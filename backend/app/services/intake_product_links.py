@@ -17,6 +17,7 @@ def entries():
     rows = json.loads(PATH.read_bytes())["ingredients"]
     rows.extend(json.loads(PATH.with_name("recipe-shapes-20261026.json").read_bytes())["ingredients"])
     rows.extend(json.loads(PATH.with_name("expansion-20261101.json").read_bytes())["ingredients"])
+    rows.extend(json.loads(PATH.with_name("expansion-round2-20261101.json").read_bytes())["ingredients"])
     return {row["requirements"][0].removeprefix("pack:"): row for row in rows}
 
 
@@ -125,6 +126,25 @@ def reviewed_drained_quantity(canonical, form, requirements, product, fact):
             continue
         for proof in row.get('reviewed_links', ()):
             quantity = proof['quantity']
+            if quantity.get('method') == 'reviewed_source_already_drained_mass_v1':
+                source, label = quantity.get('source', {}), quantity.get('label_source', {})
+                if (quantity.get('form_evidence_location') == 'review_registry'
+                        and quantity.get('source_quantity_basis') == 'declared_drained'
+                        and _review_identity(proof, product, fact)
+                        and product.sale_model == 'fixed_package' and product.purchase_terms is None
+                        and product.package_unit == product.usable_unit == quantity['unit'] == 'g'
+                        and 0 < quantity.get('declared_drained_quantity', 0)
+                        == quantity['usable_quantity'] == product.usable_quantity == product.package_quantity
+                        <= quantity.get('declared_net_quantity', 0)
+                        and quantity['basis'] == form and form in {'preserved_drained', 'cooked_drained'}
+                        and product.quantity_confidence == quantity['confidence'] == 'exact'
+                        and all(s.get('sha256') and s.get('url')
+                                and s.get('evidence_kind') == 'reviewed_manufacturer_drained_mass'
+                                and s.get('declared_net_g') == quantity['declared_net_quantity']
+                                and s.get('declared_drained_g') == quantity['declared_drained_quantity']
+                                for s in (source, label))):
+                    return True
+                continue
             if (quantity.get('method') == 'reviewed_declared_drained_mass_v1'
                     and quantity.get('form_evidence_location') == 'review_registry'
                     and _review_identity(proof, product, fact)

@@ -54,6 +54,8 @@ def _structural_check(recipe: Recipe) -> None:
     d = recipe.design
     if d is None:
         raise ValueError("Receptet saknar versionsbundet innehåll.")
+    if not supports_servings(recipe, recipe.servings):
+        raise ValueError("Receptet kräver ett helt antal godkända satser.")
     keys = {ingredient_key(i) for i in recipe.ingredients}
     if len(keys) != len(recipe.ingredients):
         raise ValueError("Samla samma ingrediens och form innan antal och köp beräknas.")
@@ -104,11 +106,21 @@ def _structural_check(recipe: Recipe) -> None:
         raise ValueError("Beroendena ryms inte inom den uppskattade tillagningstiden.")
     if recipe.instructions != [s.text for s in d.steps]:
         raise ValueError("Visade instruktioner skiljer sig från den granskade tillagningsplanen.")
+    step_keys = {s.id: set(s.ingredient_keys) for s in d.steps}
+    process_pairs = set()
+    for process in d.unmeasured_processes or ():
+        pair = (process.step_id, process.operation)
+        if (pair in process_pairs or not process.ingredient_keys
+                or len(set(process.ingredient_keys)) != len(process.ingredient_keys)
+                or not set(process.ingredient_keys) <= step_keys.get(process.step_id, set())):
+            raise ValueError("Okänd processförlust måste vara entydigt bunden till stegets verkliga ingredienser.")
+        process_pairs.add(pair)
     if content_hash(recipe) != d.content_sha256:
         raise ValueError("Receptets innehåll har ändrats utan ny granskad version.")
     p = recipe.preparation
     if (p is None or p.parent_sha256 != d.content_sha256 or p.family != d.family
-            or p.input_forms != {i.canonical_name: i.form for i in recipe.ingredients}):
+            or p.input_forms != {i.canonical_name: i.form for i in recipe.ingredients}
+            or ((p.version == "smako-authored-losses-v3") != bool(d.unmeasured_processes))):
         raise ValueError("Beredningsmetoden är inte bunden till receptets exakta innehåll.")
 
 
@@ -209,7 +221,14 @@ def _scale_amount_tokens(text, amounts, factor):
     return pattern.sub(lambda m: scaled[m.group(0)], text)
 
 
+def supports_servings(recipe: Recipe, servings: int) -> bool:
+    multiple = recipe.design.servings_multiple if recipe.design else None
+    return multiple is None or servings % multiple == 0
+
+
 def _scaled(recipe: Recipe, servings: int) -> Recipe:
+    if not supports_servings(recipe, servings):
+        raise ValueError(f"Receptet tillagas i satser om {recipe.design.servings_multiple} portioner.")
     if servings == recipe.servings:
         # Native four-/one-portion authoring is already complete. Do not add
         # the old two-portion scaling allowance to an unchanged recipe.
@@ -308,7 +327,7 @@ def _scaled(recipe: Recipe, servings: int) -> Recipe:
 def _registered_portions(servings: int) -> tuple[Recipe, ...]:
     if not 1 <= servings <= 12:
         raise ValueError("Antal portioner måste vara mellan 1 och 12.")
-    return tuple(_scaled(r, servings) for r in _registered())
+    return tuple(_scaled(r, servings) for r in _registered() if supports_servings(r, servings))
 
 
 @lru_cache(maxsize=12)
@@ -320,9 +339,12 @@ def _registered_historical_portions(servings: int) -> tuple[Recipe, ...]:
     # Serializing the entire scaled library into a disk payload retained a second
     # model tree and large temporary dictionaries while building the issued index.
     current = {id(source): (source, scaled) for source, scaled in
-               zip(_registered(), _registered_portions(servings), strict=True)}
+               zip((r for r in _registered() if supports_servings(r, servings)),
+                   _registered_portions(servings), strict=True)}
     result = []
     for source in _registered_history():
+        if not supports_servings(source, servings):
+            continue
         existing = current.get(id(source))
         recipe = existing[1] if existing is not None and existing[0] is source else _scaled(source, servings)
         _structural_check(recipe)
@@ -431,6 +453,8 @@ def prepared_recipe_lookup(servings):
 
 def candidates(preferences: RecipePreferences, servings: int = 2, *, include_supplement: bool = True) -> list[Recipe]:
     """Return complete allowed candidates; nutrition targets are qualified downstream."""
+    from app.services.diet_policy import recipe_contains_fish
+
     if preferences.mode != "complete":
         return []
     return [r.model_copy(update={
@@ -442,12 +466,14 @@ def candidates(preferences: RecipePreferences, servings: int = 2, *, include_sup
             and (not preferences.cuisines or set(r.design.cuisines) & set(preferences.cuisines))
             and preferences.min_ingredients <= r.design.ingredient_count <= preferences.max_ingredients
             and (preferences.max_minutes is None or r.design.estimated_minutes <= preferences.max_minutes)
-            and (preferences.allow_fish or not r.design.fish)
+            and (preferences.allow_fish or not recipe_contains_fish(r))
             and (preferences.adaptation == "approved" or r.design.variant_id == "base")]
 
 
 def matches_meal(recipe, meal, preferences):
     """A cheap content filter applied before product and basket qualification."""
+    from app.services.diet_policy import recipe_contains_fish
+
     validate_recipe_design(recipe)
     d, choices = recipe.design, meal.recipe_choices
     if not d or meal.meal_type not in d.meal_types:
@@ -464,7 +490,7 @@ def matches_meal(recipe, meal, preferences):
             return False
         if preferences.cuisines and not set(preferences.cuisines).intersection(d.cuisines):
             return False
-        if not preferences.allow_fish and d.fish:
+        if not preferences.allow_fish and recipe_contains_fish(recipe):
             return False
     count = ingredient_count(recipe)
     active = d.active_minutes or (d.content_source.active_minutes if d.content_source else None)
@@ -482,7 +508,7 @@ def meal_candidates(meal, preferences, *, include_supplement=True, generation=No
     # Filter unscaled metadata by meal type first. Irrelevant categories never
     # trigger quantity scaling, product matching or basket construction.
     for recipe in (_registered() if generation is None else current_recipes(generation)):
-        if meal.meal_type not in recipe.design.meal_types:
+        if meal.meal_type not in recipe.design.meal_types or not supports_servings(recipe, meal.servings):
             continue
         if not include_supplement and recipe.design.content_source is not None:
             continue

@@ -1,0 +1,1279 @@
+{
+  "pack_id": "round2-alternative-portion-corrections",
+  "recipes": [
+    {
+      "design": {
+        "active_minutes": 70,
+        "base_id": "smako-italian-pasta-alla-norma",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "pasta|dry",
+                "name": "Pasta",
+                "note": "",
+                "quantity": 360.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "aubergine|raw_edible",
+                "name": "Aubergine",
+                "note": "",
+                "quantity": 650.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "krossade tomater|as_sold",
+                "name": "Krossade tomater",
+                "note": "",
+                "quantity": 700.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "olivolja|as_sold",
+                "name": "Olivolja",
+                "note": "",
+                "quantity": 65.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "Vitlök",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "basilika|raw_edible",
+                "name": "Basilika",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "lagrad pecorino|as_sold",
+                "name": "Lagrad pecorino, vikt före eventuell borttagning av hård kant",
+                "note": "",
+                "quantity": 75.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 7.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c1",
+            "name": "Pasta och auberginesås"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "italian"
+        ],
+        "equipment": [
+          "kastrull",
+          "stor stekpanna",
+          "rivjärn"
+        ],
+        "estimated_minutes": 70,
+        "family": "aubergine_tomato_ricotta_pasta",
+        "fish": false,
+        "flavor_profile": [
+          "tomat",
+          "basilika",
+          "lagrad pecorino"
+        ],
+        "ingredient_count": 7,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "pan",
+        "primary_ingredient": "pasta",
+        "provenance": {
+          "notes": "Uttrycklig pecorinoversion av auberginepastan. Ny dos 75 g lagrad pecorino vägd före borttagning av hård ytkant ersätter 100 g ricotta salata; ingen smak-, salt- eller utbytesekvivalens antas. Den ursprungliga ricotta salata-versionen bevaras. Inte provlagad. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten. Pastavattnets text är granskad för portionsskalning; inga råvarumängder ändras.",
+          "reviewed_at": "2026-11-02"
+        },
+        "side": "ingen separat sida",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 8,
+            "id": "s1",
+            "ingredient_keys": [
+              "aubergine|raw_edible",
+              "basilika|raw_edible",
+              "lagrad pecorino|as_sold",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Ansa auberginen, väg rå ätlig mängd och skär i jämna bitar. Väg den angivna pecorinon före eventuell hård ytkant, skär bort kanten och riv resten. Hacka färsk vitlök eller använd fryst hackad direkt vid tillagningen. Väg färska basilikablad utan grova stjälkar; fryst hackad basilika används direkt i den varma såsen."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 20,
+            "id": "s2",
+            "ingredient_keys": [
+              "aubergine|raw_edible",
+              "olivolja|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Stek auberginen i två omgångar på medelhög värme. Använd ungefär tre fjärdedelar av såskomponentens olivolja och vänd tills alla bitar är mjuka och brynta; avsätt omkring tio minuter per omgång. Lägg åt sidan."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 3,
+            "id": "s3",
+            "ingredient_keys": [
+              "krossade tomater|as_sold",
+              "olivolja|as_sold",
+              "salt|as_sold",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sänk värmen. Fräs vitlöken i resten av såskomponentens olivolja i en minut. Tillsätt krossade tomater och en fjärdedel av saltet. Låt såsen börja sjuda."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 15,
+            "id": "s4",
+            "ingredient_keys": [
+              "krossade tomater|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sjud såsen utan lock på medellåg värme tills den tjocknat, cirka 15 minuter. Rör om ett par gånger."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 18,
+            "id": "s5",
+            "ingredient_keys": [
+              "pasta|dry",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "3000 ml",
+                3000.0
+              ],
+              [
+                "150 ml",
+                150.0
+              ]
+            ],
+            "text": "Koka upp 3000 ml vatten med återstående salt. Koka pastan enligt förpackningens tid, omkring tio minuter, tills den har lite tuggmotstånd. Spara 150 ml vatten från pastakoket och häll av."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 6,
+            "id": "s6",
+            "ingredient_keys": [
+              "aubergine|raw_edible",
+              "basilika|raw_edible",
+              "lagrad pecorino|as_sold",
+              "pasta|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "50 ml",
+                50.0
+              ]
+            ],
+            "text": "Vänd aubergine och basilika i tomatsåsen och koka minst tre minuter eller längre enligt örtproduktens anvisning. Behåll all vätska. Blanda i pastan. Späd vid behov med 50 ml vatten från pastakoket. Servera med lagrad pecorino ovanpå. Fördela all sås och eventuell sallad med hela dess dressing."
+          }
+        ],
+        "total_minutes": 70,
+        "unmeasured_processes": [
+          {
+            "description": "Pecorinons eventuella hårda ytkant tas bort efter vägning av inköpsmängden; ätligt utbyte är inte uppmätt.",
+            "ingredient_keys": [
+              "lagrad pecorino|as_sold"
+            ],
+            "operation": "trim_before_cooking",
+            "step_id": "s1"
+          },
+          {
+            "description": "Saltat pastavatten hälls bort utom den del som används i såsen. Pasta- och saltretention är inte uppmätta.",
+            "ingredient_keys": [
+              "pasta|dry",
+              "salt|as_sold"
+            ],
+            "operation": "drain_after_cooking",
+            "step_id": "s5"
+          }
+        ],
+        "variant_id": "simple",
+        "vegetarian": true,
+        "version": "1.0.2",
+        "waiting_minutes": 0
+      },
+      "ingredients": [
+        {
+          "canonical_name": "pasta",
+          "component": "c1",
+          "form": "dry",
+          "name": "pasta",
+          "quantity": 360.0,
+          "quantity_max": 360.0,
+          "quantity_min": 360.0,
+          "quantity_step": 360.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "aubergine",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "aubergine",
+          "quantity": 650.0,
+          "quantity_max": 650.0,
+          "quantity_min": 650.0,
+          "quantity_step": 650.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "krossade tomater",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "krossade tomater",
+          "quantity": 700.0,
+          "quantity_max": 700.0,
+          "quantity_min": 700.0,
+          "quantity_step": 700.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "olivolja",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "olivolja",
+          "product_requirements": [
+            "pack:intake_all_expansion_86ac9b2c5ae6"
+          ],
+          "quantity": 65.0,
+          "quantity_max": 65.0,
+          "quantity_min": 65.0,
+          "quantity_step": 65.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "basilika",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "basilika",
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "lagrad pecorino",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "lagrad pecorino",
+          "product_requirements": [
+            "pack:intake_all_round2_4d778ee01c81"
+          ],
+          "quantity": 75.0,
+          "quantity_max": 75.0,
+          "quantity_min": 75.0,
+          "quantity_step": 75.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 7.0,
+          "quantity_max": 7.0,
+          "quantity_min": 7.0,
+          "quantity_step": 7.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Ansa auberginen, väg rå ätlig mängd och skär i jämna bitar. Väg den angivna pecorinon före eventuell hård ytkant, skär bort kanten och riv resten. Hacka färsk vitlök eller använd fryst hackad direkt vid tillagningen. Väg färska basilikablad utan grova stjälkar; fryst hackad basilika används direkt i den varma såsen.",
+        "Stek auberginen i två omgångar på medelhög värme. Använd ungefär tre fjärdedelar av såskomponentens olivolja och vänd tills alla bitar är mjuka och brynta; avsätt omkring tio minuter per omgång. Lägg åt sidan.",
+        "Sänk värmen. Fräs vitlöken i resten av såskomponentens olivolja i en minut. Tillsätt krossade tomater och en fjärdedel av saltet. Låt såsen börja sjuda.",
+        "Sjud såsen utan lock på medellåg värme tills den tjocknat, cirka 15 minuter. Rör om ett par gånger.",
+        "Koka upp 3000 ml vatten med återstående salt. Koka pastan enligt förpackningens tid, omkring tio minuter, tills den har lite tuggmotstånd. Spara 150 ml vatten från pastakoket och häll av.",
+        "Vänd aubergine och basilika i tomatsåsen och koka minst tre minuter eller längre enligt örtproduktens anvisning. Behåll all vätska. Blanda i pastan. Späd vid behov med 50 ml vatten från pastakoket. Servera med lagrad pecorino ovanpå. Fördela all sås och eventuell sallad med hela dess dressing."
+      ],
+      "name": "Pasta alla Norma – med aubergine och lagrad pecorino",
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 75,
+        "base_id": "smako-italian-pasta-alla-norma",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "pasta|dry",
+                "name": "Pasta",
+                "note": "",
+                "quantity": 360.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "aubergine|raw_edible",
+                "name": "Aubergine",
+                "note": "",
+                "quantity": 650.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "krossade tomater|as_sold",
+                "name": "Krossade tomater",
+                "note": "",
+                "quantity": 700.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "olivolja|as_sold",
+                "name": "Olivolja",
+                "note": "",
+                "quantity": 65.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "Vitlök",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "basilika|raw_edible",
+                "name": "Basilika",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "lagrad pecorino|as_sold",
+                "name": "Lagrad pecorino, vikt före eventuell borttagning av hård kant",
+                "note": "",
+                "quantity": 75.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 7.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c1",
+            "name": "Pasta och auberginesås"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "fänkål|raw_edible",
+                "name": "Fänkål",
+                "note": "",
+                "quantity": 200.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "apelsin|raw_edible",
+                "name": "Apelsin, skalad ätlig vikt",
+                "note": "",
+                "quantity": 200.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "olivolja|as_sold",
+                "name": "Olivolja",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "c2",
+            "name": "Apelsin- och fänkålssallad"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "italian"
+        ],
+        "equipment": [
+          "kastrull",
+          "stor stekpanna",
+          "rivjärn"
+        ],
+        "estimated_minutes": 75,
+        "family": "aubergine_tomato_ricotta_pasta",
+        "fish": false,
+        "flavor_profile": [
+          "tomat",
+          "basilika",
+          "lagrad pecorino"
+        ],
+        "ingredient_count": 9,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "pan",
+        "primary_ingredient": "pasta",
+        "provenance": {
+          "notes": "Uttrycklig pecorinoversion av auberginepastan. Ny dos 75 g lagrad pecorino vägd före borttagning av hård ytkant ersätter 100 g ricotta salata; ingen smak-, salt- eller utbytesekvivalens antas. Den ursprungliga ricotta salata-versionen bevaras. Inte provlagad. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten. Pastavattnets text är granskad för portionsskalning; inga råvarumängder ändras.",
+          "reviewed_at": "2026-11-02"
+        },
+        "side": "fänkåls- och apelsinsallad",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 8,
+            "id": "s1",
+            "ingredient_keys": [
+              "aubergine|raw_edible",
+              "basilika|raw_edible",
+              "lagrad pecorino|as_sold",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Ansa auberginen, väg rå ätlig mängd och skär i jämna bitar. Väg den angivna pecorinon före eventuell hård ytkant, skär bort kanten och riv resten. Hacka färsk vitlök eller använd fryst hackad direkt vid tillagningen. Väg färska basilikablad utan grova stjälkar; fryst hackad basilika används direkt i den varma såsen."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 20,
+            "id": "s2",
+            "ingredient_keys": [
+              "aubergine|raw_edible",
+              "olivolja|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Stek auberginen i två omgångar på medelhög värme. Använd ungefär tre fjärdedelar av såskomponentens olivolja och vänd tills alla bitar är mjuka och brynta; avsätt omkring tio minuter per omgång. Lägg åt sidan."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 3,
+            "id": "s3",
+            "ingredient_keys": [
+              "krossade tomater|as_sold",
+              "olivolja|as_sold",
+              "salt|as_sold",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sänk värmen. Fräs vitlöken i resten av såskomponentens olivolja i en minut. Tillsätt krossade tomater och en fjärdedel av saltet. Låt såsen börja sjuda."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 15,
+            "id": "s4",
+            "ingredient_keys": [
+              "krossade tomater|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sjud såsen utan lock på medellåg värme tills den tjocknat, cirka 15 minuter. Rör om ett par gånger."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 5,
+            "id": "s5",
+            "ingredient_keys": [
+              "apelsin|raw_edible",
+              "fänkål|raw_edible",
+              "olivolja|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Skiva fänkålen tunt. Skär den skalade apelsinen i bitar och samla fruktsaften i salladsskålen. Blanda med salladskomponentens olivolja."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 18,
+            "id": "s6",
+            "ingredient_keys": [
+              "pasta|dry",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "3000 ml",
+                3000.0
+              ],
+              [
+                "150 ml",
+                150.0
+              ]
+            ],
+            "text": "Koka upp 3000 ml vatten med återstående salt. Koka pastan enligt förpackningens tid, omkring tio minuter, tills den har lite tuggmotstånd. Spara 150 ml vatten från pastakoket och häll av."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 6,
+            "id": "s7",
+            "ingredient_keys": [
+              "aubergine|raw_edible",
+              "basilika|raw_edible",
+              "lagrad pecorino|as_sold",
+              "pasta|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "50 ml",
+                50.0
+              ]
+            ],
+            "text": "Vänd aubergine och basilika i tomatsåsen och koka minst tre minuter eller längre enligt örtproduktens anvisning. Behåll all vätska. Blanda i pastan. Späd vid behov med 50 ml vatten från pastakoket. Servera med lagrad pecorino ovanpå och salladen bredvid. Fördela all sås och eventuell sallad med hela dess dressing."
+          }
+        ],
+        "total_minutes": 75,
+        "unmeasured_processes": [
+          {
+            "description": "Pecorinons eventuella hårda ytkant tas bort efter vägning av inköpsmängden; ätligt utbyte är inte uppmätt.",
+            "ingredient_keys": [
+              "lagrad pecorino|as_sold"
+            ],
+            "operation": "trim_before_cooking",
+            "step_id": "s1"
+          },
+          {
+            "description": "Saltat pastavatten hälls bort utom den del som används i såsen. Pasta- och saltretention är inte uppmätta.",
+            "ingredient_keys": [
+              "pasta|dry",
+              "salt|as_sold"
+            ],
+            "operation": "drain_after_cooking",
+            "step_id": "s6"
+          }
+        ],
+        "variant_id": "standard",
+        "vegetarian": true,
+        "version": "1.0.2",
+        "waiting_minutes": 0
+      },
+      "ingredients": [
+        {
+          "canonical_name": "pasta",
+          "component": "c1",
+          "form": "dry",
+          "name": "pasta",
+          "quantity": 360.0,
+          "quantity_max": 360.0,
+          "quantity_min": 360.0,
+          "quantity_step": 360.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "aubergine",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "aubergine",
+          "quantity": 650.0,
+          "quantity_max": 650.0,
+          "quantity_min": 650.0,
+          "quantity_step": 650.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "krossade tomater",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "krossade tomater",
+          "quantity": 700.0,
+          "quantity_max": 700.0,
+          "quantity_min": 700.0,
+          "quantity_step": 700.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "olivolja",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "olivolja",
+          "product_requirements": [
+            "pack:intake_all_expansion_86ac9b2c5ae6"
+          ],
+          "quantity": 75.0,
+          "quantity_max": 75.0,
+          "quantity_min": 75.0,
+          "quantity_step": 75.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "basilika",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "basilika",
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "lagrad pecorino",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "lagrad pecorino",
+          "product_requirements": [
+            "pack:intake_all_round2_4d778ee01c81"
+          ],
+          "quantity": 75.0,
+          "quantity_max": 75.0,
+          "quantity_min": 75.0,
+          "quantity_step": 75.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 7.0,
+          "quantity_max": 7.0,
+          "quantity_min": 7.0,
+          "quantity_step": 7.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "fänkål",
+          "component": "c2",
+          "form": "raw_edible",
+          "name": "fänkål",
+          "product_requirements": [
+            "pack:intake_all_2503a71baee6"
+          ],
+          "quantity": 200.0,
+          "quantity_max": 200.0,
+          "quantity_min": 200.0,
+          "quantity_step": 200.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "apelsin",
+          "component": "c2",
+          "form": "raw_edible",
+          "name": "apelsin",
+          "product_requirements": [
+            "pack:intake_all_13f784648055"
+          ],
+          "quantity": 200.0,
+          "quantity_max": 200.0,
+          "quantity_min": 200.0,
+          "quantity_step": 200.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Ansa auberginen, väg rå ätlig mängd och skär i jämna bitar. Väg den angivna pecorinon före eventuell hård ytkant, skär bort kanten och riv resten. Hacka färsk vitlök eller använd fryst hackad direkt vid tillagningen. Väg färska basilikablad utan grova stjälkar; fryst hackad basilika används direkt i den varma såsen.",
+        "Stek auberginen i två omgångar på medelhög värme. Använd ungefär tre fjärdedelar av såskomponentens olivolja och vänd tills alla bitar är mjuka och brynta; avsätt omkring tio minuter per omgång. Lägg åt sidan.",
+        "Sänk värmen. Fräs vitlöken i resten av såskomponentens olivolja i en minut. Tillsätt krossade tomater och en fjärdedel av saltet. Låt såsen börja sjuda.",
+        "Sjud såsen utan lock på medellåg värme tills den tjocknat, cirka 15 minuter. Rör om ett par gånger.",
+        "Skiva fänkålen tunt. Skär den skalade apelsinen i bitar och samla fruktsaften i salladsskålen. Blanda med salladskomponentens olivolja.",
+        "Koka upp 3000 ml vatten med återstående salt. Koka pastan enligt förpackningens tid, omkring tio minuter, tills den har lite tuggmotstånd. Spara 150 ml vatten från pastakoket och häll av.",
+        "Vänd aubergine och basilika i tomatsåsen och koka minst tre minuter eller längre enligt örtproduktens anvisning. Behåll all vätska. Blanda i pastan. Späd vid behov med 50 ml vatten från pastakoket. Servera med lagrad pecorino ovanpå och salladen bredvid. Fördela all sås och eventuell sallad med hela dess dressing."
+      ],
+      "name": "Pasta alla Norma – med apelsin- och fänkålssallad – med lagrad pecorino",
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 78,
+        "base_id": "smako-italian-pasta-alla-norma",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "pasta|dry",
+                "name": "Pasta",
+                "note": "",
+                "quantity": 360.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "aubergine|raw_edible",
+                "name": "Aubergine",
+                "note": "",
+                "quantity": 650.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "krossade tomater|as_sold",
+                "name": "Krossade tomater",
+                "note": "",
+                "quantity": 700.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "olivolja|as_sold",
+                "name": "Olivolja",
+                "note": "",
+                "quantity": 65.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "Vitlök",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "basilika|raw_edible",
+                "name": "Basilika",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "lagrad pecorino|as_sold",
+                "name": "Lagrad pecorino, vikt före eventuell borttagning av hård kant",
+                "note": "",
+                "quantity": 75.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 7.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c1",
+            "name": "Pasta och auberginesås"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "fänkål|raw_edible",
+                "name": "Fänkål",
+                "note": "",
+                "quantity": 200.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "apelsin|raw_edible",
+                "name": "Apelsin, skalad ätlig vikt",
+                "note": "",
+                "quantity": 200.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "olivolja|as_sold",
+                "name": "Olivolja",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "oliver|preserved_drained",
+                "name": "Oliver, urkärnade och avrunna",
+                "note": "",
+                "quantity": 60.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "citronjuice|as_sold",
+                "name": "Citronjuice",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "sallad|raw_edible",
+                "name": "Sallad",
+                "note": "",
+                "quantity": 80.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "mandel|as_sold",
+                "name": "Mandel",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c2",
+            "name": "Apelsin- och fänkålssallad"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "italian"
+        ],
+        "equipment": [
+          "kastrull",
+          "stor stekpanna",
+          "rivjärn"
+        ],
+        "estimated_minutes": 78,
+        "family": "aubergine_tomato_ricotta_pasta",
+        "fish": false,
+        "flavor_profile": [
+          "tomat",
+          "basilika",
+          "lagrad pecorino"
+        ],
+        "ingredient_count": 13,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "pan",
+        "primary_ingredient": "pasta",
+        "provenance": {
+          "notes": "Uttrycklig pecorinoversion av auberginepastan. Ny dos 75 g lagrad pecorino vägd före borttagning av hård ytkant ersätter 100 g ricotta salata; ingen smak-, salt- eller utbytesekvivalens antas. Den ursprungliga ricotta salata-versionen bevaras. Inte provlagad. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten. Pastavattnets text är granskad för portionsskalning; inga råvarumängder ändras.",
+          "reviewed_at": "2026-11-02"
+        },
+        "side": "fänkåls- och apelsinsallad",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 8,
+            "id": "s1",
+            "ingredient_keys": [
+              "aubergine|raw_edible",
+              "basilika|raw_edible",
+              "lagrad pecorino|as_sold",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Ansa auberginen, väg rå ätlig mängd och skär i jämna bitar. Väg den angivna pecorinon före eventuell hård ytkant, skär bort kanten och riv resten. Hacka färsk vitlök eller använd fryst hackad direkt vid tillagningen. Väg färska basilikablad utan grova stjälkar; fryst hackad basilika används direkt i den varma såsen."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 20,
+            "id": "s2",
+            "ingredient_keys": [
+              "aubergine|raw_edible",
+              "olivolja|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Stek auberginen i två omgångar på medelhög värme. Använd ungefär tre fjärdedelar av såskomponentens olivolja och vänd tills alla bitar är mjuka och brynta; avsätt omkring tio minuter per omgång. Lägg åt sidan."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 3,
+            "id": "s3",
+            "ingredient_keys": [
+              "krossade tomater|as_sold",
+              "olivolja|as_sold",
+              "salt|as_sold",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sänk värmen. Fräs vitlöken i resten av såskomponentens olivolja i en minut. Tillsätt krossade tomater och en fjärdedel av saltet. Låt såsen börja sjuda."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 15,
+            "id": "s4",
+            "ingredient_keys": [
+              "krossade tomater|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sjud såsen utan lock på medellåg värme tills den tjocknat, cirka 15 minuter. Rör om ett par gånger."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 8,
+            "id": "s5",
+            "ingredient_keys": [
+              "apelsin|raw_edible",
+              "citronjuice|as_sold",
+              "fänkål|raw_edible",
+              "mandel|as_sold",
+              "oliver|preserved_drained",
+              "olivolja|as_sold",
+              "sallad|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Skiva fänkålen tunt. Skär den skalade apelsinen i bitar och samla fruktsaften i salladsskålen. Blanda med salladskomponentens olivolja. Tillsätt citronjuice, salladsblad och avrunna oliver. Hacka och rosta mandeln i torr panna i tre minuter; strö den över salladen."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 18,
+            "id": "s6",
+            "ingredient_keys": [
+              "pasta|dry",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "3000 ml",
+                3000.0
+              ],
+              [
+                "150 ml",
+                150.0
+              ]
+            ],
+            "text": "Koka upp 3000 ml vatten med återstående salt. Koka pastan enligt förpackningens tid, omkring tio minuter, tills den har lite tuggmotstånd. Spara 150 ml vatten från pastakoket och häll av."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 6,
+            "id": "s7",
+            "ingredient_keys": [
+              "aubergine|raw_edible",
+              "basilika|raw_edible",
+              "lagrad pecorino|as_sold",
+              "pasta|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "50 ml",
+                50.0
+              ]
+            ],
+            "text": "Vänd aubergine och basilika i tomatsåsen och koka minst tre minuter eller längre enligt örtproduktens anvisning. Behåll all vätska. Blanda i pastan. Späd vid behov med 50 ml vatten från pastakoket. Servera med lagrad pecorino ovanpå och salladen bredvid. Fördela all sås och eventuell sallad med hela dess dressing."
+          }
+        ],
+        "total_minutes": 78,
+        "unmeasured_processes": [
+          {
+            "description": "Pecorinons eventuella hårda ytkant tas bort efter vägning av inköpsmängden; ätligt utbyte är inte uppmätt.",
+            "ingredient_keys": [
+              "lagrad pecorino|as_sold"
+            ],
+            "operation": "trim_before_cooking",
+            "step_id": "s1"
+          },
+          {
+            "description": "Saltat pastavatten hälls bort utom den del som används i såsen. Pasta- och saltretention är inte uppmätta.",
+            "ingredient_keys": [
+              "pasta|dry",
+              "salt|as_sold"
+            ],
+            "operation": "drain_after_cooking",
+            "step_id": "s6"
+          }
+        ],
+        "variant_id": "extended",
+        "vegetarian": true,
+        "version": "1.0.2",
+        "waiting_minutes": 0
+      },
+      "ingredients": [
+        {
+          "canonical_name": "pasta",
+          "component": "c1",
+          "form": "dry",
+          "name": "pasta",
+          "quantity": 360.0,
+          "quantity_max": 360.0,
+          "quantity_min": 360.0,
+          "quantity_step": 360.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "aubergine",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "aubergine",
+          "quantity": 650.0,
+          "quantity_max": 650.0,
+          "quantity_min": 650.0,
+          "quantity_step": 650.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "krossade tomater",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "krossade tomater",
+          "quantity": 700.0,
+          "quantity_max": 700.0,
+          "quantity_min": 700.0,
+          "quantity_step": 700.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "olivolja",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "olivolja",
+          "product_requirements": [
+            "pack:intake_all_expansion_86ac9b2c5ae6"
+          ],
+          "quantity": 75.0,
+          "quantity_max": 75.0,
+          "quantity_min": 75.0,
+          "quantity_step": 75.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "basilika",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "basilika",
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "lagrad pecorino",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "lagrad pecorino",
+          "product_requirements": [
+            "pack:intake_all_round2_4d778ee01c81"
+          ],
+          "quantity": 75.0,
+          "quantity_max": 75.0,
+          "quantity_min": 75.0,
+          "quantity_step": 75.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 7.0,
+          "quantity_max": 7.0,
+          "quantity_min": 7.0,
+          "quantity_step": 7.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "fänkål",
+          "component": "c2",
+          "form": "raw_edible",
+          "name": "fänkål",
+          "product_requirements": [
+            "pack:intake_all_2503a71baee6"
+          ],
+          "quantity": 200.0,
+          "quantity_max": 200.0,
+          "quantity_min": 200.0,
+          "quantity_step": 200.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "apelsin",
+          "component": "c2",
+          "form": "raw_edible",
+          "name": "apelsin",
+          "product_requirements": [
+            "pack:intake_all_13f784648055"
+          ],
+          "quantity": 200.0,
+          "quantity_max": 200.0,
+          "quantity_min": 200.0,
+          "quantity_step": 200.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "oliver",
+          "component": "c2",
+          "form": "preserved_drained",
+          "name": "oliver",
+          "product_requirements": [
+            "pitted"
+          ],
+          "quantity": 60.0,
+          "quantity_max": 60.0,
+          "quantity_min": 60.0,
+          "quantity_step": 60.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "citronjuice",
+          "component": "c2",
+          "form": "as_sold",
+          "name": "citronjuice",
+          "product_requirements": [
+            "pure_juice"
+          ],
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "sallad",
+          "component": "c2",
+          "form": "raw_edible",
+          "name": "sallad",
+          "product_requirements": [
+            "pack:intake_all_16d63b25fed0"
+          ],
+          "quantity": 80.0,
+          "quantity_max": 80.0,
+          "quantity_min": 80.0,
+          "quantity_step": 80.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "mandel",
+          "component": "c2",
+          "form": "as_sold",
+          "name": "mandel",
+          "product_requirements": [
+            "pack:intake_almonds"
+          ],
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Ansa auberginen, väg rå ätlig mängd och skär i jämna bitar. Väg den angivna pecorinon före eventuell hård ytkant, skär bort kanten och riv resten. Hacka färsk vitlök eller använd fryst hackad direkt vid tillagningen. Väg färska basilikablad utan grova stjälkar; fryst hackad basilika används direkt i den varma såsen.",
+        "Stek auberginen i två omgångar på medelhög värme. Använd ungefär tre fjärdedelar av såskomponentens olivolja och vänd tills alla bitar är mjuka och brynta; avsätt omkring tio minuter per omgång. Lägg åt sidan.",
+        "Sänk värmen. Fräs vitlöken i resten av såskomponentens olivolja i en minut. Tillsätt krossade tomater och en fjärdedel av saltet. Låt såsen börja sjuda.",
+        "Sjud såsen utan lock på medellåg värme tills den tjocknat, cirka 15 minuter. Rör om ett par gånger.",
+        "Skiva fänkålen tunt. Skär den skalade apelsinen i bitar och samla fruktsaften i salladsskålen. Blanda med salladskomponentens olivolja. Tillsätt citronjuice, salladsblad och avrunna oliver. Hacka och rosta mandeln i torr panna i tre minuter; strö den över salladen.",
+        "Koka upp 3000 ml vatten med återstående salt. Koka pastan enligt förpackningens tid, omkring tio minuter, tills den har lite tuggmotstånd. Spara 150 ml vatten från pastakoket och häll av.",
+        "Vänd aubergine och basilika i tomatsåsen och koka minst tre minuter eller längre enligt örtproduktens anvisning. Behåll all vätska. Blanda i pastan. Späd vid behov med 50 ml vatten från pastakoket. Servera med lagrad pecorino ovanpå och salladen bredvid. Fördela all sås och eventuell sallad med hela dess dressing."
+      ],
+      "name": "Pasta alla Norma – med fyllig apelsin-, fänkåls- och mandelsallad – med lagrad pecorino",
+      "servings": 4
+    }
+  ],
+  "schema_version": "smako-meal-pack-v1"
+}

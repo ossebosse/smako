@@ -207,8 +207,8 @@ def test_entire_intake_is_imported_and_scales_without_changing_original_library(
     assert len(report["recipes"]) == 2200
     assert len({r["source_id"] for r in report["recipes"]}) == 2200
     assert report["status"] == {"accepted": 2155, "already_imported": 45}
-    assert len(current) == 2570
-    assert len({r.design.base_id for r in current.values()}) == 975
+    assert len(current) == 2822
+    assert len({r.design.base_id for r in current.values()}) == 1072
     for original in current_recipes(13):
         assert current[identity(original)].model_dump() == original.model_dump()
     for record in report["recipes"]:

@@ -1,0 +1,1509 @@
+{
+  "pack_id": "reviewed-expansion-round2-stage52",
+  "recipes": [
+    {
+      "design": {
+        "active_minutes": 31,
+        "base_id": "smako-italian-tiella-barese",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "blåmusselkött utan skal|as_sold",
+                "name": "Fryst musselkött utan skal, deklarerad produktvikt",
+                "note": "",
+                "quantity": 400.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ris|dry",
+                "name": "ris",
+                "note": "",
+                "quantity": 260.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "potatis|raw_edible",
+                "name": "potatis",
+                "note": "",
+                "quantity": 650.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "gul lök",
+                "note": "",
+                "quantity": 160.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "tomat|raw_edible",
+                "name": "tomat",
+                "note": "",
+                "quantity": 400.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "vitlök",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "olivolja|as_sold",
+                "name": "olivolja",
+                "note": "",
+                "quantity": 50.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "svartpeppar",
+                "note": "",
+                "quantity": 0.6,
+                "unit": "g"
+              }
+            ],
+            "id": "tiella",
+            "name": "Ris, potatis och musslor"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "italian"
+        ],
+        "equipment": [
+          "ugn",
+          "djup ugnsform med lock",
+          "kanna",
+          "rivjärn",
+          "termometer"
+        ],
+        "estimated_minutes": 816,
+        "family": "tiella barese",
+        "fish": false,
+        "flavor_profile": [
+          "mussla",
+          "tomat",
+          "vitlök"
+        ],
+        "ingredient_count": 7,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "oven",
+        "primary_ingredient": "blåmusselkött utan skal",
+        "provenance": {
+          "notes": "Granskad skalfri tiella med 400 g fryst musselkött i stället för 1600 g levande musslor med skal. Ny kulinarisk dos, ingen faktor för skalutbyte. Standard och utökad använder 45 g inköpt lagrad pecorino före eventuell kantputsning. Tolv timmars kylupptining ingår. All vätska används i lagren; inga levande musslor öppnas. Inte provlagad. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "ris och potatis i lager",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 1,
+            "id": "s1",
+            "ingredient_keys": [
+              "blåmusselkött utan skal|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Väg upp fryst musselkött utan skal i ett täckt kärl i kylskåp. Behåll all vätska."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 720,
+            "id": "s2",
+            "ingredient_keys": [
+              "blåmusselkött utan skal|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Tina helt i kylskåp enligt förpackningen; planera tolv timmar och förläng vid behov."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 12,
+            "id": "s3",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "potatis|raw_edible",
+              "ris|dry",
+              "tomat|raw_edible",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sätt ugnen på 190 °C. Skala potatis och lök, väg rå ätlig mängd och skiva cirka två millimeter tunt. Hacka tomaten och väg färsk eller fryst hackad vitlök. Väg riset torrt."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 10,
+            "id": "s4",
+            "ingredient_keys": [
+              "blåmusselkött utan skal|as_sold",
+              "gul lök|raw_edible",
+              "olivolja|as_sold",
+              "potatis|raw_edible",
+              "ris|dry",
+              "salt|as_sold",
+              "svartpeppar|dry",
+              "tomat|raw_edible",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "850 ml",
+                850.0
+              ]
+            ],
+            "text": "Olja en djup form med hälften av tiellans olivolja. Lägg lök och hälften av potatisen i botten, sedan musselkött, ris, tomat och vitlök. Täck med resten av potatisen. Tillsätt salt och svartpeppar. Mät upp 850 ml vatten i en kanna; ta bort lika mycket vatten som mängden upptiningsvätska och ersätt med denna. Häll hela blandningen runt kanten. Behåll alla lager och all vätska."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 2,
+            "id": "s5",
+            "ingredient_keys": [
+              "olivolja|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Fördela resten av olivoljan över ytan. Täck formen med ugnssäkert lock och sätt in i ugnen."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 35,
+            "id": "s6",
+            "ingredient_keys": [
+              "blåmusselkött utan skal|as_sold",
+              "potatis|raw_edible",
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Baka täckt i trettiofem minuter."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 2,
+            "id": "s7",
+            "ingredient_keys": [
+              "potatis|raw_edible",
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "100 ml",
+                100.0
+              ]
+            ],
+            "text": "Ta av locket och kontrollera vätskan utan att röra om lagren. Tillsätt vid behov 100 ml vatten om det torkat innan riset mjuknat."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 20,
+            "id": "s8",
+            "ingredient_keys": [
+              "blåmusselkött utan skal|as_sold",
+              "potatis|raw_edible",
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Baka ytterligare tjugo minuter utan lock."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 2,
+            "id": "s9",
+            "ingredient_keys": [
+              "blåmusselkött utan skal|as_sold",
+              "potatis|raw_edible",
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "100 ml",
+                100.0
+              ]
+            ],
+            "text": "Kontrollera att ris och potatis är helt mjuka, mitten minst 75 °C och musselköttet genomhett enligt förpackningen. Förläng annars täckt med 100 ml vatten vid behov. Ta ut formen."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 10,
+            "id": "s10",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Låt formen vila tio minuter."
+          },
+          {
+            "depends_on": [
+              "s10"
+            ],
+            "duration_minutes": 2,
+            "id": "s11",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Fördela tiellan mellan portionerna med allt musselkött, ris, potatis och all kvarvarande sky."
+          }
+        ],
+        "total_minutes": 816,
+        "variant_id": "simple",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 785
+      },
+      "ingredients": [
+        {
+          "canonical_name": "blåmusselkött utan skal",
+          "component": "tiella",
+          "form": "as_sold",
+          "name": "blåmusselkött utan skal",
+          "product_requirements": [
+            "pack:intake_all_round2_c4025d9b948d"
+          ],
+          "quantity": 400.0,
+          "quantity_max": 400.0,
+          "quantity_min": 400.0,
+          "quantity_step": 400.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ris",
+          "component": "tiella",
+          "form": "dry",
+          "name": "ris",
+          "product_requirements": [
+            "white_rice"
+          ],
+          "quantity": 260.0,
+          "quantity_max": 260.0,
+          "quantity_min": 260.0,
+          "quantity_step": 260.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "potatis",
+          "component": "tiella",
+          "form": "raw_edible",
+          "name": "potatis",
+          "quantity": 650.0,
+          "quantity_max": 650.0,
+          "quantity_min": 650.0,
+          "quantity_step": 650.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "tiella",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 160.0,
+          "quantity_max": 160.0,
+          "quantity_min": 160.0,
+          "quantity_step": 160.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "tomat",
+          "component": "tiella",
+          "form": "raw_edible",
+          "name": "tomat",
+          "quantity": 400.0,
+          "quantity_max": 400.0,
+          "quantity_min": 400.0,
+          "quantity_step": 400.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "tiella",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "olivolja",
+          "component": "tiella",
+          "form": "as_sold",
+          "name": "olivolja",
+          "product_requirements": [
+            "pack:intake_all_expansion_86ac9b2c5ae6"
+          ],
+          "quantity": 50.0,
+          "quantity_max": 50.0,
+          "quantity_min": 50.0,
+          "quantity_step": 50.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "tiella",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 2.0,
+          "quantity_max": 2.0,
+          "quantity_min": 2.0,
+          "quantity_step": 2.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "tiella",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 0.6,
+          "quantity_max": 0.6,
+          "quantity_min": 0.6,
+          "quantity_step": 0.6,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Väg upp fryst musselkött utan skal i ett täckt kärl i kylskåp. Behåll all vätska.",
+        "Tina helt i kylskåp enligt förpackningen; planera tolv timmar och förläng vid behov.",
+        "Sätt ugnen på 190 °C. Skala potatis och lök, väg rå ätlig mängd och skiva cirka två millimeter tunt. Hacka tomaten och väg färsk eller fryst hackad vitlök. Väg riset torrt.",
+        "Olja en djup form med hälften av tiellans olivolja. Lägg lök och hälften av potatisen i botten, sedan musselkött, ris, tomat och vitlök. Täck med resten av potatisen. Tillsätt salt och svartpeppar. Mät upp 850 ml vatten i en kanna; ta bort lika mycket vatten som mängden upptiningsvätska och ersätt med denna. Häll hela blandningen runt kanten. Behåll alla lager och all vätska.",
+        "Fördela resten av olivoljan över ytan. Täck formen med ugnssäkert lock och sätt in i ugnen.",
+        "Baka täckt i trettiofem minuter.",
+        "Ta av locket och kontrollera vätskan utan att röra om lagren. Tillsätt vid behov 100 ml vatten om det torkat innan riset mjuknat.",
+        "Baka ytterligare tjugo minuter utan lock.",
+        "Kontrollera att ris och potatis är helt mjuka, mitten minst 75 °C och musselköttet genomhett enligt förpackningen. Förläng annars täckt med 100 ml vatten vid behov. Ta ut formen.",
+        "Låt formen vila tio minuter.",
+        "Fördela tiellan mellan portionerna med allt musselkött, ris, potatis och all kvarvarande sky."
+      ],
+      "name": "Tiella barese – musslor, ris och potatis i ugn – enkel – med fryst musselkött utan skal",
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 31,
+        "base_id": "smako-italian-tiella-barese",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "blåmusselkött utan skal|as_sold",
+                "name": "Fryst musselkött utan skal, deklarerad produktvikt",
+                "note": "",
+                "quantity": 400.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ris|dry",
+                "name": "ris",
+                "note": "",
+                "quantity": 260.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "potatis|raw_edible",
+                "name": "potatis",
+                "note": "",
+                "quantity": 650.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "gul lök",
+                "note": "",
+                "quantity": 160.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "tomat|raw_edible",
+                "name": "tomat",
+                "note": "",
+                "quantity": 400.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "vitlök",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "olivolja|as_sold",
+                "name": "olivolja",
+                "note": "",
+                "quantity": 50.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "svartpeppar",
+                "note": "",
+                "quantity": 0.6,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "persilja|raw_edible",
+                "name": "persilja",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "lagrad pecorino|as_sold",
+                "name": "Lagrad pecorino, inköpt gramvikt före kantputsning",
+                "note": "",
+                "quantity": 45.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ströbröd|dry",
+                "name": "ströbröd",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "g"
+              }
+            ],
+            "id": "tiella",
+            "name": "Ris, potatis och musslor"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "italian"
+        ],
+        "equipment": [
+          "ugn",
+          "djup ugnsform med lock",
+          "kanna",
+          "rivjärn",
+          "termometer"
+        ],
+        "estimated_minutes": 816,
+        "family": "tiella barese",
+        "fish": false,
+        "flavor_profile": [
+          "mussla",
+          "tomat",
+          "vitlök"
+        ],
+        "ingredient_count": 10,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "oven",
+        "primary_ingredient": "blåmusselkött utan skal",
+        "provenance": {
+          "notes": "Granskad skalfri tiella med 400 g fryst musselkött i stället för 1600 g levande musslor med skal. Ny kulinarisk dos, ingen faktor för skalutbyte. Standard och utökad använder 45 g inköpt lagrad pecorino före eventuell kantputsning. Tolv timmars kylupptining ingår. All vätska används i lagren; inga levande musslor öppnas. Inte provlagad. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "ris och potatis i lager",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 1,
+            "id": "s1",
+            "ingredient_keys": [
+              "blåmusselkött utan skal|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Väg upp fryst musselkött utan skal i ett täckt kärl i kylskåp. Behåll all vätska."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 720,
+            "id": "s2",
+            "ingredient_keys": [
+              "blåmusselkött utan skal|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Tina helt i kylskåp enligt förpackningen; planera tolv timmar och förläng vid behov."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 12,
+            "id": "s3",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "lagrad pecorino|as_sold",
+              "persilja|raw_edible",
+              "potatis|raw_edible",
+              "ris|dry",
+              "tomat|raw_edible",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sätt ugnen på 190 °C. Skala potatis och lök, väg rå ätlig mängd och skiva cirka två millimeter tunt. Hacka tomaten och väg färsk eller fryst hackad vitlök. Väg riset torrt. Väg osten före eventuell kantputsning, ta bort hård kant och riv resten utan att fylla på extra ost. Väg fryst hackad persilja."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 10,
+            "id": "s4",
+            "ingredient_keys": [
+              "blåmusselkött utan skal|as_sold",
+              "gul lök|raw_edible",
+              "lagrad pecorino|as_sold",
+              "olivolja|as_sold",
+              "persilja|raw_edible",
+              "potatis|raw_edible",
+              "ris|dry",
+              "salt|as_sold",
+              "svartpeppar|dry",
+              "tomat|raw_edible",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "850 ml",
+                850.0
+              ]
+            ],
+            "text": "Olja en djup form med hälften av tiellans olivolja. Lägg lök och hälften av potatisen i botten, sedan musselkött, ris, tomat och vitlök samt hälften av persiljan och osten. Täck med resten av potatisen. Tillsätt salt och svartpeppar. Mät upp 850 ml vatten i en kanna; ta bort lika mycket vatten som mängden upptiningsvätska och ersätt med denna. Häll hela blandningen runt kanten. Behåll alla lager och all vätska."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 2,
+            "id": "s5",
+            "ingredient_keys": [
+              "lagrad pecorino|as_sold",
+              "olivolja|as_sold",
+              "persilja|raw_edible",
+              "ströbröd|dry"
+            ],
+            "parallel_group": null,
+            "text": "Fördela resten av olivoljan över ytan tillsammans med ströbröd och resten av osten och persiljan. Täck formen med ugnssäkert lock och sätt in i ugnen."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 35,
+            "id": "s6",
+            "ingredient_keys": [
+              "blåmusselkött utan skal|as_sold",
+              "potatis|raw_edible",
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Baka täckt i trettiofem minuter."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 2,
+            "id": "s7",
+            "ingredient_keys": [
+              "potatis|raw_edible",
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "100 ml",
+                100.0
+              ]
+            ],
+            "text": "Ta av locket och kontrollera vätskan utan att röra om lagren. Tillsätt vid behov 100 ml vatten om det torkat innan riset mjuknat."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 20,
+            "id": "s8",
+            "ingredient_keys": [
+              "blåmusselkött utan skal|as_sold",
+              "potatis|raw_edible",
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Baka ytterligare tjugo minuter utan lock."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 2,
+            "id": "s9",
+            "ingredient_keys": [
+              "blåmusselkött utan skal|as_sold",
+              "potatis|raw_edible",
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "100 ml",
+                100.0
+              ]
+            ],
+            "text": "Kontrollera att ris och potatis är helt mjuka, mitten minst 75 °C och musselköttet genomhett enligt förpackningen. Förläng annars täckt med 100 ml vatten vid behov. Ta ut formen."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 10,
+            "id": "s10",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Låt formen vila tio minuter."
+          },
+          {
+            "depends_on": [
+              "s10"
+            ],
+            "duration_minutes": 2,
+            "id": "s11",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Fördela tiellan mellan portionerna med allt musselkött, ris, potatis och all kvarvarande sky."
+          }
+        ],
+        "total_minutes": 816,
+        "unmeasured_processes": [
+          {
+            "description": "Osten vägs före kantputsning utan antagen ätlig andel.",
+            "ingredient_keys": [
+              "lagrad pecorino|as_sold"
+            ],
+            "operation": "trim_before_cooking",
+            "step_id": "s3"
+          }
+        ],
+        "variant_id": "standard",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 785
+      },
+      "ingredients": [
+        {
+          "canonical_name": "blåmusselkött utan skal",
+          "component": "tiella",
+          "form": "as_sold",
+          "name": "blåmusselkött utan skal",
+          "product_requirements": [
+            "pack:intake_all_round2_c4025d9b948d"
+          ],
+          "quantity": 400.0,
+          "quantity_max": 400.0,
+          "quantity_min": 400.0,
+          "quantity_step": 400.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ris",
+          "component": "tiella",
+          "form": "dry",
+          "name": "ris",
+          "product_requirements": [
+            "white_rice"
+          ],
+          "quantity": 260.0,
+          "quantity_max": 260.0,
+          "quantity_min": 260.0,
+          "quantity_step": 260.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "potatis",
+          "component": "tiella",
+          "form": "raw_edible",
+          "name": "potatis",
+          "quantity": 650.0,
+          "quantity_max": 650.0,
+          "quantity_min": 650.0,
+          "quantity_step": 650.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "tiella",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 160.0,
+          "quantity_max": 160.0,
+          "quantity_min": 160.0,
+          "quantity_step": 160.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "tomat",
+          "component": "tiella",
+          "form": "raw_edible",
+          "name": "tomat",
+          "quantity": 400.0,
+          "quantity_max": 400.0,
+          "quantity_min": 400.0,
+          "quantity_step": 400.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "tiella",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "olivolja",
+          "component": "tiella",
+          "form": "as_sold",
+          "name": "olivolja",
+          "product_requirements": [
+            "pack:intake_all_expansion_86ac9b2c5ae6"
+          ],
+          "quantity": 50.0,
+          "quantity_max": 50.0,
+          "quantity_min": 50.0,
+          "quantity_step": 50.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "tiella",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 2.0,
+          "quantity_max": 2.0,
+          "quantity_min": 2.0,
+          "quantity_step": 2.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "tiella",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 0.6,
+          "quantity_max": 0.6,
+          "quantity_min": 0.6,
+          "quantity_step": 0.6,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "persilja",
+          "component": "tiella",
+          "form": "raw_edible",
+          "name": "persilja",
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "lagrad pecorino",
+          "component": "tiella",
+          "form": "as_sold",
+          "name": "lagrad pecorino",
+          "product_requirements": [
+            "pack:intake_all_round2_4d778ee01c81"
+          ],
+          "quantity": 45.0,
+          "quantity_max": 45.0,
+          "quantity_min": 45.0,
+          "quantity_step": 45.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ströbröd",
+          "component": "tiella",
+          "form": "dry",
+          "name": "ströbröd",
+          "quantity": 30.0,
+          "quantity_max": 30.0,
+          "quantity_min": 30.0,
+          "quantity_step": 30.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Väg upp fryst musselkött utan skal i ett täckt kärl i kylskåp. Behåll all vätska.",
+        "Tina helt i kylskåp enligt förpackningen; planera tolv timmar och förläng vid behov.",
+        "Sätt ugnen på 190 °C. Skala potatis och lök, väg rå ätlig mängd och skiva cirka två millimeter tunt. Hacka tomaten och väg färsk eller fryst hackad vitlök. Väg riset torrt. Väg osten före eventuell kantputsning, ta bort hård kant och riv resten utan att fylla på extra ost. Väg fryst hackad persilja.",
+        "Olja en djup form med hälften av tiellans olivolja. Lägg lök och hälften av potatisen i botten, sedan musselkött, ris, tomat och vitlök samt hälften av persiljan och osten. Täck med resten av potatisen. Tillsätt salt och svartpeppar. Mät upp 850 ml vatten i en kanna; ta bort lika mycket vatten som mängden upptiningsvätska och ersätt med denna. Häll hela blandningen runt kanten. Behåll alla lager och all vätska.",
+        "Fördela resten av olivoljan över ytan tillsammans med ströbröd och resten av osten och persiljan. Täck formen med ugnssäkert lock och sätt in i ugnen.",
+        "Baka täckt i trettiofem minuter.",
+        "Ta av locket och kontrollera vätskan utan att röra om lagren. Tillsätt vid behov 100 ml vatten om det torkat innan riset mjuknat.",
+        "Baka ytterligare tjugo minuter utan lock.",
+        "Kontrollera att ris och potatis är helt mjuka, mitten minst 75 °C och musselköttet genomhett enligt förpackningen. Förläng annars täckt med 100 ml vatten vid behov. Ta ut formen.",
+        "Låt formen vila tio minuter.",
+        "Fördela tiellan mellan portionerna med allt musselkött, ris, potatis och all kvarvarande sky."
+      ],
+      "name": "Tiella barese – musslor, ris och potatis i ugn – standard – med fryst musselkött utan skal",
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 36,
+        "base_id": "smako-italian-tiella-barese",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "blåmusselkött utan skal|as_sold",
+                "name": "Fryst musselkött utan skal, deklarerad produktvikt",
+                "note": "",
+                "quantity": 400.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ris|dry",
+                "name": "ris",
+                "note": "",
+                "quantity": 260.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "potatis|raw_edible",
+                "name": "potatis",
+                "note": "",
+                "quantity": 650.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "gul lök",
+                "note": "",
+                "quantity": 160.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "tomat|raw_edible",
+                "name": "tomat",
+                "note": "",
+                "quantity": 400.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "vitlök",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "olivolja|as_sold",
+                "name": "olivolja",
+                "note": "",
+                "quantity": 50.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "svartpeppar",
+                "note": "",
+                "quantity": 0.6,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "persilja|raw_edible",
+                "name": "persilja",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "lagrad pecorino|as_sold",
+                "name": "Lagrad pecorino, inköpt gramvikt före kantputsning",
+                "note": "",
+                "quantity": 45.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ströbröd|dry",
+                "name": "ströbröd",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "g"
+              }
+            ],
+            "id": "tiella",
+            "name": "Ris, potatis och musslor"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "fänkål|raw_edible",
+                "name": "fänkål",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "citronjuice|as_sold",
+                "name": "citronjuice",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "olivolja|as_sold",
+                "name": "olivolja",
+                "note": "",
+                "quantity": 12.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "sallad",
+            "name": "Fänkål med citron"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "italian"
+        ],
+        "equipment": [
+          "ugn",
+          "djup ugnsform med lock",
+          "kanna",
+          "rivjärn",
+          "termometer"
+        ],
+        "estimated_minutes": 821,
+        "family": "tiella barese",
+        "fish": false,
+        "flavor_profile": [
+          "mussla",
+          "tomat",
+          "vitlök"
+        ],
+        "ingredient_count": 12,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "oven",
+        "primary_ingredient": "blåmusselkött utan skal",
+        "provenance": {
+          "notes": "Granskad skalfri tiella med 400 g fryst musselkött i stället för 1600 g levande musslor med skal. Ny kulinarisk dos, ingen faktor för skalutbyte. Standard och utökad använder 45 g inköpt lagrad pecorino före eventuell kantputsning. Tolv timmars kylupptining ingår. All vätska används i lagren; inga levande musslor öppnas. Inte provlagad. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "ris och potatis i lager",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 1,
+            "id": "s1",
+            "ingredient_keys": [
+              "blåmusselkött utan skal|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Väg upp fryst musselkött utan skal i ett täckt kärl i kylskåp. Behåll all vätska."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 720,
+            "id": "s2",
+            "ingredient_keys": [
+              "blåmusselkött utan skal|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Tina helt i kylskåp enligt förpackningen; planera tolv timmar och förläng vid behov."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 12,
+            "id": "s3",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "lagrad pecorino|as_sold",
+              "persilja|raw_edible",
+              "potatis|raw_edible",
+              "ris|dry",
+              "tomat|raw_edible",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sätt ugnen på 190 °C. Skala potatis och lök, väg rå ätlig mängd och skiva cirka två millimeter tunt. Hacka tomaten och väg färsk eller fryst hackad vitlök. Väg riset torrt. Väg osten före eventuell kantputsning, ta bort hård kant och riv resten utan att fylla på extra ost. Väg fryst hackad persilja."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 10,
+            "id": "s4",
+            "ingredient_keys": [
+              "blåmusselkött utan skal|as_sold",
+              "gul lök|raw_edible",
+              "lagrad pecorino|as_sold",
+              "olivolja|as_sold",
+              "persilja|raw_edible",
+              "potatis|raw_edible",
+              "ris|dry",
+              "salt|as_sold",
+              "svartpeppar|dry",
+              "tomat|raw_edible",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "850 ml",
+                850.0
+              ]
+            ],
+            "text": "Olja en djup form med hälften av tiellans olivolja. Lägg lök och hälften av potatisen i botten, sedan musselkött, ris, tomat och vitlök samt hälften av persiljan och osten. Täck med resten av potatisen. Tillsätt salt och svartpeppar. Mät upp 850 ml vatten i en kanna; ta bort lika mycket vatten som mängden upptiningsvätska och ersätt med denna. Häll hela blandningen runt kanten. Behåll alla lager och all vätska."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 2,
+            "id": "s5",
+            "ingredient_keys": [
+              "lagrad pecorino|as_sold",
+              "olivolja|as_sold",
+              "persilja|raw_edible",
+              "ströbröd|dry"
+            ],
+            "parallel_group": null,
+            "text": "Fördela resten av olivoljan över ytan tillsammans med ströbröd och resten av osten och persiljan. Täck formen med ugnssäkert lock och sätt in i ugnen."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 35,
+            "id": "s6",
+            "ingredient_keys": [
+              "blåmusselkött utan skal|as_sold",
+              "potatis|raw_edible",
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Baka täckt i trettiofem minuter."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 2,
+            "id": "s7",
+            "ingredient_keys": [
+              "potatis|raw_edible",
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "100 ml",
+                100.0
+              ]
+            ],
+            "text": "Ta av locket och kontrollera vätskan utan att röra om lagren. Tillsätt vid behov 100 ml vatten om det torkat innan riset mjuknat."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 20,
+            "id": "s8",
+            "ingredient_keys": [
+              "blåmusselkött utan skal|as_sold",
+              "potatis|raw_edible",
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Baka ytterligare tjugo minuter utan lock."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 2,
+            "id": "s9",
+            "ingredient_keys": [
+              "blåmusselkött utan skal|as_sold",
+              "potatis|raw_edible",
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "100 ml",
+                100.0
+              ]
+            ],
+            "text": "Kontrollera att ris och potatis är helt mjuka, mitten minst 75 °C och musselköttet genomhett enligt förpackningen. Förläng annars täckt med 100 ml vatten vid behov. Ta ut formen."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 10,
+            "id": "s10",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Låt formen vila tio minuter."
+          },
+          {
+            "depends_on": [
+              "s10"
+            ],
+            "duration_minutes": 5,
+            "id": "s11",
+            "ingredient_keys": [
+              "citronjuice|as_sold",
+              "fänkål|raw_edible",
+              "olivolja|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Ansa fänkålen, väg den råa ätliga mängden och strimla tunt. Vänd med tillbehörets olivolja och citronjuice; behåll all dressing."
+          },
+          {
+            "depends_on": [
+              "s11"
+            ],
+            "duration_minutes": 2,
+            "id": "s12",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Fördela tiellan mellan portionerna med allt musselkött, ris, potatis och all kvarvarande sky. Servera fänkålen och all dess dressing till."
+          }
+        ],
+        "total_minutes": 821,
+        "unmeasured_processes": [
+          {
+            "description": "Osten vägs före kantputsning utan antagen ätlig andel.",
+            "ingredient_keys": [
+              "lagrad pecorino|as_sold"
+            ],
+            "operation": "trim_before_cooking",
+            "step_id": "s3"
+          }
+        ],
+        "variant_id": "extended",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 785
+      },
+      "ingredients": [
+        {
+          "canonical_name": "blåmusselkött utan skal",
+          "component": "tiella",
+          "form": "as_sold",
+          "name": "blåmusselkött utan skal",
+          "product_requirements": [
+            "pack:intake_all_round2_c4025d9b948d"
+          ],
+          "quantity": 400.0,
+          "quantity_max": 400.0,
+          "quantity_min": 400.0,
+          "quantity_step": 400.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ris",
+          "component": "tiella",
+          "form": "dry",
+          "name": "ris",
+          "product_requirements": [
+            "white_rice"
+          ],
+          "quantity": 260.0,
+          "quantity_max": 260.0,
+          "quantity_min": 260.0,
+          "quantity_step": 260.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "potatis",
+          "component": "tiella",
+          "form": "raw_edible",
+          "name": "potatis",
+          "quantity": 650.0,
+          "quantity_max": 650.0,
+          "quantity_min": 650.0,
+          "quantity_step": 650.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "tiella",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 160.0,
+          "quantity_max": 160.0,
+          "quantity_min": 160.0,
+          "quantity_step": 160.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "tomat",
+          "component": "tiella",
+          "form": "raw_edible",
+          "name": "tomat",
+          "quantity": 400.0,
+          "quantity_max": 400.0,
+          "quantity_min": 400.0,
+          "quantity_step": 400.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "tiella",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "olivolja",
+          "component": "tiella",
+          "form": "as_sold",
+          "name": "olivolja",
+          "product_requirements": [
+            "pack:intake_all_expansion_86ac9b2c5ae6"
+          ],
+          "quantity": 62.0,
+          "quantity_max": 62.0,
+          "quantity_min": 62.0,
+          "quantity_step": 62.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "tiella",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 2.0,
+          "quantity_max": 2.0,
+          "quantity_min": 2.0,
+          "quantity_step": 2.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "tiella",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 0.6,
+          "quantity_max": 0.6,
+          "quantity_min": 0.6,
+          "quantity_step": 0.6,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "persilja",
+          "component": "tiella",
+          "form": "raw_edible",
+          "name": "persilja",
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "lagrad pecorino",
+          "component": "tiella",
+          "form": "as_sold",
+          "name": "lagrad pecorino",
+          "product_requirements": [
+            "pack:intake_all_round2_4d778ee01c81"
+          ],
+          "quantity": 45.0,
+          "quantity_max": 45.0,
+          "quantity_min": 45.0,
+          "quantity_step": 45.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ströbröd",
+          "component": "tiella",
+          "form": "dry",
+          "name": "ströbröd",
+          "quantity": 30.0,
+          "quantity_max": 30.0,
+          "quantity_min": 30.0,
+          "quantity_step": 30.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "fänkål",
+          "component": "sallad",
+          "form": "raw_edible",
+          "name": "fänkål",
+          "product_requirements": [
+            "pack:intake_all_2503a71baee6"
+          ],
+          "quantity": 300.0,
+          "quantity_max": 300.0,
+          "quantity_min": 300.0,
+          "quantity_step": 300.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "citronjuice",
+          "component": "sallad",
+          "form": "as_sold",
+          "name": "citronjuice",
+          "product_requirements": [
+            "pure_juice"
+          ],
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 25.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        }
+      ],
+      "instructions": [
+        "Väg upp fryst musselkött utan skal i ett täckt kärl i kylskåp. Behåll all vätska.",
+        "Tina helt i kylskåp enligt förpackningen; planera tolv timmar och förläng vid behov.",
+        "Sätt ugnen på 190 °C. Skala potatis och lök, väg rå ätlig mängd och skiva cirka två millimeter tunt. Hacka tomaten och väg färsk eller fryst hackad vitlök. Väg riset torrt. Väg osten före eventuell kantputsning, ta bort hård kant och riv resten utan att fylla på extra ost. Väg fryst hackad persilja.",
+        "Olja en djup form med hälften av tiellans olivolja. Lägg lök och hälften av potatisen i botten, sedan musselkött, ris, tomat och vitlök samt hälften av persiljan och osten. Täck med resten av potatisen. Tillsätt salt och svartpeppar. Mät upp 850 ml vatten i en kanna; ta bort lika mycket vatten som mängden upptiningsvätska och ersätt med denna. Häll hela blandningen runt kanten. Behåll alla lager och all vätska.",
+        "Fördela resten av olivoljan över ytan tillsammans med ströbröd och resten av osten och persiljan. Täck formen med ugnssäkert lock och sätt in i ugnen.",
+        "Baka täckt i trettiofem minuter.",
+        "Ta av locket och kontrollera vätskan utan att röra om lagren. Tillsätt vid behov 100 ml vatten om det torkat innan riset mjuknat.",
+        "Baka ytterligare tjugo minuter utan lock.",
+        "Kontrollera att ris och potatis är helt mjuka, mitten minst 75 °C och musselköttet genomhett enligt förpackningen. Förläng annars täckt med 100 ml vatten vid behov. Ta ut formen.",
+        "Låt formen vila tio minuter.",
+        "Ansa fänkålen, väg den råa ätliga mängden och strimla tunt. Vänd med tillbehörets olivolja och citronjuice; behåll all dressing.",
+        "Fördela tiellan mellan portionerna med allt musselkött, ris, potatis och all kvarvarande sky. Servera fänkålen och all dess dressing till."
+      ],
+      "name": "Tiella barese – musslor, ris och potatis i ugn – utökad – med fryst musselkött utan skal",
+      "servings": 4
+    }
+  ],
+  "schema_version": "smako-meal-pack-v1"
+}

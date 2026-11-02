@@ -1,0 +1,1675 @@
+{
+  "pack_id": "reviewed-expansion-round2-stage36",
+  "recipes": [
+    {
+      "design": {
+        "active_minutes": 58,
+        "base_id": "smako-thai-tod-man-pla",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "fisk|raw_edible",
+                "name": "fisk",
+                "note": "",
+                "quantity": 650.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "röd currypasta|as_sold",
+                "name": "röd currypasta",
+                "note": "",
+                "quantity": 40.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ägg|raw_edible",
+                "name": "ägg",
+                "note": "",
+                "quantity": 50.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "haricots verts|as_sold",
+                "name": "haricots verts",
+                "note": "",
+                "quantity": 160.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "citrongräs|as_sold",
+                "name": "Hel färsk citrongrässtjälk, vägd före ansning",
+                "note": "",
+                "quantity": 12.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "rapsolja",
+                "note": "",
+                "quantity": 70.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              }
+            ],
+            "id": "kakor",
+            "name": "Elastiska fiskkakor"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ris|dry",
+                "name": "ris",
+                "note": "",
+                "quantity": 280.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              }
+            ],
+            "id": "ris",
+            "name": "Kokt ris"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "thai"
+        ],
+        "equipment": [
+          "matberedare",
+          "stekpanna",
+          "kastrull",
+          "termometer"
+        ],
+        "estimated_minutes": 801,
+        "family": "tod man pla",
+        "fish": true,
+        "flavor_profile": [
+          "röd curry",
+          "citrongräs",
+          "gurka"
+        ],
+        "ingredient_count": 7,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "pan",
+        "primary_ingredient": "fisk",
+        "provenance": {
+          "notes": "Granskad citrongräsversion: 12 g hel färsk stjälk före ansning ersätter 4 g makrutblad som en ny dos. Hårda delar tas bort och enbart mjukt innanmäte finhackas. Ingen likvärdig arom eller ätlig vikt påstås. Upptiningsförlust och kvarvarande stekolja är okända. Inte provlagad. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "ris",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 2,
+            "id": "s1",
+            "ingredient_keys": [
+              "fisk|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Väg den råa benfria fiskfilén före upptining och lägg täckt i kylskåp. Kontrollera att inga ben finns kvar."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 720,
+            "id": "s2",
+            "ingredient_keys": [
+              "fisk|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Tina fryst fisk helt i kylskåp enligt förpackningen. Planera tolv timmar och förläng om iskärnor återstår."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 2,
+            "id": "s3",
+            "ingredient_keys": [
+              "fisk|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Häll bort fri upptiningsvätska och torka fiskens yta lätt. Håll filén kall; dess vikt efter avrinning är inte förutsatt."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 3,
+            "id": "s4",
+            "ingredient_keys": [
+              "ris|dry",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "560 ml",
+                560.0
+              ]
+            ],
+            "text": "Skölj riset i sil. Lägg det i en kastrull med risets salt och 560 ml vatten; koka upp och sänk till låg värme."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 18,
+            "id": "s5",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Sjud riset under lock cirka 18 minuter tills vattnet absorberats; följ längre koktid på förpackningen vid behov."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 1,
+            "id": "s6",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Kontrollera att riset är mjukt och stäng av värmen."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 5,
+            "id": "s7",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Låt riset vila fem minuter under lock."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 1,
+            "id": "s8",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Luckra upp riset och håll det varmt över 60 °C under lock tills huvudrätten serveras."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 12,
+            "id": "s9",
+            "ingredient_keys": [
+              "citrongräs|as_sold",
+              "fisk|raw_edible",
+              "haricots verts|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "50 ml",
+                50.0
+              ]
+            ],
+            "text": "Väg citrongräset före ansning. Skär bort torr rotände, hårda ytterlager och vedartad topp. Finhacka och mortla det mjuka innanmäte som återstår mycket fint. Lägg gröna bönor direkt från frysen i en liten kastrull med 50 ml vatten. Koka under omrörning minst tre minuter, eller längre enligt förpackningen, tills mjuka. Låt fritt vatten koka in utan att hälla bort det och skär bönorna smått. Håll fisk och mixerskål kalla."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 8,
+            "id": "s10",
+            "ingredient_keys": [
+              "citrongräs|as_sold",
+              "fisk|raw_edible",
+              "haricots verts|as_sold",
+              "röd currypasta|as_sold",
+              "salt|as_sold",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Knäck och väg rått ägg utan skal. Mixa den kalla fisken med ägg, currypasta och kakornas salt. Fortsätt i korta pulser tills massan blir seg och håller formen på en sked; skrapa ner och kyl vid behov så att den inte blir varm. Vänd ner bönor och det finhackade mjuka citrongräset för hand."
+          },
+          {
+            "depends_on": [
+              "s10"
+            ],
+            "duration_minutes": 6,
+            "id": "s11",
+            "ingredient_keys": [
+              "fisk|raw_edible",
+              "rapsolja|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Värm lite av oljan och stek en liten provkaka helt igenom innan avsmakning. Forma sedan fyra tunna kakor per portion med två lätt fuktade skedar. Torka bort droppande vatten från redskapen före kontakt med oljan."
+          },
+          {
+            "depends_on": [
+              "s11"
+            ],
+            "duration_minutes": 20,
+            "id": "s12",
+            "ingredient_keys": [
+              "fisk|raw_edible",
+              "rapsolja|as_sold",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Stek i omgångar i den uppmätta oljan på medelvärme, cirka 3 minuter per sida, tills kakorna är elastiska, genomlagade och når minst 72 °C i mitten. Låt inte ytan brännas innan mitten är färdig. Lyft kakorna till galler och låt fri olja rinna av; kvarvarande olja serveras inte."
+          },
+          {
+            "depends_on": [
+              "s12"
+            ],
+            "duration_minutes": 3,
+            "id": "s13",
+            "ingredient_keys": [
+              "fisk|raw_edible",
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Servera fyra fiskkakor per portion med ris."
+          }
+        ],
+        "total_minutes": 801,
+        "unmeasured_processes": [
+          {
+            "description": "Fri upptiningsvätska från rå benfri fisk hälls bort; kvarvarande ätlig massa och ämnesförlust är okända.",
+            "ingredient_keys": [
+              "fisk|raw_edible"
+            ],
+            "operation": "drain_before_cooking",
+            "step_id": "s3"
+          },
+          {
+            "description": "Hela stjälkens inköpsvikt föregår borttagning av hårda delar. Ingen andel mjukt innanmäte antas.",
+            "ingredient_keys": [
+              "citrongräs|as_sold"
+            ],
+            "operation": "trim_before_cooking",
+            "step_id": "s9"
+          },
+          {
+            "description": "Kakorna pannsteks i uppmätt olja och får rinna av. Oljeupptag och kvarvarande stekolja är inte uppmätta; inköpt olja är inte konsumerad mängd.",
+            "ingredient_keys": [
+              "rapsolja|as_sold"
+            ],
+            "operation": "deep_fry_and_drain",
+            "step_id": "s12"
+          }
+        ],
+        "variant_id": "simple",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 743
+      },
+      "ingredients": [
+        {
+          "canonical_name": "fisk",
+          "component": "kakor",
+          "form": "raw_edible",
+          "name": "fisk",
+          "quantity": 650.0,
+          "quantity_max": 650.0,
+          "quantity_min": 650.0,
+          "quantity_step": 650.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "röd currypasta",
+          "component": "kakor",
+          "form": "as_sold",
+          "name": "röd currypasta",
+          "product_requirements": [
+            "pack:intake_all_fdde79afdb70"
+          ],
+          "quantity": 40.0,
+          "quantity_max": 40.0,
+          "quantity_min": 40.0,
+          "quantity_step": 40.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ägg",
+          "component": "kakor",
+          "form": "raw_edible",
+          "name": "ägg",
+          "product_requirements": [
+            "pack:egg"
+          ],
+          "quantity": 50.0,
+          "quantity_max": 50.0,
+          "quantity_min": 50.0,
+          "quantity_step": 50.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "haricots verts",
+          "component": "kakor",
+          "form": "as_sold",
+          "name": "haricots verts",
+          "product_requirements": [
+            "frozen",
+            "plain"
+          ],
+          "quantity": 160.0,
+          "quantity_max": 160.0,
+          "quantity_min": 160.0,
+          "quantity_step": 160.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "citrongräs",
+          "component": "kakor",
+          "form": "as_sold",
+          "name": "citrongräs",
+          "product_requirements": [
+            "pack:intake_all_shape_top5_whole_lemongrass"
+          ],
+          "quantity": 12.0,
+          "quantity_max": 12.0,
+          "quantity_min": 12.0,
+          "quantity_step": 12.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "kakor",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 70.0,
+          "quantity_max": 70.0,
+          "quantity_min": 70.0,
+          "quantity_step": 70.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "kakor",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 4.0,
+          "quantity_max": 4.0,
+          "quantity_min": 4.0,
+          "quantity_step": 4.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ris",
+          "component": "ris",
+          "form": "dry",
+          "name": "ris",
+          "product_requirements": [
+            "white_rice"
+          ],
+          "quantity": 280.0,
+          "quantity_max": 280.0,
+          "quantity_min": 280.0,
+          "quantity_step": 280.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Väg den råa benfria fiskfilén före upptining och lägg täckt i kylskåp. Kontrollera att inga ben finns kvar.",
+        "Tina fryst fisk helt i kylskåp enligt förpackningen. Planera tolv timmar och förläng om iskärnor återstår.",
+        "Häll bort fri upptiningsvätska och torka fiskens yta lätt. Håll filén kall; dess vikt efter avrinning är inte förutsatt.",
+        "Skölj riset i sil. Lägg det i en kastrull med risets salt och 560 ml vatten; koka upp och sänk till låg värme.",
+        "Sjud riset under lock cirka 18 minuter tills vattnet absorberats; följ längre koktid på förpackningen vid behov.",
+        "Kontrollera att riset är mjukt och stäng av värmen.",
+        "Låt riset vila fem minuter under lock.",
+        "Luckra upp riset och håll det varmt över 60 °C under lock tills huvudrätten serveras.",
+        "Väg citrongräset före ansning. Skär bort torr rotände, hårda ytterlager och vedartad topp. Finhacka och mortla det mjuka innanmäte som återstår mycket fint. Lägg gröna bönor direkt från frysen i en liten kastrull med 50 ml vatten. Koka under omrörning minst tre minuter, eller längre enligt förpackningen, tills mjuka. Låt fritt vatten koka in utan att hälla bort det och skär bönorna smått. Håll fisk och mixerskål kalla.",
+        "Knäck och väg rått ägg utan skal. Mixa den kalla fisken med ägg, currypasta och kakornas salt. Fortsätt i korta pulser tills massan blir seg och håller formen på en sked; skrapa ner och kyl vid behov så att den inte blir varm. Vänd ner bönor och det finhackade mjuka citrongräset för hand.",
+        "Värm lite av oljan och stek en liten provkaka helt igenom innan avsmakning. Forma sedan fyra tunna kakor per portion med två lätt fuktade skedar. Torka bort droppande vatten från redskapen före kontakt med oljan.",
+        "Stek i omgångar i den uppmätta oljan på medelvärme, cirka 3 minuter per sida, tills kakorna är elastiska, genomlagade och når minst 72 °C i mitten. Låt inte ytan brännas innan mitten är färdig. Lyft kakorna till galler och låt fri olja rinna av; kvarvarande olja serveras inte.",
+        "Servera fyra fiskkakor per portion med ris."
+      ],
+      "name": "Tod man pla – elastiska fiskkakor med gröna bönor – enkel – citrongräsversion utan makrutblad",
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 66,
+        "base_id": "smako-thai-tod-man-pla",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "fisk|raw_edible",
+                "name": "fisk",
+                "note": "",
+                "quantity": 650.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "röd currypasta|as_sold",
+                "name": "röd currypasta",
+                "note": "",
+                "quantity": 40.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ägg|raw_edible",
+                "name": "ägg",
+                "note": "",
+                "quantity": 50.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "haricots verts|as_sold",
+                "name": "haricots verts",
+                "note": "",
+                "quantity": 160.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "citrongräs|as_sold",
+                "name": "Hel färsk citrongrässtjälk, vägd före ansning",
+                "note": "",
+                "quantity": 12.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "rapsolja",
+                "note": "",
+                "quantity": 70.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              }
+            ],
+            "id": "kakor",
+            "name": "Elastiska fiskkakor"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "gurka|raw_edible",
+                "name": "gurka",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "risvinäger|as_sold",
+                "name": "risvinäger",
+                "note": "",
+                "quantity": 60.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "strösocker",
+                "note": "",
+                "quantity": 35.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              }
+            ],
+            "id": "dipp",
+            "name": "Sötsyrlig gurkdipp"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ris|dry",
+                "name": "ris",
+                "note": "",
+                "quantity": 280.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              }
+            ],
+            "id": "ris",
+            "name": "Kokt ris"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "thai"
+        ],
+        "equipment": [
+          "matberedare",
+          "stekpanna",
+          "kastrull",
+          "termometer"
+        ],
+        "estimated_minutes": 809,
+        "family": "tod man pla",
+        "fish": true,
+        "flavor_profile": [
+          "röd curry",
+          "citrongräs",
+          "gurka"
+        ],
+        "ingredient_count": 10,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "pan",
+        "primary_ingredient": "fisk",
+        "provenance": {
+          "notes": "Granskad citrongräsversion: 12 g hel färsk stjälk före ansning ersätter 4 g makrutblad som en ny dos. Hårda delar tas bort och enbart mjukt innanmäte finhackas. Ingen likvärdig arom eller ätlig vikt påstås. Upptiningsförlust och kvarvarande stekolja är okända. Inte provlagad. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "ris",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 2,
+            "id": "s1",
+            "ingredient_keys": [
+              "fisk|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Väg den råa benfria fiskfilén före upptining och lägg täckt i kylskåp. Kontrollera att inga ben finns kvar."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 720,
+            "id": "s2",
+            "ingredient_keys": [
+              "fisk|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Tina fryst fisk helt i kylskåp enligt förpackningen. Planera tolv timmar och förläng om iskärnor återstår."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 2,
+            "id": "s3",
+            "ingredient_keys": [
+              "fisk|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Häll bort fri upptiningsvätska och torka fiskens yta lätt. Håll filén kall; dess vikt efter avrinning är inte förutsatt."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 3,
+            "id": "s4",
+            "ingredient_keys": [
+              "ris|dry",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "560 ml",
+                560.0
+              ]
+            ],
+            "text": "Skölj riset i sil. Lägg det i en kastrull med risets salt och 560 ml vatten; koka upp och sänk till låg värme."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 18,
+            "id": "s5",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Sjud riset under lock cirka 18 minuter tills vattnet absorberats; följ längre koktid på förpackningen vid behov."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 1,
+            "id": "s6",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Kontrollera att riset är mjukt och stäng av värmen."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 5,
+            "id": "s7",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Låt riset vila fem minuter under lock."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 1,
+            "id": "s8",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Luckra upp riset och håll det varmt över 60 °C under lock tills huvudrätten serveras."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 8,
+            "id": "s9",
+            "ingredient_keys": [
+              "gurka|raw_edible",
+              "risvinäger|as_sold",
+              "salt|as_sold",
+              "strösocker|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "90 ml",
+                90.0
+              ]
+            ],
+            "text": "Koka risvinäger, socker, dippens salt och 90 ml vatten 3 minuter. Häll i en skål och låt svalna. Skiva gurka tunt."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 12,
+            "id": "s10",
+            "ingredient_keys": [
+              "citrongräs|as_sold",
+              "fisk|raw_edible",
+              "haricots verts|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "50 ml",
+                50.0
+              ]
+            ],
+            "text": "Väg citrongräset före ansning. Skär bort torr rotände, hårda ytterlager och vedartad topp. Finhacka och mortla det mjuka innanmäte som återstår mycket fint. Lägg gröna bönor direkt från frysen i en liten kastrull med 50 ml vatten. Koka under omrörning minst tre minuter, eller längre enligt förpackningen, tills mjuka. Låt fritt vatten koka in utan att hälla bort det och skär bönorna smått. Håll fisk och mixerskål kalla."
+          },
+          {
+            "depends_on": [
+              "s10"
+            ],
+            "duration_minutes": 8,
+            "id": "s11",
+            "ingredient_keys": [
+              "citrongräs|as_sold",
+              "fisk|raw_edible",
+              "haricots verts|as_sold",
+              "röd currypasta|as_sold",
+              "salt|as_sold",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Knäck och väg rått ägg utan skal. Mixa den kalla fisken med ägg, currypasta och kakornas salt. Fortsätt i korta pulser tills massan blir seg och håller formen på en sked; skrapa ner och kyl vid behov så att den inte blir varm. Vänd ner bönor och det finhackade mjuka citrongräset för hand."
+          },
+          {
+            "depends_on": [
+              "s11"
+            ],
+            "duration_minutes": 6,
+            "id": "s12",
+            "ingredient_keys": [
+              "fisk|raw_edible",
+              "rapsolja|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Värm lite av oljan och stek en liten provkaka helt igenom innan avsmakning. Forma sedan fyra tunna kakor per portion med två lätt fuktade skedar. Torka bort droppande vatten från redskapen före kontakt med oljan."
+          },
+          {
+            "depends_on": [
+              "s12"
+            ],
+            "duration_minutes": 20,
+            "id": "s13",
+            "ingredient_keys": [
+              "fisk|raw_edible",
+              "rapsolja|as_sold",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Stek i omgångar i den uppmätta oljan på medelvärme, cirka 3 minuter per sida, tills kakorna är elastiska, genomlagade och når minst 72 °C i mitten. Låt inte ytan brännas innan mitten är färdig. Lyft kakorna till galler och låt fri olja rinna av; kvarvarande olja serveras inte."
+          },
+          {
+            "depends_on": [
+              "s13"
+            ],
+            "duration_minutes": 3,
+            "id": "s14",
+            "ingredient_keys": [
+              "fisk|raw_edible",
+              "gurka|raw_edible",
+              "risvinäger|as_sold",
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Servera fyra fiskkakor per portion med ris. Blanda gurkan i den avsvalnade dipplagen och servera vid sidan."
+          }
+        ],
+        "total_minutes": 809,
+        "unmeasured_processes": [
+          {
+            "description": "Fri upptiningsvätska från rå benfri fisk hälls bort; kvarvarande ätlig massa och ämnesförlust är okända.",
+            "ingredient_keys": [
+              "fisk|raw_edible"
+            ],
+            "operation": "drain_before_cooking",
+            "step_id": "s3"
+          },
+          {
+            "description": "Hela stjälkens inköpsvikt föregår borttagning av hårda delar. Ingen andel mjukt innanmäte antas.",
+            "ingredient_keys": [
+              "citrongräs|as_sold"
+            ],
+            "operation": "trim_before_cooking",
+            "step_id": "s10"
+          },
+          {
+            "description": "Kakorna pannsteks i uppmätt olja och får rinna av. Oljeupptag och kvarvarande stekolja är inte uppmätta; inköpt olja är inte konsumerad mängd.",
+            "ingredient_keys": [
+              "rapsolja|as_sold"
+            ],
+            "operation": "deep_fry_and_drain",
+            "step_id": "s13"
+          }
+        ],
+        "variant_id": "standard",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 743
+      },
+      "ingredients": [
+        {
+          "canonical_name": "fisk",
+          "component": "kakor",
+          "form": "raw_edible",
+          "name": "fisk",
+          "quantity": 650.0,
+          "quantity_max": 650.0,
+          "quantity_min": 650.0,
+          "quantity_step": 650.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "röd currypasta",
+          "component": "kakor",
+          "form": "as_sold",
+          "name": "röd currypasta",
+          "product_requirements": [
+            "pack:intake_all_fdde79afdb70"
+          ],
+          "quantity": 40.0,
+          "quantity_max": 40.0,
+          "quantity_min": 40.0,
+          "quantity_step": 40.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ägg",
+          "component": "kakor",
+          "form": "raw_edible",
+          "name": "ägg",
+          "product_requirements": [
+            "pack:egg"
+          ],
+          "quantity": 50.0,
+          "quantity_max": 50.0,
+          "quantity_min": 50.0,
+          "quantity_step": 50.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "haricots verts",
+          "component": "kakor",
+          "form": "as_sold",
+          "name": "haricots verts",
+          "product_requirements": [
+            "frozen",
+            "plain"
+          ],
+          "quantity": 160.0,
+          "quantity_max": 160.0,
+          "quantity_min": 160.0,
+          "quantity_step": 160.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "citrongräs",
+          "component": "kakor",
+          "form": "as_sold",
+          "name": "citrongräs",
+          "product_requirements": [
+            "pack:intake_all_shape_top5_whole_lemongrass"
+          ],
+          "quantity": 12.0,
+          "quantity_max": 12.0,
+          "quantity_min": 12.0,
+          "quantity_step": 12.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "kakor",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 70.0,
+          "quantity_max": 70.0,
+          "quantity_min": 70.0,
+          "quantity_step": 70.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "kakor",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gurka",
+          "component": "dipp",
+          "form": "raw_edible",
+          "name": "gurka",
+          "quantity": 300.0,
+          "quantity_max": 300.0,
+          "quantity_min": 300.0,
+          "quantity_step": 300.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "risvinäger",
+          "component": "dipp",
+          "form": "as_sold",
+          "name": "risvinäger",
+          "product_requirements": [
+            "pack:intake_all_4f04b466a0d2"
+          ],
+          "quantity": 60.0,
+          "quantity_max": 60.0,
+          "quantity_min": 60.0,
+          "quantity_step": 60.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "strösocker",
+          "component": "dipp",
+          "form": "dry",
+          "name": "strösocker",
+          "product_requirements": [
+            "pack:sugar"
+          ],
+          "quantity": 35.0,
+          "quantity_max": 35.0,
+          "quantity_min": 35.0,
+          "quantity_step": 35.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ris",
+          "component": "ris",
+          "form": "dry",
+          "name": "ris",
+          "product_requirements": [
+            "white_rice"
+          ],
+          "quantity": 280.0,
+          "quantity_max": 280.0,
+          "quantity_min": 280.0,
+          "quantity_step": 280.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Väg den råa benfria fiskfilén före upptining och lägg täckt i kylskåp. Kontrollera att inga ben finns kvar.",
+        "Tina fryst fisk helt i kylskåp enligt förpackningen. Planera tolv timmar och förläng om iskärnor återstår.",
+        "Häll bort fri upptiningsvätska och torka fiskens yta lätt. Håll filén kall; dess vikt efter avrinning är inte förutsatt.",
+        "Skölj riset i sil. Lägg det i en kastrull med risets salt och 560 ml vatten; koka upp och sänk till låg värme.",
+        "Sjud riset under lock cirka 18 minuter tills vattnet absorberats; följ längre koktid på förpackningen vid behov.",
+        "Kontrollera att riset är mjukt och stäng av värmen.",
+        "Låt riset vila fem minuter under lock.",
+        "Luckra upp riset och håll det varmt över 60 °C under lock tills huvudrätten serveras.",
+        "Koka risvinäger, socker, dippens salt och 90 ml vatten 3 minuter. Häll i en skål och låt svalna. Skiva gurka tunt.",
+        "Väg citrongräset före ansning. Skär bort torr rotände, hårda ytterlager och vedartad topp. Finhacka och mortla det mjuka innanmäte som återstår mycket fint. Lägg gröna bönor direkt från frysen i en liten kastrull med 50 ml vatten. Koka under omrörning minst tre minuter, eller längre enligt förpackningen, tills mjuka. Låt fritt vatten koka in utan att hälla bort det och skär bönorna smått. Håll fisk och mixerskål kalla.",
+        "Knäck och väg rått ägg utan skal. Mixa den kalla fisken med ägg, currypasta och kakornas salt. Fortsätt i korta pulser tills massan blir seg och håller formen på en sked; skrapa ner och kyl vid behov så att den inte blir varm. Vänd ner bönor och det finhackade mjuka citrongräset för hand.",
+        "Värm lite av oljan och stek en liten provkaka helt igenom innan avsmakning. Forma sedan fyra tunna kakor per portion med två lätt fuktade skedar. Torka bort droppande vatten från redskapen före kontakt med oljan.",
+        "Stek i omgångar i den uppmätta oljan på medelvärme, cirka 3 minuter per sida, tills kakorna är elastiska, genomlagade och når minst 72 °C i mitten. Låt inte ytan brännas innan mitten är färdig. Lyft kakorna till galler och låt fri olja rinna av; kvarvarande olja serveras inte.",
+        "Servera fyra fiskkakor per portion med ris. Blanda gurkan i den avsvalnade dipplagen och servera vid sidan."
+      ],
+      "name": "Tod man pla – elastiska fiskkakor med gröna bönor – standard – citrongräsversion utan makrutblad",
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 66,
+        "base_id": "smako-thai-tod-man-pla",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "fisk|raw_edible",
+                "name": "fisk",
+                "note": "",
+                "quantity": 650.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "röd currypasta|as_sold",
+                "name": "röd currypasta",
+                "note": "",
+                "quantity": 40.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ägg|raw_edible",
+                "name": "ägg",
+                "note": "",
+                "quantity": 50.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "haricots verts|as_sold",
+                "name": "haricots verts",
+                "note": "",
+                "quantity": 160.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "citrongräs|as_sold",
+                "name": "Hel färsk citrongrässtjälk, vägd före ansning",
+                "note": "",
+                "quantity": 12.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "rapsolja",
+                "note": "",
+                "quantity": 70.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              }
+            ],
+            "id": "kakor",
+            "name": "Elastiska fiskkakor"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "gurka|raw_edible",
+                "name": "gurka",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "risvinäger|as_sold",
+                "name": "risvinäger",
+                "note": "",
+                "quantity": 60.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "strösocker",
+                "note": "",
+                "quantity": 35.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              }
+            ],
+            "id": "dipp",
+            "name": "Sötsyrlig gurkdipp"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "rostade jordnötter|as_sold",
+                "name": "Rostade osaltade jordnötter",
+                "note": "",
+                "quantity": 45.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "schalottenlök|raw_edible",
+                "name": "schalottenlök",
+                "note": "",
+                "quantity": 60.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "chiliflakes|dry",
+                "name": "chiliflakes",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              }
+            ],
+            "id": "dipp_extra",
+            "name": "Utökad dipp"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ris|dry",
+                "name": "ris",
+                "note": "",
+                "quantity": 280.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              }
+            ],
+            "id": "ris",
+            "name": "Kokt ris"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "thai"
+        ],
+        "equipment": [
+          "matberedare",
+          "stekpanna",
+          "kastrull",
+          "termometer"
+        ],
+        "estimated_minutes": 809,
+        "family": "tod man pla",
+        "fish": true,
+        "flavor_profile": [
+          "röd curry",
+          "citrongräs",
+          "gurka"
+        ],
+        "ingredient_count": 13,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "pan",
+        "primary_ingredient": "fisk",
+        "provenance": {
+          "notes": "Granskad citrongräsversion: 12 g hel färsk stjälk före ansning ersätter 4 g makrutblad som en ny dos. Hårda delar tas bort och enbart mjukt innanmäte finhackas. Ingen likvärdig arom eller ätlig vikt påstås. Upptiningsförlust och kvarvarande stekolja är okända. Inte provlagad. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "ris",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 2,
+            "id": "s1",
+            "ingredient_keys": [
+              "fisk|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Väg den råa benfria fiskfilén före upptining och lägg täckt i kylskåp. Kontrollera att inga ben finns kvar."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 720,
+            "id": "s2",
+            "ingredient_keys": [
+              "fisk|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Tina fryst fisk helt i kylskåp enligt förpackningen. Planera tolv timmar och förläng om iskärnor återstår."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 2,
+            "id": "s3",
+            "ingredient_keys": [
+              "fisk|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Häll bort fri upptiningsvätska och torka fiskens yta lätt. Håll filén kall; dess vikt efter avrinning är inte förutsatt."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 3,
+            "id": "s4",
+            "ingredient_keys": [
+              "ris|dry",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "560 ml",
+                560.0
+              ]
+            ],
+            "text": "Skölj riset i sil. Lägg det i en kastrull med risets salt och 560 ml vatten; koka upp och sänk till låg värme."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 18,
+            "id": "s5",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Sjud riset under lock cirka 18 minuter tills vattnet absorberats; följ längre koktid på förpackningen vid behov."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 1,
+            "id": "s6",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Kontrollera att riset är mjukt och stäng av värmen."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 5,
+            "id": "s7",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Låt riset vila fem minuter under lock."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 1,
+            "id": "s8",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Luckra upp riset och håll det varmt över 60 °C under lock tills huvudrätten serveras."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 8,
+            "id": "s9",
+            "ingredient_keys": [
+              "chiliflakes|dry",
+              "gurka|raw_edible",
+              "risvinäger|as_sold",
+              "rostade jordnötter|as_sold",
+              "salt|as_sold",
+              "schalottenlök|raw_edible",
+              "strösocker|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "90 ml",
+                90.0
+              ]
+            ],
+            "text": "Koka risvinäger, socker, dippens salt och 90 ml vatten 3 minuter. Häll i en skål och låt svalna. Skiva gurka tunt; skiva schalottenlök, hacka de rostade osaltade jordnötterna och rör ner chiliflakes i lagen."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 12,
+            "id": "s10",
+            "ingredient_keys": [
+              "citrongräs|as_sold",
+              "fisk|raw_edible",
+              "haricots verts|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "50 ml",
+                50.0
+              ]
+            ],
+            "text": "Väg citrongräset före ansning. Skär bort torr rotände, hårda ytterlager och vedartad topp. Finhacka och mortla det mjuka innanmäte som återstår mycket fint. Lägg gröna bönor direkt från frysen i en liten kastrull med 50 ml vatten. Koka under omrörning minst tre minuter, eller längre enligt förpackningen, tills mjuka. Låt fritt vatten koka in utan att hälla bort det och skär bönorna smått. Håll fisk och mixerskål kalla."
+          },
+          {
+            "depends_on": [
+              "s10"
+            ],
+            "duration_minutes": 8,
+            "id": "s11",
+            "ingredient_keys": [
+              "citrongräs|as_sold",
+              "fisk|raw_edible",
+              "haricots verts|as_sold",
+              "röd currypasta|as_sold",
+              "salt|as_sold",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Knäck och väg rått ägg utan skal. Mixa den kalla fisken med ägg, currypasta och kakornas salt. Fortsätt i korta pulser tills massan blir seg och håller formen på en sked; skrapa ner och kyl vid behov så att den inte blir varm. Vänd ner bönor och det finhackade mjuka citrongräset för hand."
+          },
+          {
+            "depends_on": [
+              "s11"
+            ],
+            "duration_minutes": 6,
+            "id": "s12",
+            "ingredient_keys": [
+              "fisk|raw_edible",
+              "rapsolja|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Värm lite av oljan och stek en liten provkaka helt igenom innan avsmakning. Forma sedan fyra tunna kakor per portion med två lätt fuktade skedar. Torka bort droppande vatten från redskapen före kontakt med oljan."
+          },
+          {
+            "depends_on": [
+              "s12"
+            ],
+            "duration_minutes": 20,
+            "id": "s13",
+            "ingredient_keys": [
+              "fisk|raw_edible",
+              "rapsolja|as_sold",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Stek i omgångar i den uppmätta oljan på medelvärme, cirka 3 minuter per sida, tills kakorna är elastiska, genomlagade och når minst 72 °C i mitten. Låt inte ytan brännas innan mitten är färdig. Lyft kakorna till galler och låt fri olja rinna av; kvarvarande olja serveras inte."
+          },
+          {
+            "depends_on": [
+              "s13"
+            ],
+            "duration_minutes": 3,
+            "id": "s14",
+            "ingredient_keys": [
+              "fisk|raw_edible",
+              "gurka|raw_edible",
+              "risvinäger|as_sold",
+              "ris|dry",
+              "rostade jordnötter|as_sold",
+              "schalottenlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Servera fyra fiskkakor per portion med ris. Blanda gurkan i den avsvalnade dipplagen tillsammans med schalottenlök och jordnötter och servera vid sidan."
+          }
+        ],
+        "total_minutes": 809,
+        "unmeasured_processes": [
+          {
+            "description": "Fri upptiningsvätska från rå benfri fisk hälls bort; kvarvarande ätlig massa och ämnesförlust är okända.",
+            "ingredient_keys": [
+              "fisk|raw_edible"
+            ],
+            "operation": "drain_before_cooking",
+            "step_id": "s3"
+          },
+          {
+            "description": "Hela stjälkens inköpsvikt föregår borttagning av hårda delar. Ingen andel mjukt innanmäte antas.",
+            "ingredient_keys": [
+              "citrongräs|as_sold"
+            ],
+            "operation": "trim_before_cooking",
+            "step_id": "s10"
+          },
+          {
+            "description": "Kakorna pannsteks i uppmätt olja och får rinna av. Oljeupptag och kvarvarande stekolja är inte uppmätta; inköpt olja är inte konsumerad mängd.",
+            "ingredient_keys": [
+              "rapsolja|as_sold"
+            ],
+            "operation": "deep_fry_and_drain",
+            "step_id": "s13"
+          }
+        ],
+        "variant_id": "extended",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 743
+      },
+      "ingredients": [
+        {
+          "canonical_name": "fisk",
+          "component": "kakor",
+          "form": "raw_edible",
+          "name": "fisk",
+          "quantity": 650.0,
+          "quantity_max": 650.0,
+          "quantity_min": 650.0,
+          "quantity_step": 650.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "röd currypasta",
+          "component": "kakor",
+          "form": "as_sold",
+          "name": "röd currypasta",
+          "product_requirements": [
+            "pack:intake_all_fdde79afdb70"
+          ],
+          "quantity": 40.0,
+          "quantity_max": 40.0,
+          "quantity_min": 40.0,
+          "quantity_step": 40.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ägg",
+          "component": "kakor",
+          "form": "raw_edible",
+          "name": "ägg",
+          "product_requirements": [
+            "pack:egg"
+          ],
+          "quantity": 50.0,
+          "quantity_max": 50.0,
+          "quantity_min": 50.0,
+          "quantity_step": 50.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "haricots verts",
+          "component": "kakor",
+          "form": "as_sold",
+          "name": "haricots verts",
+          "product_requirements": [
+            "frozen",
+            "plain"
+          ],
+          "quantity": 160.0,
+          "quantity_max": 160.0,
+          "quantity_min": 160.0,
+          "quantity_step": 160.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "citrongräs",
+          "component": "kakor",
+          "form": "as_sold",
+          "name": "citrongräs",
+          "product_requirements": [
+            "pack:intake_all_shape_top5_whole_lemongrass"
+          ],
+          "quantity": 12.0,
+          "quantity_max": 12.0,
+          "quantity_min": 12.0,
+          "quantity_step": 12.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "kakor",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 70.0,
+          "quantity_max": 70.0,
+          "quantity_min": 70.0,
+          "quantity_step": 70.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "kakor",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gurka",
+          "component": "dipp",
+          "form": "raw_edible",
+          "name": "gurka",
+          "quantity": 300.0,
+          "quantity_max": 300.0,
+          "quantity_min": 300.0,
+          "quantity_step": 300.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "risvinäger",
+          "component": "dipp",
+          "form": "as_sold",
+          "name": "risvinäger",
+          "product_requirements": [
+            "pack:intake_all_4f04b466a0d2"
+          ],
+          "quantity": 60.0,
+          "quantity_max": 60.0,
+          "quantity_min": 60.0,
+          "quantity_step": 60.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "strösocker",
+          "component": "dipp",
+          "form": "dry",
+          "name": "strösocker",
+          "product_requirements": [
+            "pack:sugar"
+          ],
+          "quantity": 35.0,
+          "quantity_max": 35.0,
+          "quantity_min": 35.0,
+          "quantity_step": 35.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rostade jordnötter",
+          "component": "dipp_extra",
+          "form": "as_sold",
+          "name": "rostade jordnötter",
+          "product_requirements": [
+            "pack:intake_all_expansion_702b4f80c76a"
+          ],
+          "quantity": 45.0,
+          "quantity_max": 45.0,
+          "quantity_min": 45.0,
+          "quantity_step": 45.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "schalottenlök",
+          "component": "dipp_extra",
+          "form": "raw_edible",
+          "name": "schalottenlök",
+          "product_requirements": [
+            "pack:intake_all_expansion_9b814cbd8647"
+          ],
+          "quantity": 60.0,
+          "quantity_max": 60.0,
+          "quantity_min": 60.0,
+          "quantity_step": 60.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "chiliflakes",
+          "component": "dipp_extra",
+          "form": "dry",
+          "name": "chiliflakes",
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ris",
+          "component": "ris",
+          "form": "dry",
+          "name": "ris",
+          "product_requirements": [
+            "white_rice"
+          ],
+          "quantity": 280.0,
+          "quantity_max": 280.0,
+          "quantity_min": 280.0,
+          "quantity_step": 280.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Väg den råa benfria fiskfilén före upptining och lägg täckt i kylskåp. Kontrollera att inga ben finns kvar.",
+        "Tina fryst fisk helt i kylskåp enligt förpackningen. Planera tolv timmar och förläng om iskärnor återstår.",
+        "Häll bort fri upptiningsvätska och torka fiskens yta lätt. Håll filén kall; dess vikt efter avrinning är inte förutsatt.",
+        "Skölj riset i sil. Lägg det i en kastrull med risets salt och 560 ml vatten; koka upp och sänk till låg värme.",
+        "Sjud riset under lock cirka 18 minuter tills vattnet absorberats; följ längre koktid på förpackningen vid behov.",
+        "Kontrollera att riset är mjukt och stäng av värmen.",
+        "Låt riset vila fem minuter under lock.",
+        "Luckra upp riset och håll det varmt över 60 °C under lock tills huvudrätten serveras.",
+        "Koka risvinäger, socker, dippens salt och 90 ml vatten 3 minuter. Häll i en skål och låt svalna. Skiva gurka tunt; skiva schalottenlök, hacka de rostade osaltade jordnötterna och rör ner chiliflakes i lagen.",
+        "Väg citrongräset före ansning. Skär bort torr rotände, hårda ytterlager och vedartad topp. Finhacka och mortla det mjuka innanmäte som återstår mycket fint. Lägg gröna bönor direkt från frysen i en liten kastrull med 50 ml vatten. Koka under omrörning minst tre minuter, eller längre enligt förpackningen, tills mjuka. Låt fritt vatten koka in utan att hälla bort det och skär bönorna smått. Håll fisk och mixerskål kalla.",
+        "Knäck och väg rått ägg utan skal. Mixa den kalla fisken med ägg, currypasta och kakornas salt. Fortsätt i korta pulser tills massan blir seg och håller formen på en sked; skrapa ner och kyl vid behov så att den inte blir varm. Vänd ner bönor och det finhackade mjuka citrongräset för hand.",
+        "Värm lite av oljan och stek en liten provkaka helt igenom innan avsmakning. Forma sedan fyra tunna kakor per portion med två lätt fuktade skedar. Torka bort droppande vatten från redskapen före kontakt med oljan.",
+        "Stek i omgångar i den uppmätta oljan på medelvärme, cirka 3 minuter per sida, tills kakorna är elastiska, genomlagade och når minst 72 °C i mitten. Låt inte ytan brännas innan mitten är färdig. Lyft kakorna till galler och låt fri olja rinna av; kvarvarande olja serveras inte.",
+        "Servera fyra fiskkakor per portion med ris. Blanda gurkan i den avsvalnade dipplagen tillsammans med schalottenlök och jordnötter och servera vid sidan."
+      ],
+      "name": "Tod man pla – elastiska fiskkakor med gröna bönor – utökad – citrongräsversion utan makrutblad",
+      "servings": 4
+    }
+  ],
+  "schema_version": "smako-meal-pack-v1"
+}

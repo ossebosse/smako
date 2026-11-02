@@ -1,0 +1,422 @@
+{
+  "pack_id": "reviewed-expansion-round2-stage48",
+  "recipes": [
+    {
+      "design": {
+        "active_minutes": 50,
+        "base_id": "smako-indian-vada-pav",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "potatis|raw_edible",
+                "name": "potatis",
+                "note": "",
+                "quantity": 750.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kikärtsmjöl|dry",
+                "name": "kikärtsmjöl",
+                "note": "",
+                "quantity": 130.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gurkmeja|dry",
+                "name": "gurkmeja",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "rapsolja",
+                "note": "",
+                "quantity": 220.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 4.0,
+                "unit": "g"
+              }
+            ],
+            "id": "vada",
+            "name": "Potatisvada"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "kokosflingor|dry",
+                "name": "kokosflingor",
+                "note": "",
+                "quantity": 40.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "vitlök",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "chiliflakes|dry",
+                "name": "chiliflakes",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              }
+            ],
+            "id": "chutney",
+            "name": "Torr kokos-vitlökschutney"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "mjukt hamburgerbröd|as_sold",
+                "name": "Mjukt svenskt hamburgerbröd med sesam, vägd mängd",
+                "note": "",
+                "quantity": 416.0,
+                "unit": "g"
+              }
+            ],
+            "id": "brod",
+            "name": "Mjuka pavbröd"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "indian"
+        ],
+        "equipment": [
+          "kastrull",
+          "stekpanna",
+          "termometer",
+          "potatisstöt"
+        ],
+        "estimated_minutes": 76,
+        "family": "vada pav",
+        "fish": false,
+        "flavor_profile": [
+          "potatis",
+          "kokos-vitlökschutney",
+          "chili"
+        ],
+        "ingredient_count": 8,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "pan",
+        "primary_ingredient": "potatis",
+        "provenance": {
+          "notes": "Granskad enkel vada pav med 416 g mjukt svenskt hamburgerbröd i stället för 480 g pavbröd. Brödet innehåller sesam och är ingen identisk ladi pav-produkt. Potatis och all kikärtssmet serveras; överbliven smet steks som små frasiga bitar. Okänd potatisförlust vid avrinning och okänt upptag av det grunda oljebadet redovisas utan faktor. Enkelvariantens kryddning bevaras. Inte provlagad. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "pavbröd",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 7,
+            "id": "s1",
+            "ingredient_keys": [
+              "potatis|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "1200 ml",
+                1200.0
+              ]
+            ],
+            "text": "Skala potatisen och väg den råa ätliga mängden efter skalning. Tärna och lägg i kastrull med 1200 ml vatten utan salt. Koka upp."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 18,
+            "id": "s2",
+            "ingredient_keys": [
+              "potatis|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud potatisen arton minuter."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 2,
+            "id": "s3",
+            "ingredient_keys": [
+              "potatis|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Kontrollera att potatisen är helt mjuk; förläng annars kokningen. Häll av och kasta kokvattnet. Ställ potatisen att ånga torr."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 8,
+            "id": "s4",
+            "ingredient_keys": [
+              "potatis|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Låt potatisen ånga torr åtta minuter."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 9,
+            "id": "s5",
+            "ingredient_keys": [
+              "chiliflakes|dry",
+              "kokosflingor|dry",
+              "salt|as_sold",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "20 ml",
+                20.0
+              ]
+            ],
+            "text": "Rosta kokosflingorna i torr panna under omrörning till lätt gyllene. Flytta till ett fat. Lägg färsk eller fryst hackad vitlök i pannan med 20 ml vatten; sjud under omrörning minst tre minuter och låt allt vatten koka bort utan att bränna vitlöken. Vänd tillbaka all kokos, tillsätt chiliflakes och chutneyns salt. Mortla till grov, torr smulig chutney."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 7,
+            "id": "s6",
+            "ingredient_keys": [
+              "gurkmeja|dry",
+              "kikärtsmjöl|dry",
+              "potatis|raw_edible",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "160 ml",
+                160.0
+              ]
+            ],
+            "text": "Mosa potatisen med hälften av gurkmejan och hälften av vadans salt. Forma två platta potatisbollar per portion, ungefär 2 cm tjocka. Vispa allt kikärtsmjöl, resterande gurkmeja och vadasalt med 160 ml vatten till jämn doppsmet."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 20,
+            "id": "s7",
+            "ingredient_keys": [
+              "kikärtsmjöl|dry",
+              "potatis|raw_edible",
+              "rapsolja|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Häll hela den angivna oljan i en liten djup stekpanna så den bildar ett grunt bad, högst en tredjedel av pannans höjd. Värm till cirka 170 °C. Doppa potatisbollarna i smeten och stek i omgångar cirka tre minuter per sida; anpassa antalet omgångar till portionsantalet. Kontrollera att smeten är helt genomstekt utan rått mjöl och att mitten är rykande varm. Stek eventuell kvarvarande smet som små tunna bitar och servera också dessa. Låt allt rinna av på galler. Olja som återstår i pannan serveras inte; använd torra redskap."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 5,
+            "id": "s8",
+            "ingredient_keys": [
+              "kokosflingor|dry",
+              "mjukt hamburgerbröd|as_sold",
+              "potatis|raw_edible",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Väg den angivna mängden mjukt hamburgerbröd och dela för fyllning; dela vid behov bröd så mängden kan fördelas över portionerna. Värm kort i torr panna. Fördela all kokos-vitlökschutney och två vada per portion i bröden, med eventuella frasiga smetbitar vid sidan. Servera genast."
+          }
+        ],
+        "total_minutes": 76,
+        "unmeasured_processes": [
+          {
+            "description": "Kokvattnet kasseras; potatisens kokförlust och slutvikt är inte uppmätta.",
+            "ingredient_keys": [
+              "potatis|raw_edible"
+            ],
+            "operation": "drain_after_cooking",
+            "step_id": "s3"
+          },
+          {
+            "description": "Grunt oljebad, avrinning på galler och kvarvarande olja i pannan. Ingen oljeupptagningsandel antas.",
+            "ingredient_keys": [
+              "rapsolja|as_sold"
+            ],
+            "operation": "deep_fry_and_drain",
+            "step_id": "s7"
+          }
+        ],
+        "variant_id": "simple",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 26
+      },
+      "ingredients": [
+        {
+          "canonical_name": "potatis",
+          "component": "vada",
+          "form": "raw_edible",
+          "name": "potatis",
+          "quantity": 750.0,
+          "quantity_max": 750.0,
+          "quantity_min": 750.0,
+          "quantity_step": 750.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kikärtsmjöl",
+          "component": "vada",
+          "form": "dry",
+          "name": "kikärtsmjöl",
+          "product_requirements": [
+            "pack:intake_chickpea_flour"
+          ],
+          "quantity": 130.0,
+          "quantity_max": 130.0,
+          "quantity_min": 130.0,
+          "quantity_step": 130.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gurkmeja",
+          "component": "vada",
+          "form": "dry",
+          "name": "gurkmeja",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 2.0,
+          "quantity_max": 2.0,
+          "quantity_min": 2.0,
+          "quantity_step": 2.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "vada",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 220.0,
+          "quantity_max": 220.0,
+          "quantity_min": 220.0,
+          "quantity_step": 220.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "vada",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 6.0,
+          "quantity_max": 6.0,
+          "quantity_min": 6.0,
+          "quantity_step": 6.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kokosflingor",
+          "component": "chutney",
+          "form": "dry",
+          "name": "kokosflingor",
+          "product_requirements": [
+            "pack:intake_coconut"
+          ],
+          "quantity": 40.0,
+          "quantity_max": 40.0,
+          "quantity_min": 40.0,
+          "quantity_step": 40.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "chutney",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "chiliflakes",
+          "component": "chutney",
+          "form": "dry",
+          "name": "chiliflakes",
+          "quantity": 2.0,
+          "quantity_max": 2.0,
+          "quantity_min": 2.0,
+          "quantity_step": 2.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "mjukt hamburgerbröd",
+          "component": "brod",
+          "form": "as_sold",
+          "name": "mjukt hamburgerbröd",
+          "product_requirements": [
+            "pack:intake_all_round2_d88d9539d0d3"
+          ],
+          "quantity": 416.0,
+          "quantity_max": 416.0,
+          "quantity_min": 416.0,
+          "quantity_step": 416.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Skala potatisen och väg den råa ätliga mängden efter skalning. Tärna och lägg i kastrull med 1200 ml vatten utan salt. Koka upp.",
+        "Sjud potatisen arton minuter.",
+        "Kontrollera att potatisen är helt mjuk; förläng annars kokningen. Häll av och kasta kokvattnet. Ställ potatisen att ånga torr.",
+        "Låt potatisen ånga torr åtta minuter.",
+        "Rosta kokosflingorna i torr panna under omrörning till lätt gyllene. Flytta till ett fat. Lägg färsk eller fryst hackad vitlök i pannan med 20 ml vatten; sjud under omrörning minst tre minuter och låt allt vatten koka bort utan att bränna vitlöken. Vänd tillbaka all kokos, tillsätt chiliflakes och chutneyns salt. Mortla till grov, torr smulig chutney.",
+        "Mosa potatisen med hälften av gurkmejan och hälften av vadans salt. Forma två platta potatisbollar per portion, ungefär 2 cm tjocka. Vispa allt kikärtsmjöl, resterande gurkmeja och vadasalt med 160 ml vatten till jämn doppsmet.",
+        "Häll hela den angivna oljan i en liten djup stekpanna så den bildar ett grunt bad, högst en tredjedel av pannans höjd. Värm till cirka 170 °C. Doppa potatisbollarna i smeten och stek i omgångar cirka tre minuter per sida; anpassa antalet omgångar till portionsantalet. Kontrollera att smeten är helt genomstekt utan rått mjöl och att mitten är rykande varm. Stek eventuell kvarvarande smet som små tunna bitar och servera också dessa. Låt allt rinna av på galler. Olja som återstår i pannan serveras inte; använd torra redskap.",
+        "Väg den angivna mängden mjukt hamburgerbröd och dela för fyllning; dela vid behov bröd så mängden kan fördelas över portionerna. Värm kort i torr panna. Fördela all kokos-vitlökschutney och två vada per portion i bröden, med eventuella frasiga smetbitar vid sidan. Servera genast."
+      ],
+      "name": "Vada pav – potatispakora i bröd – enkel – med mjukt svenskt hamburgerbröd",
+      "servings": 4
+    }
+  ],
+  "schema_version": "smako-meal-pack-v1"
+}

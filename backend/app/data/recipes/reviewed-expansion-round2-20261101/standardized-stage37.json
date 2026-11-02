@@ -1,0 +1,1255 @@
+{
+  "pack_id": "reviewed-expansion-round2-stage37",
+  "recipes": [
+    {
+      "design": {
+        "active_minutes": 25,
+        "base_id": "smako-greek-tsouxti-mani",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "pasta|dry",
+                "name": "Pasta",
+                "note": "",
+                "quantity": 360.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "fetaost|as_sold",
+                "name": "Fetaost utan fri lag",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "smör|as_sold",
+                "name": "Smör",
+                "note": "",
+                "quantity": 45.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "olivolja|as_sold",
+                "name": "Olivolja",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "ägg|raw_edible",
+                "name": "Ägg utan skal, vägd rå ätlig mängd",
+                "note": "",
+                "quantity": 240.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 3.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "Svartpeppar",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              }
+            ],
+            "id": "main",
+            "name": "Pasta och brynt ost"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "greek"
+        ],
+        "equipment": [
+          "stor kastrull",
+          "två stekpannor",
+          "termometer"
+        ],
+        "estimated_minutes": 34,
+        "family": "pasta med brynt smör och separat stekt ägg",
+        "fish": false,
+        "flavor_profile": [
+          "brynt smör",
+          "feta",
+          "ägg"
+        ],
+        "ingredient_count": 5,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "pan",
+        "primary_ingredient": "fetaost och ägg",
+        "provenance": {
+          "notes": "Granskad fetaversion: ny dos 100 g feta ersätter 120 g myzithra. Smöret bryns, medan den fuktigare fetan smulas över pastan och inte steks till torra ostkorn. Ingen lika sälta, smak eller konsistens påstås. Äggen steks separat till fast gula. Inte provlagad. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "pasta; i rikare varianter tomatsallad",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 7,
+            "id": "s1",
+            "ingredient_keys": [
+              "fetaost|as_sold",
+              "salt|as_sold",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "2500 ml",
+                2500.0
+              ]
+            ],
+            "text": "Koka upp 2500 ml vatten med saltet. Smula den vägda fetan utan fri lag. Knäck äggen i en skål och kontrollväg utan skal; behåll gulorna hela så långt det går."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 9,
+            "id": "s2",
+            "ingredient_keys": [
+              "pasta|dry"
+            ],
+            "parallel_group": null,
+            "text": "Koka pastan cirka nio minuter eller enligt förpackningen tills den är nästan färdig."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 2,
+            "id": "s3",
+            "ingredient_keys": [
+              "pasta|dry",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "80 ml",
+                80.0
+              ]
+            ],
+            "text": "Kontrollera pastan. Spara 80 ml vatten från pastakoket och häll sedan av pastan."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 6,
+            "id": "s4",
+            "ingredient_keys": [
+              "olivolja|as_sold",
+              "smör|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Smält smöret med hälften av huvudkomponentens olivolja i en bred panna. Rör på medel-låg värme tills smörets mjölkpartiklar är gyllenbruna och doftar nötigt. Ta omedelbart från värmen innan de blir svarta. Fetan ska inte stekas i detta steg."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 2,
+            "id": "s5",
+            "ingredient_keys": [
+              "fetaost|as_sold",
+              "olivolja|as_sold",
+              "pasta|dry",
+              "smör|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Vänd pastan i hela det brynta smöret. Tillsätt lite av det sparade pastavattnet om den klibbar. Smula fetan över pastan; rätten ska inte kokas till ostsås. Håll varmt tills äggen är klara."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 7,
+            "id": "s6",
+            "ingredient_keys": [
+              "olivolja|as_sold",
+              "svartpeppar|dry",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Värm återstående olivolja i den andra pannan. Stek äggen varsamt och vänd dem vid behov tills vitan är fast och gulan har stannat. Kontrollera minst 72 °C i äggdelen. Lägg äggen ovanpå pastan och strö över svartpeppar."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 1,
+            "id": "s7",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Servera direkt och fördela ost, pasta och ägg jämnt mellan det angivna antalet portioner. Fördela allt brynt smör och stekfett över portionerna."
+          }
+        ],
+        "total_minutes": 34,
+        "unmeasured_processes": [
+          {
+            "description": "Saltat pastavatten hälls delvis bort; en mindre del används vid servering. Stärkelseförlust och saltupptag är inte uppmätta.",
+            "ingredient_keys": [
+              "pasta|dry",
+              "salt|as_sold"
+            ],
+            "operation": "drain_after_cooking",
+            "step_id": "s3"
+          }
+        ],
+        "variant_id": "simple",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 9
+      },
+      "ingredients": [
+        {
+          "canonical_name": "pasta",
+          "component": "main",
+          "form": "dry",
+          "name": "pasta",
+          "quantity": 360.0,
+          "quantity_max": 360.0,
+          "quantity_min": 360.0,
+          "quantity_step": 360.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "fetaost",
+          "component": "main",
+          "form": "as_sold",
+          "name": "fetaost",
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "smör",
+          "component": "main",
+          "form": "as_sold",
+          "name": "smör",
+          "product_requirements": [
+            "pack:intake_butter"
+          ],
+          "quantity": 45.0,
+          "quantity_max": 45.0,
+          "quantity_min": 45.0,
+          "quantity_step": 45.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "olivolja",
+          "component": "main",
+          "form": "as_sold",
+          "name": "olivolja",
+          "product_requirements": [
+            "pack:intake_all_expansion_86ac9b2c5ae6"
+          ],
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "ägg",
+          "component": "main",
+          "form": "raw_edible",
+          "name": "ägg",
+          "product_requirements": [
+            "pack:egg"
+          ],
+          "quantity": 240.0,
+          "quantity_max": 240.0,
+          "quantity_min": 240.0,
+          "quantity_step": 240.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "main",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 3.0,
+          "quantity_max": 3.0,
+          "quantity_min": 3.0,
+          "quantity_step": 3.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "main",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Koka upp 2500 ml vatten med saltet. Smula den vägda fetan utan fri lag. Knäck äggen i en skål och kontrollväg utan skal; behåll gulorna hela så långt det går.",
+        "Koka pastan cirka nio minuter eller enligt förpackningen tills den är nästan färdig.",
+        "Kontrollera pastan. Spara 80 ml vatten från pastakoket och häll sedan av pastan.",
+        "Smält smöret med hälften av huvudkomponentens olivolja i en bred panna. Rör på medel-låg värme tills smörets mjölkpartiklar är gyllenbruna och doftar nötigt. Ta omedelbart från värmen innan de blir svarta. Fetan ska inte stekas i detta steg.",
+        "Vänd pastan i hela det brynta smöret. Tillsätt lite av det sparade pastavattnet om den klibbar. Smula fetan över pastan; rätten ska inte kokas till ostsås. Håll varmt tills äggen är klara.",
+        "Värm återstående olivolja i den andra pannan. Stek äggen varsamt och vänd dem vid behov tills vitan är fast och gulan har stannat. Kontrollera minst 72 °C i äggdelen. Lägg äggen ovanpå pastan och strö över svartpeppar.",
+        "Servera direkt och fördela ost, pasta och ägg jämnt mellan det angivna antalet portioner. Fördela allt brynt smör och stekfett över portionerna."
+      ],
+      "name": "Tsouxti – pasta med brynt smör och smulad feta och stekt ägg – enkel – fetaversion",
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 34,
+        "base_id": "smako-greek-tsouxti-mani",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "pasta|dry",
+                "name": "Pasta",
+                "note": "",
+                "quantity": 360.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "fetaost|as_sold",
+                "name": "Fetaost utan fri lag",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "smör|as_sold",
+                "name": "Smör",
+                "note": "",
+                "quantity": 45.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "olivolja|as_sold",
+                "name": "Olivolja",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "ägg|raw_edible",
+                "name": "Ägg utan skal, vägd rå ätlig mängd",
+                "note": "",
+                "quantity": 240.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 3.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "Svartpeppar",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              }
+            ],
+            "id": "main",
+            "name": "Pasta och brynt ost"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "tomat|raw_edible",
+                "name": "Tomat",
+                "note": "",
+                "quantity": 360.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gurka|raw_edible",
+                "name": "Gurka",
+                "note": "",
+                "quantity": 200.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rödlök|raw_edible",
+                "name": "Rödlök",
+                "note": "",
+                "quantity": 60.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "olivolja|as_sold",
+                "name": "Olivolja",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "salad",
+            "name": "Frisk tomatsallad"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "greek"
+        ],
+        "equipment": [
+          "stor kastrull",
+          "två stekpannor",
+          "termometer"
+        ],
+        "estimated_minutes": 43,
+        "family": "pasta med brynt smör och separat stekt ägg",
+        "fish": false,
+        "flavor_profile": [
+          "brynt smör",
+          "feta",
+          "ägg"
+        ],
+        "ingredient_count": 8,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "pan",
+        "primary_ingredient": "fetaost och ägg",
+        "provenance": {
+          "notes": "Granskad fetaversion: ny dos 100 g feta ersätter 120 g myzithra. Smöret bryns, medan den fuktigare fetan smulas över pastan och inte steks till torra ostkorn. Ingen lika sälta, smak eller konsistens påstås. Äggen steks separat till fast gula. Inte provlagad. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "pasta; i rikare varianter tomatsallad",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 9,
+            "id": "s1",
+            "ingredient_keys": [
+              "gurka|raw_edible",
+              "olivolja|as_sold",
+              "rödlök|raw_edible",
+              "tomat|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Tärna tomat och gurka, skiva rödlöken tunt och vänd med salladens olivolja. Ställ svalt medan pastan tillagas."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 7,
+            "id": "s2",
+            "ingredient_keys": [
+              "fetaost|as_sold",
+              "salt|as_sold",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "2500 ml",
+                2500.0
+              ]
+            ],
+            "text": "Koka upp 2500 ml vatten med saltet. Smula den vägda fetan utan fri lag. Knäck äggen i en skål och kontrollväg utan skal; behåll gulorna hela så långt det går."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 9,
+            "id": "s3",
+            "ingredient_keys": [
+              "pasta|dry"
+            ],
+            "parallel_group": null,
+            "text": "Koka pastan cirka nio minuter eller enligt förpackningen tills den är nästan färdig."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 2,
+            "id": "s4",
+            "ingredient_keys": [
+              "pasta|dry",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "80 ml",
+                80.0
+              ]
+            ],
+            "text": "Kontrollera pastan. Spara 80 ml vatten från pastakoket och häll sedan av pastan."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 6,
+            "id": "s5",
+            "ingredient_keys": [
+              "olivolja|as_sold",
+              "smör|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Smält smöret med hälften av huvudkomponentens olivolja i en bred panna. Rör på medel-låg värme tills smörets mjölkpartiklar är gyllenbruna och doftar nötigt. Ta omedelbart från värmen innan de blir svarta. Fetan ska inte stekas i detta steg."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 2,
+            "id": "s6",
+            "ingredient_keys": [
+              "fetaost|as_sold",
+              "olivolja|as_sold",
+              "pasta|dry",
+              "smör|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Vänd pastan i hela det brynta smöret. Tillsätt lite av det sparade pastavattnet om den klibbar. Smula fetan över pastan; rätten ska inte kokas till ostsås. Håll varmt tills äggen är klara."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 7,
+            "id": "s7",
+            "ingredient_keys": [
+              "olivolja|as_sold",
+              "svartpeppar|dry",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Värm återstående olivolja i den andra pannan. Stek äggen varsamt och vänd dem vid behov tills vitan är fast och gulan har stannat. Kontrollera minst 72 °C i äggdelen. Lägg äggen ovanpå pastan och strö över svartpeppar."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 1,
+            "id": "s8",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Servera direkt och fördela ost, pasta och ägg jämnt mellan det angivna antalet portioner. Lägg upp hela salladen bredvid. Fördela allt brynt smör och stekfett över portionerna."
+          }
+        ],
+        "total_minutes": 43,
+        "unmeasured_processes": [
+          {
+            "description": "Saltat pastavatten hälls delvis bort; en mindre del används vid servering. Stärkelseförlust och saltupptag är inte uppmätta.",
+            "ingredient_keys": [
+              "pasta|dry",
+              "salt|as_sold"
+            ],
+            "operation": "drain_after_cooking",
+            "step_id": "s4"
+          }
+        ],
+        "variant_id": "standard",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 9
+      },
+      "ingredients": [
+        {
+          "canonical_name": "pasta",
+          "component": "main",
+          "form": "dry",
+          "name": "pasta",
+          "quantity": 360.0,
+          "quantity_max": 360.0,
+          "quantity_min": 360.0,
+          "quantity_step": 360.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "fetaost",
+          "component": "main",
+          "form": "as_sold",
+          "name": "fetaost",
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "smör",
+          "component": "main",
+          "form": "as_sold",
+          "name": "smör",
+          "product_requirements": [
+            "pack:intake_butter"
+          ],
+          "quantity": 45.0,
+          "quantity_max": 45.0,
+          "quantity_min": 45.0,
+          "quantity_step": 45.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "olivolja",
+          "component": "main",
+          "form": "as_sold",
+          "name": "olivolja",
+          "product_requirements": [
+            "pack:intake_all_expansion_86ac9b2c5ae6"
+          ],
+          "quantity": 30.0,
+          "quantity_max": 30.0,
+          "quantity_min": 30.0,
+          "quantity_step": 30.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "ägg",
+          "component": "main",
+          "form": "raw_edible",
+          "name": "ägg",
+          "product_requirements": [
+            "pack:egg"
+          ],
+          "quantity": 240.0,
+          "quantity_max": 240.0,
+          "quantity_min": 240.0,
+          "quantity_step": 240.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "main",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 3.0,
+          "quantity_max": 3.0,
+          "quantity_min": 3.0,
+          "quantity_step": 3.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "main",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "tomat",
+          "component": "salad",
+          "form": "raw_edible",
+          "name": "tomat",
+          "quantity": 360.0,
+          "quantity_max": 360.0,
+          "quantity_min": 360.0,
+          "quantity_step": 360.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gurka",
+          "component": "salad",
+          "form": "raw_edible",
+          "name": "gurka",
+          "quantity": 200.0,
+          "quantity_max": 200.0,
+          "quantity_min": 200.0,
+          "quantity_step": 200.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rödlök",
+          "component": "salad",
+          "form": "raw_edible",
+          "name": "rödlök",
+          "quantity": 60.0,
+          "quantity_max": 60.0,
+          "quantity_min": 60.0,
+          "quantity_step": 60.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Tärna tomat och gurka, skiva rödlöken tunt och vänd med salladens olivolja. Ställ svalt medan pastan tillagas.",
+        "Koka upp 2500 ml vatten med saltet. Smula den vägda fetan utan fri lag. Knäck äggen i en skål och kontrollväg utan skal; behåll gulorna hela så långt det går.",
+        "Koka pastan cirka nio minuter eller enligt förpackningen tills den är nästan färdig.",
+        "Kontrollera pastan. Spara 80 ml vatten från pastakoket och häll sedan av pastan.",
+        "Smält smöret med hälften av huvudkomponentens olivolja i en bred panna. Rör på medel-låg värme tills smörets mjölkpartiklar är gyllenbruna och doftar nötigt. Ta omedelbart från värmen innan de blir svarta. Fetan ska inte stekas i detta steg.",
+        "Vänd pastan i hela det brynta smöret. Tillsätt lite av det sparade pastavattnet om den klibbar. Smula fetan över pastan; rätten ska inte kokas till ostsås. Håll varmt tills äggen är klara.",
+        "Värm återstående olivolja i den andra pannan. Stek äggen varsamt och vänd dem vid behov tills vitan är fast och gulan har stannat. Kontrollera minst 72 °C i äggdelen. Lägg äggen ovanpå pastan och strö över svartpeppar.",
+        "Servera direkt och fördela ost, pasta och ägg jämnt mellan det angivna antalet portioner. Lägg upp hela salladen bredvid. Fördela allt brynt smör och stekfett över portionerna."
+      ],
+      "name": "Tsouxti – pasta med brynt smör och smulad feta och stekt ägg – standard – fetaversion",
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 38,
+        "base_id": "smako-greek-tsouxti-mani",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "pasta|dry",
+                "name": "Pasta",
+                "note": "",
+                "quantity": 360.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "fetaost|as_sold",
+                "name": "Fetaost utan fri lag",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "smör|as_sold",
+                "name": "Smör",
+                "note": "",
+                "quantity": 45.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "olivolja|as_sold",
+                "name": "Olivolja",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "ägg|raw_edible",
+                "name": "Ägg utan skal, vägd rå ätlig mängd",
+                "note": "",
+                "quantity": 240.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 3.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "Svartpeppar",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              }
+            ],
+            "id": "main",
+            "name": "Pasta och brynt ost"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "tomat|raw_edible",
+                "name": "Tomat",
+                "note": "",
+                "quantity": 360.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gurka|raw_edible",
+                "name": "Gurka",
+                "note": "",
+                "quantity": 200.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rödlök|raw_edible",
+                "name": "Rödlök",
+                "note": "",
+                "quantity": 60.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "olivolja|as_sold",
+                "name": "Olivolja",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "rödvinsvinäger|as_sold",
+                "name": "Rödvinsvinäger",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "oliver|preserved_drained",
+                "name": "Oliver",
+                "note": "",
+                "quantity": 60.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "oregano|dry",
+                "name": "Oregano",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "persilja|raw_edible",
+                "name": "Persilja",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "g"
+              }
+            ],
+            "id": "salad",
+            "name": "Frisk tomatsallad"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "greek"
+        ],
+        "equipment": [
+          "stor kastrull",
+          "två stekpannor",
+          "termometer"
+        ],
+        "estimated_minutes": 47,
+        "family": "pasta med brynt smör och separat stekt ägg",
+        "fish": false,
+        "flavor_profile": [
+          "brynt smör",
+          "feta",
+          "ägg"
+        ],
+        "ingredient_count": 12,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "pan",
+        "primary_ingredient": "fetaost och ägg",
+        "provenance": {
+          "notes": "Granskad fetaversion: ny dos 100 g feta ersätter 120 g myzithra. Smöret bryns, medan den fuktigare fetan smulas över pastan och inte steks till torra ostkorn. Ingen lika sälta, smak eller konsistens påstås. Äggen steks separat till fast gula. Inte provlagad. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "pasta; i rikare varianter tomatsallad",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 9,
+            "id": "s1",
+            "ingredient_keys": [
+              "gurka|raw_edible",
+              "oliver|preserved_drained",
+              "olivolja|as_sold",
+              "oregano|dry",
+              "rödlök|raw_edible",
+              "rödvinsvinäger|as_sold",
+              "tomat|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Tärna tomat och gurka, skiva rödlöken tunt och vänd med salladens olivolja. Blanda ner rödvinsvinäger, avrunna oliver, oregano . Ställ svalt medan pastan tillagas."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 7,
+            "id": "s2",
+            "ingredient_keys": [
+              "fetaost|as_sold",
+              "salt|as_sold",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "2500 ml",
+                2500.0
+              ]
+            ],
+            "text": "Koka upp 2500 ml vatten med saltet. Smula den vägda fetan utan fri lag. Knäck äggen i en skål och kontrollväg utan skal; behåll gulorna hela så långt det går."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 9,
+            "id": "s3",
+            "ingredient_keys": [
+              "pasta|dry"
+            ],
+            "parallel_group": null,
+            "text": "Koka pastan cirka nio minuter eller enligt förpackningen tills den är nästan färdig."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 2,
+            "id": "s4",
+            "ingredient_keys": [
+              "pasta|dry",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "80 ml",
+                80.0
+              ]
+            ],
+            "text": "Kontrollera pastan. Spara 80 ml vatten från pastakoket och häll sedan av pastan."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 6,
+            "id": "s5",
+            "ingredient_keys": [
+              "olivolja|as_sold",
+              "smör|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Smält smöret med hälften av huvudkomponentens olivolja i en bred panna. Rör på medel-låg värme tills smörets mjölkpartiklar är gyllenbruna och doftar nötigt. Ta omedelbart från värmen innan de blir svarta. Fetan ska inte stekas i detta steg."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 6,
+            "id": "s6",
+            "ingredient_keys": [
+              "fetaost|as_sold",
+              "olivolja|as_sold",
+              "pasta|dry",
+              "persilja|raw_edible",
+              "smör|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Rör ner fryst hackad persilja och hela det sparade pastavattnet i det brynta smöret. Koka under omrörning minst tre minuter eller längre enligt förpackningen. Vänd sedan ner pastan, smula över fetan och håll varmt utan att koka osten till sås."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 7,
+            "id": "s7",
+            "ingredient_keys": [
+              "olivolja|as_sold",
+              "svartpeppar|dry",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Värm återstående olivolja i den andra pannan. Stek äggen varsamt och vänd dem vid behov tills vitan är fast och gulan har stannat. Kontrollera minst 72 °C i äggdelen. Lägg äggen ovanpå pastan och strö över svartpeppar."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 1,
+            "id": "s8",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Servera direkt och fördela ost, pasta och ägg jämnt mellan det angivna antalet portioner. Lägg upp hela salladen bredvid. Fördela allt brynt smör och stekfett över portionerna."
+          }
+        ],
+        "total_minutes": 47,
+        "unmeasured_processes": [
+          {
+            "description": "Saltat pastavatten hälls delvis bort; en mindre del används vid servering. Stärkelseförlust och saltupptag är inte uppmätta.",
+            "ingredient_keys": [
+              "pasta|dry",
+              "salt|as_sold"
+            ],
+            "operation": "drain_after_cooking",
+            "step_id": "s4"
+          }
+        ],
+        "variant_id": "extended",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 9
+      },
+      "ingredients": [
+        {
+          "canonical_name": "pasta",
+          "component": "main",
+          "form": "dry",
+          "name": "pasta",
+          "quantity": 360.0,
+          "quantity_max": 360.0,
+          "quantity_min": 360.0,
+          "quantity_step": 360.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "fetaost",
+          "component": "main",
+          "form": "as_sold",
+          "name": "fetaost",
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "smör",
+          "component": "main",
+          "form": "as_sold",
+          "name": "smör",
+          "product_requirements": [
+            "pack:intake_butter"
+          ],
+          "quantity": 45.0,
+          "quantity_max": 45.0,
+          "quantity_min": 45.0,
+          "quantity_step": 45.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "olivolja",
+          "component": "main",
+          "form": "as_sold",
+          "name": "olivolja",
+          "product_requirements": [
+            "pack:intake_all_expansion_86ac9b2c5ae6"
+          ],
+          "quantity": 30.0,
+          "quantity_max": 30.0,
+          "quantity_min": 30.0,
+          "quantity_step": 30.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "ägg",
+          "component": "main",
+          "form": "raw_edible",
+          "name": "ägg",
+          "product_requirements": [
+            "pack:egg"
+          ],
+          "quantity": 240.0,
+          "quantity_max": 240.0,
+          "quantity_min": 240.0,
+          "quantity_step": 240.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "main",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 3.0,
+          "quantity_max": 3.0,
+          "quantity_min": 3.0,
+          "quantity_step": 3.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "main",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "tomat",
+          "component": "salad",
+          "form": "raw_edible",
+          "name": "tomat",
+          "quantity": 360.0,
+          "quantity_max": 360.0,
+          "quantity_min": 360.0,
+          "quantity_step": 360.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gurka",
+          "component": "salad",
+          "form": "raw_edible",
+          "name": "gurka",
+          "quantity": 200.0,
+          "quantity_max": 200.0,
+          "quantity_min": 200.0,
+          "quantity_step": 200.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rödlök",
+          "component": "salad",
+          "form": "raw_edible",
+          "name": "rödlök",
+          "quantity": 60.0,
+          "quantity_max": 60.0,
+          "quantity_min": 60.0,
+          "quantity_step": 60.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rödvinsvinäger",
+          "component": "salad",
+          "form": "as_sold",
+          "name": "rödvinsvinäger",
+          "product_requirements": [
+            "pack:intake_all_d0351d1f36c1"
+          ],
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "oliver",
+          "component": "salad",
+          "form": "preserved_drained",
+          "name": "oliver",
+          "product_requirements": [
+            "pitted"
+          ],
+          "quantity": 60.0,
+          "quantity_max": 60.0,
+          "quantity_min": 60.0,
+          "quantity_step": 60.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "oregano",
+          "component": "salad",
+          "form": "dry",
+          "name": "oregano",
+          "product_requirements": [
+            "dried_leaf"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "persilja",
+          "component": "salad",
+          "form": "raw_edible",
+          "name": "persilja",
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 10.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Tärna tomat och gurka, skiva rödlöken tunt och vänd med salladens olivolja. Blanda ner rödvinsvinäger, avrunna oliver, oregano . Ställ svalt medan pastan tillagas.",
+        "Koka upp 2500 ml vatten med saltet. Smula den vägda fetan utan fri lag. Knäck äggen i en skål och kontrollväg utan skal; behåll gulorna hela så långt det går.",
+        "Koka pastan cirka nio minuter eller enligt förpackningen tills den är nästan färdig.",
+        "Kontrollera pastan. Spara 80 ml vatten från pastakoket och häll sedan av pastan.",
+        "Smält smöret med hälften av huvudkomponentens olivolja i en bred panna. Rör på medel-låg värme tills smörets mjölkpartiklar är gyllenbruna och doftar nötigt. Ta omedelbart från värmen innan de blir svarta. Fetan ska inte stekas i detta steg.",
+        "Rör ner fryst hackad persilja och hela det sparade pastavattnet i det brynta smöret. Koka under omrörning minst tre minuter eller längre enligt förpackningen. Vänd sedan ner pastan, smula över fetan och håll varmt utan att koka osten till sås.",
+        "Värm återstående olivolja i den andra pannan. Stek äggen varsamt och vänd dem vid behov tills vitan är fast och gulan har stannat. Kontrollera minst 72 °C i äggdelen. Lägg äggen ovanpå pastan och strö över svartpeppar.",
+        "Servera direkt och fördela ost, pasta och ägg jämnt mellan det angivna antalet portioner. Lägg upp hela salladen bredvid. Fördela allt brynt smör och stekfett över portionerna."
+      ],
+      "name": "Tsouxti – pasta med brynt smör och smulad feta och stekt ägg – utökad – fetaversion",
+      "servings": 4
+    }
+  ],
+  "schema_version": "smako-meal-pack-v1"
+}

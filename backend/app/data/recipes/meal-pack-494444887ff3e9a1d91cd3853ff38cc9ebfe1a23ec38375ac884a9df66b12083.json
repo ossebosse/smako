@@ -1,0 +1,646 @@
+{
+  "library_version": "smako-meal-pack-v1",
+  "recipes": [
+    {
+      "design": {
+        "active_minutes": 21,
+        "base_id": "smako-mexican-frijoles-puercos",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "bönor|cooked_drained",
+                "name": "Kokta bönor, avrunnen vikt",
+                "note": "",
+                "quantity": 120.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "färsk chorizokorv|as_sold",
+                "name": "Svensk rå färsk chorizokorv, vägd med fjälster",
+                "note": "",
+                "quantity": 35.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ost|as_sold",
+                "name": "Rivbar ost",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "Rapsolja",
+                "note": "",
+                "quantity": 3.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "c1",
+            "name": "Bönröra med chorizo"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "tortillas|as_sold",
+                "name": "Tortillas",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c2",
+            "name": "Tortilla"
+          }
+        ],
+        "content_sha256": "18ed1d5f84c9ead33a8da3dbab89be464863519a05631c712c2a5b0e5cb3ec61",
+        "content_source": {
+          "active_minutes": 21,
+          "method_note": "Ingredienslistan anger hela insatsen, även den del som senare hälls eller silas bort. Förlusten är inte uppmätt. Näring och färdig portionsvikt är okända; receptet kan inte styrka valda närings- eller viktgränser. Inköp och personliga kostkrav kontrolleras för samtliga insatser.",
+          "pack_id": "reviewed-expansion-round2-stage24",
+          "priority": 1,
+          "proposal_id": "smako-mexican-frijoles-puercos",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "01f6a362079476e80832d766328420c3ecdcdb7475490bb4bba658c7df465ada",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "mexican"
+        ],
+        "equipment": [
+          "stekpanna",
+          "skål",
+          "kökstermometer"
+        ],
+        "estimated_minutes": 21,
+        "family": "refried_beans_with_chorizo_and_cheese",
+        "fish": false,
+        "flavor_profile": [
+          "chorizo",
+          "rostade bönor",
+          "ost"
+        ],
+        "ingredient_count": 5,
+        "meal_types": [
+          "snack"
+        ],
+        "method": "pan",
+        "primary_ingredient": "bönor och färsk chorizokorv",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Granskad receptanpassning, inte provlagad. Tider är författaruppskattningar, inte uppmätt provlagning. Förenklad frijoles puercos i mellanmålsportion. Denna granskade version använder uttryckligen svensk rå färsk chorizo med fläsk och nöt; den är inte märkt som mexikansk korv. Rapsolja och generisk rivbar ost är deklarerade vardagsanpassningar. Receptet är inte frijol con puerco, en annan rätt med hela bönor i buljong. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "tortilla",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 3,
+            "id": "s1",
+            "ingredient_keys": [
+              "bönor|cooked_drained",
+              "ost|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "30 ml",
+                30.0
+              ]
+            ],
+            "text": "Riv osten. Mosa de kokta avrunna bönorna med 30 ml vatten till ett ganska slätt mos."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 3,
+            "id": "s2",
+            "ingredient_keys": [
+              "färsk chorizokorv|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Väg den råa färska chorizokorven före borttagning av fjälstret. Skär upp fjälstret, skrapa ur all korvfärs och kasta fjälstret. Använd separat skärbräda; tvätta händer och redskap efter rå korv."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 7,
+            "id": "s3",
+            "ingredient_keys": [
+              "färsk chorizokorv|as_sold",
+              "rapsolja|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Värm oljan i en liten panna. Smula ner den råa chorizon och stek på medelvärme i omkring sex minuter. Dela alla klumpar och kontrollera att den råa färskkorven är genomstekt och når minst 72 °C."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 5,
+            "id": "s4",
+            "ingredient_keys": [
+              "bönor|cooked_drained",
+              "ost|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Rör ner bönmoset och stek under omrörning i cirka fyra minuter tills det är hett och har blandats med chorizons fett och kryddor. Sänk värmen, rör ner osten och låt den smälta. Häll inte bort något stekfett; hela korvfärsen och allt fett blandas med bönorna."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 3,
+            "id": "s5",
+            "ingredient_keys": [
+              "tortillas|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Värm tortillan i torr panna och skär den i bitar. Servera den varma, tjocka bönröran på eller med tortillan. Följ även tortillaförpackningens uppvärmningsanvisning."
+          }
+        ],
+        "total_minutes": 21,
+        "unmeasured_processes": [
+          {
+            "description": "Fjälstret tas bort efter att hela råa korven vägts. Mängden och näringsförlusten är inte uppmätta; ingen ren köttandel antas.",
+            "ingredient_keys": [
+              "färsk chorizokorv|as_sold"
+            ],
+            "operation": "trim_before_cooking",
+            "step_id": "s2"
+          }
+        ],
+        "variant_id": "simple",
+        "vegetarian": false,
+        "version": "1.0.1"
+      },
+      "ingredients": [
+        {
+          "canonical_name": "bönor",
+          "component": "c1",
+          "form": "cooked_drained",
+          "name": "bönor",
+          "product_requirements": [
+            "white_beans"
+          ],
+          "quantity": 120.0,
+          "quantity_max": 120.0,
+          "quantity_min": 120.0,
+          "quantity_step": 120.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "färsk chorizokorv",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "färsk chorizokorv",
+          "product_requirements": [
+            "pack:intake_all_round2_fa3d2cbc4292"
+          ],
+          "quantity": 35.0,
+          "quantity_max": 35.0,
+          "quantity_min": 35.0,
+          "quantity_step": 35.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ost",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "ost",
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 3.0,
+          "quantity_max": 3.0,
+          "quantity_min": 3.0,
+          "quantity_step": 3.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "tortillas",
+          "component": "c2",
+          "form": "as_sold",
+          "name": "tortillas",
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 25.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Riv osten. Mosa de kokta avrunna bönorna med 30 ml vatten till ett ganska slätt mos.",
+        "Väg den råa färska chorizokorven före borttagning av fjälstret. Skär upp fjälstret, skrapa ur all korvfärs och kasta fjälstret. Använd separat skärbräda; tvätta händer och redskap efter rå korv.",
+        "Värm oljan i en liten panna. Smula ner den råa chorizon och stek på medelvärme i omkring sex minuter. Dela alla klumpar och kontrollera att den råa färskkorven är genomstekt och når minst 72 °C.",
+        "Rör ner bönmoset och stek under omrörning i cirka fyra minuter tills det är hett och har blandats med chorizons fett och kryddor. Sänk värmen, rör ner osten och låt den smälta. Häll inte bort något stekfett; hela korvfärsen och allt fett blandas med bönorna.",
+        "Värm tortillan i torr panna och skär den i bitar. Servera den varma, tjocka bönröran på eller med tortillan. Följ även tortillaförpackningens uppvärmningsanvisning."
+      ],
+      "name": "Frijoles puercos med tortillas – liten bön- och chorizomåltid – med svensk färsk chorizo",
+      "preparation": {
+        "family": "refried_beans_with_chorizo_and_cheese",
+        "input_forms": {
+          "bönor": "cooked_drained",
+          "färsk chorizokorv": "as_sold",
+          "ost": "as_sold",
+          "rapsolja": "as_sold",
+          "tortillas": "as_sold"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "18ed1d5f84c9ead33a8da3dbab89be464863519a05631c712c2a5b0e5cb3ec61",
+        "version": "smako-authored-losses-v3"
+      },
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 25,
+        "base_id": "smako-mexican-frijoles-puercos",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "bönor|cooked_drained",
+                "name": "Kokta bönor, avrunnen vikt",
+                "note": "",
+                "quantity": 120.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "färsk chorizokorv|as_sold",
+                "name": "Svensk rå färsk chorizokorv, vägd med fjälster",
+                "note": "",
+                "quantity": 35.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ost|as_sold",
+                "name": "Rivbar ost",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "Rapsolja",
+                "note": "",
+                "quantity": 3.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "c1",
+            "name": "Bönröra med chorizo"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "tortillas|as_sold",
+                "name": "Tortillas",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c2",
+            "name": "Tortilla"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "tomat|raw_edible",
+                "name": "Tomat",
+                "note": "",
+                "quantity": 70.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "Gul lök",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "limejuice|as_sold",
+                "name": "Limejuice",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "c3",
+            "name": "Färsk tomatsalsa"
+          }
+        ],
+        "content_sha256": "995c8a85ba3a0db9c80d98ade484c6b5bca3ef385e2077a230906b6fc49689b9",
+        "content_source": {
+          "active_minutes": 25,
+          "method_note": "Ingredienslistan anger hela insatsen, även den del som senare hälls eller silas bort. Förlusten är inte uppmätt. Näring och färdig portionsvikt är okända; receptet kan inte styrka valda närings- eller viktgränser. Inköp och personliga kostkrav kontrolleras för samtliga insatser.",
+          "pack_id": "reviewed-expansion-round2-stage24",
+          "priority": 1,
+          "proposal_id": "smako-mexican-frijoles-puercos",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "01f6a362079476e80832d766328420c3ecdcdb7475490bb4bba658c7df465ada",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "mexican"
+        ],
+        "equipment": [
+          "stekpanna",
+          "skål",
+          "kökstermometer"
+        ],
+        "estimated_minutes": 25,
+        "family": "refried_beans_with_chorizo_and_cheese",
+        "fish": false,
+        "flavor_profile": [
+          "chorizo",
+          "rostade bönor",
+          "ost"
+        ],
+        "ingredient_count": 8,
+        "meal_types": [
+          "snack"
+        ],
+        "method": "pan",
+        "primary_ingredient": "bönor och färsk chorizokorv",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Granskad receptanpassning, inte provlagad. Tider är författaruppskattningar, inte uppmätt provlagning. Förenklad frijoles puercos i mellanmålsportion. Denna granskade version använder uttryckligen svensk rå färsk chorizo med fläsk och nöt; den är inte märkt som mexikansk korv. Rapsolja och generisk rivbar ost är deklarerade vardagsanpassningar. Receptet är inte frijol con puerco, en annan rätt med hela bönor i buljong. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "tortilla och tomatsalsa",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 4,
+            "id": "s1",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "limejuice|as_sold",
+              "tomat|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Tärna tomaten och finhacka löken. Blanda med limejuice och ställ åt sidan. Använd rena redskap och en egen skärbräda för den råa korven."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 3,
+            "id": "s2",
+            "ingredient_keys": [
+              "bönor|cooked_drained",
+              "ost|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "30 ml",
+                30.0
+              ]
+            ],
+            "text": "Riv osten. Mosa de kokta avrunna bönorna med 30 ml vatten till ett ganska slätt mos."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 3,
+            "id": "s3",
+            "ingredient_keys": [
+              "färsk chorizokorv|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Väg den råa färska chorizokorven före borttagning av fjälstret. Skär upp fjälstret, skrapa ur all korvfärs och kasta fjälstret. Använd separat skärbräda; tvätta händer och redskap efter rå korv."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 7,
+            "id": "s4",
+            "ingredient_keys": [
+              "färsk chorizokorv|as_sold",
+              "rapsolja|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Värm oljan i en liten panna. Smula ner den råa chorizon och stek på medelvärme i omkring sex minuter. Dela alla klumpar och kontrollera att den råa färskkorven är genomstekt och når minst 72 °C."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 5,
+            "id": "s5",
+            "ingredient_keys": [
+              "bönor|cooked_drained",
+              "ost|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Rör ner bönmoset och stek under omrörning i cirka fyra minuter tills det är hett och har blandats med chorizons fett och kryddor. Sänk värmen, rör ner osten och låt den smälta. Häll inte bort något stekfett; hela korvfärsen och allt fett blandas med bönorna."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 3,
+            "id": "s6",
+            "ingredient_keys": [
+              "tortillas|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Värm tortillan i torr panna och skär den i bitar. Servera den varma, tjocka bönröran på eller med tortillan och tomatsalsan. Följ även tortillaförpackningens uppvärmningsanvisning."
+          }
+        ],
+        "total_minutes": 25,
+        "unmeasured_processes": [
+          {
+            "description": "Fjälstret tas bort efter att hela råa korven vägts. Mängden och näringsförlusten är inte uppmätta; ingen ren köttandel antas.",
+            "ingredient_keys": [
+              "färsk chorizokorv|as_sold"
+            ],
+            "operation": "trim_before_cooking",
+            "step_id": "s3"
+          }
+        ],
+        "variant_id": "extended",
+        "vegetarian": false,
+        "version": "1.0.1"
+      },
+      "ingredients": [
+        {
+          "canonical_name": "bönor",
+          "component": "c1",
+          "form": "cooked_drained",
+          "name": "bönor",
+          "product_requirements": [
+            "white_beans"
+          ],
+          "quantity": 120.0,
+          "quantity_max": 120.0,
+          "quantity_min": 120.0,
+          "quantity_step": 120.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "färsk chorizokorv",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "färsk chorizokorv",
+          "product_requirements": [
+            "pack:intake_all_round2_fa3d2cbc4292"
+          ],
+          "quantity": 35.0,
+          "quantity_max": 35.0,
+          "quantity_min": 35.0,
+          "quantity_step": 35.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ost",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "ost",
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 3.0,
+          "quantity_max": 3.0,
+          "quantity_min": 3.0,
+          "quantity_step": 3.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "tortillas",
+          "component": "c2",
+          "form": "as_sold",
+          "name": "tortillas",
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 25.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "tomat",
+          "component": "c3",
+          "form": "raw_edible",
+          "name": "tomat",
+          "quantity": 70.0,
+          "quantity_max": 70.0,
+          "quantity_min": 70.0,
+          "quantity_step": 70.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "c3",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 10.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "limejuice",
+          "component": "c3",
+          "form": "as_sold",
+          "name": "limejuice",
+          "product_requirements": [
+            "pure_juice"
+          ],
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        }
+      ],
+      "instructions": [
+        "Tärna tomaten och finhacka löken. Blanda med limejuice och ställ åt sidan. Använd rena redskap och en egen skärbräda för den råa korven.",
+        "Riv osten. Mosa de kokta avrunna bönorna med 30 ml vatten till ett ganska slätt mos.",
+        "Väg den råa färska chorizokorven före borttagning av fjälstret. Skär upp fjälstret, skrapa ur all korvfärs och kasta fjälstret. Använd separat skärbräda; tvätta händer och redskap efter rå korv.",
+        "Värm oljan i en liten panna. Smula ner den råa chorizon och stek på medelvärme i omkring sex minuter. Dela alla klumpar och kontrollera att den råa färskkorven är genomstekt och når minst 72 °C.",
+        "Rör ner bönmoset och stek under omrörning i cirka fyra minuter tills det är hett och har blandats med chorizons fett och kryddor. Sänk värmen, rör ner osten och låt den smälta. Häll inte bort något stekfett; hela korvfärsen och allt fett blandas med bönorna.",
+        "Värm tortillan i torr panna och skär den i bitar. Servera den varma, tjocka bönröran på eller med tortillan och tomatsalsan. Följ även tortillaförpackningens uppvärmningsanvisning."
+      ],
+      "name": "Frijoles puercos med tortillas – med färsk tomatsalsa – med svensk färsk chorizo",
+      "preparation": {
+        "family": "refried_beans_with_chorizo_and_cheese",
+        "input_forms": {
+          "bönor": "cooked_drained",
+          "färsk chorizokorv": "as_sold",
+          "gul lök": "raw_edible",
+          "limejuice": "as_sold",
+          "ost": "as_sold",
+          "rapsolja": "as_sold",
+          "tomat": "raw_edible",
+          "tortillas": "as_sold"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "995c8a85ba3a0db9c80d98ade484c6b5bca3ef385e2077a230906b6fc49689b9",
+        "version": "smako-authored-losses-v3"
+      },
+      "servings": 1
+    }
+  ]
+}

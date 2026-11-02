@@ -1,0 +1,1494 @@
+{
+  "pack_id": "reviewed-expansion-round2-stage32",
+  "recipes": [
+    {
+      "design": {
+        "active_minutes": 40,
+        "base_id": "smako-thai-nam-prik-ong",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "fläskfärs|raw_edible",
+                "name": "fläskfärs",
+                "note": "",
+                "quantity": 550.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "tomat|raw_edible",
+                "name": "tomat",
+                "note": "",
+                "quantity": 750.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "schalottenlök|raw_edible",
+                "name": "schalottenlök",
+                "note": "",
+                "quantity": 140.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "vitlök",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "chiliflakes|dry",
+                "name": "chiliflakes",
+                "note": "",
+                "quantity": 3.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "rapsolja",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "fisksås|as_sold",
+                "name": "Fisksås, ny kulinarisk dos",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "dipp",
+            "name": "Kokt tomat- och fläskdipp"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "gurka|raw_edible",
+                "name": "gurka",
+                "note": "",
+                "quantity": 400.0,
+                "unit": "g"
+              }
+            ],
+            "id": "gronsaker",
+            "name": "Grönsaker att skopa med"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ris|dry",
+                "name": "ris",
+                "note": "",
+                "quantity": 280.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              }
+            ],
+            "id": "ris",
+            "name": "Kokt ris"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "thai"
+        ],
+        "equipment": [
+          "gryta",
+          "mixer",
+          "kastrull",
+          "termometer"
+        ],
+        "estimated_minutes": 83,
+        "family": "nam prik ong",
+        "fish": true,
+        "flavor_profile": [
+          "tomat",
+          "torkad chili",
+          "fisksås"
+        ],
+        "ingredient_count": 9,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "pot",
+        "primary_ingredient": "fläskfärs",
+        "provenance": {
+          "notes": "Granskad fisksåsversion: 15 g räkpasta utgår. Enkel använder 20 ml fisksås; övriga använder totalt 30 ml i stället för tidigare 20 ml plus räkpastan. Detta är nya doser, inte likvärdig sälta eller fermenterad smak. Såsen innehåller fortfarande fisk. Inte provlagad. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "ris och råa grönsaker",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 3,
+            "id": "s1",
+            "ingredient_keys": [
+              "ris|dry",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "560 ml",
+                560.0
+              ]
+            ],
+            "text": "Skölj riset i sil. Lägg det i en kastrull med risets salt och 560 ml vatten; koka upp och sänk till låg värme."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 18,
+            "id": "s2",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Sjud riset under lock cirka 18 minuter tills vattnet absorberats. Följ förpackningens koktid och förläng vid behov."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 1,
+            "id": "s3",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Kontrollera att riset är mjukt, stäng av värmen och lägg på locket."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 5,
+            "id": "s4",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Låt riset vila under lock i fem minuter."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 1,
+            "id": "s5",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Luckra upp riset och håll det varmt över 60 °C under lock tills huvudrätten serveras."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 12,
+            "id": "s6",
+            "ingredient_keys": [
+              "chiliflakes|dry",
+              "schalottenlök|raw_edible",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "100 ml",
+                100.0
+              ]
+            ],
+            "text": "Skala och väg schalottenlöken, dela den och rosta i torr panna tills mjuk med mörka fläckar. Färsk vitlök kan rostas med löken; fryst hackad vitlök läggs direkt i mixern med all sin vätska. Mixa löken, vitlöken och chiliflakes med 100 ml vatten till grov pasta."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 10,
+            "id": "s7",
+            "ingredient_keys": [
+              "fisksås|as_sold",
+              "fläskfärs|raw_edible",
+              "rapsolja|as_sold",
+              "tomat|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Väg rå ätlig tomat och tärna. Värm oljan och fräs kryddpastan ett par minuter. Tillsätt färsen och finfördela, rör ner tomater och hela fisksåsmängden. Behåll allt fett och köttsaft."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 10,
+            "id": "s8",
+            "ingredient_keys": [
+              "fläskfärs|raw_edible",
+              "tomat|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Låt dippen sjuda utan lock på låg värme i tio minuter."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 1,
+            "id": "s9",
+            "ingredient_keys": [
+              "fläskfärs|raw_edible",
+              "tomat|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Rör från botten och kontrollera att inget bränner fast. Justera värmen."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 10,
+            "id": "s10",
+            "ingredient_keys": [
+              "fläskfärs|raw_edible",
+              "tomat|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud ytterligare tio minuter utan lock."
+          },
+          {
+            "depends_on": [
+              "s10"
+            ],
+            "duration_minutes": 5,
+            "id": "s11",
+            "ingredient_keys": [
+              "fläskfärs|raw_edible",
+              "tomat|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Rör om och kontrollera minst 72 °C i färsen. Reducera under omrörning tills dippen är tjock nog att ligga kvar på en grönsaksbit; räkna med fem minuter och förläng vid behov. Behåll hela dippen."
+          },
+          {
+            "depends_on": [
+              "s11"
+            ],
+            "duration_minutes": 7,
+            "id": "s12",
+            "ingredient_keys": [
+              "fläskfärs|raw_edible",
+              "gurka|raw_edible",
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Skär gurkan i breda stavar. Servera den varma dippen i en skål per portion med grönsaker och ris runt om. Grönsakerna vägs ansade som rå ätlig mängd. Behåll all eventuell limedressing."
+          }
+        ],
+        "total_minutes": 83,
+        "variant_id": "simple",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 43
+      },
+      "ingredients": [
+        {
+          "canonical_name": "fläskfärs",
+          "component": "dipp",
+          "form": "raw_edible",
+          "name": "fläskfärs",
+          "product_requirements": [
+            "pack:pork_mince"
+          ],
+          "quantity": 550.0,
+          "quantity_max": 550.0,
+          "quantity_min": 550.0,
+          "quantity_step": 550.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "tomat",
+          "component": "dipp",
+          "form": "raw_edible",
+          "name": "tomat",
+          "quantity": 750.0,
+          "quantity_max": 750.0,
+          "quantity_min": 750.0,
+          "quantity_step": 750.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "schalottenlök",
+          "component": "dipp",
+          "form": "raw_edible",
+          "name": "schalottenlök",
+          "product_requirements": [
+            "pack:intake_all_expansion_9b814cbd8647"
+          ],
+          "quantity": 140.0,
+          "quantity_max": 140.0,
+          "quantity_min": 140.0,
+          "quantity_step": 140.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "dipp",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "chiliflakes",
+          "component": "dipp",
+          "form": "dry",
+          "name": "chiliflakes",
+          "quantity": 3.0,
+          "quantity_max": 3.0,
+          "quantity_min": 3.0,
+          "quantity_step": 3.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "dipp",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 25.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "fisksås",
+          "component": "dipp",
+          "form": "as_sold",
+          "name": "fisksås",
+          "product_requirements": [
+            "pack:intake_all_expansion_7e1272f47d05"
+          ],
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "gurka",
+          "component": "gronsaker",
+          "form": "raw_edible",
+          "name": "gurka",
+          "quantity": 400.0,
+          "quantity_max": 400.0,
+          "quantity_min": 400.0,
+          "quantity_step": 400.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ris",
+          "component": "ris",
+          "form": "dry",
+          "name": "ris",
+          "product_requirements": [
+            "white_rice"
+          ],
+          "quantity": 280.0,
+          "quantity_max": 280.0,
+          "quantity_min": 280.0,
+          "quantity_step": 280.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "ris",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 2.0,
+          "quantity_max": 2.0,
+          "quantity_min": 2.0,
+          "quantity_step": 2.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Skölj riset i sil. Lägg det i en kastrull med risets salt och 560 ml vatten; koka upp och sänk till låg värme.",
+        "Sjud riset under lock cirka 18 minuter tills vattnet absorberats. Följ förpackningens koktid och förläng vid behov.",
+        "Kontrollera att riset är mjukt, stäng av värmen och lägg på locket.",
+        "Låt riset vila under lock i fem minuter.",
+        "Luckra upp riset och håll det varmt över 60 °C under lock tills huvudrätten serveras.",
+        "Skala och väg schalottenlöken, dela den och rosta i torr panna tills mjuk med mörka fläckar. Färsk vitlök kan rostas med löken; fryst hackad vitlök läggs direkt i mixern med all sin vätska. Mixa löken, vitlöken och chiliflakes med 100 ml vatten till grov pasta.",
+        "Väg rå ätlig tomat och tärna. Värm oljan och fräs kryddpastan ett par minuter. Tillsätt färsen och finfördela, rör ner tomater och hela fisksåsmängden. Behåll allt fett och köttsaft.",
+        "Låt dippen sjuda utan lock på låg värme i tio minuter.",
+        "Rör från botten och kontrollera att inget bränner fast. Justera värmen.",
+        "Sjud ytterligare tio minuter utan lock.",
+        "Rör om och kontrollera minst 72 °C i färsen. Reducera under omrörning tills dippen är tjock nog att ligga kvar på en grönsaksbit; räkna med fem minuter och förläng vid behov. Behåll hela dippen.",
+        "Skär gurkan i breda stavar. Servera den varma dippen i en skål per portion med grönsaker och ris runt om. Grönsakerna vägs ansade som rå ätlig mängd. Behåll all eventuell limedressing."
+      ],
+      "name": "Nam prik ong – tomat- och fläskdipp med grönsaker – enkel – fisksåsversion utan räkpasta",
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 40,
+        "base_id": "smako-thai-nam-prik-ong",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "fläskfärs|raw_edible",
+                "name": "fläskfärs",
+                "note": "",
+                "quantity": 550.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "tomat|raw_edible",
+                "name": "tomat",
+                "note": "",
+                "quantity": 750.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "schalottenlök|raw_edible",
+                "name": "schalottenlök",
+                "note": "",
+                "quantity": 140.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "vitlök",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "chiliflakes|dry",
+                "name": "chiliflakes",
+                "note": "",
+                "quantity": 3.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "rapsolja",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "fisksås|as_sold",
+                "name": "Fisksås, ny kulinarisk dos",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "strösocker",
+                "note": "",
+                "quantity": 12.0,
+                "unit": "g"
+              }
+            ],
+            "id": "dipp",
+            "name": "Kokt tomat- och fläskdipp"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "gurka|raw_edible",
+                "name": "gurka",
+                "note": "",
+                "quantity": 400.0,
+                "unit": "g"
+              }
+            ],
+            "id": "gronsaker",
+            "name": "Grönsaker att skopa med"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ris|dry",
+                "name": "ris",
+                "note": "",
+                "quantity": 280.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              }
+            ],
+            "id": "ris",
+            "name": "Kokt ris"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "thai"
+        ],
+        "equipment": [
+          "gryta",
+          "mixer",
+          "kastrull",
+          "termometer"
+        ],
+        "estimated_minutes": 83,
+        "family": "nam prik ong",
+        "fish": true,
+        "flavor_profile": [
+          "tomat",
+          "torkad chili",
+          "fisksås"
+        ],
+        "ingredient_count": 10,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "pot",
+        "primary_ingredient": "fläskfärs",
+        "provenance": {
+          "notes": "Granskad fisksåsversion: 15 g räkpasta utgår. Enkel använder 20 ml fisksås; övriga använder totalt 30 ml i stället för tidigare 20 ml plus räkpastan. Detta är nya doser, inte likvärdig sälta eller fermenterad smak. Såsen innehåller fortfarande fisk. Inte provlagad. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "ris och råa grönsaker",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 3,
+            "id": "s1",
+            "ingredient_keys": [
+              "ris|dry",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "560 ml",
+                560.0
+              ]
+            ],
+            "text": "Skölj riset i sil. Lägg det i en kastrull med risets salt och 560 ml vatten; koka upp och sänk till låg värme."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 18,
+            "id": "s2",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Sjud riset under lock cirka 18 minuter tills vattnet absorberats. Följ förpackningens koktid och förläng vid behov."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 1,
+            "id": "s3",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Kontrollera att riset är mjukt, stäng av värmen och lägg på locket."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 5,
+            "id": "s4",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Låt riset vila under lock i fem minuter."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 1,
+            "id": "s5",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Luckra upp riset och håll det varmt över 60 °C under lock tills huvudrätten serveras."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 12,
+            "id": "s6",
+            "ingredient_keys": [
+              "chiliflakes|dry",
+              "schalottenlök|raw_edible",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "100 ml",
+                100.0
+              ]
+            ],
+            "text": "Skala och väg schalottenlöken, dela den och rosta i torr panna tills mjuk med mörka fläckar. Färsk vitlök kan rostas med löken; fryst hackad vitlök läggs direkt i mixern med all sin vätska. Mixa löken, vitlöken och chiliflakes med 100 ml vatten till grov pasta."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 10,
+            "id": "s7",
+            "ingredient_keys": [
+              "fisksås|as_sold",
+              "fläskfärs|raw_edible",
+              "rapsolja|as_sold",
+              "strösocker|dry",
+              "tomat|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Väg rå ätlig tomat och tärna. Värm oljan och fräs kryddpastan ett par minuter. Tillsätt färsen och finfördela, rör ner tomater och hela fisksåsmängden samt sockret. Behåll allt fett och köttsaft."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 10,
+            "id": "s8",
+            "ingredient_keys": [
+              "fläskfärs|raw_edible",
+              "tomat|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Låt dippen sjuda utan lock på låg värme i tio minuter."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 1,
+            "id": "s9",
+            "ingredient_keys": [
+              "fläskfärs|raw_edible",
+              "tomat|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Rör från botten och kontrollera att inget bränner fast. Justera värmen."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 10,
+            "id": "s10",
+            "ingredient_keys": [
+              "fläskfärs|raw_edible",
+              "tomat|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud ytterligare tio minuter utan lock."
+          },
+          {
+            "depends_on": [
+              "s10"
+            ],
+            "duration_minutes": 5,
+            "id": "s11",
+            "ingredient_keys": [
+              "fläskfärs|raw_edible",
+              "tomat|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Rör om och kontrollera minst 72 °C i färsen. Reducera under omrörning tills dippen är tjock nog att ligga kvar på en grönsaksbit; räkna med fem minuter och förläng vid behov. Behåll hela dippen."
+          },
+          {
+            "depends_on": [
+              "s11"
+            ],
+            "duration_minutes": 7,
+            "id": "s12",
+            "ingredient_keys": [
+              "fläskfärs|raw_edible",
+              "gurka|raw_edible",
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Skär gurkan i breda stavar. Servera den varma dippen i en skål per portion med grönsaker och ris runt om. Grönsakerna vägs ansade som rå ätlig mängd. Behåll all eventuell limedressing."
+          }
+        ],
+        "total_minutes": 83,
+        "variant_id": "standard",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 43
+      },
+      "ingredients": [
+        {
+          "canonical_name": "fläskfärs",
+          "component": "dipp",
+          "form": "raw_edible",
+          "name": "fläskfärs",
+          "product_requirements": [
+            "pack:pork_mince"
+          ],
+          "quantity": 550.0,
+          "quantity_max": 550.0,
+          "quantity_min": 550.0,
+          "quantity_step": 550.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "tomat",
+          "component": "dipp",
+          "form": "raw_edible",
+          "name": "tomat",
+          "quantity": 750.0,
+          "quantity_max": 750.0,
+          "quantity_min": 750.0,
+          "quantity_step": 750.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "schalottenlök",
+          "component": "dipp",
+          "form": "raw_edible",
+          "name": "schalottenlök",
+          "product_requirements": [
+            "pack:intake_all_expansion_9b814cbd8647"
+          ],
+          "quantity": 140.0,
+          "quantity_max": 140.0,
+          "quantity_min": 140.0,
+          "quantity_step": 140.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "dipp",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "chiliflakes",
+          "component": "dipp",
+          "form": "dry",
+          "name": "chiliflakes",
+          "quantity": 3.0,
+          "quantity_max": 3.0,
+          "quantity_min": 3.0,
+          "quantity_step": 3.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "dipp",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 25.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "fisksås",
+          "component": "dipp",
+          "form": "as_sold",
+          "name": "fisksås",
+          "product_requirements": [
+            "pack:intake_all_expansion_7e1272f47d05"
+          ],
+          "quantity": 30.0,
+          "quantity_max": 30.0,
+          "quantity_min": 30.0,
+          "quantity_step": 30.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "strösocker",
+          "component": "dipp",
+          "form": "dry",
+          "name": "strösocker",
+          "product_requirements": [
+            "pack:sugar"
+          ],
+          "quantity": 12.0,
+          "quantity_max": 12.0,
+          "quantity_min": 12.0,
+          "quantity_step": 12.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gurka",
+          "component": "gronsaker",
+          "form": "raw_edible",
+          "name": "gurka",
+          "quantity": 400.0,
+          "quantity_max": 400.0,
+          "quantity_min": 400.0,
+          "quantity_step": 400.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ris",
+          "component": "ris",
+          "form": "dry",
+          "name": "ris",
+          "product_requirements": [
+            "white_rice"
+          ],
+          "quantity": 280.0,
+          "quantity_max": 280.0,
+          "quantity_min": 280.0,
+          "quantity_step": 280.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "ris",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 2.0,
+          "quantity_max": 2.0,
+          "quantity_min": 2.0,
+          "quantity_step": 2.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Skölj riset i sil. Lägg det i en kastrull med risets salt och 560 ml vatten; koka upp och sänk till låg värme.",
+        "Sjud riset under lock cirka 18 minuter tills vattnet absorberats. Följ förpackningens koktid och förläng vid behov.",
+        "Kontrollera att riset är mjukt, stäng av värmen och lägg på locket.",
+        "Låt riset vila under lock i fem minuter.",
+        "Luckra upp riset och håll det varmt över 60 °C under lock tills huvudrätten serveras.",
+        "Skala och väg schalottenlöken, dela den och rosta i torr panna tills mjuk med mörka fläckar. Färsk vitlök kan rostas med löken; fryst hackad vitlök läggs direkt i mixern med all sin vätska. Mixa löken, vitlöken och chiliflakes med 100 ml vatten till grov pasta.",
+        "Väg rå ätlig tomat och tärna. Värm oljan och fräs kryddpastan ett par minuter. Tillsätt färsen och finfördela, rör ner tomater och hela fisksåsmängden samt sockret. Behåll allt fett och köttsaft.",
+        "Låt dippen sjuda utan lock på låg värme i tio minuter.",
+        "Rör från botten och kontrollera att inget bränner fast. Justera värmen.",
+        "Sjud ytterligare tio minuter utan lock.",
+        "Rör om och kontrollera minst 72 °C i färsen. Reducera under omrörning tills dippen är tjock nog att ligga kvar på en grönsaksbit; räkna med fem minuter och förläng vid behov. Behåll hela dippen.",
+        "Skär gurkan i breda stavar. Servera den varma dippen i en skål per portion med grönsaker och ris runt om. Grönsakerna vägs ansade som rå ätlig mängd. Behåll all eventuell limedressing."
+      ],
+      "name": "Nam prik ong – tomat- och fläskdipp med grönsaker – standard – fisksåsversion utan räkpasta",
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 40,
+        "base_id": "smako-thai-nam-prik-ong",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "fläskfärs|raw_edible",
+                "name": "fläskfärs",
+                "note": "",
+                "quantity": 550.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "tomat|raw_edible",
+                "name": "tomat",
+                "note": "",
+                "quantity": 750.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "schalottenlök|raw_edible",
+                "name": "schalottenlök",
+                "note": "",
+                "quantity": 140.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "vitlök",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "chiliflakes|dry",
+                "name": "chiliflakes",
+                "note": "",
+                "quantity": 3.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "rapsolja",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "fisksås|as_sold",
+                "name": "Fisksås, ny kulinarisk dos",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "strösocker",
+                "note": "",
+                "quantity": 12.0,
+                "unit": "g"
+              }
+            ],
+            "id": "dipp",
+            "name": "Kokt tomat- och fläskdipp"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "gurka|raw_edible",
+                "name": "gurka",
+                "note": "",
+                "quantity": 400.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitkål|raw_edible",
+                "name": "vitkål",
+                "note": "",
+                "quantity": 250.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "morot|raw_edible",
+                "name": "morot",
+                "note": "",
+                "quantity": 200.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "limejuice|as_sold",
+                "name": "limejuice",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "gronsaker",
+            "name": "Grönsaker att skopa med"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ris|dry",
+                "name": "ris",
+                "note": "",
+                "quantity": 280.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              }
+            ],
+            "id": "ris",
+            "name": "Kokt ris"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "thai"
+        ],
+        "equipment": [
+          "gryta",
+          "mixer",
+          "kastrull",
+          "termometer"
+        ],
+        "estimated_minutes": 83,
+        "family": "nam prik ong",
+        "fish": true,
+        "flavor_profile": [
+          "tomat",
+          "torkad chili",
+          "fisksås"
+        ],
+        "ingredient_count": 13,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "pot",
+        "primary_ingredient": "fläskfärs",
+        "provenance": {
+          "notes": "Granskad fisksåsversion: 15 g räkpasta utgår. Enkel använder 20 ml fisksås; övriga använder totalt 30 ml i stället för tidigare 20 ml plus räkpastan. Detta är nya doser, inte likvärdig sälta eller fermenterad smak. Såsen innehåller fortfarande fisk. Inte provlagad. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "ris och råa grönsaker",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 3,
+            "id": "s1",
+            "ingredient_keys": [
+              "ris|dry",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "560 ml",
+                560.0
+              ]
+            ],
+            "text": "Skölj riset i sil. Lägg det i en kastrull med risets salt och 560 ml vatten; koka upp och sänk till låg värme."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 18,
+            "id": "s2",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Sjud riset under lock cirka 18 minuter tills vattnet absorberats. Följ förpackningens koktid och förläng vid behov."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 1,
+            "id": "s3",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Kontrollera att riset är mjukt, stäng av värmen och lägg på locket."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 5,
+            "id": "s4",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Låt riset vila under lock i fem minuter."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 1,
+            "id": "s5",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Luckra upp riset och håll det varmt över 60 °C under lock tills huvudrätten serveras."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 12,
+            "id": "s6",
+            "ingredient_keys": [
+              "chiliflakes|dry",
+              "schalottenlök|raw_edible",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "100 ml",
+                100.0
+              ]
+            ],
+            "text": "Skala och väg schalottenlöken, dela den och rosta i torr panna tills mjuk med mörka fläckar. Färsk vitlök kan rostas med löken; fryst hackad vitlök läggs direkt i mixern med all sin vätska. Mixa löken, vitlöken och chiliflakes med 100 ml vatten till grov pasta."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 10,
+            "id": "s7",
+            "ingredient_keys": [
+              "fisksås|as_sold",
+              "fläskfärs|raw_edible",
+              "rapsolja|as_sold",
+              "strösocker|dry",
+              "tomat|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Väg rå ätlig tomat och tärna. Värm oljan och fräs kryddpastan ett par minuter. Tillsätt färsen och finfördela, rör ner tomater och hela fisksåsmängden samt sockret. Behåll allt fett och köttsaft."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 10,
+            "id": "s8",
+            "ingredient_keys": [
+              "fläskfärs|raw_edible",
+              "tomat|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Låt dippen sjuda utan lock på låg värme i tio minuter."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 1,
+            "id": "s9",
+            "ingredient_keys": [
+              "fläskfärs|raw_edible",
+              "tomat|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Rör från botten och kontrollera att inget bränner fast. Justera värmen."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 10,
+            "id": "s10",
+            "ingredient_keys": [
+              "fläskfärs|raw_edible",
+              "tomat|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud ytterligare tio minuter utan lock."
+          },
+          {
+            "depends_on": [
+              "s10"
+            ],
+            "duration_minutes": 5,
+            "id": "s11",
+            "ingredient_keys": [
+              "fläskfärs|raw_edible",
+              "tomat|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Rör om och kontrollera minst 72 °C i färsen. Reducera under omrörning tills dippen är tjock nog att ligga kvar på en grönsaksbit; räkna med fem minuter och förläng vid behov. Behåll hela dippen."
+          },
+          {
+            "depends_on": [
+              "s11"
+            ],
+            "duration_minutes": 7,
+            "id": "s12",
+            "ingredient_keys": [
+              "fläskfärs|raw_edible",
+              "gurka|raw_edible",
+              "limejuice|as_sold",
+              "morot|raw_edible",
+              "ris|dry",
+              "vitkål|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Skär gurkan i breda stavar, strimla vitkål grovt, skär morot tunt och vänd allt med limejuice. Servera den varma dippen i en skål per portion med grönsaker och ris runt om. Grönsakerna vägs ansade som rå ätlig mängd. Behåll all eventuell limedressing."
+          }
+        ],
+        "total_minutes": 83,
+        "variant_id": "extended",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 43
+      },
+      "ingredients": [
+        {
+          "canonical_name": "fläskfärs",
+          "component": "dipp",
+          "form": "raw_edible",
+          "name": "fläskfärs",
+          "product_requirements": [
+            "pack:pork_mince"
+          ],
+          "quantity": 550.0,
+          "quantity_max": 550.0,
+          "quantity_min": 550.0,
+          "quantity_step": 550.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "tomat",
+          "component": "dipp",
+          "form": "raw_edible",
+          "name": "tomat",
+          "quantity": 750.0,
+          "quantity_max": 750.0,
+          "quantity_min": 750.0,
+          "quantity_step": 750.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "schalottenlök",
+          "component": "dipp",
+          "form": "raw_edible",
+          "name": "schalottenlök",
+          "product_requirements": [
+            "pack:intake_all_expansion_9b814cbd8647"
+          ],
+          "quantity": 140.0,
+          "quantity_max": 140.0,
+          "quantity_min": 140.0,
+          "quantity_step": 140.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "dipp",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "chiliflakes",
+          "component": "dipp",
+          "form": "dry",
+          "name": "chiliflakes",
+          "quantity": 3.0,
+          "quantity_max": 3.0,
+          "quantity_min": 3.0,
+          "quantity_step": 3.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "dipp",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 25.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "fisksås",
+          "component": "dipp",
+          "form": "as_sold",
+          "name": "fisksås",
+          "product_requirements": [
+            "pack:intake_all_expansion_7e1272f47d05"
+          ],
+          "quantity": 30.0,
+          "quantity_max": 30.0,
+          "quantity_min": 30.0,
+          "quantity_step": 30.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "strösocker",
+          "component": "dipp",
+          "form": "dry",
+          "name": "strösocker",
+          "product_requirements": [
+            "pack:sugar"
+          ],
+          "quantity": 12.0,
+          "quantity_max": 12.0,
+          "quantity_min": 12.0,
+          "quantity_step": 12.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gurka",
+          "component": "gronsaker",
+          "form": "raw_edible",
+          "name": "gurka",
+          "quantity": 400.0,
+          "quantity_max": 400.0,
+          "quantity_min": 400.0,
+          "quantity_step": 400.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitkål",
+          "component": "gronsaker",
+          "form": "raw_edible",
+          "name": "vitkål",
+          "quantity": 250.0,
+          "quantity_max": 250.0,
+          "quantity_min": 250.0,
+          "quantity_step": 250.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "morot",
+          "component": "gronsaker",
+          "form": "raw_edible",
+          "name": "morot",
+          "quantity": 200.0,
+          "quantity_max": 200.0,
+          "quantity_min": 200.0,
+          "quantity_step": 200.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "limejuice",
+          "component": "gronsaker",
+          "form": "as_sold",
+          "name": "limejuice",
+          "product_requirements": [
+            "pure_juice"
+          ],
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 25.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "ris",
+          "component": "ris",
+          "form": "dry",
+          "name": "ris",
+          "product_requirements": [
+            "white_rice"
+          ],
+          "quantity": 280.0,
+          "quantity_max": 280.0,
+          "quantity_min": 280.0,
+          "quantity_step": 280.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "ris",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 2.0,
+          "quantity_max": 2.0,
+          "quantity_min": 2.0,
+          "quantity_step": 2.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Skölj riset i sil. Lägg det i en kastrull med risets salt och 560 ml vatten; koka upp och sänk till låg värme.",
+        "Sjud riset under lock cirka 18 minuter tills vattnet absorberats. Följ förpackningens koktid och förläng vid behov.",
+        "Kontrollera att riset är mjukt, stäng av värmen och lägg på locket.",
+        "Låt riset vila under lock i fem minuter.",
+        "Luckra upp riset och håll det varmt över 60 °C under lock tills huvudrätten serveras.",
+        "Skala och väg schalottenlöken, dela den och rosta i torr panna tills mjuk med mörka fläckar. Färsk vitlök kan rostas med löken; fryst hackad vitlök läggs direkt i mixern med all sin vätska. Mixa löken, vitlöken och chiliflakes med 100 ml vatten till grov pasta.",
+        "Väg rå ätlig tomat och tärna. Värm oljan och fräs kryddpastan ett par minuter. Tillsätt färsen och finfördela, rör ner tomater och hela fisksåsmängden samt sockret. Behåll allt fett och köttsaft.",
+        "Låt dippen sjuda utan lock på låg värme i tio minuter.",
+        "Rör från botten och kontrollera att inget bränner fast. Justera värmen.",
+        "Sjud ytterligare tio minuter utan lock.",
+        "Rör om och kontrollera minst 72 °C i färsen. Reducera under omrörning tills dippen är tjock nog att ligga kvar på en grönsaksbit; räkna med fem minuter och förläng vid behov. Behåll hela dippen.",
+        "Skär gurkan i breda stavar, strimla vitkål grovt, skär morot tunt och vänd allt med limejuice. Servera den varma dippen i en skål per portion med grönsaker och ris runt om. Grönsakerna vägs ansade som rå ätlig mängd. Behåll all eventuell limedressing."
+      ],
+      "name": "Nam prik ong – tomat- och fläskdipp med grönsaker – utökad – fisksåsversion utan räkpasta",
+      "servings": 4
+    }
+  ],
+  "schema_version": "smako-meal-pack-v1"
+}

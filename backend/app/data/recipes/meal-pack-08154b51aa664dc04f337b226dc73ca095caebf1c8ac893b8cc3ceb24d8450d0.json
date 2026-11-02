@@ -1,0 +1,1958 @@
+{
+  "library_version": "smako-meal-pack-v1",
+  "recipes": [
+    {
+      "design": {
+        "active_minutes": 91,
+        "base_id": "smako-indian-kosha-mangsho",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "benfri lammstek|as_sold",
+                "name": "Benfri lammstek, inköpt vikt före putsning",
+                "note": "",
+                "quantity": 800.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "Gul lök",
+                "note": "",
+                "quantity": 450.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "yoghurt naturell|as_sold",
+                "name": "Yoghurt naturell",
+                "note": "",
+                "quantity": 220.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ingefära|raw_edible",
+                "name": "Ingefära",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "rapsolja",
+                "note": "",
+                "quantity": 40.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "garam masala|dry",
+                "name": "Garam masala",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "g"
+              }
+            ],
+            "id": "kosha",
+            "name": "Långsamt brynt lammstek"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ris|dry",
+                "name": "Ris",
+                "note": "",
+                "quantity": 280.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              }
+            ],
+            "id": "rice",
+            "name": "Nykokt ris"
+          }
+        ],
+        "content_sha256": "41c3951863169538a384f359955df437593989e4e79cd8e268a96412fdf50aea",
+        "content_source": {
+          "active_minutes": 91,
+          "method_note": "Ingredienslistan anger hela insatsen, även den del som senare hälls eller silas bort. Förlusten är inte uppmätt. Näring och färdig portionsvikt är okända; receptet kan inte styrka valda närings- eller viktgränser. Inköp och personliga kostkrav kontrolleras för samtliga insatser.",
+          "pack_id": "reviewed-expansion-round2-stage49",
+          "priority": 1,
+          "proposal_id": "smako-indian-kosha-mangsho",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "51b6f1c0b52adc4f9bc66512142ebe726e6d7c93cdcbdaa63c29e65049f3e9bf",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "indian"
+        ],
+        "equipment": [
+          "bred tung gryta",
+          "slev",
+          "kastrull",
+          "termometer"
+        ],
+        "estimated_minutes": 1764,
+        "family": "kosha mangsho i reducerad lök-yoghurtmasala",
+        "fish": false,
+        "flavor_profile": [
+          "brynt lök",
+          "ingefära",
+          "garam masala"
+        ],
+        "ingredient_count": 7,
+        "method": "pot",
+        "primary_ingredient": "benfri lammstek",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Uttrycklig lamm- och rapsoljeversion. 800 g inköpt benfri stek före putsning ersätter 800 g ätligt getkött; ingen utbytesfaktor eller samma senapsarom påstås. Upptining 24 timmar och marinering två timmar ingår. Ny metod med brynt lök, 90 minuters varsam sjudning och cirka 15 minuters aktiv reduktion ersätter utkastets långa ständiga bryning. Alla tider är uppskattningar, inte provlagade eller uppmätta; segt kött kräver längre tillagning. All marinad, upptiningsvätska och steksky används, putsförlusten är okänd. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "ris; potatis ingår i utökad version",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 2,
+            "id": "s1",
+            "ingredient_keys": [
+              "benfri lammstek|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Tina vid behov hela förpackningen benfri lammstek i ett täckt läckagesäkert kärl i kylskåp. Behåll all vätska."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 1440,
+            "id": "s2",
+            "ingredient_keys": [
+              "benfri lammstek|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Planera 24 timmars kylupptining, eller längre enligt förpackningen tills ingen iskärna återstår. Redan kylförvarat kött går direkt vidare."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 16,
+            "id": "s3",
+            "ingredient_keys": [
+              "benfri lammstek|as_sold",
+              "gul lök|raw_edible",
+              "ingefära|raw_edible",
+              "salt|as_sold",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Väg den angivna inköpta mängden som kött med tillhörande upptiningsvätska före putsning. Spara vätskan kallt. Putsa endast bort grova senor utan att fylla på extra kött. Skär i jämna bitar omkring 2,5 cm. Skala lök och ingefära och väg efter ansning; skiva löken och riv ingefäran. Blanda köttet med hälften av yoghurten, hälften av ingefäran och grytans salt. Ställ kött och övriga kylvaror täckta i kylskåp."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 120,
+            "id": "s4",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Låt köttet dra i kylskåp 120 minuter. Marineringen är medräknad väntetid, inte en förutsatt förberedelse."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 25,
+            "id": "s5",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "rapsolja|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Värm rapsoljan på medelvärme utan att låta den ryka. Lägg i löken och bryn långsamt under täta omrörningar cirka 25 minuter tills den är djupt gyllenbrun. Sänk värmen om kanterna svartnar."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 17,
+            "id": "s6",
+            "ingredient_keys": [
+              "benfri lammstek|as_sold",
+              "ingefära|raw_edible",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Rör ner återstående ingefära. Lägg i köttet med all marinad i omgångar. Stek och vänd tills den råa yoghurten kokat in och blandningen börjar få en brynt yta. Rör ner resten av yoghurten i små omgångar. Häll i all sparad upptiningsvätska och koka upp ordentligt. Allt fett och all marinad stannar i grytan."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 3,
+            "id": "s7",
+            "ingredient_keys": [
+              "benfri lammstek|as_sold",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "350 ml",
+                350.0
+              ]
+            ],
+            "text": "Tillsätt 350 ml vatten, rör upp bottenskyn och koka upp. Sänk värmen och lägg på lock."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 30,
+            "id": "s8",
+            "ingredient_keys": [
+              "benfri lammstek|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sjud försiktigt under lock trettio minuter."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 1,
+            "id": "s9",
+            "ingredient_keys": [
+              "benfri lammstek|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "100 ml",
+                100.0
+              ]
+            ],
+            "text": "Rör om och kontrollera bottnen. Tillsätt vid behov 100 ml vatten så att det inte bränner."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 30,
+            "id": "s10",
+            "ingredient_keys": [
+              "benfri lammstek|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sjud ytterligare trettio minuter under lock."
+          },
+          {
+            "depends_on": [
+              "s10"
+            ],
+            "duration_minutes": 1,
+            "id": "s11",
+            "ingredient_keys": [
+              "benfri lammstek|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "100 ml",
+                100.0
+              ]
+            ],
+            "text": "Rör om och kontrollera vätskan; tillsätt vid behov 100 ml vatten."
+          },
+          {
+            "depends_on": [
+              "s11"
+            ],
+            "duration_minutes": 30,
+            "id": "s12",
+            "ingredient_keys": [
+              "benfri lammstek|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sjud ytterligare cirka trettio minuter under lock."
+          },
+          {
+            "depends_on": [
+              "s12"
+            ],
+            "duration_minutes": 17,
+            "id": "s13",
+            "ingredient_keys": [
+              "benfri lammstek|as_sold",
+              "gul lök|raw_edible",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Kontrollera att lammet är helt genomlagat och delar sig lätt med gaffel. Förläng annars sjudningen. Ta av locket och reducera under tät omrörning cirka femton minuter tills mörk löksås klär köttet tätt. Skrapa bottnen ofta och sänk värmen om den bränner. Ingen sås eller fett hälls bort."
+          },
+          {
+            "depends_on": [
+              "s13"
+            ],
+            "duration_minutes": 2,
+            "id": "s14",
+            "ingredient_keys": [
+              "garam masala|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "50 ml",
+                50.0
+              ]
+            ],
+            "text": "Rör ner garam masala och värm 2 minuter. Håll den färdiga grytan över 60 °C på lägsta värme medan riset kokas; tillsätt 50 ml vatten om den riskerar att torka."
+          },
+          {
+            "depends_on": [
+              "s14"
+            ],
+            "duration_minutes": 3,
+            "id": "s15",
+            "ingredient_keys": [
+              "ris|dry",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "560 ml",
+                560.0
+              ]
+            ],
+            "text": "Lägg i en kastrull med risets salt och 560 ml vatten. Koka upp och sänk till svag värme."
+          },
+          {
+            "depends_on": [
+              "s15"
+            ],
+            "duration_minutes": 18,
+            "id": "s16",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Sjud riset under lock cirka arton minuter eller längre enligt förpackningen tills kornen är mjuka och vattnet absorberats."
+          },
+          {
+            "depends_on": [
+              "s16"
+            ],
+            "duration_minutes": 1,
+            "id": "s17",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "50 ml",
+                50.0
+              ]
+            ],
+            "text": "Kontrollera riset; tillsätt vid behov 50 ml vatten och fortsätt sjuda före vilan. Ta från värmen när riset är mjukt."
+          },
+          {
+            "depends_on": [
+              "s17"
+            ],
+            "duration_minutes": 5,
+            "id": "s18",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Låt riset vila fem minuter under lock."
+          },
+          {
+            "depends_on": [
+              "s18"
+            ],
+            "duration_minutes": 1,
+            "id": "s19",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Luckra riset. Servera direkt med huvudrätten; om den inte är färdig ska ris och huvudrätt hållas över 60 °C tills båda kan serveras."
+          },
+          {
+            "depends_on": [
+              "s19"
+            ],
+            "duration_minutes": 2,
+            "id": "s20",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Servera den täta masalan och det möra lammet med ris."
+          }
+        ],
+        "total_minutes": 1764,
+        "unmeasured_processes": [
+          {
+            "description": "Benfri lammstek vägs före putsning; borttagna senor och kvarvarande ätlig vikt är inte uppmätta.",
+            "ingredient_keys": [
+              "benfri lammstek|as_sold"
+            ],
+            "operation": "trim_before_cooking",
+            "step_id": "s3"
+          }
+        ],
+        "variant_id": "simple",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 1673
+      },
+      "ingredients": [
+        {
+          "canonical_name": "benfri lammstek",
+          "component": "kosha",
+          "form": "as_sold",
+          "name": "benfri lammstek",
+          "product_requirements": [
+            "pack:intake_all_round2_a63f28167c9e"
+          ],
+          "quantity": 800.0,
+          "quantity_max": 800.0,
+          "quantity_min": 800.0,
+          "quantity_step": 800.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "kosha",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 450.0,
+          "quantity_max": 450.0,
+          "quantity_min": 450.0,
+          "quantity_step": 450.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "yoghurt naturell",
+          "component": "kosha",
+          "form": "as_sold",
+          "name": "yoghurt naturell",
+          "product_requirements": [
+            "plain",
+            "thick"
+          ],
+          "quantity": 220.0,
+          "quantity_max": 220.0,
+          "quantity_min": 220.0,
+          "quantity_step": 220.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ingefära",
+          "component": "kosha",
+          "form": "raw_edible",
+          "name": "ingefära",
+          "quantity": 30.0,
+          "quantity_max": 30.0,
+          "quantity_min": 30.0,
+          "quantity_step": 30.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "kosha",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 40.0,
+          "quantity_max": 40.0,
+          "quantity_min": 40.0,
+          "quantity_step": 40.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "garam masala",
+          "component": "kosha",
+          "form": "dry",
+          "name": "garam masala",
+          "product_requirements": [
+            "pack:intake_all_84e26716ceb0"
+          ],
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "kosha",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 6.0,
+          "quantity_max": 6.0,
+          "quantity_min": 6.0,
+          "quantity_step": 6.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ris",
+          "component": "rice",
+          "form": "dry",
+          "name": "ris",
+          "product_requirements": [
+            "white_rice"
+          ],
+          "quantity": 280.0,
+          "quantity_max": 280.0,
+          "quantity_min": 280.0,
+          "quantity_step": 280.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Tina vid behov hela förpackningen benfri lammstek i ett täckt läckagesäkert kärl i kylskåp. Behåll all vätska.",
+        "Planera 24 timmars kylupptining, eller längre enligt förpackningen tills ingen iskärna återstår. Redan kylförvarat kött går direkt vidare.",
+        "Väg den angivna inköpta mängden som kött med tillhörande upptiningsvätska före putsning. Spara vätskan kallt. Putsa endast bort grova senor utan att fylla på extra kött. Skär i jämna bitar omkring 2,5 cm. Skala lök och ingefära och väg efter ansning; skiva löken och riv ingefäran. Blanda köttet med hälften av yoghurten, hälften av ingefäran och grytans salt. Ställ kött och övriga kylvaror täckta i kylskåp.",
+        "Låt köttet dra i kylskåp 120 minuter. Marineringen är medräknad väntetid, inte en förutsatt förberedelse.",
+        "Värm rapsoljan på medelvärme utan att låta den ryka. Lägg i löken och bryn långsamt under täta omrörningar cirka 25 minuter tills den är djupt gyllenbrun. Sänk värmen om kanterna svartnar.",
+        "Rör ner återstående ingefära. Lägg i köttet med all marinad i omgångar. Stek och vänd tills den råa yoghurten kokat in och blandningen börjar få en brynt yta. Rör ner resten av yoghurten i små omgångar. Häll i all sparad upptiningsvätska och koka upp ordentligt. Allt fett och all marinad stannar i grytan.",
+        "Tillsätt 350 ml vatten, rör upp bottenskyn och koka upp. Sänk värmen och lägg på lock.",
+        "Sjud försiktigt under lock trettio minuter.",
+        "Rör om och kontrollera bottnen. Tillsätt vid behov 100 ml vatten så att det inte bränner.",
+        "Sjud ytterligare trettio minuter under lock.",
+        "Rör om och kontrollera vätskan; tillsätt vid behov 100 ml vatten.",
+        "Sjud ytterligare cirka trettio minuter under lock.",
+        "Kontrollera att lammet är helt genomlagat och delar sig lätt med gaffel. Förläng annars sjudningen. Ta av locket och reducera under tät omrörning cirka femton minuter tills mörk löksås klär köttet tätt. Skrapa bottnen ofta och sänk värmen om den bränner. Ingen sås eller fett hälls bort.",
+        "Rör ner garam masala och värm 2 minuter. Håll den färdiga grytan över 60 °C på lägsta värme medan riset kokas; tillsätt 50 ml vatten om den riskerar att torka.",
+        "Lägg i en kastrull med risets salt och 560 ml vatten. Koka upp och sänk till svag värme.",
+        "Sjud riset under lock cirka arton minuter eller längre enligt förpackningen tills kornen är mjuka och vattnet absorberats.",
+        "Kontrollera riset; tillsätt vid behov 50 ml vatten och fortsätt sjuda före vilan. Ta från värmen när riset är mjukt.",
+        "Låt riset vila fem minuter under lock.",
+        "Luckra riset. Servera direkt med huvudrätten; om den inte är färdig ska ris och huvudrätt hållas över 60 °C tills båda kan serveras.",
+        "Servera den täta masalan och det möra lammet med ris."
+      ],
+      "name": "Kosha mangsho med benfri lammstek och rapsolja – simple",
+      "preparation": {
+        "family": "kosha mangsho i reducerad lök-yoghurtmasala",
+        "input_forms": {
+          "benfri lammstek": "as_sold",
+          "garam masala": "dry",
+          "gul lök": "raw_edible",
+          "ingefära": "raw_edible",
+          "rapsolja": "as_sold",
+          "ris": "dry",
+          "salt": "as_sold",
+          "yoghurt naturell": "as_sold"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "41c3951863169538a384f359955df437593989e4e79cd8e268a96412fdf50aea",
+        "version": "smako-authored-losses-v3"
+      },
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 91,
+        "base_id": "smako-indian-kosha-mangsho",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "benfri lammstek|as_sold",
+                "name": "Benfri lammstek, inköpt vikt före putsning",
+                "note": "",
+                "quantity": 800.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "Gul lök",
+                "note": "",
+                "quantity": 450.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "yoghurt naturell|as_sold",
+                "name": "Yoghurt naturell",
+                "note": "",
+                "quantity": 220.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ingefära|raw_edible",
+                "name": "Ingefära",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "rapsolja",
+                "note": "",
+                "quantity": 40.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "garam masala|dry",
+                "name": "Garam masala",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "Vitlök",
+                "note": "",
+                "quantity": 18.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gurkmeja|dry",
+                "name": "Gurkmeja",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "chiliflakes|dry",
+                "name": "Chiliflakes",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              }
+            ],
+            "id": "kosha",
+            "name": "Långsamt brynt lammstek"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ris|dry",
+                "name": "Ris",
+                "note": "",
+                "quantity": 280.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              }
+            ],
+            "id": "rice",
+            "name": "Nykokt ris"
+          }
+        ],
+        "content_sha256": "2c78a42d62390431730799386818b61f40f23e7aa98c3eb452e810f89eb3a533",
+        "content_source": {
+          "active_minutes": 91,
+          "method_note": "Ingredienslistan anger hela insatsen, även den del som senare hälls eller silas bort. Förlusten är inte uppmätt. Näring och färdig portionsvikt är okända; receptet kan inte styrka valda närings- eller viktgränser. Inköp och personliga kostkrav kontrolleras för samtliga insatser.",
+          "pack_id": "reviewed-expansion-round2-stage49",
+          "priority": 1,
+          "proposal_id": "smako-indian-kosha-mangsho",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "51b6f1c0b52adc4f9bc66512142ebe726e6d7c93cdcbdaa63c29e65049f3e9bf",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "indian"
+        ],
+        "equipment": [
+          "bred tung gryta",
+          "slev",
+          "kastrull",
+          "termometer"
+        ],
+        "estimated_minutes": 1764,
+        "family": "kosha mangsho i reducerad lök-yoghurtmasala",
+        "fish": false,
+        "flavor_profile": [
+          "brynt lök",
+          "ingefära",
+          "garam masala"
+        ],
+        "ingredient_count": 10,
+        "method": "pot",
+        "primary_ingredient": "benfri lammstek",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Uttrycklig lamm- och rapsoljeversion. 800 g inköpt benfri stek före putsning ersätter 800 g ätligt getkött; ingen utbytesfaktor eller samma senapsarom påstås. Upptining 24 timmar och marinering två timmar ingår. Ny metod med brynt lök, 90 minuters varsam sjudning och cirka 15 minuters aktiv reduktion ersätter utkastets långa ständiga bryning. Alla tider är uppskattningar, inte provlagade eller uppmätta; segt kött kräver längre tillagning. All marinad, upptiningsvätska och steksky används, putsförlusten är okänd. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "ris; potatis ingår i utökad version",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 2,
+            "id": "s1",
+            "ingredient_keys": [
+              "benfri lammstek|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Tina vid behov hela förpackningen benfri lammstek i ett täckt läckagesäkert kärl i kylskåp. Behåll all vätska."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 1440,
+            "id": "s2",
+            "ingredient_keys": [
+              "benfri lammstek|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Planera 24 timmars kylupptining, eller längre enligt förpackningen tills ingen iskärna återstår. Redan kylförvarat kött går direkt vidare."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 16,
+            "id": "s3",
+            "ingredient_keys": [
+              "benfri lammstek|as_sold",
+              "gul lök|raw_edible",
+              "gurkmeja|dry",
+              "ingefära|raw_edible",
+              "salt|as_sold",
+              "vitlök|raw_edible",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Väg den angivna inköpta mängden som kött med tillhörande upptiningsvätska före putsning. Spara vätskan kallt. Putsa endast bort grova senor utan att fylla på extra kött. Skär i jämna bitar omkring 2,5 cm. Skala lök och ingefära och väg efter ansning; skiva löken och riv ingefäran. Blanda köttet med hälften av yoghurten, hälften av ingefäran och grytans salt samt gurkmejan. Väg färsk eller fryst hackad vitlök och spara kallt till stekningen. Ställ kött och övriga kylvaror täckta i kylskåp."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 120,
+            "id": "s4",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Låt köttet dra i kylskåp 120 minuter. Marineringen är medräknad väntetid, inte en förutsatt förberedelse."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 25,
+            "id": "s5",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "rapsolja|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Värm rapsoljan på medelvärme utan att låta den ryka. Lägg i löken och bryn långsamt under täta omrörningar cirka 25 minuter tills den är djupt gyllenbrun. Sänk värmen om kanterna svartnar."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 17,
+            "id": "s6",
+            "ingredient_keys": [
+              "benfri lammstek|as_sold",
+              "chiliflakes|dry",
+              "ingefära|raw_edible",
+              "vitlök|raw_edible",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Rör ner återstående ingefära, vitlök och chiliflakes. Lägg i köttet med all marinad i omgångar. Stek och vänd tills den råa yoghurten kokat in och blandningen börjar få en brynt yta. Rör ner resten av yoghurten i små omgångar. Häll i all sparad upptiningsvätska och koka upp ordentligt. Allt fett och all marinad stannar i grytan."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 3,
+            "id": "s7",
+            "ingredient_keys": [
+              "benfri lammstek|as_sold",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "350 ml",
+                350.0
+              ]
+            ],
+            "text": "Tillsätt 350 ml vatten, rör upp bottenskyn och koka upp. Sänk värmen och lägg på lock."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 30,
+            "id": "s8",
+            "ingredient_keys": [
+              "benfri lammstek|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sjud försiktigt under lock trettio minuter."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 1,
+            "id": "s9",
+            "ingredient_keys": [
+              "benfri lammstek|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "100 ml",
+                100.0
+              ]
+            ],
+            "text": "Rör om och kontrollera bottnen. Tillsätt vid behov 100 ml vatten så att det inte bränner."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 30,
+            "id": "s10",
+            "ingredient_keys": [
+              "benfri lammstek|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sjud ytterligare trettio minuter under lock."
+          },
+          {
+            "depends_on": [
+              "s10"
+            ],
+            "duration_minutes": 1,
+            "id": "s11",
+            "ingredient_keys": [
+              "benfri lammstek|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "100 ml",
+                100.0
+              ]
+            ],
+            "text": "Rör om och kontrollera vätskan; tillsätt vid behov 100 ml vatten."
+          },
+          {
+            "depends_on": [
+              "s11"
+            ],
+            "duration_minutes": 30,
+            "id": "s12",
+            "ingredient_keys": [
+              "benfri lammstek|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sjud ytterligare cirka trettio minuter under lock."
+          },
+          {
+            "depends_on": [
+              "s12"
+            ],
+            "duration_minutes": 17,
+            "id": "s13",
+            "ingredient_keys": [
+              "benfri lammstek|as_sold",
+              "gul lök|raw_edible",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Kontrollera att lammet är helt genomlagat och delar sig lätt med gaffel. Förläng annars sjudningen. Ta av locket och reducera under tät omrörning cirka femton minuter tills mörk löksås klär köttet tätt. Skrapa bottnen ofta och sänk värmen om den bränner. Ingen sås eller fett hälls bort."
+          },
+          {
+            "depends_on": [
+              "s13"
+            ],
+            "duration_minutes": 2,
+            "id": "s14",
+            "ingredient_keys": [
+              "garam masala|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "50 ml",
+                50.0
+              ]
+            ],
+            "text": "Rör ner garam masala och värm 2 minuter. Håll den färdiga grytan över 60 °C på lägsta värme medan riset kokas; tillsätt 50 ml vatten om den riskerar att torka."
+          },
+          {
+            "depends_on": [
+              "s14"
+            ],
+            "duration_minutes": 3,
+            "id": "s15",
+            "ingredient_keys": [
+              "ris|dry",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "560 ml",
+                560.0
+              ]
+            ],
+            "text": "Lägg i en kastrull med risets salt och 560 ml vatten. Koka upp och sänk till svag värme."
+          },
+          {
+            "depends_on": [
+              "s15"
+            ],
+            "duration_minutes": 18,
+            "id": "s16",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Sjud riset under lock cirka arton minuter eller längre enligt förpackningen tills kornen är mjuka och vattnet absorberats."
+          },
+          {
+            "depends_on": [
+              "s16"
+            ],
+            "duration_minutes": 1,
+            "id": "s17",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "50 ml",
+                50.0
+              ]
+            ],
+            "text": "Kontrollera riset; tillsätt vid behov 50 ml vatten och fortsätt sjuda före vilan. Ta från värmen när riset är mjukt."
+          },
+          {
+            "depends_on": [
+              "s17"
+            ],
+            "duration_minutes": 5,
+            "id": "s18",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Låt riset vila fem minuter under lock."
+          },
+          {
+            "depends_on": [
+              "s18"
+            ],
+            "duration_minutes": 1,
+            "id": "s19",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Luckra riset. Servera direkt med huvudrätten; om den inte är färdig ska ris och huvudrätt hållas över 60 °C tills båda kan serveras."
+          },
+          {
+            "depends_on": [
+              "s19"
+            ],
+            "duration_minutes": 2,
+            "id": "s20",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Servera den täta masalan och det möra lammet med ris."
+          }
+        ],
+        "total_minutes": 1764,
+        "unmeasured_processes": [
+          {
+            "description": "Benfri lammstek vägs före putsning; borttagna senor och kvarvarande ätlig vikt är inte uppmätta.",
+            "ingredient_keys": [
+              "benfri lammstek|as_sold"
+            ],
+            "operation": "trim_before_cooking",
+            "step_id": "s3"
+          }
+        ],
+        "variant_id": "standard",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 1673
+      },
+      "ingredients": [
+        {
+          "canonical_name": "benfri lammstek",
+          "component": "kosha",
+          "form": "as_sold",
+          "name": "benfri lammstek",
+          "product_requirements": [
+            "pack:intake_all_round2_a63f28167c9e"
+          ],
+          "quantity": 800.0,
+          "quantity_max": 800.0,
+          "quantity_min": 800.0,
+          "quantity_step": 800.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "kosha",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 450.0,
+          "quantity_max": 450.0,
+          "quantity_min": 450.0,
+          "quantity_step": 450.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "yoghurt naturell",
+          "component": "kosha",
+          "form": "as_sold",
+          "name": "yoghurt naturell",
+          "product_requirements": [
+            "plain",
+            "thick"
+          ],
+          "quantity": 220.0,
+          "quantity_max": 220.0,
+          "quantity_min": 220.0,
+          "quantity_step": 220.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ingefära",
+          "component": "kosha",
+          "form": "raw_edible",
+          "name": "ingefära",
+          "quantity": 30.0,
+          "quantity_max": 30.0,
+          "quantity_min": 30.0,
+          "quantity_step": 30.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "kosha",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 40.0,
+          "quantity_max": 40.0,
+          "quantity_min": 40.0,
+          "quantity_step": 40.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "garam masala",
+          "component": "kosha",
+          "form": "dry",
+          "name": "garam masala",
+          "product_requirements": [
+            "pack:intake_all_84e26716ceb0"
+          ],
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "kosha",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 6.0,
+          "quantity_max": 6.0,
+          "quantity_min": 6.0,
+          "quantity_step": 6.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "kosha",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 18.0,
+          "quantity_max": 18.0,
+          "quantity_min": 18.0,
+          "quantity_step": 18.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gurkmeja",
+          "component": "kosha",
+          "form": "dry",
+          "name": "gurkmeja",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "chiliflakes",
+          "component": "kosha",
+          "form": "dry",
+          "name": "chiliflakes",
+          "quantity": 2.0,
+          "quantity_max": 2.0,
+          "quantity_min": 2.0,
+          "quantity_step": 2.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ris",
+          "component": "rice",
+          "form": "dry",
+          "name": "ris",
+          "product_requirements": [
+            "white_rice"
+          ],
+          "quantity": 280.0,
+          "quantity_max": 280.0,
+          "quantity_min": 280.0,
+          "quantity_step": 280.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Tina vid behov hela förpackningen benfri lammstek i ett täckt läckagesäkert kärl i kylskåp. Behåll all vätska.",
+        "Planera 24 timmars kylupptining, eller längre enligt förpackningen tills ingen iskärna återstår. Redan kylförvarat kött går direkt vidare.",
+        "Väg den angivna inköpta mängden som kött med tillhörande upptiningsvätska före putsning. Spara vätskan kallt. Putsa endast bort grova senor utan att fylla på extra kött. Skär i jämna bitar omkring 2,5 cm. Skala lök och ingefära och väg efter ansning; skiva löken och riv ingefäran. Blanda köttet med hälften av yoghurten, hälften av ingefäran och grytans salt samt gurkmejan. Väg färsk eller fryst hackad vitlök och spara kallt till stekningen. Ställ kött och övriga kylvaror täckta i kylskåp.",
+        "Låt köttet dra i kylskåp 120 minuter. Marineringen är medräknad väntetid, inte en förutsatt förberedelse.",
+        "Värm rapsoljan på medelvärme utan att låta den ryka. Lägg i löken och bryn långsamt under täta omrörningar cirka 25 minuter tills den är djupt gyllenbrun. Sänk värmen om kanterna svartnar.",
+        "Rör ner återstående ingefära, vitlök och chiliflakes. Lägg i köttet med all marinad i omgångar. Stek och vänd tills den råa yoghurten kokat in och blandningen börjar få en brynt yta. Rör ner resten av yoghurten i små omgångar. Häll i all sparad upptiningsvätska och koka upp ordentligt. Allt fett och all marinad stannar i grytan.",
+        "Tillsätt 350 ml vatten, rör upp bottenskyn och koka upp. Sänk värmen och lägg på lock.",
+        "Sjud försiktigt under lock trettio minuter.",
+        "Rör om och kontrollera bottnen. Tillsätt vid behov 100 ml vatten så att det inte bränner.",
+        "Sjud ytterligare trettio minuter under lock.",
+        "Rör om och kontrollera vätskan; tillsätt vid behov 100 ml vatten.",
+        "Sjud ytterligare cirka trettio minuter under lock.",
+        "Kontrollera att lammet är helt genomlagat och delar sig lätt med gaffel. Förläng annars sjudningen. Ta av locket och reducera under tät omrörning cirka femton minuter tills mörk löksås klär köttet tätt. Skrapa bottnen ofta och sänk värmen om den bränner. Ingen sås eller fett hälls bort.",
+        "Rör ner garam masala och värm 2 minuter. Håll den färdiga grytan över 60 °C på lägsta värme medan riset kokas; tillsätt 50 ml vatten om den riskerar att torka.",
+        "Lägg i en kastrull med risets salt och 560 ml vatten. Koka upp och sänk till svag värme.",
+        "Sjud riset under lock cirka arton minuter eller längre enligt förpackningen tills kornen är mjuka och vattnet absorberats.",
+        "Kontrollera riset; tillsätt vid behov 50 ml vatten och fortsätt sjuda före vilan. Ta från värmen när riset är mjukt.",
+        "Låt riset vila fem minuter under lock.",
+        "Luckra riset. Servera direkt med huvudrätten; om den inte är färdig ska ris och huvudrätt hållas över 60 °C tills båda kan serveras.",
+        "Servera den täta masalan och det möra lammet med ris."
+      ],
+      "name": "Kosha mangsho med benfri lammstek och rapsolja – standard",
+      "preparation": {
+        "family": "kosha mangsho i reducerad lök-yoghurtmasala",
+        "input_forms": {
+          "benfri lammstek": "as_sold",
+          "chiliflakes": "dry",
+          "garam masala": "dry",
+          "gul lök": "raw_edible",
+          "gurkmeja": "dry",
+          "ingefära": "raw_edible",
+          "rapsolja": "as_sold",
+          "ris": "dry",
+          "salt": "as_sold",
+          "vitlök": "raw_edible",
+          "yoghurt naturell": "as_sold"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "2c78a42d62390431730799386818b61f40f23e7aa98c3eb452e810f89eb3a533",
+        "version": "smako-authored-losses-v3"
+      },
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 95,
+        "base_id": "smako-indian-kosha-mangsho",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "benfri lammstek|as_sold",
+                "name": "Benfri lammstek, inköpt vikt före putsning",
+                "note": "",
+                "quantity": 800.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "Gul lök",
+                "note": "",
+                "quantity": 450.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "yoghurt naturell|as_sold",
+                "name": "Yoghurt naturell",
+                "note": "",
+                "quantity": 220.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ingefära|raw_edible",
+                "name": "Ingefära",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "rapsolja",
+                "note": "",
+                "quantity": 40.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "garam masala|dry",
+                "name": "Garam masala",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "Vitlök",
+                "note": "",
+                "quantity": 18.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gurkmeja|dry",
+                "name": "Gurkmeja",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "chiliflakes|dry",
+                "name": "Chiliflakes",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kanel|dry",
+                "name": "Kanel",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kardemumma|dry",
+                "name": "Kardemumma",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "potatis|raw_edible",
+                "name": "Potatis",
+                "note": "",
+                "quantity": 350.0,
+                "unit": "g"
+              }
+            ],
+            "id": "kosha",
+            "name": "Långsamt brynt lammstek"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ris|dry",
+                "name": "Ris",
+                "note": "",
+                "quantity": 280.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              }
+            ],
+            "id": "rice",
+            "name": "Nykokt ris"
+          }
+        ],
+        "content_sha256": "720794da5b95159c8d470b35b4a1e70a3809da97dc59f125a2668bbb5133f222",
+        "content_source": {
+          "active_minutes": 95,
+          "method_note": "Ingredienslistan anger hela insatsen, även den del som senare hälls eller silas bort. Förlusten är inte uppmätt. Näring och färdig portionsvikt är okända; receptet kan inte styrka valda närings- eller viktgränser. Inköp och personliga kostkrav kontrolleras för samtliga insatser.",
+          "pack_id": "reviewed-expansion-round2-stage49",
+          "priority": 1,
+          "proposal_id": "smako-indian-kosha-mangsho",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "51b6f1c0b52adc4f9bc66512142ebe726e6d7c93cdcbdaa63c29e65049f3e9bf",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "indian"
+        ],
+        "equipment": [
+          "bred tung gryta",
+          "slev",
+          "kastrull",
+          "termometer"
+        ],
+        "estimated_minutes": 1768,
+        "family": "kosha mangsho i reducerad lök-yoghurtmasala",
+        "fish": false,
+        "flavor_profile": [
+          "brynt lök",
+          "ingefära",
+          "garam masala"
+        ],
+        "ingredient_count": 13,
+        "method": "pot",
+        "primary_ingredient": "benfri lammstek",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Uttrycklig lamm- och rapsoljeversion. 800 g inköpt benfri stek före putsning ersätter 800 g ätligt getkött; ingen utbytesfaktor eller samma senapsarom påstås. Upptining 24 timmar och marinering två timmar ingår. Ny metod med brynt lök, 90 minuters varsam sjudning och cirka 15 minuters aktiv reduktion ersätter utkastets långa ständiga bryning. Alla tider är uppskattningar, inte provlagade eller uppmätta; segt kött kräver längre tillagning. All marinad, upptiningsvätska och steksky används, putsförlusten är okänd. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "ris; potatis ingår i utökad version",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 2,
+            "id": "s1",
+            "ingredient_keys": [
+              "benfri lammstek|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Tina vid behov hela förpackningen benfri lammstek i ett täckt läckagesäkert kärl i kylskåp. Behåll all vätska."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 1440,
+            "id": "s2",
+            "ingredient_keys": [
+              "benfri lammstek|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Planera 24 timmars kylupptining, eller längre enligt förpackningen tills ingen iskärna återstår. Redan kylförvarat kött går direkt vidare."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 16,
+            "id": "s3",
+            "ingredient_keys": [
+              "benfri lammstek|as_sold",
+              "gul lök|raw_edible",
+              "gurkmeja|dry",
+              "ingefära|raw_edible",
+              "salt|as_sold",
+              "vitlök|raw_edible",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Väg den angivna inköpta mängden som kött med tillhörande upptiningsvätska före putsning. Spara vätskan kallt. Putsa endast bort grova senor utan att fylla på extra kött. Skär i jämna bitar omkring 2,5 cm. Skala lök och ingefära och väg efter ansning; skiva löken och riv ingefäran. Blanda köttet med hälften av yoghurten, hälften av ingefäran och grytans salt samt gurkmejan. Väg färsk eller fryst hackad vitlök och spara kallt till stekningen. Ställ kött och övriga kylvaror täckta i kylskåp."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 120,
+            "id": "s4",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Låt köttet dra i kylskåp 120 minuter. Marineringen är medräknad väntetid, inte en förutsatt förberedelse."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 25,
+            "id": "s5",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "rapsolja|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Värm rapsoljan på medelvärme utan att låta den ryka. Lägg i löken och bryn långsamt under täta omrörningar cirka 25 minuter tills den är djupt gyllenbrun. Sänk värmen om kanterna svartnar."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 17,
+            "id": "s6",
+            "ingredient_keys": [
+              "benfri lammstek|as_sold",
+              "chiliflakes|dry",
+              "ingefära|raw_edible",
+              "kanel|dry",
+              "kardemumma|dry",
+              "vitlök|raw_edible",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Rör ner återstående ingefära, vitlök och chiliflakes samt malen kanel och malen kardemumma. Lägg i köttet med all marinad i omgångar. Stek och vänd tills den råa yoghurten kokat in och blandningen börjar få en brynt yta. Rör ner resten av yoghurten i små omgångar. Häll i all sparad upptiningsvätska och koka upp ordentligt. Allt fett och all marinad stannar i grytan."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 3,
+            "id": "s7",
+            "ingredient_keys": [
+              "benfri lammstek|as_sold",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "350 ml",
+                350.0
+              ]
+            ],
+            "text": "Tillsätt 350 ml vatten, rör upp bottenskyn och koka upp. Sänk värmen och lägg på lock."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 30,
+            "id": "s8",
+            "ingredient_keys": [
+              "benfri lammstek|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sjud försiktigt under lock trettio minuter."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 1,
+            "id": "s9",
+            "ingredient_keys": [
+              "benfri lammstek|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "100 ml",
+                100.0
+              ]
+            ],
+            "text": "Rör om och kontrollera bottnen. Tillsätt vid behov 100 ml vatten så att det inte bränner."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 30,
+            "id": "s10",
+            "ingredient_keys": [
+              "benfri lammstek|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sjud ytterligare trettio minuter under lock."
+          },
+          {
+            "depends_on": [
+              "s10"
+            ],
+            "duration_minutes": 5,
+            "id": "s11",
+            "ingredient_keys": [
+              "benfri lammstek|as_sold",
+              "potatis|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "100 ml",
+                100.0
+              ]
+            ],
+            "text": "Skala potatisen, väg den råa ätliga mängden och skär i två centimeter stora bitar. Lägg i grytan. Rör om och kontrollera vätskan; tillsätt vid behov 100 ml vatten."
+          },
+          {
+            "depends_on": [
+              "s11"
+            ],
+            "duration_minutes": 30,
+            "id": "s12",
+            "ingredient_keys": [
+              "benfri lammstek|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sjud ytterligare cirka trettio minuter under lock."
+          },
+          {
+            "depends_on": [
+              "s12"
+            ],
+            "duration_minutes": 17,
+            "id": "s13",
+            "ingredient_keys": [
+              "benfri lammstek|as_sold",
+              "gul lök|raw_edible",
+              "potatis|raw_edible",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Kontrollera att lammet är helt genomlagat och delar sig lätt med gaffel och att potatisen är mjuk. Förläng annars sjudningen. Ta av locket och reducera under tät omrörning cirka femton minuter tills mörk löksås klär köttet tätt. Skrapa bottnen ofta och sänk värmen om den bränner. Ingen sås eller fett hälls bort."
+          },
+          {
+            "depends_on": [
+              "s13"
+            ],
+            "duration_minutes": 2,
+            "id": "s14",
+            "ingredient_keys": [
+              "garam masala|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "50 ml",
+                50.0
+              ]
+            ],
+            "text": "Rör ner garam masala och värm 2 minuter. Håll den färdiga grytan över 60 °C på lägsta värme medan riset kokas; tillsätt 50 ml vatten om den riskerar att torka."
+          },
+          {
+            "depends_on": [
+              "s14"
+            ],
+            "duration_minutes": 3,
+            "id": "s15",
+            "ingredient_keys": [
+              "ris|dry",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "560 ml",
+                560.0
+              ]
+            ],
+            "text": "Lägg i en kastrull med risets salt och 560 ml vatten. Koka upp och sänk till svag värme."
+          },
+          {
+            "depends_on": [
+              "s15"
+            ],
+            "duration_minutes": 18,
+            "id": "s16",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Sjud riset under lock cirka arton minuter eller längre enligt förpackningen tills kornen är mjuka och vattnet absorberats."
+          },
+          {
+            "depends_on": [
+              "s16"
+            ],
+            "duration_minutes": 1,
+            "id": "s17",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "50 ml",
+                50.0
+              ]
+            ],
+            "text": "Kontrollera riset; tillsätt vid behov 50 ml vatten och fortsätt sjuda före vilan. Ta från värmen när riset är mjukt."
+          },
+          {
+            "depends_on": [
+              "s17"
+            ],
+            "duration_minutes": 5,
+            "id": "s18",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Låt riset vila fem minuter under lock."
+          },
+          {
+            "depends_on": [
+              "s18"
+            ],
+            "duration_minutes": 1,
+            "id": "s19",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Luckra riset. Servera direkt med huvudrätten; om den inte är färdig ska ris och huvudrätt hållas över 60 °C tills båda kan serveras."
+          },
+          {
+            "depends_on": [
+              "s19"
+            ],
+            "duration_minutes": 2,
+            "id": "s20",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Servera den täta masalan och det möra lammet med ris och de integrerade potatisklyftorna."
+          }
+        ],
+        "total_minutes": 1768,
+        "unmeasured_processes": [
+          {
+            "description": "Benfri lammstek vägs före putsning; borttagna senor och kvarvarande ätlig vikt är inte uppmätta.",
+            "ingredient_keys": [
+              "benfri lammstek|as_sold"
+            ],
+            "operation": "trim_before_cooking",
+            "step_id": "s3"
+          }
+        ],
+        "variant_id": "extended",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 1673
+      },
+      "ingredients": [
+        {
+          "canonical_name": "benfri lammstek",
+          "component": "kosha",
+          "form": "as_sold",
+          "name": "benfri lammstek",
+          "product_requirements": [
+            "pack:intake_all_round2_a63f28167c9e"
+          ],
+          "quantity": 800.0,
+          "quantity_max": 800.0,
+          "quantity_min": 800.0,
+          "quantity_step": 800.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "kosha",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 450.0,
+          "quantity_max": 450.0,
+          "quantity_min": 450.0,
+          "quantity_step": 450.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "yoghurt naturell",
+          "component": "kosha",
+          "form": "as_sold",
+          "name": "yoghurt naturell",
+          "product_requirements": [
+            "plain",
+            "thick"
+          ],
+          "quantity": 220.0,
+          "quantity_max": 220.0,
+          "quantity_min": 220.0,
+          "quantity_step": 220.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ingefära",
+          "component": "kosha",
+          "form": "raw_edible",
+          "name": "ingefära",
+          "quantity": 30.0,
+          "quantity_max": 30.0,
+          "quantity_min": 30.0,
+          "quantity_step": 30.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "kosha",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 40.0,
+          "quantity_max": 40.0,
+          "quantity_min": 40.0,
+          "quantity_step": 40.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "garam masala",
+          "component": "kosha",
+          "form": "dry",
+          "name": "garam masala",
+          "product_requirements": [
+            "pack:intake_all_84e26716ceb0"
+          ],
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "kosha",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 6.0,
+          "quantity_max": 6.0,
+          "quantity_min": 6.0,
+          "quantity_step": 6.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "kosha",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 18.0,
+          "quantity_max": 18.0,
+          "quantity_min": 18.0,
+          "quantity_step": 18.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gurkmeja",
+          "component": "kosha",
+          "form": "dry",
+          "name": "gurkmeja",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "chiliflakes",
+          "component": "kosha",
+          "form": "dry",
+          "name": "chiliflakes",
+          "quantity": 2.0,
+          "quantity_max": 2.0,
+          "quantity_min": 2.0,
+          "quantity_step": 2.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kanel",
+          "component": "kosha",
+          "form": "dry",
+          "name": "kanel",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kardemumma",
+          "component": "kosha",
+          "form": "dry",
+          "name": "kardemumma",
+          "product_requirements": [
+            "pack:intake_all_930d08a8d175"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "potatis",
+          "component": "kosha",
+          "form": "raw_edible",
+          "name": "potatis",
+          "quantity": 350.0,
+          "quantity_max": 350.0,
+          "quantity_min": 350.0,
+          "quantity_step": 350.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ris",
+          "component": "rice",
+          "form": "dry",
+          "name": "ris",
+          "product_requirements": [
+            "white_rice"
+          ],
+          "quantity": 280.0,
+          "quantity_max": 280.0,
+          "quantity_min": 280.0,
+          "quantity_step": 280.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Tina vid behov hela förpackningen benfri lammstek i ett täckt läckagesäkert kärl i kylskåp. Behåll all vätska.",
+        "Planera 24 timmars kylupptining, eller längre enligt förpackningen tills ingen iskärna återstår. Redan kylförvarat kött går direkt vidare.",
+        "Väg den angivna inköpta mängden som kött med tillhörande upptiningsvätska före putsning. Spara vätskan kallt. Putsa endast bort grova senor utan att fylla på extra kött. Skär i jämna bitar omkring 2,5 cm. Skala lök och ingefära och väg efter ansning; skiva löken och riv ingefäran. Blanda köttet med hälften av yoghurten, hälften av ingefäran och grytans salt samt gurkmejan. Väg färsk eller fryst hackad vitlök och spara kallt till stekningen. Ställ kött och övriga kylvaror täckta i kylskåp.",
+        "Låt köttet dra i kylskåp 120 minuter. Marineringen är medräknad väntetid, inte en förutsatt förberedelse.",
+        "Värm rapsoljan på medelvärme utan att låta den ryka. Lägg i löken och bryn långsamt under täta omrörningar cirka 25 minuter tills den är djupt gyllenbrun. Sänk värmen om kanterna svartnar.",
+        "Rör ner återstående ingefära, vitlök och chiliflakes samt malen kanel och malen kardemumma. Lägg i köttet med all marinad i omgångar. Stek och vänd tills den råa yoghurten kokat in och blandningen börjar få en brynt yta. Rör ner resten av yoghurten i små omgångar. Häll i all sparad upptiningsvätska och koka upp ordentligt. Allt fett och all marinad stannar i grytan.",
+        "Tillsätt 350 ml vatten, rör upp bottenskyn och koka upp. Sänk värmen och lägg på lock.",
+        "Sjud försiktigt under lock trettio minuter.",
+        "Rör om och kontrollera bottnen. Tillsätt vid behov 100 ml vatten så att det inte bränner.",
+        "Sjud ytterligare trettio minuter under lock.",
+        "Skala potatisen, väg den råa ätliga mängden och skär i två centimeter stora bitar. Lägg i grytan. Rör om och kontrollera vätskan; tillsätt vid behov 100 ml vatten.",
+        "Sjud ytterligare cirka trettio minuter under lock.",
+        "Kontrollera att lammet är helt genomlagat och delar sig lätt med gaffel och att potatisen är mjuk. Förläng annars sjudningen. Ta av locket och reducera under tät omrörning cirka femton minuter tills mörk löksås klär köttet tätt. Skrapa bottnen ofta och sänk värmen om den bränner. Ingen sås eller fett hälls bort.",
+        "Rör ner garam masala och värm 2 minuter. Håll den färdiga grytan över 60 °C på lägsta värme medan riset kokas; tillsätt 50 ml vatten om den riskerar att torka.",
+        "Lägg i en kastrull med risets salt och 560 ml vatten. Koka upp och sänk till svag värme.",
+        "Sjud riset under lock cirka arton minuter eller längre enligt förpackningen tills kornen är mjuka och vattnet absorberats.",
+        "Kontrollera riset; tillsätt vid behov 50 ml vatten och fortsätt sjuda före vilan. Ta från värmen när riset är mjukt.",
+        "Låt riset vila fem minuter under lock.",
+        "Luckra riset. Servera direkt med huvudrätten; om den inte är färdig ska ris och huvudrätt hållas över 60 °C tills båda kan serveras.",
+        "Servera den täta masalan och det möra lammet med ris och de integrerade potatisklyftorna."
+      ],
+      "name": "Kosha mangsho med benfri lammstek och rapsolja – extended",
+      "preparation": {
+        "family": "kosha mangsho i reducerad lök-yoghurtmasala",
+        "input_forms": {
+          "benfri lammstek": "as_sold",
+          "chiliflakes": "dry",
+          "garam masala": "dry",
+          "gul lök": "raw_edible",
+          "gurkmeja": "dry",
+          "ingefära": "raw_edible",
+          "kanel": "dry",
+          "kardemumma": "dry",
+          "potatis": "raw_edible",
+          "rapsolja": "as_sold",
+          "ris": "dry",
+          "salt": "as_sold",
+          "vitlök": "raw_edible",
+          "yoghurt naturell": "as_sold"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "720794da5b95159c8d470b35b4a1e70a3809da97dc59f125a2668bbb5133f222",
+        "version": "smako-authored-losses-v3"
+      },
+      "servings": 4
+    }
+  ]
+}

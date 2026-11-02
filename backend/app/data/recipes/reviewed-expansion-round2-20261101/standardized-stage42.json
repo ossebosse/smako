@@ -1,0 +1,2075 @@
+{
+  "pack_id": "reviewed-expansion-round2-stage42",
+  "recipes": [
+    {
+      "design": {
+        "active_minutes": 83,
+        "base_id": "smako-swedish-polsa",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "högrev|raw_edible",
+                "name": "högrev",
+                "note": "",
+                "quantity": 500.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ungnötslever|as_sold",
+                "name": "Ungnötslever i bit, vägd före putsning",
+                "note": "",
+                "quantity": 250.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "korngryn|dry",
+                "name": "korngryn",
+                "note": "",
+                "quantity": 200.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "gul lök",
+                "note": "",
+                "quantity": 220.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "smör|as_sold",
+                "name": "smör",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kryddpeppar|dry",
+                "name": "kryddpeppar",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 6.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "svartpeppar",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              }
+            ],
+            "id": "polsa",
+            "name": "Kött- och grynpölsa"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "rödbeta|raw_edible",
+                "name": "rödbeta",
+                "note": "",
+                "quantity": 400.0,
+                "unit": "g"
+              }
+            ],
+            "id": "rodbeta",
+            "name": "Rödbetstillbehör"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "potatis|raw_edible",
+                "name": "potatis",
+                "note": "",
+                "quantity": 850.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              }
+            ],
+            "id": "potatis",
+            "name": "Kokt potatis"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "swedish"
+        ],
+        "equipment": [
+          "stor gryta",
+          "två kastruller",
+          "kniv",
+          "stekpanna",
+          "termometer"
+        ],
+        "estimated_minutes": 1728,
+        "family": "pölsa",
+        "fish": false,
+        "flavor_profile": [
+          "kokt nötkött",
+          "lever",
+          "kryddpeppar"
+        ],
+        "ingredient_count": 8,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "pot",
+        "primary_ingredient": "högrev och ungnötslever",
+        "provenance": {
+          "notes": "Granskad pölsaversion med 500 g högrev i stället för nöthjärta och 250 g hel ungnötslever före putsning i stället för 250 g ätlig fläsklever. Det är nya insatser, inte lika ätlig mängd. Hela kött- och grynmängden serveras; putsning och kasserade kokspad ger okända förluster. Planera kylupptining för frysta produkter. Inte provlagad. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "potatis och rödbeta",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 2,
+            "id": "s1",
+            "ingredient_keys": [
+              "högrev|raw_edible",
+              "ungnötslever|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Väg högreven och den hela ungnötslevern före eventuell upptining. Lägg i separata täckta kärl i kylskåp vid cirka 4 °C. Behåll varje köttslags vätska till dess egen kokning."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 1440,
+            "id": "s2",
+            "ingredient_keys": [
+              "högrev|raw_edible",
+              "ungnötslever|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Planera 24 timmars kylupptining för frysta produkter och följ förpackningen tills allt är helt tinat. Redan tinat kött behöver ingen upptining."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 13,
+            "id": "s3",
+            "ingredient_keys": [
+              "högrev|raw_edible",
+              "salt|as_sold",
+              "ungnötslever|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "1700 ml",
+                1700.0
+              ]
+            ],
+            "text": "Väg ungnötslevern före putsning, skär bort grova hinnor och kärl och förvara kallt tills den ska kokas. Skär högreven i grova bitar. Lägg högreven med all dess upptiningssaft i gryta med 1700 ml vatten och hälften av pölsans salt. Koka upp; behåll skummet i spadet."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 60,
+            "id": "s4",
+            "ingredient_keys": [
+              "högrev|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud högreven under lock på låg värme cirka 60 minuter."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 2,
+            "id": "s5",
+            "ingredient_keys": [
+              "högrev|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "200 ml",
+                200.0
+              ]
+            ],
+            "text": "Kontrollera sjudningen och vätskan. Tillsätt högst 200 ml vatten om det behövs och lägg på locket igen."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 60,
+            "id": "s6",
+            "ingredient_keys": [
+              "högrev|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud högreven ytterligare cirka 60 minuter tills mör."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 21,
+            "id": "s7",
+            "ingredient_keys": [
+              "ungnötslever|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Kontrollera att högreven är mör och lätt kan delas; förläng sjudningen om det behövs. Lyft högreven till en skål. Skär den putsade ungnötslevern i jämna bitar och lägg med all leverns upptiningssaft i det sjudande spadet. Tillaga cirka 18 minuter, kontrollera att mitten når minst 75 °C och håll den temperaturen minst 3 minuter. Rengör redskap som varit i kontakt med rå lever."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 5,
+            "id": "s8",
+            "ingredient_keys": [
+              "högrev|raw_edible",
+              "korngryn|dry",
+              "salt|as_sold",
+              "ungnötslever|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "900 ml",
+                900.0
+              ]
+            ],
+            "text": "Ta upp den genomkokta levern. Mät upp 900 ml vatten från köttkoket till korngrynen, utan att sila bort matbitar; späd med vanligt vatten om det saknas. Kasta återstående köttspad. Koka upp grynen i det uppmätta spadet. Förvara det kokta köttet och levern täckta och varmt över 60 °C tills blandningen är färdig."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 40,
+            "id": "s9",
+            "ingredient_keys": [
+              "korngryn|dry"
+            ],
+            "parallel_group": null,
+            "text": "Sjud korngrynen under lock cirka 40 minuter tills mjuka men med lite textur. Följ längre koktid på förpackningen vid behov."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 6,
+            "id": "s10",
+            "ingredient_keys": [
+              "rödbeta|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "700 ml",
+                700.0
+              ]
+            ],
+            "text": "Skala rödbetorna, väg den råa ätliga mängden och skär dem i små tärningar. Lägg i en kastrull med 700 ml vatten och koka upp."
+          },
+          {
+            "depends_on": [
+              "s10"
+            ],
+            "duration_minutes": 25,
+            "id": "s11",
+            "ingredient_keys": [
+              "rödbeta|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud rödbetorna cirka 25 minuter tills helt mjuka."
+          },
+          {
+            "depends_on": [
+              "s11"
+            ],
+            "duration_minutes": 2,
+            "id": "s12",
+            "ingredient_keys": [
+              "rödbeta|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Kontrollera att rödbetorna är mjuka, häll av och kasta kokvattnet."
+          },
+          {
+            "depends_on": [
+              "s12"
+            ],
+            "duration_minutes": 6,
+            "id": "s13",
+            "ingredient_keys": [
+              "potatis|raw_edible",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "1500 ml",
+                1500.0
+              ]
+            ],
+            "text": "Skala potatisen, väg den råa ätliga mängden och skär den i lika stora bitar. Lägg i en kastrull med potatisens salt och 1500 ml vatten; koka upp."
+          },
+          {
+            "depends_on": [
+              "s13"
+            ],
+            "duration_minutes": 20,
+            "id": "s14",
+            "ingredient_keys": [
+              "potatis|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud potatisen cirka 20 minuter tills mjuk."
+          },
+          {
+            "depends_on": [
+              "s14"
+            ],
+            "duration_minutes": 2,
+            "id": "s15",
+            "ingredient_keys": [
+              "potatis|raw_edible",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Kontrollera med sticka att potatisen är mjuk, häll av saltat kokvatten och håll potatisen varm över 60 °C under lock."
+          },
+          {
+            "depends_on": [
+              "s15"
+            ],
+            "duration_minutes": 13,
+            "id": "s16",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "högrev|raw_edible",
+              "kryddpeppar|dry",
+              "salt|as_sold",
+              "smör|as_sold",
+              "svartpeppar|dry",
+              "ungnötslever|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Finhacka den kokta högreven och levern med kniv; mixa inte till pastej. Hacka löken och mjukstek i pölsans smör. Tillsätt malen kryddpeppar, svartpeppar och återstående salt."
+          },
+          {
+            "depends_on": [
+              "s16"
+            ],
+            "duration_minutes": 8,
+            "id": "s17",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "högrev|raw_edible",
+              "korngryn|dry",
+              "ungnötslever|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "100 ml",
+                100.0
+              ]
+            ],
+            "text": "Blanda kött, lök och gryn. Späd med högst 100 ml vatten till en fuktig, skedbar men fortfarande grynig pölsa. Hetta upp hela blandningen under omrörning."
+          },
+          {
+            "depends_on": [
+              "s17"
+            ],
+            "duration_minutes": 3,
+            "id": "s18",
+            "ingredient_keys": [
+              "högrev|raw_edible",
+              "korngryn|dry",
+              "potatis|raw_edible",
+              "rödbeta|raw_edible",
+              "ungnötslever|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Servera pölsan het med kokt potatis och avrunna rödbetor. Servera också hela den korta rödbetslagen om sådan ingår och allt smör från lökpannan."
+          }
+        ],
+        "total_minutes": 1728,
+        "unmeasured_processes": [
+          {
+            "description": "Hela leverns inköpsvikt föregår borttagning av grova hinnor och kärl. Putsförlusten är inte uppmätt.",
+            "ingredient_keys": [
+              "ungnötslever|as_sold"
+            ],
+            "operation": "trim_before_cooking",
+            "step_id": "s3"
+          },
+          {
+            "description": "Del av kokspadet kasseras efter kokning. Salt- och näringsöverföring till kasserad vätska är inte uppmätta; inga retentionsandelar antas.",
+            "ingredient_keys": [
+              "högrev|raw_edible",
+              "ungnötslever|as_sold",
+              "salt|as_sold"
+            ],
+            "operation": "drain_after_cooking",
+            "step_id": "s8"
+          },
+          {
+            "description": "Del av kokspadet kasseras efter kokning. Salt- och näringsöverföring till kasserad vätska är inte uppmätta; inga retentionsandelar antas.",
+            "ingredient_keys": [
+              "rödbeta|raw_edible"
+            ],
+            "operation": "drain_after_cooking",
+            "step_id": "s12"
+          },
+          {
+            "description": "Del av kokspadet kasseras efter kokning. Salt- och näringsöverföring till kasserad vätska är inte uppmätta; inga retentionsandelar antas.",
+            "ingredient_keys": [
+              "potatis|raw_edible",
+              "salt|as_sold"
+            ],
+            "operation": "drain_after_cooking",
+            "step_id": "s15"
+          }
+        ],
+        "variant_id": "simple",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 1645
+      },
+      "ingredients": [
+        {
+          "canonical_name": "högrev",
+          "component": "polsa",
+          "form": "raw_edible",
+          "name": "högrev",
+          "product_requirements": [
+            "pack:intake_all_expansion_e5f420f31672"
+          ],
+          "quantity": 500.0,
+          "quantity_max": 500.0,
+          "quantity_min": 500.0,
+          "quantity_step": 500.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ungnötslever",
+          "component": "polsa",
+          "form": "as_sold",
+          "name": "ungnötslever",
+          "product_requirements": [
+            "pack:intake_all_round2_20a3c4ecc9e6"
+          ],
+          "quantity": 250.0,
+          "quantity_max": 250.0,
+          "quantity_min": 250.0,
+          "quantity_step": 250.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "korngryn",
+          "component": "polsa",
+          "form": "dry",
+          "name": "korngryn",
+          "product_requirements": [
+            "pack:intake_all_bf4fc44e6bb9"
+          ],
+          "quantity": 200.0,
+          "quantity_max": 200.0,
+          "quantity_min": 200.0,
+          "quantity_step": 200.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "polsa",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 220.0,
+          "quantity_max": 220.0,
+          "quantity_min": 220.0,
+          "quantity_step": 220.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "smör",
+          "component": "polsa",
+          "form": "as_sold",
+          "name": "smör",
+          "product_requirements": [
+            "pack:intake_butter"
+          ],
+          "quantity": 30.0,
+          "quantity_max": 30.0,
+          "quantity_min": 30.0,
+          "quantity_step": 30.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kryddpeppar",
+          "component": "polsa",
+          "form": "dry",
+          "name": "kryddpeppar",
+          "product_requirements": [
+            "pack:intake_all_c412f28a0556"
+          ],
+          "quantity": 2.0,
+          "quantity_max": 2.0,
+          "quantity_min": 2.0,
+          "quantity_step": 2.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "polsa",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 8.0,
+          "quantity_max": 8.0,
+          "quantity_min": 8.0,
+          "quantity_step": 8.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "polsa",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rödbeta",
+          "component": "rodbeta",
+          "form": "raw_edible",
+          "name": "rödbeta",
+          "quantity": 400.0,
+          "quantity_max": 400.0,
+          "quantity_min": 400.0,
+          "quantity_step": 400.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "potatis",
+          "component": "potatis",
+          "form": "raw_edible",
+          "name": "potatis",
+          "quantity": 850.0,
+          "quantity_max": 850.0,
+          "quantity_min": 850.0,
+          "quantity_step": 850.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Väg högreven och den hela ungnötslevern före eventuell upptining. Lägg i separata täckta kärl i kylskåp vid cirka 4 °C. Behåll varje köttslags vätska till dess egen kokning.",
+        "Planera 24 timmars kylupptining för frysta produkter och följ förpackningen tills allt är helt tinat. Redan tinat kött behöver ingen upptining.",
+        "Väg ungnötslevern före putsning, skär bort grova hinnor och kärl och förvara kallt tills den ska kokas. Skär högreven i grova bitar. Lägg högreven med all dess upptiningssaft i gryta med 1700 ml vatten och hälften av pölsans salt. Koka upp; behåll skummet i spadet.",
+        "Sjud högreven under lock på låg värme cirka 60 minuter.",
+        "Kontrollera sjudningen och vätskan. Tillsätt högst 200 ml vatten om det behövs och lägg på locket igen.",
+        "Sjud högreven ytterligare cirka 60 minuter tills mör.",
+        "Kontrollera att högreven är mör och lätt kan delas; förläng sjudningen om det behövs. Lyft högreven till en skål. Skär den putsade ungnötslevern i jämna bitar och lägg med all leverns upptiningssaft i det sjudande spadet. Tillaga cirka 18 minuter, kontrollera att mitten når minst 75 °C och håll den temperaturen minst 3 minuter. Rengör redskap som varit i kontakt med rå lever.",
+        "Ta upp den genomkokta levern. Mät upp 900 ml vatten från köttkoket till korngrynen, utan att sila bort matbitar; späd med vanligt vatten om det saknas. Kasta återstående köttspad. Koka upp grynen i det uppmätta spadet. Förvara det kokta köttet och levern täckta och varmt över 60 °C tills blandningen är färdig.",
+        "Sjud korngrynen under lock cirka 40 minuter tills mjuka men med lite textur. Följ längre koktid på förpackningen vid behov.",
+        "Skala rödbetorna, väg den råa ätliga mängden och skär dem i små tärningar. Lägg i en kastrull med 700 ml vatten och koka upp.",
+        "Sjud rödbetorna cirka 25 minuter tills helt mjuka.",
+        "Kontrollera att rödbetorna är mjuka, häll av och kasta kokvattnet.",
+        "Skala potatisen, väg den råa ätliga mängden och skär den i lika stora bitar. Lägg i en kastrull med potatisens salt och 1500 ml vatten; koka upp.",
+        "Sjud potatisen cirka 20 minuter tills mjuk.",
+        "Kontrollera med sticka att potatisen är mjuk, häll av saltat kokvatten och håll potatisen varm över 60 °C under lock.",
+        "Finhacka den kokta högreven och levern med kniv; mixa inte till pastej. Hacka löken och mjukstek i pölsans smör. Tillsätt malen kryddpeppar, svartpeppar och återstående salt.",
+        "Blanda kött, lök och gryn. Späd med högst 100 ml vatten till en fuktig, skedbar men fortfarande grynig pölsa. Hetta upp hela blandningen under omrörning.",
+        "Servera pölsan het med kokt potatis och avrunna rödbetor. Servera också hela den korta rödbetslagen om sådan ingår och allt smör från lökpannan."
+      ],
+      "name": "Pölsa med potatis och rödbetor – enkel – med högrev och ungnötslever",
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 86,
+        "base_id": "smako-swedish-polsa",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "högrev|raw_edible",
+                "name": "högrev",
+                "note": "",
+                "quantity": 500.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ungnötslever|as_sold",
+                "name": "Ungnötslever i bit, vägd före putsning",
+                "note": "",
+                "quantity": 250.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "korngryn|dry",
+                "name": "korngryn",
+                "note": "",
+                "quantity": 200.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "gul lök",
+                "note": "",
+                "quantity": 220.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "smör|as_sold",
+                "name": "smör",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kryddpeppar|dry",
+                "name": "kryddpeppar",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 6.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "svartpeppar",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              }
+            ],
+            "id": "polsa",
+            "name": "Kött- och grynpölsa"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "rödbeta|raw_edible",
+                "name": "rödbeta",
+                "note": "",
+                "quantity": 400.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ättiksprit 12 procent|as_sold",
+                "name": "ättiksprit 12 procent",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "strösocker",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "g"
+              }
+            ],
+            "id": "rodbeta",
+            "name": "Rödbetstillbehör"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "potatis|raw_edible",
+                "name": "potatis",
+                "note": "",
+                "quantity": 850.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              }
+            ],
+            "id": "potatis",
+            "name": "Kokt potatis"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "swedish"
+        ],
+        "equipment": [
+          "stor gryta",
+          "två kastruller",
+          "kniv",
+          "stekpanna",
+          "termometer"
+        ],
+        "estimated_minutes": 1731,
+        "family": "pölsa",
+        "fish": false,
+        "flavor_profile": [
+          "kokt nötkött",
+          "lever",
+          "kryddpeppar"
+        ],
+        "ingredient_count": 10,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "pot",
+        "primary_ingredient": "högrev och ungnötslever",
+        "provenance": {
+          "notes": "Granskad pölsaversion med 500 g högrev i stället för nöthjärta och 250 g hel ungnötslever före putsning i stället för 250 g ätlig fläsklever. Det är nya insatser, inte lika ätlig mängd. Hela kött- och grynmängden serveras; putsning och kasserade kokspad ger okända förluster. Planera kylupptining för frysta produkter. Inte provlagad. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "potatis och rödbeta",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 2,
+            "id": "s1",
+            "ingredient_keys": [
+              "högrev|raw_edible",
+              "ungnötslever|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Väg högreven och den hela ungnötslevern före eventuell upptining. Lägg i separata täckta kärl i kylskåp vid cirka 4 °C. Behåll varje köttslags vätska till dess egen kokning."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 1440,
+            "id": "s2",
+            "ingredient_keys": [
+              "högrev|raw_edible",
+              "ungnötslever|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Planera 24 timmars kylupptining för frysta produkter och följ förpackningen tills allt är helt tinat. Redan tinat kött behöver ingen upptining."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 13,
+            "id": "s3",
+            "ingredient_keys": [
+              "högrev|raw_edible",
+              "salt|as_sold",
+              "ungnötslever|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "1700 ml",
+                1700.0
+              ]
+            ],
+            "text": "Väg ungnötslevern före putsning, skär bort grova hinnor och kärl och förvara kallt tills den ska kokas. Skär högreven i grova bitar. Lägg högreven med all dess upptiningssaft i gryta med 1700 ml vatten och hälften av pölsans salt. Koka upp; behåll skummet i spadet."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 60,
+            "id": "s4",
+            "ingredient_keys": [
+              "högrev|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud högreven under lock på låg värme cirka 60 minuter."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 2,
+            "id": "s5",
+            "ingredient_keys": [
+              "högrev|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "200 ml",
+                200.0
+              ]
+            ],
+            "text": "Kontrollera sjudningen och vätskan. Tillsätt högst 200 ml vatten om det behövs och lägg på locket igen."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 60,
+            "id": "s6",
+            "ingredient_keys": [
+              "högrev|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud högreven ytterligare cirka 60 minuter tills mör."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 21,
+            "id": "s7",
+            "ingredient_keys": [
+              "ungnötslever|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Kontrollera att högreven är mör och lätt kan delas; förläng sjudningen om det behövs. Lyft högreven till en skål. Skär den putsade ungnötslevern i jämna bitar och lägg med all leverns upptiningssaft i det sjudande spadet. Tillaga cirka 18 minuter, kontrollera att mitten når minst 75 °C och håll den temperaturen minst 3 minuter. Rengör redskap som varit i kontakt med rå lever."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 5,
+            "id": "s8",
+            "ingredient_keys": [
+              "högrev|raw_edible",
+              "korngryn|dry",
+              "salt|as_sold",
+              "ungnötslever|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "900 ml",
+                900.0
+              ]
+            ],
+            "text": "Ta upp den genomkokta levern. Mät upp 900 ml vatten från köttkoket till korngrynen, utan att sila bort matbitar; späd med vanligt vatten om det saknas. Kasta återstående köttspad. Koka upp grynen i det uppmätta spadet. Förvara det kokta köttet och levern täckta och varmt över 60 °C tills blandningen är färdig."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 40,
+            "id": "s9",
+            "ingredient_keys": [
+              "korngryn|dry"
+            ],
+            "parallel_group": null,
+            "text": "Sjud korngrynen under lock cirka 40 minuter tills mjuka men med lite textur. Följ längre koktid på förpackningen vid behov."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 6,
+            "id": "s10",
+            "ingredient_keys": [
+              "rödbeta|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "700 ml",
+                700.0
+              ]
+            ],
+            "text": "Skala rödbetorna, väg den råa ätliga mängden och skär dem i små tärningar. Lägg i en kastrull med 700 ml vatten och koka upp."
+          },
+          {
+            "depends_on": [
+              "s10"
+            ],
+            "duration_minutes": 25,
+            "id": "s11",
+            "ingredient_keys": [
+              "rödbeta|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud rödbetorna cirka 25 minuter tills helt mjuka."
+          },
+          {
+            "depends_on": [
+              "s11"
+            ],
+            "duration_minutes": 2,
+            "id": "s12",
+            "ingredient_keys": [
+              "rödbeta|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Kontrollera att rödbetorna är mjuka, häll av och kasta kokvattnet."
+          },
+          {
+            "depends_on": [
+              "s12"
+            ],
+            "duration_minutes": 3,
+            "id": "s13",
+            "ingredient_keys": [
+              "rödbeta|raw_edible",
+              "strösocker|dry",
+              "ättiksprit 12 procent|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "70 ml",
+                70.0
+              ]
+            ],
+            "text": "Blanda ättiksprit och socker med 70 ml vatten. Vänd ner rödbetorna och låt dra medan resten görs färdigt. Detta är för direkt servering, inte en hållbarhetsverifierad konserv."
+          },
+          {
+            "depends_on": [
+              "s13"
+            ],
+            "duration_minutes": 6,
+            "id": "s14",
+            "ingredient_keys": [
+              "potatis|raw_edible",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "1500 ml",
+                1500.0
+              ]
+            ],
+            "text": "Skala potatisen, väg den råa ätliga mängden och skär den i lika stora bitar. Lägg i en kastrull med potatisens salt och 1500 ml vatten; koka upp."
+          },
+          {
+            "depends_on": [
+              "s14"
+            ],
+            "duration_minutes": 20,
+            "id": "s15",
+            "ingredient_keys": [
+              "potatis|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud potatisen cirka 20 minuter tills mjuk."
+          },
+          {
+            "depends_on": [
+              "s15"
+            ],
+            "duration_minutes": 2,
+            "id": "s16",
+            "ingredient_keys": [
+              "potatis|raw_edible",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Kontrollera med sticka att potatisen är mjuk, häll av saltat kokvatten och håll potatisen varm över 60 °C under lock."
+          },
+          {
+            "depends_on": [
+              "s16"
+            ],
+            "duration_minutes": 13,
+            "id": "s17",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "högrev|raw_edible",
+              "kryddpeppar|dry",
+              "salt|as_sold",
+              "smör|as_sold",
+              "svartpeppar|dry",
+              "ungnötslever|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Finhacka den kokta högreven och levern med kniv; mixa inte till pastej. Hacka löken och mjukstek i pölsans smör. Tillsätt malen kryddpeppar, svartpeppar och återstående salt."
+          },
+          {
+            "depends_on": [
+              "s17"
+            ],
+            "duration_minutes": 8,
+            "id": "s18",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "högrev|raw_edible",
+              "korngryn|dry",
+              "ungnötslever|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "100 ml",
+                100.0
+              ]
+            ],
+            "text": "Blanda kött, lök och gryn. Späd med högst 100 ml vatten till en fuktig, skedbar men fortfarande grynig pölsa. Hetta upp hela blandningen under omrörning."
+          },
+          {
+            "depends_on": [
+              "s18"
+            ],
+            "duration_minutes": 3,
+            "id": "s19",
+            "ingredient_keys": [
+              "högrev|raw_edible",
+              "korngryn|dry",
+              "potatis|raw_edible",
+              "rödbeta|raw_edible",
+              "ungnötslever|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Servera pölsan het med kokt potatis och avrunna rödbetor. Servera också hela den korta rödbetslagen om sådan ingår och allt smör från lökpannan."
+          }
+        ],
+        "total_minutes": 1731,
+        "unmeasured_processes": [
+          {
+            "description": "Hela leverns inköpsvikt föregår borttagning av grova hinnor och kärl. Putsförlusten är inte uppmätt.",
+            "ingredient_keys": [
+              "ungnötslever|as_sold"
+            ],
+            "operation": "trim_before_cooking",
+            "step_id": "s3"
+          },
+          {
+            "description": "Del av kokspadet kasseras efter kokning. Salt- och näringsöverföring till kasserad vätska är inte uppmätta; inga retentionsandelar antas.",
+            "ingredient_keys": [
+              "högrev|raw_edible",
+              "ungnötslever|as_sold",
+              "salt|as_sold"
+            ],
+            "operation": "drain_after_cooking",
+            "step_id": "s8"
+          },
+          {
+            "description": "Del av kokspadet kasseras efter kokning. Salt- och näringsöverföring till kasserad vätska är inte uppmätta; inga retentionsandelar antas.",
+            "ingredient_keys": [
+              "rödbeta|raw_edible"
+            ],
+            "operation": "drain_after_cooking",
+            "step_id": "s12"
+          },
+          {
+            "description": "Del av kokspadet kasseras efter kokning. Salt- och näringsöverföring till kasserad vätska är inte uppmätta; inga retentionsandelar antas.",
+            "ingredient_keys": [
+              "potatis|raw_edible",
+              "salt|as_sold"
+            ],
+            "operation": "drain_after_cooking",
+            "step_id": "s16"
+          }
+        ],
+        "variant_id": "standard",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 1645
+      },
+      "ingredients": [
+        {
+          "canonical_name": "högrev",
+          "component": "polsa",
+          "form": "raw_edible",
+          "name": "högrev",
+          "product_requirements": [
+            "pack:intake_all_expansion_e5f420f31672"
+          ],
+          "quantity": 500.0,
+          "quantity_max": 500.0,
+          "quantity_min": 500.0,
+          "quantity_step": 500.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ungnötslever",
+          "component": "polsa",
+          "form": "as_sold",
+          "name": "ungnötslever",
+          "product_requirements": [
+            "pack:intake_all_round2_20a3c4ecc9e6"
+          ],
+          "quantity": 250.0,
+          "quantity_max": 250.0,
+          "quantity_min": 250.0,
+          "quantity_step": 250.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "korngryn",
+          "component": "polsa",
+          "form": "dry",
+          "name": "korngryn",
+          "product_requirements": [
+            "pack:intake_all_bf4fc44e6bb9"
+          ],
+          "quantity": 200.0,
+          "quantity_max": 200.0,
+          "quantity_min": 200.0,
+          "quantity_step": 200.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "polsa",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 220.0,
+          "quantity_max": 220.0,
+          "quantity_min": 220.0,
+          "quantity_step": 220.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "smör",
+          "component": "polsa",
+          "form": "as_sold",
+          "name": "smör",
+          "product_requirements": [
+            "pack:intake_butter"
+          ],
+          "quantity": 30.0,
+          "quantity_max": 30.0,
+          "quantity_min": 30.0,
+          "quantity_step": 30.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kryddpeppar",
+          "component": "polsa",
+          "form": "dry",
+          "name": "kryddpeppar",
+          "product_requirements": [
+            "pack:intake_all_c412f28a0556"
+          ],
+          "quantity": 2.0,
+          "quantity_max": 2.0,
+          "quantity_min": 2.0,
+          "quantity_step": 2.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "polsa",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 8.0,
+          "quantity_max": 8.0,
+          "quantity_min": 8.0,
+          "quantity_step": 8.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "polsa",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rödbeta",
+          "component": "rodbeta",
+          "form": "raw_edible",
+          "name": "rödbeta",
+          "quantity": 400.0,
+          "quantity_max": 400.0,
+          "quantity_min": 400.0,
+          "quantity_step": 400.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ättiksprit 12 procent",
+          "component": "rodbeta",
+          "form": "as_sold",
+          "name": "ättiksprit 12 procent",
+          "product_requirements": [
+            "pack:intake_all_expansion_e196d1ebe95c"
+          ],
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "strösocker",
+          "component": "rodbeta",
+          "form": "dry",
+          "name": "strösocker",
+          "product_requirements": [
+            "pack:sugar"
+          ],
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 25.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "potatis",
+          "component": "potatis",
+          "form": "raw_edible",
+          "name": "potatis",
+          "quantity": 850.0,
+          "quantity_max": 850.0,
+          "quantity_min": 850.0,
+          "quantity_step": 850.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Väg högreven och den hela ungnötslevern före eventuell upptining. Lägg i separata täckta kärl i kylskåp vid cirka 4 °C. Behåll varje köttslags vätska till dess egen kokning.",
+        "Planera 24 timmars kylupptining för frysta produkter och följ förpackningen tills allt är helt tinat. Redan tinat kött behöver ingen upptining.",
+        "Väg ungnötslevern före putsning, skär bort grova hinnor och kärl och förvara kallt tills den ska kokas. Skär högreven i grova bitar. Lägg högreven med all dess upptiningssaft i gryta med 1700 ml vatten och hälften av pölsans salt. Koka upp; behåll skummet i spadet.",
+        "Sjud högreven under lock på låg värme cirka 60 minuter.",
+        "Kontrollera sjudningen och vätskan. Tillsätt högst 200 ml vatten om det behövs och lägg på locket igen.",
+        "Sjud högreven ytterligare cirka 60 minuter tills mör.",
+        "Kontrollera att högreven är mör och lätt kan delas; förläng sjudningen om det behövs. Lyft högreven till en skål. Skär den putsade ungnötslevern i jämna bitar och lägg med all leverns upptiningssaft i det sjudande spadet. Tillaga cirka 18 minuter, kontrollera att mitten når minst 75 °C och håll den temperaturen minst 3 minuter. Rengör redskap som varit i kontakt med rå lever.",
+        "Ta upp den genomkokta levern. Mät upp 900 ml vatten från köttkoket till korngrynen, utan att sila bort matbitar; späd med vanligt vatten om det saknas. Kasta återstående köttspad. Koka upp grynen i det uppmätta spadet. Förvara det kokta köttet och levern täckta och varmt över 60 °C tills blandningen är färdig.",
+        "Sjud korngrynen under lock cirka 40 minuter tills mjuka men med lite textur. Följ längre koktid på förpackningen vid behov.",
+        "Skala rödbetorna, väg den råa ätliga mängden och skär dem i små tärningar. Lägg i en kastrull med 700 ml vatten och koka upp.",
+        "Sjud rödbetorna cirka 25 minuter tills helt mjuka.",
+        "Kontrollera att rödbetorna är mjuka, häll av och kasta kokvattnet.",
+        "Blanda ättiksprit och socker med 70 ml vatten. Vänd ner rödbetorna och låt dra medan resten görs färdigt. Detta är för direkt servering, inte en hållbarhetsverifierad konserv.",
+        "Skala potatisen, väg den råa ätliga mängden och skär den i lika stora bitar. Lägg i en kastrull med potatisens salt och 1500 ml vatten; koka upp.",
+        "Sjud potatisen cirka 20 minuter tills mjuk.",
+        "Kontrollera med sticka att potatisen är mjuk, häll av saltat kokvatten och håll potatisen varm över 60 °C under lock.",
+        "Finhacka den kokta högreven och levern med kniv; mixa inte till pastej. Hacka löken och mjukstek i pölsans smör. Tillsätt malen kryddpeppar, svartpeppar och återstående salt.",
+        "Blanda kött, lök och gryn. Späd med högst 100 ml vatten till en fuktig, skedbar men fortfarande grynig pölsa. Hetta upp hela blandningen under omrörning.",
+        "Servera pölsan het med kokt potatis och avrunna rödbetor. Servera också hela den korta rödbetslagen om sådan ingår och allt smör från lökpannan."
+      ],
+      "name": "Pölsa med potatis och rödbetor – standard – med högrev och ungnötslever",
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 93,
+        "base_id": "smako-swedish-polsa",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "högrev|raw_edible",
+                "name": "högrev",
+                "note": "",
+                "quantity": 500.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ungnötslever|as_sold",
+                "name": "Ungnötslever i bit, vägd före putsning",
+                "note": "",
+                "quantity": 250.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "korngryn|dry",
+                "name": "korngryn",
+                "note": "",
+                "quantity": 200.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "gul lök",
+                "note": "",
+                "quantity": 220.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "smör|as_sold",
+                "name": "smör",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kryddpeppar|dry",
+                "name": "kryddpeppar",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 6.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "svartpeppar",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              }
+            ],
+            "id": "polsa",
+            "name": "Kött- och grynpölsa"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "rödbeta|raw_edible",
+                "name": "rödbeta",
+                "note": "",
+                "quantity": 400.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ättiksprit 12 procent|as_sold",
+                "name": "ättiksprit 12 procent",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "strösocker",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "g"
+              }
+            ],
+            "id": "rodbeta",
+            "name": "Rödbetstillbehör"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ägg|raw_edible",
+                "name": "ägg",
+                "note": "",
+                "quantity": 200.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "smör|as_sold",
+                "name": "smör",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "senap|as_sold",
+                "name": "senap",
+                "note": "",
+                "quantity": 35.0,
+                "unit": "g"
+              }
+            ],
+            "id": "agg",
+            "name": "Stekt ägg och senap"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "potatis|raw_edible",
+                "name": "potatis",
+                "note": "",
+                "quantity": 850.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              }
+            ],
+            "id": "potatis",
+            "name": "Kokt potatis"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "swedish"
+        ],
+        "equipment": [
+          "stor gryta",
+          "två kastruller",
+          "kniv",
+          "stekpanna",
+          "termometer"
+        ],
+        "estimated_minutes": 1738,
+        "family": "pölsa",
+        "fish": false,
+        "flavor_profile": [
+          "kokt nötkött",
+          "lever",
+          "kryddpeppar"
+        ],
+        "ingredient_count": 12,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "pot",
+        "primary_ingredient": "högrev och ungnötslever",
+        "provenance": {
+          "notes": "Granskad pölsaversion med 500 g högrev i stället för nöthjärta och 250 g hel ungnötslever före putsning i stället för 250 g ätlig fläsklever. Det är nya insatser, inte lika ätlig mängd. Hela kött- och grynmängden serveras; putsning och kasserade kokspad ger okända förluster. Planera kylupptining för frysta produkter. Inte provlagad. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "potatis och rödbeta",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 2,
+            "id": "s1",
+            "ingredient_keys": [
+              "högrev|raw_edible",
+              "ungnötslever|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Väg högreven och den hela ungnötslevern före eventuell upptining. Lägg i separata täckta kärl i kylskåp vid cirka 4 °C. Behåll varje köttslags vätska till dess egen kokning."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 1440,
+            "id": "s2",
+            "ingredient_keys": [
+              "högrev|raw_edible",
+              "ungnötslever|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Planera 24 timmars kylupptining för frysta produkter och följ förpackningen tills allt är helt tinat. Redan tinat kött behöver ingen upptining."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 13,
+            "id": "s3",
+            "ingredient_keys": [
+              "högrev|raw_edible",
+              "salt|as_sold",
+              "ungnötslever|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "1700 ml",
+                1700.0
+              ]
+            ],
+            "text": "Väg ungnötslevern före putsning, skär bort grova hinnor och kärl och förvara kallt tills den ska kokas. Skär högreven i grova bitar. Lägg högreven med all dess upptiningssaft i gryta med 1700 ml vatten och hälften av pölsans salt. Koka upp; behåll skummet i spadet."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 60,
+            "id": "s4",
+            "ingredient_keys": [
+              "högrev|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud högreven under lock på låg värme cirka 60 minuter."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 2,
+            "id": "s5",
+            "ingredient_keys": [
+              "högrev|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "200 ml",
+                200.0
+              ]
+            ],
+            "text": "Kontrollera sjudningen och vätskan. Tillsätt högst 200 ml vatten om det behövs och lägg på locket igen."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 60,
+            "id": "s6",
+            "ingredient_keys": [
+              "högrev|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud högreven ytterligare cirka 60 minuter tills mör."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 21,
+            "id": "s7",
+            "ingredient_keys": [
+              "ungnötslever|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Kontrollera att högreven är mör och lätt kan delas; förläng sjudningen om det behövs. Lyft högreven till en skål. Skär den putsade ungnötslevern i jämna bitar och lägg med all leverns upptiningssaft i det sjudande spadet. Tillaga cirka 18 minuter, kontrollera att mitten når minst 75 °C och håll den temperaturen minst 3 minuter. Rengör redskap som varit i kontakt med rå lever."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 5,
+            "id": "s8",
+            "ingredient_keys": [
+              "högrev|raw_edible",
+              "korngryn|dry",
+              "salt|as_sold",
+              "ungnötslever|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "900 ml",
+                900.0
+              ]
+            ],
+            "text": "Ta upp den genomkokta levern. Mät upp 900 ml vatten från köttkoket till korngrynen, utan att sila bort matbitar; späd med vanligt vatten om det saknas. Kasta återstående köttspad. Koka upp grynen i det uppmätta spadet. Förvara det kokta köttet och levern täckta och varmt över 60 °C tills blandningen är färdig."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 40,
+            "id": "s9",
+            "ingredient_keys": [
+              "korngryn|dry"
+            ],
+            "parallel_group": null,
+            "text": "Sjud korngrynen under lock cirka 40 minuter tills mjuka men med lite textur. Följ längre koktid på förpackningen vid behov."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 6,
+            "id": "s10",
+            "ingredient_keys": [
+              "rödbeta|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "700 ml",
+                700.0
+              ]
+            ],
+            "text": "Skala rödbetorna, väg den råa ätliga mängden och skär dem i små tärningar. Lägg i en kastrull med 700 ml vatten och koka upp."
+          },
+          {
+            "depends_on": [
+              "s10"
+            ],
+            "duration_minutes": 25,
+            "id": "s11",
+            "ingredient_keys": [
+              "rödbeta|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud rödbetorna cirka 25 minuter tills helt mjuka."
+          },
+          {
+            "depends_on": [
+              "s11"
+            ],
+            "duration_minutes": 2,
+            "id": "s12",
+            "ingredient_keys": [
+              "rödbeta|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Kontrollera att rödbetorna är mjuka, häll av och kasta kokvattnet."
+          },
+          {
+            "depends_on": [
+              "s12"
+            ],
+            "duration_minutes": 3,
+            "id": "s13",
+            "ingredient_keys": [
+              "rödbeta|raw_edible",
+              "strösocker|dry",
+              "ättiksprit 12 procent|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "70 ml",
+                70.0
+              ]
+            ],
+            "text": "Blanda ättiksprit och socker med 70 ml vatten. Vänd ner rödbetorna och låt dra medan resten görs färdigt. Detta är för direkt servering, inte en hållbarhetsverifierad konserv."
+          },
+          {
+            "depends_on": [
+              "s13"
+            ],
+            "duration_minutes": 6,
+            "id": "s14",
+            "ingredient_keys": [
+              "potatis|raw_edible",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "1500 ml",
+                1500.0
+              ]
+            ],
+            "text": "Skala potatisen, väg den råa ätliga mängden och skär den i lika stora bitar. Lägg i en kastrull med potatisens salt och 1500 ml vatten; koka upp."
+          },
+          {
+            "depends_on": [
+              "s14"
+            ],
+            "duration_minutes": 20,
+            "id": "s15",
+            "ingredient_keys": [
+              "potatis|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud potatisen cirka 20 minuter tills mjuk."
+          },
+          {
+            "depends_on": [
+              "s15"
+            ],
+            "duration_minutes": 2,
+            "id": "s16",
+            "ingredient_keys": [
+              "potatis|raw_edible",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Kontrollera med sticka att potatisen är mjuk, häll av saltat kokvatten och håll potatisen varm över 60 °C under lock."
+          },
+          {
+            "depends_on": [
+              "s16"
+            ],
+            "duration_minutes": 13,
+            "id": "s17",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "högrev|raw_edible",
+              "kryddpeppar|dry",
+              "salt|as_sold",
+              "smör|as_sold",
+              "svartpeppar|dry",
+              "ungnötslever|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Finhacka den kokta högreven och levern med kniv; mixa inte till pastej. Hacka löken och mjukstek i pölsans smör. Tillsätt malen kryddpeppar, svartpeppar och återstående salt."
+          },
+          {
+            "depends_on": [
+              "s17"
+            ],
+            "duration_minutes": 8,
+            "id": "s18",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "högrev|raw_edible",
+              "korngryn|dry",
+              "ungnötslever|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "100 ml",
+                100.0
+              ]
+            ],
+            "text": "Blanda kött, lök och gryn. Späd med högst 100 ml vatten till en fuktig, skedbar men fortfarande grynig pölsa. Hetta upp hela blandningen under omrörning."
+          },
+          {
+            "depends_on": [
+              "s18"
+            ],
+            "duration_minutes": 7,
+            "id": "s19",
+            "ingredient_keys": [
+              "smör|as_sold",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Knäck äggen, väg den råa ätliga mängden utan skal och stek portionsvis i äggkomponentens smör tills både vita och gula är satta. Servera allt äggsmör."
+          },
+          {
+            "depends_on": [
+              "s19"
+            ],
+            "duration_minutes": 3,
+            "id": "s20",
+            "ingredient_keys": [
+              "högrev|raw_edible",
+              "korngryn|dry",
+              "potatis|raw_edible",
+              "rödbeta|raw_edible",
+              "senap|as_sold",
+              "ungnötslever|as_sold",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Servera pölsan het med kokt potatis och avrunna rödbetor samt stekt ägg och senap. Servera också hela den korta rödbetslagen om sådan ingår och allt smör från lökpannan."
+          }
+        ],
+        "total_minutes": 1738,
+        "unmeasured_processes": [
+          {
+            "description": "Hela leverns inköpsvikt föregår borttagning av grova hinnor och kärl. Putsförlusten är inte uppmätt.",
+            "ingredient_keys": [
+              "ungnötslever|as_sold"
+            ],
+            "operation": "trim_before_cooking",
+            "step_id": "s3"
+          },
+          {
+            "description": "Del av kokspadet kasseras efter kokning. Salt- och näringsöverföring till kasserad vätska är inte uppmätta; inga retentionsandelar antas.",
+            "ingredient_keys": [
+              "högrev|raw_edible",
+              "ungnötslever|as_sold",
+              "salt|as_sold"
+            ],
+            "operation": "drain_after_cooking",
+            "step_id": "s8"
+          },
+          {
+            "description": "Del av kokspadet kasseras efter kokning. Salt- och näringsöverföring till kasserad vätska är inte uppmätta; inga retentionsandelar antas.",
+            "ingredient_keys": [
+              "rödbeta|raw_edible"
+            ],
+            "operation": "drain_after_cooking",
+            "step_id": "s12"
+          },
+          {
+            "description": "Del av kokspadet kasseras efter kokning. Salt- och näringsöverföring till kasserad vätska är inte uppmätta; inga retentionsandelar antas.",
+            "ingredient_keys": [
+              "potatis|raw_edible",
+              "salt|as_sold"
+            ],
+            "operation": "drain_after_cooking",
+            "step_id": "s16"
+          }
+        ],
+        "variant_id": "extended",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 1645
+      },
+      "ingredients": [
+        {
+          "canonical_name": "högrev",
+          "component": "polsa",
+          "form": "raw_edible",
+          "name": "högrev",
+          "product_requirements": [
+            "pack:intake_all_expansion_e5f420f31672"
+          ],
+          "quantity": 500.0,
+          "quantity_max": 500.0,
+          "quantity_min": 500.0,
+          "quantity_step": 500.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ungnötslever",
+          "component": "polsa",
+          "form": "as_sold",
+          "name": "ungnötslever",
+          "product_requirements": [
+            "pack:intake_all_round2_20a3c4ecc9e6"
+          ],
+          "quantity": 250.0,
+          "quantity_max": 250.0,
+          "quantity_min": 250.0,
+          "quantity_step": 250.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "korngryn",
+          "component": "polsa",
+          "form": "dry",
+          "name": "korngryn",
+          "product_requirements": [
+            "pack:intake_all_bf4fc44e6bb9"
+          ],
+          "quantity": 200.0,
+          "quantity_max": 200.0,
+          "quantity_min": 200.0,
+          "quantity_step": 200.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "polsa",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 220.0,
+          "quantity_max": 220.0,
+          "quantity_min": 220.0,
+          "quantity_step": 220.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "smör",
+          "component": "polsa",
+          "form": "as_sold",
+          "name": "smör",
+          "product_requirements": [
+            "pack:intake_butter"
+          ],
+          "quantity": 45.0,
+          "quantity_max": 45.0,
+          "quantity_min": 45.0,
+          "quantity_step": 45.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kryddpeppar",
+          "component": "polsa",
+          "form": "dry",
+          "name": "kryddpeppar",
+          "product_requirements": [
+            "pack:intake_all_c412f28a0556"
+          ],
+          "quantity": 2.0,
+          "quantity_max": 2.0,
+          "quantity_min": 2.0,
+          "quantity_step": 2.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "polsa",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 8.0,
+          "quantity_max": 8.0,
+          "quantity_min": 8.0,
+          "quantity_step": 8.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "polsa",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rödbeta",
+          "component": "rodbeta",
+          "form": "raw_edible",
+          "name": "rödbeta",
+          "quantity": 400.0,
+          "quantity_max": 400.0,
+          "quantity_min": 400.0,
+          "quantity_step": 400.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ättiksprit 12 procent",
+          "component": "rodbeta",
+          "form": "as_sold",
+          "name": "ättiksprit 12 procent",
+          "product_requirements": [
+            "pack:intake_all_expansion_e196d1ebe95c"
+          ],
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "strösocker",
+          "component": "rodbeta",
+          "form": "dry",
+          "name": "strösocker",
+          "product_requirements": [
+            "pack:sugar"
+          ],
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 25.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ägg",
+          "component": "agg",
+          "form": "raw_edible",
+          "name": "ägg",
+          "product_requirements": [
+            "pack:egg"
+          ],
+          "quantity": 200.0,
+          "quantity_max": 200.0,
+          "quantity_min": 200.0,
+          "quantity_step": 200.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "senap",
+          "component": "agg",
+          "form": "as_sold",
+          "name": "senap",
+          "quantity": 35.0,
+          "quantity_max": 35.0,
+          "quantity_min": 35.0,
+          "quantity_step": 35.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "potatis",
+          "component": "potatis",
+          "form": "raw_edible",
+          "name": "potatis",
+          "quantity": 850.0,
+          "quantity_max": 850.0,
+          "quantity_min": 850.0,
+          "quantity_step": 850.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Väg högreven och den hela ungnötslevern före eventuell upptining. Lägg i separata täckta kärl i kylskåp vid cirka 4 °C. Behåll varje köttslags vätska till dess egen kokning.",
+        "Planera 24 timmars kylupptining för frysta produkter och följ förpackningen tills allt är helt tinat. Redan tinat kött behöver ingen upptining.",
+        "Väg ungnötslevern före putsning, skär bort grova hinnor och kärl och förvara kallt tills den ska kokas. Skär högreven i grova bitar. Lägg högreven med all dess upptiningssaft i gryta med 1700 ml vatten och hälften av pölsans salt. Koka upp; behåll skummet i spadet.",
+        "Sjud högreven under lock på låg värme cirka 60 minuter.",
+        "Kontrollera sjudningen och vätskan. Tillsätt högst 200 ml vatten om det behövs och lägg på locket igen.",
+        "Sjud högreven ytterligare cirka 60 minuter tills mör.",
+        "Kontrollera att högreven är mör och lätt kan delas; förläng sjudningen om det behövs. Lyft högreven till en skål. Skär den putsade ungnötslevern i jämna bitar och lägg med all leverns upptiningssaft i det sjudande spadet. Tillaga cirka 18 minuter, kontrollera att mitten når minst 75 °C och håll den temperaturen minst 3 minuter. Rengör redskap som varit i kontakt med rå lever.",
+        "Ta upp den genomkokta levern. Mät upp 900 ml vatten från köttkoket till korngrynen, utan att sila bort matbitar; späd med vanligt vatten om det saknas. Kasta återstående köttspad. Koka upp grynen i det uppmätta spadet. Förvara det kokta köttet och levern täckta och varmt över 60 °C tills blandningen är färdig.",
+        "Sjud korngrynen under lock cirka 40 minuter tills mjuka men med lite textur. Följ längre koktid på förpackningen vid behov.",
+        "Skala rödbetorna, väg den råa ätliga mängden och skär dem i små tärningar. Lägg i en kastrull med 700 ml vatten och koka upp.",
+        "Sjud rödbetorna cirka 25 minuter tills helt mjuka.",
+        "Kontrollera att rödbetorna är mjuka, häll av och kasta kokvattnet.",
+        "Blanda ättiksprit och socker med 70 ml vatten. Vänd ner rödbetorna och låt dra medan resten görs färdigt. Detta är för direkt servering, inte en hållbarhetsverifierad konserv.",
+        "Skala potatisen, väg den råa ätliga mängden och skär den i lika stora bitar. Lägg i en kastrull med potatisens salt och 1500 ml vatten; koka upp.",
+        "Sjud potatisen cirka 20 minuter tills mjuk.",
+        "Kontrollera med sticka att potatisen är mjuk, häll av saltat kokvatten och håll potatisen varm över 60 °C under lock.",
+        "Finhacka den kokta högreven och levern med kniv; mixa inte till pastej. Hacka löken och mjukstek i pölsans smör. Tillsätt malen kryddpeppar, svartpeppar och återstående salt.",
+        "Blanda kött, lök och gryn. Späd med högst 100 ml vatten till en fuktig, skedbar men fortfarande grynig pölsa. Hetta upp hela blandningen under omrörning.",
+        "Knäck äggen, väg den råa ätliga mängden utan skal och stek portionsvis i äggkomponentens smör tills både vita och gula är satta. Servera allt äggsmör.",
+        "Servera pölsan het med kokt potatis och avrunna rödbetor samt stekt ägg och senap. Servera också hela den korta rödbetslagen om sådan ingår och allt smör från lökpannan."
+      ],
+      "name": "Pölsa med potatis och rödbetor – utökad – med högrev och ungnötslever",
+      "servings": 4
+    }
+  ],
+  "schema_version": "smako-meal-pack-v1"
+}

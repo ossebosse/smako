@@ -1,0 +1,1720 @@
+{
+  "library_version": "smako-meal-pack-v1",
+  "recipes": [
+    {
+      "design": {
+        "active_minutes": 28,
+        "base_id": "smako-greek-tsigariasto-get",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "lammkött|raw_edible",
+                "name": "Benfritt lammkött för långkok, rå ätlig vikt",
+                "note": "",
+                "quantity": 850.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "olivolja|as_sold",
+                "name": "Olivolja",
+                "note": "",
+                "quantity": 35.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "Svartpeppar",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              }
+            ],
+            "id": "get",
+            "name": "Getkött"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "bröd|as_sold",
+                "name": "Bröd",
+                "note": "",
+                "quantity": 320.0,
+                "unit": "g"
+              }
+            ],
+            "id": "brod",
+            "name": "Bröd till spadet"
+          }
+        ],
+        "content_sha256": "53e14a586f20dfa05e81b03a33ede9352a77a6eabd77d04df917210146b1713d",
+        "content_source": {
+          "active_minutes": 28,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "reviewed-expansion-round2-stage27",
+          "priority": 1,
+          "proposal_id": "smako-greek-tsigariasto-get",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "cbf873b82c6369e835c718e44d8c33e91dfe4a55ab620857850710c65d270fa8",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "greek"
+        ],
+        "equipment": [
+          "tjockbottnad gryta med tätt lock"
+        ],
+        "estimated_minutes": 148,
+        "family": "Tsigariasto",
+        "fish": false,
+        "flavor_profile": [
+          "getkött",
+          "olivolja"
+        ],
+        "ingredient_count": 3,
+        "method": "pot",
+        "primary_ingredient": "lammkött",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Granskad version med benfritt lamm i stället för get. Rå ätlig köttmängd anges efter eventuell putsning; ingen benandel eller kokförlust har antagits. Inte provlagad; tider är författaruppskattningar och mörheten avgör faktisk koktid. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "bröd",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 15,
+            "id": "s1",
+            "ingredient_keys": [
+              "lammkött|raw_edible",
+              "olivolja|as_sold",
+              "salt|as_sold",
+              "svartpeppar|dry"
+            ],
+            "parallel_group": null,
+            "text": "Putsa bort grova senor vid behov, väg därefter angiven rå ätlig mängd benfritt lamm och skär i cirka 4 cm stora bitar. Salta och peppra. Hetta upp oljan och bryn köttet i två omgångar i samma gryta."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 2,
+            "id": "s2",
+            "ingredient_keys": [
+              "lammkött|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sänk till mycket låg värme och sätt på tätt lock. Köttet ska långsamt släppa eget spad; detta är inte en vattenfylld gryta."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 20,
+            "id": "s3",
+            "ingredient_keys": [
+              "lammkött|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Låt köttet tillagas under tätt lock på mycket låg värme i 20 minuter."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 1,
+            "id": "s4",
+            "ingredient_keys": [
+              "lammkött|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "30 ml",
+                30.0
+              ]
+            ],
+            "text": "Vänd köttet och kontrollera bottnen. Sänk värmen om det steker torrt; tillsätt endast vid behov 30 ml vatten så det inte bränner. Köttet ska tillagas i lite eget spad, inte täckas av vatten."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 20,
+            "id": "s5",
+            "ingredient_keys": [
+              "lammkött|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Låt köttet tillagas under tätt lock på mycket låg värme i 20 minuter."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 1,
+            "id": "s6",
+            "ingredient_keys": [
+              "lammkött|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "30 ml",
+                30.0
+              ]
+            ],
+            "text": "Vänd köttet och kontrollera bottnen. Sänk värmen om det steker torrt; tillsätt endast vid behov 30 ml vatten så det inte bränner. Köttet ska tillagas i lite eget spad, inte täckas av vatten."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 20,
+            "id": "s7",
+            "ingredient_keys": [
+              "lammkött|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Låt köttet tillagas under tätt lock på mycket låg värme i 20 minuter."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 1,
+            "id": "s8",
+            "ingredient_keys": [
+              "lammkött|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "30 ml",
+                30.0
+              ]
+            ],
+            "text": "Vänd köttet och kontrollera bottnen. Sänk värmen om det steker torrt; tillsätt endast vid behov 30 ml vatten så det inte bränner. Köttet ska tillagas i lite eget spad, inte täckas av vatten."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 20,
+            "id": "s9",
+            "ingredient_keys": [
+              "lammkött|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Låt köttet tillagas under tätt lock på mycket låg värme i 20 minuter."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 1,
+            "id": "s10",
+            "ingredient_keys": [
+              "lammkött|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "30 ml",
+                30.0
+              ]
+            ],
+            "text": "Vänd köttet och kontrollera bottnen. Sänk värmen om det steker torrt; tillsätt endast vid behov 30 ml vatten så det inte bränner. Köttet ska tillagas i lite eget spad, inte täckas av vatten."
+          },
+          {
+            "depends_on": [
+              "s10"
+            ],
+            "duration_minutes": 20,
+            "id": "s11",
+            "ingredient_keys": [
+              "lammkött|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Låt köttet tillagas under tätt lock på mycket låg värme i 20 minuter."
+          },
+          {
+            "depends_on": [
+              "s11"
+            ],
+            "duration_minutes": 1,
+            "id": "s12",
+            "ingredient_keys": [
+              "lammkött|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "30 ml",
+                30.0
+              ]
+            ],
+            "text": "Vänd köttet och kontrollera bottnen. Sänk värmen om det steker torrt; tillsätt endast vid behov 30 ml vatten så det inte bränner. Köttet ska tillagas i lite eget spad, inte täckas av vatten."
+          },
+          {
+            "depends_on": [
+              "s12"
+            ],
+            "duration_minutes": 20,
+            "id": "s13",
+            "ingredient_keys": [
+              "lammkött|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Låt köttet tillagas under tätt lock på mycket låg värme i 20 minuter."
+          },
+          {
+            "depends_on": [
+              "s13"
+            ],
+            "duration_minutes": 1,
+            "id": "s14",
+            "ingredient_keys": [
+              "lammkött|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "30 ml",
+                30.0
+              ]
+            ],
+            "text": "Vänd köttet och kontrollera bottnen. Sänk värmen om det steker torrt; tillsätt endast vid behov 30 ml vatten så det inte bränner. Köttet ska tillagas i lite eget spad, inte täckas av vatten."
+          },
+          {
+            "depends_on": [
+              "s14"
+            ],
+            "duration_minutes": 2,
+            "id": "s15",
+            "ingredient_keys": [
+              "lammkött|raw_edible",
+              "olivolja|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Kontrollera att köttet är genomlagat och mycket mört. Förläng tillagningen vid behov med fortsatt tillsyn. Servera allt fett och det koncentrerade spadet."
+          },
+          {
+            "depends_on": [
+              "s15"
+            ],
+            "duration_minutes": 3,
+            "id": "s16",
+            "ingredient_keys": [
+              "bröd|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Skär brödet och servera till köttet och dess spad. Väg den angivna brödmängden och behåll hela salladens saft om sallad ingår."
+          }
+        ],
+        "total_minutes": 148,
+        "variant_id": "simple",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 120
+      },
+      "ingredients": [
+        {
+          "canonical_name": "lammkött",
+          "component": "get",
+          "form": "raw_edible",
+          "name": "lammkött",
+          "product_requirements": [
+            "pack:intake_all_f5b22d7b2487",
+            "pack:lamb_braising_cut"
+          ],
+          "quantity": 850.0,
+          "quantity_max": 850.0,
+          "quantity_min": 850.0,
+          "quantity_step": 850.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "olivolja",
+          "component": "get",
+          "form": "as_sold",
+          "name": "olivolja",
+          "product_requirements": [
+            "pack:intake_all_expansion_86ac9b2c5ae6"
+          ],
+          "quantity": 35.0,
+          "quantity_max": 35.0,
+          "quantity_min": 35.0,
+          "quantity_step": 35.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "get",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "get",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "bröd",
+          "component": "brod",
+          "form": "as_sold",
+          "name": "bröd",
+          "quantity": 320.0,
+          "quantity_max": 320.0,
+          "quantity_min": 320.0,
+          "quantity_step": 320.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Putsa bort grova senor vid behov, väg därefter angiven rå ätlig mängd benfritt lamm och skär i cirka 4 cm stora bitar. Salta och peppra. Hetta upp oljan och bryn köttet i två omgångar i samma gryta.",
+        "Sänk till mycket låg värme och sätt på tätt lock. Köttet ska långsamt släppa eget spad; detta är inte en vattenfylld gryta.",
+        "Låt köttet tillagas under tätt lock på mycket låg värme i 20 minuter.",
+        "Vänd köttet och kontrollera bottnen. Sänk värmen om det steker torrt; tillsätt endast vid behov 30 ml vatten så det inte bränner. Köttet ska tillagas i lite eget spad, inte täckas av vatten.",
+        "Låt köttet tillagas under tätt lock på mycket låg värme i 20 minuter.",
+        "Vänd köttet och kontrollera bottnen. Sänk värmen om det steker torrt; tillsätt endast vid behov 30 ml vatten så det inte bränner. Köttet ska tillagas i lite eget spad, inte täckas av vatten.",
+        "Låt köttet tillagas under tätt lock på mycket låg värme i 20 minuter.",
+        "Vänd köttet och kontrollera bottnen. Sänk värmen om det steker torrt; tillsätt endast vid behov 30 ml vatten så det inte bränner. Köttet ska tillagas i lite eget spad, inte täckas av vatten.",
+        "Låt köttet tillagas under tätt lock på mycket låg värme i 20 minuter.",
+        "Vänd köttet och kontrollera bottnen. Sänk värmen om det steker torrt; tillsätt endast vid behov 30 ml vatten så det inte bränner. Köttet ska tillagas i lite eget spad, inte täckas av vatten.",
+        "Låt köttet tillagas under tätt lock på mycket låg värme i 20 minuter.",
+        "Vänd köttet och kontrollera bottnen. Sänk värmen om det steker torrt; tillsätt endast vid behov 30 ml vatten så det inte bränner. Köttet ska tillagas i lite eget spad, inte täckas av vatten.",
+        "Låt köttet tillagas under tätt lock på mycket låg värme i 20 minuter.",
+        "Vänd köttet och kontrollera bottnen. Sänk värmen om det steker torrt; tillsätt endast vid behov 30 ml vatten så det inte bränner. Köttet ska tillagas i lite eget spad, inte täckas av vatten.",
+        "Kontrollera att köttet är genomlagat och mycket mört. Förläng tillagningen vid behov med fortsatt tillsyn. Servera allt fett och det koncentrerade spadet.",
+        "Skär brödet och servera till köttet och dess spad. Väg den angivna brödmängden och behåll hela salladens saft om sallad ingår."
+      ],
+      "name": "Tsigariasto – lammkött i eget spad – långkok i eget spad",
+      "preparation": {
+        "family": "Tsigariasto",
+        "input_forms": {
+          "bröd": "as_sold",
+          "lammkött": "raw_edible",
+          "olivolja": "as_sold",
+          "salt": "as_sold",
+          "svartpeppar": "dry"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "53e14a586f20dfa05e81b03a33ede9352a77a6eabd77d04df917210146b1713d",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 37,
+        "base_id": "smako-greek-tsigariasto-get",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "lammkött|raw_edible",
+                "name": "Benfritt lammkött för långkok, rå ätlig vikt",
+                "note": "",
+                "quantity": 850.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "olivolja|as_sold",
+                "name": "Olivolja",
+                "note": "",
+                "quantity": 35.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "Svartpeppar",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitt matlagningsvin|as_sold",
+                "name": "vitt matlagningsvin",
+                "note": "",
+                "quantity": 150.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "Gul lök",
+                "note": "",
+                "quantity": 180.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "Vitlök",
+                "note": "",
+                "quantity": 12.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "citronjuice|as_sold",
+                "name": "Citronjuice",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "oregano|dry",
+                "name": "Oregano",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              }
+            ],
+            "id": "get",
+            "name": "Getkött"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "bröd|as_sold",
+                "name": "Bröd",
+                "note": "",
+                "quantity": 320.0,
+                "unit": "g"
+              }
+            ],
+            "id": "brod",
+            "name": "Bröd till spadet"
+          }
+        ],
+        "content_sha256": "fb658b147c16a56e4d4d479eb5093777161355fd275561c9e8d2bb9f0121ec7c",
+        "content_source": {
+          "active_minutes": 37,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "reviewed-expansion-round2-stage27",
+          "priority": 1,
+          "proposal_id": "smako-greek-tsigariasto-get",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "cbf873b82c6369e835c718e44d8c33e91dfe4a55ab620857850710c65d270fa8",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "greek"
+        ],
+        "equipment": [
+          "tjockbottnad gryta med tätt lock"
+        ],
+        "estimated_minutes": 157,
+        "family": "Tsigariasto",
+        "fish": false,
+        "flavor_profile": [
+          "getkött",
+          "olivolja"
+        ],
+        "ingredient_count": 8,
+        "method": "pot",
+        "primary_ingredient": "lammkött",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Granskad version med benfritt lamm i stället för get. Rå ätlig köttmängd anges efter eventuell putsning; ingen benandel eller kokförlust har antagits. Inte provlagad; tider är författaruppskattningar och mörheten avgör faktisk koktid. Lök, vin, oregano och citron är uttryckliga tillägg till fåingredienstekniken. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "bröd",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 15,
+            "id": "s1",
+            "ingredient_keys": [
+              "lammkött|raw_edible",
+              "olivolja|as_sold",
+              "salt|as_sold",
+              "svartpeppar|dry"
+            ],
+            "parallel_group": null,
+            "text": "Putsa bort grova senor vid behov, väg därefter angiven rå ätlig mängd benfritt lamm och skär i cirka 4 cm stora bitar. Salta och peppra. Hetta upp oljan och bryn köttet i två omgångar i samma gryta."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 8,
+            "id": "s2",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "oregano|dry",
+              "vitlök|raw_edible",
+              "vitt matlagningsvin|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Skala och väg lök och vitlök, skiva löken och hacka vitlöken. Fräs dem med köttet fem minuter. Tillsätt oregano och det vita matlagningsvinet, skrapa bottnen och låt det vita matlagningsvinet koka upp."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 2,
+            "id": "s3",
+            "ingredient_keys": [
+              "lammkött|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sänk till mycket låg värme och sätt på tätt lock. Köttet ska långsamt släppa eget spad; detta är inte en vattenfylld gryta."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 20,
+            "id": "s4",
+            "ingredient_keys": [
+              "lammkött|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Låt köttet tillagas under tätt lock på mycket låg värme i 20 minuter."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 1,
+            "id": "s5",
+            "ingredient_keys": [
+              "lammkött|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "30 ml",
+                30.0
+              ]
+            ],
+            "text": "Vänd köttet och kontrollera bottnen. Sänk värmen om det steker torrt; tillsätt endast vid behov 30 ml vatten så det inte bränner. Köttet ska tillagas i lite eget spad, inte täckas av vatten."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 20,
+            "id": "s6",
+            "ingredient_keys": [
+              "lammkött|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Låt köttet tillagas under tätt lock på mycket låg värme i 20 minuter."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 1,
+            "id": "s7",
+            "ingredient_keys": [
+              "lammkött|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "30 ml",
+                30.0
+              ]
+            ],
+            "text": "Vänd köttet och kontrollera bottnen. Sänk värmen om det steker torrt; tillsätt endast vid behov 30 ml vatten så det inte bränner. Köttet ska tillagas i lite eget spad, inte täckas av vatten."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 20,
+            "id": "s8",
+            "ingredient_keys": [
+              "lammkött|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Låt köttet tillagas under tätt lock på mycket låg värme i 20 minuter."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 1,
+            "id": "s9",
+            "ingredient_keys": [
+              "lammkött|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "30 ml",
+                30.0
+              ]
+            ],
+            "text": "Vänd köttet och kontrollera bottnen. Sänk värmen om det steker torrt; tillsätt endast vid behov 30 ml vatten så det inte bränner. Köttet ska tillagas i lite eget spad, inte täckas av vatten."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 20,
+            "id": "s10",
+            "ingredient_keys": [
+              "lammkött|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Låt köttet tillagas under tätt lock på mycket låg värme i 20 minuter."
+          },
+          {
+            "depends_on": [
+              "s10"
+            ],
+            "duration_minutes": 1,
+            "id": "s11",
+            "ingredient_keys": [
+              "lammkött|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "30 ml",
+                30.0
+              ]
+            ],
+            "text": "Vänd köttet och kontrollera bottnen. Sänk värmen om det steker torrt; tillsätt endast vid behov 30 ml vatten så det inte bränner. Köttet ska tillagas i lite eget spad, inte täckas av vatten."
+          },
+          {
+            "depends_on": [
+              "s11"
+            ],
+            "duration_minutes": 20,
+            "id": "s12",
+            "ingredient_keys": [
+              "lammkött|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Låt köttet tillagas under tätt lock på mycket låg värme i 20 minuter."
+          },
+          {
+            "depends_on": [
+              "s12"
+            ],
+            "duration_minutes": 1,
+            "id": "s13",
+            "ingredient_keys": [
+              "lammkött|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "30 ml",
+                30.0
+              ]
+            ],
+            "text": "Vänd köttet och kontrollera bottnen. Sänk värmen om det steker torrt; tillsätt endast vid behov 30 ml vatten så det inte bränner. Köttet ska tillagas i lite eget spad, inte täckas av vatten."
+          },
+          {
+            "depends_on": [
+              "s13"
+            ],
+            "duration_minutes": 20,
+            "id": "s14",
+            "ingredient_keys": [
+              "lammkött|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Låt köttet tillagas under tätt lock på mycket låg värme i 20 minuter."
+          },
+          {
+            "depends_on": [
+              "s14"
+            ],
+            "duration_minutes": 1,
+            "id": "s15",
+            "ingredient_keys": [
+              "lammkött|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "30 ml",
+                30.0
+              ]
+            ],
+            "text": "Vänd köttet och kontrollera bottnen. Sänk värmen om det steker torrt; tillsätt endast vid behov 30 ml vatten så det inte bränner. Köttet ska tillagas i lite eget spad, inte täckas av vatten."
+          },
+          {
+            "depends_on": [
+              "s15"
+            ],
+            "duration_minutes": 2,
+            "id": "s16",
+            "ingredient_keys": [
+              "lammkött|raw_edible",
+              "olivolja|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Kontrollera att köttet är genomlagat och mycket mört. Förläng tillagningen vid behov med fortsatt tillsyn. Servera allt fett och det koncentrerade spadet."
+          },
+          {
+            "depends_on": [
+              "s16"
+            ],
+            "duration_minutes": 1,
+            "id": "s17",
+            "ingredient_keys": [
+              "citronjuice|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Rör ner citronjuicen i det koncentrerade spadet."
+          },
+          {
+            "depends_on": [
+              "s17"
+            ],
+            "duration_minutes": 3,
+            "id": "s18",
+            "ingredient_keys": [
+              "bröd|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Skär brödet och servera till köttet och dess spad. Väg den angivna brödmängden och behåll hela salladens saft om sallad ingår."
+          }
+        ],
+        "total_minutes": 157,
+        "variant_id": "standard",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 120
+      },
+      "ingredients": [
+        {
+          "canonical_name": "lammkött",
+          "component": "get",
+          "form": "raw_edible",
+          "name": "lammkött",
+          "product_requirements": [
+            "pack:intake_all_f5b22d7b2487",
+            "pack:lamb_braising_cut"
+          ],
+          "quantity": 850.0,
+          "quantity_max": 850.0,
+          "quantity_min": 850.0,
+          "quantity_step": 850.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "olivolja",
+          "component": "get",
+          "form": "as_sold",
+          "name": "olivolja",
+          "product_requirements": [
+            "pack:intake_all_expansion_86ac9b2c5ae6"
+          ],
+          "quantity": 35.0,
+          "quantity_max": 35.0,
+          "quantity_min": 35.0,
+          "quantity_step": 35.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "get",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "get",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitt matlagningsvin",
+          "component": "get",
+          "form": "as_sold",
+          "name": "vitt matlagningsvin",
+          "product_requirements": [
+            "pack:intake_all_round2_b4cd3a71e404"
+          ],
+          "quantity": 150.0,
+          "quantity_max": 150.0,
+          "quantity_min": 150.0,
+          "quantity_step": 150.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "get",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 180.0,
+          "quantity_max": 180.0,
+          "quantity_min": 180.0,
+          "quantity_step": 180.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "get",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 12.0,
+          "quantity_max": 12.0,
+          "quantity_min": 12.0,
+          "quantity_step": 12.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "citronjuice",
+          "component": "get",
+          "form": "as_sold",
+          "name": "citronjuice",
+          "product_requirements": [
+            "pure_juice"
+          ],
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 25.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "oregano",
+          "component": "get",
+          "form": "dry",
+          "name": "oregano",
+          "product_requirements": [
+            "dried_leaf"
+          ],
+          "quantity": 2.0,
+          "quantity_max": 2.0,
+          "quantity_min": 2.0,
+          "quantity_step": 2.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "bröd",
+          "component": "brod",
+          "form": "as_sold",
+          "name": "bröd",
+          "quantity": 320.0,
+          "quantity_max": 320.0,
+          "quantity_min": 320.0,
+          "quantity_step": 320.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Putsa bort grova senor vid behov, väg därefter angiven rå ätlig mängd benfritt lamm och skär i cirka 4 cm stora bitar. Salta och peppra. Hetta upp oljan och bryn köttet i två omgångar i samma gryta.",
+        "Skala och väg lök och vitlök, skiva löken och hacka vitlöken. Fräs dem med köttet fem minuter. Tillsätt oregano och det vita matlagningsvinet, skrapa bottnen och låt det vita matlagningsvinet koka upp.",
+        "Sänk till mycket låg värme och sätt på tätt lock. Köttet ska långsamt släppa eget spad; detta är inte en vattenfylld gryta.",
+        "Låt köttet tillagas under tätt lock på mycket låg värme i 20 minuter.",
+        "Vänd köttet och kontrollera bottnen. Sänk värmen om det steker torrt; tillsätt endast vid behov 30 ml vatten så det inte bränner. Köttet ska tillagas i lite eget spad, inte täckas av vatten.",
+        "Låt köttet tillagas under tätt lock på mycket låg värme i 20 minuter.",
+        "Vänd köttet och kontrollera bottnen. Sänk värmen om det steker torrt; tillsätt endast vid behov 30 ml vatten så det inte bränner. Köttet ska tillagas i lite eget spad, inte täckas av vatten.",
+        "Låt köttet tillagas under tätt lock på mycket låg värme i 20 minuter.",
+        "Vänd köttet och kontrollera bottnen. Sänk värmen om det steker torrt; tillsätt endast vid behov 30 ml vatten så det inte bränner. Köttet ska tillagas i lite eget spad, inte täckas av vatten.",
+        "Låt köttet tillagas under tätt lock på mycket låg värme i 20 minuter.",
+        "Vänd köttet och kontrollera bottnen. Sänk värmen om det steker torrt; tillsätt endast vid behov 30 ml vatten så det inte bränner. Köttet ska tillagas i lite eget spad, inte täckas av vatten.",
+        "Låt köttet tillagas under tätt lock på mycket låg värme i 20 minuter.",
+        "Vänd köttet och kontrollera bottnen. Sänk värmen om det steker torrt; tillsätt endast vid behov 30 ml vatten så det inte bränner. Köttet ska tillagas i lite eget spad, inte täckas av vatten.",
+        "Låt köttet tillagas under tätt lock på mycket låg värme i 20 minuter.",
+        "Vänd köttet och kontrollera bottnen. Sänk värmen om det steker torrt; tillsätt endast vid behov 30 ml vatten så det inte bränner. Köttet ska tillagas i lite eget spad, inte täckas av vatten.",
+        "Kontrollera att köttet är genomlagat och mycket mört. Förläng tillagningen vid behov med fortsatt tillsyn. Servera allt fett och det koncentrerade spadet.",
+        "Rör ner citronjuicen i det koncentrerade spadet.",
+        "Skär brödet och servera till köttet och dess spad. Väg den angivna brödmängden och behåll hela salladens saft om sallad ingår."
+      ],
+      "name": "Tsigariasto – lammkött i eget spad – med vin, lök och citron – med vitt matlagningsvin",
+      "preparation": {
+        "family": "Tsigariasto",
+        "input_forms": {
+          "bröd": "as_sold",
+          "citronjuice": "as_sold",
+          "gul lök": "raw_edible",
+          "lammkött": "raw_edible",
+          "olivolja": "as_sold",
+          "oregano": "dry",
+          "salt": "as_sold",
+          "svartpeppar": "dry",
+          "vitlök": "raw_edible",
+          "vitt matlagningsvin": "as_sold"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "fb658b147c16a56e4d4d479eb5093777161355fd275561c9e8d2bb9f0121ec7c",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 43,
+        "base_id": "smako-greek-tsigariasto-get",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "lammkött|raw_edible",
+                "name": "Benfritt lammkött för långkok, rå ätlig vikt",
+                "note": "",
+                "quantity": 850.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "olivolja|as_sold",
+                "name": "Olivolja",
+                "note": "",
+                "quantity": 35.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "Svartpeppar",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitt matlagningsvin|as_sold",
+                "name": "vitt matlagningsvin",
+                "note": "",
+                "quantity": 150.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "Gul lök",
+                "note": "",
+                "quantity": 180.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "Vitlök",
+                "note": "",
+                "quantity": 12.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "citronjuice|as_sold",
+                "name": "Citronjuice",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "oregano|dry",
+                "name": "Oregano",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              }
+            ],
+            "id": "get",
+            "name": "Getkött"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "bröd|as_sold",
+                "name": "Bröd",
+                "note": "",
+                "quantity": 320.0,
+                "unit": "g"
+              }
+            ],
+            "id": "brod",
+            "name": "Bröd till spadet"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "tomat|raw_edible",
+                "name": "Tomat",
+                "note": "",
+                "quantity": 400.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gurka|raw_edible",
+                "name": "Gurka",
+                "note": "",
+                "quantity": 250.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rödlök|raw_edible",
+                "name": "Rödlök",
+                "note": "",
+                "quantity": 70.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rödvinsvinäger|as_sold",
+                "name": "Rödvinsvinäger",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "sallad",
+            "name": "Tomat- och gurksallad"
+          }
+        ],
+        "content_sha256": "71cf711879835428e398a35695f7f9c4127433ee0eb945dcee1db00a3fb7f5a8",
+        "content_source": {
+          "active_minutes": 43,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "reviewed-expansion-round2-stage27",
+          "priority": 1,
+          "proposal_id": "smako-greek-tsigariasto-get",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "cbf873b82c6369e835c718e44d8c33e91dfe4a55ab620857850710c65d270fa8",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "greek"
+        ],
+        "equipment": [
+          "tjockbottnad gryta med tätt lock"
+        ],
+        "estimated_minutes": 163,
+        "family": "Tsigariasto",
+        "fish": false,
+        "flavor_profile": [
+          "getkött",
+          "olivolja"
+        ],
+        "ingredient_count": 12,
+        "method": "pot",
+        "primary_ingredient": "lammkött",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Granskad version med benfritt lamm i stället för get. Rå ätlig köttmängd anges efter eventuell putsning; ingen benandel eller kokförlust har antagits. Inte provlagad; tider är författaruppskattningar och mörheten avgör faktisk koktid. Lök, vin, oregano och citron är uttryckliga tillägg till fåingredienstekniken. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "bröd",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 15,
+            "id": "s1",
+            "ingredient_keys": [
+              "lammkött|raw_edible",
+              "olivolja|as_sold",
+              "salt|as_sold",
+              "svartpeppar|dry"
+            ],
+            "parallel_group": null,
+            "text": "Putsa bort grova senor vid behov, väg därefter angiven rå ätlig mängd benfritt lamm och skär i cirka 4 cm stora bitar. Salta och peppra. Hetta upp oljan och bryn köttet i två omgångar i samma gryta."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 8,
+            "id": "s2",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "oregano|dry",
+              "vitlök|raw_edible",
+              "vitt matlagningsvin|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Skala och väg lök och vitlök, skiva löken och hacka vitlöken. Fräs dem med köttet fem minuter. Tillsätt oregano och det vita matlagningsvinet, skrapa bottnen och låt det vita matlagningsvinet koka upp."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 2,
+            "id": "s3",
+            "ingredient_keys": [
+              "lammkött|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sänk till mycket låg värme och sätt på tätt lock. Köttet ska långsamt släppa eget spad; detta är inte en vattenfylld gryta."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 20,
+            "id": "s4",
+            "ingredient_keys": [
+              "lammkött|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Låt köttet tillagas under tätt lock på mycket låg värme i 20 minuter."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 1,
+            "id": "s5",
+            "ingredient_keys": [
+              "lammkött|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "30 ml",
+                30.0
+              ]
+            ],
+            "text": "Vänd köttet och kontrollera bottnen. Sänk värmen om det steker torrt; tillsätt endast vid behov 30 ml vatten så det inte bränner. Köttet ska tillagas i lite eget spad, inte täckas av vatten."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 20,
+            "id": "s6",
+            "ingredient_keys": [
+              "lammkött|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Låt köttet tillagas under tätt lock på mycket låg värme i 20 minuter."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 1,
+            "id": "s7",
+            "ingredient_keys": [
+              "lammkött|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "30 ml",
+                30.0
+              ]
+            ],
+            "text": "Vänd köttet och kontrollera bottnen. Sänk värmen om det steker torrt; tillsätt endast vid behov 30 ml vatten så det inte bränner. Köttet ska tillagas i lite eget spad, inte täckas av vatten."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 20,
+            "id": "s8",
+            "ingredient_keys": [
+              "lammkött|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Låt köttet tillagas under tätt lock på mycket låg värme i 20 minuter."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 1,
+            "id": "s9",
+            "ingredient_keys": [
+              "lammkött|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "30 ml",
+                30.0
+              ]
+            ],
+            "text": "Vänd köttet och kontrollera bottnen. Sänk värmen om det steker torrt; tillsätt endast vid behov 30 ml vatten så det inte bränner. Köttet ska tillagas i lite eget spad, inte täckas av vatten."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 20,
+            "id": "s10",
+            "ingredient_keys": [
+              "lammkött|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Låt köttet tillagas under tätt lock på mycket låg värme i 20 minuter."
+          },
+          {
+            "depends_on": [
+              "s10"
+            ],
+            "duration_minutes": 1,
+            "id": "s11",
+            "ingredient_keys": [
+              "lammkött|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "30 ml",
+                30.0
+              ]
+            ],
+            "text": "Vänd köttet och kontrollera bottnen. Sänk värmen om det steker torrt; tillsätt endast vid behov 30 ml vatten så det inte bränner. Köttet ska tillagas i lite eget spad, inte täckas av vatten."
+          },
+          {
+            "depends_on": [
+              "s11"
+            ],
+            "duration_minutes": 20,
+            "id": "s12",
+            "ingredient_keys": [
+              "lammkött|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Låt köttet tillagas under tätt lock på mycket låg värme i 20 minuter."
+          },
+          {
+            "depends_on": [
+              "s12"
+            ],
+            "duration_minutes": 1,
+            "id": "s13",
+            "ingredient_keys": [
+              "lammkött|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "30 ml",
+                30.0
+              ]
+            ],
+            "text": "Vänd köttet och kontrollera bottnen. Sänk värmen om det steker torrt; tillsätt endast vid behov 30 ml vatten så det inte bränner. Köttet ska tillagas i lite eget spad, inte täckas av vatten."
+          },
+          {
+            "depends_on": [
+              "s13"
+            ],
+            "duration_minutes": 20,
+            "id": "s14",
+            "ingredient_keys": [
+              "lammkött|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Låt köttet tillagas under tätt lock på mycket låg värme i 20 minuter."
+          },
+          {
+            "depends_on": [
+              "s14"
+            ],
+            "duration_minutes": 1,
+            "id": "s15",
+            "ingredient_keys": [
+              "lammkött|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "30 ml",
+                30.0
+              ]
+            ],
+            "text": "Vänd köttet och kontrollera bottnen. Sänk värmen om det steker torrt; tillsätt endast vid behov 30 ml vatten så det inte bränner. Köttet ska tillagas i lite eget spad, inte täckas av vatten."
+          },
+          {
+            "depends_on": [
+              "s15"
+            ],
+            "duration_minutes": 2,
+            "id": "s16",
+            "ingredient_keys": [
+              "lammkött|raw_edible",
+              "olivolja|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Kontrollera att köttet är genomlagat och mycket mört. Förläng tillagningen vid behov med fortsatt tillsyn. Servera allt fett och det koncentrerade spadet."
+          },
+          {
+            "depends_on": [
+              "s16"
+            ],
+            "duration_minutes": 1,
+            "id": "s17",
+            "ingredient_keys": [
+              "citronjuice|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Rör ner citronjuicen i det koncentrerade spadet."
+          },
+          {
+            "depends_on": [
+              "s17"
+            ],
+            "duration_minutes": 6,
+            "id": "s18",
+            "ingredient_keys": [
+              "gurka|raw_edible",
+              "rödlök|raw_edible",
+              "rödvinsvinäger|as_sold",
+              "tomat|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Tärna tomat och gurka, finstrimla rödlöken och blanda med vinäger. Servera som ett saftigt tillbehör, inte i grytan."
+          },
+          {
+            "depends_on": [
+              "s18"
+            ],
+            "duration_minutes": 3,
+            "id": "s19",
+            "ingredient_keys": [
+              "bröd|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Skär brödet och servera till köttet och dess spad. Lägg upp salladen bredvid. Väg den angivna brödmängden och behåll hela salladens saft om sallad ingår."
+          }
+        ],
+        "total_minutes": 163,
+        "variant_id": "extended",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 120
+      },
+      "ingredients": [
+        {
+          "canonical_name": "lammkött",
+          "component": "get",
+          "form": "raw_edible",
+          "name": "lammkött",
+          "product_requirements": [
+            "pack:intake_all_f5b22d7b2487",
+            "pack:lamb_braising_cut"
+          ],
+          "quantity": 850.0,
+          "quantity_max": 850.0,
+          "quantity_min": 850.0,
+          "quantity_step": 850.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "olivolja",
+          "component": "get",
+          "form": "as_sold",
+          "name": "olivolja",
+          "product_requirements": [
+            "pack:intake_all_expansion_86ac9b2c5ae6"
+          ],
+          "quantity": 35.0,
+          "quantity_max": 35.0,
+          "quantity_min": 35.0,
+          "quantity_step": 35.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "get",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "get",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitt matlagningsvin",
+          "component": "get",
+          "form": "as_sold",
+          "name": "vitt matlagningsvin",
+          "product_requirements": [
+            "pack:intake_all_round2_b4cd3a71e404"
+          ],
+          "quantity": 150.0,
+          "quantity_max": 150.0,
+          "quantity_min": 150.0,
+          "quantity_step": 150.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "get",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 180.0,
+          "quantity_max": 180.0,
+          "quantity_min": 180.0,
+          "quantity_step": 180.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "get",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 12.0,
+          "quantity_max": 12.0,
+          "quantity_min": 12.0,
+          "quantity_step": 12.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "citronjuice",
+          "component": "get",
+          "form": "as_sold",
+          "name": "citronjuice",
+          "product_requirements": [
+            "pure_juice"
+          ],
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 25.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "oregano",
+          "component": "get",
+          "form": "dry",
+          "name": "oregano",
+          "product_requirements": [
+            "dried_leaf"
+          ],
+          "quantity": 2.0,
+          "quantity_max": 2.0,
+          "quantity_min": 2.0,
+          "quantity_step": 2.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "bröd",
+          "component": "brod",
+          "form": "as_sold",
+          "name": "bröd",
+          "quantity": 320.0,
+          "quantity_max": 320.0,
+          "quantity_min": 320.0,
+          "quantity_step": 320.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "tomat",
+          "component": "sallad",
+          "form": "raw_edible",
+          "name": "tomat",
+          "quantity": 400.0,
+          "quantity_max": 400.0,
+          "quantity_min": 400.0,
+          "quantity_step": 400.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gurka",
+          "component": "sallad",
+          "form": "raw_edible",
+          "name": "gurka",
+          "quantity": 250.0,
+          "quantity_max": 250.0,
+          "quantity_min": 250.0,
+          "quantity_step": 250.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rödlök",
+          "component": "sallad",
+          "form": "raw_edible",
+          "name": "rödlök",
+          "quantity": 70.0,
+          "quantity_max": 70.0,
+          "quantity_min": 70.0,
+          "quantity_step": 70.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rödvinsvinäger",
+          "component": "sallad",
+          "form": "as_sold",
+          "name": "rödvinsvinäger",
+          "product_requirements": [
+            "pack:intake_all_d0351d1f36c1"
+          ],
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        }
+      ],
+      "instructions": [
+        "Putsa bort grova senor vid behov, väg därefter angiven rå ätlig mängd benfritt lamm och skär i cirka 4 cm stora bitar. Salta och peppra. Hetta upp oljan och bryn köttet i två omgångar i samma gryta.",
+        "Skala och väg lök och vitlök, skiva löken och hacka vitlöken. Fräs dem med köttet fem minuter. Tillsätt oregano och det vita matlagningsvinet, skrapa bottnen och låt det vita matlagningsvinet koka upp.",
+        "Sänk till mycket låg värme och sätt på tätt lock. Köttet ska långsamt släppa eget spad; detta är inte en vattenfylld gryta.",
+        "Låt köttet tillagas under tätt lock på mycket låg värme i 20 minuter.",
+        "Vänd köttet och kontrollera bottnen. Sänk värmen om det steker torrt; tillsätt endast vid behov 30 ml vatten så det inte bränner. Köttet ska tillagas i lite eget spad, inte täckas av vatten.",
+        "Låt köttet tillagas under tätt lock på mycket låg värme i 20 minuter.",
+        "Vänd köttet och kontrollera bottnen. Sänk värmen om det steker torrt; tillsätt endast vid behov 30 ml vatten så det inte bränner. Köttet ska tillagas i lite eget spad, inte täckas av vatten.",
+        "Låt köttet tillagas under tätt lock på mycket låg värme i 20 minuter.",
+        "Vänd köttet och kontrollera bottnen. Sänk värmen om det steker torrt; tillsätt endast vid behov 30 ml vatten så det inte bränner. Köttet ska tillagas i lite eget spad, inte täckas av vatten.",
+        "Låt köttet tillagas under tätt lock på mycket låg värme i 20 minuter.",
+        "Vänd köttet och kontrollera bottnen. Sänk värmen om det steker torrt; tillsätt endast vid behov 30 ml vatten så det inte bränner. Köttet ska tillagas i lite eget spad, inte täckas av vatten.",
+        "Låt köttet tillagas under tätt lock på mycket låg värme i 20 minuter.",
+        "Vänd köttet och kontrollera bottnen. Sänk värmen om det steker torrt; tillsätt endast vid behov 30 ml vatten så det inte bränner. Köttet ska tillagas i lite eget spad, inte täckas av vatten.",
+        "Låt köttet tillagas under tätt lock på mycket låg värme i 20 minuter.",
+        "Vänd köttet och kontrollera bottnen. Sänk värmen om det steker torrt; tillsätt endast vid behov 30 ml vatten så det inte bränner. Köttet ska tillagas i lite eget spad, inte täckas av vatten.",
+        "Kontrollera att köttet är genomlagat och mycket mört. Förläng tillagningen vid behov med fortsatt tillsyn. Servera allt fett och det koncentrerade spadet.",
+        "Rör ner citronjuicen i det koncentrerade spadet.",
+        "Tärna tomat och gurka, finstrimla rödlöken och blanda med vinäger. Servera som ett saftigt tillbehör, inte i grytan.",
+        "Skär brödet och servera till köttet och dess spad. Lägg upp salladen bredvid. Väg den angivna brödmängden och behåll hela salladens saft om sallad ingår."
+      ],
+      "name": "Tsigariasto – lammkött i eget spad – med mustig tomat- och gurksallad – med vitt matlagningsvin",
+      "preparation": {
+        "family": "Tsigariasto",
+        "input_forms": {
+          "bröd": "as_sold",
+          "citronjuice": "as_sold",
+          "gul lök": "raw_edible",
+          "gurka": "raw_edible",
+          "lammkött": "raw_edible",
+          "olivolja": "as_sold",
+          "oregano": "dry",
+          "rödlök": "raw_edible",
+          "rödvinsvinäger": "as_sold",
+          "salt": "as_sold",
+          "svartpeppar": "dry",
+          "tomat": "raw_edible",
+          "vitlök": "raw_edible",
+          "vitt matlagningsvin": "as_sold"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "71cf711879835428e398a35695f7f9c4127433ee0eb945dcee1db00a3fb7f5a8",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 4
+    }
+  ]
+}

@@ -1,0 +1,1794 @@
+{
+  "pack_id": "reviewed-expansion-round2-stage25",
+  "recipes": [
+    {
+      "design": {
+        "active_minutes": 47,
+        "base_id": "smako-indian-rogan-josh",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "lammkött|raw_edible",
+                "name": "Benfritt lammkött för gryta, rå ätlig vikt",
+                "note": "",
+                "quantity": 800.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "yoghurt naturell|as_sold",
+                "name": "yoghurt naturell",
+                "note": "",
+                "quantity": 220.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "paprikapulver|dry",
+                "name": "Malt paprikapulver, inte rökt paprika",
+                "note": "",
+                "quantity": 8.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "fänkålsfrön|dry",
+                "name": "fänkålsfrön",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "malen ingefära|dry",
+                "name": "malen ingefära",
+                "note": "",
+                "quantity": 3.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "rapsolja",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "cayennepeppar|dry",
+                "name": "Malen cayennepeppar",
+                "note": "",
+                "quantity": 0.6,
+                "unit": "g"
+              }
+            ],
+            "id": "lamm",
+            "name": "Röd lammgryta"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ris|dry",
+                "name": "ris",
+                "note": "",
+                "quantity": 280.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              }
+            ],
+            "id": "ris",
+            "name": "Kokt ris"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "indian"
+        ],
+        "equipment": [
+          "gryta",
+          "skål",
+          "kryddkvarn eller mortel"
+        ],
+        "estimated_minutes": 170,
+        "family": "rogan josh",
+        "fish": false,
+        "flavor_profile": [
+          "paprika",
+          "cayenne",
+          "fänkålsfrö",
+          "torkad ingefära"
+        ],
+        "ingredient_count": 8,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "pot",
+        "primary_ingredient": "lammkött",
+        "provenance": {
+          "notes": "Granskad vardagsanpassning av rogan josh med lamm, yoghurt, fänkålsfrö och torkad ingefära, utan tomat. Ny dos 8 g paprikapulver och 0,6 g cayenne ersätter 10 g kashmirichili utan påstående om samma hetta, smak eller färg. Rapsolja används i stället för senapsolja/ghee och ratanjot utelämnas. Inte provlagad; tiderna är uppskattningar. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "ris",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 10,
+            "id": "s1",
+            "ingredient_keys": [
+              "cayennepeppar|dry",
+              "fänkålsfrön|dry",
+              "lammkött|raw_edible",
+              "malen ingefära|dry",
+              "paprikapulver|dry",
+              "salt|as_sold",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Väg benfritt lammkött utan grova senor och skär det i jämna grytbitar. Mal fänkålsfrön fint och blanda med paprikapulver och cayennepeppar, malen ingefära, grytans yoghurt naturell och salt. De eventuella övriga kryddorna används malda och stannar i såsen."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 17,
+            "id": "s2",
+            "ingredient_keys": [
+              "cayennepeppar|dry",
+              "fänkålsfrön|dry",
+              "lammkött|raw_edible",
+              "malen ingefära|dry",
+              "paprikapulver|dry",
+              "rapsolja|as_sold",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Värm oljan i grytan och bryn lammköttet i omgångar. Sänk värmen och tillsätt yoghurtblandningen lite i taget under omrörning. Fräs varsamt tills kryddorna doftar; undvik att bränna mjölkproteinet."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 3,
+            "id": "s3",
+            "ingredient_keys": [
+              "lammkött|raw_edible",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "500 ml",
+                500.0
+              ]
+            ],
+            "text": "Häll i 500 ml vatten och koka upp under omrörning. Sänk till svag sjudning och lägg på lock."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 30,
+            "id": "s4",
+            "ingredient_keys": [
+              "lammkött|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud försiktigt under lock 30 minuter."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 1,
+            "id": "s5",
+            "ingredient_keys": [
+              "lammkött|raw_edible",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "100 ml",
+                100.0
+              ]
+            ],
+            "text": "Rör i grytan och kontrollera att bottnen inte bränner. Tillsätt vid behov 100 ml vatten."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 30,
+            "id": "s6",
+            "ingredient_keys": [
+              "lammkött|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud ytterligare 30 minuter under lock."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 1,
+            "id": "s7",
+            "ingredient_keys": [
+              "lammkött|raw_edible",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "100 ml",
+                100.0
+              ]
+            ],
+            "text": "Rör igen och kontrollera vätskan. Tillsätt vid behov 100 ml vatten."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 40,
+            "id": "s8",
+            "ingredient_keys": [
+              "lammkött|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud ytterligare cirka 40 minuter under lock."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 2,
+            "id": "s9",
+            "ingredient_keys": [
+              "lammkött|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Kontrollera att lammet är helt genomlagat och så mört att det delar sig lätt med gaffel. Förläng sjudningen vid behov och kontrollera regelbundet vätskan. Behåll allt fett och all sås."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 3,
+            "id": "s10",
+            "ingredient_keys": [
+              "ris|dry",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "560 ml",
+                560.0
+              ]
+            ],
+            "text": "Lägg det i en kastrull med risets salt och 560 ml vatten; koka upp och sänk till låg värme."
+          },
+          {
+            "depends_on": [
+              "s10"
+            ],
+            "duration_minutes": 18,
+            "id": "s11",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Sjud riset under lock cirka 18 minuter eller längre enligt förpackningen, tills kornen är mjuka och vattnet absorberats."
+          },
+          {
+            "depends_on": [
+              "s11"
+            ],
+            "duration_minutes": 1,
+            "id": "s12",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "50 ml",
+                50.0
+              ]
+            ],
+            "text": "Kontrollera riset och ta från värmen. Om det fortfarande är hårt, tillsätt 50 ml vatten och fortsätt sjuda före vilan."
+          },
+          {
+            "depends_on": [
+              "s12"
+            ],
+            "duration_minutes": 5,
+            "id": "s13",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Låt riset vila fem minuter under lock."
+          },
+          {
+            "depends_on": [
+              "s13"
+            ],
+            "duration_minutes": 1,
+            "id": "s14",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Luckra upp riset och håll det varmt över 60 °C under lock tills huvudrätten serveras."
+          },
+          {
+            "depends_on": [
+              "s14"
+            ],
+            "duration_minutes": 8,
+            "id": "s15",
+            "ingredient_keys": [
+              "lammkött|raw_edible",
+              "ris|dry",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Ta av locket från lammgrytan och sjud försiktigt till en koncentrerad sås som omsluter köttet. Fördela med ris."
+          }
+        ],
+        "total_minutes": 170,
+        "variant_id": "simple",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 123
+      },
+      "ingredients": [
+        {
+          "canonical_name": "lammkött",
+          "component": "lamm",
+          "form": "raw_edible",
+          "name": "lammkött",
+          "product_requirements": [
+            "pack:intake_all_f5b22d7b2487",
+            "pack:lamb_braising_cut"
+          ],
+          "quantity": 800.0,
+          "quantity_max": 800.0,
+          "quantity_min": 800.0,
+          "quantity_step": 800.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "yoghurt naturell",
+          "component": "lamm",
+          "form": "as_sold",
+          "name": "yoghurt naturell",
+          "product_requirements": [
+            "plain",
+            "thick"
+          ],
+          "quantity": 220.0,
+          "quantity_max": 220.0,
+          "quantity_min": 220.0,
+          "quantity_step": 220.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "paprikapulver",
+          "component": "lamm",
+          "form": "dry",
+          "name": "paprikapulver",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 8.0,
+          "quantity_max": 8.0,
+          "quantity_min": 8.0,
+          "quantity_step": 8.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "fänkålsfrön",
+          "component": "lamm",
+          "form": "dry",
+          "name": "fänkålsfrön",
+          "product_requirements": [
+            "pack:intake_all_expansion_24d1fa569388"
+          ],
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "malen ingefära",
+          "component": "lamm",
+          "form": "dry",
+          "name": "malen ingefära",
+          "product_requirements": [
+            "pack:intake_all_expansion_a2a82736e843"
+          ],
+          "quantity": 3.0,
+          "quantity_max": 3.0,
+          "quantity_min": 3.0,
+          "quantity_step": 3.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "lamm",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 30.0,
+          "quantity_max": 30.0,
+          "quantity_min": 30.0,
+          "quantity_step": 30.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "lamm",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 7.0,
+          "quantity_max": 7.0,
+          "quantity_min": 7.0,
+          "quantity_step": 7.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "cayennepeppar",
+          "component": "lamm",
+          "form": "dry",
+          "name": "cayennepeppar",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 0.6,
+          "quantity_max": 0.6,
+          "quantity_min": 0.6,
+          "quantity_step": 0.6,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ris",
+          "component": "ris",
+          "form": "dry",
+          "name": "ris",
+          "product_requirements": [
+            "white_rice"
+          ],
+          "quantity": 280.0,
+          "quantity_max": 280.0,
+          "quantity_min": 280.0,
+          "quantity_step": 280.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Väg benfritt lammkött utan grova senor och skär det i jämna grytbitar. Mal fänkålsfrön fint och blanda med paprikapulver och cayennepeppar, malen ingefära, grytans yoghurt naturell och salt. De eventuella övriga kryddorna används malda och stannar i såsen.",
+        "Värm oljan i grytan och bryn lammköttet i omgångar. Sänk värmen och tillsätt yoghurtblandningen lite i taget under omrörning. Fräs varsamt tills kryddorna doftar; undvik att bränna mjölkproteinet.",
+        "Häll i 500 ml vatten och koka upp under omrörning. Sänk till svag sjudning och lägg på lock.",
+        "Sjud försiktigt under lock 30 minuter.",
+        "Rör i grytan och kontrollera att bottnen inte bränner. Tillsätt vid behov 100 ml vatten.",
+        "Sjud ytterligare 30 minuter under lock.",
+        "Rör igen och kontrollera vätskan. Tillsätt vid behov 100 ml vatten.",
+        "Sjud ytterligare cirka 40 minuter under lock.",
+        "Kontrollera att lammet är helt genomlagat och så mört att det delar sig lätt med gaffel. Förläng sjudningen vid behov och kontrollera regelbundet vätskan. Behåll allt fett och all sås.",
+        "Lägg det i en kastrull med risets salt och 560 ml vatten; koka upp och sänk till låg värme.",
+        "Sjud riset under lock cirka 18 minuter eller längre enligt förpackningen, tills kornen är mjuka och vattnet absorberats.",
+        "Kontrollera riset och ta från värmen. Om det fortfarande är hårt, tillsätt 50 ml vatten och fortsätt sjuda före vilan.",
+        "Låt riset vila fem minuter under lock.",
+        "Luckra upp riset och håll det varmt över 60 °C under lock tills huvudrätten serveras.",
+        "Ta av locket från lammgrytan och sjud försiktigt till en koncentrerad sås som omsluter köttet. Fördela med ris."
+      ],
+      "name": "Rogan josh – lamm i röd kryddsås – enkel – med paprika och cayenne",
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 47,
+        "base_id": "smako-indian-rogan-josh",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "lammkött|raw_edible",
+                "name": "Benfritt lammkött för gryta, rå ätlig vikt",
+                "note": "",
+                "quantity": 800.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "yoghurt naturell|as_sold",
+                "name": "yoghurt naturell",
+                "note": "",
+                "quantity": 220.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "paprikapulver|dry",
+                "name": "Malt paprikapulver, inte rökt paprika",
+                "note": "",
+                "quantity": 8.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "fänkålsfrön|dry",
+                "name": "fänkålsfrön",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "malen ingefära|dry",
+                "name": "malen ingefära",
+                "note": "",
+                "quantity": 3.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "rapsolja",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kardemumma|dry",
+                "name": "Mald kardemumma",
+                "note": "",
+                "quantity": 1.2,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kryddnejlika|dry",
+                "name": "Mald kryddnejlika",
+                "note": "",
+                "quantity": 0.5,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kanel|dry",
+                "name": "Mald kanel",
+                "note": "",
+                "quantity": 1.2,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "cayennepeppar|dry",
+                "name": "Malen cayennepeppar",
+                "note": "",
+                "quantity": 0.6,
+                "unit": "g"
+              }
+            ],
+            "id": "lamm",
+            "name": "Röd lammgryta"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ris|dry",
+                "name": "ris",
+                "note": "",
+                "quantity": 280.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              }
+            ],
+            "id": "ris",
+            "name": "Kokt ris"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "indian"
+        ],
+        "equipment": [
+          "gryta",
+          "skål",
+          "kryddkvarn eller mortel"
+        ],
+        "estimated_minutes": 170,
+        "family": "rogan josh",
+        "fish": false,
+        "flavor_profile": [
+          "paprika",
+          "cayenne",
+          "fänkålsfrö",
+          "torkad ingefära"
+        ],
+        "ingredient_count": 11,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "pot",
+        "primary_ingredient": "lammkött",
+        "provenance": {
+          "notes": "Granskad vardagsanpassning av rogan josh med lamm, yoghurt, fänkålsfrö och torkad ingefära, utan tomat. Ny dos 8 g paprikapulver och 0,6 g cayenne ersätter 10 g kashmirichili utan påstående om samma hetta, smak eller färg. Rapsolja används i stället för senapsolja/ghee och ratanjot utelämnas. Inte provlagad; tiderna är uppskattningar. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "ris",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 10,
+            "id": "s1",
+            "ingredient_keys": [
+              "cayennepeppar|dry",
+              "fänkålsfrön|dry",
+              "kanel|dry",
+              "kardemumma|dry",
+              "kryddnejlika|dry",
+              "lammkött|raw_edible",
+              "malen ingefära|dry",
+              "paprikapulver|dry",
+              "salt|as_sold",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Väg benfritt lammkött utan grova senor och skär det i jämna grytbitar. Mal fänkålsfrön fint och blanda med paprikapulver och cayennepeppar, malen ingefära, grytans yoghurt naturell och salt samt kardemumma, kryddnejlika och kanel. De eventuella övriga kryddorna används malda och stannar i såsen."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 17,
+            "id": "s2",
+            "ingredient_keys": [
+              "cayennepeppar|dry",
+              "fänkålsfrön|dry",
+              "lammkött|raw_edible",
+              "malen ingefära|dry",
+              "paprikapulver|dry",
+              "rapsolja|as_sold",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Värm oljan i grytan och bryn lammköttet i omgångar. Sänk värmen och tillsätt yoghurtblandningen lite i taget under omrörning. Fräs varsamt tills kryddorna doftar; undvik att bränna mjölkproteinet."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 3,
+            "id": "s3",
+            "ingredient_keys": [
+              "lammkött|raw_edible",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "500 ml",
+                500.0
+              ]
+            ],
+            "text": "Häll i 500 ml vatten och koka upp under omrörning. Sänk till svag sjudning och lägg på lock."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 30,
+            "id": "s4",
+            "ingredient_keys": [
+              "lammkött|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud försiktigt under lock 30 minuter."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 1,
+            "id": "s5",
+            "ingredient_keys": [
+              "lammkött|raw_edible",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "100 ml",
+                100.0
+              ]
+            ],
+            "text": "Rör i grytan och kontrollera att bottnen inte bränner. Tillsätt vid behov 100 ml vatten."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 30,
+            "id": "s6",
+            "ingredient_keys": [
+              "lammkött|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud ytterligare 30 minuter under lock."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 1,
+            "id": "s7",
+            "ingredient_keys": [
+              "lammkött|raw_edible",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "100 ml",
+                100.0
+              ]
+            ],
+            "text": "Rör igen och kontrollera vätskan. Tillsätt vid behov 100 ml vatten."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 40,
+            "id": "s8",
+            "ingredient_keys": [
+              "lammkött|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud ytterligare cirka 40 minuter under lock."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 2,
+            "id": "s9",
+            "ingredient_keys": [
+              "lammkött|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Kontrollera att lammet är helt genomlagat och så mört att det delar sig lätt med gaffel. Förläng sjudningen vid behov och kontrollera regelbundet vätskan. Behåll allt fett och all sås."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 3,
+            "id": "s10",
+            "ingredient_keys": [
+              "ris|dry",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "560 ml",
+                560.0
+              ]
+            ],
+            "text": "Lägg det i en kastrull med risets salt och 560 ml vatten; koka upp och sänk till låg värme."
+          },
+          {
+            "depends_on": [
+              "s10"
+            ],
+            "duration_minutes": 18,
+            "id": "s11",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Sjud riset under lock cirka 18 minuter eller längre enligt förpackningen, tills kornen är mjuka och vattnet absorberats."
+          },
+          {
+            "depends_on": [
+              "s11"
+            ],
+            "duration_minutes": 1,
+            "id": "s12",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "50 ml",
+                50.0
+              ]
+            ],
+            "text": "Kontrollera riset och ta från värmen. Om det fortfarande är hårt, tillsätt 50 ml vatten och fortsätt sjuda före vilan."
+          },
+          {
+            "depends_on": [
+              "s12"
+            ],
+            "duration_minutes": 5,
+            "id": "s13",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Låt riset vila fem minuter under lock."
+          },
+          {
+            "depends_on": [
+              "s13"
+            ],
+            "duration_minutes": 1,
+            "id": "s14",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Luckra upp riset och håll det varmt över 60 °C under lock tills huvudrätten serveras."
+          },
+          {
+            "depends_on": [
+              "s14"
+            ],
+            "duration_minutes": 8,
+            "id": "s15",
+            "ingredient_keys": [
+              "lammkött|raw_edible",
+              "ris|dry",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Ta av locket från lammgrytan och sjud försiktigt till en koncentrerad sås som omsluter köttet. Fördela med ris."
+          }
+        ],
+        "total_minutes": 170,
+        "variant_id": "standard",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 123
+      },
+      "ingredients": [
+        {
+          "canonical_name": "lammkött",
+          "component": "lamm",
+          "form": "raw_edible",
+          "name": "lammkött",
+          "product_requirements": [
+            "pack:intake_all_f5b22d7b2487",
+            "pack:lamb_braising_cut"
+          ],
+          "quantity": 800.0,
+          "quantity_max": 800.0,
+          "quantity_min": 800.0,
+          "quantity_step": 800.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "yoghurt naturell",
+          "component": "lamm",
+          "form": "as_sold",
+          "name": "yoghurt naturell",
+          "product_requirements": [
+            "plain",
+            "thick"
+          ],
+          "quantity": 220.0,
+          "quantity_max": 220.0,
+          "quantity_min": 220.0,
+          "quantity_step": 220.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "paprikapulver",
+          "component": "lamm",
+          "form": "dry",
+          "name": "paprikapulver",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 8.0,
+          "quantity_max": 8.0,
+          "quantity_min": 8.0,
+          "quantity_step": 8.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "fänkålsfrön",
+          "component": "lamm",
+          "form": "dry",
+          "name": "fänkålsfrön",
+          "product_requirements": [
+            "pack:intake_all_expansion_24d1fa569388"
+          ],
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "malen ingefära",
+          "component": "lamm",
+          "form": "dry",
+          "name": "malen ingefära",
+          "product_requirements": [
+            "pack:intake_all_expansion_a2a82736e843"
+          ],
+          "quantity": 3.0,
+          "quantity_max": 3.0,
+          "quantity_min": 3.0,
+          "quantity_step": 3.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "lamm",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 30.0,
+          "quantity_max": 30.0,
+          "quantity_min": 30.0,
+          "quantity_step": 30.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "lamm",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 7.0,
+          "quantity_max": 7.0,
+          "quantity_min": 7.0,
+          "quantity_step": 7.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kardemumma",
+          "component": "lamm",
+          "form": "dry",
+          "name": "kardemumma",
+          "product_requirements": [
+            "pack:intake_all_930d08a8d175"
+          ],
+          "quantity": 1.2,
+          "quantity_max": 1.2,
+          "quantity_min": 1.2,
+          "quantity_step": 1.2,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kryddnejlika",
+          "component": "lamm",
+          "form": "dry",
+          "name": "kryddnejlika",
+          "product_requirements": [
+            "pack:intake_all_expansion_c8ed716513ba"
+          ],
+          "quantity": 0.5,
+          "quantity_max": 0.5,
+          "quantity_min": 0.5,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kanel",
+          "component": "lamm",
+          "form": "dry",
+          "name": "kanel",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 1.2,
+          "quantity_max": 1.2,
+          "quantity_min": 1.2,
+          "quantity_step": 1.2,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "cayennepeppar",
+          "component": "lamm",
+          "form": "dry",
+          "name": "cayennepeppar",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 0.6,
+          "quantity_max": 0.6,
+          "quantity_min": 0.6,
+          "quantity_step": 0.6,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ris",
+          "component": "ris",
+          "form": "dry",
+          "name": "ris",
+          "product_requirements": [
+            "white_rice"
+          ],
+          "quantity": 280.0,
+          "quantity_max": 280.0,
+          "quantity_min": 280.0,
+          "quantity_step": 280.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Väg benfritt lammkött utan grova senor och skär det i jämna grytbitar. Mal fänkålsfrön fint och blanda med paprikapulver och cayennepeppar, malen ingefära, grytans yoghurt naturell och salt samt kardemumma, kryddnejlika och kanel. De eventuella övriga kryddorna används malda och stannar i såsen.",
+        "Värm oljan i grytan och bryn lammköttet i omgångar. Sänk värmen och tillsätt yoghurtblandningen lite i taget under omrörning. Fräs varsamt tills kryddorna doftar; undvik att bränna mjölkproteinet.",
+        "Häll i 500 ml vatten och koka upp under omrörning. Sänk till svag sjudning och lägg på lock.",
+        "Sjud försiktigt under lock 30 minuter.",
+        "Rör i grytan och kontrollera att bottnen inte bränner. Tillsätt vid behov 100 ml vatten.",
+        "Sjud ytterligare 30 minuter under lock.",
+        "Rör igen och kontrollera vätskan. Tillsätt vid behov 100 ml vatten.",
+        "Sjud ytterligare cirka 40 minuter under lock.",
+        "Kontrollera att lammet är helt genomlagat och så mört att det delar sig lätt med gaffel. Förläng sjudningen vid behov och kontrollera regelbundet vätskan. Behåll allt fett och all sås.",
+        "Lägg det i en kastrull med risets salt och 560 ml vatten; koka upp och sänk till låg värme.",
+        "Sjud riset under lock cirka 18 minuter eller längre enligt förpackningen, tills kornen är mjuka och vattnet absorberats.",
+        "Kontrollera riset och ta från värmen. Om det fortfarande är hårt, tillsätt 50 ml vatten och fortsätt sjuda före vilan.",
+        "Låt riset vila fem minuter under lock.",
+        "Luckra upp riset och håll det varmt över 60 °C under lock tills huvudrätten serveras.",
+        "Ta av locket från lammgrytan och sjud försiktigt till en koncentrerad sås som omsluter köttet. Fördela med ris."
+      ],
+      "name": "Rogan josh – lamm i röd kryddsås – standard – med paprika och cayenne",
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 53,
+        "base_id": "smako-indian-rogan-josh",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "lammkött|raw_edible",
+                "name": "Benfritt lammkött för gryta, rå ätlig vikt",
+                "note": "",
+                "quantity": 800.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "yoghurt naturell|as_sold",
+                "name": "yoghurt naturell",
+                "note": "",
+                "quantity": 220.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "paprikapulver|dry",
+                "name": "Malt paprikapulver, inte rökt paprika",
+                "note": "",
+                "quantity": 8.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "fänkålsfrön|dry",
+                "name": "fänkålsfrön",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "malen ingefära|dry",
+                "name": "malen ingefära",
+                "note": "",
+                "quantity": 3.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "rapsolja",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kardemumma|dry",
+                "name": "Mald kardemumma",
+                "note": "",
+                "quantity": 1.2,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kryddnejlika|dry",
+                "name": "Mald kryddnejlika",
+                "note": "",
+                "quantity": 0.5,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kanel|dry",
+                "name": "Mald kanel",
+                "note": "",
+                "quantity": 1.2,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "cayennepeppar|dry",
+                "name": "Malen cayennepeppar",
+                "note": "",
+                "quantity": 0.6,
+                "unit": "g"
+              }
+            ],
+            "id": "lamm",
+            "name": "Röd lammgryta"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "yoghurt naturell|as_sold",
+                "name": "yoghurt naturell",
+                "note": "",
+                "quantity": 250.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gurka|raw_edible",
+                "name": "gurka",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "mynta|raw_edible",
+                "name": "mynta",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "citronjuice|as_sold",
+                "name": "citronjuice",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              }
+            ],
+            "id": "raita",
+            "name": "Gurkraita"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ris|dry",
+                "name": "ris",
+                "note": "",
+                "quantity": 280.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              }
+            ],
+            "id": "ris",
+            "name": "Kokt ris"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "indian"
+        ],
+        "equipment": [
+          "gryta",
+          "skål",
+          "kryddkvarn eller mortel"
+        ],
+        "estimated_minutes": 176,
+        "family": "rogan josh",
+        "fish": false,
+        "flavor_profile": [
+          "paprika",
+          "cayenne",
+          "fänkålsfrö",
+          "torkad ingefära"
+        ],
+        "ingredient_count": 14,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "pot",
+        "primary_ingredient": "lammkött",
+        "provenance": {
+          "notes": "Granskad vardagsanpassning av rogan josh med lamm, yoghurt, fänkålsfrö och torkad ingefära, utan tomat. Ny dos 8 g paprikapulver och 0,6 g cayenne ersätter 10 g kashmirichili utan påstående om samma hetta, smak eller färg. Rapsolja används i stället för senapsolja/ghee och ratanjot utelämnas. Inte provlagad; tiderna är uppskattningar. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "ris",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 10,
+            "id": "s1",
+            "ingredient_keys": [
+              "cayennepeppar|dry",
+              "fänkålsfrön|dry",
+              "kanel|dry",
+              "kardemumma|dry",
+              "kryddnejlika|dry",
+              "lammkött|raw_edible",
+              "malen ingefära|dry",
+              "paprikapulver|dry",
+              "salt|as_sold",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Väg benfritt lammkött utan grova senor och skär det i jämna grytbitar. Mal fänkålsfrön fint och blanda med paprikapulver och cayennepeppar, malen ingefära, grytans yoghurt naturell och salt samt kardemumma, kryddnejlika och kanel. De eventuella övriga kryddorna används malda och stannar i såsen."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 17,
+            "id": "s2",
+            "ingredient_keys": [
+              "cayennepeppar|dry",
+              "fänkålsfrön|dry",
+              "lammkött|raw_edible",
+              "malen ingefära|dry",
+              "paprikapulver|dry",
+              "rapsolja|as_sold",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Värm oljan i grytan och bryn lammköttet i omgångar. Sänk värmen och tillsätt yoghurtblandningen lite i taget under omrörning. Fräs varsamt tills kryddorna doftar; undvik att bränna mjölkproteinet."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 3,
+            "id": "s3",
+            "ingredient_keys": [
+              "lammkött|raw_edible",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "500 ml",
+                500.0
+              ]
+            ],
+            "text": "Häll i 500 ml vatten och koka upp under omrörning. Sänk till svag sjudning och lägg på lock."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 30,
+            "id": "s4",
+            "ingredient_keys": [
+              "lammkött|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud försiktigt under lock 30 minuter."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 1,
+            "id": "s5",
+            "ingredient_keys": [
+              "lammkött|raw_edible",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "100 ml",
+                100.0
+              ]
+            ],
+            "text": "Rör i grytan och kontrollera att bottnen inte bränner. Tillsätt vid behov 100 ml vatten."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 30,
+            "id": "s6",
+            "ingredient_keys": [
+              "lammkött|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud ytterligare 30 minuter under lock."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 1,
+            "id": "s7",
+            "ingredient_keys": [
+              "lammkött|raw_edible",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "100 ml",
+                100.0
+              ]
+            ],
+            "text": "Rör igen och kontrollera vätskan. Tillsätt vid behov 100 ml vatten."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 40,
+            "id": "s8",
+            "ingredient_keys": [
+              "lammkött|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud ytterligare cirka 40 minuter under lock."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 2,
+            "id": "s9",
+            "ingredient_keys": [
+              "lammkött|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Kontrollera att lammet är helt genomlagat och så mört att det delar sig lätt med gaffel. Förläng sjudningen vid behov och kontrollera regelbundet vätskan. Behåll allt fett och all sås."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 3,
+            "id": "s10",
+            "ingredient_keys": [
+              "ris|dry",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "560 ml",
+                560.0
+              ]
+            ],
+            "text": "Lägg det i en kastrull med risets salt och 560 ml vatten; koka upp och sänk till låg värme."
+          },
+          {
+            "depends_on": [
+              "s10"
+            ],
+            "duration_minutes": 18,
+            "id": "s11",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Sjud riset under lock cirka 18 minuter eller längre enligt förpackningen, tills kornen är mjuka och vattnet absorberats."
+          },
+          {
+            "depends_on": [
+              "s11"
+            ],
+            "duration_minutes": 1,
+            "id": "s12",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "50 ml",
+                50.0
+              ]
+            ],
+            "text": "Kontrollera riset och ta från värmen. Om det fortfarande är hårt, tillsätt 50 ml vatten och fortsätt sjuda före vilan."
+          },
+          {
+            "depends_on": [
+              "s12"
+            ],
+            "duration_minutes": 5,
+            "id": "s13",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Låt riset vila fem minuter under lock."
+          },
+          {
+            "depends_on": [
+              "s13"
+            ],
+            "duration_minutes": 1,
+            "id": "s14",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Luckra upp riset och håll det varmt över 60 °C under lock tills huvudrätten serveras."
+          },
+          {
+            "depends_on": [
+              "s14"
+            ],
+            "duration_minutes": 6,
+            "id": "s15",
+            "ingredient_keys": [
+              "citronjuice|as_sold",
+              "gurka|raw_edible",
+              "mynta|raw_edible",
+              "salt|as_sold",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Riv den uppvägda gurkan grovt och behåll all vätska. Hacka de uppvägda färska myntabladen och blanda gurka, all gurksaft och mynta med raitans yoghurt, citronjuice och salt. Raitan blir lösare än med pressad gurka. Ställ i kylskåp vid 4 °C till servering och servera hela mängden."
+          },
+          {
+            "depends_on": [
+              "s15"
+            ],
+            "duration_minutes": 8,
+            "id": "s16",
+            "ingredient_keys": [
+              "gurka|raw_edible",
+              "lammkött|raw_edible",
+              "mynta|raw_edible",
+              "ris|dry",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Ta av locket från lammgrytan och sjud försiktigt till en koncentrerad sås som omsluter köttet. Fördela med ris och kall gurkraita."
+          }
+        ],
+        "total_minutes": 176,
+        "variant_id": "extended",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 123
+      },
+      "ingredients": [
+        {
+          "canonical_name": "lammkött",
+          "component": "lamm",
+          "form": "raw_edible",
+          "name": "lammkött",
+          "product_requirements": [
+            "pack:intake_all_f5b22d7b2487",
+            "pack:lamb_braising_cut"
+          ],
+          "quantity": 800.0,
+          "quantity_max": 800.0,
+          "quantity_min": 800.0,
+          "quantity_step": 800.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "yoghurt naturell",
+          "component": "lamm",
+          "form": "as_sold",
+          "name": "yoghurt naturell",
+          "product_requirements": [
+            "plain",
+            "thick"
+          ],
+          "quantity": 470.0,
+          "quantity_max": 470.0,
+          "quantity_min": 470.0,
+          "quantity_step": 470.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "paprikapulver",
+          "component": "lamm",
+          "form": "dry",
+          "name": "paprikapulver",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 8.0,
+          "quantity_max": 8.0,
+          "quantity_min": 8.0,
+          "quantity_step": 8.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "fänkålsfrön",
+          "component": "lamm",
+          "form": "dry",
+          "name": "fänkålsfrön",
+          "product_requirements": [
+            "pack:intake_all_expansion_24d1fa569388"
+          ],
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "malen ingefära",
+          "component": "lamm",
+          "form": "dry",
+          "name": "malen ingefära",
+          "product_requirements": [
+            "pack:intake_all_expansion_a2a82736e843"
+          ],
+          "quantity": 3.0,
+          "quantity_max": 3.0,
+          "quantity_min": 3.0,
+          "quantity_step": 3.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "lamm",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 30.0,
+          "quantity_max": 30.0,
+          "quantity_min": 30.0,
+          "quantity_step": 30.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "lamm",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 8.0,
+          "quantity_max": 8.0,
+          "quantity_min": 8.0,
+          "quantity_step": 8.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kardemumma",
+          "component": "lamm",
+          "form": "dry",
+          "name": "kardemumma",
+          "product_requirements": [
+            "pack:intake_all_930d08a8d175"
+          ],
+          "quantity": 1.2,
+          "quantity_max": 1.2,
+          "quantity_min": 1.2,
+          "quantity_step": 1.2,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kryddnejlika",
+          "component": "lamm",
+          "form": "dry",
+          "name": "kryddnejlika",
+          "product_requirements": [
+            "pack:intake_all_expansion_c8ed716513ba"
+          ],
+          "quantity": 0.5,
+          "quantity_max": 0.5,
+          "quantity_min": 0.5,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kanel",
+          "component": "lamm",
+          "form": "dry",
+          "name": "kanel",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 1.2,
+          "quantity_max": 1.2,
+          "quantity_min": 1.2,
+          "quantity_step": 1.2,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "cayennepeppar",
+          "component": "lamm",
+          "form": "dry",
+          "name": "cayennepeppar",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 0.6,
+          "quantity_max": 0.6,
+          "quantity_min": 0.6,
+          "quantity_step": 0.6,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gurka",
+          "component": "raita",
+          "form": "raw_edible",
+          "name": "gurka",
+          "quantity": 300.0,
+          "quantity_max": 300.0,
+          "quantity_min": 300.0,
+          "quantity_step": 300.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "mynta",
+          "component": "raita",
+          "form": "raw_edible",
+          "name": "mynta",
+          "product_requirements": [
+            "pack:intake_all_shape_trimmed_mint"
+          ],
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 10.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "citronjuice",
+          "component": "raita",
+          "form": "as_sold",
+          "name": "citronjuice",
+          "product_requirements": [
+            "pure_juice"
+          ],
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 25.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "ris",
+          "component": "ris",
+          "form": "dry",
+          "name": "ris",
+          "product_requirements": [
+            "white_rice"
+          ],
+          "quantity": 280.0,
+          "quantity_max": 280.0,
+          "quantity_min": 280.0,
+          "quantity_step": 280.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Väg benfritt lammkött utan grova senor och skär det i jämna grytbitar. Mal fänkålsfrön fint och blanda med paprikapulver och cayennepeppar, malen ingefära, grytans yoghurt naturell och salt samt kardemumma, kryddnejlika och kanel. De eventuella övriga kryddorna används malda och stannar i såsen.",
+        "Värm oljan i grytan och bryn lammköttet i omgångar. Sänk värmen och tillsätt yoghurtblandningen lite i taget under omrörning. Fräs varsamt tills kryddorna doftar; undvik att bränna mjölkproteinet.",
+        "Häll i 500 ml vatten och koka upp under omrörning. Sänk till svag sjudning och lägg på lock.",
+        "Sjud försiktigt under lock 30 minuter.",
+        "Rör i grytan och kontrollera att bottnen inte bränner. Tillsätt vid behov 100 ml vatten.",
+        "Sjud ytterligare 30 minuter under lock.",
+        "Rör igen och kontrollera vätskan. Tillsätt vid behov 100 ml vatten.",
+        "Sjud ytterligare cirka 40 minuter under lock.",
+        "Kontrollera att lammet är helt genomlagat och så mört att det delar sig lätt med gaffel. Förläng sjudningen vid behov och kontrollera regelbundet vätskan. Behåll allt fett och all sås.",
+        "Lägg det i en kastrull med risets salt och 560 ml vatten; koka upp och sänk till låg värme.",
+        "Sjud riset under lock cirka 18 minuter eller längre enligt förpackningen, tills kornen är mjuka och vattnet absorberats.",
+        "Kontrollera riset och ta från värmen. Om det fortfarande är hårt, tillsätt 50 ml vatten och fortsätt sjuda före vilan.",
+        "Låt riset vila fem minuter under lock.",
+        "Luckra upp riset och håll det varmt över 60 °C under lock tills huvudrätten serveras.",
+        "Riv den uppvägda gurkan grovt och behåll all vätska. Hacka de uppvägda färska myntabladen och blanda gurka, all gurksaft och mynta med raitans yoghurt, citronjuice och salt. Raitan blir lösare än med pressad gurka. Ställ i kylskåp vid 4 °C till servering och servera hela mängden.",
+        "Ta av locket från lammgrytan och sjud försiktigt till en koncentrerad sås som omsluter köttet. Fördela med ris och kall gurkraita."
+      ],
+      "name": "Rogan josh – lamm i röd kryddsås – utökad – med paprika och cayenne",
+      "servings": 4
+    }
+  ],
+  "schema_version": "smako-meal-pack-v1"
+}

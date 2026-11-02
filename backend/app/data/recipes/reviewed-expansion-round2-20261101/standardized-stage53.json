@@ -1,0 +1,1448 @@
+{
+  "pack_id": "reviewed-expansion-round2-stage53",
+  "recipes": [
+    {
+      "design": {
+        "active_minutes": 38,
+        "base_id": "smako-italian-zuppa-valpellinentze",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "surdegsfralla|as_sold",
+                "name": "Svensk surdegsfralla, uppvägd före torkning",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitkål|raw_edible",
+                "name": "vitkål",
+                "note": "",
+                "quantity": 600.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gruyère|as_sold",
+                "name": "Gruyère, inköpt mängd före borttagning av kant",
+                "note": "",
+                "quantity": 220.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "smör|as_sold",
+                "name": "Smör",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "Gul lök",
+                "note": "",
+                "quantity": 120.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "morot|raw_edible",
+                "name": "Morot",
+                "note": "",
+                "quantity": 120.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "selleri|raw_edible",
+                "name": "Selleri",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 3.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "Svartpeppar",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c1",
+            "name": "Ugnsbakad brödsoppa"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "italian"
+        ],
+        "equipment": [
+          "ugn",
+          "ugnssäker form",
+          "kastrull"
+        ],
+        "estimated_minutes": 113,
+        "family": "layered_bread_cabbage_fontina_soup",
+        "fish": false,
+        "flavor_profile": [
+          "fontina",
+          "savojkål"
+        ],
+        "ingredient_count": 7,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "oven",
+        "primary_ingredient": "vitkål och gruyère",
+        "provenance": {
+          "notes": "Granskad bröd- och kålgratäng med 220 g inköpt Gruyère före kantputsning i stället för fontina, 600 g ansad vitkål och 300 g surdegsfralla. Inga identiska ostar eller kålformer påstås. Brödet torkas i ugnen före lagring och allt grönsaksspad används. Initialt kokvatten minskas uttryckligen från 1000 till 400 ml för en saftig gratäng utan bortkastad buljong. Eventuell ostkant har okänt utbyte. Inte provlagad. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "ingen separat sida",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 4,
+            "id": "s1",
+            "ingredient_keys": [
+              "surdegsfralla|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sätt ugnen på 150 °C. Väg surdegsfrallorna före torkning och skiva centimetertjockt. Lägg på en torr plåt; ingen extra olja används."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 20,
+            "id": "s2",
+            "ingredient_keys": [
+              "surdegsfralla|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Torka brödskivorna i ugnen cirka tjugo minuter. De ska bli torra utan att brännas."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 13,
+            "id": "s3",
+            "ingredient_keys": [
+              "gruyère|as_sold",
+              "gul lök|raw_edible",
+              "morot|raw_edible",
+              "selleri|raw_edible",
+              "surdegsfralla|as_sold",
+              "vitkål|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Ta ut brödet och höj ugnen till 210 °C. Väg osten före eventuell kantputsning, avlägsna hård kant och riv resten grovt utan att fylla på extra ost. Ta bort kålens hårda rotstock och ytterblad, väg den ätliga mängden och strimla tunt. Skala lök och morot, ansa selleri, väg ätliga mängder och tärna smått."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 8,
+            "id": "s4",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "morot|raw_edible",
+              "salt|as_sold",
+              "selleri|raw_edible",
+              "smör|as_sold",
+              "svartpeppar|dry",
+              "vitkål|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "400 ml",
+                400.0
+              ]
+            ],
+            "text": "Fräs lök, morot och selleri i en tredjedel av smöret i en stor kastrull i fem minuter. Tillsätt 400 ml vatten, salt, peppar och kål. Koka upp."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 20,
+            "id": "s5",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "morot|raw_edible",
+              "selleri|raw_edible",
+              "vitkål|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud kålen och övriga grönsaker under lock cirka tjugo minuter."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 9,
+            "id": "s6",
+            "ingredient_keys": [
+              "gruyère|as_sold",
+              "smör|as_sold",
+              "surdegsfralla|as_sold",
+              "vitkål|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "100 ml",
+                100.0
+              ]
+            ],
+            "text": "Kontrollera att kålen är mjuk. Är den fortfarande hård, tillsätt vid behov 100 ml vatten och förläng sjudningen. Behåll alla grönsaker och allt spad. Smörj en ugnsform med en del av återstående smör. Varva torkat bröd, grönsaker och ost; avsluta med ost. Fördela allt spad jämnt och klicka resten av smöret ovanpå."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 35,
+            "id": "s7",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Gratinera i mitten av ugnen tills allt är hett och ostytan blivit gyllene, omkring 35 minuter. Brödet ska ha mjuknat och rätten vara saftig men inte vattnig."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 2,
+            "id": "s8",
+            "ingredient_keys": [
+              "gruyère|as_sold",
+              "surdegsfralla|as_sold",
+              "vitkål|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Kontrollera att mitten är genomhet och ytan gyllene; förläng gräddningen vid behov. Behåll och servera hela formens innehåll."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 2,
+            "id": "s9",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Fördela den varma gratängen och all dess sky mellan portionerna."
+          }
+        ],
+        "total_minutes": 113,
+        "unmeasured_processes": [
+          {
+            "description": "Gruyère vägs före eventuell kantputsning. Kantens andel och kvarvarande ätlig vikt är inte uppmätta.",
+            "ingredient_keys": [
+              "gruyère|as_sold"
+            ],
+            "operation": "trim_before_cooking",
+            "step_id": "s3"
+          }
+        ],
+        "variant_id": "simple",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 75
+      },
+      "ingredients": [
+        {
+          "canonical_name": "surdegsfralla",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "surdegsfralla",
+          "product_requirements": [
+            "pack:intake_all_round2_92b88e0a5856"
+          ],
+          "quantity": 300.0,
+          "quantity_max": 300.0,
+          "quantity_min": 300.0,
+          "quantity_step": 300.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitkål",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "vitkål",
+          "quantity": 600.0,
+          "quantity_max": 600.0,
+          "quantity_min": 600.0,
+          "quantity_step": 600.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gruyère",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "gruyère",
+          "product_requirements": [
+            "pack:intake_all_round2_329585565c35"
+          ],
+          "quantity": 220.0,
+          "quantity_max": 220.0,
+          "quantity_min": 220.0,
+          "quantity_step": 220.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "smör",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "smör",
+          "product_requirements": [
+            "pack:intake_butter"
+          ],
+          "quantity": 30.0,
+          "quantity_max": 30.0,
+          "quantity_min": 30.0,
+          "quantity_step": 30.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 120.0,
+          "quantity_max": 120.0,
+          "quantity_min": 120.0,
+          "quantity_step": 120.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "morot",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "morot",
+          "quantity": 120.0,
+          "quantity_max": 120.0,
+          "quantity_min": 120.0,
+          "quantity_step": 120.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "selleri",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "selleri",
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 3.0,
+          "quantity_max": 3.0,
+          "quantity_min": 3.0,
+          "quantity_step": 3.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "c1",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Sätt ugnen på 150 °C. Väg surdegsfrallorna före torkning och skiva centimetertjockt. Lägg på en torr plåt; ingen extra olja används.",
+        "Torka brödskivorna i ugnen cirka tjugo minuter. De ska bli torra utan att brännas.",
+        "Ta ut brödet och höj ugnen till 210 °C. Väg osten före eventuell kantputsning, avlägsna hård kant och riv resten grovt utan att fylla på extra ost. Ta bort kålens hårda rotstock och ytterblad, väg den ätliga mängden och strimla tunt. Skala lök och morot, ansa selleri, väg ätliga mängder och tärna smått.",
+        "Fräs lök, morot och selleri i en tredjedel av smöret i en stor kastrull i fem minuter. Tillsätt 400 ml vatten, salt, peppar och kål. Koka upp.",
+        "Sjud kålen och övriga grönsaker under lock cirka tjugo minuter.",
+        "Kontrollera att kålen är mjuk. Är den fortfarande hård, tillsätt vid behov 100 ml vatten och förläng sjudningen. Behåll alla grönsaker och allt spad. Smörj en ugnsform med en del av återstående smör. Varva torkat bröd, grönsaker och ost; avsluta med ost. Fördela allt spad jämnt och klicka resten av smöret ovanpå.",
+        "Gratinera i mitten av ugnen tills allt är hett och ostytan blivit gyllene, omkring 35 minuter. Brödet ska ha mjuknat och rätten vara saftig men inte vattnig.",
+        "Kontrollera att mitten är genomhet och ytan gyllene; förläng gräddningen vid behov. Behåll och servera hela formens innehåll.",
+        "Fördela den varma gratängen och all dess sky mellan portionerna."
+      ],
+      "name": "Zuppa valpellinentze – brödsoppa med savojkål och fontina – med gruyère, vitkål och surdegsfralla",
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 38,
+        "base_id": "smako-italian-zuppa-valpellinentze",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "surdegsfralla|as_sold",
+                "name": "Svensk surdegsfralla, uppvägd före torkning",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitkål|raw_edible",
+                "name": "vitkål",
+                "note": "",
+                "quantity": 600.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gruyère|as_sold",
+                "name": "Gruyère, inköpt mängd före borttagning av kant",
+                "note": "",
+                "quantity": 220.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "smör|as_sold",
+                "name": "Smör",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "Gul lök",
+                "note": "",
+                "quantity": 120.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "morot|raw_edible",
+                "name": "Morot",
+                "note": "",
+                "quantity": 120.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "selleri|raw_edible",
+                "name": "Selleri",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 3.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "Svartpeppar",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "Vitlök",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "timjan|dry",
+                "name": "Timjan",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "muskot|dry",
+                "name": "Muskot",
+                "note": "",
+                "quantity": 0.4,
+                "unit": "g"
+              }
+            ],
+            "id": "c1",
+            "name": "Ugnsbakad brödsoppa"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "italian"
+        ],
+        "equipment": [
+          "ugn",
+          "ugnssäker form",
+          "kastrull"
+        ],
+        "estimated_minutes": 113,
+        "family": "layered_bread_cabbage_fontina_soup",
+        "fish": false,
+        "flavor_profile": [
+          "fontina",
+          "savojkål"
+        ],
+        "ingredient_count": 10,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "oven",
+        "primary_ingredient": "vitkål och gruyère",
+        "provenance": {
+          "notes": "Granskad bröd- och kålgratäng med 220 g inköpt Gruyère före kantputsning i stället för fontina, 600 g ansad vitkål och 300 g surdegsfralla. Inga identiska ostar eller kålformer påstås. Brödet torkas i ugnen före lagring och allt grönsaksspad används. Initialt kokvatten minskas uttryckligen från 1000 till 400 ml för en saftig gratäng utan bortkastad buljong. Eventuell ostkant har okänt utbyte. Inte provlagad. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "ingen separat sida",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 4,
+            "id": "s1",
+            "ingredient_keys": [
+              "surdegsfralla|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sätt ugnen på 150 °C. Väg surdegsfrallorna före torkning och skiva centimetertjockt. Lägg på en torr plåt; ingen extra olja används."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 20,
+            "id": "s2",
+            "ingredient_keys": [
+              "surdegsfralla|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Torka brödskivorna i ugnen cirka tjugo minuter. De ska bli torra utan att brännas."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 13,
+            "id": "s3",
+            "ingredient_keys": [
+              "gruyère|as_sold",
+              "gul lök|raw_edible",
+              "morot|raw_edible",
+              "selleri|raw_edible",
+              "surdegsfralla|as_sold",
+              "vitkål|raw_edible",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Ta ut brödet och höj ugnen till 210 °C. Väg osten före eventuell kantputsning, avlägsna hård kant och riv resten grovt utan att fylla på extra ost. Ta bort kålens hårda rotstock och ytterblad, väg den ätliga mängden och strimla tunt. Skala lök och morot, ansa selleri, väg ätliga mängder och tärna smått. Väg färsk eller fryst hackad vitlök."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 8,
+            "id": "s4",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "morot|raw_edible",
+              "salt|as_sold",
+              "selleri|raw_edible",
+              "smör|as_sold",
+              "svartpeppar|dry",
+              "timjan|dry",
+              "vitkål|raw_edible",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "400 ml",
+                400.0
+              ]
+            ],
+            "text": "Fräs lök, morot och selleri i en tredjedel av smöret i en stor kastrull i fem minuter. Lägg i vitlök och timjan den sista minuten. Tillsätt 400 ml vatten, salt, peppar och kål. Koka upp."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 20,
+            "id": "s5",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "morot|raw_edible",
+              "selleri|raw_edible",
+              "vitkål|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud kålen och övriga grönsaker under lock cirka tjugo minuter."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 9,
+            "id": "s6",
+            "ingredient_keys": [
+              "gruyère|as_sold",
+              "muskot|dry",
+              "smör|as_sold",
+              "surdegsfralla|as_sold",
+              "vitkål|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "100 ml",
+                100.0
+              ]
+            ],
+            "text": "Kontrollera att kålen är mjuk. Är den fortfarande hård, tillsätt vid behov 100 ml vatten och förläng sjudningen. Behåll alla grönsaker och allt spad. Smörj en ugnsform med en del av återstående smör. Varva torkat bröd, grönsaker och ost; avsluta med ost. Fördela allt spad jämnt och klicka resten av smöret ovanpå. Strö över muskot."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 35,
+            "id": "s7",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Gratinera i mitten av ugnen tills allt är hett och ostytan blivit gyllene, omkring 35 minuter. Brödet ska ha mjuknat och rätten vara saftig men inte vattnig."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 2,
+            "id": "s8",
+            "ingredient_keys": [
+              "gruyère|as_sold",
+              "surdegsfralla|as_sold",
+              "vitkål|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Kontrollera att mitten är genomhet och ytan gyllene; förläng gräddningen vid behov. Behåll och servera hela formens innehåll."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 2,
+            "id": "s9",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Fördela den varma gratängen och all dess sky mellan portionerna."
+          }
+        ],
+        "total_minutes": 113,
+        "unmeasured_processes": [
+          {
+            "description": "Gruyère vägs före eventuell kantputsning. Kantens andel och kvarvarande ätlig vikt är inte uppmätta.",
+            "ingredient_keys": [
+              "gruyère|as_sold"
+            ],
+            "operation": "trim_before_cooking",
+            "step_id": "s3"
+          }
+        ],
+        "variant_id": "standard",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 75
+      },
+      "ingredients": [
+        {
+          "canonical_name": "surdegsfralla",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "surdegsfralla",
+          "product_requirements": [
+            "pack:intake_all_round2_92b88e0a5856"
+          ],
+          "quantity": 300.0,
+          "quantity_max": 300.0,
+          "quantity_min": 300.0,
+          "quantity_step": 300.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitkål",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "vitkål",
+          "quantity": 600.0,
+          "quantity_max": 600.0,
+          "quantity_min": 600.0,
+          "quantity_step": 600.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gruyère",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "gruyère",
+          "product_requirements": [
+            "pack:intake_all_round2_329585565c35"
+          ],
+          "quantity": 220.0,
+          "quantity_max": 220.0,
+          "quantity_min": 220.0,
+          "quantity_step": 220.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "smör",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "smör",
+          "product_requirements": [
+            "pack:intake_butter"
+          ],
+          "quantity": 30.0,
+          "quantity_max": 30.0,
+          "quantity_min": 30.0,
+          "quantity_step": 30.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 120.0,
+          "quantity_max": 120.0,
+          "quantity_min": 120.0,
+          "quantity_step": 120.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "morot",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "morot",
+          "quantity": 120.0,
+          "quantity_max": 120.0,
+          "quantity_min": 120.0,
+          "quantity_step": 120.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "selleri",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "selleri",
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 3.0,
+          "quantity_max": 3.0,
+          "quantity_min": 3.0,
+          "quantity_step": 3.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "c1",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 10.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "timjan",
+          "component": "c1",
+          "form": "dry",
+          "name": "timjan",
+          "product_requirements": [
+            "pack:intake_thyme"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "muskot",
+          "component": "c1",
+          "form": "dry",
+          "name": "muskot",
+          "product_requirements": [
+            "pack:intake_all_33f4eb9d910f"
+          ],
+          "quantity": 0.4,
+          "quantity_max": 0.4,
+          "quantity_min": 0.4,
+          "quantity_step": 0.4,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Sätt ugnen på 150 °C. Väg surdegsfrallorna före torkning och skiva centimetertjockt. Lägg på en torr plåt; ingen extra olja används.",
+        "Torka brödskivorna i ugnen cirka tjugo minuter. De ska bli torra utan att brännas.",
+        "Ta ut brödet och höj ugnen till 210 °C. Väg osten före eventuell kantputsning, avlägsna hård kant och riv resten grovt utan att fylla på extra ost. Ta bort kålens hårda rotstock och ytterblad, väg den ätliga mängden och strimla tunt. Skala lök och morot, ansa selleri, väg ätliga mängder och tärna smått. Väg färsk eller fryst hackad vitlök.",
+        "Fräs lök, morot och selleri i en tredjedel av smöret i en stor kastrull i fem minuter. Lägg i vitlök och timjan den sista minuten. Tillsätt 400 ml vatten, salt, peppar och kål. Koka upp.",
+        "Sjud kålen och övriga grönsaker under lock cirka tjugo minuter.",
+        "Kontrollera att kålen är mjuk. Är den fortfarande hård, tillsätt vid behov 100 ml vatten och förläng sjudningen. Behåll alla grönsaker och allt spad. Smörj en ugnsform med en del av återstående smör. Varva torkat bröd, grönsaker och ost; avsluta med ost. Fördela allt spad jämnt och klicka resten av smöret ovanpå. Strö över muskot.",
+        "Gratinera i mitten av ugnen tills allt är hett och ostytan blivit gyllene, omkring 35 minuter. Brödet ska ha mjuknat och rätten vara saftig men inte vattnig.",
+        "Kontrollera att mitten är genomhet och ytan gyllene; förläng gräddningen vid behov. Behåll och servera hela formens innehåll.",
+        "Fördela den varma gratängen och all dess sky mellan portionerna."
+      ],
+      "name": "Zuppa valpellinentze – med örter och muskot – med gruyère, vitkål och surdegsfralla",
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 42,
+        "base_id": "smako-italian-zuppa-valpellinentze",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "surdegsfralla|as_sold",
+                "name": "Svensk surdegsfralla, uppvägd före torkning",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitkål|raw_edible",
+                "name": "vitkål",
+                "note": "",
+                "quantity": 600.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gruyère|as_sold",
+                "name": "Gruyère, inköpt mängd före borttagning av kant",
+                "note": "",
+                "quantity": 220.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "smör|as_sold",
+                "name": "Smör",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "Gul lök",
+                "note": "",
+                "quantity": 120.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "morot|raw_edible",
+                "name": "Morot",
+                "note": "",
+                "quantity": 120.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "selleri|raw_edible",
+                "name": "Selleri",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 3.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "Svartpeppar",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "Vitlök",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "timjan|dry",
+                "name": "Timjan",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "muskot|dry",
+                "name": "Muskot",
+                "note": "",
+                "quantity": 0.4,
+                "unit": "g"
+              }
+            ],
+            "id": "c1",
+            "name": "Ugnsbakad brödsoppa"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "broccoli|as_sold",
+                "name": "Frysta naturella broccolibuketter",
+                "note": "",
+                "quantity": 400.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "olivolja|as_sold",
+                "name": "Olivolja",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "citronjuice|as_sold",
+                "name": "Citronjuice",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "c2",
+            "name": "Rostad citronbroccoli"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "italian"
+        ],
+        "equipment": [
+          "ugn",
+          "ugnssäker form",
+          "kastrull"
+        ],
+        "estimated_minutes": 139,
+        "family": "layered_bread_cabbage_fontina_soup",
+        "fish": false,
+        "flavor_profile": [
+          "fontina",
+          "savojkål"
+        ],
+        "ingredient_count": 13,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "oven",
+        "primary_ingredient": "vitkål och gruyère",
+        "provenance": {
+          "notes": "Granskad bröd- och kålgratäng med 220 g inköpt Gruyère före kantputsning i stället för fontina, 600 g ansad vitkål och 300 g surdegsfralla. Inga identiska ostar eller kålformer påstås. Brödet torkas i ugnen före lagring och allt grönsaksspad används. Initialt kokvatten minskas uttryckligen från 1000 till 400 ml för en saftig gratäng utan bortkastad buljong. Eventuell ostkant har okänt utbyte. Inte provlagad. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "citronbroccoli",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 4,
+            "id": "s1",
+            "ingredient_keys": [
+              "surdegsfralla|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sätt ugnen på 150 °C. Väg surdegsfrallorna före torkning och skiva centimetertjockt. Lägg på en torr plåt; ingen extra olja används."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 20,
+            "id": "s2",
+            "ingredient_keys": [
+              "surdegsfralla|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Torka brödskivorna i ugnen cirka tjugo minuter. De ska bli torra utan att brännas."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 13,
+            "id": "s3",
+            "ingredient_keys": [
+              "gruyère|as_sold",
+              "gul lök|raw_edible",
+              "morot|raw_edible",
+              "selleri|raw_edible",
+              "surdegsfralla|as_sold",
+              "vitkål|raw_edible",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Ta ut brödet och höj ugnen till 210 °C. Väg osten före eventuell kantputsning, avlägsna hård kant och riv resten grovt utan att fylla på extra ost. Ta bort kålens hårda rotstock och ytterblad, väg den ätliga mängden och strimla tunt. Skala lök och morot, ansa selleri, väg ätliga mängder och tärna smått. Väg färsk eller fryst hackad vitlök."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 8,
+            "id": "s4",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "morot|raw_edible",
+              "salt|as_sold",
+              "selleri|raw_edible",
+              "smör|as_sold",
+              "svartpeppar|dry",
+              "timjan|dry",
+              "vitkål|raw_edible",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "400 ml",
+                400.0
+              ]
+            ],
+            "text": "Fräs lök, morot och selleri i en tredjedel av smöret i en stor kastrull i fem minuter. Lägg i vitlök och timjan den sista minuten. Tillsätt 400 ml vatten, salt, peppar och kål. Koka upp."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 20,
+            "id": "s5",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "morot|raw_edible",
+              "selleri|raw_edible",
+              "vitkål|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud kålen och övriga grönsaker under lock cirka tjugo minuter."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 9,
+            "id": "s6",
+            "ingredient_keys": [
+              "gruyère|as_sold",
+              "muskot|dry",
+              "smör|as_sold",
+              "surdegsfralla|as_sold",
+              "vitkål|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "100 ml",
+                100.0
+              ]
+            ],
+            "text": "Kontrollera att kålen är mjuk. Är den fortfarande hård, tillsätt vid behov 100 ml vatten och förläng sjudningen. Behåll alla grönsaker och allt spad. Smörj en ugnsform med en del av återstående smör. Varva torkat bröd, grönsaker och ost; avsluta med ost. Fördela allt spad jämnt och klicka resten av smöret ovanpå. Strö över muskot."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 35,
+            "id": "s7",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Gratinera i mitten av ugnen tills allt är hett och ostytan blivit gyllene, omkring 35 minuter. Brödet ska ha mjuknat och rätten vara saftig men inte vattnig."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 2,
+            "id": "s8",
+            "ingredient_keys": [
+              "gruyère|as_sold",
+              "surdegsfralla|as_sold",
+              "vitkål|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Kontrollera att mitten är genomhet och ytan gyllene; förläng gräddningen vid behov. Behåll och servera hela formens innehåll."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 3,
+            "id": "s9",
+            "ingredient_keys": [
+              "broccoli|as_sold",
+              "olivolja|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Väg frysta broccolibuketter utan att tina eller sila. Vänd med tillbehörets olivolja på en plåt. Håll brödformen täckt och varm över 60 °C medan broccolin rostas."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 22,
+            "id": "s10",
+            "ingredient_keys": [
+              "broccoli|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Rosta broccolin i den varma ugnen cirka tjugotvå minuter eller längre enligt förpackningen."
+          },
+          {
+            "depends_on": [
+              "s10"
+            ],
+            "duration_minutes": 3,
+            "id": "s11",
+            "ingredient_keys": [
+              "broccoli|as_sold",
+              "citronjuice|as_sold",
+              "olivolja|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Kontrollera mjuk, helt genomhet broccoli. Vänd med citronjuicen och all kvarvarande plåtsky och servera med den varma gratängen."
+          }
+        ],
+        "total_minutes": 139,
+        "unmeasured_processes": [
+          {
+            "description": "Gruyère vägs före eventuell kantputsning. Kantens andel och kvarvarande ätlig vikt är inte uppmätta.",
+            "ingredient_keys": [
+              "gruyère|as_sold"
+            ],
+            "operation": "trim_before_cooking",
+            "step_id": "s3"
+          }
+        ],
+        "variant_id": "extended",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 97
+      },
+      "ingredients": [
+        {
+          "canonical_name": "surdegsfralla",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "surdegsfralla",
+          "product_requirements": [
+            "pack:intake_all_round2_92b88e0a5856"
+          ],
+          "quantity": 300.0,
+          "quantity_max": 300.0,
+          "quantity_min": 300.0,
+          "quantity_step": 300.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitkål",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "vitkål",
+          "quantity": 600.0,
+          "quantity_max": 600.0,
+          "quantity_min": 600.0,
+          "quantity_step": 600.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gruyère",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "gruyère",
+          "product_requirements": [
+            "pack:intake_all_round2_329585565c35"
+          ],
+          "quantity": 220.0,
+          "quantity_max": 220.0,
+          "quantity_min": 220.0,
+          "quantity_step": 220.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "smör",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "smör",
+          "product_requirements": [
+            "pack:intake_butter"
+          ],
+          "quantity": 30.0,
+          "quantity_max": 30.0,
+          "quantity_min": 30.0,
+          "quantity_step": 30.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 120.0,
+          "quantity_max": 120.0,
+          "quantity_min": 120.0,
+          "quantity_step": 120.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "morot",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "morot",
+          "quantity": 120.0,
+          "quantity_max": 120.0,
+          "quantity_min": 120.0,
+          "quantity_step": 120.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "selleri",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "selleri",
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 3.0,
+          "quantity_max": 3.0,
+          "quantity_min": 3.0,
+          "quantity_step": 3.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "c1",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 10.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "timjan",
+          "component": "c1",
+          "form": "dry",
+          "name": "timjan",
+          "product_requirements": [
+            "pack:intake_thyme"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "muskot",
+          "component": "c1",
+          "form": "dry",
+          "name": "muskot",
+          "product_requirements": [
+            "pack:intake_all_33f4eb9d910f"
+          ],
+          "quantity": 0.4,
+          "quantity_max": 0.4,
+          "quantity_min": 0.4,
+          "quantity_step": 0.4,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "broccoli",
+          "component": "c2",
+          "form": "as_sold",
+          "name": "broccoli",
+          "product_requirements": [
+            "pack:broccoli",
+            "plain",
+            "frozen"
+          ],
+          "quantity": 400.0,
+          "quantity_max": 400.0,
+          "quantity_min": 400.0,
+          "quantity_step": 400.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "olivolja",
+          "component": "c2",
+          "form": "as_sold",
+          "name": "olivolja",
+          "product_requirements": [
+            "pack:intake_all_expansion_86ac9b2c5ae6"
+          ],
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "citronjuice",
+          "component": "c2",
+          "form": "as_sold",
+          "name": "citronjuice",
+          "product_requirements": [
+            "pure_juice"
+          ],
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        }
+      ],
+      "instructions": [
+        "Sätt ugnen på 150 °C. Väg surdegsfrallorna före torkning och skiva centimetertjockt. Lägg på en torr plåt; ingen extra olja används.",
+        "Torka brödskivorna i ugnen cirka tjugo minuter. De ska bli torra utan att brännas.",
+        "Ta ut brödet och höj ugnen till 210 °C. Väg osten före eventuell kantputsning, avlägsna hård kant och riv resten grovt utan att fylla på extra ost. Ta bort kålens hårda rotstock och ytterblad, väg den ätliga mängden och strimla tunt. Skala lök och morot, ansa selleri, väg ätliga mängder och tärna smått. Väg färsk eller fryst hackad vitlök.",
+        "Fräs lök, morot och selleri i en tredjedel av smöret i en stor kastrull i fem minuter. Lägg i vitlök och timjan den sista minuten. Tillsätt 400 ml vatten, salt, peppar och kål. Koka upp.",
+        "Sjud kålen och övriga grönsaker under lock cirka tjugo minuter.",
+        "Kontrollera att kålen är mjuk. Är den fortfarande hård, tillsätt vid behov 100 ml vatten och förläng sjudningen. Behåll alla grönsaker och allt spad. Smörj en ugnsform med en del av återstående smör. Varva torkat bröd, grönsaker och ost; avsluta med ost. Fördela allt spad jämnt och klicka resten av smöret ovanpå. Strö över muskot.",
+        "Gratinera i mitten av ugnen tills allt är hett och ostytan blivit gyllene, omkring 35 minuter. Brödet ska ha mjuknat och rätten vara saftig men inte vattnig.",
+        "Kontrollera att mitten är genomhet och ytan gyllene; förläng gräddningen vid behov. Behåll och servera hela formens innehåll.",
+        "Väg frysta broccolibuketter utan att tina eller sila. Vänd med tillbehörets olivolja på en plåt. Håll brödformen täckt och varm över 60 °C medan broccolin rostas.",
+        "Rosta broccolin i den varma ugnen cirka tjugotvå minuter eller längre enligt förpackningen.",
+        "Kontrollera mjuk, helt genomhet broccoli. Vänd med citronjuicen och all kvarvarande plåtsky och servera med den varma gratängen."
+      ],
+      "name": "Zuppa valpellinentze – med rostad citronbroccoli – med gruyère, vitkål och surdegsfralla",
+      "servings": 4
+    }
+  ],
+  "schema_version": "smako-meal-pack-v1"
+}

@@ -10,6 +10,7 @@ from pathlib import Path
 from app.services.ingredient_normalizer import _search_text
 from app.services.price_universe_runtime import PreparedPriceUniverseArtifact
 from app.services.product_search import ProductSearchRequest
+from review_product_search import review_search_key, review_search_matches
 
 
 def inspect(args):
@@ -17,6 +18,7 @@ def inspect(args):
     facts = {tuple(k): v for k, v in json.loads(args.facts.read_bytes())["facts"]}
     blockers = json.loads(args.blockers.read_bytes())["identities"]
     labels = [_search_text(p.name) for p in artifact.universe.products]
+    compact_labels = [review_search_key(label) for label in labels]
     results = []
     for row in blockers:
         name, form = row["identity"].split("|")
@@ -48,6 +50,9 @@ def inspect(args):
             positions.update(i for key in found for i in artifact.product_search_index.groups[key])
             tokens = _search_text(term).split()
             positions.update(i for i, label in enumerate(labels) if all(t in label for t in tokens))
+            compact_term = review_search_key(term)
+            positions.update(i for i, label in enumerate(compact_labels)
+                             if review_search_matches(label, [compact_term]))
         products = [artifact.universe.products[i] for i in sorted(positions)]
         candidates, seen = [], set()
         for p in products:

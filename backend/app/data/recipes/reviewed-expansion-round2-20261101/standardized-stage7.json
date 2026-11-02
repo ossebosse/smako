@@ -1,0 +1,4396 @@
+{
+  "pack_id": "reviewed-expansion-round2-stage7",
+  "recipes": [
+    {
+      "design": {
+        "active_minutes": 21,
+        "base_id": "smako-greek-revithada",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "kikärtor|dry",
+                "name": "kikärtor",
+                "note": "",
+                "quantity": 420.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "gul lök",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "olivolja|as_sold",
+                "name": "olivolja",
+                "note": "",
+                "quantity": 75.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "citronjuice|as_sold",
+                "name": "citronjuice",
+                "note": "",
+                "quantity": 50.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "svartpeppar",
+                "note": "",
+                "quantity": 0.6,
+                "unit": "g"
+              }
+            ],
+            "id": "gryta",
+            "name": "Långbakade kikärtor"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "bröd|as_sold",
+                "name": "bröd",
+                "note": "",
+                "quantity": 200.0,
+                "unit": "g"
+              }
+            ],
+            "id": "brod",
+            "name": "Bröd"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "greek"
+        ],
+        "equipment": [
+          "stor skål",
+          "ugn",
+          "ugnssäker gryta med tätt lock"
+        ],
+        "estimated_minutes": 1101,
+        "family": "revithada",
+        "fish": false,
+        "flavor_profile": [
+          "kikärtor",
+          "lök",
+          "citron",
+          "olivolja"
+        ],
+        "ingredient_count": 5,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "oven",
+        "primary_ingredient": "kikärtor",
+        "provenance": {
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar, inte uppmätta. Sifnos-inspirerad revithada i vanlig ugn. Utgår från torra kikärtor och 12 timmars blötläggning; inte en rostning av färdigkokta kikärtor. Den enkla versionen utelämnar lagerblad, inte långbakningen. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "bröd",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 3,
+            "id": "s1",
+            "ingredient_keys": [
+              "kikärtor|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "2000 ml",
+                2000.0
+              ]
+            ],
+            "text": "Skölj de torra kikärtorna, lägg i en stor skål och täck med 2000 ml vatten."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 720,
+            "id": "s2",
+            "ingredient_keys": [
+              "kikärtor|dry"
+            ],
+            "parallel_group": null,
+            "text": "Blötlägg kikärtorna 12 timmar i kylskåp. Blötläggningsvattnet hälls bort i nästa aktiva steg."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 12,
+            "id": "s3",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "kikärtor|dry",
+              "olivolja|as_sold",
+              "salt|as_sold",
+              "svartpeppar|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "1500 ml",
+                1500.0
+              ]
+            ],
+            "text": "Värm ugnen till 150 °C över-/undervärme. Häll av och skölj kikärtorna. Skiva gul lök tunt. Lägg i en ugnssäker gryta med kikärtor, grytans olivolja, salt, svartpeppar och 1500 ml vatten. Koka upp på spisen och lägg på ett tätt lock."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 120,
+            "id": "s4",
+            "ingredient_keys": [
+              "kikärtor|dry"
+            ],
+            "parallel_group": null,
+            "text": "Baka den täckta grytan två timmar vid 150 °C."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 1,
+            "id": "s5",
+            "ingredient_keys": [
+              "kikärtor|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "150 ml",
+                150.0
+              ]
+            ],
+            "text": "Kontrollera vätskan och tillsätt 150 ml vatten om kikärtorna annars blir torra. Lägg tillbaka det täta locket."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 120,
+            "id": "s6",
+            "ingredient_keys": [
+              "kikärtor|dry"
+            ],
+            "parallel_group": null,
+            "text": "Baka ytterligare två timmar under tätt lock."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 1,
+            "id": "s7",
+            "ingredient_keys": [
+              "kikärtor|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "150 ml",
+                150.0
+              ]
+            ],
+            "text": "Kontrollera vätskan igen; tillsätt vid behov 150 ml vatten och lägg tillbaka locket."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 120,
+            "id": "s8",
+            "ingredient_keys": [
+              "kikärtor|dry"
+            ],
+            "parallel_group": null,
+            "text": "Baka ytterligare två timmar, totalt omkring sex timmar. Kikärtorna ska vara helt mjuka och kunna mosas lätt; förläng tiden om det behövs."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 4,
+            "id": "s9",
+            "ingredient_keys": [
+              "bröd|as_sold",
+              "citronjuice|as_sold",
+              "kikärtor|dry"
+            ],
+            "parallel_group": null,
+            "text": "Rör försiktigt ner citronjuice i den färdiga grytan. Fördela kikärtor och det krämiga spadet i fyra djupa tallrikar och servera med bröd."
+          }
+        ],
+        "total_minutes": 1101,
+        "variant_id": "simple",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 1080
+      },
+      "ingredients": [
+        {
+          "canonical_name": "kikärtor",
+          "component": "gryta",
+          "form": "dry",
+          "name": "kikärtor",
+          "product_requirements": [
+            "pack:intake_all_7a2916574c6e"
+          ],
+          "quantity": 420.0,
+          "quantity_max": 420.0,
+          "quantity_min": 420.0,
+          "quantity_step": 420.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "gryta",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 300.0,
+          "quantity_max": 300.0,
+          "quantity_min": 300.0,
+          "quantity_step": 300.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "olivolja",
+          "component": "gryta",
+          "form": "as_sold",
+          "name": "olivolja",
+          "product_requirements": [
+            "pack:intake_all_expansion_86ac9b2c5ae6"
+          ],
+          "quantity": 75.0,
+          "quantity_max": 75.0,
+          "quantity_min": 75.0,
+          "quantity_step": 75.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "citronjuice",
+          "component": "gryta",
+          "form": "as_sold",
+          "name": "citronjuice",
+          "product_requirements": [
+            "pure_juice"
+          ],
+          "quantity": 50.0,
+          "quantity_max": 50.0,
+          "quantity_min": 50.0,
+          "quantity_step": 50.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "gryta",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "gryta",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 0.6,
+          "quantity_max": 0.6,
+          "quantity_min": 0.6,
+          "quantity_step": 0.6,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "bröd",
+          "component": "brod",
+          "form": "as_sold",
+          "name": "bröd",
+          "quantity": 200.0,
+          "quantity_max": 200.0,
+          "quantity_min": 200.0,
+          "quantity_step": 200.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Skölj de torra kikärtorna, lägg i en stor skål och täck med 2000 ml vatten.",
+        "Blötlägg kikärtorna 12 timmar i kylskåp. Blötläggningsvattnet hälls bort i nästa aktiva steg.",
+        "Värm ugnen till 150 °C över-/undervärme. Häll av och skölj kikärtorna. Skiva gul lök tunt. Lägg i en ugnssäker gryta med kikärtor, grytans olivolja, salt, svartpeppar och 1500 ml vatten. Koka upp på spisen och lägg på ett tätt lock.",
+        "Baka den täckta grytan två timmar vid 150 °C.",
+        "Kontrollera vätskan och tillsätt 150 ml vatten om kikärtorna annars blir torra. Lägg tillbaka det täta locket.",
+        "Baka ytterligare två timmar under tätt lock.",
+        "Kontrollera vätskan igen; tillsätt vid behov 150 ml vatten och lägg tillbaka locket.",
+        "Baka ytterligare två timmar, totalt omkring sex timmar. Kikärtorna ska vara helt mjuka och kunna mosas lätt; förläng tiden om det behövs.",
+        "Rör försiktigt ner citronjuice i den färdiga grytan. Fördela kikärtor och det krämiga spadet i fyra djupa tallrikar och servera med bröd."
+      ],
+      "name": "Revithada – långbakade kikärtor med lök – enkel",
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 21,
+        "base_id": "smako-greek-revithada",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "kikärtor|dry",
+                "name": "kikärtor",
+                "note": "",
+                "quantity": 420.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "gul lök",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "olivolja|as_sold",
+                "name": "olivolja",
+                "note": "",
+                "quantity": 75.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "citronjuice|as_sold",
+                "name": "citronjuice",
+                "note": "",
+                "quantity": 50.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "svartpeppar",
+                "note": "",
+                "quantity": 0.6,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "vitlök",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "lagerblad|dry",
+                "name": "lagerblad",
+                "note": "",
+                "quantity": 0.3,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "oregano|dry",
+                "name": "oregano",
+                "note": "",
+                "quantity": 1.5,
+                "unit": "g"
+              }
+            ],
+            "id": "gryta",
+            "name": "Långbakade kikärtor"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "bröd|as_sold",
+                "name": "bröd",
+                "note": "",
+                "quantity": 200.0,
+                "unit": "g"
+              }
+            ],
+            "id": "brod",
+            "name": "Bröd"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "greek"
+        ],
+        "equipment": [
+          "stor skål",
+          "ugn",
+          "ugnssäker gryta med tätt lock"
+        ],
+        "estimated_minutes": 1101,
+        "family": "revithada",
+        "fish": false,
+        "flavor_profile": [
+          "kikärtor",
+          "lök",
+          "citron",
+          "olivolja"
+        ],
+        "ingredient_count": 8,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "oven",
+        "primary_ingredient": "kikärtor",
+        "provenance": {
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar, inte uppmätta. Sifnos-inspirerad revithada i vanlig ugn. Utgår från torra kikärtor och 12 timmars blötläggning; inte en rostning av färdigkokta kikärtor. Den enkla versionen utelämnar lagerblad, inte långbakningen. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "bröd",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 3,
+            "id": "s1",
+            "ingredient_keys": [
+              "kikärtor|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "2000 ml",
+                2000.0
+              ]
+            ],
+            "text": "Skölj de torra kikärtorna, lägg i en stor skål och täck med 2000 ml vatten."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 720,
+            "id": "s2",
+            "ingredient_keys": [
+              "kikärtor|dry"
+            ],
+            "parallel_group": null,
+            "text": "Blötlägg kikärtorna 12 timmar i kylskåp. Blötläggningsvattnet hälls bort i nästa aktiva steg."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 12,
+            "id": "s3",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "kikärtor|dry",
+              "lagerblad|dry",
+              "olivolja|as_sold",
+              "oregano|dry",
+              "salt|as_sold",
+              "svartpeppar|dry",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "1500 ml",
+                1500.0
+              ]
+            ],
+            "text": "Värm ugnen till 150 °C över-/undervärme. Häll av och skölj kikärtorna. Skiva gul lök tunt och hacka vitlök. Lägg i en ugnssäker gryta med kikärtor, grytans olivolja, salt, svartpeppar, lagerblad och oregano och 1500 ml vatten. Koka upp på spisen och lägg på ett tätt lock."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 120,
+            "id": "s4",
+            "ingredient_keys": [
+              "kikärtor|dry"
+            ],
+            "parallel_group": null,
+            "text": "Baka den täckta grytan två timmar vid 150 °C."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 1,
+            "id": "s5",
+            "ingredient_keys": [
+              "kikärtor|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "150 ml",
+                150.0
+              ]
+            ],
+            "text": "Kontrollera vätskan och tillsätt 150 ml vatten om kikärtorna annars blir torra. Lägg tillbaka det täta locket."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 120,
+            "id": "s6",
+            "ingredient_keys": [
+              "kikärtor|dry"
+            ],
+            "parallel_group": null,
+            "text": "Baka ytterligare två timmar under tätt lock."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 1,
+            "id": "s7",
+            "ingredient_keys": [
+              "kikärtor|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "150 ml",
+                150.0
+              ]
+            ],
+            "text": "Kontrollera vätskan igen; tillsätt vid behov 150 ml vatten och lägg tillbaka locket."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 120,
+            "id": "s8",
+            "ingredient_keys": [
+              "kikärtor|dry"
+            ],
+            "parallel_group": null,
+            "text": "Baka ytterligare två timmar, totalt omkring sex timmar. Kikärtorna ska vara helt mjuka och kunna mosas lätt; förläng tiden om det behövs."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 4,
+            "id": "s9",
+            "ingredient_keys": [
+              "bröd|as_sold",
+              "citronjuice|as_sold",
+              "kikärtor|dry",
+              "lagerblad|dry"
+            ],
+            "parallel_group": null,
+            "text": "Ta upp lagerbladen. Rör försiktigt ner citronjuice i den färdiga grytan. Fördela kikärtor och det krämiga spadet i fyra djupa tallrikar och servera med bröd."
+          }
+        ],
+        "total_minutes": 1101,
+        "unmeasured_processes": [
+          {
+            "description": "Lagerblad kokar med och plockas sedan bort. Överföring till spadet är inte uppmätt; ingen noll- eller fullretention antas.",
+            "ingredient_keys": [
+              "lagerblad|dry"
+            ],
+            "operation": "remove_after_infusion",
+            "step_id": "s9"
+          }
+        ],
+        "variant_id": "standard",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 1080
+      },
+      "ingredients": [
+        {
+          "canonical_name": "kikärtor",
+          "component": "gryta",
+          "form": "dry",
+          "name": "kikärtor",
+          "product_requirements": [
+            "pack:intake_all_7a2916574c6e"
+          ],
+          "quantity": 420.0,
+          "quantity_max": 420.0,
+          "quantity_min": 420.0,
+          "quantity_step": 420.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "gryta",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 300.0,
+          "quantity_max": 300.0,
+          "quantity_min": 300.0,
+          "quantity_step": 300.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "olivolja",
+          "component": "gryta",
+          "form": "as_sold",
+          "name": "olivolja",
+          "product_requirements": [
+            "pack:intake_all_expansion_86ac9b2c5ae6"
+          ],
+          "quantity": 75.0,
+          "quantity_max": 75.0,
+          "quantity_min": 75.0,
+          "quantity_step": 75.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "citronjuice",
+          "component": "gryta",
+          "form": "as_sold",
+          "name": "citronjuice",
+          "product_requirements": [
+            "pure_juice"
+          ],
+          "quantity": 50.0,
+          "quantity_max": 50.0,
+          "quantity_min": 50.0,
+          "quantity_step": 50.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "gryta",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "gryta",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 0.6,
+          "quantity_max": 0.6,
+          "quantity_min": 0.6,
+          "quantity_step": 0.6,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "gryta",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "lagerblad",
+          "component": "gryta",
+          "form": "dry",
+          "name": "lagerblad",
+          "product_requirements": [
+            "pack:intake_all_expansion_b43ed6916a64"
+          ],
+          "quantity": 0.3,
+          "quantity_max": 0.3,
+          "quantity_min": 0.3,
+          "quantity_step": 0.3,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "oregano",
+          "component": "gryta",
+          "form": "dry",
+          "name": "oregano",
+          "product_requirements": [
+            "dried_leaf"
+          ],
+          "quantity": 1.5,
+          "quantity_max": 1.5,
+          "quantity_min": 1.5,
+          "quantity_step": 1.5,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "bröd",
+          "component": "brod",
+          "form": "as_sold",
+          "name": "bröd",
+          "quantity": 200.0,
+          "quantity_max": 200.0,
+          "quantity_min": 200.0,
+          "quantity_step": 200.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Skölj de torra kikärtorna, lägg i en stor skål och täck med 2000 ml vatten.",
+        "Blötlägg kikärtorna 12 timmar i kylskåp. Blötläggningsvattnet hälls bort i nästa aktiva steg.",
+        "Värm ugnen till 150 °C över-/undervärme. Häll av och skölj kikärtorna. Skiva gul lök tunt och hacka vitlök. Lägg i en ugnssäker gryta med kikärtor, grytans olivolja, salt, svartpeppar, lagerblad och oregano och 1500 ml vatten. Koka upp på spisen och lägg på ett tätt lock.",
+        "Baka den täckta grytan två timmar vid 150 °C.",
+        "Kontrollera vätskan och tillsätt 150 ml vatten om kikärtorna annars blir torra. Lägg tillbaka det täta locket.",
+        "Baka ytterligare två timmar under tätt lock.",
+        "Kontrollera vätskan igen; tillsätt vid behov 150 ml vatten och lägg tillbaka locket.",
+        "Baka ytterligare två timmar, totalt omkring sex timmar. Kikärtorna ska vara helt mjuka och kunna mosas lätt; förläng tiden om det behövs.",
+        "Ta upp lagerbladen. Rör försiktigt ner citronjuice i den färdiga grytan. Fördela kikärtor och det krämiga spadet i fyra djupa tallrikar och servera med bröd."
+      ],
+      "name": "Revithada – långbakade kikärtor med lök – standard",
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 26,
+        "base_id": "smako-greek-revithada",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "kikärtor|dry",
+                "name": "kikärtor",
+                "note": "",
+                "quantity": 420.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "gul lök",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "olivolja|as_sold",
+                "name": "olivolja",
+                "note": "",
+                "quantity": 75.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "citronjuice|as_sold",
+                "name": "citronjuice",
+                "note": "",
+                "quantity": 50.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "svartpeppar",
+                "note": "",
+                "quantity": 0.6,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "vitlök",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "lagerblad|dry",
+                "name": "lagerblad",
+                "note": "",
+                "quantity": 0.3,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "oregano|dry",
+                "name": "oregano",
+                "note": "",
+                "quantity": 1.5,
+                "unit": "g"
+              }
+            ],
+            "id": "gryta",
+            "name": "Långbakade kikärtor"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "bröd|as_sold",
+                "name": "bröd",
+                "note": "",
+                "quantity": 200.0,
+                "unit": "g"
+              }
+            ],
+            "id": "brod",
+            "name": "Bröd"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "tomat|raw_edible",
+                "name": "tomat",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gurka|raw_edible",
+                "name": "gurka",
+                "note": "",
+                "quantity": 250.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "fetaost|as_sold",
+                "name": "fetaost",
+                "note": "",
+                "quantity": 120.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "olivolja|as_sold",
+                "name": "olivolja",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "sallad",
+            "name": "Tomat- och fetasallad"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "greek"
+        ],
+        "equipment": [
+          "stor skål",
+          "ugn",
+          "ugnssäker gryta med tätt lock"
+        ],
+        "estimated_minutes": 1106,
+        "family": "revithada",
+        "fish": false,
+        "flavor_profile": [
+          "kikärtor",
+          "lök",
+          "citron",
+          "olivolja"
+        ],
+        "ingredient_count": 11,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "oven",
+        "primary_ingredient": "kikärtor",
+        "provenance": {
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar, inte uppmätta. Sifnos-inspirerad revithada i vanlig ugn. Utgår från torra kikärtor och 12 timmars blötläggning; inte en rostning av färdigkokta kikärtor. Den enkla versionen utelämnar lagerblad, inte långbakningen. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "bröd",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 3,
+            "id": "s1",
+            "ingredient_keys": [
+              "kikärtor|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "2000 ml",
+                2000.0
+              ]
+            ],
+            "text": "Skölj de torra kikärtorna, lägg i en stor skål och täck med 2000 ml vatten."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 720,
+            "id": "s2",
+            "ingredient_keys": [
+              "kikärtor|dry"
+            ],
+            "parallel_group": null,
+            "text": "Blötlägg kikärtorna 12 timmar i kylskåp. Blötläggningsvattnet hälls bort i nästa aktiva steg."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 12,
+            "id": "s3",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "kikärtor|dry",
+              "lagerblad|dry",
+              "olivolja|as_sold",
+              "oregano|dry",
+              "salt|as_sold",
+              "svartpeppar|dry",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "1500 ml",
+                1500.0
+              ]
+            ],
+            "text": "Värm ugnen till 150 °C över-/undervärme. Häll av och skölj kikärtorna. Skiva gul lök tunt och hacka vitlök. Lägg i en ugnssäker gryta med kikärtor, grytans olivolja, salt, svartpeppar, lagerblad och oregano och 1500 ml vatten. Koka upp på spisen och lägg på ett tätt lock."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 120,
+            "id": "s4",
+            "ingredient_keys": [
+              "kikärtor|dry"
+            ],
+            "parallel_group": null,
+            "text": "Baka den täckta grytan två timmar vid 150 °C."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 1,
+            "id": "s5",
+            "ingredient_keys": [
+              "kikärtor|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "150 ml",
+                150.0
+              ]
+            ],
+            "text": "Kontrollera vätskan och tillsätt 150 ml vatten om kikärtorna annars blir torra. Lägg tillbaka det täta locket."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 120,
+            "id": "s6",
+            "ingredient_keys": [
+              "kikärtor|dry"
+            ],
+            "parallel_group": null,
+            "text": "Baka ytterligare två timmar under tätt lock."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 1,
+            "id": "s7",
+            "ingredient_keys": [
+              "kikärtor|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "150 ml",
+                150.0
+              ]
+            ],
+            "text": "Kontrollera vätskan igen; tillsätt vid behov 150 ml vatten och lägg tillbaka locket."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 120,
+            "id": "s8",
+            "ingredient_keys": [
+              "kikärtor|dry"
+            ],
+            "parallel_group": null,
+            "text": "Baka ytterligare två timmar, totalt omkring sex timmar. Kikärtorna ska vara helt mjuka och kunna mosas lätt; förläng tiden om det behövs."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 5,
+            "id": "s9",
+            "ingredient_keys": [
+              "fetaost|as_sold",
+              "gurka|raw_edible",
+              "olivolja|as_sold",
+              "tomat|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Tärna tomat, gurka och fetaost. Vänd med salladens olivolja och ställ svalt."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 4,
+            "id": "s10",
+            "ingredient_keys": [
+              "bröd|as_sold",
+              "citronjuice|as_sold",
+              "fetaost|as_sold",
+              "gurka|raw_edible",
+              "kikärtor|dry",
+              "lagerblad|dry",
+              "tomat|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Ta upp lagerbladen. Rör försiktigt ner citronjuice i den färdiga grytan. Fördela kikärtor och det krämiga spadet i fyra djupa tallrikar och servera med bröd och sallad."
+          }
+        ],
+        "total_minutes": 1106,
+        "unmeasured_processes": [
+          {
+            "description": "Lagerblad kokar med och plockas sedan bort. Överföring till spadet är inte uppmätt; ingen noll- eller fullretention antas.",
+            "ingredient_keys": [
+              "lagerblad|dry"
+            ],
+            "operation": "remove_after_infusion",
+            "step_id": "s10"
+          }
+        ],
+        "variant_id": "extended",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 1080
+      },
+      "ingredients": [
+        {
+          "canonical_name": "kikärtor",
+          "component": "gryta",
+          "form": "dry",
+          "name": "kikärtor",
+          "product_requirements": [
+            "pack:intake_all_7a2916574c6e"
+          ],
+          "quantity": 420.0,
+          "quantity_max": 420.0,
+          "quantity_min": 420.0,
+          "quantity_step": 420.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "gryta",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 300.0,
+          "quantity_max": 300.0,
+          "quantity_min": 300.0,
+          "quantity_step": 300.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "olivolja",
+          "component": "gryta",
+          "form": "as_sold",
+          "name": "olivolja",
+          "product_requirements": [
+            "pack:intake_all_expansion_86ac9b2c5ae6"
+          ],
+          "quantity": 85.0,
+          "quantity_max": 85.0,
+          "quantity_min": 85.0,
+          "quantity_step": 85.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "citronjuice",
+          "component": "gryta",
+          "form": "as_sold",
+          "name": "citronjuice",
+          "product_requirements": [
+            "pure_juice"
+          ],
+          "quantity": 50.0,
+          "quantity_max": 50.0,
+          "quantity_min": 50.0,
+          "quantity_step": 50.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "gryta",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "gryta",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 0.6,
+          "quantity_max": 0.6,
+          "quantity_min": 0.6,
+          "quantity_step": 0.6,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "gryta",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "lagerblad",
+          "component": "gryta",
+          "form": "dry",
+          "name": "lagerblad",
+          "product_requirements": [
+            "pack:intake_all_expansion_b43ed6916a64"
+          ],
+          "quantity": 0.3,
+          "quantity_max": 0.3,
+          "quantity_min": 0.3,
+          "quantity_step": 0.3,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "oregano",
+          "component": "gryta",
+          "form": "dry",
+          "name": "oregano",
+          "product_requirements": [
+            "dried_leaf"
+          ],
+          "quantity": 1.5,
+          "quantity_max": 1.5,
+          "quantity_min": 1.5,
+          "quantity_step": 1.5,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "bröd",
+          "component": "brod",
+          "form": "as_sold",
+          "name": "bröd",
+          "quantity": 200.0,
+          "quantity_max": 200.0,
+          "quantity_min": 200.0,
+          "quantity_step": 200.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "tomat",
+          "component": "sallad",
+          "form": "raw_edible",
+          "name": "tomat",
+          "quantity": 300.0,
+          "quantity_max": 300.0,
+          "quantity_min": 300.0,
+          "quantity_step": 300.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gurka",
+          "component": "sallad",
+          "form": "raw_edible",
+          "name": "gurka",
+          "quantity": 250.0,
+          "quantity_max": 250.0,
+          "quantity_min": 250.0,
+          "quantity_step": 250.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "fetaost",
+          "component": "sallad",
+          "form": "as_sold",
+          "name": "fetaost",
+          "quantity": 120.0,
+          "quantity_max": 120.0,
+          "quantity_min": 120.0,
+          "quantity_step": 120.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Skölj de torra kikärtorna, lägg i en stor skål och täck med 2000 ml vatten.",
+        "Blötlägg kikärtorna 12 timmar i kylskåp. Blötläggningsvattnet hälls bort i nästa aktiva steg.",
+        "Värm ugnen till 150 °C över-/undervärme. Häll av och skölj kikärtorna. Skiva gul lök tunt och hacka vitlök. Lägg i en ugnssäker gryta med kikärtor, grytans olivolja, salt, svartpeppar, lagerblad och oregano och 1500 ml vatten. Koka upp på spisen och lägg på ett tätt lock.",
+        "Baka den täckta grytan två timmar vid 150 °C.",
+        "Kontrollera vätskan och tillsätt 150 ml vatten om kikärtorna annars blir torra. Lägg tillbaka det täta locket.",
+        "Baka ytterligare två timmar under tätt lock.",
+        "Kontrollera vätskan igen; tillsätt vid behov 150 ml vatten och lägg tillbaka locket.",
+        "Baka ytterligare två timmar, totalt omkring sex timmar. Kikärtorna ska vara helt mjuka och kunna mosas lätt; förläng tiden om det behövs.",
+        "Tärna tomat, gurka och fetaost. Vänd med salladens olivolja och ställ svalt.",
+        "Ta upp lagerbladen. Rör försiktigt ner citronjuice i den färdiga grytan. Fördela kikärtor och det krämiga spadet i fyra djupa tallrikar och servera med bröd och sallad."
+      ],
+      "name": "Revithada – långbakade kikärtor med lök – utökad",
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 12,
+        "base_id": "smako-greek-tirokafteri",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "fetaost|as_sold",
+                "name": "fetaost",
+                "note": "",
+                "quantity": 55.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "paprika|raw_edible",
+                "name": "paprika",
+                "note": "",
+                "quantity": 65.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "chiliflakes|dry",
+                "name": "chiliflakes",
+                "note": "",
+                "quantity": 0.3,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "olivolja|as_sold",
+                "name": "olivolja",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "dipp",
+            "name": "Stark fetadipp"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "bröd|as_sold",
+                "name": "bröd",
+                "note": "",
+                "quantity": 40.0,
+                "unit": "g"
+              }
+            ],
+            "id": "servera",
+            "name": "Bröd och tillbehör"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "greek"
+        ],
+        "equipment": [
+          "ugn",
+          "liten form",
+          "skål",
+          "gaffel"
+        ],
+        "estimated_minutes": 42,
+        "family": "tirokafteri",
+        "fish": false,
+        "flavor_profile": [
+          "feta",
+          "chili",
+          "rostad paprika"
+        ],
+        "ingredient_count": 5,
+        "meal_types": [
+          "snack"
+        ],
+        "method": "oven",
+        "primary_ingredient": "fetaost",
+        "provenance": {
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar, inte uppmätta. Grekisk fetadipp med rostad paprika och chiliflakes. Meze anpassad till en avgränsad mellanmålsportion med bröd. Inte tzatziki med lite feta; fetan utgör hela basen. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "bröd",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 3,
+            "id": "s1",
+            "ingredient_keys": [
+              "paprika|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Värm ugnen till 230 °C över-/undervärme. Kärna ur paprikan, väg angiven rå ätlig mängd med skal och lägg med skalsidan upp i en liten ugnsform."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 20,
+            "id": "s2",
+            "ingredient_keys": [
+              "paprika|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Rosta 20 minuter eller tills skalet fått mörka blåsor."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 1,
+            "id": "s3",
+            "ingredient_keys": [
+              "paprika|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Lägg den varma paprikan i en skål och täck."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 10,
+            "id": "s4",
+            "ingredient_keys": [
+              "paprika|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Låt svalna tio minuter så att skalet lossnar."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 5,
+            "id": "s5",
+            "ingredient_keys": [
+              "chiliflakes|dry",
+              "fetaost|as_sold",
+              "olivolja|as_sold",
+              "paprika|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Dra bort det lösa skalet och hacka paprikan fint. Mosa fetaost med paprika, olivolja och chiliflakes till en grov kräm. Tillsätt ingen extra olistad vätska."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 3,
+            "id": "s6",
+            "ingredient_keys": [
+              "bröd|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Servera hela den lilla dipportionen med brödet. Kyl direkt vid 4 °C om den inte ska ätas omgående."
+          }
+        ],
+        "total_minutes": 42,
+        "unmeasured_processes": [
+          {
+            "description": "Paprikan vägs rå efter urkärning men före rostning och skalning. Borttaget skal och eventuell vätska är okänt utbyte.",
+            "ingredient_keys": [
+              "paprika|raw_edible"
+            ],
+            "operation": "peel_after_cooking",
+            "step_id": "s5"
+          }
+        ],
+        "variant_id": "simple",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 30
+      },
+      "ingredients": [
+        {
+          "canonical_name": "fetaost",
+          "component": "dipp",
+          "form": "as_sold",
+          "name": "fetaost",
+          "quantity": 55.0,
+          "quantity_max": 55.0,
+          "quantity_min": 55.0,
+          "quantity_step": 55.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "paprika",
+          "component": "dipp",
+          "form": "raw_edible",
+          "name": "paprika",
+          "quantity": 65.0,
+          "quantity_max": 65.0,
+          "quantity_min": 65.0,
+          "quantity_step": 65.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "chiliflakes",
+          "component": "dipp",
+          "form": "dry",
+          "name": "chiliflakes",
+          "quantity": 0.3,
+          "quantity_max": 0.3,
+          "quantity_min": 0.3,
+          "quantity_step": 0.3,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "olivolja",
+          "component": "dipp",
+          "form": "as_sold",
+          "name": "olivolja",
+          "product_requirements": [
+            "pack:intake_all_expansion_86ac9b2c5ae6"
+          ],
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "bröd",
+          "component": "servera",
+          "form": "as_sold",
+          "name": "bröd",
+          "quantity": 40.0,
+          "quantity_max": 40.0,
+          "quantity_min": 40.0,
+          "quantity_step": 40.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Värm ugnen till 230 °C över-/undervärme. Kärna ur paprikan, väg angiven rå ätlig mängd med skal och lägg med skalsidan upp i en liten ugnsform.",
+        "Rosta 20 minuter eller tills skalet fått mörka blåsor.",
+        "Lägg den varma paprikan i en skål och täck.",
+        "Låt svalna tio minuter så att skalet lossnar.",
+        "Dra bort det lösa skalet och hacka paprikan fint. Mosa fetaost med paprika, olivolja och chiliflakes till en grov kräm. Tillsätt ingen extra olistad vätska.",
+        "Servera hela den lilla dipportionen med brödet. Kyl direkt vid 4 °C om den inte ska ätas omgående."
+      ],
+      "name": "Tirokafteri – kryddig fetakräm med bröd – enkel",
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 12,
+        "base_id": "smako-greek-tirokafteri",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "fetaost|as_sold",
+                "name": "fetaost",
+                "note": "",
+                "quantity": 55.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "paprika|raw_edible",
+                "name": "paprika",
+                "note": "",
+                "quantity": 65.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "chiliflakes|dry",
+                "name": "chiliflakes",
+                "note": "",
+                "quantity": 0.3,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "olivolja|as_sold",
+                "name": "olivolja",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "yoghurt naturell|as_sold",
+                "name": "yoghurt naturell",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rödvinsvinäger|as_sold",
+                "name": "rödvinsvinäger",
+                "note": "",
+                "quantity": 4.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "dipp",
+            "name": "Stark fetadipp"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "bröd|as_sold",
+                "name": "bröd",
+                "note": "",
+                "quantity": 40.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gurka|raw_edible",
+                "name": "gurka",
+                "note": "",
+                "quantity": 80.0,
+                "unit": "g"
+              }
+            ],
+            "id": "servera",
+            "name": "Bröd och tillbehör"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "greek"
+        ],
+        "equipment": [
+          "ugn",
+          "liten form",
+          "skål",
+          "gaffel"
+        ],
+        "estimated_minutes": 42,
+        "family": "tirokafteri",
+        "fish": false,
+        "flavor_profile": [
+          "feta",
+          "chili",
+          "rostad paprika"
+        ],
+        "ingredient_count": 8,
+        "meal_types": [
+          "snack"
+        ],
+        "method": "oven",
+        "primary_ingredient": "fetaost",
+        "provenance": {
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar, inte uppmätta. Grekisk fetadipp med rostad paprika och chiliflakes. Meze anpassad till en avgränsad mellanmålsportion med bröd. Inte tzatziki med lite feta; fetan utgör hela basen. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "bröd",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 3,
+            "id": "s1",
+            "ingredient_keys": [
+              "paprika|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Värm ugnen till 230 °C över-/undervärme. Kärna ur paprikan, väg angiven rå ätlig mängd med skal och lägg med skalsidan upp i en liten ugnsform."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 20,
+            "id": "s2",
+            "ingredient_keys": [
+              "paprika|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Rosta 20 minuter eller tills skalet fått mörka blåsor."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 1,
+            "id": "s3",
+            "ingredient_keys": [
+              "paprika|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Lägg den varma paprikan i en skål och täck."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 10,
+            "id": "s4",
+            "ingredient_keys": [
+              "paprika|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Låt svalna tio minuter så att skalet lossnar."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 5,
+            "id": "s5",
+            "ingredient_keys": [
+              "chiliflakes|dry",
+              "fetaost|as_sold",
+              "olivolja|as_sold",
+              "paprika|raw_edible",
+              "rödvinsvinäger|as_sold",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Dra bort det lösa skalet och hacka paprikan fint. Mosa fetaost med paprika, olivolja och chiliflakes, yoghurt och rödvinsvinäger till en grov kräm. Tillsätt ingen extra olistad vätska."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 3,
+            "id": "s6",
+            "ingredient_keys": [
+              "bröd|as_sold",
+              "gurka|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Servera hela den lilla dipportionen med brödet och gurka skuren i stavar. Kyl direkt vid 4 °C om den inte ska ätas omgående."
+          }
+        ],
+        "total_minutes": 42,
+        "unmeasured_processes": [
+          {
+            "description": "Paprikan vägs rå efter urkärning men före rostning och skalning. Borttaget skal och eventuell vätska är okänt utbyte.",
+            "ingredient_keys": [
+              "paprika|raw_edible"
+            ],
+            "operation": "peel_after_cooking",
+            "step_id": "s5"
+          }
+        ],
+        "variant_id": "extended",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 30
+      },
+      "ingredients": [
+        {
+          "canonical_name": "fetaost",
+          "component": "dipp",
+          "form": "as_sold",
+          "name": "fetaost",
+          "quantity": 55.0,
+          "quantity_max": 55.0,
+          "quantity_min": 55.0,
+          "quantity_step": 55.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "paprika",
+          "component": "dipp",
+          "form": "raw_edible",
+          "name": "paprika",
+          "quantity": 65.0,
+          "quantity_max": 65.0,
+          "quantity_min": 65.0,
+          "quantity_step": 65.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "chiliflakes",
+          "component": "dipp",
+          "form": "dry",
+          "name": "chiliflakes",
+          "quantity": 0.3,
+          "quantity_max": 0.3,
+          "quantity_min": 0.3,
+          "quantity_step": 0.3,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "olivolja",
+          "component": "dipp",
+          "form": "as_sold",
+          "name": "olivolja",
+          "product_requirements": [
+            "pack:intake_all_expansion_86ac9b2c5ae6"
+          ],
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "yoghurt naturell",
+          "component": "dipp",
+          "form": "as_sold",
+          "name": "yoghurt naturell",
+          "product_requirements": [
+            "plain",
+            "thick"
+          ],
+          "quantity": 30.0,
+          "quantity_max": 30.0,
+          "quantity_min": 30.0,
+          "quantity_step": 30.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rödvinsvinäger",
+          "component": "dipp",
+          "form": "as_sold",
+          "name": "rödvinsvinäger",
+          "product_requirements": [
+            "pack:intake_all_d0351d1f36c1"
+          ],
+          "quantity": 4.0,
+          "quantity_max": 4.0,
+          "quantity_min": 4.0,
+          "quantity_step": 4.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "bröd",
+          "component": "servera",
+          "form": "as_sold",
+          "name": "bröd",
+          "quantity": 40.0,
+          "quantity_max": 40.0,
+          "quantity_min": 40.0,
+          "quantity_step": 40.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gurka",
+          "component": "servera",
+          "form": "raw_edible",
+          "name": "gurka",
+          "quantity": 80.0,
+          "quantity_max": 80.0,
+          "quantity_min": 80.0,
+          "quantity_step": 80.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Värm ugnen till 230 °C över-/undervärme. Kärna ur paprikan, väg angiven rå ätlig mängd med skal och lägg med skalsidan upp i en liten ugnsform.",
+        "Rosta 20 minuter eller tills skalet fått mörka blåsor.",
+        "Lägg den varma paprikan i en skål och täck.",
+        "Låt svalna tio minuter så att skalet lossnar.",
+        "Dra bort det lösa skalet och hacka paprikan fint. Mosa fetaost med paprika, olivolja och chiliflakes, yoghurt och rödvinsvinäger till en grov kräm. Tillsätt ingen extra olistad vätska.",
+        "Servera hela den lilla dipportionen med brödet och gurka skuren i stavar. Kyl direkt vid 4 °C om den inte ska ätas omgående."
+      ],
+      "name": "Tirokafteri – kryddig fetakräm med bröd – utökad",
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 25,
+        "base_id": "smako-greek-melitzanosalata",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "aubergine|raw_edible",
+                "name": "Aubergine med skal, rå ätlig vikt efter att fästet tagits bort",
+                "note": "",
+                "quantity": 250.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "olivolja|as_sold",
+                "name": "Olivolja",
+                "note": "",
+                "quantity": 12.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "citronjuice|as_sold",
+                "name": "Citronjuice",
+                "note": "",
+                "quantity": 12.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "Vitlök",
+                "note": "",
+                "quantity": 3.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 0.7,
+                "unit": "g"
+              }
+            ],
+            "id": "c1",
+            "name": "Rostad aubergineröra"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "bröd|as_sold",
+                "name": "Bröd",
+                "note": "",
+                "quantity": 40.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c2",
+            "name": "Bröd"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "greek"
+        ],
+        "equipment": [
+          "ugn",
+          "plåt",
+          "durkslag",
+          "kniv",
+          "stekpanna"
+        ],
+        "estimated_minutes": 95,
+        "family": "roasted_aubergine_dip",
+        "fish": false,
+        "flavor_profile": [
+          "vitlök",
+          "citron",
+          "rostad aubergine"
+        ],
+        "ingredient_count": 5,
+        "meal_types": [
+          "snack"
+        ],
+        "method": "oven",
+        "primary_ingredient": "aubergine",
+        "provenance": {
+          "notes": "AI-författat receptutkast, inte provlagat och ännu inte import-/produktgranskat av Smako. Tider är författaruppskattningar, inte uppmätt provlagning. Ugnsanpassning: skalad aubergine rostas i skivor i stället för över öppen eld. Röksmak utlovas inte. Bröd är angivet tillbehör; utökad variant har paprika och lök i själva röran. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "bröd",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 10,
+            "id": "s1",
+            "ingredient_keys": [
+              "aubergine|raw_edible",
+              "olivolja|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Värm ugnen till 225 °C över-/undervärme. Ta bort auberginens fäste, väg angiven rå mängd med skal och dela i längsgående kvartar. Skalet tas bort efter rostningen. Lägg på bakplåtspapper och pensla med hälften av rörans olivolja."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 15,
+            "id": "s2",
+            "ingredient_keys": [
+              "aubergine|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Rosta grönsakerna i 15 minuter utan att ytan blir svart."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 1,
+            "id": "s3",
+            "ingredient_keys": [
+              "aubergine|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Vänd grönsakerna med tång."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 20,
+            "id": "s4",
+            "ingredient_keys": [
+              "aubergine|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Rosta ytterligare cirka 20 minuter tills auberginen är helt mjuk och brynt men inte svart. Förläng tiden om den fortfarande är fast."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 1,
+            "id": "s5",
+            "ingredient_keys": [
+              "aubergine|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Flytta de rostade grönsakerna till ett durkslag över en skål."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 15,
+            "id": "s6",
+            "ingredient_keys": [
+              "aubergine|raw_edible",
+              "olivolja|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Låt grönsakerna rinna av över skålen och svalna 15 minuter. Pressa inte ur fruktköttet. Vätskan serveras inte."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 9,
+            "id": "s7",
+            "ingredient_keys": [
+              "aubergine|raw_edible",
+              "citronjuice|as_sold",
+              "olivolja|as_sold",
+              "salt|as_sold",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Dra bort aubergineskalet och hacka fruktköttet med kniv till en grov röra. Riv vitlöken fint och blanda med citronjuice, salt och återstående olivolja."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 20,
+            "id": "s8",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Ställ röran övertäckt i kylskåp, cirka 4 °C, så att den blir sval."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 4,
+            "id": "s9",
+            "ingredient_keys": [
+              "bröd|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Rosta brödet i torr panna på medelvärme, vänd och servera med hela portionen aubergineröra."
+          }
+        ],
+        "total_minutes": 95,
+        "unmeasured_processes": [
+          {
+            "description": "Vätska från rostade grönsaker med olja rinner av. Ingen kvarhållen andel är uppmätt.",
+            "ingredient_keys": [
+              "aubergine|raw_edible",
+              "olivolja|as_sold"
+            ],
+            "operation": "drain_after_cooking",
+            "step_id": "s6"
+          },
+          {
+            "description": "Ny tydlig rå insats med skal före rostning. Skalet tas bort efteråt; 250 g är inte en påstådd motsvarighet till 250 g skalat fruktkött.",
+            "ingredient_keys": [
+              "aubergine|raw_edible"
+            ],
+            "operation": "peel_after_cooking",
+            "step_id": "s7"
+          }
+        ],
+        "variant_id": "simple",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 70
+      },
+      "ingredients": [
+        {
+          "canonical_name": "aubergine",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "aubergine",
+          "quantity": 250.0,
+          "quantity_max": 250.0,
+          "quantity_min": 250.0,
+          "quantity_step": 250.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "olivolja",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "olivolja",
+          "product_requirements": [
+            "pack:intake_all_expansion_86ac9b2c5ae6"
+          ],
+          "quantity": 12.0,
+          "quantity_max": 12.0,
+          "quantity_min": 12.0,
+          "quantity_step": 12.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "citronjuice",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "citronjuice",
+          "product_requirements": [
+            "pure_juice"
+          ],
+          "quantity": 12.0,
+          "quantity_max": 12.0,
+          "quantity_min": 12.0,
+          "quantity_step": 12.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 3.0,
+          "quantity_max": 3.0,
+          "quantity_min": 3.0,
+          "quantity_step": 3.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 0.7,
+          "quantity_max": 0.7,
+          "quantity_min": 0.7,
+          "quantity_step": 0.7,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "bröd",
+          "component": "c2",
+          "form": "as_sold",
+          "name": "bröd",
+          "quantity": 40.0,
+          "quantity_max": 40.0,
+          "quantity_min": 40.0,
+          "quantity_step": 40.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Värm ugnen till 225 °C över-/undervärme. Ta bort auberginens fäste, väg angiven rå mängd med skal och dela i längsgående kvartar. Skalet tas bort efter rostningen. Lägg på bakplåtspapper och pensla med hälften av rörans olivolja.",
+        "Rosta grönsakerna i 15 minuter utan att ytan blir svart.",
+        "Vänd grönsakerna med tång.",
+        "Rosta ytterligare cirka 20 minuter tills auberginen är helt mjuk och brynt men inte svart. Förläng tiden om den fortfarande är fast.",
+        "Flytta de rostade grönsakerna till ett durkslag över en skål.",
+        "Låt grönsakerna rinna av över skålen och svalna 15 minuter. Pressa inte ur fruktköttet. Vätskan serveras inte.",
+        "Dra bort aubergineskalet och hacka fruktköttet med kniv till en grov röra. Riv vitlöken fint och blanda med citronjuice, salt och återstående olivolja.",
+        "Ställ röran övertäckt i kylskåp, cirka 4 °C, så att den blir sval.",
+        "Rosta brödet i torr panna på medelvärme, vänd och servera med hela portionen aubergineröra."
+      ],
+      "name": "Melitzanosalata – enkel röra med bröd – rostad med skal, sedan skalad",
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 28,
+        "base_id": "smako-greek-melitzanosalata",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "aubergine|raw_edible",
+                "name": "Aubergine med skal, rå ätlig vikt efter att fästet tagits bort",
+                "note": "",
+                "quantity": 250.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "olivolja|as_sold",
+                "name": "Olivolja",
+                "note": "",
+                "quantity": 12.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "citronjuice|as_sold",
+                "name": "Citronjuice",
+                "note": "",
+                "quantity": 12.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "Vitlök",
+                "note": "",
+                "quantity": 3.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 0.7,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rödlök|raw_edible",
+                "name": "Rödlök",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "persilja|raw_edible",
+                "name": "Persilja",
+                "note": "",
+                "quantity": 4.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "paprika|raw_edible",
+                "name": "Röd paprika, urkärnad rå vikt",
+                "note": "",
+                "quantity": 70.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c1",
+            "name": "Rostad aubergineröra"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "bröd|as_sold",
+                "name": "Bröd",
+                "note": "",
+                "quantity": 40.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c2",
+            "name": "Bröd"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "greek"
+        ],
+        "equipment": [
+          "ugn",
+          "plåt",
+          "durkslag",
+          "kniv",
+          "stekpanna"
+        ],
+        "estimated_minutes": 98,
+        "family": "roasted_aubergine_dip",
+        "fish": false,
+        "flavor_profile": [
+          "vitlök",
+          "citron",
+          "rostad aubergine"
+        ],
+        "ingredient_count": 8,
+        "meal_types": [
+          "snack"
+        ],
+        "method": "oven",
+        "primary_ingredient": "aubergine",
+        "provenance": {
+          "notes": "AI-författat receptutkast, inte provlagat och ännu inte import-/produktgranskat av Smako. Tider är författaruppskattningar, inte uppmätt provlagning. Ugnsanpassning: skalad aubergine rostas i skivor i stället för över öppen eld. Röksmak utlovas inte. Bröd är angivet tillbehör; utökad variant har paprika och lök i själva röran. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "bröd",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 10,
+            "id": "s1",
+            "ingredient_keys": [
+              "aubergine|raw_edible",
+              "olivolja|as_sold",
+              "paprika|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Värm ugnen till 225 °C över-/undervärme. Ta bort auberginens fäste, väg angiven rå mängd med skal och dela i längsgående kvartar. Skalet tas bort efter rostningen. Lägg på bakplåtspapper och pensla med hälften av rörans olivolja. Lägg även paprikan i breda bitar på plåten."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 15,
+            "id": "s2",
+            "ingredient_keys": [
+              "aubergine|raw_edible",
+              "paprika|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Rosta grönsakerna i 15 minuter utan att ytan blir svart."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 1,
+            "id": "s3",
+            "ingredient_keys": [
+              "aubergine|raw_edible",
+              "paprika|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Vänd grönsakerna med tång."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 20,
+            "id": "s4",
+            "ingredient_keys": [
+              "aubergine|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Rosta ytterligare cirka 20 minuter tills auberginen är helt mjuk och brynt men inte svart. Förläng tiden om den fortfarande är fast."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 1,
+            "id": "s5",
+            "ingredient_keys": [
+              "aubergine|raw_edible",
+              "paprika|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Flytta de rostade grönsakerna till ett durkslag över en skål."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 15,
+            "id": "s6",
+            "ingredient_keys": [
+              "aubergine|raw_edible",
+              "olivolja|as_sold",
+              "paprika|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Låt grönsakerna rinna av över skålen och svalna 15 minuter. Pressa inte ur fruktköttet. Vätskan serveras inte."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 12,
+            "id": "s7",
+            "ingredient_keys": [
+              "aubergine|raw_edible",
+              "citronjuice|as_sold",
+              "olivolja|as_sold",
+              "paprika|raw_edible",
+              "persilja|raw_edible",
+              "rödlök|raw_edible",
+              "salt|as_sold",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "20 ml",
+                20.0
+              ]
+            ],
+            "text": "Dra bort aubergineskalet och hacka fruktköttet med kniv till en grov röra. Riv vitlöken fint och blanda med citronjuice, salt och återstående olivolja. Värm fryst hackad persilja med 20 ml vatten i en liten kastrull under omrörning minst två minuter eller längre enligt förpackningen. Behåll hela denna vätska. Finhacka rödlök och rostad paprika och vänd ner. Blanda också ner all uppvärmd persilja med vätskan."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 20,
+            "id": "s8",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Ställ röran övertäckt i kylskåp, cirka 4 °C, så att den blir sval."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 4,
+            "id": "s9",
+            "ingredient_keys": [
+              "bröd|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Rosta brödet i torr panna på medelvärme, vänd och servera med hela portionen aubergineröra."
+          }
+        ],
+        "total_minutes": 98,
+        "unmeasured_processes": [
+          {
+            "description": "Vätska från rostade grönsaker med olja rinner av. Ingen kvarhållen andel är uppmätt.",
+            "ingredient_keys": [
+              "aubergine|raw_edible",
+              "olivolja|as_sold",
+              "paprika|raw_edible"
+            ],
+            "operation": "drain_after_cooking",
+            "step_id": "s6"
+          },
+          {
+            "description": "Ny tydlig rå insats med skal före rostning. Skalet tas bort efteråt; 250 g är inte en påstådd motsvarighet till 250 g skalat fruktkött.",
+            "ingredient_keys": [
+              "aubergine|raw_edible"
+            ],
+            "operation": "peel_after_cooking",
+            "step_id": "s7"
+          }
+        ],
+        "variant_id": "extended",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 70
+      },
+      "ingredients": [
+        {
+          "canonical_name": "aubergine",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "aubergine",
+          "quantity": 250.0,
+          "quantity_max": 250.0,
+          "quantity_min": 250.0,
+          "quantity_step": 250.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "olivolja",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "olivolja",
+          "product_requirements": [
+            "pack:intake_all_expansion_86ac9b2c5ae6"
+          ],
+          "quantity": 12.0,
+          "quantity_max": 12.0,
+          "quantity_min": 12.0,
+          "quantity_step": 12.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "citronjuice",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "citronjuice",
+          "product_requirements": [
+            "pure_juice"
+          ],
+          "quantity": 12.0,
+          "quantity_max": 12.0,
+          "quantity_min": 12.0,
+          "quantity_step": 12.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 3.0,
+          "quantity_max": 3.0,
+          "quantity_min": 3.0,
+          "quantity_step": 3.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 0.7,
+          "quantity_max": 0.7,
+          "quantity_min": 0.7,
+          "quantity_step": 0.7,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rödlök",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "rödlök",
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "persilja",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "persilja",
+          "quantity": 4.0,
+          "quantity_max": 4.0,
+          "quantity_min": 4.0,
+          "quantity_step": 4.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "paprika",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "paprika",
+          "quantity": 70.0,
+          "quantity_max": 70.0,
+          "quantity_min": 70.0,
+          "quantity_step": 70.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "bröd",
+          "component": "c2",
+          "form": "as_sold",
+          "name": "bröd",
+          "quantity": 40.0,
+          "quantity_max": 40.0,
+          "quantity_min": 40.0,
+          "quantity_step": 40.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Värm ugnen till 225 °C över-/undervärme. Ta bort auberginens fäste, väg angiven rå mängd med skal och dela i längsgående kvartar. Skalet tas bort efter rostningen. Lägg på bakplåtspapper och pensla med hälften av rörans olivolja. Lägg även paprikan i breda bitar på plåten.",
+        "Rosta grönsakerna i 15 minuter utan att ytan blir svart.",
+        "Vänd grönsakerna med tång.",
+        "Rosta ytterligare cirka 20 minuter tills auberginen är helt mjuk och brynt men inte svart. Förläng tiden om den fortfarande är fast.",
+        "Flytta de rostade grönsakerna till ett durkslag över en skål.",
+        "Låt grönsakerna rinna av över skålen och svalna 15 minuter. Pressa inte ur fruktköttet. Vätskan serveras inte.",
+        "Dra bort aubergineskalet och hacka fruktköttet med kniv till en grov röra. Riv vitlöken fint och blanda med citronjuice, salt och återstående olivolja. Värm fryst hackad persilja med 20 ml vatten i en liten kastrull under omrörning minst två minuter eller längre enligt förpackningen. Behåll hela denna vätska. Finhacka rödlök och rostad paprika och vänd ner. Blanda också ner all uppvärmd persilja med vätskan.",
+        "Ställ röran övertäckt i kylskåp, cirka 4 °C, så att den blir sval.",
+        "Rosta brödet i torr panna på medelvärme, vänd och servera med hela portionen aubergineröra."
+      ],
+      "name": "Melitzanosalata – paprika- och lökröra med bröd – rostad med skal, sedan skalad",
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 82,
+        "base_id": "smako-italian-pasta-alla-genovese",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "högrev|raw_edible",
+                "name": "Högrev",
+                "note": "",
+                "quantity": 700.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "Gul lök",
+                "note": "",
+                "quantity": 1000.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "pasta|dry",
+                "name": "Pasta",
+                "note": "",
+                "quantity": 320.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "olivolja|as_sold",
+                "name": "Olivolja",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "morot|raw_edible",
+                "name": "Morot",
+                "note": "",
+                "quantity": 150.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "selleri|raw_edible",
+                "name": "Selleri",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 7.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "Svartpeppar",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c1",
+            "name": "Långkok och pasta"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "italian"
+        ],
+        "equipment": [
+          "gryta med lock",
+          "kastrull",
+          "kökstermometer"
+        ],
+        "estimated_minutes": 262,
+        "family": "neapolitan_onion_beef_pasta",
+        "fish": false,
+        "flavor_profile": [
+          "långkokt lök",
+          "nötkött"
+        ],
+        "ingredient_count": 6,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "pot",
+        "primary_ingredient": "nötkött",
+        "provenance": {
+          "notes": "AI-författat receptutkast, inte provlagat och ännu inte import-/produktgranskat av Smako. Tider är författaruppskattningar, inte uppmätt provlagning. Neapolitansk genovese, inte basilika-pesto från Genua. Högrev kräver särskild registergranskning. Extra mörning vid behov kan förlänga uppskattad totaltid med upp till 60 minuter; detta är ett långt recept, inte snabb vardagspasta. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "pasta",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 15,
+            "id": "s1",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "högrev|raw_edible",
+              "morot|raw_edible",
+              "selleri|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Strimla löken tunt. Finhacka morot och selleri och skär högreven i bitar på cirka fyra centimeter. Håll rått kött och salladsråvaror åtskilda."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 12,
+            "id": "s2",
+            "ingredient_keys": [
+              "högrev|raw_edible",
+              "morot|raw_edible",
+              "olivolja|as_sold",
+              "salt|as_sold",
+              "selleri|raw_edible",
+              "svartpeppar|dry"
+            ],
+            "parallel_group": null,
+            "text": "Hetta upp grytans olivolja och bryn köttet i två omgångar. Tillsätt morot, selleri, hälften av saltet och svartpeppar och fräs i tre minuter."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 5,
+            "id": "s3",
+            "ingredient_keys": [
+              "gul lök|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "300 ml",
+                300.0
+              ]
+            ],
+            "text": "Lägg i all lök. Häll i 300 ml vatten. Rör runt, lägg på lock och sänk till mycket svag sjudning."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 30,
+            "id": "s4",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Sjud på låg värme under lock i 30 minuter."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 1,
+            "id": "s5",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "högrev|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "50 ml",
+                50.0
+              ]
+            ],
+            "text": "Rör om och kontrollera att bottnen inte kokar torr. Tillsätt vid behov 50 ml vatten och lägg tillbaka locket."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 30,
+            "id": "s6",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Sjud på låg värme under lock i 30 minuter."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 1,
+            "id": "s7",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "högrev|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "50 ml",
+                50.0
+              ]
+            ],
+            "text": "Rör om och kontrollera att bottnen inte kokar torr. Tillsätt vid behov 50 ml vatten och lägg tillbaka locket."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 30,
+            "id": "s8",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Sjud på låg värme under lock i 30 minuter."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 1,
+            "id": "s9",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "högrev|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "50 ml",
+                50.0
+              ]
+            ],
+            "text": "Rör om och kontrollera att bottnen inte kokar torr. Tillsätt vid behov 50 ml vatten och lägg tillbaka locket."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 30,
+            "id": "s10",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Sjud på låg värme under lock i 30 minuter."
+          },
+          {
+            "depends_on": [
+              "s10"
+            ],
+            "duration_minutes": 1,
+            "id": "s11",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "högrev|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "50 ml",
+                50.0
+              ]
+            ],
+            "text": "Rör om och kontrollera att bottnen inte kokar torr. Tillsätt vid behov 50 ml vatten och lägg tillbaka locket."
+          },
+          {
+            "depends_on": [
+              "s11"
+            ],
+            "duration_minutes": 30,
+            "id": "s12",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Sjud på låg värme under lock i 30 minuter."
+          },
+          {
+            "depends_on": [
+              "s12"
+            ],
+            "duration_minutes": 1,
+            "id": "s13",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "högrev|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "50 ml",
+                50.0
+              ]
+            ],
+            "text": "Rör om och kontrollera att bottnen inte kokar torr. Tillsätt vid behov 50 ml vatten och lägg tillbaka locket."
+          },
+          {
+            "depends_on": [
+              "s13"
+            ],
+            "duration_minutes": 30,
+            "id": "s14",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Sjud på låg värme under lock i 30 minuter."
+          },
+          {
+            "depends_on": [
+              "s14"
+            ],
+            "duration_minutes": 25,
+            "id": "s15",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "högrev|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Kontrollera att köttet är minst 72 °C och faller isär med en gaffel. Om det fortfarande är segt fortsätter tillagningen ytterligare 30–60 minuter; tiden beror på styckningsdetalj. Dra sönder köttet och reducera såsen utan lock i cirka 20 minuter tills löken blivit en tjock sås. Rör då och då."
+          },
+          {
+            "depends_on": [
+              "s15"
+            ],
+            "duration_minutes": 18,
+            "id": "s16",
+            "ingredient_keys": [
+              "pasta|dry",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "2500 ml",
+                2500.0
+              ]
+            ],
+            "text": "Koka upp 2500 ml vatten med resten av saltet. Koka pastan enligt förpackningen, ungefär tio minuter. Spara 150 ml kokvatten, häll av och blanda pastan med den heta kött- och löksåsen. Späd med 50 ml sparat kokvatten om den är för kompakt."
+          },
+          {
+            "depends_on": [
+              "s16"
+            ],
+            "duration_minutes": 2,
+            "id": "s17",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Fördela i fyra djupa tallrikar."
+          }
+        ],
+        "total_minutes": 262,
+        "unmeasured_processes": [
+          {
+            "description": "Saltat pastavatten hälls delvis bort och en mindre del används i såsen. Upptag av salt och förlust till vattnet är okända.",
+            "ingredient_keys": [
+              "pasta|dry",
+              "salt|as_sold"
+            ],
+            "operation": "drain_after_cooking",
+            "step_id": "s16"
+          }
+        ],
+        "variant_id": "simple",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 180
+      },
+      "ingredients": [
+        {
+          "canonical_name": "högrev",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "högrev",
+          "product_requirements": [
+            "pack:intake_all_expansion_e5f420f31672"
+          ],
+          "quantity": 700.0,
+          "quantity_max": 700.0,
+          "quantity_min": 700.0,
+          "quantity_step": 700.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 1000.0,
+          "quantity_max": 1000.0,
+          "quantity_min": 1000.0,
+          "quantity_step": 1000.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "pasta",
+          "component": "c1",
+          "form": "dry",
+          "name": "pasta",
+          "quantity": 320.0,
+          "quantity_max": 320.0,
+          "quantity_min": 320.0,
+          "quantity_step": 320.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "olivolja",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "olivolja",
+          "product_requirements": [
+            "pack:intake_all_expansion_86ac9b2c5ae6"
+          ],
+          "quantity": 30.0,
+          "quantity_max": 30.0,
+          "quantity_min": 30.0,
+          "quantity_step": 30.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "morot",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "morot",
+          "quantity": 150.0,
+          "quantity_max": 150.0,
+          "quantity_min": 150.0,
+          "quantity_step": 150.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "selleri",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "selleri",
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 7.0,
+          "quantity_max": 7.0,
+          "quantity_min": 7.0,
+          "quantity_step": 7.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "c1",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Strimla löken tunt. Finhacka morot och selleri och skär högreven i bitar på cirka fyra centimeter. Håll rått kött och salladsråvaror åtskilda.",
+        "Hetta upp grytans olivolja och bryn köttet i två omgångar. Tillsätt morot, selleri, hälften av saltet och svartpeppar och fräs i tre minuter.",
+        "Lägg i all lök. Häll i 300 ml vatten. Rör runt, lägg på lock och sänk till mycket svag sjudning.",
+        "Sjud på låg värme under lock i 30 minuter.",
+        "Rör om och kontrollera att bottnen inte kokar torr. Tillsätt vid behov 50 ml vatten och lägg tillbaka locket.",
+        "Sjud på låg värme under lock i 30 minuter.",
+        "Rör om och kontrollera att bottnen inte kokar torr. Tillsätt vid behov 50 ml vatten och lägg tillbaka locket.",
+        "Sjud på låg värme under lock i 30 minuter.",
+        "Rör om och kontrollera att bottnen inte kokar torr. Tillsätt vid behov 50 ml vatten och lägg tillbaka locket.",
+        "Sjud på låg värme under lock i 30 minuter.",
+        "Rör om och kontrollera att bottnen inte kokar torr. Tillsätt vid behov 50 ml vatten och lägg tillbaka locket.",
+        "Sjud på låg värme under lock i 30 minuter.",
+        "Rör om och kontrollera att bottnen inte kokar torr. Tillsätt vid behov 50 ml vatten och lägg tillbaka locket.",
+        "Sjud på låg värme under lock i 30 minuter.",
+        "Kontrollera att köttet är minst 72 °C och faller isär med en gaffel. Om det fortfarande är segt fortsätter tillagningen ytterligare 30–60 minuter; tiden beror på styckningsdetalj. Dra sönder köttet och reducera såsen utan lock i cirka 20 minuter tills löken blivit en tjock sås. Rör då och då.",
+        "Koka upp 2500 ml vatten med resten av saltet. Koka pastan enligt förpackningen, ungefär tio minuter. Spara 150 ml kokvatten, häll av och blanda pastan med den heta kött- och löksåsen. Späd med 50 ml sparat kokvatten om den är för kompakt.",
+        "Fördela i fyra djupa tallrikar."
+      ],
+      "name": "Pasta alla genovese – långkokt lök- och nötköttspasta",
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 82,
+        "base_id": "smako-italian-pasta-alla-genovese",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "högrev|raw_edible",
+                "name": "Högrev",
+                "note": "",
+                "quantity": 700.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "Gul lök",
+                "note": "",
+                "quantity": 1000.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "pasta|dry",
+                "name": "Pasta",
+                "note": "",
+                "quantity": 320.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "olivolja|as_sold",
+                "name": "Olivolja",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "morot|raw_edible",
+                "name": "Morot",
+                "note": "",
+                "quantity": 150.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "selleri|raw_edible",
+                "name": "Selleri",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 7.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "Svartpeppar",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitt matlagningsvin|as_sold",
+                "name": "vitt matlagningsvin",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "parmesan|as_sold",
+                "name": "Parmesan",
+                "note": "",
+                "quantity": 50.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "lagerblad|dry",
+                "name": "Lagerblad",
+                "note": "",
+                "quantity": 0.3,
+                "unit": "g"
+              }
+            ],
+            "id": "c1",
+            "name": "Långkok och pasta"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "italian"
+        ],
+        "equipment": [
+          "gryta med lock",
+          "kastrull",
+          "kökstermometer"
+        ],
+        "estimated_minutes": 262,
+        "family": "neapolitan_onion_beef_pasta",
+        "fish": false,
+        "flavor_profile": [
+          "långkokt lök",
+          "nötkött"
+        ],
+        "ingredient_count": 9,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "pot",
+        "primary_ingredient": "nötkött",
+        "provenance": {
+          "notes": "AI-författat receptutkast, inte provlagat och ännu inte import-/produktgranskat av Smako. Tider är författaruppskattningar, inte uppmätt provlagning. Neapolitansk genovese, inte basilika-pesto från Genua. Högrev kräver särskild registergranskning. Extra mörning vid behov kan förlänga uppskattad totaltid med upp till 60 minuter; detta är ett långt recept, inte snabb vardagspasta. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "pasta",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 15,
+            "id": "s1",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "högrev|raw_edible",
+              "morot|raw_edible",
+              "selleri|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Strimla löken tunt. Finhacka morot och selleri och skär högreven i bitar på cirka fyra centimeter. Håll rått kött och salladsråvaror åtskilda."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 12,
+            "id": "s2",
+            "ingredient_keys": [
+              "högrev|raw_edible",
+              "morot|raw_edible",
+              "olivolja|as_sold",
+              "salt|as_sold",
+              "selleri|raw_edible",
+              "svartpeppar|dry"
+            ],
+            "parallel_group": null,
+            "text": "Hetta upp grytans olivolja och bryn köttet i två omgångar. Tillsätt morot, selleri, hälften av saltet och svartpeppar och fräs i tre minuter."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 5,
+            "id": "s3",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "lagerblad|dry",
+              "vitt matlagningsvin|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "300 ml",
+                300.0
+              ]
+            ],
+            "text": "Häll i det vita matlagningsvinet och låt det bubbla i två minuter. Lägg i all lök och lagerblad. Häll i 300 ml vatten. Rör runt, lägg på lock och sänk till mycket svag sjudning."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 30,
+            "id": "s4",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Sjud på låg värme under lock i 30 minuter."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 1,
+            "id": "s5",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "högrev|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "50 ml",
+                50.0
+              ]
+            ],
+            "text": "Rör om och kontrollera att bottnen inte kokar torr. Tillsätt vid behov 50 ml vatten och lägg tillbaka locket."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 30,
+            "id": "s6",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Sjud på låg värme under lock i 30 minuter."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 1,
+            "id": "s7",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "högrev|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "50 ml",
+                50.0
+              ]
+            ],
+            "text": "Rör om och kontrollera att bottnen inte kokar torr. Tillsätt vid behov 50 ml vatten och lägg tillbaka locket."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 30,
+            "id": "s8",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Sjud på låg värme under lock i 30 minuter."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 1,
+            "id": "s9",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "högrev|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "50 ml",
+                50.0
+              ]
+            ],
+            "text": "Rör om och kontrollera att bottnen inte kokar torr. Tillsätt vid behov 50 ml vatten och lägg tillbaka locket."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 30,
+            "id": "s10",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Sjud på låg värme under lock i 30 minuter."
+          },
+          {
+            "depends_on": [
+              "s10"
+            ],
+            "duration_minutes": 1,
+            "id": "s11",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "högrev|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "50 ml",
+                50.0
+              ]
+            ],
+            "text": "Rör om och kontrollera att bottnen inte kokar torr. Tillsätt vid behov 50 ml vatten och lägg tillbaka locket."
+          },
+          {
+            "depends_on": [
+              "s11"
+            ],
+            "duration_minutes": 30,
+            "id": "s12",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Sjud på låg värme under lock i 30 minuter."
+          },
+          {
+            "depends_on": [
+              "s12"
+            ],
+            "duration_minutes": 1,
+            "id": "s13",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "högrev|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "50 ml",
+                50.0
+              ]
+            ],
+            "text": "Rör om och kontrollera att bottnen inte kokar torr. Tillsätt vid behov 50 ml vatten och lägg tillbaka locket."
+          },
+          {
+            "depends_on": [
+              "s13"
+            ],
+            "duration_minutes": 30,
+            "id": "s14",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Sjud på låg värme under lock i 30 minuter."
+          },
+          {
+            "depends_on": [
+              "s14"
+            ],
+            "duration_minutes": 25,
+            "id": "s15",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "högrev|raw_edible",
+              "lagerblad|dry"
+            ],
+            "parallel_group": null,
+            "text": "Kontrollera att köttet är minst 72 °C och faller isär med en gaffel. Om det fortfarande är segt fortsätter tillagningen ytterligare 30–60 minuter; tiden beror på styckningsdetalj. Dra sönder köttet och reducera såsen utan lock i cirka 20 minuter tills löken blivit en tjock sås. Rör då och då. Ta upp lagerbladet."
+          },
+          {
+            "depends_on": [
+              "s15"
+            ],
+            "duration_minutes": 18,
+            "id": "s16",
+            "ingredient_keys": [
+              "pasta|dry",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "2500 ml",
+                2500.0
+              ]
+            ],
+            "text": "Koka upp 2500 ml vatten med resten av saltet. Koka pastan enligt förpackningen, ungefär tio minuter. Spara 150 ml kokvatten, häll av och blanda pastan med den heta kött- och löksåsen. Späd med 50 ml sparat kokvatten om den är för kompakt."
+          },
+          {
+            "depends_on": [
+              "s16"
+            ],
+            "duration_minutes": 2,
+            "id": "s17",
+            "ingredient_keys": [
+              "parmesan|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Fördela i fyra djupa tallrikar och fördela den färdigrivna parmesanen över."
+          }
+        ],
+        "total_minutes": 262,
+        "unmeasured_processes": [
+          {
+            "description": "Lagerblad plockas bort efter långkok; överföring till såsen är inte uppmätt.",
+            "ingredient_keys": [
+              "lagerblad|dry"
+            ],
+            "operation": "remove_after_infusion",
+            "step_id": "s15"
+          },
+          {
+            "description": "Saltat pastavatten hälls delvis bort och en mindre del används i såsen. Upptag av salt och förlust till vattnet är okända.",
+            "ingredient_keys": [
+              "pasta|dry",
+              "salt|as_sold"
+            ],
+            "operation": "drain_after_cooking",
+            "step_id": "s16"
+          }
+        ],
+        "variant_id": "standard",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 180
+      },
+      "ingredients": [
+        {
+          "canonical_name": "högrev",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "högrev",
+          "product_requirements": [
+            "pack:intake_all_expansion_e5f420f31672"
+          ],
+          "quantity": 700.0,
+          "quantity_max": 700.0,
+          "quantity_min": 700.0,
+          "quantity_step": 700.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 1000.0,
+          "quantity_max": 1000.0,
+          "quantity_min": 1000.0,
+          "quantity_step": 1000.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "pasta",
+          "component": "c1",
+          "form": "dry",
+          "name": "pasta",
+          "quantity": 320.0,
+          "quantity_max": 320.0,
+          "quantity_min": 320.0,
+          "quantity_step": 320.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "olivolja",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "olivolja",
+          "product_requirements": [
+            "pack:intake_all_expansion_86ac9b2c5ae6"
+          ],
+          "quantity": 30.0,
+          "quantity_max": 30.0,
+          "quantity_min": 30.0,
+          "quantity_step": 30.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "morot",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "morot",
+          "quantity": 150.0,
+          "quantity_max": 150.0,
+          "quantity_min": 150.0,
+          "quantity_step": 150.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "selleri",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "selleri",
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 7.0,
+          "quantity_max": 7.0,
+          "quantity_min": 7.0,
+          "quantity_step": 7.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "c1",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitt matlagningsvin",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "vitt matlagningsvin",
+          "product_requirements": [
+            "pack:intake_all_round2_b4cd3a71e404"
+          ],
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "parmesan",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "parmesan",
+          "product_requirements": [
+            "pack:intake_all_expansion_dc7ca154fb22"
+          ],
+          "quantity": 50.0,
+          "quantity_max": 50.0,
+          "quantity_min": 50.0,
+          "quantity_step": 50.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "lagerblad",
+          "component": "c1",
+          "form": "dry",
+          "name": "lagerblad",
+          "product_requirements": [
+            "pack:intake_all_expansion_b43ed6916a64"
+          ],
+          "quantity": 0.3,
+          "quantity_max": 0.3,
+          "quantity_min": 0.3,
+          "quantity_step": 0.3,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Strimla löken tunt. Finhacka morot och selleri och skär högreven i bitar på cirka fyra centimeter. Håll rått kött och salladsråvaror åtskilda.",
+        "Hetta upp grytans olivolja och bryn köttet i två omgångar. Tillsätt morot, selleri, hälften av saltet och svartpeppar och fräs i tre minuter.",
+        "Häll i det vita matlagningsvinet och låt det bubbla i två minuter. Lägg i all lök och lagerblad. Häll i 300 ml vatten. Rör runt, lägg på lock och sänk till mycket svag sjudning.",
+        "Sjud på låg värme under lock i 30 minuter.",
+        "Rör om och kontrollera att bottnen inte kokar torr. Tillsätt vid behov 50 ml vatten och lägg tillbaka locket.",
+        "Sjud på låg värme under lock i 30 minuter.",
+        "Rör om och kontrollera att bottnen inte kokar torr. Tillsätt vid behov 50 ml vatten och lägg tillbaka locket.",
+        "Sjud på låg värme under lock i 30 minuter.",
+        "Rör om och kontrollera att bottnen inte kokar torr. Tillsätt vid behov 50 ml vatten och lägg tillbaka locket.",
+        "Sjud på låg värme under lock i 30 minuter.",
+        "Rör om och kontrollera att bottnen inte kokar torr. Tillsätt vid behov 50 ml vatten och lägg tillbaka locket.",
+        "Sjud på låg värme under lock i 30 minuter.",
+        "Rör om och kontrollera att bottnen inte kokar torr. Tillsätt vid behov 50 ml vatten och lägg tillbaka locket.",
+        "Sjud på låg värme under lock i 30 minuter.",
+        "Kontrollera att köttet är minst 72 °C och faller isär med en gaffel. Om det fortfarande är segt fortsätter tillagningen ytterligare 30–60 minuter; tiden beror på styckningsdetalj. Dra sönder köttet och reducera såsen utan lock i cirka 20 minuter tills löken blivit en tjock sås. Rör då och då. Ta upp lagerbladet.",
+        "Koka upp 2500 ml vatten med resten av saltet. Koka pastan enligt förpackningen, ungefär tio minuter. Spara 150 ml kokvatten, häll av och blanda pastan med den heta kött- och löksåsen. Späd med 50 ml sparat kokvatten om den är för kompakt.",
+        "Fördela i fyra djupa tallrikar och fördela den färdigrivna parmesanen över."
+      ],
+      "name": "Pasta alla genovese – med vitt vin och parmesan – med vitt matlagningsvin",
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 94,
+        "base_id": "smako-italian-pasta-alla-genovese",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "högrev|raw_edible",
+                "name": "Högrev",
+                "note": "",
+                "quantity": 700.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "Gul lök",
+                "note": "",
+                "quantity": 1000.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "pasta|dry",
+                "name": "Pasta",
+                "note": "",
+                "quantity": 320.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "olivolja|as_sold",
+                "name": "Olivolja",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "morot|raw_edible",
+                "name": "Morot",
+                "note": "",
+                "quantity": 150.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "selleri|raw_edible",
+                "name": "Selleri",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 7.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "Svartpeppar",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitt matlagningsvin|as_sold",
+                "name": "vitt matlagningsvin",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "parmesan|as_sold",
+                "name": "Parmesan",
+                "note": "",
+                "quantity": 50.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "lagerblad|dry",
+                "name": "Lagerblad",
+                "note": "",
+                "quantity": 0.3,
+                "unit": "g"
+              }
+            ],
+            "id": "c1",
+            "name": "Långkok och pasta"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "haricots verts|as_sold",
+                "name": "Frysta haricots verts",
+                "note": "",
+                "quantity": 400.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "citronjuice|as_sold",
+                "name": "Citronjuice",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "persilja|raw_edible",
+                "name": "Persilja",
+                "note": "",
+                "quantity": 12.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "olivolja|as_sold",
+                "name": "Olivolja",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "c2",
+            "name": "Citronbönor"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "italian"
+        ],
+        "equipment": [
+          "gryta med lock",
+          "kastrull",
+          "kökstermometer"
+        ],
+        "estimated_minutes": 274,
+        "family": "neapolitan_onion_beef_pasta",
+        "fish": false,
+        "flavor_profile": [
+          "långkokt lök",
+          "nötkött"
+        ],
+        "ingredient_count": 12,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "pot",
+        "primary_ingredient": "nötkött",
+        "provenance": {
+          "notes": "AI-författat receptutkast, inte provlagat och ännu inte import-/produktgranskat av Smako. Tider är författaruppskattningar, inte uppmätt provlagning. Neapolitansk genovese, inte basilika-pesto från Genua. Högrev kräver särskild registergranskning. Extra mörning vid behov kan förlänga uppskattad totaltid med upp till 60 minuter; detta är ett långt recept, inte snabb vardagspasta. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "pasta och gröna bönor",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 15,
+            "id": "s1",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "högrev|raw_edible",
+              "morot|raw_edible",
+              "selleri|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Strimla löken tunt. Finhacka morot och selleri och skär högreven i bitar på cirka fyra centimeter. Håll rått kött och salladsråvaror åtskilda."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 12,
+            "id": "s2",
+            "ingredient_keys": [
+              "högrev|raw_edible",
+              "morot|raw_edible",
+              "olivolja|as_sold",
+              "salt|as_sold",
+              "selleri|raw_edible",
+              "svartpeppar|dry"
+            ],
+            "parallel_group": null,
+            "text": "Hetta upp grytans olivolja och bryn köttet i två omgångar. Tillsätt morot, selleri, hälften av saltet och svartpeppar och fräs i tre minuter."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 5,
+            "id": "s3",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "lagerblad|dry",
+              "vitt matlagningsvin|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "300 ml",
+                300.0
+              ]
+            ],
+            "text": "Häll i det vita matlagningsvinet och låt det bubbla i två minuter. Lägg i all lök och lagerblad. Häll i 300 ml vatten. Rör runt, lägg på lock och sänk till mycket svag sjudning."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 30,
+            "id": "s4",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Sjud på låg värme under lock i 30 minuter."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 1,
+            "id": "s5",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "högrev|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "50 ml",
+                50.0
+              ]
+            ],
+            "text": "Rör om och kontrollera att bottnen inte kokar torr. Tillsätt vid behov 50 ml vatten och lägg tillbaka locket."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 30,
+            "id": "s6",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Sjud på låg värme under lock i 30 minuter."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 1,
+            "id": "s7",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "högrev|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "50 ml",
+                50.0
+              ]
+            ],
+            "text": "Rör om och kontrollera att bottnen inte kokar torr. Tillsätt vid behov 50 ml vatten och lägg tillbaka locket."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 30,
+            "id": "s8",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Sjud på låg värme under lock i 30 minuter."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 1,
+            "id": "s9",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "högrev|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "50 ml",
+                50.0
+              ]
+            ],
+            "text": "Rör om och kontrollera att bottnen inte kokar torr. Tillsätt vid behov 50 ml vatten och lägg tillbaka locket."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 30,
+            "id": "s10",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Sjud på låg värme under lock i 30 minuter."
+          },
+          {
+            "depends_on": [
+              "s10"
+            ],
+            "duration_minutes": 1,
+            "id": "s11",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "högrev|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "50 ml",
+                50.0
+              ]
+            ],
+            "text": "Rör om och kontrollera att bottnen inte kokar torr. Tillsätt vid behov 50 ml vatten och lägg tillbaka locket."
+          },
+          {
+            "depends_on": [
+              "s11"
+            ],
+            "duration_minutes": 30,
+            "id": "s12",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Sjud på låg värme under lock i 30 minuter."
+          },
+          {
+            "depends_on": [
+              "s12"
+            ],
+            "duration_minutes": 1,
+            "id": "s13",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "högrev|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "50 ml",
+                50.0
+              ]
+            ],
+            "text": "Rör om och kontrollera att bottnen inte kokar torr. Tillsätt vid behov 50 ml vatten och lägg tillbaka locket."
+          },
+          {
+            "depends_on": [
+              "s13"
+            ],
+            "duration_minutes": 30,
+            "id": "s14",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Sjud på låg värme under lock i 30 minuter."
+          },
+          {
+            "depends_on": [
+              "s14"
+            ],
+            "duration_minutes": 25,
+            "id": "s15",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "högrev|raw_edible",
+              "lagerblad|dry"
+            ],
+            "parallel_group": null,
+            "text": "Kontrollera att köttet är minst 72 °C och faller isär med en gaffel. Om det fortfarande är segt fortsätter tillagningen ytterligare 30–60 minuter; tiden beror på styckningsdetalj. Dra sönder köttet och reducera såsen utan lock i cirka 20 minuter tills löken blivit en tjock sås. Rör då och då. Ta upp lagerbladet."
+          },
+          {
+            "depends_on": [
+              "s15"
+            ],
+            "duration_minutes": 12,
+            "id": "s16",
+            "ingredient_keys": [
+              "citronjuice|as_sold",
+              "haricots verts|as_sold",
+              "olivolja|as_sold",
+              "persilja|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "800 ml",
+                800.0
+              ]
+            ],
+            "text": "Koka upp 800 ml vatten. Koka de frysta haricots vertsen tills genomvarma och mjälla, cirka sex minuter eller enligt förpackningen. Låt fryst hackad persilja koka med bönorna de sista två minuterna. Häll av och vänd bönorna med tillbehörets olivolja och citronjuice."
+          },
+          {
+            "depends_on": [
+              "s16"
+            ],
+            "duration_minutes": 18,
+            "id": "s17",
+            "ingredient_keys": [
+              "pasta|dry",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "2500 ml",
+                2500.0
+              ]
+            ],
+            "text": "Koka upp 2500 ml vatten med resten av saltet. Koka pastan enligt förpackningen, ungefär tio minuter. Spara 150 ml kokvatten, häll av och blanda pastan med den heta kött- och löksåsen. Späd med 50 ml sparat kokvatten om den är för kompakt."
+          },
+          {
+            "depends_on": [
+              "s17"
+            ],
+            "duration_minutes": 2,
+            "id": "s18",
+            "ingredient_keys": [
+              "parmesan|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Fördela i fyra djupa tallrikar och fördela den färdigrivna parmesanen över. Servera citronbönorna bredvid."
+          }
+        ],
+        "total_minutes": 274,
+        "unmeasured_processes": [
+          {
+            "description": "Lagerblad plockas bort efter långkok; överföring till såsen är inte uppmätt.",
+            "ingredient_keys": [
+              "lagerblad|dry"
+            ],
+            "operation": "remove_after_infusion",
+            "step_id": "s15"
+          },
+          {
+            "description": "Saltat pastavatten hälls delvis bort och en mindre del används i såsen. Upptag av salt och förlust till vattnet är okända.",
+            "ingredient_keys": [
+              "pasta|dry",
+              "salt|as_sold"
+            ],
+            "operation": "drain_after_cooking",
+            "step_id": "s17"
+          }
+        ],
+        "variant_id": "extended",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 180
+      },
+      "ingredients": [
+        {
+          "canonical_name": "högrev",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "högrev",
+          "product_requirements": [
+            "pack:intake_all_expansion_e5f420f31672"
+          ],
+          "quantity": 700.0,
+          "quantity_max": 700.0,
+          "quantity_min": 700.0,
+          "quantity_step": 700.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 1000.0,
+          "quantity_max": 1000.0,
+          "quantity_min": 1000.0,
+          "quantity_step": 1000.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "pasta",
+          "component": "c1",
+          "form": "dry",
+          "name": "pasta",
+          "quantity": 320.0,
+          "quantity_max": 320.0,
+          "quantity_min": 320.0,
+          "quantity_step": 320.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "olivolja",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "olivolja",
+          "product_requirements": [
+            "pack:intake_all_expansion_86ac9b2c5ae6"
+          ],
+          "quantity": 40.0,
+          "quantity_max": 40.0,
+          "quantity_min": 40.0,
+          "quantity_step": 40.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "morot",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "morot",
+          "quantity": 150.0,
+          "quantity_max": 150.0,
+          "quantity_min": 150.0,
+          "quantity_step": 150.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "selleri",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "selleri",
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 7.0,
+          "quantity_max": 7.0,
+          "quantity_min": 7.0,
+          "quantity_step": 7.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "c1",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitt matlagningsvin",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "vitt matlagningsvin",
+          "product_requirements": [
+            "pack:intake_all_round2_b4cd3a71e404"
+          ],
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "parmesan",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "parmesan",
+          "product_requirements": [
+            "pack:intake_all_expansion_dc7ca154fb22"
+          ],
+          "quantity": 50.0,
+          "quantity_max": 50.0,
+          "quantity_min": 50.0,
+          "quantity_step": 50.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "lagerblad",
+          "component": "c1",
+          "form": "dry",
+          "name": "lagerblad",
+          "product_requirements": [
+            "pack:intake_all_expansion_b43ed6916a64"
+          ],
+          "quantity": 0.3,
+          "quantity_max": 0.3,
+          "quantity_min": 0.3,
+          "quantity_step": 0.3,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "haricots verts",
+          "component": "c2",
+          "form": "as_sold",
+          "name": "haricots verts",
+          "product_requirements": [
+            "frozen",
+            "plain"
+          ],
+          "quantity": 400.0,
+          "quantity_max": 400.0,
+          "quantity_min": 400.0,
+          "quantity_step": 400.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "citronjuice",
+          "component": "c2",
+          "form": "as_sold",
+          "name": "citronjuice",
+          "product_requirements": [
+            "pure_juice"
+          ],
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 25.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "persilja",
+          "component": "c2",
+          "form": "raw_edible",
+          "name": "persilja",
+          "quantity": 12.0,
+          "quantity_max": 12.0,
+          "quantity_min": 12.0,
+          "quantity_step": 12.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Strimla löken tunt. Finhacka morot och selleri och skär högreven i bitar på cirka fyra centimeter. Håll rått kött och salladsråvaror åtskilda.",
+        "Hetta upp grytans olivolja och bryn köttet i två omgångar. Tillsätt morot, selleri, hälften av saltet och svartpeppar och fräs i tre minuter.",
+        "Häll i det vita matlagningsvinet och låt det bubbla i två minuter. Lägg i all lök och lagerblad. Häll i 300 ml vatten. Rör runt, lägg på lock och sänk till mycket svag sjudning.",
+        "Sjud på låg värme under lock i 30 minuter.",
+        "Rör om och kontrollera att bottnen inte kokar torr. Tillsätt vid behov 50 ml vatten och lägg tillbaka locket.",
+        "Sjud på låg värme under lock i 30 minuter.",
+        "Rör om och kontrollera att bottnen inte kokar torr. Tillsätt vid behov 50 ml vatten och lägg tillbaka locket.",
+        "Sjud på låg värme under lock i 30 minuter.",
+        "Rör om och kontrollera att bottnen inte kokar torr. Tillsätt vid behov 50 ml vatten och lägg tillbaka locket.",
+        "Sjud på låg värme under lock i 30 minuter.",
+        "Rör om och kontrollera att bottnen inte kokar torr. Tillsätt vid behov 50 ml vatten och lägg tillbaka locket.",
+        "Sjud på låg värme under lock i 30 minuter.",
+        "Rör om och kontrollera att bottnen inte kokar torr. Tillsätt vid behov 50 ml vatten och lägg tillbaka locket.",
+        "Sjud på låg värme under lock i 30 minuter.",
+        "Kontrollera att köttet är minst 72 °C och faller isär med en gaffel. Om det fortfarande är segt fortsätter tillagningen ytterligare 30–60 minuter; tiden beror på styckningsdetalj. Dra sönder köttet och reducera såsen utan lock i cirka 20 minuter tills löken blivit en tjock sås. Rör då och då. Ta upp lagerbladet.",
+        "Koka upp 800 ml vatten. Koka de frysta haricots vertsen tills genomvarma och mjälla, cirka sex minuter eller enligt förpackningen. Låt fryst hackad persilja koka med bönorna de sista två minuterna. Häll av och vänd bönorna med tillbehörets olivolja och citronjuice.",
+        "Koka upp 2500 ml vatten med resten av saltet. Koka pastan enligt förpackningen, ungefär tio minuter. Spara 150 ml kokvatten, häll av och blanda pastan med den heta kött- och löksåsen. Späd med 50 ml sparat kokvatten om den är för kompakt.",
+        "Fördela i fyra djupa tallrikar och fördela den färdigrivna parmesanen över. Servera citronbönorna bredvid."
+      ],
+      "name": "Pasta alla genovese – med vitt vin och citronbönor – med vitt matlagningsvin",
+      "servings": 4
+    }
+  ],
+  "schema_version": "smako-meal-pack-v1"
+}

@@ -61,6 +61,16 @@ class RecipeProvenance(BaseModel):
     notes: str
 
 
+class RecipeUnmeasuredProcess(BaseModel):
+    """Reviewed removal, not a measured retention coefficient or food yield."""
+
+    model_config = ConfigDict(frozen=True, extra="forbid")
+    step_id: str
+    ingredient_keys: tuple[str, ...] = Field(min_length=1)
+    operation: Literal["drain_after_cooking", "remove_after_infusion", "deep_fry_and_drain", "strain_whey", "peel_after_cooking", "remove_bones_after_cooking", "trim_before_cooking", "drain_before_cooking"]
+    description: str = Field(min_length=10, max_length=500)
+
+
 class RecipeDesign(BaseModel):
     """Immutable authored identity, cooking structure and review provenance.
 
@@ -97,16 +107,21 @@ class RecipeDesign(BaseModel):
         default="crafted", exclude_if=lambda v: v == "crafted")
     active_minutes: int | None = Field(default=None, ge=1, le=2880,
                                       exclude_if=lambda v: v is None)
-    waiting_minutes: int = Field(default=0, ge=0, le=1440, exclude_if=lambda v: v == 0)
+    # Aggregate waiting may include 24 h thawing plus passive cooking. Keep the
+    # existing 48 h total ceiling; a single step is still capped at 24 h.
+    waiting_minutes: int = Field(default=0, ge=0, le=2880, exclude_if=lambda v: v == 0)
     total_minutes: int | None = Field(default=None, ge=1, le=2880,
                                      exclude_if=lambda v: v is None)
+    unmeasured_processes: tuple[RecipeUnmeasuredProcess, ...] | None = Field(
+        default=None, min_length=1, exclude_if=lambda v: v is None)
+    servings_multiple: int | None = Field(default=None, ge=1, le=12, exclude_if=lambda v: v is None)
 
 
 class RecipePreparation(BaseModel):
     """Versioned recipe design, never an assertion of measured cooking yield."""
 
     model_config = ConfigDict(frozen=True, extra="forbid")
-    version: Literal["smako-edible-input-v1", "smako-authored-input-v2"]
+    version: Literal["smako-edible-input-v1", "smako-authored-input-v2", "smako-authored-losses-v3"]
     origin: Literal["smako_recipe_design", "explicit_adaptation"]
     parent_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
     family: str

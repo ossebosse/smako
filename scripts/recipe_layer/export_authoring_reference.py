@@ -52,6 +52,9 @@ def export(output: Path) -> dict:
             "ingredients": [i.model_dump(mode="json") for i in recipe.ingredients],
             "components": [c.model_dump(mode="json") for c in d.components],
             "instructions": recipe.instructions,
+            "preparation_version": recipe.preparation.version if recipe.preparation else None,
+            "unmeasured_processes": [p.model_dump(mode="json") for p in d.unmeasured_processes or ()],
+            "servings_multiple": d.servings_multiple,
             "active_minutes": d.active_minutes,
             "waiting_minutes": d.waiting_minutes,
             "total_minutes": d.total_minutes or d.estimated_minutes,
@@ -94,6 +97,7 @@ def export(output: Path) -> dict:
         "scope": "Current authored library in this checkout; not live beta or purchasing coverage.",
         "base_count": len(bases), "variant_count": len(details),
         "ingredient_identity_count": len(vocabulary),
+        "ingredient_unit_identity_count": len(vocabulary.by_unit),
         "cuisine_base_counts": dict(Counter("+".join(b["cuisines"]) or "unassigned" for b in bases)),
         "meal_type_base_counts": dict(Counter("+".join(b["meal_types"]) for b in bases)),
         "issued_base_count": len({r.design.base_id for r in issued}),
@@ -110,9 +114,12 @@ def export(output: Path) -> dict:
             "revoked_recipe_ids": sorted(manifest.get("revocations", {})),
         }),
         "ingrediensregister.json": encoded({
-            "scope": "Known authoring identities and default units/requirements, not availability, nutrition or price evidence. Requirements may depend on reviewed recipe identities; do not generalize them to new recipes without review.",
+            "scope": "Known authoring identities, default units and separately reviewed unit options; not availability, nutrition or price evidence. Unit options are not conversions or density/yield factors. Requirements may depend on reviewed recipe identities; do not generalize them to new recipes without review.",
             "ingredients": [{"key": key, "name": key.split("|", 1)[0],
-                "form": key.split("|", 1)[1], "unit": value[0], "requirements": value[1]}
+                "form": key.split("|", 1)[1], "unit": value[0], "requirements": value[1],
+                "unit_options": [{"unit": unit, "requirements": requirements}
+                    for (option_key, unit), (_, requirements) in sorted(vocabulary.by_unit.items())
+                    if option_key == key]}
                 for key, value in sorted(vocabulary.items())],
         }),
         "AUTHORING.md": (REPO / "docs/recipes/AUTHORING.md").read_bytes(),

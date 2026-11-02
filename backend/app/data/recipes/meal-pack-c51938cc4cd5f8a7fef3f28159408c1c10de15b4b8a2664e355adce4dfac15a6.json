@@ -1,0 +1,2788 @@
+{
+  "library_version": "smako-meal-pack-v1",
+  "recipes": [
+    {
+      "design": {
+        "active_minutes": 10,
+        "base_id": "smako-thai-kluai-buat-chi",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "banan|raw_edible",
+                "name": "Skalad, mogen men fast banan",
+                "note": "",
+                "quantity": 120.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kokosmjölk|as_sold",
+                "name": "Kokosmjölk",
+                "note": "",
+                "quantity": 90.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "Strösocker",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 0.2,
+                "unit": "g"
+              }
+            ],
+            "id": "c1",
+            "name": "Banan i kokosmjölk"
+          }
+        ],
+        "content_sha256": "b0d194de840d27960da89546f035ecbcf76970b69240bbc3d9fc3a88767c6d06",
+        "content_source": {
+          "active_minutes": 10,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "reviewed-expansion-round2-stage10",
+          "priority": 1,
+          "proposal_id": "smako-thai-kluai-buat-chi",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "8775abd207b8fddbba53d609e9a6ed85d59e4794547c94d9ac938af67aba2b23",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "thai"
+        ],
+        "equipment": [
+          "liten kastrull"
+        ],
+        "estimated_minutes": 13,
+        "family": "banana_poached_in_coconut_milk",
+        "fish": false,
+        "flavor_profile": [
+          "kokos",
+          "banan"
+        ],
+        "ingredient_count": 3,
+        "meal_types": [
+          "snack"
+        ],
+        "method": "pot",
+        "primary_ingredient": "banan",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "AI-författat receptutkast, inte provlagat och ännu inte import-/produktgranskat av Smako. Tider är författaruppskattningar, inte uppmätt provlagning. Hemmaanpassning med vanlig fast dessertbanan, inte påstådd nam wa- eller kluai khai-bindning. Tillagningen förkortas för den råvaran. Utökad toppning är en egen texturkomponent. En liten söt mellanmålsportion, inte ett näringsgodkännande. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "ingen separat sida",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 4,
+            "id": "s1",
+            "ingredient_keys": [
+              "kokosmjölk|as_sold",
+              "salt|as_sold",
+              "strösocker|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "30 ml",
+                30.0
+              ]
+            ],
+            "text": "Häll kokosmjölk, socker och salt i en liten kastrull med 30 ml vatten. Värm försiktigt till svag sjudning; undvik häftig kokning."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 5,
+            "id": "s2",
+            "ingredient_keys": [
+              "banan|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Skala bananen, väg den angivna ätliga mängden och dela den i tjocka sneda bitar. Lägg dem i kokosmjölken och sjud mycket försiktigt i tre–fem minuter tills de är varma och mjuka men håller formen. Kortare tid kan behövas för mogen vanlig banan."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 3,
+            "id": "s3",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Låt svalna lite före servering."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 1,
+            "id": "s4",
+            "ingredient_keys": [
+              "banan|raw_edible",
+              "kokosmjölk|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Servera alla bananbitar och hela kokosmjölksåsen ljumma."
+          }
+        ],
+        "total_minutes": 13,
+        "variant_id": "simple",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 3
+      },
+      "ingredients": [
+        {
+          "canonical_name": "banan",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "banan",
+          "product_requirements": [
+            "pack:intake_all_973660201bf8"
+          ],
+          "quantity": 120.0,
+          "quantity_max": 120.0,
+          "quantity_min": 120.0,
+          "quantity_step": 120.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kokosmjölk",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "kokosmjölk",
+          "quantity": 90.0,
+          "quantity_max": 90.0,
+          "quantity_min": 90.0,
+          "quantity_step": 90.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "strösocker",
+          "component": "c1",
+          "form": "dry",
+          "name": "strösocker",
+          "product_requirements": [
+            "pack:sugar"
+          ],
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 0.2,
+          "quantity_max": 0.2,
+          "quantity_min": 0.2,
+          "quantity_step": 0.2,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Häll kokosmjölk, socker och salt i en liten kastrull med 30 ml vatten. Värm försiktigt till svag sjudning; undvik häftig kokning.",
+        "Skala bananen, väg den angivna ätliga mängden och dela den i tjocka sneda bitar. Lägg dem i kokosmjölken och sjud mycket försiktigt i tre–fem minuter tills de är varma och mjuka men håller formen. Kortare tid kan behövas för mogen vanlig banan.",
+        "Låt svalna lite före servering.",
+        "Servera alla bananbitar och hela kokosmjölksåsen ljumma."
+      ],
+      "name": "Kluai buat chi – mjuk banan i lättsaltad kokosmjölk",
+      "preparation": {
+        "family": "banana_poached_in_coconut_milk",
+        "input_forms": {
+          "banan": "raw_edible",
+          "kokosmjölk": "as_sold",
+          "salt": "as_sold",
+          "strösocker": "dry"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "b0d194de840d27960da89546f035ecbcf76970b69240bbc3d9fc3a88767c6d06",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 30,
+        "base_id": "smako-italian-pasticciotto-leccese",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "vetemjöl|dry",
+                "name": "Vetemjöl",
+                "note": "",
+                "quantity": 35.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "smör|as_sold",
+                "name": "Smör",
+                "note": "",
+                "quantity": 17.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "Strösocker",
+                "note": "",
+                "quantity": 8.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "äggula|raw_edible",
+                "name": "Äggula",
+                "note": "",
+                "quantity": 6.0,
+                "unit": "g"
+              }
+            ],
+            "id": "skal",
+            "name": "Smörmördeg"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "mjölk|as_sold",
+                "name": "Mjölk",
+                "note": "",
+                "quantity": 55.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "äggula|raw_edible",
+                "name": "Äggula",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "Strösocker",
+                "note": "",
+                "quantity": 7.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "majsstärkelse|dry",
+                "name": "Majsstärkelse",
+                "note": "",
+                "quantity": 4.0,
+                "unit": "g"
+              }
+            ],
+            "id": "kram",
+            "name": "Fyllningskräm"
+          }
+        ],
+        "content_sha256": "7c4b1e77d964ac574bba6b810bea0a1baca54e7642397d49ca7eee2da3758bc2",
+        "content_source": {
+          "active_minutes": 30,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "reviewed-expansion-round2-stage10",
+          "priority": 1,
+          "proposal_id": "smako-italian-pasticciotto-leccese",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "8775abd207b8fddbba53d609e9a6ed85d59e4794547c94d9ac938af67aba2b23",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "italian"
+        ],
+        "equipment": [
+          "liten pajform cirka 9 cm",
+          "kastrull",
+          "visp",
+          "kavel",
+          "ugn",
+          "kylskåp"
+        ],
+        "estimated_minutes": 144,
+        "family": "sluten mördegspaj med kokt kräm",
+        "fish": false,
+        "flavor_profile": [
+          "mjölkkräm"
+        ],
+        "ingredient_count": 6,
+        "meal_types": [
+          "breakfast"
+        ],
+        "method": "bake",
+        "primary_ingredient": "mjölk",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Smör ersätter traditionellt ister. Enkel kräm utan vanilj; utökad med vanilj och amarena. Kaffet ingår inte. Smörversionen är uttryckligen en hemanpassning av pasticciotto, inte ett anspråk på traditionell isterdeg. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "frukostbakverk",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 3,
+            "id": "s1",
+            "ingredient_keys": [
+              "äggula|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Knäck rena hönsägg och separera gula och vita utan tillsatser. Väg rå äggula utan skal separat till deg och kräm. Oanvänd vita och gula är separata rester; komplettera inköpet om det faktiska utbytet är mindre än uppskattningen."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 6,
+            "id": "s2",
+            "ingredient_keys": [
+              "smör|as_sold",
+              "strösocker|dry",
+              "vetemjöl|dry",
+              "äggula|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "3 ml",
+                3.0
+              ]
+            ],
+            "text": "Nyp ihop skalets mjöl, smör och socker. Blanda ner skalets uppvägda äggula och 3 ml vatten, arbeta bara tills degen håller ihop. Platta till och täck."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 35,
+            "id": "s3",
+            "ingredient_keys": [
+              "smör|as_sold",
+              "strösocker|dry",
+              "vetemjöl|dry",
+              "äggula|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Kyl degen 35 minuter. Den ska vara fast nog att kavla."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 8,
+            "id": "s4",
+            "ingredient_keys": [
+              "majsstärkelse|dry",
+              "mjölk|as_sold",
+              "strösocker|dry",
+              "äggula|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Vispa krämens äggula, socker och majsstärkelse slätt med mjölken. Värm under ständig vispning tills krämen bubblar och tjocknar; låt bubbla svagt en minut under fortsatt vispning. Ta av värmen."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 2,
+            "id": "s5",
+            "ingredient_keys": [
+              "majsstärkelse|dry",
+              "mjölk|as_sold",
+              "äggula|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Bred krämen i en ren grund skål och täck direkt mot ytan före kylningen."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 35,
+            "id": "s6",
+            "ingredient_keys": [
+              "mjölk|as_sold",
+              "äggula|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Kyl krämen i kylskåp cirka 35 minuter tills den är helt kall och inte smälter smöret vid fyllning."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 10,
+            "id": "s7",
+            "ingredient_keys": [
+              "majsstärkelse|dry",
+              "mjölk|as_sold",
+              "smör|as_sold",
+              "strösocker|dry",
+              "vetemjöl|dry",
+              "äggula|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Värm ugnen till 185 °C. Klä den lilla formen med papper. Kavla två tredjedelar av degen mellan papper och klä botten och kanter. Lägg i all kall kräm. Kavla resten till ett lock och nyp fast det. Gör ett litet ånghål; ingen extra mjölning eller pensling behövs."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 24,
+            "id": "s8",
+            "ingredient_keys": [
+              "majsstärkelse|dry",
+              "mjölk|as_sold",
+              "smör|as_sold",
+              "strösocker|dry",
+              "vetemjöl|dry",
+              "äggula|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Baka cirka 24 minuter tills mördegen är gyllene och botten inte längre ser rå ut. Äggkrämen är redan kokt, men bakverket ska vara hett igenom."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 20,
+            "id": "s9",
+            "ingredient_keys": [
+              "majsstärkelse|dry",
+              "mjölk|as_sold",
+              "smör|as_sold",
+              "strösocker|dry",
+              "vetemjöl|dry",
+              "äggula|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Låt bakverket svalna på galler 20 minuter; fyllningen kan annars bränna."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 1,
+            "id": "s10",
+            "ingredient_keys": [
+              "vetemjöl|dry",
+              "äggula|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Lossa försiktigt formen och servera hela bakverket ljummet."
+          }
+        ],
+        "total_minutes": 144,
+        "variant_id": "simple",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 114
+      },
+      "ingredients": [
+        {
+          "canonical_name": "vetemjöl",
+          "component": "skal",
+          "form": "dry",
+          "name": "vetemjöl",
+          "quantity": 35.0,
+          "quantity_max": 35.0,
+          "quantity_min": 35.0,
+          "quantity_step": 35.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "smör",
+          "component": "skal",
+          "form": "as_sold",
+          "name": "smör",
+          "product_requirements": [
+            "pack:intake_butter"
+          ],
+          "quantity": 17.0,
+          "quantity_max": 17.0,
+          "quantity_min": 17.0,
+          "quantity_step": 17.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "strösocker",
+          "component": "skal",
+          "form": "dry",
+          "name": "strösocker",
+          "product_requirements": [
+            "pack:sugar"
+          ],
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "äggula",
+          "component": "skal",
+          "form": "raw_edible",
+          "name": "äggula",
+          "product_requirements": [
+            "pack:intake_all_5b4aac5de084",
+            "prepare:hen_egg_separation_estimate_v1"
+          ],
+          "quantity": 16.0,
+          "quantity_max": 16.0,
+          "quantity_min": 16.0,
+          "quantity_step": 16.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "mjölk",
+          "component": "kram",
+          "form": "as_sold",
+          "name": "mjölk",
+          "quantity": 55.0,
+          "quantity_max": 55.0,
+          "quantity_min": 55.0,
+          "quantity_step": 55.0,
+          "required": true,
+          "role": "primary",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "majsstärkelse",
+          "component": "kram",
+          "form": "dry",
+          "name": "majsstärkelse",
+          "product_requirements": [
+            "pack:intake_corn_starch"
+          ],
+          "quantity": 4.0,
+          "quantity_max": 4.0,
+          "quantity_min": 4.0,
+          "quantity_step": 4.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Knäck rena hönsägg och separera gula och vita utan tillsatser. Väg rå äggula utan skal separat till deg och kräm. Oanvänd vita och gula är separata rester; komplettera inköpet om det faktiska utbytet är mindre än uppskattningen.",
+        "Nyp ihop skalets mjöl, smör och socker. Blanda ner skalets uppvägda äggula och 3 ml vatten, arbeta bara tills degen håller ihop. Platta till och täck.",
+        "Kyl degen 35 minuter. Den ska vara fast nog att kavla.",
+        "Vispa krämens äggula, socker och majsstärkelse slätt med mjölken. Värm under ständig vispning tills krämen bubblar och tjocknar; låt bubbla svagt en minut under fortsatt vispning. Ta av värmen.",
+        "Bred krämen i en ren grund skål och täck direkt mot ytan före kylningen.",
+        "Kyl krämen i kylskåp cirka 35 minuter tills den är helt kall och inte smälter smöret vid fyllning.",
+        "Värm ugnen till 185 °C. Klä den lilla formen med papper. Kavla två tredjedelar av degen mellan papper och klä botten och kanter. Lägg i all kall kräm. Kavla resten till ett lock och nyp fast det. Gör ett litet ånghål; ingen extra mjölning eller pensling behövs.",
+        "Baka cirka 24 minuter tills mördegen är gyllene och botten inte längre ser rå ut. Äggkrämen är redan kokt, men bakverket ska vara hett igenom.",
+        "Låt bakverket svalna på galler 20 minuter; fyllningen kan annars bränna.",
+        "Lossa försiktigt formen och servera hela bakverket ljummet."
+      ],
+      "name": "Pasticciotto leccese – liten vaniljkrämspaj – enkel – mördeg med smör",
+      "preparation": {
+        "family": "sluten mördegspaj med kokt kräm",
+        "input_forms": {
+          "majsstärkelse": "dry",
+          "mjölk": "as_sold",
+          "smör": "as_sold",
+          "strösocker": "dry",
+          "vetemjöl": "dry",
+          "äggula": "raw_edible"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "7c4b1e77d964ac574bba6b810bea0a1baca54e7642397d49ca7eee2da3758bc2",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 37,
+        "base_id": "smako-mexican-sopa-de-lima",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "kyckling|raw_edible",
+                "name": "Benfritt rått kycklingkött",
+                "note": "",
+                "quantity": 650.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "Gul lök",
+                "note": "",
+                "quantity": 140.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "tomat|raw_edible",
+                "name": "Tomat",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "oregano|dry",
+                "name": "Oregano",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "limejuice|as_sold",
+                "name": "Limejuice",
+                "note": "",
+                "quantity": 65.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "Rapsolja",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 4.0,
+                "unit": "g"
+              }
+            ],
+            "id": "soppa",
+            "name": "Kyckling och lätt citrusbuljong"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "majstortillas|as_sold",
+                "name": "Majstortillas",
+                "note": "",
+                "quantity": 240.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "Rapsolja",
+                "note": "",
+                "quantity": 65.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "strimlor",
+            "name": "Krispiga majstortillas"
+          }
+        ],
+        "content_sha256": "b3745283ae46b720707580de3dd45ab040a3cb6c52c7f72eac429e1d4a7b280c",
+        "content_source": {
+          "active_minutes": 37,
+          "method_note": "Ingredienslistan anger hela insatsen, även den del som senare hälls eller silas bort. Förlusten är inte uppmätt. Näring och färdig portionsvikt är okända; receptet kan inte styrka valda närings- eller viktgränser. Inköp och personliga kostkrav kontrolleras för samtliga insatser.",
+          "pack_id": "reviewed-expansion-round2-stage10",
+          "priority": 1,
+          "proposal_id": "smako-mexican-sopa-de-lima",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "8775abd207b8fddbba53d609e9a6ed85d59e4794547c94d9ac938af67aba2b23",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "mexican"
+        ],
+        "equipment": [
+          "soppgryta",
+          "stekpanna",
+          "termometer",
+          "hålslev"
+        ],
+        "estimated_minutes": 59,
+        "family": "klar citrussyrlig kycklingsoppa",
+        "fish": false,
+        "flavor_profile": [
+          "lime",
+          "oregano"
+        ],
+        "ingredient_count": 7,
+        "method": "pot",
+        "primary_ingredient": "kyckling",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Svensk limejuice och grapefrukt approximerar lokal lima; enkel variant använder bara lime. Benfri kyckling ger lättare buljong. Stekoljan för tortillas är inköpt/insatt mängd, inte uppmätt upptagen fettmängd. Näringsberäkning behöver hantera kvarvarande olja. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "krispiga tortillastrimlor",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 11,
+            "id": "s1",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "rapsolja|as_sold",
+              "tomat|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Hacka lök och tomat. Håll rå kyckling separat från grönsaksbrädan. Fräs grönsakerna i soppans olja på medelvärme cirka 5 minuter."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 5,
+            "id": "s2",
+            "ingredient_keys": [
+              "kyckling|raw_edible",
+              "oregano|dry",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "1500 ml",
+                1500.0
+              ]
+            ],
+            "text": "Tillsätt oregano, salt och 1500 ml vatten. Lägg ner kycklingen i stora benfria bitar och koka upp. Sänk genast till sjudning. Rengör råkycklingredskapen."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 22,
+            "id": "s3",
+            "ingredient_keys": [
+              "kyckling|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud under lock cirka 22 minuter tills kycklingens tjockaste del når minst 74 °C och grönsakerna är mjuka. Förläng om kycklingbitarna kräver det; buljongen ska inte stormkoka."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 12,
+            "id": "s4",
+            "ingredient_keys": [
+              "majstortillas|as_sold",
+              "rapsolja|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Skär majstortillorna i smala strimlor och torka ytan. Värm strimlornas olja i en stekpanna på medelhög värme. Stek i omgångar tills de är frasiga, vänd med tång och lyft upp på ett galler. All angiven olja avser verklig stekinsats; olja som blir kvar i pannan är processrest."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 6,
+            "id": "s5",
+            "ingredient_keys": [
+              "kyckling|raw_edible",
+              "limejuice|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Lyft upp den genomkokta kycklingen, dra isär med två rena gafflar och lägg tillbaka i soppan. Ta grytan från stark värme och blanda i limejuicen. Soppan ska inte redas eller mixas."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 3,
+            "id": "s6",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "kyckling|raw_edible",
+              "limejuice|as_sold",
+              "majstortillas|as_sold",
+              "oregano|dry",
+              "rapsolja|as_sold",
+              "salt|as_sold",
+              "tomat|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Fördela soppan och kycklingen mellan fyra skålar. Lägg på tortillastrimlorna sist så att de fortfarande har frasig yta vid servering."
+          }
+        ],
+        "total_minutes": 59,
+        "unmeasured_processes": [
+          {
+            "description": "Tortillastrimlor steks och lyfts upp på galler; kvarvarande olja serveras inte. Upptagen oljemängd är okänd, medan hela insatsen måste köpas.",
+            "ingredient_keys": [
+              "rapsolja|as_sold",
+              "majstortillas|as_sold"
+            ],
+            "operation": "deep_fry_and_drain",
+            "step_id": "s4"
+          }
+        ],
+        "variant_id": "simple",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 22
+      },
+      "ingredients": [
+        {
+          "canonical_name": "kyckling",
+          "component": "soppa",
+          "form": "raw_edible",
+          "name": "kyckling",
+          "quantity": 650.0,
+          "quantity_max": 650.0,
+          "quantity_min": 650.0,
+          "quantity_step": 650.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "soppa",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 140.0,
+          "quantity_max": 140.0,
+          "quantity_min": 140.0,
+          "quantity_step": 140.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "tomat",
+          "component": "soppa",
+          "form": "raw_edible",
+          "name": "tomat",
+          "quantity": 300.0,
+          "quantity_max": 300.0,
+          "quantity_min": 300.0,
+          "quantity_step": 300.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "oregano",
+          "component": "soppa",
+          "form": "dry",
+          "name": "oregano",
+          "product_requirements": [
+            "dried_leaf"
+          ],
+          "quantity": 2.0,
+          "quantity_max": 2.0,
+          "quantity_min": 2.0,
+          "quantity_step": 2.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "limejuice",
+          "component": "soppa",
+          "form": "as_sold",
+          "name": "limejuice",
+          "product_requirements": [
+            "pure_juice"
+          ],
+          "quantity": 65.0,
+          "quantity_max": 65.0,
+          "quantity_min": 65.0,
+          "quantity_step": 65.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "soppa",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 80.0,
+          "quantity_max": 80.0,
+          "quantity_min": 80.0,
+          "quantity_step": 80.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "soppa",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 4.0,
+          "quantity_max": 4.0,
+          "quantity_min": 4.0,
+          "quantity_step": 4.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "majstortillas",
+          "component": "strimlor",
+          "form": "as_sold",
+          "name": "majstortillas",
+          "product_requirements": [
+            "pack:intake_all_round2_4e0f777e646a"
+          ],
+          "quantity": 240.0,
+          "quantity_max": 240.0,
+          "quantity_min": 240.0,
+          "quantity_step": 240.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Hacka lök och tomat. Håll rå kyckling separat från grönsaksbrädan. Fräs grönsakerna i soppans olja på medelvärme cirka 5 minuter.",
+        "Tillsätt oregano, salt och 1500 ml vatten. Lägg ner kycklingen i stora benfria bitar och koka upp. Sänk genast till sjudning. Rengör råkycklingredskapen.",
+        "Sjud under lock cirka 22 minuter tills kycklingens tjockaste del når minst 74 °C och grönsakerna är mjuka. Förläng om kycklingbitarna kräver det; buljongen ska inte stormkoka.",
+        "Skär majstortillorna i smala strimlor och torka ytan. Värm strimlornas olja i en stekpanna på medelhög värme. Stek i omgångar tills de är frasiga, vänd med tång och lyft upp på ett galler. All angiven olja avser verklig stekinsats; olja som blir kvar i pannan är processrest.",
+        "Lyft upp den genomkokta kycklingen, dra isär med två rena gafflar och lägg tillbaka i soppan. Ta grytan från stark värme och blanda i limejuicen. Soppan ska inte redas eller mixas.",
+        "Fördela soppan och kycklingen mellan fyra skålar. Lägg på tortillastrimlorna sist så att de fortfarande har frasig yta vid servering."
+      ],
+      "name": "Sopa de lima – kycklingsoppa med citrus och tortillas – enkel",
+      "preparation": {
+        "family": "klar citrussyrlig kycklingsoppa",
+        "input_forms": {
+          "gul lök": "raw_edible",
+          "kyckling": "raw_edible",
+          "limejuice": "as_sold",
+          "majstortillas": "as_sold",
+          "oregano": "dry",
+          "rapsolja": "as_sold",
+          "salt": "as_sold",
+          "tomat": "raw_edible"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "b3745283ae46b720707580de3dd45ab040a3cb6c52c7f72eac429e1d4a7b280c",
+        "version": "smako-authored-losses-v3"
+      },
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 40,
+        "base_id": "smako-mexican-sopa-de-lima",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "kyckling|raw_edible",
+                "name": "Benfritt rått kycklingkött",
+                "note": "",
+                "quantity": 650.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "Gul lök",
+                "note": "",
+                "quantity": 140.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "tomat|raw_edible",
+                "name": "Tomat",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "oregano|dry",
+                "name": "Oregano",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "limejuice|as_sold",
+                "name": "Limejuice",
+                "note": "",
+                "quantity": 65.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "Rapsolja",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 4.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "Vitlök",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "paprika|raw_edible",
+                "name": "Paprika",
+                "note": "",
+                "quantity": 160.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "grapefrukt|raw_edible",
+                "name": "Endast hinnfritt grapefruktkött, ingen vit skalhinna",
+                "note": "",
+                "quantity": 70.0,
+                "unit": "g"
+              }
+            ],
+            "id": "soppa",
+            "name": "Kyckling och lätt citrusbuljong"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "majstortillas|as_sold",
+                "name": "Majstortillas",
+                "note": "",
+                "quantity": 240.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "Rapsolja",
+                "note": "",
+                "quantity": 65.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "strimlor",
+            "name": "Krispiga majstortillas"
+          }
+        ],
+        "content_sha256": "485aaa5371fa653a50148fc9e276a1a107fd681f918dfff73baf21997c33070c",
+        "content_source": {
+          "active_minutes": 40,
+          "method_note": "Ingredienslistan anger hela insatsen, även den del som senare hälls eller silas bort. Förlusten är inte uppmätt. Näring och färdig portionsvikt är okända; receptet kan inte styrka valda närings- eller viktgränser. Inköp och personliga kostkrav kontrolleras för samtliga insatser.",
+          "pack_id": "reviewed-expansion-round2-stage10",
+          "priority": 1,
+          "proposal_id": "smako-mexican-sopa-de-lima",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "8775abd207b8fddbba53d609e9a6ed85d59e4794547c94d9ac938af67aba2b23",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "mexican"
+        ],
+        "equipment": [
+          "soppgryta",
+          "stekpanna",
+          "termometer",
+          "hålslev"
+        ],
+        "estimated_minutes": 62,
+        "family": "klar citrussyrlig kycklingsoppa",
+        "fish": false,
+        "flavor_profile": [
+          "lime",
+          "oregano"
+        ],
+        "ingredient_count": 10,
+        "method": "pot",
+        "primary_ingredient": "kyckling",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Svensk limejuice och grapefrukt approximerar lokal lima; enkel variant använder bara lime. Benfri kyckling ger lättare buljong. Stekoljan för tortillas är inköpt/insatt mängd, inte uppmätt upptagen fettmängd. Näringsberäkning behöver hantera kvarvarande olja. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "krispiga tortillastrimlor",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 11,
+            "id": "s1",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "paprika|raw_edible",
+              "rapsolja|as_sold",
+              "tomat|raw_edible",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Hacka lök och tomat, vitlök och paprika. Håll rå kyckling separat från grönsaksbrädan. Fräs grönsakerna i soppans olja på medelvärme cirka 5 minuter."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 5,
+            "id": "s2",
+            "ingredient_keys": [
+              "kyckling|raw_edible",
+              "oregano|dry",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "1500 ml",
+                1500.0
+              ]
+            ],
+            "text": "Tillsätt oregano, salt och 1500 ml vatten. Lägg ner kycklingen i stora benfria bitar och koka upp. Sänk genast till sjudning. Rengör råkycklingredskapen."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 22,
+            "id": "s3",
+            "ingredient_keys": [
+              "kyckling|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud under lock cirka 22 minuter tills kycklingens tjockaste del når minst 74 °C och grönsakerna är mjuka. Förläng om kycklingbitarna kräver det; buljongen ska inte stormkoka."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 12,
+            "id": "s4",
+            "ingredient_keys": [
+              "majstortillas|as_sold",
+              "rapsolja|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Skär majstortillorna i smala strimlor och torka ytan. Värm strimlornas olja i en stekpanna på medelhög värme. Stek i omgångar tills de är frasiga, vänd med tång och lyft upp på ett galler. All angiven olja avser verklig stekinsats; olja som blir kvar i pannan är processrest."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 9,
+            "id": "s5",
+            "ingredient_keys": [
+              "grapefrukt|raw_edible",
+              "kyckling|raw_edible",
+              "limejuice|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Lyft upp den genomkokta kycklingen, dra isär med två rena gafflar och lägg tillbaka i soppan. Ta grytan från stark värme och blanda i limejuicen. Skala grapefrukten och ta bort hinnorna. Väg den angivna ätliga mängden och finhacka den och rör i både saft och fruktkött som en öppen approximation av lokal lima. Soppan ska inte redas eller mixas."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 3,
+            "id": "s6",
+            "ingredient_keys": [
+              "grapefrukt|raw_edible",
+              "gul lök|raw_edible",
+              "kyckling|raw_edible",
+              "limejuice|as_sold",
+              "majstortillas|as_sold",
+              "oregano|dry",
+              "paprika|raw_edible",
+              "rapsolja|as_sold",
+              "salt|as_sold",
+              "tomat|raw_edible",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Fördela soppan och kycklingen mellan fyra skålar. Lägg på tortillastrimlorna sist så att de fortfarande har frasig yta vid servering."
+          }
+        ],
+        "total_minutes": 62,
+        "unmeasured_processes": [
+          {
+            "description": "Tortillastrimlor steks och lyfts upp på galler; kvarvarande olja serveras inte. Upptagen oljemängd är okänd, medan hela insatsen måste köpas.",
+            "ingredient_keys": [
+              "rapsolja|as_sold",
+              "majstortillas|as_sold"
+            ],
+            "operation": "deep_fry_and_drain",
+            "step_id": "s4"
+          }
+        ],
+        "variant_id": "standard",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 22
+      },
+      "ingredients": [
+        {
+          "canonical_name": "kyckling",
+          "component": "soppa",
+          "form": "raw_edible",
+          "name": "kyckling",
+          "quantity": 650.0,
+          "quantity_max": 650.0,
+          "quantity_min": 650.0,
+          "quantity_step": 650.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "soppa",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 140.0,
+          "quantity_max": 140.0,
+          "quantity_min": 140.0,
+          "quantity_step": 140.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "tomat",
+          "component": "soppa",
+          "form": "raw_edible",
+          "name": "tomat",
+          "quantity": 300.0,
+          "quantity_max": 300.0,
+          "quantity_min": 300.0,
+          "quantity_step": 300.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "oregano",
+          "component": "soppa",
+          "form": "dry",
+          "name": "oregano",
+          "product_requirements": [
+            "dried_leaf"
+          ],
+          "quantity": 2.0,
+          "quantity_max": 2.0,
+          "quantity_min": 2.0,
+          "quantity_step": 2.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "limejuice",
+          "component": "soppa",
+          "form": "as_sold",
+          "name": "limejuice",
+          "product_requirements": [
+            "pure_juice"
+          ],
+          "quantity": 65.0,
+          "quantity_max": 65.0,
+          "quantity_min": 65.0,
+          "quantity_step": 65.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "soppa",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 80.0,
+          "quantity_max": 80.0,
+          "quantity_min": 80.0,
+          "quantity_step": 80.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "soppa",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 4.0,
+          "quantity_max": 4.0,
+          "quantity_min": 4.0,
+          "quantity_step": 4.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "soppa",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 10.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "paprika",
+          "component": "soppa",
+          "form": "raw_edible",
+          "name": "paprika",
+          "quantity": 160.0,
+          "quantity_max": 160.0,
+          "quantity_min": 160.0,
+          "quantity_step": 160.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "grapefrukt",
+          "component": "soppa",
+          "form": "raw_edible",
+          "name": "grapefrukt",
+          "product_requirements": [
+            "pack:intake_all_67b9a9fdd1cb"
+          ],
+          "quantity": 70.0,
+          "quantity_max": 70.0,
+          "quantity_min": 70.0,
+          "quantity_step": 70.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "majstortillas",
+          "component": "strimlor",
+          "form": "as_sold",
+          "name": "majstortillas",
+          "product_requirements": [
+            "pack:intake_all_round2_4e0f777e646a"
+          ],
+          "quantity": 240.0,
+          "quantity_max": 240.0,
+          "quantity_min": 240.0,
+          "quantity_step": 240.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Hacka lök och tomat, vitlök och paprika. Håll rå kyckling separat från grönsaksbrädan. Fräs grönsakerna i soppans olja på medelvärme cirka 5 minuter.",
+        "Tillsätt oregano, salt och 1500 ml vatten. Lägg ner kycklingen i stora benfria bitar och koka upp. Sänk genast till sjudning. Rengör råkycklingredskapen.",
+        "Sjud under lock cirka 22 minuter tills kycklingens tjockaste del når minst 74 °C och grönsakerna är mjuka. Förläng om kycklingbitarna kräver det; buljongen ska inte stormkoka.",
+        "Skär majstortillorna i smala strimlor och torka ytan. Värm strimlornas olja i en stekpanna på medelhög värme. Stek i omgångar tills de är frasiga, vänd med tång och lyft upp på ett galler. All angiven olja avser verklig stekinsats; olja som blir kvar i pannan är processrest.",
+        "Lyft upp den genomkokta kycklingen, dra isär med två rena gafflar och lägg tillbaka i soppan. Ta grytan från stark värme och blanda i limejuicen. Skala grapefrukten och ta bort hinnorna. Väg den angivna ätliga mängden och finhacka den och rör i både saft och fruktkött som en öppen approximation av lokal lima. Soppan ska inte redas eller mixas.",
+        "Fördela soppan och kycklingen mellan fyra skålar. Lägg på tortillastrimlorna sist så att de fortfarande har frasig yta vid servering."
+      ],
+      "name": "Sopa de lima – kycklingsoppa med citrus och tortillas – standard – med lime och grapefrukt",
+      "preparation": {
+        "family": "klar citrussyrlig kycklingsoppa",
+        "input_forms": {
+          "grapefrukt": "raw_edible",
+          "gul lök": "raw_edible",
+          "kyckling": "raw_edible",
+          "limejuice": "as_sold",
+          "majstortillas": "as_sold",
+          "oregano": "dry",
+          "paprika": "raw_edible",
+          "rapsolja": "as_sold",
+          "salt": "as_sold",
+          "tomat": "raw_edible",
+          "vitlök": "raw_edible"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "485aaa5371fa653a50148fc9e276a1a107fd681f918dfff73baf21997c33070c",
+        "version": "smako-authored-losses-v3"
+      },
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 42,
+        "base_id": "smako-mexican-sopa-de-lima",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "kyckling|raw_edible",
+                "name": "Benfritt rått kycklingkött",
+                "note": "",
+                "quantity": 650.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "Gul lök",
+                "note": "",
+                "quantity": 140.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "tomat|raw_edible",
+                "name": "Tomat",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "oregano|dry",
+                "name": "Oregano",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "limejuice|as_sold",
+                "name": "Limejuice",
+                "note": "",
+                "quantity": 65.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "Rapsolja",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 4.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "Vitlök",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "paprika|raw_edible",
+                "name": "Paprika",
+                "note": "",
+                "quantity": 160.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "grapefrukt|raw_edible",
+                "name": "Endast hinnfritt grapefruktkött, ingen vit skalhinna",
+                "note": "",
+                "quantity": 70.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "morot|raw_edible",
+                "name": "Morot",
+                "note": "",
+                "quantity": 160.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "selleri|raw_edible",
+                "name": "Selleri",
+                "note": "",
+                "quantity": 90.0,
+                "unit": "g"
+              }
+            ],
+            "id": "soppa",
+            "name": "Kyckling och lätt citrusbuljong"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "majstortillas|as_sold",
+                "name": "Majstortillas",
+                "note": "",
+                "quantity": 240.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "Rapsolja",
+                "note": "",
+                "quantity": 65.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "strimlor",
+            "name": "Krispiga majstortillas"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "avokado|raw_edible",
+                "name": "Avokado",
+                "note": "",
+                "quantity": 180.0,
+                "unit": "g"
+              }
+            ],
+            "id": "avokado",
+            "name": "Avokado till servering"
+          }
+        ],
+        "content_sha256": "4bd8f273084ada67546c0d42fe7d19f13ea1fbf3d10837d9a2aa2238c0493fc4",
+        "content_source": {
+          "active_minutes": 42,
+          "method_note": "Ingredienslistan anger hela insatsen, även den del som senare hälls eller silas bort. Förlusten är inte uppmätt. Näring och färdig portionsvikt är okända; receptet kan inte styrka valda närings- eller viktgränser. Inköp och personliga kostkrav kontrolleras för samtliga insatser.",
+          "pack_id": "reviewed-expansion-round2-stage10",
+          "priority": 1,
+          "proposal_id": "smako-mexican-sopa-de-lima",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "8775abd207b8fddbba53d609e9a6ed85d59e4794547c94d9ac938af67aba2b23",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "mexican"
+        ],
+        "equipment": [
+          "soppgryta",
+          "stekpanna",
+          "termometer",
+          "hålslev"
+        ],
+        "estimated_minutes": 184,
+        "family": "klar citrussyrlig kycklingsoppa",
+        "fish": false,
+        "flavor_profile": [
+          "lime",
+          "oregano"
+        ],
+        "ingredient_count": 13,
+        "method": "pot",
+        "primary_ingredient": "kyckling",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Svensk limejuice och grapefrukt approximerar lokal lima; enkel variant använder bara lime. Benfri kyckling ger lättare buljong. Stekoljan för tortillas är inköpt/insatt mängd, inte uppmätt upptagen fettmängd. Näringsberäkning behöver hantera kvarvarande olja. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "krispiga tortillastrimlor",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 1,
+            "id": "s1",
+            "ingredient_keys": [
+              "avokado|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Väg upp fryst avokado i ett täckt kärl i kylskåp. Behåll all vätska."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 120,
+            "id": "s2",
+            "ingredient_keys": [
+              "avokado|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Tina helt i kylskåp enligt förpackningen. Planera 120 minuter och förläng vid behov tills ingen iskärna återstår. Använd hela mängden i soppan vid servering."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 11,
+            "id": "s3",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "morot|raw_edible",
+              "paprika|raw_edible",
+              "rapsolja|as_sold",
+              "selleri|raw_edible",
+              "tomat|raw_edible",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Hacka lök och tomat, vitlök och paprika, samt morot och selleri. Håll rå kyckling separat från grönsaksbrädan. Fräs grönsakerna i soppans olja på medelvärme cirka 5 minuter."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 5,
+            "id": "s4",
+            "ingredient_keys": [
+              "kyckling|raw_edible",
+              "oregano|dry",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "1500 ml",
+                1500.0
+              ]
+            ],
+            "text": "Tillsätt oregano, salt och 1500 ml vatten. Lägg ner kycklingen i stora benfria bitar och koka upp. Sänk genast till sjudning. Rengör råkycklingredskapen."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 22,
+            "id": "s5",
+            "ingredient_keys": [
+              "kyckling|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud under lock cirka 22 minuter tills kycklingens tjockaste del når minst 74 °C och grönsakerna är mjuka. Förläng om kycklingbitarna kräver det; buljongen ska inte stormkoka."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 12,
+            "id": "s6",
+            "ingredient_keys": [
+              "majstortillas|as_sold",
+              "rapsolja|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Skär majstortillorna i smala strimlor och torka ytan. Värm strimlornas olja i en stekpanna på medelhög värme. Stek i omgångar tills de är frasiga, vänd med tång och lyft upp på ett galler. All angiven olja avser verklig stekinsats; olja som blir kvar i pannan är processrest."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 9,
+            "id": "s7",
+            "ingredient_keys": [
+              "grapefrukt|raw_edible",
+              "kyckling|raw_edible",
+              "limejuice|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Lyft upp den genomkokta kycklingen, dra isär med två rena gafflar och lägg tillbaka i soppan. Ta grytan från stark värme och blanda i limejuicen. Skala grapefrukten och ta bort hinnorna. Väg den angivna ätliga mängden och finhacka den och rör i både saft och fruktkött som en öppen approximation av lokal lima. Soppan ska inte redas eller mixas."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 4,
+            "id": "s8",
+            "ingredient_keys": [
+              "avokado|raw_edible",
+              "majstortillas|as_sold",
+              "rapsolja|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Använd de tinade avokadobitarna med all saft. Fördela den i skålarna, häll över den heta soppan och lägg tortillastrimlorna ovanpå först när det är dags att äta."
+          }
+        ],
+        "total_minutes": 184,
+        "unmeasured_processes": [
+          {
+            "description": "Tortillastrimlor steks och lyfts upp på galler; kvarvarande olja serveras inte. Upptagen oljemängd är okänd, medan hela insatsen måste köpas.",
+            "ingredient_keys": [
+              "rapsolja|as_sold",
+              "majstortillas|as_sold"
+            ],
+            "operation": "deep_fry_and_drain",
+            "step_id": "s6"
+          }
+        ],
+        "variant_id": "extended",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 142
+      },
+      "ingredients": [
+        {
+          "canonical_name": "kyckling",
+          "component": "soppa",
+          "form": "raw_edible",
+          "name": "kyckling",
+          "quantity": 650.0,
+          "quantity_max": 650.0,
+          "quantity_min": 650.0,
+          "quantity_step": 650.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "soppa",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 140.0,
+          "quantity_max": 140.0,
+          "quantity_min": 140.0,
+          "quantity_step": 140.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "tomat",
+          "component": "soppa",
+          "form": "raw_edible",
+          "name": "tomat",
+          "quantity": 300.0,
+          "quantity_max": 300.0,
+          "quantity_min": 300.0,
+          "quantity_step": 300.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "oregano",
+          "component": "soppa",
+          "form": "dry",
+          "name": "oregano",
+          "product_requirements": [
+            "dried_leaf"
+          ],
+          "quantity": 2.0,
+          "quantity_max": 2.0,
+          "quantity_min": 2.0,
+          "quantity_step": 2.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "limejuice",
+          "component": "soppa",
+          "form": "as_sold",
+          "name": "limejuice",
+          "product_requirements": [
+            "pure_juice"
+          ],
+          "quantity": 65.0,
+          "quantity_max": 65.0,
+          "quantity_min": 65.0,
+          "quantity_step": 65.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "soppa",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 80.0,
+          "quantity_max": 80.0,
+          "quantity_min": 80.0,
+          "quantity_step": 80.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "soppa",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 4.0,
+          "quantity_max": 4.0,
+          "quantity_min": 4.0,
+          "quantity_step": 4.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "soppa",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 10.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "paprika",
+          "component": "soppa",
+          "form": "raw_edible",
+          "name": "paprika",
+          "quantity": 160.0,
+          "quantity_max": 160.0,
+          "quantity_min": 160.0,
+          "quantity_step": 160.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "grapefrukt",
+          "component": "soppa",
+          "form": "raw_edible",
+          "name": "grapefrukt",
+          "product_requirements": [
+            "pack:intake_all_67b9a9fdd1cb"
+          ],
+          "quantity": 70.0,
+          "quantity_max": 70.0,
+          "quantity_min": 70.0,
+          "quantity_step": 70.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "morot",
+          "component": "soppa",
+          "form": "raw_edible",
+          "name": "morot",
+          "quantity": 160.0,
+          "quantity_max": 160.0,
+          "quantity_min": 160.0,
+          "quantity_step": 160.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "selleri",
+          "component": "soppa",
+          "form": "raw_edible",
+          "name": "selleri",
+          "quantity": 90.0,
+          "quantity_max": 90.0,
+          "quantity_min": 90.0,
+          "quantity_step": 90.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "majstortillas",
+          "component": "strimlor",
+          "form": "as_sold",
+          "name": "majstortillas",
+          "product_requirements": [
+            "pack:intake_all_round2_4e0f777e646a"
+          ],
+          "quantity": 240.0,
+          "quantity_max": 240.0,
+          "quantity_min": 240.0,
+          "quantity_step": 240.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "avokado",
+          "component": "avokado",
+          "form": "raw_edible",
+          "name": "avokado",
+          "product_requirements": [
+            "pack:intake_all_416f9df16b84"
+          ],
+          "quantity": 180.0,
+          "quantity_max": 180.0,
+          "quantity_min": 180.0,
+          "quantity_step": 180.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Väg upp fryst avokado i ett täckt kärl i kylskåp. Behåll all vätska.",
+        "Tina helt i kylskåp enligt förpackningen. Planera 120 minuter och förläng vid behov tills ingen iskärna återstår. Använd hela mängden i soppan vid servering.",
+        "Hacka lök och tomat, vitlök och paprika, samt morot och selleri. Håll rå kyckling separat från grönsaksbrädan. Fräs grönsakerna i soppans olja på medelvärme cirka 5 minuter.",
+        "Tillsätt oregano, salt och 1500 ml vatten. Lägg ner kycklingen i stora benfria bitar och koka upp. Sänk genast till sjudning. Rengör råkycklingredskapen.",
+        "Sjud under lock cirka 22 minuter tills kycklingens tjockaste del når minst 74 °C och grönsakerna är mjuka. Förläng om kycklingbitarna kräver det; buljongen ska inte stormkoka.",
+        "Skär majstortillorna i smala strimlor och torka ytan. Värm strimlornas olja i en stekpanna på medelhög värme. Stek i omgångar tills de är frasiga, vänd med tång och lyft upp på ett galler. All angiven olja avser verklig stekinsats; olja som blir kvar i pannan är processrest.",
+        "Lyft upp den genomkokta kycklingen, dra isär med två rena gafflar och lägg tillbaka i soppan. Ta grytan från stark värme och blanda i limejuicen. Skala grapefrukten och ta bort hinnorna. Väg den angivna ätliga mängden och finhacka den och rör i både saft och fruktkött som en öppen approximation av lokal lima. Soppan ska inte redas eller mixas.",
+        "Använd de tinade avokadobitarna med all saft. Fördela den i skålarna, häll över den heta soppan och lägg tortillastrimlorna ovanpå först när det är dags att äta."
+      ],
+      "name": "Sopa de lima – kycklingsoppa med citrus och tortillas – utökad – med lime och grapefrukt",
+      "preparation": {
+        "family": "klar citrussyrlig kycklingsoppa",
+        "input_forms": {
+          "avokado": "raw_edible",
+          "grapefrukt": "raw_edible",
+          "gul lök": "raw_edible",
+          "kyckling": "raw_edible",
+          "limejuice": "as_sold",
+          "majstortillas": "as_sold",
+          "morot": "raw_edible",
+          "oregano": "dry",
+          "paprika": "raw_edible",
+          "rapsolja": "as_sold",
+          "salt": "as_sold",
+          "selleri": "raw_edible",
+          "tomat": "raw_edible",
+          "vitlök": "raw_edible"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "4bd8f273084ada67546c0d42fe7d19f13ea1fbf3d10837d9a2aa2238c0493fc4",
+        "version": "smako-authored-losses-v3"
+      },
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 34,
+        "base_id": "smako-indian-phirni",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ris|dry",
+                "name": "Ris",
+                "note": "",
+                "quantity": 18.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "mjölk|as_sold",
+                "name": "Mjölk",
+                "note": "",
+                "quantity": 180.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "Strösocker",
+                "note": "",
+                "quantity": 14.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kardemumma|dry",
+                "name": "Kardemumma",
+                "note": "",
+                "quantity": 0.2,
+                "unit": "g"
+              }
+            ],
+            "id": "pudding",
+            "name": "Malet ris i mjölk"
+          }
+        ],
+        "content_sha256": "4663d6c627aaf0159f0e17992667d3f98d820c2abff7968a7fa3ffa8fdb09798",
+        "content_source": {
+          "active_minutes": 34,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "reviewed-expansion-round2-stage10",
+          "priority": 1,
+          "proposal_id": "smako-indian-phirni",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "8775abd207b8fddbba53d609e9a6ed85d59e4794547c94d9ac938af67aba2b23",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "indian"
+        ],
+        "equipment": [
+          "liten mixer eller mortel",
+          "kastrull",
+          "grund portionsskål",
+          "precisionsvåg"
+        ],
+        "estimated_minutes": 169,
+        "family": "mjölkpudding av blötlagt finmalet ris",
+        "fish": false,
+        "flavor_profile": [
+          "mjölk",
+          "kardemumma"
+        ],
+        "ingredient_count": 4,
+        "meal_types": [
+          "snack"
+        ],
+        "method": "pot",
+        "primary_ingredient": "ris",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "AI-författat receptutkast, inte provlagat och ännu inte import-/produktgranskat av Smako. Tider är författaruppskattningar. Kostavsikt är inte ett produkt- eller allergengodkännande. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "kyld portionspudding",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 2,
+            "id": "s1",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "150 ml",
+                150.0
+              ]
+            ],
+            "text": "Skölj det råa riset och täck med 150 ml vatten (kallt) i en liten skål."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 30,
+            "id": "s2",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Blötlägg riset 30 minuter."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 5,
+            "id": "s3",
+            "ingredient_keys": [
+              "mjölk|as_sold",
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Häll bort blötläggningsvattnet. Mixa eller mortla det avrunna riset med en fjärdedel av mjölken till mycket fina gryn, nästan mjöl. Det är det råa blötlagda riset som mals, inte redan kokt gröt."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 3,
+            "id": "s4",
+            "ingredient_keys": [
+              "mjölk|as_sold",
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Värm resten av mjölken i en liten tjockbottnad kastrull. Vispa ner risblandningen i en tunn stråle. Sänk värmen."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 18,
+            "id": "s5",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "20 ml",
+                20.0
+              ]
+            ],
+            "text": "Sjud mycket försiktigt cirka 18 minuter under nästan ständig omrörning tills rispartiklarna är genomkokta och mjölken blivit en tjock slät kräm. Tillsätt 20 ml vatten om den blir för tät innan riset är mjukt."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 3,
+            "id": "s6",
+            "ingredient_keys": [
+              "kardemumma|dry",
+              "strösocker|dry"
+            ],
+            "parallel_group": null,
+            "text": "Rör ner socker och malen kardemumma och koka ytterligare 2 minuter. Häll upp i en grund portionsskål."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 1,
+            "id": "s7",
+            "ingredient_keys": [
+              "mjölk|as_sold",
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "500 ml",
+                500.0
+              ]
+            ],
+            "text": "Ställ skålen i ett kallt vattenbad med 500 ml vatten utan att vatten går i puddingen."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 15,
+            "id": "s8",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Låt skålen svalna 15 minuter i det kalla vattenbadet."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 1,
+            "id": "s9",
+            "ingredient_keys": [
+              "mjölk|as_sold",
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Flytta skålen till kylskåp; låt den inte stå kvar på köksbänken."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 90,
+            "id": "s10",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Kyl cirka 90 minuter tills puddingen är helt kall och har satt sig."
+          },
+          {
+            "depends_on": [
+              "s10"
+            ],
+            "duration_minutes": 1,
+            "id": "s11",
+            "ingredient_keys": [
+              "mjölk|as_sold",
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Servera hela den kalla portionsskålen."
+          }
+        ],
+        "total_minutes": 169,
+        "variant_id": "simple",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 135
+      },
+      "ingredients": [
+        {
+          "canonical_name": "ris",
+          "component": "pudding",
+          "form": "dry",
+          "name": "ris",
+          "product_requirements": [
+            "white_rice"
+          ],
+          "quantity": 18.0,
+          "quantity_max": 18.0,
+          "quantity_min": 18.0,
+          "quantity_step": 18.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "mjölk",
+          "component": "pudding",
+          "form": "as_sold",
+          "name": "mjölk",
+          "quantity": 180.0,
+          "quantity_max": 180.0,
+          "quantity_min": 180.0,
+          "quantity_step": 180.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "strösocker",
+          "component": "pudding",
+          "form": "dry",
+          "name": "strösocker",
+          "product_requirements": [
+            "pack:sugar"
+          ],
+          "quantity": 14.0,
+          "quantity_max": 14.0,
+          "quantity_min": 14.0,
+          "quantity_step": 14.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kardemumma",
+          "component": "pudding",
+          "form": "dry",
+          "name": "kardemumma",
+          "product_requirements": [
+            "pack:intake_all_930d08a8d175"
+          ],
+          "quantity": 0.2,
+          "quantity_max": 0.2,
+          "quantity_min": 0.2,
+          "quantity_step": 0.2,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Skölj det råa riset och täck med 150 ml vatten (kallt) i en liten skål.",
+        "Blötlägg riset 30 minuter.",
+        "Häll bort blötläggningsvattnet. Mixa eller mortla det avrunna riset med en fjärdedel av mjölken till mycket fina gryn, nästan mjöl. Det är det råa blötlagda riset som mals, inte redan kokt gröt.",
+        "Värm resten av mjölken i en liten tjockbottnad kastrull. Vispa ner risblandningen i en tunn stråle. Sänk värmen.",
+        "Sjud mycket försiktigt cirka 18 minuter under nästan ständig omrörning tills rispartiklarna är genomkokta och mjölken blivit en tjock slät kräm. Tillsätt 20 ml vatten om den blir för tät innan riset är mjukt.",
+        "Rör ner socker och malen kardemumma och koka ytterligare 2 minuter. Häll upp i en grund portionsskål.",
+        "Ställ skålen i ett kallt vattenbad med 500 ml vatten utan att vatten går i puddingen.",
+        "Låt skålen svalna 15 minuter i det kalla vattenbadet.",
+        "Flytta skålen till kylskåp; låt den inte stå kvar på köksbänken.",
+        "Kyl cirka 90 minuter tills puddingen är helt kall och har satt sig.",
+        "Servera hela den kalla portionsskålen."
+      ],
+      "name": "Phirni – slät mjölkpudding av malet ris – enkel",
+      "preparation": {
+        "family": "mjölkpudding av blötlagt finmalet ris",
+        "input_forms": {
+          "kardemumma": "dry",
+          "mjölk": "as_sold",
+          "ris": "dry",
+          "strösocker": "dry"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "4663d6c627aaf0159f0e17992667d3f98d820c2abff7968a7fa3ffa8fdb09798",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 30,
+        "base_id": "smako-thai-hor-mok-pla",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "fisk|raw_edible",
+                "name": "Benfri rå vit fisk, ätlig vikt",
+                "note": "",
+                "quantity": 500.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kokosmjölk|as_sold",
+                "name": "Kokosmjölk",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "ägg|raw_edible",
+                "name": "Ägg",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "röd currypasta|as_sold",
+                "name": "Röd currypasta",
+                "note": "",
+                "quantity": 40.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitkål|raw_edible",
+                "name": "Vitkål",
+                "note": "",
+                "quantity": 200.0,
+                "unit": "g"
+              }
+            ],
+            "id": "custard",
+            "name": "Ångad fiskcurry"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ris|dry",
+                "name": "Ris",
+                "note": "",
+                "quantity": 280.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              }
+            ],
+            "id": "rice",
+            "name": "Nykokt ris"
+          }
+        ],
+        "content_sha256": "b21763f30e78ad679f18c0128ad261c372507a993cc5e81b730cbe866b721863",
+        "content_source": {
+          "active_minutes": 30,
+          "method_note": "Ingredienslistan anger hela insatsen, även den del som senare hälls eller silas bort. Förlusten är inte uppmätt. Näring och färdig portionsvikt är okända; receptet kan inte styrka valda närings- eller viktgränser. Inköp och personliga kostkrav kontrolleras för samtliga insatser.",
+          "pack_id": "reviewed-expansion-round2-stage10",
+          "priority": 1,
+          "proposal_id": "smako-thai-hor-mok-pla",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "8775abd207b8fddbba53d609e9a6ed85d59e4794547c94d9ac938af67aba2b23",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "thai"
+        ],
+        "equipment": [
+          "gryta med ånginsats och lock",
+          "fyra värmetåliga skålar cirka 350 ml",
+          "matberedare",
+          "termometer",
+          "kastrull"
+        ],
+        "estimated_minutes": 808,
+        "family": "ångad fisk-kokoscurry som stannad äggkräm",
+        "fish": true,
+        "flavor_profile": [
+          "röd curry",
+          "kokos"
+        ],
+        "ingredient_count": 6,
+        "method": "pot",
+        "primary_ingredient": "fisk",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "AI-författat receptutkast, inte provlagat och ännu inte import-/produktgranskat av Smako. Tider är författaruppskattningar. Kostavsikt är inte ett produkt- eller allergengodkännande. Tillagas i värmetåliga portionsskålar i stället för bananbladskoppar. Rå fisk och råa ägg ångas till en faktisk säker kärntemperatur; detta är inte kall montering. Smakos pot beskriver här en verklig ånginsats i gryta. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "ris; gurka i utökad version",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 1,
+            "id": "s1",
+            "ingredient_keys": [
+              "fisk|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Väg upp fryst fisk i ett täckt kärl i kylskåp. Behåll all vätska."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 720,
+            "id": "s2",
+            "ingredient_keys": [
+              "fisk|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Tina helt i kylskåp enligt förpackningen. Planera 720 minuter och förläng vid behov tills ingen iskärna återstår. Blanda all upptiningssaft i fiskmassan; hela massan ska genomhettas till minst 72 °C."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 5,
+            "id": "s3",
+            "ingredient_keys": [
+              "vitkål|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "1000 ml",
+                1000.0
+              ]
+            ],
+            "text": "Strimla vitkålen fint. Lägg ånginsats i grytan och häll 1000 ml vatten under insatsen, utan att vattnet når upp till maten. Koka upp. Lägg kålen i insatsen och täck med lock."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 5,
+            "id": "s4",
+            "ingredient_keys": [
+              "vitkål|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Ånga kålen 5 minuter så att den mjuknar. Den ska inte ersättas av råa hårda kålbitar i bottnen av färdiga fiskkrämen."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 12,
+            "id": "s5",
+            "ingredient_keys": [
+              "fisk|raw_edible",
+              "kokosmjölk|as_sold",
+              "röd currypasta|as_sold",
+              "vitkål|raw_edible",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Låt kålen rinna av och fördela den i de värmetåliga skålarna. Använd den upptinade benfria fisken och behåll all upptiningssaft i fiskmassan. Knäck ägg och väg den råa mängden utan skal. Skär hälften i små bitar och kör den andra hälften grovt i matberedare. Blanda båda fiskdelarna med currypastan. Arbeta in ägg och kokosmjölken från fiskkomponenten tills massan börjar binda. Fördela över kålen; lämna minst 1 cm till kanten."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 2,
+            "id": "s6",
+            "ingredient_keys": [
+              "fisk|raw_edible",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Ställ skålarna stadigt i ånginsatsen och lägg på locket."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 15,
+            "id": "s7",
+            "ingredient_keys": [
+              "fisk|raw_edible",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Ånga under lock i 15 minuter."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 1,
+            "id": "s8",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Kontrollera vattnet under insatsen. Fyll vid behov på med 300 ml kokande vatten utan att hälla i maten. Lägg tillbaka locket."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 15,
+            "id": "s9",
+            "ingredient_keys": [
+              "fisk|raw_edible",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Ånga ytterligare 15 minuter, totalt cirka 30 minuter."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 2,
+            "id": "s10",
+            "ingredient_keys": [
+              "fisk|raw_edible",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Kontrollera att krämen stannat och att mitten av samtliga skålar nått minst 72 °C. Förläng ångningen vid behov; servera aldrig rå fisk-äggkräm."
+          },
+          {
+            "depends_on": [
+              "s10"
+            ],
+            "duration_minutes": 1,
+            "id": "s11",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Håll de färdiga fiskkrämerna varma över 60 °C under lock medan riset kokas. Lyft inte skålarna med bara händer."
+          },
+          {
+            "depends_on": [
+              "s11"
+            ],
+            "duration_minutes": 3,
+            "id": "s12",
+            "ingredient_keys": [
+              "ris|dry",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "560 ml",
+                560.0
+              ]
+            ],
+            "text": "Skölj riset i sil. Lägg i en kastrull med risets salt och 560 ml vatten. Koka upp och sänk till svag värme."
+          },
+          {
+            "depends_on": [
+              "s12"
+            ],
+            "duration_minutes": 18,
+            "id": "s13",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "50 ml",
+                50.0
+              ]
+            ],
+            "text": "Sjud riset under lock cirka 18 minuter, eller längre enligt förpackningen, tills kornen är mjuka och vattnet absorberats. Kontrollera mot slutet; tillsätt vid behov 50 ml vatten. Håll locket på."
+          },
+          {
+            "depends_on": [
+              "s13"
+            ],
+            "duration_minutes": 5,
+            "id": "s14",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Ta riset från värmen och låt vila under lock i 5 minuter."
+          },
+          {
+            "depends_on": [
+              "s14"
+            ],
+            "duration_minutes": 1,
+            "id": "s15",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Luckra riset. Servera direkt med huvudrätten; om den inte är färdig ska ris och huvudrätt hållas över 60 °C tills båda kan serveras."
+          },
+          {
+            "depends_on": [
+              "s15"
+            ],
+            "duration_minutes": 2,
+            "id": "s16",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Servera en skål stannad fiskcurry per person med ris. Skålarna är heta och äts inte."
+          }
+        ],
+        "total_minutes": 808,
+        "unmeasured_processes": [
+          {
+            "description": "Kålen ångas och får rinna av före fyllning. Vätske- och näringsförlusten är inte uppmätt.",
+            "ingredient_keys": [
+              "vitkål|raw_edible"
+            ],
+            "operation": "drain_after_cooking",
+            "step_id": "s5"
+          }
+        ],
+        "variant_id": "simple",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 778
+      },
+      "ingredients": [
+        {
+          "canonical_name": "fisk",
+          "component": "custard",
+          "form": "raw_edible",
+          "name": "fisk",
+          "quantity": 500.0,
+          "quantity_max": 500.0,
+          "quantity_min": 500.0,
+          "quantity_step": 500.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kokosmjölk",
+          "component": "custard",
+          "form": "as_sold",
+          "name": "kokosmjölk",
+          "quantity": 300.0,
+          "quantity_max": 300.0,
+          "quantity_min": 300.0,
+          "quantity_step": 300.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "ägg",
+          "component": "custard",
+          "form": "raw_edible",
+          "name": "ägg",
+          "product_requirements": [
+            "pack:egg"
+          ],
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "röd currypasta",
+          "component": "custard",
+          "form": "as_sold",
+          "name": "röd currypasta",
+          "product_requirements": [
+            "pack:intake_all_fdde79afdb70"
+          ],
+          "quantity": 40.0,
+          "quantity_max": 40.0,
+          "quantity_min": 40.0,
+          "quantity_step": 40.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitkål",
+          "component": "custard",
+          "form": "raw_edible",
+          "name": "vitkål",
+          "quantity": 200.0,
+          "quantity_max": 200.0,
+          "quantity_min": 200.0,
+          "quantity_step": 200.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ris",
+          "component": "rice",
+          "form": "dry",
+          "name": "ris",
+          "product_requirements": [
+            "white_rice"
+          ],
+          "quantity": 280.0,
+          "quantity_max": 280.0,
+          "quantity_min": 280.0,
+          "quantity_step": 280.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "rice",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Väg upp fryst fisk i ett täckt kärl i kylskåp. Behåll all vätska.",
+        "Tina helt i kylskåp enligt förpackningen. Planera 720 minuter och förläng vid behov tills ingen iskärna återstår. Blanda all upptiningssaft i fiskmassan; hela massan ska genomhettas till minst 72 °C.",
+        "Strimla vitkålen fint. Lägg ånginsats i grytan och häll 1000 ml vatten under insatsen, utan att vattnet når upp till maten. Koka upp. Lägg kålen i insatsen och täck med lock.",
+        "Ånga kålen 5 minuter så att den mjuknar. Den ska inte ersättas av råa hårda kålbitar i bottnen av färdiga fiskkrämen.",
+        "Låt kålen rinna av och fördela den i de värmetåliga skålarna. Använd den upptinade benfria fisken och behåll all upptiningssaft i fiskmassan. Knäck ägg och väg den råa mängden utan skal. Skär hälften i små bitar och kör den andra hälften grovt i matberedare. Blanda båda fiskdelarna med currypastan. Arbeta in ägg och kokosmjölken från fiskkomponenten tills massan börjar binda. Fördela över kålen; lämna minst 1 cm till kanten.",
+        "Ställ skålarna stadigt i ånginsatsen och lägg på locket.",
+        "Ånga under lock i 15 minuter.",
+        "Kontrollera vattnet under insatsen. Fyll vid behov på med 300 ml kokande vatten utan att hälla i maten. Lägg tillbaka locket.",
+        "Ånga ytterligare 15 minuter, totalt cirka 30 minuter.",
+        "Kontrollera att krämen stannat och att mitten av samtliga skålar nått minst 72 °C. Förläng ångningen vid behov; servera aldrig rå fisk-äggkräm.",
+        "Håll de färdiga fiskkrämerna varma över 60 °C under lock medan riset kokas. Lyft inte skålarna med bara händer.",
+        "Skölj riset i sil. Lägg i en kastrull med risets salt och 560 ml vatten. Koka upp och sänk till svag värme.",
+        "Sjud riset under lock cirka 18 minuter, eller längre enligt förpackningen, tills kornen är mjuka och vattnet absorberats. Kontrollera mot slutet; tillsätt vid behov 50 ml vatten. Håll locket på.",
+        "Ta riset från värmen och låt vila under lock i 5 minuter.",
+        "Luckra riset. Servera direkt med huvudrätten; om den inte är färdig ska ris och huvudrätt hållas över 60 °C tills båda kan serveras.",
+        "Servera en skål stannad fiskcurry per person med ris. Skålarna är heta och äts inte."
+      ],
+      "name": "Hor mok pla – ångad fiskcurrypudding – enkel",
+      "preparation": {
+        "family": "ångad fisk-kokoscurry som stannad äggkräm",
+        "input_forms": {
+          "fisk": "raw_edible",
+          "kokosmjölk": "as_sold",
+          "ris": "dry",
+          "röd currypasta": "as_sold",
+          "salt": "as_sold",
+          "vitkål": "raw_edible",
+          "ägg": "raw_edible"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "b21763f30e78ad679f18c0128ad261c372507a993cc5e81b730cbe866b721863",
+        "version": "smako-authored-losses-v3"
+      },
+      "servings": 4
+    }
+  ]
+}

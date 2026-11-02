@@ -5,6 +5,28 @@ Chat eller annat receptförfattande. Ägarens förtydliganden 2026-11-01 ligger
 till grund för detta dokument. Läs också [produktmålet](../PRODUCT-GOAL.md),
 [täckningsöverblicken](../COVERAGE-OVERVIEW.md) och [författarformatet](AUTHORING.md).
 
+## Senaste läge: fem leveranser mottagna 2026-11-01
+
+**189 grundrätter / 501 varianter** är faktiskt mottagna, inklusive senaste
+ZIP med 24/62. Fördelningen är 123 middagar, 17 frukostar och 49 mellanmål.
+Nästa nyskrivna paket är **022**. Mot beställningen återstår **811
+grundrätter / 2 249 varianter**: 627 middagar, 108 frukostar och 76 mellanmål.
+
+Biblioteket är nu **1 072 baser / 2 822 varianter**. Från denna beställning
+är 360 varianter importerade i 138 baser (135 hela familjer, tre delvis).
+141 varianter återstår med dokumenterade hinder. Både importerade och alla
+kvarvarande mottagna utkast ska ingå i nästa dubblettunderlag. Se
+[senaste rapporten och kön](../reviews/recipe-unblock-round2-20261101/REPORT.md).
+Den nya mängd-/processhanteringen gör inte okänd näring eller saknat
+produktstöd godkänt. Fortsätt enligt ägarens preferenser nedan.
+
+Vid nästa mindre ZIP: komplettera `audit_expansion_queue.py` med
+`scripts/recipe_layer/screen_pending_recipe_inputs.py` på den nya kön och
+det deklarerade frysta produkt-/faktaunderlaget. Dess `ranked_combined_blocks`
+visar även produktbrister bakom ett registerfel. En löst känd ingrediens
+är fortfarande varken ett godkänt recept eller en verifierad hel korg.
+Se körkommando och resultat i senaste rapporten.
+
 ## Ägarens preferenser
 
 - Prioritera klassiska, etablerade rätter och verklig kulinarisk bredd.
@@ -28,7 +50,7 @@ till grund för detta dokument. Läs också [produktmålet](../PRODUCT-GOAL.md),
 
 ## Aktuell beställning och redan skickat underlag
 
-**Senaste importstatus 2026-11-01:** 41 av de 165 mottagna grundrätterna,
+**Historisk importstatus före femte leveransen 2026-11-01:** 41 av de 165 mottagna grundrätterna,
 108 av 439 varianter, är nu granskade och importerade som nya versioner.
 Biblioteket har 975 baser / 2 570 varianter. De nedanstående mottagnings- och
 tidsrapporterna beskriver tidigare steg före importen. Ingen betaaktivering
@@ -69,7 +91,7 @@ Vid den mottagningskontrollen gjordes ingen import eller betaaktivering.
 **Ägarens rättelse 2026-11-01:** det finns inget separat 72/194-arkiv.
 Hänvisningarna till det i författarens rapporter är felaktiga och ska inte
 utlösa fler efterfrågningar eller hindra importarbete. Räkna endast faktiskt
-mottagna receptfiler (165/439 hittills), inte de 70/190 refererade extra ID:na.
+mottagna receptfiler (nu 189/501), inte de 70/190 refererade extra ID:na.
 Nya ZIP-leveranser kommer löpande med cirka 10–40 grundrätter åt gången.
 Varje leverans ska bytebevaras och räknas efter sitt faktiska innehåll;
 kontrollera ID, innehåll och koncept mot biblioteket och alla mottagna utkast.
@@ -81,10 +103,10 @@ med de hinder som blockerar flest varianter först. Skilj löst registerhinder,
 verifierat produktstöd, granskad receptberedning och importerad hel familj.
 Sakgranska identiteter/former och använd befintliga produkt-/beredningsvägar.
 
-Nästa nyskrivna författarpaket är **019**; återstående mål mot faktiskt
-mottagna utkast är **835 grundrätter / 2 311 varianter**, fördelat på
-641 middagar, 112 frukostar och 82 mellanmål. Detta är inte en slutlig
-nyhetsbedömning av de 165 baserna. Bevara deras ID:n, räkna inte pilotpaketet
+Nästa nyskrivna författarpaket är **022**; återstående mål mot faktiskt
+mottagna utkast är **811 grundrätter / 2 249 varianter**, fördelat på
+627 middagar, 108 frukostar och 76 mellanmål. Detta är inte en slutlig
+nyhetsbedömning av de 189 baserna. Bevara deras ID:n, räkna inte pilotpaketet
 igen och ta med alla mottagna recept i nästa dubblettunderlag även före import.
 Författarens referenser till obefintliga äldre leveranser är inte mottagna recept.
 [Återkoppling på checkpointen](requests/20261101/ATGARDER-CHECKPOINT-72-TILL-CHAT.txt)
@@ -139,6 +161,12 @@ ingrediensregister, formatexempel, källrevision och hashmanifest. Det kontrolle
 formatexemplet med `standardize` och native `validate_pack_bytes`. Resultatet
 är referensmaterial, inte nya recept eller bevis på produktstöd. På Linux används
 `.venv/bin/python` och `PYTHONPATH=backend:.`.
+
+Ingrediensregistrets `unit_options` visar separat granskade enheter med
+respektive produktkrav, exempelvis gram och ml filmjölk. Det är inga
+omräkningsfaktorer; välj en enhet och författa dess mängd uttryckligen.
+Receptdetaljerna inkluderar också beredningsversion och okända
+processförluster, så att dessa villkor följer med i författarunderlaget.
 
 ### 2. Hämta aktuell täckning
 

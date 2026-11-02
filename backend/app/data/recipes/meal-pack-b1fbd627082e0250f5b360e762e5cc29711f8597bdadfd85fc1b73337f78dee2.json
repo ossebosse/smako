@@ -1,0 +1,3297 @@
+{
+  "library_version": "smako-meal-pack-v1",
+  "recipes": [
+    {
+      "design": {
+        "active_minutes": 13,
+        "base_id": "smako-italian-panforte",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "kanderade apelsinskal|as_sold",
+                "name": "Kanderade hackade apelsinskal",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "g"
+              }
+            ],
+            "id": "kandera",
+            "name": "Färdigkanderat apelsinskal"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "mandel|as_sold",
+                "name": "mandel",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "honung|as_sold",
+                "name": "honung",
+                "note": "",
+                "quantity": 12.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vetemjöl|dry",
+                "name": "vetemjöl",
+                "note": "",
+                "quantity": 12.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kanel|dry",
+                "name": "kanel",
+                "note": "",
+                "quantity": 0.3,
+                "unit": "g"
+              }
+            ],
+            "id": "kaka",
+            "name": "Tät nötkaka"
+          }
+        ],
+        "content_sha256": "21da265f5eb92f3e22af0c5f06bdab9ef085f0b142dad816bafe3e0b6b5c64ad",
+        "content_source": {
+          "active_minutes": 13,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "reviewed-expansion-round2-stage3",
+          "priority": 1,
+          "proposal_id": "smako-italian-panforte",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "61a3e86cf4c62920ea2a6021aa42d7679daa0d6fb3d62cc463979552b1beca26",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "italian"
+        ],
+        "equipment": [
+          "liten kastrull",
+          "stekpanna",
+          "ugn",
+          "bakplåtspapper",
+          "liten ugnsform"
+        ],
+        "estimated_minutes": 76,
+        "family": "panforte",
+        "fish": false,
+        "flavor_profile": [
+          "honung",
+          "apelsin",
+          "kanel"
+        ],
+        "ingredient_count": 5,
+        "meal_types": [
+          "snack"
+        ],
+        "method": "bake",
+        "primary_ingredient": "mandel",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar, inte uppmätta. Siena-inspirerad panforte med hemlagat kanderat apelsinskal. Kryddningen är förenklad. En portion är en liten energität bakverksbit, inte en hel kaka. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "ingen extra komponent",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 7,
+            "id": "s1",
+            "ingredient_keys": [
+              "kanel|dry",
+              "mandel|as_sold",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Sätt ugnen på 160 °C över-/undervärme. Rosta mandel kort i en torr panna tills de doftar, grovhacka och blanda med vetemjöl och kanel."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 3,
+            "id": "s2",
+            "ingredient_keys": [
+              "honung|as_sold",
+              "kanderade apelsinskal|as_sold",
+              "mandel|as_sold",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "10 ml",
+                10.0
+              ]
+            ],
+            "text": "Värm honungen med 10 ml vatten tills den bubblar. Rör i de färdigkanderade hackade apelsinskalen och därefter nöt-mjölblandningen. Arbeta till en mycket tjock sammanhängande massa; allt ska användas."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 2,
+            "id": "s3",
+            "ingredient_keys": [
+              "mandel|as_sold",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Klä en liten ugnsfast form med bakplåtspapper. Pressa ut massan cirka 1,5 cm tjock med en fuktad sked; vid större portionsantal används större form med samma tjocklek."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 18,
+            "id": "s4",
+            "ingredient_keys": [
+              "honung|as_sold",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Baka cirka 18 minuter tills ytan är matt och kanterna satta; massan ska fortfarande vara något mjuk när den är varm."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 45,
+            "id": "s5",
+            "ingredient_keys": [
+              "honung|as_sold",
+              "mandel|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Låt svalna helt i formen, omkring 45 minuter. Lyft ur och servera hela den angivna lilla portionen; vid uppskalning skärs den större kakan i motsvarande antal bitar."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 1,
+            "id": "s6",
+            "ingredient_keys": [
+              "kanderade apelsinskal|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Servera hela den avsvalnade lilla kakan som en mellanmålsportion."
+          }
+        ],
+        "total_minutes": 76,
+        "variant_id": "simple",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 63
+      },
+      "ingredients": [
+        {
+          "canonical_name": "kanderade apelsinskal",
+          "component": "kandera",
+          "form": "as_sold",
+          "name": "kanderade apelsinskal",
+          "product_requirements": [
+            "pack:intake_all_round2_e9fa816eee5a"
+          ],
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 25.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "mandel",
+          "component": "kaka",
+          "form": "as_sold",
+          "name": "mandel",
+          "product_requirements": [
+            "pack:intake_almonds"
+          ],
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 25.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "honung",
+          "component": "kaka",
+          "form": "as_sold",
+          "name": "honung",
+          "product_requirements": [
+            "pack:intake_all_2e70d2f3b24b"
+          ],
+          "quantity": 12.0,
+          "quantity_max": 12.0,
+          "quantity_min": 12.0,
+          "quantity_step": 12.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vetemjöl",
+          "component": "kaka",
+          "form": "dry",
+          "name": "vetemjöl",
+          "quantity": 12.0,
+          "quantity_max": 12.0,
+          "quantity_min": 12.0,
+          "quantity_step": 12.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kanel",
+          "component": "kaka",
+          "form": "dry",
+          "name": "kanel",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 0.3,
+          "quantity_max": 0.3,
+          "quantity_min": 0.3,
+          "quantity_step": 0.3,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Sätt ugnen på 160 °C över-/undervärme. Rosta mandel kort i en torr panna tills de doftar, grovhacka och blanda med vetemjöl och kanel.",
+        "Värm honungen med 10 ml vatten tills den bubblar. Rör i de färdigkanderade hackade apelsinskalen och därefter nöt-mjölblandningen. Arbeta till en mycket tjock sammanhängande massa; allt ska användas.",
+        "Klä en liten ugnsfast form med bakplåtspapper. Pressa ut massan cirka 1,5 cm tjock med en fuktad sked; vid större portionsantal används större form med samma tjocklek.",
+        "Baka cirka 18 minuter tills ytan är matt och kanterna satta; massan ska fortfarande vara något mjuk när den är varm.",
+        "Låt svalna helt i formen, omkring 45 minuter. Lyft ur och servera hela den angivna lilla portionen; vid uppskalning skärs den större kakan i motsvarande antal bitar.",
+        "Servera hela den avsvalnade lilla kakan som en mellanmålsportion."
+      ],
+      "name": "Panforte med färdigkanderat apelsinskal – tät nöt- och citruskaka – enkel",
+      "preparation": {
+        "family": "panforte",
+        "input_forms": {
+          "honung": "as_sold",
+          "kanderade apelsinskal": "as_sold",
+          "kanel": "dry",
+          "mandel": "as_sold",
+          "vetemjöl": "dry"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "21da265f5eb92f3e22af0c5f06bdab9ef085f0b142dad816bafe3e0b6b5c64ad",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 13,
+        "base_id": "smako-italian-panforte",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "kanderade apelsinskal|as_sold",
+                "name": "Kanderade hackade apelsinskal",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "g"
+              }
+            ],
+            "id": "kandera",
+            "name": "Färdigkanderat apelsinskal"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "mandel|as_sold",
+                "name": "mandel",
+                "note": "",
+                "quantity": 18.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "honung|as_sold",
+                "name": "honung",
+                "note": "",
+                "quantity": 12.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vetemjöl|dry",
+                "name": "vetemjöl",
+                "note": "",
+                "quantity": 12.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kanel|dry",
+                "name": "kanel",
+                "note": "",
+                "quantity": 0.3,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "hasselnötter|as_sold",
+                "name": "hasselnötter",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kakao|dry",
+                "name": "kakao",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "muskot|dry",
+                "name": "muskot",
+                "note": "",
+                "quantity": 0.1,
+                "unit": "g"
+              }
+            ],
+            "id": "kaka",
+            "name": "Tät nötkaka"
+          }
+        ],
+        "content_sha256": "3f5a913ee8e369658b78b80e10ee4efefbef4a2b1a00f36455bf8186ea26af3c",
+        "content_source": {
+          "active_minutes": 13,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "reviewed-expansion-round2-stage3",
+          "priority": 1,
+          "proposal_id": "smako-italian-panforte",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "61a3e86cf4c62920ea2a6021aa42d7679daa0d6fb3d62cc463979552b1beca26",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "italian"
+        ],
+        "equipment": [
+          "liten kastrull",
+          "stekpanna",
+          "ugn",
+          "bakplåtspapper",
+          "liten ugnsform"
+        ],
+        "estimated_minutes": 76,
+        "family": "panforte",
+        "fish": false,
+        "flavor_profile": [
+          "honung",
+          "apelsin",
+          "kanel"
+        ],
+        "ingredient_count": 8,
+        "meal_types": [
+          "snack"
+        ],
+        "method": "bake",
+        "primary_ingredient": "mandel",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar, inte uppmätta. Siena-inspirerad panforte med hemlagat kanderat apelsinskal. Kryddningen är förenklad. En portion är en liten energität bakverksbit, inte en hel kaka. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "ingen extra komponent",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 7,
+            "id": "s1",
+            "ingredient_keys": [
+              "hasselnötter|as_sold",
+              "kakao|dry",
+              "kanel|dry",
+              "mandel|as_sold",
+              "muskot|dry",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Sätt ugnen på 160 °C över-/undervärme. Rosta mandel och hasselnötter kort i en torr panna tills de doftar, grovhacka och blanda med vetemjöl och kanel, kakao och muskot."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 3,
+            "id": "s2",
+            "ingredient_keys": [
+              "honung|as_sold",
+              "kanderade apelsinskal|as_sold",
+              "mandel|as_sold",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "10 ml",
+                10.0
+              ]
+            ],
+            "text": "Värm honungen med 10 ml vatten tills den bubblar. Rör i de färdigkanderade hackade apelsinskalen och därefter nöt-mjölblandningen. Arbeta till en mycket tjock sammanhängande massa; allt ska användas."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 2,
+            "id": "s3",
+            "ingredient_keys": [
+              "mandel|as_sold",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Klä en liten ugnsfast form med bakplåtspapper. Pressa ut massan cirka 1,5 cm tjock med en fuktad sked; vid större portionsantal används större form med samma tjocklek."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 18,
+            "id": "s4",
+            "ingredient_keys": [
+              "honung|as_sold",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Baka cirka 18 minuter tills ytan är matt och kanterna satta; massan ska fortfarande vara något mjuk när den är varm."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 45,
+            "id": "s5",
+            "ingredient_keys": [
+              "honung|as_sold",
+              "mandel|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Låt svalna helt i formen, omkring 45 minuter. Lyft ur och servera hela den angivna lilla portionen; vid uppskalning skärs den större kakan i motsvarande antal bitar."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 1,
+            "id": "s6",
+            "ingredient_keys": [
+              "kanderade apelsinskal|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Servera hela den avsvalnade lilla kakan som en mellanmålsportion."
+          }
+        ],
+        "total_minutes": 76,
+        "variant_id": "extended",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 63
+      },
+      "ingredients": [
+        {
+          "canonical_name": "kanderade apelsinskal",
+          "component": "kandera",
+          "form": "as_sold",
+          "name": "kanderade apelsinskal",
+          "product_requirements": [
+            "pack:intake_all_round2_e9fa816eee5a"
+          ],
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 25.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "mandel",
+          "component": "kaka",
+          "form": "as_sold",
+          "name": "mandel",
+          "product_requirements": [
+            "pack:intake_almonds"
+          ],
+          "quantity": 18.0,
+          "quantity_max": 18.0,
+          "quantity_min": 18.0,
+          "quantity_step": 18.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "honung",
+          "component": "kaka",
+          "form": "as_sold",
+          "name": "honung",
+          "product_requirements": [
+            "pack:intake_all_2e70d2f3b24b"
+          ],
+          "quantity": 12.0,
+          "quantity_max": 12.0,
+          "quantity_min": 12.0,
+          "quantity_step": 12.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vetemjöl",
+          "component": "kaka",
+          "form": "dry",
+          "name": "vetemjöl",
+          "quantity": 12.0,
+          "quantity_max": 12.0,
+          "quantity_min": 12.0,
+          "quantity_step": 12.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kanel",
+          "component": "kaka",
+          "form": "dry",
+          "name": "kanel",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 0.3,
+          "quantity_max": 0.3,
+          "quantity_min": 0.3,
+          "quantity_step": 0.3,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "hasselnötter",
+          "component": "kaka",
+          "form": "as_sold",
+          "name": "hasselnötter",
+          "product_requirements": [
+            "pack:intake_all_8ecfa0240129"
+          ],
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 10.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kakao",
+          "component": "kaka",
+          "form": "dry",
+          "name": "kakao",
+          "product_requirements": [
+            "pack:intake_all_e428e190fee1"
+          ],
+          "quantity": 2.0,
+          "quantity_max": 2.0,
+          "quantity_min": 2.0,
+          "quantity_step": 2.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "muskot",
+          "component": "kaka",
+          "form": "dry",
+          "name": "muskot",
+          "product_requirements": [
+            "pack:intake_all_33f4eb9d910f"
+          ],
+          "quantity": 0.1,
+          "quantity_max": 0.1,
+          "quantity_min": 0.1,
+          "quantity_step": 0.1,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Sätt ugnen på 160 °C över-/undervärme. Rosta mandel och hasselnötter kort i en torr panna tills de doftar, grovhacka och blanda med vetemjöl och kanel, kakao och muskot.",
+        "Värm honungen med 10 ml vatten tills den bubblar. Rör i de färdigkanderade hackade apelsinskalen och därefter nöt-mjölblandningen. Arbeta till en mycket tjock sammanhängande massa; allt ska användas.",
+        "Klä en liten ugnsfast form med bakplåtspapper. Pressa ut massan cirka 1,5 cm tjock med en fuktad sked; vid större portionsantal används större form med samma tjocklek.",
+        "Baka cirka 18 minuter tills ytan är matt och kanterna satta; massan ska fortfarande vara något mjuk när den är varm.",
+        "Låt svalna helt i formen, omkring 45 minuter. Lyft ur och servera hela den angivna lilla portionen; vid uppskalning skärs den större kakan i motsvarande antal bitar.",
+        "Servera hela den avsvalnade lilla kakan som en mellanmålsportion."
+      ],
+      "name": "Panforte med färdigkanderat apelsinskal – tät nöt- och citruskaka – utökad",
+      "preparation": {
+        "family": "panforte",
+        "input_forms": {
+          "hasselnötter": "as_sold",
+          "honung": "as_sold",
+          "kakao": "dry",
+          "kanderade apelsinskal": "as_sold",
+          "kanel": "dry",
+          "mandel": "as_sold",
+          "muskot": "dry",
+          "vetemjöl": "dry"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "3f5a913ee8e369658b78b80e10ee4efefbef4a2b1a00f36455bf8186ea26af3c",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 9,
+        "base_id": "smako-swedish-bryta-filmjolk",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "filmjölk|as_sold",
+                "name": "filmjölk",
+                "note": "",
+                "quantity": 285.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "hårt tunnbröd|as_sold",
+                "name": "hårt tunnbröd",
+                "note": "",
+                "quantity": 45.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "lingon|as_sold",
+                "name": "lingon",
+                "note": "",
+                "quantity": 40.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "strösocker",
+                "note": "",
+                "quantity": 12.0,
+                "unit": "g"
+              }
+            ],
+            "id": "bryta",
+            "name": "Filmjölk med brutet tunnbröd"
+          }
+        ],
+        "content_sha256": "c1f96da2a08bd73631837c9bbd38955322719ed48e7cefbf124931d9843f6f57",
+        "content_source": {
+          "active_minutes": 9,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "reviewed-expansion-round2-stage3",
+          "priority": 1,
+          "proposal_id": "smako-swedish-bryta-filmjolk",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "61a3e86cf4c62920ea2a6021aa42d7679daa0d6fb3d62cc463979552b1beca26",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "swedish"
+        ],
+        "equipment": [
+          "skål",
+          "kastrull vid utökad variant"
+        ],
+        "estimated_minutes": 29,
+        "family": "filbryta",
+        "fish": false,
+        "flavor_profile": [
+          "syrlig fil",
+          "lingon",
+          "tunnbröd"
+        ],
+        "ingredient_count": 4,
+        "meal_types": [
+          "breakfast"
+        ],
+        "method": "cold_assembly",
+        "primary_ingredient": "filmjölk",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar, inte uppmätta. Norrländsk filbryta med hårt tunnbröd, här med lingon. Utökad äppelkompott är en tydligt namngiven vardagsanpassning, inte ett anspråk på regional originalversion. Tunnbrödet ska produktgranskas; mjukt bröd är inte ett direkt alias. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "hårt tunnbröd",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 5,
+            "id": "s1",
+            "ingredient_keys": [
+              "lingon|as_sold",
+              "strösocker|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "20 ml",
+                20.0
+              ]
+            ],
+            "text": "Lägg frysta lingon, allt socker och 20 ml vatten i en liten kastrull. Koka under omrörning minst en minut eller längre enligt förpackningen. Behåll alla bär och all saft."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 20,
+            "id": "s2",
+            "ingredient_keys": [
+              "lingon|as_sold",
+              "strösocker|dry"
+            ],
+            "parallel_group": null,
+            "text": "Fördela lingonen tunt i en ren grund skål och låt svalna 20 minuter. Ställ sedan i kylskåp tills helt kalla före servering med filen."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 3,
+            "id": "s3",
+            "ingredient_keys": [
+              "filmjölk|as_sold",
+              "hårt tunnbröd|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Väg filmjölken i gram i en skål och bryt tunnbrödet i små bitar direkt i filen. Låt stå 2 minuter så att brödet mjuknar i kanterna men fortfarande har viss struktur."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 1,
+            "id": "s4",
+            "ingredient_keys": [
+              "filmjölk|as_sold",
+              "hårt tunnbröd|as_sold",
+              "lingon|as_sold",
+              "strösocker|dry"
+            ],
+            "parallel_group": null,
+            "text": "Toppa med de kalla kokta sockrade lingonen. Ät direkt; hela mängden är en frukostportion."
+          }
+        ],
+        "total_minutes": 29,
+        "variant_id": "simple",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 20
+      },
+      "ingredients": [
+        {
+          "canonical_name": "filmjölk",
+          "component": "bryta",
+          "form": "as_sold",
+          "name": "filmjölk",
+          "product_requirements": [
+            "pack:intake_all_round2_d88843b59afc"
+          ],
+          "quantity": 285.0,
+          "quantity_max": 285.0,
+          "quantity_min": 285.0,
+          "quantity_step": 285.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "hårt tunnbröd",
+          "component": "bryta",
+          "form": "as_sold",
+          "name": "hårt tunnbröd",
+          "product_requirements": [
+            "pack:intake_all_expansion_8648d2803ade"
+          ],
+          "quantity": 45.0,
+          "quantity_max": 45.0,
+          "quantity_min": 45.0,
+          "quantity_step": 45.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "lingon",
+          "component": "bryta",
+          "form": "as_sold",
+          "name": "lingon",
+          "product_requirements": [
+            "pack:intake_all_af34ffffedcc"
+          ],
+          "quantity": 40.0,
+          "quantity_max": 40.0,
+          "quantity_min": 40.0,
+          "quantity_step": 40.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "strösocker",
+          "component": "bryta",
+          "form": "dry",
+          "name": "strösocker",
+          "product_requirements": [
+            "pack:sugar"
+          ],
+          "quantity": 12.0,
+          "quantity_max": 12.0,
+          "quantity_min": 12.0,
+          "quantity_step": 12.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Lägg frysta lingon, allt socker och 20 ml vatten i en liten kastrull. Koka under omrörning minst en minut eller längre enligt förpackningen. Behåll alla bär och all saft.",
+        "Fördela lingonen tunt i en ren grund skål och låt svalna 20 minuter. Ställ sedan i kylskåp tills helt kalla före servering med filen.",
+        "Väg filmjölken i gram i en skål och bryt tunnbrödet i små bitar direkt i filen. Låt stå 2 minuter så att brödet mjuknar i kanterna men fortfarande har viss struktur.",
+        "Toppa med de kalla kokta sockrade lingonen. Ät direkt; hela mängden är en frukostportion."
+      ],
+      "name": "Bryta – tunnbröd i filmjölk – enkel",
+      "preparation": {
+        "family": "filbryta",
+        "input_forms": {
+          "filmjölk": "as_sold",
+          "hårt tunnbröd": "as_sold",
+          "lingon": "as_sold",
+          "strösocker": "dry"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "c1f96da2a08bd73631837c9bbd38955322719ed48e7cefbf124931d9843f6f57",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 17,
+        "base_id": "smako-swedish-bryta-filmjolk",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "filmjölk|as_sold",
+                "name": "filmjölk",
+                "note": "",
+                "quantity": 285.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "hårt tunnbröd|as_sold",
+                "name": "hårt tunnbröd",
+                "note": "",
+                "quantity": 45.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "lingon|as_sold",
+                "name": "lingon",
+                "note": "",
+                "quantity": 40.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "strösocker",
+                "note": "",
+                "quantity": 12.0,
+                "unit": "g"
+              }
+            ],
+            "id": "bryta",
+            "name": "Filmjölk med brutet tunnbröd"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "äpple|raw_edible",
+                "name": "äpple",
+                "note": "",
+                "quantity": 110.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kanel|dry",
+                "name": "kanel",
+                "note": "",
+                "quantity": 0.5,
+                "unit": "g"
+              }
+            ],
+            "id": "apple",
+            "name": "Äppelkompott"
+          }
+        ],
+        "content_sha256": "7c68bbc748368046d35f4d0fe5535e250d7ee723238afccecb7753921ed10094",
+        "content_source": {
+          "active_minutes": 17,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "reviewed-expansion-round2-stage3",
+          "priority": 1,
+          "proposal_id": "smako-swedish-bryta-filmjolk",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "61a3e86cf4c62920ea2a6021aa42d7679daa0d6fb3d62cc463979552b1beca26",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "swedish"
+        ],
+        "equipment": [
+          "skål",
+          "kastrull vid utökad variant"
+        ],
+        "estimated_minutes": 47,
+        "family": "filbryta",
+        "fish": false,
+        "flavor_profile": [
+          "syrlig fil",
+          "lingon",
+          "tunnbröd"
+        ],
+        "ingredient_count": 6,
+        "meal_types": [
+          "breakfast"
+        ],
+        "method": "cold_assembly",
+        "primary_ingredient": "filmjölk",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar, inte uppmätta. Norrländsk filbryta med hårt tunnbröd, här med lingon. Utökad äppelkompott är en tydligt namngiven vardagsanpassning, inte ett anspråk på regional originalversion. Tunnbrödet ska produktgranskas; mjukt bröd är inte ett direkt alias. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "hårt tunnbröd",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 5,
+            "id": "s1",
+            "ingredient_keys": [
+              "lingon|as_sold",
+              "strösocker|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "20 ml",
+                20.0
+              ]
+            ],
+            "text": "Lägg frysta lingon, allt socker och 20 ml vatten i en liten kastrull. Koka under omrörning minst en minut eller längre enligt förpackningen. Behåll alla bär och all saft."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 20,
+            "id": "s2",
+            "ingredient_keys": [
+              "lingon|as_sold",
+              "strösocker|dry"
+            ],
+            "parallel_group": null,
+            "text": "Fördela lingonen tunt i en ren grund skål och låt svalna 20 minuter. Ställ sedan i kylskåp tills helt kalla före servering med filen."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 8,
+            "id": "s3",
+            "ingredient_keys": [
+              "kanel|dry",
+              "äpple|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "30 ml",
+                30.0
+              ]
+            ],
+            "text": "Tärna äpplet smått och lägg i en liten kastrull med kanel och 30 ml vatten. Sjud under lock cirka 6 minuter tills bitarna är mjuka men håller formen."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 10,
+            "id": "s4",
+            "ingredient_keys": [
+              "äpple|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Låt kompotten svalna cirka 10 minuter så att den inte värmer filmjölken."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 3,
+            "id": "s5",
+            "ingredient_keys": [
+              "filmjölk|as_sold",
+              "hårt tunnbröd|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Väg filmjölken i gram i en skål och bryt tunnbrödet i små bitar direkt i filen. Låt stå 2 minuter så att brödet mjuknar i kanterna men fortfarande har viss struktur."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 1,
+            "id": "s6",
+            "ingredient_keys": [
+              "filmjölk|as_sold",
+              "hårt tunnbröd|as_sold",
+              "kanel|dry",
+              "lingon|as_sold",
+              "strösocker|dry",
+              "äpple|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Toppa med de kalla kokta sockrade lingonen och den avsvalnade äppelkompotten. Ät direkt; hela mängden är en frukostportion."
+          }
+        ],
+        "total_minutes": 47,
+        "variant_id": "extended",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 30
+      },
+      "ingredients": [
+        {
+          "canonical_name": "filmjölk",
+          "component": "bryta",
+          "form": "as_sold",
+          "name": "filmjölk",
+          "product_requirements": [
+            "pack:intake_all_round2_d88843b59afc"
+          ],
+          "quantity": 285.0,
+          "quantity_max": 285.0,
+          "quantity_min": 285.0,
+          "quantity_step": 285.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "hårt tunnbröd",
+          "component": "bryta",
+          "form": "as_sold",
+          "name": "hårt tunnbröd",
+          "product_requirements": [
+            "pack:intake_all_expansion_8648d2803ade"
+          ],
+          "quantity": 45.0,
+          "quantity_max": 45.0,
+          "quantity_min": 45.0,
+          "quantity_step": 45.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "lingon",
+          "component": "bryta",
+          "form": "as_sold",
+          "name": "lingon",
+          "product_requirements": [
+            "pack:intake_all_af34ffffedcc"
+          ],
+          "quantity": 40.0,
+          "quantity_max": 40.0,
+          "quantity_min": 40.0,
+          "quantity_step": 40.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "strösocker",
+          "component": "bryta",
+          "form": "dry",
+          "name": "strösocker",
+          "product_requirements": [
+            "pack:sugar"
+          ],
+          "quantity": 12.0,
+          "quantity_max": 12.0,
+          "quantity_min": 12.0,
+          "quantity_step": 12.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "äpple",
+          "component": "apple",
+          "form": "raw_edible",
+          "name": "äpple",
+          "quantity": 110.0,
+          "quantity_max": 110.0,
+          "quantity_min": 110.0,
+          "quantity_step": 110.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kanel",
+          "component": "apple",
+          "form": "dry",
+          "name": "kanel",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 0.5,
+          "quantity_max": 0.5,
+          "quantity_min": 0.5,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Lägg frysta lingon, allt socker och 20 ml vatten i en liten kastrull. Koka under omrörning minst en minut eller längre enligt förpackningen. Behåll alla bär och all saft.",
+        "Fördela lingonen tunt i en ren grund skål och låt svalna 20 minuter. Ställ sedan i kylskåp tills helt kalla före servering med filen.",
+        "Tärna äpplet smått och lägg i en liten kastrull med kanel och 30 ml vatten. Sjud under lock cirka 6 minuter tills bitarna är mjuka men håller formen.",
+        "Låt kompotten svalna cirka 10 minuter så att den inte värmer filmjölken.",
+        "Väg filmjölken i gram i en skål och bryt tunnbrödet i små bitar direkt i filen. Låt stå 2 minuter så att brödet mjuknar i kanterna men fortfarande har viss struktur.",
+        "Toppa med de kalla kokta sockrade lingonen och den avsvalnade äppelkompotten. Ät direkt; hela mängden är en frukostportion."
+      ],
+      "name": "Bryta – tunnbröd i filmjölk – utökad",
+      "preparation": {
+        "family": "filbryta",
+        "input_forms": {
+          "filmjölk": "as_sold",
+          "hårt tunnbröd": "as_sold",
+          "kanel": "dry",
+          "lingon": "as_sold",
+          "strösocker": "dry",
+          "äpple": "raw_edible"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "7c68bbc748368046d35f4d0fe5535e250d7ee723238afccecb7753921ed10094",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 39,
+        "base_id": "smako-mexican-enfrijoladas",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "svarta bönor|cooked_drained",
+                "name": "svarta bönor",
+                "note": "",
+                "quantity": 850.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "gul lök",
+                "note": "",
+                "quantity": 160.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "vitlök",
+                "note": "",
+                "quantity": 12.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "rapsolja",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 3.0,
+                "unit": "g"
+              }
+            ],
+            "id": "bonsas",
+            "name": "Svart bönsås"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "avokado|raw_edible",
+                "name": "avokado",
+                "note": "",
+                "quantity": 200.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "limejuice|as_sold",
+                "name": "limejuice",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "servering",
+            "name": "Sval servering"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "majstortillas|as_sold",
+                "name": "Mjuka majstortillas",
+                "note": "",
+                "quantity": 400.0,
+                "unit": "g"
+              }
+            ],
+            "id": "majsbrod",
+            "name": "Färdiga mjuka majstortillas"
+          }
+        ],
+        "content_sha256": "9dacec699cbbc8e9ee41971bb8e3a8d74b2e3c8ceefe13c302d5dfc48795eebc",
+        "content_source": {
+          "active_minutes": 39,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "reviewed-expansion-round2-stage3",
+          "priority": 1,
+          "proposal_id": "smako-mexican-enfrijoladas",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "61a3e86cf4c62920ea2a6021aa42d7679daa0d6fb3d62cc463979552b1beca26",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "mexican"
+        ],
+        "equipment": [
+          "mixer",
+          "stekpanna",
+          "kastrull",
+          "tortillapress eller kavel"
+        ],
+        "estimated_minutes": 159,
+        "family": "enfrijoladas",
+        "fish": false,
+        "flavor_profile": [
+          "svart böna",
+          "rostad lök"
+        ],
+        "ingredient_count": 7,
+        "method": "pan",
+        "primary_ingredient": "svarta bönor",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar, inte uppmätta. Enfrijoladas: mjuka majstortillas doppas och viks i slät bönsås, inte tomatgratinerade enchiladas. Feta i den rikare varianten är en uttalad ersättning för queso fresco. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "majstortillas i bönsås",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 1,
+            "id": "s1",
+            "ingredient_keys": [
+              "avokado|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Väg upp fryst avokado i ett täckt kärl i kylskåp. Behåll all vätska."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 120,
+            "id": "s2",
+            "ingredient_keys": [
+              "avokado|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Tina helt i kylskåp enligt förpackningen. Planera 120 minuter och förläng vid behov tills ingen iskärna återstår. Använd alla bitar och all saft i avokadotillbehöret."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 8,
+            "id": "s3",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "rapsolja|as_sold",
+              "svarta bönor|cooked_drained",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Hacka gul lök och vitlök. Fräs i rapsolja på medelvärme tills löken är mjuk. Skölj de kokta bönorna och låt rinna av."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 10,
+            "id": "s4",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "salt|as_sold",
+              "svarta bönor|cooked_drained",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "500 ml",
+                500.0
+              ],
+              [
+                "100 ml",
+                100.0
+              ]
+            ],
+            "text": "Mixa lökfräs, bönor, såsens salt och 500 ml vatten till helt slät sås. Häll tillbaka och sjud 6 minuter under omrörning; den ska täcka tortillas men fortfarande rinna av en sked. Späd vid behov med 100 ml vatten."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 6,
+            "id": "s5",
+            "ingredient_keys": [
+              "avokado|raw_edible",
+              "limejuice|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Använd helt tinade avokadobitar med all saft och vänd med serveringens limejuice."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 6,
+            "id": "s6",
+            "ingredient_keys": [
+              "majstortillas|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Värm de färdiga mjuka majstortillorna i torr panna enligt förpackningen tills böjliga och genomvarma. Lägg i ren handduk och använd direkt."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 8,
+            "id": "s7",
+            "ingredient_keys": [
+              "avokado|raw_edible",
+              "majstortillas|as_sold",
+              "svarta bönor|cooked_drained"
+            ],
+            "parallel_group": null,
+            "text": "Doppa de mjuka tortillorna en i taget i den varma bönsåsen. Vik dubbla och lägg direkt på fyra tallrikar. Fördela all återstående bönsås över, lägg avokado vid sidan. Servera omedelbart."
+          }
+        ],
+        "total_minutes": 159,
+        "variant_id": "simple",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 120
+      },
+      "ingredients": [
+        {
+          "canonical_name": "svarta bönor",
+          "component": "bonsas",
+          "form": "cooked_drained",
+          "name": "svarta bönor",
+          "quantity": 850.0,
+          "quantity_max": 850.0,
+          "quantity_min": 850.0,
+          "quantity_step": 850.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "bonsas",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 160.0,
+          "quantity_max": 160.0,
+          "quantity_min": 160.0,
+          "quantity_step": 160.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "bonsas",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 12.0,
+          "quantity_max": 12.0,
+          "quantity_min": 12.0,
+          "quantity_step": 12.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "bonsas",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 30.0,
+          "quantity_max": 30.0,
+          "quantity_min": 30.0,
+          "quantity_step": 30.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "bonsas",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 3.0,
+          "quantity_max": 3.0,
+          "quantity_min": 3.0,
+          "quantity_step": 3.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "avokado",
+          "component": "servering",
+          "form": "raw_edible",
+          "name": "avokado",
+          "product_requirements": [
+            "pack:intake_all_416f9df16b84"
+          ],
+          "quantity": 200.0,
+          "quantity_max": 200.0,
+          "quantity_min": 200.0,
+          "quantity_step": 200.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "limejuice",
+          "component": "servering",
+          "form": "as_sold",
+          "name": "limejuice",
+          "product_requirements": [
+            "pure_juice"
+          ],
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 25.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "majstortillas",
+          "component": "majsbrod",
+          "form": "as_sold",
+          "name": "majstortillas",
+          "product_requirements": [
+            "pack:intake_all_round2_4e0f777e646a"
+          ],
+          "quantity": 400.0,
+          "quantity_max": 400.0,
+          "quantity_min": 400.0,
+          "quantity_step": 400.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Väg upp fryst avokado i ett täckt kärl i kylskåp. Behåll all vätska.",
+        "Tina helt i kylskåp enligt förpackningen. Planera 120 minuter och förläng vid behov tills ingen iskärna återstår. Använd alla bitar och all saft i avokadotillbehöret.",
+        "Hacka gul lök och vitlök. Fräs i rapsolja på medelvärme tills löken är mjuk. Skölj de kokta bönorna och låt rinna av.",
+        "Mixa lökfräs, bönor, såsens salt och 500 ml vatten till helt slät sås. Häll tillbaka och sjud 6 minuter under omrörning; den ska täcka tortillas men fortfarande rinna av en sked. Späd vid behov med 100 ml vatten.",
+        "Använd helt tinade avokadobitar med all saft och vänd med serveringens limejuice.",
+        "Värm de färdiga mjuka majstortillorna i torr panna enligt förpackningen tills böjliga och genomvarma. Lägg i ren handduk och använd direkt.",
+        "Doppa de mjuka tortillorna en i taget i den varma bönsåsen. Vik dubbla och lägg direkt på fyra tallrikar. Fördela all återstående bönsås över, lägg avokado vid sidan. Servera omedelbart."
+      ],
+      "name": "Enfrijoladas med färdiga majstortillas – tortillas i svart bönsås – enkel",
+      "preparation": {
+        "family": "enfrijoladas",
+        "input_forms": {
+          "avokado": "raw_edible",
+          "gul lök": "raw_edible",
+          "limejuice": "as_sold",
+          "majstortillas": "as_sold",
+          "rapsolja": "as_sold",
+          "salt": "as_sold",
+          "svarta bönor": "cooked_drained",
+          "vitlök": "raw_edible"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "9dacec699cbbc8e9ee41971bb8e3a8d74b2e3c8ceefe13c302d5dfc48795eebc",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 39,
+        "base_id": "smako-mexican-enfrijoladas",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "svarta bönor|cooked_drained",
+                "name": "svarta bönor",
+                "note": "",
+                "quantity": 850.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "gul lök",
+                "note": "",
+                "quantity": 160.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "vitlök",
+                "note": "",
+                "quantity": 12.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "rapsolja",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 3.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "chiliflakes|dry",
+                "name": "chiliflakes",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              }
+            ],
+            "id": "bonsas",
+            "name": "Svart bönsås"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "avokado|raw_edible",
+                "name": "avokado",
+                "note": "",
+                "quantity": 200.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "limejuice|as_sold",
+                "name": "limejuice",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "fetaost|as_sold",
+                "name": "fetaost",
+                "note": "",
+                "quantity": 120.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "crème fraiche|as_sold",
+                "name": "crème fraiche",
+                "note": "",
+                "quantity": 80.0,
+                "unit": "g"
+              }
+            ],
+            "id": "servering",
+            "name": "Sval servering"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "majstortillas|as_sold",
+                "name": "Mjuka majstortillas",
+                "note": "",
+                "quantity": 400.0,
+                "unit": "g"
+              }
+            ],
+            "id": "majsbrod",
+            "name": "Färdiga mjuka majstortillas"
+          }
+        ],
+        "content_sha256": "87920b21485604247d7ef6830853a68c77da06584c82175975fae1c3146be9bb",
+        "content_source": {
+          "active_minutes": 39,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "reviewed-expansion-round2-stage3",
+          "priority": 1,
+          "proposal_id": "smako-mexican-enfrijoladas",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "61a3e86cf4c62920ea2a6021aa42d7679daa0d6fb3d62cc463979552b1beca26",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "mexican"
+        ],
+        "equipment": [
+          "mixer",
+          "stekpanna",
+          "kastrull",
+          "tortillapress eller kavel"
+        ],
+        "estimated_minutes": 159,
+        "family": "enfrijoladas",
+        "fish": false,
+        "flavor_profile": [
+          "svart böna",
+          "rostad lök"
+        ],
+        "ingredient_count": 10,
+        "method": "pan",
+        "primary_ingredient": "svarta bönor",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar, inte uppmätta. Enfrijoladas: mjuka majstortillas doppas och viks i slät bönsås, inte tomatgratinerade enchiladas. Feta i den rikare varianten är en uttalad ersättning för queso fresco. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "majstortillas i bönsås",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 1,
+            "id": "s1",
+            "ingredient_keys": [
+              "avokado|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Väg upp fryst avokado i ett täckt kärl i kylskåp. Behåll all vätska."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 120,
+            "id": "s2",
+            "ingredient_keys": [
+              "avokado|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Tina helt i kylskåp enligt förpackningen. Planera 120 minuter och förläng vid behov tills ingen iskärna återstår. Använd alla bitar och all saft i avokadotillbehöret."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 8,
+            "id": "s3",
+            "ingredient_keys": [
+              "chiliflakes|dry",
+              "gul lök|raw_edible",
+              "rapsolja|as_sold",
+              "svarta bönor|cooked_drained",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Hacka gul lök och vitlök. Fräs i rapsolja på medelvärme tills löken är mjuk; tillsätt chiliflakes mot slutet. Skölj de kokta bönorna och låt rinna av."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 10,
+            "id": "s4",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "salt|as_sold",
+              "svarta bönor|cooked_drained",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "500 ml",
+                500.0
+              ],
+              [
+                "100 ml",
+                100.0
+              ]
+            ],
+            "text": "Mixa lökfräs, bönor, såsens salt och 500 ml vatten till helt slät sås. Häll tillbaka och sjud 6 minuter under omrörning; den ska täcka tortillas men fortfarande rinna av en sked. Späd vid behov med 100 ml vatten."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 6,
+            "id": "s5",
+            "ingredient_keys": [
+              "avokado|raw_edible",
+              "crème fraiche|as_sold",
+              "fetaost|as_sold",
+              "limejuice|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Använd helt tinade avokadobitar med all saft och vänd med serveringens limejuice. Smula fetaost och rör crème fraiche slät."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 6,
+            "id": "s6",
+            "ingredient_keys": [
+              "majstortillas|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Värm de färdiga mjuka majstortillorna i torr panna enligt förpackningen tills böjliga och genomvarma. Lägg i ren handduk och använd direkt."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 8,
+            "id": "s7",
+            "ingredient_keys": [
+              "avokado|raw_edible",
+              "crème fraiche|as_sold",
+              "fetaost|as_sold",
+              "majstortillas|as_sold",
+              "svarta bönor|cooked_drained"
+            ],
+            "parallel_group": null,
+            "text": "Doppa de mjuka tortillorna en i taget i den varma bönsåsen. Vik dubbla och lägg direkt på fyra tallrikar. Fördela all återstående bönsås över, lägg avokado vid sidan och fördela fetaost och crème fraiche över tortillorna. Servera omedelbart."
+          }
+        ],
+        "total_minutes": 159,
+        "variant_id": "standard",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 120
+      },
+      "ingredients": [
+        {
+          "canonical_name": "svarta bönor",
+          "component": "bonsas",
+          "form": "cooked_drained",
+          "name": "svarta bönor",
+          "quantity": 850.0,
+          "quantity_max": 850.0,
+          "quantity_min": 850.0,
+          "quantity_step": 850.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "bonsas",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 160.0,
+          "quantity_max": 160.0,
+          "quantity_min": 160.0,
+          "quantity_step": 160.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "bonsas",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 12.0,
+          "quantity_max": 12.0,
+          "quantity_min": 12.0,
+          "quantity_step": 12.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "bonsas",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 30.0,
+          "quantity_max": 30.0,
+          "quantity_min": 30.0,
+          "quantity_step": 30.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "bonsas",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 3.0,
+          "quantity_max": 3.0,
+          "quantity_min": 3.0,
+          "quantity_step": 3.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "chiliflakes",
+          "component": "bonsas",
+          "form": "dry",
+          "name": "chiliflakes",
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "avokado",
+          "component": "servering",
+          "form": "raw_edible",
+          "name": "avokado",
+          "product_requirements": [
+            "pack:intake_all_416f9df16b84"
+          ],
+          "quantity": 200.0,
+          "quantity_max": 200.0,
+          "quantity_min": 200.0,
+          "quantity_step": 200.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "limejuice",
+          "component": "servering",
+          "form": "as_sold",
+          "name": "limejuice",
+          "product_requirements": [
+            "pure_juice"
+          ],
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 25.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "fetaost",
+          "component": "servering",
+          "form": "as_sold",
+          "name": "fetaost",
+          "quantity": 120.0,
+          "quantity_max": 120.0,
+          "quantity_min": 120.0,
+          "quantity_step": 120.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "crème fraiche",
+          "component": "servering",
+          "form": "as_sold",
+          "name": "crème fraiche",
+          "quantity": 80.0,
+          "quantity_max": 80.0,
+          "quantity_min": 80.0,
+          "quantity_step": 80.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "majstortillas",
+          "component": "majsbrod",
+          "form": "as_sold",
+          "name": "majstortillas",
+          "product_requirements": [
+            "pack:intake_all_round2_4e0f777e646a"
+          ],
+          "quantity": 400.0,
+          "quantity_max": 400.0,
+          "quantity_min": 400.0,
+          "quantity_step": 400.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Väg upp fryst avokado i ett täckt kärl i kylskåp. Behåll all vätska.",
+        "Tina helt i kylskåp enligt förpackningen. Planera 120 minuter och förläng vid behov tills ingen iskärna återstår. Använd alla bitar och all saft i avokadotillbehöret.",
+        "Hacka gul lök och vitlök. Fräs i rapsolja på medelvärme tills löken är mjuk; tillsätt chiliflakes mot slutet. Skölj de kokta bönorna och låt rinna av.",
+        "Mixa lökfräs, bönor, såsens salt och 500 ml vatten till helt slät sås. Häll tillbaka och sjud 6 minuter under omrörning; den ska täcka tortillas men fortfarande rinna av en sked. Späd vid behov med 100 ml vatten.",
+        "Använd helt tinade avokadobitar med all saft och vänd med serveringens limejuice. Smula fetaost och rör crème fraiche slät.",
+        "Värm de färdiga mjuka majstortillorna i torr panna enligt förpackningen tills böjliga och genomvarma. Lägg i ren handduk och använd direkt.",
+        "Doppa de mjuka tortillorna en i taget i den varma bönsåsen. Vik dubbla och lägg direkt på fyra tallrikar. Fördela all återstående bönsås över, lägg avokado vid sidan och fördela fetaost och crème fraiche över tortillorna. Servera omedelbart."
+      ],
+      "name": "Enfrijoladas med färdiga majstortillas – tortillas i svart bönsås – standard",
+      "preparation": {
+        "family": "enfrijoladas",
+        "input_forms": {
+          "avokado": "raw_edible",
+          "chiliflakes": "dry",
+          "crème fraiche": "as_sold",
+          "fetaost": "as_sold",
+          "gul lök": "raw_edible",
+          "limejuice": "as_sold",
+          "majstortillas": "as_sold",
+          "rapsolja": "as_sold",
+          "salt": "as_sold",
+          "svarta bönor": "cooked_drained",
+          "vitlök": "raw_edible"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "87920b21485604247d7ef6830853a68c77da06584c82175975fae1c3146be9bb",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 39,
+        "base_id": "smako-mexican-enfrijoladas",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "svarta bönor|cooked_drained",
+                "name": "svarta bönor",
+                "note": "",
+                "quantity": 850.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "gul lök",
+                "note": "",
+                "quantity": 160.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "vitlök",
+                "note": "",
+                "quantity": 12.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "rapsolja",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 3.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "chiliflakes|dry",
+                "name": "chiliflakes",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              }
+            ],
+            "id": "bonsas",
+            "name": "Svart bönsås"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "avokado|raw_edible",
+                "name": "avokado",
+                "note": "",
+                "quantity": 200.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "limejuice|as_sold",
+                "name": "limejuice",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "fetaost|as_sold",
+                "name": "fetaost",
+                "note": "",
+                "quantity": 120.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "crème fraiche|as_sold",
+                "name": "crème fraiche",
+                "note": "",
+                "quantity": 80.0,
+                "unit": "g"
+              }
+            ],
+            "id": "servering",
+            "name": "Sval servering"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "tomat|raw_edible",
+                "name": "tomat",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rödlök|raw_edible",
+                "name": "rödlök",
+                "note": "",
+                "quantity": 60.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "koriander|raw_edible",
+                "name": "koriander",
+                "note": "",
+                "quantity": 12.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "limejuice|as_sold",
+                "name": "limejuice",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              }
+            ],
+            "id": "salsa",
+            "name": "Tomatsalsa"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "majstortillas|as_sold",
+                "name": "Mjuka majstortillas",
+                "note": "",
+                "quantity": 400.0,
+                "unit": "g"
+              }
+            ],
+            "id": "majsbrod",
+            "name": "Färdiga mjuka majstortillas"
+          }
+        ],
+        "content_sha256": "20feda79894f1bd1a3bb20d00b73a00b3f29e44b76f48e77dc984d7c738a0f23",
+        "content_source": {
+          "active_minutes": 39,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "reviewed-expansion-round2-stage3",
+          "priority": 1,
+          "proposal_id": "smako-mexican-enfrijoladas",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "61a3e86cf4c62920ea2a6021aa42d7679daa0d6fb3d62cc463979552b1beca26",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "mexican"
+        ],
+        "equipment": [
+          "mixer",
+          "stekpanna",
+          "kastrull",
+          "tortillapress eller kavel"
+        ],
+        "estimated_minutes": 159,
+        "family": "enfrijoladas",
+        "fish": false,
+        "flavor_profile": [
+          "svart böna",
+          "rostad lök"
+        ],
+        "ingredient_count": 13,
+        "method": "pan",
+        "primary_ingredient": "svarta bönor",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar, inte uppmätta. Enfrijoladas: mjuka majstortillas doppas och viks i slät bönsås, inte tomatgratinerade enchiladas. Feta i den rikare varianten är en uttalad ersättning för queso fresco. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "majstortillas i bönsås",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 1,
+            "id": "s1",
+            "ingredient_keys": [
+              "avokado|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Väg upp fryst avokado i ett täckt kärl i kylskåp. Behåll all vätska."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 120,
+            "id": "s2",
+            "ingredient_keys": [
+              "avokado|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Tina helt i kylskåp enligt förpackningen. Planera 120 minuter och förläng vid behov tills ingen iskärna återstår. Använd alla bitar och all saft i avokadotillbehöret."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 8,
+            "id": "s3",
+            "ingredient_keys": [
+              "chiliflakes|dry",
+              "gul lök|raw_edible",
+              "rapsolja|as_sold",
+              "svarta bönor|cooked_drained",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Hacka gul lök och vitlök. Fräs i rapsolja på medelvärme tills löken är mjuk; tillsätt chiliflakes mot slutet. Skölj de kokta bönorna och låt rinna av."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 10,
+            "id": "s4",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "koriander|raw_edible",
+              "salt|as_sold",
+              "svarta bönor|cooked_drained",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "500 ml",
+                500.0
+              ],
+              [
+                "100 ml",
+                100.0
+              ]
+            ],
+            "text": "Mixa lökfräs, bönor, såsens salt och 500 ml vatten till helt slät sås. Häll tillbaka och sjud 6 minuter under omrörning; den ska täcka tortillas men fortfarande rinna av en sked. Späd vid behov med 100 ml vatten. Tillsätt fryst hackad koriander i bönsåsen och låt den koka med hela tiden."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 6,
+            "id": "s5",
+            "ingredient_keys": [
+              "avokado|raw_edible",
+              "crème fraiche|as_sold",
+              "fetaost|as_sold",
+              "limejuice|as_sold",
+              "rödlök|raw_edible",
+              "salt|as_sold",
+              "tomat|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Använd helt tinade avokadobitar med all saft och vänd med serveringens limejuice. Smula fetaost och rör crème fraiche slät. Tärna tomat och rödlök och blanda med salsans limejuice och salt."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 6,
+            "id": "s6",
+            "ingredient_keys": [
+              "majstortillas|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Värm de färdiga mjuka majstortillorna i torr panna enligt förpackningen tills böjliga och genomvarma. Lägg i ren handduk och använd direkt."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 8,
+            "id": "s7",
+            "ingredient_keys": [
+              "avokado|raw_edible",
+              "crème fraiche|as_sold",
+              "fetaost|as_sold",
+              "koriander|raw_edible",
+              "majstortillas|as_sold",
+              "rödlök|raw_edible",
+              "svarta bönor|cooked_drained",
+              "tomat|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Doppa de mjuka tortillorna en i taget i den varma bönsåsen. Vik dubbla och lägg direkt på fyra tallrikar. Fördela all återstående bönsås över, lägg avokado vid sidan och fördela fetaost och crème fraiche över tortillorna. Servera tomatsalsan vid sidan."
+          }
+        ],
+        "total_minutes": 159,
+        "variant_id": "extended",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 120
+      },
+      "ingredients": [
+        {
+          "canonical_name": "svarta bönor",
+          "component": "bonsas",
+          "form": "cooked_drained",
+          "name": "svarta bönor",
+          "quantity": 850.0,
+          "quantity_max": 850.0,
+          "quantity_min": 850.0,
+          "quantity_step": 850.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "bonsas",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 160.0,
+          "quantity_max": 160.0,
+          "quantity_min": 160.0,
+          "quantity_step": 160.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "bonsas",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 12.0,
+          "quantity_max": 12.0,
+          "quantity_min": 12.0,
+          "quantity_step": 12.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "bonsas",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 30.0,
+          "quantity_max": 30.0,
+          "quantity_min": 30.0,
+          "quantity_step": 30.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "bonsas",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 4.0,
+          "quantity_max": 4.0,
+          "quantity_min": 4.0,
+          "quantity_step": 4.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "chiliflakes",
+          "component": "bonsas",
+          "form": "dry",
+          "name": "chiliflakes",
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "avokado",
+          "component": "servering",
+          "form": "raw_edible",
+          "name": "avokado",
+          "product_requirements": [
+            "pack:intake_all_416f9df16b84"
+          ],
+          "quantity": 200.0,
+          "quantity_max": 200.0,
+          "quantity_min": 200.0,
+          "quantity_step": 200.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "limejuice",
+          "component": "servering",
+          "form": "as_sold",
+          "name": "limejuice",
+          "product_requirements": [
+            "pure_juice"
+          ],
+          "quantity": 45.0,
+          "quantity_max": 45.0,
+          "quantity_min": 45.0,
+          "quantity_step": 45.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "fetaost",
+          "component": "servering",
+          "form": "as_sold",
+          "name": "fetaost",
+          "quantity": 120.0,
+          "quantity_max": 120.0,
+          "quantity_min": 120.0,
+          "quantity_step": 120.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "crème fraiche",
+          "component": "servering",
+          "form": "as_sold",
+          "name": "crème fraiche",
+          "quantity": 80.0,
+          "quantity_max": 80.0,
+          "quantity_min": 80.0,
+          "quantity_step": 80.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "tomat",
+          "component": "salsa",
+          "form": "raw_edible",
+          "name": "tomat",
+          "quantity": 300.0,
+          "quantity_max": 300.0,
+          "quantity_min": 300.0,
+          "quantity_step": 300.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rödlök",
+          "component": "salsa",
+          "form": "raw_edible",
+          "name": "rödlök",
+          "quantity": 60.0,
+          "quantity_max": 60.0,
+          "quantity_min": 60.0,
+          "quantity_step": 60.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "koriander",
+          "component": "salsa",
+          "form": "raw_edible",
+          "name": "koriander",
+          "product_requirements": [
+            "pack:intake_all_9b2370e0e926"
+          ],
+          "quantity": 12.0,
+          "quantity_max": 12.0,
+          "quantity_min": 12.0,
+          "quantity_step": 12.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "majstortillas",
+          "component": "majsbrod",
+          "form": "as_sold",
+          "name": "majstortillas",
+          "product_requirements": [
+            "pack:intake_all_round2_4e0f777e646a"
+          ],
+          "quantity": 400.0,
+          "quantity_max": 400.0,
+          "quantity_min": 400.0,
+          "quantity_step": 400.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Väg upp fryst avokado i ett täckt kärl i kylskåp. Behåll all vätska.",
+        "Tina helt i kylskåp enligt förpackningen. Planera 120 minuter och förläng vid behov tills ingen iskärna återstår. Använd alla bitar och all saft i avokadotillbehöret.",
+        "Hacka gul lök och vitlök. Fräs i rapsolja på medelvärme tills löken är mjuk; tillsätt chiliflakes mot slutet. Skölj de kokta bönorna och låt rinna av.",
+        "Mixa lökfräs, bönor, såsens salt och 500 ml vatten till helt slät sås. Häll tillbaka och sjud 6 minuter under omrörning; den ska täcka tortillas men fortfarande rinna av en sked. Späd vid behov med 100 ml vatten. Tillsätt fryst hackad koriander i bönsåsen och låt den koka med hela tiden.",
+        "Använd helt tinade avokadobitar med all saft och vänd med serveringens limejuice. Smula fetaost och rör crème fraiche slät. Tärna tomat och rödlök och blanda med salsans limejuice och salt.",
+        "Värm de färdiga mjuka majstortillorna i torr panna enligt förpackningen tills böjliga och genomvarma. Lägg i ren handduk och använd direkt.",
+        "Doppa de mjuka tortillorna en i taget i den varma bönsåsen. Vik dubbla och lägg direkt på fyra tallrikar. Fördela all återstående bönsås över, lägg avokado vid sidan och fördela fetaost och crème fraiche över tortillorna. Servera tomatsalsan vid sidan."
+      ],
+      "name": "Enfrijoladas med färdiga majstortillas – tortillas i svart bönsås – utökad",
+      "preparation": {
+        "family": "enfrijoladas",
+        "input_forms": {
+          "avokado": "raw_edible",
+          "chiliflakes": "dry",
+          "crème fraiche": "as_sold",
+          "fetaost": "as_sold",
+          "gul lök": "raw_edible",
+          "koriander": "raw_edible",
+          "limejuice": "as_sold",
+          "majstortillas": "as_sold",
+          "rapsolja": "as_sold",
+          "rödlök": "raw_edible",
+          "salt": "as_sold",
+          "svarta bönor": "cooked_drained",
+          "tomat": "raw_edible",
+          "vitlök": "raw_edible"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "20feda79894f1bd1a3bb20d00b73a00b3f29e44b76f48e77dc984d7c738a0f23",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 15,
+        "base_id": "smako-italian-schiacciata-uva",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "vetemjöl|dry",
+                "name": "Vetemjöl",
+                "note": "",
+                "quantity": 55.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "torrjäst|dry",
+                "name": "Torrjäst",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "olivolja|as_sold",
+                "name": "Olivolja",
+                "note": "",
+                "quantity": 8.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "vindruvor|raw_edible",
+                "name": "Vindruvor",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "Strösocker",
+                "note": "",
+                "quantity": 12.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 0.4,
+                "unit": "g"
+              }
+            ],
+            "id": "brod",
+            "name": "Druvfyllt jästbröd"
+          }
+        ],
+        "content_sha256": "1c4813349a770b04afe1431898db30a68cb14a4c751bfd41e1a2072b485f2d3d",
+        "content_source": {
+          "active_minutes": 15,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "reviewed-expansion-round2-stage3",
+          "priority": 1,
+          "proposal_id": "smako-italian-schiacciata-uva",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "61a3e86cf4c62920ea2a6021aa42d7679daa0d6fb3d62cc463979552b1beca26",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "italian"
+        ],
+        "equipment": [
+          "ugn",
+          "liten form cirka 14 cm",
+          "bunke"
+        ],
+        "estimated_minutes": 135,
+        "family": "Schiacciata all’uva",
+        "fish": false,
+        "flavor_profile": [
+          "druvor",
+          "olivolja"
+        ],
+        "ingredient_count": 5,
+        "meal_types": [
+          "snack"
+        ],
+        "method": "bake",
+        "primary_ingredient": "vetemjöl",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "AI-författat receptutkast, inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Två degskikt med druvor emellan är bärande. Valnötter, rosmarin och yoghurt är uttryckliga utökningar; kärnfria druvor är en hemmaanpassning. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "inget separat tillbehör",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 6,
+            "id": "s1",
+            "ingredient_keys": [
+              "olivolja|as_sold",
+              "salt|as_sold",
+              "torrjäst|dry",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "35 ml",
+                35.0
+              ]
+            ],
+            "text": "Blanda mjöl, jäst och salt med 35 ml vatten som är fingervarmt och hälften av oljan. Knåda fem minuter till en mjuk deg."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 60,
+            "id": "s2",
+            "ingredient_keys": [
+              "torrjäst|dry",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Täck bunken och låt degen jäsa cirka 60 minuter till tydligt ökad volym."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 8,
+            "id": "s3",
+            "ingredient_keys": [
+              "olivolja|as_sold",
+              "strösocker|dry",
+              "vetemjöl|dry",
+              "vindruvor|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Använd kärnfria bordsdruvor. Plocka av klasstjälkarna, skölj och torka. Väg den angivna ätliga mängden och halvera utan att ta bort skalet; behåll all saft i brödet. Klä formen med bakplåtspapper. Dela degen i två delar och tryck ut en del i botten. Lägg hälften av druvorna och sockret ovanpå. Täck med resten av degen, tryck ner resterande druvor och strö på resten av sockret. Ringla över oljan."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 20,
+            "id": "s4",
+            "ingredient_keys": [
+              "torrjäst|dry",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Låt jäsa 20 minuter. Värm under tiden ugnen till 200 °C."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 25,
+            "id": "s5",
+            "ingredient_keys": [
+              "vetemjöl|dry",
+              "vindruvor|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Grädda cirka 25 minuter tills kanterna är gyllene och mittdegen är genomgräddad, inte kladdig under frukten."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 15,
+            "id": "s6",
+            "ingredient_keys": [
+              "vindruvor|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Låt svalna 15 minuter före servering."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 1,
+            "id": "s7",
+            "ingredient_keys": [
+              "vindruvor|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Servera hela den avsvalnade portionen med all fruktsaft från formen."
+          }
+        ],
+        "total_minutes": 135,
+        "variant_id": "simple",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 120
+      },
+      "ingredients": [
+        {
+          "canonical_name": "vetemjöl",
+          "component": "brod",
+          "form": "dry",
+          "name": "vetemjöl",
+          "quantity": 55.0,
+          "quantity_max": 55.0,
+          "quantity_min": 55.0,
+          "quantity_step": 55.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "torrjäst",
+          "component": "brod",
+          "form": "dry",
+          "name": "torrjäst",
+          "product_requirements": [
+            "pack:intake_all_aaf63645a6f0"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "olivolja",
+          "component": "brod",
+          "form": "as_sold",
+          "name": "olivolja",
+          "product_requirements": [
+            "pack:intake_all_expansion_86ac9b2c5ae6"
+          ],
+          "quantity": 8.0,
+          "quantity_max": 8.0,
+          "quantity_min": 8.0,
+          "quantity_step": 8.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "vindruvor",
+          "component": "brod",
+          "form": "raw_edible",
+          "name": "vindruvor",
+          "product_requirements": [
+            "pack:intake_all_round2_64cf3a45c98d"
+          ],
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "strösocker",
+          "component": "brod",
+          "form": "dry",
+          "name": "strösocker",
+          "product_requirements": [
+            "pack:sugar"
+          ],
+          "quantity": 12.0,
+          "quantity_max": 12.0,
+          "quantity_min": 12.0,
+          "quantity_step": 12.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "brod",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 0.4,
+          "quantity_max": 0.4,
+          "quantity_min": 0.4,
+          "quantity_step": 0.4,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Blanda mjöl, jäst och salt med 35 ml vatten som är fingervarmt och hälften av oljan. Knåda fem minuter till en mjuk deg.",
+        "Täck bunken och låt degen jäsa cirka 60 minuter till tydligt ökad volym.",
+        "Använd kärnfria bordsdruvor. Plocka av klasstjälkarna, skölj och torka. Väg den angivna ätliga mängden och halvera utan att ta bort skalet; behåll all saft i brödet. Klä formen med bakplåtspapper. Dela degen i två delar och tryck ut en del i botten. Lägg hälften av druvorna och sockret ovanpå. Täck med resten av degen, tryck ner resterande druvor och strö på resten av sockret. Ringla över oljan.",
+        "Låt jäsa 20 minuter. Värm under tiden ugnen till 200 °C.",
+        "Grädda cirka 25 minuter tills kanterna är gyllene och mittdegen är genomgräddad, inte kladdig under frukten.",
+        "Låt svalna 15 minuter före servering.",
+        "Servera hela den avsvalnade portionen med all fruktsaft från formen."
+      ],
+      "name": "Schiacciata med kärnfria bordsdruvor all’uva – vindruvsfyllt jästbröd – litet druvfyllt skördebröd",
+      "preparation": {
+        "family": "Schiacciata all’uva",
+        "input_forms": {
+          "olivolja": "as_sold",
+          "salt": "as_sold",
+          "strösocker": "dry",
+          "torrjäst": "dry",
+          "vetemjöl": "dry",
+          "vindruvor": "raw_edible"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "1c4813349a770b04afe1431898db30a68cb14a4c751bfd41e1a2072b485f2d3d",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 15,
+        "base_id": "smako-italian-schiacciata-uva",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "vetemjöl|dry",
+                "name": "Vetemjöl",
+                "note": "",
+                "quantity": 55.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "torrjäst|dry",
+                "name": "Torrjäst",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "olivolja|as_sold",
+                "name": "Olivolja",
+                "note": "",
+                "quantity": 8.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "vindruvor|raw_edible",
+                "name": "Vindruvor",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "Strösocker",
+                "note": "",
+                "quantity": 12.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 0.4,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "valnötter|as_sold",
+                "name": "Valnötter",
+                "note": "",
+                "quantity": 12.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rosmarin|dry",
+                "name": "Rosmarin",
+                "note": "",
+                "quantity": 0.2,
+                "unit": "g"
+              }
+            ],
+            "id": "brod",
+            "name": "Druvfyllt jästbröd"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "yoghurt naturell|as_sold",
+                "name": "Yoghurt naturell",
+                "note": "",
+                "quantity": 80.0,
+                "unit": "g"
+              }
+            ],
+            "id": "yoghurt",
+            "name": "Yoghurt bredvid"
+          }
+        ],
+        "content_sha256": "953469647dc9f4af77383200d19a297ac1a4fa53280ebc8246bcbe125ee82bd5",
+        "content_source": {
+          "active_minutes": 15,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "reviewed-expansion-round2-stage3",
+          "priority": 1,
+          "proposal_id": "smako-italian-schiacciata-uva",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "61a3e86cf4c62920ea2a6021aa42d7679daa0d6fb3d62cc463979552b1beca26",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "italian"
+        ],
+        "equipment": [
+          "ugn",
+          "liten form cirka 14 cm",
+          "bunke"
+        ],
+        "estimated_minutes": 135,
+        "family": "Schiacciata all’uva",
+        "fish": false,
+        "flavor_profile": [
+          "druvor",
+          "olivolja"
+        ],
+        "ingredient_count": 8,
+        "meal_types": [
+          "snack"
+        ],
+        "method": "bake",
+        "primary_ingredient": "vetemjöl",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "AI-författat receptutkast, inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Två degskikt med druvor emellan är bärande. Valnötter, rosmarin och yoghurt är uttryckliga utökningar; kärnfria druvor är en hemmaanpassning. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "yoghurt",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 6,
+            "id": "s1",
+            "ingredient_keys": [
+              "olivolja|as_sold",
+              "salt|as_sold",
+              "torrjäst|dry",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "35 ml",
+                35.0
+              ]
+            ],
+            "text": "Blanda mjöl, jäst och salt med 35 ml vatten som är fingervarmt och hälften av oljan. Knåda fem minuter till en mjuk deg."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 60,
+            "id": "s2",
+            "ingredient_keys": [
+              "torrjäst|dry",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Täck bunken och låt degen jäsa cirka 60 minuter till tydligt ökad volym."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 8,
+            "id": "s3",
+            "ingredient_keys": [
+              "olivolja|as_sold",
+              "rosmarin|dry",
+              "strösocker|dry",
+              "valnötter|as_sold",
+              "vetemjöl|dry",
+              "vindruvor|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Använd kärnfria bordsdruvor. Plocka av klasstjälkarna, skölj och torka. Väg den angivna ätliga mängden och halvera utan att ta bort skalet; behåll all saft i brödet. Klä formen med bakplåtspapper. Dela degen i två delar och tryck ut en del i botten. Lägg hälften av druvorna och sockret ovanpå. Hacka valnötterna och lägg dem i fyllningen. Täck med resten av degen, tryck ner resterande druvor och strö på resten av sockret. Ringla över oljan. Strö rosmarinen över druvorna."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 20,
+            "id": "s4",
+            "ingredient_keys": [
+              "torrjäst|dry",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Låt jäsa 20 minuter. Värm under tiden ugnen till 200 °C."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 25,
+            "id": "s5",
+            "ingredient_keys": [
+              "vetemjöl|dry",
+              "vindruvor|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Grädda cirka 25 minuter tills kanterna är gyllene och mittdegen är genomgräddad, inte kladdig under frukten."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 15,
+            "id": "s6",
+            "ingredient_keys": [
+              "vindruvor|raw_edible",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Låt svalna 15 minuter före servering."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 1,
+            "id": "s7",
+            "ingredient_keys": [
+              "vindruvor|raw_edible",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Servera hela den avsvalnade portionen med all fruktsaft från formen. Servera yoghurten bredvid."
+          }
+        ],
+        "total_minutes": 135,
+        "variant_id": "extended",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 120
+      },
+      "ingredients": [
+        {
+          "canonical_name": "vetemjöl",
+          "component": "brod",
+          "form": "dry",
+          "name": "vetemjöl",
+          "quantity": 55.0,
+          "quantity_max": 55.0,
+          "quantity_min": 55.0,
+          "quantity_step": 55.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "torrjäst",
+          "component": "brod",
+          "form": "dry",
+          "name": "torrjäst",
+          "product_requirements": [
+            "pack:intake_all_aaf63645a6f0"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "olivolja",
+          "component": "brod",
+          "form": "as_sold",
+          "name": "olivolja",
+          "product_requirements": [
+            "pack:intake_all_expansion_86ac9b2c5ae6"
+          ],
+          "quantity": 8.0,
+          "quantity_max": 8.0,
+          "quantity_min": 8.0,
+          "quantity_step": 8.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "vindruvor",
+          "component": "brod",
+          "form": "raw_edible",
+          "name": "vindruvor",
+          "product_requirements": [
+            "pack:intake_all_round2_64cf3a45c98d"
+          ],
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "strösocker",
+          "component": "brod",
+          "form": "dry",
+          "name": "strösocker",
+          "product_requirements": [
+            "pack:sugar"
+          ],
+          "quantity": 12.0,
+          "quantity_max": 12.0,
+          "quantity_min": 12.0,
+          "quantity_step": 12.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "brod",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 0.4,
+          "quantity_max": 0.4,
+          "quantity_min": 0.4,
+          "quantity_step": 0.4,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "valnötter",
+          "component": "brod",
+          "form": "as_sold",
+          "name": "valnötter",
+          "product_requirements": [
+            "pack:intake_walnuts"
+          ],
+          "quantity": 12.0,
+          "quantity_max": 12.0,
+          "quantity_min": 12.0,
+          "quantity_step": 12.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rosmarin",
+          "component": "brod",
+          "form": "dry",
+          "name": "rosmarin",
+          "product_requirements": [
+            "pack:intake_rosemary"
+          ],
+          "quantity": 0.2,
+          "quantity_max": 0.2,
+          "quantity_min": 0.2,
+          "quantity_step": 0.2,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "yoghurt naturell",
+          "component": "yoghurt",
+          "form": "as_sold",
+          "name": "yoghurt naturell",
+          "product_requirements": [
+            "plain",
+            "thick"
+          ],
+          "quantity": 80.0,
+          "quantity_max": 80.0,
+          "quantity_min": 80.0,
+          "quantity_step": 80.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Blanda mjöl, jäst och salt med 35 ml vatten som är fingervarmt och hälften av oljan. Knåda fem minuter till en mjuk deg.",
+        "Täck bunken och låt degen jäsa cirka 60 minuter till tydligt ökad volym.",
+        "Använd kärnfria bordsdruvor. Plocka av klasstjälkarna, skölj och torka. Väg den angivna ätliga mängden och halvera utan att ta bort skalet; behåll all saft i brödet. Klä formen med bakplåtspapper. Dela degen i två delar och tryck ut en del i botten. Lägg hälften av druvorna och sockret ovanpå. Hacka valnötterna och lägg dem i fyllningen. Täck med resten av degen, tryck ner resterande druvor och strö på resten av sockret. Ringla över oljan. Strö rosmarinen över druvorna.",
+        "Låt jäsa 20 minuter. Värm under tiden ugnen till 200 °C.",
+        "Grädda cirka 25 minuter tills kanterna är gyllene och mittdegen är genomgräddad, inte kladdig under frukten.",
+        "Låt svalna 15 minuter före servering.",
+        "Servera hela den avsvalnade portionen med all fruktsaft från formen. Servera yoghurten bredvid."
+      ],
+      "name": "Schiacciata med kärnfria bordsdruvor all’uva – vindruvsfyllt jästbröd – med valnötter, rosmarin och yoghurt",
+      "preparation": {
+        "family": "Schiacciata all’uva",
+        "input_forms": {
+          "olivolja": "as_sold",
+          "rosmarin": "dry",
+          "salt": "as_sold",
+          "strösocker": "dry",
+          "torrjäst": "dry",
+          "valnötter": "as_sold",
+          "vetemjöl": "dry",
+          "vindruvor": "raw_edible",
+          "yoghurt naturell": "as_sold"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "953469647dc9f4af77383200d19a297ac1a4fa53280ebc8246bcbe125ee82bd5",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 1
+    }
+  ]
+}

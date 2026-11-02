@@ -1,0 +1,1265 @@
+{
+  "pack_id": "reviewed-expansion-round2-stage31",
+  "recipes": [
+    {
+      "design": {
+        "active_minutes": 53,
+        "base_id": "smako-mexican-rajas-con-crema",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "paprika|raw_edible",
+                "name": "Paprika, rå urkärnad mängd med skinn före rostning",
+                "note": "",
+                "quantity": 650.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "gul lök",
+                "note": "",
+                "quantity": 200.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "grädde|as_sold",
+                "name": "grädde",
+                "note": "",
+                "quantity": 250.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "majs|as_sold",
+                "name": "majs",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "rapsolja",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 4.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "jalapeño|raw_edible",
+                "name": "Naturell hackad fryst jalapeño",
+                "note": "",
+                "quantity": 6.0,
+                "unit": "g"
+              }
+            ],
+            "id": "rajas",
+            "name": "Rostade paprikastrimlor i grädde"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "majstortillas|as_sold",
+                "name": "Färdiga mjuka majstortillas",
+                "note": "",
+                "quantity": 400.0,
+                "unit": "g"
+              }
+            ],
+            "id": "majsbrod",
+            "name": "Färdiga mjuka majstortillas"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "mexican"
+        ],
+        "equipment": [
+          "ugn",
+          "plåt",
+          "värmetålig skål med lock",
+          "stekpanna"
+        ],
+        "estimated_minutes": 63,
+        "family": "rajas con crema",
+        "fish": false,
+        "flavor_profile": [
+          "rostad paprika",
+          "jalapeño",
+          "grädde",
+          "majs"
+        ],
+        "ingredient_count": 7,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "pan",
+        "primary_ingredient": "paprika",
+        "provenance": {
+          "notes": "Granskad paprika- och jalapeñoversion, utan poblano. Den angivna paprikamängden vägs urkärnad men med skinn före rostning; skalets förlust är okänd. Jalapeñon är en separat dos på 6 g, inte påstådd likvärdig hetta. Färdiga mjuka majstortillas ersätter degberedningen. Inte provlagad. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "majstortillas",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 18,
+            "id": "s1",
+            "ingredient_keys": [
+              "paprika|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sätt ugnen på 240 °C grill. Dela paprikan, ta bort stjälk och kärnhus och väg den råa ätliga mängden med skinn kvar. Lägg halvorna med skinnet uppåt på plåt. Grilla under uppsikt cirka 18 minuter tills skinnet blåser upp och mörknar fläckvis; fruktköttet ska inte brännas. Flytta vid behov plåten."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 1,
+            "id": "s2",
+            "ingredient_keys": [
+              "paprika|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Flytta de rostade paprikahalvorna och all fruktsaft till en värmetålig skål och lägg på lock."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 10,
+            "id": "s3",
+            "ingredient_keys": [
+              "paprika|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Låt de rostade paprikahalvorna ånga och svalna under lock i tio minuter."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 9,
+            "id": "s4",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "paprika|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Dra av löst mörkt skinn, behåll allt paprikakött och all saft och skär i breda strimlor. Skala och väg löken, skiva tunt."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 10,
+            "id": "s5",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "jalapeño|raw_edible",
+              "majs|as_sold",
+              "paprika|raw_edible",
+              "rapsolja|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Värm oljan och mjukstek löken. Tillsätt den frysta hackade jalapeñon och fräs en minut. Vänd ner paprikastrimlorna med all saft och den frysta majsen, låt allt bli hett. Häll inte bort någon vätska."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 9,
+            "id": "s6",
+            "ingredient_keys": [
+              "grädde|as_sold",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Häll i grädden och gräddkomponentens salt. Sjud under omrörning cirka sex minuter tills majsen är genomvarm och såsen omsluter grönsakerna."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 6,
+            "id": "s7",
+            "ingredient_keys": [
+              "grädde|as_sold",
+              "majstortillas|as_sold",
+              "paprika|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Väg den angivna mängden färdiga mjuka majstortillas och värm i torr panna enligt förpackningen tills böjliga. Fördela rajas med hela gräddsåsen mellan portionerna och servera med tortillorna."
+          }
+        ],
+        "total_minutes": 63,
+        "unmeasured_processes": [
+          {
+            "description": "Rostad paprika skalas efter att den råa urkärnade mängden vägts. Borttagen skinnmassa och näringsretention är inte uppmätta.",
+            "ingredient_keys": [
+              "paprika|raw_edible"
+            ],
+            "operation": "peel_after_cooking",
+            "step_id": "s4"
+          }
+        ],
+        "variant_id": "simple",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 10
+      },
+      "ingredients": [
+        {
+          "canonical_name": "paprika",
+          "component": "rajas",
+          "form": "raw_edible",
+          "name": "paprika",
+          "quantity": 650.0,
+          "quantity_max": 650.0,
+          "quantity_min": 650.0,
+          "quantity_step": 650.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "rajas",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 200.0,
+          "quantity_max": 200.0,
+          "quantity_min": 200.0,
+          "quantity_step": 200.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "grädde",
+          "component": "rajas",
+          "form": "as_sold",
+          "name": "grädde",
+          "product_requirements": [
+            "pack:intake_all_2ba6bda1d4b2"
+          ],
+          "quantity": 250.0,
+          "quantity_max": 250.0,
+          "quantity_min": 250.0,
+          "quantity_step": 250.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "majs",
+          "component": "rajas",
+          "form": "as_sold",
+          "name": "majs",
+          "product_requirements": [
+            "frozen",
+            "plain"
+          ],
+          "quantity": 300.0,
+          "quantity_max": 300.0,
+          "quantity_min": 300.0,
+          "quantity_step": 300.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "rajas",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "rajas",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 4.0,
+          "quantity_max": 4.0,
+          "quantity_min": 4.0,
+          "quantity_step": 4.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "jalapeño",
+          "component": "rajas",
+          "form": "raw_edible",
+          "name": "jalapeño",
+          "product_requirements": [
+            "pack:intake_all_round2_1d3e8bb882c0"
+          ],
+          "quantity": 6.0,
+          "quantity_max": 6.0,
+          "quantity_min": 6.0,
+          "quantity_step": 6.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "majstortillas",
+          "component": "majsbrod",
+          "form": "as_sold",
+          "name": "majstortillas",
+          "product_requirements": [
+            "pack:intake_all_round2_4e0f777e646a"
+          ],
+          "quantity": 400.0,
+          "quantity_max": 400.0,
+          "quantity_min": 400.0,
+          "quantity_step": 400.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Sätt ugnen på 240 °C grill. Dela paprikan, ta bort stjälk och kärnhus och väg den råa ätliga mängden med skinn kvar. Lägg halvorna med skinnet uppåt på plåt. Grilla under uppsikt cirka 18 minuter tills skinnet blåser upp och mörknar fläckvis; fruktköttet ska inte brännas. Flytta vid behov plåten.",
+        "Flytta de rostade paprikahalvorna och all fruktsaft till en värmetålig skål och lägg på lock.",
+        "Låt de rostade paprikahalvorna ånga och svalna under lock i tio minuter.",
+        "Dra av löst mörkt skinn, behåll allt paprikakött och all saft och skär i breda strimlor. Skala och väg löken, skiva tunt.",
+        "Värm oljan och mjukstek löken. Tillsätt den frysta hackade jalapeñon och fräs en minut. Vänd ner paprikastrimlorna med all saft och den frysta majsen, låt allt bli hett. Häll inte bort någon vätska.",
+        "Häll i grädden och gräddkomponentens salt. Sjud under omrörning cirka sex minuter tills majsen är genomvarm och såsen omsluter grönsakerna.",
+        "Väg den angivna mängden färdiga mjuka majstortillas och värm i torr panna enligt förpackningen tills böjliga. Fördela rajas med hela gräddsåsen mellan portionerna och servera med tortillorna."
+      ],
+      "name": "Rajas con crema – rostad paprika och jalapeño i gräddsås – enkel – med färdiga majstortillas",
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 56,
+        "base_id": "smako-mexican-rajas-con-crema",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "paprika|raw_edible",
+                "name": "Paprika, rå urkärnad mängd med skinn före rostning",
+                "note": "",
+                "quantity": 650.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "gul lök",
+                "note": "",
+                "quantity": 200.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "grädde|as_sold",
+                "name": "grädde",
+                "note": "",
+                "quantity": 250.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "majs|as_sold",
+                "name": "majs",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "rapsolja",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 4.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "vitlök",
+                "note": "",
+                "quantity": 12.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "mozzarella|preserved_drained",
+                "name": "Mozzarella, vägd efter avrinning utan fri lag",
+                "note": "",
+                "quantity": 120.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svarta bönor|cooked_drained",
+                "name": "svarta bönor",
+                "note": "",
+                "quantity": 400.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "jalapeño|raw_edible",
+                "name": "Naturell hackad fryst jalapeño",
+                "note": "",
+                "quantity": 6.0,
+                "unit": "g"
+              }
+            ],
+            "id": "rajas",
+            "name": "Rostade paprikastrimlor i grädde"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "majstortillas|as_sold",
+                "name": "Färdiga mjuka majstortillas",
+                "note": "",
+                "quantity": 400.0,
+                "unit": "g"
+              }
+            ],
+            "id": "majsbrod",
+            "name": "Färdiga mjuka majstortillas"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "mexican"
+        ],
+        "equipment": [
+          "ugn",
+          "plåt",
+          "värmetålig skål med lock",
+          "stekpanna"
+        ],
+        "estimated_minutes": 66,
+        "family": "rajas con crema",
+        "fish": false,
+        "flavor_profile": [
+          "rostad paprika",
+          "jalapeño",
+          "grädde",
+          "majs"
+        ],
+        "ingredient_count": 10,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "pan",
+        "primary_ingredient": "paprika",
+        "provenance": {
+          "notes": "Granskad paprika- och jalapeñoversion, utan poblano. Den angivna paprikamängden vägs urkärnad men med skinn före rostning; skalets förlust är okänd. Jalapeñon är en separat dos på 6 g, inte påstådd likvärdig hetta. Färdiga mjuka majstortillas ersätter degberedningen. Inte provlagad. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "majstortillas",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 18,
+            "id": "s1",
+            "ingredient_keys": [
+              "paprika|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sätt ugnen på 240 °C grill. Dela paprikan, ta bort stjälk och kärnhus och väg den råa ätliga mängden med skinn kvar. Lägg halvorna med skinnet uppåt på plåt. Grilla under uppsikt cirka 18 minuter tills skinnet blåser upp och mörknar fläckvis; fruktköttet ska inte brännas. Flytta vid behov plåten."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 1,
+            "id": "s2",
+            "ingredient_keys": [
+              "paprika|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Flytta de rostade paprikahalvorna och all fruktsaft till en värmetålig skål och lägg på lock."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 10,
+            "id": "s3",
+            "ingredient_keys": [
+              "paprika|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Låt de rostade paprikahalvorna ånga och svalna under lock i tio minuter."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 9,
+            "id": "s4",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "paprika|raw_edible",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Dra av löst mörkt skinn, behåll allt paprikakött och all saft och skär i breda strimlor. Skala och väg löken, skiva tunt. Hacka färsk vitlök eller väg fryst hackad vitlök."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 10,
+            "id": "s5",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "jalapeño|raw_edible",
+              "majs|as_sold",
+              "paprika|raw_edible",
+              "rapsolja|as_sold",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Värm oljan och mjukstek löken. Tillsätt den frysta hackade jalapeñon och vitlöken och fräs en minut. Vänd ner paprikastrimlorna med all saft och den frysta majsen, låt allt bli hett. Häll inte bort någon vätska."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 12,
+            "id": "s6",
+            "ingredient_keys": [
+              "grädde|as_sold",
+              "mozzarella|preserved_drained",
+              "salt|as_sold",
+              "svarta bönor|cooked_drained"
+            ],
+            "parallel_group": null,
+            "text": "Häll i grädden och gräddkomponentens salt. Sjud under omrörning cirka sex minuter tills majsen är genomvarm och såsen omsluter grönsakerna. Väg de kokta svarta bönorna efter avrinning och värm i såsen. Låt mozzarellan rinna av, väg utan fri lag och riv i små bitar. Rör i tills den smält."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 6,
+            "id": "s7",
+            "ingredient_keys": [
+              "grädde|as_sold",
+              "majstortillas|as_sold",
+              "paprika|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Väg den angivna mängden färdiga mjuka majstortillas och värm i torr panna enligt förpackningen tills böjliga. Fördela rajas med hela gräddsåsen mellan portionerna och servera med tortillorna."
+          }
+        ],
+        "total_minutes": 66,
+        "unmeasured_processes": [
+          {
+            "description": "Rostad paprika skalas efter att den råa urkärnade mängden vägts. Borttagen skinnmassa och näringsretention är inte uppmätta.",
+            "ingredient_keys": [
+              "paprika|raw_edible"
+            ],
+            "operation": "peel_after_cooking",
+            "step_id": "s4"
+          }
+        ],
+        "variant_id": "standard",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 10
+      },
+      "ingredients": [
+        {
+          "canonical_name": "paprika",
+          "component": "rajas",
+          "form": "raw_edible",
+          "name": "paprika",
+          "quantity": 650.0,
+          "quantity_max": 650.0,
+          "quantity_min": 650.0,
+          "quantity_step": 650.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "rajas",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 200.0,
+          "quantity_max": 200.0,
+          "quantity_min": 200.0,
+          "quantity_step": 200.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "grädde",
+          "component": "rajas",
+          "form": "as_sold",
+          "name": "grädde",
+          "product_requirements": [
+            "pack:intake_all_2ba6bda1d4b2"
+          ],
+          "quantity": 250.0,
+          "quantity_max": 250.0,
+          "quantity_min": 250.0,
+          "quantity_step": 250.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "majs",
+          "component": "rajas",
+          "form": "as_sold",
+          "name": "majs",
+          "product_requirements": [
+            "frozen",
+            "plain"
+          ],
+          "quantity": 300.0,
+          "quantity_max": 300.0,
+          "quantity_min": 300.0,
+          "quantity_step": 300.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "rajas",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "rajas",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 4.0,
+          "quantity_max": 4.0,
+          "quantity_min": 4.0,
+          "quantity_step": 4.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "rajas",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 12.0,
+          "quantity_max": 12.0,
+          "quantity_min": 12.0,
+          "quantity_step": 12.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "mozzarella",
+          "component": "rajas",
+          "form": "preserved_drained",
+          "name": "mozzarella",
+          "product_requirements": [
+            "pack:intake_all_05c97f94a699"
+          ],
+          "quantity": 120.0,
+          "quantity_max": 120.0,
+          "quantity_min": 120.0,
+          "quantity_step": 120.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svarta bönor",
+          "component": "rajas",
+          "form": "cooked_drained",
+          "name": "svarta bönor",
+          "quantity": 400.0,
+          "quantity_max": 400.0,
+          "quantity_min": 400.0,
+          "quantity_step": 400.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "jalapeño",
+          "component": "rajas",
+          "form": "raw_edible",
+          "name": "jalapeño",
+          "product_requirements": [
+            "pack:intake_all_round2_1d3e8bb882c0"
+          ],
+          "quantity": 6.0,
+          "quantity_max": 6.0,
+          "quantity_min": 6.0,
+          "quantity_step": 6.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "majstortillas",
+          "component": "majsbrod",
+          "form": "as_sold",
+          "name": "majstortillas",
+          "product_requirements": [
+            "pack:intake_all_round2_4e0f777e646a"
+          ],
+          "quantity": 400.0,
+          "quantity_max": 400.0,
+          "quantity_min": 400.0,
+          "quantity_step": 400.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Sätt ugnen på 240 °C grill. Dela paprikan, ta bort stjälk och kärnhus och väg den råa ätliga mängden med skinn kvar. Lägg halvorna med skinnet uppåt på plåt. Grilla under uppsikt cirka 18 minuter tills skinnet blåser upp och mörknar fläckvis; fruktköttet ska inte brännas. Flytta vid behov plåten.",
+        "Flytta de rostade paprikahalvorna och all fruktsaft till en värmetålig skål och lägg på lock.",
+        "Låt de rostade paprikahalvorna ånga och svalna under lock i tio minuter.",
+        "Dra av löst mörkt skinn, behåll allt paprikakött och all saft och skär i breda strimlor. Skala och väg löken, skiva tunt. Hacka färsk vitlök eller väg fryst hackad vitlök.",
+        "Värm oljan och mjukstek löken. Tillsätt den frysta hackade jalapeñon och vitlöken och fräs en minut. Vänd ner paprikastrimlorna med all saft och den frysta majsen, låt allt bli hett. Häll inte bort någon vätska.",
+        "Häll i grädden och gräddkomponentens salt. Sjud under omrörning cirka sex minuter tills majsen är genomvarm och såsen omsluter grönsakerna. Väg de kokta svarta bönorna efter avrinning och värm i såsen. Låt mozzarellan rinna av, väg utan fri lag och riv i små bitar. Rör i tills den smält.",
+        "Väg den angivna mängden färdiga mjuka majstortillas och värm i torr panna enligt förpackningen tills böjliga. Fördela rajas med hela gräddsåsen mellan portionerna och servera med tortillorna."
+      ],
+      "name": "Rajas con crema – rostad paprika och jalapeño i gräddsås – standard – med färdiga majstortillas",
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 60,
+        "base_id": "smako-mexican-rajas-con-crema",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "paprika|raw_edible",
+                "name": "Paprika, rå urkärnad mängd med skinn före rostning",
+                "note": "",
+                "quantity": 650.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "gul lök",
+                "note": "",
+                "quantity": 200.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "grädde|as_sold",
+                "name": "grädde",
+                "note": "",
+                "quantity": 250.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "majs|as_sold",
+                "name": "majs",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "rapsolja",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 4.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "vitlök",
+                "note": "",
+                "quantity": 12.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "mozzarella|preserved_drained",
+                "name": "Mozzarella, vägd efter avrinning utan fri lag",
+                "note": "",
+                "quantity": 120.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svarta bönor|cooked_drained",
+                "name": "svarta bönor",
+                "note": "",
+                "quantity": 400.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "jalapeño|raw_edible",
+                "name": "Naturell hackad fryst jalapeño",
+                "note": "",
+                "quantity": 6.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "koriander|raw_edible",
+                "name": "koriander",
+                "note": "",
+                "quantity": 12.0,
+                "unit": "g"
+              }
+            ],
+            "id": "rajas",
+            "name": "Rostade paprikastrimlor i grädde"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "tomat|raw_edible",
+                "name": "tomat",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "limejuice|as_sold",
+                "name": "limejuice",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              }
+            ],
+            "id": "tomatsallad",
+            "name": "Frisk tomatsallad"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "majstortillas|as_sold",
+                "name": "Färdiga mjuka majstortillas",
+                "note": "",
+                "quantity": 400.0,
+                "unit": "g"
+              }
+            ],
+            "id": "majsbrod",
+            "name": "Färdiga mjuka majstortillas"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "mexican"
+        ],
+        "equipment": [
+          "ugn",
+          "plåt",
+          "värmetålig skål med lock",
+          "stekpanna"
+        ],
+        "estimated_minutes": 70,
+        "family": "rajas con crema",
+        "fish": false,
+        "flavor_profile": [
+          "rostad paprika",
+          "jalapeño",
+          "grädde",
+          "majs"
+        ],
+        "ingredient_count": 13,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "pan",
+        "primary_ingredient": "paprika",
+        "provenance": {
+          "notes": "Granskad paprika- och jalapeñoversion, utan poblano. Den angivna paprikamängden vägs urkärnad men med skinn före rostning; skalets förlust är okänd. Jalapeñon är en separat dos på 6 g, inte påstådd likvärdig hetta. Färdiga mjuka majstortillas ersätter degberedningen. Inte provlagad. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "majstortillas",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 18,
+            "id": "s1",
+            "ingredient_keys": [
+              "paprika|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sätt ugnen på 240 °C grill. Dela paprikan, ta bort stjälk och kärnhus och väg den råa ätliga mängden med skinn kvar. Lägg halvorna med skinnet uppåt på plåt. Grilla under uppsikt cirka 18 minuter tills skinnet blåser upp och mörknar fläckvis; fruktköttet ska inte brännas. Flytta vid behov plåten."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 1,
+            "id": "s2",
+            "ingredient_keys": [
+              "paprika|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Flytta de rostade paprikahalvorna och all fruktsaft till en värmetålig skål och lägg på lock."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 10,
+            "id": "s3",
+            "ingredient_keys": [
+              "paprika|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Låt de rostade paprikahalvorna ånga och svalna under lock i tio minuter."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 9,
+            "id": "s4",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "paprika|raw_edible",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Dra av löst mörkt skinn, behåll allt paprikakött och all saft och skär i breda strimlor. Skala och väg löken, skiva tunt. Hacka färsk vitlök eller väg fryst hackad vitlök."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 10,
+            "id": "s5",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "jalapeño|raw_edible",
+              "majs|as_sold",
+              "paprika|raw_edible",
+              "rapsolja|as_sold",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Värm oljan och mjukstek löken. Tillsätt den frysta hackade jalapeñon och vitlöken och fräs en minut. Vänd ner paprikastrimlorna med all saft och den frysta majsen, låt allt bli hett. Häll inte bort någon vätska."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 12,
+            "id": "s6",
+            "ingredient_keys": [
+              "grädde|as_sold",
+              "koriander|raw_edible",
+              "mozzarella|preserved_drained",
+              "salt|as_sold",
+              "svarta bönor|cooked_drained"
+            ],
+            "parallel_group": null,
+            "text": "Häll i grädden och gräddkomponentens salt. Sjud under omrörning cirka sex minuter tills majsen är genomvarm och såsen omsluter grönsakerna. Väg de kokta svarta bönorna efter avrinning och värm i såsen. Låt mozzarellan rinna av, väg utan fri lag och riv i små bitar. Rör i tills den smält. Den uppvägda frysta hackade koriandern ska sjuda i gräddsåsen minst tre minuter eller längre enligt förpackningen."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 4,
+            "id": "s7",
+            "ingredient_keys": [
+              "limejuice|as_sold",
+              "salt|as_sold",
+              "tomat|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Väg rå ätlig tomat, tärna och vänd med limejuicen och salladens salt. Behåll hela dressingen."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 6,
+            "id": "s8",
+            "ingredient_keys": [
+              "grädde|as_sold",
+              "majstortillas|as_sold",
+              "paprika|raw_edible",
+              "tomat|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Väg den angivna mängden färdiga mjuka majstortillas och värm i torr panna enligt förpackningen tills böjliga. Fördela rajas med hela gräddsåsen mellan portionerna och servera med tortillorna. Lägg upp tomatsalladen med hela dressingen bredvid."
+          }
+        ],
+        "total_minutes": 70,
+        "unmeasured_processes": [
+          {
+            "description": "Rostad paprika skalas efter att den råa urkärnade mängden vägts. Borttagen skinnmassa och näringsretention är inte uppmätta.",
+            "ingredient_keys": [
+              "paprika|raw_edible"
+            ],
+            "operation": "peel_after_cooking",
+            "step_id": "s4"
+          }
+        ],
+        "variant_id": "extended",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 10
+      },
+      "ingredients": [
+        {
+          "canonical_name": "paprika",
+          "component": "rajas",
+          "form": "raw_edible",
+          "name": "paprika",
+          "quantity": 650.0,
+          "quantity_max": 650.0,
+          "quantity_min": 650.0,
+          "quantity_step": 650.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "rajas",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 200.0,
+          "quantity_max": 200.0,
+          "quantity_min": 200.0,
+          "quantity_step": 200.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "grädde",
+          "component": "rajas",
+          "form": "as_sold",
+          "name": "grädde",
+          "product_requirements": [
+            "pack:intake_all_2ba6bda1d4b2"
+          ],
+          "quantity": 250.0,
+          "quantity_max": 250.0,
+          "quantity_min": 250.0,
+          "quantity_step": 250.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "majs",
+          "component": "rajas",
+          "form": "as_sold",
+          "name": "majs",
+          "product_requirements": [
+            "frozen",
+            "plain"
+          ],
+          "quantity": 300.0,
+          "quantity_max": 300.0,
+          "quantity_min": 300.0,
+          "quantity_step": 300.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "rajas",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "rajas",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "rajas",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 12.0,
+          "quantity_max": 12.0,
+          "quantity_min": 12.0,
+          "quantity_step": 12.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "mozzarella",
+          "component": "rajas",
+          "form": "preserved_drained",
+          "name": "mozzarella",
+          "product_requirements": [
+            "pack:intake_all_05c97f94a699"
+          ],
+          "quantity": 120.0,
+          "quantity_max": 120.0,
+          "quantity_min": 120.0,
+          "quantity_step": 120.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svarta bönor",
+          "component": "rajas",
+          "form": "cooked_drained",
+          "name": "svarta bönor",
+          "quantity": 400.0,
+          "quantity_max": 400.0,
+          "quantity_min": 400.0,
+          "quantity_step": 400.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "jalapeño",
+          "component": "rajas",
+          "form": "raw_edible",
+          "name": "jalapeño",
+          "product_requirements": [
+            "pack:intake_all_round2_1d3e8bb882c0"
+          ],
+          "quantity": 6.0,
+          "quantity_max": 6.0,
+          "quantity_min": 6.0,
+          "quantity_step": 6.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "koriander",
+          "component": "rajas",
+          "form": "raw_edible",
+          "name": "koriander",
+          "product_requirements": [
+            "pack:intake_all_9b2370e0e926"
+          ],
+          "quantity": 12.0,
+          "quantity_max": 12.0,
+          "quantity_min": 12.0,
+          "quantity_step": 12.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "tomat",
+          "component": "tomatsallad",
+          "form": "raw_edible",
+          "name": "tomat",
+          "quantity": 300.0,
+          "quantity_max": 300.0,
+          "quantity_min": 300.0,
+          "quantity_step": 300.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "limejuice",
+          "component": "tomatsallad",
+          "form": "as_sold",
+          "name": "limejuice",
+          "product_requirements": [
+            "pure_juice"
+          ],
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 25.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "majstortillas",
+          "component": "majsbrod",
+          "form": "as_sold",
+          "name": "majstortillas",
+          "product_requirements": [
+            "pack:intake_all_round2_4e0f777e646a"
+          ],
+          "quantity": 400.0,
+          "quantity_max": 400.0,
+          "quantity_min": 400.0,
+          "quantity_step": 400.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Sätt ugnen på 240 °C grill. Dela paprikan, ta bort stjälk och kärnhus och väg den råa ätliga mängden med skinn kvar. Lägg halvorna med skinnet uppåt på plåt. Grilla under uppsikt cirka 18 minuter tills skinnet blåser upp och mörknar fläckvis; fruktköttet ska inte brännas. Flytta vid behov plåten.",
+        "Flytta de rostade paprikahalvorna och all fruktsaft till en värmetålig skål och lägg på lock.",
+        "Låt de rostade paprikahalvorna ånga och svalna under lock i tio minuter.",
+        "Dra av löst mörkt skinn, behåll allt paprikakött och all saft och skär i breda strimlor. Skala och väg löken, skiva tunt. Hacka färsk vitlök eller väg fryst hackad vitlök.",
+        "Värm oljan och mjukstek löken. Tillsätt den frysta hackade jalapeñon och vitlöken och fräs en minut. Vänd ner paprikastrimlorna med all saft och den frysta majsen, låt allt bli hett. Häll inte bort någon vätska.",
+        "Häll i grädden och gräddkomponentens salt. Sjud under omrörning cirka sex minuter tills majsen är genomvarm och såsen omsluter grönsakerna. Väg de kokta svarta bönorna efter avrinning och värm i såsen. Låt mozzarellan rinna av, väg utan fri lag och riv i små bitar. Rör i tills den smält. Den uppvägda frysta hackade koriandern ska sjuda i gräddsåsen minst tre minuter eller längre enligt förpackningen.",
+        "Väg rå ätlig tomat, tärna och vänd med limejuicen och salladens salt. Behåll hela dressingen.",
+        "Väg den angivna mängden färdiga mjuka majstortillas och värm i torr panna enligt förpackningen tills böjliga. Fördela rajas med hela gräddsåsen mellan portionerna och servera med tortillorna. Lägg upp tomatsalladen med hela dressingen bredvid."
+      ],
+      "name": "Rajas con crema – rostad paprika och jalapeño i gräddsås – utökad – med färdiga majstortillas",
+      "servings": 4
+    }
+  ],
+  "schema_version": "smako-meal-pack-v1"
+}

@@ -171,6 +171,12 @@ def validate_pack_bytes(source, *, label="content pack"):
                     "safety_sources":[],
                     "storage_note":"Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
                 }
+            if data["design"].get("unmeasured_processes"):
+                data["design"]["content_source"]["method_note"] = (
+                    "Ingredienslistan anger hela insatsen, även den del som senare hälls eller silas bort. "
+                    "Förlusten är inte uppmätt. Näring och färdig portionsvikt är okända; "
+                    "receptet kan inte styrka valda närings- eller viktgränser. "
+                    "Inköp och personliga kostkrav kontrolleras för samtliga insatser.")
             data.pop("preparation", None)
             recipe = Recipe.model_validate(data)
             d = recipe.design
@@ -185,17 +191,21 @@ def validate_pack_bytes(source, *, label="content pack"):
             if not all(c.amounts for c in d.components):
                 raise ValueError(f"{ref}.design.components: komponentmängder krävs")
             if d.method in {"cold_assembly", "refrigerated_assembly", "salad"} and any(
-                    i.canonical_name in {"kyckling", "kalkon", "nötfärs", "fläskfärs", "blandfärs",
+                    (i.canonical_name in {"kyckling", "kalkon", "nötfärs", "fläskfärs", "blandfärs",
                                          "nötkött", "lammkött", "lammfärs", "fläskkött", "fläsklever",
                                          "kycklinglever", "råa räkor", "bläckfisk", "musslor", "makrill",
                                          "fläskkarré", "kalvfärs", "nötinnanlår", "högrev", "nötstek",
                                          "nötkött för snabbstekning", "hel kyckling", "rimmat fläsk",
                                          "ägg", "äggula", "äggvita", "fisk", "lax"}
-                    and i.form == "raw_edible" for i in recipe.ingredients):
+                    and i.form == "raw_edible")
+                    or (i.form == "as_sold" and i.canonical_name in {
+                        "ägg", "hel kyckling", "oxsvans med ben", "rimmat fläsklägg", "nötblod",
+                        "ungnötslever", "råa skalade vannameiräkor", "blåmusselkött utan skal", "färsk chorizokorv", "benfri lammstek", "färsk salsicciakorv"})
+                    for i in recipe.ingredients):
                 raise ValueError(f"{ref}.design.method: rå animalisk ingrediens kräver varm metod")
             sha = content_hash(recipe)
             recipe = recipe.model_copy(update={"design": d.model_copy(update={"content_sha256": sha}),
-                "preparation": RecipePreparation(version="smako-authored-input-v2",
+                "preparation": RecipePreparation(version=("smako-authored-losses-v3" if d.unmeasured_processes else "smako-authored-input-v2"),
                     origin="smako_recipe_design", parent_sha256=sha, family=d.family,
                     input_forms={i.canonical_name:i.form for i in recipe.ingredients})})
             _structural_check(recipe)

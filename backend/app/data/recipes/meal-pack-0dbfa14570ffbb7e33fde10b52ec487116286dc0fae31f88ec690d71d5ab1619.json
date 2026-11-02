@@ -1,0 +1,1790 @@
+{
+  "library_version": "smako-meal-pack-v1",
+  "recipes": [
+    {
+      "design": {
+        "active_minutes": 57,
+        "base_id": "smako-mexican-manchamanteles",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "kyckling|raw_edible",
+                "name": "Kyckling",
+                "note": "",
+                "quantity": 650.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "anchochili|dry",
+                "name": "Mald anchochili",
+                "note": "",
+                "quantity": 24.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "tomat|raw_edible",
+                "name": "Tomat",
+                "note": "",
+                "quantity": 600.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ananas|raw_edible",
+                "name": "Ananas",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kokbanan med skal|as_sold",
+                "name": "Mogen gul/svartfläckig kokbanan, inköpt vikt med skal",
+                "note": "",
+                "quantity": 600.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "Rapsolja",
+                "note": "",
+                "quantity": 35.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 4.0,
+                "unit": "g"
+              }
+            ],
+            "id": "mole",
+            "name": "Fruktig röd mole"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ris|dry",
+                "name": "Ris",
+                "note": "",
+                "quantity": 280.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              }
+            ],
+            "id": "rice",
+            "name": "Nykokt ris"
+          }
+        ],
+        "content_sha256": "cccf271871438d42c526e2e8c8c7a271ff48855dcb67fb7ec38ebf8b8e45eaca",
+        "content_source": {
+          "active_minutes": 57,
+          "method_note": "Ingredienslistan anger hela insatsen, även den del som senare hälls eller silas bort. Förlusten är inte uppmätt. Näring och färdig portionsvikt är okända; receptet kan inte styrka valda närings- eller viktgränser. Inköp och personliga kostkrav kontrolleras för samtliga insatser.",
+          "pack_id": "reviewed-expansion-round2-stage19",
+          "priority": 1,
+          "proposal_id": "smako-mexican-manchamanteles",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "b0f9bd6fecdcbee13bf0b30d80836bef8f5d186ede0344430a293619d3a7c423",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "mexican"
+        ],
+        "equipment": [
+          "gryta",
+          "stekpanna",
+          "mixer",
+          "termometer"
+        ],
+        "estimated_minutes": 107,
+        "family": "röd fruktmole med kyckling, ananas och matbanan",
+        "fish": false,
+        "flavor_profile": [
+          "ancho",
+          "ananas",
+          "matbanan"
+        ],
+        "ingredient_count": 7,
+        "method": "pot",
+        "primary_ingredient": "kyckling",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "AI-författat receptutkast, inte provlagat och ännu inte import-/produktgranskat av Smako. Tider är författaruppskattningar. Kostavsikt är inte ett produkt- eller allergengodkännande. Förenklad vardagsversion av manchamanteles. Mogen matbanan används, inte grön kokbanan; inga ersättningar mellan dessa insatsidentiteter antas. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "ris",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 2,
+            "id": "s1",
+            "ingredient_keys": [
+              "anchochili|dry"
+            ],
+            "parallel_group": null,
+            "text": "Utgå från redan mogen kokbanan med gul till svartfläckig skal och eftergivligt fruktkött. Grön hård kokbanan måste mogna före matlagningen; mognadstid ingår inte i receptets tillagningstid. Rör den uppvägda malda anchochilin med 250 ml hett vatten; ingen hel chili ska rostas eller rensas."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 5,
+            "id": "s2",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Låt den malda chilin dra i vattnet fem minuter; hela blandningen ska användas."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 12,
+            "id": "s3",
+            "ingredient_keys": [
+              "rapsolja|as_sold",
+              "tomat|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Skär tomat i grova bitar. Stek tomaten i hälften av oljan tills den mjuknar och får rostade kanter."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 8,
+            "id": "s4",
+            "ingredient_keys": [
+              "anchochili|dry",
+              "tomat|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Mixa den uppblötta malda chilin och tomatfräset med allt chilivatten till en slät sås. Häll i grytan och koka under omrörning 5 minuter."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 5,
+            "id": "s5",
+            "ingredient_keys": [
+              "kyckling|raw_edible",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "250 ml",
+                250.0
+              ]
+            ],
+            "text": "Skär kycklingen i jämna bitar omkring 3 cm. Lägg ner i såsen med salt och 250 ml vatten. Koka upp och sänk värmen. Diska skärbrädan efter rå kyckling."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 11,
+            "id": "s6",
+            "ingredient_keys": [
+              "kyckling|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud kycklingen under lock i elva minuter."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 1,
+            "id": "s7",
+            "ingredient_keys": [
+              "kyckling|raw_edible",
+              "tomat|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "50 ml",
+                50.0
+              ]
+            ],
+            "text": "Rör i molesåsen och kontrollera att bottnen inte bränner. Tillsätt vid behov 50 ml vatten."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 11,
+            "id": "s8",
+            "ingredient_keys": [
+              "kyckling|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud ytterligare elva minuter under lock."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 2,
+            "id": "s9",
+            "ingredient_keys": [
+              "kyckling|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Kontrollera minst 74 °C mitt i de tjockaste kycklingbitarna. Fortsätt sjuda om de inte är genomlagade."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 8,
+            "id": "s10",
+            "ingredient_keys": [
+              "ananas|raw_edible",
+              "kokbanan med skal|as_sold",
+              "rapsolja|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Väg kokbananen med skal till den nya angivna bruttomängden, skala och skiva allt fruktkött. Stek försiktigt i återstående olja tills skivorna är gyllene med mjuk mitt. Använd den uppvägda frysta ananasen i nästa steg; ingen saft ska hällas bort."
+          },
+          {
+            "depends_on": [
+              "s10"
+            ],
+            "duration_minutes": 13,
+            "id": "s11",
+            "ingredient_keys": [
+              "ananas|raw_edible",
+              "kokbanan med skal|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Vänd ner fryst ananas med all saft i grytan och sjud under omrörning minst tio minuter eller längre enligt förpackningen tills frukten är helt genomhet. Lägg ner den stekta kokbananen sist och värm 2 minuter utan att röra sönder den. Håll grytan varm på lägsta värme medan riset kokas. Skrapa även ner all stekolja från bananpannan i grytan."
+          },
+          {
+            "depends_on": [
+              "s11"
+            ],
+            "duration_minutes": 3,
+            "id": "s12",
+            "ingredient_keys": [
+              "ris|dry",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "560 ml",
+                560.0
+              ]
+            ],
+            "text": "Skölj riset i sil. Lägg i en kastrull med risets salt och 560 ml vatten. Koka upp och sänk till svag värme."
+          },
+          {
+            "depends_on": [
+              "s12"
+            ],
+            "duration_minutes": 18,
+            "id": "s13",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Sjud riset under lock cirka 18 minuter eller längre enligt förpackningen tills det är mjukt och vattnet absorberats."
+          },
+          {
+            "depends_on": [
+              "s13"
+            ],
+            "duration_minutes": 1,
+            "id": "s14",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "50 ml",
+                50.0
+              ]
+            ],
+            "text": "Kontrollera riset och ta det från värmen när det är mjukt. Tillsätt annars 50 ml vatten och fortsätt sjuda före vilan."
+          },
+          {
+            "depends_on": [
+              "s14"
+            ],
+            "duration_minutes": 5,
+            "id": "s15",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Låt riset vila under lock fem minuter efter att det tagits från värmen."
+          },
+          {
+            "depends_on": [
+              "s15"
+            ],
+            "duration_minutes": 1,
+            "id": "s16",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Luckra riset. Servera direkt med huvudrätten; om den inte är färdig ska ris och huvudrätt hållas över 60 °C tills båda kan serveras."
+          },
+          {
+            "depends_on": [
+              "s16"
+            ],
+            "duration_minutes": 1,
+            "id": "s17",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Servera fruktmolen med ris. Både ananas och matbanan ska finnas i varje portion, inte bara användas som garnering."
+          }
+        ],
+        "total_minutes": 107,
+        "unmeasured_processes": [
+          {
+            "description": "Kokbanan vägs med skal före skalning. Skalets andel och kvarvarande ätliga vikt är inte uppmätta; inget portionsutbyte antas.",
+            "ingredient_keys": [
+              "kokbanan med skal|as_sold"
+            ],
+            "operation": "trim_before_cooking",
+            "step_id": "s10"
+          }
+        ],
+        "variant_id": "simple",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 50
+      },
+      "ingredients": [
+        {
+          "canonical_name": "kyckling",
+          "component": "mole",
+          "form": "raw_edible",
+          "name": "kyckling",
+          "quantity": 650.0,
+          "quantity_max": 650.0,
+          "quantity_min": 650.0,
+          "quantity_step": 650.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "anchochili",
+          "component": "mole",
+          "form": "dry",
+          "name": "anchochili",
+          "product_requirements": [
+            "pack:intake_all_round2_637eba129fe4"
+          ],
+          "quantity": 24.0,
+          "quantity_max": 24.0,
+          "quantity_min": 24.0,
+          "quantity_step": 24.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "tomat",
+          "component": "mole",
+          "form": "raw_edible",
+          "name": "tomat",
+          "quantity": 600.0,
+          "quantity_max": 600.0,
+          "quantity_min": 600.0,
+          "quantity_step": 600.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ananas",
+          "component": "mole",
+          "form": "raw_edible",
+          "name": "ananas",
+          "product_requirements": [
+            "pack:intake_all_5e01993f43fb"
+          ],
+          "quantity": 300.0,
+          "quantity_max": 300.0,
+          "quantity_min": 300.0,
+          "quantity_step": 300.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kokbanan med skal",
+          "component": "mole",
+          "form": "as_sold",
+          "name": "kokbanan med skal",
+          "product_requirements": [
+            "pack:intake_all_round2_72e1f5444d28"
+          ],
+          "quantity": 600.0,
+          "quantity_max": 600.0,
+          "quantity_min": 600.0,
+          "quantity_step": 600.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "mole",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 35.0,
+          "quantity_max": 35.0,
+          "quantity_min": 35.0,
+          "quantity_step": 35.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "mole",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ris",
+          "component": "rice",
+          "form": "dry",
+          "name": "ris",
+          "product_requirements": [
+            "white_rice"
+          ],
+          "quantity": 280.0,
+          "quantity_max": 280.0,
+          "quantity_min": 280.0,
+          "quantity_step": 280.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Utgå från redan mogen kokbanan med gul till svartfläckig skal och eftergivligt fruktkött. Grön hård kokbanan måste mogna före matlagningen; mognadstid ingår inte i receptets tillagningstid. Rör den uppvägda malda anchochilin med 250 ml hett vatten; ingen hel chili ska rostas eller rensas.",
+        "Låt den malda chilin dra i vattnet fem minuter; hela blandningen ska användas.",
+        "Skär tomat i grova bitar. Stek tomaten i hälften av oljan tills den mjuknar och får rostade kanter.",
+        "Mixa den uppblötta malda chilin och tomatfräset med allt chilivatten till en slät sås. Häll i grytan och koka under omrörning 5 minuter.",
+        "Skär kycklingen i jämna bitar omkring 3 cm. Lägg ner i såsen med salt och 250 ml vatten. Koka upp och sänk värmen. Diska skärbrädan efter rå kyckling.",
+        "Sjud kycklingen under lock i elva minuter.",
+        "Rör i molesåsen och kontrollera att bottnen inte bränner. Tillsätt vid behov 50 ml vatten.",
+        "Sjud ytterligare elva minuter under lock.",
+        "Kontrollera minst 74 °C mitt i de tjockaste kycklingbitarna. Fortsätt sjuda om de inte är genomlagade.",
+        "Väg kokbananen med skal till den nya angivna bruttomängden, skala och skiva allt fruktkött. Stek försiktigt i återstående olja tills skivorna är gyllene med mjuk mitt. Använd den uppvägda frysta ananasen i nästa steg; ingen saft ska hällas bort.",
+        "Vänd ner fryst ananas med all saft i grytan och sjud under omrörning minst tio minuter eller längre enligt förpackningen tills frukten är helt genomhet. Lägg ner den stekta kokbananen sist och värm 2 minuter utan att röra sönder den. Håll grytan varm på lägsta värme medan riset kokas. Skrapa även ner all stekolja från bananpannan i grytan.",
+        "Skölj riset i sil. Lägg i en kastrull med risets salt och 560 ml vatten. Koka upp och sänk till svag värme.",
+        "Sjud riset under lock cirka 18 minuter eller längre enligt förpackningen tills det är mjukt och vattnet absorberats.",
+        "Kontrollera riset och ta det från värmen när det är mjukt. Tillsätt annars 50 ml vatten och fortsätt sjuda före vilan.",
+        "Låt riset vila under lock fem minuter efter att det tagits från värmen.",
+        "Luckra riset. Servera direkt med huvudrätten; om den inte är färdig ska ris och huvudrätt hållas över 60 °C tills båda kan serveras.",
+        "Servera fruktmolen med ris. Både ananas och matbanan ska finnas i varje portion, inte bara användas som garnering."
+      ],
+      "name": "Manchamanteles – fruktig ancho- och kycklinggryta – enkel – med uppvägd hel mogen kokbanan",
+      "preparation": {
+        "family": "röd fruktmole med kyckling, ananas och matbanan",
+        "input_forms": {
+          "ananas": "raw_edible",
+          "anchochili": "dry",
+          "kokbanan med skal": "as_sold",
+          "kyckling": "raw_edible",
+          "rapsolja": "as_sold",
+          "ris": "dry",
+          "salt": "as_sold",
+          "tomat": "raw_edible"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "cccf271871438d42c526e2e8c8c7a271ff48855dcb67fb7ec38ebf8b8e45eaca",
+        "version": "smako-authored-losses-v3"
+      },
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 57,
+        "base_id": "smako-mexican-manchamanteles",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "kyckling|raw_edible",
+                "name": "Kyckling",
+                "note": "",
+                "quantity": 650.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "anchochili|dry",
+                "name": "Mald anchochili",
+                "note": "",
+                "quantity": 24.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "tomat|raw_edible",
+                "name": "Tomat",
+                "note": "",
+                "quantity": 600.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ananas|raw_edible",
+                "name": "Ananas",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kokbanan med skal|as_sold",
+                "name": "Mogen gul/svartfläckig kokbanan, inköpt vikt med skal",
+                "note": "",
+                "quantity": 600.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "Rapsolja",
+                "note": "",
+                "quantity": 35.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 4.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "Gul lök",
+                "note": "",
+                "quantity": 150.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "Vitlök",
+                "note": "",
+                "quantity": 12.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kanel|dry",
+                "name": "Kanel",
+                "note": "",
+                "quantity": 0.8,
+                "unit": "g"
+              }
+            ],
+            "id": "mole",
+            "name": "Fruktig röd mole"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ris|dry",
+                "name": "Ris",
+                "note": "",
+                "quantity": 280.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              }
+            ],
+            "id": "rice",
+            "name": "Nykokt ris"
+          }
+        ],
+        "content_sha256": "0dd1d69bd36c5893d481a2ef4ac63ac2ccf857187be6e8db6b69298440ce268d",
+        "content_source": {
+          "active_minutes": 57,
+          "method_note": "Ingredienslistan anger hela insatsen, även den del som senare hälls eller silas bort. Förlusten är inte uppmätt. Näring och färdig portionsvikt är okända; receptet kan inte styrka valda närings- eller viktgränser. Inköp och personliga kostkrav kontrolleras för samtliga insatser.",
+          "pack_id": "reviewed-expansion-round2-stage19",
+          "priority": 1,
+          "proposal_id": "smako-mexican-manchamanteles",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "b0f9bd6fecdcbee13bf0b30d80836bef8f5d186ede0344430a293619d3a7c423",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "mexican"
+        ],
+        "equipment": [
+          "gryta",
+          "stekpanna",
+          "mixer",
+          "termometer"
+        ],
+        "estimated_minutes": 107,
+        "family": "röd fruktmole med kyckling, ananas och matbanan",
+        "fish": false,
+        "flavor_profile": [
+          "ancho",
+          "ananas",
+          "matbanan"
+        ],
+        "ingredient_count": 10,
+        "method": "pot",
+        "primary_ingredient": "kyckling",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "AI-författat receptutkast, inte provlagat och ännu inte import-/produktgranskat av Smako. Tider är författaruppskattningar. Kostavsikt är inte ett produkt- eller allergengodkännande. Förenklad vardagsversion av manchamanteles. Mogen matbanan används, inte grön kokbanan; inga ersättningar mellan dessa insatsidentiteter antas. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "ris",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 2,
+            "id": "s1",
+            "ingredient_keys": [
+              "anchochili|dry"
+            ],
+            "parallel_group": null,
+            "text": "Utgå från redan mogen kokbanan med gul till svartfläckig skal och eftergivligt fruktkött. Grön hård kokbanan måste mogna före matlagningen; mognadstid ingår inte i receptets tillagningstid. Rör den uppvägda malda anchochilin med 250 ml hett vatten; ingen hel chili ska rostas eller rensas."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 5,
+            "id": "s2",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Låt den malda chilin dra i vattnet fem minuter; hela blandningen ska användas."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 12,
+            "id": "s3",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "rapsolja|as_sold",
+              "tomat|raw_edible",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Skär tomat i grova bitar, hacka lök och vitlök. Stek tomaten tillsammans med lök och vitlök i hälften av oljan tills den mjuknar och får rostade kanter."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 8,
+            "id": "s4",
+            "ingredient_keys": [
+              "anchochili|dry",
+              "kanel|dry",
+              "tomat|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Mixa den uppblötta malda chilin och tomatfräset med allt chilivatten, kanel till en slät sås. Häll i grytan och koka under omrörning 5 minuter."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 5,
+            "id": "s5",
+            "ingredient_keys": [
+              "kyckling|raw_edible",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "250 ml",
+                250.0
+              ]
+            ],
+            "text": "Skär kycklingen i jämna bitar omkring 3 cm. Lägg ner i såsen med salt och 250 ml vatten. Koka upp och sänk värmen. Diska skärbrädan efter rå kyckling."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 11,
+            "id": "s6",
+            "ingredient_keys": [
+              "kyckling|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud kycklingen under lock i elva minuter."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 1,
+            "id": "s7",
+            "ingredient_keys": [
+              "kyckling|raw_edible",
+              "tomat|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "50 ml",
+                50.0
+              ]
+            ],
+            "text": "Rör i molesåsen och kontrollera att bottnen inte bränner. Tillsätt vid behov 50 ml vatten."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 11,
+            "id": "s8",
+            "ingredient_keys": [
+              "kyckling|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud ytterligare elva minuter under lock."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 2,
+            "id": "s9",
+            "ingredient_keys": [
+              "kyckling|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Kontrollera minst 74 °C mitt i de tjockaste kycklingbitarna. Fortsätt sjuda om de inte är genomlagade."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 8,
+            "id": "s10",
+            "ingredient_keys": [
+              "ananas|raw_edible",
+              "kokbanan med skal|as_sold",
+              "rapsolja|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Väg kokbananen med skal till den nya angivna bruttomängden, skala och skiva allt fruktkött. Stek försiktigt i återstående olja tills skivorna är gyllene med mjuk mitt. Använd den uppvägda frysta ananasen i nästa steg; ingen saft ska hällas bort."
+          },
+          {
+            "depends_on": [
+              "s10"
+            ],
+            "duration_minutes": 13,
+            "id": "s11",
+            "ingredient_keys": [
+              "ananas|raw_edible",
+              "kokbanan med skal|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Vänd ner fryst ananas med all saft i grytan och sjud under omrörning minst tio minuter eller längre enligt förpackningen tills frukten är helt genomhet. Lägg ner den stekta kokbananen sist och värm 2 minuter utan att röra sönder den. Håll grytan varm på lägsta värme medan riset kokas. Skrapa även ner all stekolja från bananpannan i grytan."
+          },
+          {
+            "depends_on": [
+              "s11"
+            ],
+            "duration_minutes": 3,
+            "id": "s12",
+            "ingredient_keys": [
+              "ris|dry",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "560 ml",
+                560.0
+              ]
+            ],
+            "text": "Skölj riset i sil. Lägg i en kastrull med risets salt och 560 ml vatten. Koka upp och sänk till svag värme."
+          },
+          {
+            "depends_on": [
+              "s12"
+            ],
+            "duration_minutes": 18,
+            "id": "s13",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Sjud riset under lock cirka 18 minuter eller längre enligt förpackningen tills det är mjukt och vattnet absorberats."
+          },
+          {
+            "depends_on": [
+              "s13"
+            ],
+            "duration_minutes": 1,
+            "id": "s14",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "50 ml",
+                50.0
+              ]
+            ],
+            "text": "Kontrollera riset och ta det från värmen när det är mjukt. Tillsätt annars 50 ml vatten och fortsätt sjuda före vilan."
+          },
+          {
+            "depends_on": [
+              "s14"
+            ],
+            "duration_minutes": 5,
+            "id": "s15",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Låt riset vila under lock fem minuter efter att det tagits från värmen."
+          },
+          {
+            "depends_on": [
+              "s15"
+            ],
+            "duration_minutes": 1,
+            "id": "s16",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Luckra riset. Servera direkt med huvudrätten; om den inte är färdig ska ris och huvudrätt hållas över 60 °C tills båda kan serveras."
+          },
+          {
+            "depends_on": [
+              "s16"
+            ],
+            "duration_minutes": 1,
+            "id": "s17",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Servera fruktmolen med ris. Både ananas och matbanan ska finnas i varje portion, inte bara användas som garnering."
+          }
+        ],
+        "total_minutes": 107,
+        "unmeasured_processes": [
+          {
+            "description": "Kokbanan vägs med skal före skalning. Skalets andel och kvarvarande ätliga vikt är inte uppmätta; inget portionsutbyte antas.",
+            "ingredient_keys": [
+              "kokbanan med skal|as_sold"
+            ],
+            "operation": "trim_before_cooking",
+            "step_id": "s10"
+          }
+        ],
+        "variant_id": "standard",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 50
+      },
+      "ingredients": [
+        {
+          "canonical_name": "kyckling",
+          "component": "mole",
+          "form": "raw_edible",
+          "name": "kyckling",
+          "quantity": 650.0,
+          "quantity_max": 650.0,
+          "quantity_min": 650.0,
+          "quantity_step": 650.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "anchochili",
+          "component": "mole",
+          "form": "dry",
+          "name": "anchochili",
+          "product_requirements": [
+            "pack:intake_all_round2_637eba129fe4"
+          ],
+          "quantity": 24.0,
+          "quantity_max": 24.0,
+          "quantity_min": 24.0,
+          "quantity_step": 24.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "tomat",
+          "component": "mole",
+          "form": "raw_edible",
+          "name": "tomat",
+          "quantity": 600.0,
+          "quantity_max": 600.0,
+          "quantity_min": 600.0,
+          "quantity_step": 600.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ananas",
+          "component": "mole",
+          "form": "raw_edible",
+          "name": "ananas",
+          "product_requirements": [
+            "pack:intake_all_5e01993f43fb"
+          ],
+          "quantity": 300.0,
+          "quantity_max": 300.0,
+          "quantity_min": 300.0,
+          "quantity_step": 300.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kokbanan med skal",
+          "component": "mole",
+          "form": "as_sold",
+          "name": "kokbanan med skal",
+          "product_requirements": [
+            "pack:intake_all_round2_72e1f5444d28"
+          ],
+          "quantity": 600.0,
+          "quantity_max": 600.0,
+          "quantity_min": 600.0,
+          "quantity_step": 600.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "mole",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 35.0,
+          "quantity_max": 35.0,
+          "quantity_min": 35.0,
+          "quantity_step": 35.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "mole",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "mole",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 150.0,
+          "quantity_max": 150.0,
+          "quantity_min": 150.0,
+          "quantity_step": 150.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "mole",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 12.0,
+          "quantity_max": 12.0,
+          "quantity_min": 12.0,
+          "quantity_step": 12.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kanel",
+          "component": "mole",
+          "form": "dry",
+          "name": "kanel",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 0.8,
+          "quantity_max": 0.8,
+          "quantity_min": 0.8,
+          "quantity_step": 0.8,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ris",
+          "component": "rice",
+          "form": "dry",
+          "name": "ris",
+          "product_requirements": [
+            "white_rice"
+          ],
+          "quantity": 280.0,
+          "quantity_max": 280.0,
+          "quantity_min": 280.0,
+          "quantity_step": 280.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Utgå från redan mogen kokbanan med gul till svartfläckig skal och eftergivligt fruktkött. Grön hård kokbanan måste mogna före matlagningen; mognadstid ingår inte i receptets tillagningstid. Rör den uppvägda malda anchochilin med 250 ml hett vatten; ingen hel chili ska rostas eller rensas.",
+        "Låt den malda chilin dra i vattnet fem minuter; hela blandningen ska användas.",
+        "Skär tomat i grova bitar, hacka lök och vitlök. Stek tomaten tillsammans med lök och vitlök i hälften av oljan tills den mjuknar och får rostade kanter.",
+        "Mixa den uppblötta malda chilin och tomatfräset med allt chilivatten, kanel till en slät sås. Häll i grytan och koka under omrörning 5 minuter.",
+        "Skär kycklingen i jämna bitar omkring 3 cm. Lägg ner i såsen med salt och 250 ml vatten. Koka upp och sänk värmen. Diska skärbrädan efter rå kyckling.",
+        "Sjud kycklingen under lock i elva minuter.",
+        "Rör i molesåsen och kontrollera att bottnen inte bränner. Tillsätt vid behov 50 ml vatten.",
+        "Sjud ytterligare elva minuter under lock.",
+        "Kontrollera minst 74 °C mitt i de tjockaste kycklingbitarna. Fortsätt sjuda om de inte är genomlagade.",
+        "Väg kokbananen med skal till den nya angivna bruttomängden, skala och skiva allt fruktkött. Stek försiktigt i återstående olja tills skivorna är gyllene med mjuk mitt. Använd den uppvägda frysta ananasen i nästa steg; ingen saft ska hällas bort.",
+        "Vänd ner fryst ananas med all saft i grytan och sjud under omrörning minst tio minuter eller längre enligt förpackningen tills frukten är helt genomhet. Lägg ner den stekta kokbananen sist och värm 2 minuter utan att röra sönder den. Håll grytan varm på lägsta värme medan riset kokas. Skrapa även ner all stekolja från bananpannan i grytan.",
+        "Skölj riset i sil. Lägg i en kastrull med risets salt och 560 ml vatten. Koka upp och sänk till svag värme.",
+        "Sjud riset under lock cirka 18 minuter eller längre enligt förpackningen tills det är mjukt och vattnet absorberats.",
+        "Kontrollera riset och ta det från värmen när det är mjukt. Tillsätt annars 50 ml vatten och fortsätt sjuda före vilan.",
+        "Låt riset vila under lock fem minuter efter att det tagits från värmen.",
+        "Luckra riset. Servera direkt med huvudrätten; om den inte är färdig ska ris och huvudrätt hållas över 60 °C tills båda kan serveras.",
+        "Servera fruktmolen med ris. Både ananas och matbanan ska finnas i varje portion, inte bara användas som garnering."
+      ],
+      "name": "Manchamanteles – fruktig ancho- och kycklinggryta – standard – med uppvägd hel mogen kokbanan",
+      "preparation": {
+        "family": "röd fruktmole med kyckling, ananas och matbanan",
+        "input_forms": {
+          "ananas": "raw_edible",
+          "anchochili": "dry",
+          "gul lök": "raw_edible",
+          "kanel": "dry",
+          "kokbanan med skal": "as_sold",
+          "kyckling": "raw_edible",
+          "rapsolja": "as_sold",
+          "ris": "dry",
+          "salt": "as_sold",
+          "tomat": "raw_edible",
+          "vitlök": "raw_edible"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "0dd1d69bd36c5893d481a2ef4ac63ac2ccf857187be6e8db6b69298440ce268d",
+        "version": "smako-authored-losses-v3"
+      },
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 57,
+        "base_id": "smako-mexican-manchamanteles",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "kyckling|raw_edible",
+                "name": "Kyckling",
+                "note": "",
+                "quantity": 650.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "anchochili|dry",
+                "name": "Mald anchochili",
+                "note": "",
+                "quantity": 24.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "tomat|raw_edible",
+                "name": "Tomat",
+                "note": "",
+                "quantity": 600.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ananas|raw_edible",
+                "name": "Ananas",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kokbanan med skal|as_sold",
+                "name": "Mogen gul/svartfläckig kokbanan, inköpt vikt med skal",
+                "note": "",
+                "quantity": 600.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "Rapsolja",
+                "note": "",
+                "quantity": 35.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 4.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "Gul lök",
+                "note": "",
+                "quantity": 150.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "Vitlök",
+                "note": "",
+                "quantity": 12.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kanel|dry",
+                "name": "Kanel",
+                "note": "",
+                "quantity": 0.8,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "mandel|as_sold",
+                "name": "Mandel",
+                "note": "",
+                "quantity": 35.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "äpple|raw_edible",
+                "name": "Äpple",
+                "note": "",
+                "quantity": 160.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "sesamfrön|as_sold",
+                "name": "Sesamfrön",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "g"
+              }
+            ],
+            "id": "mole",
+            "name": "Fruktig röd mole"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ris|dry",
+                "name": "Ris",
+                "note": "",
+                "quantity": 280.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              }
+            ],
+            "id": "rice",
+            "name": "Nykokt ris"
+          }
+        ],
+        "content_sha256": "cecd200afb5c09817fec571b918b5152b8fbec7beb24a3190529b4c8732c4be8",
+        "content_source": {
+          "active_minutes": 57,
+          "method_note": "Ingredienslistan anger hela insatsen, även den del som senare hälls eller silas bort. Förlusten är inte uppmätt. Näring och färdig portionsvikt är okända; receptet kan inte styrka valda närings- eller viktgränser. Inköp och personliga kostkrav kontrolleras för samtliga insatser.",
+          "pack_id": "reviewed-expansion-round2-stage19",
+          "priority": 1,
+          "proposal_id": "smako-mexican-manchamanteles",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "b0f9bd6fecdcbee13bf0b30d80836bef8f5d186ede0344430a293619d3a7c423",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "mexican"
+        ],
+        "equipment": [
+          "gryta",
+          "stekpanna",
+          "mixer",
+          "termometer"
+        ],
+        "estimated_minutes": 107,
+        "family": "röd fruktmole med kyckling, ananas och matbanan",
+        "fish": false,
+        "flavor_profile": [
+          "ancho",
+          "ananas",
+          "matbanan"
+        ],
+        "ingredient_count": 13,
+        "method": "pot",
+        "primary_ingredient": "kyckling",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "AI-författat receptutkast, inte provlagat och ännu inte import-/produktgranskat av Smako. Tider är författaruppskattningar. Kostavsikt är inte ett produkt- eller allergengodkännande. Förenklad vardagsversion av manchamanteles. Mogen matbanan används, inte grön kokbanan; inga ersättningar mellan dessa insatsidentiteter antas. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "ris",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 2,
+            "id": "s1",
+            "ingredient_keys": [
+              "anchochili|dry"
+            ],
+            "parallel_group": null,
+            "text": "Utgå från redan mogen kokbanan med gul till svartfläckig skal och eftergivligt fruktkött. Grön hård kokbanan måste mogna före matlagningen; mognadstid ingår inte i receptets tillagningstid. Rör den uppvägda malda anchochilin med 250 ml hett vatten; ingen hel chili ska rostas eller rensas."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 5,
+            "id": "s2",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Låt den malda chilin dra i vattnet fem minuter; hela blandningen ska användas."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 12,
+            "id": "s3",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "mandel|as_sold",
+              "rapsolja|as_sold",
+              "sesamfrön|as_sold",
+              "tomat|raw_edible",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Skär tomat i grova bitar, hacka lök och vitlök. Stek tomaten tillsammans med lök och vitlök i hälften av oljan tills den mjuknar och får rostade kanter. Rosta mandel och sesam i en torr liten panna tills de doftar, utan att brännas."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 8,
+            "id": "s4",
+            "ingredient_keys": [
+              "anchochili|dry",
+              "kanel|dry",
+              "mandel|as_sold",
+              "sesamfrön|as_sold",
+              "tomat|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Mixa den uppblötta malda chilin och tomatfräset med allt chilivatten, kanel och de rostade nötterna och sesamfröna till en slät sås. Häll i grytan och koka under omrörning 5 minuter."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 5,
+            "id": "s5",
+            "ingredient_keys": [
+              "kyckling|raw_edible",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "250 ml",
+                250.0
+              ]
+            ],
+            "text": "Skär kycklingen i jämna bitar omkring 3 cm. Lägg ner i såsen med salt och 250 ml vatten. Koka upp och sänk värmen. Diska skärbrädan efter rå kyckling."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 11,
+            "id": "s6",
+            "ingredient_keys": [
+              "kyckling|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud kycklingen under lock i elva minuter."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 1,
+            "id": "s7",
+            "ingredient_keys": [
+              "kyckling|raw_edible",
+              "tomat|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "50 ml",
+                50.0
+              ]
+            ],
+            "text": "Rör i molesåsen och kontrollera att bottnen inte bränner. Tillsätt vid behov 50 ml vatten."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 11,
+            "id": "s8",
+            "ingredient_keys": [
+              "kyckling|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud ytterligare elva minuter under lock."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 2,
+            "id": "s9",
+            "ingredient_keys": [
+              "kyckling|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Kontrollera minst 74 °C mitt i de tjockaste kycklingbitarna. Fortsätt sjuda om de inte är genomlagade."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 8,
+            "id": "s10",
+            "ingredient_keys": [
+              "ananas|raw_edible",
+              "kokbanan med skal|as_sold",
+              "rapsolja|as_sold",
+              "äpple|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Väg kokbananen med skal till den nya angivna bruttomängden, skala och skiva allt fruktkött. Stek försiktigt i återstående olja tills skivorna är gyllene med mjuk mitt. Använd den uppvägda frysta ananasen i nästa steg; ingen saft ska hällas bort. Skala och kärna ur äpplet, väg den råa ätliga mängden och tärna."
+          },
+          {
+            "depends_on": [
+              "s10"
+            ],
+            "duration_minutes": 13,
+            "id": "s11",
+            "ingredient_keys": [
+              "ananas|raw_edible",
+              "kokbanan med skal|as_sold",
+              "äpple|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Vänd ner fryst ananas med all saft och äpple i grytan och sjud under omrörning minst tio minuter eller längre enligt förpackningen tills frukten är helt genomhet. Lägg ner den stekta kokbananen sist och värm 2 minuter utan att röra sönder den. Håll grytan varm på lägsta värme medan riset kokas. Skrapa även ner all stekolja från bananpannan i grytan."
+          },
+          {
+            "depends_on": [
+              "s11"
+            ],
+            "duration_minutes": 3,
+            "id": "s12",
+            "ingredient_keys": [
+              "ris|dry",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "560 ml",
+                560.0
+              ]
+            ],
+            "text": "Skölj riset i sil. Lägg i en kastrull med risets salt och 560 ml vatten. Koka upp och sänk till svag värme."
+          },
+          {
+            "depends_on": [
+              "s12"
+            ],
+            "duration_minutes": 18,
+            "id": "s13",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Sjud riset under lock cirka 18 minuter eller längre enligt förpackningen tills det är mjukt och vattnet absorberats."
+          },
+          {
+            "depends_on": [
+              "s13"
+            ],
+            "duration_minutes": 1,
+            "id": "s14",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "50 ml",
+                50.0
+              ]
+            ],
+            "text": "Kontrollera riset och ta det från värmen när det är mjukt. Tillsätt annars 50 ml vatten och fortsätt sjuda före vilan."
+          },
+          {
+            "depends_on": [
+              "s14"
+            ],
+            "duration_minutes": 5,
+            "id": "s15",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Låt riset vila under lock fem minuter efter att det tagits från värmen."
+          },
+          {
+            "depends_on": [
+              "s15"
+            ],
+            "duration_minutes": 1,
+            "id": "s16",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Luckra riset. Servera direkt med huvudrätten; om den inte är färdig ska ris och huvudrätt hållas över 60 °C tills båda kan serveras."
+          },
+          {
+            "depends_on": [
+              "s16"
+            ],
+            "duration_minutes": 1,
+            "id": "s17",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Servera fruktmolen med ris. Både ananas och matbanan ska finnas i varje portion, inte bara användas som garnering."
+          }
+        ],
+        "total_minutes": 107,
+        "unmeasured_processes": [
+          {
+            "description": "Kokbanan vägs med skal före skalning. Skalets andel och kvarvarande ätliga vikt är inte uppmätta; inget portionsutbyte antas.",
+            "ingredient_keys": [
+              "kokbanan med skal|as_sold"
+            ],
+            "operation": "trim_before_cooking",
+            "step_id": "s10"
+          }
+        ],
+        "variant_id": "extended",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 50
+      },
+      "ingredients": [
+        {
+          "canonical_name": "kyckling",
+          "component": "mole",
+          "form": "raw_edible",
+          "name": "kyckling",
+          "quantity": 650.0,
+          "quantity_max": 650.0,
+          "quantity_min": 650.0,
+          "quantity_step": 650.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "anchochili",
+          "component": "mole",
+          "form": "dry",
+          "name": "anchochili",
+          "product_requirements": [
+            "pack:intake_all_round2_637eba129fe4"
+          ],
+          "quantity": 24.0,
+          "quantity_max": 24.0,
+          "quantity_min": 24.0,
+          "quantity_step": 24.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "tomat",
+          "component": "mole",
+          "form": "raw_edible",
+          "name": "tomat",
+          "quantity": 600.0,
+          "quantity_max": 600.0,
+          "quantity_min": 600.0,
+          "quantity_step": 600.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ananas",
+          "component": "mole",
+          "form": "raw_edible",
+          "name": "ananas",
+          "product_requirements": [
+            "pack:intake_all_5e01993f43fb"
+          ],
+          "quantity": 300.0,
+          "quantity_max": 300.0,
+          "quantity_min": 300.0,
+          "quantity_step": 300.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kokbanan med skal",
+          "component": "mole",
+          "form": "as_sold",
+          "name": "kokbanan med skal",
+          "product_requirements": [
+            "pack:intake_all_round2_72e1f5444d28"
+          ],
+          "quantity": 600.0,
+          "quantity_max": 600.0,
+          "quantity_min": 600.0,
+          "quantity_step": 600.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "mole",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 35.0,
+          "quantity_max": 35.0,
+          "quantity_min": 35.0,
+          "quantity_step": 35.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "mole",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "mole",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 150.0,
+          "quantity_max": 150.0,
+          "quantity_min": 150.0,
+          "quantity_step": 150.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "mole",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 12.0,
+          "quantity_max": 12.0,
+          "quantity_min": 12.0,
+          "quantity_step": 12.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kanel",
+          "component": "mole",
+          "form": "dry",
+          "name": "kanel",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 0.8,
+          "quantity_max": 0.8,
+          "quantity_min": 0.8,
+          "quantity_step": 0.8,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "mandel",
+          "component": "mole",
+          "form": "as_sold",
+          "name": "mandel",
+          "product_requirements": [
+            "pack:intake_almonds"
+          ],
+          "quantity": 35.0,
+          "quantity_max": 35.0,
+          "quantity_min": 35.0,
+          "quantity_step": 35.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "äpple",
+          "component": "mole",
+          "form": "raw_edible",
+          "name": "äpple",
+          "quantity": 160.0,
+          "quantity_max": 160.0,
+          "quantity_min": 160.0,
+          "quantity_step": 160.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "sesamfrön",
+          "component": "mole",
+          "form": "as_sold",
+          "name": "sesamfrön",
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ris",
+          "component": "rice",
+          "form": "dry",
+          "name": "ris",
+          "product_requirements": [
+            "white_rice"
+          ],
+          "quantity": 280.0,
+          "quantity_max": 280.0,
+          "quantity_min": 280.0,
+          "quantity_step": 280.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Utgå från redan mogen kokbanan med gul till svartfläckig skal och eftergivligt fruktkött. Grön hård kokbanan måste mogna före matlagningen; mognadstid ingår inte i receptets tillagningstid. Rör den uppvägda malda anchochilin med 250 ml hett vatten; ingen hel chili ska rostas eller rensas.",
+        "Låt den malda chilin dra i vattnet fem minuter; hela blandningen ska användas.",
+        "Skär tomat i grova bitar, hacka lök och vitlök. Stek tomaten tillsammans med lök och vitlök i hälften av oljan tills den mjuknar och får rostade kanter. Rosta mandel och sesam i en torr liten panna tills de doftar, utan att brännas.",
+        "Mixa den uppblötta malda chilin och tomatfräset med allt chilivatten, kanel och de rostade nötterna och sesamfröna till en slät sås. Häll i grytan och koka under omrörning 5 minuter.",
+        "Skär kycklingen i jämna bitar omkring 3 cm. Lägg ner i såsen med salt och 250 ml vatten. Koka upp och sänk värmen. Diska skärbrädan efter rå kyckling.",
+        "Sjud kycklingen under lock i elva minuter.",
+        "Rör i molesåsen och kontrollera att bottnen inte bränner. Tillsätt vid behov 50 ml vatten.",
+        "Sjud ytterligare elva minuter under lock.",
+        "Kontrollera minst 74 °C mitt i de tjockaste kycklingbitarna. Fortsätt sjuda om de inte är genomlagade.",
+        "Väg kokbananen med skal till den nya angivna bruttomängden, skala och skiva allt fruktkött. Stek försiktigt i återstående olja tills skivorna är gyllene med mjuk mitt. Använd den uppvägda frysta ananasen i nästa steg; ingen saft ska hällas bort. Skala och kärna ur äpplet, väg den råa ätliga mängden och tärna.",
+        "Vänd ner fryst ananas med all saft och äpple i grytan och sjud under omrörning minst tio minuter eller längre enligt förpackningen tills frukten är helt genomhet. Lägg ner den stekta kokbananen sist och värm 2 minuter utan att röra sönder den. Håll grytan varm på lägsta värme medan riset kokas. Skrapa även ner all stekolja från bananpannan i grytan.",
+        "Skölj riset i sil. Lägg i en kastrull med risets salt och 560 ml vatten. Koka upp och sänk till svag värme.",
+        "Sjud riset under lock cirka 18 minuter eller längre enligt förpackningen tills det är mjukt och vattnet absorberats.",
+        "Kontrollera riset och ta det från värmen när det är mjukt. Tillsätt annars 50 ml vatten och fortsätt sjuda före vilan.",
+        "Låt riset vila under lock fem minuter efter att det tagits från värmen.",
+        "Luckra riset. Servera direkt med huvudrätten; om den inte är färdig ska ris och huvudrätt hållas över 60 °C tills båda kan serveras.",
+        "Servera fruktmolen med ris. Både ananas och matbanan ska finnas i varje portion, inte bara användas som garnering."
+      ],
+      "name": "Manchamanteles – fruktig ancho- och kycklinggryta – utökad – med uppvägd hel mogen kokbanan",
+      "preparation": {
+        "family": "röd fruktmole med kyckling, ananas och matbanan",
+        "input_forms": {
+          "ananas": "raw_edible",
+          "anchochili": "dry",
+          "gul lök": "raw_edible",
+          "kanel": "dry",
+          "kokbanan med skal": "as_sold",
+          "kyckling": "raw_edible",
+          "mandel": "as_sold",
+          "rapsolja": "as_sold",
+          "ris": "dry",
+          "salt": "as_sold",
+          "sesamfrön": "as_sold",
+          "tomat": "raw_edible",
+          "vitlök": "raw_edible",
+          "äpple": "raw_edible"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "cecd200afb5c09817fec571b918b5152b8fbec7beb24a3190529b4c8732c4be8",
+        "version": "smako-authored-losses-v3"
+      },
+      "servings": 4
+    }
+  ]
+}

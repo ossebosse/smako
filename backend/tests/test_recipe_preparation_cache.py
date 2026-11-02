@@ -175,7 +175,11 @@ def test_distinct_recipes_share_input_work_but_keep_exact_validation_and_provena
     assert absent
     assert all(planner.nutrition_evidence(item, "rapsolja", "ml", fields, r) is None for r in absent)
     expected = [planner._nutrition_evidence(item, "rapsolja", "ml", fields, r) for r in recipes]
-    assert all(expected)
+    # Reviewed losses have unknown served nutrition even with declared oil.
+    # They still participate in the cache-equivalence check below.
+    assert any(expected)
+    assert all((value is None) == bool(r.design.unmeasured_processes)
+               for r, value in zip(recipes, expected, strict=True))
     planner.recipe_computations = RecipeComputationCache()
     with (
         patch.object(planner, "_nutrition_evidence", wraps=planner._nutrition_evidence) as compute,
@@ -185,7 +189,8 @@ def test_distinct_recipes_share_input_work_but_keep_exact_validation_and_provena
         assert actual == expected  # Includes family, method and original source provenance.
         assert verify.call_count == len(recipes)  # Never borrow another recipe's approval.
         distinct = {(r.preparation.version, r.preparation.family,
-                     r.preparation.input_forms["rapsolja"]) for r in recipes}
+                     r.preparation.input_forms["rapsolja"]) for r in recipes
+                    if not r.design.unmeasured_processes}
         assert compute.call_count == len(distinct) < len(recipes)
         # A cache hit must not conceal even a tiny amount change or broken seal.
         recipe = recipes[0].model_copy(deep=True)

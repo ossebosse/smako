@@ -1,0 +1,1426 @@
+{
+  "pack_id": "reviewed-expansion-round2-stage50",
+  "recipes": [
+    {
+      "design": {
+        "active_minutes": 37,
+        "base_id": "smako-indian-recheado-makrill",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "lax|raw_edible",
+                "name": "Rå benfri laxfilé, ätlig vikt",
+                "note": "",
+                "quantity": 700.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rökt paprikapulver|dry",
+                "name": "Rökt paprikapulver, ny mildare kryddversion",
+                "note": "",
+                "quantity": 6.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "äppelcidervinäger|as_sold",
+                "name": "Äppelcidervinäger",
+                "note": "",
+                "quantity": 40.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "Vitlök",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ingefära|raw_edible",
+                "name": "Ingefära",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "Rapsolja",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 4.0,
+                "unit": "g"
+              }
+            ],
+            "id": "fisk",
+            "name": "Makrill med recheadopasta"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ris|dry",
+                "name": "Ris",
+                "note": "",
+                "quantity": 280.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              }
+            ],
+            "id": "ris",
+            "name": "Kokt ris"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "indian"
+        ],
+        "equipment": [
+          "stekpanna med lock",
+          "mixer",
+          "kastrull",
+          "termometer"
+        ],
+        "estimated_minutes": 780,
+        "family": "recheadofisk med vinägerpasta mellan filéer",
+        "fish": true,
+        "flavor_profile": [
+          "vinäger",
+          "chili",
+          "vitlök"
+        ],
+        "ingredient_count": 7,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "pan",
+        "primary_ingredient": "lax",
+        "provenance": {
+          "notes": "Uttrycklig laxversion av recheadotekniken: 700 g rå benfri lax ersätter 700 g makrill och 6 g rökt paprika ersätter 8 g kashmirchili. Både fisksmak och hetta ändras; inga identiska råvaror påstås. Filépar med vinägerpasta behålls. Kylupptining ingår, vätska och all stekolja genomkokas och serveras. Ingen panering eller ny kryddstyrka tillsätts. Inte provlagad. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "ris",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 1,
+            "id": "s1",
+            "ingredient_keys": [
+              "lax|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Väg upp fryst lax i ett täckt kärl i kylskåp. Behåll all vätska."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 720,
+            "id": "s2",
+            "ingredient_keys": [
+              "lax|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Tina helt i kylskåp enligt förpackningen. Planera 720 minuter och förläng vid behov tills ingen iskärna återstår. Behåll all upptiningsvätska och koka den med fisken i pannan. Redan kylförvarad rå lax kan gå direkt vidare."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 3,
+            "id": "s3",
+            "ingredient_keys": [
+              "ris|dry",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "560 ml",
+                560.0
+              ]
+            ],
+            "text": "Skölj riset. Koka upp ris och risdelens salt med 560 ml vatten i en kastrull. Lägg på lock och sänk till låg värme. Kontrollera även produktens angivna vattenbehov."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 18,
+            "id": "s4",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Sjud riset under lock cirka 18 minuter tills det är mjukt och vätskan har sugits in."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 1,
+            "id": "s5",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "50 ml",
+                50.0
+              ]
+            ],
+            "text": "Kontrollera riset. Är det hårt, tillsätt 50 ml vatten och förläng sjudningen; ta från värmen när det är mjukt."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 5,
+            "id": "s6",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Låt riset vila fem minuter under lock; det ska sedan hållas över 60 °C fram till servering."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 10,
+            "id": "s7",
+            "ingredient_keys": [
+              "ingefära|raw_edible",
+              "lax|raw_edible",
+              "rökt paprikapulver|dry",
+              "salt|as_sold",
+              "vitlök|raw_edible",
+              "äppelcidervinäger|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Kontrollera att laxfiléerna är helt tinade och utan ben. Behåll all upptiningsvätska för genomkokning i pannan. Dela i jämntjocka filébitar; skär vid behov längs tjockleken så att två lagda ihop blir högst cirka 3 cm. Mixa rökt paprika, vinäger, färsk eller fryst hackad vitlök, skalad uppvägd ingefära och fiskdelens salt till pasta."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 5,
+            "id": "s8",
+            "ingredient_keys": [
+              "lax|raw_edible",
+              "rökt paprikapulver|dry"
+            ],
+            "parallel_group": null,
+            "text": "Fördela all kryddpasta på hälften av laxfilébitarna och lägg de återstående ovanpå. Eventuellt skinn ska vara utåt och tillagas och serveras med fisken. Håll paren högst cirka 3 cm tjocka; fäst vid behov med tandpetare."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 15,
+            "id": "s9",
+            "ingredient_keys": [
+              "lax|raw_edible",
+              "rapsolja|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "30 ml",
+                30.0
+              ]
+            ],
+            "text": "Värm oljan på medelvärme. Stek laxparen cirka fyra minuter per sida. Tillsätt all sparad upptiningsvätska och 30 ml vatten. Lägg på lock och sjud ytterligare minst fem minuter tills mitten mellan filéerna når minst 72 °C och vitlökspastan är genomlagad; förläng enligt förpackningen. Behåll all sky och olja."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 2,
+            "id": "s10",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Ta bort samtliga tandpetare och fördela laxen med ris och alla tillbehör. Skrapa ur och servera hela pannans genomkokta sky och olja."
+          }
+        ],
+        "total_minutes": 780,
+        "variant_id": "simple",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 743
+      },
+      "ingredients": [
+        {
+          "canonical_name": "lax",
+          "component": "fisk",
+          "form": "raw_edible",
+          "name": "lax",
+          "quantity": 700.0,
+          "quantity_max": 700.0,
+          "quantity_min": 700.0,
+          "quantity_step": 700.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rökt paprikapulver",
+          "component": "fisk",
+          "form": "dry",
+          "name": "rökt paprikapulver",
+          "product_requirements": [
+            "pack:smoked_paprika"
+          ],
+          "quantity": 6.0,
+          "quantity_max": 6.0,
+          "quantity_min": 6.0,
+          "quantity_step": 6.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "äppelcidervinäger",
+          "component": "fisk",
+          "form": "as_sold",
+          "name": "äppelcidervinäger",
+          "product_requirements": [
+            "pack:intake_all_be24da3ca83d"
+          ],
+          "quantity": 40.0,
+          "quantity_max": 40.0,
+          "quantity_min": 40.0,
+          "quantity_step": 40.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "fisk",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ingefära",
+          "component": "fisk",
+          "form": "raw_edible",
+          "name": "ingefära",
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "fisk",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 30.0,
+          "quantity_max": 30.0,
+          "quantity_min": 30.0,
+          "quantity_step": 30.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "fisk",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 6.0,
+          "quantity_max": 6.0,
+          "quantity_min": 6.0,
+          "quantity_step": 6.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ris",
+          "component": "ris",
+          "form": "dry",
+          "name": "ris",
+          "product_requirements": [
+            "white_rice"
+          ],
+          "quantity": 280.0,
+          "quantity_max": 280.0,
+          "quantity_min": 280.0,
+          "quantity_step": 280.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Väg upp fryst lax i ett täckt kärl i kylskåp. Behåll all vätska.",
+        "Tina helt i kylskåp enligt förpackningen. Planera 720 minuter och förläng vid behov tills ingen iskärna återstår. Behåll all upptiningsvätska och koka den med fisken i pannan. Redan kylförvarad rå lax kan gå direkt vidare.",
+        "Skölj riset. Koka upp ris och risdelens salt med 560 ml vatten i en kastrull. Lägg på lock och sänk till låg värme. Kontrollera även produktens angivna vattenbehov.",
+        "Sjud riset under lock cirka 18 minuter tills det är mjukt och vätskan har sugits in.",
+        "Kontrollera riset. Är det hårt, tillsätt 50 ml vatten och förläng sjudningen; ta från värmen när det är mjukt.",
+        "Låt riset vila fem minuter under lock; det ska sedan hållas över 60 °C fram till servering.",
+        "Kontrollera att laxfiléerna är helt tinade och utan ben. Behåll all upptiningsvätska för genomkokning i pannan. Dela i jämntjocka filébitar; skär vid behov längs tjockleken så att två lagda ihop blir högst cirka 3 cm. Mixa rökt paprika, vinäger, färsk eller fryst hackad vitlök, skalad uppvägd ingefära och fiskdelens salt till pasta.",
+        "Fördela all kryddpasta på hälften av laxfilébitarna och lägg de återstående ovanpå. Eventuellt skinn ska vara utåt och tillagas och serveras med fisken. Håll paren högst cirka 3 cm tjocka; fäst vid behov med tandpetare.",
+        "Värm oljan på medelvärme. Stek laxparen cirka fyra minuter per sida. Tillsätt all sparad upptiningsvätska och 30 ml vatten. Lägg på lock och sjud ytterligare minst fem minuter tills mitten mellan filéerna når minst 72 °C och vitlökspastan är genomlagad; förläng enligt förpackningen. Behåll all sky och olja.",
+        "Ta bort samtliga tandpetare och fördela laxen med ris och alla tillbehör. Skrapa ur och servera hela pannans genomkokta sky och olja."
+      ],
+      "name": "Lax recheado med rökt paprika – simple",
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 45,
+        "base_id": "smako-indian-recheado-makrill",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "lax|raw_edible",
+                "name": "Rå benfri laxfilé, ätlig vikt",
+                "note": "",
+                "quantity": 700.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rökt paprikapulver|dry",
+                "name": "Rökt paprikapulver, ny mildare kryddversion",
+                "note": "",
+                "quantity": 6.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "äppelcidervinäger|as_sold",
+                "name": "Äppelcidervinäger",
+                "note": "",
+                "quantity": 40.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "Vitlök",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ingefära|raw_edible",
+                "name": "Ingefära",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "Rapsolja",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 4.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "spiskummin|dry",
+                "name": "Spiskummin",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gurkmeja|dry",
+                "name": "Gurkmeja",
+                "note": "",
+                "quantity": 1.5,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "Gul lök",
+                "note": "",
+                "quantity": 150.0,
+                "unit": "g"
+              }
+            ],
+            "id": "fisk",
+            "name": "Makrill med recheadopasta"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ris|dry",
+                "name": "Ris",
+                "note": "",
+                "quantity": 280.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              }
+            ],
+            "id": "ris",
+            "name": "Kokt ris"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "indian"
+        ],
+        "equipment": [
+          "stekpanna med lock",
+          "mixer",
+          "kastrull",
+          "termometer"
+        ],
+        "estimated_minutes": 788,
+        "family": "recheadofisk med vinägerpasta mellan filéer",
+        "fish": true,
+        "flavor_profile": [
+          "vinäger",
+          "chili",
+          "vitlök"
+        ],
+        "ingredient_count": 10,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "pan",
+        "primary_ingredient": "lax",
+        "provenance": {
+          "notes": "Uttrycklig laxversion av recheadotekniken: 700 g rå benfri lax ersätter 700 g makrill och 6 g rökt paprika ersätter 8 g kashmirchili. Både fisksmak och hetta ändras; inga identiska råvaror påstås. Filépar med vinägerpasta behålls. Kylupptining ingår, vätska och all stekolja genomkokas och serveras. Ingen panering eller ny kryddstyrka tillsätts. Inte provlagad. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "ris",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 1,
+            "id": "s1",
+            "ingredient_keys": [
+              "lax|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Väg upp fryst lax i ett täckt kärl i kylskåp. Behåll all vätska."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 720,
+            "id": "s2",
+            "ingredient_keys": [
+              "lax|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Tina helt i kylskåp enligt förpackningen. Planera 720 minuter och förläng vid behov tills ingen iskärna återstår. Behåll all upptiningsvätska och koka den med fisken i pannan. Redan kylförvarad rå lax kan gå direkt vidare."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 3,
+            "id": "s3",
+            "ingredient_keys": [
+              "ris|dry",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "560 ml",
+                560.0
+              ]
+            ],
+            "text": "Skölj riset. Koka upp ris och risdelens salt med 560 ml vatten i en kastrull. Lägg på lock och sänk till låg värme. Kontrollera även produktens angivna vattenbehov."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 18,
+            "id": "s4",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Sjud riset under lock cirka 18 minuter tills det är mjukt och vätskan har sugits in."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 1,
+            "id": "s5",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "50 ml",
+                50.0
+              ]
+            ],
+            "text": "Kontrollera riset. Är det hårt, tillsätt 50 ml vatten och förläng sjudningen; ta från värmen när det är mjukt."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 5,
+            "id": "s6",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Låt riset vila fem minuter under lock; det ska sedan hållas över 60 °C fram till servering."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 10,
+            "id": "s7",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "gurkmeja|dry",
+              "ingefära|raw_edible",
+              "lax|raw_edible",
+              "rökt paprikapulver|dry",
+              "salt|as_sold",
+              "spiskummin|dry",
+              "vitlök|raw_edible",
+              "äppelcidervinäger|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Kontrollera att laxfiléerna är helt tinade och utan ben. Behåll all upptiningsvätska för genomkokning i pannan. Dela i jämntjocka filébitar; skär vid behov längs tjockleken så att två lagda ihop blir högst cirka 3 cm. Mixa rökt paprika, vinäger, färsk eller fryst hackad vitlök, skalad uppvägd ingefära och fiskdelens salt till pasta. Mixa också ner spiskummin och gurkmeja. Skala och väg löken, skiva tunt."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 5,
+            "id": "s8",
+            "ingredient_keys": [
+              "lax|raw_edible",
+              "rökt paprikapulver|dry"
+            ],
+            "parallel_group": null,
+            "text": "Fördela all kryddpasta på hälften av laxfilébitarna och lägg de återstående ovanpå. Eventuellt skinn ska vara utåt och tillagas och serveras med fisken. Håll paren högst cirka 3 cm tjocka; fäst vid behov med tandpetare."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 8,
+            "id": "s9",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "rapsolja|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Mjukstek löken i en tredjedel av oljan på medelvärme åtta minuter. Lyft upp och håll varm."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 15,
+            "id": "s10",
+            "ingredient_keys": [
+              "lax|raw_edible",
+              "rapsolja|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "30 ml",
+                30.0
+              ]
+            ],
+            "text": "Värm återstående olja på medelvärme. Stek laxparen cirka fyra minuter per sida. Tillsätt all sparad upptiningsvätska och 30 ml vatten. Lägg på lock och sjud ytterligare minst fem minuter tills mitten mellan filéerna når minst 72 °C och vitlökspastan är genomlagad; förläng enligt förpackningen. Behåll all sky och olja."
+          },
+          {
+            "depends_on": [
+              "s10"
+            ],
+            "duration_minutes": 2,
+            "id": "s11",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Ta bort samtliga tandpetare och fördela laxen med ris och alla tillbehör. Skrapa ur och servera hela pannans genomkokta sky och olja."
+          }
+        ],
+        "total_minutes": 788,
+        "variant_id": "standard",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 743
+      },
+      "ingredients": [
+        {
+          "canonical_name": "lax",
+          "component": "fisk",
+          "form": "raw_edible",
+          "name": "lax",
+          "quantity": 700.0,
+          "quantity_max": 700.0,
+          "quantity_min": 700.0,
+          "quantity_step": 700.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rökt paprikapulver",
+          "component": "fisk",
+          "form": "dry",
+          "name": "rökt paprikapulver",
+          "product_requirements": [
+            "pack:smoked_paprika"
+          ],
+          "quantity": 6.0,
+          "quantity_max": 6.0,
+          "quantity_min": 6.0,
+          "quantity_step": 6.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "äppelcidervinäger",
+          "component": "fisk",
+          "form": "as_sold",
+          "name": "äppelcidervinäger",
+          "product_requirements": [
+            "pack:intake_all_be24da3ca83d"
+          ],
+          "quantity": 40.0,
+          "quantity_max": 40.0,
+          "quantity_min": 40.0,
+          "quantity_step": 40.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "fisk",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ingefära",
+          "component": "fisk",
+          "form": "raw_edible",
+          "name": "ingefära",
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "fisk",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 30.0,
+          "quantity_max": 30.0,
+          "quantity_min": 30.0,
+          "quantity_step": 30.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "fisk",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 6.0,
+          "quantity_max": 6.0,
+          "quantity_min": 6.0,
+          "quantity_step": 6.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "spiskummin",
+          "component": "fisk",
+          "form": "dry",
+          "name": "spiskummin",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 2.0,
+          "quantity_max": 2.0,
+          "quantity_min": 2.0,
+          "quantity_step": 2.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gurkmeja",
+          "component": "fisk",
+          "form": "dry",
+          "name": "gurkmeja",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 1.5,
+          "quantity_max": 1.5,
+          "quantity_min": 1.5,
+          "quantity_step": 1.5,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "fisk",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 150.0,
+          "quantity_max": 150.0,
+          "quantity_min": 150.0,
+          "quantity_step": 150.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ris",
+          "component": "ris",
+          "form": "dry",
+          "name": "ris",
+          "product_requirements": [
+            "white_rice"
+          ],
+          "quantity": 280.0,
+          "quantity_max": 280.0,
+          "quantity_min": 280.0,
+          "quantity_step": 280.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Väg upp fryst lax i ett täckt kärl i kylskåp. Behåll all vätska.",
+        "Tina helt i kylskåp enligt förpackningen. Planera 720 minuter och förläng vid behov tills ingen iskärna återstår. Behåll all upptiningsvätska och koka den med fisken i pannan. Redan kylförvarad rå lax kan gå direkt vidare.",
+        "Skölj riset. Koka upp ris och risdelens salt med 560 ml vatten i en kastrull. Lägg på lock och sänk till låg värme. Kontrollera även produktens angivna vattenbehov.",
+        "Sjud riset under lock cirka 18 minuter tills det är mjukt och vätskan har sugits in.",
+        "Kontrollera riset. Är det hårt, tillsätt 50 ml vatten och förläng sjudningen; ta från värmen när det är mjukt.",
+        "Låt riset vila fem minuter under lock; det ska sedan hållas över 60 °C fram till servering.",
+        "Kontrollera att laxfiléerna är helt tinade och utan ben. Behåll all upptiningsvätska för genomkokning i pannan. Dela i jämntjocka filébitar; skär vid behov längs tjockleken så att två lagda ihop blir högst cirka 3 cm. Mixa rökt paprika, vinäger, färsk eller fryst hackad vitlök, skalad uppvägd ingefära och fiskdelens salt till pasta. Mixa också ner spiskummin och gurkmeja. Skala och väg löken, skiva tunt.",
+        "Fördela all kryddpasta på hälften av laxfilébitarna och lägg de återstående ovanpå. Eventuellt skinn ska vara utåt och tillagas och serveras med fisken. Håll paren högst cirka 3 cm tjocka; fäst vid behov med tandpetare.",
+        "Mjukstek löken i en tredjedel av oljan på medelvärme åtta minuter. Lyft upp och håll varm.",
+        "Värm återstående olja på medelvärme. Stek laxparen cirka fyra minuter per sida. Tillsätt all sparad upptiningsvätska och 30 ml vatten. Lägg på lock och sjud ytterligare minst fem minuter tills mitten mellan filéerna når minst 72 °C och vitlökspastan är genomlagad; förläng enligt förpackningen. Behåll all sky och olja.",
+        "Ta bort samtliga tandpetare och fördela laxen med ris och alla tillbehör. Skrapa ur och servera hela pannans genomkokta sky och olja."
+      ],
+      "name": "Lax recheado med rökt paprika – standard",
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 51,
+        "base_id": "smako-indian-recheado-makrill",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "lax|raw_edible",
+                "name": "Rå benfri laxfilé, ätlig vikt",
+                "note": "",
+                "quantity": 700.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rökt paprikapulver|dry",
+                "name": "Rökt paprikapulver, ny mildare kryddversion",
+                "note": "",
+                "quantity": 6.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "äppelcidervinäger|as_sold",
+                "name": "Äppelcidervinäger",
+                "note": "",
+                "quantity": 40.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "Vitlök",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ingefära|raw_edible",
+                "name": "Ingefära",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "Rapsolja",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 4.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "spiskummin|dry",
+                "name": "Spiskummin",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gurkmeja|dry",
+                "name": "Gurkmeja",
+                "note": "",
+                "quantity": 1.5,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "Gul lök",
+                "note": "",
+                "quantity": 150.0,
+                "unit": "g"
+              }
+            ],
+            "id": "fisk",
+            "name": "Makrill med recheadopasta"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ris|dry",
+                "name": "Ris",
+                "note": "",
+                "quantity": 280.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              }
+            ],
+            "id": "ris",
+            "name": "Kokt ris"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "tomat|raw_edible",
+                "name": "Tomat",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gurka|raw_edible",
+                "name": "Gurka",
+                "note": "",
+                "quantity": 200.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "limejuice|as_sold",
+                "name": "Limejuice",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "sallad",
+            "name": "Frisk grönsakssallad"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "indian"
+        ],
+        "equipment": [
+          "stekpanna med lock",
+          "mixer",
+          "kastrull",
+          "termometer"
+        ],
+        "estimated_minutes": 794,
+        "family": "recheadofisk med vinägerpasta mellan filéer",
+        "fish": true,
+        "flavor_profile": [
+          "vinäger",
+          "chili",
+          "vitlök"
+        ],
+        "ingredient_count": 13,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "pan",
+        "primary_ingredient": "lax",
+        "provenance": {
+          "notes": "Uttrycklig laxversion av recheadotekniken: 700 g rå benfri lax ersätter 700 g makrill och 6 g rökt paprika ersätter 8 g kashmirchili. Både fisksmak och hetta ändras; inga identiska råvaror påstås. Filépar med vinägerpasta behålls. Kylupptining ingår, vätska och all stekolja genomkokas och serveras. Ingen panering eller ny kryddstyrka tillsätts. Inte provlagad. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "ris",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 1,
+            "id": "s1",
+            "ingredient_keys": [
+              "lax|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Väg upp fryst lax i ett täckt kärl i kylskåp. Behåll all vätska."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 720,
+            "id": "s2",
+            "ingredient_keys": [
+              "lax|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Tina helt i kylskåp enligt förpackningen. Planera 720 minuter och förläng vid behov tills ingen iskärna återstår. Behåll all upptiningsvätska och koka den med fisken i pannan. Redan kylförvarad rå lax kan gå direkt vidare."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 3,
+            "id": "s3",
+            "ingredient_keys": [
+              "ris|dry",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "560 ml",
+                560.0
+              ]
+            ],
+            "text": "Skölj riset. Koka upp ris och risdelens salt med 560 ml vatten i en kastrull. Lägg på lock och sänk till låg värme. Kontrollera även produktens angivna vattenbehov."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 18,
+            "id": "s4",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Sjud riset under lock cirka 18 minuter tills det är mjukt och vätskan har sugits in."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 1,
+            "id": "s5",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "50 ml",
+                50.0
+              ]
+            ],
+            "text": "Kontrollera riset. Är det hårt, tillsätt 50 ml vatten och förläng sjudningen; ta från värmen när det är mjukt."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 5,
+            "id": "s6",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Låt riset vila fem minuter under lock; det ska sedan hållas över 60 °C fram till servering."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 10,
+            "id": "s7",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "gurkmeja|dry",
+              "ingefära|raw_edible",
+              "lax|raw_edible",
+              "rökt paprikapulver|dry",
+              "salt|as_sold",
+              "spiskummin|dry",
+              "vitlök|raw_edible",
+              "äppelcidervinäger|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Kontrollera att laxfiléerna är helt tinade och utan ben. Behåll all upptiningsvätska för genomkokning i pannan. Dela i jämntjocka filébitar; skär vid behov längs tjockleken så att två lagda ihop blir högst cirka 3 cm. Mixa rökt paprika, vinäger, färsk eller fryst hackad vitlök, skalad uppvägd ingefära och fiskdelens salt till pasta. Mixa också ner spiskummin och gurkmeja. Skala och väg löken, skiva tunt."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 5,
+            "id": "s8",
+            "ingredient_keys": [
+              "lax|raw_edible",
+              "rökt paprikapulver|dry"
+            ],
+            "parallel_group": null,
+            "text": "Fördela all kryddpasta på hälften av laxfilébitarna och lägg de återstående ovanpå. Eventuellt skinn ska vara utåt och tillagas och serveras med fisken. Håll paren högst cirka 3 cm tjocka; fäst vid behov med tandpetare."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 8,
+            "id": "s9",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "rapsolja|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Mjukstek löken i en tredjedel av oljan på medelvärme åtta minuter. Lyft upp och håll varm."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 15,
+            "id": "s10",
+            "ingredient_keys": [
+              "lax|raw_edible",
+              "rapsolja|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "30 ml",
+                30.0
+              ]
+            ],
+            "text": "Värm återstående olja på medelvärme. Stek laxparen cirka fyra minuter per sida. Tillsätt all sparad upptiningsvätska och 30 ml vatten. Lägg på lock och sjud ytterligare minst fem minuter tills mitten mellan filéerna når minst 72 °C och vitlökspastan är genomlagad; förläng enligt förpackningen. Behåll all sky och olja."
+          },
+          {
+            "depends_on": [
+              "s10"
+            ],
+            "duration_minutes": 6,
+            "id": "s11",
+            "ingredient_keys": [
+              "gurka|raw_edible",
+              "limejuice|as_sold",
+              "tomat|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Tärna tomat och gurka och blanda med limejuice. Låt tomatens saft bli salladens dressing."
+          },
+          {
+            "depends_on": [
+              "s11"
+            ],
+            "duration_minutes": 2,
+            "id": "s12",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Ta bort samtliga tandpetare och fördela laxen med ris och alla tillbehör. Skrapa ur och servera hela pannans genomkokta sky och olja."
+          }
+        ],
+        "total_minutes": 794,
+        "variant_id": "extended",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 743
+      },
+      "ingredients": [
+        {
+          "canonical_name": "lax",
+          "component": "fisk",
+          "form": "raw_edible",
+          "name": "lax",
+          "quantity": 700.0,
+          "quantity_max": 700.0,
+          "quantity_min": 700.0,
+          "quantity_step": 700.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rökt paprikapulver",
+          "component": "fisk",
+          "form": "dry",
+          "name": "rökt paprikapulver",
+          "product_requirements": [
+            "pack:smoked_paprika"
+          ],
+          "quantity": 6.0,
+          "quantity_max": 6.0,
+          "quantity_min": 6.0,
+          "quantity_step": 6.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "äppelcidervinäger",
+          "component": "fisk",
+          "form": "as_sold",
+          "name": "äppelcidervinäger",
+          "product_requirements": [
+            "pack:intake_all_be24da3ca83d"
+          ],
+          "quantity": 40.0,
+          "quantity_max": 40.0,
+          "quantity_min": 40.0,
+          "quantity_step": 40.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "fisk",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ingefära",
+          "component": "fisk",
+          "form": "raw_edible",
+          "name": "ingefära",
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "fisk",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 30.0,
+          "quantity_max": 30.0,
+          "quantity_min": 30.0,
+          "quantity_step": 30.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "fisk",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 6.0,
+          "quantity_max": 6.0,
+          "quantity_min": 6.0,
+          "quantity_step": 6.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "spiskummin",
+          "component": "fisk",
+          "form": "dry",
+          "name": "spiskummin",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 2.0,
+          "quantity_max": 2.0,
+          "quantity_min": 2.0,
+          "quantity_step": 2.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gurkmeja",
+          "component": "fisk",
+          "form": "dry",
+          "name": "gurkmeja",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 1.5,
+          "quantity_max": 1.5,
+          "quantity_min": 1.5,
+          "quantity_step": 1.5,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "fisk",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 150.0,
+          "quantity_max": 150.0,
+          "quantity_min": 150.0,
+          "quantity_step": 150.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ris",
+          "component": "ris",
+          "form": "dry",
+          "name": "ris",
+          "product_requirements": [
+            "white_rice"
+          ],
+          "quantity": 280.0,
+          "quantity_max": 280.0,
+          "quantity_min": 280.0,
+          "quantity_step": 280.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "tomat",
+          "component": "sallad",
+          "form": "raw_edible",
+          "name": "tomat",
+          "quantity": 300.0,
+          "quantity_max": 300.0,
+          "quantity_min": 300.0,
+          "quantity_step": 300.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gurka",
+          "component": "sallad",
+          "form": "raw_edible",
+          "name": "gurka",
+          "quantity": 200.0,
+          "quantity_max": 200.0,
+          "quantity_min": 200.0,
+          "quantity_step": 200.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "limejuice",
+          "component": "sallad",
+          "form": "as_sold",
+          "name": "limejuice",
+          "product_requirements": [
+            "pure_juice"
+          ],
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        }
+      ],
+      "instructions": [
+        "Väg upp fryst lax i ett täckt kärl i kylskåp. Behåll all vätska.",
+        "Tina helt i kylskåp enligt förpackningen. Planera 720 minuter och förläng vid behov tills ingen iskärna återstår. Behåll all upptiningsvätska och koka den med fisken i pannan. Redan kylförvarad rå lax kan gå direkt vidare.",
+        "Skölj riset. Koka upp ris och risdelens salt med 560 ml vatten i en kastrull. Lägg på lock och sänk till låg värme. Kontrollera även produktens angivna vattenbehov.",
+        "Sjud riset under lock cirka 18 minuter tills det är mjukt och vätskan har sugits in.",
+        "Kontrollera riset. Är det hårt, tillsätt 50 ml vatten och förläng sjudningen; ta från värmen när det är mjukt.",
+        "Låt riset vila fem minuter under lock; det ska sedan hållas över 60 °C fram till servering.",
+        "Kontrollera att laxfiléerna är helt tinade och utan ben. Behåll all upptiningsvätska för genomkokning i pannan. Dela i jämntjocka filébitar; skär vid behov längs tjockleken så att två lagda ihop blir högst cirka 3 cm. Mixa rökt paprika, vinäger, färsk eller fryst hackad vitlök, skalad uppvägd ingefära och fiskdelens salt till pasta. Mixa också ner spiskummin och gurkmeja. Skala och väg löken, skiva tunt.",
+        "Fördela all kryddpasta på hälften av laxfilébitarna och lägg de återstående ovanpå. Eventuellt skinn ska vara utåt och tillagas och serveras med fisken. Håll paren högst cirka 3 cm tjocka; fäst vid behov med tandpetare.",
+        "Mjukstek löken i en tredjedel av oljan på medelvärme åtta minuter. Lyft upp och håll varm.",
+        "Värm återstående olja på medelvärme. Stek laxparen cirka fyra minuter per sida. Tillsätt all sparad upptiningsvätska och 30 ml vatten. Lägg på lock och sjud ytterligare minst fem minuter tills mitten mellan filéerna når minst 72 °C och vitlökspastan är genomlagad; förläng enligt förpackningen. Behåll all sky och olja.",
+        "Tärna tomat och gurka och blanda med limejuice. Låt tomatens saft bli salladens dressing.",
+        "Ta bort samtliga tandpetare och fördela laxen med ris och alla tillbehör. Skrapa ur och servera hela pannans genomkokta sky och olja."
+      ],
+      "name": "Lax recheado med rökt paprika – extended",
+      "servings": 4
+    }
+  ],
+  "schema_version": "smako-meal-pack-v1"
+}

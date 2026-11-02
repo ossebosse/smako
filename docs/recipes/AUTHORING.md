@@ -21,6 +21,34 @@ Per recept: `base_id`, `name`, `servings`, `meal_type` (dinner/breakfast/snack),
   ska avvika från bibliotekets standard för samma `namn|form`.
 - `steps`: `text`, `uses` (ingrediensnamn), `minutes`, valfritt `after`
   (stegnummer från 1) och `passive: true` för väntetid (ugn, sjudning, jäsning).
+  Ett steg får ta högst 24 timmar. Summerad väntetid och total tid får vara
+  högst 48 timmar, så kylupptining följd av långkok kan redovisas korrekt.
+  Aktiv kontroll, omrörning och överföring ska vara egna aktiva steg.
+  Kortare tidsgränser som användaren väljer respekteras fortfarande.
+- Valfritt `unmeasured_processes`: granskad avrinning eller borttagning där
+  slutligt utbyte saknas. Varje post har exakt `step` (stegnummer från 1),
+  `ingredients` (namn som används i det steget), `operation` och `description`.
+  Tillåtna operationer är `drain_after_cooking`, `remove_after_infusion`,
+  `deep_fry_and_drain`, `strain_whey`, `peel_after_cooking` och
+  `remove_bones_after_cooking`, `trim_before_cooking` och `drain_before_cooking`.
+  Ingen absorptionsprocent, densitet eller annan förlustfaktor accepteras.
+
+Ett sådant recept får det separata beredningskontraktet
+`smako-authored-losses-v3`. Hela råvaruinsatsen måste kunna köpas, inklusive
+frityrolja eller mjölk vars vassle senare silas bort. Näring och färdig
+portionsvikt visas som **okända**. Receptet stoppas om användaren har valt
+närings- eller portionsviktsgränser; det får inte använda en insatsbaserad
+näringsuppskattning eller en tidigare cachepost som bevis för dessa gränser.
+Produkt-, kost-, allergen-, butiks- och priskontroller gäller som vanligt.
+En fullständigt kontrollerad varukorg utan näringsgränser är därför inte ett
+bevis för näringsvärden. Mätningar kräver ett framtida separat granskat underlag.
+`servings_multiple` kan ange ett granskat helt portionssteg, exempelvis 4
+för en fylld hel kyckling som bara godkänns för 4, 8 eller 12 portioner.
+Användaren får fortfarande välja andra portionsantal; då väljs andra recept.
+Detta avrundar inte inköp eller tillåter automatiskt rester från en större sats.
+
+Gamla receptversioner omtolkas inte: ändrad process kräver ny innehållsgranskad
+version med eget innehållshash. Funktionen ersätter inte provlagning.
 
 ## Det verktyget standardiserar
 

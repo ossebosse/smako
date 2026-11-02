@@ -1,0 +1,3394 @@
+{
+  "library_version": "smako-meal-pack-v1",
+  "recipes": [
+    {
+      "design": {
+        "active_minutes": 49,
+        "base_id": "smako-italian-pasta-amatriciana",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "guanciale|as_sold",
+                "name": "guanciale",
+                "note": "",
+                "quantity": 160.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "krossade tomater|as_sold",
+                "name": "krossade tomater",
+                "note": "",
+                "quantity": 650.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "lagrad pecorino|as_sold",
+                "name": "Lagrad pecorino i bit, vägd före ansning",
+                "note": "",
+                "quantity": 75.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "chiliflakes|dry",
+                "name": "chiliflakes",
+                "note": "",
+                "quantity": 0.5,
+                "unit": "g"
+              }
+            ],
+            "id": "sas",
+            "name": "Guanciale- och tomatsås"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "pasta|dry",
+                "name": "pasta",
+                "note": "",
+                "quantity": 360.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 8.0,
+                "unit": "g"
+              }
+            ],
+            "id": "pasta",
+            "name": "Pasta"
+          }
+        ],
+        "content_sha256": "43ef0f6be23393b9dd7be46db095f126038e94f6dfd3c17d73ee31757a19584e",
+        "content_source": {
+          "active_minutes": 49,
+          "method_note": "Ingredienslistan anger hela insatsen, även den del som senare hälls eller silas bort. Förlusten är inte uppmätt. Näring och färdig portionsvikt är okända; receptet kan inte styrka valda närings- eller viktgränser. Inköp och personliga kostkrav kontrolleras för samtliga insatser.",
+          "pack_id": "reviewed-expansion-round2-stage14",
+          "priority": 1,
+          "proposal_id": "smako-italian-pasta-amatriciana",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "db7ab596c30cb77cff7aa0beaaae325f2dd0c6f5e95d64eafa27499e8edc7774",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "italian"
+        ],
+        "equipment": [
+          "stekpanna",
+          "kastrull",
+          "sil"
+        ],
+        "estimated_minutes": 49,
+        "family": "pasta all’amatriciana",
+        "fish": false,
+        "flavor_profile": [
+          "guanciale",
+          "tomat",
+          "pecorino",
+          "chili"
+        ],
+        "ingredient_count": 5,
+        "method": "pan",
+        "primary_ingredient": "guanciale",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar, inte uppmätta. Amatriciana utan vin, med riktig guanciale och pecorino. Inga ägg i såsen. Grönsakskomponenterna i rikare varianter är vardagstillbehör och påstås inte tillhöra ett originalrecept. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "pasta",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 5,
+            "id": "s1",
+            "ingredient_keys": [
+              "lagrad pecorino|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Väg ostbiten före ansning. Skär bort eventuell hård ytkant och finriv all återstående ost. Här används lagrad pecorino av fårmjölk; osten är inte verifierad som Pecorino Romano."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 10,
+            "id": "s2",
+            "ingredient_keys": [
+              "guanciale|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Tärna guanciale smått och lägg i kall stekpanna. Värm långsamt på medellåg värme 8–10 minuter så att fettet smälter fram och köttet får gyllene kanter. Rör ofta; inget extra stekfett behövs. Behåll allt utsmält fett i såsen."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 15,
+            "id": "s3",
+            "ingredient_keys": [
+              "chiliflakes|dry",
+              "guanciale|as_sold",
+              "krossade tomater|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Rör ner chiliflakes och sedan krossade tomater. Låt såsen sjuda 15 minuter tills den tjocknat; guanciale och ost ger sälta så tillsätt inget olistat salt. Rör regelbundet under sjudningen."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 4,
+            "id": "s4",
+            "ingredient_keys": [
+              "pasta|dry",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "3000 ml",
+                3000.0
+              ]
+            ],
+            "text": "Koka upp 3000 ml vatten med pastans salt. Lägg i pastan och rör så att den inte klibbar."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 10,
+            "id": "s5",
+            "ingredient_keys": [
+              "pasta|dry",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Koka pastan enligt förpackningens tid till al dente, här planerat till 10 minuter. Spara 250 ml av kokvattnet och häll sedan av."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 5,
+            "id": "s6",
+            "ingredient_keys": [
+              "krossade tomater|as_sold",
+              "lagrad pecorino|as_sold",
+              "pasta|dry"
+            ],
+            "parallel_group": null,
+            "text": "Använd den redan finrivna lagrade pecorinon. Vänd pastan i tomatsåsen med lite sparat pastavatten och arbeta ihop en blank sås. Ta från värmen, rör i hälften av osten och fördela resten över fyra portioner."
+          }
+        ],
+        "total_minutes": 49,
+        "unmeasured_processes": [
+          {
+            "description": "Inköpt ostbit vägs före eventuell bortskärning av ytkant. Kvarvarande mängd och dess näring är inte uppmätta.",
+            "ingredient_keys": [
+              "lagrad pecorino|as_sold"
+            ],
+            "operation": "trim_before_cooking",
+            "step_id": "s1"
+          },
+          {
+            "description": "En del saltat stärkelsevatten sparas till såsen och resten hälls bort. Saltets och stärkelsens kvarhållna mängd är okänd.",
+            "ingredient_keys": [
+              "pasta|dry",
+              "salt|as_sold"
+            ],
+            "operation": "drain_after_cooking",
+            "step_id": "s5"
+          }
+        ],
+        "variant_id": "simple",
+        "vegetarian": false,
+        "version": "1.0.1"
+      },
+      "ingredients": [
+        {
+          "canonical_name": "guanciale",
+          "component": "sas",
+          "form": "as_sold",
+          "name": "guanciale",
+          "product_requirements": [
+            "pack:intake_all_expansion_fcb034991181"
+          ],
+          "quantity": 160.0,
+          "quantity_max": 160.0,
+          "quantity_min": 160.0,
+          "quantity_step": 160.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "krossade tomater",
+          "component": "sas",
+          "form": "as_sold",
+          "name": "krossade tomater",
+          "quantity": 650.0,
+          "quantity_max": 650.0,
+          "quantity_min": 650.0,
+          "quantity_step": 650.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "lagrad pecorino",
+          "component": "sas",
+          "form": "as_sold",
+          "name": "lagrad pecorino",
+          "product_requirements": [
+            "pack:intake_all_round2_4d778ee01c81"
+          ],
+          "quantity": 75.0,
+          "quantity_max": 75.0,
+          "quantity_min": 75.0,
+          "quantity_step": 75.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "chiliflakes",
+          "component": "sas",
+          "form": "dry",
+          "name": "chiliflakes",
+          "quantity": 0.5,
+          "quantity_max": 0.5,
+          "quantity_min": 0.5,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "pasta",
+          "component": "pasta",
+          "form": "dry",
+          "name": "pasta",
+          "quantity": 360.0,
+          "quantity_max": 360.0,
+          "quantity_min": 360.0,
+          "quantity_step": 360.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "pasta",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 8.0,
+          "quantity_max": 8.0,
+          "quantity_min": 8.0,
+          "quantity_step": 8.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Väg ostbiten före ansning. Skär bort eventuell hård ytkant och finriv all återstående ost. Här används lagrad pecorino av fårmjölk; osten är inte verifierad som Pecorino Romano.",
+        "Tärna guanciale smått och lägg i kall stekpanna. Värm långsamt på medellåg värme 8–10 minuter så att fettet smälter fram och köttet får gyllene kanter. Rör ofta; inget extra stekfett behövs. Behåll allt utsmält fett i såsen.",
+        "Rör ner chiliflakes och sedan krossade tomater. Låt såsen sjuda 15 minuter tills den tjocknat; guanciale och ost ger sälta så tillsätt inget olistat salt. Rör regelbundet under sjudningen.",
+        "Koka upp 3000 ml vatten med pastans salt. Lägg i pastan och rör så att den inte klibbar.",
+        "Koka pastan enligt förpackningens tid till al dente, här planerat till 10 minuter. Spara 250 ml av kokvattnet och häll sedan av.",
+        "Använd den redan finrivna lagrade pecorinon. Vänd pastan i tomatsåsen med lite sparat pastavatten och arbeta ihop en blank sås. Ta från värmen, rör i hälften av osten och fördela resten över fyra portioner."
+      ],
+      "name": "Pasta all’amatriciana – enkel – med lagrad pecorino",
+      "preparation": {
+        "family": "pasta all’amatriciana",
+        "input_forms": {
+          "chiliflakes": "dry",
+          "guanciale": "as_sold",
+          "krossade tomater": "as_sold",
+          "lagrad pecorino": "as_sold",
+          "pasta": "dry",
+          "salt": "as_sold"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "43ef0f6be23393b9dd7be46db095f126038e94f6dfd3c17d73ee31757a19584e",
+        "version": "smako-authored-losses-v3"
+      },
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 54,
+        "base_id": "smako-italian-pasta-amatriciana",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "guanciale|as_sold",
+                "name": "guanciale",
+                "note": "",
+                "quantity": 160.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "krossade tomater|as_sold",
+                "name": "krossade tomater",
+                "note": "",
+                "quantity": 650.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "lagrad pecorino|as_sold",
+                "name": "Lagrad pecorino i bit, vägd före ansning",
+                "note": "",
+                "quantity": 75.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "chiliflakes|dry",
+                "name": "chiliflakes",
+                "note": "",
+                "quantity": 0.5,
+                "unit": "g"
+              }
+            ],
+            "id": "sas",
+            "name": "Guanciale- och tomatsås"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "zucchini|raw_edible",
+                "name": "zucchini",
+                "note": "",
+                "quantity": 500.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "olivolja|as_sold",
+                "name": "olivolja",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 1.5,
+                "unit": "g"
+              }
+            ],
+            "id": "zucchini",
+            "name": "Rostad zucchini"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "pasta|dry",
+                "name": "pasta",
+                "note": "",
+                "quantity": 360.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 8.0,
+                "unit": "g"
+              }
+            ],
+            "id": "pasta",
+            "name": "Pasta"
+          }
+        ],
+        "content_sha256": "e7ab850094d0ee06d6b96e724f63bd4af93f58cf3ed4a7f47aa6c7fae15fb364",
+        "content_source": {
+          "active_minutes": 54,
+          "method_note": "Ingredienslistan anger hela insatsen, även den del som senare hälls eller silas bort. Förlusten är inte uppmätt. Näring och färdig portionsvikt är okända; receptet kan inte styrka valda närings- eller viktgränser. Inköp och personliga kostkrav kontrolleras för samtliga insatser.",
+          "pack_id": "reviewed-expansion-round2-stage14",
+          "priority": 1,
+          "proposal_id": "smako-italian-pasta-amatriciana",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "db7ab596c30cb77cff7aa0beaaae325f2dd0c6f5e95d64eafa27499e8edc7774",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "italian"
+        ],
+        "equipment": [
+          "stekpanna",
+          "kastrull",
+          "sil",
+          "ugn",
+          "ugnsform"
+        ],
+        "estimated_minutes": 74,
+        "family": "pasta all’amatriciana",
+        "fish": false,
+        "flavor_profile": [
+          "guanciale",
+          "tomat",
+          "pecorino",
+          "chili"
+        ],
+        "ingredient_count": 7,
+        "method": "pan",
+        "primary_ingredient": "guanciale",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar, inte uppmätta. Amatriciana utan vin, med riktig guanciale och pecorino. Inga ägg i såsen. Grönsakskomponenterna i rikare varianter är vardagstillbehör och påstås inte tillhöra ett originalrecept. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "pasta",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 5,
+            "id": "s1",
+            "ingredient_keys": [
+              "lagrad pecorino|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Väg ostbiten före ansning. Skär bort eventuell hård ytkant och finriv all återstående ost. Här används lagrad pecorino av fårmjölk; osten är inte verifierad som Pecorino Romano."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 5,
+            "id": "s2",
+            "ingredient_keys": [
+              "olivolja|as_sold",
+              "salt|as_sold",
+              "zucchini|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sätt ugnen på 220 °C. Skär zucchini i tjocka halvmånar, vänd med olivolja och grönsakernas salt och sprid i en vid form."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 20,
+            "id": "s3",
+            "ingredient_keys": [
+              "zucchini|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Rosta zucchinin 20 minuter tills den fått färg men fortfarande håller formen."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 10,
+            "id": "s4",
+            "ingredient_keys": [
+              "guanciale|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Tärna guanciale smått och lägg i kall stekpanna. Värm långsamt på medellåg värme 8–10 minuter så att fettet smälter fram och köttet får gyllene kanter. Rör ofta; inget extra stekfett behövs. Behåll allt utsmält fett i såsen."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 15,
+            "id": "s5",
+            "ingredient_keys": [
+              "chiliflakes|dry",
+              "guanciale|as_sold",
+              "krossade tomater|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Rör ner chiliflakes och sedan krossade tomater. Låt såsen sjuda 15 minuter tills den tjocknat; guanciale och ost ger sälta så tillsätt inget olistat salt. Rör regelbundet under sjudningen."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 4,
+            "id": "s6",
+            "ingredient_keys": [
+              "pasta|dry",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "3000 ml",
+                3000.0
+              ]
+            ],
+            "text": "Koka upp 3000 ml vatten med pastans salt. Lägg i pastan och rör så att den inte klibbar."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 10,
+            "id": "s7",
+            "ingredient_keys": [
+              "pasta|dry",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Koka pastan enligt förpackningens tid till al dente, här planerat till 10 minuter. Spara 250 ml av kokvattnet och häll sedan av."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 5,
+            "id": "s8",
+            "ingredient_keys": [
+              "krossade tomater|as_sold",
+              "lagrad pecorino|as_sold",
+              "pasta|dry",
+              "zucchini|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Använd den redan finrivna lagrade pecorinon. Vänd pastan i tomatsåsen med lite sparat pastavatten och arbeta ihop en blank sås. Ta från värmen, rör i hälften av osten och fördela resten över fyra portioner. Lägg den rostade zucchinin vid sidan."
+          }
+        ],
+        "total_minutes": 74,
+        "unmeasured_processes": [
+          {
+            "description": "Inköpt ostbit vägs före eventuell bortskärning av ytkant. Kvarvarande mängd och dess näring är inte uppmätta.",
+            "ingredient_keys": [
+              "lagrad pecorino|as_sold"
+            ],
+            "operation": "trim_before_cooking",
+            "step_id": "s1"
+          },
+          {
+            "description": "En del saltat stärkelsevatten sparas till såsen och resten hälls bort. Saltets och stärkelsens kvarhållna mängd är okänd.",
+            "ingredient_keys": [
+              "pasta|dry",
+              "salt|as_sold"
+            ],
+            "operation": "drain_after_cooking",
+            "step_id": "s7"
+          }
+        ],
+        "variant_id": "standard",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 20
+      },
+      "ingredients": [
+        {
+          "canonical_name": "guanciale",
+          "component": "sas",
+          "form": "as_sold",
+          "name": "guanciale",
+          "product_requirements": [
+            "pack:intake_all_expansion_fcb034991181"
+          ],
+          "quantity": 160.0,
+          "quantity_max": 160.0,
+          "quantity_min": 160.0,
+          "quantity_step": 160.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "krossade tomater",
+          "component": "sas",
+          "form": "as_sold",
+          "name": "krossade tomater",
+          "quantity": 650.0,
+          "quantity_max": 650.0,
+          "quantity_min": 650.0,
+          "quantity_step": 650.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "lagrad pecorino",
+          "component": "sas",
+          "form": "as_sold",
+          "name": "lagrad pecorino",
+          "product_requirements": [
+            "pack:intake_all_round2_4d778ee01c81"
+          ],
+          "quantity": 75.0,
+          "quantity_max": 75.0,
+          "quantity_min": 75.0,
+          "quantity_step": 75.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "chiliflakes",
+          "component": "sas",
+          "form": "dry",
+          "name": "chiliflakes",
+          "quantity": 0.5,
+          "quantity_max": 0.5,
+          "quantity_min": 0.5,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "zucchini",
+          "component": "zucchini",
+          "form": "raw_edible",
+          "name": "zucchini",
+          "quantity": 500.0,
+          "quantity_max": 500.0,
+          "quantity_min": 500.0,
+          "quantity_step": 500.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "olivolja",
+          "component": "zucchini",
+          "form": "as_sold",
+          "name": "olivolja",
+          "product_requirements": [
+            "pack:intake_all_expansion_86ac9b2c5ae6"
+          ],
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "zucchini",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 9.5,
+          "quantity_max": 9.5,
+          "quantity_min": 9.5,
+          "quantity_step": 9.5,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "pasta",
+          "component": "pasta",
+          "form": "dry",
+          "name": "pasta",
+          "quantity": 360.0,
+          "quantity_max": 360.0,
+          "quantity_min": 360.0,
+          "quantity_step": 360.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Väg ostbiten före ansning. Skär bort eventuell hård ytkant och finriv all återstående ost. Här används lagrad pecorino av fårmjölk; osten är inte verifierad som Pecorino Romano.",
+        "Sätt ugnen på 220 °C. Skär zucchini i tjocka halvmånar, vänd med olivolja och grönsakernas salt och sprid i en vid form.",
+        "Rosta zucchinin 20 minuter tills den fått färg men fortfarande håller formen.",
+        "Tärna guanciale smått och lägg i kall stekpanna. Värm långsamt på medellåg värme 8–10 minuter så att fettet smälter fram och köttet får gyllene kanter. Rör ofta; inget extra stekfett behövs. Behåll allt utsmält fett i såsen.",
+        "Rör ner chiliflakes och sedan krossade tomater. Låt såsen sjuda 15 minuter tills den tjocknat; guanciale och ost ger sälta så tillsätt inget olistat salt. Rör regelbundet under sjudningen.",
+        "Koka upp 3000 ml vatten med pastans salt. Lägg i pastan och rör så att den inte klibbar.",
+        "Koka pastan enligt förpackningens tid till al dente, här planerat till 10 minuter. Spara 250 ml av kokvattnet och häll sedan av.",
+        "Använd den redan finrivna lagrade pecorinon. Vänd pastan i tomatsåsen med lite sparat pastavatten och arbeta ihop en blank sås. Ta från värmen, rör i hälften av osten och fördela resten över fyra portioner. Lägg den rostade zucchinin vid sidan."
+      ],
+      "name": "Pasta all’amatriciana – standard – med lagrad pecorino",
+      "preparation": {
+        "family": "pasta all’amatriciana",
+        "input_forms": {
+          "chiliflakes": "dry",
+          "guanciale": "as_sold",
+          "krossade tomater": "as_sold",
+          "lagrad pecorino": "as_sold",
+          "olivolja": "as_sold",
+          "pasta": "dry",
+          "salt": "as_sold",
+          "zucchini": "raw_edible"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "e7ab850094d0ee06d6b96e724f63bd4af93f58cf3ed4a7f47aa6c7fae15fb364",
+        "version": "smako-authored-losses-v3"
+      },
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 62,
+        "base_id": "smako-italian-pasta-amatriciana",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "guanciale|as_sold",
+                "name": "guanciale",
+                "note": "",
+                "quantity": 160.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "krossade tomater|as_sold",
+                "name": "krossade tomater",
+                "note": "",
+                "quantity": 650.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "lagrad pecorino|as_sold",
+                "name": "Lagrad pecorino i bit, vägd före ansning",
+                "note": "",
+                "quantity": 75.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "chiliflakes|dry",
+                "name": "chiliflakes",
+                "note": "",
+                "quantity": 0.5,
+                "unit": "g"
+              }
+            ],
+            "id": "sas",
+            "name": "Guanciale- och tomatsås"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "zucchini|raw_edible",
+                "name": "zucchini",
+                "note": "",
+                "quantity": 500.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "olivolja|as_sold",
+                "name": "olivolja",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 1.5,
+                "unit": "g"
+              }
+            ],
+            "id": "zucchini",
+            "name": "Rostad zucchini"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "bönor|cooked_drained",
+                "name": "bönor",
+                "note": "",
+                "quantity": 350.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "citronjuice|as_sold",
+                "name": "citronjuice",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "persilja|raw_edible",
+                "name": "persilja",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "olivolja|as_sold",
+                "name": "olivolja",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "bonor",
+            "name": "Citron- och persiljebönor"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "pasta|dry",
+                "name": "pasta",
+                "note": "",
+                "quantity": 360.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 8.0,
+                "unit": "g"
+              }
+            ],
+            "id": "pasta",
+            "name": "Pasta"
+          }
+        ],
+        "content_sha256": "042d1036792eeeacbb88ed5bdc5f6d83d7c4d555df9ec49b53a95a8c577d8d70",
+        "content_source": {
+          "active_minutes": 62,
+          "method_note": "Ingredienslistan anger hela insatsen, även den del som senare hälls eller silas bort. Förlusten är inte uppmätt. Näring och färdig portionsvikt är okända; receptet kan inte styrka valda närings- eller viktgränser. Inköp och personliga kostkrav kontrolleras för samtliga insatser.",
+          "pack_id": "reviewed-expansion-round2-stage14",
+          "priority": 1,
+          "proposal_id": "smako-italian-pasta-amatriciana",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "db7ab596c30cb77cff7aa0beaaae325f2dd0c6f5e95d64eafa27499e8edc7774",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "italian"
+        ],
+        "equipment": [
+          "stekpanna",
+          "kastrull",
+          "sil",
+          "ugn",
+          "ugnsform"
+        ],
+        "estimated_minutes": 82,
+        "family": "pasta all’amatriciana",
+        "fish": false,
+        "flavor_profile": [
+          "guanciale",
+          "tomat",
+          "pecorino",
+          "chili"
+        ],
+        "ingredient_count": 10,
+        "method": "pan",
+        "primary_ingredient": "guanciale",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar, inte uppmätta. Amatriciana utan vin, med riktig guanciale och pecorino. Inga ägg i såsen. Grönsakskomponenterna i rikare varianter är vardagstillbehör och påstås inte tillhöra ett originalrecept. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "pasta",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 5,
+            "id": "s1",
+            "ingredient_keys": [
+              "lagrad pecorino|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Väg ostbiten före ansning. Skär bort eventuell hård ytkant och finriv all återstående ost. Här används lagrad pecorino av fårmjölk; osten är inte verifierad som Pecorino Romano."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 5,
+            "id": "s2",
+            "ingredient_keys": [
+              "olivolja|as_sold",
+              "salt|as_sold",
+              "zucchini|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sätt ugnen på 220 °C. Skär zucchini i tjocka halvmånar, vänd med olivolja och grönsakernas salt och sprid i en vid form."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 20,
+            "id": "s3",
+            "ingredient_keys": [
+              "zucchini|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Rosta zucchinin 20 minuter tills den fått färg men fortfarande håller formen."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 8,
+            "id": "s4",
+            "ingredient_keys": [
+              "bönor|cooked_drained",
+              "citronjuice|as_sold",
+              "olivolja|as_sold",
+              "persilja|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "20 ml",
+                20.0
+              ]
+            ],
+            "text": "Väg de redan kokta vita bönorna efter sköljning och avrinning. Koka fryst hackad persilja med 20 ml vatten under omrörning i minst tre minuter eller längre enligt förpackningen. Vänd hela mängden med bönorna, citronjuice och bönkomponentens olivolja och servera ljummet."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 10,
+            "id": "s5",
+            "ingredient_keys": [
+              "guanciale|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Tärna guanciale smått och lägg i kall stekpanna. Värm långsamt på medellåg värme 8–10 minuter så att fettet smälter fram och köttet får gyllene kanter. Rör ofta; inget extra stekfett behövs. Behåll allt utsmält fett i såsen."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 15,
+            "id": "s6",
+            "ingredient_keys": [
+              "chiliflakes|dry",
+              "guanciale|as_sold",
+              "krossade tomater|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Rör ner chiliflakes och sedan krossade tomater. Låt såsen sjuda 15 minuter tills den tjocknat; guanciale och ost ger sälta så tillsätt inget olistat salt. Rör regelbundet under sjudningen."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 4,
+            "id": "s7",
+            "ingredient_keys": [
+              "pasta|dry",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "3000 ml",
+                3000.0
+              ]
+            ],
+            "text": "Koka upp 3000 ml vatten med pastans salt. Lägg i pastan och rör så att den inte klibbar."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 10,
+            "id": "s8",
+            "ingredient_keys": [
+              "pasta|dry",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Koka pastan enligt förpackningens tid till al dente, här planerat till 10 minuter. Spara 250 ml av kokvattnet och häll sedan av."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 5,
+            "id": "s9",
+            "ingredient_keys": [
+              "bönor|cooked_drained",
+              "citronjuice|as_sold",
+              "krossade tomater|as_sold",
+              "lagrad pecorino|as_sold",
+              "pasta|dry",
+              "persilja|raw_edible",
+              "zucchini|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Använd den redan finrivna lagrade pecorinon. Vänd pastan i tomatsåsen med lite sparat pastavatten och arbeta ihop en blank sås. Ta från värmen, rör i hälften av osten och fördela resten över fyra portioner. Lägg den rostade zucchinin vid sidan tillsammans med citronbönorna."
+          }
+        ],
+        "total_minutes": 82,
+        "unmeasured_processes": [
+          {
+            "description": "Inköpt ostbit vägs före eventuell bortskärning av ytkant. Kvarvarande mängd och dess näring är inte uppmätta.",
+            "ingredient_keys": [
+              "lagrad pecorino|as_sold"
+            ],
+            "operation": "trim_before_cooking",
+            "step_id": "s1"
+          },
+          {
+            "description": "En del saltat stärkelsevatten sparas till såsen och resten hälls bort. Saltets och stärkelsens kvarhållna mängd är okänd.",
+            "ingredient_keys": [
+              "pasta|dry",
+              "salt|as_sold"
+            ],
+            "operation": "drain_after_cooking",
+            "step_id": "s8"
+          }
+        ],
+        "variant_id": "extended",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 20
+      },
+      "ingredients": [
+        {
+          "canonical_name": "guanciale",
+          "component": "sas",
+          "form": "as_sold",
+          "name": "guanciale",
+          "product_requirements": [
+            "pack:intake_all_expansion_fcb034991181"
+          ],
+          "quantity": 160.0,
+          "quantity_max": 160.0,
+          "quantity_min": 160.0,
+          "quantity_step": 160.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "krossade tomater",
+          "component": "sas",
+          "form": "as_sold",
+          "name": "krossade tomater",
+          "quantity": 650.0,
+          "quantity_max": 650.0,
+          "quantity_min": 650.0,
+          "quantity_step": 650.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "lagrad pecorino",
+          "component": "sas",
+          "form": "as_sold",
+          "name": "lagrad pecorino",
+          "product_requirements": [
+            "pack:intake_all_round2_4d778ee01c81"
+          ],
+          "quantity": 75.0,
+          "quantity_max": 75.0,
+          "quantity_min": 75.0,
+          "quantity_step": 75.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "chiliflakes",
+          "component": "sas",
+          "form": "dry",
+          "name": "chiliflakes",
+          "quantity": 0.5,
+          "quantity_max": 0.5,
+          "quantity_min": 0.5,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "zucchini",
+          "component": "zucchini",
+          "form": "raw_edible",
+          "name": "zucchini",
+          "quantity": 500.0,
+          "quantity_max": 500.0,
+          "quantity_min": 500.0,
+          "quantity_step": 500.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "olivolja",
+          "component": "zucchini",
+          "form": "as_sold",
+          "name": "olivolja",
+          "product_requirements": [
+            "pack:intake_all_expansion_86ac9b2c5ae6"
+          ],
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 25.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "zucchini",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 9.5,
+          "quantity_max": 9.5,
+          "quantity_min": 9.5,
+          "quantity_step": 9.5,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "bönor",
+          "component": "bonor",
+          "form": "cooked_drained",
+          "name": "bönor",
+          "product_requirements": [
+            "white_beans"
+          ],
+          "quantity": 350.0,
+          "quantity_max": 350.0,
+          "quantity_min": 350.0,
+          "quantity_step": 350.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "citronjuice",
+          "component": "bonor",
+          "form": "as_sold",
+          "name": "citronjuice",
+          "product_requirements": [
+            "pure_juice"
+          ],
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 25.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "persilja",
+          "component": "bonor",
+          "form": "raw_edible",
+          "name": "persilja",
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "pasta",
+          "component": "pasta",
+          "form": "dry",
+          "name": "pasta",
+          "quantity": 360.0,
+          "quantity_max": 360.0,
+          "quantity_min": 360.0,
+          "quantity_step": 360.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Väg ostbiten före ansning. Skär bort eventuell hård ytkant och finriv all återstående ost. Här används lagrad pecorino av fårmjölk; osten är inte verifierad som Pecorino Romano.",
+        "Sätt ugnen på 220 °C. Skär zucchini i tjocka halvmånar, vänd med olivolja och grönsakernas salt och sprid i en vid form.",
+        "Rosta zucchinin 20 minuter tills den fått färg men fortfarande håller formen.",
+        "Väg de redan kokta vita bönorna efter sköljning och avrinning. Koka fryst hackad persilja med 20 ml vatten under omrörning i minst tre minuter eller längre enligt förpackningen. Vänd hela mängden med bönorna, citronjuice och bönkomponentens olivolja och servera ljummet.",
+        "Tärna guanciale smått och lägg i kall stekpanna. Värm långsamt på medellåg värme 8–10 minuter så att fettet smälter fram och köttet får gyllene kanter. Rör ofta; inget extra stekfett behövs. Behåll allt utsmält fett i såsen.",
+        "Rör ner chiliflakes och sedan krossade tomater. Låt såsen sjuda 15 minuter tills den tjocknat; guanciale och ost ger sälta så tillsätt inget olistat salt. Rör regelbundet under sjudningen.",
+        "Koka upp 3000 ml vatten med pastans salt. Lägg i pastan och rör så att den inte klibbar.",
+        "Koka pastan enligt förpackningens tid till al dente, här planerat till 10 minuter. Spara 250 ml av kokvattnet och häll sedan av.",
+        "Använd den redan finrivna lagrade pecorinon. Vänd pastan i tomatsåsen med lite sparat pastavatten och arbeta ihop en blank sås. Ta från värmen, rör i hälften av osten och fördela resten över fyra portioner. Lägg den rostade zucchinin vid sidan tillsammans med citronbönorna."
+      ],
+      "name": "Pasta all’amatriciana – utökad – med lagrad pecorino och ljumma persiljebönor",
+      "preparation": {
+        "family": "pasta all’amatriciana",
+        "input_forms": {
+          "bönor": "cooked_drained",
+          "chiliflakes": "dry",
+          "citronjuice": "as_sold",
+          "guanciale": "as_sold",
+          "krossade tomater": "as_sold",
+          "lagrad pecorino": "as_sold",
+          "olivolja": "as_sold",
+          "pasta": "dry",
+          "persilja": "raw_edible",
+          "salt": "as_sold",
+          "zucchini": "raw_edible"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "042d1036792eeeacbb88ed5bdc5f6d83d7c4d555df9ec49b53a95a8c577d8d70",
+        "version": "smako-authored-losses-v3"
+      },
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 33,
+        "base_id": "smako-italian-pasta-cacio-pepe",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "pasta|dry",
+                "name": "Torr spaghetti",
+                "note": "",
+                "quantity": 360.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "lagrad pecorino|as_sold",
+                "name": "Lagrad pecorino i bit, vägd före ansning",
+                "note": "",
+                "quantity": 150.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "Svartpeppar",
+                "note": "",
+                "quantity": 3.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 4.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c1",
+            "name": "Pasta med ost- och pepparemulsion"
+          }
+        ],
+        "content_sha256": "be60cdd4e8c251df2bb4190a66253e722a6e19ba1b4204fc6c009dbcf7ea3c8e",
+        "content_source": {
+          "active_minutes": 33,
+          "method_note": "Ingredienslistan anger hela insatsen, även den del som senare hälls eller silas bort. Förlusten är inte uppmätt. Näring och färdig portionsvikt är okända; receptet kan inte styrka valda närings- eller viktgränser. Inköp och personliga kostkrav kontrolleras för samtliga insatser.",
+          "pack_id": "reviewed-expansion-round2-stage14",
+          "priority": 1,
+          "proposal_id": "smako-italian-pasta-cacio-pepe",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "db7ab596c30cb77cff7aa0beaaae325f2dd0c6f5e95d64eafa27499e8edc7774",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "italian"
+        ],
+        "equipment": [
+          "kastrull",
+          "finrivjärn",
+          "skål",
+          "stekpanna"
+        ],
+        "estimated_minutes": 33,
+        "family": "pecorino_pepper_emulsion_pasta",
+        "fish": false,
+        "flavor_profile": [
+          "pecorino",
+          "svartpeppar"
+        ],
+        "ingredient_count": 2,
+        "method": "pot",
+        "primary_ingredient": "pasta",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "AI-författat receptutkast, inte provlagat och ännu inte import-/produktgranskat av Smako. Tider är författaruppskattningar, inte uppmätt provlagning. Medvetet ingrediensundantag: kärnan består av pasta, pecorino och svartpeppar. Peppar räknas inte i Smakos antal. Inget smör, grädde eller utfyllnad har lagts till för att nå en kvot. Salladerna är separata måltidskomponenter; ostens löpe är inte verifierad. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "ingen separat sida",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 5,
+            "id": "s1",
+            "ingredient_keys": [
+              "lagrad pecorino|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Väg ostbiten före ansning. Skär bort eventuell hård ytkant och finriv all återstående ost. Här används lagrad pecorino av fårmjölk; osten är inte verifierad som Pecorino Romano."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 10,
+            "id": "s2",
+            "ingredient_keys": [
+              "lagrad pecorino|as_sold",
+              "salt|as_sold",
+              "svartpeppar|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "1800 ml",
+                1800.0
+              ]
+            ],
+            "text": "Lägg den redan finrivna lagrade pecorinon i en rymlig värmetålig skål. Krossa svartpepparn grovt. Koka upp 1800 ml vatten med salt i en bred kastrull."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 10,
+            "id": "s3",
+            "ingredient_keys": [
+              "pasta|dry",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Koka pastan till precis före al dente, omkring tio minuter eller enligt förpackningen. Rör ofta i den relativt lilla vattenmängden. Ta upp 300 ml stärkelserikt kokvatten innan pastan hälls av."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 3,
+            "id": "s4",
+            "ingredient_keys": [
+              "svartpeppar|dry"
+            ],
+            "parallel_group": null,
+            "text": "Rosta svartpepparn i en torr panna på medellåg värme en minut. Häll på 100 ml av kokvattnet, låt bubbla en minut och ta av pannan. Låt både resterande kokvatten och pannan svalna något; ostblandningen får inte hällas i en kokhet panna."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 4,
+            "id": "s5",
+            "ingredient_keys": [
+              "lagrad pecorino|as_sold",
+              "pasta|dry"
+            ],
+            "parallel_group": null,
+            "text": "Rör 80 ml av det ljumma, inte kokande, kokvattnet med den finrivna pecorinon till en tjock kräm. Vänd pastan i pepparvattnet och flytta sedan pastan till ostskålen. Arbeta ihop utanför spisen tills den täcks av en slät sås. Justera med 20 ml sparat kokvatten åt gången vid behov, inom den sparade mängden. Koka inte efter att osten blandats i."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 1,
+            "id": "s6",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Fördela genast på varma tallrikar och servera. Ostsåsen tjocknar snabbt när den kallnar."
+          }
+        ],
+        "total_minutes": 33,
+        "unmeasured_processes": [
+          {
+            "description": "Inköpt ostbit vägs före eventuell bortskärning av ytkant. Kvarvarande mängd och dess näring är inte uppmätta.",
+            "ingredient_keys": [
+              "lagrad pecorino|as_sold"
+            ],
+            "operation": "trim_before_cooking",
+            "step_id": "s1"
+          },
+          {
+            "description": "En del saltat stärkelsevatten sparas till såsen och resten hälls bort. Saltets och stärkelsens kvarhållna mängd är okänd.",
+            "ingredient_keys": [
+              "pasta|dry",
+              "salt|as_sold"
+            ],
+            "operation": "drain_after_cooking",
+            "step_id": "s3"
+          }
+        ],
+        "variant_id": "simple",
+        "vegetarian": true,
+        "version": "1.0.1"
+      },
+      "ingredients": [
+        {
+          "canonical_name": "pasta",
+          "component": "c1",
+          "form": "dry",
+          "name": "pasta",
+          "quantity": 360.0,
+          "quantity_max": 360.0,
+          "quantity_min": 360.0,
+          "quantity_step": 360.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "lagrad pecorino",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "lagrad pecorino",
+          "product_requirements": [
+            "pack:intake_all_round2_4d778ee01c81"
+          ],
+          "quantity": 150.0,
+          "quantity_max": 150.0,
+          "quantity_min": 150.0,
+          "quantity_step": 150.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "c1",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 3.0,
+          "quantity_max": 3.0,
+          "quantity_min": 3.0,
+          "quantity_step": 3.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 4.0,
+          "quantity_max": 4.0,
+          "quantity_min": 4.0,
+          "quantity_step": 4.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Väg ostbiten före ansning. Skär bort eventuell hård ytkant och finriv all återstående ost. Här används lagrad pecorino av fårmjölk; osten är inte verifierad som Pecorino Romano.",
+        "Lägg den redan finrivna lagrade pecorinon i en rymlig värmetålig skål. Krossa svartpepparn grovt. Koka upp 1800 ml vatten med salt i en bred kastrull.",
+        "Koka pastan till precis före al dente, omkring tio minuter eller enligt förpackningen. Rör ofta i den relativt lilla vattenmängden. Ta upp 300 ml stärkelserikt kokvatten innan pastan hälls av.",
+        "Rosta svartpepparn i en torr panna på medellåg värme en minut. Häll på 100 ml av kokvattnet, låt bubbla en minut och ta av pannan. Låt både resterande kokvatten och pannan svalna något; ostblandningen får inte hällas i en kokhet panna.",
+        "Rör 80 ml av det ljumma, inte kokande, kokvattnet med den finrivna pecorinon till en tjock kräm. Vänd pastan i pepparvattnet och flytta sedan pastan till ostskålen. Arbeta ihop utanför spisen tills den täcks av en slät sås. Justera med 20 ml sparat kokvatten åt gången vid behov, inom den sparade mängden. Koka inte efter att osten blandats i.",
+        "Fördela genast på varma tallrikar och servera. Ostsåsen tjocknar snabbt när den kallnar."
+      ],
+      "name": "Cacio e pepe – ren ost- och pepparpasta – med lagrad pecorino",
+      "preparation": {
+        "family": "pecorino_pepper_emulsion_pasta",
+        "input_forms": {
+          "lagrad pecorino": "as_sold",
+          "pasta": "dry",
+          "salt": "as_sold",
+          "svartpeppar": "dry"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "be60cdd4e8c251df2bb4190a66253e722a6e19ba1b4204fc6c009dbcf7ea3c8e",
+        "version": "smako-authored-losses-v3"
+      },
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 37,
+        "base_id": "smako-italian-pasta-cacio-pepe",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "pasta|dry",
+                "name": "Torr spaghetti",
+                "note": "",
+                "quantity": 360.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "lagrad pecorino|as_sold",
+                "name": "Lagrad pecorino i bit, vägd före ansning",
+                "note": "",
+                "quantity": 150.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "Svartpeppar",
+                "note": "",
+                "quantity": 3.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 4.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c1",
+            "name": "Pasta med ost- och pepparemulsion"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "sallad|raw_edible",
+                "name": "Sallad",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "olivolja|as_sold",
+                "name": "Olivolja",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "citronjuice|as_sold",
+                "name": "Citronjuice",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "c2",
+            "name": "Citronklädd sallad"
+          }
+        ],
+        "content_sha256": "c17af47ab0fe1ee83adf7775461fbced8519c20a193b18b4a40e9675165a5765",
+        "content_source": {
+          "active_minutes": 37,
+          "method_note": "Ingredienslistan anger hela insatsen, även den del som senare hälls eller silas bort. Förlusten är inte uppmätt. Näring och färdig portionsvikt är okända; receptet kan inte styrka valda närings- eller viktgränser. Inköp och personliga kostkrav kontrolleras för samtliga insatser.",
+          "pack_id": "reviewed-expansion-round2-stage14",
+          "priority": 1,
+          "proposal_id": "smako-italian-pasta-cacio-pepe",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "db7ab596c30cb77cff7aa0beaaae325f2dd0c6f5e95d64eafa27499e8edc7774",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "italian"
+        ],
+        "equipment": [
+          "kastrull",
+          "finrivjärn",
+          "skål",
+          "stekpanna"
+        ],
+        "estimated_minutes": 37,
+        "family": "pecorino_pepper_emulsion_pasta",
+        "fish": false,
+        "flavor_profile": [
+          "pecorino",
+          "svartpeppar"
+        ],
+        "ingredient_count": 5,
+        "method": "pot",
+        "primary_ingredient": "pasta",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "AI-författat receptutkast, inte provlagat och ännu inte import-/produktgranskat av Smako. Tider är författaruppskattningar, inte uppmätt provlagning. Medvetet ingrediensundantag: kärnan består av pasta, pecorino och svartpeppar. Peppar räknas inte i Smakos antal. Inget smör, grädde eller utfyllnad har lagts till för att nå en kvot. Salladerna är separata måltidskomponenter; ostens löpe är inte verifierad. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "citronsallad",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 5,
+            "id": "s1",
+            "ingredient_keys": [
+              "lagrad pecorino|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Väg ostbiten före ansning. Skär bort eventuell hård ytkant och finriv all återstående ost. Här används lagrad pecorino av fårmjölk; osten är inte verifierad som Pecorino Romano."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 4,
+            "id": "s2",
+            "ingredient_keys": [
+              "citronjuice|as_sold",
+              "olivolja|as_sold",
+              "sallad|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Skölj salladen och låt den rinna av. Blanda citronjuice och olivolja. Vänd ner salladen strax före servering."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 10,
+            "id": "s3",
+            "ingredient_keys": [
+              "lagrad pecorino|as_sold",
+              "salt|as_sold",
+              "svartpeppar|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "1800 ml",
+                1800.0
+              ]
+            ],
+            "text": "Lägg den redan finrivna lagrade pecorinon i en rymlig värmetålig skål. Krossa svartpepparn grovt. Koka upp 1800 ml vatten med salt i en bred kastrull."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 10,
+            "id": "s4",
+            "ingredient_keys": [
+              "pasta|dry",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Koka pastan till precis före al dente, omkring tio minuter eller enligt förpackningen. Rör ofta i den relativt lilla vattenmängden. Ta upp 300 ml stärkelserikt kokvatten innan pastan hälls av."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 3,
+            "id": "s5",
+            "ingredient_keys": [
+              "svartpeppar|dry"
+            ],
+            "parallel_group": null,
+            "text": "Rosta svartpepparn i en torr panna på medellåg värme en minut. Häll på 100 ml av kokvattnet, låt bubbla en minut och ta av pannan. Låt både resterande kokvatten och pannan svalna något; ostblandningen får inte hällas i en kokhet panna."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 4,
+            "id": "s6",
+            "ingredient_keys": [
+              "lagrad pecorino|as_sold",
+              "pasta|dry"
+            ],
+            "parallel_group": null,
+            "text": "Rör 80 ml av det ljumma, inte kokande, kokvattnet med den finrivna pecorinon till en tjock kräm. Vänd pastan i pepparvattnet och flytta sedan pastan till ostskålen. Arbeta ihop utanför spisen tills den täcks av en slät sås. Justera med 20 ml sparat kokvatten åt gången vid behov, inom den sparade mängden. Koka inte efter att osten blandats i."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 1,
+            "id": "s7",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Fördela genast på varma tallrikar och servera med salladen vid sidan."
+          }
+        ],
+        "total_minutes": 37,
+        "unmeasured_processes": [
+          {
+            "description": "Inköpt ostbit vägs före eventuell bortskärning av ytkant. Kvarvarande mängd och dess näring är inte uppmätta.",
+            "ingredient_keys": [
+              "lagrad pecorino|as_sold"
+            ],
+            "operation": "trim_before_cooking",
+            "step_id": "s1"
+          },
+          {
+            "description": "En del saltat stärkelsevatten sparas till såsen och resten hälls bort. Saltets och stärkelsens kvarhållna mängd är okänd.",
+            "ingredient_keys": [
+              "pasta|dry",
+              "salt|as_sold"
+            ],
+            "operation": "drain_after_cooking",
+            "step_id": "s4"
+          }
+        ],
+        "variant_id": "standard",
+        "vegetarian": true,
+        "version": "1.0.1"
+      },
+      "ingredients": [
+        {
+          "canonical_name": "pasta",
+          "component": "c1",
+          "form": "dry",
+          "name": "pasta",
+          "quantity": 360.0,
+          "quantity_max": 360.0,
+          "quantity_min": 360.0,
+          "quantity_step": 360.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "lagrad pecorino",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "lagrad pecorino",
+          "product_requirements": [
+            "pack:intake_all_round2_4d778ee01c81"
+          ],
+          "quantity": 150.0,
+          "quantity_max": 150.0,
+          "quantity_min": 150.0,
+          "quantity_step": 150.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "c1",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 3.0,
+          "quantity_max": 3.0,
+          "quantity_min": 3.0,
+          "quantity_step": 3.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 4.0,
+          "quantity_max": 4.0,
+          "quantity_min": 4.0,
+          "quantity_step": 4.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "sallad",
+          "component": "c2",
+          "form": "raw_edible",
+          "name": "sallad",
+          "product_requirements": [
+            "pack:intake_all_16d63b25fed0"
+          ],
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "olivolja",
+          "component": "c2",
+          "form": "as_sold",
+          "name": "olivolja",
+          "product_requirements": [
+            "pack:intake_all_expansion_86ac9b2c5ae6"
+          ],
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "citronjuice",
+          "component": "c2",
+          "form": "as_sold",
+          "name": "citronjuice",
+          "product_requirements": [
+            "pure_juice"
+          ],
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        }
+      ],
+      "instructions": [
+        "Väg ostbiten före ansning. Skär bort eventuell hård ytkant och finriv all återstående ost. Här används lagrad pecorino av fårmjölk; osten är inte verifierad som Pecorino Romano.",
+        "Skölj salladen och låt den rinna av. Blanda citronjuice och olivolja. Vänd ner salladen strax före servering.",
+        "Lägg den redan finrivna lagrade pecorinon i en rymlig värmetålig skål. Krossa svartpepparn grovt. Koka upp 1800 ml vatten med salt i en bred kastrull.",
+        "Koka pastan till precis före al dente, omkring tio minuter eller enligt förpackningen. Rör ofta i den relativt lilla vattenmängden. Ta upp 300 ml stärkelserikt kokvatten innan pastan hälls av.",
+        "Rosta svartpepparn i en torr panna på medellåg värme en minut. Häll på 100 ml av kokvattnet, låt bubbla en minut och ta av pannan. Låt både resterande kokvatten och pannan svalna något; ostblandningen får inte hällas i en kokhet panna.",
+        "Rör 80 ml av det ljumma, inte kokande, kokvattnet med den finrivna pecorinon till en tjock kräm. Vänd pastan i pepparvattnet och flytta sedan pastan till ostskålen. Arbeta ihop utanför spisen tills den täcks av en slät sås. Justera med 20 ml sparat kokvatten åt gången vid behov, inom den sparade mängden. Koka inte efter att osten blandats i.",
+        "Fördela genast på varma tallrikar och servera med salladen vid sidan."
+      ],
+      "name": "Cacio e pepe – med citronsallad – med lagrad pecorino",
+      "preparation": {
+        "family": "pecorino_pepper_emulsion_pasta",
+        "input_forms": {
+          "citronjuice": "as_sold",
+          "lagrad pecorino": "as_sold",
+          "olivolja": "as_sold",
+          "pasta": "dry",
+          "sallad": "raw_edible",
+          "salt": "as_sold",
+          "svartpeppar": "dry"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "c17af47ab0fe1ee83adf7775461fbced8519c20a193b18b4a40e9675165a5765",
+        "version": "smako-authored-losses-v3"
+      },
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 41,
+        "base_id": "smako-italian-pasta-cacio-pepe",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "pasta|dry",
+                "name": "Torr spaghetti",
+                "note": "",
+                "quantity": 360.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "lagrad pecorino|as_sold",
+                "name": "Lagrad pecorino i bit, vägd före ansning",
+                "note": "",
+                "quantity": 150.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "Svartpeppar",
+                "note": "",
+                "quantity": 3.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 4.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c1",
+            "name": "Pasta med ost- och pepparemulsion"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "sallad|raw_edible",
+                "name": "Sallad",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "olivolja|as_sold",
+                "name": "Olivolja",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "citronjuice|as_sold",
+                "name": "Citronjuice",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "bönor|cooked_drained",
+                "name": "Kokta och avrunna bönor",
+                "note": "",
+                "quantity": 400.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "tomat|raw_edible",
+                "name": "Tomat",
+                "note": "",
+                "quantity": 250.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "fänkål|raw_edible",
+                "name": "Fänkål",
+                "note": "",
+                "quantity": 200.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rödlök|raw_edible",
+                "name": "Rödlök",
+                "note": "",
+                "quantity": 40.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c2",
+            "name": "Citronklädd sallad"
+          }
+        ],
+        "content_sha256": "573cd0f55ce92aef984cac21e211d0de3170b15b37f17ee5f41a593ee6578b04",
+        "content_source": {
+          "active_minutes": 41,
+          "method_note": "Ingredienslistan anger hela insatsen, även den del som senare hälls eller silas bort. Förlusten är inte uppmätt. Näring och färdig portionsvikt är okända; receptet kan inte styrka valda närings- eller viktgränser. Inköp och personliga kostkrav kontrolleras för samtliga insatser.",
+          "pack_id": "reviewed-expansion-round2-stage14",
+          "priority": 1,
+          "proposal_id": "smako-italian-pasta-cacio-pepe",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "db7ab596c30cb77cff7aa0beaaae325f2dd0c6f5e95d64eafa27499e8edc7774",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "italian"
+        ],
+        "equipment": [
+          "kastrull",
+          "finrivjärn",
+          "skål",
+          "stekpanna"
+        ],
+        "estimated_minutes": 41,
+        "family": "pecorino_pepper_emulsion_pasta",
+        "fish": false,
+        "flavor_profile": [
+          "pecorino",
+          "svartpeppar"
+        ],
+        "ingredient_count": 9,
+        "method": "pot",
+        "primary_ingredient": "pasta",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "AI-författat receptutkast, inte provlagat och ännu inte import-/produktgranskat av Smako. Tider är författaruppskattningar, inte uppmätt provlagning. Medvetet ingrediensundantag: kärnan består av pasta, pecorino och svartpeppar. Peppar räknas inte i Smakos antal. Inget smör, grädde eller utfyllnad har lagts till för att nå en kvot. Salladerna är separata måltidskomponenter; ostens löpe är inte verifierad. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "bön- och fänkålssallad",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 5,
+            "id": "s1",
+            "ingredient_keys": [
+              "lagrad pecorino|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Väg ostbiten före ansning. Skär bort eventuell hård ytkant och finriv all återstående ost. Här används lagrad pecorino av fårmjölk; osten är inte verifierad som Pecorino Romano."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 8,
+            "id": "s2",
+            "ingredient_keys": [
+              "bönor|cooked_drained",
+              "citronjuice|as_sold",
+              "fänkål|raw_edible",
+              "olivolja|as_sold",
+              "rödlök|raw_edible",
+              "sallad|raw_edible",
+              "tomat|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Skölj salladen och låt den rinna av. Blanda citronjuice och olivolja. Skiva fänkål och rödlök mycket tunt, tärna tomaterna och blanda grönsakerna och de avrunna bönorna med dressingen och salladen."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 10,
+            "id": "s3",
+            "ingredient_keys": [
+              "lagrad pecorino|as_sold",
+              "salt|as_sold",
+              "svartpeppar|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "1800 ml",
+                1800.0
+              ]
+            ],
+            "text": "Lägg den redan finrivna lagrade pecorinon i en rymlig värmetålig skål. Krossa svartpepparn grovt. Koka upp 1800 ml vatten med salt i en bred kastrull."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 10,
+            "id": "s4",
+            "ingredient_keys": [
+              "pasta|dry",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Koka pastan till precis före al dente, omkring tio minuter eller enligt förpackningen. Rör ofta i den relativt lilla vattenmängden. Ta upp 300 ml stärkelserikt kokvatten innan pastan hälls av."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 3,
+            "id": "s5",
+            "ingredient_keys": [
+              "svartpeppar|dry"
+            ],
+            "parallel_group": null,
+            "text": "Rosta svartpepparn i en torr panna på medellåg värme en minut. Häll på 100 ml av kokvattnet, låt bubbla en minut och ta av pannan. Låt både resterande kokvatten och pannan svalna något; ostblandningen får inte hällas i en kokhet panna."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 4,
+            "id": "s6",
+            "ingredient_keys": [
+              "lagrad pecorino|as_sold",
+              "pasta|dry"
+            ],
+            "parallel_group": null,
+            "text": "Rör 80 ml av det ljumma, inte kokande, kokvattnet med den finrivna pecorinon till en tjock kräm. Vänd pastan i pepparvattnet och flytta sedan pastan till ostskålen. Arbeta ihop utanför spisen tills den täcks av en slät sås. Justera med 20 ml sparat kokvatten åt gången vid behov, inom den sparade mängden. Koka inte efter att osten blandats i."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 1,
+            "id": "s7",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Fördela genast på varma tallrikar och servera med salladen vid sidan."
+          }
+        ],
+        "total_minutes": 41,
+        "unmeasured_processes": [
+          {
+            "description": "Inköpt ostbit vägs före eventuell bortskärning av ytkant. Kvarvarande mängd och dess näring är inte uppmätta.",
+            "ingredient_keys": [
+              "lagrad pecorino|as_sold"
+            ],
+            "operation": "trim_before_cooking",
+            "step_id": "s1"
+          },
+          {
+            "description": "En del saltat stärkelsevatten sparas till såsen och resten hälls bort. Saltets och stärkelsens kvarhållna mängd är okänd.",
+            "ingredient_keys": [
+              "pasta|dry",
+              "salt|as_sold"
+            ],
+            "operation": "drain_after_cooking",
+            "step_id": "s4"
+          }
+        ],
+        "variant_id": "extended",
+        "vegetarian": true,
+        "version": "1.0.1"
+      },
+      "ingredients": [
+        {
+          "canonical_name": "pasta",
+          "component": "c1",
+          "form": "dry",
+          "name": "pasta",
+          "quantity": 360.0,
+          "quantity_max": 360.0,
+          "quantity_min": 360.0,
+          "quantity_step": 360.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "lagrad pecorino",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "lagrad pecorino",
+          "product_requirements": [
+            "pack:intake_all_round2_4d778ee01c81"
+          ],
+          "quantity": 150.0,
+          "quantity_max": 150.0,
+          "quantity_min": 150.0,
+          "quantity_step": 150.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "c1",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 3.0,
+          "quantity_max": 3.0,
+          "quantity_min": 3.0,
+          "quantity_step": 3.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 4.0,
+          "quantity_max": 4.0,
+          "quantity_min": 4.0,
+          "quantity_step": 4.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "sallad",
+          "component": "c2",
+          "form": "raw_edible",
+          "name": "sallad",
+          "product_requirements": [
+            "pack:intake_all_16d63b25fed0"
+          ],
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "olivolja",
+          "component": "c2",
+          "form": "as_sold",
+          "name": "olivolja",
+          "product_requirements": [
+            "pack:intake_all_expansion_86ac9b2c5ae6"
+          ],
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "citronjuice",
+          "component": "c2",
+          "form": "as_sold",
+          "name": "citronjuice",
+          "product_requirements": [
+            "pure_juice"
+          ],
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "bönor",
+          "component": "c2",
+          "form": "cooked_drained",
+          "name": "bönor",
+          "product_requirements": [
+            "white_beans"
+          ],
+          "quantity": 400.0,
+          "quantity_max": 400.0,
+          "quantity_min": 400.0,
+          "quantity_step": 400.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "tomat",
+          "component": "c2",
+          "form": "raw_edible",
+          "name": "tomat",
+          "quantity": 250.0,
+          "quantity_max": 250.0,
+          "quantity_min": 250.0,
+          "quantity_step": 250.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "fänkål",
+          "component": "c2",
+          "form": "raw_edible",
+          "name": "fänkål",
+          "product_requirements": [
+            "pack:intake_all_2503a71baee6"
+          ],
+          "quantity": 200.0,
+          "quantity_max": 200.0,
+          "quantity_min": 200.0,
+          "quantity_step": 200.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rödlök",
+          "component": "c2",
+          "form": "raw_edible",
+          "name": "rödlök",
+          "quantity": 40.0,
+          "quantity_max": 40.0,
+          "quantity_min": 40.0,
+          "quantity_step": 40.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Väg ostbiten före ansning. Skär bort eventuell hård ytkant och finriv all återstående ost. Här används lagrad pecorino av fårmjölk; osten är inte verifierad som Pecorino Romano.",
+        "Skölj salladen och låt den rinna av. Blanda citronjuice och olivolja. Skiva fänkål och rödlök mycket tunt, tärna tomaterna och blanda grönsakerna och de avrunna bönorna med dressingen och salladen.",
+        "Lägg den redan finrivna lagrade pecorinon i en rymlig värmetålig skål. Krossa svartpepparn grovt. Koka upp 1800 ml vatten med salt i en bred kastrull.",
+        "Koka pastan till precis före al dente, omkring tio minuter eller enligt förpackningen. Rör ofta i den relativt lilla vattenmängden. Ta upp 300 ml stärkelserikt kokvatten innan pastan hälls av.",
+        "Rosta svartpepparn i en torr panna på medellåg värme en minut. Häll på 100 ml av kokvattnet, låt bubbla en minut och ta av pannan. Låt både resterande kokvatten och pannan svalna något; ostblandningen får inte hällas i en kokhet panna.",
+        "Rör 80 ml av det ljumma, inte kokande, kokvattnet med den finrivna pecorinon till en tjock kräm. Vänd pastan i pepparvattnet och flytta sedan pastan till ostskålen. Arbeta ihop utanför spisen tills den täcks av en slät sås. Justera med 20 ml sparat kokvatten åt gången vid behov, inom den sparade mängden. Koka inte efter att osten blandats i.",
+        "Fördela genast på varma tallrikar och servera med salladen vid sidan."
+      ],
+      "name": "Cacio e pepe – med bön-, fänkåls- och tomatsallad – med lagrad pecorino",
+      "preparation": {
+        "family": "pecorino_pepper_emulsion_pasta",
+        "input_forms": {
+          "bönor": "cooked_drained",
+          "citronjuice": "as_sold",
+          "fänkål": "raw_edible",
+          "lagrad pecorino": "as_sold",
+          "olivolja": "as_sold",
+          "pasta": "dry",
+          "rödlök": "raw_edible",
+          "sallad": "raw_edible",
+          "salt": "as_sold",
+          "svartpeppar": "dry",
+          "tomat": "raw_edible"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "573cd0f55ce92aef984cac21e211d0de3170b15b37f17ee5f41a593ee6578b04",
+        "version": "smako-authored-losses-v3"
+      },
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 42,
+        "base_id": "smako-mexican-torta-ahogada",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "fläskkarré|raw_edible",
+                "name": "Fläskkarré",
+                "note": "",
+                "quantity": 750.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "Rapsolja",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 3.0,
+                "unit": "g"
+              }
+            ],
+            "id": "pork",
+            "name": "Långsjudet och brynt fläsk"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "tomat|raw_edible",
+                "name": "Tomat",
+                "note": "",
+                "quantity": 800.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "Vitlök",
+                "note": "",
+                "quantity": 16.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "äppelcidervinäger|as_sold",
+                "name": "Äppelcidervinäger",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "oregano|dry",
+                "name": "Oregano",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              }
+            ],
+            "id": "salsa",
+            "name": "Kokt tomatsalsa"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "surdegsfralla|as_sold",
+                "name": "Färdigbakade svenska surdegsfrallor, 4 × 80 g",
+                "note": "",
+                "quantity": 320.0,
+                "unit": "g"
+              }
+            ],
+            "id": "bread",
+            "name": "Hårdskorpat bröd"
+          }
+        ],
+        "content_sha256": "685b813a21cb2e4eecfd8019bdd714b11e830f18680687ef5e94ba36e4cd0dce",
+        "content_source": {
+          "active_minutes": 42,
+          "method_note": "Ingredienslistan anger hela insatsen, även den del som senare hälls eller silas bort. Förlusten är inte uppmätt. Näring och färdig portionsvikt är okända; receptet kan inte styrka valda närings- eller viktgränser. Inköp och personliga kostkrav kontrolleras för samtliga insatser.",
+          "pack_id": "reviewed-expansion-round2-stage14",
+          "priority": 1,
+          "proposal_id": "smako-mexican-torta-ahogada",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "db7ab596c30cb77cff7aa0beaaae325f2dd0c6f5e95d64eafa27499e8edc7774",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "mexican"
+        ],
+        "equipment": [
+          "gryta",
+          "mixer",
+          "stekpanna",
+          "termometer"
+        ],
+        "estimated_minutes": 187,
+        "family": "dränkt fläsksmörgås med kokt salsa",
+        "fish": false,
+        "flavor_profile": [
+          "tomat",
+          "oregano"
+        ],
+        "ingredient_count": 7,
+        "method": "pot",
+        "primary_ingredient": "fläskkarré",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "AI-författat receptutkast, inte provlagat och ännu inte import-/produktgranskat av Smako. Tider är författaruppskattningar. Kostavsikt är inte ett produkt- eller allergengodkännande. Svensk fast surdegsfralla ersätter birote och är en uttalad anpassning. Fläsket tillagas från rå karré i detta recept; färdiga carnitas förutsätts inte. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "hårdskorpat bröd dränkt i tomatsalsa",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 8,
+            "id": "s1",
+            "ingredient_keys": [
+              "fläskkarré|raw_edible",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "500 ml",
+                500.0
+              ]
+            ],
+            "text": "Skär karrén i stora bitar. Lägg i gryta med köttets salt och 500 ml vatten. Koka upp och sänk värmen; skumma inte bort något."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 55,
+            "id": "s2",
+            "ingredient_keys": [
+              "fläskkarré|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud köttet under lock i 55 minuter."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 2,
+            "id": "s3",
+            "ingredient_keys": [
+              "fläskkarré|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "100 ml",
+                100.0
+              ]
+            ],
+            "text": "Vänd köttbitarna och kontrollera spadet. Tillsätt 100 ml vatten om det behövs så grytan inte kokar torr."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 55,
+            "id": "s4",
+            "ingredient_keys": [
+              "fläskkarré|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud ytterligare 55 minuter under lock. Köttet ska bli helt genomlagat och mycket mört."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 15,
+            "id": "s5",
+            "ingredient_keys": [
+              "fläskkarré|raw_edible",
+              "rapsolja|as_sold",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Kontrollera att köttet är minst 72 °C och faller isär lätt; förläng annars sjudningen. Lyft upp och dra i fibrer. Kokspadet används inte i denna version. Bryn allt kött i köttets rapsolja under omrörning i tio minuter; behåll oljan och köttsaften i fyllningen."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 6,
+            "id": "s6",
+            "ingredient_keys": [
+              "oregano|dry",
+              "salt|as_sold",
+              "tomat|raw_edible",
+              "vitlök|raw_edible",
+              "äppelcidervinäger|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "300 ml",
+                300.0
+              ]
+            ],
+            "text": "Grovhacka tomaterna och skala vitlöken. Lägg i separat gryta med oregano, vinäger, salsans salt och 300 ml vatten. Koka upp."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 20,
+            "id": "s7",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Sjud tomatsalsan 20 minuter tills tomat och vitlök är helt mjuka. Såsen ska vara lös nog att hälla över brödet, inte en torr fyllning."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 3,
+            "id": "s8",
+            "ingredient_keys": [
+              "tomat|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Mixa salsan slät med stavmixer och värm till kokpunkten igen. Håll varm på låg värme."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 2,
+            "id": "s9",
+            "ingredient_keys": [
+              "surdegsfralla|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sätt ugnen på 200 °C och lägg de färdigbakade surdegsfrallorna på galler. Brödet är en svensk anpassning, inte traditionellt birote. Använd inte rå deg eller ogräddat fryst bakeoffbröd."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 10,
+            "id": "s10",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Låt ugnen bli varm, cirka tio minuter."
+          },
+          {
+            "depends_on": [
+              "s10"
+            ],
+            "duration_minutes": 1,
+            "id": "s11",
+            "ingredient_keys": [
+              "surdegsfralla|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sätt in frallorna i ugnen."
+          },
+          {
+            "depends_on": [
+              "s11"
+            ],
+            "duration_minutes": 5,
+            "id": "s12",
+            "ingredient_keys": [
+              "surdegsfralla|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Värm frallorna fem minuter tills ytan är frasig; de är redan färdigbakade."
+          },
+          {
+            "depends_on": [
+              "s12"
+            ],
+            "duration_minutes": 5,
+            "id": "s13",
+            "ingredient_keys": [
+              "surdegsfralla|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Ta ut brödet. Dela frallorna nästan helt igenom. Fyll med allt fläsk. Lägg i djupa tallrikar. Häll all varm tomatsalsa över och runt bröden först precis före servering; brödet ska inte stekas efter dränkningen. Fördela även all eventuell limejuice från löken över fyllningen."
+          }
+        ],
+        "total_minutes": 187,
+        "unmeasured_processes": [
+          {
+            "description": "Saltat kokspad blir över och serveras inte. Köttets kvarhållna vätska, salt och näring är okända.",
+            "ingredient_keys": [
+              "fläskkarré|raw_edible",
+              "salt|as_sold"
+            ],
+            "operation": "drain_after_cooking",
+            "step_id": "s5"
+          }
+        ],
+        "variant_id": "simple",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 145
+      },
+      "ingredients": [
+        {
+          "canonical_name": "fläskkarré",
+          "component": "pork",
+          "form": "raw_edible",
+          "name": "fläskkarré",
+          "product_requirements": [
+            "pack:intake_all_expansion_487e551f21df"
+          ],
+          "quantity": 750.0,
+          "quantity_max": 750.0,
+          "quantity_min": 750.0,
+          "quantity_step": 750.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "pork",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "pork",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "tomat",
+          "component": "salsa",
+          "form": "raw_edible",
+          "name": "tomat",
+          "quantity": 800.0,
+          "quantity_max": 800.0,
+          "quantity_min": 800.0,
+          "quantity_step": 800.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "salsa",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 16.0,
+          "quantity_max": 16.0,
+          "quantity_min": 16.0,
+          "quantity_step": 16.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "äppelcidervinäger",
+          "component": "salsa",
+          "form": "as_sold",
+          "name": "äppelcidervinäger",
+          "product_requirements": [
+            "pack:intake_all_be24da3ca83d"
+          ],
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 25.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "oregano",
+          "component": "salsa",
+          "form": "dry",
+          "name": "oregano",
+          "product_requirements": [
+            "dried_leaf"
+          ],
+          "quantity": 2.0,
+          "quantity_max": 2.0,
+          "quantity_min": 2.0,
+          "quantity_step": 2.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "surdegsfralla",
+          "component": "bread",
+          "form": "as_sold",
+          "name": "surdegsfralla",
+          "product_requirements": [
+            "pack:intake_all_round2_92b88e0a5856"
+          ],
+          "quantity": 320.0,
+          "quantity_max": 320.0,
+          "quantity_min": 320.0,
+          "quantity_step": 320.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Skär karrén i stora bitar. Lägg i gryta med köttets salt och 500 ml vatten. Koka upp och sänk värmen; skumma inte bort något.",
+        "Sjud köttet under lock i 55 minuter.",
+        "Vänd köttbitarna och kontrollera spadet. Tillsätt 100 ml vatten om det behövs så grytan inte kokar torr.",
+        "Sjud ytterligare 55 minuter under lock. Köttet ska bli helt genomlagat och mycket mört.",
+        "Kontrollera att köttet är minst 72 °C och faller isär lätt; förläng annars sjudningen. Lyft upp och dra i fibrer. Kokspadet används inte i denna version. Bryn allt kött i köttets rapsolja under omrörning i tio minuter; behåll oljan och köttsaften i fyllningen.",
+        "Grovhacka tomaterna och skala vitlöken. Lägg i separat gryta med oregano, vinäger, salsans salt och 300 ml vatten. Koka upp.",
+        "Sjud tomatsalsan 20 minuter tills tomat och vitlök är helt mjuka. Såsen ska vara lös nog att hälla över brödet, inte en torr fyllning.",
+        "Mixa salsan slät med stavmixer och värm till kokpunkten igen. Håll varm på låg värme.",
+        "Sätt ugnen på 200 °C och lägg de färdigbakade surdegsfrallorna på galler. Brödet är en svensk anpassning, inte traditionellt birote. Använd inte rå deg eller ogräddat fryst bakeoffbröd.",
+        "Låt ugnen bli varm, cirka tio minuter.",
+        "Sätt in frallorna i ugnen.",
+        "Värm frallorna fem minuter tills ytan är frasig; de är redan färdigbakade.",
+        "Ta ut brödet. Dela frallorna nästan helt igenom. Fyll med allt fläsk. Lägg i djupa tallrikar. Häll all varm tomatsalsa över och runt bröden först precis före servering; brödet ska inte stekas efter dränkningen. Fördela även all eventuell limejuice från löken över fyllningen."
+      ],
+      "name": "Torta ahogada – dränkt fläsksmörgås – enkel – med svensk surdegsfralla",
+      "preparation": {
+        "family": "dränkt fläsksmörgås med kokt salsa",
+        "input_forms": {
+          "fläskkarré": "raw_edible",
+          "oregano": "dry",
+          "rapsolja": "as_sold",
+          "salt": "as_sold",
+          "surdegsfralla": "as_sold",
+          "tomat": "raw_edible",
+          "vitlök": "raw_edible",
+          "äppelcidervinäger": "as_sold"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "685b813a21cb2e4eecfd8019bdd714b11e830f18680687ef5e94ba36e4cd0dce",
+        "version": "smako-authored-losses-v3"
+      },
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 50,
+        "base_id": "smako-mexican-torta-ahogada",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "fläskkarré|raw_edible",
+                "name": "Fläskkarré",
+                "note": "",
+                "quantity": 750.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "Rapsolja",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 3.0,
+                "unit": "g"
+              }
+            ],
+            "id": "pork",
+            "name": "Långsjudet och brynt fläsk"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "tomat|raw_edible",
+                "name": "Tomat",
+                "note": "",
+                "quantity": 800.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "Vitlök",
+                "note": "",
+                "quantity": 16.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "äppelcidervinäger|as_sold",
+                "name": "Äppelcidervinäger",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "oregano|dry",
+                "name": "Oregano",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              }
+            ],
+            "id": "salsa",
+            "name": "Kokt tomatsalsa"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "surdegsfralla|as_sold",
+                "name": "Färdigbakade svenska surdegsfrallor, 4 × 80 g",
+                "note": "",
+                "quantity": 320.0,
+                "unit": "g"
+              }
+            ],
+            "id": "bread",
+            "name": "Hårdskorpat bröd"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "svarta bönor|cooked_drained",
+                "name": "Svarta bönor",
+                "note": "",
+                "quantity": 240.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "Rapsolja",
+                "note": "",
+                "quantity": 8.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "beans",
+            "name": "Bönkräm"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "rödlök|raw_edible",
+                "name": "Rödlök",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "limejuice|as_sold",
+                "name": "Limejuice",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "pickle",
+            "name": "Limepicklad lök"
+          }
+        ],
+        "content_sha256": "0abfda429f76ec10fa61bbc461d59b7cc1abb224d3ae21e9fa3728d27608363b",
+        "content_source": {
+          "active_minutes": 50,
+          "method_note": "Ingredienslistan anger hela insatsen, även den del som senare hälls eller silas bort. Förlusten är inte uppmätt. Näring och färdig portionsvikt är okända; receptet kan inte styrka valda närings- eller viktgränser. Inköp och personliga kostkrav kontrolleras för samtliga insatser.",
+          "pack_id": "reviewed-expansion-round2-stage14",
+          "priority": 1,
+          "proposal_id": "smako-mexican-torta-ahogada",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "db7ab596c30cb77cff7aa0beaaae325f2dd0c6f5e95d64eafa27499e8edc7774",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "mexican"
+        ],
+        "equipment": [
+          "gryta",
+          "mixer",
+          "stekpanna",
+          "termometer"
+        ],
+        "estimated_minutes": 195,
+        "family": "dränkt fläsksmörgås med kokt salsa",
+        "fish": false,
+        "flavor_profile": [
+          "tomat",
+          "oregano"
+        ],
+        "ingredient_count": 10,
+        "method": "pot",
+        "primary_ingredient": "fläskkarré",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "AI-författat receptutkast, inte provlagat och ännu inte import-/produktgranskat av Smako. Tider är författaruppskattningar. Kostavsikt är inte ett produkt- eller allergengodkännande. Svensk fast surdegsfralla ersätter birote och är en uttalad anpassning. Fläsket tillagas från rå karré i detta recept; färdiga carnitas förutsätts inte. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "hårdskorpat bröd dränkt i tomatsalsa",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 8,
+            "id": "s1",
+            "ingredient_keys": [
+              "fläskkarré|raw_edible",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "500 ml",
+                500.0
+              ]
+            ],
+            "text": "Skär karrén i stora bitar. Lägg i gryta med köttets salt och 500 ml vatten. Koka upp och sänk värmen; skumma inte bort något."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 55,
+            "id": "s2",
+            "ingredient_keys": [
+              "fläskkarré|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud köttet under lock i 55 minuter."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 2,
+            "id": "s3",
+            "ingredient_keys": [
+              "fläskkarré|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "100 ml",
+                100.0
+              ]
+            ],
+            "text": "Vänd köttbitarna och kontrollera spadet. Tillsätt 100 ml vatten om det behövs så grytan inte kokar torr."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 55,
+            "id": "s4",
+            "ingredient_keys": [
+              "fläskkarré|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud ytterligare 55 minuter under lock. Köttet ska bli helt genomlagat och mycket mört."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 15,
+            "id": "s5",
+            "ingredient_keys": [
+              "fläskkarré|raw_edible",
+              "rapsolja|as_sold",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Kontrollera att köttet är minst 72 °C och faller isär lätt; förläng annars sjudningen. Lyft upp och dra i fibrer. Kokspadet används inte i denna version. Bryn allt kött i köttets rapsolja under omrörning i tio minuter; behåll oljan och köttsaften i fyllningen."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 6,
+            "id": "s6",
+            "ingredient_keys": [
+              "oregano|dry",
+              "salt|as_sold",
+              "tomat|raw_edible",
+              "vitlök|raw_edible",
+              "äppelcidervinäger|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "300 ml",
+                300.0
+              ]
+            ],
+            "text": "Grovhacka tomaterna och skala vitlöken. Lägg i separat gryta med oregano, vinäger, salsans salt och 300 ml vatten. Koka upp."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 20,
+            "id": "s7",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Sjud tomatsalsan 20 minuter tills tomat och vitlök är helt mjuka. Såsen ska vara lös nog att hälla över brödet, inte en torr fyllning."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 3,
+            "id": "s8",
+            "ingredient_keys": [
+              "tomat|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Mixa salsan slät med stavmixer och värm till kokpunkten igen. Håll varm på låg värme."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 8,
+            "id": "s9",
+            "ingredient_keys": [
+              "limejuice|as_sold",
+              "rapsolja|as_sold",
+              "rödlök|raw_edible",
+              "svarta bönor|cooked_drained"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "50 ml",
+                50.0
+              ]
+            ],
+            "text": "Skiva rödlöken tunt, vänd med limejuicen och låt dra medan bönorna görs. Värm bönornas rapsolja i en liten kastrull, lägg i de avrunna bönorna och 50 ml vatten. Mosa och värm under omrörning till en bredbar kräm."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 2,
+            "id": "s10",
+            "ingredient_keys": [
+              "surdegsfralla|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sätt ugnen på 200 °C och lägg de färdigbakade surdegsfrallorna på galler. Brödet är en svensk anpassning, inte traditionellt birote. Använd inte rå deg eller ogräddat fryst bakeoffbröd."
+          },
+          {
+            "depends_on": [
+              "s10"
+            ],
+            "duration_minutes": 10,
+            "id": "s11",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Låt ugnen bli varm, cirka tio minuter."
+          },
+          {
+            "depends_on": [
+              "s11"
+            ],
+            "duration_minutes": 1,
+            "id": "s12",
+            "ingredient_keys": [
+              "surdegsfralla|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sätt in frallorna i ugnen."
+          },
+          {
+            "depends_on": [
+              "s12"
+            ],
+            "duration_minutes": 5,
+            "id": "s13",
+            "ingredient_keys": [
+              "surdegsfralla|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Värm frallorna fem minuter tills ytan är frasig; de är redan färdigbakade."
+          },
+          {
+            "depends_on": [
+              "s13"
+            ],
+            "duration_minutes": 5,
+            "id": "s14",
+            "ingredient_keys": [
+              "surdegsfralla|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Ta ut brödet. Dela frallorna nästan helt igenom. Bred bönkräm i dem och lägg på fläsk och den picklade löken. Lägg i djupa tallrikar. Häll all varm tomatsalsa över och runt bröden först precis före servering; brödet ska inte stekas efter dränkningen. Fördela även all eventuell limejuice från löken över fyllningen."
+          }
+        ],
+        "total_minutes": 195,
+        "unmeasured_processes": [
+          {
+            "description": "Saltat kokspad blir över och serveras inte. Köttets kvarhållna vätska, salt och näring är okända.",
+            "ingredient_keys": [
+              "fläskkarré|raw_edible",
+              "salt|as_sold"
+            ],
+            "operation": "drain_after_cooking",
+            "step_id": "s5"
+          }
+        ],
+        "variant_id": "standard",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 145
+      },
+      "ingredients": [
+        {
+          "canonical_name": "fläskkarré",
+          "component": "pork",
+          "form": "raw_edible",
+          "name": "fläskkarré",
+          "product_requirements": [
+            "pack:intake_all_expansion_487e551f21df"
+          ],
+          "quantity": 750.0,
+          "quantity_max": 750.0,
+          "quantity_min": 750.0,
+          "quantity_step": 750.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "pork",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 28.0,
+          "quantity_max": 28.0,
+          "quantity_min": 28.0,
+          "quantity_step": 28.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "pork",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "tomat",
+          "component": "salsa",
+          "form": "raw_edible",
+          "name": "tomat",
+          "quantity": 800.0,
+          "quantity_max": 800.0,
+          "quantity_min": 800.0,
+          "quantity_step": 800.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "salsa",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 16.0,
+          "quantity_max": 16.0,
+          "quantity_min": 16.0,
+          "quantity_step": 16.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "äppelcidervinäger",
+          "component": "salsa",
+          "form": "as_sold",
+          "name": "äppelcidervinäger",
+          "product_requirements": [
+            "pack:intake_all_be24da3ca83d"
+          ],
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 25.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "oregano",
+          "component": "salsa",
+          "form": "dry",
+          "name": "oregano",
+          "product_requirements": [
+            "dried_leaf"
+          ],
+          "quantity": 2.0,
+          "quantity_max": 2.0,
+          "quantity_min": 2.0,
+          "quantity_step": 2.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "surdegsfralla",
+          "component": "bread",
+          "form": "as_sold",
+          "name": "surdegsfralla",
+          "product_requirements": [
+            "pack:intake_all_round2_92b88e0a5856"
+          ],
+          "quantity": 320.0,
+          "quantity_max": 320.0,
+          "quantity_min": 320.0,
+          "quantity_step": 320.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svarta bönor",
+          "component": "beans",
+          "form": "cooked_drained",
+          "name": "svarta bönor",
+          "quantity": 240.0,
+          "quantity_max": 240.0,
+          "quantity_min": 240.0,
+          "quantity_step": 240.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rödlök",
+          "component": "pickle",
+          "form": "raw_edible",
+          "name": "rödlök",
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "limejuice",
+          "component": "pickle",
+          "form": "as_sold",
+          "name": "limejuice",
+          "product_requirements": [
+            "pure_juice"
+          ],
+          "quantity": 30.0,
+          "quantity_max": 30.0,
+          "quantity_min": 30.0,
+          "quantity_step": 30.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        }
+      ],
+      "instructions": [
+        "Skär karrén i stora bitar. Lägg i gryta med köttets salt och 500 ml vatten. Koka upp och sänk värmen; skumma inte bort något.",
+        "Sjud köttet under lock i 55 minuter.",
+        "Vänd köttbitarna och kontrollera spadet. Tillsätt 100 ml vatten om det behövs så grytan inte kokar torr.",
+        "Sjud ytterligare 55 minuter under lock. Köttet ska bli helt genomlagat och mycket mört.",
+        "Kontrollera att köttet är minst 72 °C och faller isär lätt; förläng annars sjudningen. Lyft upp och dra i fibrer. Kokspadet används inte i denna version. Bryn allt kött i köttets rapsolja under omrörning i tio minuter; behåll oljan och köttsaften i fyllningen.",
+        "Grovhacka tomaterna och skala vitlöken. Lägg i separat gryta med oregano, vinäger, salsans salt och 300 ml vatten. Koka upp.",
+        "Sjud tomatsalsan 20 minuter tills tomat och vitlök är helt mjuka. Såsen ska vara lös nog att hälla över brödet, inte en torr fyllning.",
+        "Mixa salsan slät med stavmixer och värm till kokpunkten igen. Håll varm på låg värme.",
+        "Skiva rödlöken tunt, vänd med limejuicen och låt dra medan bönorna görs. Värm bönornas rapsolja i en liten kastrull, lägg i de avrunna bönorna och 50 ml vatten. Mosa och värm under omrörning till en bredbar kräm.",
+        "Sätt ugnen på 200 °C och lägg de färdigbakade surdegsfrallorna på galler. Brödet är en svensk anpassning, inte traditionellt birote. Använd inte rå deg eller ogräddat fryst bakeoffbröd.",
+        "Låt ugnen bli varm, cirka tio minuter.",
+        "Sätt in frallorna i ugnen.",
+        "Värm frallorna fem minuter tills ytan är frasig; de är redan färdigbakade.",
+        "Ta ut brödet. Dela frallorna nästan helt igenom. Bred bönkräm i dem och lägg på fläsk och den picklade löken. Lägg i djupa tallrikar. Häll all varm tomatsalsa över och runt bröden först precis före servering; brödet ska inte stekas efter dränkningen. Fördela även all eventuell limejuice från löken över fyllningen."
+      ],
+      "name": "Torta ahogada – dränkt fläsksmörgås – standard – med svensk surdegsfralla",
+      "preparation": {
+        "family": "dränkt fläsksmörgås med kokt salsa",
+        "input_forms": {
+          "fläskkarré": "raw_edible",
+          "limejuice": "as_sold",
+          "oregano": "dry",
+          "rapsolja": "as_sold",
+          "rödlök": "raw_edible",
+          "salt": "as_sold",
+          "surdegsfralla": "as_sold",
+          "svarta bönor": "cooked_drained",
+          "tomat": "raw_edible",
+          "vitlök": "raw_edible",
+          "äppelcidervinäger": "as_sold"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "0abfda429f76ec10fa61bbc461d59b7cc1abb224d3ae21e9fa3728d27608363b",
+        "version": "smako-authored-losses-v3"
+      },
+      "servings": 4
+    }
+  ]
+}

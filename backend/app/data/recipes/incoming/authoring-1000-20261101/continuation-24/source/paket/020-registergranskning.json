@@ -1,0 +1,6466 @@
+{
+  "schema_version": "smako-recipe-authoring-v1",
+  "pack_id": "smako-expansion-1000-20261101-020",
+  "recipes": [
+    {
+      "base_id": "smako-greek-horiatiki",
+      "cuisine": "greek",
+      "meal_type": "dinner",
+      "version": "1.0.0",
+      "variant_id": "simple",
+      "name": "Horiatiki – grekisk bondsallad med bröd – enkel",
+      "servings": 4,
+      "family": "rå grönsallad med feta",
+      "primary": "fetaost",
+      "method": "salad",
+      "side": "bröd",
+      "flavor": [
+        "oregano",
+        "olivolja"
+      ],
+      "equipment": [
+        "kniv",
+        "skärbräda",
+        "salladsskål"
+      ],
+      "components": [
+        {
+          "id": "sallad",
+          "name": "Rå bondsallad",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 650,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 400,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka"
+            },
+            {
+              "name": "fetaost",
+              "form": "as_sold",
+              "quantity": 280,
+              "unit": "g",
+              "role": "primary",
+              "label": "Fetaost"
+            },
+            {
+              "name": "oliver",
+              "form": "preserved_drained",
+              "quantity": 90,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Oliver"
+            },
+            {
+              "name": "olivolja",
+              "form": "as_sold",
+              "quantity": 45,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Olivolja"
+            },
+            {
+              "name": "oregano",
+              "form": "dry",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Oregano"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            }
+          ]
+        },
+        {
+          "id": "brod",
+          "name": "Bröd vid sidan",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 320,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Skölj grönsakerna. Skär tomat i klyftor och gurka i grova bitar; samla tomatsaften i skålen.",
+          "uses": [
+            "tomat",
+            "gurka"
+          ],
+          "minutes": 9,
+          "passive": false,
+          "after": []
+        },
+        {
+          "text": "Vänd grönsakerna med oliver, olivolja, oregano och den angivna saltmängden. Lägg fetaosten i stora skivor ovanpå. Låt brödet vara separat så det inte blir en blöt brödsallad.",
+          "uses": [
+            "tomat",
+            "gurka",
+            "fetaost",
+            "oliver",
+            "olivolja",
+            "oregano",
+            "salt"
+          ],
+          "minutes": 3,
+          "passive": false,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Skär brödet och fördela hela salladen, all dressing och brödet mellan fyra portioner. Servera direkt; ingen kyld animalisk råvara ska tillagas i detta recept.",
+          "uses": [
+            "tomat",
+            "gurka",
+            "fetaost",
+            "oliver",
+            "olivolja",
+            "oregano",
+            "salt",
+            "bröd"
+          ],
+          "minutes": 3,
+          "passive": false,
+          "after": [
+            2
+          ]
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Utökad variant tillför kikärtor för mättnad och kapris; den beskrivs som vardagsutökning, inte historisk standard."
+    },
+    {
+      "base_id": "smako-greek-horiatiki",
+      "cuisine": "greek",
+      "meal_type": "dinner",
+      "version": "1.0.0",
+      "variant_id": "standard",
+      "name": "Horiatiki – grekisk bondsallad med bröd – standard",
+      "servings": 4,
+      "family": "rå grönsallad med feta",
+      "primary": "fetaost",
+      "method": "salad",
+      "side": "bröd",
+      "flavor": [
+        "oregano",
+        "olivolja"
+      ],
+      "equipment": [
+        "kniv",
+        "skärbräda",
+        "salladsskål"
+      ],
+      "components": [
+        {
+          "id": "sallad",
+          "name": "Rå bondsallad",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 650,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 400,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka"
+            },
+            {
+              "name": "fetaost",
+              "form": "as_sold",
+              "quantity": 280,
+              "unit": "g",
+              "role": "primary",
+              "label": "Fetaost"
+            },
+            {
+              "name": "oliver",
+              "form": "preserved_drained",
+              "quantity": 90,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Oliver"
+            },
+            {
+              "name": "olivolja",
+              "form": "as_sold",
+              "quantity": 45,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Olivolja"
+            },
+            {
+              "name": "oregano",
+              "form": "dry",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Oregano"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            },
+            {
+              "name": "paprika",
+              "form": "raw_edible",
+              "quantity": 180,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Paprika"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 70,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rödlök"
+            },
+            {
+              "name": "rödvinsvinäger",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Rödvinsvinäger"
+            }
+          ]
+        },
+        {
+          "id": "brod",
+          "name": "Bröd vid sidan",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 320,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Skölj grönsakerna. Skär tomat i klyftor och gurka i grova bitar; samla tomatsaften i skålen. Skiva paprika och rödlök tunt.",
+          "uses": [
+            "tomat",
+            "gurka",
+            "paprika",
+            "rödlök"
+          ],
+          "minutes": 9,
+          "passive": false,
+          "after": []
+        },
+        {
+          "text": "Vänd grönsakerna med oliver, olivolja, oregano och den angivna saltmängden. Blanda i vinägern. Lägg fetaosten i stora skivor ovanpå. Låt brödet vara separat så det inte blir en blöt brödsallad.",
+          "uses": [
+            "tomat",
+            "gurka",
+            "fetaost",
+            "oliver",
+            "olivolja",
+            "oregano",
+            "salt",
+            "paprika",
+            "rödlök",
+            "rödvinsvinäger"
+          ],
+          "minutes": 3,
+          "passive": false,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Skär brödet och fördela hela salladen, all dressing och brödet mellan fyra portioner. Servera direkt; ingen kyld animalisk råvara ska tillagas i detta recept.",
+          "uses": [
+            "tomat",
+            "gurka",
+            "fetaost",
+            "oliver",
+            "olivolja",
+            "oregano",
+            "salt",
+            "paprika",
+            "rödlök",
+            "rödvinsvinäger",
+            "bröd"
+          ],
+          "minutes": 3,
+          "passive": false,
+          "after": [
+            2
+          ]
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Utökad variant tillför kikärtor för mättnad och kapris; den beskrivs som vardagsutökning, inte historisk standard."
+    },
+    {
+      "base_id": "smako-greek-horiatiki",
+      "cuisine": "greek",
+      "meal_type": "dinner",
+      "version": "1.0.0",
+      "variant_id": "extended",
+      "name": "Horiatiki – grekisk bondsallad med bröd – utökad",
+      "servings": 4,
+      "family": "rå grönsallad med feta",
+      "primary": "fetaost",
+      "method": "salad",
+      "side": "bröd",
+      "flavor": [
+        "oregano",
+        "olivolja"
+      ],
+      "equipment": [
+        "kniv",
+        "skärbräda",
+        "salladsskål"
+      ],
+      "components": [
+        {
+          "id": "sallad",
+          "name": "Rå bondsallad",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 650,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 400,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka"
+            },
+            {
+              "name": "fetaost",
+              "form": "as_sold",
+              "quantity": 280,
+              "unit": "g",
+              "role": "primary",
+              "label": "Fetaost"
+            },
+            {
+              "name": "oliver",
+              "form": "preserved_drained",
+              "quantity": 90,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Oliver"
+            },
+            {
+              "name": "olivolja",
+              "form": "as_sold",
+              "quantity": 45,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Olivolja"
+            },
+            {
+              "name": "oregano",
+              "form": "dry",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Oregano"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            },
+            {
+              "name": "paprika",
+              "form": "raw_edible",
+              "quantity": 180,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Paprika"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 70,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rödlök"
+            },
+            {
+              "name": "rödvinsvinäger",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Rödvinsvinäger"
+            },
+            {
+              "name": "kikärtor",
+              "form": "cooked_drained",
+              "quantity": 300,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta kikärtor, avrunnen vikt"
+            },
+            {
+              "name": "kapris",
+              "form": "preserved_drained",
+              "quantity": 20,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Kapris"
+            }
+          ]
+        },
+        {
+          "id": "brod",
+          "name": "Bröd vid sidan",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 240,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Skölj grönsakerna. Skär tomat i klyftor och gurka i grova bitar; samla tomatsaften i skålen. Skiva paprika och rödlök tunt. Skölj kikärtorna och låt dem rinna av före vägning. Låt kaprisen rinna av.",
+          "uses": [
+            "tomat",
+            "gurka",
+            "paprika",
+            "rödlök",
+            "kikärtor",
+            "kapris"
+          ],
+          "minutes": 9,
+          "passive": false,
+          "after": []
+        },
+        {
+          "text": "Vänd grönsakerna med oliver, olivolja, oregano och den angivna saltmängden. Blanda i vinägern. Vänd ner kikärtor och kapris; detta är en mättande vardagsutökning. Lägg fetaosten i stora skivor ovanpå. Låt brödet vara separat så det inte blir en blöt brödsallad.",
+          "uses": [
+            "tomat",
+            "gurka",
+            "fetaost",
+            "oliver",
+            "olivolja",
+            "oregano",
+            "salt",
+            "paprika",
+            "rödlök",
+            "rödvinsvinäger",
+            "kikärtor",
+            "kapris"
+          ],
+          "minutes": 3,
+          "passive": false,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Skär brödet och fördela hela salladen, all dressing och brödet mellan fyra portioner. Servera direkt; ingen kyld animalisk råvara ska tillagas i detta recept.",
+          "uses": [
+            "tomat",
+            "gurka",
+            "fetaost",
+            "oliver",
+            "olivolja",
+            "oregano",
+            "salt",
+            "paprika",
+            "rödlök",
+            "rödvinsvinäger",
+            "kikärtor",
+            "kapris",
+            "bröd"
+          ],
+          "minutes": 3,
+          "passive": false,
+          "after": [
+            2
+          ]
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Utökad variant tillför kikärtor för mättnad och kapris; den beskrivs som vardagsutökning, inte historisk standard."
+    },
+    {
+      "base_id": "smako-greek-chochlioi-boubouristi",
+      "cuisine": "greek",
+      "meal_type": "dinner",
+      "version": "1.0.0",
+      "variant_id": "simple",
+      "name": "Chochlioi boubouristi – snäckor med rosmarin och vinäger – enkel",
+      "servings": 4,
+      "family": "pannstekta snäckor i skal",
+      "primary": "kokta matsnäckor med skal",
+      "method": "pan",
+      "side": "bröd och eventuellt potatis",
+      "flavor": [
+        "rosmarin",
+        "vinäger"
+      ],
+      "equipment": [
+        "stor stekpanna med lock",
+        "snäcktång eller liten gaffel",
+        "kastrull",
+        "termometer"
+      ],
+      "components": [
+        {
+          "id": "snackor",
+          "name": "Snäckor med vinägersky",
+          "ingredients": [
+            {
+              "name": "kokta matsnäckor med skal",
+              "form": "as_sold",
+              "quantity": 1600,
+              "unit": "g",
+              "role": "primary",
+              "label": "Färdigkokta ofyllda matsnäckor i skal, inköpsvikt"
+            },
+            {
+              "name": "olivolja",
+              "form": "as_sold",
+              "quantity": 65,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Olivolja"
+            },
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 16,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Vetemjöl"
+            },
+            {
+              "name": "rödvinsvinäger",
+              "form": "as_sold",
+              "quantity": 65,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Rödvinsvinäger"
+            },
+            {
+              "name": "rosmarin",
+              "form": "dry",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rosmarin"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            }
+          ]
+        },
+        {
+          "id": "brod",
+          "name": "Bröd",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 400,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Kontrollera att produkten är köpta, färdigkokta livsmedelssnäckor i skal utan smörfyllning. Detta recept omfattar inte rensning eller kokning av råa eller insamlade snäckor. Häll av förpackningsvätska och torka skalens utsida. Lägg saltet i en stor panna och ställ snäckorna med öppningen nedåt.",
+          "uses": [
+            "kokta matsnäckor med skal",
+            "salt"
+          ],
+          "minutes": 7,
+          "passive": false,
+          "after": []
+        },
+        {
+          "text": "Häll i snäckkomponentens olivolja och värm på medelhög värme. Stek försiktigt fyra minuter och rör sedan om. Pudra över mjölet, vänd och låt det fräsa en minut utan att brännas.",
+          "uses": [
+            "kokta matsnäckor med skal",
+            "olivolja",
+            "vetemjöl"
+          ],
+          "minutes": 5,
+          "passive": false,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Sänk värmen. Tillsätt vinäger, rosmarin och 100 ml vatten med pannan bortvänd från ansiktet. Låt småkoka under lock och vänd emellanåt tills snäckköttet är ordentligt genomhett, cirka 6 minuter; följ produktens längre återuppvärmningskrav om sådant finns. Späd med 30 ml vatten om skyn blir torr. Fördela snäckor och all sky.",
+          "uses": [
+            "kokta matsnäckor med skal",
+            "rödvinsvinäger",
+            "rosmarin"
+          ],
+          "minutes": 6,
+          "passive": false,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Servera omedelbart med brödet. Ät endast snäckköttet och såsen; skalen är avfall. Fördela hela tillbehörsmängderna jämnt över fyra portioner.",
+          "uses": [
+            "kokta matsnäckor med skal",
+            "olivolja",
+            "vetemjöl",
+            "rödvinsvinäger",
+            "rosmarin",
+            "salt",
+            "bröd"
+          ],
+          "minutes": 3,
+          "passive": false,
+          "after": [
+            3
+          ]
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Enbart köpta, redan säkert tillagade matsnäckor i skal används. Uppvärmningsanpassning, inte instruktion för vilda eller råa snäckor. Skalvikt är inte ätlig mängd. Produktens faktiska ätbara utbyte och uppvärmningsanvisning är blockerande granskningspunkter."
+    },
+    {
+      "base_id": "smako-greek-chochlioi-boubouristi",
+      "cuisine": "greek",
+      "meal_type": "dinner",
+      "version": "1.0.0",
+      "variant_id": "standard",
+      "name": "Chochlioi boubouristi – snäckor med rosmarin och vinäger – standard",
+      "servings": 4,
+      "family": "pannstekta snäckor i skal",
+      "primary": "kokta matsnäckor med skal",
+      "method": "pan",
+      "side": "bröd och eventuellt potatis",
+      "flavor": [
+        "rosmarin",
+        "vinäger"
+      ],
+      "equipment": [
+        "stor stekpanna med lock",
+        "snäcktång eller liten gaffel",
+        "kastrull",
+        "termometer"
+      ],
+      "components": [
+        {
+          "id": "snackor",
+          "name": "Snäckor med vinägersky",
+          "ingredients": [
+            {
+              "name": "kokta matsnäckor med skal",
+              "form": "as_sold",
+              "quantity": 1600,
+              "unit": "g",
+              "role": "primary",
+              "label": "Färdigkokta ofyllda matsnäckor i skal, inköpsvikt"
+            },
+            {
+              "name": "olivolja",
+              "form": "as_sold",
+              "quantity": 65,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Olivolja"
+            },
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 16,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Vetemjöl"
+            },
+            {
+              "name": "rödvinsvinäger",
+              "form": "as_sold",
+              "quantity": 65,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Rödvinsvinäger"
+            },
+            {
+              "name": "rosmarin",
+              "form": "dry",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rosmarin"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            }
+          ]
+        },
+        {
+          "id": "brod",
+          "name": "Bröd",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 220,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd"
+            }
+          ]
+        },
+        {
+          "id": "potatis",
+          "name": "Persiljepotatis",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 650,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 8,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 16,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja"
+            },
+            {
+              "name": "olivolja",
+              "form": "as_sold",
+              "quantity": 15,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Olivolja"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Skala och dela potatisen jämnt. Lägg den i kastrull med 1300 ml vatten och potatiskomponentens salt. Koka upp.",
+          "uses": [
+            "potatis",
+            "salt"
+          ],
+          "minutes": 6,
+          "passive": false,
+          "after": []
+        },
+        {
+          "text": "Sjud potatisen under lock på låg värme cirka 20 minuter, tills en sticka går lätt igenom. Anpassa efter bitstorleken; häll sedan av.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 20,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Finhacka vitlök och persilja. Vänd den varma potatisen med dessa och potatiskomponentens olja. Håll varmt under lock medan snäckorna görs färdiga.",
+          "uses": [
+            "potatis",
+            "vitlök",
+            "persilja",
+            "olivolja",
+            "salt"
+          ],
+          "minutes": 4,
+          "passive": false,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Kontrollera att produkten är köpta, färdigkokta livsmedelssnäckor i skal utan smörfyllning. Detta recept omfattar inte rensning eller kokning av råa eller insamlade snäckor. Häll av förpackningsvätska och torka skalens utsida. Lägg saltet i en stor panna och ställ snäckorna med öppningen nedåt.",
+          "uses": [
+            "kokta matsnäckor med skal",
+            "salt"
+          ],
+          "minutes": 7,
+          "passive": false,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Häll i snäckkomponentens olivolja och värm på medelhög värme. Stek försiktigt fyra minuter och rör sedan om. Pudra över mjölet, vänd och låt det fräsa en minut utan att brännas.",
+          "uses": [
+            "kokta matsnäckor med skal",
+            "olivolja",
+            "vetemjöl"
+          ],
+          "minutes": 5,
+          "passive": false,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Sänk värmen. Tillsätt vinäger, rosmarin och 100 ml vatten med pannan bortvänd från ansiktet. Låt småkoka under lock och vänd emellanåt tills snäckköttet är ordentligt genomhett, cirka 6 minuter; följ produktens längre återuppvärmningskrav om sådant finns. Späd med 30 ml vatten om skyn blir torr. Fördela snäckor och all sky.",
+          "uses": [
+            "kokta matsnäckor med skal",
+            "rödvinsvinäger",
+            "rosmarin"
+          ],
+          "minutes": 6,
+          "passive": false,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Servera omedelbart med brödet, persiljepotatisen. Ät endast snäckköttet och såsen; skalen är avfall. Fördela hela tillbehörsmängderna jämnt över fyra portioner.",
+          "uses": [
+            "kokta matsnäckor med skal",
+            "olivolja",
+            "vetemjöl",
+            "rödvinsvinäger",
+            "rosmarin",
+            "salt",
+            "bröd",
+            "potatis",
+            "vitlök",
+            "persilja"
+          ],
+          "minutes": 3,
+          "passive": false,
+          "after": [
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Enbart köpta, redan säkert tillagade matsnäckor i skal används. Uppvärmningsanpassning, inte instruktion för vilda eller råa snäckor. Skalvikt är inte ätlig mängd. Produktens faktiska ätbara utbyte och uppvärmningsanvisning är blockerande granskningspunkter."
+    },
+    {
+      "base_id": "smako-greek-chochlioi-boubouristi",
+      "cuisine": "greek",
+      "meal_type": "dinner",
+      "version": "1.0.0",
+      "variant_id": "extended",
+      "name": "Chochlioi boubouristi – snäckor med rosmarin och vinäger – utökad",
+      "servings": 4,
+      "family": "pannstekta snäckor i skal",
+      "primary": "kokta matsnäckor med skal",
+      "method": "pan",
+      "side": "bröd och eventuellt potatis",
+      "flavor": [
+        "rosmarin",
+        "vinäger"
+      ],
+      "equipment": [
+        "stor stekpanna med lock",
+        "snäcktång eller liten gaffel",
+        "kastrull",
+        "termometer"
+      ],
+      "components": [
+        {
+          "id": "snackor",
+          "name": "Snäckor med vinägersky",
+          "ingredients": [
+            {
+              "name": "kokta matsnäckor med skal",
+              "form": "as_sold",
+              "quantity": 1600,
+              "unit": "g",
+              "role": "primary",
+              "label": "Färdigkokta ofyllda matsnäckor i skal, inköpsvikt"
+            },
+            {
+              "name": "olivolja",
+              "form": "as_sold",
+              "quantity": 65,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Olivolja"
+            },
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 16,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Vetemjöl"
+            },
+            {
+              "name": "rödvinsvinäger",
+              "form": "as_sold",
+              "quantity": 65,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Rödvinsvinäger"
+            },
+            {
+              "name": "rosmarin",
+              "form": "dry",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rosmarin"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            }
+          ]
+        },
+        {
+          "id": "brod",
+          "name": "Bröd",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 220,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd"
+            }
+          ]
+        },
+        {
+          "id": "potatis",
+          "name": "Persiljepotatis",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 650,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 8,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 16,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja"
+            },
+            {
+              "name": "olivolja",
+              "form": "as_sold",
+              "quantity": 15,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Olivolja"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            }
+          ]
+        },
+        {
+          "id": "sallad",
+          "name": "Tomat- och gurksallad",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 350,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 250,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 50,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök"
+            },
+            {
+              "name": "rödvinsvinäger",
+              "form": "as_sold",
+              "quantity": 15,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Rödvinsvinäger"
+            },
+            {
+              "name": "olivolja",
+              "form": "as_sold",
+              "quantity": 12,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Olivolja"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Skala och dela potatisen jämnt. Lägg den i kastrull med 1300 ml vatten och potatiskomponentens salt. Koka upp.",
+          "uses": [
+            "potatis",
+            "salt"
+          ],
+          "minutes": 6,
+          "passive": false,
+          "after": []
+        },
+        {
+          "text": "Sjud potatisen under lock på låg värme cirka 20 minuter, tills en sticka går lätt igenom. Anpassa efter bitstorleken; häll sedan av.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 20,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Finhacka vitlök och persilja. Vänd den varma potatisen med dessa och potatiskomponentens olja. Håll varmt under lock medan snäckorna görs färdiga.",
+          "uses": [
+            "potatis",
+            "vitlök",
+            "persilja",
+            "olivolja",
+            "salt"
+          ],
+          "minutes": 4,
+          "passive": false,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Skär tomat och gurka, finstrimla löken och vänd med salladens vinäger och olja. Ställ svalt till servering.",
+          "uses": [
+            "tomat",
+            "gurka",
+            "gul lök",
+            "rödvinsvinäger",
+            "olivolja"
+          ],
+          "minutes": 6,
+          "passive": false,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Kontrollera att produkten är köpta, färdigkokta livsmedelssnäckor i skal utan smörfyllning. Detta recept omfattar inte rensning eller kokning av råa eller insamlade snäckor. Häll av förpackningsvätska och torka skalens utsida. Lägg saltet i en stor panna och ställ snäckorna med öppningen nedåt.",
+          "uses": [
+            "kokta matsnäckor med skal",
+            "salt"
+          ],
+          "minutes": 7,
+          "passive": false,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Häll i snäckkomponentens olivolja och värm på medelhög värme. Stek försiktigt fyra minuter och rör sedan om. Pudra över mjölet, vänd och låt det fräsa en minut utan att brännas.",
+          "uses": [
+            "kokta matsnäckor med skal",
+            "olivolja",
+            "vetemjöl"
+          ],
+          "minutes": 5,
+          "passive": false,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Sänk värmen. Tillsätt vinäger, rosmarin och 100 ml vatten med pannan bortvänd från ansiktet. Låt småkoka under lock och vänd emellanåt tills snäckköttet är ordentligt genomhett, cirka 6 minuter; följ produktens längre återuppvärmningskrav om sådant finns. Späd med 30 ml vatten om skyn blir torr. Fördela snäckor och all sky.",
+          "uses": [
+            "kokta matsnäckor med skal",
+            "rödvinsvinäger",
+            "rosmarin"
+          ],
+          "minutes": 6,
+          "passive": false,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Servera omedelbart med brödet, persiljepotatisen och salladen. Ät endast snäckköttet och såsen; skalen är avfall. Fördela hela tillbehörsmängderna jämnt över fyra portioner.",
+          "uses": [
+            "kokta matsnäckor med skal",
+            "olivolja",
+            "vetemjöl",
+            "rödvinsvinäger",
+            "rosmarin",
+            "salt",
+            "bröd",
+            "potatis",
+            "vitlök",
+            "persilja",
+            "tomat",
+            "gurka",
+            "gul lök"
+          ],
+          "minutes": 3,
+          "passive": false,
+          "after": [
+            7
+          ]
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Enbart köpta, redan säkert tillagade matsnäckor i skal används. Uppvärmningsanpassning, inte instruktion för vilda eller råa snäckor. Skalvikt är inte ätlig mängd. Produktens faktiska ätbara utbyte och uppvärmningsanvisning är blockerande granskningspunkter."
+    },
+    {
+      "base_id": "smako-greek-tahinopita",
+      "cuisine": "greek",
+      "meal_type": "breakfast",
+      "version": "1.0.0",
+      "variant_id": "simple",
+      "name": "Tahinopita – cypriotisk tahinisnurra – enkel",
+      "servings": 1,
+      "family": "tahini-fylld jästspiral",
+      "primary": "tahini",
+      "method": "bake",
+      "side": "frukostbakverk",
+      "flavor": [
+        "tahini",
+        "kanel"
+      ],
+      "equipment": [
+        "bunke",
+        "kavel",
+        "bakplåtspapper",
+        "ugn"
+      ],
+      "components": [
+        {
+          "id": "deg",
+          "name": "Jäst deg",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 55,
+              "unit": "g",
+              "role": "primary",
+              "label": "Vetemjöl"
+            },
+            {
+              "name": "torrjäst",
+              "form": "dry",
+              "quantity": 0.9,
+              "unit": "g",
+              "role": "cooking",
+              "label": "Torrjäst"
+            },
+            {
+              "name": "strösocker",
+              "form": "dry",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Strösocker"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            }
+          ]
+        },
+        {
+          "id": "fyllning",
+          "name": "Tahini-kanelkräm",
+          "ingredients": [
+            {
+              "name": "tahini",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "g",
+              "role": "primary",
+              "label": "Tahini"
+            },
+            {
+              "name": "strösocker",
+              "form": "dry",
+              "quantity": 10,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Strösocker"
+            },
+            {
+              "name": "kanel",
+              "form": "dry",
+              "quantity": 0.7,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Kanel"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Blanda degens mjöl, torrjäst, socker och salt. Tillsätt 33 ml ljummet vatten. Knåda till en smidig deg i cirka 7 minuter. Mjöla inte extra; kavla senare mellan papper.",
+          "uses": [
+            "vetemjöl",
+            "torrjäst",
+            "strösocker",
+            "salt"
+          ],
+          "minutes": 8,
+          "passive": false,
+          "after": []
+        },
+        {
+          "text": "Täck bunken. Låt jäsa cirka 90 minuter på dragfri plats tills degen har ökat tydligt i volym. Kall deg kan behöva längre tid.",
+          "uses": [
+            "vetemjöl",
+            "torrjäst",
+            "strösocker",
+            "salt"
+          ],
+          "minutes": 90,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Rör tahini, fyllningens socker och kanel till en tjock kräm. Kavla degen tunt mellan två bakplåtspapper. Bred krämen över arket. Rulla till en sträng, tvinna varsamt och snurra ihop till en spiral. Platta till med handen utan att pressa ut fyllningen.",
+          "uses": [
+            "vetemjöl",
+            "torrjäst",
+            "strösocker",
+            "salt",
+            "tahini",
+            "kanel"
+          ],
+          "minutes": 9,
+          "passive": false,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Låt spiralen vila täckt 20 minuter. Värm under tiden ugnen till 190 °C över- och undervärme.",
+          "uses": [
+            "vetemjöl",
+            "torrjäst",
+            "strösocker",
+            "salt"
+          ],
+          "minutes": 20,
+          "passive": true,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Sätt plåten mitt i ugnen och baka cirka 17 minuter. Degen ska få gyllene färg och vara genombakad, inte rå mellan lagren.",
+          "uses": [
+            "vetemjöl",
+            "torrjäst",
+            "strösocker",
+            "salt",
+            "tahini",
+            "kanel"
+          ],
+          "minutes": 17,
+          "passive": true,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Låt snurran svalna på galler cirka 10 minuter; tahinifyllningen är varm länge.",
+          "uses": [
+            "vetemjöl",
+            "torrjäst",
+            "strösocker",
+            "salt",
+            "tahini",
+            "kanel"
+          ],
+          "minutes": 10,
+          "passive": true,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Servera hela snurran som en frukostportion. Ingen sirap eller annan topping förutsätts.",
+          "uses": [
+            "vetemjöl",
+            "torrjäst",
+            "strösocker",
+            "salt",
+            "tahini",
+            "kanel"
+          ],
+          "minutes": 1,
+          "passive": false,
+          "after": [
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Enkel oljefri deg; utökad frukost med oljad deg och äpple/yoghurt. Kökstillhörigheten avser grekcypriotisk tradition, inte geografiskt ursprung på grekiska fastlandet."
+    },
+    {
+      "base_id": "smako-greek-tahinopita",
+      "cuisine": "greek",
+      "meal_type": "breakfast",
+      "version": "1.0.0",
+      "variant_id": "extended",
+      "name": "Tahinopita – cypriotisk tahinisnurra – utökad",
+      "servings": 1,
+      "family": "tahini-fylld jästspiral",
+      "primary": "tahini",
+      "method": "bake",
+      "side": "frukostbakverk",
+      "flavor": [
+        "tahini",
+        "kanel"
+      ],
+      "equipment": [
+        "bunke",
+        "kavel",
+        "bakplåtspapper",
+        "ugn"
+      ],
+      "components": [
+        {
+          "id": "deg",
+          "name": "Jäst deg",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 55,
+              "unit": "g",
+              "role": "primary",
+              "label": "Vetemjöl"
+            },
+            {
+              "name": "torrjäst",
+              "form": "dry",
+              "quantity": 0.9,
+              "unit": "g",
+              "role": "cooking",
+              "label": "Torrjäst"
+            },
+            {
+              "name": "strösocker",
+              "form": "dry",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Strösocker"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            },
+            {
+              "name": "olivolja",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Olivolja"
+            }
+          ]
+        },
+        {
+          "id": "fyllning",
+          "name": "Tahini-kanelkräm",
+          "ingredients": [
+            {
+              "name": "tahini",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "g",
+              "role": "primary",
+              "label": "Tahini"
+            },
+            {
+              "name": "strösocker",
+              "form": "dry",
+              "quantity": 10,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Strösocker"
+            },
+            {
+              "name": "kanel",
+              "form": "dry",
+              "quantity": 0.7,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Kanel"
+            }
+          ]
+        },
+        {
+          "id": "servering",
+          "name": "Äpple och yoghurt",
+          "ingredients": [
+            {
+              "name": "äpple",
+              "form": "raw_edible",
+              "quantity": 110,
+              "unit": "g",
+              "role": "side",
+              "label": "Äpple"
+            },
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 100,
+              "unit": "g",
+              "role": "side",
+              "label": "Yoghurt naturell"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Blanda degens mjöl, torrjäst, socker och salt. Tillsätt 33 ml ljummet vatten och olivoljan. Knåda till en smidig deg i cirka 7 minuter. Mjöla inte extra; kavla senare mellan papper.",
+          "uses": [
+            "vetemjöl",
+            "torrjäst",
+            "strösocker",
+            "salt",
+            "olivolja"
+          ],
+          "minutes": 8,
+          "passive": false,
+          "after": []
+        },
+        {
+          "text": "Täck bunken. Låt jäsa cirka 90 minuter på dragfri plats tills degen har ökat tydligt i volym. Kall deg kan behöva längre tid.",
+          "uses": [
+            "vetemjöl",
+            "torrjäst",
+            "strösocker",
+            "salt",
+            "olivolja"
+          ],
+          "minutes": 90,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Rör tahini, fyllningens socker och kanel till en tjock kräm. Kavla degen tunt mellan två bakplåtspapper. Bred krämen över arket. Rulla till en sträng, tvinna varsamt och snurra ihop till en spiral. Platta till med handen utan att pressa ut fyllningen.",
+          "uses": [
+            "vetemjöl",
+            "torrjäst",
+            "strösocker",
+            "salt",
+            "olivolja",
+            "tahini",
+            "kanel"
+          ],
+          "minutes": 9,
+          "passive": false,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Låt spiralen vila täckt 20 minuter. Värm under tiden ugnen till 190 °C över- och undervärme.",
+          "uses": [
+            "vetemjöl",
+            "torrjäst",
+            "strösocker",
+            "salt",
+            "olivolja"
+          ],
+          "minutes": 20,
+          "passive": true,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Sätt plåten mitt i ugnen och baka cirka 17 minuter. Degen ska få gyllene färg och vara genombakad, inte rå mellan lagren.",
+          "uses": [
+            "vetemjöl",
+            "torrjäst",
+            "strösocker",
+            "salt",
+            "olivolja",
+            "tahini",
+            "kanel"
+          ],
+          "minutes": 17,
+          "passive": true,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Låt snurran svalna på galler cirka 10 minuter; tahinifyllningen är varm länge.",
+          "uses": [
+            "vetemjöl",
+            "torrjäst",
+            "strösocker",
+            "salt",
+            "olivolja",
+            "tahini",
+            "kanel"
+          ],
+          "minutes": 10,
+          "passive": true,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Skölj äpplet och skär den angivna ätliga mängden i klyftor. Servera frukostsnurran med äpple och yoghurt.",
+          "uses": [
+            "äpple",
+            "yoghurt naturell"
+          ],
+          "minutes": 3,
+          "passive": false,
+          "after": [
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Enkel oljefri deg; utökad frukost med oljad deg och äpple/yoghurt. Kökstillhörigheten avser grekcypriotisk tradition, inte geografiskt ursprung på grekiska fastlandet."
+    },
+    {
+      "base_id": "smako-italian-torta-pasqualina",
+      "cuisine": "italian",
+      "meal_type": "dinner",
+      "version": "1.0.0",
+      "variant_id": "simple",
+      "name": "Torta pasqualina – grönsakspaj med hela ägg – enkel",
+      "servings": 4,
+      "family": "sluten grönsakspaj med hela ägg",
+      "primary": "ricotta",
+      "method": "bake",
+      "side": "grönsaker",
+      "flavor": [
+        "ricotta",
+        "gröna blad"
+      ],
+      "equipment": [
+        "ugn",
+        "form cirka 24 cm",
+        "kavel",
+        "stekpanna",
+        "sil",
+        "termometer"
+      ],
+      "components": [
+        {
+          "id": "deg",
+          "name": "Oljedeg",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 250,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl"
+            },
+            {
+              "name": "olivolja",
+              "form": "as_sold",
+              "quantity": 35,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Olivolja"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            }
+          ]
+        },
+        {
+          "id": "fyllning",
+          "name": "Bladgrönt, ricotta och hela ägg",
+          "ingredients": [
+            {
+              "name": "spenat",
+              "form": "as_sold",
+              "quantity": 600,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Fryst bladspenat, vägd fryst"
+            },
+            {
+              "name": "ricotta",
+              "form": "as_sold",
+              "quantity": 300,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ricotta"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 220,
+              "unit": "g",
+              "role": "primary",
+              "label": "Råa ägg utan skal, håll gulorna hela"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 120,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök"
+            },
+            {
+              "name": "parmesan",
+              "form": "as_sold",
+              "quantity": 45,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Parmesan"
+            },
+            {
+              "name": "olivolja",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Olivolja"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Blanda degens mjöl, olja och salt med 125 ml vatten. Knåda cirka 6 minuter tills degen är jämn; täck.",
+          "uses": [
+            "vetemjöl",
+            "olivolja",
+            "salt"
+          ],
+          "minutes": 7,
+          "passive": false,
+          "after": []
+        },
+        {
+          "text": "Låt degen vila 30 minuter i rumstemperatur så att den blir lättare att sträcka.",
+          "uses": [
+            "vetemjöl",
+            "olivolja",
+            "salt"
+          ],
+          "minutes": 30,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Hacka löken. Värm spenaten i en panna med 50 ml vatten och rör tills den tinat helt. Låt rinna av i sil och tryck ur överflödig vätska utan att kasta själva bladen.",
+          "uses": [
+            "gul lök",
+            "spenat"
+          ],
+          "minutes": 10,
+          "passive": false,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Mjukstek löken i fyllningens olja. Vänd ner de avrunna bladen och stek tills blandningen inte är vattnig. Ta av värmen.",
+          "uses": [
+            "gul lök",
+            "olivolja",
+            "spenat"
+          ],
+          "minutes": 7,
+          "passive": false,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Låt grönsaksblandningen svalna på ett fat cirka 15 minuter. Värm ugnen till 185 °C.",
+          "uses": [
+            "spenat",
+            "gul lök"
+          ],
+          "minutes": 15,
+          "passive": true,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Rör ricotta och finriven parmesan med grönsakerna och fyllningens salt. Äggen ska inte vispas ner i blandningen.",
+          "uses": [
+            "ricotta",
+            "parmesan",
+            "salt",
+            "spenat"
+          ],
+          "minutes": 4,
+          "passive": false,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Klä formen med bakplåtspapper. Dela degen i två delar och kavla tunt mellan papper; den ena delen ska täcka botten och gå upp längs kanten. Lägg i bottenarket och fyll med ricottablandningen. Knäck och väg äggen utan skal, håll gulorna hela. Gör gropar i fyllningen för gulorna och fördela hela den uppvägda äggmängden i groparna. Täck med det andra degarket, förslut kanten och gör små ånghål utan att punktera gulorna.",
+          "uses": [
+            "vetemjöl",
+            "olivolja",
+            "salt",
+            "spenat",
+            "ricotta",
+            "ägg",
+            "gul lök",
+            "parmesan"
+          ],
+          "minutes": 17,
+          "passive": false,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Baka på nedre falsen cirka 45 minuter. Skalet ska vara gyllene och botten gräddad. Kontrollera att ägghålen har stelnad vita och minst 72 °C i mitten; förläng vid behov.",
+          "uses": [
+            "vetemjöl",
+            "olivolja",
+            "salt",
+            "spenat",
+            "ricotta",
+            "ägg",
+            "gul lök",
+            "parmesan"
+          ],
+          "minutes": 45,
+          "passive": true,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Låt pajen vila 12 minuter innan den skärs så att snitten håller ihop.",
+          "uses": [
+            "spenat",
+            "ricotta",
+            "ägg",
+            "gul lök",
+            "parmesan",
+            "olivolja",
+            "salt"
+          ],
+          "minutes": 12,
+          "passive": true,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Skär pajen i fyra portioner genom fyllningen så att de hela äggens snittyta framträder. Servera varm eller ljummen direkt.",
+          "uses": [
+            "vetemjöl",
+            "olivolja",
+            "salt",
+            "spenat",
+            "ricotta",
+            "ägg",
+            "gul lök",
+            "parmesan"
+          ],
+          "minutes": 3,
+          "passive": false,
+          "after": [
+            9
+          ]
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Två till fyra degark i hemmakök, inte den historiska mångskiktsversionen. Osterna behöver produktgranskas för kostklassning."
+    },
+    {
+      "base_id": "smako-italian-torta-pasqualina",
+      "cuisine": "italian",
+      "meal_type": "dinner",
+      "version": "1.0.0",
+      "variant_id": "standard",
+      "name": "Torta pasqualina – grönsakspaj med hela ägg – standard",
+      "servings": 4,
+      "family": "sluten grönsakspaj med hela ägg",
+      "primary": "ricotta",
+      "method": "bake",
+      "side": "grönsaker",
+      "flavor": [
+        "ricotta",
+        "gröna blad"
+      ],
+      "equipment": [
+        "ugn",
+        "form cirka 24 cm",
+        "kavel",
+        "stekpanna",
+        "sil",
+        "termometer"
+      ],
+      "components": [
+        {
+          "id": "deg",
+          "name": "Oljedeg",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 250,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl"
+            },
+            {
+              "name": "olivolja",
+              "form": "as_sold",
+              "quantity": 35,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Olivolja"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            }
+          ]
+        },
+        {
+          "id": "fyllning",
+          "name": "Bladgrönt, ricotta och hela ägg",
+          "ingredients": [
+            {
+              "name": "spenat",
+              "form": "as_sold",
+              "quantity": 400,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Fryst bladspenat, vägd fryst"
+            },
+            {
+              "name": "ricotta",
+              "form": "as_sold",
+              "quantity": 300,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ricotta"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 220,
+              "unit": "g",
+              "role": "primary",
+              "label": "Råa ägg utan skal, håll gulorna hela"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 120,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök"
+            },
+            {
+              "name": "parmesan",
+              "form": "as_sold",
+              "quantity": 45,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Parmesan"
+            },
+            {
+              "name": "olivolja",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Olivolja"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            },
+            {
+              "name": "mangold",
+              "form": "raw_edible",
+              "quantity": 200,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Mangold"
+            },
+            {
+              "name": "mejram",
+              "form": "dry",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Mejram"
+            },
+            {
+              "name": "muskot",
+              "form": "dry",
+              "quantity": 0.3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Muskot"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Blanda degens mjöl, olja och salt med 125 ml vatten. Knåda cirka 6 minuter tills degen är jämn; täck.",
+          "uses": [
+            "vetemjöl",
+            "olivolja",
+            "salt"
+          ],
+          "minutes": 7,
+          "passive": false,
+          "after": []
+        },
+        {
+          "text": "Låt degen vila 30 minuter i rumstemperatur så att den blir lättare att sträcka.",
+          "uses": [
+            "vetemjöl",
+            "olivolja",
+            "salt"
+          ],
+          "minutes": 30,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Hacka löken. Värm spenaten i en panna med 50 ml vatten och rör tills den tinat helt. Skär mangolden och tillsätt den, stjälkar först och blad sist. Låt rinna av i sil och tryck ur överflödig vätska utan att kasta själva bladen.",
+          "uses": [
+            "gul lök",
+            "spenat",
+            "mangold"
+          ],
+          "minutes": 10,
+          "passive": false,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Mjukstek löken i fyllningens olja. Vänd ner de avrunna bladen och stek tills blandningen inte är vattnig. Ta av värmen.",
+          "uses": [
+            "gul lök",
+            "olivolja",
+            "spenat",
+            "mangold"
+          ],
+          "minutes": 7,
+          "passive": false,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Låt grönsaksblandningen svalna på ett fat cirka 15 minuter. Värm ugnen till 185 °C.",
+          "uses": [
+            "spenat",
+            "gul lök"
+          ],
+          "minutes": 15,
+          "passive": true,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Rör ricotta och finriven parmesan med grönsakerna och fyllningens salt, mejram och muskot. Äggen ska inte vispas ner i blandningen.",
+          "uses": [
+            "ricotta",
+            "parmesan",
+            "salt",
+            "spenat",
+            "mejram",
+            "muskot"
+          ],
+          "minutes": 4,
+          "passive": false,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Klä formen med bakplåtspapper. Dela degen i två delar och kavla tunt mellan papper; den ena delen ska täcka botten och gå upp längs kanten. Lägg i bottenarket och fyll med ricottablandningen. Knäck och väg äggen utan skal, håll gulorna hela. Gör gropar i fyllningen för gulorna och fördela hela den uppvägda äggmängden i groparna. Täck med det andra degarket, förslut kanten och gör små ånghål utan att punktera gulorna.",
+          "uses": [
+            "vetemjöl",
+            "olivolja",
+            "salt",
+            "spenat",
+            "ricotta",
+            "ägg",
+            "gul lök",
+            "parmesan",
+            "mangold",
+            "mejram",
+            "muskot"
+          ],
+          "minutes": 17,
+          "passive": false,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Baka på nedre falsen cirka 45 minuter. Skalet ska vara gyllene och botten gräddad. Kontrollera att ägghålen har stelnad vita och minst 72 °C i mitten; förläng vid behov.",
+          "uses": [
+            "vetemjöl",
+            "olivolja",
+            "salt",
+            "spenat",
+            "ricotta",
+            "ägg",
+            "gul lök",
+            "parmesan",
+            "mangold",
+            "mejram",
+            "muskot"
+          ],
+          "minutes": 45,
+          "passive": true,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Låt pajen vila 12 minuter innan den skärs så att snitten håller ihop.",
+          "uses": [
+            "spenat",
+            "ricotta",
+            "ägg",
+            "gul lök",
+            "parmesan",
+            "olivolja",
+            "salt",
+            "mangold",
+            "mejram",
+            "muskot"
+          ],
+          "minutes": 12,
+          "passive": true,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Skär pajen i fyra portioner genom fyllningen så att de hela äggens snittyta framträder. Servera varm eller ljummen direkt.",
+          "uses": [
+            "vetemjöl",
+            "olivolja",
+            "salt",
+            "spenat",
+            "ricotta",
+            "ägg",
+            "gul lök",
+            "parmesan",
+            "mangold",
+            "mejram",
+            "muskot"
+          ],
+          "minutes": 3,
+          "passive": false,
+          "after": [
+            9
+          ]
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Två till fyra degark i hemmakök, inte den historiska mångskiktsversionen. Osterna behöver produktgranskas för kostklassning."
+    },
+    {
+      "base_id": "smako-italian-torta-pasqualina",
+      "cuisine": "italian",
+      "meal_type": "dinner",
+      "version": "1.0.0",
+      "variant_id": "extended",
+      "name": "Torta pasqualina – grönsakspaj med hela ägg – utökad",
+      "servings": 4,
+      "family": "sluten grönsakspaj med hela ägg",
+      "primary": "ricotta",
+      "method": "bake",
+      "side": "grönsaker",
+      "flavor": [
+        "ricotta",
+        "gröna blad"
+      ],
+      "equipment": [
+        "ugn",
+        "form cirka 24 cm",
+        "kavel",
+        "stekpanna",
+        "sil",
+        "termometer"
+      ],
+      "components": [
+        {
+          "id": "deg",
+          "name": "Oljedeg",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 250,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl"
+            },
+            {
+              "name": "olivolja",
+              "form": "as_sold",
+              "quantity": 35,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Olivolja"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            }
+          ]
+        },
+        {
+          "id": "fyllning",
+          "name": "Bladgrönt, ricotta och hela ägg",
+          "ingredients": [
+            {
+              "name": "spenat",
+              "form": "as_sold",
+              "quantity": 400,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Fryst bladspenat, vägd fryst"
+            },
+            {
+              "name": "ricotta",
+              "form": "as_sold",
+              "quantity": 300,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ricotta"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 220,
+              "unit": "g",
+              "role": "primary",
+              "label": "Råa ägg utan skal, håll gulorna hela"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 120,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök"
+            },
+            {
+              "name": "parmesan",
+              "form": "as_sold",
+              "quantity": 45,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Parmesan"
+            },
+            {
+              "name": "olivolja",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Olivolja"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            },
+            {
+              "name": "mangold",
+              "form": "raw_edible",
+              "quantity": 200,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Mangold"
+            },
+            {
+              "name": "mejram",
+              "form": "dry",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Mejram"
+            },
+            {
+              "name": "muskot",
+              "form": "dry",
+              "quantity": 0.3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Muskot"
+            }
+          ]
+        },
+        {
+          "id": "sallad",
+          "name": "Tomat och basilika",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 450,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat"
+            },
+            {
+              "name": "basilika",
+              "form": "raw_edible",
+              "quantity": 12,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Basilika"
+            },
+            {
+              "name": "rödvinsvinäger",
+              "form": "as_sold",
+              "quantity": 15,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Rödvinsvinäger"
+            },
+            {
+              "name": "olivolja",
+              "form": "as_sold",
+              "quantity": 12,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Olivolja"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Blanda degens mjöl, olja och salt med 125 ml vatten. Knåda cirka 6 minuter tills degen är jämn; täck.",
+          "uses": [
+            "vetemjöl",
+            "olivolja",
+            "salt"
+          ],
+          "minutes": 7,
+          "passive": false,
+          "after": []
+        },
+        {
+          "text": "Låt degen vila 30 minuter i rumstemperatur så att den blir lättare att sträcka.",
+          "uses": [
+            "vetemjöl",
+            "olivolja",
+            "salt"
+          ],
+          "minutes": 30,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Hacka löken. Värm spenaten i en panna med 50 ml vatten och rör tills den tinat helt. Skär mangolden och tillsätt den, stjälkar först och blad sist. Låt rinna av i sil och tryck ur överflödig vätska utan att kasta själva bladen.",
+          "uses": [
+            "gul lök",
+            "spenat",
+            "mangold"
+          ],
+          "minutes": 10,
+          "passive": false,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Mjukstek löken i fyllningens olja. Vänd ner de avrunna bladen och stek tills blandningen inte är vattnig. Ta av värmen.",
+          "uses": [
+            "gul lök",
+            "olivolja",
+            "spenat",
+            "mangold"
+          ],
+          "minutes": 7,
+          "passive": false,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Låt grönsaksblandningen svalna på ett fat cirka 15 minuter. Värm ugnen till 185 °C.",
+          "uses": [
+            "spenat",
+            "gul lök"
+          ],
+          "minutes": 15,
+          "passive": true,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Rör ricotta och finriven parmesan med grönsakerna och fyllningens salt, mejram och muskot. Äggen ska inte vispas ner i blandningen.",
+          "uses": [
+            "ricotta",
+            "parmesan",
+            "salt",
+            "spenat",
+            "mejram",
+            "muskot"
+          ],
+          "minutes": 4,
+          "passive": false,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Klä formen med bakplåtspapper. Dela degen i två delar och kavla tunt mellan papper; den ena delen ska täcka botten och gå upp längs kanten. Lägg i bottenarket och fyll med ricottablandningen. Knäck och väg äggen utan skal, håll gulorna hela. Gör gropar i fyllningen för gulorna och fördela hela den uppvägda äggmängden i groparna. Täck med det andra degarket, förslut kanten och gör små ånghål utan att punktera gulorna.",
+          "uses": [
+            "vetemjöl",
+            "olivolja",
+            "salt",
+            "spenat",
+            "ricotta",
+            "ägg",
+            "gul lök",
+            "parmesan",
+            "mangold",
+            "mejram",
+            "muskot"
+          ],
+          "minutes": 17,
+          "passive": false,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Baka på nedre falsen cirka 45 minuter. Skalet ska vara gyllene och botten gräddad. Kontrollera att ägghålen har stelnad vita och minst 72 °C i mitten; förläng vid behov.",
+          "uses": [
+            "vetemjöl",
+            "olivolja",
+            "salt",
+            "spenat",
+            "ricotta",
+            "ägg",
+            "gul lök",
+            "parmesan",
+            "mangold",
+            "mejram",
+            "muskot"
+          ],
+          "minutes": 45,
+          "passive": true,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Låt pajen vila 12 minuter innan den skärs så att snitten håller ihop.",
+          "uses": [
+            "spenat",
+            "ricotta",
+            "ägg",
+            "gul lök",
+            "parmesan",
+            "olivolja",
+            "salt",
+            "mangold",
+            "mejram",
+            "muskot"
+          ],
+          "minutes": 12,
+          "passive": true,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Skär tomaterna och riv basilikan. Blanda med salladens vinäger och olja. Skär pajen i fyra delar och servera hela salladen till.",
+          "uses": [
+            "tomat",
+            "basilika",
+            "rödvinsvinäger",
+            "olivolja"
+          ],
+          "minutes": 6,
+          "passive": false,
+          "after": [
+            9
+          ]
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Två till fyra degark i hemmakök, inte den historiska mångskiktsversionen. Osterna behöver produktgranskas för kostklassning."
+    },
+    {
+      "base_id": "smako-italian-lingua-salsa-verde",
+      "cuisine": "italian",
+      "meal_type": "dinner",
+      "version": "1.0.0",
+      "variant_id": "simple",
+      "name": "Lingua in salsa verde – pocherad tunga med grön sås – enkel",
+      "servings": 4,
+      "family": "pocherad tunga med brödörtssås",
+      "primary": "oxtunga",
+      "method": "pot",
+      "side": "kokt potatis",
+      "flavor": [
+        "persilja",
+        "vinäger"
+      ],
+      "equipment": [
+        "stor gryta",
+        "kastrull",
+        "mixer eller kniv",
+        "termometer"
+      ],
+      "components": [
+        {
+          "id": "tunga",
+          "name": "Långsjuden oxtunga",
+          "ingredients": [
+            {
+              "name": "oxtunga",
+              "form": "as_sold",
+              "quantity": 900,
+              "unit": "g",
+              "role": "primary",
+              "label": "Rå hel oxtunga inklusive hud som tas bort"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            }
+          ]
+        },
+        {
+          "id": "sas",
+          "name": "Salsa verde",
+          "ingredients": [
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 60,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja"
+            },
+            {
+              "name": "olivolja",
+              "form": "as_sold",
+              "quantity": 65,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Olivolja"
+            },
+            {
+              "name": "rödvinsvinäger",
+              "form": "as_sold",
+              "quantity": 40,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Rödvinsvinäger"
+            },
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 65,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Bröd"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 8,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök"
+            }
+          ]
+        },
+        {
+          "id": "potatis",
+          "name": "Potatis",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 900,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Lägg den råa tungan i en rymlig gryta med 2200 ml vatten och tungans salt. Koka upp och skumma ytan. Tvätta händer och redskap efter rått kött.",
+          "uses": [
+            "oxtunga",
+            "salt"
+          ],
+          "minutes": 12,
+          "passive": false,
+          "after": []
+        },
+        {
+          "text": "Sjud under lock på låg värme cirka 150 minuter, tills ett spett går lätt igenom tungans tjockaste del. Kontrollera vattennivån ett par gånger och fyll vid behov på med 300 ml vatten. Stor tunga kan behöva ytterligare 30 minuter; ta inte upp segt kött som färdigt.",
+          "uses": [
+            "oxtunga"
+          ],
+          "minutes": 150,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Skala och dela potatisen. Koka upp den med 1400 ml vatten och potatisens salt.",
+          "uses": [
+            "potatis",
+            "salt"
+          ],
+          "minutes": 6,
+          "passive": false,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sjud potatisen cirka 20 minuter tills den är mjuk. Häll av och håll varmt under lock.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 20,
+          "passive": true,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Riv brödet och blöt det med vinägern och 35 ml vatten. Finhacka persilja och vitlök. Arbeta ihop med det fuktiga brödet och olivoljan till en grov grön sås. Ingen majonnäs ingår.",
+          "uses": [
+            "persilja",
+            "olivolja",
+            "rödvinsvinäger",
+            "bröd",
+            "vitlök"
+          ],
+          "minutes": 8,
+          "passive": false,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Lyft tungan ur spadet och dra av den tjocka ytterhuden medan köttet fortfarande är varmt. Huden är avfall, inte extra portion. Skär köttet tvärs fibrerna i tunna skivor. Servera direkt med såsen och potatisen. Använd alla receptets ätliga komponenter; överblivet kokspad är processrest.",
+          "uses": [
+            "oxtunga",
+            "salt",
+            "persilja",
+            "olivolja",
+            "rödvinsvinäger",
+            "bröd",
+            "vitlök",
+            "potatis"
+          ],
+          "minutes": 10,
+          "passive": false,
+          "after": [
+            5
+          ]
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Enkel sås utan sardell/kapris; standard och utökad närmare bagnet verd. Samma råvara som tacos de lengua men inte samma komponenter, tillagade slutstruktur eller servering. Rå tunga och avlägsnad hud saknar verifierat ätbart produktutbyte. Utökad sås använder ångad äggstanning, inte ett falskt cooked_drained-ingrediensbyte."
+    },
+    {
+      "base_id": "smako-italian-lingua-salsa-verde",
+      "cuisine": "italian",
+      "meal_type": "dinner",
+      "version": "1.0.0",
+      "variant_id": "standard",
+      "name": "Lingua in salsa verde – pocherad tunga med grön sås – standard",
+      "servings": 4,
+      "family": "pocherad tunga med brödörtssås",
+      "primary": "oxtunga",
+      "method": "pot",
+      "side": "kokt potatis",
+      "flavor": [
+        "persilja",
+        "vinäger"
+      ],
+      "equipment": [
+        "stor gryta",
+        "kastrull",
+        "mixer eller kniv",
+        "termometer"
+      ],
+      "components": [
+        {
+          "id": "tunga",
+          "name": "Långsjuden oxtunga",
+          "ingredients": [
+            {
+              "name": "oxtunga",
+              "form": "as_sold",
+              "quantity": 900,
+              "unit": "g",
+              "role": "primary",
+              "label": "Rå hel oxtunga inklusive hud som tas bort"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 160,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök"
+            }
+          ]
+        },
+        {
+          "id": "sas",
+          "name": "Salsa verde",
+          "ingredients": [
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 60,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja"
+            },
+            {
+              "name": "olivolja",
+              "form": "as_sold",
+              "quantity": 65,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Olivolja"
+            },
+            {
+              "name": "rödvinsvinäger",
+              "form": "as_sold",
+              "quantity": 40,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Rödvinsvinäger"
+            },
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 65,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Bröd"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 8,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök"
+            },
+            {
+              "name": "sardeller",
+              "form": "preserved_drained",
+              "quantity": 20,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Sardeller"
+            },
+            {
+              "name": "kapris",
+              "form": "preserved_drained",
+              "quantity": 20,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Kapris"
+            }
+          ]
+        },
+        {
+          "id": "potatis",
+          "name": "Potatis",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 900,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Lägg den råa tungan i en rymlig gryta med 2200 ml vatten och tungans salt. Skär löken i klyftor och lägg ner. Koka upp och skumma ytan. Tvätta händer och redskap efter rått kött.",
+          "uses": [
+            "oxtunga",
+            "salt",
+            "gul lök"
+          ],
+          "minutes": 12,
+          "passive": false,
+          "after": []
+        },
+        {
+          "text": "Sjud under lock på låg värme cirka 150 minuter, tills ett spett går lätt igenom tungans tjockaste del. Kontrollera vattennivån ett par gånger och fyll vid behov på med 300 ml vatten. Stor tunga kan behöva ytterligare 30 minuter; ta inte upp segt kött som färdigt.",
+          "uses": [
+            "oxtunga"
+          ],
+          "minutes": 150,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Skala och dela potatisen. Koka upp den med 1400 ml vatten och potatisens salt.",
+          "uses": [
+            "potatis",
+            "salt"
+          ],
+          "minutes": 6,
+          "passive": false,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sjud potatisen cirka 20 minuter tills den är mjuk. Häll av och håll varmt under lock.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 20,
+          "passive": true,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Riv brödet och blöt det med vinägern och 35 ml vatten. Finhacka persilja och vitlök, sardeller och kapris. Arbeta ihop med det fuktiga brödet och olivoljan till en grov grön sås. Ingen majonnäs ingår.",
+          "uses": [
+            "persilja",
+            "olivolja",
+            "rödvinsvinäger",
+            "bröd",
+            "vitlök",
+            "sardeller",
+            "kapris"
+          ],
+          "minutes": 8,
+          "passive": false,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Lyft tungan ur spadet och dra av den tjocka ytterhuden medan köttet fortfarande är varmt. Huden är avfall, inte extra portion. Skär köttet tvärs fibrerna i tunna skivor. Servera direkt med såsen och potatisen, samt de mjuka kokgrönsakerna. Använd alla receptets ätliga komponenter; överblivet kokspad är processrest.",
+          "uses": [
+            "oxtunga",
+            "salt",
+            "gul lök",
+            "persilja",
+            "olivolja",
+            "rödvinsvinäger",
+            "bröd",
+            "vitlök",
+            "sardeller",
+            "kapris",
+            "potatis"
+          ],
+          "minutes": 10,
+          "passive": false,
+          "after": [
+            5
+          ]
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Enkel sås utan sardell/kapris; standard och utökad närmare bagnet verd. Samma råvara som tacos de lengua men inte samma komponenter, tillagade slutstruktur eller servering. Rå tunga och avlägsnad hud saknar verifierat ätbart produktutbyte. Utökad sås använder ångad äggstanning, inte ett falskt cooked_drained-ingrediensbyte."
+    },
+    {
+      "base_id": "smako-italian-lingua-salsa-verde",
+      "cuisine": "italian",
+      "meal_type": "dinner",
+      "version": "1.0.0",
+      "variant_id": "extended",
+      "name": "Lingua in salsa verde – pocherad tunga med grön sås – utökad",
+      "servings": 4,
+      "family": "pocherad tunga med brödörtssås",
+      "primary": "oxtunga",
+      "method": "pot",
+      "side": "kokt potatis",
+      "flavor": [
+        "persilja",
+        "vinäger"
+      ],
+      "equipment": [
+        "stor gryta",
+        "kastrull",
+        "mixer eller kniv",
+        "termometer"
+      ],
+      "components": [
+        {
+          "id": "tunga",
+          "name": "Långsjuden oxtunga",
+          "ingredients": [
+            {
+              "name": "oxtunga",
+              "form": "as_sold",
+              "quantity": 900,
+              "unit": "g",
+              "role": "primary",
+              "label": "Rå hel oxtunga inklusive hud som tas bort"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 160,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 220,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot"
+            },
+            {
+              "name": "selleri",
+              "form": "raw_edible",
+              "quantity": 120,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Selleri"
+            }
+          ]
+        },
+        {
+          "id": "sas",
+          "name": "Salsa verde",
+          "ingredients": [
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 60,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja"
+            },
+            {
+              "name": "olivolja",
+              "form": "as_sold",
+              "quantity": 65,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Olivolja"
+            },
+            {
+              "name": "rödvinsvinäger",
+              "form": "as_sold",
+              "quantity": 40,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Rödvinsvinäger"
+            },
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 65,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Bröd"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 8,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök"
+            },
+            {
+              "name": "sardeller",
+              "form": "preserved_drained",
+              "quantity": 20,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Sardeller"
+            },
+            {
+              "name": "kapris",
+              "form": "preserved_drained",
+              "quantity": 20,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Kapris"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 80,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Rått ägg utan skal för fast stanning som hackas i såsen"
+            }
+          ]
+        },
+        {
+          "id": "potatis",
+          "name": "Potatis",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 900,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Lägg den råa tungan i en rymlig gryta med 2200 ml vatten och tungans salt. Skär löken i klyftor och lägg ner. Skär morot och selleri i grova bitar; spara dem till senare i koket så att de kan serveras hela. Koka upp och skumma ytan. Tvätta händer och redskap efter rått kött.",
+          "uses": [
+            "oxtunga",
+            "salt",
+            "gul lök",
+            "morot",
+            "selleri"
+          ],
+          "minutes": 12,
+          "passive": false,
+          "after": []
+        },
+        {
+          "text": "Sjud under lock på låg värme cirka 150 minuter, tills ett spett går lätt igenom tungans tjockaste del. Kontrollera vattennivån ett par gånger och fyll vid behov på med 300 ml vatten. Stor tunga kan behöva ytterligare 30 minuter; ta inte upp segt kött som färdigt.",
+          "uses": [
+            "oxtunga"
+          ],
+          "minutes": 150,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Lägg morot och selleri i det sjudande spadet och låt även tungan ligga kvar. Starta en mindre kastrull med 500 ml vatten för äggstanningen.",
+          "uses": [
+            "morot",
+            "selleri"
+          ],
+          "minutes": 3,
+          "passive": false,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sjud grönsakerna cirka 15 minuter tills de är möra. Håll därefter tunga och grönsaker varmt i spadet.",
+          "uses": [
+            "morot",
+            "selleri",
+            "oxtunga"
+          ],
+          "minutes": 15,
+          "passive": true,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Skala och dela potatisen. Koka upp den med 1400 ml vatten och potatisens salt.",
+          "uses": [
+            "potatis",
+            "salt"
+          ],
+          "minutes": 6,
+          "passive": false,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Sjud potatisen cirka 20 minuter tills den är mjuk. Häll av och håll varmt under lock.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 20,
+          "passive": true,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Vispa den uppvägda råa äggmängden lätt i en liten värmetålig skål. Ställ skålen i kastrullen med sjudande vatten utan att vatten når in. Lägg lock på kastrullen.",
+          "uses": [
+            "ägg"
+          ],
+          "minutes": 2,
+          "passive": false,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Ånga ägget till helt fast stanning, cirka 12 minuter, och kontrollera minst 72 °C i mitten. Ta upp skålen och hacka stanningen fint. Detta ersätter att anta en styckevikt för hårdkokta ägg.",
+          "uses": [
+            "ägg"
+          ],
+          "minutes": 12,
+          "passive": true,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Riv brödet och blöt det med vinägern och 35 ml vatten. Finhacka persilja och vitlök, sardeller och kapris. Arbeta ihop med det fuktiga brödet och olivoljan till en grov grön sås. Vänd ner det genomkokta hackade ägget. Ingen majonnäs ingår.",
+          "uses": [
+            "persilja",
+            "olivolja",
+            "rödvinsvinäger",
+            "bröd",
+            "vitlök",
+            "sardeller",
+            "kapris",
+            "ägg"
+          ],
+          "minutes": 8,
+          "passive": false,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Lyft tungan ur spadet och dra av den tjocka ytterhuden medan köttet fortfarande är varmt. Huden är avfall, inte extra portion. Skär köttet tvärs fibrerna i tunna skivor. Servera direkt med såsen och potatisen, samt de mjuka kokgrönsakerna. Använd alla receptets ätliga komponenter; överblivet kokspad är processrest.",
+          "uses": [
+            "oxtunga",
+            "salt",
+            "gul lök",
+            "morot",
+            "selleri",
+            "persilja",
+            "olivolja",
+            "rödvinsvinäger",
+            "bröd",
+            "vitlök",
+            "sardeller",
+            "kapris",
+            "ägg",
+            "potatis"
+          ],
+          "minutes": 10,
+          "passive": false,
+          "after": [
+            9
+          ]
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Enkel sås utan sardell/kapris; standard och utökad närmare bagnet verd. Samma råvara som tacos de lengua men inte samma komponenter, tillagade slutstruktur eller servering. Rå tunga och avlägsnad hud saknar verifierat ätbart produktutbyte. Utökad sås använder ångad äggstanning, inte ett falskt cooked_drained-ingrediensbyte."
+    },
+    {
+      "base_id": "smako-italian-focaccia-formaggio-recco-stil",
+      "cuisine": "italian",
+      "meal_type": "dinner",
+      "version": "1.0.0",
+      "variant_id": "simple",
+      "name": "Focaccia col formaggio – hembakad i Recco-stil – enkel",
+      "servings": 4,
+      "family": "ojäst tunn ostfylld deg",
+      "primary": "stracchino",
+      "method": "bake",
+      "side": "tomatsallad",
+      "flavor": [
+        "stracchino",
+        "olivolja"
+      ],
+      "equipment": [
+        "ugn med 250 °C",
+        "kavel",
+        "bakplåtspapper godkänt för vald temperatur",
+        "plåt"
+      ],
+      "components": [
+        {
+          "id": "brod",
+          "name": "Två tunna degark med stracchino",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 280,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl"
+            },
+            {
+              "name": "olivolja",
+              "form": "as_sold",
+              "quantity": 35,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Olivolja"
+            },
+            {
+              "name": "stracchino",
+              "form": "as_sold",
+              "quantity": 400,
+              "unit": "g",
+              "role": "primary",
+              "label": "Stracchino"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            }
+          ]
+        },
+        {
+          "id": "sallad",
+          "name": "Sallad",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 450,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat"
+            },
+            {
+              "name": "balsamvinäger",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Balsamvinäger"
+            },
+            {
+              "name": "olivolja",
+              "form": "as_sold",
+              "quantity": 15,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Olivolja"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Blanda mjöl och salt med 145 ml vatten och två tredjedelar av brödets olja. Knåda 8 minuter till elastisk deg. Ingen jäst används.",
+          "uses": [
+            "vetemjöl",
+            "salt",
+            "olivolja"
+          ],
+          "minutes": 9,
+          "passive": false,
+          "after": []
+        },
+        {
+          "text": "Täck degen och låt vila i 45 minuter så att den kan sträckas riktigt tunt.",
+          "uses": [
+            "vetemjöl"
+          ],
+          "minutes": 45,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Värm ugnen till 250 °C och låt plåten bli varm. Dela degen i två lika delar. Kavla och dra försiktigt ut vardera till mycket tunna ark. Lägg det ena på ett temperaturtåligt bakpapper. Fördela stracchinon i små klickar och täck med andra arket. Förslut kanterna och nyp små ångöppningar i ovansidan. Pensla med återstående brödolja.",
+          "uses": [
+            "vetemjöl",
+            "olivolja",
+            "stracchino",
+            "salt"
+          ],
+          "minutes": 18,
+          "passive": false,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "För över till het plåt. Grädda cirka 14 minuter tills degen fått bruna blåsor, osten bubblar och botten är gräddad. Följ bakpapprets temperaturgräns; använd lätt oljad metallplåt i stället om papperet inte är godkänt för temperaturen, med olja tagen från receptets redan angivna mängd.",
+          "uses": [
+            "vetemjöl",
+            "olivolja",
+            "stracchino",
+            "salt"
+          ],
+          "minutes": 14,
+          "passive": true,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Skär tomaten. Blanda salladens råvaror med dess olja och balsamvinäger. Skär den nybakade focaccian i portionsbitar och servera direkt med hela salladen.",
+          "uses": [
+            "tomat",
+            "balsamvinäger",
+            "olivolja"
+          ],
+          "minutes": 7,
+          "passive": false,
+          "after": [
+            4
+          ]
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Hemmaugnsvariant med separat sallad för komplett middag; ingen DOP/IGP-autenticitetsstämpel. Färre ingredienser än middagsriktmärkena i enkel/standard är avsiktligt: ojäst ostfocaccia ska inte fyllas ut med fler degkryddor."
+    },
+    {
+      "base_id": "smako-italian-focaccia-formaggio-recco-stil",
+      "cuisine": "italian",
+      "meal_type": "dinner",
+      "version": "1.0.0",
+      "variant_id": "standard",
+      "name": "Focaccia col formaggio – hembakad i Recco-stil – standard",
+      "servings": 4,
+      "family": "ojäst tunn ostfylld deg",
+      "primary": "stracchino",
+      "method": "bake",
+      "side": "tomatsallad",
+      "flavor": [
+        "stracchino",
+        "olivolja"
+      ],
+      "equipment": [
+        "ugn med 250 °C",
+        "kavel",
+        "bakplåtspapper godkänt för vald temperatur",
+        "plåt"
+      ],
+      "components": [
+        {
+          "id": "brod",
+          "name": "Två tunna degark med stracchino",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 280,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl"
+            },
+            {
+              "name": "olivolja",
+              "form": "as_sold",
+              "quantity": 35,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Olivolja"
+            },
+            {
+              "name": "stracchino",
+              "form": "as_sold",
+              "quantity": 400,
+              "unit": "g",
+              "role": "primary",
+              "label": "Stracchino"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            }
+          ]
+        },
+        {
+          "id": "sallad",
+          "name": "Sallad",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 450,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat"
+            },
+            {
+              "name": "balsamvinäger",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Balsamvinäger"
+            },
+            {
+              "name": "olivolja",
+              "form": "as_sold",
+              "quantity": 15,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Olivolja"
+            },
+            {
+              "name": "rucola",
+              "form": "raw_edible",
+              "quantity": 70,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rucola"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 250,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Blanda mjöl och salt med 145 ml vatten och två tredjedelar av brödets olja. Knåda 8 minuter till elastisk deg. Ingen jäst används.",
+          "uses": [
+            "vetemjöl",
+            "salt",
+            "olivolja"
+          ],
+          "minutes": 9,
+          "passive": false,
+          "after": []
+        },
+        {
+          "text": "Täck degen och låt vila i 45 minuter så att den kan sträckas riktigt tunt.",
+          "uses": [
+            "vetemjöl"
+          ],
+          "minutes": 45,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Värm ugnen till 250 °C och låt plåten bli varm. Dela degen i två lika delar. Kavla och dra försiktigt ut vardera till mycket tunna ark. Lägg det ena på ett temperaturtåligt bakpapper. Fördela stracchinon i små klickar och täck med andra arket. Förslut kanterna och nyp små ångöppningar i ovansidan. Pensla med återstående brödolja.",
+          "uses": [
+            "vetemjöl",
+            "olivolja",
+            "stracchino",
+            "salt"
+          ],
+          "minutes": 18,
+          "passive": false,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "För över till het plåt. Grädda cirka 14 minuter tills degen fått bruna blåsor, osten bubblar och botten är gräddad. Följ bakpapprets temperaturgräns; använd lätt oljad metallplåt i stället om papperet inte är godkänt för temperaturen, med olja tagen från receptets redan angivna mängd.",
+          "uses": [
+            "vetemjöl",
+            "olivolja",
+            "stracchino",
+            "salt"
+          ],
+          "minutes": 14,
+          "passive": true,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Skär tomaten, gurkan. Blanda salladens råvaror med dess olja och balsamvinäger. Skär den nybakade focaccian i portionsbitar och servera direkt med hela salladen.",
+          "uses": [
+            "tomat",
+            "balsamvinäger",
+            "olivolja",
+            "rucola",
+            "gurka"
+          ],
+          "minutes": 7,
+          "passive": false,
+          "after": [
+            4
+          ]
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Hemmaugnsvariant med separat sallad för komplett middag; ingen DOP/IGP-autenticitetsstämpel. Färre ingredienser än middagsriktmärkena i enkel/standard är avsiktligt: ojäst ostfocaccia ska inte fyllas ut med fler degkryddor."
+    },
+    {
+      "base_id": "smako-italian-focaccia-formaggio-recco-stil",
+      "cuisine": "italian",
+      "meal_type": "dinner",
+      "version": "1.0.0",
+      "variant_id": "extended",
+      "name": "Focaccia col formaggio – hembakad i Recco-stil – utökad",
+      "servings": 4,
+      "family": "ojäst tunn ostfylld deg",
+      "primary": "stracchino",
+      "method": "bake",
+      "side": "tomatsallad",
+      "flavor": [
+        "stracchino",
+        "olivolja"
+      ],
+      "equipment": [
+        "ugn med 250 °C",
+        "kavel",
+        "bakplåtspapper godkänt för vald temperatur",
+        "plåt"
+      ],
+      "components": [
+        {
+          "id": "brod",
+          "name": "Två tunna degark med stracchino",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 280,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl"
+            },
+            {
+              "name": "olivolja",
+              "form": "as_sold",
+              "quantity": 35,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Olivolja"
+            },
+            {
+              "name": "stracchino",
+              "form": "as_sold",
+              "quantity": 400,
+              "unit": "g",
+              "role": "primary",
+              "label": "Stracchino"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            }
+          ]
+        },
+        {
+          "id": "sallad",
+          "name": "Sallad",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 450,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat"
+            },
+            {
+              "name": "balsamvinäger",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Balsamvinäger"
+            },
+            {
+              "name": "olivolja",
+              "form": "as_sold",
+              "quantity": 15,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Olivolja"
+            },
+            {
+              "name": "rucola",
+              "form": "raw_edible",
+              "quantity": 70,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rucola"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 250,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka"
+            },
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 300,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta vita bönor, avrunnen vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 60,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rödlök"
+            },
+            {
+              "name": "basilika",
+              "form": "raw_edible",
+              "quantity": 12,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Basilika"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Blanda mjöl och salt med 145 ml vatten och två tredjedelar av brödets olja. Knåda 8 minuter till elastisk deg. Ingen jäst används.",
+          "uses": [
+            "vetemjöl",
+            "salt",
+            "olivolja"
+          ],
+          "minutes": 9,
+          "passive": false,
+          "after": []
+        },
+        {
+          "text": "Täck degen och låt vila i 45 minuter så att den kan sträckas riktigt tunt.",
+          "uses": [
+            "vetemjöl"
+          ],
+          "minutes": 45,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Värm ugnen till 250 °C och låt plåten bli varm. Dela degen i två lika delar. Kavla och dra försiktigt ut vardera till mycket tunna ark. Lägg det ena på ett temperaturtåligt bakpapper. Fördela stracchinon i små klickar och täck med andra arket. Förslut kanterna och nyp små ångöppningar i ovansidan. Pensla med återstående brödolja.",
+          "uses": [
+            "vetemjöl",
+            "olivolja",
+            "stracchino",
+            "salt"
+          ],
+          "minutes": 18,
+          "passive": false,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "För över till het plåt. Grädda cirka 14 minuter tills degen fått bruna blåsor, osten bubblar och botten är gräddad. Följ bakpapprets temperaturgräns; använd lätt oljad metallplåt i stället om papperet inte är godkänt för temperaturen, med olja tagen från receptets redan angivna mängd.",
+          "uses": [
+            "vetemjöl",
+            "olivolja",
+            "stracchino",
+            "salt"
+          ],
+          "minutes": 14,
+          "passive": true,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Skär tomaten, gurkan och rödlöken. Blanda salladens råvaror med dess olja och balsamvinäger. Bönorna vägs avrunna och basilikan rivs ner. Skär den nybakade focaccian i portionsbitar och servera direkt med hela salladen.",
+          "uses": [
+            "tomat",
+            "balsamvinäger",
+            "olivolja",
+            "rucola",
+            "gurka",
+            "bönor",
+            "rödlök",
+            "basilika"
+          ],
+          "minutes": 7,
+          "passive": false,
+          "after": [
+            4
+          ]
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Hemmaugnsvariant med separat sallad för komplett middag; ingen DOP/IGP-autenticitetsstämpel. Färre ingredienser än middagsriktmärkena i enkel/standard är avsiktligt: ojäst ostfocaccia ska inte fyllas ut med fler degkryddor."
+    },
+    {
+      "base_id": "smako-italian-pasticciotto-leccese",
+      "cuisine": "italian",
+      "meal_type": "breakfast",
+      "version": "1.0.0",
+      "variant_id": "simple",
+      "name": "Pasticciotto leccese – liten vaniljkrämspaj – enkel",
+      "servings": 1,
+      "family": "sluten mördegspaj med kokt kräm",
+      "primary": "mjölk",
+      "method": "bake",
+      "side": "frukostbakverk",
+      "flavor": [
+        "mjölkkräm"
+      ],
+      "equipment": [
+        "liten pajform cirka 9 cm",
+        "kastrull",
+        "visp",
+        "kavel",
+        "ugn",
+        "kylskåp"
+      ],
+      "components": [
+        {
+          "id": "skal",
+          "name": "Smörmördeg",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 35,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl"
+            },
+            {
+              "name": "smör",
+              "form": "as_sold",
+              "quantity": 17,
+              "unit": "g",
+              "role": "cooking",
+              "label": "Smör"
+            },
+            {
+              "name": "strösocker",
+              "form": "dry",
+              "quantity": 8,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Strösocker"
+            },
+            {
+              "name": "äggula",
+              "form": "raw_edible",
+              "quantity": 6,
+              "unit": "g",
+              "role": "cooking",
+              "label": "Äggula"
+            }
+          ]
+        },
+        {
+          "id": "kram",
+          "name": "Fyllningskräm",
+          "ingredients": [
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 55,
+              "unit": "ml",
+              "role": "primary",
+              "label": "Mjölk"
+            },
+            {
+              "name": "äggula",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "primary",
+              "label": "Äggula"
+            },
+            {
+              "name": "strösocker",
+              "form": "dry",
+              "quantity": 7,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Strösocker"
+            },
+            {
+              "name": "majsstärkelse",
+              "form": "dry",
+              "quantity": 4,
+              "unit": "g",
+              "role": "cooking",
+              "label": "Majsstärkelse"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Nyp ihop skalets mjöl, smör och socker. Blanda ner skalets uppvägda äggula och 3 ml vatten, arbeta bara tills degen håller ihop. Platta till och täck.",
+          "uses": [
+            "vetemjöl",
+            "smör",
+            "strösocker",
+            "äggula"
+          ],
+          "minutes": 6,
+          "passive": false,
+          "after": []
+        },
+        {
+          "text": "Kyl degen 35 minuter. Den ska vara fast nog att kavla.",
+          "uses": [
+            "vetemjöl",
+            "smör",
+            "strösocker",
+            "äggula"
+          ],
+          "minutes": 35,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Vispa krämens äggula, socker och majsstärkelse slätt med mjölken. Värm under ständig vispning tills krämen bubblar och tjocknar; låt bubbla svagt en minut under fortsatt vispning. Ta av värmen.",
+          "uses": [
+            "äggula",
+            "strösocker",
+            "majsstärkelse",
+            "mjölk"
+          ],
+          "minutes": 8,
+          "passive": false,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Bred krämen i en ren grund skål, täck direkt mot ytan och kyl i kylskåp cirka 35 minuter tills den är kall nog att fylla degen utan att smälta smöret.",
+          "uses": [
+            "mjölk",
+            "äggula"
+          ],
+          "minutes": 35,
+          "passive": true,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Värm ugnen till 185 °C. Klä den lilla formen med papper. Kavla två tredjedelar av degen mellan papper och klä botten och kanter. Lägg i all kall kräm. Kavla resten till ett lock och nyp fast det. Gör ett litet ånghål; ingen extra mjölning eller pensling behövs.",
+          "uses": [
+            "vetemjöl",
+            "smör",
+            "strösocker",
+            "äggula",
+            "mjölk",
+            "majsstärkelse"
+          ],
+          "minutes": 10,
+          "passive": false,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Baka cirka 24 minuter tills mördegen är gyllene och botten inte längre ser rå ut. Äggkrämen är redan kokt, men bakverket ska vara hett igenom.",
+          "uses": [
+            "vetemjöl",
+            "smör",
+            "strösocker",
+            "äggula",
+            "mjölk",
+            "majsstärkelse"
+          ],
+          "minutes": 24,
+          "passive": true,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Låt svalna på galler 20 minuter innan formen tas bort. Servera bakverket ljummet som en frukostportion; fyllningen kan annars bränna.",
+          "uses": [
+            "vetemjöl",
+            "smör",
+            "strösocker",
+            "äggula",
+            "mjölk",
+            "majsstärkelse"
+          ],
+          "minutes": 20,
+          "passive": true,
+          "after": [
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Smör ersätter traditionellt ister. Enkel kräm utan vanilj; utökad med vanilj och amarena. Kaffet ingår inte. Smörversionen är uttryckligen en hemanpassning av pasticciotto, inte ett anspråk på traditionell isterdeg."
+    },
+    {
+      "base_id": "smako-italian-pasticciotto-leccese",
+      "cuisine": "italian",
+      "meal_type": "breakfast",
+      "version": "1.0.0",
+      "variant_id": "extended",
+      "name": "Pasticciotto leccese – liten vaniljkrämspaj – utökad",
+      "servings": 1,
+      "family": "sluten mördegspaj med kokt kräm",
+      "primary": "mjölk",
+      "method": "bake",
+      "side": "frukostbakverk",
+      "flavor": [
+        "mjölkkräm"
+      ],
+      "equipment": [
+        "liten pajform cirka 9 cm",
+        "kastrull",
+        "visp",
+        "kavel",
+        "ugn",
+        "kylskåp"
+      ],
+      "components": [
+        {
+          "id": "skal",
+          "name": "Smörmördeg",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 35,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl"
+            },
+            {
+              "name": "smör",
+              "form": "as_sold",
+              "quantity": 17,
+              "unit": "g",
+              "role": "cooking",
+              "label": "Smör"
+            },
+            {
+              "name": "strösocker",
+              "form": "dry",
+              "quantity": 8,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Strösocker"
+            },
+            {
+              "name": "äggula",
+              "form": "raw_edible",
+              "quantity": 6,
+              "unit": "g",
+              "role": "cooking",
+              "label": "Äggula"
+            }
+          ]
+        },
+        {
+          "id": "kram",
+          "name": "Fyllningskräm",
+          "ingredients": [
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 55,
+              "unit": "ml",
+              "role": "primary",
+              "label": "Mjölk"
+            },
+            {
+              "name": "äggula",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "primary",
+              "label": "Äggula"
+            },
+            {
+              "name": "strösocker",
+              "form": "dry",
+              "quantity": 7,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Strösocker"
+            },
+            {
+              "name": "majsstärkelse",
+              "form": "dry",
+              "quantity": 4,
+              "unit": "g",
+              "role": "cooking",
+              "label": "Majsstärkelse"
+            },
+            {
+              "name": "vaniljpulver",
+              "form": "dry",
+              "quantity": 0.1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vaniljpulver"
+            },
+            {
+              "name": "amarenakörsbär i sirap",
+              "form": "preserved_drained",
+              "quantity": 15,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Avrunna amarena, sirapen används inte"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Nyp ihop skalets mjöl, smör och socker. Blanda ner skalets uppvägda äggula och 3 ml vatten, arbeta bara tills degen håller ihop. Platta till och täck.",
+          "uses": [
+            "vetemjöl",
+            "smör",
+            "strösocker",
+            "äggula"
+          ],
+          "minutes": 6,
+          "passive": false,
+          "after": []
+        },
+        {
+          "text": "Kyl degen 35 minuter. Den ska vara fast nog att kavla.",
+          "uses": [
+            "vetemjöl",
+            "smör",
+            "strösocker",
+            "äggula"
+          ],
+          "minutes": 35,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Vispa krämens äggula, socker och majsstärkelse slätt med mjölken och vaniljen. Värm under ständig vispning tills krämen bubblar och tjocknar; låt bubbla svagt en minut under fortsatt vispning. Ta av värmen.",
+          "uses": [
+            "äggula",
+            "strösocker",
+            "majsstärkelse",
+            "mjölk",
+            "vaniljpulver"
+          ],
+          "minutes": 8,
+          "passive": false,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Bred krämen i en ren grund skål, täck direkt mot ytan och kyl i kylskåp cirka 35 minuter tills den är kall nog att fylla degen utan att smälta smöret.",
+          "uses": [
+            "mjölk",
+            "äggula"
+          ],
+          "minutes": 35,
+          "passive": true,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Värm ugnen till 185 °C. Klä den lilla formen med papper. Kavla två tredjedelar av degen mellan papper och klä botten och kanter. Lägg i all kall kräm och de avrunna körsbären. Kavla resten till ett lock och nyp fast det. Gör ett litet ånghål; ingen extra mjölning eller pensling behövs.",
+          "uses": [
+            "vetemjöl",
+            "smör",
+            "strösocker",
+            "äggula",
+            "mjölk",
+            "majsstärkelse",
+            "vaniljpulver",
+            "amarenakörsbär i sirap"
+          ],
+          "minutes": 10,
+          "passive": false,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Baka cirka 24 minuter tills mördegen är gyllene och botten inte längre ser rå ut. Äggkrämen är redan kokt, men bakverket ska vara hett igenom.",
+          "uses": [
+            "vetemjöl",
+            "smör",
+            "strösocker",
+            "äggula",
+            "mjölk",
+            "majsstärkelse",
+            "vaniljpulver",
+            "amarenakörsbär i sirap"
+          ],
+          "minutes": 24,
+          "passive": true,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Låt svalna på galler 20 minuter innan formen tas bort. Servera bakverket ljummet som en frukostportion; fyllningen kan annars bränna.",
+          "uses": [
+            "vetemjöl",
+            "smör",
+            "strösocker",
+            "äggula",
+            "mjölk",
+            "majsstärkelse",
+            "vaniljpulver",
+            "amarenakörsbär i sirap"
+          ],
+          "minutes": 20,
+          "passive": true,
+          "after": [
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Smör ersätter traditionellt ister. Enkel kräm utan vanilj; utökad med vanilj och amarena. Kaffet ingår inte. Smörversionen är uttryckligen en hemanpassning av pasticciotto, inte ett anspråk på traditionell isterdeg."
+    },
+    {
+      "base_id": "smako-mexican-sopa-de-lima",
+      "cuisine": "mexican",
+      "meal_type": "dinner",
+      "version": "1.0.0",
+      "variant_id": "simple",
+      "name": "Sopa de lima – kycklingsoppa med citrus och tortillas – enkel",
+      "servings": 4,
+      "family": "klar citrussyrlig kycklingsoppa",
+      "primary": "kyckling",
+      "method": "pot",
+      "side": "krispiga tortillastrimlor",
+      "flavor": [
+        "lime",
+        "oregano"
+      ],
+      "equipment": [
+        "soppgryta",
+        "stekpanna",
+        "termometer",
+        "hålslev"
+      ],
+      "components": [
+        {
+          "id": "soppa",
+          "name": "Kyckling och lätt citrusbuljong",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 650,
+              "unit": "g",
+              "role": "primary",
+              "label": "Benfritt rått kycklingkött"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 140,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök"
+            },
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat"
+            },
+            {
+              "name": "oregano",
+              "form": "dry",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Oregano"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 65,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Limejuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            }
+          ]
+        },
+        {
+          "id": "strimlor",
+          "name": "Krispiga majstortillas",
+          "ingredients": [
+            {
+              "name": "majstortillas",
+              "form": "as_sold",
+              "quantity": 240,
+              "unit": "g",
+              "role": "side",
+              "label": "Majstortillas"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 65,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Hacka lök och tomat. Håll rå kyckling separat från grönsaksbrädan. Fräs grönsakerna i soppans olja på medelvärme cirka 5 minuter.",
+          "uses": [
+            "gul lök",
+            "tomat",
+            "rapsolja"
+          ],
+          "minutes": 11,
+          "passive": false,
+          "after": []
+        },
+        {
+          "text": "Tillsätt oregano, salt och 1500 ml vatten. Lägg ner kycklingen i stora benfria bitar och koka upp. Sänk genast till sjudning. Rengör råkycklingredskapen.",
+          "uses": [
+            "oregano",
+            "salt",
+            "kyckling"
+          ],
+          "minutes": 5,
+          "passive": false,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Sjud under lock cirka 22 minuter tills kycklingens tjockaste del når minst 74 °C och grönsakerna är mjuka. Förläng om kycklingbitarna kräver det; buljongen ska inte stormkoka.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 22,
+          "passive": true,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Skär majstortillorna i smala strimlor och torka ytan. Värm strimlornas olja i en stekpanna på medelhög värme. Stek i omgångar tills de är frasiga, vänd med tång och lyft upp på ett galler. All angiven olja avser verklig stekinsats; olja som blir kvar i pannan är processrest.",
+          "uses": [
+            "majstortillas",
+            "rapsolja"
+          ],
+          "minutes": 12,
+          "passive": false,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Lyft upp den genomkokta kycklingen, dra isär med två rena gafflar och lägg tillbaka i soppan. Ta grytan från stark värme och blanda i limejuicen. Soppan ska inte redas eller mixas.",
+          "uses": [
+            "kyckling",
+            "limejuice"
+          ],
+          "minutes": 6,
+          "passive": false,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Fördela soppan och kycklingen mellan fyra skålar. Lägg på tortillastrimlorna sist så att de fortfarande har frasig yta vid servering.",
+          "uses": [
+            "kyckling",
+            "gul lök",
+            "tomat",
+            "oregano",
+            "limejuice",
+            "rapsolja",
+            "salt",
+            "majstortillas"
+          ],
+          "minutes": 3,
+          "passive": false,
+          "after": [
+            5
+          ]
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Svensk limejuice och grapefrukt approximerar lokal lima; enkel variant använder bara lime. Benfri kyckling ger lättare buljong. Stekoljan för tortillas är inköpt/insatt mängd, inte uppmätt upptagen fettmängd. Näringsberäkning behöver hantera kvarvarande olja."
+    },
+    {
+      "base_id": "smako-mexican-sopa-de-lima",
+      "cuisine": "mexican",
+      "meal_type": "dinner",
+      "version": "1.0.0",
+      "variant_id": "standard",
+      "name": "Sopa de lima – kycklingsoppa med citrus och tortillas – standard",
+      "servings": 4,
+      "family": "klar citrussyrlig kycklingsoppa",
+      "primary": "kyckling",
+      "method": "pot",
+      "side": "krispiga tortillastrimlor",
+      "flavor": [
+        "lime",
+        "oregano"
+      ],
+      "equipment": [
+        "soppgryta",
+        "stekpanna",
+        "termometer",
+        "hålslev"
+      ],
+      "components": [
+        {
+          "id": "soppa",
+          "name": "Kyckling och lätt citrusbuljong",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 650,
+              "unit": "g",
+              "role": "primary",
+              "label": "Benfritt rått kycklingkött"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 140,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök"
+            },
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat"
+            },
+            {
+              "name": "oregano",
+              "form": "dry",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Oregano"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 65,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Limejuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök"
+            },
+            {
+              "name": "paprika",
+              "form": "raw_edible",
+              "quantity": 160,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Paprika"
+            },
+            {
+              "name": "grapefrukt",
+              "form": "raw_edible",
+              "quantity": 70,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Endast hinnfritt grapefruktkött, ingen vit skalhinna"
+            }
+          ]
+        },
+        {
+          "id": "strimlor",
+          "name": "Krispiga majstortillas",
+          "ingredients": [
+            {
+              "name": "majstortillas",
+              "form": "as_sold",
+              "quantity": 240,
+              "unit": "g",
+              "role": "side",
+              "label": "Majstortillas"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 65,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Hacka lök och tomat, vitlök och paprika. Håll rå kyckling separat från grönsaksbrädan. Fräs grönsakerna i soppans olja på medelvärme cirka 5 minuter.",
+          "uses": [
+            "gul lök",
+            "tomat",
+            "rapsolja",
+            "vitlök",
+            "paprika"
+          ],
+          "minutes": 11,
+          "passive": false,
+          "after": []
+        },
+        {
+          "text": "Tillsätt oregano, salt och 1500 ml vatten. Lägg ner kycklingen i stora benfria bitar och koka upp. Sänk genast till sjudning. Rengör råkycklingredskapen.",
+          "uses": [
+            "oregano",
+            "salt",
+            "kyckling"
+          ],
+          "minutes": 5,
+          "passive": false,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Sjud under lock cirka 22 minuter tills kycklingens tjockaste del når minst 74 °C och grönsakerna är mjuka. Förläng om kycklingbitarna kräver det; buljongen ska inte stormkoka.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 22,
+          "passive": true,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Skär majstortillorna i smala strimlor och torka ytan. Värm strimlornas olja i en stekpanna på medelhög värme. Stek i omgångar tills de är frasiga, vänd med tång och lyft upp på ett galler. All angiven olja avser verklig stekinsats; olja som blir kvar i pannan är processrest.",
+          "uses": [
+            "majstortillas",
+            "rapsolja"
+          ],
+          "minutes": 12,
+          "passive": false,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Lyft upp den genomkokta kycklingen, dra isär med två rena gafflar och lägg tillbaka i soppan. Ta grytan från stark värme och blanda i limejuicen. Finhacka det helt hinnfria grapefruktköttet och rör i både saft och fruktkött som en öppen approximation av lokal lima. Soppan ska inte redas eller mixas.",
+          "uses": [
+            "kyckling",
+            "limejuice",
+            "grapefrukt"
+          ],
+          "minutes": 6,
+          "passive": false,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Fördela soppan och kycklingen mellan fyra skålar. Lägg på tortillastrimlorna sist så att de fortfarande har frasig yta vid servering.",
+          "uses": [
+            "kyckling",
+            "gul lök",
+            "tomat",
+            "oregano",
+            "limejuice",
+            "rapsolja",
+            "salt",
+            "vitlök",
+            "paprika",
+            "grapefrukt",
+            "majstortillas"
+          ],
+          "minutes": 3,
+          "passive": false,
+          "after": [
+            5
+          ]
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Svensk limejuice och grapefrukt approximerar lokal lima; enkel variant använder bara lime. Benfri kyckling ger lättare buljong. Stekoljan för tortillas är inköpt/insatt mängd, inte uppmätt upptagen fettmängd. Näringsberäkning behöver hantera kvarvarande olja."
+    },
+    {
+      "base_id": "smako-mexican-sopa-de-lima",
+      "cuisine": "mexican",
+      "meal_type": "dinner",
+      "version": "1.0.0",
+      "variant_id": "extended",
+      "name": "Sopa de lima – kycklingsoppa med citrus och tortillas – utökad",
+      "servings": 4,
+      "family": "klar citrussyrlig kycklingsoppa",
+      "primary": "kyckling",
+      "method": "pot",
+      "side": "krispiga tortillastrimlor",
+      "flavor": [
+        "lime",
+        "oregano"
+      ],
+      "equipment": [
+        "soppgryta",
+        "stekpanna",
+        "termometer",
+        "hålslev"
+      ],
+      "components": [
+        {
+          "id": "soppa",
+          "name": "Kyckling och lätt citrusbuljong",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 650,
+              "unit": "g",
+              "role": "primary",
+              "label": "Benfritt rått kycklingkött"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 140,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök"
+            },
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat"
+            },
+            {
+              "name": "oregano",
+              "form": "dry",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Oregano"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 65,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Limejuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök"
+            },
+            {
+              "name": "paprika",
+              "form": "raw_edible",
+              "quantity": 160,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Paprika"
+            },
+            {
+              "name": "grapefrukt",
+              "form": "raw_edible",
+              "quantity": 70,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Endast hinnfritt grapefruktkött, ingen vit skalhinna"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 160,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot"
+            },
+            {
+              "name": "selleri",
+              "form": "raw_edible",
+              "quantity": 90,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Selleri"
+            }
+          ]
+        },
+        {
+          "id": "strimlor",
+          "name": "Krispiga majstortillas",
+          "ingredients": [
+            {
+              "name": "majstortillas",
+              "form": "as_sold",
+              "quantity": 240,
+              "unit": "g",
+              "role": "side",
+              "label": "Majstortillas"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 65,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja"
+            }
+          ]
+        },
+        {
+          "id": "avokado",
+          "name": "Avokado till servering",
+          "ingredients": [
+            {
+              "name": "avokado",
+              "form": "raw_edible",
+              "quantity": 180,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Avokado"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Hacka lök och tomat, vitlök och paprika, samt morot och selleri. Håll rå kyckling separat från grönsaksbrädan. Fräs grönsakerna i soppans olja på medelvärme cirka 5 minuter.",
+          "uses": [
+            "gul lök",
+            "tomat",
+            "rapsolja",
+            "vitlök",
+            "paprika",
+            "morot",
+            "selleri"
+          ],
+          "minutes": 11,
+          "passive": false,
+          "after": []
+        },
+        {
+          "text": "Tillsätt oregano, salt och 1500 ml vatten. Lägg ner kycklingen i stora benfria bitar och koka upp. Sänk genast till sjudning. Rengör råkycklingredskapen.",
+          "uses": [
+            "oregano",
+            "salt",
+            "kyckling"
+          ],
+          "minutes": 5,
+          "passive": false,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Sjud under lock cirka 22 minuter tills kycklingens tjockaste del når minst 74 °C och grönsakerna är mjuka. Förläng om kycklingbitarna kräver det; buljongen ska inte stormkoka.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 22,
+          "passive": true,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Skär majstortillorna i smala strimlor och torka ytan. Värm strimlornas olja i en stekpanna på medelhög värme. Stek i omgångar tills de är frasiga, vänd med tång och lyft upp på ett galler. All angiven olja avser verklig stekinsats; olja som blir kvar i pannan är processrest.",
+          "uses": [
+            "majstortillas",
+            "rapsolja"
+          ],
+          "minutes": 12,
+          "passive": false,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Lyft upp den genomkokta kycklingen, dra isär med två rena gafflar och lägg tillbaka i soppan. Ta grytan från stark värme och blanda i limejuicen. Finhacka det helt hinnfria grapefruktköttet och rör i både saft och fruktkött som en öppen approximation av lokal lima. Soppan ska inte redas eller mixas.",
+          "uses": [
+            "kyckling",
+            "limejuice",
+            "grapefrukt"
+          ],
+          "minutes": 6,
+          "passive": false,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Tärna avokadon. Fördela den i skålarna, häll över den heta soppan och lägg tortillastrimlorna ovanpå först när det är dags att äta.",
+          "uses": [
+            "majstortillas",
+            "rapsolja",
+            "avokado"
+          ],
+          "minutes": 4,
+          "passive": false,
+          "after": [
+            5
+          ]
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Svensk limejuice och grapefrukt approximerar lokal lima; enkel variant använder bara lime. Benfri kyckling ger lättare buljong. Stekoljan för tortillas är inköpt/insatt mängd, inte uppmätt upptagen fettmängd. Näringsberäkning behöver hantera kvarvarande olja."
+    },
+    {
+      "base_id": "smako-mexican-tacos-de-canasta",
+      "cuisine": "mexican",
+      "meal_type": "dinner",
+      "version": "1.0.0",
+      "variant_id": "simple",
+      "name": "Tacos de canasta – ångvilade korgtacos – enkel",
+      "servings": 4,
+      "family": "varmångade fyllda majstacos",
+      "primary": "bönor",
+      "method": "pan",
+      "side": "salsa och eventuell snabbpickles",
+      "flavor": [
+        "ancho",
+        "vitlök"
+      ],
+      "equipment": [
+        "stekpanna",
+        "kastrull",
+        "mixer",
+        "värmetålig behållare",
+        "bakpapper",
+        "ren handduk",
+        "termometer"
+      ],
+      "components": [
+        {
+          "id": "fyllningar",
+          "name": "Två torra fyllningar",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 550,
+              "unit": "g",
+              "role": "primary",
+              "label": "Potatis"
+            },
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 420,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta bönor, avrunnen vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 130,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            }
+          ]
+        },
+        {
+          "id": "tacos",
+          "name": "Tortillas och varm chiliolja",
+          "ingredients": [
+            {
+              "name": "majstortillas",
+              "form": "as_sold",
+              "quantity": 400,
+              "unit": "g",
+              "role": "side",
+              "label": "Majstortillas"
+            },
+            {
+              "name": "anchochili",
+              "form": "dry",
+              "quantity": 10,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Torkad ancho utan stjälk och frön"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 60,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Skala och dela potatisen. Koka upp den med 1000 ml vatten och hälften av fyllningarnas salt. Häll 120 ml kokhett vatten över anchochilin i en skål.",
+          "uses": [
+            "potatis",
+            "salt",
+            "anchochili"
+          ],
+          "minutes": 6,
+          "passive": false,
+          "after": []
+        },
+        {
+          "text": "Sjud potatisen cirka 18 minuter tills den är helt mjuk. Låt samtidigt chilin mjukna i sitt heta vatten. Häll av potatisen noga.",
+          "uses": [
+            "potatis",
+            "anchochili"
+          ],
+          "minutes": 18,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Hacka löken och fräs i fyllningarnas olja. Dela den stekta löken i två delar. Mosa bönorna med ena delen och resten av saltet. Mosa potatisen med andra delen. Stek varje fyllning kort i samma panna tills den är varm och ganska torr, inte såsig.",
+          "uses": [
+            "potatis",
+            "bönor",
+            "gul lök",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 12,
+          "passive": false,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Mixa den mjuka anchochilin med vitlöken och 25 ml vatten till slät pasta. Värm taco-komponentens olja försiktigt i en liten kastrull. Rör ner chilipastan från låg höjd; den kan stänka. Sjud under omrörning tills vattenbubblorna nästan upphört och oljan doftar rostad chili, utan att vitlöken bränns.",
+          "uses": [
+            "anchochili",
+            "vitlök",
+            "rapsolja"
+          ],
+          "minutes": 7,
+          "passive": false,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Klä en förvärmd värmetålig behållare med bakpapper. Värm majstortillorna i torr panna tills de är böjliga och heta, cirka en halv minut per sida. Fördela bönfyllning i hälften och potatisfyllning i resten. Vik och lägg tätt i lager; pensla varje lager med den varma chilioljan. Använd all tortilla, fyllning och olja. Förslut papperet och linda behållaren i handduken.",
+          "uses": [
+            "potatis",
+            "bönor",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "majstortillas",
+            "anchochili",
+            "vitlök"
+          ],
+          "minutes": 15,
+          "passive": false,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Låt de inpackade tacosen ångvila 25 minuter. Behållaren ska behålla hettan; sikta på att fyllningen hålls över 60 °C. Detta är avsedd slutbehandling, inte passiv förvaring över flera timmar.",
+          "uses": [
+            "potatis",
+            "bönor",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "majstortillas",
+            "anchochili",
+            "vitlök"
+          ],
+          "minutes": 25,
+          "passive": true,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Öppna försiktigt för varm ånga. Fördela de mjuka, oljeglänsande tacosen över fyra portioner. Ät direkt; någon frasig yta eftersträvas inte.",
+          "uses": [
+            "potatis",
+            "bönor",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "majstortillas",
+            "anchochili",
+            "vitlök"
+          ],
+          "minutes": 3,
+          "passive": false,
+          "after": [
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Liten värmetålig, handduksisolerad behållare ersätter gatukökets korg."
+    },
+    {
+      "base_id": "smako-mexican-tacos-de-canasta",
+      "cuisine": "mexican",
+      "meal_type": "dinner",
+      "version": "1.0.0",
+      "variant_id": "standard",
+      "name": "Tacos de canasta – ångvilade korgtacos – standard",
+      "servings": 4,
+      "family": "varmångade fyllda majstacos",
+      "primary": "bönor",
+      "method": "pan",
+      "side": "salsa och eventuell snabbpickles",
+      "flavor": [
+        "ancho",
+        "vitlök"
+      ],
+      "equipment": [
+        "stekpanna",
+        "kastrull",
+        "mixer",
+        "värmetålig behållare",
+        "bakpapper",
+        "ren handduk",
+        "termometer"
+      ],
+      "components": [
+        {
+          "id": "fyllningar",
+          "name": "Två torra fyllningar",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 550,
+              "unit": "g",
+              "role": "primary",
+              "label": "Potatis"
+            },
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 420,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta bönor, avrunnen vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 130,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            }
+          ]
+        },
+        {
+          "id": "tacos",
+          "name": "Tortillas och varm chiliolja",
+          "ingredients": [
+            {
+              "name": "majstortillas",
+              "form": "as_sold",
+              "quantity": 400,
+              "unit": "g",
+              "role": "side",
+              "label": "Majstortillas"
+            },
+            {
+              "name": "anchochili",
+              "form": "dry",
+              "quantity": 10,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Torkad ancho utan stjälk och frön"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 60,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja"
+            }
+          ]
+        },
+        {
+          "id": "salsa",
+          "name": "Tomatsalsa",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 400,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Limejuice"
+            },
+            {
+              "name": "koriander",
+              "form": "raw_edible",
+              "quantity": 16,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Koriander"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Skala och dela potatisen. Koka upp den med 1000 ml vatten och hälften av fyllningarnas salt. Häll 120 ml kokhett vatten över anchochilin i en skål.",
+          "uses": [
+            "potatis",
+            "salt",
+            "anchochili"
+          ],
+          "minutes": 6,
+          "passive": false,
+          "after": []
+        },
+        {
+          "text": "Sjud potatisen cirka 18 minuter tills den är helt mjuk. Låt samtidigt chilin mjukna i sitt heta vatten. Häll av potatisen noga.",
+          "uses": [
+            "potatis",
+            "anchochili"
+          ],
+          "minutes": 18,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Hacka löken och fräs i fyllningarnas olja. Dela den stekta löken i två delar. Mosa bönorna med ena delen och resten av saltet. Mosa potatisen med andra delen. Stek varje fyllning kort i samma panna tills den är varm och ganska torr, inte såsig.",
+          "uses": [
+            "potatis",
+            "bönor",
+            "gul lök",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 12,
+          "passive": false,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Mixa den mjuka anchochilin med vitlöken och 25 ml vatten till slät pasta. Värm taco-komponentens olja försiktigt i en liten kastrull. Rör ner chilipastan från låg höjd; den kan stänka. Sjud under omrörning tills vattenbubblorna nästan upphört och oljan doftar rostad chili, utan att vitlöken bränns.",
+          "uses": [
+            "anchochili",
+            "vitlök",
+            "rapsolja"
+          ],
+          "minutes": 7,
+          "passive": false,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Klä en förvärmd värmetålig behållare med bakpapper. Värm majstortillorna i torr panna tills de är böjliga och heta, cirka en halv minut per sida. Fördela bönfyllning i hälften och potatisfyllning i resten. Vik och lägg tätt i lager; pensla varje lager med den varma chilioljan. Använd all tortilla, fyllning och olja. Förslut papperet och linda behållaren i handduken.",
+          "uses": [
+            "potatis",
+            "bönor",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "majstortillas",
+            "anchochili",
+            "vitlök"
+          ],
+          "minutes": 15,
+          "passive": false,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Låt de inpackade tacosen ångvila 25 minuter. Behållaren ska behålla hettan; sikta på att fyllningen hålls över 60 °C. Detta är avsedd slutbehandling, inte passiv förvaring över flera timmar.",
+          "uses": [
+            "potatis",
+            "bönor",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "majstortillas",
+            "anchochili",
+            "vitlök"
+          ],
+          "minutes": 25,
+          "passive": true,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Finhacka tomat och koriander och vänd med salsans limejuice och salt.",
+          "uses": [
+            "tomat",
+            "limejuice",
+            "koriander",
+            "salt"
+          ],
+          "minutes": 6,
+          "passive": false,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Öppna försiktigt för varm ånga. Fördela de mjuka, oljeglänsande tacosen över fyra portioner och servera salsan vid sidan. Ät direkt; någon frasig yta eftersträvas inte.",
+          "uses": [
+            "potatis",
+            "bönor",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "majstortillas",
+            "anchochili",
+            "vitlök",
+            "tomat",
+            "limejuice",
+            "koriander"
+          ],
+          "minutes": 3,
+          "passive": false,
+          "after": [
+            7
+          ]
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Liten värmetålig, handduksisolerad behållare ersätter gatukökets korg."
+    },
+    {
+      "base_id": "smako-mexican-tacos-de-canasta",
+      "cuisine": "mexican",
+      "meal_type": "dinner",
+      "version": "1.0.0",
+      "variant_id": "extended",
+      "name": "Tacos de canasta – ångvilade korgtacos – utökad",
+      "servings": 4,
+      "family": "varmångade fyllda majstacos",
+      "primary": "bönor",
+      "method": "pan",
+      "side": "salsa och eventuell snabbpickles",
+      "flavor": [
+        "ancho",
+        "vitlök"
+      ],
+      "equipment": [
+        "stekpanna",
+        "kastrull",
+        "mixer",
+        "värmetålig behållare",
+        "bakpapper",
+        "ren handduk",
+        "termometer"
+      ],
+      "components": [
+        {
+          "id": "fyllningar",
+          "name": "Två torra fyllningar",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 550,
+              "unit": "g",
+              "role": "primary",
+              "label": "Potatis"
+            },
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 420,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta bönor, avrunnen vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 130,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            }
+          ]
+        },
+        {
+          "id": "tacos",
+          "name": "Tortillas och varm chiliolja",
+          "ingredients": [
+            {
+              "name": "majstortillas",
+              "form": "as_sold",
+              "quantity": 400,
+              "unit": "g",
+              "role": "side",
+              "label": "Majstortillas"
+            },
+            {
+              "name": "anchochili",
+              "form": "dry",
+              "quantity": 10,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Torkad ancho utan stjälk och frön"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 60,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja"
+            }
+          ]
+        },
+        {
+          "id": "salsa",
+          "name": "Tomatsalsa",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 400,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Limejuice"
+            },
+            {
+              "name": "koriander",
+              "form": "raw_edible",
+              "quantity": 16,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Koriander"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            }
+          ]
+        },
+        {
+          "id": "pickles",
+          "name": "Snabbsyrad morot och jalapeño",
+          "ingredients": [
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 180,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot"
+            },
+            {
+              "name": "jalapeño",
+              "form": "raw_edible",
+              "quantity": 20,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Jalapeño"
+            },
+            {
+              "name": "äppelcidervinäger",
+              "form": "as_sold",
+              "quantity": 45,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Äppelcidervinäger"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Skala och dela potatisen. Koka upp den med 1000 ml vatten och hälften av fyllningarnas salt. Häll 120 ml kokhett vatten över anchochilin i en skål.",
+          "uses": [
+            "potatis",
+            "salt",
+            "anchochili"
+          ],
+          "minutes": 6,
+          "passive": false,
+          "after": []
+        },
+        {
+          "text": "Sjud potatisen cirka 18 minuter tills den är helt mjuk. Låt samtidigt chilin mjukna i sitt heta vatten. Häll av potatisen noga.",
+          "uses": [
+            "potatis",
+            "anchochili"
+          ],
+          "minutes": 18,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Strimla moroten tunt och skiva jalapeñon. Koka upp vinägern med 100 ml vatten och pickleskomponentens salt. Lägg ner morot och chili och sjud 3 minuter. Ställ åt sidan att dra medan tacos görs; detta är ett tillbehör för direkt servering, inte konservering.",
+          "uses": [
+            "morot",
+            "jalapeño",
+            "äppelcidervinäger",
+            "salt"
+          ],
+          "minutes": 7,
+          "passive": false,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Hacka löken och fräs i fyllningarnas olja. Dela den stekta löken i två delar. Mosa bönorna med ena delen och resten av saltet. Mosa potatisen med andra delen. Stek varje fyllning kort i samma panna tills den är varm och ganska torr, inte såsig.",
+          "uses": [
+            "potatis",
+            "bönor",
+            "gul lök",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 12,
+          "passive": false,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Mixa den mjuka anchochilin med vitlöken och 25 ml vatten till slät pasta. Värm taco-komponentens olja försiktigt i en liten kastrull. Rör ner chilipastan från låg höjd; den kan stänka. Sjud under omrörning tills vattenbubblorna nästan upphört och oljan doftar rostad chili, utan att vitlöken bränns.",
+          "uses": [
+            "anchochili",
+            "vitlök",
+            "rapsolja"
+          ],
+          "minutes": 7,
+          "passive": false,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Klä en förvärmd värmetålig behållare med bakpapper. Värm majstortillorna i torr panna tills de är böjliga och heta, cirka en halv minut per sida. Fördela bönfyllning i hälften och potatisfyllning i resten. Vik och lägg tätt i lager; pensla varje lager med den varma chilioljan. Använd all tortilla, fyllning och olja. Förslut papperet och linda behållaren i handduken.",
+          "uses": [
+            "potatis",
+            "bönor",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "majstortillas",
+            "anchochili",
+            "vitlök"
+          ],
+          "minutes": 15,
+          "passive": false,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Låt de inpackade tacosen ångvila 25 minuter. Behållaren ska behålla hettan; sikta på att fyllningen hålls över 60 °C. Detta är avsedd slutbehandling, inte passiv förvaring över flera timmar.",
+          "uses": [
+            "potatis",
+            "bönor",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "majstortillas",
+            "anchochili",
+            "vitlök"
+          ],
+          "minutes": 25,
+          "passive": true,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Finhacka tomat och koriander och vänd med salsans limejuice och salt.",
+          "uses": [
+            "tomat",
+            "limejuice",
+            "koriander",
+            "salt"
+          ],
+          "minutes": 6,
+          "passive": false,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Öppna försiktigt för varm ånga. Fördela de mjuka, oljeglänsande tacosen över fyra portioner och servera salsan vid sidan tillsammans med de snabbsyrade grönsakerna och deras lag. Ät direkt; någon frasig yta eftersträvas inte.",
+          "uses": [
+            "potatis",
+            "bönor",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "majstortillas",
+            "anchochili",
+            "vitlök",
+            "tomat",
+            "limejuice",
+            "koriander",
+            "morot",
+            "jalapeño",
+            "äppelcidervinäger"
+          ],
+          "minutes": 3,
+          "passive": false,
+          "after": [
+            8
+          ]
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Liten värmetålig, handduksisolerad behållare ersätter gatukökets korg."
+    },
+    {
+      "base_id": "smako-mexican-pescado-zarandeado",
+      "cuisine": "mexican",
+      "meal_type": "dinner",
+      "version": "1.0.0",
+      "variant_id": "simple",
+      "name": "Pescado zarandeado – fisk i het hemmaugn – enkel",
+      "servings": 4,
+      "family": "öppet brynt chilifisk",
+      "primary": "fisk",
+      "method": "oven",
+      "side": "varma majstortillas",
+      "flavor": [
+        "ancho",
+        "tomat",
+        "umami"
+      ],
+      "equipment": [
+        "ugn med grillelement",
+        "ugnsform",
+        "kastrull",
+        "stekpanna",
+        "mixer",
+        "termometer"
+      ],
+      "components": [
+        {
+          "id": "fisk",
+          "name": "Fisk och kokt adobopasta",
+          "ingredients": [
+            {
+              "name": "fisk",
+              "form": "raw_edible",
+              "quantity": 800,
+              "unit": "g",
+              "role": "primary",
+              "label": "Rå benfri vit fiskfilé"
+            },
+            {
+              "name": "anchochili",
+              "form": "dry",
+              "quantity": 14,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Anchochili"
+            },
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat"
+            },
+            {
+              "name": "sojasås",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Sojasås"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 12,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök"
+            }
+          ]
+        },
+        {
+          "id": "tortillas",
+          "name": "Majstortillas",
+          "ingredients": [
+            {
+              "name": "majstortillas",
+              "form": "as_sold",
+              "quantity": 280,
+              "unit": "g",
+              "role": "side",
+              "label": "Majstortillas"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Ta bort eventuella chilistjälkar och frön före vägning. Rosta anchochilin hastigt i torr kastrull, utan att svärta den. Häll på 180 ml hett vatten.",
+          "uses": [
+            "anchochili"
+          ],
+          "minutes": 3,
+          "passive": false,
+          "after": []
+        },
+        {
+          "text": "Låt chilin mjukna 15 minuter medan ugnen värms till 220 °C.",
+          "uses": [
+            "anchochili"
+          ],
+          "minutes": 15,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Hacka tomat och vitlök. Fräs dem i hälften av oljan tills tomaten mjuknat. Mixa med den avrunna chilin, sojan samt 50 ml vatten.",
+          "uses": [
+            "tomat",
+            "vitlök",
+            "rapsolja",
+            "anchochili",
+            "sojasås"
+          ],
+          "minutes": 10,
+          "passive": false,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Häll tillbaka chilipastan i kastrullen och låt puttra under omrörning cirka 5 minuter tills den går att breda tunt utan att rinna av fisken. Ingen rå fisk har ännu varit i kontakt med pastan.",
+          "uses": [
+            "anchochili",
+            "tomat"
+          ],
+          "minutes": 5,
+          "passive": false,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Kontrollera fiskfilén efter ben. Smörj formen med återstående olja och lägg filéerna i ett lager. Bred all den kokta chilipastan över fisken. Ställ mitt i ugnen, utan lock eller täckande papper.",
+          "uses": [
+            "fisk",
+            "anchochili",
+            "tomat",
+            "sojasås",
+            "rapsolja",
+            "vitlök"
+          ],
+          "minutes": 5,
+          "passive": false,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Baka cirka 12 minuter. Sätt sedan på övre grillelementet för de sista 2–4 minuterna tills ytan fått tydligt brynta fläckar. Bevaka grillningen och kontrollera minst 63 °C i fiskens tjockaste del. Anpassa tiden efter filétjocklek; brynt yta ensam bevisar inte genomlagning.",
+          "uses": [
+            "fisk",
+            "anchochili",
+            "tomat",
+            "sojasås",
+            "rapsolja",
+            "vitlök"
+          ],
+          "minutes": 16,
+          "passive": false,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Värm majstortillorna i torr panna och lägg i en ren handduk. Servera fisken med all genomvarm adobopasta, tortillas. Fyra portioner. Grillhalster och vedeld används inte i denna hemanpassning.",
+          "uses": [
+            "majstortillas"
+          ],
+          "minutes": 6,
+          "passive": false,
+          "after": [
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Öppen ugnsgrill och fiskfilé ersätter fläkt hel fisk i grillhalster. Namn och steg visar anpassningen."
+    },
+    {
+      "base_id": "smako-mexican-pescado-zarandeado",
+      "cuisine": "mexican",
+      "meal_type": "dinner",
+      "version": "1.0.0",
+      "variant_id": "standard",
+      "name": "Pescado zarandeado – fisk i het hemmaugn – standard",
+      "servings": 4,
+      "family": "öppet brynt chilifisk",
+      "primary": "fisk",
+      "method": "oven",
+      "side": "varma majstortillas",
+      "flavor": [
+        "ancho",
+        "tomat",
+        "umami"
+      ],
+      "equipment": [
+        "ugn med grillelement",
+        "ugnsform",
+        "kastrull",
+        "stekpanna",
+        "mixer",
+        "termometer"
+      ],
+      "components": [
+        {
+          "id": "fisk",
+          "name": "Fisk och kokt adobopasta",
+          "ingredients": [
+            {
+              "name": "fisk",
+              "form": "raw_edible",
+              "quantity": 800,
+              "unit": "g",
+              "role": "primary",
+              "label": "Rå benfri vit fiskfilé"
+            },
+            {
+              "name": "anchochili",
+              "form": "dry",
+              "quantity": 14,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Anchochili"
+            },
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat"
+            },
+            {
+              "name": "sojasås",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Sojasås"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 12,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök"
+            },
+            {
+              "name": "worcestershiresås",
+              "form": "as_sold",
+              "quantity": 15,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Worcestershiresås"
+            }
+          ]
+        },
+        {
+          "id": "tortillas",
+          "name": "Majstortillas",
+          "ingredients": [
+            {
+              "name": "majstortillas",
+              "form": "as_sold",
+              "quantity": 280,
+              "unit": "g",
+              "role": "side",
+              "label": "Majstortillas"
+            }
+          ]
+        },
+        {
+          "id": "lok",
+          "name": "Syrlig lök",
+          "ingredients": [
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 90,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rödlök"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Limejuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Ta bort eventuella chilistjälkar och frön före vägning. Rosta anchochilin hastigt i torr kastrull, utan att svärta den. Häll på 180 ml hett vatten.",
+          "uses": [
+            "anchochili"
+          ],
+          "minutes": 3,
+          "passive": false,
+          "after": []
+        },
+        {
+          "text": "Låt chilin mjukna 15 minuter medan ugnen värms till 220 °C.",
+          "uses": [
+            "anchochili"
+          ],
+          "minutes": 15,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Hacka tomat och vitlök. Fräs dem i hälften av oljan tills tomaten mjuknat. Mixa med den avrunna chilin, sojan och Worcestershiresåsen samt 50 ml vatten.",
+          "uses": [
+            "tomat",
+            "vitlök",
+            "rapsolja",
+            "anchochili",
+            "sojasås",
+            "worcestershiresås"
+          ],
+          "minutes": 10,
+          "passive": false,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Häll tillbaka chilipastan i kastrullen och låt puttra under omrörning cirka 5 minuter tills den går att breda tunt utan att rinna av fisken. Ingen rå fisk har ännu varit i kontakt med pastan.",
+          "uses": [
+            "anchochili",
+            "tomat"
+          ],
+          "minutes": 5,
+          "passive": false,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Kontrollera fiskfilén efter ben. Smörj formen med återstående olja och lägg filéerna i ett lager. Bred all den kokta chilipastan över fisken. Ställ mitt i ugnen, utan lock eller täckande papper.",
+          "uses": [
+            "fisk",
+            "anchochili",
+            "tomat",
+            "sojasås",
+            "rapsolja",
+            "vitlök",
+            "worcestershiresås"
+          ],
+          "minutes": 5,
+          "passive": false,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Baka cirka 12 minuter. Sätt sedan på övre grillelementet för de sista 2–4 minuterna tills ytan fått tydligt brynta fläckar. Bevaka grillningen och kontrollera minst 63 °C i fiskens tjockaste del. Anpassa tiden efter filétjocklek; brynt yta ensam bevisar inte genomlagning.",
+          "uses": [
+            "fisk",
+            "anchochili",
+            "tomat",
+            "sojasås",
+            "rapsolja",
+            "vitlök",
+            "worcestershiresås"
+          ],
+          "minutes": 16,
+          "passive": false,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Skiva rödlöken tunt och vänd med lökkomponentens limejuice och salt. Låt stå medan tortillorna värms.",
+          "uses": [
+            "rödlök",
+            "limejuice",
+            "salt"
+          ],
+          "minutes": 4,
+          "passive": false,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Värm majstortillorna i torr panna och lägg i en ren handduk. Servera fisken med all genomvarm adobopasta, tortillas, syrlig lök. Fyra portioner. Grillhalster och vedeld används inte i denna hemanpassning.",
+          "uses": [
+            "majstortillas"
+          ],
+          "minutes": 6,
+          "passive": false,
+          "after": [
+            7
+          ]
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Öppen ugnsgrill och fiskfilé ersätter fläkt hel fisk i grillhalster. Namn och steg visar anpassningen."
+    },
+    {
+      "base_id": "smako-mexican-pescado-zarandeado",
+      "cuisine": "mexican",
+      "meal_type": "dinner",
+      "version": "1.0.0",
+      "variant_id": "extended",
+      "name": "Pescado zarandeado – fisk i het hemmaugn – utökad",
+      "servings": 4,
+      "family": "öppet brynt chilifisk",
+      "primary": "fisk",
+      "method": "oven",
+      "side": "varma majstortillas",
+      "flavor": [
+        "ancho",
+        "tomat",
+        "umami"
+      ],
+      "equipment": [
+        "ugn med grillelement",
+        "ugnsform",
+        "kastrull",
+        "stekpanna",
+        "mixer",
+        "termometer"
+      ],
+      "components": [
+        {
+          "id": "fisk",
+          "name": "Fisk och kokt adobopasta",
+          "ingredients": [
+            {
+              "name": "fisk",
+              "form": "raw_edible",
+              "quantity": 800,
+              "unit": "g",
+              "role": "primary",
+              "label": "Rå benfri vit fiskfilé"
+            },
+            {
+              "name": "anchochili",
+              "form": "dry",
+              "quantity": 14,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Anchochili"
+            },
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat"
+            },
+            {
+              "name": "sojasås",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Sojasås"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 12,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök"
+            },
+            {
+              "name": "worcestershiresås",
+              "form": "as_sold",
+              "quantity": 15,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Worcestershiresås"
+            }
+          ]
+        },
+        {
+          "id": "tortillas",
+          "name": "Majstortillas",
+          "ingredients": [
+            {
+              "name": "majstortillas",
+              "form": "as_sold",
+              "quantity": 280,
+              "unit": "g",
+              "role": "side",
+              "label": "Majstortillas"
+            }
+          ]
+        },
+        {
+          "id": "lok",
+          "name": "Syrlig lök",
+          "ingredients": [
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 90,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rödlök"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Limejuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            }
+          ]
+        },
+        {
+          "id": "kal",
+          "name": "Kål och avokado",
+          "ingredients": [
+            {
+              "name": "vitkål",
+              "form": "raw_edible",
+              "quantity": 250,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Vitkål"
+            },
+            {
+              "name": "avokado",
+              "form": "raw_edible",
+              "quantity": 180,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Avokado"
+            },
+            {
+              "name": "koriander",
+              "form": "raw_edible",
+              "quantity": 16,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Koriander"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 15,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Limejuice"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Ta bort eventuella chilistjälkar och frön före vägning. Rosta anchochilin hastigt i torr kastrull, utan att svärta den. Häll på 180 ml hett vatten.",
+          "uses": [
+            "anchochili"
+          ],
+          "minutes": 3,
+          "passive": false,
+          "after": []
+        },
+        {
+          "text": "Låt chilin mjukna 15 minuter medan ugnen värms till 220 °C.",
+          "uses": [
+            "anchochili"
+          ],
+          "minutes": 15,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Hacka tomat och vitlök. Fräs dem i hälften av oljan tills tomaten mjuknat. Mixa med den avrunna chilin, sojan och Worcestershiresåsen samt 50 ml vatten.",
+          "uses": [
+            "tomat",
+            "vitlök",
+            "rapsolja",
+            "anchochili",
+            "sojasås",
+            "worcestershiresås"
+          ],
+          "minutes": 10,
+          "passive": false,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Häll tillbaka chilipastan i kastrullen och låt puttra under omrörning cirka 5 minuter tills den går att breda tunt utan att rinna av fisken. Ingen rå fisk har ännu varit i kontakt med pastan.",
+          "uses": [
+            "anchochili",
+            "tomat"
+          ],
+          "minutes": 5,
+          "passive": false,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Kontrollera fiskfilén efter ben. Smörj formen med återstående olja och lägg filéerna i ett lager. Bred all den kokta chilipastan över fisken. Ställ mitt i ugnen, utan lock eller täckande papper.",
+          "uses": [
+            "fisk",
+            "anchochili",
+            "tomat",
+            "sojasås",
+            "rapsolja",
+            "vitlök",
+            "worcestershiresås"
+          ],
+          "minutes": 5,
+          "passive": false,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Baka cirka 12 minuter. Sätt sedan på övre grillelementet för de sista 2–4 minuterna tills ytan fått tydligt brynta fläckar. Bevaka grillningen och kontrollera minst 63 °C i fiskens tjockaste del. Anpassa tiden efter filétjocklek; brynt yta ensam bevisar inte genomlagning.",
+          "uses": [
+            "fisk",
+            "anchochili",
+            "tomat",
+            "sojasås",
+            "rapsolja",
+            "vitlök",
+            "worcestershiresås"
+          ],
+          "minutes": 16,
+          "passive": false,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Skiva rödlöken tunt och vänd med lökkomponentens limejuice och salt. Låt stå medan tortillorna värms.",
+          "uses": [
+            "rödlök",
+            "limejuice",
+            "salt"
+          ],
+          "minutes": 4,
+          "passive": false,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Strimla kålen och krama lätt med sin limejuice. Vänd ner skuren avokado och hackad koriander.",
+          "uses": [
+            "vitkål",
+            "avokado",
+            "koriander",
+            "limejuice"
+          ],
+          "minutes": 5,
+          "passive": false,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Värm majstortillorna i torr panna och lägg i en ren handduk. Servera fisken med all genomvarm adobopasta, tortillas, syrlig lök och kålsallad. Fyra portioner. Grillhalster och vedeld används inte i denna hemanpassning.",
+          "uses": [
+            "majstortillas"
+          ],
+          "minutes": 6,
+          "passive": false,
+          "after": [
+            8
+          ]
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Öppen ugnsgrill och fiskfilé ersätter fläkt hel fisk i grillhalster. Namn och steg visar anpassningen."
+    }
+  ]
+}

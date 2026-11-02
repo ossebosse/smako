@@ -114,7 +114,10 @@ def test_new_dairy_inputs_are_excluded_from_vegan_requests(name):
 def test_unknown_inputs_still_require_review_and_existing_defaults_are_preserved():
     vocabulary = library_vocabulary([])
     assert 'makrutlimeblad|raw_edible' not in vocabulary
-    assert 'evaporerad mjölk|as_sold' not in vocabulary
+    assert 'makrutlimeblad|dry' not in vocabulary
+    # The later review supports weighed unsweetened milk, not its old ml dose.
+    assert vocabulary['evaporerad mjölk|as_sold'][0] == 'g'
+    assert ('evaporerad mjölk|as_sold', 'ml') not in vocabulary.by_unit
     for row in ROWS:
         assert vocabulary[row['name']+'|'+row['form']] == (row['unit'],row['requirements'])
 

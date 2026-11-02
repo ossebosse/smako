@@ -1,0 +1,5365 @@
+{
+  "library_version": "smako-meal-pack-v1",
+  "recipes": [
+    {
+      "design": {
+        "active_minutes": 39,
+        "base_id": "smako-swedish-flasklagg-rotmos",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "rimmat fläsklägg|as_sold",
+                "name": "Rå rimmad fläsklägg, bruttovikt före borttagning av eventuella ben och seg svål",
+                "note": "",
+                "quantity": 1500.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "lagerblad|dry",
+                "name": "lagerblad",
+                "note": "",
+                "quantity": 0.5,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kryddpeppar|dry",
+                "name": "kryddpeppar",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              }
+            ],
+            "id": "lagg",
+            "name": "Långkokt lägg"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "kålrot|raw_edible",
+                "name": "kålrot",
+                "note": "",
+                "quantity": 650.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "morot|raw_edible",
+                "name": "morot",
+                "note": "",
+                "quantity": 250.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "potatis|raw_edible",
+                "name": "potatis",
+                "note": "",
+                "quantity": 750.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "smör|as_sold",
+                "name": "smör",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "g"
+              }
+            ],
+            "id": "mos",
+            "name": "Rotmos"
+          }
+        ],
+        "content_sha256": "d67e568668285c33d642fc2e627ee9ba518af51cb64ee0ae629723459b0a3026",
+        "content_source": {
+          "active_minutes": 39,
+          "method_note": "Ingredienslistan anger hela insatsen, även den del som senare hälls eller silas bort. Förlusten är inte uppmätt. Näring och färdig portionsvikt är okända; receptet kan inte styrka valda närings- eller viktgränser. Inköp och personliga kostkrav kontrolleras för samtliga insatser.",
+          "pack_id": "reviewed-expansion-round2-stage13",
+          "priority": 1,
+          "proposal_id": "smako-swedish-flasklagg-rotmos",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "c3ab12b8ffdf3fbeb1e28a131d533632c39d31917e8d5ec6374e4e537da57125",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "swedish"
+        ],
+        "equipment": [
+          "stor gryta",
+          "kastrull",
+          "potatisstöt",
+          "termometer"
+        ],
+        "estimated_minutes": 249,
+        "family": "fläsklägg och rotmos",
+        "fish": false,
+        "flavor_profile": [
+          "rimmat",
+          "rotfrukter",
+          "kryddpeppar"
+        ],
+        "ingredient_count": 7,
+        "method": "pot",
+        "primary_ingredient": "rimmat fläsklägg med ben",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar, inte uppmätta. Läggen är rå och rimmad med ben; inköpsvikten är inte ätlig köttvikt. Ben/svålutbyte och salt behöver senare produkt- och beredningsgranskning. Lång sjudning till mörhet och mos smaksatt med kokspad bevaras. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "rotmos",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 12,
+            "id": "s1",
+            "ingredient_keys": [
+              "kryddpeppar|dry",
+              "lagerblad|dry",
+              "rimmat fläsklägg|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "3000 ml",
+                3000.0
+              ],
+              [
+                "500 ml",
+                500.0
+              ]
+            ],
+            "text": "Använd rå rimmad fläsklägg, med eller utan ben, nära den angivna vikten före putsning. Kontrollera faktisk vikt och kostnad. Lägg fläskläggen i grytan med 3000 ml vatten eller så att den täcks; tillsätt vid behov ytterligare 500 ml vatten. Koka upp och skumma. Lägg i lagerblad och malen kryddpeppar. Tillsätt inte extra salt till det rimmade köttet."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 60,
+            "id": "s2",
+            "ingredient_keys": [
+              "rimmat fläsklägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sjud läggen försiktigt under lock i 60 minuter."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 1,
+            "id": "s3",
+            "ingredient_keys": [
+              "rimmat fläsklägg|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "300 ml",
+                300.0
+              ]
+            ],
+            "text": "Kontrollera vätskan och vänd läggen. Fyll vid behov på med 300 ml vatten."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 60,
+            "id": "s4",
+            "ingredient_keys": [
+              "rimmat fläsklägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sjud ytterligare 60 minuter."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 1,
+            "id": "s5",
+            "ingredient_keys": [
+              "rimmat fläsklägg|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "300 ml",
+                300.0
+              ]
+            ],
+            "text": "Kontrollera och vänd igen; fyll vid behov på med 300 ml vatten."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 60,
+            "id": "s6",
+            "ingredient_keys": [
+              "rimmat fläsklägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sjud ytterligare omkring 60 minuter, tills köttet är mycket mört och lätt delas med gaffel, eller lossnar från ben om ben ingår. Förläng vid behov."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 10,
+            "id": "s7",
+            "ingredient_keys": [
+              "kålrot|raw_edible",
+              "lagerblad|dry",
+              "morot|raw_edible",
+              "potatis|raw_edible",
+              "rimmat fläsklägg|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "600 ml",
+                600.0
+              ]
+            ],
+            "text": "Skala kålrot, morot och potatis, väg de råa ätliga mängderna och tärna. Ta upp lagerbladen. Lägg rotfrukterna i en annan kastrull med 600 ml vatten och 400 ml av läggens kokspad. Låt läggen ligga kvar varmt över 60 °C i resten av spadet."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 30,
+            "id": "s8",
+            "ingredient_keys": [
+              "kålrot|raw_edible",
+              "morot|raw_edible",
+              "potatis|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Koka rotfrukterna mjuka cirka 30 minuter."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 2,
+            "id": "s9",
+            "ingredient_keys": [
+              "kålrot|raw_edible",
+              "morot|raw_edible",
+              "potatis|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Häll av rotfrukterna och spara kokvätskan separat till spädning av moset."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 10,
+            "id": "s10",
+            "ingredient_keys": [
+              "kålrot|raw_edible",
+              "morot|raw_edible",
+              "potatis|raw_edible",
+              "rimmat fläsklägg|as_sold",
+              "smör|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Mosa rotfrukterna med smöret. Späd med den sparade kokvätskan lite i taget till ett grovt mos. Kontrollera sältan innan mer kokspad tillsätts. Lyft upp läggen, avlägsna eventuella ben och seg svål och fördela köttet."
+          },
+          {
+            "depends_on": [
+              "s10"
+            ],
+            "duration_minutes": 3,
+            "id": "s11",
+            "ingredient_keys": [
+              "kryddpeppar|dry",
+              "kålrot|raw_edible",
+              "morot|raw_edible",
+              "potatis|raw_edible",
+              "rimmat fläsklägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Servera fläskläggen med varmt rotmos."
+          }
+        ],
+        "total_minutes": 249,
+        "unmeasured_processes": [
+          {
+            "description": "Lagerblad kokar med och tas upp. Överföring till kokspadet är inte uppmätt.",
+            "ingredient_keys": [
+              "lagerblad|dry"
+            ],
+            "operation": "remove_after_infusion",
+            "step_id": "s7"
+          },
+          {
+            "description": "Eventuella ben och seg svål tas bort från köttet. Förpackningens bruttovikt omvandlas inte till en påhittad ätlig vikt.",
+            "ingredient_keys": [
+              "rimmat fläsklägg|as_sold"
+            ],
+            "operation": "remove_bones_after_cooking",
+            "step_id": "s10"
+          },
+          {
+            "description": "Endast kokspad som faktiskt används till moset serveras. Resterande lag och rotfruktsvatten är processrester med okänd salt- och näringsfördelning.",
+            "ingredient_keys": [
+              "rimmat fläsklägg|as_sold",
+              "kålrot|raw_edible",
+              "morot|raw_edible",
+              "potatis|raw_edible",
+              "kryddpeppar|dry"
+            ],
+            "operation": "drain_after_cooking",
+            "step_id": "s11"
+          }
+        ],
+        "variant_id": "simple",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 210
+      },
+      "ingredients": [
+        {
+          "canonical_name": "rimmat fläsklägg",
+          "component": "lagg",
+          "form": "as_sold",
+          "name": "rimmat fläsklägg",
+          "product_requirements": [
+            "pack:intake_all_round2_6f34660b827c"
+          ],
+          "quantity": 1500.0,
+          "quantity_max": 1500.0,
+          "quantity_min": 1500.0,
+          "quantity_step": 1500.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "lagerblad",
+          "component": "lagg",
+          "form": "dry",
+          "name": "lagerblad",
+          "product_requirements": [
+            "pack:intake_all_expansion_b43ed6916a64"
+          ],
+          "quantity": 0.5,
+          "quantity_max": 0.5,
+          "quantity_min": 0.5,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kryddpeppar",
+          "component": "lagg",
+          "form": "dry",
+          "name": "kryddpeppar",
+          "product_requirements": [
+            "pack:intake_all_c412f28a0556"
+          ],
+          "quantity": 2.0,
+          "quantity_max": 2.0,
+          "quantity_min": 2.0,
+          "quantity_step": 2.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kålrot",
+          "component": "mos",
+          "form": "raw_edible",
+          "name": "kålrot",
+          "product_requirements": [
+            "pack:intake_all_7fb56162bc4e"
+          ],
+          "quantity": 650.0,
+          "quantity_max": 650.0,
+          "quantity_min": 650.0,
+          "quantity_step": 650.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "morot",
+          "component": "mos",
+          "form": "raw_edible",
+          "name": "morot",
+          "quantity": 250.0,
+          "quantity_max": 250.0,
+          "quantity_min": 250.0,
+          "quantity_step": 250.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "potatis",
+          "component": "mos",
+          "form": "raw_edible",
+          "name": "potatis",
+          "quantity": 750.0,
+          "quantity_max": 750.0,
+          "quantity_min": 750.0,
+          "quantity_step": 750.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "smör",
+          "component": "mos",
+          "form": "as_sold",
+          "name": "smör",
+          "product_requirements": [
+            "pack:intake_butter"
+          ],
+          "quantity": 30.0,
+          "quantity_max": 30.0,
+          "quantity_min": 30.0,
+          "quantity_step": 30.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Använd rå rimmad fläsklägg, med eller utan ben, nära den angivna vikten före putsning. Kontrollera faktisk vikt och kostnad. Lägg fläskläggen i grytan med 3000 ml vatten eller så att den täcks; tillsätt vid behov ytterligare 500 ml vatten. Koka upp och skumma. Lägg i lagerblad och malen kryddpeppar. Tillsätt inte extra salt till det rimmade köttet.",
+        "Sjud läggen försiktigt under lock i 60 minuter.",
+        "Kontrollera vätskan och vänd läggen. Fyll vid behov på med 300 ml vatten.",
+        "Sjud ytterligare 60 minuter.",
+        "Kontrollera och vänd igen; fyll vid behov på med 300 ml vatten.",
+        "Sjud ytterligare omkring 60 minuter, tills köttet är mycket mört och lätt delas med gaffel, eller lossnar från ben om ben ingår. Förläng vid behov.",
+        "Skala kålrot, morot och potatis, väg de råa ätliga mängderna och tärna. Ta upp lagerbladen. Lägg rotfrukterna i en annan kastrull med 600 ml vatten och 400 ml av läggens kokspad. Låt läggen ligga kvar varmt över 60 °C i resten av spadet.",
+        "Koka rotfrukterna mjuka cirka 30 minuter.",
+        "Häll av rotfrukterna och spara kokvätskan separat till spädning av moset.",
+        "Mosa rotfrukterna med smöret. Späd med den sparade kokvätskan lite i taget till ett grovt mos. Kontrollera sältan innan mer kokspad tillsätts. Lyft upp läggen, avlägsna eventuella ben och seg svål och fördela köttet.",
+        "Servera fläskläggen med varmt rotmos."
+      ],
+      "name": "Fläsklägg med rotmos – enkel – med rå rimmad lägg",
+      "preparation": {
+        "family": "fläsklägg och rotmos",
+        "input_forms": {
+          "kryddpeppar": "dry",
+          "kålrot": "raw_edible",
+          "lagerblad": "dry",
+          "morot": "raw_edible",
+          "potatis": "raw_edible",
+          "rimmat fläsklägg": "as_sold",
+          "smör": "as_sold"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "d67e568668285c33d642fc2e627ee9ba518af51cb64ee0ae629723459b0a3026",
+        "version": "smako-authored-losses-v3"
+      },
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 39,
+        "base_id": "smako-swedish-flasklagg-rotmos",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "rimmat fläsklägg|as_sold",
+                "name": "Rå rimmad fläsklägg, bruttovikt före borttagning av eventuella ben och seg svål",
+                "note": "",
+                "quantity": 1500.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "lagerblad|dry",
+                "name": "lagerblad",
+                "note": "",
+                "quantity": 0.5,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kryddpeppar|dry",
+                "name": "kryddpeppar",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "gul lök",
+                "note": "",
+                "quantity": 180.0,
+                "unit": "g"
+              }
+            ],
+            "id": "lagg",
+            "name": "Långkokt lägg"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "kålrot|raw_edible",
+                "name": "kålrot",
+                "note": "",
+                "quantity": 650.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "morot|raw_edible",
+                "name": "morot",
+                "note": "",
+                "quantity": 250.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "potatis|raw_edible",
+                "name": "potatis",
+                "note": "",
+                "quantity": 750.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "smör|as_sold",
+                "name": "smör",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ljus sirap|as_sold",
+                "name": "ljus sirap",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "senap|as_sold",
+                "name": "senap",
+                "note": "",
+                "quantity": 40.0,
+                "unit": "g"
+              }
+            ],
+            "id": "mos",
+            "name": "Rotmos"
+          }
+        ],
+        "content_sha256": "b1d195eed94dc6ca7dc1bdf5c5a7fc0a47bdfeb494ac360e073bac0eb42ff1b2",
+        "content_source": {
+          "active_minutes": 39,
+          "method_note": "Ingredienslistan anger hela insatsen, även den del som senare hälls eller silas bort. Förlusten är inte uppmätt. Näring och färdig portionsvikt är okända; receptet kan inte styrka valda närings- eller viktgränser. Inköp och personliga kostkrav kontrolleras för samtliga insatser.",
+          "pack_id": "reviewed-expansion-round2-stage13",
+          "priority": 1,
+          "proposal_id": "smako-swedish-flasklagg-rotmos",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "c3ab12b8ffdf3fbeb1e28a131d533632c39d31917e8d5ec6374e4e537da57125",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "swedish"
+        ],
+        "equipment": [
+          "stor gryta",
+          "kastrull",
+          "potatisstöt",
+          "termometer"
+        ],
+        "estimated_minutes": 249,
+        "family": "fläsklägg och rotmos",
+        "fish": false,
+        "flavor_profile": [
+          "rimmat",
+          "rotfrukter",
+          "kryddpeppar"
+        ],
+        "ingredient_count": 10,
+        "method": "pot",
+        "primary_ingredient": "rimmat fläsklägg med ben",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar, inte uppmätta. Läggen är rå och rimmad med ben; inköpsvikten är inte ätlig köttvikt. Ben/svålutbyte och salt behöver senare produkt- och beredningsgranskning. Lång sjudning till mörhet och mos smaksatt med kokspad bevaras. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "rotmos",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 12,
+            "id": "s1",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "kryddpeppar|dry",
+              "lagerblad|dry",
+              "rimmat fläsklägg|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "3000 ml",
+                3000.0
+              ],
+              [
+                "500 ml",
+                500.0
+              ]
+            ],
+            "text": "Använd rå rimmad fläsklägg, med eller utan ben, nära den angivna vikten före putsning. Kontrollera faktisk vikt och kostnad. Lägg fläskläggen i grytan med 3000 ml vatten eller så att den täcks; tillsätt vid behov ytterligare 500 ml vatten. Koka upp och skumma. Lägg i lagerblad och malen kryddpeppar samt skalad klyftad lök. Tillsätt inte extra salt till det rimmade köttet."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 60,
+            "id": "s2",
+            "ingredient_keys": [
+              "rimmat fläsklägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sjud läggen försiktigt under lock i 60 minuter."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 1,
+            "id": "s3",
+            "ingredient_keys": [
+              "rimmat fläsklägg|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "300 ml",
+                300.0
+              ]
+            ],
+            "text": "Kontrollera vätskan och vänd läggen. Fyll vid behov på med 300 ml vatten."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 60,
+            "id": "s4",
+            "ingredient_keys": [
+              "rimmat fläsklägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sjud ytterligare 60 minuter."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 1,
+            "id": "s5",
+            "ingredient_keys": [
+              "rimmat fläsklägg|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "300 ml",
+                300.0
+              ]
+            ],
+            "text": "Kontrollera och vänd igen; fyll vid behov på med 300 ml vatten."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 60,
+            "id": "s6",
+            "ingredient_keys": [
+              "rimmat fläsklägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sjud ytterligare omkring 60 minuter, tills köttet är mycket mört och lätt delas med gaffel, eller lossnar från ben om ben ingår. Förläng vid behov."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 10,
+            "id": "s7",
+            "ingredient_keys": [
+              "kålrot|raw_edible",
+              "lagerblad|dry",
+              "morot|raw_edible",
+              "potatis|raw_edible",
+              "rimmat fläsklägg|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "600 ml",
+                600.0
+              ]
+            ],
+            "text": "Skala kålrot, morot och potatis, väg de råa ätliga mängderna och tärna. Ta upp lagerbladen. Lägg rotfrukterna i en annan kastrull med 600 ml vatten och 400 ml av läggens kokspad. Låt läggen ligga kvar varmt över 60 °C i resten av spadet."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 30,
+            "id": "s8",
+            "ingredient_keys": [
+              "kålrot|raw_edible",
+              "morot|raw_edible",
+              "potatis|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Koka rotfrukterna mjuka cirka 30 minuter."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 2,
+            "id": "s9",
+            "ingredient_keys": [
+              "kålrot|raw_edible",
+              "morot|raw_edible",
+              "potatis|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Häll av rotfrukterna och spara kokvätskan separat till spädning av moset."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 10,
+            "id": "s10",
+            "ingredient_keys": [
+              "kålrot|raw_edible",
+              "ljus sirap|as_sold",
+              "morot|raw_edible",
+              "potatis|raw_edible",
+              "rimmat fläsklägg|as_sold",
+              "smör|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Mosa rotfrukterna med smöret och sirapen. Späd med den sparade kokvätskan lite i taget till ett grovt mos. Kontrollera sältan innan mer kokspad tillsätts. Lyft upp läggen, avlägsna eventuella ben och seg svål och fördela köttet."
+          },
+          {
+            "depends_on": [
+              "s10"
+            ],
+            "duration_minutes": 3,
+            "id": "s11",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "kryddpeppar|dry",
+              "kålrot|raw_edible",
+              "morot|raw_edible",
+              "potatis|raw_edible",
+              "rimmat fläsklägg|as_sold",
+              "senap|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Servera fläskläggen med varmt rotmos och senap vid sidan; fördela även den kokta löken."
+          }
+        ],
+        "total_minutes": 249,
+        "unmeasured_processes": [
+          {
+            "description": "Lagerblad kokar med och tas upp. Överföring till kokspadet är inte uppmätt.",
+            "ingredient_keys": [
+              "lagerblad|dry"
+            ],
+            "operation": "remove_after_infusion",
+            "step_id": "s7"
+          },
+          {
+            "description": "Eventuella ben och seg svål tas bort från köttet. Förpackningens bruttovikt omvandlas inte till en påhittad ätlig vikt.",
+            "ingredient_keys": [
+              "rimmat fläsklägg|as_sold"
+            ],
+            "operation": "remove_bones_after_cooking",
+            "step_id": "s10"
+          },
+          {
+            "description": "Endast kokspad som faktiskt används till moset serveras. Resterande lag och rotfruktsvatten är processrester med okänd salt- och näringsfördelning.",
+            "ingredient_keys": [
+              "rimmat fläsklägg|as_sold",
+              "kålrot|raw_edible",
+              "morot|raw_edible",
+              "potatis|raw_edible",
+              "kryddpeppar|dry"
+            ],
+            "operation": "drain_after_cooking",
+            "step_id": "s11"
+          }
+        ],
+        "variant_id": "standard",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 210
+      },
+      "ingredients": [
+        {
+          "canonical_name": "rimmat fläsklägg",
+          "component": "lagg",
+          "form": "as_sold",
+          "name": "rimmat fläsklägg",
+          "product_requirements": [
+            "pack:intake_all_round2_6f34660b827c"
+          ],
+          "quantity": 1500.0,
+          "quantity_max": 1500.0,
+          "quantity_min": 1500.0,
+          "quantity_step": 1500.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "lagerblad",
+          "component": "lagg",
+          "form": "dry",
+          "name": "lagerblad",
+          "product_requirements": [
+            "pack:intake_all_expansion_b43ed6916a64"
+          ],
+          "quantity": 0.5,
+          "quantity_max": 0.5,
+          "quantity_min": 0.5,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kryddpeppar",
+          "component": "lagg",
+          "form": "dry",
+          "name": "kryddpeppar",
+          "product_requirements": [
+            "pack:intake_all_c412f28a0556"
+          ],
+          "quantity": 2.0,
+          "quantity_max": 2.0,
+          "quantity_min": 2.0,
+          "quantity_step": 2.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "lagg",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 180.0,
+          "quantity_max": 180.0,
+          "quantity_min": 180.0,
+          "quantity_step": 180.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kålrot",
+          "component": "mos",
+          "form": "raw_edible",
+          "name": "kålrot",
+          "product_requirements": [
+            "pack:intake_all_7fb56162bc4e"
+          ],
+          "quantity": 650.0,
+          "quantity_max": 650.0,
+          "quantity_min": 650.0,
+          "quantity_step": 650.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "morot",
+          "component": "mos",
+          "form": "raw_edible",
+          "name": "morot",
+          "quantity": 250.0,
+          "quantity_max": 250.0,
+          "quantity_min": 250.0,
+          "quantity_step": 250.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "potatis",
+          "component": "mos",
+          "form": "raw_edible",
+          "name": "potatis",
+          "quantity": 750.0,
+          "quantity_max": 750.0,
+          "quantity_min": 750.0,
+          "quantity_step": 750.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "smör",
+          "component": "mos",
+          "form": "as_sold",
+          "name": "smör",
+          "product_requirements": [
+            "pack:intake_butter"
+          ],
+          "quantity": 30.0,
+          "quantity_max": 30.0,
+          "quantity_min": 30.0,
+          "quantity_step": 30.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ljus sirap",
+          "component": "mos",
+          "form": "as_sold",
+          "name": "ljus sirap",
+          "product_requirements": [
+            "pack:intake_all_expansion_8848eae55cd5"
+          ],
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "senap",
+          "component": "mos",
+          "form": "as_sold",
+          "name": "senap",
+          "quantity": 40.0,
+          "quantity_max": 40.0,
+          "quantity_min": 40.0,
+          "quantity_step": 40.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Använd rå rimmad fläsklägg, med eller utan ben, nära den angivna vikten före putsning. Kontrollera faktisk vikt och kostnad. Lägg fläskläggen i grytan med 3000 ml vatten eller så att den täcks; tillsätt vid behov ytterligare 500 ml vatten. Koka upp och skumma. Lägg i lagerblad och malen kryddpeppar samt skalad klyftad lök. Tillsätt inte extra salt till det rimmade köttet.",
+        "Sjud läggen försiktigt under lock i 60 minuter.",
+        "Kontrollera vätskan och vänd läggen. Fyll vid behov på med 300 ml vatten.",
+        "Sjud ytterligare 60 minuter.",
+        "Kontrollera och vänd igen; fyll vid behov på med 300 ml vatten.",
+        "Sjud ytterligare omkring 60 minuter, tills köttet är mycket mört och lätt delas med gaffel, eller lossnar från ben om ben ingår. Förläng vid behov.",
+        "Skala kålrot, morot och potatis, väg de råa ätliga mängderna och tärna. Ta upp lagerbladen. Lägg rotfrukterna i en annan kastrull med 600 ml vatten och 400 ml av läggens kokspad. Låt läggen ligga kvar varmt över 60 °C i resten av spadet.",
+        "Koka rotfrukterna mjuka cirka 30 minuter.",
+        "Häll av rotfrukterna och spara kokvätskan separat till spädning av moset.",
+        "Mosa rotfrukterna med smöret och sirapen. Späd med den sparade kokvätskan lite i taget till ett grovt mos. Kontrollera sältan innan mer kokspad tillsätts. Lyft upp läggen, avlägsna eventuella ben och seg svål och fördela köttet.",
+        "Servera fläskläggen med varmt rotmos och senap vid sidan; fördela även den kokta löken."
+      ],
+      "name": "Fläsklägg med rotmos – standard – med rå rimmad lägg",
+      "preparation": {
+        "family": "fläsklägg och rotmos",
+        "input_forms": {
+          "gul lök": "raw_edible",
+          "kryddpeppar": "dry",
+          "kålrot": "raw_edible",
+          "lagerblad": "dry",
+          "ljus sirap": "as_sold",
+          "morot": "raw_edible",
+          "potatis": "raw_edible",
+          "rimmat fläsklägg": "as_sold",
+          "senap": "as_sold",
+          "smör": "as_sold"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "b1d195eed94dc6ca7dc1bdf5c5a7fc0a47bdfeb494ac360e073bac0eb42ff1b2",
+        "version": "smako-authored-losses-v3"
+      },
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 46,
+        "base_id": "smako-swedish-flasklagg-rotmos",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "rimmat fläsklägg|as_sold",
+                "name": "Rå rimmad fläsklägg, bruttovikt före borttagning av eventuella ben och seg svål",
+                "note": "",
+                "quantity": 1500.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "lagerblad|dry",
+                "name": "lagerblad",
+                "note": "",
+                "quantity": 0.5,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kryddpeppar|dry",
+                "name": "kryddpeppar",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "gul lök",
+                "note": "",
+                "quantity": 180.0,
+                "unit": "g"
+              }
+            ],
+            "id": "lagg",
+            "name": "Långkokt lägg"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "kålrot|raw_edible",
+                "name": "kålrot",
+                "note": "",
+                "quantity": 650.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "morot|raw_edible",
+                "name": "morot",
+                "note": "",
+                "quantity": 250.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "potatis|raw_edible",
+                "name": "potatis",
+                "note": "",
+                "quantity": 750.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "smör|as_sold",
+                "name": "smör",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ljus sirap|as_sold",
+                "name": "ljus sirap",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "senap|as_sold",
+                "name": "senap",
+                "note": "",
+                "quantity": 40.0,
+                "unit": "g"
+              }
+            ],
+            "id": "mos",
+            "name": "Rotmos"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "vitkål|raw_edible",
+                "name": "vitkål",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "äpple|raw_edible",
+                "name": "äpple",
+                "note": "",
+                "quantity": 200.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "äppelcidervinäger|as_sold",
+                "name": "äppelcidervinäger",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "sallad",
+            "name": "Kål och äpple"
+          }
+        ],
+        "content_sha256": "45df7c97f30b2e9442814da9055b69be5a79b15c763fefa14e3d194601828d83",
+        "content_source": {
+          "active_minutes": 46,
+          "method_note": "Ingredienslistan anger hela insatsen, även den del som senare hälls eller silas bort. Förlusten är inte uppmätt. Näring och färdig portionsvikt är okända; receptet kan inte styrka valda närings- eller viktgränser. Inköp och personliga kostkrav kontrolleras för samtliga insatser.",
+          "pack_id": "reviewed-expansion-round2-stage13",
+          "priority": 1,
+          "proposal_id": "smako-swedish-flasklagg-rotmos",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "c3ab12b8ffdf3fbeb1e28a131d533632c39d31917e8d5ec6374e4e537da57125",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "swedish"
+        ],
+        "equipment": [
+          "stor gryta",
+          "kastrull",
+          "potatisstöt",
+          "termometer"
+        ],
+        "estimated_minutes": 256,
+        "family": "fläsklägg och rotmos",
+        "fish": false,
+        "flavor_profile": [
+          "rimmat",
+          "rotfrukter",
+          "kryddpeppar"
+        ],
+        "ingredient_count": 13,
+        "method": "pot",
+        "primary_ingredient": "rimmat fläsklägg med ben",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar, inte uppmätta. Läggen är rå och rimmad med ben; inköpsvikten är inte ätlig köttvikt. Ben/svålutbyte och salt behöver senare produkt- och beredningsgranskning. Lång sjudning till mörhet och mos smaksatt med kokspad bevaras. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "rotmos",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 12,
+            "id": "s1",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "kryddpeppar|dry",
+              "lagerblad|dry",
+              "rimmat fläsklägg|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "3000 ml",
+                3000.0
+              ],
+              [
+                "500 ml",
+                500.0
+              ]
+            ],
+            "text": "Använd rå rimmad fläsklägg, med eller utan ben, nära den angivna vikten före putsning. Kontrollera faktisk vikt och kostnad. Lägg fläskläggen i grytan med 3000 ml vatten eller så att den täcks; tillsätt vid behov ytterligare 500 ml vatten. Koka upp och skumma. Lägg i lagerblad och malen kryddpeppar samt skalad klyftad lök. Tillsätt inte extra salt till det rimmade köttet."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 60,
+            "id": "s2",
+            "ingredient_keys": [
+              "rimmat fläsklägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sjud läggen försiktigt under lock i 60 minuter."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 1,
+            "id": "s3",
+            "ingredient_keys": [
+              "rimmat fläsklägg|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "300 ml",
+                300.0
+              ]
+            ],
+            "text": "Kontrollera vätskan och vänd läggen. Fyll vid behov på med 300 ml vatten."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 60,
+            "id": "s4",
+            "ingredient_keys": [
+              "rimmat fläsklägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sjud ytterligare 60 minuter."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 1,
+            "id": "s5",
+            "ingredient_keys": [
+              "rimmat fläsklägg|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "300 ml",
+                300.0
+              ]
+            ],
+            "text": "Kontrollera och vänd igen; fyll vid behov på med 300 ml vatten."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 60,
+            "id": "s6",
+            "ingredient_keys": [
+              "rimmat fläsklägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sjud ytterligare omkring 60 minuter, tills köttet är mycket mört och lätt delas med gaffel, eller lossnar från ben om ben ingår. Förläng vid behov."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 10,
+            "id": "s7",
+            "ingredient_keys": [
+              "kålrot|raw_edible",
+              "lagerblad|dry",
+              "morot|raw_edible",
+              "potatis|raw_edible",
+              "rimmat fläsklägg|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "600 ml",
+                600.0
+              ]
+            ],
+            "text": "Skala kålrot, morot och potatis, väg de råa ätliga mängderna och tärna. Ta upp lagerbladen. Lägg rotfrukterna i en annan kastrull med 600 ml vatten och 400 ml av läggens kokspad. Låt läggen ligga kvar varmt över 60 °C i resten av spadet."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 30,
+            "id": "s8",
+            "ingredient_keys": [
+              "kålrot|raw_edible",
+              "morot|raw_edible",
+              "potatis|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Koka rotfrukterna mjuka cirka 30 minuter."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 2,
+            "id": "s9",
+            "ingredient_keys": [
+              "kålrot|raw_edible",
+              "morot|raw_edible",
+              "potatis|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Häll av rotfrukterna och spara kokvätskan separat till spädning av moset."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 7,
+            "id": "s10",
+            "ingredient_keys": [
+              "vitkål|raw_edible",
+              "äppelcidervinäger|as_sold",
+              "äpple|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Strimla vitkålen tunt och skär äpplet i stavar. Krama kålen kort med äppelcidervinäger och vänd i äpplet."
+          },
+          {
+            "depends_on": [
+              "s10"
+            ],
+            "duration_minutes": 10,
+            "id": "s11",
+            "ingredient_keys": [
+              "kålrot|raw_edible",
+              "ljus sirap|as_sold",
+              "morot|raw_edible",
+              "potatis|raw_edible",
+              "rimmat fläsklägg|as_sold",
+              "smör|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Mosa rotfrukterna med smöret och sirapen. Späd med den sparade kokvätskan lite i taget till ett grovt mos. Kontrollera sältan innan mer kokspad tillsätts. Lyft upp läggen, avlägsna eventuella ben och seg svål och fördela köttet."
+          },
+          {
+            "depends_on": [
+              "s11"
+            ],
+            "duration_minutes": 3,
+            "id": "s12",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "kryddpeppar|dry",
+              "kålrot|raw_edible",
+              "morot|raw_edible",
+              "potatis|raw_edible",
+              "rimmat fläsklägg|as_sold",
+              "senap|as_sold",
+              "vitkål|raw_edible",
+              "äpple|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Servera fläskläggen med varmt rotmos och senap vid sidan; fördela även den kokta löken samt kål-äppelsalladen."
+          }
+        ],
+        "total_minutes": 256,
+        "unmeasured_processes": [
+          {
+            "description": "Lagerblad kokar med och tas upp. Överföring till kokspadet är inte uppmätt.",
+            "ingredient_keys": [
+              "lagerblad|dry"
+            ],
+            "operation": "remove_after_infusion",
+            "step_id": "s7"
+          },
+          {
+            "description": "Eventuella ben och seg svål tas bort från köttet. Förpackningens bruttovikt omvandlas inte till en påhittad ätlig vikt.",
+            "ingredient_keys": [
+              "rimmat fläsklägg|as_sold"
+            ],
+            "operation": "remove_bones_after_cooking",
+            "step_id": "s11"
+          },
+          {
+            "description": "Endast kokspad som faktiskt används till moset serveras. Resterande lag och rotfruktsvatten är processrester med okänd salt- och näringsfördelning.",
+            "ingredient_keys": [
+              "rimmat fläsklägg|as_sold",
+              "kålrot|raw_edible",
+              "morot|raw_edible",
+              "potatis|raw_edible",
+              "kryddpeppar|dry"
+            ],
+            "operation": "drain_after_cooking",
+            "step_id": "s12"
+          }
+        ],
+        "variant_id": "extended",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 210
+      },
+      "ingredients": [
+        {
+          "canonical_name": "rimmat fläsklägg",
+          "component": "lagg",
+          "form": "as_sold",
+          "name": "rimmat fläsklägg",
+          "product_requirements": [
+            "pack:intake_all_round2_6f34660b827c"
+          ],
+          "quantity": 1500.0,
+          "quantity_max": 1500.0,
+          "quantity_min": 1500.0,
+          "quantity_step": 1500.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "lagerblad",
+          "component": "lagg",
+          "form": "dry",
+          "name": "lagerblad",
+          "product_requirements": [
+            "pack:intake_all_expansion_b43ed6916a64"
+          ],
+          "quantity": 0.5,
+          "quantity_max": 0.5,
+          "quantity_min": 0.5,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kryddpeppar",
+          "component": "lagg",
+          "form": "dry",
+          "name": "kryddpeppar",
+          "product_requirements": [
+            "pack:intake_all_c412f28a0556"
+          ],
+          "quantity": 2.0,
+          "quantity_max": 2.0,
+          "quantity_min": 2.0,
+          "quantity_step": 2.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "lagg",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 180.0,
+          "quantity_max": 180.0,
+          "quantity_min": 180.0,
+          "quantity_step": 180.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kålrot",
+          "component": "mos",
+          "form": "raw_edible",
+          "name": "kålrot",
+          "product_requirements": [
+            "pack:intake_all_7fb56162bc4e"
+          ],
+          "quantity": 650.0,
+          "quantity_max": 650.0,
+          "quantity_min": 650.0,
+          "quantity_step": 650.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "morot",
+          "component": "mos",
+          "form": "raw_edible",
+          "name": "morot",
+          "quantity": 250.0,
+          "quantity_max": 250.0,
+          "quantity_min": 250.0,
+          "quantity_step": 250.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "potatis",
+          "component": "mos",
+          "form": "raw_edible",
+          "name": "potatis",
+          "quantity": 750.0,
+          "quantity_max": 750.0,
+          "quantity_min": 750.0,
+          "quantity_step": 750.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "smör",
+          "component": "mos",
+          "form": "as_sold",
+          "name": "smör",
+          "product_requirements": [
+            "pack:intake_butter"
+          ],
+          "quantity": 30.0,
+          "quantity_max": 30.0,
+          "quantity_min": 30.0,
+          "quantity_step": 30.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ljus sirap",
+          "component": "mos",
+          "form": "as_sold",
+          "name": "ljus sirap",
+          "product_requirements": [
+            "pack:intake_all_expansion_8848eae55cd5"
+          ],
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "senap",
+          "component": "mos",
+          "form": "as_sold",
+          "name": "senap",
+          "quantity": 40.0,
+          "quantity_max": 40.0,
+          "quantity_min": 40.0,
+          "quantity_step": 40.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitkål",
+          "component": "sallad",
+          "form": "raw_edible",
+          "name": "vitkål",
+          "quantity": 300.0,
+          "quantity_max": 300.0,
+          "quantity_min": 300.0,
+          "quantity_step": 300.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "äpple",
+          "component": "sallad",
+          "form": "raw_edible",
+          "name": "äpple",
+          "quantity": 200.0,
+          "quantity_max": 200.0,
+          "quantity_min": 200.0,
+          "quantity_step": 200.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "äppelcidervinäger",
+          "component": "sallad",
+          "form": "as_sold",
+          "name": "äppelcidervinäger",
+          "product_requirements": [
+            "pack:intake_all_be24da3ca83d"
+          ],
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 25.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        }
+      ],
+      "instructions": [
+        "Använd rå rimmad fläsklägg, med eller utan ben, nära den angivna vikten före putsning. Kontrollera faktisk vikt och kostnad. Lägg fläskläggen i grytan med 3000 ml vatten eller så att den täcks; tillsätt vid behov ytterligare 500 ml vatten. Koka upp och skumma. Lägg i lagerblad och malen kryddpeppar samt skalad klyftad lök. Tillsätt inte extra salt till det rimmade köttet.",
+        "Sjud läggen försiktigt under lock i 60 minuter.",
+        "Kontrollera vätskan och vänd läggen. Fyll vid behov på med 300 ml vatten.",
+        "Sjud ytterligare 60 minuter.",
+        "Kontrollera och vänd igen; fyll vid behov på med 300 ml vatten.",
+        "Sjud ytterligare omkring 60 minuter, tills köttet är mycket mört och lätt delas med gaffel, eller lossnar från ben om ben ingår. Förläng vid behov.",
+        "Skala kålrot, morot och potatis, väg de råa ätliga mängderna och tärna. Ta upp lagerbladen. Lägg rotfrukterna i en annan kastrull med 600 ml vatten och 400 ml av läggens kokspad. Låt läggen ligga kvar varmt över 60 °C i resten av spadet.",
+        "Koka rotfrukterna mjuka cirka 30 minuter.",
+        "Häll av rotfrukterna och spara kokvätskan separat till spädning av moset.",
+        "Strimla vitkålen tunt och skär äpplet i stavar. Krama kålen kort med äppelcidervinäger och vänd i äpplet.",
+        "Mosa rotfrukterna med smöret och sirapen. Späd med den sparade kokvätskan lite i taget till ett grovt mos. Kontrollera sältan innan mer kokspad tillsätts. Lyft upp läggen, avlägsna eventuella ben och seg svål och fördela köttet.",
+        "Servera fläskläggen med varmt rotmos och senap vid sidan; fördela även den kokta löken samt kål-äppelsalladen."
+      ],
+      "name": "Fläsklägg med rotmos – utökad – med rå rimmad lägg",
+      "preparation": {
+        "family": "fläsklägg och rotmos",
+        "input_forms": {
+          "gul lök": "raw_edible",
+          "kryddpeppar": "dry",
+          "kålrot": "raw_edible",
+          "lagerblad": "dry",
+          "ljus sirap": "as_sold",
+          "morot": "raw_edible",
+          "potatis": "raw_edible",
+          "rimmat fläsklägg": "as_sold",
+          "senap": "as_sold",
+          "smör": "as_sold",
+          "vitkål": "raw_edible",
+          "äppelcidervinäger": "as_sold",
+          "äpple": "raw_edible"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "45df7c97f30b2e9442814da9055b69be5a79b15c763fefa14e3d194601828d83",
+        "version": "smako-authored-losses-v3"
+      },
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 92,
+        "base_id": "smako-italian-coda-vaccinara",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "oxsvans med ben|as_sold",
+                "name": "Oxsvans med ben",
+                "note": "",
+                "quantity": 1500.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "selleri|raw_edible",
+                "name": "Selleri",
+                "note": "",
+                "quantity": 450.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "Gul lök",
+                "note": "",
+                "quantity": 180.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "krossade tomater|as_sold",
+                "name": "Krossade tomater",
+                "note": "",
+                "quantity": 700.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "olivolja|as_sold",
+                "name": "Olivolja",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "Svartpeppar",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              }
+            ],
+            "id": "stew",
+            "name": "Oxsvans i tomat och selleri"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "bröd|as_sold",
+                "name": "Bröd",
+                "note": "",
+                "quantity": 280.0,
+                "unit": "g"
+              }
+            ],
+            "id": "bread",
+            "name": "Bröd"
+          }
+        ],
+        "content_sha256": "10eca3024e7ef686c3d2c37915ef5d4063e5b12cf66597f6b0869828ebced72f",
+        "content_source": {
+          "active_minutes": 92,
+          "method_note": "Ingredienslistan anger hela insatsen, även den del som senare hälls eller silas bort. Förlusten är inte uppmätt. Näring och färdig portionsvikt är okända; receptet kan inte styrka valda närings- eller viktgränser. Inköp och personliga kostkrav kontrolleras för samtliga insatser.",
+          "pack_id": "reviewed-expansion-round2-stage13",
+          "priority": 1,
+          "proposal_id": "smako-italian-coda-vaccinara",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "c3ab12b8ffdf3fbeb1e28a131d533632c39d31917e8d5ec6374e4e537da57125",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "italian"
+        ],
+        "equipment": [
+          "tung gryta med lock",
+          "tång",
+          "termometer"
+        ],
+        "estimated_minutes": 272,
+        "family": "gelatinrikt oxsvanslångkok med selleri",
+        "fish": false,
+        "flavor_profile": [
+          "tomat",
+          "selleri"
+        ],
+        "ingredient_count": 6,
+        "method": "pot",
+        "primary_ingredient": "oxsvans med ben",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "AI-författat receptutkast, inte provlagat och ännu inte import-/produktgranskat av Smako. Tider är författaruppskattningar. Kostavsikt är inte ett produkt- eller allergengodkännande. Oxsvans vägs med ben. Ben avlägsnas efter kokning; inget schablonmässigt ätligt utbyte har antagits. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "bröd",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 12,
+            "id": "s1",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "oxsvans med ben|as_sold",
+              "selleri|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Torka oxsvansbitarna torra och kontrollera att inga lösa bensplitter finns. Skiva sellerin och hacka löken. Använd separat bräda för det råa köttet."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 18,
+            "id": "s2",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "olivolja|as_sold",
+              "oxsvans med ben|as_sold",
+              "salt|as_sold",
+              "svartpeppar|dry"
+            ],
+            "parallel_group": null,
+            "text": "Bryn oxsvansen runt om i olivoljan i omgångar. Lyft upp den och fräs löken tills den mjuknar. Lägg tillbaka köttet och krydda med salt och svartpeppar."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 5,
+            "id": "s3",
+            "ingredient_keys": [
+              "krossade tomater|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "700 ml",
+                700.0
+              ]
+            ],
+            "text": "Tillsätt krossade tomater och 700 ml vatten. Koka upp och sänk till svag sjudning; skrapa varsamt botten utan att slå sönder köttet."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 30,
+            "id": "s4",
+            "ingredient_keys": [
+              "oxsvans med ben|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sjud oxsvansen under lock på låg värme i 30 minuter."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 1,
+            "id": "s5",
+            "ingredient_keys": [
+              "oxsvans med ben|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "150 ml",
+                150.0
+              ]
+            ],
+            "text": "Kontrollera vätskan och rör varsamt. Tillsätt vid behov 150 ml vatten så att bottnen inte kokar torr."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 30,
+            "id": "s6",
+            "ingredient_keys": [
+              "oxsvans med ben|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sjud oxsvansen under lock på låg värme i 30 minuter."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 1,
+            "id": "s7",
+            "ingredient_keys": [
+              "oxsvans med ben|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "150 ml",
+                150.0
+              ]
+            ],
+            "text": "Kontrollera vätskan och rör varsamt. Tillsätt vid behov 150 ml vatten så att bottnen inte kokar torr."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 30,
+            "id": "s8",
+            "ingredient_keys": [
+              "oxsvans med ben|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sjud oxsvansen under lock på låg värme i 30 minuter."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 1,
+            "id": "s9",
+            "ingredient_keys": [
+              "oxsvans med ben|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "150 ml",
+                150.0
+              ]
+            ],
+            "text": "Kontrollera vätskan och rör varsamt. Tillsätt vid behov 150 ml vatten så att bottnen inte kokar torr."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 30,
+            "id": "s10",
+            "ingredient_keys": [
+              "oxsvans med ben|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sjud oxsvansen under lock på låg värme i 30 minuter."
+          },
+          {
+            "depends_on": [
+              "s10"
+            ],
+            "duration_minutes": 1,
+            "id": "s11",
+            "ingredient_keys": [
+              "oxsvans med ben|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "150 ml",
+                150.0
+              ]
+            ],
+            "text": "Kontrollera vätskan och rör varsamt. Tillsätt vid behov 150 ml vatten så att bottnen inte kokar torr."
+          },
+          {
+            "depends_on": [
+              "s11"
+            ],
+            "duration_minutes": 30,
+            "id": "s12",
+            "ingredient_keys": [
+              "oxsvans med ben|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sjud oxsvansen under lock på låg värme i 30 minuter."
+          },
+          {
+            "depends_on": [
+              "s12"
+            ],
+            "duration_minutes": 1,
+            "id": "s13",
+            "ingredient_keys": [
+              "oxsvans med ben|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "150 ml",
+                150.0
+              ]
+            ],
+            "text": "Kontrollera vätskan och rör varsamt. Tillsätt vid behov 150 ml vatten så att bottnen inte kokar torr."
+          },
+          {
+            "depends_on": [
+              "s13"
+            ],
+            "duration_minutes": 30,
+            "id": "s14",
+            "ingredient_keys": [
+              "oxsvans med ben|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sjud oxsvansen under lock på låg värme i 30 minuter. Efter totalt cirka 180 minuter ska köttet börja lossna från benen; förläng om det fortfarande är segt."
+          },
+          {
+            "depends_on": [
+              "s14"
+            ],
+            "duration_minutes": 3,
+            "id": "s15",
+            "ingredient_keys": [
+              "selleri|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Vänd ner sellerin i tomatspadet. Fortsätt på svag värme."
+          },
+          {
+            "depends_on": [
+              "s15"
+            ],
+            "duration_minutes": 35,
+            "id": "s16",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Sjud utan heltäckande lock ytterligare omkring 35 minuter, tills sellerin är mycket mjuk, köttet lossnar lätt och såsen är fyllig. Rör försiktigt för att undvika att botten bränns."
+          },
+          {
+            "depends_on": [
+              "s16"
+            ],
+            "duration_minutes": 12,
+            "id": "s17",
+            "ingredient_keys": [
+              "oxsvans med ben|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Ta upp köttbitarna. Lossa köttet från benen med två gafflar, kontrollera efter små ben och lägg tillbaka allt ätligt kött i såsen. Värm igenom. Benen är processrester och ska inte serveras."
+          },
+          {
+            "depends_on": [
+              "s17"
+            ],
+            "duration_minutes": 2,
+            "id": "s18",
+            "ingredient_keys": [
+              "bröd|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Skiva brödet och servera till grytan så att hela mängden fördelas mellan portionerna. Ingen olja eller annan påläggsvara förutsätts."
+          }
+        ],
+        "total_minutes": 272,
+        "unmeasured_processes": [
+          {
+            "description": "Oxsvans köps med ben som bruttovikt. Ben avlägsnas efter långkok; ingen ätlig andel eller tillagad vikt antas.",
+            "ingredient_keys": [
+              "oxsvans med ben|as_sold"
+            ],
+            "operation": "remove_bones_after_cooking",
+            "step_id": "s17"
+          }
+        ],
+        "variant_id": "simple",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 180
+      },
+      "ingredients": [
+        {
+          "canonical_name": "oxsvans med ben",
+          "component": "stew",
+          "form": "as_sold",
+          "name": "oxsvans med ben",
+          "product_requirements": [
+            "pack:intake_all_round2_dcab56890d66"
+          ],
+          "quantity": 1500.0,
+          "quantity_max": 1500.0,
+          "quantity_min": 1500.0,
+          "quantity_step": 1500.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "selleri",
+          "component": "stew",
+          "form": "raw_edible",
+          "name": "selleri",
+          "quantity": 450.0,
+          "quantity_max": 450.0,
+          "quantity_min": 450.0,
+          "quantity_step": 450.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "stew",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 180.0,
+          "quantity_max": 180.0,
+          "quantity_min": 180.0,
+          "quantity_step": 180.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "krossade tomater",
+          "component": "stew",
+          "form": "as_sold",
+          "name": "krossade tomater",
+          "quantity": 700.0,
+          "quantity_max": 700.0,
+          "quantity_min": 700.0,
+          "quantity_step": 700.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "olivolja",
+          "component": "stew",
+          "form": "as_sold",
+          "name": "olivolja",
+          "product_requirements": [
+            "pack:intake_all_expansion_86ac9b2c5ae6"
+          ],
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 25.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "stew",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "stew",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "bröd",
+          "component": "bread",
+          "form": "as_sold",
+          "name": "bröd",
+          "quantity": 280.0,
+          "quantity_max": 280.0,
+          "quantity_min": 280.0,
+          "quantity_step": 280.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Torka oxsvansbitarna torra och kontrollera att inga lösa bensplitter finns. Skiva sellerin och hacka löken. Använd separat bräda för det råa köttet.",
+        "Bryn oxsvansen runt om i olivoljan i omgångar. Lyft upp den och fräs löken tills den mjuknar. Lägg tillbaka köttet och krydda med salt och svartpeppar.",
+        "Tillsätt krossade tomater och 700 ml vatten. Koka upp och sänk till svag sjudning; skrapa varsamt botten utan att slå sönder köttet.",
+        "Sjud oxsvansen under lock på låg värme i 30 minuter.",
+        "Kontrollera vätskan och rör varsamt. Tillsätt vid behov 150 ml vatten så att bottnen inte kokar torr.",
+        "Sjud oxsvansen under lock på låg värme i 30 minuter.",
+        "Kontrollera vätskan och rör varsamt. Tillsätt vid behov 150 ml vatten så att bottnen inte kokar torr.",
+        "Sjud oxsvansen under lock på låg värme i 30 minuter.",
+        "Kontrollera vätskan och rör varsamt. Tillsätt vid behov 150 ml vatten så att bottnen inte kokar torr.",
+        "Sjud oxsvansen under lock på låg värme i 30 minuter.",
+        "Kontrollera vätskan och rör varsamt. Tillsätt vid behov 150 ml vatten så att bottnen inte kokar torr.",
+        "Sjud oxsvansen under lock på låg värme i 30 minuter.",
+        "Kontrollera vätskan och rör varsamt. Tillsätt vid behov 150 ml vatten så att bottnen inte kokar torr.",
+        "Sjud oxsvansen under lock på låg värme i 30 minuter. Efter totalt cirka 180 minuter ska köttet börja lossna från benen; förläng om det fortfarande är segt.",
+        "Vänd ner sellerin i tomatspadet. Fortsätt på svag värme.",
+        "Sjud utan heltäckande lock ytterligare omkring 35 minuter, tills sellerin är mycket mjuk, köttet lossnar lätt och såsen är fyllig. Rör försiktigt för att undvika att botten bränns.",
+        "Ta upp köttbitarna. Lossa köttet från benen med två gafflar, kontrollera efter små ben och lägg tillbaka allt ätligt kött i såsen. Värm igenom. Benen är processrester och ska inte serveras.",
+        "Skiva brödet och servera till grytan så att hela mängden fördelas mellan portionerna. Ingen olja eller annan påläggsvara förutsätts."
+      ],
+      "name": "Coda alla vaccinara – oxsvans med selleri – enkel",
+      "preparation": {
+        "family": "gelatinrikt oxsvanslångkok med selleri",
+        "input_forms": {
+          "bröd": "as_sold",
+          "gul lök": "raw_edible",
+          "krossade tomater": "as_sold",
+          "olivolja": "as_sold",
+          "oxsvans med ben": "as_sold",
+          "salt": "as_sold",
+          "selleri": "raw_edible",
+          "svartpeppar": "dry"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "10eca3024e7ef686c3d2c37915ef5d4063e5b12cf66597f6b0869828ebced72f",
+        "version": "smako-authored-losses-v3"
+      },
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 92,
+        "base_id": "smako-italian-coda-vaccinara",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "oxsvans med ben|as_sold",
+                "name": "Oxsvans med ben",
+                "note": "",
+                "quantity": 1500.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "selleri|raw_edible",
+                "name": "Selleri",
+                "note": "",
+                "quantity": 450.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "Gul lök",
+                "note": "",
+                "quantity": 180.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "krossade tomater|as_sold",
+                "name": "Krossade tomater",
+                "note": "",
+                "quantity": 700.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "olivolja|as_sold",
+                "name": "Olivolja",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "Svartpeppar",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "Vitlök",
+                "note": "",
+                "quantity": 12.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "morot|raw_edible",
+                "name": "Morot",
+                "note": "",
+                "quantity": 150.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitt matlagningsvin|as_sold",
+                "name": "vitt matlagningsvin",
+                "note": "",
+                "quantity": 150.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "stew",
+            "name": "Oxsvans i tomat och selleri"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "bröd|as_sold",
+                "name": "Bröd",
+                "note": "",
+                "quantity": 280.0,
+                "unit": "g"
+              }
+            ],
+            "id": "bread",
+            "name": "Bröd"
+          }
+        ],
+        "content_sha256": "81a321f3f0c030ec09449c7af2b460ca5e973d3c71dcbbbc9139716f356cf304",
+        "content_source": {
+          "active_minutes": 92,
+          "method_note": "Ingredienslistan anger hela insatsen, även den del som senare hälls eller silas bort. Förlusten är inte uppmätt. Näring och färdig portionsvikt är okända; receptet kan inte styrka valda närings- eller viktgränser. Inköp och personliga kostkrav kontrolleras för samtliga insatser.",
+          "pack_id": "reviewed-expansion-round2-stage13",
+          "priority": 1,
+          "proposal_id": "smako-italian-coda-vaccinara",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "c3ab12b8ffdf3fbeb1e28a131d533632c39d31917e8d5ec6374e4e537da57125",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "italian"
+        ],
+        "equipment": [
+          "tung gryta med lock",
+          "tång",
+          "termometer"
+        ],
+        "estimated_minutes": 272,
+        "family": "gelatinrikt oxsvanslångkok med selleri",
+        "fish": false,
+        "flavor_profile": [
+          "tomat",
+          "selleri"
+        ],
+        "ingredient_count": 9,
+        "method": "pot",
+        "primary_ingredient": "oxsvans med ben",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "AI-författat receptutkast, inte provlagat och ännu inte import-/produktgranskat av Smako. Tider är författaruppskattningar. Kostavsikt är inte ett produkt- eller allergengodkännande. Oxsvans vägs med ben. Ben avlägsnas efter kokning; inget schablonmässigt ätligt utbyte har antagits. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "bröd",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 12,
+            "id": "s1",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "morot|raw_edible",
+              "oxsvans med ben|as_sold",
+              "selleri|raw_edible",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Torka oxsvansbitarna torra och kontrollera att inga lösa bensplitter finns. Skiva sellerin och hacka löken. Hacka vitlök och tärna morot. Använd separat bräda för det råa köttet."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 18,
+            "id": "s2",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "morot|raw_edible",
+              "olivolja|as_sold",
+              "oxsvans med ben|as_sold",
+              "salt|as_sold",
+              "svartpeppar|dry",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Bryn oxsvansen runt om i olivoljan i omgångar. Lyft upp den och fräs löken tillsammans med morot och vitlök tills den mjuknar. Lägg tillbaka köttet och krydda med salt och svartpeppar."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 5,
+            "id": "s3",
+            "ingredient_keys": [
+              "krossade tomater|as_sold",
+              "vitt matlagningsvin|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "700 ml",
+                700.0
+              ]
+            ],
+            "text": "Häll i vitt matlagningsvin och koka 3 minuter. Tillsätt krossade tomater och 700 ml vatten. Koka upp och sänk till svag sjudning; skrapa varsamt botten utan att slå sönder köttet."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 30,
+            "id": "s4",
+            "ingredient_keys": [
+              "oxsvans med ben|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sjud oxsvansen under lock på låg värme i 30 minuter."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 1,
+            "id": "s5",
+            "ingredient_keys": [
+              "oxsvans med ben|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "150 ml",
+                150.0
+              ]
+            ],
+            "text": "Kontrollera vätskan och rör varsamt. Tillsätt vid behov 150 ml vatten så att bottnen inte kokar torr."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 30,
+            "id": "s6",
+            "ingredient_keys": [
+              "oxsvans med ben|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sjud oxsvansen under lock på låg värme i 30 minuter."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 1,
+            "id": "s7",
+            "ingredient_keys": [
+              "oxsvans med ben|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "150 ml",
+                150.0
+              ]
+            ],
+            "text": "Kontrollera vätskan och rör varsamt. Tillsätt vid behov 150 ml vatten så att bottnen inte kokar torr."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 30,
+            "id": "s8",
+            "ingredient_keys": [
+              "oxsvans med ben|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sjud oxsvansen under lock på låg värme i 30 minuter."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 1,
+            "id": "s9",
+            "ingredient_keys": [
+              "oxsvans med ben|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "150 ml",
+                150.0
+              ]
+            ],
+            "text": "Kontrollera vätskan och rör varsamt. Tillsätt vid behov 150 ml vatten så att bottnen inte kokar torr."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 30,
+            "id": "s10",
+            "ingredient_keys": [
+              "oxsvans med ben|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sjud oxsvansen under lock på låg värme i 30 minuter."
+          },
+          {
+            "depends_on": [
+              "s10"
+            ],
+            "duration_minutes": 1,
+            "id": "s11",
+            "ingredient_keys": [
+              "oxsvans med ben|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "150 ml",
+                150.0
+              ]
+            ],
+            "text": "Kontrollera vätskan och rör varsamt. Tillsätt vid behov 150 ml vatten så att bottnen inte kokar torr."
+          },
+          {
+            "depends_on": [
+              "s11"
+            ],
+            "duration_minutes": 30,
+            "id": "s12",
+            "ingredient_keys": [
+              "oxsvans med ben|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sjud oxsvansen under lock på låg värme i 30 minuter."
+          },
+          {
+            "depends_on": [
+              "s12"
+            ],
+            "duration_minutes": 1,
+            "id": "s13",
+            "ingredient_keys": [
+              "oxsvans med ben|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "150 ml",
+                150.0
+              ]
+            ],
+            "text": "Kontrollera vätskan och rör varsamt. Tillsätt vid behov 150 ml vatten så att bottnen inte kokar torr."
+          },
+          {
+            "depends_on": [
+              "s13"
+            ],
+            "duration_minutes": 30,
+            "id": "s14",
+            "ingredient_keys": [
+              "oxsvans med ben|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sjud oxsvansen under lock på låg värme i 30 minuter. Efter totalt cirka 180 minuter ska köttet börja lossna från benen; förläng om det fortfarande är segt."
+          },
+          {
+            "depends_on": [
+              "s14"
+            ],
+            "duration_minutes": 3,
+            "id": "s15",
+            "ingredient_keys": [
+              "selleri|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Vänd ner sellerin i tomatspadet. Fortsätt på svag värme."
+          },
+          {
+            "depends_on": [
+              "s15"
+            ],
+            "duration_minutes": 35,
+            "id": "s16",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Sjud utan heltäckande lock ytterligare omkring 35 minuter, tills sellerin är mycket mjuk, köttet lossnar lätt och såsen är fyllig. Rör försiktigt för att undvika att botten bränns."
+          },
+          {
+            "depends_on": [
+              "s16"
+            ],
+            "duration_minutes": 12,
+            "id": "s17",
+            "ingredient_keys": [
+              "oxsvans med ben|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Ta upp köttbitarna. Lossa köttet från benen med två gafflar, kontrollera efter små ben och lägg tillbaka allt ätligt kött i såsen. Värm igenom. Benen är processrester och ska inte serveras."
+          },
+          {
+            "depends_on": [
+              "s17"
+            ],
+            "duration_minutes": 2,
+            "id": "s18",
+            "ingredient_keys": [
+              "bröd|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Skiva brödet och servera till grytan så att hela mängden fördelas mellan portionerna. Ingen olja eller annan påläggsvara förutsätts."
+          }
+        ],
+        "total_minutes": 272,
+        "unmeasured_processes": [
+          {
+            "description": "Oxsvans köps med ben som bruttovikt. Ben avlägsnas efter långkok; ingen ätlig andel eller tillagad vikt antas.",
+            "ingredient_keys": [
+              "oxsvans med ben|as_sold"
+            ],
+            "operation": "remove_bones_after_cooking",
+            "step_id": "s17"
+          }
+        ],
+        "variant_id": "standard",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 180
+      },
+      "ingredients": [
+        {
+          "canonical_name": "oxsvans med ben",
+          "component": "stew",
+          "form": "as_sold",
+          "name": "oxsvans med ben",
+          "product_requirements": [
+            "pack:intake_all_round2_dcab56890d66"
+          ],
+          "quantity": 1500.0,
+          "quantity_max": 1500.0,
+          "quantity_min": 1500.0,
+          "quantity_step": 1500.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "selleri",
+          "component": "stew",
+          "form": "raw_edible",
+          "name": "selleri",
+          "quantity": 450.0,
+          "quantity_max": 450.0,
+          "quantity_min": 450.0,
+          "quantity_step": 450.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "stew",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 180.0,
+          "quantity_max": 180.0,
+          "quantity_min": 180.0,
+          "quantity_step": 180.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "krossade tomater",
+          "component": "stew",
+          "form": "as_sold",
+          "name": "krossade tomater",
+          "quantity": 700.0,
+          "quantity_max": 700.0,
+          "quantity_min": 700.0,
+          "quantity_step": 700.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "olivolja",
+          "component": "stew",
+          "form": "as_sold",
+          "name": "olivolja",
+          "product_requirements": [
+            "pack:intake_all_expansion_86ac9b2c5ae6"
+          ],
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 25.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "stew",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "stew",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "stew",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 12.0,
+          "quantity_max": 12.0,
+          "quantity_min": 12.0,
+          "quantity_step": 12.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "morot",
+          "component": "stew",
+          "form": "raw_edible",
+          "name": "morot",
+          "quantity": 150.0,
+          "quantity_max": 150.0,
+          "quantity_min": 150.0,
+          "quantity_step": 150.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitt matlagningsvin",
+          "component": "stew",
+          "form": "as_sold",
+          "name": "vitt matlagningsvin",
+          "product_requirements": [
+            "pack:intake_all_round2_b4cd3a71e404"
+          ],
+          "quantity": 150.0,
+          "quantity_max": 150.0,
+          "quantity_min": 150.0,
+          "quantity_step": 150.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "bröd",
+          "component": "bread",
+          "form": "as_sold",
+          "name": "bröd",
+          "quantity": 280.0,
+          "quantity_max": 280.0,
+          "quantity_min": 280.0,
+          "quantity_step": 280.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Torka oxsvansbitarna torra och kontrollera att inga lösa bensplitter finns. Skiva sellerin och hacka löken. Hacka vitlök och tärna morot. Använd separat bräda för det råa köttet.",
+        "Bryn oxsvansen runt om i olivoljan i omgångar. Lyft upp den och fräs löken tillsammans med morot och vitlök tills den mjuknar. Lägg tillbaka köttet och krydda med salt och svartpeppar.",
+        "Häll i vitt matlagningsvin och koka 3 minuter. Tillsätt krossade tomater och 700 ml vatten. Koka upp och sänk till svag sjudning; skrapa varsamt botten utan att slå sönder köttet.",
+        "Sjud oxsvansen under lock på låg värme i 30 minuter.",
+        "Kontrollera vätskan och rör varsamt. Tillsätt vid behov 150 ml vatten så att bottnen inte kokar torr.",
+        "Sjud oxsvansen under lock på låg värme i 30 minuter.",
+        "Kontrollera vätskan och rör varsamt. Tillsätt vid behov 150 ml vatten så att bottnen inte kokar torr.",
+        "Sjud oxsvansen under lock på låg värme i 30 minuter.",
+        "Kontrollera vätskan och rör varsamt. Tillsätt vid behov 150 ml vatten så att bottnen inte kokar torr.",
+        "Sjud oxsvansen under lock på låg värme i 30 minuter.",
+        "Kontrollera vätskan och rör varsamt. Tillsätt vid behov 150 ml vatten så att bottnen inte kokar torr.",
+        "Sjud oxsvansen under lock på låg värme i 30 minuter.",
+        "Kontrollera vätskan och rör varsamt. Tillsätt vid behov 150 ml vatten så att bottnen inte kokar torr.",
+        "Sjud oxsvansen under lock på låg värme i 30 minuter. Efter totalt cirka 180 minuter ska köttet börja lossna från benen; förläng om det fortfarande är segt.",
+        "Vänd ner sellerin i tomatspadet. Fortsätt på svag värme.",
+        "Sjud utan heltäckande lock ytterligare omkring 35 minuter, tills sellerin är mycket mjuk, köttet lossnar lätt och såsen är fyllig. Rör försiktigt för att undvika att botten bränns.",
+        "Ta upp köttbitarna. Lossa köttet från benen med två gafflar, kontrollera efter små ben och lägg tillbaka allt ätligt kött i såsen. Värm igenom. Benen är processrester och ska inte serveras.",
+        "Skiva brödet och servera till grytan så att hela mängden fördelas mellan portionerna. Ingen olja eller annan påläggsvara förutsätts."
+      ],
+      "name": "Coda alla vaccinara – oxsvans med selleri – standard – med vitt matlagningsvin",
+      "preparation": {
+        "family": "gelatinrikt oxsvanslångkok med selleri",
+        "input_forms": {
+          "bröd": "as_sold",
+          "gul lök": "raw_edible",
+          "krossade tomater": "as_sold",
+          "morot": "raw_edible",
+          "olivolja": "as_sold",
+          "oxsvans med ben": "as_sold",
+          "salt": "as_sold",
+          "selleri": "raw_edible",
+          "svartpeppar": "dry",
+          "vitlök": "raw_edible",
+          "vitt matlagningsvin": "as_sold"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "81a321f3f0c030ec09449c7af2b460ca5e973d3c71dcbbbc9139716f356cf304",
+        "version": "smako-authored-losses-v3"
+      },
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 92,
+        "base_id": "smako-italian-coda-vaccinara",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "oxsvans med ben|as_sold",
+                "name": "Oxsvans med ben",
+                "note": "",
+                "quantity": 1500.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "selleri|raw_edible",
+                "name": "Selleri",
+                "note": "",
+                "quantity": 450.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "Gul lök",
+                "note": "",
+                "quantity": 180.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "krossade tomater|as_sold",
+                "name": "Krossade tomater",
+                "note": "",
+                "quantity": 700.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "olivolja|as_sold",
+                "name": "Olivolja",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "Svartpeppar",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "Vitlök",
+                "note": "",
+                "quantity": 12.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "morot|raw_edible",
+                "name": "Morot",
+                "note": "",
+                "quantity": 150.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitt matlagningsvin|as_sold",
+                "name": "vitt matlagningsvin",
+                "note": "",
+                "quantity": 150.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "russin|as_sold",
+                "name": "Russin",
+                "note": "",
+                "quantity": 35.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "pinjenötter|as_sold",
+                "name": "Pinjenötter",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kakao|dry",
+                "name": "Kakao",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "g"
+              }
+            ],
+            "id": "stew",
+            "name": "Oxsvans i tomat och selleri"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "bröd|as_sold",
+                "name": "Bröd",
+                "note": "",
+                "quantity": 280.0,
+                "unit": "g"
+              }
+            ],
+            "id": "bread",
+            "name": "Bröd"
+          }
+        ],
+        "content_sha256": "f7d6eb06aca990301d422f051b6017e1ba27b6c7fe58177518724290972a2a87",
+        "content_source": {
+          "active_minutes": 92,
+          "method_note": "Ingredienslistan anger hela insatsen, även den del som senare hälls eller silas bort. Förlusten är inte uppmätt. Näring och färdig portionsvikt är okända; receptet kan inte styrka valda närings- eller viktgränser. Inköp och personliga kostkrav kontrolleras för samtliga insatser.",
+          "pack_id": "reviewed-expansion-round2-stage13",
+          "priority": 1,
+          "proposal_id": "smako-italian-coda-vaccinara",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "c3ab12b8ffdf3fbeb1e28a131d533632c39d31917e8d5ec6374e4e537da57125",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "italian"
+        ],
+        "equipment": [
+          "tung gryta med lock",
+          "tång",
+          "termometer"
+        ],
+        "estimated_minutes": 272,
+        "family": "gelatinrikt oxsvanslångkok med selleri",
+        "fish": false,
+        "flavor_profile": [
+          "tomat",
+          "selleri"
+        ],
+        "ingredient_count": 12,
+        "method": "pot",
+        "primary_ingredient": "oxsvans med ben",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "AI-författat receptutkast, inte provlagat och ännu inte import-/produktgranskat av Smako. Tider är författaruppskattningar. Kostavsikt är inte ett produkt- eller allergengodkännande. Oxsvans vägs med ben. Ben avlägsnas efter kokning; inget schablonmässigt ätligt utbyte har antagits. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "bröd",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 12,
+            "id": "s1",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "morot|raw_edible",
+              "oxsvans med ben|as_sold",
+              "selleri|raw_edible",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Torka oxsvansbitarna torra och kontrollera att inga lösa bensplitter finns. Skiva sellerin och hacka löken. Hacka vitlök och tärna morot. Använd separat bräda för det råa köttet."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 18,
+            "id": "s2",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "morot|raw_edible",
+              "olivolja|as_sold",
+              "oxsvans med ben|as_sold",
+              "salt|as_sold",
+              "svartpeppar|dry",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Bryn oxsvansen runt om i olivoljan i omgångar. Lyft upp den och fräs löken tillsammans med morot och vitlök tills den mjuknar. Lägg tillbaka köttet och krydda med salt och svartpeppar."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 5,
+            "id": "s3",
+            "ingredient_keys": [
+              "krossade tomater|as_sold",
+              "vitt matlagningsvin|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "700 ml",
+                700.0
+              ]
+            ],
+            "text": "Häll i vitt matlagningsvin och koka 3 minuter. Tillsätt krossade tomater och 700 ml vatten. Koka upp och sänk till svag sjudning; skrapa varsamt botten utan att slå sönder köttet."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 30,
+            "id": "s4",
+            "ingredient_keys": [
+              "oxsvans med ben|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sjud oxsvansen under lock på låg värme i 30 minuter."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 1,
+            "id": "s5",
+            "ingredient_keys": [
+              "oxsvans med ben|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "150 ml",
+                150.0
+              ]
+            ],
+            "text": "Kontrollera vätskan och rör varsamt. Tillsätt vid behov 150 ml vatten så att bottnen inte kokar torr."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 30,
+            "id": "s6",
+            "ingredient_keys": [
+              "oxsvans med ben|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sjud oxsvansen under lock på låg värme i 30 minuter."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 1,
+            "id": "s7",
+            "ingredient_keys": [
+              "oxsvans med ben|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "150 ml",
+                150.0
+              ]
+            ],
+            "text": "Kontrollera vätskan och rör varsamt. Tillsätt vid behov 150 ml vatten så att bottnen inte kokar torr."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 30,
+            "id": "s8",
+            "ingredient_keys": [
+              "oxsvans med ben|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sjud oxsvansen under lock på låg värme i 30 minuter."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 1,
+            "id": "s9",
+            "ingredient_keys": [
+              "oxsvans med ben|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "150 ml",
+                150.0
+              ]
+            ],
+            "text": "Kontrollera vätskan och rör varsamt. Tillsätt vid behov 150 ml vatten så att bottnen inte kokar torr."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 30,
+            "id": "s10",
+            "ingredient_keys": [
+              "oxsvans med ben|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sjud oxsvansen under lock på låg värme i 30 minuter."
+          },
+          {
+            "depends_on": [
+              "s10"
+            ],
+            "duration_minutes": 1,
+            "id": "s11",
+            "ingredient_keys": [
+              "oxsvans med ben|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "150 ml",
+                150.0
+              ]
+            ],
+            "text": "Kontrollera vätskan och rör varsamt. Tillsätt vid behov 150 ml vatten så att bottnen inte kokar torr."
+          },
+          {
+            "depends_on": [
+              "s11"
+            ],
+            "duration_minutes": 30,
+            "id": "s12",
+            "ingredient_keys": [
+              "oxsvans med ben|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sjud oxsvansen under lock på låg värme i 30 minuter."
+          },
+          {
+            "depends_on": [
+              "s12"
+            ],
+            "duration_minutes": 1,
+            "id": "s13",
+            "ingredient_keys": [
+              "oxsvans med ben|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "150 ml",
+                150.0
+              ]
+            ],
+            "text": "Kontrollera vätskan och rör varsamt. Tillsätt vid behov 150 ml vatten så att bottnen inte kokar torr."
+          },
+          {
+            "depends_on": [
+              "s13"
+            ],
+            "duration_minutes": 30,
+            "id": "s14",
+            "ingredient_keys": [
+              "oxsvans med ben|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sjud oxsvansen under lock på låg värme i 30 minuter. Efter totalt cirka 180 minuter ska köttet börja lossna från benen; förläng om det fortfarande är segt."
+          },
+          {
+            "depends_on": [
+              "s14"
+            ],
+            "duration_minutes": 3,
+            "id": "s15",
+            "ingredient_keys": [
+              "kakao|dry",
+              "pinjenötter|as_sold",
+              "russin|as_sold",
+              "selleri|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "30 ml",
+                30.0
+              ]
+            ],
+            "text": "Vänd ner sellerin i tomatspadet. Tillsätt russin, pinjenötter och kakaon utrörd i 30 ml vatten. Fortsätt på svag värme."
+          },
+          {
+            "depends_on": [
+              "s15"
+            ],
+            "duration_minutes": 35,
+            "id": "s16",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Sjud utan heltäckande lock ytterligare omkring 35 minuter, tills sellerin är mycket mjuk, köttet lossnar lätt och såsen är fyllig. Rör försiktigt för att undvika att botten bränns."
+          },
+          {
+            "depends_on": [
+              "s16"
+            ],
+            "duration_minutes": 12,
+            "id": "s17",
+            "ingredient_keys": [
+              "oxsvans med ben|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Ta upp köttbitarna. Lossa köttet från benen med två gafflar, kontrollera efter små ben och lägg tillbaka allt ätligt kött i såsen. Värm igenom. Benen är processrester och ska inte serveras."
+          },
+          {
+            "depends_on": [
+              "s17"
+            ],
+            "duration_minutes": 2,
+            "id": "s18",
+            "ingredient_keys": [
+              "bröd|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Skiva brödet och servera till grytan så att hela mängden fördelas mellan portionerna. Ingen olja eller annan påläggsvara förutsätts."
+          }
+        ],
+        "total_minutes": 272,
+        "unmeasured_processes": [
+          {
+            "description": "Oxsvans köps med ben som bruttovikt. Ben avlägsnas efter långkok; ingen ätlig andel eller tillagad vikt antas.",
+            "ingredient_keys": [
+              "oxsvans med ben|as_sold"
+            ],
+            "operation": "remove_bones_after_cooking",
+            "step_id": "s17"
+          }
+        ],
+        "variant_id": "extended",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 180
+      },
+      "ingredients": [
+        {
+          "canonical_name": "oxsvans med ben",
+          "component": "stew",
+          "form": "as_sold",
+          "name": "oxsvans med ben",
+          "product_requirements": [
+            "pack:intake_all_round2_dcab56890d66"
+          ],
+          "quantity": 1500.0,
+          "quantity_max": 1500.0,
+          "quantity_min": 1500.0,
+          "quantity_step": 1500.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "selleri",
+          "component": "stew",
+          "form": "raw_edible",
+          "name": "selleri",
+          "quantity": 450.0,
+          "quantity_max": 450.0,
+          "quantity_min": 450.0,
+          "quantity_step": 450.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "stew",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 180.0,
+          "quantity_max": 180.0,
+          "quantity_min": 180.0,
+          "quantity_step": 180.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "krossade tomater",
+          "component": "stew",
+          "form": "as_sold",
+          "name": "krossade tomater",
+          "quantity": 700.0,
+          "quantity_max": 700.0,
+          "quantity_min": 700.0,
+          "quantity_step": 700.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "olivolja",
+          "component": "stew",
+          "form": "as_sold",
+          "name": "olivolja",
+          "product_requirements": [
+            "pack:intake_all_expansion_86ac9b2c5ae6"
+          ],
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 25.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "stew",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "stew",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "stew",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 12.0,
+          "quantity_max": 12.0,
+          "quantity_min": 12.0,
+          "quantity_step": 12.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "morot",
+          "component": "stew",
+          "form": "raw_edible",
+          "name": "morot",
+          "quantity": 150.0,
+          "quantity_max": 150.0,
+          "quantity_min": 150.0,
+          "quantity_step": 150.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitt matlagningsvin",
+          "component": "stew",
+          "form": "as_sold",
+          "name": "vitt matlagningsvin",
+          "product_requirements": [
+            "pack:intake_all_round2_b4cd3a71e404"
+          ],
+          "quantity": 150.0,
+          "quantity_max": 150.0,
+          "quantity_min": 150.0,
+          "quantity_step": 150.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "russin",
+          "component": "stew",
+          "form": "as_sold",
+          "name": "russin",
+          "product_requirements": [
+            "pack:intake_all_c84b87d5ba4a"
+          ],
+          "quantity": 35.0,
+          "quantity_max": 35.0,
+          "quantity_min": 35.0,
+          "quantity_step": 35.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "pinjenötter",
+          "component": "stew",
+          "form": "as_sold",
+          "name": "pinjenötter",
+          "product_requirements": [
+            "pack:intake_all_expansion_4156f96de83e"
+          ],
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 25.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kakao",
+          "component": "stew",
+          "form": "dry",
+          "name": "kakao",
+          "product_requirements": [
+            "pack:intake_all_e428e190fee1"
+          ],
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "bröd",
+          "component": "bread",
+          "form": "as_sold",
+          "name": "bröd",
+          "quantity": 280.0,
+          "quantity_max": 280.0,
+          "quantity_min": 280.0,
+          "quantity_step": 280.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Torka oxsvansbitarna torra och kontrollera att inga lösa bensplitter finns. Skiva sellerin och hacka löken. Hacka vitlök och tärna morot. Använd separat bräda för det råa köttet.",
+        "Bryn oxsvansen runt om i olivoljan i omgångar. Lyft upp den och fräs löken tillsammans med morot och vitlök tills den mjuknar. Lägg tillbaka köttet och krydda med salt och svartpeppar.",
+        "Häll i vitt matlagningsvin och koka 3 minuter. Tillsätt krossade tomater och 700 ml vatten. Koka upp och sänk till svag sjudning; skrapa varsamt botten utan att slå sönder köttet.",
+        "Sjud oxsvansen under lock på låg värme i 30 minuter.",
+        "Kontrollera vätskan och rör varsamt. Tillsätt vid behov 150 ml vatten så att bottnen inte kokar torr.",
+        "Sjud oxsvansen under lock på låg värme i 30 minuter.",
+        "Kontrollera vätskan och rör varsamt. Tillsätt vid behov 150 ml vatten så att bottnen inte kokar torr.",
+        "Sjud oxsvansen under lock på låg värme i 30 minuter.",
+        "Kontrollera vätskan och rör varsamt. Tillsätt vid behov 150 ml vatten så att bottnen inte kokar torr.",
+        "Sjud oxsvansen under lock på låg värme i 30 minuter.",
+        "Kontrollera vätskan och rör varsamt. Tillsätt vid behov 150 ml vatten så att bottnen inte kokar torr.",
+        "Sjud oxsvansen under lock på låg värme i 30 minuter.",
+        "Kontrollera vätskan och rör varsamt. Tillsätt vid behov 150 ml vatten så att bottnen inte kokar torr.",
+        "Sjud oxsvansen under lock på låg värme i 30 minuter. Efter totalt cirka 180 minuter ska köttet börja lossna från benen; förläng om det fortfarande är segt.",
+        "Vänd ner sellerin i tomatspadet. Tillsätt russin, pinjenötter och kakaon utrörd i 30 ml vatten. Fortsätt på svag värme.",
+        "Sjud utan heltäckande lock ytterligare omkring 35 minuter, tills sellerin är mycket mjuk, köttet lossnar lätt och såsen är fyllig. Rör försiktigt för att undvika att botten bränns.",
+        "Ta upp köttbitarna. Lossa köttet från benen med två gafflar, kontrollera efter små ben och lägg tillbaka allt ätligt kött i såsen. Värm igenom. Benen är processrester och ska inte serveras.",
+        "Skiva brödet och servera till grytan så att hela mängden fördelas mellan portionerna. Ingen olja eller annan påläggsvara förutsätts."
+      ],
+      "name": "Coda alla vaccinara – oxsvans med selleri – utökad – med vitt matlagningsvin",
+      "preparation": {
+        "family": "gelatinrikt oxsvanslångkok med selleri",
+        "input_forms": {
+          "bröd": "as_sold",
+          "gul lök": "raw_edible",
+          "kakao": "dry",
+          "krossade tomater": "as_sold",
+          "morot": "raw_edible",
+          "olivolja": "as_sold",
+          "oxsvans med ben": "as_sold",
+          "pinjenötter": "as_sold",
+          "russin": "as_sold",
+          "salt": "as_sold",
+          "selleri": "raw_edible",
+          "svartpeppar": "dry",
+          "vitlök": "raw_edible",
+          "vitt matlagningsvin": "as_sold"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "f7d6eb06aca990301d422f051b6017e1ba27b6c7fe58177518724290972a2a87",
+        "version": "smako-authored-losses-v3"
+      },
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 55,
+        "base_id": "smako-indian-murgh-musallam",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "hel kyckling|as_sold",
+                "name": "Hel rå kyckling, bruttovikt inklusive ben och skinn",
+                "note": "",
+                "quantity": 1350.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "yoghurt naturell|as_sold",
+                "name": "Yoghurt naturell",
+                "note": "",
+                "quantity": 180.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ingefära|raw_edible",
+                "name": "Ingefära",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "Vitlök",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "garam masala|dry",
+                "name": "Garam masala",
+                "note": "",
+                "quantity": 6.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 6.0,
+                "unit": "g"
+              }
+            ],
+            "id": "fagel",
+            "name": "Marinerad hel kyckling"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ris|dry",
+                "name": "Ris",
+                "note": "",
+                "quantity": 180.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ägg|as_sold",
+                "name": "Råa hela hönsägg med skal, räknade före kokning",
+                "note": "",
+                "quantity": 4.0,
+                "unit": "st"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              }
+            ],
+            "id": "fyllning",
+            "name": "Ris- och äggfyllning"
+          }
+        ],
+        "content_sha256": "149aa0b3cd20d637be7f8d548ed39c22ddd706a76a81b5253f9320d38a7d60cf",
+        "content_source": {
+          "active_minutes": 55,
+          "method_note": "Ingredienslistan anger hela insatsen, även den del som senare hälls eller silas bort. Förlusten är inte uppmätt. Näring och färdig portionsvikt är okända; receptet kan inte styrka valda närings- eller viktgränser. Inköp och personliga kostkrav kontrolleras för samtliga insatser.",
+          "pack_id": "reviewed-expansion-round2-stage13",
+          "priority": 1,
+          "proposal_id": "smako-indian-murgh-musallam",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "c3ab12b8ffdf3fbeb1e28a131d533632c39d31917e8d5ec6374e4e537da57125",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "indian"
+        ],
+        "equipment": [
+          "ugn",
+          "ugnssäker gryta med lock",
+          "kastrull",
+          "termometer",
+          "matlagningssnöre"
+        ],
+        "estimated_minutes": 335,
+        "family": "Murgh musallam",
+        "fish": false,
+        "flavor_profile": [
+          "yoghurt",
+          "ingefära",
+          "garam masala"
+        ],
+        "ingredient_count": 7,
+        "method": "oven",
+        "primary_ingredient": "hel kyckling",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "AI-författat receptutkast, inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Ugnsanpassad hel, fylld fågel. Enkelversionen är medvetet förenklad men inte ett löst kycklingcurryrecept. Hel fågel anges som såld med ben; inget ätligt utbyte antas. Fyllning och lår måste båda temperaturkontrolleras. Ris i separat form kan behöva 30 ml extra vatten under den långa ugnstiden. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "risfyllning i fågeln",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 15,
+            "id": "s1",
+            "ingredient_keys": [
+              "garam masala|dry",
+              "hel kyckling|as_sold",
+              "ingefära|raw_edible",
+              "salt|as_sold",
+              "vitlök|raw_edible",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Välj en hel rå kyckling nära ingredienslistans bruttovikt. Butikens vikt är uppskattad; kontrollera faktisk vikt och kostnad. Kontrollera att fågeln är urplockad; skölj inte rå kyckling. Torka med papper och skär några grunda snitt i lårens skinn. Riv ingefära och vitlök och rör ihop med yoghurt, garam masala och fågeldelens salt. Gnid in fågeln även under löst skinn där det går utan att riva sönder. Diska råkycklingredskap och tvätta händerna."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 120,
+            "id": "s2",
+            "ingredient_keys": [
+              "hel kyckling|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Täck och marinera i kylskåp i två timmar."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 5,
+            "id": "s3",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "1000 ml",
+                1000.0
+              ]
+            ],
+            "text": "Lägg det angivna antalet råa hela ägg i en kastrull med 1000 ml vatten och koka upp försiktigt."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 12,
+            "id": "s4",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sjud äggen tolv minuter från uppkok tills vita och gula blir helt fasta."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 1,
+            "id": "s5",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Häll av det heta vattnet och tillsätt 1000 ml kallt vatten."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 5,
+            "id": "s6",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Låt svalna fem minuter så att äggen går att skala."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 4,
+            "id": "s7",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Skala äggen och kasta skalen. Kontrollera fasta gulor och vitor; alla kokta ägg används utan antagen gramvikt."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 3,
+            "id": "s8",
+            "ingredient_keys": [
+              "ris|dry",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "360 ml",
+                360.0
+              ]
+            ],
+            "text": "Skölj riset och koka upp med fyllningens salt och 360 ml vatten. Lägg på lock och sänk värmen."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 18,
+            "id": "s9",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Sjud riset under lock cirka 18 minuter tills det är mjukt och vattnet sugits upp."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 10,
+            "id": "s10",
+            "ingredient_keys": [
+              "hel kyckling|as_sold",
+              "ris|dry",
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "30 ml",
+                30.0
+              ]
+            ],
+            "text": "Värm ugnen till 175 °C. Hacka de nykokta skalade äggen och blanda med det heta riset. Fyll fågeln löst med så mycket av fyllningen som ryms utan packning. Bind benen löst. Lägg eventuell överbliven fyllning i en liten täckt ugnssäker form med 30 ml vatten; den ska också med i ugnen och hållas varm."
+          },
+          {
+            "depends_on": [
+              "s10"
+            ],
+            "duration_minutes": 4,
+            "id": "s11",
+            "ingredient_keys": [
+              "hel kyckling|as_sold",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "100 ml",
+                100.0
+              ]
+            ],
+            "text": "Lägg fågeln i grytan med marinaden och 100 ml vatten. Täck och sätt in i ugnen. Ställ in formen med eventuell extra fyllning samtidigt; håll den täckt så riset inte torkar."
+          },
+          {
+            "depends_on": [
+              "s11"
+            ],
+            "duration_minutes": 85,
+            "id": "s12",
+            "ingredient_keys": [
+              "hel kyckling|as_sold",
+              "ris|dry",
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Ugnstillaga fågeln täckt vid 175 °C i cirka 85 minuter."
+          },
+          {
+            "depends_on": [
+              "s12"
+            ],
+            "duration_minutes": 1,
+            "id": "s13",
+            "ingredient_keys": [
+              "hel kyckling|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Ta försiktigt av locket; skydda händerna mot ånga."
+          },
+          {
+            "depends_on": [
+              "s13"
+            ],
+            "duration_minutes": 25,
+            "id": "s14",
+            "ingredient_keys": [
+              "hel kyckling|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Fortsätt ugnstillagningen utan lock cirka 25 minuter för färg."
+          },
+          {
+            "depends_on": [
+              "s14"
+            ],
+            "duration_minutes": 2,
+            "id": "s15",
+            "ingredient_keys": [
+              "hel kyckling|as_sold",
+              "ris|dry",
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Mät innerst i låret utan benkontakt och mitt i fyllningen, även eventuell separat fyllningsform. Samtliga ska nå minst 74 °C. Förläng tillagningen om någon mätpunkt är kallare."
+          },
+          {
+            "depends_on": [
+              "s15"
+            ],
+            "duration_minutes": 15,
+            "id": "s16",
+            "ingredient_keys": [
+              "hel kyckling|as_sold",
+              "ris|dry",
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Låt fågeln vila 15 minuter."
+          },
+          {
+            "depends_on": [
+              "s16"
+            ],
+            "duration_minutes": 10,
+            "id": "s17",
+            "ingredient_keys": [
+              "hel kyckling|as_sold",
+              "ris|dry",
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Ta bort snöret, lyft ur fyllningen och lossa allt ätligt kött och skinn från benen. Kontrollera små ben. Fördela kött, skinn, all fyllning och allt genomkokt spad eller sås mellan portionerna; benen serveras inte."
+          }
+        ],
+        "total_minutes": 335,
+        "unmeasured_processes": [
+          {
+            "description": "Ägg köps och doseras som antal före kokning. Skalen avlägsnas och ingen rå eller kokt styckvikt antas.",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "operation": "peel_after_cooking",
+            "step_id": "s7"
+          },
+          {
+            "description": "Kycklingens inköpta bruttovikt innehåller ben. Allt ätligt kött, skinn och sky serveras; benens andel och tillagat utbyte är okända.",
+            "ingredient_keys": [
+              "hel kyckling|as_sold"
+            ],
+            "operation": "remove_bones_after_cooking",
+            "step_id": "s17"
+          }
+        ],
+        "variant_id": "simple",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 280
+      },
+      "ingredients": [
+        {
+          "canonical_name": "hel kyckling",
+          "component": "fagel",
+          "form": "as_sold",
+          "name": "hel kyckling",
+          "product_requirements": [
+            "pack:intake_all_round2_711f790ea5c0"
+          ],
+          "quantity": 1350.0,
+          "quantity_max": 1350.0,
+          "quantity_min": 1350.0,
+          "quantity_step": 1350.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "yoghurt naturell",
+          "component": "fagel",
+          "form": "as_sold",
+          "name": "yoghurt naturell",
+          "product_requirements": [
+            "plain",
+            "thick"
+          ],
+          "quantity": 180.0,
+          "quantity_max": 180.0,
+          "quantity_min": 180.0,
+          "quantity_step": 180.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ingefära",
+          "component": "fagel",
+          "form": "raw_edible",
+          "name": "ingefära",
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "fagel",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "garam masala",
+          "component": "fagel",
+          "form": "dry",
+          "name": "garam masala",
+          "product_requirements": [
+            "pack:intake_all_84e26716ceb0"
+          ],
+          "quantity": 6.0,
+          "quantity_max": 6.0,
+          "quantity_min": 6.0,
+          "quantity_step": 6.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "fagel",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 7.0,
+          "quantity_max": 7.0,
+          "quantity_min": 7.0,
+          "quantity_step": 7.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ris",
+          "component": "fyllning",
+          "form": "dry",
+          "name": "ris",
+          "product_requirements": [
+            "white_rice"
+          ],
+          "quantity": 180.0,
+          "quantity_max": 180.0,
+          "quantity_min": 180.0,
+          "quantity_step": 180.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ägg",
+          "component": "fyllning",
+          "form": "as_sold",
+          "name": "ägg",
+          "product_requirements": [
+            "pack:intake_all_round2_eb585a9d4454"
+          ],
+          "quantity": 4.0,
+          "quantity_max": 4.0,
+          "quantity_min": 4.0,
+          "quantity_step": 4.0,
+          "required": true,
+          "role": "primary",
+          "unit": "st"
+        }
+      ],
+      "instructions": [
+        "Välj en hel rå kyckling nära ingredienslistans bruttovikt. Butikens vikt är uppskattad; kontrollera faktisk vikt och kostnad. Kontrollera att fågeln är urplockad; skölj inte rå kyckling. Torka med papper och skär några grunda snitt i lårens skinn. Riv ingefära och vitlök och rör ihop med yoghurt, garam masala och fågeldelens salt. Gnid in fågeln även under löst skinn där det går utan att riva sönder. Diska råkycklingredskap och tvätta händerna.",
+        "Täck och marinera i kylskåp i två timmar.",
+        "Lägg det angivna antalet råa hela ägg i en kastrull med 1000 ml vatten och koka upp försiktigt.",
+        "Sjud äggen tolv minuter från uppkok tills vita och gula blir helt fasta.",
+        "Häll av det heta vattnet och tillsätt 1000 ml kallt vatten.",
+        "Låt svalna fem minuter så att äggen går att skala.",
+        "Skala äggen och kasta skalen. Kontrollera fasta gulor och vitor; alla kokta ägg används utan antagen gramvikt.",
+        "Skölj riset och koka upp med fyllningens salt och 360 ml vatten. Lägg på lock och sänk värmen.",
+        "Sjud riset under lock cirka 18 minuter tills det är mjukt och vattnet sugits upp.",
+        "Värm ugnen till 175 °C. Hacka de nykokta skalade äggen och blanda med det heta riset. Fyll fågeln löst med så mycket av fyllningen som ryms utan packning. Bind benen löst. Lägg eventuell överbliven fyllning i en liten täckt ugnssäker form med 30 ml vatten; den ska också med i ugnen och hållas varm.",
+        "Lägg fågeln i grytan med marinaden och 100 ml vatten. Täck och sätt in i ugnen. Ställ in formen med eventuell extra fyllning samtidigt; håll den täckt så riset inte torkar.",
+        "Ugnstillaga fågeln täckt vid 175 °C i cirka 85 minuter.",
+        "Ta försiktigt av locket; skydda händerna mot ånga.",
+        "Fortsätt ugnstillagningen utan lock cirka 25 minuter för färg.",
+        "Mät innerst i låret utan benkontakt och mitt i fyllningen, även eventuell separat fyllningsform. Samtliga ska nå minst 74 °C. Förläng tillagningen om någon mätpunkt är kallare.",
+        "Låt fågeln vila 15 minuter.",
+        "Ta bort snöret, lyft ur fyllningen och lossa allt ätligt kött och skinn från benen. Kontrollera små ben. Fördela kött, skinn, all fyllning och allt genomkokt spad eller sås mellan portionerna; benen serveras inte."
+      ],
+      "name": "Murgh musallam – fylld hel kyckling – hel fågel med ris- och äggfyllning – med hel rå kyckling och nykokta ägg",
+      "preparation": {
+        "family": "Murgh musallam",
+        "input_forms": {
+          "garam masala": "dry",
+          "hel kyckling": "as_sold",
+          "ingefära": "raw_edible",
+          "ris": "dry",
+          "salt": "as_sold",
+          "vitlök": "raw_edible",
+          "yoghurt naturell": "as_sold",
+          "ägg": "as_sold"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "149aa0b3cd20d637be7f8d548ed39c22ddd706a76a81b5253f9320d38a7d60cf",
+        "version": "smako-authored-losses-v3"
+      },
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 67,
+        "base_id": "smako-indian-murgh-musallam",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "hel kyckling|as_sold",
+                "name": "Hel rå kyckling, bruttovikt inklusive ben och skinn",
+                "note": "",
+                "quantity": 1350.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "yoghurt naturell|as_sold",
+                "name": "Yoghurt naturell",
+                "note": "",
+                "quantity": 180.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ingefära|raw_edible",
+                "name": "Ingefära",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "Vitlök",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "garam masala|dry",
+                "name": "Garam masala",
+                "note": "",
+                "quantity": 6.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 6.0,
+                "unit": "g"
+              }
+            ],
+            "id": "fagel",
+            "name": "Marinerad hel kyckling"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ris|dry",
+                "name": "Ris",
+                "note": "",
+                "quantity": 180.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ägg|as_sold",
+                "name": "Råa hela hönsägg med skal, räknade före kokning",
+                "note": "",
+                "quantity": 4.0,
+                "unit": "st"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              }
+            ],
+            "id": "fyllning",
+            "name": "Ris- och äggfyllning"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "Gul lök",
+                "note": "",
+                "quantity": 200.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "tomat|raw_edible",
+                "name": "Tomat",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "Rapsolja",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "sas",
+            "name": "Lök- och tomatsås"
+          }
+        ],
+        "content_sha256": "933ffcb94b80196fc8c44e138efe59348692133edabd85a0c2f1fa067af8f13a",
+        "content_source": {
+          "active_minutes": 67,
+          "method_note": "Ingredienslistan anger hela insatsen, även den del som senare hälls eller silas bort. Förlusten är inte uppmätt. Näring och färdig portionsvikt är okända; receptet kan inte styrka valda närings- eller viktgränser. Inköp och personliga kostkrav kontrolleras för samtliga insatser.",
+          "pack_id": "reviewed-expansion-round2-stage13",
+          "priority": 1,
+          "proposal_id": "smako-indian-murgh-musallam",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "c3ab12b8ffdf3fbeb1e28a131d533632c39d31917e8d5ec6374e4e537da57125",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "indian"
+        ],
+        "equipment": [
+          "ugn",
+          "ugnssäker gryta med lock",
+          "kastrull",
+          "termometer",
+          "matlagningssnöre"
+        ],
+        "estimated_minutes": 347,
+        "family": "Murgh musallam",
+        "fish": false,
+        "flavor_profile": [
+          "yoghurt",
+          "ingefära",
+          "garam masala"
+        ],
+        "ingredient_count": 10,
+        "method": "oven",
+        "primary_ingredient": "hel kyckling",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "AI-författat receptutkast, inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Ugnsanpassad hel, fylld fågel. Enkelversionen är medvetet förenklad men inte ett löst kycklingcurryrecept. Hel fågel anges som såld med ben; inget ätligt utbyte antas. Fyllning och lår måste båda temperaturkontrolleras. Ris i separat form kan behöva 30 ml extra vatten under den långa ugnstiden. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "risfyllning i fågeln",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 15,
+            "id": "s1",
+            "ingredient_keys": [
+              "garam masala|dry",
+              "hel kyckling|as_sold",
+              "ingefära|raw_edible",
+              "salt|as_sold",
+              "vitlök|raw_edible",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Välj en hel rå kyckling nära ingredienslistans bruttovikt. Butikens vikt är uppskattad; kontrollera faktisk vikt och kostnad. Kontrollera att fågeln är urplockad; skölj inte rå kyckling. Torka med papper och skär några grunda snitt i lårens skinn. Riv ingefära och vitlök och rör ihop med yoghurt, garam masala och fågeldelens salt. Gnid in fågeln även under löst skinn där det går utan att riva sönder. Diska råkycklingredskap och tvätta händerna."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 120,
+            "id": "s2",
+            "ingredient_keys": [
+              "hel kyckling|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Täck och marinera i kylskåp i två timmar."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 5,
+            "id": "s3",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "1000 ml",
+                1000.0
+              ]
+            ],
+            "text": "Lägg det angivna antalet råa hela ägg i en kastrull med 1000 ml vatten och koka upp försiktigt."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 12,
+            "id": "s4",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sjud äggen tolv minuter från uppkok tills vita och gula blir helt fasta."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 1,
+            "id": "s5",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Häll av det heta vattnet och tillsätt 1000 ml kallt vatten."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 5,
+            "id": "s6",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Låt svalna fem minuter så att äggen går att skala."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 4,
+            "id": "s7",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Skala äggen och kasta skalen. Kontrollera fasta gulor och vitor; alla kokta ägg används utan antagen gramvikt."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 3,
+            "id": "s8",
+            "ingredient_keys": [
+              "ris|dry",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "360 ml",
+                360.0
+              ]
+            ],
+            "text": "Skölj riset och koka upp med fyllningens salt och 360 ml vatten. Lägg på lock och sänk värmen."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 18,
+            "id": "s9",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Sjud riset under lock cirka 18 minuter tills det är mjukt och vattnet sugits upp."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 10,
+            "id": "s10",
+            "ingredient_keys": [
+              "hel kyckling|as_sold",
+              "ris|dry",
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "30 ml",
+                30.0
+              ]
+            ],
+            "text": "Värm ugnen till 175 °C. Hacka de nykokta skalade äggen och blanda med det heta riset. Fyll fågeln löst med så mycket av fyllningen som ryms utan packning. Bind benen löst. Lägg eventuell överbliven fyllning i en liten täckt ugnssäker form med 30 ml vatten; den ska också med i ugnen och hållas varm."
+          },
+          {
+            "depends_on": [
+              "s10"
+            ],
+            "duration_minutes": 12,
+            "id": "s11",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "rapsolja|as_sold",
+              "tomat|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Hacka lök och tomat. Mjukstek löken i oljan i grytan fem minuter, rör ner tomaten och låt koka ytterligare fem minuter."
+          },
+          {
+            "depends_on": [
+              "s11"
+            ],
+            "duration_minutes": 4,
+            "id": "s12",
+            "ingredient_keys": [
+              "hel kyckling|as_sold",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "100 ml",
+                100.0
+              ]
+            ],
+            "text": "Lägg fågeln i grytan ovanpå tomatsåsen med marinaden och 100 ml vatten. Täck och sätt in i ugnen. Ställ in formen med eventuell extra fyllning samtidigt; håll den täckt så riset inte torkar."
+          },
+          {
+            "depends_on": [
+              "s12"
+            ],
+            "duration_minutes": 85,
+            "id": "s13",
+            "ingredient_keys": [
+              "hel kyckling|as_sold",
+              "ris|dry",
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Ugnstillaga fågeln täckt vid 175 °C i cirka 85 minuter."
+          },
+          {
+            "depends_on": [
+              "s13"
+            ],
+            "duration_minutes": 1,
+            "id": "s14",
+            "ingredient_keys": [
+              "hel kyckling|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Ta försiktigt av locket; skydda händerna mot ånga."
+          },
+          {
+            "depends_on": [
+              "s14"
+            ],
+            "duration_minutes": 25,
+            "id": "s15",
+            "ingredient_keys": [
+              "hel kyckling|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Fortsätt ugnstillagningen utan lock cirka 25 minuter för färg."
+          },
+          {
+            "depends_on": [
+              "s15"
+            ],
+            "duration_minutes": 2,
+            "id": "s16",
+            "ingredient_keys": [
+              "hel kyckling|as_sold",
+              "ris|dry",
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Mät innerst i låret utan benkontakt och mitt i fyllningen, även eventuell separat fyllningsform. Samtliga ska nå minst 74 °C. Förläng tillagningen om någon mätpunkt är kallare."
+          },
+          {
+            "depends_on": [
+              "s16"
+            ],
+            "duration_minutes": 15,
+            "id": "s17",
+            "ingredient_keys": [
+              "hel kyckling|as_sold",
+              "ris|dry",
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Låt fågeln vila 15 minuter."
+          },
+          {
+            "depends_on": [
+              "s17"
+            ],
+            "duration_minutes": 10,
+            "id": "s18",
+            "ingredient_keys": [
+              "hel kyckling|as_sold",
+              "ris|dry",
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Ta bort snöret, lyft ur fyllningen och lossa allt ätligt kött och skinn från benen. Kontrollera små ben. Fördela kött, skinn, all fyllning och allt genomkokt spad eller sås mellan portionerna; benen serveras inte."
+          }
+        ],
+        "total_minutes": 347,
+        "unmeasured_processes": [
+          {
+            "description": "Ägg köps och doseras som antal före kokning. Skalen avlägsnas och ingen rå eller kokt styckvikt antas.",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "operation": "peel_after_cooking",
+            "step_id": "s7"
+          },
+          {
+            "description": "Kycklingens inköpta bruttovikt innehåller ben. Allt ätligt kött, skinn och sky serveras; benens andel och tillagat utbyte är okända.",
+            "ingredient_keys": [
+              "hel kyckling|as_sold"
+            ],
+            "operation": "remove_bones_after_cooking",
+            "step_id": "s18"
+          }
+        ],
+        "variant_id": "standard",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 280
+      },
+      "ingredients": [
+        {
+          "canonical_name": "hel kyckling",
+          "component": "fagel",
+          "form": "as_sold",
+          "name": "hel kyckling",
+          "product_requirements": [
+            "pack:intake_all_round2_711f790ea5c0"
+          ],
+          "quantity": 1350.0,
+          "quantity_max": 1350.0,
+          "quantity_min": 1350.0,
+          "quantity_step": 1350.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "yoghurt naturell",
+          "component": "fagel",
+          "form": "as_sold",
+          "name": "yoghurt naturell",
+          "product_requirements": [
+            "plain",
+            "thick"
+          ],
+          "quantity": 180.0,
+          "quantity_max": 180.0,
+          "quantity_min": 180.0,
+          "quantity_step": 180.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ingefära",
+          "component": "fagel",
+          "form": "raw_edible",
+          "name": "ingefära",
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "fagel",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "garam masala",
+          "component": "fagel",
+          "form": "dry",
+          "name": "garam masala",
+          "product_requirements": [
+            "pack:intake_all_84e26716ceb0"
+          ],
+          "quantity": 6.0,
+          "quantity_max": 6.0,
+          "quantity_min": 6.0,
+          "quantity_step": 6.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "fagel",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 7.0,
+          "quantity_max": 7.0,
+          "quantity_min": 7.0,
+          "quantity_step": 7.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ris",
+          "component": "fyllning",
+          "form": "dry",
+          "name": "ris",
+          "product_requirements": [
+            "white_rice"
+          ],
+          "quantity": 180.0,
+          "quantity_max": 180.0,
+          "quantity_min": 180.0,
+          "quantity_step": 180.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ägg",
+          "component": "fyllning",
+          "form": "as_sold",
+          "name": "ägg",
+          "product_requirements": [
+            "pack:intake_all_round2_eb585a9d4454"
+          ],
+          "quantity": 4.0,
+          "quantity_max": 4.0,
+          "quantity_min": 4.0,
+          "quantity_step": 4.0,
+          "required": true,
+          "role": "primary",
+          "unit": "st"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "sas",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 200.0,
+          "quantity_max": 200.0,
+          "quantity_min": 200.0,
+          "quantity_step": 200.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "tomat",
+          "component": "sas",
+          "form": "raw_edible",
+          "name": "tomat",
+          "quantity": 300.0,
+          "quantity_max": 300.0,
+          "quantity_min": 300.0,
+          "quantity_step": 300.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "sas",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 25.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        }
+      ],
+      "instructions": [
+        "Välj en hel rå kyckling nära ingredienslistans bruttovikt. Butikens vikt är uppskattad; kontrollera faktisk vikt och kostnad. Kontrollera att fågeln är urplockad; skölj inte rå kyckling. Torka med papper och skär några grunda snitt i lårens skinn. Riv ingefära och vitlök och rör ihop med yoghurt, garam masala och fågeldelens salt. Gnid in fågeln även under löst skinn där det går utan att riva sönder. Diska råkycklingredskap och tvätta händerna.",
+        "Täck och marinera i kylskåp i två timmar.",
+        "Lägg det angivna antalet råa hela ägg i en kastrull med 1000 ml vatten och koka upp försiktigt.",
+        "Sjud äggen tolv minuter från uppkok tills vita och gula blir helt fasta.",
+        "Häll av det heta vattnet och tillsätt 1000 ml kallt vatten.",
+        "Låt svalna fem minuter så att äggen går att skala.",
+        "Skala äggen och kasta skalen. Kontrollera fasta gulor och vitor; alla kokta ägg används utan antagen gramvikt.",
+        "Skölj riset och koka upp med fyllningens salt och 360 ml vatten. Lägg på lock och sänk värmen.",
+        "Sjud riset under lock cirka 18 minuter tills det är mjukt och vattnet sugits upp.",
+        "Värm ugnen till 175 °C. Hacka de nykokta skalade äggen och blanda med det heta riset. Fyll fågeln löst med så mycket av fyllningen som ryms utan packning. Bind benen löst. Lägg eventuell överbliven fyllning i en liten täckt ugnssäker form med 30 ml vatten; den ska också med i ugnen och hållas varm.",
+        "Hacka lök och tomat. Mjukstek löken i oljan i grytan fem minuter, rör ner tomaten och låt koka ytterligare fem minuter.",
+        "Lägg fågeln i grytan ovanpå tomatsåsen med marinaden och 100 ml vatten. Täck och sätt in i ugnen. Ställ in formen med eventuell extra fyllning samtidigt; håll den täckt så riset inte torkar.",
+        "Ugnstillaga fågeln täckt vid 175 °C i cirka 85 minuter.",
+        "Ta försiktigt av locket; skydda händerna mot ånga.",
+        "Fortsätt ugnstillagningen utan lock cirka 25 minuter för färg.",
+        "Mät innerst i låret utan benkontakt och mitt i fyllningen, även eventuell separat fyllningsform. Samtliga ska nå minst 74 °C. Förläng tillagningen om någon mätpunkt är kallare.",
+        "Låt fågeln vila 15 minuter.",
+        "Ta bort snöret, lyft ur fyllningen och lossa allt ätligt kött och skinn från benen. Kontrollera små ben. Fördela kött, skinn, all fyllning och allt genomkokt spad eller sås mellan portionerna; benen serveras inte."
+      ],
+      "name": "Murgh musallam – fylld hel kyckling – med tomat- och löksås – med hel rå kyckling och nykokta ägg",
+      "preparation": {
+        "family": "Murgh musallam",
+        "input_forms": {
+          "garam masala": "dry",
+          "gul lök": "raw_edible",
+          "hel kyckling": "as_sold",
+          "ingefära": "raw_edible",
+          "rapsolja": "as_sold",
+          "ris": "dry",
+          "salt": "as_sold",
+          "tomat": "raw_edible",
+          "vitlök": "raw_edible",
+          "yoghurt naturell": "as_sold",
+          "ägg": "as_sold"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "933ffcb94b80196fc8c44e138efe59348692133edabd85a0c2f1fa067af8f13a",
+        "version": "smako-authored-losses-v3"
+      },
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 67,
+        "base_id": "smako-indian-murgh-musallam",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "hel kyckling|as_sold",
+                "name": "Hel rå kyckling, bruttovikt inklusive ben och skinn",
+                "note": "",
+                "quantity": 1350.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "yoghurt naturell|as_sold",
+                "name": "Yoghurt naturell",
+                "note": "",
+                "quantity": 180.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ingefära|raw_edible",
+                "name": "Ingefära",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "Vitlök",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "garam masala|dry",
+                "name": "Garam masala",
+                "note": "",
+                "quantity": 6.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 6.0,
+                "unit": "g"
+              }
+            ],
+            "id": "fagel",
+            "name": "Marinerad hel kyckling"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ris|dry",
+                "name": "Ris",
+                "note": "",
+                "quantity": 180.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ägg|as_sold",
+                "name": "Råa hela hönsägg med skal, räknade före kokning",
+                "note": "",
+                "quantity": 4.0,
+                "unit": "st"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "mandel|as_sold",
+                "name": "Mandel",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "russin|as_sold",
+                "name": "Russin",
+                "note": "",
+                "quantity": 35.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "koriander|raw_edible",
+                "name": "Koriander",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "g"
+              }
+            ],
+            "id": "fyllning",
+            "name": "Ris- och äggfyllning"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "Gul lök",
+                "note": "",
+                "quantity": 200.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "tomat|raw_edible",
+                "name": "Tomat",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "Rapsolja",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "sas",
+            "name": "Lök- och tomatsås"
+          }
+        ],
+        "content_sha256": "fcee8451a375a12c3eaa47782c920287d33fd1e238883ec904338d5cbe5b4dd5",
+        "content_source": {
+          "active_minutes": 67,
+          "method_note": "Ingredienslistan anger hela insatsen, även den del som senare hälls eller silas bort. Förlusten är inte uppmätt. Näring och färdig portionsvikt är okända; receptet kan inte styrka valda närings- eller viktgränser. Inköp och personliga kostkrav kontrolleras för samtliga insatser.",
+          "pack_id": "reviewed-expansion-round2-stage13",
+          "priority": 1,
+          "proposal_id": "smako-indian-murgh-musallam",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "c3ab12b8ffdf3fbeb1e28a131d533632c39d31917e8d5ec6374e4e537da57125",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "indian"
+        ],
+        "equipment": [
+          "ugn",
+          "ugnssäker gryta med lock",
+          "kastrull",
+          "termometer",
+          "matlagningssnöre"
+        ],
+        "estimated_minutes": 347,
+        "family": "Murgh musallam",
+        "fish": false,
+        "flavor_profile": [
+          "yoghurt",
+          "ingefära",
+          "garam masala"
+        ],
+        "ingredient_count": 13,
+        "method": "oven",
+        "primary_ingredient": "hel kyckling",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "AI-författat receptutkast, inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Ugnsanpassad hel, fylld fågel. Enkelversionen är medvetet förenklad men inte ett löst kycklingcurryrecept. Hel fågel anges som såld med ben; inget ätligt utbyte antas. Fyllning och lår måste båda temperaturkontrolleras. Ris i separat form kan behöva 30 ml extra vatten under den långa ugnstiden. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "risfyllning i fågeln",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 15,
+            "id": "s1",
+            "ingredient_keys": [
+              "garam masala|dry",
+              "hel kyckling|as_sold",
+              "ingefära|raw_edible",
+              "salt|as_sold",
+              "vitlök|raw_edible",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Välj en hel rå kyckling nära ingredienslistans bruttovikt. Butikens vikt är uppskattad; kontrollera faktisk vikt och kostnad. Kontrollera att fågeln är urplockad; skölj inte rå kyckling. Torka med papper och skär några grunda snitt i lårens skinn. Riv ingefära och vitlök och rör ihop med yoghurt, garam masala och fågeldelens salt. Gnid in fågeln även under löst skinn där det går utan att riva sönder. Diska råkycklingredskap och tvätta händerna."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 120,
+            "id": "s2",
+            "ingredient_keys": [
+              "hel kyckling|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Täck och marinera i kylskåp i två timmar."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 5,
+            "id": "s3",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "1000 ml",
+                1000.0
+              ]
+            ],
+            "text": "Lägg det angivna antalet råa hela ägg i en kastrull med 1000 ml vatten och koka upp försiktigt."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 12,
+            "id": "s4",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sjud äggen tolv minuter från uppkok tills vita och gula blir helt fasta."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 1,
+            "id": "s5",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Häll av det heta vattnet och tillsätt 1000 ml kallt vatten."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 5,
+            "id": "s6",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Låt svalna fem minuter så att äggen går att skala."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 4,
+            "id": "s7",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Skala äggen och kasta skalen. Kontrollera fasta gulor och vitor; alla kokta ägg används utan antagen gramvikt."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 3,
+            "id": "s8",
+            "ingredient_keys": [
+              "ris|dry",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "360 ml",
+                360.0
+              ]
+            ],
+            "text": "Skölj riset och koka upp med fyllningens salt och 360 ml vatten. Lägg på lock och sänk värmen."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 18,
+            "id": "s9",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Sjud riset under lock cirka 18 minuter tills det är mjukt och vattnet sugits upp."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 10,
+            "id": "s10",
+            "ingredient_keys": [
+              "hel kyckling|as_sold",
+              "koriander|raw_edible",
+              "mandel|as_sold",
+              "ris|dry",
+              "russin|as_sold",
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "30 ml",
+                30.0
+              ]
+            ],
+            "text": "Värm ugnen till 175 °C. Hacka de nykokta skalade äggen och blanda med det heta riset. Hacka mandeln och blanda ner den, russin och fryst hackad koriander; hela fyllningen ska genomhettas. Fyll fågeln löst med så mycket av fyllningen som ryms utan packning. Bind benen löst. Lägg eventuell överbliven fyllning i en liten täckt ugnssäker form med 30 ml vatten; den ska också med i ugnen och hållas varm."
+          },
+          {
+            "depends_on": [
+              "s10"
+            ],
+            "duration_minutes": 12,
+            "id": "s11",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "rapsolja|as_sold",
+              "tomat|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Hacka lök och tomat. Mjukstek löken i oljan i grytan fem minuter, rör ner tomaten och låt koka ytterligare fem minuter."
+          },
+          {
+            "depends_on": [
+              "s11"
+            ],
+            "duration_minutes": 4,
+            "id": "s12",
+            "ingredient_keys": [
+              "hel kyckling|as_sold",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "100 ml",
+                100.0
+              ]
+            ],
+            "text": "Lägg fågeln i grytan ovanpå tomatsåsen med marinaden och 100 ml vatten. Täck och sätt in i ugnen. Ställ in formen med eventuell extra fyllning samtidigt; håll den täckt så riset inte torkar."
+          },
+          {
+            "depends_on": [
+              "s12"
+            ],
+            "duration_minutes": 85,
+            "id": "s13",
+            "ingredient_keys": [
+              "hel kyckling|as_sold",
+              "ris|dry",
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Ugnstillaga fågeln täckt vid 175 °C i cirka 85 minuter."
+          },
+          {
+            "depends_on": [
+              "s13"
+            ],
+            "duration_minutes": 1,
+            "id": "s14",
+            "ingredient_keys": [
+              "hel kyckling|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Ta försiktigt av locket; skydda händerna mot ånga."
+          },
+          {
+            "depends_on": [
+              "s14"
+            ],
+            "duration_minutes": 25,
+            "id": "s15",
+            "ingredient_keys": [
+              "hel kyckling|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Fortsätt ugnstillagningen utan lock cirka 25 minuter för färg."
+          },
+          {
+            "depends_on": [
+              "s15"
+            ],
+            "duration_minutes": 2,
+            "id": "s16",
+            "ingredient_keys": [
+              "hel kyckling|as_sold",
+              "ris|dry",
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Mät innerst i låret utan benkontakt och mitt i fyllningen, även eventuell separat fyllningsform. Samtliga ska nå minst 74 °C. Förläng tillagningen om någon mätpunkt är kallare."
+          },
+          {
+            "depends_on": [
+              "s16"
+            ],
+            "duration_minutes": 15,
+            "id": "s17",
+            "ingredient_keys": [
+              "hel kyckling|as_sold",
+              "ris|dry",
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Låt fågeln vila 15 minuter."
+          },
+          {
+            "depends_on": [
+              "s17"
+            ],
+            "duration_minutes": 10,
+            "id": "s18",
+            "ingredient_keys": [
+              "hel kyckling|as_sold",
+              "ris|dry",
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Ta bort snöret, lyft ur fyllningen och lossa allt ätligt kött och skinn från benen. Kontrollera små ben. Fördela kött, skinn, all fyllning och allt genomkokt spad eller sås mellan portionerna; benen serveras inte."
+          }
+        ],
+        "total_minutes": 347,
+        "unmeasured_processes": [
+          {
+            "description": "Ägg köps och doseras som antal före kokning. Skalen avlägsnas och ingen rå eller kokt styckvikt antas.",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "operation": "peel_after_cooking",
+            "step_id": "s7"
+          },
+          {
+            "description": "Kycklingens inköpta bruttovikt innehåller ben. Allt ätligt kött, skinn och sky serveras; benens andel och tillagat utbyte är okända.",
+            "ingredient_keys": [
+              "hel kyckling|as_sold"
+            ],
+            "operation": "remove_bones_after_cooking",
+            "step_id": "s18"
+          }
+        ],
+        "variant_id": "extended",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 280
+      },
+      "ingredients": [
+        {
+          "canonical_name": "hel kyckling",
+          "component": "fagel",
+          "form": "as_sold",
+          "name": "hel kyckling",
+          "product_requirements": [
+            "pack:intake_all_round2_711f790ea5c0"
+          ],
+          "quantity": 1350.0,
+          "quantity_max": 1350.0,
+          "quantity_min": 1350.0,
+          "quantity_step": 1350.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "yoghurt naturell",
+          "component": "fagel",
+          "form": "as_sold",
+          "name": "yoghurt naturell",
+          "product_requirements": [
+            "plain",
+            "thick"
+          ],
+          "quantity": 180.0,
+          "quantity_max": 180.0,
+          "quantity_min": 180.0,
+          "quantity_step": 180.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ingefära",
+          "component": "fagel",
+          "form": "raw_edible",
+          "name": "ingefära",
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "fagel",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "garam masala",
+          "component": "fagel",
+          "form": "dry",
+          "name": "garam masala",
+          "product_requirements": [
+            "pack:intake_all_84e26716ceb0"
+          ],
+          "quantity": 6.0,
+          "quantity_max": 6.0,
+          "quantity_min": 6.0,
+          "quantity_step": 6.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "fagel",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 7.0,
+          "quantity_max": 7.0,
+          "quantity_min": 7.0,
+          "quantity_step": 7.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ris",
+          "component": "fyllning",
+          "form": "dry",
+          "name": "ris",
+          "product_requirements": [
+            "white_rice"
+          ],
+          "quantity": 180.0,
+          "quantity_max": 180.0,
+          "quantity_min": 180.0,
+          "quantity_step": 180.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ägg",
+          "component": "fyllning",
+          "form": "as_sold",
+          "name": "ägg",
+          "product_requirements": [
+            "pack:intake_all_round2_eb585a9d4454"
+          ],
+          "quantity": 4.0,
+          "quantity_max": 4.0,
+          "quantity_min": 4.0,
+          "quantity_step": 4.0,
+          "required": true,
+          "role": "primary",
+          "unit": "st"
+        },
+        {
+          "canonical_name": "mandel",
+          "component": "fyllning",
+          "form": "as_sold",
+          "name": "mandel",
+          "product_requirements": [
+            "pack:intake_almonds"
+          ],
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 25.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "russin",
+          "component": "fyllning",
+          "form": "as_sold",
+          "name": "russin",
+          "product_requirements": [
+            "pack:intake_all_c84b87d5ba4a"
+          ],
+          "quantity": 35.0,
+          "quantity_max": 35.0,
+          "quantity_min": 35.0,
+          "quantity_step": 35.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "koriander",
+          "component": "fyllning",
+          "form": "raw_edible",
+          "name": "koriander",
+          "product_requirements": [
+            "pack:intake_all_9b2370e0e926"
+          ],
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 10.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "sas",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 200.0,
+          "quantity_max": 200.0,
+          "quantity_min": 200.0,
+          "quantity_step": 200.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "tomat",
+          "component": "sas",
+          "form": "raw_edible",
+          "name": "tomat",
+          "quantity": 300.0,
+          "quantity_max": 300.0,
+          "quantity_min": 300.0,
+          "quantity_step": 300.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "sas",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 25.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        }
+      ],
+      "instructions": [
+        "Välj en hel rå kyckling nära ingredienslistans bruttovikt. Butikens vikt är uppskattad; kontrollera faktisk vikt och kostnad. Kontrollera att fågeln är urplockad; skölj inte rå kyckling. Torka med papper och skär några grunda snitt i lårens skinn. Riv ingefära och vitlök och rör ihop med yoghurt, garam masala och fågeldelens salt. Gnid in fågeln även under löst skinn där det går utan att riva sönder. Diska råkycklingredskap och tvätta händerna.",
+        "Täck och marinera i kylskåp i två timmar.",
+        "Lägg det angivna antalet råa hela ägg i en kastrull med 1000 ml vatten och koka upp försiktigt.",
+        "Sjud äggen tolv minuter från uppkok tills vita och gula blir helt fasta.",
+        "Häll av det heta vattnet och tillsätt 1000 ml kallt vatten.",
+        "Låt svalna fem minuter så att äggen går att skala.",
+        "Skala äggen och kasta skalen. Kontrollera fasta gulor och vitor; alla kokta ägg används utan antagen gramvikt.",
+        "Skölj riset och koka upp med fyllningens salt och 360 ml vatten. Lägg på lock och sänk värmen.",
+        "Sjud riset under lock cirka 18 minuter tills det är mjukt och vattnet sugits upp.",
+        "Värm ugnen till 175 °C. Hacka de nykokta skalade äggen och blanda med det heta riset. Hacka mandeln och blanda ner den, russin och fryst hackad koriander; hela fyllningen ska genomhettas. Fyll fågeln löst med så mycket av fyllningen som ryms utan packning. Bind benen löst. Lägg eventuell överbliven fyllning i en liten täckt ugnssäker form med 30 ml vatten; den ska också med i ugnen och hållas varm.",
+        "Hacka lök och tomat. Mjukstek löken i oljan i grytan fem minuter, rör ner tomaten och låt koka ytterligare fem minuter.",
+        "Lägg fågeln i grytan ovanpå tomatsåsen med marinaden och 100 ml vatten. Täck och sätt in i ugnen. Ställ in formen med eventuell extra fyllning samtidigt; håll den täckt så riset inte torkar.",
+        "Ugnstillaga fågeln täckt vid 175 °C i cirka 85 minuter.",
+        "Ta försiktigt av locket; skydda händerna mot ånga.",
+        "Fortsätt ugnstillagningen utan lock cirka 25 minuter för färg.",
+        "Mät innerst i låret utan benkontakt och mitt i fyllningen, även eventuell separat fyllningsform. Samtliga ska nå minst 74 °C. Förläng tillagningen om någon mätpunkt är kallare.",
+        "Låt fågeln vila 15 minuter.",
+        "Ta bort snöret, lyft ur fyllningen och lossa allt ätligt kött och skinn från benen. Kontrollera små ben. Fördela kött, skinn, all fyllning och allt genomkokt spad eller sås mellan portionerna; benen serveras inte."
+      ],
+      "name": "Murgh musallam – fylld hel kyckling – med mandel, russin och koriander – med hel rå kyckling och nykokta ägg",
+      "preparation": {
+        "family": "Murgh musallam",
+        "input_forms": {
+          "garam masala": "dry",
+          "gul lök": "raw_edible",
+          "hel kyckling": "as_sold",
+          "ingefära": "raw_edible",
+          "koriander": "raw_edible",
+          "mandel": "as_sold",
+          "rapsolja": "as_sold",
+          "ris": "dry",
+          "russin": "as_sold",
+          "salt": "as_sold",
+          "tomat": "raw_edible",
+          "vitlök": "raw_edible",
+          "yoghurt naturell": "as_sold",
+          "ägg": "as_sold"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "fcee8451a375a12c3eaa47782c920287d33fd1e238883ec904338d5cbe5b4dd5",
+        "version": "smako-authored-losses-v3"
+      },
+      "servings": 4
+    }
+  ]
+}

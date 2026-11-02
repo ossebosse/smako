@@ -1,0 +1,2489 @@
+{
+  "pack_id": "reviewed-expansion-round2-stage9",
+  "recipes": [
+    {
+      "design": {
+        "active_minutes": 54,
+        "base_id": "smako-swedish-bohuslansk-aggost",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "mjölk|as_sold",
+                "name": "Mjölk",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "filmjölk|as_sold",
+                "name": "Filmjölk, uppvägd i gram",
+                "note": "",
+                "quantity": 42.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ägg|raw_edible",
+                "name": "Uppvispat rått ägg utan skal",
+                "note": "",
+                "quantity": 50.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "Strösocker",
+                "note": "",
+                "quantity": 8.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c1",
+            "name": "Äggost"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "jordgubbar|raw_edible",
+                "name": "Frysta ansade jordgubbar, hela mängden och saften används",
+                "note": "",
+                "quantity": 60.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c2",
+            "name": "Bär"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "swedish"
+        ],
+        "equipment": [
+          "tjockbottnad kastrull",
+          "kökstermometer",
+          "silduk",
+          "sil eller liten äggostform",
+          "kylskåp"
+        ],
+        "estimated_minutes": 434,
+        "family": "heat_curdled_drained_egg_cheese",
+        "fish": false,
+        "flavor_profile": [
+          "mjölk",
+          "jordgubbar"
+        ],
+        "ingredient_count": 5,
+        "meal_types": [
+          "snack"
+        ],
+        "method": "pot",
+        "primary_ingredient": "mjölk och ägg",
+        "provenance": {
+          "notes": "AI-författat receptutkast, inte provlagat och ännu inte import-/produktgranskat av Smako. Tider är författaruppskattningar, inte uppmätt provlagning. Bohuslänsk värmekoagulerad och avrunnen äggost, inte kall mascarponekräm. En liten mellanmåls-/dessertportion. Rå ägginsats tillagas faktiskt före kylningen. Avrinningsutbyte och exakt konsistens för en liten sats måste provlagas; råvaruvikterna avser insats före avrinning. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "färska bär",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 1,
+            "id": "s1",
+            "ingredient_keys": [
+              "jordgubbar|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Väg upp fryst jordgubbar i ett täckt kärl i kylskåp. Behåll all vätska."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 120,
+            "id": "s2",
+            "ingredient_keys": [
+              "jordgubbar|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Tina helt i kylskåp enligt förpackningen. Planera 120 minuter och förläng vid behov tills ingen iskärna återstår. Servera hela bärmängden och all saft till äggosten."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 8,
+            "id": "s3",
+            "ingredient_keys": [
+              "filmjölk|as_sold",
+              "mjölk|as_sold",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Knäck ägg och väg den råa mängden utan skal. Väg filmjölken i gram. Värm mjölken försiktigt till cirka 60 °C i en liten tjockbottnad kastrull. Vispa ägget med filmjölken i en skål och rör ner i den varma mjölken."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 40,
+            "id": "s4",
+            "ingredient_keys": [
+              "filmjölk|as_sold",
+              "mjölk|as_sold",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Värm vidare på låg till medellåg värme under varsam återkommande omrörning i ungefär 30–45 minuter, utan att koka kraftigt. Blandningen ska tydligt dela sig i ostmassa och vassle. Kontrollera att den har nått minst 85 °C; ägget ska vara genomhettat och massan koagulerad. Rör inte sönder den färdiga ostmassan."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 10,
+            "id": "s5",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Ta från värmen och låt ostmassan samla sig i tio minuter."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 2,
+            "id": "s6",
+            "ingredient_keys": [
+              "filmjölk|as_sold",
+              "mjölk|as_sold",
+              "strösocker|dry",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Klä en liten sil eller äggostform med ren silduk över en skål. Lyft över ostmassan med hålslev och varva med sockret. Vasslen är en separat processrest med okänt näringsinnehåll."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 10,
+            "id": "s7",
+            "ingredient_keys": [
+              "filmjölk|as_sold",
+              "mjölk|as_sold",
+              "strösocker|dry",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Låt rinna av tio minuter tills den värsta hettan gått ur."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 240,
+            "id": "s8",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Täck formen och låt rinna av vidare i kylskåp, cirka 4 °C, minst fyra timmar tills osten är kall och håller ihop. Skålens vassle får inte nå upp till ostmassan."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 3,
+            "id": "s9",
+            "ingredient_keys": [
+              "jordgubbar|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Dela de tinade jordgubbarna och servera all saft till. Stjälp försiktigt upp äggosten och servera med bären. Håll äggosten kall fram till servering."
+          }
+        ],
+        "total_minutes": 434,
+        "unmeasured_processes": [
+          {
+            "description": "Ostmassan skiljs från vasslen och fortsätter rinna av i kylskåp. Ätligt utbyte och näringsfördelning är inte uppmätta.",
+            "ingredient_keys": [
+              "mjölk|as_sold",
+              "filmjölk|as_sold",
+              "ägg|raw_edible",
+              "strösocker|dry"
+            ],
+            "operation": "strain_whey",
+            "step_id": "s6"
+          }
+        ],
+        "variant_id": "simple",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 380
+      },
+      "ingredients": [
+        {
+          "canonical_name": "mjölk",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "mjölk",
+          "quantity": 300.0,
+          "quantity_max": 300.0,
+          "quantity_min": 300.0,
+          "quantity_step": 300.0,
+          "required": true,
+          "role": "primary",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "filmjölk",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "filmjölk",
+          "product_requirements": [
+            "pack:intake_all_round2_d88843b59afc"
+          ],
+          "quantity": 42.0,
+          "quantity_max": 42.0,
+          "quantity_min": 42.0,
+          "quantity_step": 42.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ägg",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "ägg",
+          "product_requirements": [
+            "pack:egg"
+          ],
+          "quantity": 50.0,
+          "quantity_max": 50.0,
+          "quantity_min": 50.0,
+          "quantity_step": 50.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "strösocker",
+          "component": "c1",
+          "form": "dry",
+          "name": "strösocker",
+          "product_requirements": [
+            "pack:sugar"
+          ],
+          "quantity": 8.0,
+          "quantity_max": 8.0,
+          "quantity_min": 8.0,
+          "quantity_step": 8.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "jordgubbar",
+          "component": "c2",
+          "form": "raw_edible",
+          "name": "jordgubbar",
+          "product_requirements": [
+            "pack:intake_all_9ae2b7704475"
+          ],
+          "quantity": 60.0,
+          "quantity_max": 60.0,
+          "quantity_min": 60.0,
+          "quantity_step": 60.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Väg upp fryst jordgubbar i ett täckt kärl i kylskåp. Behåll all vätska.",
+        "Tina helt i kylskåp enligt förpackningen. Planera 120 minuter och förläng vid behov tills ingen iskärna återstår. Servera hela bärmängden och all saft till äggosten.",
+        "Knäck ägg och väg den råa mängden utan skal. Väg filmjölken i gram. Värm mjölken försiktigt till cirka 60 °C i en liten tjockbottnad kastrull. Vispa ägget med filmjölken i en skål och rör ner i den varma mjölken.",
+        "Värm vidare på låg till medellåg värme under varsam återkommande omrörning i ungefär 30–45 minuter, utan att koka kraftigt. Blandningen ska tydligt dela sig i ostmassa och vassle. Kontrollera att den har nått minst 85 °C; ägget ska vara genomhettat och massan koagulerad. Rör inte sönder den färdiga ostmassan.",
+        "Ta från värmen och låt ostmassan samla sig i tio minuter.",
+        "Klä en liten sil eller äggostform med ren silduk över en skål. Lyft över ostmassan med hålslev och varva med sockret. Vasslen är en separat processrest med okänt näringsinnehåll.",
+        "Låt rinna av tio minuter tills den värsta hettan gått ur.",
+        "Täck formen och låt rinna av vidare i kylskåp, cirka 4 °C, minst fyra timmar tills osten är kall och håller ihop. Skålens vassle får inte nå upp till ostmassan.",
+        "Dela de tinade jordgubbarna och servera all saft till. Stjälp försiktigt upp äggosten och servera med bären. Håll äggosten kall fram till servering."
+      ],
+      "name": "Bohuslänsk äggost med bär – liten äggost med tinade bär",
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 60,
+        "base_id": "smako-swedish-bohuslansk-aggost",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "mjölk|as_sold",
+                "name": "Mjölk",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "filmjölk|as_sold",
+                "name": "Filmjölk, uppvägd i gram",
+                "note": "",
+                "quantity": 42.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ägg|raw_edible",
+                "name": "Uppvispat rått ägg utan skal",
+                "note": "",
+                "quantity": 50.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "Strösocker",
+                "note": "",
+                "quantity": 8.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c1",
+            "name": "Äggost"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "jordgubbar|raw_edible",
+                "name": "Frysta ansade jordgubbar, hela mängden och saften används",
+                "note": "",
+                "quantity": 60.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c2",
+            "name": "Bär"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "grädde|as_sold",
+                "name": "Grädde",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "vaniljpulver|dry",
+                "name": "Vaniljpulver",
+                "note": "",
+                "quantity": 0.2,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "mandel|as_sold",
+                "name": "Mandel",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c3",
+            "name": "Vaniljgrädde och mandel"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "swedish"
+        ],
+        "equipment": [
+          "tjockbottnad kastrull",
+          "kökstermometer",
+          "silduk",
+          "sil eller liten äggostform",
+          "kylskåp",
+          "stekpanna",
+          "visp"
+        ],
+        "estimated_minutes": 440,
+        "family": "heat_curdled_drained_egg_cheese",
+        "fish": false,
+        "flavor_profile": [
+          "mjölk",
+          "jordgubbar"
+        ],
+        "ingredient_count": 8,
+        "meal_types": [
+          "snack"
+        ],
+        "method": "pot",
+        "primary_ingredient": "mjölk och ägg",
+        "provenance": {
+          "notes": "AI-författat receptutkast, inte provlagat och ännu inte import-/produktgranskat av Smako. Tider är författaruppskattningar, inte uppmätt provlagning. Bohuslänsk värmekoagulerad och avrunnen äggost, inte kall mascarponekräm. En liten mellanmåls-/dessertportion. Rå ägginsats tillagas faktiskt före kylningen. Avrinningsutbyte och exakt konsistens för en liten sats måste provlagas; råvaruvikterna avser insats före avrinning. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "färska bär och vaniljgrädde",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 1,
+            "id": "s1",
+            "ingredient_keys": [
+              "jordgubbar|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Väg upp fryst jordgubbar i ett täckt kärl i kylskåp. Behåll all vätska."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 120,
+            "id": "s2",
+            "ingredient_keys": [
+              "jordgubbar|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Tina helt i kylskåp enligt förpackningen. Planera 120 minuter och förläng vid behov tills ingen iskärna återstår. Servera hela bärmängden och all saft till äggosten."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 8,
+            "id": "s3",
+            "ingredient_keys": [
+              "filmjölk|as_sold",
+              "mjölk|as_sold",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Knäck ägg och väg den råa mängden utan skal. Väg filmjölken i gram. Värm mjölken försiktigt till cirka 60 °C i en liten tjockbottnad kastrull. Vispa ägget med filmjölken i en skål och rör ner i den varma mjölken."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 40,
+            "id": "s4",
+            "ingredient_keys": [
+              "filmjölk|as_sold",
+              "mjölk|as_sold",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Värm vidare på låg till medellåg värme under varsam återkommande omrörning i ungefär 30–45 minuter, utan att koka kraftigt. Blandningen ska tydligt dela sig i ostmassa och vassle. Kontrollera att den har nått minst 85 °C; ägget ska vara genomhettat och massan koagulerad. Rör inte sönder den färdiga ostmassan."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 10,
+            "id": "s5",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Ta från värmen och låt ostmassan samla sig i tio minuter."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 2,
+            "id": "s6",
+            "ingredient_keys": [
+              "filmjölk|as_sold",
+              "mjölk|as_sold",
+              "strösocker|dry",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Klä en liten sil eller äggostform med ren silduk över en skål. Lyft över ostmassan med hålslev och varva med sockret. Vasslen är en separat processrest med okänt näringsinnehåll."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 10,
+            "id": "s7",
+            "ingredient_keys": [
+              "filmjölk|as_sold",
+              "mjölk|as_sold",
+              "strösocker|dry",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Låt rinna av tio minuter tills den värsta hettan gått ur."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 240,
+            "id": "s8",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Täck formen och låt rinna av vidare i kylskåp, cirka 4 °C, minst fyra timmar tills osten är kall och håller ihop. Skålens vassle får inte nå upp till ostmassan."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 6,
+            "id": "s9",
+            "ingredient_keys": [
+              "grädde|as_sold",
+              "mandel|as_sold",
+              "vaniljpulver|dry"
+            ],
+            "parallel_group": null,
+            "text": "Hacka mandeln och rosta i torr panna i cirka tre minuter. Låt svalna. Vispa den kalla vispgrädden mjukt med vaniljpulvret i en smal liten skål."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 3,
+            "id": "s10",
+            "ingredient_keys": [
+              "jordgubbar|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Dela de tinade jordgubbarna och servera all saft till. Stjälp försiktigt upp äggosten och servera med bären, vaniljgrädden och den rostade mandeln. Håll äggosten kall fram till servering."
+          }
+        ],
+        "total_minutes": 440,
+        "unmeasured_processes": [
+          {
+            "description": "Ostmassan skiljs från vasslen och fortsätter rinna av i kylskåp. Ätligt utbyte och näringsfördelning är inte uppmätta.",
+            "ingredient_keys": [
+              "mjölk|as_sold",
+              "filmjölk|as_sold",
+              "ägg|raw_edible",
+              "strösocker|dry"
+            ],
+            "operation": "strain_whey",
+            "step_id": "s6"
+          }
+        ],
+        "variant_id": "extended",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 380
+      },
+      "ingredients": [
+        {
+          "canonical_name": "mjölk",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "mjölk",
+          "quantity": 300.0,
+          "quantity_max": 300.0,
+          "quantity_min": 300.0,
+          "quantity_step": 300.0,
+          "required": true,
+          "role": "primary",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "filmjölk",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "filmjölk",
+          "product_requirements": [
+            "pack:intake_all_round2_d88843b59afc"
+          ],
+          "quantity": 42.0,
+          "quantity_max": 42.0,
+          "quantity_min": 42.0,
+          "quantity_step": 42.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ägg",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "ägg",
+          "product_requirements": [
+            "pack:egg"
+          ],
+          "quantity": 50.0,
+          "quantity_max": 50.0,
+          "quantity_min": 50.0,
+          "quantity_step": 50.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "strösocker",
+          "component": "c1",
+          "form": "dry",
+          "name": "strösocker",
+          "product_requirements": [
+            "pack:sugar"
+          ],
+          "quantity": 8.0,
+          "quantity_max": 8.0,
+          "quantity_min": 8.0,
+          "quantity_step": 8.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "jordgubbar",
+          "component": "c2",
+          "form": "raw_edible",
+          "name": "jordgubbar",
+          "product_requirements": [
+            "pack:intake_all_9ae2b7704475"
+          ],
+          "quantity": 60.0,
+          "quantity_max": 60.0,
+          "quantity_min": 60.0,
+          "quantity_step": 60.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "grädde",
+          "component": "c3",
+          "form": "as_sold",
+          "name": "grädde",
+          "product_requirements": [
+            "pack:intake_all_2ba6bda1d4b2"
+          ],
+          "quantity": 30.0,
+          "quantity_max": 30.0,
+          "quantity_min": 30.0,
+          "quantity_step": 30.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "vaniljpulver",
+          "component": "c3",
+          "form": "dry",
+          "name": "vaniljpulver",
+          "product_requirements": [
+            "pack:intake_all_e761b331fb42"
+          ],
+          "quantity": 0.2,
+          "quantity_max": 0.2,
+          "quantity_min": 0.2,
+          "quantity_step": 0.2,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "mandel",
+          "component": "c3",
+          "form": "as_sold",
+          "name": "mandel",
+          "product_requirements": [
+            "pack:intake_almonds"
+          ],
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 10.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Väg upp fryst jordgubbar i ett täckt kärl i kylskåp. Behåll all vätska.",
+        "Tina helt i kylskåp enligt förpackningen. Planera 120 minuter och förläng vid behov tills ingen iskärna återstår. Servera hela bärmängden och all saft till äggosten.",
+        "Knäck ägg och väg den råa mängden utan skal. Väg filmjölken i gram. Värm mjölken försiktigt till cirka 60 °C i en liten tjockbottnad kastrull. Vispa ägget med filmjölken i en skål och rör ner i den varma mjölken.",
+        "Värm vidare på låg till medellåg värme under varsam återkommande omrörning i ungefär 30–45 minuter, utan att koka kraftigt. Blandningen ska tydligt dela sig i ostmassa och vassle. Kontrollera att den har nått minst 85 °C; ägget ska vara genomhettat och massan koagulerad. Rör inte sönder den färdiga ostmassan.",
+        "Ta från värmen och låt ostmassan samla sig i tio minuter.",
+        "Klä en liten sil eller äggostform med ren silduk över en skål. Lyft över ostmassan med hålslev och varva med sockret. Vasslen är en separat processrest med okänt näringsinnehåll.",
+        "Låt rinna av tio minuter tills den värsta hettan gått ur.",
+        "Täck formen och låt rinna av vidare i kylskåp, cirka 4 °C, minst fyra timmar tills osten är kall och håller ihop. Skålens vassle får inte nå upp till ostmassan.",
+        "Hacka mandeln och rosta i torr panna i cirka tre minuter. Låt svalna. Vispa den kalla vispgrädden mjukt med vaniljpulvret i en smal liten skål.",
+        "Dela de tinade jordgubbarna och servera all saft till. Stjälp försiktigt upp äggosten och servera med bären, vaniljgrädden och den rostade mandeln. Håll äggosten kall fram till servering."
+      ],
+      "name": "Bohuslänsk äggost med bär – med bär, vaniljgrädde och rostad mandel",
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 8,
+        "base_id": "smako-indian-shrikhand",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "yoghurt naturell|as_sold",
+                "name": "Naturell yoghurt, vikt före avrinning",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "florsocker|dry",
+                "name": "Florsocker",
+                "note": "",
+                "quantity": 12.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kardemumma|dry",
+                "name": "Kardemumma",
+                "note": "",
+                "quantity": 0.3,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "mandel|as_sold",
+                "name": "Mandel",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c1",
+            "name": "Avrunnen yoghurtkräm"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "indian"
+        ],
+        "equipment": [
+          "sil",
+          "silduk",
+          "skål",
+          "kylskåp"
+        ],
+        "estimated_minutes": 488,
+        "family": "strained_yoghurt_shrikhand",
+        "fish": false,
+        "flavor_profile": [
+          "kardemumma"
+        ],
+        "ingredient_count": 4,
+        "meal_types": [
+          "snack"
+        ],
+        "method": "refrigerated_assembly",
+        "primary_ingredient": "yoghurt",
+        "provenance": {
+          "notes": "AI-författat receptutkast, inte provlagat och ännu inte import-/produktgranskat av Smako. Tider är författaruppskattningar, inte uppmätt provlagning. Söt yoghurtkräm av avrunnen yoghurt, inte kvarg eller gelatinpudding. Utökad mangoanpassning anknyter till amrakhand. Avrinningens utbyte är inte uppmätt; produkternas slutliga näringsberäkning ska göras i Smako. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "mandel",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 3,
+            "id": "s1",
+            "ingredient_keys": [
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Lägg en ren silduk i en fin sil över en skål. Häll i yoghurten. Se till att silens botten inte står i vätskan och täck hela uppställningen."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 480,
+            "id": "s2",
+            "ingredient_keys": [
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Låt yoghurten rinna av i kylskåp, cirka 4 °C, i åtta timmar. Vasslen är processrest; den angivna mängden är yoghurt före avrinning och inte en påhittad färdigvikt."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 3,
+            "id": "s3",
+            "ingredient_keys": [
+              "florsocker|dry",
+              "kardemumma|dry",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Skrapa ner den tjocka yoghurten i en kall skål. Rör med florsocker och kardemumma tills krämen är slät."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 2,
+            "id": "s4",
+            "ingredient_keys": [
+              "mandel|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Hacka mandeln, strö över och servera kallt. Håll krämen i kylskåp fram till servering."
+          }
+        ],
+        "total_minutes": 488,
+        "unmeasured_processes": [
+          {
+            "description": "Yoghurtens vassle silas bort under åtta timmar i kylskåp. Serverad vikt och näringsfördelning är inte uppmätta.",
+            "ingredient_keys": [
+              "yoghurt naturell|as_sold"
+            ],
+            "operation": "strain_whey",
+            "step_id": "s2"
+          }
+        ],
+        "variant_id": "simple",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 480
+      },
+      "ingredients": [
+        {
+          "canonical_name": "yoghurt naturell",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "yoghurt naturell",
+          "product_requirements": [
+            "plain",
+            "thick"
+          ],
+          "quantity": 300.0,
+          "quantity_max": 300.0,
+          "quantity_min": 300.0,
+          "quantity_step": 300.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "florsocker",
+          "component": "c1",
+          "form": "dry",
+          "name": "florsocker",
+          "product_requirements": [
+            "pack:intake_all_0064db2ce67f"
+          ],
+          "quantity": 12.0,
+          "quantity_max": 12.0,
+          "quantity_min": 12.0,
+          "quantity_step": 12.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kardemumma",
+          "component": "c1",
+          "form": "dry",
+          "name": "kardemumma",
+          "product_requirements": [
+            "pack:intake_all_930d08a8d175"
+          ],
+          "quantity": 0.3,
+          "quantity_max": 0.3,
+          "quantity_min": 0.3,
+          "quantity_step": 0.3,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "mandel",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "mandel",
+          "product_requirements": [
+            "pack:intake_almonds"
+          ],
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 10.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Lägg en ren silduk i en fin sil över en skål. Häll i yoghurten. Se till att silens botten inte står i vätskan och täck hela uppställningen.",
+        "Låt yoghurten rinna av i kylskåp, cirka 4 °C, i åtta timmar. Vasslen är processrest; den angivna mängden är yoghurt före avrinning och inte en påhittad färdigvikt.",
+        "Skrapa ner den tjocka yoghurten i en kall skål. Rör med florsocker och kardemumma tills krämen är slät.",
+        "Hacka mandeln, strö över och servera kallt. Håll krämen i kylskåp fram till servering."
+      ],
+      "name": "Shrikhand – kardemummakräm med mandel",
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 14,
+        "base_id": "smako-indian-shrikhand",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "yoghurt naturell|as_sold",
+                "name": "Naturell yoghurt, vikt före avrinning",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "florsocker|dry",
+                "name": "Florsocker",
+                "note": "",
+                "quantity": 12.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kardemumma|dry",
+                "name": "Kardemumma",
+                "note": "",
+                "quantity": 0.3,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "mandel|as_sold",
+                "name": "Mandel",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c1",
+            "name": "Avrunnen yoghurtkräm"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "mango|raw_edible",
+                "name": "Mango",
+                "note": "",
+                "quantity": 80.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "saffran|dry",
+                "name": "Saffran",
+                "note": "",
+                "quantity": 0.02,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "mjölk|as_sold",
+                "name": "Mjölk",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "c2",
+            "name": "Mango och saffran"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "indian"
+        ],
+        "equipment": [
+          "sil",
+          "silduk",
+          "skål",
+          "kylskåp",
+          "liten kastrull"
+        ],
+        "estimated_minutes": 624,
+        "family": "strained_yoghurt_shrikhand",
+        "fish": false,
+        "flavor_profile": [
+          "kardemumma",
+          "saffran",
+          "mango"
+        ],
+        "ingredient_count": 7,
+        "meal_types": [
+          "snack"
+        ],
+        "method": "refrigerated_assembly",
+        "primary_ingredient": "yoghurt",
+        "provenance": {
+          "notes": "AI-författat receptutkast, inte provlagat och ännu inte import-/produktgranskat av Smako. Tider är författaruppskattningar, inte uppmätt provlagning. Söt yoghurtkräm av avrunnen yoghurt, inte kvarg eller gelatinpudding. Utökad mangoanpassning anknyter till amrakhand. Avrinningens utbyte är inte uppmätt; produkternas slutliga näringsberäkning ska göras i Smako. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "mandel och mango",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 1,
+            "id": "s1",
+            "ingredient_keys": [
+              "mango|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Väg upp fryst mango i ett täckt kärl i kylskåp. Behåll all vätska."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 120,
+            "id": "s2",
+            "ingredient_keys": [
+              "mango|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Tina helt i kylskåp enligt förpackningen. Planera 120 minuter och förläng vid behov tills ingen iskärna återstår. Behåll all saft till krämen."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 3,
+            "id": "s3",
+            "ingredient_keys": [
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Lägg en ren silduk i en fin sil över en skål. Häll i yoghurten. Se till att silens botten inte står i vätskan och täck hela uppställningen."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 480,
+            "id": "s4",
+            "ingredient_keys": [
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Låt yoghurten rinna av i kylskåp, cirka 4 °C, i åtta timmar. Vasslen är processrest; den angivna mängden är yoghurt före avrinning och inte en påhittad färdigvikt."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 2,
+            "id": "s5",
+            "ingredient_keys": [
+              "mjölk|as_sold",
+              "saffran|dry"
+            ],
+            "parallel_group": null,
+            "text": "Värm mjölken försiktigt i en liten kastrull, rör ner saffran och ta från värmen."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 10,
+            "id": "s6",
+            "ingredient_keys": [
+              "mjölk|as_sold",
+              "saffran|dry"
+            ],
+            "parallel_group": null,
+            "text": "Låt saffransmjölken dra och svalna tio minuter."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 3,
+            "id": "s7",
+            "ingredient_keys": [
+              "mango|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Använd de tinade mangobitarna med all saft och mosa hälften till ett grovt mos."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 3,
+            "id": "s8",
+            "ingredient_keys": [
+              "florsocker|dry",
+              "kardemumma|dry",
+              "mango|raw_edible",
+              "mjölk|as_sold",
+              "saffran|dry",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Skrapa ner den tjocka yoghurten i en kall skål. Rör med florsocker och kardemumma tills krämen är slät. Vänd ner mangomoset och den avsvalnade saffransmjölken; toppa med resterande mangobitar."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 2,
+            "id": "s9",
+            "ingredient_keys": [
+              "mandel|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Hacka mandeln, strö över och servera kallt. Håll krämen i kylskåp fram till servering."
+          }
+        ],
+        "total_minutes": 624,
+        "unmeasured_processes": [
+          {
+            "description": "Yoghurtens vassle silas bort under åtta timmar i kylskåp. Serverad vikt och näringsfördelning är inte uppmätta.",
+            "ingredient_keys": [
+              "yoghurt naturell|as_sold"
+            ],
+            "operation": "strain_whey",
+            "step_id": "s4"
+          }
+        ],
+        "variant_id": "extended",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 610
+      },
+      "ingredients": [
+        {
+          "canonical_name": "yoghurt naturell",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "yoghurt naturell",
+          "product_requirements": [
+            "plain",
+            "thick"
+          ],
+          "quantity": 300.0,
+          "quantity_max": 300.0,
+          "quantity_min": 300.0,
+          "quantity_step": 300.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "florsocker",
+          "component": "c1",
+          "form": "dry",
+          "name": "florsocker",
+          "product_requirements": [
+            "pack:intake_all_0064db2ce67f"
+          ],
+          "quantity": 12.0,
+          "quantity_max": 12.0,
+          "quantity_min": 12.0,
+          "quantity_step": 12.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kardemumma",
+          "component": "c1",
+          "form": "dry",
+          "name": "kardemumma",
+          "product_requirements": [
+            "pack:intake_all_930d08a8d175"
+          ],
+          "quantity": 0.3,
+          "quantity_max": 0.3,
+          "quantity_min": 0.3,
+          "quantity_step": 0.3,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "mandel",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "mandel",
+          "product_requirements": [
+            "pack:intake_almonds"
+          ],
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 10.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "mango",
+          "component": "c2",
+          "form": "raw_edible",
+          "name": "mango",
+          "product_requirements": [
+            "pack:intake_all_d51e7b07e8a0"
+          ],
+          "quantity": 80.0,
+          "quantity_max": 80.0,
+          "quantity_min": 80.0,
+          "quantity_step": 80.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "saffran",
+          "component": "c2",
+          "form": "dry",
+          "name": "saffran",
+          "product_requirements": [
+            "pack:intake_all_expansion_69b457a7583c"
+          ],
+          "quantity": 0.02,
+          "quantity_max": 0.02,
+          "quantity_min": 0.02,
+          "quantity_step": 0.02,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "mjölk",
+          "component": "c2",
+          "form": "as_sold",
+          "name": "mjölk",
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 10.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        }
+      ],
+      "instructions": [
+        "Väg upp fryst mango i ett täckt kärl i kylskåp. Behåll all vätska.",
+        "Tina helt i kylskåp enligt förpackningen. Planera 120 minuter och förläng vid behov tills ingen iskärna återstår. Behåll all saft till krämen.",
+        "Lägg en ren silduk i en fin sil över en skål. Häll i yoghurten. Se till att silens botten inte står i vätskan och täck hela uppställningen.",
+        "Låt yoghurten rinna av i kylskåp, cirka 4 °C, i åtta timmar. Vasslen är processrest; den angivna mängden är yoghurt före avrinning och inte en påhittad färdigvikt.",
+        "Värm mjölken försiktigt i en liten kastrull, rör ner saffran och ta från värmen.",
+        "Låt saffransmjölken dra och svalna tio minuter.",
+        "Använd de tinade mangobitarna med all saft och mosa hälften till ett grovt mos.",
+        "Skrapa ner den tjocka yoghurten i en kall skål. Rör med florsocker och kardemumma tills krämen är slät. Vänd ner mangomoset och den avsvalnade saffransmjölken; toppa med resterande mangobitar.",
+        "Hacka mandeln, strö över och servera kallt. Håll krämen i kylskåp fram till servering."
+      ],
+      "name": "Shrikhand – mango- och saffranskräm",
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 27,
+        "base_id": "smako-indian-chhena-poda",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "mjölk|as_sold",
+                "name": "Mjölk för syrad färskost, ingen antagen ostutbytesvikt",
+                "note": "",
+                "quantity": 500.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "citronjuice|as_sold",
+                "name": "Citronjuice",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "ost",
+            "name": "Färsk chhena"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "Strösocker",
+                "note": "",
+                "quantity": 16.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "mannagryn|dry",
+                "name": "Mannagryn",
+                "note": "",
+                "quantity": 8.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "smör|as_sold",
+                "name": "Smör",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "g"
+              }
+            ],
+            "id": "kaka",
+            "name": "Äggfri ostmassa"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "indian"
+        ],
+        "equipment": [
+          "kastrull",
+          "silduk",
+          "sil",
+          "liten form cirka 9 cm",
+          "ugn"
+        ],
+        "estimated_minutes": 137,
+        "family": "bakad syrad färskostmassa",
+        "fish": false,
+        "flavor_profile": [
+          "karamelliserad mjölk"
+        ],
+        "ingredient_count": 5,
+        "meal_types": [
+          "snack"
+        ],
+        "method": "bake",
+        "primary_ingredient": "mjölk",
+        "provenance": {
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Vanlig ugn och liten form ersätter glöd-/bladbakning; utökad med nötter och russin. Vassle är processbiprodukt, ingen antagen utbytesvikt används. Processen separerar vassle från mjölk. Insatsmängderna är korrekta men ätbart utbyte och näringsfördelning måste process-/produktgranskas före användning i beräknad veckokorg. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "litet mellanmålsbakverk",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 10,
+            "id": "s1",
+            "ingredient_keys": [
+              "citronjuice|as_sold",
+              "mjölk|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Värm mjölken försiktigt till uppkok under omrörning. Dra av värmen och rör ner citronjuicen. Låt stå någon minut tills tydliga ostflockar skilts från gulaktig vassle. Om mjölken ännu är slät, värm varsamt igen och rör lugnt; tillsätt inga olistade syror."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 2,
+            "id": "s2",
+            "ingredient_keys": [
+              "citronjuice|as_sold",
+              "mjölk|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Klä en sil med ren silduk över en skål och häll försiktigt i ostmassan och vasslen."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 15,
+            "id": "s3",
+            "ingredient_keys": [
+              "citronjuice|as_sold",
+              "mjölk|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Låt ostmassan rinna av cirka 15 minuter. Pressa inte torrt; den ska vara fuktig och gå att knåda. Vassle som inte används är en separat processrest."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 10,
+            "id": "s4",
+            "ingredient_keys": [
+              "citronjuice|as_sold",
+              "mjölk|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Låt ostmassan svalna tio minuter tills den går att hantera."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 3,
+            "id": "s5",
+            "ingredient_keys": [
+              "smör|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Värm ugnen till 185 °C och klä en liten form med bakplåtspapper. Smält det uppmätta smöret försiktigt."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 8,
+            "id": "s6",
+            "ingredient_keys": [
+              "citronjuice|as_sold",
+              "mannagryn|dry",
+              "mjölk|as_sold",
+              "smör|as_sold",
+              "strösocker|dry"
+            ],
+            "parallel_group": null,
+            "text": "Knåda all nygjord ostmassa med sockret i cirka 5 minuter tills den blivit jämn. Blanda i mannagryn och smält smör. Massan ska vara mjuk och skedbar; rör vid behov i sparad vassle motsvarande högst halva den angivna citronjuicemängden. Ingen köpt keso eller äggstanning ingår."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 15,
+            "id": "s7",
+            "ingredient_keys": [
+              "mannagryn|dry",
+              "smör|as_sold",
+              "strösocker|dry"
+            ],
+            "parallel_group": null,
+            "text": "Låt massan vila 15 minuter så att mannagrynen sväller."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 2,
+            "id": "s8",
+            "ingredient_keys": [
+              "mannagryn|dry",
+              "mjölk|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Fördela hela massan i formen och jämna till ytan."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 40,
+            "id": "s9",
+            "ingredient_keys": [
+              "citronjuice|as_sold",
+              "mannagryn|dry",
+              "mjölk|as_sold",
+              "smör|as_sold",
+              "strösocker|dry"
+            ],
+            "parallel_group": null,
+            "text": "Baka cirka 40 minuter tills kakan håller ihop och ytan är tydligt mörkt gyllene och karamelliserad, inte kolsvart. Kontrollera att mitten är fast men saftig; täck löst med papper om den får för mycket färg före mitten stannat."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 30,
+            "id": "s10",
+            "ingredient_keys": [
+              "citronjuice|as_sold",
+              "mannagryn|dry",
+              "mjölk|as_sold",
+              "smör|as_sold",
+              "strösocker|dry"
+            ],
+            "parallel_group": null,
+            "text": "Låt kakan svalna i formen 30 minuter."
+          },
+          {
+            "depends_on": [
+              "s10"
+            ],
+            "duration_minutes": 2,
+            "id": "s11",
+            "ingredient_keys": [
+              "mannagryn|dry",
+              "mjölk|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Lossa hela den lilla kakan och servera. Förvara inte fuktig färskostkaka i varm ugn efter servering."
+          }
+        ],
+        "total_minutes": 137,
+        "unmeasured_processes": [
+          {
+            "description": "Mjölk och citron delas i ostmassa och vassle. Bara angiven liten del vassle får återföras; kvarvarande processrest och näringsfördelning är inte uppmätta.",
+            "ingredient_keys": [
+              "mjölk|as_sold",
+              "citronjuice|as_sold"
+            ],
+            "operation": "strain_whey",
+            "step_id": "s3"
+          }
+        ],
+        "variant_id": "simple",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 110
+      },
+      "ingredients": [
+        {
+          "canonical_name": "mjölk",
+          "component": "ost",
+          "form": "as_sold",
+          "name": "mjölk",
+          "quantity": 500.0,
+          "quantity_max": 500.0,
+          "quantity_min": 500.0,
+          "quantity_step": 500.0,
+          "required": true,
+          "role": "primary",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "citronjuice",
+          "component": "ost",
+          "form": "as_sold",
+          "name": "citronjuice",
+          "product_requirements": [
+            "pure_juice"
+          ],
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "strösocker",
+          "component": "kaka",
+          "form": "dry",
+          "name": "strösocker",
+          "product_requirements": [
+            "pack:sugar"
+          ],
+          "quantity": 16.0,
+          "quantity_max": 16.0,
+          "quantity_min": 16.0,
+          "quantity_step": 16.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "mannagryn",
+          "component": "kaka",
+          "form": "dry",
+          "name": "mannagryn",
+          "product_requirements": [
+            "pack:intake_all_fbd02229c232"
+          ],
+          "quantity": 8.0,
+          "quantity_max": 8.0,
+          "quantity_min": 8.0,
+          "quantity_step": 8.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "smör",
+          "component": "kaka",
+          "form": "as_sold",
+          "name": "smör",
+          "product_requirements": [
+            "pack:intake_butter"
+          ],
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Värm mjölken försiktigt till uppkok under omrörning. Dra av värmen och rör ner citronjuicen. Låt stå någon minut tills tydliga ostflockar skilts från gulaktig vassle. Om mjölken ännu är slät, värm varsamt igen och rör lugnt; tillsätt inga olistade syror.",
+        "Klä en sil med ren silduk över en skål och häll försiktigt i ostmassan och vasslen.",
+        "Låt ostmassan rinna av cirka 15 minuter. Pressa inte torrt; den ska vara fuktig och gå att knåda. Vassle som inte används är en separat processrest.",
+        "Låt ostmassan svalna tio minuter tills den går att hantera.",
+        "Värm ugnen till 185 °C och klä en liten form med bakplåtspapper. Smält det uppmätta smöret försiktigt.",
+        "Knåda all nygjord ostmassa med sockret i cirka 5 minuter tills den blivit jämn. Blanda i mannagryn och smält smör. Massan ska vara mjuk och skedbar; rör vid behov i sparad vassle motsvarande högst halva den angivna citronjuicemängden. Ingen köpt keso eller äggstanning ingår.",
+        "Låt massan vila 15 minuter så att mannagrynen sväller.",
+        "Fördela hela massan i formen och jämna till ytan.",
+        "Baka cirka 40 minuter tills kakan håller ihop och ytan är tydligt mörkt gyllene och karamelliserad, inte kolsvart. Kontrollera att mitten är fast men saftig; täck löst med papper om den får för mycket färg före mitten stannat.",
+        "Låt kakan svalna i formen 30 minuter.",
+        "Lossa hela den lilla kakan och servera. Förvara inte fuktig färskostkaka i varm ugn efter servering."
+      ],
+      "name": "Chhena poda – karamelliserad färskostkaka – enkel",
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 27,
+        "base_id": "smako-indian-chhena-poda",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "mjölk|as_sold",
+                "name": "Mjölk för syrad färskost, ingen antagen ostutbytesvikt",
+                "note": "",
+                "quantity": 500.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "citronjuice|as_sold",
+                "name": "Citronjuice",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "ost",
+            "name": "Färsk chhena"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "Strösocker",
+                "note": "",
+                "quantity": 16.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "mannagryn|dry",
+                "name": "Mannagryn",
+                "note": "",
+                "quantity": 8.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "smör|as_sold",
+                "name": "Smör",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kardemumma|dry",
+                "name": "Kardemumma",
+                "note": "",
+                "quantity": 0.3,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "cashewnötter|as_sold",
+                "name": "Cashewnötter",
+                "note": "",
+                "quantity": 8.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "russin|as_sold",
+                "name": "Russin",
+                "note": "",
+                "quantity": 8.0,
+                "unit": "g"
+              }
+            ],
+            "id": "kaka",
+            "name": "Äggfri ostmassa"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "indian"
+        ],
+        "equipment": [
+          "kastrull",
+          "silduk",
+          "sil",
+          "liten form cirka 9 cm",
+          "ugn"
+        ],
+        "estimated_minutes": 137,
+        "family": "bakad syrad färskostmassa",
+        "fish": false,
+        "flavor_profile": [
+          "karamelliserad mjölk"
+        ],
+        "ingredient_count": 8,
+        "meal_types": [
+          "snack"
+        ],
+        "method": "bake",
+        "primary_ingredient": "mjölk",
+        "provenance": {
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Vanlig ugn och liten form ersätter glöd-/bladbakning; utökad med nötter och russin. Vassle är processbiprodukt, ingen antagen utbytesvikt används. Processen separerar vassle från mjölk. Insatsmängderna är korrekta men ätbart utbyte och näringsfördelning måste process-/produktgranskas före användning i beräknad veckokorg. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "litet mellanmålsbakverk",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 10,
+            "id": "s1",
+            "ingredient_keys": [
+              "citronjuice|as_sold",
+              "mjölk|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Värm mjölken försiktigt till uppkok under omrörning. Dra av värmen och rör ner citronjuicen. Låt stå någon minut tills tydliga ostflockar skilts från gulaktig vassle. Om mjölken ännu är slät, värm varsamt igen och rör lugnt; tillsätt inga olistade syror."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 2,
+            "id": "s2",
+            "ingredient_keys": [
+              "citronjuice|as_sold",
+              "mjölk|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Klä en sil med ren silduk över en skål och häll försiktigt i ostmassan och vasslen."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 15,
+            "id": "s3",
+            "ingredient_keys": [
+              "citronjuice|as_sold",
+              "mjölk|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Låt ostmassan rinna av cirka 15 minuter. Pressa inte torrt; den ska vara fuktig och gå att knåda. Vassle som inte används är en separat processrest."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 10,
+            "id": "s4",
+            "ingredient_keys": [
+              "citronjuice|as_sold",
+              "mjölk|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Låt ostmassan svalna tio minuter tills den går att hantera."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 3,
+            "id": "s5",
+            "ingredient_keys": [
+              "smör|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Värm ugnen till 185 °C och klä en liten form med bakplåtspapper. Smält det uppmätta smöret försiktigt."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 8,
+            "id": "s6",
+            "ingredient_keys": [
+              "cashewnötter|as_sold",
+              "citronjuice|as_sold",
+              "kardemumma|dry",
+              "mannagryn|dry",
+              "mjölk|as_sold",
+              "russin|as_sold",
+              "smör|as_sold",
+              "strösocker|dry"
+            ],
+            "parallel_group": null,
+            "text": "Knåda all nygjord ostmassa med sockret i cirka 5 minuter tills den blivit jämn. Blanda i mannagryn och smält smör, kardemumma, grovhackade cashewnötter och russin. Massan ska vara mjuk och skedbar; rör vid behov i sparad vassle motsvarande högst halva den angivna citronjuicemängden. Ingen köpt keso eller äggstanning ingår."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 15,
+            "id": "s7",
+            "ingredient_keys": [
+              "cashewnötter|as_sold",
+              "kardemumma|dry",
+              "mannagryn|dry",
+              "russin|as_sold",
+              "smör|as_sold",
+              "strösocker|dry"
+            ],
+            "parallel_group": null,
+            "text": "Låt massan vila 15 minuter så att mannagrynen sväller."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 2,
+            "id": "s8",
+            "ingredient_keys": [
+              "mannagryn|dry",
+              "mjölk|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Fördela hela massan i formen och jämna till ytan."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 40,
+            "id": "s9",
+            "ingredient_keys": [
+              "cashewnötter|as_sold",
+              "citronjuice|as_sold",
+              "kardemumma|dry",
+              "mannagryn|dry",
+              "mjölk|as_sold",
+              "russin|as_sold",
+              "smör|as_sold",
+              "strösocker|dry"
+            ],
+            "parallel_group": null,
+            "text": "Baka cirka 40 minuter tills kakan håller ihop och ytan är tydligt mörkt gyllene och karamelliserad, inte kolsvart. Kontrollera att mitten är fast men saftig; täck löst med papper om den får för mycket färg före mitten stannat."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 30,
+            "id": "s10",
+            "ingredient_keys": [
+              "cashewnötter|as_sold",
+              "citronjuice|as_sold",
+              "kardemumma|dry",
+              "mannagryn|dry",
+              "mjölk|as_sold",
+              "russin|as_sold",
+              "smör|as_sold",
+              "strösocker|dry"
+            ],
+            "parallel_group": null,
+            "text": "Låt kakan svalna i formen 30 minuter."
+          },
+          {
+            "depends_on": [
+              "s10"
+            ],
+            "duration_minutes": 2,
+            "id": "s11",
+            "ingredient_keys": [
+              "mannagryn|dry",
+              "mjölk|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Lossa hela den lilla kakan och servera. Förvara inte fuktig färskostkaka i varm ugn efter servering."
+          }
+        ],
+        "total_minutes": 137,
+        "unmeasured_processes": [
+          {
+            "description": "Mjölk och citron delas i ostmassa och vassle. Bara angiven liten del vassle får återföras; kvarvarande processrest och näringsfördelning är inte uppmätta.",
+            "ingredient_keys": [
+              "mjölk|as_sold",
+              "citronjuice|as_sold"
+            ],
+            "operation": "strain_whey",
+            "step_id": "s3"
+          }
+        ],
+        "variant_id": "extended",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 110
+      },
+      "ingredients": [
+        {
+          "canonical_name": "mjölk",
+          "component": "ost",
+          "form": "as_sold",
+          "name": "mjölk",
+          "quantity": 500.0,
+          "quantity_max": 500.0,
+          "quantity_min": 500.0,
+          "quantity_step": 500.0,
+          "required": true,
+          "role": "primary",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "citronjuice",
+          "component": "ost",
+          "form": "as_sold",
+          "name": "citronjuice",
+          "product_requirements": [
+            "pure_juice"
+          ],
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "strösocker",
+          "component": "kaka",
+          "form": "dry",
+          "name": "strösocker",
+          "product_requirements": [
+            "pack:sugar"
+          ],
+          "quantity": 16.0,
+          "quantity_max": 16.0,
+          "quantity_min": 16.0,
+          "quantity_step": 16.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "mannagryn",
+          "component": "kaka",
+          "form": "dry",
+          "name": "mannagryn",
+          "product_requirements": [
+            "pack:intake_all_fbd02229c232"
+          ],
+          "quantity": 8.0,
+          "quantity_max": 8.0,
+          "quantity_min": 8.0,
+          "quantity_step": 8.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "smör",
+          "component": "kaka",
+          "form": "as_sold",
+          "name": "smör",
+          "product_requirements": [
+            "pack:intake_butter"
+          ],
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kardemumma",
+          "component": "kaka",
+          "form": "dry",
+          "name": "kardemumma",
+          "product_requirements": [
+            "pack:intake_all_930d08a8d175"
+          ],
+          "quantity": 0.3,
+          "quantity_max": 0.3,
+          "quantity_min": 0.3,
+          "quantity_step": 0.3,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "cashewnötter",
+          "component": "kaka",
+          "form": "as_sold",
+          "name": "cashewnötter",
+          "product_requirements": [
+            "pack:intake_all_048a3aee2a0e"
+          ],
+          "quantity": 8.0,
+          "quantity_max": 8.0,
+          "quantity_min": 8.0,
+          "quantity_step": 8.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "russin",
+          "component": "kaka",
+          "form": "as_sold",
+          "name": "russin",
+          "product_requirements": [
+            "pack:intake_all_c84b87d5ba4a"
+          ],
+          "quantity": 8.0,
+          "quantity_max": 8.0,
+          "quantity_min": 8.0,
+          "quantity_step": 8.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Värm mjölken försiktigt till uppkok under omrörning. Dra av värmen och rör ner citronjuicen. Låt stå någon minut tills tydliga ostflockar skilts från gulaktig vassle. Om mjölken ännu är slät, värm varsamt igen och rör lugnt; tillsätt inga olistade syror.",
+        "Klä en sil med ren silduk över en skål och häll försiktigt i ostmassan och vasslen.",
+        "Låt ostmassan rinna av cirka 15 minuter. Pressa inte torrt; den ska vara fuktig och gå att knåda. Vassle som inte används är en separat processrest.",
+        "Låt ostmassan svalna tio minuter tills den går att hantera.",
+        "Värm ugnen till 185 °C och klä en liten form med bakplåtspapper. Smält det uppmätta smöret försiktigt.",
+        "Knåda all nygjord ostmassa med sockret i cirka 5 minuter tills den blivit jämn. Blanda i mannagryn och smält smör, kardemumma, grovhackade cashewnötter och russin. Massan ska vara mjuk och skedbar; rör vid behov i sparad vassle motsvarande högst halva den angivna citronjuicemängden. Ingen köpt keso eller äggstanning ingår.",
+        "Låt massan vila 15 minuter så att mannagrynen sväller.",
+        "Fördela hela massan i formen och jämna till ytan.",
+        "Baka cirka 40 minuter tills kakan håller ihop och ytan är tydligt mörkt gyllene och karamelliserad, inte kolsvart. Kontrollera att mitten är fast men saftig; täck löst med papper om den får för mycket färg före mitten stannat.",
+        "Låt kakan svalna i formen 30 minuter.",
+        "Lossa hela den lilla kakan och servera. Förvara inte fuktig färskostkaka i varm ugn efter servering."
+      ],
+      "name": "Chhena poda – karamelliserad färskostkaka – utökad",
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 49,
+        "base_id": "smako-italian-torta-pasqualina",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "vetemjöl|dry",
+                "name": "Vetemjöl",
+                "note": "",
+                "quantity": 250.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "olivolja|as_sold",
+                "name": "Olivolja",
+                "note": "",
+                "quantity": 35.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              }
+            ],
+            "id": "deg",
+            "name": "Oljedeg"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "spenat|as_sold",
+                "name": "Fryst bladspenat, vägd fryst",
+                "note": "",
+                "quantity": 600.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ricotta|as_sold",
+                "name": "Ricotta",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ägg|raw_edible",
+                "name": "Råa ägg utan skal, håll gulorna hela",
+                "note": "",
+                "quantity": 220.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "Gul lök",
+                "note": "",
+                "quantity": 120.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "parmesan|as_sold",
+                "name": "Parmesan",
+                "note": "",
+                "quantity": 45.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "olivolja|as_sold",
+                "name": "Olivolja",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              }
+            ],
+            "id": "fyllning",
+            "name": "Bladgrönt, ricotta och hela ägg"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "italian"
+        ],
+        "equipment": [
+          "ugn",
+          "form cirka 24 cm",
+          "kavel",
+          "stekpanna",
+          "sil",
+          "termometer"
+        ],
+        "estimated_minutes": 151,
+        "family": "sluten grönsakspaj med hela ägg",
+        "fish": false,
+        "flavor_profile": [
+          "ricotta",
+          "gröna blad"
+        ],
+        "ingredient_count": 7,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "bake",
+        "primary_ingredient": "ricotta",
+        "provenance": {
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Två till fyra degark i hemmakök, inte den historiska mångskiktsversionen. Osterna behöver produktgranskas för kostklassning. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "grönsaker",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 7,
+            "id": "s1",
+            "ingredient_keys": [
+              "olivolja|as_sold",
+              "salt|as_sold",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "125 ml",
+                125.0
+              ]
+            ],
+            "text": "Blanda degens mjöl, olja och salt med 125 ml vatten. Knåda cirka 6 minuter tills degen är jämn; täck."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 30,
+            "id": "s2",
+            "ingredient_keys": [
+              "olivolja|as_sold",
+              "salt|as_sold",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Låt degen vila 30 minuter i rumstemperatur så att den blir lättare att sträcka."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 10,
+            "id": "s3",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "spenat|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "50 ml",
+                50.0
+              ]
+            ],
+            "text": "Hacka löken. Värm spenaten i en panna med 50 ml vatten och rör tills den tinat helt. Låt rinna av i sil och tryck ur överflödig vätska utan att kasta själva bladen."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 7,
+            "id": "s4",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "olivolja|as_sold",
+              "spenat|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Mjukstek löken i fyllningens olja. Vänd ner de avrunna bladen och stek tills blandningen inte är vattnig. Ta av värmen."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 15,
+            "id": "s5",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "spenat|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Låt grönsaksblandningen svalna på ett fat cirka 15 minuter."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 5,
+            "id": "s6",
+            "ingredient_keys": [
+              "parmesan|as_sold",
+              "ricotta|as_sold",
+              "salt|as_sold",
+              "spenat|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Värm ugnen till 185 °C. Rör ricotta och den färdigrivna parmesanen med grönsakerna och fyllningens salt. Äggen ska inte vispas ner i blandningen."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 17,
+            "id": "s7",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "olivolja|as_sold",
+              "parmesan|as_sold",
+              "ricotta|as_sold",
+              "salt|as_sold",
+              "spenat|as_sold",
+              "vetemjöl|dry",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Klä formen med bakplåtspapper. Dela degen i två delar och kavla tunt mellan papper; den ena delen ska täcka botten och gå upp längs kanten. Lägg i bottenarket och fyll med ricottablandningen. Knäck och väg äggen utan skal, håll gulorna hela. Gör gropar i fyllningen för gulorna och fördela hela den uppvägda äggmängden i groparna. Täck med det andra degarket, förslut kanten och gör små ånghål utan att punktera gulorna."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 45,
+            "id": "s8",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "olivolja|as_sold",
+              "parmesan|as_sold",
+              "ricotta|as_sold",
+              "salt|as_sold",
+              "spenat|as_sold",
+              "vetemjöl|dry",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Baka på nedre falsen cirka 45 minuter. Skalet ska vara gyllene och botten gräddad. Kontrollera att ägghålen har stelnad vita och minst 72 °C i mitten; förläng vid behov."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 12,
+            "id": "s9",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "olivolja|as_sold",
+              "parmesan|as_sold",
+              "ricotta|as_sold",
+              "salt|as_sold",
+              "spenat|as_sold",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Låt pajen vila 12 minuter innan den skärs så att snitten håller ihop."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 3,
+            "id": "s10",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "olivolja|as_sold",
+              "parmesan|as_sold",
+              "ricotta|as_sold",
+              "salt|as_sold",
+              "spenat|as_sold",
+              "vetemjöl|dry",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Skär pajen i fyra portioner genom fyllningen så att de hela äggens snittyta framträder. Servera varm eller ljummen direkt."
+          }
+        ],
+        "total_minutes": 151,
+        "unmeasured_processes": [
+          {
+            "description": "Uppvärmda bladgrönsaker pressas ur före fyllningen. Vätskemängd och näringsförlust är inte uppmätta; hela inköpta insatsen bevaras.",
+            "ingredient_keys": [
+              "spenat|as_sold"
+            ],
+            "operation": "drain_after_cooking",
+            "step_id": "s3"
+          }
+        ],
+        "variant_id": "simple",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 102
+      },
+      "ingredients": [
+        {
+          "canonical_name": "vetemjöl",
+          "component": "deg",
+          "form": "dry",
+          "name": "vetemjöl",
+          "quantity": 250.0,
+          "quantity_max": 250.0,
+          "quantity_min": 250.0,
+          "quantity_step": 250.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "olivolja",
+          "component": "deg",
+          "form": "as_sold",
+          "name": "olivolja",
+          "product_requirements": [
+            "pack:intake_all_expansion_86ac9b2c5ae6"
+          ],
+          "quantity": 55.0,
+          "quantity_max": 55.0,
+          "quantity_min": 55.0,
+          "quantity_step": 55.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "deg",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 4.0,
+          "quantity_max": 4.0,
+          "quantity_min": 4.0,
+          "quantity_step": 4.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "spenat",
+          "component": "fyllning",
+          "form": "as_sold",
+          "name": "spenat",
+          "product_requirements": [
+            "frozen",
+            "plain"
+          ],
+          "quantity": 600.0,
+          "quantity_max": 600.0,
+          "quantity_min": 600.0,
+          "quantity_step": 600.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ricotta",
+          "component": "fyllning",
+          "form": "as_sold",
+          "name": "ricotta",
+          "product_requirements": [
+            "pack:intake_all_cbf3dd8282c8"
+          ],
+          "quantity": 300.0,
+          "quantity_max": 300.0,
+          "quantity_min": 300.0,
+          "quantity_step": 300.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ägg",
+          "component": "fyllning",
+          "form": "raw_edible",
+          "name": "ägg",
+          "product_requirements": [
+            "pack:egg"
+          ],
+          "quantity": 220.0,
+          "quantity_max": 220.0,
+          "quantity_min": 220.0,
+          "quantity_step": 220.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "fyllning",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 120.0,
+          "quantity_max": 120.0,
+          "quantity_min": 120.0,
+          "quantity_step": 120.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "parmesan",
+          "component": "fyllning",
+          "form": "as_sold",
+          "name": "parmesan",
+          "product_requirements": [
+            "pack:intake_all_expansion_dc7ca154fb22"
+          ],
+          "quantity": 45.0,
+          "quantity_max": 45.0,
+          "quantity_min": 45.0,
+          "quantity_step": 45.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Blanda degens mjöl, olja och salt med 125 ml vatten. Knåda cirka 6 minuter tills degen är jämn; täck.",
+        "Låt degen vila 30 minuter i rumstemperatur så att den blir lättare att sträcka.",
+        "Hacka löken. Värm spenaten i en panna med 50 ml vatten och rör tills den tinat helt. Låt rinna av i sil och tryck ur överflödig vätska utan att kasta själva bladen.",
+        "Mjukstek löken i fyllningens olja. Vänd ner de avrunna bladen och stek tills blandningen inte är vattnig. Ta av värmen.",
+        "Låt grönsaksblandningen svalna på ett fat cirka 15 minuter.",
+        "Värm ugnen till 185 °C. Rör ricotta och den färdigrivna parmesanen med grönsakerna och fyllningens salt. Äggen ska inte vispas ner i blandningen.",
+        "Klä formen med bakplåtspapper. Dela degen i två delar och kavla tunt mellan papper; den ena delen ska täcka botten och gå upp längs kanten. Lägg i bottenarket och fyll med ricottablandningen. Knäck och väg äggen utan skal, håll gulorna hela. Gör gropar i fyllningen för gulorna och fördela hela den uppvägda äggmängden i groparna. Täck med det andra degarket, förslut kanten och gör små ånghål utan att punktera gulorna.",
+        "Baka på nedre falsen cirka 45 minuter. Skalet ska vara gyllene och botten gräddad. Kontrollera att ägghålen har stelnad vita och minst 72 °C i mitten; förläng vid behov.",
+        "Låt pajen vila 12 minuter innan den skärs så att snitten håller ihop.",
+        "Skär pajen i fyra portioner genom fyllningen så att de hela äggens snittyta framträder. Servera varm eller ljummen direkt."
+      ],
+      "name": "Torta pasqualina – grönsakspaj med hela ägg – enkel",
+      "servings": 4
+    }
+  ],
+  "schema_version": "smako-meal-pack-v1"
+}

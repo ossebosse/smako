@@ -349,6 +349,10 @@ class PersonalPlanner:
         return self.nutrition_cache[key]
 
     def _nutrition_evidence(self, product, name, unit, requested, recipe):
+        from app.services.recipe_preparation import has_unmeasured_process
+
+        if has_unmeasured_process(recipe):
+            return None
         if product.purchase_terms and product.purchase_terms.identity_scope == "campaign_group":
             return None
         fact = self.source_facts(product)
@@ -2307,6 +2311,14 @@ class PersonalPlanner:
             meal = self.meals[slot.meal_type]
             limits = meal.limits
             row = {"slot_id": slot.id, "status": "NOT_REQUESTED", "values": {}, "sources": []}
+            from app.services.recipe_preparation import has_unmeasured_process
+
+            if has_unmeasured_process(slot.recipe):
+                if limits.active:
+                    raise PolicyConflict(
+                        f"{slot.recipe.name}: förlust vid tillagning är inte uppmätt. Närings- och portionsviktsgränser kan inte verifieras.",
+                        code="DATA_BLOCKED", stage="preparation")
+                row.update(status="UNKNOWN", reason="Okänd förlust vid tillagning; näring och färdig portionsvikt är inte beräknade.")
             if limits.active:
                 totals = defaultdict(float)
                 requested = requested_nutrients(limits)

@@ -5,6 +5,10 @@ from app.services.ingredient_normalizer import canonicalize_ingredient_name as c
 
 
 def estimate_portion_weight(recipe, selected_by_name):
+    from app.services.recipe_preparation import has_unmeasured_process
+
+    if has_unmeasured_process(recipe):
+        return None
     from app.services.personal_nutrition import (
         is_raw_salad_preparation,
         is_reference_preparation,

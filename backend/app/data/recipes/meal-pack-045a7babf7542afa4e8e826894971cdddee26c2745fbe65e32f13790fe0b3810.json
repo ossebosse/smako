@@ -1,0 +1,623 @@
+{
+  "library_version": "smako-meal-pack-v1",
+  "recipes": [
+    {
+      "design": {
+        "active_minutes": 17,
+        "base_id": "smako-thai-woon-kati",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "agar agar|dry",
+                "name": "Agar agar",
+                "note": "",
+                "quantity": 1.6,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kokosmjölk|as_sold",
+                "name": "Kokosmjölk",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "Strösocker",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 0.2,
+                "unit": "g"
+              }
+            ],
+            "id": "gele",
+            "name": "Två agarbaserade lager"
+          }
+        ],
+        "content_sha256": "e50921a6a3e23a0987415d976f482d90a87bb3a9fdb9e8471aea18edf2e4fe84",
+        "content_source": {
+          "active_minutes": 17,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "reviewed-expansion-round2-stage55",
+          "priority": 1,
+          "proposal_id": "smako-thai-woon-kati",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "a0d7547bc1efc00ec92bd96d80b2cf2528da3256080f04987fb280a10fb5083c",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "thai"
+        ],
+        "equipment": [
+          "två små kastruller",
+          "liten form cirka 250 ml",
+          "kylskåp",
+          "fin våg"
+        ],
+        "estimated_minutes": 107,
+        "family": "Woon kati",
+        "fish": false,
+        "flavor_profile": [
+          "kokos",
+          "söt-salt"
+        ],
+        "ingredient_count": 3,
+        "meal_types": [
+          "snack"
+        ],
+        "method": "pot",
+        "primary_ingredient": "kokosmjölk",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Uttryckligen utan pandan och dess arom. Klar socker-agarbas med separat kokosmjölkslager; originalets 1,6 g agar, 100 ml kokosmjölk, 20 g socker och 0,2 g salt per portion bevaras. 120 ml vatten används direkt i klara lagret i stället för 160 ml till bladinfusion som sedan skulle mätas till 120 ml. Ingen infusion eller bladförlust återstår. Utökad variant behåller 100 g mango och 8 ml limejuice. Inte provlagad. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "inget separat tillbehör",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 6,
+            "id": "s1",
+            "ingredient_keys": [
+              "agar agar|dry",
+              "strösocker|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "120 ml",
+                120.0
+              ]
+            ],
+            "text": "Mät upp 120 ml vatten i en liten kastrull. Vispa ner hälften av agarpulvret. Koka upp under omrörning och koka försiktigt tre minuter eller längre enligt förpackningen tills agarn är helt löst. Rör ner hälften av sockret tills det lösts. Häll hela blandningen i en liten värmetålig form."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 10,
+            "id": "s2",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Låt det klara lagret stå cirka tio minuter tills ytan precis har satt sig men fortfarande är varm."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 8,
+            "id": "s3",
+            "ingredient_keys": [
+              "agar agar|dry",
+              "kokosmjölk|as_sold",
+              "salt|as_sold",
+              "strösocker|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "40 ml",
+                40.0
+              ]
+            ],
+            "text": "Vispa resten av agarn i kokosmjölken med 40 ml vatten. Koka upp under omrörning och småkoka tre minuter eller längre enligt förpackningen tills agarn är helt löst. Rör ner resten av sockret och saltet. Låt bara svalna kort så blandningen fortfarande är flytande. Kontrollera det klara lagret: ytan ska bära men vara varm och lite klibbig. Häll kokoslagret försiktigt över baksidan av en sked ovanpå det klara lagret."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 20,
+            "id": "s4",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Låt de båda lagren sätta sig och svalna cirka tjugo minuter."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 1,
+            "id": "s5",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Flytta formen till kylskåp och täck när den inte längre avger ånga."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 60,
+            "id": "s6",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Kyl minst sextio minuter tills gelén är helt kall och stadig; förläng vid behov."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 2,
+            "id": "s7",
+            "ingredient_keys": [
+              "agar agar|dry",
+              "kokosmjölk|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Skär eller skeda upp hela den kalla gelén och servera."
+          }
+        ],
+        "total_minutes": 107,
+        "variant_id": "simple",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 90
+      },
+      "ingredients": [
+        {
+          "canonical_name": "agar agar",
+          "component": "gele",
+          "form": "dry",
+          "name": "agar agar",
+          "product_requirements": [
+            "pack:intake_all_expansion_225f1952cc88"
+          ],
+          "quantity": 1.6,
+          "quantity_max": 1.6,
+          "quantity_min": 1.6,
+          "quantity_step": 1.6,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kokosmjölk",
+          "component": "gele",
+          "form": "as_sold",
+          "name": "kokosmjölk",
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "primary",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "strösocker",
+          "component": "gele",
+          "form": "dry",
+          "name": "strösocker",
+          "product_requirements": [
+            "pack:sugar"
+          ],
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "gele",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 0.2,
+          "quantity_max": 0.2,
+          "quantity_min": 0.2,
+          "quantity_step": 0.2,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Mät upp 120 ml vatten i en liten kastrull. Vispa ner hälften av agarpulvret. Koka upp under omrörning och koka försiktigt tre minuter eller längre enligt förpackningen tills agarn är helt löst. Rör ner hälften av sockret tills det lösts. Häll hela blandningen i en liten värmetålig form.",
+        "Låt det klara lagret stå cirka tio minuter tills ytan precis har satt sig men fortfarande är varm.",
+        "Vispa resten av agarn i kokosmjölken med 40 ml vatten. Koka upp under omrörning och småkoka tre minuter eller längre enligt förpackningen tills agarn är helt löst. Rör ner resten av sockret och saltet. Låt bara svalna kort så blandningen fortfarande är flytande. Kontrollera det klara lagret: ytan ska bära men vara varm och lite klibbig. Häll kokoslagret försiktigt över baksidan av en sked ovanpå det klara lagret.",
+        "Låt de båda lagren sätta sig och svalna cirka tjugo minuter.",
+        "Flytta formen till kylskåp och täck när den inte längre avger ånga.",
+        "Kyl minst sextio minuter tills gelén är helt kall och stadig; förläng vid behov.",
+        "Skär eller skeda upp hela den kalla gelén och servera."
+      ],
+      "name": "Woon kati – tvålagers kokosgelé utan pandan – enkel",
+      "preparation": {
+        "family": "Woon kati",
+        "input_forms": {
+          "agar agar": "dry",
+          "kokosmjölk": "as_sold",
+          "salt": "as_sold",
+          "strösocker": "dry"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "e50921a6a3e23a0987415d976f482d90a87bb3a9fdb9e8471aea18edf2e4fe84",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 20,
+        "base_id": "smako-thai-woon-kati",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "agar agar|dry",
+                "name": "Agar agar",
+                "note": "",
+                "quantity": 1.6,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kokosmjölk|as_sold",
+                "name": "Kokosmjölk",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "Strösocker",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 0.2,
+                "unit": "g"
+              }
+            ],
+            "id": "gele",
+            "name": "Två agarbaserade lager"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "mango|raw_edible",
+                "name": "Mango",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "limejuice|as_sold",
+                "name": "Limejuice",
+                "note": "",
+                "quantity": 8.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "mango",
+            "name": "Mango med lime"
+          }
+        ],
+        "content_sha256": "ea0b438712a3f43b879a4f96e13fc81fdcd6c05ce4708c397e1c3aa3394eb329",
+        "content_source": {
+          "active_minutes": 20,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "reviewed-expansion-round2-stage55",
+          "priority": 1,
+          "proposal_id": "smako-thai-woon-kati",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "a0d7547bc1efc00ec92bd96d80b2cf2528da3256080f04987fb280a10fb5083c",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "thai"
+        ],
+        "equipment": [
+          "två små kastruller",
+          "liten form cirka 250 ml",
+          "kylskåp",
+          "fin våg"
+        ],
+        "estimated_minutes": 230,
+        "family": "Woon kati",
+        "fish": false,
+        "flavor_profile": [
+          "kokos",
+          "söt-salt",
+          "mango",
+          "lime"
+        ],
+        "ingredient_count": 5,
+        "meal_types": [
+          "snack"
+        ],
+        "method": "pot",
+        "primary_ingredient": "kokosmjölk",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Uttryckligen utan pandan och dess arom. Klar socker-agarbas med separat kokosmjölkslager; originalets 1,6 g agar, 100 ml kokosmjölk, 20 g socker och 0,2 g salt per portion bevaras. 120 ml vatten används direkt i klara lagret i stället för 160 ml till bladinfusion som sedan skulle mätas till 120 ml. Ingen infusion eller bladförlust återstår. Utökad variant behåller 100 g mango och 8 ml limejuice. Inte provlagad. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "mangosallad",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 1,
+            "id": "s1",
+            "ingredient_keys": [
+              "mango|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Väg upp fryst mango i ett täckt kärl i kylskåp. Behåll all vätska."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 120,
+            "id": "s2",
+            "ingredient_keys": [
+              "mango|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Tina helt i kylskåp enligt förpackningen. Planera 120 minuter och förläng vid behov tills ingen iskärna återstår. Behåll hela mängden och all fruktsaft till serveringen; vikten avser fryst ansat fruktkött utan skal eller kärna."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 6,
+            "id": "s3",
+            "ingredient_keys": [
+              "agar agar|dry",
+              "strösocker|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "120 ml",
+                120.0
+              ]
+            ],
+            "text": "Mät upp 120 ml vatten i en liten kastrull. Vispa ner hälften av agarpulvret. Koka upp under omrörning och koka försiktigt tre minuter eller längre enligt förpackningen tills agarn är helt löst. Rör ner hälften av sockret tills det lösts. Häll hela blandningen i en liten värmetålig form."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 10,
+            "id": "s4",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Låt det klara lagret stå cirka tio minuter tills ytan precis har satt sig men fortfarande är varm."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 8,
+            "id": "s5",
+            "ingredient_keys": [
+              "agar agar|dry",
+              "kokosmjölk|as_sold",
+              "salt|as_sold",
+              "strösocker|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "40 ml",
+                40.0
+              ]
+            ],
+            "text": "Vispa resten av agarn i kokosmjölken med 40 ml vatten. Koka upp under omrörning och småkoka tre minuter eller längre enligt förpackningen tills agarn är helt löst. Rör ner resten av sockret och saltet. Låt bara svalna kort så blandningen fortfarande är flytande. Kontrollera det klara lagret: ytan ska bära men vara varm och lite klibbig. Häll kokoslagret försiktigt över baksidan av en sked ovanpå det klara lagret."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 20,
+            "id": "s6",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Låt de båda lagren sätta sig och svalna cirka tjugo minuter."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 1,
+            "id": "s7",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Flytta formen till kylskåp och täck när den inte längre avger ånga."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 60,
+            "id": "s8",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Kyl minst sextio minuter tills gelén är helt kall och stadig; förläng vid behov."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 4,
+            "id": "s9",
+            "ingredient_keys": [
+              "agar agar|dry",
+              "kokosmjölk|as_sold",
+              "limejuice|as_sold",
+              "mango|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Dela vid behov de tinade mangobitarna och vänd med limejuice och all fruktsaft. Skär gelén i små bitar och servera hela mängden tillsammans med all mango och saft."
+          }
+        ],
+        "total_minutes": 230,
+        "variant_id": "extended",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 210
+      },
+      "ingredients": [
+        {
+          "canonical_name": "agar agar",
+          "component": "gele",
+          "form": "dry",
+          "name": "agar agar",
+          "product_requirements": [
+            "pack:intake_all_expansion_225f1952cc88"
+          ],
+          "quantity": 1.6,
+          "quantity_max": 1.6,
+          "quantity_min": 1.6,
+          "quantity_step": 1.6,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kokosmjölk",
+          "component": "gele",
+          "form": "as_sold",
+          "name": "kokosmjölk",
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "primary",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "strösocker",
+          "component": "gele",
+          "form": "dry",
+          "name": "strösocker",
+          "product_requirements": [
+            "pack:sugar"
+          ],
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "gele",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 0.2,
+          "quantity_max": 0.2,
+          "quantity_min": 0.2,
+          "quantity_step": 0.2,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "mango",
+          "component": "mango",
+          "form": "raw_edible",
+          "name": "mango",
+          "product_requirements": [
+            "pack:intake_all_d51e7b07e8a0"
+          ],
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "limejuice",
+          "component": "mango",
+          "form": "as_sold",
+          "name": "limejuice",
+          "product_requirements": [
+            "pure_juice"
+          ],
+          "quantity": 8.0,
+          "quantity_max": 8.0,
+          "quantity_min": 8.0,
+          "quantity_step": 8.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        }
+      ],
+      "instructions": [
+        "Väg upp fryst mango i ett täckt kärl i kylskåp. Behåll all vätska.",
+        "Tina helt i kylskåp enligt förpackningen. Planera 120 minuter och förläng vid behov tills ingen iskärna återstår. Behåll hela mängden och all fruktsaft till serveringen; vikten avser fryst ansat fruktkött utan skal eller kärna.",
+        "Mät upp 120 ml vatten i en liten kastrull. Vispa ner hälften av agarpulvret. Koka upp under omrörning och koka försiktigt tre minuter eller längre enligt förpackningen tills agarn är helt löst. Rör ner hälften av sockret tills det lösts. Häll hela blandningen i en liten värmetålig form.",
+        "Låt det klara lagret stå cirka tio minuter tills ytan precis har satt sig men fortfarande är varm.",
+        "Vispa resten av agarn i kokosmjölken med 40 ml vatten. Koka upp under omrörning och småkoka tre minuter eller längre enligt förpackningen tills agarn är helt löst. Rör ner resten av sockret och saltet. Låt bara svalna kort så blandningen fortfarande är flytande. Kontrollera det klara lagret: ytan ska bära men vara varm och lite klibbig. Häll kokoslagret försiktigt över baksidan av en sked ovanpå det klara lagret.",
+        "Låt de båda lagren sätta sig och svalna cirka tjugo minuter.",
+        "Flytta formen till kylskåp och täck när den inte längre avger ånga.",
+        "Kyl minst sextio minuter tills gelén är helt kall och stadig; förläng vid behov.",
+        "Dela vid behov de tinade mangobitarna och vänd med limejuice och all fruktsaft. Skär gelén i små bitar och servera hela mängden tillsammans med all mango och saft."
+      ],
+      "name": "Woon kati – tvålagers kokosgelé utan pandan – med mango och lime",
+      "preparation": {
+        "family": "Woon kati",
+        "input_forms": {
+          "agar agar": "dry",
+          "kokosmjölk": "as_sold",
+          "limejuice": "as_sold",
+          "mango": "raw_edible",
+          "salt": "as_sold",
+          "strösocker": "dry"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "ea0b438712a3f43b879a4f96e13fc81fdcd6c05ce4708c397e1c3aa3394eb329",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 1
+    }
+  ]
+}

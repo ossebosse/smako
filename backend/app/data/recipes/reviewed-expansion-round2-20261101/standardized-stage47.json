@@ -1,0 +1,1455 @@
+{
+  "pack_id": "reviewed-expansion-round2-stage47",
+  "recipes": [
+    {
+      "design": {
+        "active_minutes": 50,
+        "base_id": "smako-mexican-papadzules",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ägg|as_sold",
+                "name": "Hela råa ägg, räknade före kokning",
+                "note": "",
+                "quantity": 8.0,
+                "unit": "st"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              }
+            ],
+            "id": "fyllning",
+            "name": "Äggfyllning"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "pumpakärnor|as_sold",
+                "name": "pumpakärnor",
+                "note": "",
+                "quantity": 180.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "koriander|raw_edible",
+                "name": "Fryst hackad koriander",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 3.0,
+                "unit": "g"
+              }
+            ],
+            "id": "karna",
+            "name": "Pumpakärnssås"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "tomat|raw_edible",
+                "name": "tomat",
+                "note": "",
+                "quantity": 550.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "rapsolja",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              }
+            ],
+            "id": "tomat",
+            "name": "Separat tomatsås"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "majstortillas|as_sold",
+                "name": "Mjuka färdigbakade majstortillas",
+                "note": "",
+                "quantity": 400.0,
+                "unit": "g"
+              }
+            ],
+            "id": "majsbrod",
+            "name": "Hemlagade majstortillas"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "mexican"
+        ],
+        "equipment": [
+          "kastruller",
+          "stekpanna",
+          "stavmixer",
+          "termometer"
+        ],
+        "estimated_minutes": 67,
+        "family": "papadzules",
+        "fish": false,
+        "flavor_profile": [
+          "pumpakärna",
+          "epazote",
+          "tomat"
+        ],
+        "ingredient_count": 6,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "pot",
+        "primary_ingredient": "kokta ägg",
+        "provenance": {
+          "notes": "Granskad korianderversion med 20 g fryst hackad koriander i stället för 7 g epazote, åtta råa hela ägg i stället för 400 g färdigkokt ägg och 400 g färdigbakade majstortillas i stället för 260 g masa harina och tortillornas 2 g salt. Inga lika smaker, tillagade äggvikter eller degutbyten antas. Alla såser och allt örtspad serveras. Inte provlagad. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "majstortillas",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 6,
+            "id": "s1",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "1600 ml",
+                1600.0
+              ]
+            ],
+            "text": "Lägg det angivna antalet råa hela ägg i kastrull med 1600 ml vatten. Koka upp försiktigt."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 12,
+            "id": "s2",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sjud äggen tolv minuter så både vita och gula blir fasta."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 6,
+            "id": "s3",
+            "ingredient_keys": [
+              "salt|as_sold",
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Häll bort kokvattnet och spola äggen hastigt svalt så de går att hantera. Skala, kasta skalen och skölj bort skalrester. Kontrollera fasta gulor och vitor, hacka äggen och blanda med fyllningens salt. Håll fyllningen täckt och varm över 60 °C, exempelvis i en skål över varmt vatten."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 6,
+            "id": "s4",
+            "ingredient_keys": [
+              "pumpakärnor|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Rosta pumpakärnorna varsamt i torr panna under omrörning tills de doftar nötigt, utan att bränna dem. Ta från värmen."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 3,
+            "id": "s5",
+            "ingredient_keys": [
+              "koriander|raw_edible",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "550 ml",
+                550.0
+              ]
+            ],
+            "text": "Lägg fryst hackad koriander direkt i en kastrull med pumpasåsens salt och 550 ml vatten. Koka upp."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 5,
+            "id": "s6",
+            "ingredient_keys": [
+              "koriander|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud örtspadet fem minuter, eller längre enligt örtens förpackning."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 4,
+            "id": "s7",
+            "ingredient_keys": [
+              "koriander|raw_edible",
+              "pumpakärnor|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Mixa hela örtspadet med alla pumpakärnor slätt med stavmixer i ett högt värmetåligt kärl; undvik stänk. Håll såsen över 60 °C på mycket låg värme utan kraftig kokning. Rör vid behov; kasta inget spad."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 14,
+            "id": "s8",
+            "ingredient_keys": [
+              "rapsolja|as_sold",
+              "salt|as_sold",
+              "tomat|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Tärna tomaterna och värm rapsoljan i en kastrull. Lägg i alla tomater och tomatsåsens salt. Sjud under omrörning tills tomaterna faller sönder, minst tio minuter. Eventuell fryst vitlök ska vara helt genomhettad. Behåll all olja och tomatvätska; håll tomat- och pumpakärnssås åtskilda."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 6,
+            "id": "s9",
+            "ingredient_keys": [
+              "majstortillas|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Väg den angivna mängden mjuka färdigbakade majstortillas. Värm i omgångar i torr panna enligt förpackningen och håll mjuka under ren kökshandduk."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 5,
+            "id": "s10",
+            "ingredient_keys": [
+              "majstortillas|as_sold",
+              "pumpakärnor|as_sold",
+              "tomat|raw_edible",
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Fördela hela äggfyllningen i tortillorna och rulla samman. Fördela över det angivna antalet portioner. Täck med hela pumpakärnssåsen och lägg tomatsåsen i en separat sträng över; servera eventuell sås som inte ryms vid sidan. Servera genast."
+          }
+        ],
+        "total_minutes": 67,
+        "unmeasured_processes": [
+          {
+            "description": "Råa ägg köps och doseras i antal; skal tas bort utan antagen styckvikt eller kokt gramvikt.",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "operation": "peel_after_cooking",
+            "step_id": "s3"
+          }
+        ],
+        "variant_id": "simple",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 17
+      },
+      "ingredients": [
+        {
+          "canonical_name": "ägg",
+          "component": "fyllning",
+          "form": "as_sold",
+          "name": "ägg",
+          "product_requirements": [
+            "pack:intake_all_round2_eb585a9d4454"
+          ],
+          "quantity": 8.0,
+          "quantity_max": 8.0,
+          "quantity_min": 8.0,
+          "quantity_step": 8.0,
+          "required": true,
+          "role": "primary",
+          "unit": "st"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "fyllning",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 6.0,
+          "quantity_max": 6.0,
+          "quantity_min": 6.0,
+          "quantity_step": 6.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "pumpakärnor",
+          "component": "karna",
+          "form": "as_sold",
+          "name": "pumpakärnor",
+          "product_requirements": [
+            "pack:intake_pumpkin_kernels"
+          ],
+          "quantity": 180.0,
+          "quantity_max": 180.0,
+          "quantity_min": 180.0,
+          "quantity_step": 180.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "koriander",
+          "component": "karna",
+          "form": "raw_edible",
+          "name": "koriander",
+          "product_requirements": [
+            "pack:intake_all_9b2370e0e926"
+          ],
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "tomat",
+          "component": "tomat",
+          "form": "raw_edible",
+          "name": "tomat",
+          "quantity": 550.0,
+          "quantity_max": 550.0,
+          "quantity_min": 550.0,
+          "quantity_step": 550.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "tomat",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "majstortillas",
+          "component": "majsbrod",
+          "form": "as_sold",
+          "name": "majstortillas",
+          "product_requirements": [
+            "pack:intake_all_round2_4e0f777e646a"
+          ],
+          "quantity": 400.0,
+          "quantity_max": 400.0,
+          "quantity_min": 400.0,
+          "quantity_step": 400.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Lägg det angivna antalet råa hela ägg i kastrull med 1600 ml vatten. Koka upp försiktigt.",
+        "Sjud äggen tolv minuter så både vita och gula blir fasta.",
+        "Häll bort kokvattnet och spola äggen hastigt svalt så de går att hantera. Skala, kasta skalen och skölj bort skalrester. Kontrollera fasta gulor och vitor, hacka äggen och blanda med fyllningens salt. Håll fyllningen täckt och varm över 60 °C, exempelvis i en skål över varmt vatten.",
+        "Rosta pumpakärnorna varsamt i torr panna under omrörning tills de doftar nötigt, utan att bränna dem. Ta från värmen.",
+        "Lägg fryst hackad koriander direkt i en kastrull med pumpasåsens salt och 550 ml vatten. Koka upp.",
+        "Sjud örtspadet fem minuter, eller längre enligt örtens förpackning.",
+        "Mixa hela örtspadet med alla pumpakärnor slätt med stavmixer i ett högt värmetåligt kärl; undvik stänk. Håll såsen över 60 °C på mycket låg värme utan kraftig kokning. Rör vid behov; kasta inget spad.",
+        "Tärna tomaterna och värm rapsoljan i en kastrull. Lägg i alla tomater och tomatsåsens salt. Sjud under omrörning tills tomaterna faller sönder, minst tio minuter. Eventuell fryst vitlök ska vara helt genomhettad. Behåll all olja och tomatvätska; håll tomat- och pumpakärnssås åtskilda.",
+        "Väg den angivna mängden mjuka färdigbakade majstortillas. Värm i omgångar i torr panna enligt förpackningen och håll mjuka under ren kökshandduk.",
+        "Fördela hela äggfyllningen i tortillorna och rulla samman. Fördela över det angivna antalet portioner. Täck med hela pumpakärnssåsen och lägg tomatsåsen i en separat sträng över; servera eventuell sås som inte ryms vid sidan. Servera genast."
+      ],
+      "name": "Papadzules – äggtortillas med pumpakärnssås – enkel – koriander och färdiga majstortillas",
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 50,
+        "base_id": "smako-mexican-papadzules",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ägg|as_sold",
+                "name": "Hela råa ägg, räknade före kokning",
+                "note": "",
+                "quantity": 8.0,
+                "unit": "st"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              }
+            ],
+            "id": "fyllning",
+            "name": "Äggfyllning"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "pumpakärnor|as_sold",
+                "name": "pumpakärnor",
+                "note": "",
+                "quantity": 180.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "koriander|raw_edible",
+                "name": "Fryst hackad koriander",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 3.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "gul lök",
+                "note": "",
+                "quantity": 70.0,
+                "unit": "g"
+              }
+            ],
+            "id": "karna",
+            "name": "Pumpakärnssås"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "tomat|raw_edible",
+                "name": "tomat",
+                "note": "",
+                "quantity": 550.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "rapsolja",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "vitlök",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "chiliflakes|dry",
+                "name": "chiliflakes",
+                "note": "",
+                "quantity": 0.8,
+                "unit": "g"
+              }
+            ],
+            "id": "tomat",
+            "name": "Separat tomatsås"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "majstortillas|as_sold",
+                "name": "Mjuka färdigbakade majstortillas",
+                "note": "",
+                "quantity": 400.0,
+                "unit": "g"
+              }
+            ],
+            "id": "majsbrod",
+            "name": "Hemlagade majstortillas"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "mexican"
+        ],
+        "equipment": [
+          "kastruller",
+          "stekpanna",
+          "stavmixer",
+          "termometer"
+        ],
+        "estimated_minutes": 67,
+        "family": "papadzules",
+        "fish": false,
+        "flavor_profile": [
+          "pumpakärna",
+          "epazote",
+          "tomat"
+        ],
+        "ingredient_count": 9,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "pot",
+        "primary_ingredient": "kokta ägg",
+        "provenance": {
+          "notes": "Granskad korianderversion med 20 g fryst hackad koriander i stället för 7 g epazote, åtta råa hela ägg i stället för 400 g färdigkokt ägg och 400 g färdigbakade majstortillas i stället för 260 g masa harina och tortillornas 2 g salt. Inga lika smaker, tillagade äggvikter eller degutbyten antas. Alla såser och allt örtspad serveras. Inte provlagad. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "majstortillas",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 6,
+            "id": "s1",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "1600 ml",
+                1600.0
+              ]
+            ],
+            "text": "Lägg det angivna antalet råa hela ägg i kastrull med 1600 ml vatten. Koka upp försiktigt."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 12,
+            "id": "s2",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sjud äggen tolv minuter så både vita och gula blir fasta."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 6,
+            "id": "s3",
+            "ingredient_keys": [
+              "salt|as_sold",
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Häll bort kokvattnet och spola äggen hastigt svalt så de går att hantera. Skala, kasta skalen och skölj bort skalrester. Kontrollera fasta gulor och vitor, hacka äggen och blanda med fyllningens salt. Håll fyllningen täckt och varm över 60 °C, exempelvis i en skål över varmt vatten."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 6,
+            "id": "s4",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "pumpakärnor|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Rosta pumpakärnorna varsamt i torr panna under omrörning tills de doftar nötigt, utan att bränna dem. Ta från värmen. Skala, väg och finhacka såsens lök."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 3,
+            "id": "s5",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "koriander|raw_edible",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "550 ml",
+                550.0
+              ]
+            ],
+            "text": "Lägg fryst hackad koriander direkt i en kastrull med pumpasåsens salt och 550 ml vatten. Tillsätt den hackade löken. Koka upp."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 5,
+            "id": "s6",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "koriander|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud örtspadet fem minuter, eller längre enligt örtens förpackning."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 4,
+            "id": "s7",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "koriander|raw_edible",
+              "pumpakärnor|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Kontrollera att löken är mjuk; förläng annars sjudningen. Mixa hela örtspadet med alla pumpakärnor slätt med stavmixer i ett högt värmetåligt kärl; undvik stänk. Håll såsen över 60 °C på mycket låg värme utan kraftig kokning. Rör vid behov; kasta inget spad."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 14,
+            "id": "s8",
+            "ingredient_keys": [
+              "chiliflakes|dry",
+              "rapsolja|as_sold",
+              "salt|as_sold",
+              "tomat|raw_edible",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Tärna tomaterna och värm rapsoljan i en kastrull. Tillsätt färsk eller fryst hackad vitlök samt chiliflakes och rör kort. Lägg i alla tomater och tomatsåsens salt. Sjud under omrörning tills tomaterna faller sönder, minst tio minuter. Eventuell fryst vitlök ska vara helt genomhettad. Behåll all olja och tomatvätska; håll tomat- och pumpakärnssås åtskilda."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 6,
+            "id": "s9",
+            "ingredient_keys": [
+              "majstortillas|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Väg den angivna mängden mjuka färdigbakade majstortillas. Värm i omgångar i torr panna enligt förpackningen och håll mjuka under ren kökshandduk."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 5,
+            "id": "s10",
+            "ingredient_keys": [
+              "majstortillas|as_sold",
+              "pumpakärnor|as_sold",
+              "tomat|raw_edible",
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Fördela hela äggfyllningen i tortillorna och rulla samman. Fördela över det angivna antalet portioner. Täck med hela pumpakärnssåsen och lägg tomatsåsen i en separat sträng över; servera eventuell sås som inte ryms vid sidan. Servera genast."
+          }
+        ],
+        "total_minutes": 67,
+        "unmeasured_processes": [
+          {
+            "description": "Råa ägg köps och doseras i antal; skal tas bort utan antagen styckvikt eller kokt gramvikt.",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "operation": "peel_after_cooking",
+            "step_id": "s3"
+          }
+        ],
+        "variant_id": "standard",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 17
+      },
+      "ingredients": [
+        {
+          "canonical_name": "ägg",
+          "component": "fyllning",
+          "form": "as_sold",
+          "name": "ägg",
+          "product_requirements": [
+            "pack:intake_all_round2_eb585a9d4454"
+          ],
+          "quantity": 8.0,
+          "quantity_max": 8.0,
+          "quantity_min": 8.0,
+          "quantity_step": 8.0,
+          "required": true,
+          "role": "primary",
+          "unit": "st"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "fyllning",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 6.0,
+          "quantity_max": 6.0,
+          "quantity_min": 6.0,
+          "quantity_step": 6.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "pumpakärnor",
+          "component": "karna",
+          "form": "as_sold",
+          "name": "pumpakärnor",
+          "product_requirements": [
+            "pack:intake_pumpkin_kernels"
+          ],
+          "quantity": 180.0,
+          "quantity_max": 180.0,
+          "quantity_min": 180.0,
+          "quantity_step": 180.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "koriander",
+          "component": "karna",
+          "form": "raw_edible",
+          "name": "koriander",
+          "product_requirements": [
+            "pack:intake_all_9b2370e0e926"
+          ],
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "karna",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 70.0,
+          "quantity_max": 70.0,
+          "quantity_min": 70.0,
+          "quantity_step": 70.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "tomat",
+          "component": "tomat",
+          "form": "raw_edible",
+          "name": "tomat",
+          "quantity": 550.0,
+          "quantity_max": 550.0,
+          "quantity_min": 550.0,
+          "quantity_step": 550.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "tomat",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "tomat",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 10.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "chiliflakes",
+          "component": "tomat",
+          "form": "dry",
+          "name": "chiliflakes",
+          "quantity": 0.8,
+          "quantity_max": 0.8,
+          "quantity_min": 0.8,
+          "quantity_step": 0.8,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "majstortillas",
+          "component": "majsbrod",
+          "form": "as_sold",
+          "name": "majstortillas",
+          "product_requirements": [
+            "pack:intake_all_round2_4e0f777e646a"
+          ],
+          "quantity": 400.0,
+          "quantity_max": 400.0,
+          "quantity_min": 400.0,
+          "quantity_step": 400.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Lägg det angivna antalet råa hela ägg i kastrull med 1600 ml vatten. Koka upp försiktigt.",
+        "Sjud äggen tolv minuter så både vita och gula blir fasta.",
+        "Häll bort kokvattnet och spola äggen hastigt svalt så de går att hantera. Skala, kasta skalen och skölj bort skalrester. Kontrollera fasta gulor och vitor, hacka äggen och blanda med fyllningens salt. Håll fyllningen täckt och varm över 60 °C, exempelvis i en skål över varmt vatten.",
+        "Rosta pumpakärnorna varsamt i torr panna under omrörning tills de doftar nötigt, utan att bränna dem. Ta från värmen. Skala, väg och finhacka såsens lök.",
+        "Lägg fryst hackad koriander direkt i en kastrull med pumpasåsens salt och 550 ml vatten. Tillsätt den hackade löken. Koka upp.",
+        "Sjud örtspadet fem minuter, eller längre enligt örtens förpackning.",
+        "Kontrollera att löken är mjuk; förläng annars sjudningen. Mixa hela örtspadet med alla pumpakärnor slätt med stavmixer i ett högt värmetåligt kärl; undvik stänk. Håll såsen över 60 °C på mycket låg värme utan kraftig kokning. Rör vid behov; kasta inget spad.",
+        "Tärna tomaterna och värm rapsoljan i en kastrull. Tillsätt färsk eller fryst hackad vitlök samt chiliflakes och rör kort. Lägg i alla tomater och tomatsåsens salt. Sjud under omrörning tills tomaterna faller sönder, minst tio minuter. Eventuell fryst vitlök ska vara helt genomhettad. Behåll all olja och tomatvätska; håll tomat- och pumpakärnssås åtskilda.",
+        "Väg den angivna mängden mjuka färdigbakade majstortillas. Värm i omgångar i torr panna enligt förpackningen och håll mjuka under ren kökshandduk.",
+        "Fördela hela äggfyllningen i tortillorna och rulla samman. Fördela över det angivna antalet portioner. Täck med hela pumpakärnssåsen och lägg tomatsåsen i en separat sträng över; servera eventuell sås som inte ryms vid sidan. Servera genast."
+      ],
+      "name": "Papadzules – äggtortillas med pumpakärnssås – standard – koriander och färdiga majstortillas",
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 55,
+        "base_id": "smako-mexican-papadzules",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ägg|as_sold",
+                "name": "Hela råa ägg, räknade före kokning",
+                "note": "",
+                "quantity": 8.0,
+                "unit": "st"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              }
+            ],
+            "id": "fyllning",
+            "name": "Äggfyllning"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "pumpakärnor|as_sold",
+                "name": "pumpakärnor",
+                "note": "",
+                "quantity": 180.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "koriander|raw_edible",
+                "name": "Fryst hackad koriander",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 3.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "gul lök",
+                "note": "",
+                "quantity": 70.0,
+                "unit": "g"
+              }
+            ],
+            "id": "karna",
+            "name": "Pumpakärnssås"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "tomat|raw_edible",
+                "name": "tomat",
+                "note": "",
+                "quantity": 550.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "rapsolja",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "vitlök",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "chiliflakes|dry",
+                "name": "chiliflakes",
+                "note": "",
+                "quantity": 0.8,
+                "unit": "g"
+              }
+            ],
+            "id": "tomat",
+            "name": "Separat tomatsås"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "avokado|raw_edible",
+                "name": "avokado",
+                "note": "",
+                "quantity": 200.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gurka|raw_edible",
+                "name": "gurka",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "limejuice|as_sold",
+                "name": "limejuice",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              }
+            ],
+            "id": "sval",
+            "name": "Sval grönsakssallad"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "majstortillas|as_sold",
+                "name": "Mjuka färdigbakade majstortillas",
+                "note": "",
+                "quantity": 400.0,
+                "unit": "g"
+              }
+            ],
+            "id": "majsbrod",
+            "name": "Hemlagade majstortillas"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "mexican"
+        ],
+        "equipment": [
+          "kastruller",
+          "stekpanna",
+          "stavmixer",
+          "termometer"
+        ],
+        "estimated_minutes": 192,
+        "family": "papadzules",
+        "fish": false,
+        "flavor_profile": [
+          "pumpakärna",
+          "epazote",
+          "tomat"
+        ],
+        "ingredient_count": 12,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "pot",
+        "primary_ingredient": "kokta ägg",
+        "provenance": {
+          "notes": "Granskad korianderversion med 20 g fryst hackad koriander i stället för 7 g epazote, åtta råa hela ägg i stället för 400 g färdigkokt ägg och 400 g färdigbakade majstortillas i stället för 260 g masa harina och tortillornas 2 g salt. Inga lika smaker, tillagade äggvikter eller degutbyten antas. Alla såser och allt örtspad serveras. Inte provlagad. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "majstortillas",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 1,
+            "id": "s1",
+            "ingredient_keys": [
+              "avokado|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Väg upp fryst avokado i ett täckt kärl. Ställ i kylskåp och behåll all upptiningssaft."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 120,
+            "id": "s2",
+            "ingredient_keys": [
+              "avokado|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Tina avokadon helt i kylskåp enligt förpackningen; planera två timmar och förläng vid behov."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 6,
+            "id": "s3",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "1600 ml",
+                1600.0
+              ]
+            ],
+            "text": "Lägg det angivna antalet råa hela ägg i kastrull med 1600 ml vatten. Koka upp försiktigt."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 12,
+            "id": "s4",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sjud äggen tolv minuter så både vita och gula blir fasta."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 6,
+            "id": "s5",
+            "ingredient_keys": [
+              "salt|as_sold",
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Häll bort kokvattnet och spola äggen hastigt svalt så de går att hantera. Skala, kasta skalen och skölj bort skalrester. Kontrollera fasta gulor och vitor, hacka äggen och blanda med fyllningens salt. Håll fyllningen täckt och varm över 60 °C, exempelvis i en skål över varmt vatten."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 6,
+            "id": "s6",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "pumpakärnor|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Rosta pumpakärnorna varsamt i torr panna under omrörning tills de doftar nötigt, utan att bränna dem. Ta från värmen. Skala, väg och finhacka såsens lök."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 3,
+            "id": "s7",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "koriander|raw_edible",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "550 ml",
+                550.0
+              ]
+            ],
+            "text": "Lägg fryst hackad koriander direkt i en kastrull med pumpasåsens salt och 550 ml vatten. Tillsätt den hackade löken. Koka upp."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 5,
+            "id": "s8",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "koriander|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud örtspadet fem minuter, eller längre enligt örtens förpackning."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 4,
+            "id": "s9",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "koriander|raw_edible",
+              "pumpakärnor|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Kontrollera att löken är mjuk; förläng annars sjudningen. Mixa hela örtspadet med alla pumpakärnor slätt med stavmixer i ett högt värmetåligt kärl; undvik stänk. Håll såsen över 60 °C på mycket låg värme utan kraftig kokning. Rör vid behov; kasta inget spad."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 14,
+            "id": "s10",
+            "ingredient_keys": [
+              "chiliflakes|dry",
+              "rapsolja|as_sold",
+              "salt|as_sold",
+              "tomat|raw_edible",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Tärna tomaterna och värm rapsoljan i en kastrull. Tillsätt färsk eller fryst hackad vitlök samt chiliflakes och rör kort. Lägg i alla tomater och tomatsåsens salt. Sjud under omrörning tills tomaterna faller sönder, minst tio minuter. Eventuell fryst vitlök ska vara helt genomhettad. Behåll all olja och tomatvätska; håll tomat- och pumpakärnssås åtskilda."
+          },
+          {
+            "depends_on": [
+              "s10"
+            ],
+            "duration_minutes": 4,
+            "id": "s11",
+            "ingredient_keys": [
+              "avokado|raw_edible",
+              "gurka|raw_edible",
+              "limejuice|as_sold",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Använd redan tinad avokado med all sin saft. Skiva gurkan och vänd med avokadon, all limejuice och salladens salt."
+          },
+          {
+            "depends_on": [
+              "s11"
+            ],
+            "duration_minutes": 6,
+            "id": "s12",
+            "ingredient_keys": [
+              "majstortillas|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Väg den angivna mängden mjuka färdigbakade majstortillas. Värm i omgångar i torr panna enligt förpackningen och håll mjuka under ren kökshandduk."
+          },
+          {
+            "depends_on": [
+              "s12"
+            ],
+            "duration_minutes": 5,
+            "id": "s13",
+            "ingredient_keys": [
+              "avokado|raw_edible",
+              "gurka|raw_edible",
+              "majstortillas|as_sold",
+              "pumpakärnor|as_sold",
+              "tomat|raw_edible",
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Fördela hela äggfyllningen i tortillorna och rulla samman. Fördela över det angivna antalet portioner. Täck med hela pumpakärnssåsen och lägg tomatsåsen i en separat sträng över; servera eventuell sås som inte ryms vid sidan. Servera hela avokadosalladen med saften till. Servera genast."
+          }
+        ],
+        "total_minutes": 192,
+        "unmeasured_processes": [
+          {
+            "description": "Råa ägg köps och doseras i antal; skal tas bort utan antagen styckvikt eller kokt gramvikt.",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "operation": "peel_after_cooking",
+            "step_id": "s5"
+          }
+        ],
+        "variant_id": "extended",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 137
+      },
+      "ingredients": [
+        {
+          "canonical_name": "ägg",
+          "component": "fyllning",
+          "form": "as_sold",
+          "name": "ägg",
+          "product_requirements": [
+            "pack:intake_all_round2_eb585a9d4454"
+          ],
+          "quantity": 8.0,
+          "quantity_max": 8.0,
+          "quantity_min": 8.0,
+          "quantity_step": 8.0,
+          "required": true,
+          "role": "primary",
+          "unit": "st"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "fyllning",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 7.0,
+          "quantity_max": 7.0,
+          "quantity_min": 7.0,
+          "quantity_step": 7.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "pumpakärnor",
+          "component": "karna",
+          "form": "as_sold",
+          "name": "pumpakärnor",
+          "product_requirements": [
+            "pack:intake_pumpkin_kernels"
+          ],
+          "quantity": 180.0,
+          "quantity_max": 180.0,
+          "quantity_min": 180.0,
+          "quantity_step": 180.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "koriander",
+          "component": "karna",
+          "form": "raw_edible",
+          "name": "koriander",
+          "product_requirements": [
+            "pack:intake_all_9b2370e0e926"
+          ],
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "karna",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 70.0,
+          "quantity_max": 70.0,
+          "quantity_min": 70.0,
+          "quantity_step": 70.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "tomat",
+          "component": "tomat",
+          "form": "raw_edible",
+          "name": "tomat",
+          "quantity": 550.0,
+          "quantity_max": 550.0,
+          "quantity_min": 550.0,
+          "quantity_step": 550.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "tomat",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "tomat",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 10.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "chiliflakes",
+          "component": "tomat",
+          "form": "dry",
+          "name": "chiliflakes",
+          "quantity": 0.8,
+          "quantity_max": 0.8,
+          "quantity_min": 0.8,
+          "quantity_step": 0.8,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "avokado",
+          "component": "sval",
+          "form": "raw_edible",
+          "name": "avokado",
+          "product_requirements": [
+            "pack:intake_all_416f9df16b84"
+          ],
+          "quantity": 200.0,
+          "quantity_max": 200.0,
+          "quantity_min": 200.0,
+          "quantity_step": 200.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gurka",
+          "component": "sval",
+          "form": "raw_edible",
+          "name": "gurka",
+          "quantity": 300.0,
+          "quantity_max": 300.0,
+          "quantity_min": 300.0,
+          "quantity_step": 300.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "limejuice",
+          "component": "sval",
+          "form": "as_sold",
+          "name": "limejuice",
+          "product_requirements": [
+            "pure_juice"
+          ],
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 25.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "majstortillas",
+          "component": "majsbrod",
+          "form": "as_sold",
+          "name": "majstortillas",
+          "product_requirements": [
+            "pack:intake_all_round2_4e0f777e646a"
+          ],
+          "quantity": 400.0,
+          "quantity_max": 400.0,
+          "quantity_min": 400.0,
+          "quantity_step": 400.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Väg upp fryst avokado i ett täckt kärl. Ställ i kylskåp och behåll all upptiningssaft.",
+        "Tina avokadon helt i kylskåp enligt förpackningen; planera två timmar och förläng vid behov.",
+        "Lägg det angivna antalet råa hela ägg i kastrull med 1600 ml vatten. Koka upp försiktigt.",
+        "Sjud äggen tolv minuter så både vita och gula blir fasta.",
+        "Häll bort kokvattnet och spola äggen hastigt svalt så de går att hantera. Skala, kasta skalen och skölj bort skalrester. Kontrollera fasta gulor och vitor, hacka äggen och blanda med fyllningens salt. Håll fyllningen täckt och varm över 60 °C, exempelvis i en skål över varmt vatten.",
+        "Rosta pumpakärnorna varsamt i torr panna under omrörning tills de doftar nötigt, utan att bränna dem. Ta från värmen. Skala, väg och finhacka såsens lök.",
+        "Lägg fryst hackad koriander direkt i en kastrull med pumpasåsens salt och 550 ml vatten. Tillsätt den hackade löken. Koka upp.",
+        "Sjud örtspadet fem minuter, eller längre enligt örtens förpackning.",
+        "Kontrollera att löken är mjuk; förläng annars sjudningen. Mixa hela örtspadet med alla pumpakärnor slätt med stavmixer i ett högt värmetåligt kärl; undvik stänk. Håll såsen över 60 °C på mycket låg värme utan kraftig kokning. Rör vid behov; kasta inget spad.",
+        "Tärna tomaterna och värm rapsoljan i en kastrull. Tillsätt färsk eller fryst hackad vitlök samt chiliflakes och rör kort. Lägg i alla tomater och tomatsåsens salt. Sjud under omrörning tills tomaterna faller sönder, minst tio minuter. Eventuell fryst vitlök ska vara helt genomhettad. Behåll all olja och tomatvätska; håll tomat- och pumpakärnssås åtskilda.",
+        "Använd redan tinad avokado med all sin saft. Skiva gurkan och vänd med avokadon, all limejuice och salladens salt.",
+        "Väg den angivna mängden mjuka färdigbakade majstortillas. Värm i omgångar i torr panna enligt förpackningen och håll mjuka under ren kökshandduk.",
+        "Fördela hela äggfyllningen i tortillorna och rulla samman. Fördela över det angivna antalet portioner. Täck med hela pumpakärnssåsen och lägg tomatsåsen i en separat sträng över; servera eventuell sås som inte ryms vid sidan. Servera hela avokadosalladen med saften till. Servera genast."
+      ],
+      "name": "Papadzules – äggtortillas med pumpakärnssås – utökad – koriander och färdiga majstortillas",
+      "servings": 4
+    }
+  ],
+  "schema_version": "smako-meal-pack-v1"
+}

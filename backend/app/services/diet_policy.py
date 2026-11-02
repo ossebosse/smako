@@ -52,6 +52,7 @@ _MEAT_OR_FISH = frozenset(
         "räkor",
         "skaldjur",
         "råa räkor",
+        "råa skalade vannameiräkor", "blåmusselkött utan skal",
         "musslor",
         "bläckfisk",
         "makrill",
@@ -63,15 +64,29 @@ _MEAT_OR_FISH = frozenset(
         "rökt lax",
         "varmrökt lax",
         "fläskkarré", "kalvfärs", "guanciale", "fisksås", "sardeller",
-        "hel kyckling", "nötinnanlår", "högrev", "nötstek", "getkött",
+        "hel kyckling", "nötinnanlår", "högrev", "nötstek", "getkött", "ungnötslever",
         "nöthjärta", "oxtunga", "nötblod", "räkpasta", "torkade räkor",
         "svensk ansjovis", "svensk ansjovis med spad", "isterband", "ister",
-        "nötkött för snabbstekning", "ostronsås",
+        "nötkött för snabbstekning", "ostronsås", "worcestershiresås",
+        "oxsvans med ben", "rimmat fläsklägg", "ätklar inläggningssill", "corned beef på burk", "färsk chorizokorv", "benfri lammstek", "färsk salsicciakorv",
     }
 )
 _MEAT_OR_FISH_FAMILIES = frozenset(
     {"meat", "poultry", "fish", "seafood", "shellfish", "organ"}
 )
+# Culinary categories for request filtering, never aliases or product matches.
+FINFISH_INGREDIENTS = frozenset({"fisk", "lax", "torsk", "tonfisk", "makrill", "rökt makrill",
+    "sardiner", "matjessill", "stenbitsrom", "rökt lax", "varmrökt lax", "svensk ansjovis",
+    "svensk ansjovis med spad", "ätklar inläggningssill"})
+FISH_FLAVOURINGS = frozenset({"sardeller", "fisksås", "ostronsås", "worcestershiresås"})
+SHELLFISH_INGREDIENTS = frozenset({"räkor", "råa räkor", "skaldjur", "musslor", "bläckfisk",
+    "råa skalade vannameiräkor", "blåmusselkött utan skal"})
+POULTRY_INGREDIENTS = frozenset({"kyckling", "hel kyckling", "kalkon"})
+# This reviewed sausage is explicitly pork + beef. This only narrows user
+# exclusions; it never aliases product identity or supplies nutrition facts.
+_REVIEWED_MEAT_COMPONENTS = {"färsk chorizokorv": frozenset({"fläskkött", "nötkött"}),
+                             "färsk salsicciakorv": frozenset({"fläskkött"}),
+                             "benfri lammstek": frozenset({"lamm", "lammkött"})}
 _OTHER_ANIMAL = frozenset(
     {
         "ägg",
@@ -101,7 +116,7 @@ _OTHER_ANIMAL = frozenset(
         "färskost",
         "kefir",
         "filmjölk",
-        "parmesan", "pecorino romano", "ghee", "mjölkpulver", "evaporerad mjölk",
+        "parmesan", "pecorino romano", "lagrad pecorino", "gruyère", "ghee", "mjölkpulver", "evaporerad mjölk",
     }
 )
 _OTHER_ANIMAL_FAMILIES = frozenset({"dairy", "egg"})
@@ -122,14 +137,22 @@ def _excluded_by_diet(name: str, preference: DietPreference) -> bool:
     return False
 
 
+def recipe_contains_fish(recipe: Recipe) -> bool:
+    """Preserve sealed legacy flags and also check explicit culinary identities."""
+    return bool(recipe.design and recipe.design.fish) or any(
+        canonicalize_ingredient_name(i.canonical_name or i.name) in FINFISH_INGREDIENTS | FISH_FLAVOURINGS
+        for i in recipe.ingredients)
+
+
 def ingredient_is_excluded(name: str, exclusions: Iterable[str]) -> bool:
     """Explicit fish excludes the existing fish family, not only the generic name."""
     canonical = canonicalize_ingredient_name(name)
     exclusions = tuple(exclusions)
     excluded = {canonicalize_ingredient_name(v) for v in exclusions if str(v).strip()}
-    return canonical in excluded or (
+    return canonical in excluded or bool(_REVIEWED_MEAT_COMPONENTS.get(canonical, frozenset()) & excluded) or (
         any(v.casefold().strip() == "fisk" for v in exclusions)
-        and semantic_requirement(canonical).food_family == "fish"
+        and (canonical in FINFISH_INGREDIENTS | FISH_FLAVOURINGS
+             or semantic_requirement(canonical).food_family == "fish")
     )
 
 

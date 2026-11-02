@@ -1,0 +1,269 @@
+{
+  "pack_id": "reviewed-expansion-round2-stage56",
+  "recipes": [
+    {
+      "design": {
+        "active_minutes": 14,
+        "base_id": "smako-thai-kluai-buat-chi",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "banan|raw_edible",
+                "name": "Skalad, mogen men fast banan",
+                "note": "",
+                "quantity": 120.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kokosmjölk|as_sold",
+                "name": "Kokosmjölk",
+                "note": "",
+                "quantity": 90.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "Strösocker",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 0.2,
+                "unit": "g"
+              }
+            ],
+            "id": "c1",
+            "name": "Banan i kokosmjölk"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "kokosflingor|dry",
+                "name": "Grova torkade kokosflingor",
+                "note": "",
+                "quantity": 8.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "sesamfrön|as_sold",
+                "name": "Sesamfrön",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c2",
+            "name": "Rostad kokostopping"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "thai"
+        ],
+        "equipment": [
+          "liten kastrull",
+          "stekpanna"
+        ],
+        "estimated_minutes": 17,
+        "family": "banana_poached_in_coconut_milk",
+        "fish": false,
+        "flavor_profile": [
+          "banan",
+          "kokos",
+          "sesam",
+          "söt-salt"
+        ],
+        "ingredient_count": 5,
+        "meal_types": [
+          "snack"
+        ],
+        "method": "pot",
+        "primary_ingredient": "banan",
+        "provenance": {
+          "notes": "Granskad utökad variant utan 2 g pandanblad. Bladets arom utelämnas uttryckligen; ingen annan ingrediens kallas pandan. Samtliga övriga matmängder bevaras. Rosta 8 g kokosflingor och 5 g torra sesamfrön per portion och servera hela toppingen till banan i kokosmjölk. Inte provlagad. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "ingen separat sida",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 4,
+            "id": "s1",
+            "ingredient_keys": [
+              "kokosflingor|dry",
+              "sesamfrön|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Rosta kokos och sesam i torr panna på medellåg värme tills de doftar och är gyllene, cirka tre minuter. Häll upp på en tallrik så att de inte bränns av eftervärmen."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 4,
+            "id": "s2",
+            "ingredient_keys": [
+              "kokosmjölk|as_sold",
+              "salt|as_sold",
+              "strösocker|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "30 ml",
+                30.0
+              ]
+            ],
+            "text": "Häll kokosmjölk, socker och salt i en liten kastrull med 30 ml vatten. Värm försiktigt till svag sjudning under omrörning; undvik häftig kokning."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 5,
+            "id": "s3",
+            "ingredient_keys": [
+              "banan|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Skala bananen, väg den angivna ätliga mängden och dela den i tjocka sneda bitar. Lägg dem i kokosmjölken och sjud mycket försiktigt i tre–fem minuter tills de är varma och mjuka men håller formen. Kortare tid kan behövas för mogen vanlig banan."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 3,
+            "id": "s4",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Låt banan och kokosmjölk svalna lite före servering."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 1,
+            "id": "s5",
+            "ingredient_keys": [
+              "banan|raw_edible",
+              "kokosflingor|dry",
+              "kokosmjölk|as_sold",
+              "sesamfrön|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Servera alla bananbitar och hela kokosmjölksåsen ljumma med all rostad kokos och sesam ovanpå."
+          }
+        ],
+        "total_minutes": 17,
+        "variant_id": "extended",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 3
+      },
+      "ingredients": [
+        {
+          "canonical_name": "banan",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "banan",
+          "product_requirements": [
+            "pack:intake_all_973660201bf8"
+          ],
+          "quantity": 120.0,
+          "quantity_max": 120.0,
+          "quantity_min": 120.0,
+          "quantity_step": 120.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kokosmjölk",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "kokosmjölk",
+          "quantity": 90.0,
+          "quantity_max": 90.0,
+          "quantity_min": 90.0,
+          "quantity_step": 90.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "strösocker",
+          "component": "c1",
+          "form": "dry",
+          "name": "strösocker",
+          "product_requirements": [
+            "pack:sugar"
+          ],
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 0.2,
+          "quantity_max": 0.2,
+          "quantity_min": 0.2,
+          "quantity_step": 0.2,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kokosflingor",
+          "component": "c2",
+          "form": "dry",
+          "name": "kokosflingor",
+          "product_requirements": [
+            "pack:intake_coconut"
+          ],
+          "quantity": 8.0,
+          "quantity_max": 8.0,
+          "quantity_min": 8.0,
+          "quantity_step": 8.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "sesamfrön",
+          "component": "c2",
+          "form": "as_sold",
+          "name": "sesamfrön",
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Rosta kokos och sesam i torr panna på medellåg värme tills de doftar och är gyllene, cirka tre minuter. Häll upp på en tallrik så att de inte bränns av eftervärmen.",
+        "Häll kokosmjölk, socker och salt i en liten kastrull med 30 ml vatten. Värm försiktigt till svag sjudning under omrörning; undvik häftig kokning.",
+        "Skala bananen, väg den angivna ätliga mängden och dela den i tjocka sneda bitar. Lägg dem i kokosmjölken och sjud mycket försiktigt i tre–fem minuter tills de är varma och mjuka men håller formen. Kortare tid kan behövas för mogen vanlig banan.",
+        "Låt banan och kokosmjölk svalna lite före servering.",
+        "Servera alla bananbitar och hela kokosmjölksåsen ljumma med all rostad kokos och sesam ovanpå."
+      ],
+      "name": "Kluai buat chi – med rostad kokos och sesam, utan pandan",
+      "servings": 1
+    }
+  ],
+  "schema_version": "smako-meal-pack-v1"
+}

@@ -1,0 +1,2185 @@
+{
+  "library_version": "smako-meal-pack-v1",
+  "recipes": [
+    {
+      "design": {
+        "active_minutes": 34,
+        "base_id": "smako-swedish-janssons-frestelse",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "potatis|raw_edible",
+                "name": "potatis",
+                "note": "",
+                "quantity": 1100.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "gul lök",
+                "note": "",
+                "quantity": 250.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svensk ansjovis|preserved_drained",
+                "name": "Svensk ansjovisfilé, avrunnen utan extra spad",
+                "note": "",
+                "quantity": 158.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "grädde|as_sold",
+                "name": "grädde",
+                "note": "",
+                "quantity": 450.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "smör|as_sold",
+                "name": "smör",
+                "note": "",
+                "quantity": 45.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ströbröd|dry",
+                "name": "ströbröd",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "svartpeppar",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              }
+            ],
+            "id": "gratang",
+            "name": "Potatis-ansjovisgratäng"
+          }
+        ],
+        "content_sha256": "bb70f3f8465efd347644df1b9dccf9b72a8894d0f490629fbfd77218e4a8625a",
+        "content_source": {
+          "active_minutes": 34,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "reviewed-expansion-round2-stage15",
+          "priority": 1,
+          "proposal_id": "smako-swedish-janssons-frestelse",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "c3d6f5d0b311ed5e03eca409bafe98d0fe0b6bfd74ddb4010d1e9d5f8f28dd8b",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "swedish"
+        ],
+        "equipment": [
+          "ugn",
+          "gratängform",
+          "stekpanna",
+          "kastrull",
+          "mandolin eller kniv"
+        ],
+        "estimated_minutes": 144,
+        "family": "Janssons frestelse",
+        "fish": false,
+        "flavor_profile": [
+          "ansjovis",
+          "lök",
+          "grädde"
+        ],
+        "ingredient_count": 6,
+        "method": "oven",
+        "primary_ingredient": "svensk ansjovis med spad",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar, inte uppmätta. Potatisen är rå och strimlad och bakas länge i grädde med svensk ansjovis, inte sardeller. Ansjovismängden gäller filéer inklusive spad; fiskandel och sälta behöver produktgranskas. Utökad stannar vid elva ingredienser i stället för att fyllas ut med garnering. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "grönsaker i högre varianter",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 14,
+            "id": "s1",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "potatis|raw_edible",
+              "svensk ansjovis|preserved_drained"
+            ],
+            "parallel_group": null,
+            "text": "Sätt ugnen på 175 °C över-/undervärme. Skala potatisen och väg den angivna råa ätliga mängden. Skär i cirka 3 mm tunna strimlor utan att skölja bort stärkelsen. Skala och skiva den uppvägda löken. Låt ansjovisfiléerna rinna av och väg 158 g utan fri lag, motsvarande två deklarerade 79 g-mängder; dela grovt. Spadet används inte i denna version."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 8,
+            "id": "s2",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "smör|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Mjukstek löken i hälften av gratängens smör på medelvärme utan att bryna den hårt. Smörj formen med en liten del av resterande smör."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 7,
+            "id": "s3",
+            "ingredient_keys": [
+              "grädde|as_sold",
+              "gul lök|raw_edible",
+              "potatis|raw_edible",
+              "smör|as_sold",
+              "ströbröd|dry",
+              "svartpeppar|dry",
+              "svensk ansjovis|preserved_drained"
+            ],
+            "parallel_group": null,
+            "text": "Varva potatis, lök och ansjovis i formen och avsluta med potatis. Häll över grädden. Strö över svartpeppar och ströbröd och klicka över det sista gratängsmöret. Extra salt ingår inte eftersom fisken är salt."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 60,
+            "id": "s4",
+            "ingredient_keys": [
+              "grädde|as_sold",
+              "potatis|raw_edible",
+              "svensk ansjovis|preserved_drained"
+            ],
+            "parallel_group": null,
+            "text": "Grädda gratängen i nedre delen av ugnen i 60 minuter."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 2,
+            "id": "s5",
+            "ingredient_keys": [
+              "potatis|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Kontrollera gratängens yta och täck löst med folie om den blivit mörk."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 40,
+            "id": "s6",
+            "ingredient_keys": [
+              "grädde|as_sold",
+              "potatis|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Grädda ytterligare 40 minuter. Vätskan ska bindas till en krämig sås."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 1,
+            "id": "s7",
+            "ingredient_keys": [
+              "potatis|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Kontrollera med sticka att samtliga potatislager är helt mjuka; förläng annars gräddningen. Ta ut formen."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 10,
+            "id": "s8",
+            "ingredient_keys": [
+              "grädde|as_sold",
+              "potatis|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Låt gratängen stå 10 minuter så att den sätter sig innan den delas i fyra middagsportioner."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 2,
+            "id": "s9",
+            "ingredient_keys": [
+              "potatis|raw_edible",
+              "svensk ansjovis|preserved_drained"
+            ],
+            "parallel_group": null,
+            "text": "Servera den varma frestelsen."
+          }
+        ],
+        "total_minutes": 144,
+        "variant_id": "simple",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 110
+      },
+      "ingredients": [
+        {
+          "canonical_name": "potatis",
+          "component": "gratang",
+          "form": "raw_edible",
+          "name": "potatis",
+          "quantity": 1100.0,
+          "quantity_max": 1100.0,
+          "quantity_min": 1100.0,
+          "quantity_step": 1100.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "gratang",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 250.0,
+          "quantity_max": 250.0,
+          "quantity_min": 250.0,
+          "quantity_step": 250.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svensk ansjovis",
+          "component": "gratang",
+          "form": "preserved_drained",
+          "name": "svensk ansjovis",
+          "product_requirements": [
+            "pack:intake_all_round2_4a9d9b6951b8"
+          ],
+          "quantity": 158.0,
+          "quantity_max": 158.0,
+          "quantity_min": 158.0,
+          "quantity_step": 158.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "grädde",
+          "component": "gratang",
+          "form": "as_sold",
+          "name": "grädde",
+          "product_requirements": [
+            "pack:intake_all_2ba6bda1d4b2"
+          ],
+          "quantity": 450.0,
+          "quantity_max": 450.0,
+          "quantity_min": 450.0,
+          "quantity_step": 450.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "smör",
+          "component": "gratang",
+          "form": "as_sold",
+          "name": "smör",
+          "product_requirements": [
+            "pack:intake_butter"
+          ],
+          "quantity": 45.0,
+          "quantity_max": 45.0,
+          "quantity_min": 45.0,
+          "quantity_step": 45.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ströbröd",
+          "component": "gratang",
+          "form": "dry",
+          "name": "ströbröd",
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 25.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "gratang",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Sätt ugnen på 175 °C över-/undervärme. Skala potatisen och väg den angivna råa ätliga mängden. Skär i cirka 3 mm tunna strimlor utan att skölja bort stärkelsen. Skala och skiva den uppvägda löken. Låt ansjovisfiléerna rinna av och väg 158 g utan fri lag, motsvarande två deklarerade 79 g-mängder; dela grovt. Spadet används inte i denna version.",
+        "Mjukstek löken i hälften av gratängens smör på medelvärme utan att bryna den hårt. Smörj formen med en liten del av resterande smör.",
+        "Varva potatis, lök och ansjovis i formen och avsluta med potatis. Häll över grädden. Strö över svartpeppar och ströbröd och klicka över det sista gratängsmöret. Extra salt ingår inte eftersom fisken är salt.",
+        "Grädda gratängen i nedre delen av ugnen i 60 minuter.",
+        "Kontrollera gratängens yta och täck löst med folie om den blivit mörk.",
+        "Grädda ytterligare 40 minuter. Vätskan ska bindas till en krämig sås.",
+        "Kontrollera med sticka att samtliga potatislager är helt mjuka; förläng annars gräddningen. Ta ut formen.",
+        "Låt gratängen stå 10 minuter så att den sätter sig innan den delas i fyra middagsportioner.",
+        "Servera den varma frestelsen."
+      ],
+      "name": "Janssons frestelse – enkel – med avrunnen ansjovis utan extra spad",
+      "preparation": {
+        "family": "Janssons frestelse",
+        "input_forms": {
+          "grädde": "as_sold",
+          "gul lök": "raw_edible",
+          "potatis": "raw_edible",
+          "smör": "as_sold",
+          "ströbröd": "dry",
+          "svartpeppar": "dry",
+          "svensk ansjovis": "preserved_drained"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "bb70f3f8465efd347644df1b9dccf9b72a8894d0f490629fbfd77218e4a8625a",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 44,
+        "base_id": "smako-swedish-janssons-frestelse",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "potatis|raw_edible",
+                "name": "potatis",
+                "note": "",
+                "quantity": 1100.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "gul lök",
+                "note": "",
+                "quantity": 250.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svensk ansjovis|preserved_drained",
+                "name": "Svensk ansjovisfilé, avrunnen utan extra spad",
+                "note": "",
+                "quantity": 158.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "grädde|as_sold",
+                "name": "grädde",
+                "note": "",
+                "quantity": 350.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "smör|as_sold",
+                "name": "smör",
+                "note": "",
+                "quantity": 45.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ströbröd|dry",
+                "name": "ströbröd",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "svartpeppar",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "mjölk|as_sold",
+                "name": "mjölk",
+                "note": "",
+                "quantity": 150.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "gratang",
+            "name": "Potatis-ansjovisgratäng"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "grönkål|raw_edible",
+                "name": "grönkål",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "smör|as_sold",
+                "name": "smör",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              }
+            ],
+            "id": "kal",
+            "name": "Smörvänd grönkål"
+          }
+        ],
+        "content_sha256": "811c71d5ae8b1519bcaab1c75398c42ad44d967aaa398d8e0d8cb666d77d0b3e",
+        "content_source": {
+          "active_minutes": 44,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "reviewed-expansion-round2-stage15",
+          "priority": 1,
+          "proposal_id": "smako-swedish-janssons-frestelse",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "c3d6f5d0b311ed5e03eca409bafe98d0fe0b6bfd74ddb4010d1e9d5f8f28dd8b",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "swedish"
+        ],
+        "equipment": [
+          "ugn",
+          "gratängform",
+          "stekpanna",
+          "kastrull",
+          "mandolin eller kniv"
+        ],
+        "estimated_minutes": 154,
+        "family": "Janssons frestelse",
+        "fish": false,
+        "flavor_profile": [
+          "ansjovis",
+          "lök",
+          "grädde"
+        ],
+        "ingredient_count": 8,
+        "method": "oven",
+        "primary_ingredient": "svensk ansjovis med spad",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar, inte uppmätta. Potatisen är rå och strimlad och bakas länge i grädde med svensk ansjovis, inte sardeller. Ansjovismängden gäller filéer inklusive spad; fiskandel och sälta behöver produktgranskas. Utökad stannar vid elva ingredienser i stället för att fyllas ut med garnering. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "grönsaker i högre varianter",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 14,
+            "id": "s1",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "potatis|raw_edible",
+              "svensk ansjovis|preserved_drained"
+            ],
+            "parallel_group": null,
+            "text": "Sätt ugnen på 175 °C över-/undervärme. Skala potatisen och väg den angivna råa ätliga mängden. Skär i cirka 3 mm tunna strimlor utan att skölja bort stärkelsen. Skala och skiva den uppvägda löken. Låt ansjovisfiléerna rinna av och väg 158 g utan fri lag, motsvarande två deklarerade 79 g-mängder; dela grovt. Spadet används inte i denna version."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 8,
+            "id": "s2",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "smör|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Mjukstek löken i hälften av gratängens smör på medelvärme utan att bryna den hårt. Smörj formen med en liten del av resterande smör."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 7,
+            "id": "s3",
+            "ingredient_keys": [
+              "grädde|as_sold",
+              "gul lök|raw_edible",
+              "mjölk|as_sold",
+              "potatis|raw_edible",
+              "smör|as_sold",
+              "ströbröd|dry",
+              "svartpeppar|dry",
+              "svensk ansjovis|preserved_drained"
+            ],
+            "parallel_group": null,
+            "text": "Varva potatis, lök och ansjovis i formen och avsluta med potatis. Häll över grädden och mjölken. Strö över svartpeppar och ströbröd och klicka över det sista gratängsmöret. Extra salt ingår inte eftersom fisken är salt."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 60,
+            "id": "s4",
+            "ingredient_keys": [
+              "grädde|as_sold",
+              "potatis|raw_edible",
+              "svensk ansjovis|preserved_drained"
+            ],
+            "parallel_group": null,
+            "text": "Grädda gratängen i nedre delen av ugnen i 60 minuter."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 2,
+            "id": "s5",
+            "ingredient_keys": [
+              "potatis|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Kontrollera gratängens yta och täck löst med folie om den blivit mörk."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 40,
+            "id": "s6",
+            "ingredient_keys": [
+              "grädde|as_sold",
+              "potatis|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Grädda ytterligare 40 minuter. Vätskan ska bindas till en krämig sås."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 1,
+            "id": "s7",
+            "ingredient_keys": [
+              "potatis|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Kontrollera med sticka att samtliga potatislager är helt mjuka; förläng annars gräddningen. Ta ut formen."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 10,
+            "id": "s8",
+            "ingredient_keys": [
+              "grönkål|raw_edible",
+              "smör|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "60 ml",
+                60.0
+              ]
+            ],
+            "text": "Lägg den uppvägda frysta hackade grönkålen direkt i pannan med tillbehörets smör och 60 ml vatten. Genomhetta under omrörning minst tio minuter eller längre enligt förpackningen. Låt vattnet koka in; servera all kål och allt smör."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 10,
+            "id": "s9",
+            "ingredient_keys": [
+              "grädde|as_sold",
+              "potatis|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Låt gratängen stå 10 minuter så att den sätter sig innan den delas i fyra middagsportioner."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 2,
+            "id": "s10",
+            "ingredient_keys": [
+              "grönkål|raw_edible",
+              "potatis|raw_edible",
+              "svensk ansjovis|preserved_drained"
+            ],
+            "parallel_group": null,
+            "text": "Servera den varma frestelsen med smörvänd grönkål."
+          }
+        ],
+        "total_minutes": 154,
+        "variant_id": "standard",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 110
+      },
+      "ingredients": [
+        {
+          "canonical_name": "potatis",
+          "component": "gratang",
+          "form": "raw_edible",
+          "name": "potatis",
+          "quantity": 1100.0,
+          "quantity_max": 1100.0,
+          "quantity_min": 1100.0,
+          "quantity_step": 1100.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "gratang",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 250.0,
+          "quantity_max": 250.0,
+          "quantity_min": 250.0,
+          "quantity_step": 250.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svensk ansjovis",
+          "component": "gratang",
+          "form": "preserved_drained",
+          "name": "svensk ansjovis",
+          "product_requirements": [
+            "pack:intake_all_round2_4a9d9b6951b8"
+          ],
+          "quantity": 158.0,
+          "quantity_max": 158.0,
+          "quantity_min": 158.0,
+          "quantity_step": 158.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "grädde",
+          "component": "gratang",
+          "form": "as_sold",
+          "name": "grädde",
+          "product_requirements": [
+            "pack:intake_all_2ba6bda1d4b2"
+          ],
+          "quantity": 350.0,
+          "quantity_max": 350.0,
+          "quantity_min": 350.0,
+          "quantity_step": 350.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "smör",
+          "component": "gratang",
+          "form": "as_sold",
+          "name": "smör",
+          "product_requirements": [
+            "pack:intake_butter"
+          ],
+          "quantity": 60.0,
+          "quantity_max": 60.0,
+          "quantity_min": 60.0,
+          "quantity_step": 60.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ströbröd",
+          "component": "gratang",
+          "form": "dry",
+          "name": "ströbröd",
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 25.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "gratang",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "mjölk",
+          "component": "gratang",
+          "form": "as_sold",
+          "name": "mjölk",
+          "quantity": 150.0,
+          "quantity_max": 150.0,
+          "quantity_min": 150.0,
+          "quantity_step": 150.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "grönkål",
+          "component": "kal",
+          "form": "raw_edible",
+          "name": "grönkål",
+          "product_requirements": [
+            "pack:intake_all_2f43e26d5a69"
+          ],
+          "quantity": 300.0,
+          "quantity_max": 300.0,
+          "quantity_min": 300.0,
+          "quantity_step": 300.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Sätt ugnen på 175 °C över-/undervärme. Skala potatisen och väg den angivna råa ätliga mängden. Skär i cirka 3 mm tunna strimlor utan att skölja bort stärkelsen. Skala och skiva den uppvägda löken. Låt ansjovisfiléerna rinna av och väg 158 g utan fri lag, motsvarande två deklarerade 79 g-mängder; dela grovt. Spadet används inte i denna version.",
+        "Mjukstek löken i hälften av gratängens smör på medelvärme utan att bryna den hårt. Smörj formen med en liten del av resterande smör.",
+        "Varva potatis, lök och ansjovis i formen och avsluta med potatis. Häll över grädden och mjölken. Strö över svartpeppar och ströbröd och klicka över det sista gratängsmöret. Extra salt ingår inte eftersom fisken är salt.",
+        "Grädda gratängen i nedre delen av ugnen i 60 minuter.",
+        "Kontrollera gratängens yta och täck löst med folie om den blivit mörk.",
+        "Grädda ytterligare 40 minuter. Vätskan ska bindas till en krämig sås.",
+        "Kontrollera med sticka att samtliga potatislager är helt mjuka; förläng annars gräddningen. Ta ut formen.",
+        "Lägg den uppvägda frysta hackade grönkålen direkt i pannan med tillbehörets smör och 60 ml vatten. Genomhetta under omrörning minst tio minuter eller längre enligt förpackningen. Låt vattnet koka in; servera all kål och allt smör.",
+        "Låt gratängen stå 10 minuter så att den sätter sig innan den delas i fyra middagsportioner.",
+        "Servera den varma frestelsen med smörvänd grönkål."
+      ],
+      "name": "Janssons frestelse – standard – med avrunnen ansjovis utan extra spad",
+      "preparation": {
+        "family": "Janssons frestelse",
+        "input_forms": {
+          "grädde": "as_sold",
+          "grönkål": "raw_edible",
+          "gul lök": "raw_edible",
+          "mjölk": "as_sold",
+          "potatis": "raw_edible",
+          "smör": "as_sold",
+          "ströbröd": "dry",
+          "svartpeppar": "dry",
+          "svensk ansjovis": "preserved_drained"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "811c71d5ae8b1519bcaab1c75398c42ad44d967aaa398d8e0d8cb666d77d0b3e",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 52,
+        "base_id": "smako-swedish-janssons-frestelse",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "potatis|raw_edible",
+                "name": "potatis",
+                "note": "",
+                "quantity": 1100.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "gul lök",
+                "note": "",
+                "quantity": 250.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svensk ansjovis|preserved_drained",
+                "name": "Svensk ansjovisfilé, avrunnen utan extra spad",
+                "note": "",
+                "quantity": 158.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "grädde|as_sold",
+                "name": "grädde",
+                "note": "",
+                "quantity": 350.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "smör|as_sold",
+                "name": "smör",
+                "note": "",
+                "quantity": 45.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ströbröd|dry",
+                "name": "ströbröd",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "svartpeppar",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "mjölk|as_sold",
+                "name": "mjölk",
+                "note": "",
+                "quantity": 150.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "gratang",
+            "name": "Potatis-ansjovisgratäng"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "grönkål|raw_edible",
+                "name": "grönkål",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "smör|as_sold",
+                "name": "smör",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              }
+            ],
+            "id": "kal",
+            "name": "Smörvänd grönkål"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "rödbeta|raw_edible",
+                "name": "rödbeta",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "äpple|raw_edible",
+                "name": "äpple",
+                "note": "",
+                "quantity": 220.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "äppelcidervinäger|as_sold",
+                "name": "äppelcidervinäger",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "sallad",
+            "name": "Rödbets-äppelsallad"
+          }
+        ],
+        "content_sha256": "57c72d3de7d7c1a2cdf9b880848965fda8fcf328657583dff9634606a108e6ef",
+        "content_source": {
+          "active_minutes": 52,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "reviewed-expansion-round2-stage15",
+          "priority": 1,
+          "proposal_id": "smako-swedish-janssons-frestelse",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "c3d6f5d0b311ed5e03eca409bafe98d0fe0b6bfd74ddb4010d1e9d5f8f28dd8b",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "swedish"
+        ],
+        "equipment": [
+          "ugn",
+          "gratängform",
+          "stekpanna",
+          "kastrull",
+          "mandolin eller kniv"
+        ],
+        "estimated_minutes": 162,
+        "family": "Janssons frestelse",
+        "fish": false,
+        "flavor_profile": [
+          "ansjovis",
+          "lök",
+          "grädde"
+        ],
+        "ingredient_count": 11,
+        "method": "oven",
+        "primary_ingredient": "svensk ansjovis med spad",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar, inte uppmätta. Potatisen är rå och strimlad och bakas länge i grädde med svensk ansjovis, inte sardeller. Ansjovismängden gäller filéer inklusive spad; fiskandel och sälta behöver produktgranskas. Utökad stannar vid elva ingredienser i stället för att fyllas ut med garnering. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "grönsaker i högre varianter",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 14,
+            "id": "s1",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "potatis|raw_edible",
+              "svensk ansjovis|preserved_drained"
+            ],
+            "parallel_group": null,
+            "text": "Sätt ugnen på 175 °C över-/undervärme. Skala potatisen och väg den angivna råa ätliga mängden. Skär i cirka 3 mm tunna strimlor utan att skölja bort stärkelsen. Skala och skiva den uppvägda löken. Låt ansjovisfiléerna rinna av och väg 158 g utan fri lag, motsvarande två deklarerade 79 g-mängder; dela grovt. Spadet används inte i denna version."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 8,
+            "id": "s2",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "smör|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Mjukstek löken i hälften av gratängens smör på medelvärme utan att bryna den hårt. Smörj formen med en liten del av resterande smör."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 7,
+            "id": "s3",
+            "ingredient_keys": [
+              "grädde|as_sold",
+              "gul lök|raw_edible",
+              "mjölk|as_sold",
+              "potatis|raw_edible",
+              "smör|as_sold",
+              "ströbröd|dry",
+              "svartpeppar|dry",
+              "svensk ansjovis|preserved_drained"
+            ],
+            "parallel_group": null,
+            "text": "Varva potatis, lök och ansjovis i formen och avsluta med potatis. Häll över grädden och mjölken. Strö över svartpeppar och ströbröd och klicka över det sista gratängsmöret. Extra salt ingår inte eftersom fisken är salt."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 60,
+            "id": "s4",
+            "ingredient_keys": [
+              "grädde|as_sold",
+              "potatis|raw_edible",
+              "svensk ansjovis|preserved_drained"
+            ],
+            "parallel_group": null,
+            "text": "Grädda gratängen i nedre delen av ugnen i 60 minuter."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 2,
+            "id": "s5",
+            "ingredient_keys": [
+              "potatis|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Kontrollera gratängens yta och täck löst med folie om den blivit mörk."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 40,
+            "id": "s6",
+            "ingredient_keys": [
+              "grädde|as_sold",
+              "potatis|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Grädda ytterligare 40 minuter. Vätskan ska bindas till en krämig sås."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 1,
+            "id": "s7",
+            "ingredient_keys": [
+              "potatis|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Kontrollera med sticka att samtliga potatislager är helt mjuka; förläng annars gräddningen. Ta ut formen."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 10,
+            "id": "s8",
+            "ingredient_keys": [
+              "grönkål|raw_edible",
+              "smör|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "60 ml",
+                60.0
+              ]
+            ],
+            "text": "Lägg den uppvägda frysta hackade grönkålen direkt i pannan med tillbehörets smör och 60 ml vatten. Genomhetta under omrörning minst tio minuter eller längre enligt förpackningen. Låt vattnet koka in; servera all kål och allt smör."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 8,
+            "id": "s9",
+            "ingredient_keys": [
+              "rödbeta|raw_edible",
+              "äppelcidervinäger|as_sold",
+              "äpple|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Skala rödbetan och kärna ur äpplet, väg därefter respektive råa ätliga mängd. Riv rödbetan och skär äpplet i tunna stavar. Vänd med all vinäger och servera hela salladen med saften."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 10,
+            "id": "s10",
+            "ingredient_keys": [
+              "grädde|as_sold",
+              "potatis|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Låt gratängen stå 10 minuter så att den sätter sig innan den delas i fyra middagsportioner."
+          },
+          {
+            "depends_on": [
+              "s10"
+            ],
+            "duration_minutes": 2,
+            "id": "s11",
+            "ingredient_keys": [
+              "grönkål|raw_edible",
+              "potatis|raw_edible",
+              "rödbeta|raw_edible",
+              "svensk ansjovis|preserved_drained",
+              "äpple|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Servera den varma frestelsen med smörvänd grönkål och rödbets-äppelsallad."
+          }
+        ],
+        "total_minutes": 162,
+        "variant_id": "extended",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 110
+      },
+      "ingredients": [
+        {
+          "canonical_name": "potatis",
+          "component": "gratang",
+          "form": "raw_edible",
+          "name": "potatis",
+          "quantity": 1100.0,
+          "quantity_max": 1100.0,
+          "quantity_min": 1100.0,
+          "quantity_step": 1100.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "gratang",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 250.0,
+          "quantity_max": 250.0,
+          "quantity_min": 250.0,
+          "quantity_step": 250.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svensk ansjovis",
+          "component": "gratang",
+          "form": "preserved_drained",
+          "name": "svensk ansjovis",
+          "product_requirements": [
+            "pack:intake_all_round2_4a9d9b6951b8"
+          ],
+          "quantity": 158.0,
+          "quantity_max": 158.0,
+          "quantity_min": 158.0,
+          "quantity_step": 158.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "grädde",
+          "component": "gratang",
+          "form": "as_sold",
+          "name": "grädde",
+          "product_requirements": [
+            "pack:intake_all_2ba6bda1d4b2"
+          ],
+          "quantity": 350.0,
+          "quantity_max": 350.0,
+          "quantity_min": 350.0,
+          "quantity_step": 350.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "smör",
+          "component": "gratang",
+          "form": "as_sold",
+          "name": "smör",
+          "product_requirements": [
+            "pack:intake_butter"
+          ],
+          "quantity": 60.0,
+          "quantity_max": 60.0,
+          "quantity_min": 60.0,
+          "quantity_step": 60.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ströbröd",
+          "component": "gratang",
+          "form": "dry",
+          "name": "ströbröd",
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 25.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "gratang",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "mjölk",
+          "component": "gratang",
+          "form": "as_sold",
+          "name": "mjölk",
+          "quantity": 150.0,
+          "quantity_max": 150.0,
+          "quantity_min": 150.0,
+          "quantity_step": 150.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "grönkål",
+          "component": "kal",
+          "form": "raw_edible",
+          "name": "grönkål",
+          "product_requirements": [
+            "pack:intake_all_2f43e26d5a69"
+          ],
+          "quantity": 300.0,
+          "quantity_max": 300.0,
+          "quantity_min": 300.0,
+          "quantity_step": 300.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rödbeta",
+          "component": "sallad",
+          "form": "raw_edible",
+          "name": "rödbeta",
+          "quantity": 300.0,
+          "quantity_max": 300.0,
+          "quantity_min": 300.0,
+          "quantity_step": 300.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "äpple",
+          "component": "sallad",
+          "form": "raw_edible",
+          "name": "äpple",
+          "quantity": 220.0,
+          "quantity_max": 220.0,
+          "quantity_min": 220.0,
+          "quantity_step": 220.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "äppelcidervinäger",
+          "component": "sallad",
+          "form": "as_sold",
+          "name": "äppelcidervinäger",
+          "product_requirements": [
+            "pack:intake_all_be24da3ca83d"
+          ],
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 25.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        }
+      ],
+      "instructions": [
+        "Sätt ugnen på 175 °C över-/undervärme. Skala potatisen och väg den angivna råa ätliga mängden. Skär i cirka 3 mm tunna strimlor utan att skölja bort stärkelsen. Skala och skiva den uppvägda löken. Låt ansjovisfiléerna rinna av och väg 158 g utan fri lag, motsvarande två deklarerade 79 g-mängder; dela grovt. Spadet används inte i denna version.",
+        "Mjukstek löken i hälften av gratängens smör på medelvärme utan att bryna den hårt. Smörj formen med en liten del av resterande smör.",
+        "Varva potatis, lök och ansjovis i formen och avsluta med potatis. Häll över grädden och mjölken. Strö över svartpeppar och ströbröd och klicka över det sista gratängsmöret. Extra salt ingår inte eftersom fisken är salt.",
+        "Grädda gratängen i nedre delen av ugnen i 60 minuter.",
+        "Kontrollera gratängens yta och täck löst med folie om den blivit mörk.",
+        "Grädda ytterligare 40 minuter. Vätskan ska bindas till en krämig sås.",
+        "Kontrollera med sticka att samtliga potatislager är helt mjuka; förläng annars gräddningen. Ta ut formen.",
+        "Lägg den uppvägda frysta hackade grönkålen direkt i pannan med tillbehörets smör och 60 ml vatten. Genomhetta under omrörning minst tio minuter eller längre enligt förpackningen. Låt vattnet koka in; servera all kål och allt smör.",
+        "Skala rödbetan och kärna ur äpplet, väg därefter respektive råa ätliga mängd. Riv rödbetan och skär äpplet i tunna stavar. Vänd med all vinäger och servera hela salladen med saften.",
+        "Låt gratängen stå 10 minuter så att den sätter sig innan den delas i fyra middagsportioner.",
+        "Servera den varma frestelsen med smörvänd grönkål och rödbets-äppelsallad."
+      ],
+      "name": "Janssons frestelse – utökad – med avrunnen ansjovis utan extra spad",
+      "preparation": {
+        "family": "Janssons frestelse",
+        "input_forms": {
+          "grädde": "as_sold",
+          "grönkål": "raw_edible",
+          "gul lök": "raw_edible",
+          "mjölk": "as_sold",
+          "potatis": "raw_edible",
+          "rödbeta": "raw_edible",
+          "smör": "as_sold",
+          "ströbröd": "dry",
+          "svartpeppar": "dry",
+          "svensk ansjovis": "preserved_drained",
+          "äppelcidervinäger": "as_sold",
+          "äpple": "raw_edible"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "57c72d3de7d7c1a2cdf9b880848965fda8fcf328657583dff9634606a108e6ef",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 20,
+        "base_id": "smako-swedish-gubbrora-ansjovis",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ägg|as_sold",
+                "name": "Hela råa ägg med skal, räknade före kokning",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "st"
+              },
+              {
+                "ingredient_key": "svensk ansjovis|preserved_drained",
+                "name": "Svensk ansjovisfilé, avrunnen utan spad",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rödlök|raw_edible",
+                "name": "Rödlök",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "crème fraiche|as_sold",
+                "name": "Crème fraiche",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "dill|raw_edible",
+                "name": "Dill",
+                "note": "",
+                "quantity": 3.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c1",
+            "name": "Gubbröra"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "knäckebröd|as_sold",
+                "name": "Knäckebröd",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c2",
+            "name": "Knäckebröd"
+          }
+        ],
+        "content_sha256": "a355e1e34b9bbca524383b7a3fc826df1a3b85fc2636ddcb8ba6cc85738d41ff",
+        "content_source": {
+          "active_minutes": 20,
+          "method_note": "Ingredienslistan anger hela insatsen, även den del som senare hälls eller silas bort. Förlusten är inte uppmätt. Näring och färdig portionsvikt är okända; receptet kan inte styrka valda närings- eller viktgränser. Inköp och personliga kostkrav kontrolleras för samtliga insatser.",
+          "pack_id": "reviewed-expansion-round2-stage15",
+          "priority": 1,
+          "proposal_id": "smako-swedish-gubbrora-ansjovis",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "c3d6f5d0b311ed5e03eca409bafe98d0fe0b6bfd74ddb4010d1e9d5f8f28dd8b",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "swedish"
+        ],
+        "equipment": [
+          "kniv",
+          "skål",
+          "kylskåp"
+        ],
+        "estimated_minutes": 67,
+        "family": "chopped_cooked_egg_anchovy_salad",
+        "fish": false,
+        "flavor_profile": [
+          "svensk ansjovis",
+          "dill",
+          "lök"
+        ],
+        "ingredient_count": 6,
+        "meal_types": [
+          "snack"
+        ],
+        "method": "pot",
+        "primary_ingredient": "ägg och ansjovis",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "AI-författat receptutkast, inte provlagat och ännu inte import-/produktgranskat av Smako. Tider är författaruppskattningar, inte uppmätt provlagning. Den kalla kedjan förutsätter faktiskt färdigkokta ägg med kokt ätlig vikt; ingen rå insats har märkts om som kokt. Svensk kryddinlagd ansjovis av skarpsill, inte sardeller. En variant av svensk gubbröra utan potatis; tillägg och mängder är egen författning. Ansjovisens avrunna identitet är blockerad för registergranskning. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "knäckebröd",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 5,
+            "id": "s1",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Lägg de hela råa äggen i en kastrull med kallt vatten så de täcks. Koka upp."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 12,
+            "id": "s2",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sjud äggen tolv minuter så vitan och gulan blir fasta."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 1,
+            "id": "s3",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Häll av kokvattnet och lägg äggen i kallt vatten."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 5,
+            "id": "s4",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Låt äggen svalna i det kalla vattnet fem minuter."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 4,
+            "id": "s5",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Skala äggen, skölj bort eventuella skalrester och tärna dem med rena redskap. Lägg på en ren tallrik i kylskåp."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 4,
+            "id": "s6",
+            "ingredient_keys": [
+              "dill|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "15 ml",
+                15.0
+              ]
+            ],
+            "text": "Koka de frysta hackade örterna med 15 ml vatten under omrörning minst tre minuter eller längre enligt förpackningen. Häll hela mängden i en ren liten skål och ställ i kylskåp."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 30,
+            "id": "s7",
+            "ingredient_keys": [
+              "dill|raw_edible",
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Låt ägg och örter kallna helt i kylskåp, uppskattningsvis 30 minuter. Förläng tills båda är högst 8 °C innan de blandas med den kalla röran."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 2,
+            "id": "s8",
+            "ingredient_keys": [
+              "svensk ansjovis|preserved_drained"
+            ],
+            "parallel_group": null,
+            "text": "Låt ansjovisfiléerna rinna av utan att skölja, väg den angivna avrunna mängden och hacka fint."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 3,
+            "id": "s9",
+            "ingredient_keys": [
+              "crème fraiche|as_sold",
+              "dill|raw_edible",
+              "rödlök|raw_edible",
+              "svensk ansjovis|preserved_drained",
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Finhacka den skalade uppvägda rödlöken. Rör ihop med crème fraiche och hela den kalla örtblandningen med vätskan. Vänd ner de kalla tärnade äggen och ansjovisen. Inget extra salt ingår."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 1,
+            "id": "s10",
+            "ingredient_keys": [
+              "knäckebröd|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Servera genast på eller med knäckebrödet. Röran ska stå i kylskåp, cirka 4 °C, fram till serveringen och inte långvarigt i rumstemperatur."
+          }
+        ],
+        "total_minutes": 67,
+        "unmeasured_processes": [
+          {
+            "description": "Två råa hela ägg kokas och skalas. Ingen rå eller kokt styckvikt eller skalandel antas.",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "operation": "peel_after_cooking",
+            "step_id": "s5"
+          }
+        ],
+        "variant_id": "simple",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 47
+      },
+      "ingredients": [
+        {
+          "canonical_name": "ägg",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "ägg",
+          "product_requirements": [
+            "pack:intake_all_round2_eb585a9d4454"
+          ],
+          "quantity": 2.0,
+          "quantity_max": 2.0,
+          "quantity_min": 2.0,
+          "quantity_step": 2.0,
+          "required": true,
+          "role": "primary",
+          "unit": "st"
+        },
+        {
+          "canonical_name": "svensk ansjovis",
+          "component": "c1",
+          "form": "preserved_drained",
+          "name": "svensk ansjovis",
+          "product_requirements": [
+            "pack:intake_all_round2_4a9d9b6951b8"
+          ],
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 25.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rödlök",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "rödlök",
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 10.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "crème fraiche",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "crème fraiche",
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "dill",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "dill",
+          "product_requirements": [
+            "frozen"
+          ],
+          "quantity": 3.0,
+          "quantity_max": 3.0,
+          "quantity_min": 3.0,
+          "quantity_step": 3.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "knäckebröd",
+          "component": "c2",
+          "form": "as_sold",
+          "name": "knäckebröd",
+          "product_requirements": [
+            "pack:intake_all_692c59119944"
+          ],
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Lägg de hela råa äggen i en kastrull med kallt vatten så de täcks. Koka upp.",
+        "Sjud äggen tolv minuter så vitan och gulan blir fasta.",
+        "Häll av kokvattnet och lägg äggen i kallt vatten.",
+        "Låt äggen svalna i det kalla vattnet fem minuter.",
+        "Skala äggen, skölj bort eventuella skalrester och tärna dem med rena redskap. Lägg på en ren tallrik i kylskåp.",
+        "Koka de frysta hackade örterna med 15 ml vatten under omrörning minst tre minuter eller längre enligt förpackningen. Häll hela mängden i en ren liten skål och ställ i kylskåp.",
+        "Låt ägg och örter kallna helt i kylskåp, uppskattningsvis 30 minuter. Förläng tills båda är högst 8 °C innan de blandas med den kalla röran.",
+        "Låt ansjovisfiléerna rinna av utan att skölja, väg den angivna avrunna mängden och hacka fint.",
+        "Finhacka den skalade uppvägda rödlöken. Rör ihop med crème fraiche och hela den kalla örtblandningen med vätskan. Vänd ner de kalla tärnade äggen och ansjovisen. Inget extra salt ingår.",
+        "Servera genast på eller med knäckebrödet. Röran ska stå i kylskåp, cirka 4 °C, fram till serveringen och inte långvarigt i rumstemperatur."
+      ],
+      "name": "Gubbröra med ansjovis på knäckebröd – ansjovis- och äggröra på knäcke – med nykokta och kylda ägg",
+      "preparation": {
+        "family": "chopped_cooked_egg_anchovy_salad",
+        "input_forms": {
+          "crème fraiche": "as_sold",
+          "dill": "raw_edible",
+          "knäckebröd": "as_sold",
+          "rödlök": "raw_edible",
+          "svensk ansjovis": "preserved_drained",
+          "ägg": "as_sold"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "a355e1e34b9bbca524383b7a3fc826df1a3b85fc2636ddcb8ba6cc85738d41ff",
+        "version": "smako-authored-losses-v3"
+      },
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 22,
+        "base_id": "smako-swedish-gubbrora-ansjovis",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ägg|as_sold",
+                "name": "Hela råa ägg med skal, räknade före kokning",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "st"
+              },
+              {
+                "ingredient_key": "svensk ansjovis|preserved_drained",
+                "name": "Svensk ansjovisfilé, avrunnen utan spad",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rödlök|raw_edible",
+                "name": "Rödlök",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "crème fraiche|as_sold",
+                "name": "Crème fraiche",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "dill|raw_edible",
+                "name": "Dill",
+                "note": "",
+                "quantity": 3.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "senap|as_sold",
+                "name": "Senap",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gräslök|raw_edible",
+                "name": "Gräslök",
+                "note": "",
+                "quantity": 3.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c1",
+            "name": "Gubbröra"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "knäckebröd|as_sold",
+                "name": "Knäckebröd",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c2",
+            "name": "Knäckebröd"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "gurka|raw_edible",
+                "name": "Gurka",
+                "note": "",
+                "quantity": 60.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c3",
+            "name": "Gurka"
+          }
+        ],
+        "content_sha256": "d7690458d879df86e9d0e41aac456584b11914a881febcf655fa61cd53d17d34",
+        "content_source": {
+          "active_minutes": 22,
+          "method_note": "Ingredienslistan anger hela insatsen, även den del som senare hälls eller silas bort. Förlusten är inte uppmätt. Näring och färdig portionsvikt är okända; receptet kan inte styrka valda närings- eller viktgränser. Inköp och personliga kostkrav kontrolleras för samtliga insatser.",
+          "pack_id": "reviewed-expansion-round2-stage15",
+          "priority": 1,
+          "proposal_id": "smako-swedish-gubbrora-ansjovis",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "c3d6f5d0b311ed5e03eca409bafe98d0fe0b6bfd74ddb4010d1e9d5f8f28dd8b",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "swedish"
+        ],
+        "equipment": [
+          "kniv",
+          "skål",
+          "kylskåp"
+        ],
+        "estimated_minutes": 69,
+        "family": "chopped_cooked_egg_anchovy_salad",
+        "fish": false,
+        "flavor_profile": [
+          "svensk ansjovis",
+          "dill",
+          "lök"
+        ],
+        "ingredient_count": 9,
+        "meal_types": [
+          "snack"
+        ],
+        "method": "pot",
+        "primary_ingredient": "ägg och ansjovis",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "AI-författat receptutkast, inte provlagat och ännu inte import-/produktgranskat av Smako. Tider är författaruppskattningar, inte uppmätt provlagning. Den kalla kedjan förutsätter faktiskt färdigkokta ägg med kokt ätlig vikt; ingen rå insats har märkts om som kokt. Svensk kryddinlagd ansjovis av skarpsill, inte sardeller. En variant av svensk gubbröra utan potatis; tillägg och mängder är egen författning. Ansjovisens avrunna identitet är blockerad för registergranskning. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "knäckebröd och gurka",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 5,
+            "id": "s1",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Lägg de hela råa äggen i en kastrull med kallt vatten så de täcks. Koka upp."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 12,
+            "id": "s2",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sjud äggen tolv minuter så vitan och gulan blir fasta."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 1,
+            "id": "s3",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Häll av kokvattnet och lägg äggen i kallt vatten."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 5,
+            "id": "s4",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Låt äggen svalna i det kalla vattnet fem minuter."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 4,
+            "id": "s5",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Skala äggen, skölj bort eventuella skalrester och tärna dem med rena redskap. Lägg på en ren tallrik i kylskåp."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 4,
+            "id": "s6",
+            "ingredient_keys": [
+              "dill|raw_edible",
+              "gräslök|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "15 ml",
+                15.0
+              ]
+            ],
+            "text": "Koka de frysta hackade örterna med 15 ml vatten under omrörning minst tre minuter eller längre enligt förpackningen. Häll hela mängden i en ren liten skål och ställ i kylskåp."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 30,
+            "id": "s7",
+            "ingredient_keys": [
+              "dill|raw_edible",
+              "gräslök|raw_edible",
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Låt ägg och örter kallna helt i kylskåp, uppskattningsvis 30 minuter. Förläng tills båda är högst 8 °C innan de blandas med den kalla röran."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 2,
+            "id": "s8",
+            "ingredient_keys": [
+              "svensk ansjovis|preserved_drained"
+            ],
+            "parallel_group": null,
+            "text": "Låt ansjovisfiléerna rinna av utan att skölja, väg den angivna avrunna mängden och hacka fint."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 3,
+            "id": "s9",
+            "ingredient_keys": [
+              "crème fraiche|as_sold",
+              "dill|raw_edible",
+              "gräslök|raw_edible",
+              "rödlök|raw_edible",
+              "senap|as_sold",
+              "svensk ansjovis|preserved_drained",
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Finhacka den skalade uppvägda rödlöken. Rör ihop med crème fraiche och hela den kalla örtblandningen med vätskan. Rör också i senapen. Vänd ner de kalla tärnade äggen och ansjovisen. Inget extra salt ingår."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 2,
+            "id": "s10",
+            "ingredient_keys": [
+              "gurka|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Skär gurkan i stavar eller skivor och lägg bredvid."
+          },
+          {
+            "depends_on": [
+              "s10"
+            ],
+            "duration_minutes": 1,
+            "id": "s11",
+            "ingredient_keys": [
+              "knäckebröd|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Servera genast på eller med knäckebrödet och gurkan. Röran ska stå i kylskåp, cirka 4 °C, fram till serveringen och inte långvarigt i rumstemperatur."
+          }
+        ],
+        "total_minutes": 69,
+        "unmeasured_processes": [
+          {
+            "description": "Två råa hela ägg kokas och skalas. Ingen rå eller kokt styckvikt eller skalandel antas.",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "operation": "peel_after_cooking",
+            "step_id": "s5"
+          }
+        ],
+        "variant_id": "extended",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 47
+      },
+      "ingredients": [
+        {
+          "canonical_name": "ägg",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "ägg",
+          "product_requirements": [
+            "pack:intake_all_round2_eb585a9d4454"
+          ],
+          "quantity": 2.0,
+          "quantity_max": 2.0,
+          "quantity_min": 2.0,
+          "quantity_step": 2.0,
+          "required": true,
+          "role": "primary",
+          "unit": "st"
+        },
+        {
+          "canonical_name": "svensk ansjovis",
+          "component": "c1",
+          "form": "preserved_drained",
+          "name": "svensk ansjovis",
+          "product_requirements": [
+            "pack:intake_all_round2_4a9d9b6951b8"
+          ],
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 25.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rödlök",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "rödlök",
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 10.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "crème fraiche",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "crème fraiche",
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "dill",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "dill",
+          "product_requirements": [
+            "frozen"
+          ],
+          "quantity": 3.0,
+          "quantity_max": 3.0,
+          "quantity_min": 3.0,
+          "quantity_step": 3.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "senap",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "senap",
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gräslök",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "gräslök",
+          "product_requirements": [
+            "pack:intake_all_c39128bb8715"
+          ],
+          "quantity": 3.0,
+          "quantity_max": 3.0,
+          "quantity_min": 3.0,
+          "quantity_step": 3.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "knäckebröd",
+          "component": "c2",
+          "form": "as_sold",
+          "name": "knäckebröd",
+          "product_requirements": [
+            "pack:intake_all_692c59119944"
+          ],
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gurka",
+          "component": "c3",
+          "form": "raw_edible",
+          "name": "gurka",
+          "quantity": 60.0,
+          "quantity_max": 60.0,
+          "quantity_min": 60.0,
+          "quantity_step": 60.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Lägg de hela råa äggen i en kastrull med kallt vatten så de täcks. Koka upp.",
+        "Sjud äggen tolv minuter så vitan och gulan blir fasta.",
+        "Häll av kokvattnet och lägg äggen i kallt vatten.",
+        "Låt äggen svalna i det kalla vattnet fem minuter.",
+        "Skala äggen, skölj bort eventuella skalrester och tärna dem med rena redskap. Lägg på en ren tallrik i kylskåp.",
+        "Koka de frysta hackade örterna med 15 ml vatten under omrörning minst tre minuter eller längre enligt förpackningen. Häll hela mängden i en ren liten skål och ställ i kylskåp.",
+        "Låt ägg och örter kallna helt i kylskåp, uppskattningsvis 30 minuter. Förläng tills båda är högst 8 °C innan de blandas med den kalla röran.",
+        "Låt ansjovisfiléerna rinna av utan att skölja, väg den angivna avrunna mängden och hacka fint.",
+        "Finhacka den skalade uppvägda rödlöken. Rör ihop med crème fraiche och hela den kalla örtblandningen med vätskan. Rör också i senapen. Vänd ner de kalla tärnade äggen och ansjovisen. Inget extra salt ingår.",
+        "Skär gurkan i stavar eller skivor och lägg bredvid.",
+        "Servera genast på eller med knäckebrödet och gurkan. Röran ska stå i kylskåp, cirka 4 °C, fram till serveringen och inte långvarigt i rumstemperatur."
+      ],
+      "name": "Gubbröra med ansjovis på knäckebröd – med senap, gräslök och gurka – med nykokta och kylda ägg",
+      "preparation": {
+        "family": "chopped_cooked_egg_anchovy_salad",
+        "input_forms": {
+          "crème fraiche": "as_sold",
+          "dill": "raw_edible",
+          "gräslök": "raw_edible",
+          "gurka": "raw_edible",
+          "knäckebröd": "as_sold",
+          "rödlök": "raw_edible",
+          "senap": "as_sold",
+          "svensk ansjovis": "preserved_drained",
+          "ägg": "as_sold"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "d7690458d879df86e9d0e41aac456584b11914a881febcf655fa61cd53d17d34",
+        "version": "smako-authored-losses-v3"
+      },
+      "servings": 1
+    }
+  ]
+}
