@@ -83,3 +83,8 @@
 /backend/app/data/ingredients/expansion-round2-20261101.json -text whitespace=cr-at-eol
 /backend/app/data/recipes/reviewed-expansion-round2-20261101/*.json -text whitespace=cr-at-eol
 /docs/reviews/recipe-unblock-round2-20261101/*.json -text whitespace=cr-at-eol
+# Preserve continuation 022-024 and independently reviewed round-three receipts.
+/backend/app/data/recipes/incoming/authoring-1000-20261101/continuation-21/source/** -text whitespace=cr-at-eol
+/backend/app/data/recipes/incoming/authoring-1000-20261101/continuation-21/source/RECEPTINDEX.txt -text whitespace=cr-at-eol,-blank-at-eof
+/backend/app/data/recipes/reviewed-expansion-round3-20261102/*.json -text whitespace=cr-at-eol
+/docs/reviews/recipe-unblock-round3-20261102/*.json -text whitespace=cr-at-eol

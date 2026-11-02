@@ -1,0 +1,978 @@
+{
+  "pack_id": "reviewed-expansion-round3-stage3",
+  "recipes": [
+    {
+      "design": {
+        "active_minutes": 20,
+        "base_id": "smako-greek-kolokithopita-sot-pumpapaj",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "filodeg|as_sold",
+                "name": "Filodeg",
+                "note": "",
+                "quantity": 35.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "smör|as_sold",
+                "name": "Smör",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "g"
+              }
+            ],
+            "id": "pastry",
+            "name": "Filohölje"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "pumpa|raw_edible",
+                "name": "Pumpa",
+                "note": "",
+                "quantity": 130.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "Strösocker",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kanel|dry",
+                "name": "Kanel",
+                "note": "",
+                "quantity": 0.5,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "valnötter|as_sold",
+                "name": "Valnötter",
+                "note": "",
+                "quantity": 12.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "russin|as_sold",
+                "name": "Russin",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kanderade apelsinskal|as_sold",
+                "name": "Kanderade apelsinskal, ny dos",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "g"
+              }
+            ],
+            "id": "fill",
+            "name": "Pumpafyllning"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "greek"
+        ],
+        "equipment": [
+          "Kastrull",
+          "Ugn",
+          "Liten pajform",
+          "Bakpapper"
+        ],
+        "estimated_minutes": 82,
+        "family": "Glykia kolokithopita",
+        "fish": false,
+        "flavor_profile": [
+          "kanel",
+          "pumpa"
+        ],
+        "ingredient_count": 8,
+        "meal_types": [
+          "snack"
+        ],
+        "method": "bake",
+        "primary_ingredient": "pumpa",
+        "provenance": {
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import-, ingrediens- eller produktgranskat av Smako. Mängder och tider är författaruppskattningar. Väg råa ätliga delar efter putsning och avrunna råvaror efter avrinning; mängderna av ägg avser ägg utan skal. Söt pumpapaj, inte pumpaäggstanning. Filodegen är färdigköpt; inga olistade ingredienser till hemmadeg förutsätts. Innehållsgranskad 2026-11-02; inte provlagad. Produktformer, mängder och avvikelser är dokumenterade i granskningsrapporten.",
+          "reviewed_at": "2026-11-02"
+        },
+        "side": "filodeg",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 4,
+            "id": "s1",
+            "ingredient_keys": [
+              "pumpa|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "35 ml",
+                35.0
+              ]
+            ],
+            "text": "Skala och kärna ur pumpan, väg den angivna råa ätliga mängden och skär smått. Lägg i kastrull med 35 ml vatten och lock."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 12,
+            "id": "s2",
+            "ingredient_keys": [
+              "pumpa|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud under lock cirka tolv minuter tills pumpan kan mosas med en gaffel."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 8,
+            "id": "s3",
+            "ingredient_keys": [
+              "kanderade apelsinskal|as_sold",
+              "kanel|dry",
+              "pumpa|raw_edible",
+              "russin|as_sold",
+              "strösocker|dry",
+              "valnötter|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Mosa pumpan och rör ner socker och kanel, grovhackade valnötter, russin och finhackade kanderade apelsinskal. Rör på medelvärme tills fyllningen är tjock och en sked lämnar ett tydligt spår. Koka bort kvarvarande fritt vatten under omrörning; inget pumpaspad hälls bort."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 15,
+            "id": "s4",
+            "ingredient_keys": [
+              "kanderade apelsinskal|as_sold",
+              "kanel|dry",
+              "pumpa|raw_edible",
+              "russin|as_sold",
+              "strösocker|dry",
+              "valnötter|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Bred ut fyllningen tunt och låt svalna femton minuter. Sätt därefter på ugnen i nästa arbetssteg."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 8,
+            "id": "s5",
+            "ingredient_keys": [
+              "filodeg|as_sold",
+              "pumpa|raw_edible",
+              "smör|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sätt ugnen på 190 °C över-/undervärme. Smält smöret. Klä en liten form med bakpapper. Använd hälften av filodegen som botten och pensla varje lager tunt med smör. Lägg på pumpafyllningen, täck med resten av filon och använd återstående smör till lagren och ytan. Vik in kanterna."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 25,
+            "id": "s6",
+            "ingredient_keys": [
+              "filodeg|as_sold",
+              "pumpa|raw_edible",
+              "smör|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Grädda cirka 25 minuter tills filon är frasig och gyllene även vid botten. Håll samma fyllningsdjup, omkring 2 cm, om receptet skalas upp."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 10,
+            "id": "s7",
+            "ingredient_keys": [
+              "pumpa|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Låt svalna tio minuter före servering. Vid större sats används flera formar med samma fyllningsdjup. Fördela hela pajen eller pajerna jämnt över det valda portionsantalet."
+          }
+        ],
+        "total_minutes": 82,
+        "variant_id": "extended",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 62
+      },
+      "ingredients": [
+        {
+          "canonical_name": "filodeg",
+          "component": "pastry",
+          "form": "as_sold",
+          "name": "filodeg",
+          "product_requirements": [
+            "pack:intake_all_84bf8a612357"
+          ],
+          "quantity": 35.0,
+          "quantity_max": 35.0,
+          "quantity_min": 35.0,
+          "quantity_step": 35.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "smör",
+          "component": "pastry",
+          "form": "as_sold",
+          "name": "smör",
+          "product_requirements": [
+            "pack:intake_butter"
+          ],
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 10.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "pumpa",
+          "component": "fill",
+          "form": "raw_edible",
+          "name": "pumpa",
+          "product_requirements": [
+            "pack:intake_all_698c76eefaf0"
+          ],
+          "quantity": 130.0,
+          "quantity_max": 130.0,
+          "quantity_min": 130.0,
+          "quantity_step": 130.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "strösocker",
+          "component": "fill",
+          "form": "dry",
+          "name": "strösocker",
+          "product_requirements": [
+            "pack:sugar"
+          ],
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 10.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kanel",
+          "component": "fill",
+          "form": "dry",
+          "name": "kanel",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 0.5,
+          "quantity_max": 0.5,
+          "quantity_min": 0.5,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "valnötter",
+          "component": "fill",
+          "form": "as_sold",
+          "name": "valnötter",
+          "product_requirements": [
+            "pack:intake_walnuts"
+          ],
+          "quantity": 12.0,
+          "quantity_max": 12.0,
+          "quantity_min": 12.0,
+          "quantity_step": 12.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "russin",
+          "component": "fill",
+          "form": "as_sold",
+          "name": "russin",
+          "product_requirements": [
+            "pack:intake_all_c84b87d5ba4a"
+          ],
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 10.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kanderade apelsinskal",
+          "component": "fill",
+          "form": "as_sold",
+          "name": "kanderade apelsinskal",
+          "product_requirements": [
+            "pack:intake_all_round2_e9fa816eee5a"
+          ],
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Skala och kärna ur pumpan, väg den angivna råa ätliga mängden och skär smått. Lägg i kastrull med 35 ml vatten och lock.",
+        "Sjud under lock cirka tolv minuter tills pumpan kan mosas med en gaffel.",
+        "Mosa pumpan och rör ner socker och kanel, grovhackade valnötter, russin och finhackade kanderade apelsinskal. Rör på medelvärme tills fyllningen är tjock och en sked lämnar ett tydligt spår. Koka bort kvarvarande fritt vatten under omrörning; inget pumpaspad hälls bort.",
+        "Bred ut fyllningen tunt och låt svalna femton minuter. Sätt därefter på ugnen i nästa arbetssteg.",
+        "Sätt ugnen på 190 °C över-/undervärme. Smält smöret. Klä en liten form med bakpapper. Använd hälften av filodegen som botten och pensla varje lager tunt med smör. Lägg på pumpafyllningen, täck med resten av filon och använd återstående smör till lagren och ytan. Vik in kanterna.",
+        "Grädda cirka 25 minuter tills filon är frasig och gyllene även vid botten. Håll samma fyllningsdjup, omkring 2 cm, om receptet skalas upp.",
+        "Låt svalna tio minuter före servering. Vid större sats används flera formar med samma fyllningsdjup. Fördela hela pajen eller pajerna jämnt över det valda portionsantalet."
+      ],
+      "name": "Söt kolokithopita med pumpa och kanel – utökad – med kanderat apelsinskal",
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 20,
+        "base_id": "smako-mexican-coyotas-piloncillo",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "vetemjöl|dry",
+                "name": "Vetemjöl",
+                "note": "",
+                "quantity": 42.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "smör|as_sold",
+                "name": "Smör",
+                "note": "",
+                "quantity": 14.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "bakpulver|dry",
+                "name": "Bakpulver",
+                "note": "",
+                "quantity": 0.6,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 0.2,
+                "unit": "g"
+              }
+            ],
+            "id": "dough",
+            "name": "Smörbaserad kakdeg"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "mörkt muscovadosocker|dry",
+                "name": "mörkt muscovadosocker",
+                "note": "",
+                "quantity": 18.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vetemjöl|dry",
+                "name": "Vetemjöl",
+                "note": "",
+                "quantity": 3.0,
+                "unit": "g"
+              }
+            ],
+            "id": "fill",
+            "name": "Muscovadofyllning"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "mexican"
+        ],
+        "equipment": [
+          "Ugn",
+          "Kavel",
+          "Bakpapper",
+          "Galler"
+        ],
+        "estimated_minutes": 75,
+        "family": "Coyotas",
+        "fish": false,
+        "flavor_profile": [
+          "rörsocker"
+        ],
+        "ingredient_count": 4,
+        "meal_types": [
+          "snack"
+        ],
+        "method": "bake",
+        "primary_ingredient": "mörkt muscovadosocker",
+        "provenance": {
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import-, ingrediens- eller produktgranskat av Smako. Mängder och tider är författaruppskattningar. Väg råa ätliga delar efter putsning och avrunna råvaror efter avrinning; mängderna av ägg avser ägg utan skal. Sonora-inspirerad smöranpassning av coyotas; traditionell fettdeg kan göras med andra fetter. Detta är inte laminerad smördeg trots fettinnehållet. Innehållsgranskad 2026-11-02; inte provlagad. Produktformer, mängder och avvikelser är dokumenterade i granskningsrapporten.",
+          "reviewed_at": "2026-11-02"
+        },
+        "side": "mördeg",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 5,
+            "id": "s1",
+            "ingredient_keys": [
+              "bakpulver|dry",
+              "salt|as_sold",
+              "smör|as_sold",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "14 ml",
+                14.0
+              ]
+            ],
+            "text": "Blanda degens vetemjöl, bakpulver och salt. Nyp in smöret och arbeta in 14 ml vatten till en mjuk men inte kladdig deg. Knåda bara tills den håller samman."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 20,
+            "id": "s2",
+            "ingredient_keys": [
+              "smör|as_sold",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Låt degen vila täckt i kylskåp."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 5,
+            "id": "s3",
+            "ingredient_keys": [
+              "mörkt muscovadosocker|dry",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Smula sönder alla klumpar i det mörka muscovadosockret och blanda med fyllningens vetemjöl. Tillsätt inget vatten till fyllningen; den ska vara smulig utan fri vätska före gräddning."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 7,
+            "id": "s4",
+            "ingredient_keys": [
+              "mörkt muscovadosocker|dry",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "2 ml",
+                2.0
+              ]
+            ],
+            "text": "Sätt ugnen på 190 °C över-/undervärme. Dela degen i två lika delar per vald portion och kavla varje del mellan bakpapper till en tunn rundel, cirka tio centimeter. Fördela fyllningen jämnt på hälften av rundlarna med fri kant. Använd totalt 2 ml vatten för att fukta kanterna, lägg på lockrundlarna och förslut noga med gaffel. Stick två små ånghål per kaka. Håll kakornas storlek vid större sats; använd fler plåtar eller omgångar."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 20,
+            "id": "s5",
+            "ingredient_keys": [
+              "mörkt muscovadosocker|dry",
+              "smör|as_sold",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Grädda på bakpapper cirka tjugo minuter tills båda degskivorna är genomgräddade och ytan gyllene. Kontrollera undersidan i nästa aktiva steg; förläng vid behov."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 3,
+            "id": "s6",
+            "ingredient_keys": [
+              "mörkt muscovadosocker|dry"
+            ],
+            "parallel_group": null,
+            "text": "Kontrollera att även undersidan är gräddad och förläng vid behov. Flytta försiktigt kakorna till galler med bakspade. Fördela eventuell utläckt fyllning på samma kakor; fyllningen är mycket het direkt ur ugnen."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 15,
+            "id": "s7",
+            "ingredient_keys": [
+              "mörkt muscovadosocker|dry"
+            ],
+            "parallel_group": null,
+            "text": "Låt svalna minst femton minuter på galler. Servera en kaka per vald portion."
+          }
+        ],
+        "total_minutes": 75,
+        "variant_id": "simple",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 55
+      },
+      "ingredients": [
+        {
+          "canonical_name": "vetemjöl",
+          "component": "dough",
+          "form": "dry",
+          "name": "vetemjöl",
+          "quantity": 45.0,
+          "quantity_max": 45.0,
+          "quantity_min": 45.0,
+          "quantity_step": 45.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "smör",
+          "component": "dough",
+          "form": "as_sold",
+          "name": "smör",
+          "product_requirements": [
+            "pack:intake_butter"
+          ],
+          "quantity": 14.0,
+          "quantity_max": 14.0,
+          "quantity_min": 14.0,
+          "quantity_step": 14.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "bakpulver",
+          "component": "dough",
+          "form": "dry",
+          "name": "bakpulver",
+          "product_requirements": [
+            "pack:intake_baking_powder"
+          ],
+          "quantity": 0.6,
+          "quantity_max": 0.6,
+          "quantity_min": 0.6,
+          "quantity_step": 0.6,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "dough",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 0.2,
+          "quantity_max": 0.2,
+          "quantity_min": 0.2,
+          "quantity_step": 0.2,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "mörkt muscovadosocker",
+          "component": "fill",
+          "form": "dry",
+          "name": "mörkt muscovadosocker",
+          "product_requirements": [
+            "pack:intake_all_expansion_ac284f871634"
+          ],
+          "quantity": 18.0,
+          "quantity_max": 18.0,
+          "quantity_min": 18.0,
+          "quantity_step": 18.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Blanda degens vetemjöl, bakpulver och salt. Nyp in smöret och arbeta in 14 ml vatten till en mjuk men inte kladdig deg. Knåda bara tills den håller samman.",
+        "Låt degen vila täckt i kylskåp.",
+        "Smula sönder alla klumpar i det mörka muscovadosockret och blanda med fyllningens vetemjöl. Tillsätt inget vatten till fyllningen; den ska vara smulig utan fri vätska före gräddning.",
+        "Sätt ugnen på 190 °C över-/undervärme. Dela degen i två lika delar per vald portion och kavla varje del mellan bakpapper till en tunn rundel, cirka tio centimeter. Fördela fyllningen jämnt på hälften av rundlarna med fri kant. Använd totalt 2 ml vatten för att fukta kanterna, lägg på lockrundlarna och förslut noga med gaffel. Stick två små ånghål per kaka. Håll kakornas storlek vid större sats; använd fler plåtar eller omgångar.",
+        "Grädda på bakpapper cirka tjugo minuter tills båda degskivorna är genomgräddade och ytan gyllene. Kontrollera undersidan i nästa aktiva steg; förläng vid behov.",
+        "Kontrollera att även undersidan är gräddad och förläng vid behov. Flytta försiktigt kakorna till galler med bakspade. Fördela eventuell utläckt fyllning på samma kakor; fyllningen är mycket het direkt ur ugnen.",
+        "Låt svalna minst femton minuter på galler. Servera en kaka per vald portion."
+      ],
+      "name": "Coyotas – fyllda muscovadokakor – enkel",
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 20,
+        "base_id": "smako-mexican-coyotas-piloncillo",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "vetemjöl|dry",
+                "name": "Vetemjöl",
+                "note": "",
+                "quantity": 42.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "smör|as_sold",
+                "name": "Smör",
+                "note": "",
+                "quantity": 14.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "bakpulver|dry",
+                "name": "Bakpulver",
+                "note": "",
+                "quantity": 0.6,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 0.2,
+                "unit": "g"
+              }
+            ],
+            "id": "dough",
+            "name": "Smörbaserad kakdeg"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "mörkt muscovadosocker|dry",
+                "name": "mörkt muscovadosocker",
+                "note": "",
+                "quantity": 18.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vetemjöl|dry",
+                "name": "Vetemjöl",
+                "note": "",
+                "quantity": 3.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "valnötter|as_sold",
+                "name": "Valnötter",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kanel|dry",
+                "name": "Kanel",
+                "note": "",
+                "quantity": 0.25,
+                "unit": "g"
+              }
+            ],
+            "id": "fill",
+            "name": "Muscovadofyllning"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "mexican"
+        ],
+        "equipment": [
+          "Ugn",
+          "Kavel",
+          "Bakpapper",
+          "Galler"
+        ],
+        "estimated_minutes": 75,
+        "family": "Coyotas",
+        "fish": false,
+        "flavor_profile": [
+          "rörsocker"
+        ],
+        "ingredient_count": 6,
+        "meal_types": [
+          "snack"
+        ],
+        "method": "bake",
+        "primary_ingredient": "mörkt muscovadosocker",
+        "provenance": {
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import-, ingrediens- eller produktgranskat av Smako. Mängder och tider är författaruppskattningar. Väg råa ätliga delar efter putsning och avrunna råvaror efter avrinning; mängderna av ägg avser ägg utan skal. Sonora-inspirerad smöranpassning av coyotas; traditionell fettdeg kan göras med andra fetter. Detta är inte laminerad smördeg trots fettinnehållet. Innehållsgranskad 2026-11-02; inte provlagad. Produktformer, mängder och avvikelser är dokumenterade i granskningsrapporten.",
+          "reviewed_at": "2026-11-02"
+        },
+        "side": "mördeg",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 5,
+            "id": "s1",
+            "ingredient_keys": [
+              "bakpulver|dry",
+              "salt|as_sold",
+              "smör|as_sold",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "14 ml",
+                14.0
+              ]
+            ],
+            "text": "Blanda degens vetemjöl, bakpulver och salt. Nyp in smöret och arbeta in 14 ml vatten till en mjuk men inte kladdig deg. Knåda bara tills den håller samman."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 20,
+            "id": "s2",
+            "ingredient_keys": [
+              "smör|as_sold",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Låt degen vila täckt i kylskåp."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 5,
+            "id": "s3",
+            "ingredient_keys": [
+              "kanel|dry",
+              "mörkt muscovadosocker|dry",
+              "valnötter|as_sold",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Smula sönder alla klumpar i det mörka muscovadosockret och blanda med fyllningens vetemjöl, finhackade valnötter och kanel. Tillsätt inget vatten till fyllningen; den ska vara smulig utan fri vätska före gräddning."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 7,
+            "id": "s4",
+            "ingredient_keys": [
+              "mörkt muscovadosocker|dry",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "2 ml",
+                2.0
+              ]
+            ],
+            "text": "Sätt ugnen på 190 °C över-/undervärme. Dela degen i två lika delar per vald portion och kavla varje del mellan bakpapper till en tunn rundel, cirka tio centimeter. Fördela fyllningen jämnt på hälften av rundlarna med fri kant. Använd totalt 2 ml vatten för att fukta kanterna, lägg på lockrundlarna och förslut noga med gaffel. Stick två små ånghål per kaka. Håll kakornas storlek vid större sats; använd fler plåtar eller omgångar."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 20,
+            "id": "s5",
+            "ingredient_keys": [
+              "mörkt muscovadosocker|dry",
+              "smör|as_sold",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Grädda på bakpapper cirka tjugo minuter tills båda degskivorna är genomgräddade och ytan gyllene. Kontrollera undersidan i nästa aktiva steg; förläng vid behov."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 3,
+            "id": "s6",
+            "ingredient_keys": [
+              "mörkt muscovadosocker|dry"
+            ],
+            "parallel_group": null,
+            "text": "Kontrollera att även undersidan är gräddad och förläng vid behov. Flytta försiktigt kakorna till galler med bakspade. Fördela eventuell utläckt fyllning på samma kakor; fyllningen är mycket het direkt ur ugnen."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 15,
+            "id": "s7",
+            "ingredient_keys": [
+              "mörkt muscovadosocker|dry"
+            ],
+            "parallel_group": null,
+            "text": "Låt svalna minst femton minuter på galler. Servera en kaka per vald portion."
+          }
+        ],
+        "total_minutes": 75,
+        "variant_id": "extended",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 55
+      },
+      "ingredients": [
+        {
+          "canonical_name": "vetemjöl",
+          "component": "dough",
+          "form": "dry",
+          "name": "vetemjöl",
+          "quantity": 45.0,
+          "quantity_max": 45.0,
+          "quantity_min": 45.0,
+          "quantity_step": 45.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "smör",
+          "component": "dough",
+          "form": "as_sold",
+          "name": "smör",
+          "product_requirements": [
+            "pack:intake_butter"
+          ],
+          "quantity": 14.0,
+          "quantity_max": 14.0,
+          "quantity_min": 14.0,
+          "quantity_step": 14.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "bakpulver",
+          "component": "dough",
+          "form": "dry",
+          "name": "bakpulver",
+          "product_requirements": [
+            "pack:intake_baking_powder"
+          ],
+          "quantity": 0.6,
+          "quantity_max": 0.6,
+          "quantity_min": 0.6,
+          "quantity_step": 0.6,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "dough",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 0.2,
+          "quantity_max": 0.2,
+          "quantity_min": 0.2,
+          "quantity_step": 0.2,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "mörkt muscovadosocker",
+          "component": "fill",
+          "form": "dry",
+          "name": "mörkt muscovadosocker",
+          "product_requirements": [
+            "pack:intake_all_expansion_ac284f871634"
+          ],
+          "quantity": 18.0,
+          "quantity_max": 18.0,
+          "quantity_min": 18.0,
+          "quantity_step": 18.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "valnötter",
+          "component": "fill",
+          "form": "as_sold",
+          "name": "valnötter",
+          "product_requirements": [
+            "pack:intake_walnuts"
+          ],
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 10.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kanel",
+          "component": "fill",
+          "form": "dry",
+          "name": "kanel",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 0.25,
+          "quantity_max": 0.25,
+          "quantity_min": 0.25,
+          "quantity_step": 0.25,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Blanda degens vetemjöl, bakpulver och salt. Nyp in smöret och arbeta in 14 ml vatten till en mjuk men inte kladdig deg. Knåda bara tills den håller samman.",
+        "Låt degen vila täckt i kylskåp.",
+        "Smula sönder alla klumpar i det mörka muscovadosockret och blanda med fyllningens vetemjöl, finhackade valnötter och kanel. Tillsätt inget vatten till fyllningen; den ska vara smulig utan fri vätska före gräddning.",
+        "Sätt ugnen på 190 °C över-/undervärme. Dela degen i två lika delar per vald portion och kavla varje del mellan bakpapper till en tunn rundel, cirka tio centimeter. Fördela fyllningen jämnt på hälften av rundlarna med fri kant. Använd totalt 2 ml vatten för att fukta kanterna, lägg på lockrundlarna och förslut noga med gaffel. Stick två små ånghål per kaka. Håll kakornas storlek vid större sats; använd fler plåtar eller omgångar.",
+        "Grädda på bakpapper cirka tjugo minuter tills båda degskivorna är genomgräddade och ytan gyllene. Kontrollera undersidan i nästa aktiva steg; förläng vid behov.",
+        "Kontrollera att även undersidan är gräddad och förläng vid behov. Flytta försiktigt kakorna till galler med bakspade. Fördela eventuell utläckt fyllning på samma kakor; fyllningen är mycket het direkt ur ugnen.",
+        "Låt svalna minst femton minuter på galler. Servera en kaka per vald portion."
+      ],
+      "name": "Coyotas – fyllda muscovadokakor – utökad",
+      "servings": 1
+    }
+  ],
+  "schema_version": "smako-meal-pack-v1"
+}

@@ -1,0 +1,2023 @@
+{
+  "scope": {
+    "original_bases": 934,
+    "original_variants": 2462,
+    "previous_archives": 6,
+    "previous_unique_base_ids": 259,
+    "previous_variant_occurrences": 695,
+    "previous_unique_variant_ids": 691,
+    "cross_cuisine_and_unlabelled_included": true,
+    "new_bases": 21,
+    "new_variants": 55
+  },
+  "workflow": "Förinventering och beslut sparades före full författning. Samtliga faktiska varianttexter jämfördes sedan på nytt. Likhet är inte liktydigt med dubblett; låg poäng bevisar inte nyhet.",
+  "pre_authoring": {
+    "file": "granskning/fore-forfattning-maskin.json",
+    "decision_file": "granskning/fore-forfattning-beslut.json",
+    "library_pairs": 27439,
+    "new_candidate_pairs": 253
+  },
+  "post_authoring": {
+    "file": "granskning/efter-forfattning-maskin.json",
+    "library_variant_pairs": 173635,
+    "new_cross_family_variant_pairs": 1438
+  },
+  "accepted": [
+    {
+      "base_id": "smako-greek-magiritsa-lammlever-agg-citron",
+      "decision": "accept",
+      "pre_authoring_nearest_library": [
+        {
+          "base_id": "smako-greek-chicken-artichoke-egg-lemon-stew",
+          "names": [
+            "Grekiskinspirerad kyckling med kronärtskocka och äggcitron – enkel",
+            "Grekiskinspirerad kyckling med kronärtskocka och äggcitron – utökad",
+            "Grekiskinspirerad kyckling med kronärtskocka och äggcitron – vardag"
+          ],
+          "origin": "original",
+          "score": 0.1567,
+          "name_similarity": 0.1651,
+          "ingredient_jaccard": 0.2222,
+          "full_instruction_similarity": 0.0516
+        },
+        {
+          "base_id": "smako-greek-youvarlakia-avgolemono",
+          "names": [
+            "Youvarlakia – risfärsbullar i äggcitronsoppa – enkel",
+            "Youvarlakia – risfärsbullar i äggcitronsoppa – standard",
+            "Youvarlakia – risfärsbullar i äggcitronsoppa – utökad"
+          ],
+          "origin": "previous_delivery",
+          "score": 0.1299,
+          "name_similarity": 0.1101,
+          "ingredient_jaccard": 0.2353,
+          "full_instruction_similarity": 0.014
+        },
+        {
+          "base_id": "smako-greek-fish-potato-saffron-free-lemon-casserole",
+          "names": [
+            "Grekiskinspirerad fisk med potatis och äggcitronspad – enkel",
+            "Grekiskinspirerad fisk med potatis och äggcitronspad – utökad",
+            "Grekiskinspirerad fisk med potatis och äggcitronspad – vardag"
+          ],
+          "origin": "original",
+          "score": 0.1224,
+          "name_similarity": 0.1609,
+          "ingredient_jaccard": 0.1579,
+          "full_instruction_similarity": 0.0112
+        }
+      ],
+      "pre_authoring_culinary_reason": "Gemensam äggcitronredning räcker inte ensam till nyhet. Här tillkommer en särskild organkedja (förvällning, finhackning), stor mängd salladsblad och örtstjälkar samt löst ris i en organsoppa. Kyckling-kronärtskocksgrytan har brynt filékött och separat ris; youvarlakia har rått ris inuti färsbullar. Leverversionens traditionella identitet stöds av källan.",
+      "post_authoring_nearest_library": [
+        {
+          "base_id": "smako-greek-youvarlakia-avgolemono",
+          "variant_id": "extended",
+          "name": "Youvarlakia – risfärsbullar i äggcitronsoppa – utökad",
+          "origin": "previous_delivery",
+          "score": 0.2382,
+          "ingredient_jaccard": 0.5,
+          "instruction_similarity": 0.1369
+        },
+        {
+          "base_id": "smako-greek-chicken-artichoke-egg-lemon-stew",
+          "variant_id": "extended",
+          "name": "Grekiskinspirerad kyckling med kronärtskocka och äggcitron – utökad",
+          "origin": "original",
+          "score": 0.2375,
+          "ingredient_jaccard": 0.4737,
+          "instruction_similarity": 0.1181
+        },
+        {
+          "base_id": "smako-greek-fish-potato-saffron-free-lemon-casserole",
+          "variant_id": "extended",
+          "name": "Grekiskinspirerad fisk med potatis och äggcitronspad – utökad",
+          "origin": "original",
+          "score": 0.1951,
+          "ingredient_jaccard": 0.4,
+          "instruction_similarity": 0.0856
+        }
+      ],
+      "post_authoring_culinary_reason": "Lös lever-, ris- och bladsoppa med särskild inälvsberedning, inte ris i köttbullar (youvarlakia) eller separat ris till filégryta. Äggcitron ensam är inte nyhetsargumentet.",
+      "nearest_new_after_authoring": {
+        "base_id": "smako-italian-pallotte-cacio-uova",
+        "name": "Pallotte cacio e ova – ost- och brödbollar i tomatsås",
+        "score": 0.2129,
+        "variant_pair": {
+          "left": "smako-greek-magiritsa-lammlever-agg-citron:1.0.0:extended",
+          "right": "smako-italian-pallotte-cacio-uova:1.0.0:extended",
+          "score": 0.2129,
+          "ingredient_jaccard": 0.5882,
+          "instruction_similarity": 0.0787
+        },
+        "difference": "Gemensamt ägg, bröd och grönsaker ligger i olika roller: lever- och rissoppa med redning kontra formade ostbrödbollar i tomat."
+      },
+      "finding_method": "Fullständiga matriser enligt granskning/*, kompletterade med läsning av relevanta närträffars fullständiga recept; AI-redaktionellt beslut, inte Smakos godkännande."
+    },
+    {
+      "base_id": "smako-greek-marathopita-fankalsgront",
+      "decision": "accept",
+      "pre_authoring_nearest_library": [
+        {
+          "base_id": "smako-greek-kreatopita-kefalonia",
+          "names": [
+            "Kefalonsk kreatopita med kött och ris – enkel",
+            "Kefalonsk kreatopita med kött och ris – standard",
+            "Kefalonsk kreatopita med kött och ris – utökad"
+          ],
+          "origin": "previous_delivery",
+          "score": 0.1502,
+          "name_similarity": 0.1359,
+          "ingredient_jaccard": 0.2667,
+          "full_instruction_similarity": 0.01
+        },
+        {
+          "base_id": "smako-greek-closed-chicken-pan-bread",
+          "names": [
+            "Grekiskinspirerade stekbröd med kycklingfyllning – enkel",
+            "Grekiskinspirerade stekbröd med kycklingfyllning – utökad",
+            "Grekiskinspirerade stekbröd med kycklingfyllning – vardag"
+          ],
+          "origin": "original",
+          "score": 0.1296,
+          "name_similarity": 0.0348,
+          "ingredient_jaccard": 0.3077,
+          "full_instruction_similarity": 0.0318
+        },
+        {
+          "base_id": "smako-greek-tofu-spinach-flatbread-folds",
+          "names": [
+            "Grekiskinspirerade tunnbrödsveck med spenattofu – enkel",
+            "Grekiskinspirerade tunnbrödsveck med spenattofu – utökad",
+            "Grekiskinspirerade tunnbrödsveck med spenattofu – vardag"
+          ],
+          "origin": "original",
+          "score": 0.1226,
+          "name_similarity": 0.0257,
+          "ingredient_jaccard": 0.3077,
+          "full_instruction_similarity": 0.0185
+        }
+      ],
+      "pre_authoring_culinary_reason": "De närmaste generiska stekbröden gräddas först och viks kring färdig tofu/kyckling. Här sluts en urkokt fänkålsbladsfyllning in i rå deg, kavlas tunt och steks innesluten. Sfakianopita använder ost som tunn fyllning och honung; marathopita är en separat etablerad örtbrödstradition. Nyheten är inte byte av köttsort eller en tillsatt krydda.",
+      "post_authoring_nearest_library": [
+        {
+          "base_id": "smako-greek-kreatopita-kefalonia",
+          "variant_id": "simple",
+          "name": "Kefalonsk kreatopita med kött och ris – enkel",
+          "origin": "previous_delivery",
+          "score": 0.1939,
+          "ingredient_jaccard": 0.375,
+          "instruction_similarity": 0.096
+        },
+        {
+          "base_id": "smako-greek-pitarakia-milos",
+          "variant_id": "simple",
+          "name": "Pitarakia – spröda ost- och lökhalvmånar – enkel",
+          "origin": "previous_delivery",
+          "score": 0.1911,
+          "ingredient_jaccard": 0.4286,
+          "instruction_similarity": 0.103
+        },
+        {
+          "base_id": "smako-greek-sfakianopita",
+          "variant_id": "simple",
+          "name": "Sfakianopita – tunn ostfylld panna med honung – enkel",
+          "origin": "previous_delivery",
+          "score": 0.186,
+          "ingredient_jaccard": 0.2857,
+          "instruction_similarity": 0.1612
+        }
+      ],
+      "post_authoring_culinary_reason": "Fänkålsgrönt är själva fyllningen i ett tunt förslutet ojäst pannbröd. Pitarakia/kreatopita och äldre ost-honungsbröd har annan fyllningsidentitet och konstruktion; här är det inte byte av vanlig garnering.",
+      "nearest_new_after_authoring": {
+        "base_id": "smako-greek-magiritsa-lammlever-agg-citron",
+        "name": "Magiritsa med lammlever och äggcitron",
+        "score": 0.0933,
+        "variant_pair": {
+          "left": "smako-greek-magiritsa-lammlever-agg-citron:1.0.0:standard",
+          "right": "smako-greek-marathopita-fankalsgront:1.0.0:simple",
+          "score": 0.0933,
+          "ingredient_jaccard": 0.2308,
+          "instruction_similarity": 0.0256
+        },
+        "difference": "Jämför bärande kedjor: Tunt kavlat ojäst pannbröd med urkokt, avsvalnad fyllning av fänkålsgrönt; inte fänkålsknöl, ostfyllt honungsbröd eller jästa spenatsnurror. Mot Magiritsa: Förvälld och finhackad lever med bladgrönt och ris; soppan reds med tempererad äggcitron. Leverversion utan tarmar, inte en vanlig kycklingsoppa med nytt proteinnamn. Skillnaden ligger i huvudkomponent och tillagning, inte en extra krydda eller serveringsetikett."
+      },
+      "finding_method": "Fullständiga matriser enligt granskning/*, kompletterade med läsning av relevanta närträffars fullständiga recept; AI-redaktionellt beslut, inte Smakos godkännande."
+    },
+    {
+      "base_id": "smako-greek-bouyiourdi-feta-paprika",
+      "decision": "accept",
+      "pre_authoring_nearest_library": [
+        {
+          "base_id": "smako-greek-strapatsada",
+          "names": [
+            "Strapatsada – tomatägg med bröd – enkel",
+            "Strapatsada – tomatägg med bröd – utökad"
+          ],
+          "origin": "previous_delivery",
+          "score": 0.2273,
+          "name_similarity": 0.0216,
+          "ingredient_jaccard": 0.6,
+          "full_instruction_similarity": 0.0347
+        },
+        {
+          "base_id": "smako-greek-snack-tomato-feta-toast",
+          "names": [
+            "Rostat bröd med tomat, fetaost och oregano"
+          ],
+          "origin": "original",
+          "score": 0.2058,
+          "name_similarity": 0.0898,
+          "ingredient_jaccard": 0.4444,
+          "full_instruction_similarity": 0.0573
+        },
+        {
+          "base_id": "smako-greek-tirokafteri",
+          "names": [
+            "Tirokafteri – kryddig fetakräm med bröd – enkel",
+            "Tirokafteri – kryddig fetakräm med bröd – utökad"
+          ],
+          "origin": "previous_delivery",
+          "score": 0.1967,
+          "name_similarity": 0.0463,
+          "ingredient_jaccard": 0.4545,
+          "full_instruction_similarity": 0.0765
+        }
+      ],
+      "pre_authoring_culinary_reason": "Tomat-fetatoasten monterar kalla toppings på rostat bröd; tirokafteri mosar feta med rostad paprika till kall röra; strapatsada är tomat med stannat ägg. Bouyiourdi bakar själva osten och grönsakerna till varm meze, med bröd vid sidan. Process och sluttextur skiljer, trots överlappande råvaror.",
+      "post_authoring_nearest_library": [
+        {
+          "base_id": "smako-greek-tirokafteri",
+          "variant_id": "simple",
+          "name": "Tirokafteri – kryddig fetakräm med bröd – enkel",
+          "origin": "previous_delivery",
+          "score": 0.2972,
+          "ingredient_jaccard": 0.8333,
+          "instruction_similarity": 0.0729
+        },
+        {
+          "base_id": "smako-greek-strapatsada",
+          "variant_id": "extended",
+          "name": "Strapatsada – tomatägg med bröd – utökad",
+          "origin": "previous_delivery",
+          "score": 0.2093,
+          "ingredient_jaccard": 0.6,
+          "instruction_similarity": 0.0414
+        },
+        {
+          "base_id": "smako-greek-horiatiki",
+          "variant_id": "standard",
+          "name": "Horiatiki – grekisk bondsallad med bröd – standard",
+          "origin": "previous_delivery",
+          "score": 0.1856,
+          "ingredient_jaccard": 0.5,
+          "instruction_similarity": 0.0648
+        }
+      ],
+      "post_authoring_culinary_reason": "Tirokafteri är en kall mixad fetakräm. Här bakas feta och grönsaker som en varm meze med sky. Den etablerade bärande värmebehandlingen och strukturen skiljer rätterna, inte bara paprikamängden.",
+      "nearest_new_after_authoring": {
+        "base_id": "smako-italian-pallotte-cacio-uova",
+        "name": "Pallotte cacio e ova – ost- och brödbollar i tomatsås",
+        "score": 0.0842,
+        "variant_pair": {
+          "left": "smako-greek-bouyiourdi-feta-paprika:1.0.0:simple",
+          "right": "smako-italian-pallotte-cacio-uova:1.0.0:simple",
+          "score": 0.0842,
+          "ingredient_jaccard": 0.2,
+          "instruction_similarity": 0.0506
+        },
+        "difference": "Jämför bärande kedjor: Varm meze där feta och grönsaker bakas ihop till en skedbar rätt, inte kall mixad fetakräm. Bröd gör portionen till ett mellanmål. Mot Pallotte cacio e ova: Bröd, riven hårdost och ägg bildar bollar som bryns och efterkokas i tomat. Inget kött, ingen ricottagnocchi. Grund stekning i stället för traditionell fritering. Skillnaden ligger i huvudkomponent och tillagning, inte en extra krydda eller serveringsetikett."
+      },
+      "finding_method": "Fullständiga matriser enligt granskning/*, kompletterade med läsning av relevanta närträffars fullständiga recept; AI-redaktionellt beslut, inte Smakos godkännande."
+    },
+    {
+      "base_id": "smako-greek-kolokithopita-sot-pumpapaj",
+      "decision": "accept",
+      "pre_authoring_nearest_library": [
+        {
+          "base_id": "smako-greek-fanouropita",
+          "names": [
+            "Fanouropita – kryddig apelsinkaka utan ägg – enkel",
+            "Fanouropita – kryddig apelsinkaka utan ägg – utökad"
+          ],
+          "origin": "previous_delivery",
+          "score": 0.1993,
+          "name_similarity": 0.1165,
+          "ingredient_jaccard": 0.4167,
+          "full_instruction_similarity": 0.0276
+        },
+        {
+          "base_id": "smako-greek-karidopita",
+          "names": [
+            "Karidopita – valnötskaka med sirap – enkel",
+            "Karidopita – valnötskaka med sirap – utökad"
+          ],
+          "origin": "previous_delivery",
+          "score": 0.1702,
+          "name_similarity": 0.1271,
+          "ingredient_jaccard": 0.3077,
+          "full_instruction_similarity": 0.0465
+        },
+        {
+          "base_id": "smako-greek-halvas-simigdalenios",
+          "names": [
+            "Halvas simigdalenios – rostad mannagrynspudding – med nötter, russin och apelsin",
+            "Halvas simigdalenios – rostad mannagrynspudding – oljerostad pudding"
+          ],
+          "origin": "previous_delivery",
+          "score": 0.1385,
+          "name_similarity": 0.0136,
+          "ingredient_jaccard": 0.3636,
+          "full_instruction_similarity": 0.0231
+        }
+      ],
+      "pre_authoring_culinary_reason": "Fanouropita och karidopita är kaksmeter, och nöt-filokakan får sirap. Här är pumpa den huvudsakliga separata, först avvattnade fyllningen mellan hela filolager, utan sirapsindränkning. Pumpans tillagning och fuktkontroll är en bärande annan process.",
+      "post_authoring_nearest_library": [
+        {
+          "base_id": "smako-greek-fanouropita",
+          "variant_id": "extended",
+          "name": "Fanouropita – kryddig apelsinkaka utan ägg – utökad",
+          "origin": "previous_delivery",
+          "score": 0.1883,
+          "ingredient_jaccard": 0.4167,
+          "instruction_similarity": 0.062
+        },
+        {
+          "base_id": "smako-greek-snack-nut-syrup-filo-layers",
+          "variant_id": "simple",
+          "name": "Liten nötfylld filokaka med citrussirap – enkel",
+          "origin": "original",
+          "score": 0.1797,
+          "ingredient_jaccard": 0.5,
+          "instruction_similarity": 0.0457
+        },
+        {
+          "base_id": "smako-greek-karidopita",
+          "variant_id": "extended",
+          "name": "Karidopita – valnötskaka med sirap – utökad",
+          "origin": "previous_delivery",
+          "score": 0.1735,
+          "ingredient_jaccard": 0.3077,
+          "instruction_similarity": 0.0813
+        }
+      ],
+      "post_authoring_culinary_reason": "Söt kokt pumpafyllning mellan filolager, inte sirapsindränkta nötfilolager eller mjuk kryddkaka. Pumpan är fyllningsmassa, inte en smaksättningsnypa.",
+      "nearest_new_after_authoring": {
+        "base_id": "smako-thai-khanom-fak-thong-angad-pumpkaka",
+        "name": "Khanom fak thong – ångade pumpakakor",
+        "score": 0.1328,
+        "variant_pair": {
+          "left": "smako-greek-kolokithopita-sot-pumpapaj:1.0.0:simple",
+          "right": "smako-thai-khanom-fak-thong-angad-pumpkaka:1.0.0:simple",
+          "score": 0.1328,
+          "ingredient_jaccard": 0.25,
+          "instruction_similarity": 0.0844
+        },
+        "difference": "Pumpa ingår i båda, men filohölje bakas kring en separat fyllning i kolokithopita medan pumpan binds i ångad kokos-/stärkelsesmet i khanom fak thong."
+      },
+      "finding_method": "Fullständiga matriser enligt granskning/*, kompletterade med läsning av relevanta närträffars fullständiga recept; AI-redaktionellt beslut, inte Smakos godkännande."
+    },
+    {
+      "base_id": "smako-italian-pallotte-cacio-uova",
+      "decision": "accept",
+      "pre_authoring_nearest_library": [
+        {
+          "base_id": "smako-italian-cacciucco",
+          "names": [
+            "Cacciucco – toskansk fisk- och bläckfiskgryta – fiskgryta över rostat bröd",
+            "Cacciucco – toskansk fisk- och bläckfiskgryta – med selleri och fördjupad tomatbas",
+            "Cacciucco – toskansk fisk- och bläckfiskgryta – med vin, lök och chili"
+          ],
+          "origin": "previous_delivery",
+          "score": 0.1626,
+          "name_similarity": 0.0712,
+          "ingredient_jaccard": 0.375,
+          "full_instruction_similarity": 0.0116
+        },
+        {
+          "base_id": "smako-italian-beef-whitebean-tomato-bread-soup",
+          "names": [
+            "Italienskinspirerad nötfärssoppa med vita bönor och bröd – enkel",
+            "Italienskinspirerad nötfärssoppa med vita bönor och bröd – utökad",
+            "Italienskinspirerad nötfärssoppa med vita bönor och bröd – vardag"
+          ],
+          "origin": "original",
+          "score": 0.1604,
+          "name_similarity": 0.0476,
+          "ingredient_jaccard": 0.375,
+          "full_instruction_similarity": 0.0405
+        },
+        {
+          "base_id": "smako-greek-fasolakia-ladera",
+          "names": [
+            "Fasolakia ladera – gröna bönor och potatis i tomat – enkel",
+            "Fasolakia ladera – gröna bönor och potatis i tomat – standard",
+            "Fasolakia ladera – gröna bönor och potatis i tomat – utökad"
+          ],
+          "origin": "previous_delivery",
+          "score": 0.1555,
+          "name_similarity": 0.022,
+          "ingredient_jaccard": 0.4,
+          "full_instruction_similarity": 0.0267
+        }
+      ],
+      "pre_authoring_culinary_reason": "Färsbullar i tomat har rått kött som bindande huvudråvara. Pallotte använder äggkoagulerat bröd och pecorino till mjuka bollar som först får skorpa och sedan sjuds; inte en animalisk proteinkälla utbytt i samma färsrecept. Brödkakan bakar en hel stanning, och gnocchi kokas som degknyten utan brynt bröd-ostmassa.",
+      "post_authoring_nearest_library": [
+        {
+          "base_id": "smako-italian-pasta-cacio-pepe",
+          "variant_id": "standard",
+          "name": "Cacio e pepe – med citronsallad",
+          "origin": "previous_delivery",
+          "score": 0.2041,
+          "ingredient_jaccard": 0.2857,
+          "instruction_similarity": 0.0618
+        },
+        {
+          "base_id": "smako-italian-beef-whitebean-tomato-bread-soup",
+          "variant_id": "extended",
+          "name": "Italienskinspirerad nötfärssoppa med vita bönor och bröd – utökad",
+          "origin": "original",
+          "score": 0.2024,
+          "ingredient_jaccard": 0.5294,
+          "instruction_similarity": 0.0474
+        },
+        {
+          "base_id": "smako-italian-trippa-romana",
+          "variant_id": "extended",
+          "name": "Trippa alla romana med mynta och pecorino – utökad",
+          "origin": "previous_delivery",
+          "score": 0.1981,
+          "ingredient_jaccard": 0.5294,
+          "instruction_similarity": 0.0607
+        }
+      ],
+      "post_authoring_culinary_reason": "Bröd, ägg och pecorino formas och pannbryns till självständiga bollar som sjuds i tomatsås. Cacio e pepe är pasta; äldre polpette har andra basmassor. Gemensam ost gör inte metoderna likvärdiga.",
+      "nearest_new_after_authoring": {
+        "base_id": "smako-greek-magiritsa-lammlever-agg-citron",
+        "name": "Magiritsa med lammlever och äggcitron",
+        "score": 0.2129,
+        "variant_pair": {
+          "left": "smako-greek-magiritsa-lammlever-agg-citron:1.0.0:extended",
+          "right": "smako-italian-pallotte-cacio-uova:1.0.0:extended",
+          "score": 0.2129,
+          "ingredient_jaccard": 0.5882,
+          "instruction_similarity": 0.0787
+        },
+        "difference": "Gemensamt ägg, bröd och grönsaker ligger i olika roller: lever- och rissoppa med redning kontra formade ostbrödbollar i tomat."
+      },
+      "finding_method": "Fullständiga matriser enligt granskning/*, kompletterade med läsning av relevanta närträffars fullständiga recept; AI-redaktionellt beslut, inte Smakos godkännande."
+    },
+    {
+      "base_id": "smako-italian-frittata-scammaro-aggfri",
+      "decision": "accept",
+      "pre_authoring_nearest_library": [
+        {
+          "base_id": "smako-italian-pasta-puttanesca",
+          "names": [
+            "Pasta alla puttanesca – enkel",
+            "Pasta alla puttanesca – standard",
+            "Pasta alla puttanesca – utökad"
+          ],
+          "origin": "previous_delivery",
+          "score": 0.1777,
+          "name_similarity": 0.0732,
+          "ingredient_jaccard": 0.4,
+          "full_instruction_similarity": 0.0335
+        },
+        {
+          "base_id": "smako-italian-breakfast-pasta-egg-frittata-breakfast",
+          "names": [
+            "Pastafrittata med spenat och ost – enkel",
+            "Pastafrittata med spenat och ost – utökad"
+          ],
+          "origin": "original",
+          "score": 0.1671,
+          "name_similarity": 0.3387,
+          "ingredient_jaccard": 0.0625,
+          "full_instruction_similarity": 0.039
+        },
+        {
+          "base_id": "smako-italian-sarde-beccafico",
+          "names": [
+            "Sarde a beccafico – fyllda sardiner – enkel",
+            "Sarde a beccafico – fyllda sardiner – standard",
+            "Sarde a beccafico – fyllda sardiner – utökad"
+          ],
+          "origin": "previous_delivery",
+          "score": 0.1414,
+          "name_similarity": 0.0162,
+          "ingredient_jaccard": 0.375,
+          "full_instruction_similarity": 0.0147
+        }
+      ],
+      "pre_authoring_culinary_reason": "Puttanesca är lös pasta med tomatsås; den befintliga pastafrittatan binds av ägg. Scammaro saknar både tomatsås och äggbindning: stärkelse, pressning och två rostade ytor ger en sammanhängande skärbar kaka. Etablerad napolitansk rätt, inte bara ny pastaform.",
+      "post_authoring_nearest_library": [
+        {
+          "base_id": "smako-italian-pasta-puttanesca",
+          "variant_id": "simple",
+          "name": "Pasta alla puttanesca – enkel",
+          "origin": "previous_delivery",
+          "score": 0.2591,
+          "ingredient_jaccard": 0.625,
+          "instruction_similarity": 0.1082
+        },
+        {
+          "base_id": "smako-italian-pasta-sarde-fankal",
+          "variant_id": "extended",
+          "name": "Pasta con le sarde – sardiner, fänkål och russin – utökad",
+          "origin": "previous_delivery",
+          "score": 0.1761,
+          "ingredient_jaccard": 0.3889,
+          "instruction_similarity": 0.0903
+        },
+        {
+          "base_id": "smako-italian-breakfast-pasta-egg-frittata-breakfast",
+          "variant_id": "extended",
+          "name": "Pastafrittata med spenat och ost – utökad",
+          "origin": "original",
+          "score": 0.1506,
+          "ingredient_jaccard": 0.1111,
+          "instruction_similarity": 0.0475
+        }
+      ],
+      "post_authoring_culinary_reason": "Gemensamma oliver, kapris och sardeller med puttanesca men här ger pastans stärkelse en sammanpressad, vänd och stekt äggfri kaka. En särskild etablerad rättidentitet med annan struktur.",
+      "nearest_new_after_authoring": {
+        "base_id": "smako-italian-pallotte-cacio-uova",
+        "name": "Pallotte cacio e ova – ost- och brödbollar i tomatsås",
+        "score": 0.0878,
+        "variant_pair": {
+          "left": "smako-italian-pallotte-cacio-uova:1.0.0:standard",
+          "right": "smako-italian-frittata-scammaro-aggfri:1.0.0:standard",
+          "score": 0.0878,
+          "ingredient_jaccard": 0.2,
+          "instruction_similarity": 0.0242
+        },
+        "difference": "Jämför bärande kedjor: Pastan pressas och steks som en sammanhängande kaka utan ägg; stärkelse, rostning och dubbel stekyta binder den. Inte en omelett med restpasta eller bara en annan pastaform. Mot Pallotte cacio e ova: Bröd, riven hårdost och ägg bildar bollar som bryns och efterkokas i tomat. Inget kött, ingen ricottagnocchi. Grund stekning i stället för traditionell fritering. Skillnaden ligger i huvudkomponent och tillagning, inte en extra krydda eller serveringsetikett."
+      },
+      "finding_method": "Fullständiga matriser enligt granskning/*, kompletterade med läsning av relevanta närträffars fullständiga recept; AI-redaktionellt beslut, inte Smakos godkännande."
+    },
+    {
+      "base_id": "smako-italian-jota-triestina-surkal-bonor",
+      "decision": "accept",
+      "pre_authoring_nearest_library": [
+        {
+          "base_id": "smako-greek-fasolakia-ladera",
+          "names": [
+            "Fasolakia ladera – gröna bönor och potatis i tomat – enkel",
+            "Fasolakia ladera – gröna bönor och potatis i tomat – standard",
+            "Fasolakia ladera – gröna bönor och potatis i tomat – utökad"
+          ],
+          "origin": "previous_delivery",
+          "score": 0.1396,
+          "name_similarity": 0.057,
+          "ingredient_jaccard": 0.3125,
+          "full_instruction_similarity": 0.0297
+        },
+        {
+          "base_id": "smako-greek-revithada",
+          "names": [
+            "Revithada – långbakade kikärtor med lök – enkel",
+            "Revithada – långbakade kikärtor med lök – standard",
+            "Revithada – långbakade kikärtor med lök – utökad"
+          ],
+          "origin": "previous_delivery",
+          "score": 0.1249,
+          "name_similarity": 0.0027,
+          "ingredient_jaccard": 0.3333,
+          "full_instruction_similarity": 0.0287
+        },
+        {
+          "base_id": "smako-greek-patatato-amorgos",
+          "names": [
+            "Patatato – getkött och potatis i tomatspad – enkel",
+            "Patatato – getkött och potatis i tomatspad – standard",
+            "Patatato – getkött och potatis i tomatspad – utökad"
+          ],
+          "origin": "previous_delivery",
+          "score": 0.1206,
+          "name_similarity": 0.0365,
+          "ingredient_jaccard": 0.2941,
+          "full_instruction_similarity": 0.0122
+        }
+      ],
+      "pre_authoring_culinary_reason": "Ingen av de närmaste tomat-/bön- eller kikärtsgrytorna har fermenterad surkål som huvudsaklig syra och grönsak. Potatis och en del av bönorna kokas och mosas till bindning innan surkålen sammanförs. Soppan är inte ribollita, vars bröd kokas sönder med tomat och kål.",
+      "post_authoring_nearest_library": [
+        {
+          "base_id": "smako-greek-patatato-amorgos",
+          "variant_id": "extended",
+          "name": "Patatato – getkött och potatis i tomatspad – utökad",
+          "origin": "previous_delivery",
+          "score": 0.1989,
+          "ingredient_jaccard": 0.4706,
+          "instruction_similarity": 0.1136
+        },
+        {
+          "base_id": "smako-italian-lingua-salsa-verde",
+          "variant_id": "extended",
+          "name": "Lingua in salsa verde – pocherad tunga med grön sås – utökad",
+          "origin": "previous_delivery",
+          "score": 0.1818,
+          "ingredient_jaccard": 0.4706,
+          "instruction_similarity": 0.0677
+        },
+        {
+          "base_id": "smako-greek-fasolada",
+          "variant_id": "standard",
+          "name": "Fasolada – vit bönsoppa – standard",
+          "origin": "previous_delivery",
+          "score": 0.1774,
+          "ingredient_jaccard": 0.4667,
+          "instruction_similarity": 0.0707
+        }
+      ],
+      "post_authoring_culinary_reason": "Surkål förenas med redan kokt potatis och delvis mosade bönor. Syran, den separata förkokningen och redningen är bärande; det är inte en allmän bönsoppa med extra kålgarnering.",
+      "nearest_new_after_authoring": {
+        "base_id": "smako-italian-pallotte-cacio-uova",
+        "name": "Pallotte cacio e ova – ost- och brödbollar i tomatsås",
+        "score": 0.1525,
+        "variant_pair": {
+          "left": "smako-italian-pallotte-cacio-uova:1.0.0:extended",
+          "right": "smako-italian-jota-triestina-surkal-bonor:1.0.0:extended",
+          "score": 0.1525,
+          "ingredient_jaccard": 0.3889,
+          "instruction_similarity": 0.063
+        },
+        "difference": "Jämför bärande kedjor: Syrlig soppa där surkål mjukkokas och en del bönor/potatis mosas som bindning. Växtbaserad vardagstolkning med kokta kidneybönor, inte en minestrone eller en tomatbönsoppa. Mot Pallotte cacio e ova: Bröd, riven hårdost och ägg bildar bollar som bryns och efterkokas i tomat. Inget kött, ingen ricottagnocchi. Grund stekning i stället för traditionell fritering. Skillnaden ligger i huvudkomponent och tillagning, inte en extra krydda eller serveringsetikett."
+      },
+      "finding_method": "Fullständiga matriser enligt granskning/*, kompletterade med läsning av relevanta närträffars fullständiga recept; AI-redaktionellt beslut, inte Smakos godkännande."
+    },
+    {
+      "base_id": "smako-italian-pastiera-napoletana-matvete",
+      "decision": "accept",
+      "pre_authoring_nearest_library": [
+        {
+          "base_id": "smako-italian-breakfast-ricotta-breakfast-tart",
+          "names": [
+            "Liten ricottapaj med päron – enkel",
+            "Liten ricottapaj med päron – utökad"
+          ],
+          "origin": "original",
+          "score": 0.2288,
+          "name_similarity": 0.148,
+          "ingredient_jaccard": 0.4615,
+          "full_instruction_similarity": 0.0324
+        },
+        {
+          "base_id": "smako-italian-budino-riso-toscana",
+          "names": [
+            "Budino di riso – liten mördegspaj med risfyllning – enkel",
+            "Budino di riso – liten mördegspaj med risfyllning – utökad"
+          ],
+          "origin": "previous_delivery",
+          "score": 0.1976,
+          "name_similarity": 0.0394,
+          "ingredient_jaccard": 0.5,
+          "full_instruction_similarity": 0.0272
+        },
+        {
+          "base_id": "smako-italian-breakfast-baked-ricotta-pastry-tubes",
+          "names": [
+            "Bakade degskal med ricotta och apelsin – enkel",
+            "Bakade degskal med ricotta och apelsin – utökad"
+          ],
+          "origin": "original",
+          "score": 0.1927,
+          "name_similarity": 0.1172,
+          "ingredient_jaccard": 0.3846,
+          "full_instruction_similarity": 0.0446
+        }
+      ],
+      "pre_authoring_culinary_reason": "Ricottapajen har päron i slät ricottaäggkräm; budino di riso är risgrynsgröt med ägg i skal. Pastiera förenar mjölkkokt vete och ricotta till en spannmåls-ostfyllning med apelsinblom och korsat mördegslock. Kombination, textur och separat etablerad rättidentitet motiverar en egen bas, inte enbart arombyte. Matvetevariationen är uttryckligt anpassad.",
+      "post_authoring_nearest_library": [
+        {
+          "base_id": "smako-italian-breakfast-ricotta-breakfast-tart",
+          "variant_id": "simple",
+          "name": "Liten ricottapaj med päron – enkel",
+          "origin": "original",
+          "score": 0.2529,
+          "ingredient_jaccard": 0.5556,
+          "instruction_similarity": 0.083
+        },
+        {
+          "base_id": "smako-italian-budino-riso-toscana",
+          "variant_id": "simple",
+          "name": "Budino di riso – liten mördegspaj med risfyllning – enkel",
+          "origin": "previous_delivery",
+          "score": 0.2285,
+          "ingredient_jaccard": 0.5556,
+          "instruction_similarity": 0.1171
+        },
+        {
+          "base_id": "smako-italian-breakfast-baked-ricotta-pastry-tubes",
+          "variant_id": "simple",
+          "name": "Bakade degskal med ricotta och apelsin – enkel",
+          "origin": "original",
+          "score": 0.2082,
+          "ingredient_jaccard": 0.4545,
+          "instruction_similarity": 0.0658
+        }
+      ],
+      "post_authoring_culinary_reason": "Vetekorn kokas och förenas med ricotta och apelsinblom i mördeg. Tidigare ricottapaj och risbudino saknar denna kombination; matvete tydliggör hemmaanpassningen.",
+      "nearest_new_after_authoring": {
+        "base_id": "smako-swedish-fiskpudding-ris-mjolk",
+        "name": "Fiskpudding med mjölkkokt ris",
+        "score": 0.1168,
+        "variant_pair": {
+          "left": "smako-italian-pastiera-napoletana-matvete:1.0.0:simple",
+          "right": "smako-swedish-fiskpudding-ris-mjolk:1.0.0:simple",
+          "score": 0.1168,
+          "ingredient_jaccard": 0.25,
+          "instruction_similarity": 0.0945
+        },
+        "difference": "Jämför bärande kedjor: Mördeg runt ricotta, mjölkkokt vete och apelsinblom. Matvete i stället för inköpt grano cotto anges öppet. Kornens textur skiljer den från släta ricottapajer. Mot Fiskpudding: Mjölkkokt rundris och tillagad vitfisk binds med ägg och ugnsbakas till pudding. Sushiris är uttrycklig vardagsanpassning av rundkornigt ris. Inte potatislaxpudding eller en fiskfilé med ris vid sidan. Skillnaden ligger i huvudkomponent och tillagning, inte en extra krydda eller serveringsetikett."
+      },
+      "finding_method": "Fullständiga matriser enligt granskning/*, kompletterade med läsning av relevanta närträffars fullständiga recept; AI-redaktionellt beslut, inte Smakos godkännande."
+    },
+    {
+      "base_id": "smako-mexican-tlatlapas-gula-arter",
+      "decision": "accept",
+      "pre_authoring_nearest_library": [
+        {
+          "base_id": "smako-mexican-chilpachole-jaiba",
+          "names": [
+            "Chilpachole de jaiba – krabbsoppa med chili – krabbsoppa bunden med majsmasa",
+            "Chilpachole de jaiba – krabbsoppa med chili – med avokado och koriander",
+            "Chilpachole de jaiba – krabbsoppa med chili – med epazote och lime"
+          ],
+          "origin": "previous_delivery",
+          "score": 0.1552,
+          "name_similarity": 0.0234,
+          "ingredient_jaccard": 0.4,
+          "full_instruction_similarity": 0.0233
+        },
+        {
+          "base_id": "smako-greek-yellow-pea-fava-onion-potato",
+          "names": [
+            "Grekiskinspirerad gul ärtkräm med mjuk lök och potatis – enkel",
+            "Grekiskinspirerad gul ärtkräm med mjuk lök och potatis – utökad",
+            "Grekiskinspirerad gul ärtkräm med mjuk lök och potatis – vardag"
+          ],
+          "origin": "original",
+          "score": 0.1475,
+          "name_similarity": 0.0498,
+          "ingredient_jaccard": 0.3333,
+          "full_instruction_similarity": 0.0438
+        },
+        {
+          "base_id": "smako-mexican-black-bean-tortilla-soup",
+          "names": [
+            "Svart bönsoppa med rostade tortillaremsor – enkel",
+            "Svart bönsoppa med rostade tortillaremsor – utökad",
+            "Svart bönsoppa med rostade tortillaremsor – vardag"
+          ],
+          "origin": "original",
+          "score": 0.1356,
+          "name_similarity": 0.0946,
+          "ingredient_jaccard": 0.2667,
+          "full_instruction_similarity": 0.0178
+        }
+      ],
+      "pre_authoring_culinary_reason": "Den svenska ärtsoppan kokar hela blötlagda ärtor, fava mosar färdigkokta ärtor, svart bönsoppa använder färdigkokta bönor. Tlatlapas rostar och mal torra ärtor före kokningen och gör en slät mjölsoppa med epazote/chili. Detta är en annan dokumenterad beredningskedja, inte ett vanligt bönsortsbyte.",
+      "post_authoring_nearest_library": [
+        {
+          "base_id": "smako-mexican-mixiotes-kyckling",
+          "variant_id": "standard",
+          "name": "Mixiotes – ångade kycklingpaket i chiliadobo – standard",
+          "origin": "previous_delivery",
+          "score": 0.1903,
+          "ingredient_jaccard": 0.4615,
+          "instruction_similarity": 0.0661
+        },
+        {
+          "base_id": "smako-mexican-mole-olla",
+          "variant_id": "standard",
+          "name": "Mole de olla – köttsoppa med rostad chili – standard",
+          "origin": "previous_delivery",
+          "score": 0.1873,
+          "ingredient_jaccard": 0.3571,
+          "instruction_similarity": 0.0857
+        },
+        {
+          "base_id": "smako-mexican-huauzontles-capeados",
+          "variant_id": "standard",
+          "name": "Huauzontles capeados med ost och tomatsås – standard",
+          "origin": "previous_delivery",
+          "score": 0.1799,
+          "ingredient_jaccard": 0.4615,
+          "instruction_similarity": 0.0485
+        }
+      ],
+      "post_authoring_culinary_reason": "Torra ärtor rostas, mals och kokas till soppa. Chili/epazote överlappar mixiotes och mole de olla, men deras kärna är köttkok eller paket, inte rostat baljväxtmjöl.",
+      "nearest_new_after_authoring": {
+        "base_id": "smako-mexican-chilesatole-majs-masa",
+        "name": "Chilesatole – salt majs- och masasoppa",
+        "score": 0.166,
+        "variant_pair": {
+          "left": "smako-mexican-tlatlapas-gula-arter:1.0.0:standard",
+          "right": "smako-mexican-chilesatole-majs-masa:1.0.0:standard",
+          "score": 0.166,
+          "ingredient_jaccard": 0.3571,
+          "instruction_similarity": 0.0857
+        },
+        "difference": "Rostade och malda gula ärtor genomkokas som mjöl, jämfört med hel majs och nixtamaliserad masa. Två dokumenterade men olika bärande råvaru- och kokkedjor."
+      },
+      "finding_method": "Fullständiga matriser enligt granskning/*, kompletterade med läsning av relevanta närträffars fullständiga recept; AI-redaktionellt beslut, inte Smakos godkännande."
+    },
+    {
+      "base_id": "smako-mexican-chilesatole-majs-masa",
+      "decision": "accept",
+      "pre_authoring_nearest_library": [
+        {
+          "base_id": "smako-mexican-chilpachole-jaiba",
+          "names": [
+            "Chilpachole de jaiba – krabbsoppa med chili – krabbsoppa bunden med majsmasa",
+            "Chilpachole de jaiba – krabbsoppa med chili – med avokado och koriander",
+            "Chilpachole de jaiba – krabbsoppa med chili – med epazote och lime"
+          ],
+          "origin": "previous_delivery",
+          "score": 0.1818,
+          "name_similarity": 0.1533,
+          "ingredient_jaccard": 0.3125,
+          "full_instruction_similarity": 0.0447
+        },
+        {
+          "base_id": "smako-mexican-mole-olla",
+          "names": [
+            "Mole de olla – köttsoppa med rostad chili – enkel",
+            "Mole de olla – köttsoppa med rostad chili – standard",
+            "Mole de olla – köttsoppa med rostad chili – utökad"
+          ],
+          "origin": "previous_delivery",
+          "score": 0.1648,
+          "name_similarity": 0.1459,
+          "ingredient_jaccard": 0.2778,
+          "full_instruction_similarity": 0.0367
+        },
+        {
+          "base_id": "smako-mexican-corn-soup",
+          "names": [
+            "Krämig majs- och bönsoppa med ostquesadilla och tomatsalsa",
+            "Krämig majs- och bönsoppa med ostquesadilla och tomatsalsa – större huvudportion",
+            "Majs- och bönsoppa med ostquesadilla och tomatsalsa"
+          ],
+          "origin": "original",
+          "score": 0.1527,
+          "name_similarity": 0.1367,
+          "ingredient_jaccard": 0.2632,
+          "full_instruction_similarity": 0.0235
+        }
+      ],
+      "pre_authoring_culinary_reason": "Den befintliga majssoppan har mjölk och delvis mosade kokta bönor som krämig bas. Chilesatole binds av nixtamaliserad majsmasa som kokas direkt i majs- och chilispadet. Chilpachole är krabbsoppa där skaldjurskött och chilispad dominerar, inte denna majsrätt. Den dubbla majsstrukturen är huvudidentiteten.",
+      "post_authoring_nearest_library": [
+        {
+          "base_id": "smako-mexican-chilpachole-jaiba",
+          "variant_id": "extended",
+          "name": "Chilpachole de jaiba – krabbsoppa med chili – med avokado och koriander",
+          "origin": "previous_delivery",
+          "score": 0.2288,
+          "ingredient_jaccard": 0.4706,
+          "instruction_similarity": 0.122
+        },
+        {
+          "base_id": "smako-mexican-corn-soup",
+          "variant_id": "protein",
+          "name": "Majs- och bönsoppa med ostquesadilla och tomatsalsa",
+          "origin": "original",
+          "score": 0.1833,
+          "ingredient_jaccard": 0.3333,
+          "instruction_similarity": 0.0684
+        },
+        {
+          "base_id": "smako-mexican-black-bean-tortilla-soup",
+          "variant_id": "extended",
+          "name": "Svart bönsoppa med rostade tortillaremsor – utökad",
+          "origin": "original",
+          "score": 0.1758,
+          "ingredient_jaccard": 0.4375,
+          "instruction_similarity": 0.0517
+        }
+      ],
+      "post_authoring_culinary_reason": "Majs och masa är soppans huvudstruktur, inte krabba/skaldjur som i chilpachole. Kombinationen hel majs och nixtamaliserad masa skiljer också från tlatlapas rostade ärtmjöl.",
+      "nearest_new_after_authoring": {
+        "base_id": "smako-mexican-tlatlapas-gula-arter",
+        "name": "Tlatlapas på rostade gula ärtor",
+        "score": 0.166,
+        "variant_pair": {
+          "left": "smako-mexican-tlatlapas-gula-arter:1.0.0:standard",
+          "right": "smako-mexican-chilesatole-majs-masa:1.0.0:standard",
+          "score": 0.166,
+          "ingredient_jaccard": 0.3571,
+          "instruction_similarity": 0.0857
+        },
+        "difference": "Rostade och malda gula ärtor genomkokas som mjöl, jämfört med hel majs och nixtamaliserad masa. Två dokumenterade men olika bärande råvaru- och kokkedjor."
+      },
+      "finding_method": "Fullständiga matriser enligt granskning/*, kompletterade med läsning av relevanta närträffars fullständiga recept; AI-redaktionellt beslut, inte Smakos godkännande."
+    },
+    {
+      "base_id": "smako-mexican-ensalada-nopales-kokt-kaktus",
+      "decision": "accept",
+      "pre_authoring_nearest_library": [
+        {
+          "base_id": "smako-mexican-tortitas-camaron-nopales",
+          "names": [
+            "Tortitas de camarón med nopales – enkel",
+            "Tortitas de camarón med nopales – standard",
+            "Tortitas de camarón med nopales – utökad"
+          ],
+          "origin": "previous_delivery",
+          "score": 0.2188,
+          "name_similarity": 0.3901,
+          "ingredient_jaccard": 0.1579,
+          "full_instruction_similarity": 0.0299
+        },
+        {
+          "base_id": "smako-mexican-sweetpotato-bean-flautas",
+          "names": [
+            "Krispiga tortillarullar med bönor och sötpotatis – enkel",
+            "Krispiga tortillarullar med bönor och sötpotatis – utökad",
+            "Krispiga tortillarullar med bönor och sötpotatis – vardag"
+          ],
+          "origin": "original",
+          "score": 0.2117,
+          "name_similarity": 0.1012,
+          "ingredient_jaccard": 0.4615,
+          "full_instruction_similarity": 0.0389
+        },
+        {
+          "base_id": "smako-mexican-enfrijoladas",
+          "names": [
+            "Enfrijoladas – tortillas i svart bönsås – enkel",
+            "Enfrijoladas – tortillas i svart bönsås – standard",
+            "Enfrijoladas – tortillas i svart bönsås – utökad"
+          ],
+          "origin": "previous_delivery",
+          "score": 0.2072,
+          "name_similarity": 0.1707,
+          "ingredient_jaccard": 0.375,
+          "full_instruction_similarity": 0.0305
+        }
+      ],
+      "pre_authoring_culinary_reason": "Tortitas de camarón är räkkakor i varm chilisås med nopales som tillbehör. Här är kokta, kylda nopales huvudkomponenten i en sallad, utan räkkakor eller chilisås. Salpicón bygger på långkokt trådigt kött; en ny måltidsetikett eller lite kaktus i en sådan sallad skulle inte accepteras.",
+      "post_authoring_nearest_library": [
+        {
+          "base_id": "smako-mexican-enfrijoladas",
+          "variant_id": "extended",
+          "name": "Enfrijoladas – tortillas i svart bönsås – utökad",
+          "origin": "previous_delivery",
+          "score": 0.1987,
+          "ingredient_jaccard": 0.3529,
+          "instruction_similarity": 0.0866
+        },
+        {
+          "base_id": "smako-mexican-salpicon-de-res",
+          "variant_id": "standard",
+          "name": "Salpicón de res – syrlig sallad med trådigt nötkött – standard",
+          "origin": "previous_delivery",
+          "score": 0.1895,
+          "ingredient_jaccard": 0.4286,
+          "instruction_similarity": 0.0757
+        },
+        {
+          "base_id": "smako-mexican-sweetpotato-bean-flautas",
+          "variant_id": "extended",
+          "name": "Krispiga tortillarullar med bönor och sötpotatis – utökad",
+          "origin": "original",
+          "score": 0.189,
+          "ingredient_jaccard": 0.4286,
+          "instruction_similarity": 0.0718
+        }
+      ],
+      "post_authoring_culinary_reason": "Förkokta kaktusblad utgör en komplett avsvalnad salladsbas, inte en liten sallad till enfrijoladas eller flautas. Tillagning och konsistens är bärande och tortillas bara sidokomponenten.",
+      "nearest_new_after_authoring": {
+        "base_id": "smako-mexican-tlatlapas-gula-arter",
+        "name": "Tlatlapas på rostade gula ärtor",
+        "score": 0.1398,
+        "variant_pair": {
+          "left": "smako-mexican-tlatlapas-gula-arter:1.0.0:extended",
+          "right": "smako-mexican-ensalada-nopales-kokt-kaktus:1.0.0:simple",
+          "score": 0.1398,
+          "ingredient_jaccard": 0.2667,
+          "instruction_similarity": 0.1175
+        },
+        "difference": "Jämför bärande kedjor: Kokt, avrunnen kaktus i kall hackad sallad med tomat, lök och färskost; större måltidsportion med tortillas. Inte varmfyllda kaktusblad eller en generell grönsallad. Mot Tlatlapas: Torkade ärtor rostas, mals torra och kokas därefter till soppa med chili och epazote. Den omvända malnings-/kokkedjan skiljer från hel ärtsoppa och kokt bönpuré. Gulärtsversion av dokumenterad ärtvariation. Skillnaden ligger i huvudkomponent och tillagning, inte en extra krydda eller serveringsetikett."
+      },
+      "finding_method": "Fullständiga matriser enligt granskning/*, kompletterade med läsning av relevanta närträffars fullständiga recept; AI-redaktionellt beslut, inte Smakos godkännande."
+    },
+    {
+      "base_id": "smako-mexican-coyotas-piloncillo",
+      "decision": "accept",
+      "pre_authoring_nearest_library": [
+        {
+          "base_id": "smako-mexican-calabaza-tacha",
+          "names": [
+            "Calabaza en tacha – pumpa med piloncillo – enkel",
+            "Calabaza en tacha – pumpa med piloncillo – utökad"
+          ],
+          "origin": "previous_delivery",
+          "score": 0.2089,
+          "name_similarity": 0.3173,
+          "ingredient_jaccard": 0.2,
+          "full_instruction_similarity": 0.0479
+        },
+        {
+          "base_id": "smako-swedish-snack-steamed-date-sponge",
+          "names": [
+            "Liten ångad dadelpudding med yoghurt – enkel",
+            "Liten ångad dadelpudding med yoghurt – utökad"
+          ],
+          "origin": "original",
+          "score": 0.1635,
+          "name_similarity": 0.0018,
+          "ingredient_jaccard": 0.4545,
+          "full_instruction_similarity": 0.0147
+        },
+        {
+          "base_id": "smako-greek-karidopita",
+          "names": [
+            "Karidopita – valnötskaka med sirap – enkel",
+            "Karidopita – valnötskaka med sirap – utökad"
+          ],
+          "origin": "previous_delivery",
+          "score": 0.139,
+          "name_similarity": 0.0049,
+          "ingredient_jaccard": 0.3636,
+          "full_instruction_similarity": 0.039
+        }
+      ],
+      "pre_authoring_culinary_reason": "Kakorna är två tunna bakpulverdegsskivor som sluts kring en torr sockerfyllning. Calabaza en tacha är pumpa kokt i sirap utan deg, och andra kakor har öppen fyllning eller kaksmet. Valnötsvarianten behåller samma bas-ID.",
+      "post_authoring_nearest_library": [
+        {
+          "base_id": "smako-mexican-calabaza-tacha",
+          "variant_id": "simple",
+          "name": "Calabaza en tacha – pumpa med piloncillo – enkel",
+          "origin": "previous_delivery",
+          "score": 0.1891,
+          "ingredient_jaccard": 0.2857,
+          "instruction_similarity": 0.0166
+        },
+        {
+          "base_id": "smako-swedish-havreflarn",
+          "variant_id": "simple",
+          "name": "Havreflarn – tunna knäckiga havrekakor – tunna knäckiga flarn",
+          "origin": "previous_delivery",
+          "score": 0.1754,
+          "ingredient_jaccard": 0.5,
+          "instruction_similarity": 0.0503
+        },
+        {
+          "base_id": "smako-swedish-snack-steamed-date-sponge",
+          "variant_id": "extended",
+          "name": "Liten ångad dadelpudding med yoghurt – utökad",
+          "origin": "original",
+          "score": 0.1565,
+          "ingredient_jaccard": 0.4545,
+          "instruction_similarity": 0.0395
+        }
+      ],
+      "post_authoring_culinary_reason": "Piloncillo smälter inuti en försluten tunn degkaka. Tidigare pumpa i sirap och havreflarn delar socker/fett men inte den torra sockerfyllningen i två degskivor.",
+      "nearest_new_after_authoring": {
+        "base_id": "smako-greek-kolokithopita-sot-pumpapaj",
+        "name": "Söt kolokithopita med pumpa och kanel",
+        "score": 0.114,
+        "variant_pair": {
+          "left": "smako-greek-kolokithopita-sot-pumpapaj:1.0.0:extended",
+          "right": "smako-mexican-coyotas-piloncillo:1.0.0:extended",
+          "score": 0.114,
+          "ingredient_jaccard": 0.2727,
+          "instruction_similarity": 0.0691
+        },
+        "difference": "Jämför bärande kedjor: Två tunna runda degskivor omsluter torr riven piloncillo innan gräddning. Smör är en uttalad hemmaanpassning av kort fettdeg; inte empanada med mjuk fruktfyllning. Mot Glykia kolokithopita: Filopaj med tillagad avrunnen pumpafyllning, inte nötbaklava med sirap eller äggstannad pumpa. Förenklad filoversion. Skillnaden ligger i huvudkomponent och tillagning, inte en extra krydda eller serveringsetikett."
+      },
+      "finding_method": "Fullständiga matriser enligt granskning/*, kompletterade med läsning av relevanta närträffars fullständiga recept; AI-redaktionellt beslut, inte Smakos godkännande."
+    },
+    {
+      "base_id": "smako-indian-mysore-pak",
+      "decision": "accept",
+      "pre_authoring_nearest_library": [
+        {
+          "base_id": "smako-indian-gajar-halwa",
+          "names": [
+            "Gajar halwa – med nötter, russin och kondenserad mjölk",
+            "Gajar halwa – morot långsamt kokt i mjölk"
+          ],
+          "origin": "previous_delivery",
+          "score": 0.1187,
+          "name_similarity": 0.0253,
+          "ingredient_jaccard": 0.3,
+          "full_instruction_similarity": 0.0141
+        },
+        {
+          "base_id": "smako-indian-chhena-poda",
+          "names": [
+            "Chhena poda – karamelliserad färskostkaka – enkel",
+            "Chhena poda – karamelliserad färskostkaka – utökad"
+          ],
+          "origin": "previous_delivery",
+          "score": 0.1185,
+          "name_similarity": 0.0264,
+          "ingredient_jaccard": 0.3,
+          "full_instruction_similarity": 0.0119
+        },
+        {
+          "base_id": "smako-indian-snack-kneaded-cooked-milk-curd-squares",
+          "names": [
+            "Små knådade och kokta mjölkkonfektbitar – enkel",
+            "Små knådade och kokta mjölkkonfektbitar – utökad"
+          ],
+          "origin": "original",
+          "score": 0.1045,
+          "name_similarity": 0.0898,
+          "ingredient_jaccard": 0.1818,
+          "full_instruction_similarity": 0.0198
+        }
+      ],
+      "pre_authoring_culinary_reason": "Mysore pak sätter sig genom kokt sockerlag och gradvis tillsatt varmt ghee medan kikärtsmjölet tillagas i massan. Ladoo bygger på torrrostning och knådning/rullning. Skärbar, porös konfekt är därför inte bara en annan form på samma färdiga smet.",
+      "post_authoring_nearest_library": [
+        {
+          "base_id": "smako-mexican-camotes-poblanos",
+          "variant_id": "simple",
+          "name": "Camotes poblanos – mjuka sötpotatiskonfektbitar – mjuk sötpotatiskonfekt",
+          "origin": "previous_delivery",
+          "score": 0.1296,
+          "ingredient_jaccard": 0.2,
+          "instruction_similarity": 0.057
+        },
+        {
+          "base_id": "smako-indian-snack-kneaded-cooked-milk-curd-squares",
+          "variant_id": "simple",
+          "name": "Små knådade och kokta mjölkkonfektbitar – enkel",
+          "origin": "original",
+          "score": 0.1269,
+          "ingredient_jaccard": 0.25,
+          "instruction_similarity": 0.0471
+        },
+        {
+          "base_id": "smako-indian-snack-roasted-besan-ladoo",
+          "variant_id": "simple",
+          "name": "Små rostade kikärtsmjölskulor med mjölk – enkel",
+          "origin": "original",
+          "score": 0.1222,
+          "ingredient_jaccard": 0.25,
+          "instruction_similarity": 0.06
+        }
+      ],
+      "post_authoring_culinary_reason": "Socker, ghee och kikärtsmjöl kokas till porös konfekt. Mjölkostkonfekt och sötpotatiskonfekt har annan bärande massa och sättning. Ingen extra råvara läggs till för att tvinga upp antalet.",
+      "nearest_new_after_authoring": {
+        "base_id": "smako-swedish-kalvdans-ramjolk",
+        "name": "Kalvdans med kanel",
+        "score": 0.0686,
+        "variant_pair": {
+          "left": "smako-indian-mysore-pak:1.0.0:simple",
+          "right": "smako-swedish-kalvdans-ramjolk:1.0.0:simple",
+          "score": 0.0686,
+          "ingredient_jaccard": 0.1667,
+          "instruction_similarity": 0.0355
+        },
+        "difference": "Jämför bärande kedjor: Kikärtsmjöl och varmt ghee arbetas i kokt sockerlag tills massan poröst sätter sig i form. Inte rullade ladoobollar av torrrostat mjöl och eftertillsatt socker. Mot Kalvdans: Kolostrumets egna proteiner sätter en mjuk pudding i vattenbad utan ägg, stärkelse eller ostlöpe. Exakt råmjölksstyrka behöver produkt- och provlagninggranskning. Skillnaden ligger i huvudkomponent och tillagning, inte en extra krydda eller serveringsetikett."
+      },
+      "finding_method": "Fullständiga matriser enligt granskning/*, kompletterade med läsning av relevanta närträffars fullständiga recept; AI-redaktionellt beslut, inte Smakos godkännande."
+    },
+    {
+      "base_id": "smako-indian-nagaland-rokt-flask-bambu",
+      "decision": "accept",
+      "pre_authoring_nearest_library": [
+        {
+          "base_id": "smako-thai-beef-bamboo-clear-noodle-soup",
+          "names": [
+            "Thailändskinspirerad nötsoppa med bambu och nudlar – enkel",
+            "Thailändskinspirerad nötsoppa med bambu och nudlar – utökad",
+            "Thailändskinspirerad nötsoppa med bambu och nudlar – vardag"
+          ],
+          "origin": "original",
+          "score": 0.1821,
+          "name_similarity": 0.2187,
+          "ingredient_jaccard": 0.2222,
+          "full_instruction_similarity": 0.0674
+        },
+        {
+          "base_id": "smako-thai-chicken-cashew-bamboo-wok",
+          "names": [
+            "Thailändskinspirerad kycklingwok med cashew och bambu – enkel",
+            "Thailändskinspirerad kycklingwok med cashew och bambu – utökad",
+            "Thailändskinspirerad kycklingwok med cashew och bambu – vardag"
+          ],
+          "origin": "original",
+          "score": 0.1583,
+          "name_similarity": 0.2023,
+          "ingredient_jaccard": 0.2,
+          "full_instruction_similarity": 0.0293
+        },
+        {
+          "base_id": "smako-thai-fish-tamarind-bamboo-soup",
+          "names": [
+            "Thailändskinspirerad syrlig fisksoppa med bambu – enkel",
+            "Thailändskinspirerad syrlig fisksoppa med bambu – utökad",
+            "Thailändskinspirerad syrlig fisksoppa med bambu – vardag"
+          ],
+          "origin": "original",
+          "score": 0.1519,
+          "name_similarity": 0.2282,
+          "ingredient_jaccard": 0.15,
+          "full_instruction_similarity": 0.0324
+        }
+      ],
+      "pre_authoring_culinary_reason": "Fermenterade bambuskott och rökt fläsk är bärande för en syrlig kokning utan standardiserad tomat-currybas. Det är varken en thai wok med vanlig konserverad bambu eller en generisk indisk kycklinggryta där proteinet bytts. Pak choi och pumpatillbehör är namngivna hemmaanpassningar, inte påstådda originalkomponenter.",
+      "post_authoring_nearest_library": [
+        {
+          "base_id": "smako-indian-chicken-cafreal",
+          "variant_id": "standard",
+          "name": "Chicken cafreal – grönkryddad kyckling – standard",
+          "origin": "previous_delivery",
+          "score": 0.1936,
+          "ingredient_jaccard": 0.4615,
+          "instruction_similarity": 0.0843
+        },
+        {
+          "base_id": "smako-thai-beef-bamboo-clear-noodle-soup",
+          "variant_id": "extended",
+          "name": "Thailändskinspirerad nötsoppa med bambu och nudlar – utökad",
+          "origin": "original",
+          "score": 0.1877,
+          "ingredient_jaccard": 0.3158,
+          "instruction_similarity": 0.1036
+        },
+        {
+          "base_id": "smako-indian-fermented-rice-urad-crepes-mushrooms",
+          "variant_id": "extended",
+          "name": "Indiskinspirerade fermenterade ris-uradcrêpes med svamp – utökad",
+          "origin": "original",
+          "score": 0.1752,
+          "ingredient_jaccard": 0.3158,
+          "instruction_similarity": 0.0388
+        }
+      ],
+      "post_authoring_culinary_reason": "Rökt fläsk och fermenterade bambuskott sjuds tillsammans, med tydligt namngiven Nagaland-inspiration. Vanlig konserverad bambu i klar nudelsoppa är inte samma fermenterade huvudkomponent eller rökta långkok.",
+      "nearest_new_after_authoring": {
+        "base_id": "smako-thai-kaeng-jued-mara-fylld-bittergurka",
+        "name": "Kaeng jued mara – fläskfylld bittergurka i soppa",
+        "score": 0.1105,
+        "variant_pair": {
+          "left": "smako-indian-nagaland-rokt-flask-bambu:1.0.0:standard",
+          "right": "smako-thai-kaeng-jued-mara-fylld-bittergurka:1.0.0:extended",
+          "score": 0.1105,
+          "ingredient_jaccard": 0.2222,
+          "instruction_similarity": 0.0899
+        },
+        "difference": "Jämför bärande kedjor: Långkok av rökt fläsk och syrligt fermenterade bambuskott utan vanlig currybas. Namnet gör hemmaanpassningen tydlig; exakt lokal benämning påstås inte. Mot Kaeng jued mara: Urkärnade bittergurksringar fylls med rå fläsk- och glasnudelfärs och pocheras i klar soppa. Inte öppna ugnsgratinerade grönsaksbåtar. Skillnaden ligger i huvudkomponent och tillagning, inte en extra krydda eller serveringsetikett."
+      },
+      "finding_method": "Fullständiga matriser enligt granskning/*, kompletterade med läsning av relevanta närträffars fullständiga recept; AI-redaktionellt beslut, inte Smakos godkännande."
+    },
+    {
+      "base_id": "smako-thai-kaeng-jued-mara-fylld-bittergurka",
+      "decision": "accept",
+      "pre_authoring_nearest_library": [
+        {
+          "base_id": "smako-indian-whole-bitter-gourd-onion-nut-stuffing",
+          "names": [
+            "Indiskinspirerad fylld bittergurka med linsris – enkel",
+            "Indiskinspirerad fylld bittergurka med linsris – utökad",
+            "Indiskinspirerad fylld bittergurka med linsris – vardag"
+          ],
+          "origin": "original",
+          "score": 0.1865,
+          "name_similarity": 0.3231,
+          "ingredient_jaccard": 0.15,
+          "full_instruction_similarity": 0.0189
+        },
+        {
+          "base_id": "smako-thai-pork-stuffed-zucchini",
+          "names": [
+            "Thailändskinspirerad zucchini fylld med fläsk och kokos – enkel",
+            "Thailändskinspirerad zucchini fylld med fläsk och kokos – utökad",
+            "Thailändskinspirerad zucchini fylld med fläsk och kokos – vardag"
+          ],
+          "origin": "original",
+          "score": 0.1666,
+          "name_similarity": 0.0807,
+          "ingredient_jaccard": 0.3529,
+          "full_instruction_similarity": 0.0432
+        },
+        {
+          "base_id": "smako-indian-poppy-mustard-milk-green-plantain-pot",
+          "names": [
+            "Indiskinspirerad matbanan och bittergurka i vallmo-senapssås – enkel",
+            "Indiskinspirerad matbanan och bittergurka i vallmo-senapssås – utökad",
+            "Indiskinspirerad matbanan och bittergurka i vallmo-senapssås – vardag"
+          ],
+          "origin": "original",
+          "score": 0.144,
+          "name_similarity": 0.2166,
+          "ingredient_jaccard": 0.15,
+          "full_instruction_similarity": 0.0195
+        }
+      ],
+      "pre_authoring_culinary_reason": "Bittergurkans urgröpta cylindrar sluts runt rå fläskfärs med glasnudlar och pocheras i en klar soppa. Den befintliga fyllda bittergurkan steks med lök-/nötfyllning, och zucchini får färdigstekt fyllning och bakas. Innesluten rå fyllning, nudelbindning och klar kokvätska är en annan rättarkitektur.",
+      "post_authoring_nearest_library": [
+        {
+          "base_id": "smako-thai-pork-stuffed-zucchini",
+          "variant_id": "standard",
+          "name": "Thailändskinspirerad zucchini fylld med fläsk och kokos – vardag",
+          "origin": "original",
+          "score": 0.1936,
+          "ingredient_jaccard": 0.4375,
+          "instruction_similarity": 0.0878
+        },
+        {
+          "base_id": "smako-thai-pad-woon-sen",
+          "variant_id": "standard",
+          "name": "Pad woon sen – glasnudelwok med ägg – standard",
+          "origin": "previous_delivery",
+          "score": 0.1776,
+          "ingredient_jaccard": 0.4286,
+          "instruction_similarity": 0.0737
+        },
+        {
+          "base_id": "smako-indian-whole-bitter-gourd-onion-nut-stuffing",
+          "variant_id": "standard",
+          "name": "Indiskinspirerad fylld bittergurka med linsris – vardag",
+          "origin": "original",
+          "score": 0.1766,
+          "ingredient_jaccard": 0.2143,
+          "instruction_similarity": 0.0556
+        }
+      ],
+      "post_authoring_culinary_reason": "Bittergurksringar fylls med rå fläsk- och glasnudelmassa och sjuds i soppa; jämför bakade öppna zucchinibåtar. Fruktens hålrum och soppkoket bär identiteten, inte ett enkelt proteinbyte.",
+      "nearest_new_after_authoring": {
+        "base_id": "smako-thai-suki-nam-glasnudelsoppa",
+        "name": "Suki nam – glasnudelsoppa med röd tofusås",
+        "score": 0.1544,
+        "variant_pair": {
+          "left": "smako-thai-kaeng-jued-mara-fylld-bittergurka:1.0.0:extended",
+          "right": "smako-thai-suki-nam-glasnudelsoppa:1.0.0:extended",
+          "score": 0.1544,
+          "ingredient_jaccard": 0.3333,
+          "instruction_similarity": 0.0943
+        },
+        "difference": "Fyllda bittergurksringar med glasnudlar i rå färsmassa och separat ris, jämfört med lösa glasnudlar, skivad kyckling, äggstråk och separat tofusås."
+      },
+      "finding_method": "Fullständiga matriser enligt granskning/*, kompletterade med läsning av relevanta närträffars fullständiga recept; AI-redaktionellt beslut, inte Smakos godkännande."
+    },
+    {
+      "base_id": "smako-thai-suki-nam-glasnudelsoppa",
+      "decision": "accept",
+      "pre_authoring_nearest_library": [
+        {
+          "base_id": "smako-thai-pad-woon-sen",
+          "names": [
+            "Pad woon sen – glasnudelwok med ägg – enkel",
+            "Pad woon sen – glasnudelwok med ägg – standard",
+            "Pad woon sen – glasnudelwok med ägg – utökad"
+          ],
+          "origin": "previous_delivery",
+          "score": 0.201,
+          "name_similarity": 0.2635,
+          "ingredient_jaccard": 0.2632,
+          "full_instruction_similarity": 0.014
+        },
+        {
+          "base_id": "smako-thai-yen-ta-fo",
+          "names": [
+            "Yen ta fo – nudelsoppa med röd fermenterad tofu – enkel",
+            "Yen ta fo – nudelsoppa med röd fermenterad tofu – standard",
+            "Yen ta fo – nudelsoppa med röd fermenterad tofu – utökad"
+          ],
+          "origin": "previous_delivery",
+          "score": 0.1692,
+          "name_similarity": 0.2623,
+          "ingredient_jaccard": 0.1364,
+          "full_instruction_similarity": 0.0661
+        },
+        {
+          "base_id": "smako-thai-pork-waterchestnut-meatball-noodle-soup",
+          "names": [
+            "Thailändskinspirerad nudelsoppa med fläsk- och vattenkastanjbollar – enkel",
+            "Thailändskinspirerad nudelsoppa med fläsk- och vattenkastanjbollar – utökad",
+            "Thailändskinspirerad nudelsoppa med fläsk- och vattenkastanjbollar – vardag"
+          ],
+          "origin": "original",
+          "score": 0.1449,
+          "name_similarity": 0.1885,
+          "ingredient_jaccard": 0.1905,
+          "full_instruction_similarity": 0.0113
+        }
+      ],
+      "pre_authoring_culinary_reason": "Pad woon sen är torr glasnudelwok. Yen ta fo har runda risnudlar, fiskbullar och en röd tofu-syrlig buljong. Suki nam har glasnudlar, ägg som dras till stråk, skivad kyckling och en separat rödtofu-sesamsås att dosera vid bordet; såsens roll och ägg-/nudelberedningen skiljer, inte enbart proteinet.",
+      "post_authoring_nearest_library": [
+        {
+          "base_id": "smako-thai-pad-woon-sen",
+          "variant_id": "standard",
+          "name": "Pad woon sen – glasnudelwok med ägg – standard",
+          "origin": "previous_delivery",
+          "score": 0.2492,
+          "ingredient_jaccard": 0.4375,
+          "instruction_similarity": 0.0799
+        },
+        {
+          "base_id": "smako-thai-yen-ta-fo",
+          "variant_id": "standard",
+          "name": "Yen ta fo – nudelsoppa med röd fermenterad tofu – standard",
+          "origin": "previous_delivery",
+          "score": 0.2035,
+          "ingredient_jaccard": 0.2105,
+          "instruction_similarity": 0.1276
+        },
+        {
+          "base_id": "smako-thai-covered-pot-chicken-glass-noodles",
+          "variant_id": "simple",
+          "name": "Glasnudlar som ångkokas i gryta med kyckling och ingefära – enkel",
+          "origin": "original",
+          "score": 0.1748,
+          "ingredient_jaccard": 0.3125,
+          "instruction_similarity": 0.0606
+        }
+      ],
+      "post_authoring_culinary_reason": "Lös glasnudelsoppa med tillagad kyckling, äggstråk och separat röd tofu-/sesamsås. Pad woon sen är wokad och yentafo är en annan fisk-/buljongkedja; den separata suki-såsen är bärande.",
+      "nearest_new_after_authoring": {
+        "base_id": "smako-thai-kaeng-jued-mara-fylld-bittergurka",
+        "name": "Kaeng jued mara – fläskfylld bittergurka i soppa",
+        "score": 0.1544,
+        "variant_pair": {
+          "left": "smako-thai-kaeng-jued-mara-fylld-bittergurka:1.0.0:extended",
+          "right": "smako-thai-suki-nam-glasnudelsoppa:1.0.0:extended",
+          "score": 0.1544,
+          "ingredient_jaccard": 0.3333,
+          "instruction_similarity": 0.0943
+        },
+        "difference": "Fyllda bittergurksringar med glasnudlar i rå färsmassa och separat ris, jämfört med lösa glasnudlar, skivad kyckling, äggstråk och separat tofusås."
+      },
+      "finding_method": "Fullständiga matriser enligt granskning/*, kompletterade med läsning av relevanta närträffars fullständiga recept; AI-redaktionellt beslut, inte Smakos godkännande."
+    },
+    {
+      "base_id": "smako-thai-khanom-fak-thong-angad-pumpkaka",
+      "decision": "accept",
+      "pre_authoring_nearest_library": [
+        {
+          "base_id": "smako-thai-khanom-tan",
+          "names": [
+            "Khanom tan – jästa palmfruktskakor – enkel",
+            "Khanom tan – jästa palmfruktskakor – utökad"
+          ],
+          "origin": "previous_delivery",
+          "score": 0.2448,
+          "name_similarity": 0.3093,
+          "ingredient_jaccard": 0.3333,
+          "full_instruction_similarity": 0.0178
+        },
+        {
+          "base_id": "smako-thai-snack-steamed-coconut-layer-cake",
+          "names": [
+            "Ångad kokos- och riskaka i tunna lager – enkel",
+            "Ångad kokos- och riskaka i tunna lager – utökad"
+          ],
+          "origin": "original",
+          "score": 0.1842,
+          "name_similarity": 0.0781,
+          "ingredient_jaccard": 0.4,
+          "full_instruction_similarity": 0.0518
+        },
+        {
+          "base_id": "smako-thai-khanom-sai-sai",
+          "names": [
+            "Khanom sai sai – kokosfyllda ångknyten – enkel",
+            "Khanom sai sai – kokosfyllda ångknyten – utökad"
+          ],
+          "origin": "previous_delivery",
+          "score": 0.1592,
+          "name_similarity": 0.2415,
+          "ingredient_jaccard": 0.1667,
+          "full_instruction_similarity": 0.0169
+        }
+      ],
+      "pre_authoring_culinary_reason": "Khanom tan är jäst och luftigt; den lagrade kokoskakan ångas i tunna växelvisa skikt. Pumpakakan är ojäst och tät, med kokt pumpapuré som stor basmängd och stärkelse som binder i ett enda skikt. Pumpaäggstanningen använder ett helt pumpaskal och ägg som bindemedel. Ingen av dessa är samma recept med endast en färg-/fruktersättning.",
+      "post_authoring_nearest_library": [
+        {
+          "base_id": "smako-thai-khanom-tan",
+          "variant_id": "simple",
+          "name": "Khanom tan – jästa palmfruktskakor – enkel",
+          "origin": "previous_delivery",
+          "score": 0.3006,
+          "ingredient_jaccard": 0.4286,
+          "instruction_similarity": 0.1846
+        },
+        {
+          "base_id": "smako-thai-snack-steamed-coconut-layer-cake",
+          "variant_id": "simple",
+          "name": "Ångad kokos- och riskaka i tunna lager – enkel",
+          "origin": "original",
+          "score": 0.2774,
+          "ingredient_jaccard": 0.6667,
+          "instruction_similarity": 0.1151
+        },
+        {
+          "base_id": "smako-thai-khanom-sai-sai",
+          "variant_id": "simple",
+          "name": "Khanom sai sai – kokosfyllda ångknyten – enkel",
+          "origin": "previous_delivery",
+          "score": 0.1993,
+          "ingredient_jaccard": 0.25,
+          "instruction_similarity": 0.0932
+        }
+      ],
+      "post_authoring_culinary_reason": "Icke jäst pumpapuré och stärkelse ångas till tät kaka. Khanom tan är en jäst palmkaka; jäsning, råvarans roll och textur skiljer grundkoncepten.",
+      "nearest_new_after_authoring": {
+        "base_id": "smako-greek-kolokithopita-sot-pumpapaj",
+        "name": "Söt kolokithopita med pumpa och kanel",
+        "score": 0.1328,
+        "variant_pair": {
+          "left": "smako-greek-kolokithopita-sot-pumpapaj:1.0.0:simple",
+          "right": "smako-thai-khanom-fak-thong-angad-pumpkaka:1.0.0:simple",
+          "score": 0.1328,
+          "ingredient_jaccard": 0.25,
+          "instruction_similarity": 0.0844
+        },
+        "difference": "Pumpa ingår i båda, men filohölje bakas kring en separat fyllning i kolokithopita medan pumpan binds i ångad kokos-/stärkelsesmet i khanom fak thong."
+      },
+      "finding_method": "Fullständiga matriser enligt granskning/*, kompletterade med läsning av relevanta närträffars fullständiga recept; AI-redaktionellt beslut, inte Smakos godkännande."
+    },
+    {
+      "base_id": "smako-swedish-angamat-sommargronsaker",
+      "decision": "accept",
+      "pre_authoring_nearest_library": [
+        {
+          "base_id": "smako-swedish-skomakarlada",
+          "names": [
+            "Skomakarlåda med purjolök och potatismos – enkel",
+            "Skomakarlåda med purjolök och potatismos – standard",
+            "Skomakarlåda med purjolök och potatismos – utökad"
+          ],
+          "origin": "previous_delivery",
+          "score": 0.1657,
+          "name_similarity": 0.023,
+          "ingredient_jaccard": 0.4375,
+          "full_instruction_similarity": 0.0135
+        },
+        {
+          "base_id": "smako-swedish-lutfisk",
+          "names": [
+            "Lutfisk med vit sås, ärtor och potatis – enkel",
+            "Lutfisk med vit sås, ärtor och potatis – standard",
+            "Lutfisk med vit sås, ärtor och potatis – utökad"
+          ],
+          "origin": "previous_delivery",
+          "score": 0.1467,
+          "name_similarity": 0.033,
+          "ingredient_jaccard": 0.375,
+          "full_instruction_similarity": 0.0092
+        },
+        {
+          "base_id": "smako-swedish-nasselsoppa",
+          "names": [
+            "Nässelsoppa med ägg och bröd – enkel",
+            "Nässelsoppa med ägg och bröd – standard",
+            "Nässelsoppa med ägg och bröd – utökad"
+          ],
+          "origin": "previous_delivery",
+          "score": 0.1455,
+          "name_similarity": 0.0264,
+          "ingredient_jaccard": 0.375,
+          "full_instruction_similarity": 0.0146
+        }
+      ],
+      "pre_authoring_culinary_reason": "Grönsakerna behålls som bitar i en mjölk-/mjölredd soppa. Nässelsoppan har finfördelade nässlor och ägg, och kyckling-limpsoppan har kött och mjölkdumplings. Det är inte en ny etikett på befintlig mixad grönsakssoppa.",
+      "post_authoring_nearest_library": [
+        {
+          "base_id": "smako-swedish-breakfast-grilled-ham-bread-milk-sauce",
+          "variant_id": "simple",
+          "name": "Gratinerad frukostmacka med skinka och mjölksås – enkel",
+          "origin": "original",
+          "score": 0.1854,
+          "ingredient_jaccard": 0.4444,
+          "instruction_similarity": 0.0835
+        },
+        {
+          "base_id": "smako-swedish-nasselsoppa",
+          "variant_id": "simple",
+          "name": "Nässelsoppa med ägg och bröd – enkel",
+          "origin": "previous_delivery",
+          "score": 0.1756,
+          "ingredient_jaccard": 0.4444,
+          "instruction_similarity": 0.0685
+        },
+        {
+          "base_id": "smako-swedish-lutfisk",
+          "variant_id": "simple",
+          "name": "Lutfisk med vit sås, ärtor och potatis – enkel",
+          "origin": "previous_delivery",
+          "score": 0.1751,
+          "ingredient_jaccard": 0.4444,
+          "instruction_similarity": 0.0668
+        }
+      ],
+      "post_authoring_culinary_reason": "Hela sommargrönsaker behålls i en mjölk- och mjölredd soppa. Nässelsoppa har en annan bärande bladbas och brödrätter med mjölksås är inte soppan.",
+      "nearest_new_after_authoring": {
+        "base_id": "smako-swedish-stekt-saltsill-loksas",
+        "name": "Stekt saltsill med löksås",
+        "score": 0.1306,
+        "variant_pair": {
+          "left": "smako-swedish-angamat-sommargronsaker:1.0.0:simple",
+          "right": "smako-swedish-stekt-saltsill-loksas:1.0.0:simple",
+          "score": 0.1306,
+          "ingredient_jaccard": 0.3,
+          "instruction_similarity": 0.0709
+        },
+        "difference": "Lök, mjölk, smör och mjöl är gemensamt såsunderlag. Grönsakssoppa med hela grönsaker är inte stekta hela sillfiléer med separat löksås."
+      },
+      "finding_method": "Fullständiga matriser enligt granskning/*, kompletterade med läsning av relevanta närträffars fullständiga recept; AI-redaktionellt beslut, inte Smakos godkännande."
+    },
+    {
+      "base_id": "smako-swedish-fiskpudding-ris-mjolk",
+      "decision": "accept",
+      "pre_authoring_nearest_library": [
+        {
+          "base_id": "smako-swedish-snack-self-saucing-lemon-pudding",
+          "names": [
+            "Citronpudding med mjuk kaka och varm sås – enkel",
+            "Citronpudding med mjuk kaka och varm sås – utökad"
+          ],
+          "origin": "original",
+          "score": 0.186,
+          "name_similarity": 0.2002,
+          "ingredient_jaccard": 0.2857,
+          "full_instruction_similarity": 0.0237
+        },
+        {
+          "base_id": "smako-swedish-breakfast-broccoli-bread-strata",
+          "names": [
+            "Brödpudding med broccoli och ost till frukost – enkel",
+            "Brödpudding med broccoli och ost till frukost – utökad"
+          ],
+          "origin": "original",
+          "score": 0.1768,
+          "name_similarity": 0.201,
+          "ingredient_jaccard": 0.2667,
+          "full_instruction_similarity": 0.0124
+        },
+        {
+          "base_id": "smako-swedish-smoked-salmon-potato-pudding",
+          "names": [
+            "Potatispudding med varmrökt lax – enkel",
+            "Potatispudding med varmrökt lax – utökad",
+            "Potatispudding med varmrökt lax – vardag"
+          ],
+          "origin": "original",
+          "score": 0.175,
+          "name_similarity": 0.2247,
+          "ingredient_jaccard": 0.2222,
+          "full_instruction_similarity": 0.0294
+        }
+      ],
+      "pre_authoring_culinary_reason": "Fisken förkokas och flikas, riset kokas mjukt med mjölk, och de förenas med ägg före bakning. Potatislaxpuddingen varvar skivad potatis med rökt lax i lös äggstanning; brödpuddingen har annan stärkelsestruktur. Den salta fisk-risgrötspuddingen är en etablerad egen rätt, inte samma filé med ett tillbehörsbyte.",
+      "post_authoring_nearest_library": [
+        {
+          "base_id": "smako-intake-breadpudding",
+          "variant_id": "7fb05752-simple",
+          "name": "Kyckling- och spenatpudding med bröd – enkel",
+          "origin": "original",
+          "score": 0.1844,
+          "ingredient_jaccard": 0.2727,
+          "instruction_similarity": 0.0713
+        },
+        {
+          "base_id": "smako-swedish-snack-self-saucing-lemon-pudding",
+          "variant_id": "simple",
+          "name": "Citronpudding med mjuk kaka och varm sås – enkel",
+          "origin": "original",
+          "score": 0.1756,
+          "ingredient_jaccard": 0.3333,
+          "instruction_similarity": 0.0399
+        },
+        {
+          "base_id": "smako-swedish-smoked-salmon-potato-pudding",
+          "variant_id": "extended",
+          "name": "Potatispudding med varmrökt lax – utökad",
+          "origin": "original",
+          "score": 0.1687,
+          "ingredient_jaccard": 0.25,
+          "instruction_similarity": 0.0518
+        }
+      ],
+      "post_authoring_culinary_reason": "Fisk och mjölkkokt ris binds av ägg och gräddas. Brödpudding, potatisgratäng eller ugnsfisk med separat ris har inte denna sammanhållna risgrötsbas.",
+      "nearest_new_after_authoring": {
+        "base_id": "smako-swedish-angamat-sommargronsaker",
+        "name": "Ängamat med mjölk och sommargrönsaker",
+        "score": 0.1262,
+        "variant_pair": {
+          "left": "smako-swedish-angamat-sommargronsaker:1.0.0:simple",
+          "right": "smako-swedish-fiskpudding-ris-mjolk:1.0.0:simple",
+          "score": 0.1262,
+          "ingredient_jaccard": 0.2727,
+          "instruction_similarity": 0.0365
+        },
+        "difference": "Jämför bärande kedjor: Mjölkkokt rundris och tillagad vitfisk binds med ägg och ugnsbakas till pudding. Sushiris är uttrycklig vardagsanpassning av rundkornigt ris. Inte potatislaxpudding eller en fiskfilé med ris vid sidan. Mot Ängamat: Bitar av späda grönsaker i ljus mjölksoppa med lätt mjölredning. Inte puréad grönsakssoppa eller soppa med dominerande baljväxter. Skillnaden ligger i huvudkomponent och tillagning, inte en extra krydda eller serveringsetikett."
+      },
+      "finding_method": "Fullständiga matriser enligt granskning/*, kompletterade med läsning av relevanta närträffars fullständiga recept; AI-redaktionellt beslut, inte Smakos godkännande."
+    },
+    {
+      "base_id": "smako-swedish-kalvdans-ramjolk",
+      "decision": "accept",
+      "pre_authoring_nearest_library": [
+        {
+          "base_id": "smako-swedish-chokladpudding",
+          "names": [
+            "Chokladpudding med mjölk – enkel",
+            "Chokladpudding med mjölk – utökad"
+          ],
+          "origin": "previous_delivery",
+          "score": 0.1949,
+          "name_similarity": 0.0822,
+          "ingredient_jaccard": 0.4444,
+          "full_instruction_similarity": 0.026
+        },
+        {
+          "base_id": "smako-swedish-breakfast-apple-cinnamon-porridge",
+          "names": [
+            "Havregrynsgröt med äpple, kanel och jordnötter"
+          ],
+          "origin": "original",
+          "score": 0.1623,
+          "name_similarity": 0.0857,
+          "ingredient_jaccard": 0.3333,
+          "full_instruction_similarity": 0.0454
+        },
+        {
+          "base_id": "smako-italian-panna-cotta",
+          "names": [
+            "Panna cotta med bär – enkel",
+            "Panna cotta med bär – utökad"
+          ],
+          "origin": "previous_delivery",
+          "score": 0.1593,
+          "name_similarity": 0.0056,
+          "ingredient_jaccard": 0.4444,
+          "full_instruction_similarity": 0.0058
+        }
+      ],
+      "pre_authoring_culinary_reason": "Chokladpudding använder stärkelse, panna cotta gelatin och karamellkräm ägg. Kalvdans använder kolostrumets egna värmekoagulerande proteiner och varken ägg eller tillsatt förtjockare. Råvaran är inte vanlig opastöriserad mjölk; produktens styrka är en separat blockerare.",
+      "post_authoring_nearest_library": [
+        {
+          "base_id": "smako-swedish-kanelbullar",
+          "variant_id": "simple",
+          "name": "Kanelbulle med smörfyllning – enkel",
+          "origin": "previous_delivery",
+          "score": 0.1983,
+          "ingredient_jaccard": 0.4286,
+          "instruction_similarity": 0.0245
+        },
+        {
+          "base_id": "smako-swedish-chokladpudding",
+          "variant_id": "extended",
+          "name": "Chokladpudding med mjölk – utökad",
+          "origin": "previous_delivery",
+          "score": 0.1803,
+          "ingredient_jaccard": 0.4444,
+          "instruction_similarity": 0.0398
+        },
+        {
+          "base_id": "smako-swedish-breakfast-apple-cinnamon-porridge",
+          "variant_id": "base",
+          "name": "Havregrynsgröt med äpple, kanel och jordnötter",
+          "origin": "original",
+          "score": 0.1741,
+          "ingredient_jaccard": 0.4286,
+          "instruction_similarity": 0.0379
+        }
+      ],
+      "post_authoring_culinary_reason": "Kolostrum stelnar genom sina egna proteiner utan ägg, stärkelse eller gelatin. Kanelbullar och vanlig mjölkpudding är ingredienslikhet, inte samma sättningsprocess. Produktstyrkan är fortfarande en blockerare.",
+      "nearest_new_after_authoring": {
+        "base_id": "smako-greek-kolokithopita-sot-pumpapaj",
+        "name": "Söt kolokithopita med pumpa och kanel",
+        "score": 0.1209,
+        "variant_pair": {
+          "left": "smako-greek-kolokithopita-sot-pumpapaj:1.0.0:simple",
+          "right": "smako-swedish-kalvdans-ramjolk:1.0.0:simple",
+          "score": 0.1209,
+          "ingredient_jaccard": 0.2857,
+          "instruction_similarity": 0.0308
+        },
+        "difference": "Jämför bärande kedjor: Kolostrumets egna proteiner sätter en mjuk pudding i vattenbad utan ägg, stärkelse eller ostlöpe. Exakt råmjölksstyrka behöver produkt- och provlagninggranskning. Mot Glykia kolokithopita: Filopaj med tillagad avrunnen pumpafyllning, inte nötbaklava med sirap eller äggstannad pumpa. Förenklad filoversion. Skillnaden ligger i huvudkomponent och tillagning, inte en extra krydda eller serveringsetikett."
+      },
+      "finding_method": "Fullständiga matriser enligt granskning/*, kompletterade med läsning av relevanta närträffars fullständiga recept; AI-redaktionellt beslut, inte Smakos godkännande."
+    },
+    {
+      "base_id": "smako-swedish-stekt-saltsill-loksas",
+      "decision": "accept",
+      "pre_authoring_nearest_library": [
+        {
+          "base_id": "smako-swedish-nasselsoppa",
+          "names": [
+            "Nässelsoppa med ägg och bröd – enkel",
+            "Nässelsoppa med ägg och bröd – standard",
+            "Nässelsoppa med ägg och bröd – utökad"
+          ],
+          "origin": "previous_delivery",
+          "score": 0.1869,
+          "name_similarity": 0.0242,
+          "ingredient_jaccard": 0.5,
+          "full_instruction_similarity": 0.0089
+        },
+        {
+          "base_id": "smako-swedish-janssons-frestelse",
+          "names": [
+            "Janssons frestelse – enkel",
+            "Janssons frestelse – standard",
+            "Janssons frestelse – utökad"
+          ],
+          "origin": "previous_delivery",
+          "score": 0.1623,
+          "name_similarity": 0.0224,
+          "ingredient_jaccard": 0.4286,
+          "full_instruction_similarity": 0.0134
+        },
+        {
+          "base_id": "smako-swedish-sillbullar-korintsas",
+          "names": [
+            "Sillbullar med korintsås och potatis – enkel",
+            "Sillbullar med korintsås och potatis – standard",
+            "Sillbullar med korintsås och potatis – utökad"
+          ],
+          "origin": "previous_delivery",
+          "score": 0.1611,
+          "name_similarity": 0.0868,
+          "ingredient_jaccard": 0.3529,
+          "full_instruction_similarity": 0.0116
+        }
+      ],
+      "pre_authoring_culinary_reason": "Saltkonserverad och avsaltad rå sill steks som filé. Sillbullarna blandar sill med andra råvaror till biffar och använder korintsås; Janssons bakar potatis och svensk ansjovis; strömmingsflundror använder färsk fisk i dubbelvikta paket. Saltning/avsaltning och löksåsen är rättidentiteten, inte ett vanligt tillbehörsbyte.",
+      "post_authoring_nearest_library": [
+        {
+          "base_id": "smako-swedish-nasselsoppa",
+          "variant_id": "standard",
+          "name": "Nässelsoppa med ägg och bröd – standard",
+          "origin": "previous_delivery",
+          "score": 0.2432,
+          "ingredient_jaccard": 0.6364,
+          "instruction_similarity": 0.0587
+        },
+        {
+          "base_id": "smako-swedish-sillbullar-korintsas",
+          "variant_id": "standard",
+          "name": "Sillbullar med korintsås och potatis – standard",
+          "origin": "previous_delivery",
+          "score": 0.2383,
+          "ingredient_jaccard": 0.6,
+          "instruction_similarity": 0.072
+        },
+        {
+          "base_id": "smako-swedish-lapskojs",
+          "variant_id": "simple",
+          "name": "Lapskojs – rimmad oxbringa i potatismos – enkel",
+          "origin": "previous_delivery",
+          "score": 0.2122,
+          "ingredient_jaccard": 0.5714,
+          "instruction_similarity": 0.0712
+        }
+      ],
+      "post_authoring_culinary_reason": "Hela urvattnade saltade sillfiléer steks och serveras med löksås. Tidigare sillbullar är en mald potatis-/fiskmassa med annan sås; inget nytt ID skapas för ett enkelt tillbehörsbyte.",
+      "nearest_new_after_authoring": {
+        "base_id": "smako-swedish-angamat-sommargronsaker",
+        "name": "Ängamat med mjölk och sommargrönsaker",
+        "score": 0.1306,
+        "variant_pair": {
+          "left": "smako-swedish-angamat-sommargronsaker:1.0.0:simple",
+          "right": "smako-swedish-stekt-saltsill-loksas:1.0.0:simple",
+          "score": 0.1306,
+          "ingredient_jaccard": 0.3,
+          "instruction_similarity": 0.0709
+        },
+        "difference": "Lök, mjölk, smör och mjöl är gemensamt såsunderlag. Grönsakssoppa med hela grönsaker är inte stekta hela sillfiléer med separat löksås."
+      },
+      "finding_method": "Fullständiga matriser enligt granskning/*, kompletterade med läsning av relevanta närträffars fullständiga recept; AI-redaktionellt beslut, inte Smakos godkännande."
+    }
+  ],
+  "rejected_not_authored": [
+    {
+      "base_id": "smako-italian-crostini-fegatini",
+      "name": "Crostini di fegatini – varm kycklingleverkräm",
+      "cuisine": "italian",
+      "meal_type": "snack",
+      "traditional_name": "Crostini neri / crostini di fegatini",
+      "region": "Toscana",
+      "tradition_status": "regional_anpassad",
+      "planned_ingredients": [
+        "kycklinglever",
+        "bröd",
+        "smör",
+        "kapris",
+        "gul lök",
+        "sardellfilé",
+        "morot",
+        "selleri"
+      ],
+      "identity": "Genomstekt kycklinglever finmixas till ett bredbart pålägg med kapris och smör. Inte skivad lever med lök som varmrätt.",
+      "source_key": "crostini",
+      "decision": "reject",
+      "reason": "smako-swedish-chicken-liver-smooth-pate har redan genomstekt och smörmixad kycklingleverpastej på bröd. Kapris/sardeller och varm servering räcker inte här till ny grundrätt."
+    },
+    {
+      "base_id": "smako-indian-rava-dosa-spetsiga",
+      "name": "Rava dosa – ojästa spetsiga mannagrynspannkakor",
+      "cuisine": "indian",
+      "meal_type": "breakfast",
+      "traditional_name": "Rava dosa",
+      "region": "Södra Indien",
+      "tradition_status": "regional_anpassad",
+      "planned_ingredients": [
+        "mannagryn",
+        "rismjöl",
+        "vetemjöl",
+        "rapsolja",
+        "spiskummin",
+        "gul lök",
+        "ingefära",
+        "yoghurt naturell"
+      ],
+      "identity": "Tunn ojäst semolina-/rismjölssmet hälls i en spetsig hinna, inte utbredd fermenterad ris-linscrêpe. Yoghurt serveras vid sidan i den utökade varianten.",
+      "source_key": "rava",
+      "decision": "reject",
+      "reason": "Redan avvisad i tidigare leveranser (smako-indian-rava-dosa); respekt för kvarhållen familjegräns. Förs som möjlig variant av befintlig dosafamilj, inte nytt base_id."
+    },
+    {
+      "name": "Skordalia",
+      "existing_base_id": "smako-greek-snack-garlic-potato-emulsion",
+      "decision": "reject",
+      "reason": "Rättens grundkoncept finns redan i biblioteket under beskrivande namn; föreslå förbättring av befintlig bas."
+    },
+    {
+      "name": "Taramosalata",
+      "existing_base_id": "smako-greek-snack-roe-bread-emulsion",
+      "decision": "reject",
+      "reason": "Rättens grundkoncept finns redan i biblioteket under beskrivande namn; föreslå förbättring av befintlig bas."
+    },
+    {
+      "name": "Grekisk fava",
+      "existing_base_id": "smako-greek-yellow-pea-fava-onion-potato",
+      "decision": "reject",
+      "reason": "Rättens grundkoncept finns redan i biblioteket under beskrivande namn; föreslå förbättring av befintlig bas."
+    },
+    {
+      "name": "Vitello tonnato",
+      "existing_base_id": "smako-italian-poached-chicken-tuna-caper-sauce",
+      "decision": "reject",
+      "reason": "Rättens grundkoncept finns redan i biblioteket under beskrivande namn; föreslå förbättring av befintlig bas."
+    },
+    {
+      "name": "Frico",
+      "existing_base_id": "smako-italian-frico-cheese-potato-crust",
+      "decision": "reject",
+      "reason": "Rättens grundkoncept finns redan i biblioteket under beskrivande namn; föreslå förbättring av befintlig bas."
+    },
+    {
+      "name": "Avial",
+      "existing_base_id": "smako-indian-vegetable-batons-coarse-coconut-yogurt",
+      "decision": "reject",
+      "reason": "Rättens grundkoncept finns redan i biblioteket under beskrivande namn; föreslå förbättring av befintlig bas."
+    },
+    {
+      "name": "Shukto",
+      "existing_base_id": "smako-indian-poppy-mustard-milk-green-plantain-pot",
+      "decision": "reject",
+      "reason": "Rättens grundkoncept finns redan i biblioteket under beskrivande namn; föreslå förbättring av befintlig bas."
+    },
+    {
+      "name": "Dhokar dalna",
+      "existing_base_id": "smako-indian-ground-chana-set-fried-sauce-squares",
+      "decision": "reject",
+      "reason": "Rättens grundkoncept finns redan i biblioteket under beskrivande namn; föreslå förbättring av befintlig bas."
+    },
+    {
+      "name": "Appam",
+      "existing_base_id": "smako-indian-yeasted-rice-coconut-bowl-pancakes",
+      "decision": "reject",
+      "reason": "Rättens grundkoncept finns redan i biblioteket under beskrivande namn; föreslå förbättring av befintlig bas."
+    },
+    {
+      "name": "Sjömansbiff",
+      "existing_base_id": "smako-swedish-thin-beef-potato-layered-pot",
+      "decision": "reject",
+      "reason": "Rättens grundkoncept finns redan i biblioteket under beskrivande namn; föreslå förbättring av befintlig bas."
+    },
+    {
+      "name": "Smörgåstårta",
+      "existing_base_id": "smako-swedish-breakfast-mini-breakfast-sandwich-cake",
+      "decision": "reject",
+      "reason": "Rättens grundkoncept finns redan i biblioteket under beskrivande namn; föreslå förbättring av befintlig bas."
+    }
+  ],
+  "review_not_authored": [
+    {
+      "name": "Kuzhi paniyaram",
+      "decision": "review",
+      "reason": "Samma fermenterade ris-uradbas som tidigare dosa/idli-familjer; gränsen mellan formvariant och egen rätt inte avgjord. Inte författad eller räknad."
+    },
+    {
+      "name": "Ceviche de pescado cocido",
+      "decision": "review",
+      "reason": "Värmetillagad säkerhetsanpassning behöver närmare gränsdragning mot redan levererad kall räkskål och fiskescabeche. Inte författad eller räknad."
+    }
+  ],
+  "previous_conflicts": "historik/tidigare-leveranskonflikter.json",
+  "limitations": [
+    "AI-redaktionell bedömning, inte extern eller mänsklig originalitetsattest.",
+    "Ingen smak/provlagningsbedömning har genomförts.",
+    "Äldre konceptöverlapp är kvarvarande konflikter, inte nya recept i denna ZIP."
+  ]
+}

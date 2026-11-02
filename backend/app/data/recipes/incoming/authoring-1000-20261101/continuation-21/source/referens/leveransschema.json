@@ -1,0 +1,273 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Smako authoring handoff structural subset",
+  "description": "Companion schema derived from the existing authoring contract. Not the native validator. Version, variant_id and notes are optional in the original format/example, but must be explicit in the requested new delivery. Counts, servings targets, novelty, identity/form/unit support, cooking quality and provenance require separate checks.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "pack_id",
+    "recipes"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "smako-recipe-authoring-v1"
+    },
+    "pack_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "recipes": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 4096,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "base_id",
+          "name",
+          "servings",
+          "meal_type",
+          "cuisine",
+          "family",
+          "primary",
+          "method",
+          "side",
+          "flavor",
+          "equipment",
+          "components",
+          "steps"
+        ],
+        "properties": {
+          "base_id": {
+            "type": "string",
+            "pattern": "^smako-[a-z]+-[a-z0-9-]+$"
+          },
+          "version": {
+            "type": "string",
+            "pattern": "^\\d+\\.\\d+\\.\\d+$"
+          },
+          "variant_id": {
+            "type": "string",
+            "pattern": "^[a-z0-9-]+$"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 150
+          },
+          "servings": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 12
+          },
+          "meal_type": {
+            "enum": [
+              "dinner",
+              "breakfast",
+              "snack"
+            ]
+          },
+          "cuisine": {
+            "enum": [
+              "greek",
+              "italian",
+              "mexican",
+              "indian",
+              "thai",
+              "swedish"
+            ]
+          },
+          "family": {
+            "type": "string",
+            "minLength": 1
+          },
+          "primary": {
+            "type": "string",
+            "minLength": 1
+          },
+          "side": {
+            "type": "string",
+            "minLength": 1
+          },
+          "method": {
+            "enum": [
+              "pot",
+              "pan",
+              "oven",
+              "bake",
+              "salad",
+              "cold_assembly",
+              "refrigerated_assembly"
+            ]
+          },
+          "flavor": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          },
+          "equipment": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          },
+          "level": {
+            "enum": [
+              "simple",
+              "crafted"
+            ]
+          },
+          "components": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 40,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "id",
+                "name",
+                "ingredients"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "name": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "ingredients": {
+                  "type": "array",
+                  "minItems": 1,
+                  "maxItems": 40,
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "name",
+                      "form",
+                      "quantity",
+                      "role",
+                      "label"
+                    ],
+                    "properties": {
+                      "name": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 120
+                      },
+                      "label": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "note": {
+                        "type": "string"
+                      },
+                      "form": {
+                        "enum": [
+                          "dry",
+                          "raw_edible",
+                          "as_sold",
+                          "cooked_drained",
+                          "preserved_drained"
+                        ]
+                      },
+                      "quantity": {
+                        "type": "number",
+                        "exclusiveMinimum": 0,
+                        "maximum": 100000
+                      },
+                      "unit": {
+                        "enum": [
+                          "g",
+                          "ml",
+                          "st"
+                        ]
+                      },
+                      "role": {
+                        "enum": [
+                          "primary",
+                          "side",
+                          "vegetable",
+                          "sauce",
+                          "flavour",
+                          "cooking"
+                        ]
+                      },
+                      "requirements": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "uniqueItems": true
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "steps": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 40,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "text",
+                "uses",
+                "minutes"
+              ],
+              "properties": {
+                "text": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 2000
+                },
+                "uses": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "uniqueItems": true
+                },
+                "minutes": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 1440
+                },
+                "after": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "items": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "passive": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "notes": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

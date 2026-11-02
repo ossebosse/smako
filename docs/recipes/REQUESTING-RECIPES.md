@@ -5,18 +5,19 @@ Chat eller annat receptförfattande. Ägarens förtydliganden 2026-11-01 ligger
 till grund för detta dokument. Läs också [produktmålet](../PRODUCT-GOAL.md),
 [täckningsöverblicken](../COVERAGE-OVERVIEW.md) och [författarformatet](AUTHORING.md).
 
-## Senaste läge: fem leveranser mottagna 2026-11-01
+## Senaste läge: sex leveranser mottagna 2026-11-02
 
-**189 grundrätter / 501 varianter** är faktiskt mottagna, inklusive senaste
-ZIP med 24/62. Fördelningen är 123 middagar, 17 frukostar och 49 mellanmål.
-Nästa nyskrivna paket är **022**. Mot beställningen återstår **811
-grundrätter / 2 249 varianter**: 627 middagar, 108 frukostar och 76 mellanmål.
+**210 grundrätter / 556 varianter** är faktiskt mottagna, inklusive senaste
+ZIP med 21/55. Fördelningen är 136 middagar, 18 frukostar och 56 mellanmål.
+Nästa nyskrivna paket är **025**. Mot beställningen återstår **790
+grundrätter / 2 194 varianter**: 614 middagar, 107 frukostar och 69 mellanmål.
 
-Biblioteket är nu **1 072 baser / 2 822 varianter**. Från denna beställning
-är 360 varianter importerade i 138 baser (135 hela familjer, tre delvis).
-141 varianter återstår med dokumenterade hinder. Både importerade och alla
+Biblioteket är nu **1 080 baser / 2 842 varianter**. Från denna beställning
+är 380 varianter importerade i 146 baser (142 hela familjer, fyra delvis).
+176 varianter återstår med dokumenterade hinder, varav 35 från senaste ZIP.
+Både importerade och alla
 kvarvarande mottagna utkast ska ingå i nästa dubblettunderlag. Se
-[senaste rapporten och kön](../reviews/recipe-unblock-round2-20261101/REPORT.md).
+[senaste rapporten och kön](../reviews/recipe-unblock-round3-20261102/REPORT.md).
 Den nya mängd-/processhanteringen gör inte okänd näring eller saknat
 produktstöd godkänt. Fortsätt enligt ägarens preferenser nedan.
 
@@ -91,7 +92,7 @@ Vid den mottagningskontrollen gjordes ingen import eller betaaktivering.
 **Ägarens rättelse 2026-11-01:** det finns inget separat 72/194-arkiv.
 Hänvisningarna till det i författarens rapporter är felaktiga och ska inte
 utlösa fler efterfrågningar eller hindra importarbete. Räkna endast faktiskt
-mottagna receptfiler (nu 189/501), inte de 70/190 refererade extra ID:na.
+mottagna receptfiler (nu 210/556), inte de 70/190 refererade extra ID:na.
 Nya ZIP-leveranser kommer löpande med cirka 10–40 grundrätter åt gången.
 Varje leverans ska bytebevaras och räknas efter sitt faktiska innehåll;
 kontrollera ID, innehåll och koncept mot biblioteket och alla mottagna utkast.
@@ -103,10 +104,10 @@ med de hinder som blockerar flest varianter först. Skilj löst registerhinder,
 verifierat produktstöd, granskad receptberedning och importerad hel familj.
 Sakgranska identiteter/former och använd befintliga produkt-/beredningsvägar.
 
-Nästa nyskrivna författarpaket är **022**; återstående mål mot faktiskt
-mottagna utkast är **811 grundrätter / 2 249 varianter**, fördelat på
-627 middagar, 108 frukostar och 76 mellanmål. Detta är inte en slutlig
-nyhetsbedömning av de 189 baserna. Bevara deras ID:n, räkna inte pilotpaketet
+Nästa nyskrivna författarpaket är **025**; återstående mål mot faktiskt
+mottagna utkast är **790 grundrätter / 2 194 varianter**, fördelat på
+614 middagar, 107 frukostar och 69 mellanmål. Detta är inte en slutlig
+nyhetsbedömning av de 210 baserna. Bevara deras ID:n, räkna inte pilotpaketet
 igen och ta med alla mottagna recept i nästa dubblettunderlag även före import.
 Författarens referenser till obefintliga äldre leveranser är inte mottagna recept.
 [Återkoppling på checkpointen](requests/20261101/ATGARDER-CHECKPOINT-72-TILL-CHAT.txt)
