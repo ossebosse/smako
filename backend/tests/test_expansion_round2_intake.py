@@ -63,7 +63,7 @@ def test_each_issued_stage_matches_reviewed_source_changes_and_complete_basket_p
     manifest = manifest_entries()
     issued = {identity(r): r for r in load_entries(manifest['current'] + manifest['history'])}
     accepted = set()
-    for stage in (*range(1, 34), *range(35, 60)):
+    for stage in (*range(1, 34), *range(35, 61)):
         authors = json.loads((AUTHORED / f'authoring-stage{stage}.json').read_bytes())['recipes']
         raw = (AUTHORED / f'standardized-stage{stage}.json').read_bytes()
         review = json.loads((REPORT / f'recipe-review-stage{stage}.json').read_bytes())
@@ -93,7 +93,7 @@ def test_each_issued_stage_matches_reviewed_source_changes_and_complete_basket_p
         baskets = proof['modes']['estimated']['recipes']
         assert {r['id'] for r in baskets} == ids and len(baskets) == len(ids)
         assert all(r['status'] == 'verified' and r['audit']['passed'] for r in baskets)
-    assert len(accepted) == 250
+    assert len(accepted) == 252
 
 
 def test_every_received_identity_has_one_final_decision_and_old_imports_are_retained():
@@ -102,11 +102,11 @@ def test_every_received_identity_has_one_final_decision_and_old_imports_are_reta
     rows = queue['variants']
     assert len(rows) == len({r['source_id'] for r in rows}) == 501
     assert len({r['base_id'] for r in rows}) == 189
-    assert sum(r['status'] == 'imported_reviewed_version' for r in rows) == 358
+    assert sum(r['status'] == 'imported_reviewed_version' for r in rows) == 360
     assert sum(r['status'] == 'pending_qualified_input' for r in rows) == 20
-    assert summary['newly_imported_variants'] == 250
+    assert summary['newly_imported_variants'] == 252
     assert summary['newly_imported_bases'] == 97
-    assert summary['current_variants'] == 2820 and summary['current_bases'] == 1072
+    assert summary['current_variants'] == 2822 and summary['current_bases'] == 1072
     assert summary['preserved_issued_variants'] == 3625
     assert summary['original_reference_ids'] == 2200
     assert summary['corrected_new_versions'] == 77 and summary['corrected_current_variants'] == 74

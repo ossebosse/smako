@@ -12,13 +12,20 @@ ZIP med 24/62. Fördelningen är 123 middagar, 17 frukostar och 49 mellanmål.
 Nästa nyskrivna paket är **022**. Mot beställningen återstår **811
 grundrätter / 2 249 varianter**: 627 middagar, 108 frukostar och 76 mellanmål.
 
-Biblioteket är nu **1 072 baser / 2 820 varianter**. Från denna beställning
-är 358 varianter importerade i 138 baser (134 hela familjer, fyra delvis).
-143 varianter återstår med dokumenterade hinder. Både importerade och alla
+Biblioteket är nu **1 072 baser / 2 822 varianter**. Från denna beställning
+är 360 varianter importerade i 138 baser (135 hela familjer, tre delvis).
+141 varianter återstår med dokumenterade hinder. Både importerade och alla
 kvarvarande mottagna utkast ska ingå i nästa dubblettunderlag. Se
 [senaste rapporten och kön](../reviews/recipe-unblock-round2-20261101/REPORT.md).
 Den nya mängd-/processhanteringen gör inte okänd näring eller saknat
 produktstöd godkänt. Fortsätt enligt ägarens preferenser nedan.
+
+Vid nästa mindre ZIP: komplettera `audit_expansion_queue.py` med
+`scripts/recipe_layer/screen_pending_recipe_inputs.py` på den nya kön och
+det deklarerade frysta produkt-/faktaunderlaget. Dess `ranked_combined_blocks`
+visar även produktbrister bakom ett registerfel. En löst känd ingrediens
+är fortfarande varken ett godkänt recept eller en verifierad hel korg.
+Se körkommando och resultat i senaste rapporten.
 
 ## Ägarens preferenser
 

@@ -18,6 +18,34 @@ from app.services.recipe_library import (
 REPORT = Path('docs/reviews/recipe-unblock-round2-20261101')
 
 
+@pytest.mark.parametrize('variant', ['standard', 'extended'])
+@pytest.mark.parametrize('servings', [2, 8])
+def test_herb_custard_retains_milk_loss_and_cools_before_raw_fish_mixing(variant, servings):
+    recipe = next(r for r in current_recipes()
+                  if r.design.base_id == 'smako-thai-hor-mok-pla' and r.design.variant_id == variant)
+    names = {i.canonical_name: i for i in recipe.ingredients}
+    assert not {'thaibasilika', 'makrutlimeblad', 'färsk chili'} & names.keys()
+    assert names['basilika'].quantity == 15 and names['torkade makrutlimeblad'].quantity == 1
+    assert names['fisk'].quantity == 500
+    scaled = _scaled(recipe, servings)
+    validate_recipe_design(scaled)
+    processes = scaled.design.unmeasured_processes
+    infusion = next(p for p in processes if p.operation == 'remove_after_infusion')
+    assert set(infusion.ingredient_keys) == {'torkade makrutlimeblad|dry', 'kokosmjölk|as_sold'}
+    steps = scaled.design.steps
+    sieving = next(i for i, s in enumerate(steps) if s.id == infusion.step_id)
+    cooling = next(i for i, s in enumerate(steps) if 'högst 25 °C' in s.text)
+    mixing = next(i for i, s in enumerate(steps) if 'hela den avsvalnade silade' in s.text)
+    assert sieving < cooling < mixing
+    assert 'fyll inte på med extra kokosmjölk' in steps[sieving].text
+    assert f'{500 * servings // 4} ml vatten' in steps[sieving].text
+    assert any(p.operation == 'drain_after_cooking' and 'vitkål|raw_edible' in p.ingredient_keys for p in processes)
+    assert any('mitten av samtliga skålar nått minst 72 °C' in s.text for s in steps[mixing + 1:])
+    if variant == 'extended':
+        assert names['paprika'].quantity == 20 and names['gurka'].quantity == 250
+        assert names['rismjöl'].quantity == 8
+
+
 def test_oven_pastor_has_ground_ancho_ready_tortillas_and_no_raw_salsa_or_lost_pan_juices():
     recipes = [r for r in current_recipes() if r.design.base_id == 'smako-mexican-tacos-al-pastor']
     assert len(recipes) == 3

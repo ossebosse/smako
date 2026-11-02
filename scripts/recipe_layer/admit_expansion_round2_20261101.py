@@ -262,6 +262,10 @@ STAGES[59] = {
     'smako-indian-vada-pav': 'Utökad vada pav behåller standardens senapsfrö/ingefära och separata sötsyrliga dadelchutney. Samma öppna bröd-/utan-currybladsanpassning som steg 54. Det redan granskade tamarindkoncentratet i ml används som egen ny dos 20 ml i stället för 30 g pasta; ingen ny produktkälla, densitet eller gram/ml-konvertering. Alla 60 g urkärnade dadlar, 15 g koriander och 25 ml limejuice behålls; fryst koriander genomkokas i chutneyn.',
 }
 SELECTED_VARIANTS[59] = {'smako-indian-vada-pav': {'extended'}}
+STAGES[60] = {
+    'smako-thai-hor-mok-pla': 'Ångad stannad fisk-äggkräm på kål bevaras. Två tydligt namngivna örtalternativ använder vanlig basilika och 1 g torkade makrutblad som silas ur fiskkomponentens kokosmjölk före kylning och äggblandning. Pailin Chongchitnant anger italiensk basilika som alternativ och torra blad för curry: https://hot-thai-kitchen.com/thai-ingredients/ . Hennes haw mok beskriver samma skål-/ångteknik och paprika som garnering: https://hot-thai-kitchen.com/haw-mok-red-curry-custard/ . Egna doser, ingen likvärdig arom eller färsk-torr-faktor. Utökad behåller separat kokoskräm och limegurka; 20 g röd paprika ersätter 5 g färsk chili. Okänd extraktion och kokosmjölksförlust i silade blad redovisas.',
+}
+SELECTED_VARIANTS[60] = {'smako-thai-hor-mok-pla': {'standard', 'extended'}}
 
 
 def sha(raw):
@@ -1895,6 +1899,39 @@ def correct(row, vocabulary):
         prepend_thaw(row, 'fisk', 720, 'Blanda all upptiningssaft i fiskmassan; hela massan ska genomhettas till minst 72 °C.')
         row['unmeasured_processes'][0]['step'] += 2
         changes.append('Explicit frozen-fish thaw, all juice cooked in the custard, and shell-free raw egg weight. Mark steamed-cabbage draining as unknown loss. Schedule steamer loading, water inspection and final temperature checks as active work.')
+        if row['variant_id'] != 'simple':
+            rename_ingredient(row, 'thaibasilika', 'basilika')
+            rename_ingredient(row, 'makrutlimeblad', 'torkade makrutlimeblad')
+            rename_ingredient(row, 'färsk chili', 'paprika')
+            for component in row['components']:
+                for item in component['ingredients']:
+                    if item['name'] == 'torkade makrutlimeblad':
+                        item.update(quantity=1, form='dry', label='Torkade makrutlimeblad, vägs före infusion')
+                    if item['name'] == 'basilika':
+                        item['label'] = 'Vanlig basilika, ansade blad eller frysta hackade blad'
+                    if item['name'] == 'paprika':
+                        item.update(quantity=20, label='Röd paprika, ätlig rå vikt efter urkärning')
+            row['name'] = 'Hor mok pla – vanlig basilika och torr limebladsinfusion – ' + ('med fisksås' if row['variant_id'] == 'standard' else 'med kokoskräm och limegurka')
+            row['flavor'] = ['röd curry', 'kokos', 'vanlig basilika', 'silad limebladsinfusion']
+            mixing = row['steps'][4]
+            mixing['text'] = mixing['text'].replace('ägg och kokosmjölken från fiskkomponenten', 'ägg och hela den avsvalnade silade kokosmjölken från fiskkomponenten').replace('finstrimlade makrutlimeblad och thaibasilika', 'hackad vanlig basilika; frysta hackade blad tillsätts direkt med all vätska')
+            mixing['uses'].remove('torkade makrutlimeblad')
+            for step in row['steps']:
+                step['text'] = step['text'].replace('Strimla chilin fint', 'Kärna ur röd paprika, väg den ätliga mängden och strimla fint').replace('och lägg på chilin', 'och lägg på paprikastrimlorna')
+                step['text'] = step['text'].replace('300 ml kokande vatten', '300 ml vatten (kokande)')
+            row['equipment'] = [e.replace('fyra värmetåliga skålar cirka 350 ml', 'värmetåliga portionsskålar cirka 350 ml, en per portion') for e in row['equipment']]
+            infusion = [
+                {'text': 'Häll hela fiskkomponentens kokosmjölk i en liten kastrull och lägg i de uppvägda torkade limebladen. Värm till svag sjudning under omrörning. Toppens kokosmjölk, om den ingår, hålls separat.', 'uses': ['kokosmjölk', 'torkade makrutlimeblad'], 'minutes': 3},
+                {'text': 'Låt dra på mycket låg värme under lock i tio minuter; undvik kraftig kokning.', 'uses': ['kokosmjölk', 'torkade makrutlimeblad'], 'minutes': 10, 'passive': True},
+                {'text': 'Sila kokosmjölken genom finmaskig sil till en grund värmetålig skål. Kasta alla blad och hårda fragment; fyll inte på med extra kokosmjölk. Ställ skålen i ett kallt vattenbad med 500 ml vatten utan att vatten kommer i mjölken.', 'uses': ['kokosmjölk', 'torkade makrutlimeblad'], 'minutes': 3},
+                {'text': 'Låt den silade kokosmjölken svalna i vattenbadet cirka femton minuter.', 'uses': ['kokosmjölk'], 'minutes': 15, 'passive': True},
+                {'text': 'Kontrollera att kokosmjölken har svalnat till högst 25 °C innan råa ägg eller fisk tillsätts; förläng kylningen vid behov. Använd hela den silade mängden i fiskmassan. Fisken stannar i kylskåp tills massan ska blandas.', 'uses': ['kokosmjölk', 'fisk', 'ägg'], 'minutes': 1},
+            ]
+            for index, step in enumerate(infusion, 3):
+                insert_step(row, index, step)
+            mark_process(row, 5, ['torkade makrutlimeblad', 'kokosmjölk'], 'remove_after_infusion', 'Blad och hårda fragment silas bort. Extraktion samt kokosmjölk som följer med bladen är okända; inga torr/färsk- eller näringsfaktorer antas.')
+            row['notes'] += ' Örtalternativ med vanlig basilika och egen dos 1 g torkade makrutblad i stället för 15 g thaibasilika och 2 g färska blad; vanlig basilika behåller 15 g-dosen. Ingen lika arom påstås. Kokosmjölken vägs/mäts före infusion och okänd silförlust; fyll inte på extra. Utökad får 20 g röd paprika i stället för 5 g färsk chili. Fisk och ägg tillsätts efter aktiv kontroll av kylningen, och hela fiskmassan ångas till minst 72 °C. Inte provlagad.'
+            changes.append('Standard/extended only: explicit ordinary-basil version with a new 1 g dried-leaf infusion in the original custard coconut milk. Strain every fragment, record unknown milk/leaf loss and cool before egg/fish mixing. Extended replaces 5 g fresh chili with 20 g edible red pepper garnish; retain separate cooked coconut topping and lime-cucumber side.')
     if base.endswith('kluai-buat-chi'):
         if row['variant_id']=='extended':
             for component in row['components']:

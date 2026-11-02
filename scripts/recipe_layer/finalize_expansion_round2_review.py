@@ -21,7 +21,7 @@ from review_product_search import review_search_key, review_search_matches
 
 REPORT = Path('docs/reviews/recipe-unblock-round2-20261101')
 BASE = '545dad2a1b78566e0bff0c4ff616c053c038cc58'
-STAGE_NUMBERS = (*range(1, 34), *range(35, 60))
+STAGE_NUMBERS = (*range(1, 34), *range(35, 61))
 REJECTED_STAGES = (34,)
 EXTRA_QUERIES = {
     'makrutlimeblad': ['makrut', 'kaffir', 'limeblad', 'lime leaves', 'limblad', 'lime leaf'],

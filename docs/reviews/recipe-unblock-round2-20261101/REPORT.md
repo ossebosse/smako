@@ -1,19 +1,19 @@
 # Fortsatt hinderarbete och receptimport 2026-11-01
 
-**250 ytterligare varianter och 97 nya grundrätter är innehållsgranskade och
-importerade.** Biblioteket växer från **975/2 570 till 1 072/2 820**. Alla
-250 har klarat ordinarie slutlig inköpskontroll med tillåtna uppskattningar
-i den frysta referensen. **134 klarar även exakt inköp**; 113 är datablockerade
+**252 ytterligare varianter och 97 nya grundrätter är innehållsgranskade och
+importerade.** Biblioteket växer från **975/2 570 till 1 072/2 822**. Alla
+252 har klarat ordinarie slutlig inköpskontroll med tillåtna uppskattningar
+i den frysta referensen. **136 klarar även exakt inköp**; 113 är datablockerade
 och tre stoppas i checkout i det läget. Inget av dessa korgprov nådde tidsgränsen.
 
 De fem faktiskt mottagna leveranserna innehåller **189 grundrätter / 501
-varianter**. Totalt har **358 varianter i 138 grundrätter** importerats:
-134 hela familjer och fyra delvis importerade. **143 varianter återstår**.
+varianter**. Totalt har **360 varianter i 138 grundrätter** importerats:
+135 hela familjer och tre delvis importerade. **141 varianter återstår**.
 Den senast mottagna ZIP-filen med 24 grundrätter / 62 varianter har 44
 importerade varianter och 18 kvar i kön. Ett godkänt syskon gör inte hela
 familjen godkänd.
 
-Originalfilerna är bytebevarade. 250 godkända varianter fick först version 1.0.1.
+Originalfilerna är bytebevarade. 252 godkända varianter fick först version 1.0.1.
 Därefter utfärdades 77 efterföljare för 74 av varianterna: 50 för portionsinstruktioner,
 satsstorlek eller fiskmetadata, nio för lammstek/upptining, åtta efter kontroll
 av faktiskt valda frysta produkter, tre för skalbart kokvatten, tre för kort
@@ -44,7 +44,7 @@ Ingen ny närings-, allergen- eller ekologisk deklaration har lagts till.
 | Kulinariska alternativ | Bland annat svensk surdegsfralla, lagrad pecorino, ungnötslever, färdig tomatillosalsa, musselkött utan skal och corned beef. Nytt namn, ny uttrycklig dos/metod där det behövs; inga falska råvarualias. |
 
 Varje steg har separat `recipe-review-stageN.json`, `import-stageN.json`
-och `qualification-stageN.json` (N = 1–59, där steg 34 är underkänt och återkallat). Granskningarna binder
+och `qualification-stageN.json` (N = 1–60, där steg 34 är underkänt och återkallat). Granskningarna binder
 original-ID, originalfilens hash, nytt versions-ID, innehållshash, samtliga
 mängdändringar och kulinarisk jämförelse. Receptens ingrediensantal,
 arbetssteg och synliga instruktioner följer samma innehåll.
@@ -64,7 +64,7 @@ passiv kokning, ugnstid och väntan.
 
 ## Senare granskning av fem ytterligare hinder
 
-Steg 23–27 gav ytterligare 13 av totalens 250 varianter: två pasqualina
+Steg 23–27 gav ytterligare 13 av totalens 252 varianter: två pasqualina
 med uttryckligen 600 g spenat och kvarvarande mejram/muskot, två frijoles
 puercos med svensk färsk chorizo, tre rogan josh med paprika/cayenne samt
 sex patatato/tsigariasto med lamm. Tillbehör och kryddskillnader bevarar
@@ -277,6 +277,18 @@ frysta produktformer där korgen väljer dem, inklusive genomhettad koriander,
 kylupptinad avokado/mango och ugnsrostad broccoli. Ingen tillagningsprovning
 eller ny uppmätt menyberäkningstid följer av godkända inköpskorgar.
 
+Steg 60 öppnade dessutom två hor mok-varianter. De använder vanlig
+basilika och 1 g torkade makrutblad som får dra i fiskkomponentens befintliga
+kokosmjölk, silas bort och kyls före blandning med rå fisk/ägg. Både extraktion
+och mjölk som följer med bladen är okända förluster. [Pailin Chongchitnants
+ingrediensguide](https://hot-thai-kitchen.com/thai-ingredients/) stöder vanlig
+basilika som alternativ och torra blad i curry; hennes [haw mok-recept](https://hot-thai-kitchen.com/haw-mok-red-curry-custard/)
+stöder skål-/ångtekniken och paprikagarnering. Vår infusionsdos och metod är
+separat granskade författarval. Den utökade varianten får 20 g paprika i
+stället för 5 g chili och behåller kokoskräm och limegurka. Faktiska korgar
+väljer fryst hackad basilika, som genomångas, samt blad från den granskade
+KRUA-kopplingen. Båda korgarna passerar uppskattat och exakt inköp.
+
 Vada pavs sista produktkontroll visade att de valda
 [Fontana-dadlarna](https://www.fontana.se/produkt/farska-dadlar-ekologiska/)
 innehåller kärnor. En separat 1.0.2-efterföljare anger därför 60 g **inköpt
@@ -294,6 +306,14 @@ Det är ett dokumenterat tidigare mängdbasfel för separat rättning med
 granskade efterföljare eller en verifierad urkärnad produkt. De tillhör
 inte denna omgångs nya import; deras gamla versioner och referenser ändras
 inte här. Den här rapportens godkännanden gäller bara de angivna nya korgarna.
+
+Ett konkret spår för dessa äldre rättningar är Garant Eko torkade urkärnade
+dadlar 200 g (GTIN 7340083482274), som finns i den frysta referensen hos
+befintliga butiker. [Garant](https://www.garantskafferiet.se/vara-produkter/choklad--snacks/notter--torkad-frukt/Torkade-dadlar/)
+bekräftar urkärnad form och ingredienserna dadlar/vatten. Detta är en annan
+produktform än Fontanas färska dadlar; den behöver separat källbunden
+ingrediensgranskning, lämplig beredning och nya receptversioner. Ingen ny
+koppling, näringsdeklaration eller gammal receptändring görs med detta fynd.
 
 ## Källor och kvalificeringsscope
 
@@ -344,23 +364,46 @@ bibliotekets kvalitetskrav samt 19 för portions-/versionskedjor, frysta
 produktformer och kostkategorier. Alla slutliga nya versioner har egna
 godkända korgprov; inget gammalt prov har skrivits om för att få ett godkännande.
 
-Slutkontrollen av samtliga 250 varianter gav **840 godkända offline-tester**,
+Slutkontrollen av samtliga 252 varianter gav **844 unika godkända offline-tester**,
 utan fel eller överhoppade testfall. Den omfattar alla importkvitton,
 versionskedjor, ingrediensgränser, portionsskalning, kostfilter och hela
 bibliotekets innehållskrav. Ruff, compileall och diffkontroll passerade.
 De tidigare testkörningarnas antal överlappar och ska inte summeras.
+Den sista körningen hade 855 utföranden för dessa 844 unika testfall eftersom
+en testfil angavs två gånger. Sju separata tester för den nya diagnostiken
+passerar också; totalt 851 olika lokalt godkända testfall.
 
 ## Kvarvarande kö och nästa leverans
 
-[Variantkön](queue.json) redovisar samtliga 501 käll-ID:n. De 143 kvarvarande
-består av **123 med register-/författarhinder** och **20 strukturellt giltiga
+[Variantkön](queue.json) redovisar samtliga 501 käll-ID:n. De 141 kvarvarande
+består av **121 med register-/författarhinder** och **20 strukturellt giltiga
 utkast med konkret saknat produktstöd**. De senare har omprovats i båda
 inköpslägena, se [ingrediensprovet](remaining-native-inputs.json).
+
+En kompletterande [kontroll av alla kvarvarande utkasts kända insatser](pending-known-inputs.json)
+visar fler hinder bakom registerfelen. **73 av 141** har konkret
+produktblockering i uppskattat inköpsläge, däribland **53 av de 121** med
+register-/författarhinder. De övriga 68 har endast fått sina kända
+ingredienser kontrollerade; okända identiteter och innehållsgranskning
+återstår. Inga kompletta korgar eller recept godkänns av denna kontroll.
+Varje rad behåller ursprunglig mängd, enhet, produktkrav och källhash.
+`ranked_combined_blocks` förenar kvarvarande namn-/formhinder med dessa
+produktblockeringar. Tamarindpasta berör därmed elva varianter, masa harina
+åtta, tapiokastärkelse sju och klibbigt rismjöl två. Använd denna förenade
+lista före nästa receptändring; antalen överlappar mellan hinder.
+
+Kör `screen_pending_recipe_inputs.py --queue <aktuell-kö.json> --universe
+<universum.json> --facts <fakta.json> --clock <referensens-klocka> --output
+<ny-diagnostik.json>` efter mottagningskontrollen eller med en uppdaterad
+beslutskö. Det stöder både rå granskningskö och ännu inte importerade
+poster i beslutskön. Diagnostiska delmängder används endast i minnet och
+exporteras inte som importpaket. Syntaktiska fel redovisas som okända
+diagnostikfel, aldrig som lösta inköpsbehov.
 
 [Ingrediensliggaren](ingredient-blockers.json) rangordnar återstående
 hinder med sökord, antal träffar, produktetiketter, berörda recept och nästa
 åtgärd. Störst är räkpasta (15), curryblad (11), makrutlimeblad och thaibasilika
-(10 vardera), guajillochili (6) och palmsocker i inköpt form (8). Antalen överlappar. En tom sökning i den frysta
+(8 vardera), guajillochili (6) och palmsocker i inköpt form (8). Antalen överlappar. En tom sökning i den frysta
 referensen bevisar inte att en vara saknas i handeln.
 
 Thaibasilika i kruka har ingen verifierad bladmassa; ett framtida recept med
