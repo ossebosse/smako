@@ -121,9 +121,12 @@ def language_warnings(row):
         if any(phrase in step["text"] for phrase in (
             "Låt momentet fortsätta tills den angivna tiden", "Förbered och påbörja momentet:",
             "Finhacka fasta bitar", "huvudkomponent", "komponentmängder", "ingen förlustandel antas",
-            "skala rotfrukter före vägning",
+            "skala rotfrukter före vägning", "huvudråvar", "nästa aktiva steg", "förlusten är okänd",
         )):
             warnings.append(f"Språk: steg {number} har malltext; ange råvaran, handlingen och hur man ser att det är klart")
+    if any("ny receptdos" in str(item.get("name", ""))
+           for component in row.get("components", []) for item in component.get("ingredients", [])):
+        warnings.append("Språk: håll versionshistorik som 'ny receptdos' utanför ingrediensnamnen")
     return warnings
 
 

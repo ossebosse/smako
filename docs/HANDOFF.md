@@ -1,3 +1,46 @@
+# 2026-11-02: Uppföljning av språkgranskningen
+
+Ägaren har bett oss fortsätta med återstående receptmallar och UI-texter.
+**526 varianter i 176 grundrätter** har fått nya språkversioner: **688 steg**
+har skrivits om och **93 varianter** visar ”Tamarindkoncentrat CHS” utan den
+interna anteckningen ”ny receptdos”. Råvaror namnges i stället för
+”huvudråvaran”/”huvudkomponenten”; tillagningskontroller hänvisar till stegets
+verkliga ingredienser. Praktiska instruktioner om att hälla av vatten/spad
+behålls medan interna processkommentarer tas bort. Titlarnas ”inspirerad”
+har inte massraderats; sådana ändringar kräver bedömning av rättens identitet.
+
+[Före/efter-underlag](reviews/recipe-language-followup-20261102/recipe-review.json)
+och [versionsövergång](reviews/recipe-language-followup-20261102/library-transition.json).
+Alla **6 507 tidigare utgivna receptversioner** är bevarade. Biblioteket har
+fortfarande **1 083 grundrätter / 2 851 aktuella varianter** och samma **2 200
+ursprungsreferenser**. Alla 526 versioner har kontrollerats för portionstal
+1–12: oförändrade råvaror, mängder, beredningsunderlag, temperaturer,
+skalbart processvatten och beräkningstider. Detta är ingen provlagning eller
+ny priskvalificering. Beredningens innehållshash binds till den nya versionen.
+
+Mynta- och äggdialogerna använder ”väg”, ”registrera” och ”spara” i stället
+för ”bokför insats/utfall”. Alla mätfält, mängdgränser och registreringsdata
+behålls. Inköps- och näringsstatus har enklare formuleringar; okända
+näringsvärden och prisernas omfattning förblir synliga. Författarverktyget
+varnar även för de återstående mallfraserna och intern versionsinformation.
+
+Den tidigare språkgranskningens publiceringsverktyg tar nu explicita
+granskningskataloger och omskrivningsfunktioner. Första omgångens regler och
+kvitton är oförändrade; den nya övergången har egen verifierare. Täckning och
+historiktester följer båda övergångarna och kontrollerar fortfarande originalens
+exakta innehållshashar. Ingen jämförelsebaslinje har regenererats.
+
+Webbläsarprov i Chromium/WebKit vid 390/1280 px är godkända; bilder finns i
+`.local/recipe-language-followup-presentation`. Publiceringens fullständiga
+mängd-/tidsverifiering, Ruff, compileall och JavaScript-syntaxkontroll är godkända.
+Riktade tester för receptbibliotek, båda språkversionerna, täckningsreferenser,
+författarverktyg, inköps-UI, ägg-/myntadialoger, äldre kvalificeringskvitton,
+portionsskalning och importomgång tre/fyra är godkända. Textbundna kontroller
+har uppdaterats till de nya formuleringarna; temperatur- och mängdkrav består.
+Ingen betaaktivering ingår.
+
+---
+
 # 2026-11-02: Språkgranskning av UI och recept
 
 Ägarens ”Genomför alla förslag” omfattar granskningens språkändringar.

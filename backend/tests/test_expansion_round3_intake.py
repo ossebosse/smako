@@ -103,7 +103,7 @@ def test_fish_losses_follow_thaw_insertion_and_egg_mixing_follows_cooling():
         processes = recipe.design.unmeasured_processes
         fish = next(p for p in processes if 'fisk|raw_edible' in p.ingredient_keys)
         assert fish.operation == 'drain_after_cooking' and fish.step_id == 's5'
-        assert 'Kokspadet hälls bort' in steps[fish.step_id].text
+        assert 'Häll bort kokspadet.' in steps[fish.step_id].text
         assert 'högst 25 °C' in steps['s7'].text and 'utan skal' in steps['s7'].text
         assert 'minst 72 °C' in steps['s9'].text
         assert any('ärtor|as_sold' in p.ingredient_keys and p.step_id == 's9' for p in processes)

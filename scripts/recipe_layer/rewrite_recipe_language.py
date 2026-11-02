@@ -186,13 +186,14 @@ def verify_pair(old, new, *, check_scaling=True):
                 assert any(token in s.text for s in new.design.steps)
 
 
-def prepare():
-    if (REPORT / "library-transition.json").exists():
+def prepare(*, report=REPORT, work=WORK, rewriter=rewrite_recipe, pair_check=verify_pair,
+            pack_prefix="recipe-language-20261102"):
+    if (report / "library-transition.json").exists():
         raise ValueError("Already published; use --verify")
-    WORK.mkdir(parents=True, exist_ok=True)
-    REPORT.mkdir(parents=True, exist_ok=True)
+    work.mkdir(parents=True, exist_ok=True)
+    report.mkdir(parents=True, exist_ok=True)
     manifest = manifest_entries()
-    overrides = json.loads((REPORT / "recipe-names.json").read_bytes())
+    overrides = json.loads((report / "recipe-names.json").read_bytes())
     issued = load_entries([*manifest["current"], *manifest["history"]])
     latest = {}
     for recipe in issued:
@@ -201,7 +202,7 @@ def prepare():
     changed, originals, records = [], {}, []
     for recipe in current_recipes():
         old = recipe.model_dump(mode="json")
-        row, merged = rewrite_recipe(old, overrides)
+        row, merged = rewriter(old, overrides)
         if row == old:
             continue
         major, minor, patch = latest[recipe.design.base_id, recipe.design.variant_id]
@@ -215,19 +216,21 @@ def prepare():
         records.append({"previous_id": identity(recipe), "previous_content_sha256": recipe.design.content_sha256,
                         "name_before": old["name"], "name_after": row["name"], "merged_wait_steps": merged,
                         "steps_before": old["instructions"], "steps_after": row["instructions"]})
+        if old["design"]["components"] != row["design"]["components"]:
+            records[-1].update(components_before=old["design"]["components"], components_after=row["design"]["components"])
     published, drafts = [], []
     for offset in range(0, len(changed), 200):
         number = offset // 200 + 1
-        payload = {"schema_version": "smako-meal-pack-v1", "pack_id": f"recipe-language-20261102-{number:02}",
+        payload = {"schema_version": "smako-meal-pack-v1", "pack_id": f"{pack_prefix}-{number:02}",
                    "recipes": changed[offset:offset + 200]}
         source = encoded(payload)
         validated = validate_pack_bytes(source)
         if validated["rejections"]:
             raise ValueError(validated["rejections"][:5])
         for recipe in validated["recipes"]:
-            verify_pair(originals[recipe.design.base_id, recipe.design.variant_id], recipe)
+            pair_check(originals[recipe.design.base_id, recipe.design.variant_id], recipe)
             published.append(recipe)
-        path = WORK / f"pack-{number:02}.json"
+        path = work / f"pack-{number:02}.json"
         path.write_bytes(source)
         drafts.append({"file": path.name, "sha256": hashlib.sha256(source).hexdigest()})
         print(f"Validated pack {number}: {len(validated['recipes'])} recipes", flush=True)
@@ -237,33 +240,34 @@ def prepare():
               "active_variants": len(current_recipes()), "changed_variants": len(records),
               "checked_servings": list(range(1, 13)), "drafts": drafts, "corrected": records,
               "cooking_test": "not_cooked", "purchase_qualification": "unchanged inputs; no new live basket claim"}
-    (REPORT / "recipe-review.json").write_bytes(encoded(review))
+    (report / "recipe-review.json").write_bytes(encoded(review))
     print(json.dumps({"changed": len(records), "merged_wait_steps": sum(len(r["merged_wait_steps"]) for r in records)}, ensure_ascii=False))
 
 
-def publish():
-    review = json.loads((REPORT / "recipe-review.json").read_bytes())
+def publish(*, report=REPORT, work=WORK, rewriter=rewrite_recipe, pair_check=verify_pair):
+    review = json.loads((report / "recipe-review.json").read_bytes())
     if manifest_entries() != review["before_manifest"]:
         raise ValueError("Manifest changed after review")
     receipts = []
     for draft in review["drafts"]:
-        path = WORK / draft["file"]
-        if path.parent != WORK or hashlib.sha256(path.read_bytes()).hexdigest() != draft["sha256"]:
+        path = work / draft["file"]
+        if path.parent != work or hashlib.sha256(path.read_bytes()).hexdigest() != draft["sha256"]:
             raise ValueError("Draft changed after review")
     for draft in review["drafts"]:
-        path = WORK / draft["file"]
+        path = work / draft["file"]
         receipts.append(import_pack(path))
     after = manifest_entries()
-    review["corrected"] = [{k: v for k, v in row.items() if k not in {"steps_before", "steps_after"}}
+    review["corrected"] = [{k: v for k, v in row.items() if k not in {"steps_before", "steps_after", "components_before", "components_after"}}
                            for row in review["corrected"]]
     review.update(after_manifest=after, after_manifest_file_sha256=sha(after),
                   added_entries=after["current"][len(review["before_manifest"]["current"]):],
                   import_receipts=receipts)
-    (REPORT / "library-transition.json").write_bytes(encoded(review))
-    verify()
+    (report / "library-transition.json").write_bytes(encoded(review))
+    verify(report=report, rewriter=rewriter, pair_check=pair_check)
 
 
-def checked_transition(review, *, check_scaling=False):
+def checked_transition(review, *, check_scaling=False, report=REPORT,
+                       rewriter=rewrite_recipe, pair_check=verify_pair):
     """Validate the complete change before applying any subset to coverage IDs."""
     before, after = review["before_manifest"], review["after_manifest"]
     assert after == {**before, "current": before["current"] + review["added_entries"]}
@@ -275,7 +279,7 @@ def checked_transition(review, *, check_scaling=False):
     assert set(added) == {r["runtime_id"] for r in review["corrected"]}
     assert len(added) == len(review["corrected"]) == review["changed_variants"]
     assert len({r["previous_id"] for r in review["corrected"]}) == len(added)
-    overrides = json.loads((REPORT / "recipe-names.json").read_bytes())
+    overrides = json.loads((report / "recipe-names.json").read_bytes())
     def active_ids(recipes):
         active = {}
         for recipe in recipes:
@@ -296,18 +300,20 @@ def checked_transition(review, *, check_scaling=False):
         assert successor.design.content_sha256 == row["content_sha256"]
         key = original.design.base_id, original.design.variant_id
         assert before_active[key] == identity(original) and after_active[key] == identity(successor)
-        expected, merged = rewrite_recipe(original.model_dump(mode="json"), overrides)
+        expected, merged = rewriter(original.model_dump(mode="json"), overrides)
         assert successor.name == expected["name"]
         assert successor.instructions == expected["instructions"]
+        assert [c.model_dump(mode="json") for c in successor.design.components] == expected["design"]["components"]
         assert [s.model_dump(mode="json") for s in successor.design.steps] == expected["design"]["steps"]
         assert successor.design.batch_scaling.model_dump(mode="json") == expected["design"]["batch_scaling"]
         assert [list(pair) for pair in merged] == row["merged_wait_steps"]
-        verify_pair(original, successor, check_scaling=check_scaling)
+        pair_check(original, successor, check_scaling=check_scaling)
     return review
 
 
-def verify():
-    review = checked_transition(json.loads((REPORT / "library-transition.json").read_bytes()), check_scaling=True)
+def verify(*, report=REPORT, rewriter=rewrite_recipe, pair_check=verify_pair):
+    review = checked_transition(json.loads((report / "library-transition.json").read_bytes()), check_scaling=True,
+                                report=report, rewriter=rewriter, pair_check=pair_check)
     old = load_entries([*review["before_manifest"]["current"], *review["before_manifest"]["history"]])
     added = load_entries(review["added_entries"])
     print(json.dumps({"verified_successors": len(added), "preserved_issued_versions": len(old),

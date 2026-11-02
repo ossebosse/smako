@@ -38,6 +38,10 @@ def test_full_transition_preserves_issued_history_and_all_current_identities(rev
 def test_coverage_keeps_every_original_id_and_maps_only_its_reviewed_successors(review):
     original, current = imported_recipes()
     assert len(original) == len(set(original)) == len(current) == 2200
+    # Check this historical edge against its own end state, before round two.
+    snapshot = current_recipes(len(review["after_manifest"]["current"]))
+    at_edge = {(r.design.base_id, r.design.variant_id): r for r in snapshot}
+    current = [at_edge[r.design.base_id, r.design.variant_id] for r in current]
     predecessors = {r["runtime_id"]: r["previous_id"] for r in review["corrected"]}
     ids = [identity(r) for r in current]
     before_ids = [predecessors.get(key, key) for key in ids]

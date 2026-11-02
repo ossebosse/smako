@@ -21,8 +21,11 @@ def main():
     recipes = [r.model_dump(mode='json') for r in active if r.preparation.version == 'smako-edible-input-v1']
     receipt = json.loads((ROOT / 'docs/reviews/recipe-language-20261102/library-transition.json').read_bytes())
     merged_id = next(r['runtime_id'] for r in receipt['corrected'] if r['merged_wait_steps'])
-    samples = [next(r for r in active if identity(r) == merged_id),
-               next(r for r in active if r.preparation.version == 'smako-authored-losses-v3' and r.design.batch_scaling)]
+    followup = json.loads((ROOT / 'docs/reviews/recipe-language-followup-20261102/library-transition.json').read_bytes())
+    replacements = {row['previous_id']: row['runtime_id'] for row in followup['corrected']}
+    samples = [next(r for r in active if identity(r) == replacements.get(merged_id, merged_id)),
+               next(r for r in active if r.preparation.version == 'smako-authored-losses-v3' and r.design.batch_scaling),
+               next(r for r in active if any(a.name == 'Tamarindkoncentrat CHS' for c in r.design.components for a in c.amounts or ()))]
     reports = []
     with sync_playwright() as pw:
         for engine in ('chromium', 'webkit'):
@@ -79,6 +82,9 @@ def main():
                     expect(card.get_by_text('Recept-ID:', exact=False)).to_be_hidden()
                     expect(card.locator('.complete-recipe-method')).not_to_contain_text('Förbered och påbörja')
                     expect(card.locator('.complete-recipe-method')).not_to_contain_text('Låt momentet fortsätta')
+                    expect(card.locator('.complete-recipe-method')).not_to_contain_text('huvudråvaran')
+                    expect(card.locator('.complete-recipe-method')).not_to_contain_text('huvudkomponenten')
+                    expect(card.locator('.complete-recipe-ingredients')).not_to_contain_text('ny receptdos')
                     expect(card.locator('.recipe-quality-note')).to_contain_text('inte provlagat')
                     assert page.evaluate('document.documentElement.scrollWidth <= innerWidth')
                     card.screenshot(path=str(args.output / f'{engine}-{width}-language-{index}.png'))

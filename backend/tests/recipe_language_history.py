@@ -13,16 +13,21 @@ def language_review():
 
 @lru_cache(maxsize=1)
 def language_successors():
-    return {r["previous_id"]: r for r in language_review()["corrected"]}
+    followup = json.loads((ROOT.parents[3] / "docs/reviews/recipe-language-followup-20261102/library-transition.json").read_bytes())
+    return {r["previous_id"]: r for review in (language_review(), followup) for r in review["corrected"]}
 
 
 def after_language_id(recipe_id):
-    return language_successors().get(recipe_id, {}).get("runtime_id", recipe_id)
+    while recipe_id in language_successors():
+        recipe_id = language_successors()[recipe_id]["runtime_id"]
+    return recipe_id
 
 
 def before_language_id(recipe_id):
-    return next((r["previous_id"] for r in language_successors().values()
-                 if r["runtime_id"] == recipe_id), recipe_id)
+    previous = {r["runtime_id"]: r["previous_id"] for r in language_successors().values()}
+    while recipe_id in previous:
+        recipe_id = previous[recipe_id]
+    return recipe_id
 
 
 def current_language_cohort(pack_prefix):
@@ -42,9 +47,9 @@ def assert_current_language_version(recipe_id, content_sha256):
     # The previous qualification still certifies exactly its original bytes.
     assert _issued()[recipe_id].design.content_sha256 == content_sha256
     active = {identity(r): r for r in current_recipes()}
-    successor = language_successors().get(recipe_id)
-    if successor:
+    while recipe_id in language_successors():
+        successor = language_successors()[recipe_id]
         assert successor["previous_content_sha256"] == content_sha256
-        assert active[successor["runtime_id"]].design.content_sha256 == successor["content_sha256"]
-    else:
-        assert active[recipe_id].design.content_sha256 == content_sha256
+        recipe_id, content_sha256 = successor["runtime_id"], successor["content_sha256"]
+        assert _issued()[recipe_id].design.content_sha256 == content_sha256
+    assert active[recipe_id].design.content_sha256 == content_sha256

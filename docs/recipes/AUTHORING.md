@@ -124,6 +124,11 @@ under `incoming` ska aldrig skrivas över.
   ”huvudkomponenten” och ”komponentmängder”. Håll beräkningsantaganden i
   metodinformationen. Behåll praktiska anvisningar om vad som ska användas,
   hällas bort, kylas eller genomhettas i själva steget.
+- Namnge råvaran även vid kontroll av tillagningen: ”kikärtorna är genomvarma
+  och auberginen är mjuk”, inte ”huvudråvaran är färdig”. Hänvisa bara till
+  grönsaker som faktiskt finns i steget. Skriv ”nästa steg” om ordningsföljden
+  behöver förklaras, inte ”nästa aktiva steg”. Ingrediensnamn ska inte innehålla
+  interna versionsanteckningar som ”ny receptdos”.
 - Skriv naturlig svenska utan reklamfraser, superlativ eller påståenden om
   provlagning och autenticitet som saknar stöd. Ange anpassningar som ändrar
   rättens identitet tydligt. ”Grekiskt” kan vara en kategorietikett; receptets
