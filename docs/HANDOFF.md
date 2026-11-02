@@ -1,3 +1,30 @@
+# 2026-11-02: Användartexter utan systemspråk (/personal)
+
+Ägaren bad om att göra synliga texter mindre AI-lika. Branch
+`copy/deslop-ui-20261102`. Ändrat:
+
+- `/personal` (HTML och skripten den laddar): ”underlag”, ”verifierad”,
+  ”korg”, ”tillfälle”, ”priskontext”, ”planeraren” m.fl. är utbytta mot vanlig
+  svenska. Staplade förbehåll och ”X, inte Y” är borttagna; varningar om
+  uppskattningar, allergener, nätpriser och AI-ursprung finns kvar.
+- Serverns användarmeddelanden i `api/`, planeraren, skafferiet,
+  produktsök och butiksstatus säger vad som hände och vad man kan göra.
+  Felkoder, steg och logik är oförändrade.
+- Ny [språkguide](UI-LANGUAGE.md) och `backend/tests/test_ui_language.py`
+  som stoppar orden i texterna som `/personal` laddar (74 träffar på main, 0 nu).
+- `index.html`/`app.js` används inte och är orörda.
+
+Textbundna tester är uppdaterade. Kört: JS-syntax, node-testerna
+(`plan_transport` 10/10; `barcode-scanner/scanner.test.js` fallerar redan på
+main), Ruff/compileall på ändrade filer och språktestet. **Python-sviten och
+webbläsarproven är inte körda** eftersom molnmiljön saknade åtkomst till PyPI;
+kör riktade tester lokalt före merge. Ingen betaaktivering ingår.
+
+Iakttaget, inte åtgärdat: när API:t svarar med HTML visas JavaScript-felet
+(”Unexpected token '<' …”) rått för användaren i `/personal`.
+
+---
+
 # 2026-11-02: Uppföljning av språkgranskningen
 
 Ägaren har bett oss fortsätta med återstående receptmallar och UI-texter.
