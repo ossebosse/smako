@@ -33,21 +33,21 @@
     if (price.purchase_terms) {
       const terms = price.purchase_terms;
       if (terms.approximate_package_g) block.append(node("p", `Cirka ${terms.approximate_package_g} g per hel förpackning. Slutpriset beror på vikten.`));
-      if (terms.minimum_package_g && terms.maximum_package_g) block.append(node("p", `Källans viktintervall: cirka ${terms.minimum_package_g}–${terms.maximum_package_g} g per hel förpackning. Inköpsförslaget utgår från den mindre förpackningen; välj efter behov och kontrollera vikten.`));
-      block.append(node("p", `Belagt varupris: ${money(price.quoted_price)}${["kg","l"].includes(price.quoted_price_unit) ? `/${price.quoted_price_unit}` : ` för ${price.quoted_quantity || 1} förpackning(ar)/styck`}.`));
-      if (price.purchase_terms.variant_selection === "required") block.append(node("p", "Välj en kampanjmärkt variant i butiken. Inte närings- eller allergigodkänd som specifik produkt."));
-      if (price.purchase_terms.deposit_status === "unknown") block.append(node("p", "Pant är inte fastställd. Ingen komplett köptotal visas."));
+      if (terms.minimum_package_g && terms.maximum_package_g) block.append(node("p", `Förpackningarna väger ungefär ${terms.minimum_package_g}–${terms.maximum_package_g} g. Vi räknar med den minsta, så kolla vikten när du handlar.`));
+      block.append(node("p", `Pris: ${money(price.quoted_price)}${["kg","l"].includes(price.quoted_price_unit) ? `/${price.quoted_price_unit}` : ` för ${price.quoted_quantity || 1} förpackning(ar)/styck`}.`));
+      if (price.purchase_terms.variant_selection === "required") block.append(node("p", "Välj en variant som ingår i kampanjen när du handlar. Vi har inte kontrollerat näring och allergener för varianterna."));
+      if (price.purchase_terms.deposit_status === "unknown") block.append(node("p", "Vi vet inte hur mycket pant det blir, så totalpriset visas inte."));
       if (price.purchase_terms.exclusions.length) block.append(node("p", `Undantag: ${price.purchase_terms.exclusions.join("; ")}`));
     }
-    block.append(node("p", `Rapporterat grundpris (kan inkludera kampanj): ${money(price.regular_price)}${["kg","l"].includes(price.quoted_price_unit) ? `/${price.quoted_price_unit}` : ""}`));
+    block.append(node("p", `Ordinarie pris enligt butiken (kan vara ett kampanjpris): ${money(price.regular_price)}${["kg","l"].includes(price.quoted_price_unit) ? `/${price.quoted_price_unit}` : ""}`));
     for (const offer of price.promotions) {
       const label = offer.membership_required ? `Medlemskampanj · ${offer.membership_label}` : "Kampanj";
-      block.append(node("p", `${label}: ${offer.required_packages > 1 ? `${offer.required_packages} för ` : ""}${money(offer.price)}${["kg","l"].includes(price.quoted_price_unit) ? `/${price.quoted_price_unit}` : ""} · ${offer.description}${offer.membership_required ? " · Kräver angivet medlemskap" : ""}${offer.max_quantity ? ` · Max ${offer.max_quantity} ${offer.required_packages > 1 ? "köpgrupper" : "förpackningar"}` : ""}${offer.valid_from || offer.valid_to ? ` · Gäller ${offer.valid_from || "?"}–${offer.valid_to || "?"}` : " · Giltighetsdatum saknas"}`));
+      block.append(node("p", `${label}: ${offer.required_packages > 1 ? `${offer.required_packages} för ` : ""}${money(offer.price)}${["kg","l"].includes(price.quoted_price_unit) ? `/${price.quoted_price_unit}` : ""} · ${offer.description}${offer.membership_required ? " · Kräver medlemskap" : ""}${offer.max_quantity ? ` · Max ${offer.max_quantity} ${offer.required_packages > 1 ? "köpgrupper" : "förpackningar"}` : ""}${offer.valid_from || offer.valid_to ? ` · Gäller ${offer.valid_from || "?"}–${offer.valid_to || "?"}` : " · Okänt hur länge erbjudandet gäller"}`));
     }
     const source = node("details");
     source.append(node("summary", "Prisets källa och aktualitet"));
     source.append(node("p", price.availability_label));
-    source.append(node("p", `${price.freshness === "AGING" ? "Äldre, fortfarande jämförbart underlag" : "Aktuellt underlag"} · Observerat ${price.observed_at ? new Date(price.observed_at).toLocaleString("sv-SE") : "okänt"}`));
+    source.append(node("p", `${price.freshness === "AGING" ? "Äldre pris, går fortfarande att jämföra" : "Aktuellt pris"} · Observerat ${price.observed_at ? new Date(price.observed_at).toLocaleString("sv-SE") : "okänt"}`));
     source.append(node("p", `Källa: ${price.source_provider || "saknas"}`));
     block.append(source);
     return block;
@@ -56,14 +56,14 @@
     coverage.replaceChildren();
     coverage.hidden = !chains.length;
     const current = chains.filter((chain) => chain.current_contexts > 0);
-    coverage.append(node("p", current.length ? `Jämför just nu: ${current.map((chain) => chain.label).join(", ")}.` : "Inga kedjor har aktuellt jämförbart prisunderlag."));
+    coverage.append(node("p", current.length ? `Jämför just nu: ${current.map((chain) => chain.label).join(", ")}.` : "Vi har inga aktuella priser att jämföra."));
     const missing = chains.filter((chain) => !chain.current_contexts);
     const reasons = new Map();
     missing.forEach((chain) => reasons.set(chain.status_label, [...(reasons.get(chain.status_label) || []), chain.label]));
     if (missing.length) coverage.append(node("p", [...reasons].map(([reason, labels]) => `${labels.join(", ")} jämförs inte: ${reason.toLocaleLowerCase("sv-SE")}.`).join(" ")));
     const details = node("details");
     details.append(node("summary", "Träffar och täckning per kedja"));
-    chains.forEach((chain) => details.append(node("p", `${chain.label}: ${chain.status_label}.${chain.next_step?` ${chain.next_step}`:""}${chain.current_contexts && chain.stale_contexts ? " Äldre prisunderlag från ytterligare inköpsställen har uteslutits." : ""}`)));
+    chains.forEach((chain) => details.append(node("p", `${chain.label}: ${chain.status_label}.${chain.next_step?` ${chain.next_step}`:""}${chain.current_contexts && chain.stale_contexts ? " Äldre priser från fler butiker är inte med." : ""}`)));
     coverage.append(details);
   }
   function card(product, expanded) {
@@ -77,7 +77,7 @@
     const details = node("details");
     details.open = expanded;
     details.append(node("summary", product.prices.length > 1 ? `Jämför samma produkt · ${product.prices.length} inköpsställen` : "Visa pris, kampanjer och källa"));
-    if (product.prices.length > 1) details.append(node("p", "Samma verifierade streckkod och förpackning. Billigast just nu visas först."));
+    if (product.prices.length > 1) details.append(node("p", "Samma streckkod och förpackning. Billigast först."));
     else details.append(node("p", "Ingen ytterligare aktuell jämförelse för denna exakta produkt."));
     product.prices.forEach((price) => details.append(priceLine(price)));
     const link = node("a", "Öppna produktjämförelse");
@@ -129,7 +129,7 @@
       if (!response.ok) throw new Error(typeof data.detail === "string" ? data.detail : "Kontrollera söktext, streckkod och postnummer.");
       if (current !== sequence) return;
       showCoverage(data.chain_coverage || []);
-      status.textContent = data.total ? `${data.total} produkter. ${data.semantics === "exact_identity" ? "Exakt produktjämförelse." : "Liknande alternativ – olika produkter jämförs inte som samma vara."}` : `${data.exact_gtin ? "Ingen exakt träff" : "Inga aktuella träffar"}. Prova ett annat produktnamn.`;
+      status.textContent = data.total ? `${data.total} produkter. ${data.semantics === "exact_identity" ? "Samma produkt i olika butiker." : "Liknande produkter. De är inte samma vara."}` : `${data.exact_gtin ? "Ingen exakt träff" : "Inga aktuella träffar"}. Prova ett annat produktnamn.`;
       data.results.forEach((product) => results.append(card(product, Boolean(detailKey) || data.semantics === "exact_identity")));
       next = data.next_offset;
       more.hidden = next == null;

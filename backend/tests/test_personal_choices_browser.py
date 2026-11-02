@@ -435,7 +435,7 @@ def test_distribution_conflict_preserves_explicit_values(choices):
     expect(page.locator("#dinner-distribution-dialog")).to_contain_text("5 av 5 måltider fördelade · 0 kvar")
     done(page, "dinner", "distribution")
     edit(page, "dinner-count", 4)
-    expect(page.locator("#dinner-conflict")).to_contain_text("5 fördelade men bara 4")
+    expect(page.locator("#dinner-conflict")).to_contain_text("Du har fördelat 5 rätter men har bara 4 måltider")
     page.locator("#choice-submit").click()
     assert not captured
     page.locator("#dinner-distribution-open").click()
@@ -671,7 +671,7 @@ def test_profile_review_does_not_replace_confirmed_hard_requirements(choices):
     expect(page.locator("#review-allergies")).to_have_value("jordnötter")
     expect(page.locator("#review-exclusions")).to_have_value("fisk")
     expect(page.locator("#profile-likes")).to_have_value("")
-    page.locator("#personal-dialog").get_by_role("button", name="Tillämpa granskade val").click()
+    page.locator("#personal-dialog").get_by_role("button", name="Använd valen").click()
     expect(page.locator("#profile-likes")).to_have_value("kyckling")
     expect(page.locator("#profile-allergies")).to_have_value("jordnötter")
 
