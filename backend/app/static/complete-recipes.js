@@ -2,9 +2,14 @@
 (() => {
   "use strict";
   const cuisines = {greek:"Grekiskt", italian:"Italienskt", mexican:"Mexikanskt", indian:"Indiskt", thai:"Thailändskt", swedish:"Svenskt"};
-  const ingredientForms = {raw_edible:"rå, ätbar mängd",dry:"torr råvara",as_sold:"mängd som såld",cooked_drained:"kokt och avrunnen mängd",preserved_drained:"avrunnen konserverad vara"};
+  const ingredientForms = {raw_edible:"rå, ätbar mängd",dry:"torr råvara",as_sold:"mängd före beredning",cooked_drained:"kokt och avrunnen mängd",preserved_drained:"avrunnen konserverad vara"};
   const ingredientRequirements = {plain:"naturell",frozen:"fryst",red_split:"röda, delade",ground:"malen",firm:"fast",thick:"tjock yoghurt, 5–10 % fetthalt",white_rice:"vitt ris",white_beans:"vita bönor",pure_juice:"ren juice",dried_leaf:"torkade blad"};
   const number = value => value==null||value===""||!Number.isFinite(Number(value))?"okänd":Number(value).toLocaleString("sv-SE", {maximumFractionDigits:2});
+  const duration = minutes => {
+    if(minutes==null||!Number.isFinite(Number(minutes)))return "okänd tid";
+    const hours=Math.floor(minutes/60),rest=minutes%60;
+    return hours?`${number(hours)} tim${rest?` ${number(rest)} min`:""}`:`${number(minutes)} min`;
+  };
   const storage = {
     get(key) { try { return JSON.parse(sessionStorage.getItem(key) || "null"); } catch (_) { return null; } },
     set(key, value) { try { sessionStorage.setItem(key, JSON.stringify(value)); } catch (_) { /* Optional tab-local recovery. */ } },
@@ -60,7 +65,7 @@
     const countHint=el("p","Alla rättens komponenter räknas tillsammans. Salt, peppar och vatten räknas inte. Olja, kryddor och såser räknas. Skafferiet minskar inköpen, inte ingrediensantalet.","field-hint");
     advanced.append(grid,custom,...(personal?[]:[countHint]),field("Tillåt fisk när övriga kostval medger det",fish));
     if(personal)box.append(countHint);
-    const contexts=el("fieldset",null,"recipe-contexts complete-recipe-options");contexts.id="recipe-price-contexts";contexts.append(el("legend","Butiker och priskanaler"),el("p","Inget markerat betyder alla tillåtna inköpsställen i ditt prisområde. Valda butiker och onlinekanaler begränsar sökningen; ditt butikstak gäller fortfarande.","field-hint"));
+    const contexts=el("fieldset",null,"recipe-contexts complete-recipe-options");contexts.id="recipe-price-contexts";contexts.append(el("legend","Butiker och nätbutiker"),el("p","Inget markerat betyder alla tillåtna inköpsställen i ditt prisområde. Valda butiker och onlinekanaler begränsar sökningen; ditt val av högsta antal inköpsställen gäller fortfarande.","field-hint"));
     const contextOptions=el("div");const contextStatus=el("p",null,"field-hint");contextStatus.setAttribute("role","status");contexts.append(contextOptions,contextStatus);advanced.append(contexts);
     let selectedContexts=[],contextEpoch=0,contextPosition=null;
     let contextPostal=document.getElementById("postal-code")?.value.replace(/\s/g,"");
@@ -108,7 +113,7 @@
     let estimates=null,pantry=null;
     if(!personal){
       estimates=input("recipe-nutrition-estimates","checkbox","");pantry=input("recipe-use-pantry","checkbox","",{checked:true});
-      advanced.append(field("Tillåt spårbara näringsuppskattningar",estimates),el("p","Separat från uppskattade köp: tillåt dokumenterade generiska näringsreferenser och granskad varm beredning. Källor och status visas i resultatet.","field-hint"),field("Använd mitt faktiskt angivna skafferi",pantry));
+      advanced.append(field("Tillåt spårbara näringsuppskattningar",estimates),el("p","Tillåt att näringen uppskattas med hjälp av livsmedelstabeller och uppgifter om tillagningen. Källorna visas i planen. Uppskattade inköpsmängder väljs separat.","field-hint"),field("Använd mitt skafferi",pantry));
       const link=el("a","Öppna och ändra mitt skafferi");link.href="/personal#pantry";advanced.append(link);
     } else advanced.append(el("p","Kostval, näringsgränser och den gemensamma smakprofilen följer dina övriga extraval. Spårbara näringsuppskattningar tillåts.","field-hint"));
     const mealFields=el("fieldset",null,"complete-recipe-fields");
@@ -330,34 +335,48 @@
       return `${before.length?`När steg ${join(before)} är ${before.length===1?"klart":"klara"}`:"Från början"} kan du göra steg ${join(group.indices)} parallellt.`;
     });
   }
+  function ingredientLabel(row) {
+    // Only omit generic wording repeated by the form label directly below.
+    // Specific trimming, thaw-liquid and bone/skin instructions stay verbatim.
+    const suffixes={raw_edible:[", rå ätlig vikt"],dry:[", torr vikt"],
+      as_sold:[", vikt som såld (g)",", volym som såld (ml)",", mängd som såld",", som såld",", som sålda"],
+      cooked_drained:[", tillagad och avrunnen vikt",", tillagad avrunnen vikt",", kokt avrunnen vikt"],
+      preserved_drained:[", avrunnen vikt",", konserverad avrunnen vikt"]};
+    const suffix=(suffixes[row.form]||[]).find(value=>row.name.endsWith(value));
+    return suffix?row.name.slice(0,-suffix.length):row.name;
+  }
   function renderRecipe(recipe,{nutrition=null,personal=null,slotId=null}={}) {
     const design=recipe.design;if(!design)return null;
     const presentation=cookingPresentation(recipe);
     const out=el("div",null,"complete-recipe-content");
     const intro=el("div",null,"complete-recipe-intro");
-    intro.append(el("p",(design.cuisines||[]).map(c=>`${(cuisines[c]||c).toLowerCase()} inspirerad`).join(" · "),"recipe-cuisine-label"));
+    intro.append(el("p",(design.cuisines||[]).map(c=>cuisines[c]||c).join(" · "),"recipe-cuisine-label"));
     const count=design.ingredient_count??ingredientCount(recipe);
-    const timing=design.total_minutes!=null?`uppskattad total tid ${number(design.total_minutes)} min · aktiv ${number(design.active_minutes)} min${design.waiting_minutes?` · väntan ${number(design.waiting_minutes)} min`:""}`:`uppskattad tid ${number(design.estimated_minutes)} min`;
+    const timing=design.total_minutes!=null?`uppskattad total tid ${duration(design.total_minutes)} · aktiv ${duration(design.active_minutes)}${design.waiting_minutes?` · väntan ${duration(design.waiting_minutes)}`:""}`:`uppskattad tid ${duration(design.estimated_minutes)}`;
     intro.append(el("p",`${recipe.servings} portioner · ${count} ingredienser · ${timing}`,"complete-recipe-facts"));
-    if(design.unmeasured_processes?.length)intro.append(el("p","Ingredienslistan anger hela insatsen, även den del som senare hälls eller silas bort. Näring och färdig portionsvikt är ännu okända.","recipe-method-note"));
+    if(design.unmeasured_processes?.length)intro.append(el("p","Ingredienslistan anger mängden före tillagning, även det som senare hälls, silas eller putsas bort. Näringsvärden och färdig portionsvikt är okända.","recipe-method-note"));
     const demands=(personal?.remaining_demands||[]).filter(row=>row.source===slotId&&!['salt','peppar','svartpeppar','vitpeppar','vatten'].includes(row.name));
     if(demands.length===count&&demands.every(row=>row.original_quantity==null||Math.abs(row.original_quantity-row.quantity)<0.000001)){
       let home=0,partial=0;
       for(const demand of demands){const used=(personal.allocations||[]).filter(row=>row.demand_key===demand.demand_key).reduce((sum,row)=>sum+row.quantity,0);if(used>=demand.quantity-0.000001)home++;else if(used>0)partial++;}
       intro.append(el("p",`${count} ingredienser: ${count-home} behöver köpas och ${home} finns helt hemma.${partial?` Av de ${count-home} som behöver köpas finns ${partial} redan delvis hemma.`:""}`));
     } else if(demands.some(row=>row.original_quantity!=null&&row.original_quantity>row.quantity)){
-      intro.append(el("p","En del av rättens behov har redan bokförts som förbrukat. Inköpslistan visar återstående behov; receptets ingrediensantal är oförändrat."));
+      intro.append(el("p","Du har redan registrerat en del av råvarorna som använda. Inköpslistan visar vad som återstår att köpa."));
     }
-    intro.append(el("p",`Recept ${design.base_id} · version ${design.version} · ${design.variant_id==="base"?"grundrecept":`variation ${design.variant_id}`}`,"small"));
     if(nutrition){
       const values=nutrition.values||nutrition;const parts=[];
       for(const [key,alt,label] of [["protein_g","protein_g_per_serving","g protein"],["kcal","kcal_per_serving","kcal"],["carbs_g","carbs_g_per_serving","g kolhydrater"],["fat_g","fat_g_per_serving","g fett"]]){const value=values[key]??values[alt];if(value!=null&&value!==""&&Number.isFinite(Number(value)))parts.push(`${nutritionNumber(value,nutrition.status)} ${label}`);}
-      intro.append(el("p",`${parts.length?`${parts.join(" · ")} per portion. `:""}Näring: ${{VERIFIED:"produktdeklarationer",ESTIMATED:"spårbar uppskattning",NOT_REQUESTED:"inte beräknad – inget näringsmål valt",UNKNOWN:"okänd",FAILED:"ej kvalificerad"}[nutrition.status]||"okänd"}.${parts.length<4?" Saknade näringsvärden är okända.":""}`));
+      intro.append(el("p",`${parts.length?`${parts.join(" · ")} per portion. `:""}Näring: ${{VERIFIED:"produktdeklarationer",ESTIMATED:"spårbar uppskattning",NOT_REQUESTED:"inte beräknad – inget näringsmål valt",UNKNOWN:"okänd",FAILED:"ej kvalificerad"}[nutrition.status]||"okänd"}.${parts.length<4?" Alla näringsvärden finns inte tillgängliga.":""}`));
       intro.append(nutritionInformation(nutrition,presentation));
-    } else {intro.append(el("p","Näring: se planens kvalitetsunderlag. Saknade näringsvärden är okända."));if(presentation.methodNotes.length)intro.append(nutritionInformation(null,presentation));}
-    if(personal)intro.append(el("p",`Allergenstatus: ${personal.checks?.allergy==="VERIFIED"?"kontrollerad mot källdeklarationer enligt dina krav":"ingen verifierad allergikontroll begärd"}. Köpstatus och näringsstatus bedöms separat.`,"small"));
+    } else {intro.append(el("p","Näringsvärden saknas för det här receptet."));if(presentation.methodNotes.length)intro.append(nutritionInformation(null,presentation));}
+    if(personal)intro.append(el("p",personal.checks?.allergy==="VERIFIED"?"Dina allergival har kontrollerats mot produkternas deklarationer. Kontrollera även märkningen på förpackningen.":personal.checks?.allergy==="NOT_REQUESTED"?"Du har inte begärt någon allergikontroll för den här planen.":"Allergikontrollen kunde inte bekräftas. Kontrollera produkternas innehåll och märkning.","small"));
     const provenance=design.provenance||{};
-    intro.append(el("p",`Innehåll: ${provenance.content_review==="reviewed"?"granskat":"granskningsstatus saknas"}. Maskinell validering: ${provenance.machine_validation==="passed"?"godkänd":"status saknas"}. Provlagning: ${provenance.cooking_test==="not_cooked"?"inte genomförd":provenance.cooking_test||"underlag saknas"}.`,"recipe-quality-note"));
+    intro.append(el("p",provenance.cooking_test==="not_cooked"?"Receptet är inte provlagat. Tiderna är uppskattade.":"Uppgift om provlagning saknas. Tiderna är uppskattade.","recipe-quality-note"));
+    const recipeInfo=el("details",null,"recipe-about");recipeInfo.append(el("summary","Om receptet"));
+    recipeInfo.append(el("p","Receptet är framtaget med AI. Granskning och automatiska kontroller ersätter inte provlagning."));
+    recipeInfo.append(el("p",`Innehållsgranskning: ${provenance.content_review==="reviewed"?"genomförd":"uppgift saknas"}. Automatisk strukturkontroll: ${provenance.machine_validation==="passed"?"godkänd":"uppgift saknas"}.`));
+    recipeInfo.append(el("p",`Recept-ID: ${design.base_id} · version ${design.version} · variant ${design.variant_id}`,"small"));
+    intro.append(recipeInfo);
     if(design.equipment?.length)intro.append(el("p",`Utrustning: ${design.equipment.join(", ")}.`));
     if(design.content_source?.storage_note){const storage=el("details");storage.append(el("summary","Rester och förvaring"),el("p",design.content_source.storage_note));intro.append(storage);}out.append(intro);
     const ingredients=el("section",null,"complete-recipe-ingredients");ingredients.append(el("h3","Ingredienser för hela receptet"));
@@ -369,27 +388,27 @@
         return {...source,...amount,form:source?.form||"process_water"};
       })||(recipe.ingredients||[]).filter(i=>component.id?i.component===component.id:!mapped.has(i.component));if(!rows.length)continue;
       const group=el("div",null,"recipe-component");group.append(el("h4",component.name));const list=el("ul",null,"recipe-ingredients");
-      for(const row of rows){const item=el("li"),name=el("span",row.name);const basis=[ingredientForms[row.form],...(row.product_requirements||[]).map(key=>ingredientRequirements[key])].filter(Boolean);if(basis.length)name.append(el("small",basis.join(" · "),"recipe-ingredient-form"));if(row.note)name.append(el("small",row.note,"recipe-ingredient-form"));item.append(name,el("span",`${number(row.quantity)} ${row.unit}`,"ingredient-amount"));list.append(item);}group.append(list);ingredients.append(group);
+      for(const row of rows){const item=el("li"),name=el("span",ingredientLabel(row));const basis=[ingredientForms[row.form],...(row.product_requirements||[]).map(key=>ingredientRequirements[key])].filter(Boolean);if(basis.length)name.append(el("small",basis.join(" · "),"recipe-ingredient-form"));if(row.note)name.append(el("small",row.note,"recipe-ingredient-form"));item.append(name,el("span",`${number(row.quantity)} ${row.unit}`,"ingredient-amount"));list.append(item);}group.append(list);ingredients.append(group);
     }
-    ingredients.append(el("p","Mängderna avser receptets använda ingredienser. Samma ingrediens och form räknas en gång även när den används i flera komponenter. Salt, peppar och vatten ingår i listan men inte i det valda antalet.","field-hint"));
+    ingredients.append(el("p","Mängderna gäller hela receptet. Salt, peppar och vatten räknas inte in i ingrediensantalet.","field-hint"));
     const allocations=(personal?.allocations||[]).filter(a=>slotId && (a.source===slotId||a.slot_id===slotId));
     if(allocations.length){ingredients.append(el("h4","Skafferi används"));for(const row of allocations)ingredients.append(el("p",`${row.name||row.ingredient||"Skafferivara"}: ${number(row.quantity)} ${row.unit||""}.`));}
     out.append(ingredients);
     const method=el("section",null,"complete-recipe-method");method.append(el("h3","Gör så här"));const steps=el("ol",null,"instructions-list complete-recipe-steps");
     const overlap=design.content_source?[]:parallelPlan(design.steps||[]);
-    if(design.content_source)method.append(el("p","Följ tidsankarna i stegen. Total tid är en uppskattning för angiven portionsmängd; flera pannor eller omgångar kan påverka tiden.","field-hint"));
+    if(design.content_source)method.append(el("p","Följ tiderna i stegen. Tillagningen kan ta längre tid om du behöver laga maten i flera omgångar.","field-hint"));
     if(overlap.length){const plan=el("div",null,"recipe-parallel-plan");for(const text of overlap)plan.append(el("p",text));method.append(plan);}
     const instructions=presentation.instructions;
     instructions.forEach((instruction,index)=>{
       const item=el("li");const step=design.steps?.[index];item.append(el("p",typeof instruction==="string"?instruction:instruction.text));
-      if(step?.duration_minutes!=null)item.append(el("span",`ca ${number(step.duration_minutes)} min`,"step-timing"));steps.append(item);
-    });method.append(steps,el("p","Stegtiderna är uppskattningar. Summera dem inte när moment görs parallellt.","field-hint"));out.append(method);return out;
+      if(step?.duration_minutes!=null)item.append(el("span",`ca ${duration(step.duration_minutes)}`,"step-timing"));steps.append(item);
+    });method.append(steps);out.append(method);return out;
   }
 
   function recipeFeedback({recipe,recipeIndex,planId,revision}) {
     const dialog=el("dialog",null,"consumer-dialog complete-feedback-dialog");const form=el("form",null,"dialog-card");
     const heading=el("h2",`Hur blev ${recipe.name}?`);heading.id="recipe-feedback-title";dialog.setAttribute("aria-labelledby",heading.id);form.append(heading);
-    if(recipe.design)form.append(el("p",`Återkopplingen hör till ${recipe.design.base_id}, version ${recipe.design.version}, ${recipe.design.variant_id}.`));
+    if(recipe.design)form.append(el("p","Din återkoppling kopplas till den version av receptet som du har i planen."));
     const taste=select("recipe-feedback-taste",[["","Välj smakbetyg"],...[1,2,3,4,5].map(n=>[String(n),`${n} av 5`])],"");
     const difficulty=select("recipe-feedback-difficulty",[["","Välj svårighetsgrad"],["1","1 · Mycket enkel"],["2","2 · Enkel"],["3","3 · Medel"],["4","4 · Svår"],["5","5 · Mycket svår"]],"");
     const portion=select("recipe-feedback-portion",[["","Välj portionsstorlek"],["small","För liten"],["right","Lagom"],["large","För stor"]],"");
@@ -416,7 +435,7 @@
   function searchNotice(plan,mode) {
     if(!(plan.recipes||[]).some(recipe=>recipe.design))return null;
     const out=el("div",null,"recipe-search-status data-note");
-    out.append(el("p",mode==="cheapest"?"Lägsta hittade inköpskostnad inom dina val. Sökningen bevisar inte global optimalitet.":"Inköpskostnaden följer ditt val av balans mellan pris och variation. Sökningen bevisar inte global optimalitet."));
+    out.append(el("p",mode==="cheapest"?"Lägsta hittade inköpskostnad inom dina val. Det kan finnas en billigare kombination som sökningen inte har hittat.":"Inköpskostnaden följer ditt val av balans mellan pris och variation. Det kan finnas en billigare kombination som sökningen inte har hittat."));
     const distribution=plan.personal?.checks?.week_distribution;if(distribution){const cuisineCounts=Object.entries(distribution.cuisines||{}).map(([name,count])=>`${cuisines[name]||name} ${count}`);const proteins=Object.entries(distribution.main_proteins||{}).map(([source,count])=>`${source} ${count} ${count===1?"middag":"middagar"}`);out.append(el("p",`${distribution.distinct_cuisines} matkök${cuisineCounts.length?` · ${cuisineCounts.join(" · ")}`:""}${proteins.length?` · ${proteins.join(" · ")}`:""}.`));}
     const resolution=plan.personal?.checks?.variation_resolution;if(resolution?.message)out.append(el("p",resolution.message));
     const budget=plan.personal?.checks?.search_outcome?.budget_message;if(typeof budget==="string"&&budget.trim())out.append(el("p",budget));return out;
@@ -441,36 +460,39 @@
     out.append(el("p",`${plan.optimized_basket.verification_status==="VERIFIED_WITH_ESTIMATES"?"Uppskattat belopp att betala":"Belopp att betala"}: ${money(plan.optimized_basket.total)}. Hela köp, inklusive eventuell pant.`));
     out.append(el("p",checks.used_ingredient_cost==null?"Kostnaden för allt som används är okänd eftersom skafferiets tidigare inköpspris saknas.":`${estimated?"Uppskattad kostnad":"Kostnad"} för mängderna som används: ${money(checks.used_ingredient_cost)} (utan pant).`));
     if(checks.used_ingredient_cost==null&&checks.new_purchase_used_cost!=null)out.append(el("p",`Använd andel av de nya matinköpen: ${estimated?"cirka ":""}${money(checks.new_purchase_used_cost)}. Skafferiets historiska kostnad ingår inte.`));
-    if(plan.personal.allocations?.length){out.append(el("h4","Från ditt faktiska skafferi"));const list=el("ul");for(const row of plan.personal.allocations)list.append(el("li",`${row.name}: ${number(row.quantity)} ${row.unit}`));out.append(list);}
+    if(plan.personal.allocations?.length){out.append(el("h4","Från ditt skafferi"));const list=el("ul");for(const row of plan.personal.allocations)list.append(el("li",`${row.name}: ${number(row.quantity)} ${row.unit}`));out.append(list);}
     if(checks.used_cost_basis?.description)out.append(el("p",checks.used_cost_basis.description,"field-hint"));
-    out.append(el("p","Resterna i inköpslistan är planerade mängder. De bokförs inte automatiskt som lager och deras framtida värde minskar inte beloppet att betala.","field-hint"));return out;
+    out.append(el("p","Inköpslistan visar hur mycket som väntas bli över. Det läggs till i skafferiet när du bekräftar inköpet. Du betalar för hela förpackningen.","field-hint"));return out;
   }
 
   function productDetails(detail) {
     if(!detail)return null;const out=el("details",null,"recipe-product-declaration");out.append(el("summary","Sammansättning och allergenunderlag"));
     out.append(el("p",detail.ingredients?.length?`Ingrediensunderlag: ${detail.ingredients.join(", ")}.`:"Ingrediensdeklaration saknas i detta underlag."));
     if(!detail.ingredients_complete)out.append(el("p","Ingrediensunderlaget är inte komplett.","field-hint"));
-    out.append(el("p",detail.allergens_present?.length?`Angivna allergener: ${detail.allergens_present.join(", ")}.`:"Inga allergener anges i detta underlag. Detta bevisar inte frånvaro."));
+    out.append(el("p",detail.allergens_present?.length?`Angivna allergener: ${detail.allergens_present.join(", ")}.`:"Inga allergener anges i detta underlag. Varan kan ändå innehålla allergener."));
     out.append(el("p",detail.allergens_trace?.length?`Angivna spår: ${detail.allergens_trace.join(", ")}.`:"Inga spår anges i detta underlag. Följ planens separata allergenkontroll."));
     if(detail.source)out.append(el("p",`Källreferens: ${detail.source}`,"small"));return out;
   }
 
   function diagnostics(data) {
-    if(!data)return null;const out=el("details",null,"recipe-planning-diagnostics");out.open=true;out.append(el("summary","Blockeringsfördelning"));
-    out.append(el("p",`${data.raw_recipe_pool??"Okänt antal"} receptkandidater ingick i underlaget. ${data.singleton_passed??"Okänt antal"} klarade den enskilda kontrollen; ${data.not_singleton_evaluated??"okänt antal"} blev inte enskilt prövade. Ett enskilt godkännande innebär inte att rätterna tillsammans bildar en giltig veckomeny.`));
-    const counts=el("ul");for(const row of data.candidate_rejections||[])if(row.rejected)counts.append(el("li",`${row.label}: ${row.rejected} avslag.`));out.append(counts);
+    if(!data)return null;const out=el("details",null,"recipe-planning-diagnostics");out.open=true;out.append(el("summary","Därför kunde planen inte skapas"));
+    out.append(el("p","Vi kunde inte sätta ihop en komplett meny som uppfyller dina val. Dina val och din tidigare plan finns kvar."));
+    const statistics=el("details");statistics.append(el("summary","Detaljer om sökningen"));
+    statistics.append(el("p",`${data.raw_recipe_pool??"Okänt antal"} recept ingick i sökningen. ${data.singleton_passed??"Okänt antal"} klarade kontrollen var för sig; ${data.not_singleton_evaluated??"okänt antal"} kontrollerades inte enskilt. Recept som fungerar var för sig behöver inte fungera tillsammans i samma meny.`));
+    const counts=el("ul");for(const row of data.candidate_rejections||[])if(row.rejected)counts.append(el("li",`${row.label}: ${row.rejected} recept valdes bort.`));statistics.append(counts);
     const examples=el("ul");const seen=new Set();for(const row of data.candidate_details||[]){
       const reason=String(row.reason||"").startsWith("Befintlig strukturell måltidskontroll")?"Rättens grundkontroll saknar tillräckligt näringsunderlag. Detta är inte i sig ett avslag på ditt valda proteinmål.":String(row.reason||"").replace(/\bprotein_g\b/g,"protein").replace(/\bas_sold\b/g,"som såld").replace(/\braw_edible\b/g,"rå ätbar mängd").replace(/\bcooked_drained\b/g,"kokt och avrunnen");
       const text=reason.startsWith(`${row.recipe}:`)?reason:`${row.recipe}: ${reason}`;if(seen.has(text))continue;seen.add(text);if(examples.children.length<8)examples.append(el("li",text));
     }if(examples.children.length){out.append(el("h3","Exempel på vad som stoppade recepten"),examples);if(seen.size>8)out.append(el("p",`Visar 8 av ${seen.size} skilda exempel.`));}
     if((data.search||[]).some(row=>row.rejections?.variation))out.append(el("p","Veckans variationskrav stoppade kombinationer av de kvarvarande rätterna. Ett alternativ är att välja fler matkök eller längre tillagningstid för att ge fler rätter möjlighet att prövas."));
     else if((data.candidate_details||[]).some(row=>row.stage==="nutrition_bound"))out.append(el("p","Ett alternativ är att tillåta godkända receptvariationer eller välja fler matkök. Du kan också uttryckligen ändra proteinmålet. Inget av dina val ändras automatiskt."));
-    else out.append(el("p","Prova fler matkök eller längre tillagningstid för att låta fler rätter prövas. Saknat produktunderlag behöver kompletteras; ändrade val garanterar inte en lösning."));
-    out.append(el("p",data.counting||"Sökningen är begränsad och bevisar inte att alla möjliga menyer är omöjliga.","field-hint"));return out;
+    else if(data.missing_needs?.length)out.append(el("p","Det saknas uppgifter om några av varorna som recepten behöver. Du kan välja andra butiker eller försöka igen när uppgifterna har kompletterats."));
+    else out.append(el("p","Fler matkök eller längre tillagningstid ger fler recept att välja bland. Det kan hjälpa, men vissa varuuppgifter kan också behöva kompletteras."));
+    statistics.append(el("p",data.counting||"Alla möjliga menyer har inte prövats.","field-hint"));out.append(statistics);return out;
   }
 
   const validJobUrl=url=>/^\/api\/plan-jobs\/[a-f0-9]{32}$/.test(url||"");
-  const stages={queued:"Din menyberäkning väntar på en ledig plats.",product_facts:"Kontrollerar produktfakta och aktuella prisvillkor.",candidate_qualification:"Prövar rätternas produkter, mängder och näringskrav.",week_search:"Söker efter en samordnad veckomeny och inköpskorg.",final_audit:"Slutkontrollerar hela inköpslistan och dina krav.",saving:"Sparar den färdiga planrevisionen."};
+  const stages={queued:"Din menyberäkning väntar på en ledig plats.",product_facts:"Kontrollerar varor, priser och erbjudanden.",candidate_qualification:"Kontrollerar att varor och mängder passar dina recept och näringsval.",week_search:"Sätter ihop måltiderna och jämför inköpskostnaden.",final_audit:"Slutkontrollerar hela inköpslistan och dina krav.",saving:"Sparar din plan."};
   stages.library_preparation="Förbereder receptbiblioteket för dina val.";
   stages.cancelling="Avbryter beräkningen efter pågående arbetssteg.";
   function jobProgress(data){

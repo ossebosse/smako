@@ -1529,7 +1529,7 @@
     const groups = basketGroups(basket);
 
     if (!groups.length) {
-      dom.storeGroups.append(emptyMessage("Ingen optimerad inköpslista returnerades i svaret."));
+      dom.storeGroups.append(emptyMessage("Ingen inköpslista kunde visas."));
     } else {
       groups.forEach((group) => dom.storeGroups.append(renderStoreGroup(group, verification.status, data.personal?.checks?.ingredient_product_details||[])));
     }
@@ -2177,7 +2177,7 @@
     if (sourceKey.includes("federat") || sourceKey.includes("price-universe")) {
       const builtAt = first(data, ["data.built_at", "prices_updated_at"]);
       const updated = localDateTime(builtAt);
-      dom.sourceDescription.textContent = `${updated ? `Priser uppdaterade ${updated}. ` : ""}Resultatet använder ett förbyggt federerat prisuniversum med tillgängliga online- eller butikskopplade prisdata. De ska inte tolkas som garanterade hyllpriser; fysisk tillgänglighet och hyllpris kan avvika.`;
+      dom.sourceDescription.textContent = `${updated ? `Priser uppdaterade ${updated}. ` : ""}Priserna gäller de butiker och nätbutiker som anges. Pris och lager i en fysisk butik kan skilja sig.`;
       dom.footerSource.textContent = "Aktuella digitala prisdata. Pris och tillgänglighet kan förändras i butik.";
     } else if (sourceKey.includes("primat")) {
       dom.sourceDescription.append(document.createTextNode("Produkt-, pris- och priskontextdata i resultatet kommer via "));
@@ -2191,7 +2191,7 @@
       dom.sourceDescription.textContent = "Resultatet använder demodata från MockPriceProvider. Den demonstrerar hela flödet, men priserna ska inte tolkas som aktuella butikspriser.";
       dom.footerSource.textContent = "Demoläge: prisdata från MockPriceProvider, inte aktuella butikspriser.";
     } else {
-      dom.sourceDescription.textContent = "Backend-svaret angav ingen tydlig prisdatakälla. Kontrollera dataläget innan priserna används som inköpsunderlag.";
+      dom.sourceDescription.textContent = "Priskällan saknas. Priserna kan därför inte bekräftas.";
       dom.footerSource.textContent = "Produktpriser visas endast när de kommer från tjänstens prisdata.";
     }
 
@@ -2202,7 +2202,7 @@
       if (freshness === "fresh") {
         const freshnessText = ageHours !== null && ageHours < 24
           ? " Priser uppdaterade idag."
-          : " Prisunderlaget är färskt enligt tjänstens freshness-policy.";
+          : " Priserna har hämtats nyligen.";
         dom.sourceDescription.append(document.createTextNode(freshnessText));
       } else if (freshness === "aging") {
         dom.warningsList.append(createElement("li", null, "Vissa baspriser har inte uppdaterats nyligen. De behålls tills nya priser hämtats. Kampanjpriser gäller bara under sin giltighetstid."));
@@ -2501,7 +2501,7 @@
       dom.newPricesMessage.textContent = "Den sparade planen och dess ursprungliga pris visas oförändrade. Försök kontrollera aktuella priser senare.";
     } else {
       dom.newPricesTitle.textContent = showBanner ? "Nya priser finns" : "Samordnade inköp för hela veckan";
-      dom.newPricesMessage.textContent = showBanner ? "Din sparade plan visas fortfarande med sitt ursprungliga prisunderlag." : "Räkna uttryckligen om med aktuellt prisunderlag och skafferi. Den tidigare revisionen bevaras.";
+      dom.newPricesMessage.textContent = showBanner ? "Din sparade plan visas fortfarande med sitt ursprungliga prisunderlag." : "Räkna om med aktuella priser och det du har hemma. Den tidigare planen sparas.";
     }
     dom.recalculatePlanButton.hidden = !data.personal && !Boolean(first(data, ["recalculation_available"], false));
     dom.recalculatePlanButton.textContent = data.personal ? "Räkna om inköpslistan" : "Uppdatera planen";
@@ -2963,7 +2963,7 @@
       if (!response.ok) {
         throw new Error(errorFromResponse(data, `Rapporten kunde inte sparas (HTTP ${response.status}).`));
       }
-      dom.reportStatus.textContent = "Tack! Rapporten är sparad som separat evidens.";
+      dom.reportStatus.textContent = "Tack! Din rapport är sparad.";
       sendAnalyticsEvent("product_report_created");
       window.setTimeout(closeReportDialog, 900);
     } catch (error) {

@@ -9,10 +9,10 @@
   const el=(tag,text,cls)=>{const n=document.createElement(tag);if(text!=null)n.textContent=text;if(cls)n.className=cls;return n;};
   const mobile=window.matchMedia("(max-width: 849px)");
   // Planner stages (complete-recipes.js has the long texts).
-  const TITLES={starting:"Skickar dina val till köket",queued:"Ställer oss i kön",library_preparation:"Bläddrar i receptboken",
-    product_facts:"Kollar hyllor och priser",candidate_qualification:"Provsmakar recepten",week_search:"Pusslar ihop veckan",
-    final_audit:"Dubbelkollar inköpslistan",saving:"Packar kassen",cancelling:"Avbryter…",reconnecting:"Tappade kontakten – återansluter",
-    working:"Köket arbetar med din plan"};
+  const TITLES={starting:"Startar planeringen",queued:"Väntar på en ledig plats",library_preparation:"Letar efter recept",
+    product_facts:"Kontrollerar varor och priser",candidate_qualification:"Kontrollerar recepten mot dina val",week_search:"Sätter ihop din meny",
+    final_audit:"Kontrollerar inköpslistan",saving:"Sparar din plan",cancelling:"Avbryter…",reconnecting:"Återansluter",
+    working:"Arbetar med din plan"};
   const UNITS={recipes:"recept prövade",publications:"steg klara"};
   const art=`<svg viewBox="0 0 120 96" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
     <g class="pp-items">
@@ -57,7 +57,7 @@
     if(state==="running"){refreshCancel();return api;}
     anchor=target;startedAt=since||Date.now();onCancel=cancelAction;canCancel=cancellable;
     setState("running");panel.dataset.stage="starting";
-    title.textContent=TITLES.starting;detail.textContent="Alla måltider räknas mot samma korg. En stor plan kan ta flera minuter. Dina val och senaste plan finns kvar medan du väntar.";
+    title.textContent=TITLES.starting;detail.textContent="Vi räknar ihop dina måltider och varor. En stor plan kan ta flera minuter. Dina val och senaste plan finns kvar medan du väntar.";
     count.textContent="";clock.textContent=elapsed();measure(null);meter.hidden=false;
     // Restart the drawing animation for each new plan.
     visual.innerHTML=art;
@@ -84,7 +84,7 @@
   function finish(){
     if(state!=="running")return Promise.resolve();
     clearInterval(timer);setState("done");panel.dataset.stage="saving";
-    title.textContent="Klart! Din plan är packad";detail.textContent="Öppnar planen och inköpslistan…";meter.classList.remove("is-waiting");fill.style.width="100%";count.textContent="";
+    title.textContent="Din plan är klar";detail.textContent="Öppnar planen och inköpslistan…";meter.classList.remove("is-waiting");fill.style.width="100%";count.textContent="";
     const wait=window.matchMedia("(prefers-reduced-motion: reduce)").matches?150:900;
     return new Promise(resolve=>setTimeout(()=>{hide();resolve();},wait));
   }

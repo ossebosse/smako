@@ -102,8 +102,8 @@ def run_case(browser, engine: str, mobile: bool, personal: bool, output: Path):
     status = page.locator("#personal-status" if personal else "#error-message")
     submit.click()
     expect(status).to_contain_text("oförenliga val")
-    expect(page.locator(".recipe-planning-diagnostics")).to_contain_text("Blockeringsfördelning")
-    expect(page.locator(".recipe-planning-diagnostics")).to_contain_text("Näringskrav: 8 avslag")
+    expect(page.locator(".recipe-planning-diagnostics")).to_contain_text("Detaljer om sökningen")
+    expect(page.locator(".recipe-planning-diagnostics")).to_contain_text("Näringskrav: 8 recept valdes bort.")
     expect(page.locator(".recipe-planning-diagnostics")).not_to_contain_text("estimate_confidence_below_minimum")
     assert len(plans) == 1
     assert plans[0]["recipe_preferences"] == {"mode": "complete", "cuisines": ["greek", "mexican"],
@@ -254,7 +254,7 @@ def run_case(browser, engine: str, mobile: bool, personal: bool, output: Path):
     }""")
     assert "4 ingredienser: 3 behöver köpas och 1 finns helt hemma" in rendered["counts"]
     assert "Av de 3 som behöver köpas finns 1 redan delvis hemma" in rendered["counts"]
-    assert "finns helt hemma" not in rendered["consumed"] and "bokförts som förbrukat" in rendered["consumed"]
+    assert "finns helt hemma" not in rendered["consumed"] and "registrerat en del av råvarorna som använda" in rendered["consumed"]
     assert "inte beräknad – inget näringsmål valt" in rendered["unknown"]
     assert "Saknade näringsvärden är okända" in rendered["unknown"]
     assert "0 g protein" not in rendered["unknown"] and "0 kcal" not in rendered["unknown"]

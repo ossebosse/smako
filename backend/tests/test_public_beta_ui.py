@@ -12,7 +12,7 @@ def test_first_visit_onboarding_is_short_consumer_copy() -> None:
 
     assert 'id="onboarding-dialog"' in page
     assert "Vi jämför matpriser." in page
-    assert "Vi bygger recept utifrån vad som är billigt." in page
+    assert "Vi väljer recept och jämför inköpskostnaden." in page
     assert "Du får en färdig inköpslista." in page
     assert "Skapa min veckomeny" in page
     assert 'onboardingSeenKey = "grocery-beta-onboarding-seen-v1"' in script
@@ -160,20 +160,24 @@ def test_privacy_and_beta_terms_are_factual_and_linked() -> None:
     assert 'href="/static/privacy.html"' in page
     assert 'href="/static/beta-terms.html"' in page
     assert "Ingen exakt plats" in privacy
-    assert "Inga retailer-lösenord" in privacy
+    assert "Inga lösenord till butiker" in privacy
     assert "högst 180 dagar" in privacy
-    assert "lagringstid 0 timmar" in privacy
+    assert "raderas som standard direkt efter bearbetningen" in privacy
     assert "IP-adresser eller frågesträngar" in privacy
-    assert "Policy-TODO" in privacy
+    assert "Policy-TODO" not in privacy
+    assert "tidsgräns för automatisk radering" in privacy
+    assert "ännu inte fastställd" in privacy
     assert 'id="privacy-erasure-form"' in privacy
     assert 'src="/static/privacy.js"' in privacy
     assert "Radera mina uppgifter" in privacy
     assert "högst 14 dagar" in privacy
-    assert "automatisk återspelning" in privacy
-    assert "före en bredare lansering" in privacy
+    assert "raderingar tillämpas manuellt innan tjänsten öppnas igen" in privacy
+    assert "Ansvarig: Smako (tills vidare)" in privacy
+    assert "[kontaktuppgifter kommer]" in privacy
     assert "Kontrollera alltid slutpriset" in terms
     assert "Online-sortiment är inte en garanti" in terms
-    assert "Juridisk TODO" in terms
+    assert "Juridisk TODO" not in terms
+    assert 'href="/static/privacy.html#policy-contact"' in terms
 
 
 def test_privacy_erasure_is_confirmed_same_origin_and_clears_local_data_after_success() -> None:

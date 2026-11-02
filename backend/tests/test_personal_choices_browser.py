@@ -1072,7 +1072,7 @@ def test_plan_progress_replaces_the_create_button_and_can_cancel(choices, width)
     if width >= 850:
         # Inline where the button was, not at the top of the page.
         assert page.evaluate("document.querySelector('#choice-submit').nextElementSibling.matches('.plan-progress')")
-    expect(panel.locator(".plan-progress-title")).to_have_text("Provsmakar recepten")
+    expect(panel.locator(".plan-progress-title")).to_have_text("Kontrollerar recepten mot dina val")
     expect(panel.locator(".plan-progress-count")).to_have_text("2 av 5 recept prövade")
     expect(panel.locator(".plan-progress-fill")).to_have_attribute("style", "width: 40%;")
     expect(panel.locator(".plan-progress-steps")).to_have_count(0)

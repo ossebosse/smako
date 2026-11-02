@@ -16,9 +16,9 @@
     <link rel="stylesheet" href="/static/complete-recipes.css?v=complete-recipes-1" />
     <script src="/scanner-assets/physical-barcode-scanner.js" defer></script>
     <script src="/static/frontend-bootstrap.js?v=loading-hotfix-20260909" defer></script>
-    <script src="/static/complete-recipes.js?v=municipality-rollout-2" defer></script>
+    <script src="/static/complete-recipes.js?v=20261102-language" defer></script>
     <script src="/static/municipal-areas.js?v=1" defer></script>
-  <script src="/static/app.js?v=municipal-20261010" defer></script>
+  <script src="/static/app.js?v=20261102-language" defer></script>
     <script src="/static/product-search.js?v=comparability-20261010" defer></script>
   </head>
   <body>
@@ -94,7 +94,7 @@
           <ul class="benefits" aria-label="Så fungerar tjänsten">
             <li><span aria-hidden="true">01</span> Lokala produkter och kampanjer</li>
             <li><span aria-hidden="true">02</span> Prisberäknade recept för dina val</li>
-            <li><span aria-hidden="true">03</span> Optimerad handel via flera inköpsställen</li>
+            <li><span aria-hidden="true">03</span> Jämför inköp i flera butiker</li>
           </ul>
         </div>
 
@@ -148,7 +148,7 @@
                   <option value="2" selected>2 inköpsställen</option>
                   <option value="3">3 inköpsställen</option>
                 </select>
-                <span class="field-hint">Ett inköpsställe kan vara en butikskopplad eller onlinebaserad priskontext. Fler stopp kan ge lägre pris.</span>
+                <span class="field-hint">Du kan jämföra både butiker och nätbutiker. Pristypen anges i listan. Fler inköpsställen kan ge lägre pris.</span>
               </div>
 
               <div class="field field-wide">
@@ -282,7 +282,7 @@
         >
           <div class="spinner" aria-hidden="true"></div>
           <div>
-            <h2 id="loading-title">Vi bygger din veckomeny</h2>
+            <h2 id="loading-title">Vi sätter ihop din veckomeny</h2>
             <p id="loading-message">Vi söker vidare tills en komplett, prisberäknad plan är klar. Det kan ta några sekunder.</p>
           </div>
         </div>
@@ -328,7 +328,7 @@
         <details class="online-price-explanation">
           <summary>Vad betyder onlinepris?</summary>
           <p>
-            Ett onlinepris gäller den angivna beställnings- eller priskontexten. Det är inte ett
+            Ett onlinepris gäller den angivna nätbutiken. Det är inte ett
             bekräftat hyllpris eller en garanti att varan finns i varje fysisk butik.
           </p>
         </details>
@@ -357,7 +357,7 @@
               <p class="section-number">VÄLJ PLAN</p>
               <h2 id="plan-options-title">Pris eller mer variation?</h2>
             </div>
-            <p>Alla alternativ är redan beräknade mot samma prisdata. Byte här gör inget nytt API-anrop.</p>
+            <p>Alternativen är redan beräknade med samma priser. Du kan byta direkt.</p>
           </div>
           <div
             id="plan-options-list"
@@ -367,7 +367,7 @@
           ></div>
           <div id="active-plan-summary" class="active-plan-summary" aria-live="polite"></div>
           <p id="primary-plan-note" class="primary-plan-note" hidden>
-            Inköpsscenarier och jämförelsen mot en priskontext hör till den ursprungligen valda planen och
+            Inköpsalternativen och jämförelsen med en enda butik hör till den ursprungligen valda planen och
             döljs för detta lokalt valda alternativ.
           </p>
         </section>
@@ -389,7 +389,7 @@
               <p class="section-number">02</p>
               <h2 id="ingredients-title">Sammanställda ingredienser</h2>
             </div>
-            <p>Mängderna är summerade och normaliserade från alla recept.</p>
+            <p>Här har vi räknat ihop mängderna från alla recept.</p>
           </div>
           <div id="ingredients-list" class="ingredient-grid"></div>
         </section>
@@ -531,7 +531,7 @@
               <div>
                 <h3 id="diversity-quality-title">Receptvariation</h3>
                 <p>
-                  Likheten räknas deterministiskt på ingredienser, receptfamilj,
+                  Vi jämför ingredienser, receptfamilj,
                   tillagningssätt, rättform, kolhydrat, protein och såsbas.
                 </p>
               </div>
@@ -568,7 +568,7 @@
               <p class="section-number">09</p>
               <h2 id="store-tradeoff-title">Pris mot extra inköpsställen</h2>
             </div>
-            <p>Jämförelsen räknar samma meny i en enda giltig priskontext och jämför med korgen över flera inköpsställen. Det innebär inte verifierat fysiskt hyllsortiment.</p>
+            <p>Här jämförs kostnaden för samma meny från ett enda inköpsställe med inköp från flera. Varorna är inte garanterade att finnas i butikens hyllor.</p>
           </div>
           <div id="store-tradeoff-cards" class="tradeoff-grid"></div>
         </section>
@@ -614,7 +614,7 @@
         <h2 id="onboarding-title">Billigare middagar, från pris till inköpslista</h2>
         <ol class="onboarding-steps">
           <li><span>1</span><strong>Vi jämför matpriser.</strong></li>
-          <li><span>2</span><strong>Vi bygger recept utifrån vad som är billigt.</strong></li>
+          <li><span>2</span><strong>Vi väljer recept och jämför inköpskostnaden.</strong></li>
           <li><span>3</span><strong>Du får en färdig inköpslista.</strong></li>
         </ol>
         <p class="coverage-note">Kommunväljaren visar var aktuella priser finns.</p>
@@ -671,8 +671,8 @@
         </div>
         <p id="report-product-summary" class="report-product-summary"></p>
         <p id="report-store-requirement" class="store-requirement" hidden>
-          Den här prisraden är ett onlinekontext och kan inte automatiskt kallas en fysisk butik.
-          Välj den exakta fysiska butiken där du gjorde observationen.
+          Priset gäller en nätbutik.
+          Välj den fysiska butik där du såg varan eller priset.
         </p>
         <div class="field">
           <label for="report-physical-store">Fysisk butik</label>
@@ -722,7 +722,7 @@
           <button type="button" class="secondary-button" data-close-dialog>Avbryt</button>
           <button id="report-submit" type="submit" class="primary-button">Skicka rapport</button>
         </div>
-        <p class="privacy-note">Rapporten sparas som separat community-evidens och ändrar aldrig prisdatakällan direkt.</p>
+        <p class="privacy-note">Din rapport sparas för granskning. Den ändrar inte priserna automatiskt.</p>
       </form>
     </dialog>
 
@@ -743,7 +743,7 @@
           <button id="scanner-cancel" class="secondary-button" type="button" hidden>Avbryt skanning</button>
         </div>
         <div class="manual-gtin-row">
-          <div class="field"><label for="manual-gtin">Eller skriv GTIN</label><input id="manual-gtin" inputmode="numeric" autocomplete="off" placeholder="731…" /></div>
+          <div class="field"><label for="manual-gtin">Eller skriv streckkodens siffror</label><input id="manual-gtin" inputmode="numeric" autocomplete="off" placeholder="731…" /></div>
           <button id="manual-gtin-submit" class="secondary-button" type="button">Slå upp</button>
         </div>
         <div id="scanner-result" class="scanner-result" hidden></div>

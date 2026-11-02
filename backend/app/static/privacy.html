@@ -4,53 +4,53 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="theme-color" content="#173e35" />
-    <title>Integritet · Billigaste veckomenyn</title>
+    <title>Integritet · Smako</title>
     <link rel="stylesheet" href="/static/styles.css" />
   </head>
   <body class="policy-page">
-    <header class="site-header"><div class="header-inner"><a class="brand" href="/"><span class="brand-mark" aria-hidden="true">B</span><span>Billigaste veckomenyn</span></a></div></header>
+    <header class="site-header"><div class="header-inner"><a class="brand" href="/"><span class="brand-mark" aria-hidden="true">S</span><span>Smako</span></a></div></header>
     <main class="policy-content">
-      <p class="eyebrow">Publik beta i Lund</p>
+      <p class="eyebrow">Smako · Beta</p>
       <h1>Integritet</h1>
-      <p>Det här beskriver vad den nuvarande betaversionen faktiskt lagrar. Texten behöver granskas juridiskt före en större lansering.</p>
+      <p>Här beskriver vi vilka uppgifter Smako sparar i betan, hur de används och vad du kan radera.</p>
 
       <h2>Det vi lagrar</h2>
       <ul>
-        <li>En slumpmässig anonym sessionsidentifierare för idempotens, missbruksskydd och aggregerad betastatistik.</li>
+        <li>Ett slumpmässigt sessions-ID för att känna igen samma besök, undvika dubbla åtgärder, motverka missbruk och sammanställa statistik.</li>
         <li>Genererade planer och deras prisunderlag när en plan sparas på servern.</li>
-        <li>Communityrapporter om pris, sortiment, kampanj eller produktidentitet.</li>
+        <li>Dina rapporter om priser, sortiment, erbjudanden och varor.</li>
         <li>Allmän feedback, samt e-post endast när du frivilligt anger den för att få svar.</li>
-        <li>Minimala produktmätvärden, svarstid, felkod, appversion och PriceUniverse-ID.</li>
+        <li>Uppgifter för statistik och felsökning, bland annat svarstid, felkod, appversion och vilket prisunderlag som användes.</li>
       </ul>
 
       <h2>Det som ligger på din enhet</h2>
       <p>Postnummer, portionsval, antal middagar, kost, mål, max antal inköpsställen, medlemskap, anonymt sessions-ID och senaste plan-ID sparas lokalt i webbläsaren. Knappen för att rensa inställningar tar bort samtliga dessa lokala värden.</p>
-      <p>En sparad planlänk lägger plan-ID efter <code>#</code> i adressen. Fragmentet skickas inte med den vanliga sidförfrågan till servern. Äldre länkar med <code>?plan=</code> läses för bakåtkompatibilitet och flyttas omedelbart till fragmentformatet.</p>
+      <p>En sparad planlänk innehåller planens ID efter <code>#</code> i adressen. Den delen skickas inte till servern när själva sidan hämtas, men appen använder ID:t för att hämta planen. Äldre länkar görs om till samma format när de öppnas.</p>
 
       <h2>Smakokonto och medlemskap</h2>
-      <p>Om du skapar konto lagrar vi din e-postadress, en saltad lösenordshash och en hash av din återställningskod. Lösenord och återställningskod lagras inte i klartext. Kontot ger tillgång till större menyer och ett privat skafferi mellan enheter. E-postadressen är en inloggningsuppgift; den är inte verifierad och ingen e-post skickas.</p>
-      <p>Inloggningen använder en HttpOnly-cookie som gäller i högst 30 dagar. Utloggning återkallar den aktuella sessionen; lösenordsåterställning återkallar alla kontots sessioner. Gästskafferiet flyttas bara när du väljer att spara det på kontot. Ett befintligt kontoskafferi skrivs inte över.</p>
+      <p>Om du skapar konto lagrar vi din e-postadress, skyddade kontrollvärden för ditt lösenord och din återställningskod. Lösenord och återställningskod lagras inte i klartext. Kontot ger tillgång till större menyer och ett privat skafferi mellan enheter. E-postadressen är en inloggningsuppgift; den är inte verifierad och ingen e-post skickas.</p>
+      <p>Inloggningen sparas i en skyddad cookie i högst 30 dagar. När du loggar ut avslutas den inloggningen. När du återställer lösenordet loggas alla kontots enheter ut. Gästskafferiet flyttas bara när du väljer att spara det på kontot. Ett befintligt kontoskafferi skrivs inte över.</p>
       <p>Raderingsfunktionen nedan tar bort personliga planer och skafferi för ditt inloggade konto, eller din gästsession om du inte är inloggad. Själva inloggningskontot behålls. Kontakta Smako om du även vill ta bort kontot.</p>
       <h2>Lagringstid</h2>
-      <p>Den separata, pseudonyma sessionscookien kan finnas kvar i högst 180 dagar. Sparade planer, strukturerad communityevidens och feedback behålls under den begränsade betaperioden för reproducerbarhet, moderering och felsökning. Någon automatisk slutfrist för dessa poster är ännu inte fastställd; detta är en uttrycklig policyfråga som ska beslutas före en bredare lansering. Rå kvittobild och rå kvittotext har som standard lagringstid 0 timmar efter bearbetning.</p>
+      <p>Cookien som identifierar ditt besök kan finnas kvar i högst 180 dagar. Sparade planer, användarrapporter och feedback behålls under betaperioden för granskning och felsökning. Någon tidsgräns för automatisk radering av dessa uppgifter är ännu inte fastställd. Kvittobilder och ursprunglig kvittotext raderas som standard direkt efter bearbetningen.</p>
 
       <h2>Det vi inte samlar in automatiskt</h2>
       <ul>
-        <li>Inga retailer-lösenord, personliga butikskonton eller aktiverade kuponger.</li>
-        <li>Ingen exakt plats, kontaktlista eller aggressiv enhetsfingerprinting.</li>
+        <li>Inga lösenord till butiker, personliga butikskonton eller aktiverade kuponger.</li>
+        <li>Ingen exakt plats, kontaktlista eller identifiering genom kartläggning av din enhets egenskaper.</li>
         <li>Inga annonseringspixlar eller tredjepartsprofilering.</li>
-        <li>Inga cookies, tokens, känsliga headers eller råa kvitton i felrapporter.</li>
-        <li>Inga IP-adresser eller frågesträngar lagras i ingressens accessloggar; rå accessloggning är avstängd. Applikationens strukturerade driftlogg använder endast uttryckligen tillåtna fält.</li>
+        <li>Inga inloggningsuppgifter, cookies eller ursprungliga kvittobilder och kvittotexter i felrapporter.</li>
+        <li>Inga IP-adresser eller frågesträngar sparas i webbserverns besöksloggar. Appens driftlogg sparar bara särskilt utvalda uppgifter för felsökning.</li>
       </ul>
 
       <h2>Kvitton i beta</h2>
-      <p>Strukturerade kvittouppgifter kan användas som evidens. Standardinställningen behåller inte rå kvittotext eller bild efter bearbetning. Foto-OCR är ännu inte en färdig konsumentfunktion.</p>
+      <p>Uppgifter om varor och priser från kvitton kan användas för att kontrollera rapporter. Kvittobilden och den ursprungliga texten raderas som standard efter bearbetningen. Att läsa in kvitton från foton är ännu inte tillgängligt i det vanliga användarflödet.</p>
 
-      <h2>Communitydata</h2>
-      <p>Rapporter kan användas för att förbättra pris- och sortimentsbedömningar. De ändrar inte auktoritativa prisdata automatiskt och en rapportörs identitet visas inte för andra användare.</p>
+      <h2>Användarrapporter</h2>
+      <p>Rapporter kan användas för att förbättra uppgifterna om priser och sortiment. Rapporter ändrar inte priserna automatiskt. Andra användare ser inte vem som skickade rapporten.</p>
 
       <h2>Radering och kontakt</h2>
-      <p>Du kan själv radera betauppgifter som hör till den här webbläsarens nuvarande anonyma session. Sparade planer, feedback (inklusive frivillig e-post), produktmätningar och frontendfel tas bort. Community- och kvittoevidens behålls som fakta för spårbarhet, men kopplingen till den gamla anonyma sessionen ersätts av en unik, icke återkopplingsbar radmarkör. Priskällor och PriceUniverse ändras aldrig av raderingen.</p>
+      <p>Du kan radera betauppgifter som hör till ditt nuvarande besök i den här webbläsaren. Sparade planer, feedback med eventuell e-postadress, statistik och felrapporter tas bort. Uppgifter om priser och varor från användarrapporter och kvitton behålls, men kopplingen till ditt besök tas bort.</p>
       <p>Efter en lyckad radering tas även appens lokala webbläsardata bort och den anonyma sessionscookien löper ut. Åtgärden kan inte ångras i den aktiva tjänsten.</p>
 
       <form id="privacy-erasure-form" class="privacy-erasure-card">
@@ -65,9 +65,9 @@
       </form>
 
       <h2>Säkerhetskopior</h2>
-      <p>Raderade poster kan finnas kvar i roterande säkerhetskopior i högst 14 dagar. Produktionsrutinen kräver en krypterad kopia utanför servern. Raderingen skapar en separat, icke identifierande undertryckningspost med opaka post-ID:n, men automatisk återspelning vid restore är ännu inte implementerad. Före tjänsten återöppnas efter en återställning måste operatören därför bevara och tillämpa dessa undertryckningsposter, eller rensa berörda säkerhetskopior. Detta är ett obligatoriskt manuellt restore-steg.</p>
-      <p><strong>Policy-TODO före en bredare lansering:</strong> juridiskt granska texten och publicera namn och direkt kontaktväg till ansvarig operatör. Ingen sådan identitet eller adress hittas på i denna beta.</p>
-      <p><a class="secondary-button policy-back" href="/">Tillbaka till veckomenyn</a></p>
+      <p>Raderade uppgifter kan finnas kvar i säkerhetskopior i högst 14 dagar. Om en säkerhetskopia återställs behöver tidigare raderingar tillämpas manuellt innan tjänsten öppnas igen. Vi sparar därför separata markeringar av vilka poster som ska tas bort. Markeringarna innehåller inte uppgifterna som raderades.</p>
+      <section id="policy-contact"><h2>Kontakt</h2><p>Ansvarig: Smako (tills vidare). Smako är ännu inte ett företag.</p><p>Kontakt: [kontaktuppgifter kommer].</p></section>
+      <p><a class="secondary-button policy-back" href="/">Tillbaka till Smako</a></p>
     </main>
     <script src="/static/privacy.js" defer></script>
   </body>

@@ -13,17 +13,17 @@
   <link rel="stylesheet" href="/static/plan-progress.css?v=progress-20261031b" />
   <link rel="stylesheet" href="/static/plan-view.css?v=planview-20261031b" />
   <script src="/scanner-assets/physical-barcode-scanner.js" defer></script>
-  <script src="/static/complete-recipes.js?v=planview-20261031" defer></script>
+  <script src="/static/complete-recipes.js?v=20261102-language" defer></script>
   <script src="/static/shopping-location.js?v=location-20261011" defer></script>
   <script src="/static/choice-controls.js?v=option3-1" defer></script>
-  <script src="/static/plan-progress.js?v=progress-20261031b" defer></script>
-  <script src="/static/personal.js?v=planview-20261031" defer></script>
+  <script src="/static/plan-progress.js?v=20261102-language" defer></script>
+  <script src="/static/personal.js?v=20261102-language" defer></script>
   <script src="/static/product-search.js?v=comparability-20261010" defer></script>
   <script src="/static/configurator.js?v=planview-20261031" defer></script>
 </head>
 <body class="personal-app">
   <a class="skip-link" href="#personal-main">Hoppa till innehållet</a>
-  <header class="personal-header"><a class="brand" href="/personal">Smako</a><span>En enklare väg till godare vardag</span></header>
+  <header class="personal-header"><a class="brand" href="/personal">Smako</a><span>Planera måltider och inköp</span></header>
   <nav class="personal-nav" aria-label="Huvudmeny">
     <button type="button" data-open="plan" aria-current="page">Min plan</button>
     <button type="button" data-open="shopping">Inköpslista</button>
@@ -39,8 +39,8 @@
       <p class="membership-note">Som gäst: 3 recept per meny och 2 portioner per recept. <button type="button" class="secondary-button" data-open="account">Lås upp mer med ett konto</button></p>
       <div id="plan-content"></div>
     </section>
-    <section data-view="shopping" id="personal-shopping" hidden><h1>En gemensam inköpslista</h1><p>Även utan recept. Alla varor delar samma butikstak och medlemskap.</p>
-      <div id="shopping-content"><p>Ingen beräknad korg ännu.</p></div>
+    <section data-view="shopping" id="personal-shopping" hidden><h1>En gemensam inköpslista</h1><p>Lägg till varor även utan recept. Dina val av butiker och medlemskap gäller hela listan.</p>
+      <div id="shopping-content"><p>Beräkna inköpslistan för att se priserna.</p></div>
       <h2>Mina varor</h2><p>Lägg till varor med eller utan recept. Priserna visas när hela inköpslistan har beräknats.</p>
       <button type="button" class="secondary-button" id="add-shopping-item">Lägg till vara</button>
       <div id="shopping-search-box">
@@ -60,7 +60,7 @@
       <p>Om en plan redan är öppen läggs varorna till dess recept. Välj ”utan recept” för en fristående lista. Butikstak, postnummer och medlemskap väljs under Mina val.</p>
     </section>
     <section data-view="pantry" id="personal-pantry" hidden><h1>Mitt skafferi</h1><p id="account-status">Ditt skafferi sparas i gästsessionen. Skapa konto för att nå det på fler enheter.</p>
-      <button type="button" class="secondary-button" data-open="account">Spara skafferiet på mitt konto</button><p>Faktiskt lager visas separat från reservationer och framtida överskott. Generering bokför aldrig inköp.</p>
+      <button type="button" class="secondary-button" data-open="account">Spara skafferiet på mitt konto</button><p>Här ser du vad du har hemma och vad som behövs till din plan. Nya inköp läggs till när du bekräftar att du har handlat.</p>
       <button class="primary-button" type="button" id="add-pantry">Lägg till manuellt</button>
       <button class="secondary-button" type="button" data-open="product-search">Sök eller skanna</button>
       <div id="pantry-list"></div><div id="reservation-list"></div>
@@ -109,24 +109,24 @@
         <p>Fler måltider, smakval, butiker och egna gränser. Standardvalen gäller tills du ändrar dem.</p>
         <fieldset><legend>Fler måltider</legend><div id="extra-meal-toggles" class="personal-checks"></div><p>Valda måltider visas under Middag, med egna inställningar.</p><button type="button" id="go-to-meals" class="secondary-button">Gå till måltider ↑</button></fieldset>
         <div id="memberships" hidden></div>
-        <fieldset id="taste-choices"><legend>Smak, uteslutningar och allergier</legend><label>Beskriv dina val<textarea id="profile-text" maxlength="2000" placeholder="Gillar kyckling, ogillar koriander, måste undvika jordnötter"></textarea></label><button type="button" id="interpret-profile" class="secondary-button">Tolka och granska</button><p>Granska de svenska fälten före tillämpning. Ogillar är ett mjukt önskemål. Uteslutningar och allergier är hårda krav.</p><div id="profile-fields" class="personal-grid"></div>
+        <fieldset id="taste-choices"><legend>Smak, uteslutningar och allergier</legend><label>Beskriv dina val<textarea id="profile-text" maxlength="2000" placeholder="Gillar kyckling, ogillar koriander, måste undvika jordnötter"></textarea></label><button type="button" id="interpret-profile" class="secondary-button">Tolka och granska</button><p>Kontrollera att vi har tolkat dina val rätt. Vi försöker undvika det du ogillar. Ingredienser som du utesluter och allergier måste alltid respekteras.</p><div id="profile-fields" class="personal-grid"></div>
           <label id="unresolved-label" hidden>Inte tolkat – flytta till rätt fält och töm sedan rutan<textarea id="unresolved-text"></textarea></label>
-          <p class="data-note">Uteslut ingredienser är ett hårt matval: fisk innebär inga fiskingredienser, även i sås och buljong. Det gäller inte bara huvudråvaran. Tillräckligt källstött ingrediensunderlag krävs; okänt godtas inte. Allergier anges separat och kräver även kontrollerat allergen- och spårunderlag. Ett godkänt matval är ingen allergisäkerhetskontroll. Tidigare sparade val behåller sin typ.</p>
-          <button type="button" id="save-profile" class="secondary-button">Spara min profil i gästsessionen</button><p>Profilen sparas för återanvändning bara med knappen ovan. Planens bekräftade krav följer dess privata revisioner.</p>
+          <p class="data-note">Vi utesluter ingrediensen även ur såser och buljonger. Produkter vars innehåll inte kan kontrolleras väljs bort. Ange allergier separat, så att även allergenmärkning och deklarerade spår kontrolleras. Att utesluta en ingrediens ersätter inte allergivalet.</p>
+          <button type="button" id="save-profile" class="secondary-button">Spara min profil i gästsessionen</button><p>Spara profilen om du vill använda samma val nästa gång. Dina val sparas också med planen.</p>
         </fieldset>
         <div id="complete-recipe-controls"></div>
-        <fieldset id="organic-choices"><legend>Ekologiskt</legend><div id="organic-percent-control"></div><p>Minst X % av matinköpets varukostnad ska vara verifierat ekologisk. Gäller alla köpta livsmedel efter rabatt, inklusive mat-extravaror. Skafferi, avgifter och icke-livsmedel ingår inte. Okänd status räknas inte som eko.</p><label class="check-label"><input type="checkbox" id="organic-animals"/> Kräv ekologiskt för alla animaliska produkter, även ägg och mejeri</label><p class="data-note">Källstödd ekologisk märkning finns för en del produkter. Okänd status räknas inte positivt. Animaliskt innehåll och sammansatta produkter kan fortfarande sakna tillräckligt underlag.</p></fieldset>
+        <fieldset id="organic-choices"><legend>Ekologiskt</legend><div id="organic-percent-control"></div><p>Välj hur stor del av matkostnaden som minst ska gå till ekologiska varor. Vi räknar priset efter rabatt, inklusive dina egna matvaror. Varor hemma, avgifter och annat än mat ingår inte. Bara varor med bekräftad ekologisk märkning räknas som ekologiska.</p><label class="check-label"><input type="checkbox" id="organic-animals"/> Kräv ekologiskt för alla animaliska produkter, även ägg och mejeri</label><p class="data-note">Vi kan sakna uppgifter om ekologisk märkning eller animaliska ingredienser för vissa produkter. Då kan vi inte bekräfta att de uppfyller ditt val.</p></fieldset>
         <fieldset id="pantry-choices"><legend>Skafferi</legend><label class="check-label"><input type="checkbox" id="planning-use-pantry" checked/> Använd mitt bekräftade skafferi i planen</label><p>Avmarkera för att beräkna inköp utan att använda skafferiet. Valet sparas med planen.</p></fieldset>
-        <fieldset id="surplus-choices"><legend>Överskott</legend><label>Inköpsstrategi<select id="surplus-mode"><option value="minimize">Minimera överskott</option><option value="allow_larger">Tillåt större köp och föreslå användning av resten</option></select></label><p>Hela förpackningar kan ge oundvikligt överskott. Strategiska extraköp redovisar extra mängd och merkostnad. Rester är beräknade; hållbarhet är okänd.</p></fieldset>
+        <fieldset id="surplus-choices"><legend>Överskott</legend><label>Inköpsstrategi<select id="surplus-mode"><option value="minimize">Minimera överskott</option><option value="allow_larger">Tillåt större köp och föreslå användning av resten</option></select></label><p>Det kan bli mat över när du köper hela förpackningar. Om du tillåter större köp visar vi mängden och den extra kostnaden. Hur länge resterna håller är inte beräknat.</p></fieldset>
         </details>
         <button id="generate-plan" type="submit" class="primary-button">Skapa plan och inköpslista</button>
         </fieldset>
       </form>
-      <aside class="choice-summary" aria-labelledby="choice-summary-title"><p class="eyebrow">Din plan i korthet</p><h2 id="choice-summary-title">En god vecka börjar här.</h2><dl id="choice-summary-lines"></dl><p>Dina måltider och egna varor planeras tillsammans i en gemensam inköpskorg.</p><button type="button" class="secondary-button" id="choice-add-items" data-open="shopping">Fortsätt lägga till varor</button><button type="button" class="primary-button" id="choice-submit" disabled>Skapa plan och inköpslista</button><p class="small">Dina val och tidigare plan behålls om beräkningen inte kan slutföras.</p></aside>
+      <aside class="choice-summary" aria-labelledby="choice-summary-title"><p class="eyebrow">Din plan i korthet</p><h2 id="choice-summary-title">Din plan</h2><dl id="choice-summary-lines"></dl><p>Receptens ingredienser och dina egna varor samlas i en inköpslista.</p><button type="button" class="secondary-button" id="choice-add-items" data-open="shopping">Fortsätt lägga till varor</button><button type="button" class="primary-button" id="choice-submit" disabled>Skapa plan och inköpslista</button><p class="small">Dina val och tidigare plan behålls om beräkningen inte kan slutföras.</p></aside>
       </div>
     </section>
   </main>
   <footer class="personal-footer"><a href="/klassisk">Tidigare middagsplanering och feedback</a><a href="/static/privacy.html">Integritet och radera mina data</a><span id="personal-version"></span></footer>
   <dialog id="personal-dialog"><div id="dialog-body"></div><button type="button" id="dialog-close" class="secondary-button">Stäng</button></dialog>
-  <dialog id="location-stores-dialog" aria-labelledby="location-stores-title"><h2 id="location-stores-title">Välj specifika butiker</h2><p>Bocka i de butiker och priskanaler du vill jämföra.</p><div id="location-store-list" class="store-picker-list"></div><p id="location-modal-status" role="status"></p><button id="location-stores-done" type="button" class="primary-button">Klart</button></dialog>
+  <dialog id="location-stores-dialog" aria-labelledby="location-stores-title"><h2 id="location-stores-title">Välj specifika butiker</h2><p>Bocka i de butiker och nätbutiker du vill jämföra.</p><div id="location-store-list" class="store-picker-list"></div><p id="location-modal-status" role="status"></p><button id="location-stores-done" type="button" class="primary-button">Klart</button></dialog>
 </body></html>
