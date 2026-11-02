@@ -36,9 +36,9 @@ test('HTTP failures, HTML, malformed JSON and status schema are not network retr
   for(const [make,expected] of [
     [()=>response({detail:'expired'},401),401],[()=>response({detail:'forbidden'},403),403],
     [()=>response({detail:'missing'},404),404],[()=>response({detail:'invalid'},422),422],
-    [()=>new Response('<html/>',{headers:{'Content-Type':'text/html'}}),'svarstyp'],
-    [()=>new Response('{',{headers:{'Content-Type':'application/json'}}),'JSON'],
-    [()=>response({status:'finished'},202),'planeringssvar'],[()=>response({}),'planeringsresultat']]){
+    [()=>new Response('<html/>',{headers:{'Content-Type':'text/html'}}),'oväntat sätt'],
+    [()=>new Response('{',{headers:{'Content-Type':'application/json'}}),'oväntat sätt'],
+    [()=>response({status:'finished'},202),'oväntat sätt'],[()=>response({}),'oväntat sätt']]){
     let calls=0;const {api}=setup(async()=>{calls++;return make();});
     const run=api.jobRequest({scope:'public',url:'/api/plans',payload:{}});
     if(typeof expected==='number')assert.equal((await run).status,expected);
