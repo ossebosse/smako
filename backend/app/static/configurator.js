@@ -31,7 +31,7 @@
     {title:"Smak",lead:"Vad gillar du – och vad måste undvikas?",art:"taste",nodes:()=>[$('taste-choices')]},
     {title:"Recept",lead:"Vilka recept passar dig?",art:"recipes",nodes:()=>[$('complete-recipe-controls')]},
     {title:"Mer",lead:"Ekologiskt, skafferi och överskott",art:"more",nodes:()=>[$('organic-choices'),$('pantry-choices'),$('surplus-choices')]},
-    {title:"Varor",lead:"Egna varor i samma korg",art:"items",nodes:()=>[itemsBox]},
+    {title:"Varor",lead:"Egna varor i samma inköpslista",art:"items",nodes:()=>[itemsBox]},
     {title:"Sammanfattning",lead:"Din plan i korthet",art:"done",nodes:()=>[document.querySelector('.choice-summary')]},
   ];
   const summaryIndex=steps.length-1;

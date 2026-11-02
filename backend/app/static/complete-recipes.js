@@ -469,7 +469,7 @@
 
   function productDetails(detail) {
     if(!detail)return null;const out=el("details",null,"recipe-product-declaration");out.append(el("summary","Innehåll och allergener"));
-    out.append(el("p",detail.ingredients?.length?`Ingrediensunderlag: ${detail.ingredients.join(", ")}.`:"Innehållsförteckning saknas."));
+    out.append(el("p",detail.ingredients?.length?`Ingredienser: ${detail.ingredients.join(", ")}.`:"Innehållsförteckning saknas."));
     if(!detail.ingredients_complete)out.append(el("p","Innehållsförteckningen är inte komplett.","field-hint"));
     out.append(el("p",detail.allergens_present?.length?`Angivna allergener: ${detail.allergens_present.join(", ")}.`:"Inga allergener angivna. Varan kan ändå innehålla allergener."));
     out.append(el("p",detail.allergens_trace?.length?`Angivna spår: ${detail.allergens_trace.join(", ")}.`:"Inga spår angivna."));
@@ -556,15 +556,15 @@
   async function readResponse(response,flow) {
     const type=response.headers.get("Content-Type")||"";
     if(!/application\/(?:[a-z0-9.-]+\+)?json(?:;|$)/i.test(type))throw schemaError("Servern svarade på ett oväntat sätt.");
-    let data;try{data=await response.clone().json();}catch(error){check(flow);if(error instanceof SyntaxError)throw schemaError("Servern skickade ogiltig JSON vid statuskontrollen.");if(error instanceof TypeError)error.transport=true;throw error;}
+    let data;try{data=await response.clone().json();}catch(error){check(flow);if(error instanceof SyntaxError)throw schemaError("Servern svarade på ett oväntat sätt.");if(error instanceof TypeError)error.transport=true;throw error;}
     check(flow);
-    if(!data||typeof data!=="object"||Array.isArray(data))throw schemaError("Servern skickade ett ogiltigt statusformat.");
+    if(!data||typeof data!=="object"||Array.isArray(data))throw schemaError("Servern svarade på ett oväntat sätt.");
     if(response.status===202){
-      if(data.status!=="pending"||!validJobUrl(data.status_url)||(flow.url&&flow.url!==data.status_url))throw schemaError("Servern skickade ett ogiltigt planeringssvar.");
+      if(data.status!=="pending"||!validJobUrl(data.status_url)||(flow.url&&flow.url!==data.status_url))throw schemaError("Servern svarade på ett oväntat sätt.");
     }else if(response.ok){
       const saved=data.saved||data;
       if(!saved.plan_id||!Number.isInteger(saved.revision)||!saved.request||!saved.plan||!Array.isArray(saved.plan.recipes)||!Array.isArray(saved.plan.optimized_basket?.stores)
-          ||(saved.request.personal&&(!Array.isArray(saved.plan.personal?.slots)||!saved.plan.personal?.checks)))throw schemaError("Servern skickade ett ogiltigt planeringsresultat.");
+          ||(saved.request.personal&&(!Array.isArray(saved.plan.personal?.slots)||!saved.plan.personal?.checks)))throw schemaError("Servern svarade på ett oväntat sätt.");
     }
     return data;
   }
