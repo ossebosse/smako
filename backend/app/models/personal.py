@@ -98,7 +98,7 @@ class MealSettings(PrivateModel):
         if any(v < 0 for v in self.distribution.values()):
             raise ValueError("Antalet rätter kan inte vara negativt.")
         if sum(self.distribution.values()) > self.count:
-            raise ValueError("Fördelningen överstiger antalet måltidstillfällen.")
+            raise ValueError("Du har fördelat fler rätter än du har måltider.")
         if self.diet != "mixed" and any(
             self.distribution.get(k, 0) for k in ("meat", "fish", "chicken")
         ):
@@ -110,7 +110,7 @@ class MealSettings(PrivateModel):
             and "vegetarian" in self.distribution
             and self.distribution["vegetarian"] != self.count
         ):
-            raise ValueError("Alla tillfällen måste vara vegetariska med vald kost.")
+            raise ValueError("Med det kostvalet måste alla måltider vara vegetariska.")
         return self
 
 
@@ -213,9 +213,9 @@ class EggSeparation(PrivateModel):
         import math
 
         if any(not math.isfinite(q) or q <= 0 for q in self.inputs.values()):
-            raise ValueError("Ange positiva uppmätta insatsmängder utan skal.")
+            raise ValueError("Ange vikten på äggen utan skal.")
         if self.yolk_g + self.white_g <= 0 or self.yolk_g + self.white_g > sum(self.inputs.values()) + 1e-7:
-            raise ValueError("Uppmätt gula och vita ska vara positiva tillsammans och rymmas i ätbar insats.")
+            raise ValueError("Gula och vita får tillsammans inte väga mer än äggen.")
         return self
 
 
@@ -231,7 +231,7 @@ class MintLeafTrimming(PrivateModel):
         if any(not math.isfinite(q) or q <= 0 for q in self.inputs.values()):
             raise ValueError("Ange positiva uppmätta mängder ätbar råmynta före bladplockning.")
         if self.leaf_g > sum(self.inputs.values()) + 1e-7:
-            raise ValueError("De uppmätta myntabladen ska rymmas i den uppmätta råinsatsen.")
+            raise ValueError("Bladen kan inte väga mer än myntan före plockning.")
         return self
 
 
@@ -295,12 +295,12 @@ class PersonalPlanning(PrivateModel):
             raise ValueError("Extravarornas rad-ID måste vara unika.")
         if self.slots is not None:
             if len({s.id for s in self.slots}) != len(self.slots):
-                raise ValueError("Måltidstillfällenas ID måste vara unika.")
+                raise ValueError("Två måltider har samma ID.")
             for meal in self.meals:
                 if sum(s.meal_type == meal.meal_type for s in self.slots) != meal.count:
-                    raise ValueError("Tillfällen måste stämma med valda antal, inklusive tomma.")
+                    raise ValueError("Måltiderna stämmer inte med antalet du har valt.")
             if any(s.meal_type not in {m.meal_type for m in self.meals} for s in self.slots):
-                raise ValueError("Tillfället saknar måltidsinställning.")
+                raise ValueError("En måltid saknar inställningar.")
         return self
 
 

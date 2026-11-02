@@ -212,7 +212,7 @@ def check_product(product, profile, facts=None, *, organic_animals=False):
                 )
                 if _contains(term, names):
                     raise PolicyConflict(
-                        f"{product.name}: produktdeklarationen anger {term}, som strider mot ditt hårda val."
+                        f"{product.name}: produktdeklarationen anger {term}, som du har valt bort."
                     )
         unknown = [a for a in profile.allergies if a not in ALLERGENS]
         if unknown:
@@ -242,10 +242,10 @@ def check_product(product, profile, facts=None, *, organic_animals=False):
         for term in profile.allergies:
             allergen = ALLERGENS[term]
             if allergen in facts.allergens_present or allergen in facts.allergens_trace:
-                raise PolicyConflict(f"{product.name}: deklarerad förekomst/spår av {allergen}.")
+                raise PolicyConflict(f"{product.name}: innehåller eller kan innehålla spår av {allergen}.")
             if allergen not in facts.allergens_checked:
                 raise PolicyConflict(
-                    f"{product.name}: {allergen} är inte verifierat i källan.",
+                    f"{product.name}: {allergen} framgår inte av innehållsförteckningen.",
                     stage="policy_taste",
                     code="DATA_BLOCKED",
                 )
@@ -256,13 +256,13 @@ def check_product(product, profile, facts=None, *, organic_animals=False):
             return
         if facts is None or facts.animal is None:
             raise PolicyConflict(
-                f"{product.name}: animaliskt innehåll/ekostatus kan inte verifieras.",
+                f"{product.name}: vi vet inte om varan är ekologisk eller innehåller animalier.",
                 stage="organic",
                 code="DATA_BLOCKED",
             )
         if facts.animal and facts.organic is not True:
             raise PolicyConflict(
-                f"{product.name} saknar verifierad ekologisk status för animalier.",
+                f"{product.name} är inte märkt som ekologisk.",
                 stage="organic",
                 code="DATA_BLOCKED" if facts.organic is None else "CONFLICT",
             )

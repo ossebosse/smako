@@ -121,7 +121,7 @@ def test_short_yield_is_recorded_truthfully_and_blocks_consumption(tmp_path):
     result = private.inventory_action(OWNER, saved, "prepare", stock["revision"], operation_id="prepare-short", preparation=batch(20, 60))
     assert result["ledger"][-1]["preparation"]["loss_g"] == 10
     assert sum(i["quantity"] for i in result["items"]) == 290
-    with pytest.raises(PersonalConflict, match="täcker inte"):
+    with pytest.raises(PersonalConflict, match="räcker inte"):
         private.inventory_action(OWNER, saved, "consume", result["revision"])
     assert private.read(OWNER) == result
 

@@ -108,7 +108,7 @@ def _plan_actor_hash(http_request: Request, settings: Settings) -> str:
     if owner_actor_hash is None:
         raise HTTPException(
             status_code=503,
-            detail="Planens anonyma ägarsession kunde inte upprättas.",
+            detail="Vi kunde inte koppla planen till din webbläsare. Försök igen.",
             headers={"X-Error-Code": "saved_plan_owner_session_unavailable"},
         )
     return owner_actor_hash
@@ -120,12 +120,12 @@ def _plan_write_forbidden(
     if isinstance(error, PlanReadOnlyError):
         return HTTPException(
             status_code=403,
-            detail="Den här äldre sparade planen är skrivskyddad och kan inte ändras.",
+            detail="Den här planen är gammal och kan inte ändras. Skapa en ny plan.",
             headers={"X-Error-Code": "saved_plan_read_only"},
         )
     return HTTPException(
         status_code=403,
-        detail=("Planen kan bara ändras från den anonyma webbläsarsession som skapade den."),
+        detail=("Planen kan bara ändras i webbläsaren där den skapades."),
         headers={"X-Error-Code": "saved_plan_owner_required"},
     )
 
@@ -137,14 +137,13 @@ def _plan_read_forbidden(
         return HTTPException(
             status_code=403,
             detail=(
-                "Den här äldre sparade planen saknar en säker ägarsession och "
-                "kan därför inte öppnas."
+                "Den här planen är gammal och kan inte öppnas. Skapa en ny plan."
             ),
             headers={"X-Error-Code": "saved_plan_owner_unavailable"},
         )
     return HTTPException(
         status_code=403,
-        detail=("Planen kan bara öppnas från den anonyma webbläsarsession som skapade den."),
+        detail=("Planen kan bara öppnas i webbläsaren där den skapades."),
         headers={"X-Error-Code": "saved_plan_owner_required"},
     )
 
@@ -314,7 +313,7 @@ async def _run_personal_work(
     except PlannerAdmissionOverloaded as exc:
         raise HTTPException(
             503,
-            "Det är många som beräknar korgar. Försök igen om några sekunder.",
+            "Många räknar på sina planer just nu. Försök igen om några sekunder.",
             headers={"Retry-After": "10"},
         ) from exc
 
@@ -385,7 +384,7 @@ def _production_consumer_request(
     if exceeds_budget:
         raise HTTPException(
             status_code=422,
-            detail="Begäran ligger utanför betans tillåtna planeringsgränser.",
+            detail="Det du har valt är mer än betan klarar. Välj färre måltider eller portioner.",
             headers={"X-Error-Code": "consumer_request_budget_exceeded"},
         )
     return _consumer_request(request)
@@ -620,7 +619,7 @@ async def _create_plan_body(request: PlanRequest, http_request: Request, setting
     except ValueError as exc:
         # Request validation has already completed. A model/configuration error
         # inside planning is a server failure, never evidence of a bad form field.
-        raise HTTPException(status_code=500, detail="Planeringstjänsten kunde inte slutföra menyn.",
+        raise HTTPException(status_code=500, detail="Något gick fel när menyn skulle räknas ut. Försök igen.",
                             headers={"X-Error-Code": "planner_internal_error"}) from exc
 
 
@@ -706,9 +705,9 @@ async def cancel_plan_job(job_id: str, http_request: Request):
     job = _plan_jobs(http_request, settings).get(job_id, _plan_actor_hash(http_request, settings))
     headers = {"Cache-Control": "private, no-store"}
     if job is None:
-        raise HTTPException(404, "Planeringsförsöket finns inte i din session.", headers=headers)
+        raise HTTPException(404, "Vi hittar inte beräkningen. Starta en ny.", headers=headers)
     if job.task.done() and not job.task.cancelled():
-        raise HTTPException(409, "Planeringsförsöket är redan avslutat.", headers=headers)
+        raise HTTPException(409, "Beräkningen är redan klar.", headers=headers)
     if not job.task.done():
         job.status = ("cancelling", None)
         job.task.cancel()
@@ -723,7 +722,7 @@ async def poll_plan_job(job_id: str, http_request: Request):
     settings = get_settings()
     job = _plan_jobs(http_request, settings).get(job_id, _plan_actor_hash(http_request, settings))
     if job is None or job.task.cancelled():
-        raise HTTPException(404, "Planeringsförsöket har gått ut. Skapa menyn igen.",
+        raise HTTPException(404, "Beräkningen tog för lång tid och har avbrutits. Skapa menyn igen.",
                             headers={"X-Error-Code": "planner_job_expired", "Cache-Control": "private, no-store"})
     # Only an authenticated owner lookup may attach job evidence to this read.
     http_request.state.diagnostic_plan_job = job
@@ -758,7 +757,7 @@ async def find_plan_job(request_id: str, http_request: Request):
     settings = get_settings()
     job = _plan_jobs(http_request, settings).by_request(request_id, _plan_actor_hash(http_request, settings))
     if job is None:
-        raise HTTPException(404, "Startförsöket kan inte återfinnas i din session. Det kan ha gått ut eller avslutats vid serveromstart. Ingen ny beräkning har startats.",
+        raise HTTPException(404, "Vi hittar inte beräkningen. Den kan ha avbrutits när servern startades om. Starta en ny beräkning.",
                             headers={"X-Error-Code": "planner_job_expired", "Cache-Control": "private, no-store"})
     return _pending_plan_job(job)
 
@@ -794,7 +793,7 @@ async def _with_current_deadline(settings, work):
             return result
     except PlanningDeadlineExceeded as exc:
         raise PolicyConflict(
-            "Sökningen är ofullständig efter tidsgränsen. Ingen slutkontrollerad lista kunde levereras. Dina krav har inte ändrats.",
+            "Vi hann inte hitta en fungerande lista. Försök igen eller välj färre krav.",
             code="SEARCH_INCOMPLETE", stage="search_deadline",
             diagnostics=getattr(exc, "diagnostics", None),
         ) from exc
@@ -828,7 +827,7 @@ async def _create_saved_plan_body(consumer_request: PlanRequest, http_request: R
     except PriceProviderError as exc:
         raise HTTPException(status_code=502, detail="price provider unavailable") from exc
     except ValueError as exc:
-        raise HTTPException(status_code=500, detail="Planeringstjänsten kunde inte slutföra menyn.",
+        raise HTTPException(status_code=500, detail="Något gick fel när menyn skulle räknas ut. Försök igen.",
                             headers={"X-Error-Code": "planner_internal_error"}) from exc
 
 

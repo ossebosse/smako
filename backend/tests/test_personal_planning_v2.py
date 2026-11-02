@@ -216,7 +216,7 @@ def test_unknown_allergy_and_exclusion_fail_closed():
         with pytest.raises(PolicyConflict) as exc:
             run(p, request(extras=[extra], profile=profile))
         assert exc.value.code == "DATA_BLOCKED"
-    with pytest.raises(PolicyConflict, match="hårda val"):
+    with pytest.raises(PolicyConflict, match="valt bort"):
         run(p, request(extras=[extra], profile=TasteProfile(exclusions=["bröd"])))
 
 

@@ -130,7 +130,7 @@ def test_valid_solution_reports_nutrition_budget_separately_from_checkout_validi
     assert result["search_budget"]["nutrition_status"] == "REACHED"
     assert result["search_budget"]["nutrition_budget_exhausted_recorded"] == 1
     assert result["search_budget"]["distinct_week_proposals_pruned"] == 6
-    assert "En giltig meny hittades" in result["budget_message"]
+    assert "Vi hittade en meny som uppfyller dina val" in result["budget_message"]
 
 
 def test_omitted_nutrition_details_do_not_claim_no_search_limit_was_reached():

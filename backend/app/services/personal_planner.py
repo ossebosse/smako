@@ -106,7 +106,7 @@ def personal_policy_request(request, dinner_count):
 
 
 
-_AUDIT_FAILURE = "Korgens mängder/prisvillkor kunde inte verifieras."
+_AUDIT_FAILURE = "Vi kunde inte kontrollera mängderna eller priserna i inköpslistan."
 
 class PersonalPlanner:
     def __init__(
@@ -221,7 +221,7 @@ class PersonalPlanner:
         if request.allowed_store_ids:
             missing = set(request.allowed_store_ids) - self.store_ids
             if missing:
-                raise PolicyConflict("Valda priskontexter saknas eller är för gamla: " + ", ".join(sorted(missing)),
+                raise PolicyConflict("Priserna för några valda butiker saknas eller är för gamla: " + ", ".join(sorted(missing)),
                                      code="DATA_BLOCKED", stage="store_cap")
             self.store_ids &= set(request.allowed_store_ids)
         self.index = prepared.product_search_index
@@ -283,7 +283,7 @@ class PersonalPlanner:
 
         if self.spec.pantry_revision != state["revision"]:
             raise PolicyConflict(
-                "Skafferiet har ändrats. Läs om och beräkna igen.", code="REVISION_CONFLICT"
+                "Skafferiet har ändrats. Ladda om sidan och räkna om.", code="REVISION_CONFLICT"
             )
 
     def source_facts(self, product):
@@ -820,7 +820,7 @@ class PersonalPlanner:
             failure = conflicts[0] if conflicts else PolicyConflict(
                 (f"{name} finns som viktvara. Välj Tillåt uppskattad vikt och kostnad under Inköpsberäkning för att pröva dessa varor. Slutbeloppet beror på faktisk vikt; övriga krav gäller fortfarande."
                  if weight_consent_missing else
-                 f"Ingen verifierad köpbar vara för {name}, {unit}. Kontrollera mängden, egenskaperna eller exakt produkt."),
+                 f"Vi hittar ingen vara att köpa för {name}, {unit}. Kontrollera mängden, egenskaperna eller exakt produkt."),
                 code="DATA_BLOCKED",
             )
             if failure.diagnostics is None:
@@ -856,7 +856,7 @@ class PersonalPlanner:
         if self.complete and (meal.meal_type == "dinner" or meal.recipe_choices is not None):
             from app.services.recipe_library import matches_meal
             if not matches_meal(recipe, meal, self.request.recipe_preferences):
-                raise PolicyConflict("Receptet uppfyller inte val av matkök, ingrediensantal, tid eller anpassning. Välj ett kvalificerat alternativ.", code="RECIPE_CHOICES_CONFLICT")
+                raise PolicyConflict("Receptet stämmer inte med dina val av matkök, antal ingredienser eller tid. Välj ett annat recept.", code="RECIPE_CHOICES_CONFLICT")
         if (self.complete and recipe.design is not None
                 and all(i.canonical_name == canonicalize_ingredient_name(i.name) for i in recipe.ingredients)):
             from app.services.recipe_library import share_issued_recipe_parts
@@ -1066,12 +1066,12 @@ class PersonalPlanner:
                 and (not self.spec.allow_nutrition_estimates or not item.get("nutrition_reference"))
             ):
                 raise PolicyConflict(
-                    f"{item['name']}: skafferivarans exakta produkt och näringsdeklaration saknas. För generiskt underlag krävs uppskattningsläge och bekräftat livsmedel/beredningsstatus i Skafferi.",
+                    f"{item['name']}: vi vet inte näringen för varan i skafferiet. Tillåt uppskattad näring och ange i Skafferi vilket livsmedel det är och om det är rått eller tillagat.",
                     code="DATA_BLOCKED",
                 )
             if row["organic_animals"] and not item["product_key"] and not origin:
                 raise PolicyConflict(
-                    f"{item['name']}: skafferivarans animaliska innehåll/ekostatus saknar produktunderlag.",
+                    f"{item['name']}: vi vet inte om varan i skafferiet är ekologisk eller innehåller animalier.",
                     code="DATA_BLOCKED",
                 )
             used = min(remaining, available[item["id"]])
@@ -1315,7 +1315,7 @@ class PersonalPlanner:
                 )
         if missing_nutrition:
             raise PolicyConflict(
-                f"{recipe.name if recipe else 'Korgen'}: näringsunderlag med rätt enhet saknas för {', '.join(sorted(missing_nutrition))} ({len(missing_nutrition)} av {len(nutrition_needs)} ingrediensbehov). Underlaget har saknade eller konfliktfyllda värden. Detta är ett datahinder, inte ett beräknat för lågt proteinvärde.",
+                f"{recipe.name if recipe else 'Korgen'}: näringsvärden saknas för {', '.join(sorted(missing_nutrition))} ({len(missing_nutrition)} av {len(nutrition_needs)} ingrediensbehov). Uppgifterna saknas eller motsäger varandra. Det betyder inte att receptet har för lite protein.",
                 code="DATA_BLOCKED",
                 stage="product_qualification",
             )
@@ -1724,10 +1724,8 @@ class PersonalPlanner:
         first = violations[0]
         raise PolicyConflict(
             f"{first['recipe']}: {first['nutrient']} ligger inom "
-            f"[{first['lower']:.12g}, {first['upper']:.12g}] per portion även med "
-            f"oberoende optimistiska val ur det kvalificerade kandidatunderlaget; "
-            f"{first['direction']} {first['limit']:g} kan inte nås inom detta underlag. "
-            "Detta är en beräknad gräns, inte ett uppnått köp eller en slutsats om andra produkter.",
+            f"[{first['lower']:.12g}, {first['upper']:.12g}] per portion med de varor vi har; "
+            f"{first['direction']} {first['limit']:g} går inte att nå med de varorna.",
             code="NUTRITION_TARGET_NOT_MET", stage="nutrition_bound",
         )
 
@@ -2067,7 +2065,7 @@ class PersonalPlanner:
         eligible = [g["key"] for g in groups if g["food"] and organic_candidates[g["key"]]]
         if not eligible:
             raise PolicyConflict(
-                f"Ingen av {sum(g['food'] for g in groups)} matinköpsrader har ett verifierat ekologiskt alternativ i sökningen. Vald kostnadsandel kan inte verifieras. Ändra kravet uttryckligen i Mina val, välj andra varor eller gå tillbaka.",
+                f"Ingen av {sum(g['food'] for g in groups)} matvaror finns som ekologiskt alternativ. Sänk andelen ekologiskt i Mina val, välj andra varor eller gå tillbaka.",
                 code="DATA_BLOCKED",
             )
         best = None
@@ -2151,7 +2149,7 @@ class PersonalPlanner:
                 continue
         if best is None:
             raise PolicyConflict(
-                f"Ingen kombination hittades med minst {self.spec.organic_percent:g} % verifierat eko inom butikstaket ({searched} kontrollerade kombinationer). Kravet är oförändrat."
+                f"Ingen kombination hittades med minst {self.spec.organic_percent:g} % ekologiskt i de butiker du valt ({searched} kombinationer testade)."
             )
         if cache_key is not None:
             remember_bounded(self.ecological_results, cache_key, best.model_copy(deep=True), 32)
@@ -2228,7 +2226,7 @@ class PersonalPlanner:
             if self.spec.organic_animals
             or any(m.count and m.organic_animals for m in self.spec.meals)
             else "NOT_REQUESTED",
-            "organic_definition": "Minst X % av matinköpets varukostnad ska vara verifierat ekologisk.",
+            "organic_definition": "Minst X % av matkostnaden ska vara ekologisk.",
             "distribution": [
                 {"meal_type": s.meal_type, "slot_id": s.id, "protein": self._protein_category(s.recipe)}
                 for s in slots
@@ -2316,7 +2314,7 @@ class PersonalPlanner:
             if has_unmeasured_process(slot.recipe):
                 if limits.active:
                     raise PolicyConflict(
-                        f"{slot.recipe.name}: förlust vid tillagning är inte uppmätt. Närings- och portionsviktsgränser kan inte verifieras.",
+                        f"{slot.recipe.name}: vi vet inte hur mycket som försvinner vid tillagningen, så näring och portionsvikt kan inte kontrolleras.",
                         code="DATA_BLOCKED", stage="preparation")
                 row.update(status="UNKNOWN", reason="Okänd förlust vid tillagning; näring och färdig portionsvikt är inte beräknade.")
             if limits.active:
@@ -2398,7 +2396,7 @@ class PersonalPlanner:
                             }
                             if len(values) != 1:
                                 raise PolicyConflict(
-                                    f"{need['name']}: skafferiets exakta näringsunderlag saknas eller är motstridigt.",
+                                    f"{need['name']}: näringsvärdena för varan i skafferiet saknas eller motsäger varandra.",
                                     code="DATA_BLOCKED",
                                 )
                             contributions.append((allocation["quantity"], evidence[0], "pantry"))
@@ -2497,7 +2495,7 @@ class PersonalPlanner:
                         or weight["total_g"] <= 0
                     ):
                         raise PolicyConflict(
-                            f"{slot.recipe.name}: underlag för tillagad portionsvikt och tillagningsutbyte saknas. Vattenupptag och avdunstning kan inte beräknas för detta recept; råvaruvikt används inte som färdig vikt.",
+                            f"{slot.recipe.name}: vi vet inte vad en färdig portion väger, så receptet kan inte kontrolleras mot en viktgräns.",
                             code="DATA_BLOCKED",
                             stage="preparation",
                         )
@@ -2709,9 +2707,9 @@ class PersonalPlanner:
                     raise PolicyConflict("Inget grundrecept uppfyller kombinationen av matkök, tid och ingrediensantal. Prova längre tillagningstid, ett bredare ingrediensintervall eller fler matkök. Dina krav har inte ändrats.", code="RECIPE_CHOICES_UNFULFILLED", stage="policy_taste")
                 first = local_conflicts[0] if local_conflicts else None
                 code = getattr(first, "code", "RECIPE_QUALIFICATION_BLOCKED")
-                reason = str(first) if first else "Recepten stoppades av måltidskontrollen. Se den första orsaken per recept i underlaget."
+                reason = str(first) if first else "Recepten stämde inte med dina val. Orsaken visas för varje recept."
                 if code == "DATA_BLOCKED":
-                    suggestion = "Ett eller flera val kan inte kontrolleras med det tillgängliga underlaget. Se orsakerna per recept. Saknade närings-, allergen- eller viktuppgifter behöver kompletteras; ett lägre proteinmål löser inte sådana dataluckor."
+                    suggestion = "Vi saknar uppgifter om näring, allergener eller vikt för att kontrollera några av dina val. Orsaken visas för varje recept. Att sänka proteinmålet hjälper inte."
                 elif code == "NUTRITION_TARGET_NOT_MET":
                     suggestion = "Pröva godkända receptvariationer eller ändra näringsmålet uttryckligen."
                 else:
@@ -2830,11 +2828,11 @@ class PersonalPlanner:
             code = getattr(exc, "code", "SEARCH_BLOCKED")
             if isinstance(exc, IncompleteBasketError):
                 if code == "SEARCH_INCOMPLETE":
-                    message = "Sökningen är ofullständig. Ingen slutkontrollerad meny kunde färdigställas. Dina krav har inte ändrats."
+                    message = "Vi hann inte hitta en fungerande meny. Försök igen eller välj färre krav."
                     self.diagnostics.search.append({"depth": 0, "attempt": 1, "library_phase": "incomplete",
                         "beam_pruned": 0, "status": code, "search_report": getattr(exc, "search_report", None)})
                 else:
-                    message = "Sökningen hittade ingen komplett meny med dina krav. Se blockeringsfördelningen. Inga krav har sänkts."
+                    message = "Vi hittade ingen meny som uppfyller alla dina krav. Se vad som stoppade recepten nedan."
             elif self.diagnostics.pools and not (self.complete and code == "RECIPE_CHOICES_CONFLICT"):
                 message = (
                     "Ingen komplett kombination hittades. Flera kandidater har prövats; exemplet nedan förklarar inte hela veckoplanen. "
@@ -2867,8 +2865,8 @@ class PersonalPlanner:
         complete = sorted({s.name for s in self.view.stores
                            if s.store_id not in self.store_ids
                            and s.coverage in {"full_catalog", "full_online_catalog"}})
-        text = ("De valda butikerna har bara kampanjpriser i Smakos underlag, så varor "
-                "som inte är på kampanj kan inte prissättas där.")
+        text = ("Vi har bara kampanjpriser från de valda butikerna, så varor "
+                "som inte är på kampanj har inget pris där.")
         if complete:
             text += " Lägg till minst en butik med fullt sortiment, till exempel " + ", ".join(complete[:3]) + "."
         return text
@@ -3492,9 +3490,8 @@ class PersonalPlanner:
                 outcome["expanded_search_budget"] = completed_search_outcome(
                     comparison["expanded_search_diagnostics"])["search_budget"]
                 if comparison["expanded_search_error"] or outcome["expanded_search_budget"]["nutrition_status"] == "REACHED":
-                    outcome["budget_message"] = (outcome.get("budget_message") or "En giltig meny hittades.") + (
-                        " Sökningen i det större tillåtna området gav ingen bättre giltig lösning; "
-                        "den tidigare lösningen behölls och kontrollerades mot dina val.")
+                    outcome["budget_message"] = (outcome.get("budget_message") or "Vi hittade en meny som uppfyller dina val.") + (
+                        " Vi letade i fler butiker men hittade inget bättre.")
             result.personal.checks["search_outcome"] = outcome
         return result
 
@@ -3583,7 +3580,7 @@ class PersonalPlanner:
             ]
         generating = self.spec.slots is None
         if generating and replace_slot is None and self._reuse_capacity_proof():
-            raise IncompleteBasketError("Den kvalificerade receptpoolen räcker inte för variationskravet.")
+            raise IncompleteBasketError("Det finns inte tillräckligt många recept för den variation du valt.")
         # Keep Varierad conditioned on a real Balanserad menu, as in the existing
         # planner. Its ceiling covers breakfasts, snacks and extras as well.
         if generating and self.request.diversity_mode == "varied" and balanced_reference is None:
@@ -3635,8 +3632,8 @@ class PersonalPlanner:
                 ]
                 if slot.id == replace_slot and not choices:
                     raise PolicyConflict(
-                        "Ingen annan grundrätt kvalificerades med dina val. Den tidigare planrevisionen är bevarad. "
-                        "Utöka matkök, tid eller ingrediensintervall uttryckligen, eller behåll rätten.",
+                        "Det finns ingen annan rätt som passar dina val. Din plan är oförändrad. "
+                        "Välj fler matkök, längre tid eller fler ingredienser, eller behåll rätten.",
                         code="RECIPE_ALTERNATIVE_NOT_FOUND", stage="variation")
                 options.append([slot.model_copy(update={"recipe": r}) for r in choices])
             else:
@@ -3779,7 +3776,7 @@ class PersonalPlanner:
                 self.diagnostics.singleton_passed += 1
             if final and ceiling is not None and result["basket"].total > ceiling:
                 raise PolicyConflict(
-                    f"Varierad överskrider vald kostnadsgräns {ceiling:.2f} kr för hela korgen. Balanserad kostar {balanced_reference.optimized_basket.total:.2f} kr."
+                    f"Varierad överskrider vald kostnadsgräns {ceiling:.2f} kr för hela inköpet. Balanserad kostar {balanced_reference.optimized_basket.total:.2f} kr."
                 )
             return result
 
@@ -3910,7 +3907,7 @@ class PersonalPlanner:
                     })
                     if incremental_library:
                         self._retain_capacity_proof(dict(self.diagnostics.search[-1]))
-                    raise IncompleteBasketError("Den kvalificerade receptpoolen räcker inte för variationskravet.")
+                    raise IncompleteBasketError("Det finns inte tillräckligt många recept för den variation du valt.")
                 if prepared_menu is not None:
                     try:
                         chosen, result = self._search_prepared_menu(prepared_menu, evaluate, accepts, score)
@@ -3949,7 +3946,7 @@ class PersonalPlanner:
             result = self.basket(chosen, final=True)
             result["checks"]["audited_search_retry"] = True
         if not accepts(chosen, final=True):
-            raise PolicyConflict("Slutlig fördelning eller variation kunde inte verifieras.")
+            raise PolicyConflict("Vi kunde inte kontrollera fördelningen eller variationen i menyn.")
         recipes = [s.recipe for s in chosen if s.recipe]
         result["checks"]["checkout_audit"] = result["audit"].model_dump(mode="json")
         if variation_resolution is not None:
@@ -4098,7 +4095,7 @@ class PersonalPlanner:
             recipe_source="versioned-complete-library+personal-planning" if self.complete else "deterministic-candidates+personal-planning",
             warnings=[
                 "Köpkostnaden avser hela förpackningar. Näring, allergener och eko är separata kontroller.",
-                "Kontosynk kräver verifierad inloggning. Gästläget är privat för denna webbläsarsession.",
+                "Logga in för att spara på kontot. Som gäst sparas allt bara i den här webbläsaren.",
                 "Kampanjgrupper används bara när källa och deltagande produktidentiteter är uttryckliga.",
             ],
             personal=PersonalResult(
@@ -4187,7 +4184,7 @@ class PersonalPlanner:
                         "additional_purchases": result["basket"],
                         "uses_future_surplus": result["allocations"],
                         "status": "PREVIEW_ONLY",
-                        "message": "Beräknade framtida rester. Inget lager eller korg ändras förrän receptet väljs. Hållbarhet är okänd.",
+                        "message": "Bygger på det som beräknas bli över. Ingenting ändras förrän du väljer receptet. Vi vet inte hur länge resterna håller.",
                     }
                 )
             except (ValueError, IncompleteBasketError):

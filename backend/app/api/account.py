@@ -215,7 +215,7 @@ async def callback(request: Request):
     except Exception as exc:
         # Neither tokens nor provider exception text may enter logs or UI.
         raise HTTPException(
-            401, "Inloggningen kunde inte verifieras. Försök igen från Smako."
+            401, "Inloggningen misslyckades. Försök igen från Smako."
         ) from exc
 
 
@@ -247,7 +247,7 @@ def migrate_guest(payload: MigrationRequest, request: Request):
     guest = pseudonymous_actor(getattr(request.state, "anonymous_session_id", None), settings)
     if not owner or not guest or not payload.confirm_move_to_verified_account:
         raise HTTPException(
-            403, "Verifierad inloggning, gästägarsession och uttrycklig flytt krävs."
+            403, "Logga in och välj att flytta gästdata till kontot först."
         )
     store = _store(request)
     with store._connect() as connection:
@@ -284,7 +284,7 @@ def migration_preview(request: Request, response: Response):
     from app.api.plan import _store
 
     if not verified_owner(request):
-        raise HTTPException(403, "Verifierad inloggning krävs.")
+        raise HTTPException(403, "Du behöver logga in.")
     guest = pseudonymous_actor(getattr(request.state, "anonymous_session_id", None), get_settings())
     with _store(request)._connect() as connection:
         source = read_state(connection, guest)

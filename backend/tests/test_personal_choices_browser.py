@@ -682,7 +682,7 @@ def test_snack_without_breakfast_and_zero_dinners(choices):
     choose_location(page)
     edit(page, "dinner-count", 0)
     page.locator("#choice-submit").click()
-    expect(page.locator("#personal-status")).to_contain_text("minst ett måltidstillfälle")
+    expect(page.locator("#personal-status")).to_contain_text("minst en måltid")
     assert not captured
     page.locator("#extra-choices>summary").click()
     page.locator("#enable-snack").check()

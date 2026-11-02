@@ -162,7 +162,7 @@ def product_generic(payload: ProductGenericQuery, request: Request, response: Re
         raise HTTPException(422, "Kontrollera varunamn och postnummer.") from exc
     prepared = GLOBAL_PREPARED_PRICE_UNIVERSES.get_for_request(search.postal_code, {})
     if prepared is None:
-        raise HTTPException(409, "Produktunderlag saknas för valt postnummer.")
+        raise HTTPException(409, "Vi har inga varor för det här postnumret än.")
     if payload.generic is not None:
         generic = payload.generic.model_dump()
         if not falls_under(prepared, payload.product_keys, generic):
@@ -199,7 +199,7 @@ def pantry_update(payload: PantryWrite, request: Request, response: Response):
         prepared = GLOBAL_PREPARED_PRICE_UNIVERSES.get_for_request("22350", {})
         if prepared is None:
             raise PolicyConflict(
-                "Exakta skafferivaror kräver lokalt produktunderlag.", code="DATA_BLOCKED"
+                "Vi har inga produktuppgifter för ditt område, så du kan inte välja en exakt produkt till skafferiet.", code="DATA_BLOCKED"
             )
         for item in payload.items:
             if not item.product_key:
@@ -207,7 +207,7 @@ def pantry_update(payload: PantryWrite, request: Request, response: Response):
             positions = prepared.product_search_index.groups.get(item.product_key, ())
             if not positions:
                 raise PolicyConflict(
-                    "Den exakta skafferiprodukten saknas i underlaget. Behåll tidigare lager eller lägg till en generisk vara uttryckligen.",
+                    "Vi hittar inte produkten längre. Behåll det du har registrerat eller lägg till varan utan märke.",
                     code="DATA_BLOCKED",
                 )
             product = prepared.universe.products[positions[0]]
@@ -343,7 +343,7 @@ async def _change_plan_body(plan_id, payload, request, response):
         try:
             target = plans.get_owned(plan_id, owner_actor_hash=owner, revision=payload.revision)
         except PlanNotFoundError as exc:
-            raise PersonalConflict("Planrevisionen finns inte. Läs om planen.") from exc
+            raise PersonalConflict("Den versionen av planen finns inte. Ladda om sidan.") from exc
         state = private.inventory_action(
             owner,
             target,
@@ -372,7 +372,7 @@ async def _change_plan_body(plan_id, payload, request, response):
     if payload.action in {"edit", "replace", "remove"}:
         slot = next((s for s in spec.slots if s.id == payload.slot_id), None)
         if slot is None:
-            raise HTTPException(422, "Måltidstillfället saknas.")
+            raise HTTPException(422, "Måltiden finns inte längre.")
         if payload.action == "edit":
             if payload.recipe is None:
                 raise HTTPException(422, "Ett strukturerat recept krävs.")
@@ -395,7 +395,7 @@ async def _change_plan_body(plan_id, payload, request, response):
                 replace_slot = slot.id
     elif payload.action == "restore_revision":
         if payload.restore_revision is None:
-            raise HTTPException(422, "Välj en historisk planrevision.")
+            raise HTTPException(422, "Välj en tidigare version av planen.")
         try:
             historic = plans.get_owned(
                 plan_id, owner_actor_hash=owner, revision=payload.restore_revision
@@ -422,14 +422,14 @@ async def _change_plan_body(plan_id, payload, request, response):
         from app.models.personal import MealSettings, MealSlot
 
         if payload.recipe is None:
-            raise HTTPException(422, "Välj ett recept till det nya tillfället.")
+            raise HTTPException(422, "Välj ett recept till den nya måltiden.")
         meal = next((m for m in spec.meals if m.meal_type == "dinner"), None)
         if meal is None:
             meal = MealSettings(count=0, servings=payload.recipe.servings)
             spec.meals.append(meal)
         if meal.count >= 7:
             raise HTTPException(
-                422, "Planen har redan sju middagstillfällen. Byt ett befintligt recept."
+                422, "Planen har redan sju middagar. Byt ut ett av recepten i stället."
             )
         meal.count += 1
         spec.slots.append(
@@ -441,7 +441,7 @@ async def _change_plan_body(plan_id, payload, request, response):
         spec = PersonalPlanning.model_validate(spec.model_dump())
     except ValidationError as exc:
         raise HTTPException(
-            422, "Ändringen strider mot antalet tillfällen eller vald fördelning."
+            422, "Ändringen stämmer inte med antalet måltider eller din fördelning."
         ) from exc
     updates = {"personal": spec, "membership_price_policy": "all_advertised"}
     if payload.purchase_planning_mode is not None:
@@ -532,7 +532,7 @@ def install_handlers(app):
         return JSONResponse(
             status_code=422,
             content={
-                "detail": "Kampanjgruppens underlag eller kombination kan inte verifieras. Senaste fungerande plan är bevarad. Välj andra varor eller gå tillbaka.",
+                "detail": "Vi kunde inte räkna ut kampanjpriset för den kombinationen. Din senaste plan finns kvar. Välj andra varor eller gå tillbaka.",
                 "code": "DATA_BLOCKED",
             },
             headers={"Cache-Control": "private, no-store"},
