@@ -20,6 +20,10 @@ ROOT = Path(__file__).parents[1] / "data/recipes"
 MANIFEST = ROOT / "library-manifest.json"
 MAX_BYTES = 16 * 1024 * 1024
 MAX_RECIPES = 4096
+# Small, independently reviewed recipe deliveries retain every issued pack.
+# Keep a finite bound aligned with the immutable pack cache, without forcing
+# history deletion when the previous 128-generation ceiling is reached.
+MAX_PACKS = 1024
 METHODS = frozenset({"pot", "pan", "oven", "bake", "salad", "cold_assembly", "refrigerated_assembly"})
 
 
@@ -66,7 +70,7 @@ def manifest_entries(root=ROOT):
                               {"schema_version", "current", "history", "revocations"})
             or manifest["schema_version"] != MANIFEST_SCHEMA):
         raise ValueError("Okänd eller felaktig biblioteksschema")
-    if len(manifest["current"]) + len(manifest["history"]) > 128:
+    if len(manifest["current"]) + len(manifest["history"]) > MAX_PACKS:
         raise ValueError("Biblioteket har för många paketgenerationer")
     revoked = manifest.get("revocations", {})
     if (not isinstance(revoked, dict) or len(revoked) > MAX_RECIPES
@@ -77,7 +81,7 @@ def manifest_entries(root=ROOT):
     return manifest
 
 
-@lru_cache(maxsize=1024)
+@lru_cache(maxsize=MAX_PACKS)
 def _entry_recipes(root, file, sha256):
     """Validated recipes of one content-addressed pack (immutable for its hash)."""
     path = checked_path(Path(root), file)
@@ -288,7 +292,7 @@ def import_pack(path, *, root=ROOT, accepted_ids=None):
     target = root / ("meal-pack-" + sha + ".json")
     manifest = manifest_entries(root)
     entry = {"file":target.name,"sha256":sha}
-    if entry not in manifest["current"] and len(manifest["current"]) + len(manifest["history"]) >= 128:
+    if entry not in manifest["current"] and len(manifest["current"]) + len(manifest["history"]) >= MAX_PACKS:
         raise ValueError("Biblioteket har för många paketgenerationer")
     if target.exists() and target.read_bytes() != content:
         raise ValueError("Befintligt paket har ändrats")

@@ -162,7 +162,7 @@ def test_reviewed_vocabulary_rejects_an_empty_bootstrap(tmp_path):
         library_vocabulary((), reviewed_path=path)
 
 
-def test_import_refuses_generation_129_before_writing_and_remains_idempotent(tmp_path):
+def test_import_refuses_above_generation_limit_before_writing_and_remains_idempotent(tmp_path):
     pack, _ = authored()
     path = tmp_path / "input.json"
     path.write_bytes(content.encoded(pack))
@@ -172,7 +172,7 @@ def test_import_refuses_generation_129_before_writing_and_remains_idempotent(tmp
     manifest_path.write_bytes(content.encoded({"schema_version": content.MANIFEST_SCHEMA, "current": [], "history": []}))
     first = content.import_pack(path, root=root)
     manifest = content.manifest_entries(root)
-    manifest["history"] = manifest["current"] * 127
+    manifest["history"] = manifest["current"] * (content.MAX_PACKS - 1)
     manifest_path.write_bytes(content.encoded(manifest))
     before = manifest_path.read_bytes()
     content.import_pack(path, root=root)  # Existing publication is still legal at the limit.
@@ -185,6 +185,35 @@ def test_import_refuses_generation_129_before_writing_and_remains_idempotent(tmp
     assert manifest_path.read_bytes() == before
     assert [p.name for p in root.glob("meal-pack-*.json")] == [first["published_file"]]
     assert content.load_entries(manifest["current"], root)
+    manifest["history"].extend(manifest["current"])
+    manifest_path.write_bytes(content.encoded(manifest))
+    with pytest.raises(ValueError, match="för många paketgenerationer"):
+        content.manifest_entries(root)
+
+
+def test_import_preserves_history_across_previous_generation_limit(tmp_path):
+    pack, _ = authored()
+    path = tmp_path / "input.json"
+    path.write_bytes(content.encoded(pack))
+    root = tmp_path / "library"
+    root.mkdir()
+    manifest_path = root / content.MANIFEST.name
+    manifest_path.write_bytes(content.encoded({"schema_version": content.MANIFEST_SCHEMA, "current": [], "history": []}))
+    first = content.import_pack(path, root=root)
+    manifest = content.manifest_entries(root)
+    manifest["history"] = manifest["current"] * 127
+    manifest_path.write_bytes(content.encoded(manifest))
+    old_pack = (root / first["published_file"]).read_bytes()
+    pack["pack_id"] = "generation-129"
+    pack["recipes"][0]["design"]["base_id"] = "smako-greek-other-generation"
+    path.write_bytes(content.encoded(pack))
+    content.import_pack(path, root=root)
+    after = content.manifest_entries(root)
+    assert len(after["current"]) + len(after["history"]) == 129
+    assert after["history"] == manifest["history"]
+    assert after["current"][:1] == manifest["current"]
+    assert (root / first["published_file"]).read_bytes() == old_pack
+    assert len(content.load_entries([*after["current"], *after["history"]], root)) == 2
 
 
 def test_reviewed_requirements_cannot_be_removed_in_authoring():

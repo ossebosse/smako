@@ -1,0 +1,900 @@
+{
+  "pack_id": "reviewed-expansion-round4-stage2",
+  "recipes": [
+    {
+      "design": {
+        "active_minutes": 56,
+        "base_id": "smako-italian-pastiera-napoletana-matvete",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "vetemjöl|dry",
+                "name": "Vetemjöl",
+                "note": "",
+                "quantity": 32.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "smör|as_sold",
+                "name": "Smör",
+                "note": "",
+                "quantity": 12.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "Strösocker",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ägg|raw_edible",
+                "name": "Ägg",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "g"
+              }
+            ],
+            "id": "crust",
+            "name": "Mördeg"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "matvete|dry",
+                "name": "Matvete",
+                "note": "",
+                "quantity": 14.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "mjölk|as_sold",
+                "name": "Mjölk",
+                "note": "",
+                "quantity": 45.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "ricotta|as_sold",
+                "name": "Ricotta",
+                "note": "",
+                "quantity": 45.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ägg|raw_edible",
+                "name": "Ägg",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "Strösocker",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "apelsinblomsvatten|as_sold",
+                "name": "Apelsinblomsvatten",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "fill",
+            "name": "Vete- och ricottafyllning"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "italian"
+        ],
+        "equipment": [
+          "Kastrull",
+          "Ugn",
+          "Pajform cirka 10 cm",
+          "Termometer"
+        ],
+        "estimated_minutes": 161,
+        "family": "Pastiera napoletana",
+        "fish": false,
+        "flavor_profile": [
+          "apelsinblom",
+          "vete"
+        ],
+        "ingredient_count": 8,
+        "meal_types": [
+          "snack"
+        ],
+        "method": "bake",
+        "primary_ingredient": "ricotta",
+        "provenance": {
+          "notes": "Innehållsgranskad 2026-11-02; inte provlagad. Egen receptanpassning med råvaruformer, inköpsmängder, portionsskalning och okända processförluster enligt granskningsrapporten. Ägg anges utan skal; grönsaker vägs ansade där formen är raw_edible.",
+          "reviewed_at": "2026-11-02"
+        },
+        "side": "mördeg och matvete",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 6,
+            "id": "s1",
+            "ingredient_keys": [
+              "smör|as_sold",
+              "strösocker|dry",
+              "vetemjöl|dry",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "3 ml",
+                3.0
+              ]
+            ],
+            "text": "Nyp ihop mjöl, smör och degens socker. Arbeta snabbt in degens uppvägda ägg till en sammanhängande mördeg. Tillsätt 3 ml vatten endast om degen är smulig. Platta till och täck. Äggmängder avser uppvispat ägg vägt utan skal; väg degens och fyllningens mängder separat."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 30,
+            "id": "s2",
+            "ingredient_keys": [
+              "smör|as_sold",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Låt degen vila kallt i kylskåp."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 23,
+            "id": "s3",
+            "ingredient_keys": [
+              "matvete|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "150 ml",
+                150.0
+              ]
+            ],
+            "text": "Skölj matvetet och koka det i 150 ml vatten tills kornen är mjuka, cirka 20 minuter eller enligt förpackningen. Häll av överskottsvatten ordentligt."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 8,
+            "id": "s4",
+            "ingredient_keys": [
+              "matvete|dry",
+              "mjölk|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Lägg det kokta vetet i en liten kastrull med mjölken. Sjud under tät omrörning cirka 8 minuter till en tjock, mjuk gröt utan lös mjölk."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 20,
+            "id": "s5",
+            "ingredient_keys": [
+              "matvete|dry",
+              "mjölk|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Bred ut veteblandningen tunt i en ren skål och låt svalna till högst 25 °C före äggblandningen. Planera tjugo minuter och förläng vid behov."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 7,
+            "id": "s6",
+            "ingredient_keys": [
+              "apelsinblomsvatten|as_sold",
+              "matvete|dry",
+              "mjölk|as_sold",
+              "ricotta|as_sold",
+              "strösocker|dry",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Kontrollera att veteblandningen är högst 25 °C. Mät apelsinblomsvattnet med graderat millilitermått. Rör ricotta, fyllningens ägg och socker samt apelsinblomsvatten slätt. Vänd ner den avsvalnade veteblandningen. Behåll vetekornen, mixa inte fyllningen."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 9,
+            "id": "s7",
+            "ingredient_keys": [
+              "matvete|dry",
+              "ricotta|as_sold",
+              "smör|as_sold",
+              "strösocker|dry",
+              "vetemjöl|dry",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sätt ugnen på 175 °C över-/undervärme. Använd en låg pajform cirka tio centimeter per vald portion, eller flera former med motsvarande sammanlagd bottenyta och samma låga fyllningsdjup. Klä med bakpapper. Kavla tre fjärdedelar av degen mellan papper och klä botten och kanten. Fördela fyllningen. Skär resterande deg i remsor och lägg glest korsvis ovanpå. Använd all deg, även kantbitar."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 30,
+            "id": "s8",
+            "ingredient_keys": [
+              "ricotta|as_sold",
+              "vetemjöl|dry",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Grädda cirka trettio minuter tills mördegen är gyllene och fyllningen stannat. Behåll samma låga fyllningsdjup vid större sats och använd fler formar eller omgångar."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 3,
+            "id": "s9",
+            "ingredient_keys": [
+              "ricotta|as_sold",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Kontrollera minst 72 °C i mitten av varje paj. Förläng gräddningen vid behov och kontrollera igen. Ta ut formarna."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 25,
+            "id": "s10",
+            "ingredient_keys": [
+              "matvete|dry",
+              "ricotta|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Låt svalna i formarna cirka tjugofem minuter före servering. Fördela hela satsen jämnt mellan valt antal portioner. Kyl snabbt i grunda behållare och förvara vid 4 °C om pajerna ska sparas."
+          }
+        ],
+        "total_minutes": 161,
+        "unmeasured_processes": [
+          {
+            "description": "Kokvatten från vetet hälls bort; förlust av stärkelse och slutlig serverad vikt är inte mätta.",
+            "ingredient_keys": [
+              "matvete|dry"
+            ],
+            "operation": "drain_after_cooking",
+            "step_id": "s3"
+          }
+        ],
+        "variant_id": "simple",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 105
+      },
+      "ingredients": [
+        {
+          "canonical_name": "vetemjöl",
+          "component": "crust",
+          "form": "dry",
+          "name": "vetemjöl",
+          "quantity": 32.0,
+          "quantity_max": 32.0,
+          "quantity_min": 32.0,
+          "quantity_step": 32.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "smör",
+          "component": "crust",
+          "form": "as_sold",
+          "name": "smör",
+          "product_requirements": [
+            "pack:intake_butter"
+          ],
+          "quantity": 12.0,
+          "quantity_max": 12.0,
+          "quantity_min": 12.0,
+          "quantity_step": 12.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "strösocker",
+          "component": "crust",
+          "form": "dry",
+          "name": "strösocker",
+          "product_requirements": [
+            "pack:sugar"
+          ],
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ägg",
+          "component": "crust",
+          "form": "raw_edible",
+          "name": "ägg",
+          "product_requirements": [
+            "pack:egg"
+          ],
+          "quantity": 30.0,
+          "quantity_max": 30.0,
+          "quantity_min": 30.0,
+          "quantity_step": 30.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "matvete",
+          "component": "fill",
+          "form": "dry",
+          "name": "matvete",
+          "product_requirements": [
+            "pack:intake_all_87a3434722f5"
+          ],
+          "quantity": 14.0,
+          "quantity_max": 14.0,
+          "quantity_min": 14.0,
+          "quantity_step": 14.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "mjölk",
+          "component": "fill",
+          "form": "as_sold",
+          "name": "mjölk",
+          "quantity": 45.0,
+          "quantity_max": 45.0,
+          "quantity_min": 45.0,
+          "quantity_step": 45.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "ricotta",
+          "component": "fill",
+          "form": "as_sold",
+          "name": "ricotta",
+          "product_requirements": [
+            "pack:intake_all_cbf3dd8282c8"
+          ],
+          "quantity": 45.0,
+          "quantity_max": 45.0,
+          "quantity_min": 45.0,
+          "quantity_step": 45.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "apelsinblomsvatten",
+          "component": "fill",
+          "form": "as_sold",
+          "name": "apelsinblomsvatten",
+          "product_requirements": [
+            "pack:intake_all_round4_4ee3d32dffca"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        }
+      ],
+      "instructions": [
+        "Nyp ihop mjöl, smör och degens socker. Arbeta snabbt in degens uppvägda ägg till en sammanhängande mördeg. Tillsätt 3 ml vatten endast om degen är smulig. Platta till och täck. Äggmängder avser uppvispat ägg vägt utan skal; väg degens och fyllningens mängder separat.",
+        "Låt degen vila kallt i kylskåp.",
+        "Skölj matvetet och koka det i 150 ml vatten tills kornen är mjuka, cirka 20 minuter eller enligt förpackningen. Häll av överskottsvatten ordentligt.",
+        "Lägg det kokta vetet i en liten kastrull med mjölken. Sjud under tät omrörning cirka 8 minuter till en tjock, mjuk gröt utan lös mjölk.",
+        "Bred ut veteblandningen tunt i en ren skål och låt svalna till högst 25 °C före äggblandningen. Planera tjugo minuter och förläng vid behov.",
+        "Kontrollera att veteblandningen är högst 25 °C. Mät apelsinblomsvattnet med graderat millilitermått. Rör ricotta, fyllningens ägg och socker samt apelsinblomsvatten slätt. Vänd ner den avsvalnade veteblandningen. Behåll vetekornen, mixa inte fyllningen.",
+        "Sätt ugnen på 175 °C över-/undervärme. Använd en låg pajform cirka tio centimeter per vald portion, eller flera former med motsvarande sammanlagd bottenyta och samma låga fyllningsdjup. Klä med bakpapper. Kavla tre fjärdedelar av degen mellan papper och klä botten och kanten. Fördela fyllningen. Skär resterande deg i remsor och lägg glest korsvis ovanpå. Använd all deg, även kantbitar.",
+        "Grädda cirka trettio minuter tills mördegen är gyllene och fyllningen stannat. Behåll samma låga fyllningsdjup vid större sats och använd fler formar eller omgångar.",
+        "Kontrollera minst 72 °C i mitten av varje paj. Förläng gräddningen vid behov och kontrollera igen. Ta ut formarna.",
+        "Låt svalna i formarna cirka tjugofem minuter före servering. Fördela hela satsen jämnt mellan valt antal portioner. Kyl snabbt i grunda behållare och förvara vid 4 °C om pajerna ska sparas."
+      ],
+      "name": "Pastiera-inspirerad ricotta- och vetepaj – enkel",
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 56,
+        "base_id": "smako-italian-pastiera-napoletana-matvete",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "vetemjöl|dry",
+                "name": "Vetemjöl",
+                "note": "",
+                "quantity": 32.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "smör|as_sold",
+                "name": "Smör",
+                "note": "",
+                "quantity": 12.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "Strösocker",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ägg|raw_edible",
+                "name": "Ägg",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "g"
+              }
+            ],
+            "id": "crust",
+            "name": "Mördeg"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "matvete|dry",
+                "name": "Matvete",
+                "note": "",
+                "quantity": 14.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "mjölk|as_sold",
+                "name": "Mjölk",
+                "note": "",
+                "quantity": 45.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "ricotta|as_sold",
+                "name": "Ricotta",
+                "note": "",
+                "quantity": 45.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ägg|raw_edible",
+                "name": "Ägg",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "Strösocker",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "apelsinblomsvatten|as_sold",
+                "name": "Apelsinblomsvatten",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "kanderade apelsinskal|as_sold",
+                "name": "kanderade apelsinskal",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vaniljpulver|dry",
+                "name": "Vaniljpulver",
+                "note": "",
+                "quantity": 0.15,
+                "unit": "g"
+              }
+            ],
+            "id": "fill",
+            "name": "Vete- och ricottafyllning"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "italian"
+        ],
+        "equipment": [
+          "Kastrull",
+          "Ugn",
+          "Pajform cirka 10 cm",
+          "Termometer"
+        ],
+        "estimated_minutes": 161,
+        "family": "Pastiera napoletana",
+        "fish": false,
+        "flavor_profile": [
+          "apelsinblom",
+          "vete"
+        ],
+        "ingredient_count": 10,
+        "meal_types": [
+          "snack"
+        ],
+        "method": "bake",
+        "primary_ingredient": "ricotta",
+        "provenance": {
+          "notes": "Innehållsgranskad 2026-11-02; inte provlagad. Egen receptanpassning med råvaruformer, inköpsmängder, portionsskalning och okända processförluster enligt granskningsrapporten. Ägg anges utan skal; grönsaker vägs ansade där formen är raw_edible.",
+          "reviewed_at": "2026-11-02"
+        },
+        "side": "mördeg och matvete",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 6,
+            "id": "s1",
+            "ingredient_keys": [
+              "smör|as_sold",
+              "strösocker|dry",
+              "vetemjöl|dry",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "3 ml",
+                3.0
+              ]
+            ],
+            "text": "Nyp ihop mjöl, smör och degens socker. Arbeta snabbt in degens uppvägda ägg till en sammanhängande mördeg. Tillsätt 3 ml vatten endast om degen är smulig. Platta till och täck. Äggmängder avser uppvispat ägg vägt utan skal; väg degens och fyllningens mängder separat."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 30,
+            "id": "s2",
+            "ingredient_keys": [
+              "smör|as_sold",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Låt degen vila kallt i kylskåp."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 23,
+            "id": "s3",
+            "ingredient_keys": [
+              "matvete|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "150 ml",
+                150.0
+              ]
+            ],
+            "text": "Skölj matvetet och koka det i 150 ml vatten tills kornen är mjuka, cirka 20 minuter eller enligt förpackningen. Häll av överskottsvatten ordentligt."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 8,
+            "id": "s4",
+            "ingredient_keys": [
+              "matvete|dry",
+              "mjölk|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Lägg det kokta vetet i en liten kastrull med mjölken. Sjud under tät omrörning cirka 8 minuter till en tjock, mjuk gröt utan lös mjölk."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 20,
+            "id": "s5",
+            "ingredient_keys": [
+              "matvete|dry",
+              "mjölk|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Bred ut veteblandningen tunt i en ren skål och låt svalna till högst 25 °C före äggblandningen. Planera tjugo minuter och förläng vid behov."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 7,
+            "id": "s6",
+            "ingredient_keys": [
+              "apelsinblomsvatten|as_sold",
+              "kanderade apelsinskal|as_sold",
+              "matvete|dry",
+              "mjölk|as_sold",
+              "ricotta|as_sold",
+              "strösocker|dry",
+              "vaniljpulver|dry",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Kontrollera att veteblandningen är högst 25 °C. Mät apelsinblomsvattnet med graderat millilitermått. Rör ricotta, fyllningens ägg och socker samt apelsinblomsvatten slätt. Vänd ner den avsvalnade veteblandningen, finhackade kanderade apelsinskal och vaniljpulver. Behåll vetekornen, mixa inte fyllningen."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 9,
+            "id": "s7",
+            "ingredient_keys": [
+              "matvete|dry",
+              "ricotta|as_sold",
+              "smör|as_sold",
+              "strösocker|dry",
+              "vetemjöl|dry",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sätt ugnen på 175 °C över-/undervärme. Använd en låg pajform cirka tio centimeter per vald portion, eller flera former med motsvarande sammanlagd bottenyta och samma låga fyllningsdjup. Klä med bakpapper. Kavla tre fjärdedelar av degen mellan papper och klä botten och kanten. Fördela fyllningen. Skär resterande deg i remsor och lägg glest korsvis ovanpå. Använd all deg, även kantbitar."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 30,
+            "id": "s8",
+            "ingredient_keys": [
+              "ricotta|as_sold",
+              "vetemjöl|dry",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Grädda cirka trettio minuter tills mördegen är gyllene och fyllningen stannat. Behåll samma låga fyllningsdjup vid större sats och använd fler formar eller omgångar."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 3,
+            "id": "s9",
+            "ingredient_keys": [
+              "ricotta|as_sold",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Kontrollera minst 72 °C i mitten av varje paj. Förläng gräddningen vid behov och kontrollera igen. Ta ut formarna."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 25,
+            "id": "s10",
+            "ingredient_keys": [
+              "matvete|dry",
+              "ricotta|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Låt svalna i formarna cirka tjugofem minuter före servering. Fördela hela satsen jämnt mellan valt antal portioner. Kyl snabbt i grunda behållare och förvara vid 4 °C om pajerna ska sparas."
+          }
+        ],
+        "total_minutes": 161,
+        "unmeasured_processes": [
+          {
+            "description": "Kokvatten från vetet hälls bort; förlust av stärkelse och slutlig serverad vikt är inte mätta.",
+            "ingredient_keys": [
+              "matvete|dry"
+            ],
+            "operation": "drain_after_cooking",
+            "step_id": "s3"
+          }
+        ],
+        "variant_id": "extended",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 105
+      },
+      "ingredients": [
+        {
+          "canonical_name": "vetemjöl",
+          "component": "crust",
+          "form": "dry",
+          "name": "vetemjöl",
+          "quantity": 32.0,
+          "quantity_max": 32.0,
+          "quantity_min": 32.0,
+          "quantity_step": 32.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "smör",
+          "component": "crust",
+          "form": "as_sold",
+          "name": "smör",
+          "product_requirements": [
+            "pack:intake_butter"
+          ],
+          "quantity": 12.0,
+          "quantity_max": 12.0,
+          "quantity_min": 12.0,
+          "quantity_step": 12.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "strösocker",
+          "component": "crust",
+          "form": "dry",
+          "name": "strösocker",
+          "product_requirements": [
+            "pack:sugar"
+          ],
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ägg",
+          "component": "crust",
+          "form": "raw_edible",
+          "name": "ägg",
+          "product_requirements": [
+            "pack:egg"
+          ],
+          "quantity": 30.0,
+          "quantity_max": 30.0,
+          "quantity_min": 30.0,
+          "quantity_step": 30.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "matvete",
+          "component": "fill",
+          "form": "dry",
+          "name": "matvete",
+          "product_requirements": [
+            "pack:intake_all_87a3434722f5"
+          ],
+          "quantity": 14.0,
+          "quantity_max": 14.0,
+          "quantity_min": 14.0,
+          "quantity_step": 14.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "mjölk",
+          "component": "fill",
+          "form": "as_sold",
+          "name": "mjölk",
+          "quantity": 45.0,
+          "quantity_max": 45.0,
+          "quantity_min": 45.0,
+          "quantity_step": 45.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "ricotta",
+          "component": "fill",
+          "form": "as_sold",
+          "name": "ricotta",
+          "product_requirements": [
+            "pack:intake_all_cbf3dd8282c8"
+          ],
+          "quantity": 45.0,
+          "quantity_max": 45.0,
+          "quantity_min": 45.0,
+          "quantity_step": 45.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "apelsinblomsvatten",
+          "component": "fill",
+          "form": "as_sold",
+          "name": "apelsinblomsvatten",
+          "product_requirements": [
+            "pack:intake_all_round4_4ee3d32dffca"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "kanderade apelsinskal",
+          "component": "fill",
+          "form": "as_sold",
+          "name": "kanderade apelsinskal",
+          "product_requirements": [
+            "pack:intake_all_round2_e9fa816eee5a"
+          ],
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 10.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vaniljpulver",
+          "component": "fill",
+          "form": "dry",
+          "name": "vaniljpulver",
+          "product_requirements": [
+            "pack:intake_all_e761b331fb42"
+          ],
+          "quantity": 0.15,
+          "quantity_max": 0.15,
+          "quantity_min": 0.15,
+          "quantity_step": 0.15,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Nyp ihop mjöl, smör och degens socker. Arbeta snabbt in degens uppvägda ägg till en sammanhängande mördeg. Tillsätt 3 ml vatten endast om degen är smulig. Platta till och täck. Äggmängder avser uppvispat ägg vägt utan skal; väg degens och fyllningens mängder separat.",
+        "Låt degen vila kallt i kylskåp.",
+        "Skölj matvetet och koka det i 150 ml vatten tills kornen är mjuka, cirka 20 minuter eller enligt förpackningen. Häll av överskottsvatten ordentligt.",
+        "Lägg det kokta vetet i en liten kastrull med mjölken. Sjud under tät omrörning cirka 8 minuter till en tjock, mjuk gröt utan lös mjölk.",
+        "Bred ut veteblandningen tunt i en ren skål och låt svalna till högst 25 °C före äggblandningen. Planera tjugo minuter och förläng vid behov.",
+        "Kontrollera att veteblandningen är högst 25 °C. Mät apelsinblomsvattnet med graderat millilitermått. Rör ricotta, fyllningens ägg och socker samt apelsinblomsvatten slätt. Vänd ner den avsvalnade veteblandningen, finhackade kanderade apelsinskal och vaniljpulver. Behåll vetekornen, mixa inte fyllningen.",
+        "Sätt ugnen på 175 °C över-/undervärme. Använd en låg pajform cirka tio centimeter per vald portion, eller flera former med motsvarande sammanlagd bottenyta och samma låga fyllningsdjup. Klä med bakpapper. Kavla tre fjärdedelar av degen mellan papper och klä botten och kanten. Fördela fyllningen. Skär resterande deg i remsor och lägg glest korsvis ovanpå. Använd all deg, även kantbitar.",
+        "Grädda cirka trettio minuter tills mördegen är gyllene och fyllningen stannat. Behåll samma låga fyllningsdjup vid större sats och använd fler formar eller omgångar.",
+        "Kontrollera minst 72 °C i mitten av varje paj. Förläng gräddningen vid behov och kontrollera igen. Ta ut formarna.",
+        "Låt svalna i formarna cirka tjugofem minuter före servering. Fördela hela satsen jämnt mellan valt antal portioner. Kyl snabbt i grunda behållare och förvara vid 4 °C om pajerna ska sparas."
+      ],
+      "name": "Pastiera-inspirerad ricotta- och vetepaj – med kanderat apelsinskal och vanilj",
+      "servings": 1
+    }
+  ],
+  "schema_version": "smako-meal-pack-v1"
+}

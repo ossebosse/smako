@@ -1,0 +1,1468 @@
+{
+  "pack_id": "reviewed-expansion-round4-stage3",
+  "recipes": [
+    {
+      "design": {
+        "active_minutes": 14,
+        "base_id": "smako-greek-bouyiourdi-feta-paprika",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "fetaost|as_sold",
+                "name": "Fetaost",
+                "note": "",
+                "quantity": 65.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "tomat|raw_edible",
+                "name": "Tomat",
+                "note": "",
+                "quantity": 120.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "paprika|raw_edible",
+                "name": "Paprika",
+                "note": "",
+                "quantity": 55.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "olivolja|as_sold",
+                "name": "Olivolja",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "chiliflakes|dry",
+                "name": "Chiliflakes",
+                "note": "",
+                "quantity": 0.15,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "oregano|dry",
+                "name": "Oregano",
+                "note": "",
+                "quantity": 0.3,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gruyère|as_sold",
+                "name": "gruyère",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "g"
+              }
+            ],
+            "id": "bake",
+            "name": "Varm fetameze"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "bröd|as_sold",
+                "name": "Bröd",
+                "note": "",
+                "quantity": 55.0,
+                "unit": "g"
+              }
+            ],
+            "id": "bread",
+            "name": "Bröd"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "greek"
+        ],
+        "equipment": [
+          "Ugn",
+          "Liten ugnsform"
+        ],
+        "estimated_minutes": 34,
+        "family": "Bouyiourdi",
+        "fish": false,
+        "flavor_profile": [
+          "chili",
+          "paprika"
+        ],
+        "ingredient_count": 8,
+        "meal_types": [
+          "snack"
+        ],
+        "method": "oven",
+        "primary_ingredient": "fetaost",
+        "provenance": {
+          "notes": "Innehållsgranskad 2026-11-02; inte provlagad. Egen receptanpassning med råvaruformer, inköpsmängder, portionsskalning och okända processförluster enligt granskningsrapporten. Ägg anges utan skal; grönsaker vägs ansade där formen är raw_edible.",
+          "reviewed_at": "2026-11-02"
+        },
+        "side": "bröd",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 10,
+            "id": "s1",
+            "ingredient_keys": [
+              "chiliflakes|dry",
+              "fetaost|as_sold",
+              "gruyère|as_sold",
+              "olivolja|as_sold",
+              "oregano|dry",
+              "paprika|raw_edible",
+              "tomat|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Väg gruyèren som inköpt bit före putsning. Skär bort eventuell oätlig kant och riv resten; inget bestämt utbyte antas. Sätt ugnen på 210 °C över-/undervärme. Skiva tomat och paprika tunt. Lägg hälften av grönsakerna i en liten ugnsform, fetaosten ovanpå och resten av grönsakerna runtom. Fördela olivolja och chiliflakes, oregano och den rivna gruyèren över formen. Väg tomat och paprika efter ansning. Anpassa formens yta till portionerna och behåll samma låga lager."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 20,
+            "id": "s2",
+            "ingredient_keys": [
+              "chiliflakes|dry",
+              "fetaost|as_sold",
+              "gruyère|as_sold",
+              "olivolja|as_sold",
+              "oregano|dry",
+              "paprika|raw_edible",
+              "tomat|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Baka cirka 20 minuter tills grönsakerna mjuknat och osten är genomvarm, mjuk och lätt gyllene. Feta behåller lite struktur; den behöver inte bli en slät sås."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 4,
+            "id": "s3",
+            "ingredient_keys": [
+              "bröd|as_sold",
+              "fetaost|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Kontrollera att grönsakerna är mjuka och förläng gräddningen vid behov. Skär allt uppvägt bröd inklusive ätlig skorpa i bitar. Fördela hela formen och brödet jämnt mellan valt antal mellanmålsportioner."
+          }
+        ],
+        "total_minutes": 34,
+        "unmeasured_processes": [
+          {
+            "description": "Inköpt ostvikt före eventuell oätlig kant; ingen andel eller serverad näring antas.",
+            "ingredient_keys": [
+              "gruyère|as_sold"
+            ],
+            "operation": "trim_before_cooking",
+            "step_id": "s1"
+          }
+        ],
+        "variant_id": "extended",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 20
+      },
+      "ingredients": [
+        {
+          "canonical_name": "fetaost",
+          "component": "bake",
+          "form": "as_sold",
+          "name": "fetaost",
+          "quantity": 65.0,
+          "quantity_max": 65.0,
+          "quantity_min": 65.0,
+          "quantity_step": 65.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "tomat",
+          "component": "bake",
+          "form": "raw_edible",
+          "name": "tomat",
+          "quantity": 120.0,
+          "quantity_max": 120.0,
+          "quantity_min": 120.0,
+          "quantity_step": 120.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "paprika",
+          "component": "bake",
+          "form": "raw_edible",
+          "name": "paprika",
+          "quantity": 55.0,
+          "quantity_max": 55.0,
+          "quantity_min": 55.0,
+          "quantity_step": 55.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "olivolja",
+          "component": "bake",
+          "form": "as_sold",
+          "name": "olivolja",
+          "product_requirements": [
+            "pack:intake_all_expansion_86ac9b2c5ae6"
+          ],
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "chiliflakes",
+          "component": "bake",
+          "form": "dry",
+          "name": "chiliflakes",
+          "quantity": 0.15,
+          "quantity_max": 0.15,
+          "quantity_min": 0.15,
+          "quantity_step": 0.15,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "oregano",
+          "component": "bake",
+          "form": "dry",
+          "name": "oregano",
+          "product_requirements": [
+            "dried_leaf"
+          ],
+          "quantity": 0.3,
+          "quantity_max": 0.3,
+          "quantity_min": 0.3,
+          "quantity_step": 0.3,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gruyère",
+          "component": "bake",
+          "form": "as_sold",
+          "name": "gruyère",
+          "product_requirements": [
+            "pack:intake_all_round2_329585565c35"
+          ],
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "bröd",
+          "component": "bread",
+          "form": "as_sold",
+          "name": "bröd",
+          "quantity": 55.0,
+          "quantity_max": 55.0,
+          "quantity_min": 55.0,
+          "quantity_step": 55.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Väg gruyèren som inköpt bit före putsning. Skär bort eventuell oätlig kant och riv resten; inget bestämt utbyte antas. Sätt ugnen på 210 °C över-/undervärme. Skiva tomat och paprika tunt. Lägg hälften av grönsakerna i en liten ugnsform, fetaosten ovanpå och resten av grönsakerna runtom. Fördela olivolja och chiliflakes, oregano och den rivna gruyèren över formen. Väg tomat och paprika efter ansning. Anpassa formens yta till portionerna och behåll samma låga lager.",
+        "Baka cirka 20 minuter tills grönsakerna mjuknat och osten är genomvarm, mjuk och lätt gyllene. Feta behåller lite struktur; den behöver inte bli en slät sås.",
+        "Kontrollera att grönsakerna är mjuka och förläng gräddningen vid behov. Skär allt uppvägt bröd inklusive ätlig skorpa i bitar. Fördela hela formen och brödet jämnt mellan valt antal mellanmålsportioner."
+      ],
+      "name": "Bouyiourdi – ugnsbakad feta med paprika – med gruyère och bröd",
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 42,
+        "base_id": "smako-italian-focaccia-formaggio-recco-stil",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "vetemjöl|dry",
+                "name": "Vetemjöl",
+                "note": "",
+                "quantity": 280.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "olivolja|as_sold",
+                "name": "Olivolja",
+                "note": "",
+                "quantity": 35.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "ricotta|as_sold",
+                "name": "Ricotta",
+                "note": "",
+                "quantity": 140.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "färskost|as_sold",
+                "name": "Naturell färskost",
+                "note": "",
+                "quantity": 130.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "mozzarella|preserved_drained",
+                "name": "Mozzarella, vägd avrunnen",
+                "note": "",
+                "quantity": 130.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 3.0,
+                "unit": "g"
+              }
+            ],
+            "id": "brod",
+            "name": "Två tunna degark med tre ostar"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "tomat|raw_edible",
+                "name": "Tomat",
+                "note": "",
+                "quantity": 450.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "balsamvinäger|as_sold",
+                "name": "Balsamvinäger",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "olivolja|as_sold",
+                "name": "Olivolja",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "sallad",
+            "name": "Sallad"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "italian"
+        ],
+        "equipment": [
+          "ugn med 250 °C",
+          "kavel",
+          "bakplåtspapper godkänt för vald temperatur",
+          "plåt"
+        ],
+        "estimated_minutes": 101,
+        "family": "ojäst tunn ostfylld deg",
+        "fish": false,
+        "flavor_profile": [
+          "tre ostar",
+          "olivolja"
+        ],
+        "ingredient_count": 7,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "bake",
+        "primary_ingredient": "ricotta, färskost och mozzarella",
+        "provenance": {
+          "notes": "Innehållsgranskad 2026-11-02; inte provlagad. Egen receptanpassning med råvaruformer, inköpsmängder, portionsskalning och okända processförluster enligt granskningsrapporten. Ägg anges utan skal; grönsaker vägs ansade där formen är raw_edible.",
+          "reviewed_at": "2026-11-02"
+        },
+        "side": "tomatsallad",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 9,
+            "id": "s1",
+            "ingredient_keys": [
+              "olivolja|as_sold",
+              "salt|as_sold",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "145 ml",
+                145.0
+              ]
+            ],
+            "text": "Blanda mjöl och salt med 145 ml vatten och två tredjedelar av brödets olja. Knåda 8 minuter till elastisk deg. Ingen jäst används."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 45,
+            "id": "s2",
+            "ingredient_keys": [
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Täck degen och låt vila i 45 minuter så att den kan sträckas riktigt tunt."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 23,
+            "id": "s3",
+            "ingredient_keys": [
+              "färskost|as_sold",
+              "mozzarella|preserved_drained",
+              "olivolja|as_sold",
+              "ricotta|as_sold",
+              "salt|as_sold",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Värm ugnen till 250 °C med plåten i. Låt mozzarellan rinna av och väg den angivna avrunna mängden. Riv eller finfördela den och blanda med hela ricottan och färskosten; ingen ostvätska från dessa två produkter hälls bort. Dela degen i två lika delar. Kavla mellan bakpapper och dra till mycket tunna ark, cirka en millimeter. Använd motsvarande plåtyta vid större sats, eventuellt flera plåtar. Fördela ostblandningen på det undre arket, täck med det andra och förslut kanterna. Gör små ångöppningar och pensla med återstående brödolja. Använd allt degmaterial. Välj bakpapper godkänt för 250 °C eller lätt oljad metallplåt med olja från receptets mängd."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 14,
+            "id": "s4",
+            "ingredient_keys": [
+              "olivolja|as_sold",
+              "salt|as_sold",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Grädda på het plåt cirka fjorton minuter tills degen fått bruna blåsor och osten bubblar. Håll samma tunna deg och fyllningsdjup i större satser; grädda i flera omgångar vid behov."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 3,
+            "id": "s5",
+            "ingredient_keys": [
+              "färskost|as_sold",
+              "mozzarella|preserved_drained",
+              "ricotta|as_sold",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Lyft försiktigt ett hörn och kontrollera att botten är gräddad; förläng vid behov. Ta ut plåten."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 7,
+            "id": "s6",
+            "ingredient_keys": [
+              "balsamvinäger|as_sold",
+              "olivolja|as_sold",
+              "tomat|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Väg tomaten efter ansning och skär den. Blanda salladens råvaror med dess olja och balsamvinäger. Skär brödet i portionsbitar och servera hela brödet och salladen jämnt fördelat mellan valt antal portioner."
+          }
+        ],
+        "total_minutes": 101,
+        "variant_id": "simple",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 59
+      },
+      "ingredients": [
+        {
+          "canonical_name": "vetemjöl",
+          "component": "brod",
+          "form": "dry",
+          "name": "vetemjöl",
+          "quantity": 280.0,
+          "quantity_max": 280.0,
+          "quantity_min": 280.0,
+          "quantity_step": 280.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "olivolja",
+          "component": "brod",
+          "form": "as_sold",
+          "name": "olivolja",
+          "product_requirements": [
+            "pack:intake_all_expansion_86ac9b2c5ae6"
+          ],
+          "quantity": 50.0,
+          "quantity_max": 50.0,
+          "quantity_min": 50.0,
+          "quantity_step": 50.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "ricotta",
+          "component": "brod",
+          "form": "as_sold",
+          "name": "ricotta",
+          "product_requirements": [
+            "pack:intake_all_cbf3dd8282c8"
+          ],
+          "quantity": 140.0,
+          "quantity_max": 140.0,
+          "quantity_min": 140.0,
+          "quantity_step": 140.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "färskost",
+          "component": "brod",
+          "form": "as_sold",
+          "name": "färskost",
+          "product_requirements": [
+            "pack:intake_all_536538040095"
+          ],
+          "quantity": 130.0,
+          "quantity_max": 130.0,
+          "quantity_min": 130.0,
+          "quantity_step": 130.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "mozzarella",
+          "component": "brod",
+          "form": "preserved_drained",
+          "name": "mozzarella",
+          "product_requirements": [
+            "pack:intake_all_05c97f94a699"
+          ],
+          "quantity": 130.0,
+          "quantity_max": 130.0,
+          "quantity_min": 130.0,
+          "quantity_step": 130.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "brod",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 3.0,
+          "quantity_max": 3.0,
+          "quantity_min": 3.0,
+          "quantity_step": 3.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "tomat",
+          "component": "sallad",
+          "form": "raw_edible",
+          "name": "tomat",
+          "quantity": 450.0,
+          "quantity_max": 450.0,
+          "quantity_min": 450.0,
+          "quantity_step": 450.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "balsamvinäger",
+          "component": "sallad",
+          "form": "as_sold",
+          "name": "balsamvinäger",
+          "product_requirements": [
+            "pack:intake_all_0a4ab19f1766"
+          ],
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        }
+      ],
+      "instructions": [
+        "Blanda mjöl och salt med 145 ml vatten och två tredjedelar av brödets olja. Knåda 8 minuter till elastisk deg. Ingen jäst används.",
+        "Täck degen och låt vila i 45 minuter så att den kan sträckas riktigt tunt.",
+        "Värm ugnen till 250 °C med plåten i. Låt mozzarellan rinna av och väg den angivna avrunna mängden. Riv eller finfördela den och blanda med hela ricottan och färskosten; ingen ostvätska från dessa två produkter hälls bort. Dela degen i två lika delar. Kavla mellan bakpapper och dra till mycket tunna ark, cirka en millimeter. Använd motsvarande plåtyta vid större sats, eventuellt flera plåtar. Fördela ostblandningen på det undre arket, täck med det andra och förslut kanterna. Gör små ångöppningar och pensla med återstående brödolja. Använd allt degmaterial. Välj bakpapper godkänt för 250 °C eller lätt oljad metallplåt med olja från receptets mängd.",
+        "Grädda på het plåt cirka fjorton minuter tills degen fått bruna blåsor och osten bubblar. Håll samma tunna deg och fyllningsdjup i större satser; grädda i flera omgångar vid behov.",
+        "Lyft försiktigt ett hörn och kontrollera att botten är gräddad; förläng vid behov. Ta ut plåten.",
+        "Väg tomaten efter ansning och skär den. Blanda salladens råvaror med dess olja och balsamvinäger. Skär brödet i portionsbitar och servera hela brödet och salladen jämnt fördelat mellan valt antal portioner."
+      ],
+      "name": "Focaccia col formaggio – Recco-inspirerad med ricotta, färskost och mozzarella – enkel",
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 42,
+        "base_id": "smako-italian-focaccia-formaggio-recco-stil",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "vetemjöl|dry",
+                "name": "Vetemjöl",
+                "note": "",
+                "quantity": 280.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "olivolja|as_sold",
+                "name": "Olivolja",
+                "note": "",
+                "quantity": 35.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "ricotta|as_sold",
+                "name": "Ricotta",
+                "note": "",
+                "quantity": 140.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "färskost|as_sold",
+                "name": "Naturell färskost",
+                "note": "",
+                "quantity": 130.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "mozzarella|preserved_drained",
+                "name": "Mozzarella, vägd avrunnen",
+                "note": "",
+                "quantity": 130.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 3.0,
+                "unit": "g"
+              }
+            ],
+            "id": "brod",
+            "name": "Två tunna degark med tre ostar"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "tomat|raw_edible",
+                "name": "Tomat",
+                "note": "",
+                "quantity": 450.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "balsamvinäger|as_sold",
+                "name": "Balsamvinäger",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "olivolja|as_sold",
+                "name": "Olivolja",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "rucola|raw_edible",
+                "name": "Rucola",
+                "note": "",
+                "quantity": 70.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gurka|raw_edible",
+                "name": "Gurka",
+                "note": "",
+                "quantity": 250.0,
+                "unit": "g"
+              }
+            ],
+            "id": "sallad",
+            "name": "Sallad"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "italian"
+        ],
+        "equipment": [
+          "ugn med 250 °C",
+          "kavel",
+          "bakplåtspapper godkänt för vald temperatur",
+          "plåt"
+        ],
+        "estimated_minutes": 101,
+        "family": "ojäst tunn ostfylld deg",
+        "fish": false,
+        "flavor_profile": [
+          "tre ostar",
+          "olivolja"
+        ],
+        "ingredient_count": 9,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "bake",
+        "primary_ingredient": "ricotta, färskost och mozzarella",
+        "provenance": {
+          "notes": "Innehållsgranskad 2026-11-02; inte provlagad. Egen receptanpassning med råvaruformer, inköpsmängder, portionsskalning och okända processförluster enligt granskningsrapporten. Ägg anges utan skal; grönsaker vägs ansade där formen är raw_edible.",
+          "reviewed_at": "2026-11-02"
+        },
+        "side": "tomatsallad",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 9,
+            "id": "s1",
+            "ingredient_keys": [
+              "olivolja|as_sold",
+              "salt|as_sold",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "145 ml",
+                145.0
+              ]
+            ],
+            "text": "Blanda mjöl och salt med 145 ml vatten och två tredjedelar av brödets olja. Knåda 8 minuter till elastisk deg. Ingen jäst används."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 45,
+            "id": "s2",
+            "ingredient_keys": [
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Täck degen och låt vila i 45 minuter så att den kan sträckas riktigt tunt."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 23,
+            "id": "s3",
+            "ingredient_keys": [
+              "färskost|as_sold",
+              "mozzarella|preserved_drained",
+              "olivolja|as_sold",
+              "ricotta|as_sold",
+              "salt|as_sold",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Värm ugnen till 250 °C med plåten i. Låt mozzarellan rinna av och väg den angivna avrunna mängden. Riv eller finfördela den och blanda med hela ricottan och färskosten; ingen ostvätska från dessa två produkter hälls bort. Dela degen i två lika delar. Kavla mellan bakpapper och dra till mycket tunna ark, cirka en millimeter. Använd motsvarande plåtyta vid större sats, eventuellt flera plåtar. Fördela ostblandningen på det undre arket, täck med det andra och förslut kanterna. Gör små ångöppningar och pensla med återstående brödolja. Använd allt degmaterial. Välj bakpapper godkänt för 250 °C eller lätt oljad metallplåt med olja från receptets mängd."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 14,
+            "id": "s4",
+            "ingredient_keys": [
+              "olivolja|as_sold",
+              "salt|as_sold",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Grädda på het plåt cirka fjorton minuter tills degen fått bruna blåsor och osten bubblar. Håll samma tunna deg och fyllningsdjup i större satser; grädda i flera omgångar vid behov."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 3,
+            "id": "s5",
+            "ingredient_keys": [
+              "färskost|as_sold",
+              "mozzarella|preserved_drained",
+              "ricotta|as_sold",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Lyft försiktigt ett hörn och kontrollera att botten är gräddad; förläng vid behov. Ta ut plåten."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 7,
+            "id": "s6",
+            "ingredient_keys": [
+              "balsamvinäger|as_sold",
+              "gurka|raw_edible",
+              "olivolja|as_sold",
+              "rucola|raw_edible",
+              "tomat|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Väg tomaten efter ansning och skär den. Blanda salladens råvaror med dess olja och balsamvinäger. Skär brödet i portionsbitar och servera hela brödet och salladen jämnt fördelat mellan valt antal portioner. Skölj rucolan enligt förpackningen, låt ytvatten rinna av och använd hela uppvägda blad inklusive ätliga stjälkar. Väg gurkan efter ansning och skär den."
+          }
+        ],
+        "total_minutes": 101,
+        "variant_id": "standard",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 59
+      },
+      "ingredients": [
+        {
+          "canonical_name": "vetemjöl",
+          "component": "brod",
+          "form": "dry",
+          "name": "vetemjöl",
+          "quantity": 280.0,
+          "quantity_max": 280.0,
+          "quantity_min": 280.0,
+          "quantity_step": 280.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "olivolja",
+          "component": "brod",
+          "form": "as_sold",
+          "name": "olivolja",
+          "product_requirements": [
+            "pack:intake_all_expansion_86ac9b2c5ae6"
+          ],
+          "quantity": 50.0,
+          "quantity_max": 50.0,
+          "quantity_min": 50.0,
+          "quantity_step": 50.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "ricotta",
+          "component": "brod",
+          "form": "as_sold",
+          "name": "ricotta",
+          "product_requirements": [
+            "pack:intake_all_cbf3dd8282c8"
+          ],
+          "quantity": 140.0,
+          "quantity_max": 140.0,
+          "quantity_min": 140.0,
+          "quantity_step": 140.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "färskost",
+          "component": "brod",
+          "form": "as_sold",
+          "name": "färskost",
+          "product_requirements": [
+            "pack:intake_all_536538040095"
+          ],
+          "quantity": 130.0,
+          "quantity_max": 130.0,
+          "quantity_min": 130.0,
+          "quantity_step": 130.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "mozzarella",
+          "component": "brod",
+          "form": "preserved_drained",
+          "name": "mozzarella",
+          "product_requirements": [
+            "pack:intake_all_05c97f94a699"
+          ],
+          "quantity": 130.0,
+          "quantity_max": 130.0,
+          "quantity_min": 130.0,
+          "quantity_step": 130.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "brod",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 3.0,
+          "quantity_max": 3.0,
+          "quantity_min": 3.0,
+          "quantity_step": 3.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "tomat",
+          "component": "sallad",
+          "form": "raw_edible",
+          "name": "tomat",
+          "quantity": 450.0,
+          "quantity_max": 450.0,
+          "quantity_min": 450.0,
+          "quantity_step": 450.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "balsamvinäger",
+          "component": "sallad",
+          "form": "as_sold",
+          "name": "balsamvinäger",
+          "product_requirements": [
+            "pack:intake_all_0a4ab19f1766"
+          ],
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "rucola",
+          "component": "sallad",
+          "form": "raw_edible",
+          "name": "rucola",
+          "product_requirements": [
+            "pack:intake_all_round4_c50878188c5b"
+          ],
+          "quantity": 70.0,
+          "quantity_max": 70.0,
+          "quantity_min": 70.0,
+          "quantity_step": 70.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gurka",
+          "component": "sallad",
+          "form": "raw_edible",
+          "name": "gurka",
+          "quantity": 250.0,
+          "quantity_max": 250.0,
+          "quantity_min": 250.0,
+          "quantity_step": 250.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Blanda mjöl och salt med 145 ml vatten och två tredjedelar av brödets olja. Knåda 8 minuter till elastisk deg. Ingen jäst används.",
+        "Täck degen och låt vila i 45 minuter så att den kan sträckas riktigt tunt.",
+        "Värm ugnen till 250 °C med plåten i. Låt mozzarellan rinna av och väg den angivna avrunna mängden. Riv eller finfördela den och blanda med hela ricottan och färskosten; ingen ostvätska från dessa två produkter hälls bort. Dela degen i två lika delar. Kavla mellan bakpapper och dra till mycket tunna ark, cirka en millimeter. Använd motsvarande plåtyta vid större sats, eventuellt flera plåtar. Fördela ostblandningen på det undre arket, täck med det andra och förslut kanterna. Gör små ångöppningar och pensla med återstående brödolja. Använd allt degmaterial. Välj bakpapper godkänt för 250 °C eller lätt oljad metallplåt med olja från receptets mängd.",
+        "Grädda på het plåt cirka fjorton minuter tills degen fått bruna blåsor och osten bubblar. Håll samma tunna deg och fyllningsdjup i större satser; grädda i flera omgångar vid behov.",
+        "Lyft försiktigt ett hörn och kontrollera att botten är gräddad; förläng vid behov. Ta ut plåten.",
+        "Väg tomaten efter ansning och skär den. Blanda salladens råvaror med dess olja och balsamvinäger. Skär brödet i portionsbitar och servera hela brödet och salladen jämnt fördelat mellan valt antal portioner. Skölj rucolan enligt förpackningen, låt ytvatten rinna av och använd hela uppvägda blad inklusive ätliga stjälkar. Väg gurkan efter ansning och skär den."
+      ],
+      "name": "Focaccia col formaggio – Recco-inspirerad med ricotta, färskost och mozzarella – standard",
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 42,
+        "base_id": "smako-italian-focaccia-formaggio-recco-stil",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "vetemjöl|dry",
+                "name": "Vetemjöl",
+                "note": "",
+                "quantity": 280.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "olivolja|as_sold",
+                "name": "Olivolja",
+                "note": "",
+                "quantity": 35.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "ricotta|as_sold",
+                "name": "Ricotta",
+                "note": "",
+                "quantity": 140.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "färskost|as_sold",
+                "name": "Naturell färskost",
+                "note": "",
+                "quantity": 130.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "mozzarella|preserved_drained",
+                "name": "Mozzarella, vägd avrunnen",
+                "note": "",
+                "quantity": 130.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 3.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "basilika|raw_edible",
+                "name": "Basilika",
+                "note": "",
+                "quantity": 12.0,
+                "unit": "g"
+              }
+            ],
+            "id": "brod",
+            "name": "Två tunna degark med tre ostar"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "tomat|raw_edible",
+                "name": "Tomat",
+                "note": "",
+                "quantity": 450.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "balsamvinäger|as_sold",
+                "name": "Balsamvinäger",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "olivolja|as_sold",
+                "name": "Olivolja",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "rucola|raw_edible",
+                "name": "Rucola",
+                "note": "",
+                "quantity": 70.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gurka|raw_edible",
+                "name": "Gurka",
+                "note": "",
+                "quantity": 250.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "bönor|cooked_drained",
+                "name": "Kokta vita bönor, avrunnen vikt",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rödlök|raw_edible",
+                "name": "Rödlök",
+                "note": "",
+                "quantity": 60.0,
+                "unit": "g"
+              }
+            ],
+            "id": "sallad",
+            "name": "Sallad"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "italian"
+        ],
+        "equipment": [
+          "ugn med 250 °C",
+          "kavel",
+          "bakplåtspapper godkänt för vald temperatur",
+          "plåt"
+        ],
+        "estimated_minutes": 101,
+        "family": "ojäst tunn ostfylld deg",
+        "fish": false,
+        "flavor_profile": [
+          "tre ostar",
+          "olivolja"
+        ],
+        "ingredient_count": 12,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "bake",
+        "primary_ingredient": "ricotta, färskost och mozzarella",
+        "provenance": {
+          "notes": "Innehållsgranskad 2026-11-02; inte provlagad. Egen receptanpassning med råvaruformer, inköpsmängder, portionsskalning och okända processförluster enligt granskningsrapporten. Ägg anges utan skal; grönsaker vägs ansade där formen är raw_edible.",
+          "reviewed_at": "2026-11-02"
+        },
+        "side": "tomatsallad",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 9,
+            "id": "s1",
+            "ingredient_keys": [
+              "olivolja|as_sold",
+              "salt|as_sold",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "145 ml",
+                145.0
+              ]
+            ],
+            "text": "Blanda mjöl och salt med 145 ml vatten och två tredjedelar av brödets olja. Knåda 8 minuter till elastisk deg. Ingen jäst används."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 45,
+            "id": "s2",
+            "ingredient_keys": [
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Täck degen och låt vila i 45 minuter så att den kan sträckas riktigt tunt."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 23,
+            "id": "s3",
+            "ingredient_keys": [
+              "basilika|raw_edible",
+              "färskost|as_sold",
+              "mozzarella|preserved_drained",
+              "olivolja|as_sold",
+              "ricotta|as_sold",
+              "salt|as_sold",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Värm ugnen till 250 °C med plåten i. Låt mozzarellan rinna av och väg den angivna avrunna mängden. Riv eller finfördela den och blanda med hela ricottan och färskosten; ingen ostvätska från dessa två produkter hälls bort. Dela degen i två lika delar. Kavla mellan bakpapper och dra till mycket tunna ark, cirka en millimeter. Använd motsvarande plåtyta vid större sats, eventuellt flera plåtar. Fördela ostblandningen på det undre arket, täck med det andra och förslut kanterna. Gör små ångöppningar och pensla med återstående brödolja. Använd allt degmaterial. Välj bakpapper godkänt för 250 °C eller lätt oljad metallplåt med olja från receptets mängd. Blanda all färsk eller fryst hackad basilika i ostfyllningen före gräddningen; behåll dess vätska."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 14,
+            "id": "s4",
+            "ingredient_keys": [
+              "olivolja|as_sold",
+              "salt|as_sold",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Grädda på het plåt cirka fjorton minuter tills degen fått bruna blåsor och osten bubblar. Håll samma tunna deg och fyllningsdjup i större satser; grädda i flera omgångar vid behov."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 3,
+            "id": "s5",
+            "ingredient_keys": [
+              "basilika|raw_edible",
+              "färskost|as_sold",
+              "mozzarella|preserved_drained",
+              "ricotta|as_sold",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Lyft försiktigt ett hörn och kontrollera att botten är gräddad; förläng vid behov. Ta ut plåten. Kontrollera att hela ostfyllningen med basilikan är genomhet och når minst 75 °C, samt följ örtproduktens anvisning."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 7,
+            "id": "s6",
+            "ingredient_keys": [
+              "balsamvinäger|as_sold",
+              "bönor|cooked_drained",
+              "gurka|raw_edible",
+              "olivolja|as_sold",
+              "rucola|raw_edible",
+              "rödlök|raw_edible",
+              "tomat|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Väg tomaten efter ansning och skär den. Blanda salladens råvaror med dess olja och balsamvinäger. Skär brödet i portionsbitar och servera hela brödet och salladen jämnt fördelat mellan valt antal portioner. Skölj rucolan enligt förpackningen, låt ytvatten rinna av och använd hela uppvägda blad inklusive ätliga stjälkar. Väg gurkan efter ansning och skär den. Väg bönorna avrunna och rödlöken skalad. Skiva löken tunt och vänd ner båda i salladen."
+          }
+        ],
+        "total_minutes": 101,
+        "variant_id": "extended",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 59
+      },
+      "ingredients": [
+        {
+          "canonical_name": "vetemjöl",
+          "component": "brod",
+          "form": "dry",
+          "name": "vetemjöl",
+          "quantity": 280.0,
+          "quantity_max": 280.0,
+          "quantity_min": 280.0,
+          "quantity_step": 280.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "olivolja",
+          "component": "brod",
+          "form": "as_sold",
+          "name": "olivolja",
+          "product_requirements": [
+            "pack:intake_all_expansion_86ac9b2c5ae6"
+          ],
+          "quantity": 50.0,
+          "quantity_max": 50.0,
+          "quantity_min": 50.0,
+          "quantity_step": 50.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "ricotta",
+          "component": "brod",
+          "form": "as_sold",
+          "name": "ricotta",
+          "product_requirements": [
+            "pack:intake_all_cbf3dd8282c8"
+          ],
+          "quantity": 140.0,
+          "quantity_max": 140.0,
+          "quantity_min": 140.0,
+          "quantity_step": 140.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "färskost",
+          "component": "brod",
+          "form": "as_sold",
+          "name": "färskost",
+          "product_requirements": [
+            "pack:intake_all_536538040095"
+          ],
+          "quantity": 130.0,
+          "quantity_max": 130.0,
+          "quantity_min": 130.0,
+          "quantity_step": 130.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "mozzarella",
+          "component": "brod",
+          "form": "preserved_drained",
+          "name": "mozzarella",
+          "product_requirements": [
+            "pack:intake_all_05c97f94a699"
+          ],
+          "quantity": 130.0,
+          "quantity_max": 130.0,
+          "quantity_min": 130.0,
+          "quantity_step": 130.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "brod",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 3.0,
+          "quantity_max": 3.0,
+          "quantity_min": 3.0,
+          "quantity_step": 3.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "basilika",
+          "component": "brod",
+          "form": "raw_edible",
+          "name": "basilika",
+          "quantity": 12.0,
+          "quantity_max": 12.0,
+          "quantity_min": 12.0,
+          "quantity_step": 12.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "tomat",
+          "component": "sallad",
+          "form": "raw_edible",
+          "name": "tomat",
+          "quantity": 450.0,
+          "quantity_max": 450.0,
+          "quantity_min": 450.0,
+          "quantity_step": 450.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "balsamvinäger",
+          "component": "sallad",
+          "form": "as_sold",
+          "name": "balsamvinäger",
+          "product_requirements": [
+            "pack:intake_all_0a4ab19f1766"
+          ],
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "rucola",
+          "component": "sallad",
+          "form": "raw_edible",
+          "name": "rucola",
+          "product_requirements": [
+            "pack:intake_all_round4_c50878188c5b"
+          ],
+          "quantity": 70.0,
+          "quantity_max": 70.0,
+          "quantity_min": 70.0,
+          "quantity_step": 70.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gurka",
+          "component": "sallad",
+          "form": "raw_edible",
+          "name": "gurka",
+          "quantity": 250.0,
+          "quantity_max": 250.0,
+          "quantity_min": 250.0,
+          "quantity_step": 250.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "bönor",
+          "component": "sallad",
+          "form": "cooked_drained",
+          "name": "bönor",
+          "product_requirements": [
+            "white_beans"
+          ],
+          "quantity": 300.0,
+          "quantity_max": 300.0,
+          "quantity_min": 300.0,
+          "quantity_step": 300.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rödlök",
+          "component": "sallad",
+          "form": "raw_edible",
+          "name": "rödlök",
+          "quantity": 60.0,
+          "quantity_max": 60.0,
+          "quantity_min": 60.0,
+          "quantity_step": 60.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Blanda mjöl och salt med 145 ml vatten och två tredjedelar av brödets olja. Knåda 8 minuter till elastisk deg. Ingen jäst används.",
+        "Täck degen och låt vila i 45 minuter så att den kan sträckas riktigt tunt.",
+        "Värm ugnen till 250 °C med plåten i. Låt mozzarellan rinna av och väg den angivna avrunna mängden. Riv eller finfördela den och blanda med hela ricottan och färskosten; ingen ostvätska från dessa två produkter hälls bort. Dela degen i två lika delar. Kavla mellan bakpapper och dra till mycket tunna ark, cirka en millimeter. Använd motsvarande plåtyta vid större sats, eventuellt flera plåtar. Fördela ostblandningen på det undre arket, täck med det andra och förslut kanterna. Gör små ångöppningar och pensla med återstående brödolja. Använd allt degmaterial. Välj bakpapper godkänt för 250 °C eller lätt oljad metallplåt med olja från receptets mängd. Blanda all färsk eller fryst hackad basilika i ostfyllningen före gräddningen; behåll dess vätska.",
+        "Grädda på het plåt cirka fjorton minuter tills degen fått bruna blåsor och osten bubblar. Håll samma tunna deg och fyllningsdjup i större satser; grädda i flera omgångar vid behov.",
+        "Lyft försiktigt ett hörn och kontrollera att botten är gräddad; förläng vid behov. Ta ut plåten. Kontrollera att hela ostfyllningen med basilikan är genomhet och når minst 75 °C, samt följ örtproduktens anvisning.",
+        "Väg tomaten efter ansning och skär den. Blanda salladens råvaror med dess olja och balsamvinäger. Skär brödet i portionsbitar och servera hela brödet och salladen jämnt fördelat mellan valt antal portioner. Skölj rucolan enligt förpackningen, låt ytvatten rinna av och använd hela uppvägda blad inklusive ätliga stjälkar. Väg gurkan efter ansning och skär den. Väg bönorna avrunna och rödlöken skalad. Skiva löken tunt och vänd ner båda i salladen."
+      ],
+      "name": "Focaccia col formaggio – Recco-inspirerad med ricotta, färskost och mozzarella – utökad",
+      "servings": 4
+    }
+  ],
+  "schema_version": "smako-meal-pack-v1"
+}

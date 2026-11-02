@@ -70,7 +70,8 @@ def library_vocabulary(recipes, *, reviewed_path=REVIEWED_VOCABULARY):
 
     document = json.loads(reviewed_path.read_bytes())
     if reviewed_path == REVIEWED_VOCABULARY:
-        for name in ("intake-all-20261026.json", "expansion-20261101.json", "expansion-round2-20261101.json"):
+        for name in ("intake-all-20261026.json", "expansion-20261101.json", "expansion-round2-20261101.json",
+                     "expansion-round4-20261102.json"):
             document["ingredients"].extend(json.loads(reviewed_path.with_name(name).read_bytes())["ingredients"])
     if document["schema_version"] != "smako-authoring-vocabulary-v1":
         raise ValueError("Okänd schema för granskat ingrediensvokabulär")
