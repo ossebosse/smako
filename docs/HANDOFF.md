@@ -1,3 +1,40 @@
+# 2026-11-02: Leverans 21/55 och ytterligare 20 importerade varianter
+
+Se [rapporten](reviews/recipe-unblock-round3-20261102/REPORT.md),
+[variantkön](reviews/recipe-unblock-round3-20261102/queue.json) och
+[samlad ingredienskontroll](reviews/recipe-unblock-round3-20261102/pending-known-inputs.json).
+35 originalfiler från senaste ZIP är bytebevarade och checksummeverifierade.
+Paket 022–024 innehåller 21 grundrätter / 55 varianter. Nästa paket är **025**.
+
+**20 varianter i åtta nya grundrätter** är innehållsgranskade och importerade:
+pumpafilo, ängamat, fiskpudding, enkel bouyiourdi, scammaro, jota, pallotte och
+coyotas. 14 gick in efter beredningsgranskning; sex ytterligare öppnades med
+uttrycklig lagrad pecorino, kanderat apelsinskal och mörkt muscovadosocker.
+Inga falska råvarualias eller nya mängdfaktorer införs. Alla 20 har godkända
+fulla korgar i uppskattat läge, 14 även exakt, i samma frysta referens.
+
+Biblioteket är **1 080 baser / 2 842 varianter**. Sex mottagna ZIP innehåller
+**210 baser / 556 varianter**, varav **380 importerade och 176 väntande**.
+Senaste leveransen har 20 importerade och 35 väntande; de tidigare 141 är
+fortfarande kvar. Beställningen återstår med 790 baser / 2 194 varianter.
+Leveransens egna högre historikantal inkluderar obefintliga arkiv och räknas inte.
+
+Räkpasta/curryblad/masa saknar fortfarande verifierad ren produkt i samma
+butiksunderlag. Tamarindkoncentrat i ml är en separat insats och löser inte
+gramdoser eller andra samtidiga hinder automatiskt. Fortsätt med
+`ranked_combined_blocks` i den nya kontrollen. Mysore pak har därutöver
+olöst praktisk granskning av mycket liten het sockersats.
+
+Fiskens kylupptining, frysta örters genomhettning, okända förluster av spad,
+ostkant och lagerblad samt portionsskalning är explicit granskade. De okända
+förlusterna får inte räknas som serverad näring eller vikt under hårda gränser.
+De 3 955 tidigare utgivna versionerna och 2 200 ursprungsreferenserna bevaras
+genom en ny additiv manifestövergång; CI-baslinjer är oförändrade.
+Recepten är inte provlagade. Ingen betaaktivering eller varm tidsmätning ingår.
+Det äldre problemet i sex dadelvarianter är fortfarande dokumenterat och olöst.
+
+---
+
 # 2026-11-01: Ytterligare 252 receptvarianter granskade och importerade
 
 Se [rapporten för andra hinderomgången](reviews/recipe-unblock-round2-20261101/REPORT.md),

@@ -10,3 +10,8 @@ markers = [
 [tool.ruff]
 target-version = "py312"
 line-length = 100
+
+[tool.ruff.lint.per-file-ignores]
+# User-supplied source evidence, preserved byte-for-byte and never executed.
+# Runtime/scripts/tests outside this exact archived delivery remain checked.
+"backend/app/data/recipes/incoming/authoring-1000-20261101/continuation-21/source/**/*.py" = ["ALL"]

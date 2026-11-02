@@ -1,0 +1,764 @@
+{
+  "checked_at_utc": "2026-11-01T21:36:45.348472+00:00",
+  "tool": "Fristående Python + JSON Schema; inte Smakos validator",
+  "python_version": "3.13.5",
+  "jsonschema_version": "4.26.0",
+  "validator_file": "kontroll/validera_leverans.py",
+  "validator_sha256": "a97fcdf46574bc85c6b8e4821e353ca9b0c154bad998d2e50938d773e06fa215",
+  "structural_error_count": 0,
+  "errors": [],
+  "warning_count": 25,
+  "warnings": [
+    {
+      "type": "ingredient_interval_exception",
+      "base_id": "smako-greek-magiritsa-lammlever-agg-citron",
+      "variant_id": "simple",
+      "actual_count": 8,
+      "target_range": [
+        5,
+        7
+      ],
+      "reason": "Lever, ris, sallad, lök, dill, fett, ägg och citron behövs för en komplett lever- och äggcitronsoppa. Ingen bärande del döljs bakom en färdigmix."
+    },
+    {
+      "type": "ingredient_interval_exception",
+      "base_id": "smako-greek-bouyiourdi-feta-paprika",
+      "variant_id": "simple",
+      "actual_count": 6,
+      "target_range": [
+        3,
+        5
+      ],
+      "reason": "Feta, tomat, paprika, olja och chili bildar varm meze. Brödet är en faktisk mättande mellanmålskomponent och lämnas inte olistat."
+    },
+    {
+      "type": "ingredient_interval_exception",
+      "base_id": "smako-italian-pastiera-napoletana-matvete",
+      "variant_id": "simple",
+      "actual_count": 8,
+      "target_range": [
+        3,
+        5
+      ],
+      "reason": "Mördeg plus vete-ricottafyllning med apelsinblom kan inte göras till 3–5 ingredienser utan att tappa rättens identitet. Gemensamt ägg/socker räknas bara en gång."
+    },
+    {
+      "type": "ingredient_interval_exception",
+      "base_id": "smako-italian-pastiera-napoletana-matvete",
+      "variant_id": "extended",
+      "actual_count": 10,
+      "target_range": [
+        6,
+        8
+      ],
+      "reason": "Kanderat citronskal och vanilj är meningsfulla tillägg i vetefyllningen; mördeg och fyllning kräver redan åtta unika basingredienser."
+    },
+    {
+      "type": "ingredient_interval_exception",
+      "base_id": "smako-indian-mysore-pak",
+      "variant_id": "extended",
+      "actual_count": 5,
+      "target_range": [
+        6,
+        8
+      ],
+      "reason": "Ghee, socker och kikärtsmjöl plus cashew och kardemumma ger fem meningsfulla råvaror. En sjätte skulle här vara utfyllnad."
+    },
+    {
+      "type": "ingredient_interval_exception",
+      "base_id": "smako-thai-suki-nam-glasnudelsoppa",
+      "variant_id": "simple",
+      "actual_count": 10,
+      "target_range": [
+        5,
+        7
+      ],
+      "reason": "En fullständig separat suki-sås skrivs ut med röd tofu, sesam, syra, socker och vitlök; soppans kyckling, ägg, nudlar och kål utelämnas inte för att nå sju."
+    },
+    {
+      "type": "ingredient_interval_exception",
+      "base_id": "smako-thai-suki-nam-glasnudelsoppa",
+      "variant_id": "standard",
+      "actual_count": 13,
+      "target_range": [
+        8,
+        11
+      ],
+      "reason": "Svamp, salladslök och soja är meningsfulla tillägg till kärnreceptet med separat sås. Ingredienser döljs inte i odefinierad köpt suki-sås."
+    },
+    {
+      "type": "process_review",
+      "base_id": "smako-mexican-tlatlapas-gula-arter",
+      "variant_id": "simple",
+      "blocker": "Kvarnkrav och malningsgrad måste verifieras i hemmakök; ärtorna får inte förbli grova eller råa.",
+      "status": "requires_review_before_use"
+    },
+    {
+      "type": "process_review",
+      "base_id": "smako-mexican-tlatlapas-gula-arter",
+      "variant_id": "standard",
+      "blocker": "Kvarnkrav och malningsgrad måste verifieras i hemmakök; ärtorna får inte förbli grova eller råa.",
+      "status": "requires_review_before_use"
+    },
+    {
+      "type": "process_review",
+      "base_id": "smako-mexican-tlatlapas-gula-arter",
+      "variant_id": "extended",
+      "blocker": "Kvarnkrav och malningsgrad måste verifieras i hemmakök; ärtorna får inte förbli grova eller råa.",
+      "status": "requires_review_before_use"
+    },
+    {
+      "type": "process_review",
+      "base_id": "smako-indian-mysore-pak",
+      "variant_id": "simple",
+      "blocker": "Småskalig sockerkokning och sluttextur är inte provlagade. Termometer och kärl måste kunna hantera portionsmängden.",
+      "status": "requires_review_before_use"
+    },
+    {
+      "type": "process_review",
+      "base_id": "smako-indian-mysore-pak",
+      "variant_id": "extended",
+      "blocker": "Småskalig sockerkokning och sluttextur är inte provlagade. Termometer och kärl måste kunna hantera portionsmängden.",
+      "status": "requires_review_before_use"
+    },
+    {
+      "type": "process_review",
+      "base_id": "smako-indian-nagaland-rokt-flask-bambu",
+      "variant_id": "simple",
+      "blocker": "Verifiera köttets rå/tillagad-status och bambuns kommersiella förbehandling samt anvisad koktid.",
+      "status": "requires_review_before_use"
+    },
+    {
+      "type": "process_review",
+      "base_id": "smako-indian-nagaland-rokt-flask-bambu",
+      "variant_id": "standard",
+      "blocker": "Verifiera köttets rå/tillagad-status och bambuns kommersiella förbehandling samt anvisad koktid.",
+      "status": "requires_review_before_use"
+    },
+    {
+      "type": "process_review",
+      "base_id": "smako-indian-nagaland-rokt-flask-bambu",
+      "variant_id": "extended",
+      "blocker": "Verifiera köttets rå/tillagad-status och bambuns kommersiella förbehandling samt anvisad koktid.",
+      "status": "requires_review_before_use"
+    },
+    {
+      "type": "process_review",
+      "base_id": "smako-thai-khanom-fak-thong-angad-pumpkaka",
+      "variant_id": "simple",
+      "blocker": "Ångkokning anges som pot med uttrycklig ånginsats; metodmappning och kärl behöver granskas i Smako.",
+      "status": "requires_review_before_use"
+    },
+    {
+      "type": "process_review",
+      "base_id": "smako-thai-khanom-fak-thong-angad-pumpkaka",
+      "variant_id": "extended",
+      "blocker": "Ångkokning anges som pot med uttrycklig ånginsats; metodmappning och kärl behöver granskas i Smako.",
+      "status": "requires_review_before_use"
+    },
+    {
+      "type": "process_review",
+      "base_id": "smako-swedish-kalvdans-ramjolk",
+      "variant_id": "simple",
+      "blocker": "Kolostrumets styrka och lämpligt spädningsförhållande måste fastställas för en faktisk livsmedelsprodukt; formeln är inte provlagad.",
+      "status": "requires_review_before_use"
+    },
+    {
+      "type": "process_review",
+      "base_id": "smako-swedish-kalvdans-ramjolk",
+      "variant_id": "extended",
+      "blocker": "Kolostrumets styrka och lämpligt spädningsförhållande måste fastställas för en faktisk livsmedelsprodukt; formeln är inte provlagad.",
+      "status": "requires_review_before_use"
+    },
+    {
+      "type": "process_review",
+      "base_id": "smako-swedish-stekt-saltsill-loksas",
+      "variant_id": "simple",
+      "blocker": "Produkt måste uttryckligen vara rå urvattnad saltsill för stekning, inte inlagd eller icke urvattnad sill.",
+      "status": "requires_review_before_use"
+    },
+    {
+      "type": "process_review",
+      "base_id": "smako-swedish-stekt-saltsill-loksas",
+      "variant_id": "standard",
+      "blocker": "Produkt måste uttryckligen vara rå urvattnad saltsill för stekning, inte inlagd eller icke urvattnad sill.",
+      "status": "requires_review_before_use"
+    },
+    {
+      "type": "process_review",
+      "base_id": "smako-swedish-stekt-saltsill-loksas",
+      "variant_id": "extended",
+      "blocker": "Produkt måste uttryckligen vara rå urvattnad saltsill för stekning, inte inlagd eller icke urvattnad sill.",
+      "status": "requires_review_before_use"
+    },
+    {
+      "type": "registry_hold",
+      "proposal_count": 27,
+      "blocked_bases": 18,
+      "directly_blocked_variants": 44,
+      "whole_family_hold_variants": 47
+    },
+    {
+      "type": "historical_conflicts",
+      "file": "historik/tidigare-leveranskonflikter.json",
+      "scope": "Äldre filer, inte nya ID-kollisioner."
+    },
+    {
+      "type": "not_trial_cooked",
+      "scope": "Samtliga 55 varianter; tider och mängder är författaruppskattningar."
+    }
+  ],
+  "counts": {
+    "bases": 21,
+    "variants": 55,
+    "packs": 3,
+    "known_identity_complete_families": 3,
+    "json_files_parsed_before_report_write": 26
+  },
+  "packs": [
+    {
+      "file": "paket/022-kanda-identiteter.json",
+      "bytes": 52959,
+      "sha256": "0deb5599037ec2037e51a3a1c732dda50a2b7e188ed966c4c568ea556a3bd3ea",
+      "base_count": 3,
+      "variant_count": 8
+    },
+    {
+      "file": "paket/023-registergranskning.json",
+      "bytes": 154291,
+      "sha256": "406abbf26289a967ceb0838d4f9f903b70565329c9ad0c799c9b51629f33c7fa",
+      "base_count": 9,
+      "variant_count": 24
+    },
+    {
+      "file": "paket/024-registergranskning.json",
+      "bytes": 155444,
+      "sha256": "3edf9cf6c8a4cb58ba9659efdf62f197e8176512add44c0dfab05824561e5b72",
+      "base_count": 9,
+      "variant_count": 23
+    }
+  ],
+  "measurements": [
+    {
+      "base_id": "smako-greek-kolokithopita-sot-pumpapaj",
+      "variant_id": "simple",
+      "ingredient_count": 5,
+      "active_minutes": 17,
+      "total_minutes": 79,
+      "waiting_minutes": 62,
+      "known_only": true
+    },
+    {
+      "base_id": "smako-greek-kolokithopita-sot-pumpapaj",
+      "variant_id": "extended",
+      "ingredient_count": 8,
+      "active_minutes": 17,
+      "total_minutes": 79,
+      "waiting_minutes": 62,
+      "known_only": true
+    },
+    {
+      "base_id": "smako-swedish-angamat-sommargronsaker",
+      "variant_id": "simple",
+      "ingredient_count": 7,
+      "active_minutes": 38,
+      "total_minutes": 38,
+      "waiting_minutes": 0,
+      "known_only": true
+    },
+    {
+      "base_id": "smako-swedish-angamat-sommargronsaker",
+      "variant_id": "standard",
+      "ingredient_count": 10,
+      "active_minutes": 38,
+      "total_minutes": 38,
+      "waiting_minutes": 0,
+      "known_only": true
+    },
+    {
+      "base_id": "smako-swedish-angamat-sommargronsaker",
+      "variant_id": "extended",
+      "ingredient_count": 13,
+      "active_minutes": 42,
+      "total_minutes": 42,
+      "waiting_minutes": 0,
+      "known_only": true
+    },
+    {
+      "base_id": "smako-swedish-fiskpudding-ris-mjolk",
+      "variant_id": "simple",
+      "ingredient_count": 7,
+      "active_minutes": 67,
+      "total_minutes": 122,
+      "waiting_minutes": 55,
+      "known_only": true
+    },
+    {
+      "base_id": "smako-swedish-fiskpudding-ris-mjolk",
+      "variant_id": "standard",
+      "ingredient_count": 10,
+      "active_minutes": 67,
+      "total_minutes": 122,
+      "waiting_minutes": 55,
+      "known_only": true
+    },
+    {
+      "base_id": "smako-swedish-fiskpudding-ris-mjolk",
+      "variant_id": "extended",
+      "ingredient_count": 13,
+      "active_minutes": 72,
+      "total_minutes": 127,
+      "waiting_minutes": 55,
+      "known_only": true
+    },
+    {
+      "base_id": "smako-greek-magiritsa-lammlever-agg-citron",
+      "variant_id": "simple",
+      "ingredient_count": 8,
+      "active_minutes": 40,
+      "total_minutes": 65,
+      "waiting_minutes": 25,
+      "known_only": false
+    },
+    {
+      "base_id": "smako-greek-magiritsa-lammlever-agg-citron",
+      "variant_id": "standard",
+      "ingredient_count": 11,
+      "active_minutes": 40,
+      "total_minutes": 65,
+      "waiting_minutes": 25,
+      "known_only": false
+    },
+    {
+      "base_id": "smako-greek-magiritsa-lammlever-agg-citron",
+      "variant_id": "extended",
+      "ingredient_count": 14,
+      "active_minutes": 40,
+      "total_minutes": 65,
+      "waiting_minutes": 25,
+      "known_only": false
+    },
+    {
+      "base_id": "smako-greek-marathopita-fankalsgront",
+      "variant_id": "simple",
+      "ingredient_count": 5,
+      "active_minutes": 34,
+      "total_minutes": 74,
+      "waiting_minutes": 40,
+      "known_only": false
+    },
+    {
+      "base_id": "smako-greek-marathopita-fankalsgront",
+      "variant_id": "extended",
+      "ingredient_count": 7,
+      "active_minutes": 34,
+      "total_minutes": 74,
+      "waiting_minutes": 40,
+      "known_only": false
+    },
+    {
+      "base_id": "smako-greek-bouyiourdi-feta-paprika",
+      "variant_id": "simple",
+      "ingredient_count": 6,
+      "active_minutes": 12,
+      "total_minutes": 32,
+      "waiting_minutes": 20,
+      "known_only": false
+    },
+    {
+      "base_id": "smako-greek-bouyiourdi-feta-paprika",
+      "variant_id": "extended",
+      "ingredient_count": 8,
+      "active_minutes": 12,
+      "total_minutes": 32,
+      "waiting_minutes": 20,
+      "known_only": false
+    },
+    {
+      "base_id": "smako-italian-pallotte-cacio-uova",
+      "variant_id": "simple",
+      "ingredient_count": 6,
+      "active_minutes": 34,
+      "total_minutes": 89,
+      "waiting_minutes": 55,
+      "known_only": false
+    },
+    {
+      "base_id": "smako-italian-pallotte-cacio-uova",
+      "variant_id": "standard",
+      "ingredient_count": 9,
+      "active_minutes": 34,
+      "total_minutes": 89,
+      "waiting_minutes": 55,
+      "known_only": false
+    },
+    {
+      "base_id": "smako-italian-pallotte-cacio-uova",
+      "variant_id": "extended",
+      "ingredient_count": 13,
+      "active_minutes": 38,
+      "total_minutes": 93,
+      "waiting_minutes": 55,
+      "known_only": false
+    },
+    {
+      "base_id": "smako-italian-frittata-scammaro-aggfri",
+      "variant_id": "simple",
+      "ingredient_count": 6,
+      "active_minutes": 46,
+      "total_minutes": 51,
+      "waiting_minutes": 5,
+      "known_only": false
+    },
+    {
+      "base_id": "smako-italian-frittata-scammaro-aggfri",
+      "variant_id": "standard",
+      "ingredient_count": 9,
+      "active_minutes": 46,
+      "total_minutes": 51,
+      "waiting_minutes": 5,
+      "known_only": false
+    },
+    {
+      "base_id": "smako-italian-frittata-scammaro-aggfri",
+      "variant_id": "extended",
+      "ingredient_count": 12,
+      "active_minutes": 52,
+      "total_minutes": 57,
+      "waiting_minutes": 5,
+      "known_only": false
+    },
+    {
+      "base_id": "smako-italian-jota-triestina-surkal-bonor",
+      "variant_id": "simple",
+      "ingredient_count": 6,
+      "active_minutes": 43,
+      "total_minutes": 68,
+      "waiting_minutes": 25,
+      "known_only": false
+    },
+    {
+      "base_id": "smako-italian-jota-triestina-surkal-bonor",
+      "variant_id": "standard",
+      "ingredient_count": 9,
+      "active_minutes": 43,
+      "total_minutes": 68,
+      "waiting_minutes": 25,
+      "known_only": false
+    },
+    {
+      "base_id": "smako-italian-jota-triestina-surkal-bonor",
+      "variant_id": "extended",
+      "ingredient_count": 12,
+      "active_minutes": 43,
+      "total_minutes": 68,
+      "waiting_minutes": 25,
+      "known_only": false
+    },
+    {
+      "base_id": "smako-italian-pastiera-napoletana-matvete",
+      "variant_id": "simple",
+      "ingredient_count": 8,
+      "active_minutes": 51,
+      "total_minutes": 156,
+      "waiting_minutes": 105,
+      "known_only": false
+    },
+    {
+      "base_id": "smako-italian-pastiera-napoletana-matvete",
+      "variant_id": "extended",
+      "ingredient_count": 10,
+      "active_minutes": 51,
+      "total_minutes": 156,
+      "waiting_minutes": 105,
+      "known_only": false
+    },
+    {
+      "base_id": "smako-mexican-tlatlapas-gula-arter",
+      "variant_id": "simple",
+      "ingredient_count": 6,
+      "active_minutes": 100,
+      "total_minutes": 130,
+      "waiting_minutes": 30,
+      "known_only": false
+    },
+    {
+      "base_id": "smako-mexican-tlatlapas-gula-arter",
+      "variant_id": "standard",
+      "ingredient_count": 9,
+      "active_minutes": 100,
+      "total_minutes": 130,
+      "waiting_minutes": 30,
+      "known_only": false
+    },
+    {
+      "base_id": "smako-mexican-tlatlapas-gula-arter",
+      "variant_id": "extended",
+      "ingredient_count": 12,
+      "active_minutes": 120,
+      "total_minutes": 150,
+      "waiting_minutes": 30,
+      "known_only": false
+    },
+    {
+      "base_id": "smako-mexican-chilesatole-majs-masa",
+      "variant_id": "simple",
+      "ingredient_count": 7,
+      "active_minutes": 33,
+      "total_minutes": 48,
+      "waiting_minutes": 15,
+      "known_only": false
+    },
+    {
+      "base_id": "smako-mexican-chilesatole-majs-masa",
+      "variant_id": "standard",
+      "ingredient_count": 10,
+      "active_minutes": 36,
+      "total_minutes": 51,
+      "waiting_minutes": 15,
+      "known_only": false
+    },
+    {
+      "base_id": "smako-mexican-chilesatole-majs-masa",
+      "variant_id": "extended",
+      "ingredient_count": 13,
+      "active_minutes": 40,
+      "total_minutes": 55,
+      "waiting_minutes": 15,
+      "known_only": false
+    },
+    {
+      "base_id": "smako-mexican-ensalada-nopales-kokt-kaktus",
+      "variant_id": "simple",
+      "ingredient_count": 7,
+      "active_minutes": 41,
+      "total_minutes": 56,
+      "waiting_minutes": 15,
+      "known_only": false
+    },
+    {
+      "base_id": "smako-mexican-ensalada-nopales-kokt-kaktus",
+      "variant_id": "standard",
+      "ingredient_count": 10,
+      "active_minutes": 41,
+      "total_minutes": 56,
+      "waiting_minutes": 15,
+      "known_only": false
+    },
+    {
+      "base_id": "smako-mexican-ensalada-nopales-kokt-kaktus",
+      "variant_id": "extended",
+      "ingredient_count": 13,
+      "active_minutes": 41,
+      "total_minutes": 56,
+      "waiting_minutes": 15,
+      "known_only": false
+    },
+    {
+      "base_id": "smako-mexican-coyotas-piloncillo",
+      "variant_id": "simple",
+      "ingredient_count": 4,
+      "active_minutes": 17,
+      "total_minutes": 72,
+      "waiting_minutes": 55,
+      "known_only": false
+    },
+    {
+      "base_id": "smako-mexican-coyotas-piloncillo",
+      "variant_id": "extended",
+      "ingredient_count": 6,
+      "active_minutes": 17,
+      "total_minutes": 72,
+      "waiting_minutes": 55,
+      "known_only": false
+    },
+    {
+      "base_id": "smako-indian-mysore-pak",
+      "variant_id": "simple",
+      "ingredient_count": 3,
+      "active_minutes": 30,
+      "total_minutes": 65,
+      "waiting_minutes": 35,
+      "known_only": false
+    },
+    {
+      "base_id": "smako-indian-mysore-pak",
+      "variant_id": "extended",
+      "ingredient_count": 5,
+      "active_minutes": 30,
+      "total_minutes": 65,
+      "waiting_minutes": 35,
+      "known_only": false
+    },
+    {
+      "base_id": "smako-indian-nagaland-rokt-flask-bambu",
+      "variant_id": "simple",
+      "ingredient_count": 6,
+      "active_minutes": 22,
+      "total_minutes": 132,
+      "waiting_minutes": 110,
+      "known_only": false
+    },
+    {
+      "base_id": "smako-indian-nagaland-rokt-flask-bambu",
+      "variant_id": "standard",
+      "ingredient_count": 9,
+      "active_minutes": 31,
+      "total_minutes": 141,
+      "waiting_minutes": 110,
+      "known_only": false
+    },
+    {
+      "base_id": "smako-indian-nagaland-rokt-flask-bambu",
+      "variant_id": "extended",
+      "ingredient_count": 12,
+      "active_minutes": 41,
+      "total_minutes": 151,
+      "waiting_minutes": 110,
+      "known_only": false
+    },
+    {
+      "base_id": "smako-thai-kaeng-jued-mara-fylld-bittergurka",
+      "variant_id": "simple",
+      "ingredient_count": 7,
+      "active_minutes": 47,
+      "total_minutes": 102,
+      "waiting_minutes": 55,
+      "known_only": true
+    },
+    {
+      "base_id": "smako-thai-kaeng-jued-mara-fylld-bittergurka",
+      "variant_id": "standard",
+      "ingredient_count": 10,
+      "active_minutes": 47,
+      "total_minutes": 102,
+      "waiting_minutes": 55,
+      "known_only": true
+    },
+    {
+      "base_id": "smako-thai-kaeng-jued-mara-fylld-bittergurka",
+      "variant_id": "extended",
+      "ingredient_count": 13,
+      "active_minutes": 49,
+      "total_minutes": 104,
+      "waiting_minutes": 55,
+      "known_only": false
+    },
+    {
+      "base_id": "smako-thai-suki-nam-glasnudelsoppa",
+      "variant_id": "simple",
+      "ingredient_count": 10,
+      "active_minutes": 45,
+      "total_minutes": 45,
+      "waiting_minutes": 0,
+      "known_only": false
+    },
+    {
+      "base_id": "smako-thai-suki-nam-glasnudelsoppa",
+      "variant_id": "standard",
+      "ingredient_count": 13,
+      "active_minutes": 45,
+      "total_minutes": 45,
+      "waiting_minutes": 0,
+      "known_only": false
+    },
+    {
+      "base_id": "smako-thai-suki-nam-glasnudelsoppa",
+      "variant_id": "extended",
+      "ingredient_count": 15,
+      "active_minutes": 45,
+      "total_minutes": 45,
+      "waiting_minutes": 0,
+      "known_only": false
+    },
+    {
+      "base_id": "smako-thai-khanom-fak-thong-angad-pumpkaka",
+      "variant_id": "simple",
+      "ingredient_count": 5,
+      "active_minutes": 15,
+      "total_minutes": 70,
+      "waiting_minutes": 55,
+      "known_only": true
+    },
+    {
+      "base_id": "smako-thai-khanom-fak-thong-angad-pumpkaka",
+      "variant_id": "extended",
+      "ingredient_count": 6,
+      "active_minutes": 15,
+      "total_minutes": 70,
+      "waiting_minutes": 55,
+      "known_only": false
+    },
+    {
+      "base_id": "smako-swedish-kalvdans-ramjolk",
+      "variant_id": "simple",
+      "ingredient_count": 4,
+      "active_minutes": 10,
+      "total_minutes": 65,
+      "waiting_minutes": 55,
+      "known_only": false
+    },
+    {
+      "base_id": "smako-swedish-kalvdans-ramjolk",
+      "variant_id": "extended",
+      "ingredient_count": 6,
+      "active_minutes": 15,
+      "total_minutes": 70,
+      "waiting_minutes": 55,
+      "known_only": false
+    },
+    {
+      "base_id": "smako-swedish-stekt-saltsill-loksas",
+      "variant_id": "simple",
+      "ingredient_count": 6,
+      "active_minutes": 70,
+      "total_minutes": 70,
+      "waiting_minutes": 0,
+      "known_only": false
+    },
+    {
+      "base_id": "smako-swedish-stekt-saltsill-loksas",
+      "variant_id": "standard",
+      "ingredient_count": 9,
+      "active_minutes": 73,
+      "total_minutes": 73,
+      "waiting_minutes": 0,
+      "known_only": false
+    },
+    {
+      "base_id": "smako-swedish-stekt-saltsill-loksas",
+      "variant_id": "extended",
+      "ingredient_count": 13,
+      "active_minutes": 78,
+      "total_minutes": 78,
+      "waiting_minutes": 0,
+      "known_only": false
+    }
+  ],
+  "checks_run": [
+    "UTF-8/JSON för alla befintliga leveransfiler",
+    "JSON Schema mot alla faktiska nya paket",
+    "Bas-ID, varianttuple, pack-ID och historiska/reserverade ID:n",
+    "Köks-/måltids-/portionskvoter och variantfamiljer",
+    "Ingrediensantal, mängder, former, enheter och fullständig förslagskoppling",
+    "Kanonisk uses-täckning, komponent-ID:n och tidigare-indexerade beroenden",
+    "Processvattenenheter och låsta gramvikter i löptext",
+    "Tidskritisk väg, aktiv tid och giltiga tidsgränser",
+    "Familjevis separation av kända/okända identiteter",
+    "Paketstorlek och SHA-256",
+    "Maskinjämförelse före/efter författning dokumenterad i separata filer",
+    "Korsreferenser mellan paket, kandidatregister, källor, kvoter, eftergranskning och checkpoint",
+    "Alla ingrediensintervallundantag kontrollerade mot faktiska antal"
+  ],
+  "semantic_review_scope": "AI-redaktionell granskning av huvudkedjor och relevanta närträffar; ingen smak-, produkt- eller mänsklig kvalitetsattest. uses-täckning är en strukturell kontroll, inte ett bevis på praktisk tillagning.",
+  "not_run": [
+    "Smakos native import-/standardiseringsvalidator",
+    "Produktbindning och köpbarhet",
+    "Närings- och allergenberäkning",
+    "Produktgodkännande av vegetarianism/löpe/eko",
+    "Provlagning och uppmätta tids-/utbytesvärden",
+    "Betaaktivering eller runtimegeneration",
+    "Storlek efter Smakos framtida standardisering"
+  ],
+  "archive_check": "Görs efter paketering; separat leveranskvitto sparas efter återöppning."
+}

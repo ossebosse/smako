@@ -1,0 +1,144 @@
+UPPDRAG: 1 000 NYA GRUNDRÄTTER TILL SMAKO
+
+Ta fram ett nytt, sammanhängande receptunderlag till Smako utifrån de bifogade filerna. Skriv på svenska. Prioritera klassiska, etablerade rätter som tillför verklig variation jämfört med biblioteket. Samma rätt med olika ingrediensantal är varianter av EN grundrätt.
+
+1. OMFATTNING OCH EXAKTA MÅL
+
+Beställningen avser 1 000 nya grundrätter UTÖVER befintligt bibliotek, inte 1 000 variantposter:
+- 750 middagar, 4 portioner per recept, tre varianter per grundrätt.
+- 125 frukostar, 1 portion per recept, två varianter per grundrätt.
+- 125 mellanmål, 1 portion per recept, två varianter per grundrätt.
+Det ger 2 750 fullständiga variantposter om hela målet uppnås.
+
+Fördela den NYA leveransen enligt denna tabell. Befintliga recept räknas inte in i kvoterna. Varje ny grundrätt har ett huvudkök och en måltidstyp och räknas bara en gång.
+
+Matkök       cuisine   Middag Frukost Mellanmål Totalt
+Grekiskt     greek       125     21       21      167
+Italienskt   italian     125     21       20      166
+Mexikanskt   mexican     125     21       21      167
+Indiskt      indian      125     21       21      167
+Thailändskt  thai        125     21       21      167
+Svenskt      swedish     125     20       21      166
+TOTALT                   750    125      125    1 000
+
+Skillnaden på en rätt mellan köken beror på att 1 000 inte är delbart med sex. Flytta inte kvoter mellan köken för att dölja svårigheter. Redovisa underskott per cell om det saknas tillräckligt bra och olika rätter. Målet är 1 000, men kulinarisk kvalitet och verklig skillnad går före utfyllnad.
+
+2. LÄS UNDERLAGET FÖRST
+
+Referensen exporterades från Smakos lokala main den 1 november 2026. Exakt kodrevision och bibliotekssignatur finns i referensmanifest.json.
+- befintliga-grundratter.json: 934 aktuella grundrätter, med namn, familjer, ingredienser och variantreferenser.
+- befintliga-recept-detaljer.jsonl: samtliga 2 462 aktuella varianter, en JSON-post per rad, inklusive mängder och tillagning.
+- reserverade-idn.json: redan utgivna grundrätts-ID:n och variant/version-ID:n, även historiska. Återanvänd dem inte för nya rätter.
+- ingrediensregister.json: 284 kända namn/form-identiteter med standardenheter och produktkrav. Detta är ett författarregister, inte ett intyg om tillgång, näring eller pris.
+- AUTHORING.md, authoring-example.json och leveransschema.json: formatbeskrivning, ett befintligt exempel och ett kompletterande JSON Schema för den beställda leveransen. Exemplet får INTE räknas som en ny rätt.
+- exempelkontroll.json: kontroll av just det befintliga formatexemplet.
+
+Läs JSON/JSONL med kod och bygg ett sökbart index över ALLA grundrätter och varianter. Bekräfta inledningsvis antal och filernas läsbarhet. Några befintliga rätter saknar köksmärkning eller tillhör flera kök; de ska ändå ingå i dubblettgranskningen. Använd inte enbart första sidan, ett stickprov eller gamla uppgifter från en tidigare chatt. Om filer inte går att läsa, säg exakt vad som saknas och begär det innan du påstår att en fullständig jämförelse gjorts.
+
+3. VÄLJ RÄTTER SOM TILLFÖR NÅGOT
+
+Prioritetsordning:
+1) Klassiska, väletablerade rätter som saknas i Smako.
+2) Etablerade regionala rätter med tydligt egen karaktär.
+3) Varsamma, tydligt namngivna vardagsanpassningar när en traditionell version inte fungerar med underlaget.
+
+Ange traditionellt namn, region där det är relevant, rättens bärande ingredienser/teknik och vad som motiverar kökstillhörigheten i ett separat kandidatregister. Skilj klassiskt, regionalt och inspirerat/anpassat. Kalla inte en påhittad rätt klassisk. Ett par kryddor räcker inte för att ge en generell rätt en ny kökstillhörighet. Frukost/mellanmål ska fungera som den måltiden, inte vara en middagsrätt med ny etikett.
+
+Verifiera osäkra ursprungs- och klassikerpåståenden med trovärdiga kulinariska källor. Spara faktiskt använda källor och vad de stödjer i källförteckningen. Hitta inte på länkar eller påstå att källor har lästs om de inte har lästs. Formulera recepttexterna själv; kopiera inte publicerade recepttexter. Markera ej verifierade påståenden för granskning.
+
+Sikta på god vardagsbredd: vegetariskt och veganskt, baljväxter, kyckling, fisk och övrigt kött där det är naturligt för köket. Redovisa faktisk fördelning och rätter med skaldjur separat. Skapa inte en serie nästan identiska proteinbyten för att fylla antalet.
+
+Vid val mellan lika bra och tydligt skilda kandidater, prioritera mättande vardagsmat med användbara basråvaror från ingrediensregistret och rimlig återanvändning av råvaror mellan olika rätter. Det ska ge Smako fler möjligheter att hitta billiga gemensamma inköpskorgar. Hitta inte på kronor per portion, butikstillgång eller besparingar; dessa måste senare mätas i Smako. Färre ingredienser är inte i sig ett bevis på lägre inköpskostnad.
+
+4. GRANSKA LIKHET INNAN FULLSTÄNDIG FÖRFATTNING
+
+Jämför varje ny kandidat både med hela befintliga biblioteket och med de andra nya kandidaterna, även över köksgränser. Jämför rättens koncept, alternativa/traditionella namn, huvudingredienser, tillagningssätt, komponenter, smaksättning och servering. Komplettera maskinell namn-/ingredienslikhet med kulinarisk bedömning. Ett nytt ID eller låg namnlikhet bevisar inte att rätten är ny; hög ingredienslikhet kan ibland vara naturlig för två olika klassiker.
+
+Räkna inte följande som en ny grundrätt:
+- Samma rätt med nytt namn, översättning, annan portionering eller annan måltidsetikett.
+- Samma rätt med en extra krydda, garnering, ett vanligt tillbehörsbyte eller något ändrade mängder.
+- Samma grundupplägg där bara pastaform, bönsort eller proteinkälla bytts utan tydligt egen etablerad rätt eller väsentligt annat tillagningsupplägg.
+- En enklare/utökad version av en rätt som redan finns i Smako.
+
+Om en kandidat egentligen är en förbättring eller ny variant av en befintlig grundrätt, lägg den i en separat förslagslista med det befintliga base_id:t som referens. Räkna den inte bland de 1 000 nya och skapa inte ett konkurrerande nytt base_id.
+
+För varje ny grundrätt: dokumentera de närmaste befintliga träffarna (upp till tre med base_id och namn), närmaste nya kandidat, varför de skiljer sig och beslutet accept/reject/review. Ange hur träffarna hittades. Tveksamma gränsfall med review får inte räknas som färdiggranskade nya rätter. Behåll en lista över avvisade/ersatta förslag och skälen, så att de inte återinförs i nästa paket.
+
+5. VARIANTER MED OLIKA INGREDIENSANTAL
+
+Middag: tre självständigt användbara varianter:
+- variant_id=simple: riktmärke 5–7 räknade ingredienser.
+- variant_id=standard: riktmärke 8–11.
+- variant_id=extended: riktmärke 12–15.
+
+Frukost och mellanmål: två varianter, simple och extended. Sikta på ungefär 3–5 respektive 6–8 räknade ingredienser när det passar rätten.
+
+Det är riktmärken, inte skäl att förstöra en klassiker. Alla varianter ska bevara grundrättens identitet, vara goda, fullständiga och tydligt skilja sig i faktiskt ingrediensantal. Lägg inte till dekorativa ingredienser eller konstlade små komponenter enbart för att nå en gräns. Behövs ett undantag, ange verkligt antal och kulinarisk motivering i översikten. Om två/tre meningsfulla varianter inte går att göra, välj i första hand en annan ny grundrätt; redovisa annars det kvarstående variantunderskottet öppet.
+
+Enkel version ska vara en genomtänkt förenkling, inte en ofullständig rätt. Standardversion ska bevara kärnan i klassikern. Utökad version får ha meningsfull extra grönsak, sås eller komponent. En anpassning får inte felaktigt presenteras som traditionell originalversion.
+
+Smakos räknare: antalet unika kanoniska name|form i hela varianten; samma ingrediens i flera komponenter räknas en gång. Salt, svartpeppar, peppar och vatten räknas inte. Olja, övriga kryddor och andra faktiska ingredienser räknas. Särskrivning, alias och olika mängder får inte öka antalet. Använd inte flera former av samma kanoniska namn för att blåsa upp antal eller kringgå importregler.
+
+Nuvarande standardfilter för middag är 10–15 räknade ingredienser. Sträva efter att varje middagsgrundrätt har minst en naturlig variant i det intervallet, men fyll inte ut recepten. Redovisa alla som saknar sådan variant. Övriga varianter är ändå relevanta för användarens andra filterval.
+
+Varianter delar base_id och version=1.0.0, men har eget variant_id, fullständig ingredienslista, egna mängder och samtliga steg. Skriv aldrig "som grundreceptet, men ...". Fältet level (simple/crafted) beskriver en annan dimension och får inte användas i stället för variant_id. Omittera level om du inte avsiktligt klassificerar den dimensionen.
+
+6. INGREDIENSER, MÄNGDER OCH TILLAGNING
+
+Använd ingrediensregistrets exakta kanoniska namn, form och enhet. Visa ett begripligt svenskt namn i label. Prioritera redan kända identiteter, men använd inte fel råvara eller form för att få en rad att passa registret.
+
+Saknas en nödvändig identitet: dokumentera den i registerforslag.json med föreslaget namn, form, enhet, konkret råvara, användande base_id/variant_id och varför kända identiteter inte räcker. Markera berörda varianter som kräver registergranskning. Hitta inte på pack:-krav, produktkopplingar eller ett falskt alias. Separera dessa poster från paket som enbart använder kända identiteter. Ett flaggat utkast kan räknas som författat men inte som importklart eller användbart.
+
+Ingrediensregisterets requirements är standardkrav. Omittera normalt requirements i receptet så att Smako använder dem. Ändra inte kraven för att göra en vara lättare att hitta. Observerade särskilda krav i referensen kan vara bundna till en viss granskad receptversion och får inte kopieras som en generell behörighet. En nödvändig ny styckningsdetalj/produktform ska flaggas för granskning om rätt bindning saknas.
+
+Mängder ska vara positiva, rimliga och avse rätt insatsform: dry, raw_edible, as_sold, cooked_drained eller preserved_drained. Torra/kokta och hela/ätliga/avrunna mängder är inte utbytbara. Använd standardenheten från registret; inga gissade densiteter, styckevikter eller avrunna andelar. Skriv numeriska mängder, inte "efter smak" som enda mängdangivelse. Om samma råvara används i flera komponenter ska varje komponent ha sin verkliga delmängd och totalsumman vara rimlig.
+
+Allt som behövs, även stekfett, sås och tillbehör, måste finnas med. Alla listade ingredienser ska användas i steg, och steg får inte förutsätta olistade inköpsingredienser. Processvatten är undantaget: skriv mängden som exempelvis "500 ml vatten" i stegtexten, enligt AUTHORING.md. Använd inte dl/l för processvatten.
+
+Mängder i komponentlistan ska kunna portionsskalas. Undvik att låsa andra råvarors gramantal i löptext som inte automatiskt skalas; hänvisa till ingrediensen eller en tydlig andel av dess angivna mängd. Temperatur, tid och kärldimensioner ska förstås inte skalas som ingrediensmängder.
+
+Beskriv fungerande tillagning för en hemmakock: ordning, beredning, värme, relevanta temperatur-/färdighetskontroller och servering. Ange stegtider, verkliga beroenden och passiva steg. Ta med blötläggning, marinering, jäsning, avrinning, kylning och andra förberedelser där de behövs. Undanhåll inte lång väntan för att klara ett tidsfilter. Kalla sluträtter med rå animalisk insats måste ha en faktisk säker tillagningskedja och korrekt metod; byt inte metadata till färdiglagad råvara utan att receptet faktiskt använder det.
+
+Tider är författaruppskattningar, inte uppmätt provlagning. AUTHORING.md beskriver Smakos beräkning och gränser. Orealistiska eller otillåtna tider ska redovisas för granskning, inte kapas. Sätt inte näringsvärden, allergenfrihet, vegetarisk löpe, eko, hållbarhet eller produktgodkännanden utan underlag. Ange avsedd kostprofil separat; Smako avgör slutlig klassificering från faktiska ingredienser och produkter.
+
+7. FILFORMAT
+
+Receptpaketen ska vara UTF-8 JSON enligt smako-recipe-authoring-v1:
+{"schema_version":"smako-recipe-authoring-v1","pack_id":"smako-expansion-1000-20261101-001","recipes":[...]}
+
+Använd leveransschema.json tillsammans med AUTHORING.md och exemplet. Schemat är en strukturell kontroll för denna leverans, inte Smakos fullständiga validator eller ett kvalitetsgodkännande.
+
+Varje variant ska uttryckligen ha:
+base_id, version, variant_id, name, servings, meal_type, cuisine, family, primary, method, side, flavor, equipment, components, steps, notes.
+base_id ska vara stabilt, unikt och av formen smako-<cuisine>-<beskrivande-ascii-namn>. Kontrollera mot reserverade-idn.json och hela nya leveransen. Använd samma ID under fortsatt arbete; bokför ersättningar och rättningar.
+method ska vara pot, pan, oven, bake, salad, cold_assembly eller refrigerated_assembly och motsvara den faktiska tillagningskedjan. Nödvändiga metoder som formatet inte rymmer ska flaggas, inte etiketteras falskt.
+Komponenter: id, name, ingredients. Ingrediens: name, form, quantity, role, label; unit får anges enligt registret. Role: primary, side, vegetable, sauce, flavour eller cooking.
+Steg: text, uses, minutes, valfritt after (1-baserade tidigare stegnummer), passive. uses ska ange faktiska kanoniska ingrediensnamn i receptet. Varje steg tar minst en minut. Alla beroenden ska vara giltiga och utan cykler.
+notes ska tydligt säga att innehållet är AI-författat, inte provlagat och ännu inte import-/produktgranskat av Smako.
+
+Källor, likhetsbedömningar, kostavsikt, ingrediensantal, tidsöversikter och blockerare hör i separata översiktsfiler. Lägg inte okända metadatafält i receptobjekten. Skapa inte Smakos härledda runtimefält, innehållshashar eller godkännandestämplar.
+
+8. ARBETSORDNING OCH LEVERANS
+
+A. Läs filerna och bygg index. Skapa en kandidatlista med basidentitet, kök, måltid, klassikerstatus, närmaste befintliga rätt och tydlig skillnad. Granska och ersätt för lika förslag innan du skriver alla varianter.
+B. Gör först ett pilotpaket med 12 grundrätter, två per kök: en middag och en frukost eller ett mellanmål. Detta paket INGÅR i slutantalet. Kontrollera format, ingrediensidentiteter, antal, tider och dubbletter. Rätta upptäckta problem innan resten författas.
+C. Fortsätt i hanterliga paket, normalt 10–20 grundrätter per paket med samtliga varianter tillsammans. Paket är en leveransindelning, inte var sin runtimegeneration. Håll varje JSON-fil väl under 16 MiB; Smako kontrollerar senare även storleken efter standardisering.
+D. Uppdatera ett gemensamt kandidatregister, dubblettregister och kumulativ leveransöversikt efter varje paket. Om arbetet kräver en fortsättning: lämna en checkpoint med färdiga filer, exakta antal, nästa paketnummer, kvarstående kvoter och blockerare. Starta inte om med nya ID:n och tappa inte tidigare jämförelser.
+E. Leverera nedladdningsbara filer, gärna en ZIP med paket och översikter. Ge inte bara en lång chattlista eller avkortad JSON. Om verktyg för filer saknas, säg det och leverera kompletta numrerade delpaket utan att kalla leveransen färdig.
+
+Slutleveransen ska innehålla:
+- paket/*.json: recept enligt rätt schema. Ingen duplicerad samlad receptfil som kan råka importeras en gång till.
+- kandidatregister.json: samtliga nya grundrätter, variantreferenser, kulinarisk identitet och status.
+- leveransoversikt.json: mål och verkligt utfall per kök/måltid, grundrätter separat från varianter, kostavsikt, ingrediensantal per variant, tidsöversikter, intervallundantag och blockerare.
+- dubblettgranskning.json: jämförelser mot befintligt och nytt, beslut med motiveringar, kvarvarande gränsfall och avvisade förslag.
+- registerforslag.json: saknade ingrediensidentiteter och exakt berörda varianter, även om listan är tom.
+- befintliga-recept-forslag.json: förslag som hör till befintliga grundrätter och därför inte räknas som nya, även om listan är tom.
+- kallor.json: faktiskt kontrollerade källor kopplade till bas-ID och vad de stödjer; markera det som inte verifierats.
+- kontrollrapport.json: maskinkontroller som faktiskt körts, verktyg/metod, fel, varningar och kontroller som inte kunnat köras.
+- LAS-MIG.txt: filkarta, slutantal, eventuella underskott och tydlig status: AI-författade receptutkast för separat granskning/import i Smako.
+
+Kontrollera med kod där det går: JSON/schema; unika bas-ID:n och base_id+version+variant_id; inga krockar med reserverade ID:n; kvoter; varianter per bas; verkliga ingrediensantal efter sammanräkning; fullständiga mängder och steg; kända namn/form/enheter eller uttryckliga blockerare; korrekt användning av ingredienser; beroenden och tidsberäkning; filstorlekar; att pilot och fortsättning räknats exakt en gång. En namn-/ingrediensjämförelse ensam är inte ett fullständigt kulinariskt dubblettgodkännande.
+
+Rapportera separat: författade grundrätter/varianter, granskade som tillräckligt olika, schema-kontrollerade, ingrediensblockerade och kvarvarande osäkra. Påstå inte att Smakos egna kontroller, import, köpbarhet, provlagning eller betaaktivering har genomförts. Påstå inte full leverans förrän de faktiska filerna och deras kontroller stöder det.
+
+Börja nu med att läsa underlaget, bekräfta räknade antal och göra kandidatinventeringen. Fortsätt därefter enligt arbetsordningen. Var tydlig om faktiska begränsningar; fyll aldrig ut underskott med recept som är för lika.

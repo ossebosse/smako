@@ -1,0 +1,66 @@
+SMAKO – SEPARAT FORTSÄTTNING 022–024
+
+STATUS
+21 nya grundrätter och 55 kompletta variantposter: 13 middagar, 1 frukost och 7 mellanmål.
+AI-författade receptutkast för separat granskning/import i Smako. Inte provlagade.
+Inga äldre receptpaket eller samlade dubbla importfiler ingår. Den första piloten räknas inte igen.
+
+PAKET OCH LEVERANSORDNING
+022-kanda-identiteter.json: 3 hela familjer, 8 varianter.
+023-registergranskning.json: 9 familjer, 24 varianter.
+024-registergranskning.json: 9 familjer, 23 varianter.
+Endast filer i paket/ är receptpaket. Importera inte översikter/historik som recept.
+Paketeringen håller samman alla varianter av varje grundrätt. Det mindre paketet 022
+beror på strikt separation av kända ingrediensidentiteter och registerblockerade familjer.
+Kända identiteter är INTE ett godkännande av produktval, köpbarhet eller provlagning.
+
+GRANSKNING OCH UNDERSKOTT
+Jämförelsen omfattar originalets 934 baser och 2462 varianter, sex tidigare arkivs
+259 olika bas-ID:n och 695 variantförekomster, samt de nya kandidaterna sinsemellan.
+21 kandidater accepterades redaktionellt före författning. 13 avvisades och 2 lades
+som review utan recept och utan att räknas. Eftergranskning omfattar alla 55 faktiska
+varianttexter mot hela materialet. AI-granskning är inte extern originalitetsattest.
+Alla nya familjer har kompletta variantuppsättningar. Sju ingrediensintervallundantag
+är motiverade. Alla 13 middagar har minst en variant med 10–15 räknade ingredienser.
+Kvoter per kök och måltid finns i leveransoversikt.json. Beställningen är INTE färdig.
+Efter denna del finns 280 skilda utgivna bas-ID:n och 746 skilda variant-ID:n som
+provisoriskt bokföringsvärde. Återstående ID-baserad kvot är 720 baser / 2004 varianter.
+Äldre konceptöverlapp och fyra konfliktfyllda variant-ID:n finns kvar; 280 är därför
+INTE ett slutligt verifierat antal kulinariskt skilda rätter. Äldre konflikter får
+inte döljas genom att räkna båda leveranserna som nya. Se historik/.
+
+REGISTER OCH PROCESSBLOCKERARE
+27 föreslagna namn/form-identiteter, exakt kopplade till användningar.
+44 varianter använder direkt okänd identitet; 18 hela familjer / 47 varianter hålls
+ändå samman i registerpaketen. Inga falska alias, pack:-krav eller produktgodkännanden.
+Kalvdansens kolostrumstyrka och receptets 1:1-spädning måste verifieras mot faktisk
+livsmedelsprodukt före användning. Tlatlapas kräver lämplig kvarn och provad kokning.
+Mysore pak kräver granskning av liten het sockersats. Rökt fläsk och fermenterad bambu
+kräver rätt produktstatus; saltsill ska vara rå, redan urvattnad och avsedd för stekning.
+Ångkokning i pot är uttryckligen markerad för metod-/utrustningsgranskning i Smako.
+Dessa är verkliga blockerare, inte uppgifter om genomförd provlagning.
+
+FILER
+paket/                         Endast de tre nya receptpaketen.
+RECEPTINDEX.txt                 Läsbar lista med samtliga 21 nya grundrätter.
+kandidatregister.json          Identitet, kök, källor, beslut och variantreferenser.
+dubblettgranskning.json         För-/eftergranskning och kulinariska skillnader.
+leveransoversikt.json           Kvoter, mängdantal, kostavsikt, tider och blockerare.
+registerforslag.json            Saknade identiteter och varje komponentanvändning.
+befintliga-recept-forslag.json  Förslag som hör till befintliga ID:n och inte räknas.
+kallor.json                     Faktiskt lästa källor och avgränsat påståendestöd.
+kontrollrapport.json            Faktiskt körd fristående kontroll, fel och varningar.
+kontroll/validera_leverans.py    Omkörbar strukturkontroll, kräver Python + jsonschema.
+granskning/                    Matrisutdata och sparad jämförelsekod.
+referens/                      Schema, regler, register och indatamanifest.
+historik/                      Kompakt spärrindex, äldre konflikter och avslag.
+checkpoint.json                Nästa paketnummer 025 och kvarvarande kvoter.
+FILMANIFEST.json               SHA-256 för leveransfiler, inte runtime-innehållshashar.
+
+KONTROLLENS GRÄNSER
+Läs kontrollrapport.json för de kontroller som faktiskt körts. Detta är inte Smakos
+native-validator. Näring, allergener, produktbindning, inköpspris, köpbarhet, import,
+standardiserad filstorlek och betaaktivering har inte kontrollerats eller utförts.
+Alla tider är författaruppskattningar med konservativ sekventiell beroendekedja.
+Ingrediensantal säger inte att en rätt är billigare. Kostprofiler är avsikt, inte
+verifierade löpe-/produktklassningar eller allergenfrihet.
