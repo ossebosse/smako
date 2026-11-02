@@ -1,23 +1,25 @@
 # Fortsatt hinderarbete och receptimport 2026-11-01
 
-**224 ytterligare varianter och 89 nya grundrätter är innehållsgranskade och
-importerade.** Biblioteket växer från **975/2 570 till 1 064/2 794**. Alla
-224 har klarat ordinarie slutlig inköpskontroll med tillåtna uppskattningar
-i den frysta referensen. **127 klarar även exakt inköp**; 95 är datablockerade
-och två stoppas i checkout i det läget. Inget av dessa korgprov nådde tidsgränsen.
+**250 ytterligare varianter och 97 nya grundrätter är innehållsgranskade och
+importerade.** Biblioteket växer från **975/2 570 till 1 072/2 820**. Alla
+250 har klarat ordinarie slutlig inköpskontroll med tillåtna uppskattningar
+i den frysta referensen. **134 klarar även exakt inköp**; 113 är datablockerade
+och tre stoppas i checkout i det läget. Inget av dessa korgprov nådde tidsgränsen.
 
 De fem faktiskt mottagna leveranserna innehåller **189 grundrätter / 501
-varianter**. Totalt har **332 varianter i 130 grundrätter** importerats:
-124 hela familjer och sex delvis importerade. **169 varianter återstår**.
+varianter**. Totalt har **358 varianter i 138 grundrätter** importerats:
+134 hela familjer och fyra delvis importerade. **143 varianter återstår**.
 Den senast mottagna ZIP-filen med 24 grundrätter / 62 varianter har 44
 importerade varianter och 18 kvar i kön. Ett godkänt syskon gör inte hela
 familjen godkänd.
 
-Originalfilerna är bytebevarade. 224 godkända varianter fick först version 1.0.1.
-Därefter utfärdades 76 efterföljare för 73 av varianterna: 50 för portionsinstruktioner,
+Originalfilerna är bytebevarade. 250 godkända varianter fick först version 1.0.1.
+Därefter utfärdades 77 efterföljare för 74 av varianterna: 50 för portionsinstruktioner,
 satsstorlek eller fiskmetadata, nio för lammstek/upptining, åtta efter kontroll
-av faktiskt valda frysta produkter, tre för skalbart kokvatten, tre för kort pasta och tre för Pindi choles blötläggningsvatten. Tre pastavarianter har kedjan 1.0.1 → 1.0.2 → 1.0.3.
-Alla 76 ersatta versioner är återkallade men bytebevarade. En ytterligare lokalt
+av faktiskt valda frysta produkter, tre för skalbart kokvatten, tre för kort
+pasta, tre för Pindi choles blötläggningsvatten och en för dadlarnas inköpta
+vikt före urkärning. Tre pastavarianter har kedjan 1.0.1 → 1.0.2 → 1.0.3.
+Alla 77 ersatta versioner är återkallade men bytebevarade. En ytterligare lokalt
 utgiven version underkändes i korgprovet och återkallades; den räknas inte som import. Recepten är **inte provlagade**. Tider och nya kulinariska doser är granskade
 författaruppskattningar. De 3 625 tidigare utgivna versionerna, samtliga
 2 570 tidigare aktuella varianter och de 2 200 ursprungsreferenserna bevaras.
@@ -25,7 +27,7 @@ Ingen betaaktivering, insamling eller ändring av användarprofiler ingår.
 
 ## Åtgärder som öppnade recepten
 
-43 ytterligare namn/form/enhetsidentiteter har **258 individuellt granskade
+44 ytterligare namn/form/enhetsidentiteter har **266 individuellt granskade
 produktkopplingar** i befintliga butikskontexter. Registret finns i
 [`expansion-round2-20261101.json`](../../../backend/app/data/ingredients/expansion-round2-20261101.json).
 Varje koppling behåller artikel/GTIN, butik, hela produktnamnet, märke,
@@ -42,7 +44,7 @@ Ingen ny närings-, allergen- eller ekologisk deklaration har lagts till.
 | Kulinariska alternativ | Bland annat svensk surdegsfralla, lagrad pecorino, ungnötslever, färdig tomatillosalsa, musselkött utan skal och corned beef. Nytt namn, ny uttrycklig dos/metod där det behövs; inga falska råvarualias. |
 
 Varje steg har separat `recipe-review-stageN.json`, `import-stageN.json`
-och `qualification-stageN.json` (N = 1–48, där steg 34 är underkänt och återkallat). Granskningarna binder
+och `qualification-stageN.json` (N = 1–59, där steg 34 är underkänt och återkallat). Granskningarna binder
 original-ID, originalfilens hash, nytt versions-ID, innehållshash, samtliga
 mängdändringar och kulinarisk jämförelse. Receptens ingrediensantal,
 arbetssteg och synliga instruktioner följer samma innehåll.
@@ -62,7 +64,7 @@ passiv kokning, ugnstid och väntan.
 
 ## Senare granskning av fem ytterligare hinder
 
-Steg 23–27 gav ytterligare 13 av totalens 224 varianter: två pasqualina
+Steg 23–27 gav ytterligare 13 av totalens 250 varianter: två pasqualina
 med uttryckligen 600 g spenat och kvarvarande mejram/muskot, två frijoles
 puercos med svensk färsk chorizo, tre rogan josh med paprika/cayenne samt
 sex patatato/tsigariasto med lamm. Tillbehör och kryddskillnader bevarar
@@ -186,7 +188,7 @@ av export, kostgränser och befintliga författarkontrakt gav 117 godkända test
 
 Steg 39–48 öppnade ytterligare **26 varianter**. Samtliga har fullständiga
 korgprov och synligt namngivna anpassningar. Den enkla vada pav-varianten
-släpps in separat; dess två syskon med curryblad kvarstår i kön.
+släpptes här in separat; dess två syskon öppnades senare i steg 54 och 59.
 
 | Rätt / antal | Granskat alternativ och metodstöd |
 |---|---|
@@ -218,6 +220,81 @@ följer portionsantalet. Granskade ingrediensrader kan återskapas selektivt
 med `review_expansion_round2.py --only 'namn|form|enhet' --inventory ...`.
 Kommandot kräver samma frysta referens och bevarar andra registerrader.
 
+## Avslutande berednings- och råvaruhinder
+
+Steg 49–59 öppnar ytterligare 26 varianter inom samma granskningsomgång.
+De nya doserna är författarbedömningar, inte uppmätta utbytesfaktorer.
+
+- Kosha mangsho använder benfri lammstek och rapsolja, med planerad
+  kylupptining, okänd putsförlust, två timmars marinering och separat
+  sjudning/reduktion. [Shintas recept](https://carameltintedlife.com/203/)
+  stöder lamm och neutral olja; [Lee Jacksons metod](https://www.cookeatworld.com/kosha-mangsho-bengali-lamb-curry/)
+  stöder längre sjudning av benfri stek. Det är en ny metod med ärligt
+  redovisad tillsyn, inte avkortad aktiv tid för att klara en modellgräns.
+- Recheado har en uttrycklig laxversion med rökt paprika. Korgarna visar
+  rå fryst lax, aldrig makrill på tomatkonserv. Själva alternativet har stöd
+  hos [kocken Tony Coelho](https://beta.kuwaittimes.com/article/13274/lifestyle/art-fashion/whats-cooking-in-our-kitchens/).
+  Fryst vitlök och all upptiningsvätska genomhettas; all pannsky serveras.
+- Undhiyu får spenat-muthiya med rostade osaltade jordnötter. Spenatens
+  vätska behålls, frysta örter kokas igenom och antalet dumplingar följer
+  portionerna. [Dassana Amit](https://www.vegrecipesofindia.com/methi-muthia-steamed-methi-muthia-fried/)
+  beskriver spenat som möjlig muthiya-grönsak; bockhornsklöversmak påstås inte.
+- Tiella använder 400 g fryst musselkött utan skal, inte 1 600 g levande
+  skalbärande musslor. [Miria Onestas skalfria tiella](https://www.dueamicheincucina.it/2020/06/riso-patate-e-cozze-ricetta-tiella-barese.html)
+  stöder teknikvalet, medan fryst produkt och dos är våra uttryckliga val.
+  All upptiningsvätska ingår i den angivna totala kokvätskan.
+- Bröd- och kålgratängen får Gruyère, vitkål och surdegsfralla efter
+  [Emilys alternativa ost- och kålförslag](https://www.insidetherustickitchen.com/zuppa-alla-valpellinese/).
+  [Lustenbergers exakta 150 g-produkt hos Hemköp](https://www.hemkop.se/produkt/Gruyere-Hardost-101774848_ST)
+  har åtta källbundna kopplingar. Ostkantens vikt är okänd, mjölkosten
+  blockeras av vegankost och ingen vegetarisk löpegaranti har lagts till.
+- Standard-vada pav behåller senapsfrö och ingefära men utelämnar curryblad
+  öppet. En sextondel av all inköpt olja används i det kvarvarande fräset;
+  resten är grunt oljebad med okänt upptag. Utökad variant använder det
+  redan granskade tamarindkoncentratet i en ny dos om 20 ml i stället för
+  30 g pasta. Ingen densitet antas; hela dadelchutneyn serveras och dess
+  frysta koriander genomkokas. Alla tre nivåer är därmed importerade.
+- Woon kati behåller två agarlager med saltad kokosmjölk men utelämnar
+  pandan. Utökad kluai buat chi behåller rostad kokos och sesam. Utgivaren
+  anger pandan som valfri arom i [kokosgelén](https://talardthai.com/coconut-milk-jelly/)
+  och [bananrätten](https://talardthai.com/bananas-in-coconut-milk/).
+  Kyltid, mango-upptining och portionsskalbart processvatten är uttryckliga.
+- Tre rätter med citrusbräserat fläsk i pibilstil använder 12 g paprika i
+  stället för 35 g achiotepasta. Det synliga namnet anger paprikaversion.
+  [Milk Streets eget recept](https://www.177milkstreet.com/recipes/dutch-oven-cochinita-pibil-tacos)
+  beskriver en paprikabaserad väg; våra doser granskas separat. Två timmars
+  marinering och tre timmars sluten ugnsbräsering bevaras. Köttet serveras
+  med allt spad och limesyrad rödlök, till skillnad från chilorios torrstekning.
+- Ugnstacos al pastor har 25 g mald ancho och uttryckligen ingen achiote.
+  [Rick Bayless](https://www.rickbayless.com/recipe/pastor-style-tacos/)
+  använder ancho och anger achiote som valfri. Leveransens egen ugnsteknik
+  och fyra timmars marinering behålls. Ny dos färdiga majstortillas ersätter
+  masa-degen; utökad variant har separat färdig tomatillosalsa. Ananasen
+  tinas, frysta örter genomkokas och all marinad/plåtsky serveras.
+
+Faktiskt valda produkter har granskats även för dessa steg. Recepten anger
+frysta produktformer där korgen väljer dem, inklusive genomhettad koriander,
+kylupptinad avokado/mango och ugnsrostad broccoli. Ingen tillagningsprovning
+eller ny uppmätt menyberäkningstid följer av godkända inköpskorgar.
+
+Vada pavs sista produktkontroll visade att de valda
+[Fontana-dadlarna](https://www.fontana.se/produkt/farska-dadlar-ekologiska/)
+innehåller kärnor. En separat 1.0.2-efterföljare anger därför 60 g **inköpt
+vikt före urkärning**, med okänd förlust och utan påfyllnad av extra frukt.
+Den första versionens bytes och korgprov bevaras, men versionen återkallas.
+Se [rättningen](date-basis-corrections.json) och
+[dess nya korgprov](qualification-date-basis-corrections.json).
+
+Kontrollen identifierade också sex äldre aktuella varianter i tre familjer
+som använder samma generella dadelkoppling men talar om urkärnade dadlar:
+`smako-swedish-snack-cold-cashew-fat-set-cake`,
+`smako-swedish-snack-filled-chocolate-dates` och
+`smako-swedish-snack-steamed-date-sponge` (simple/extended).
+Det är ett dokumenterat tidigare mängdbasfel för separat rättning med
+granskade efterföljare eller en verifierad urkärnad produkt. De tillhör
+inte denna omgångs nya import; deras gamla versioner och referenser ändras
+inte här. Den här rapportens godkännanden gäller bara de angivna nya korgarna.
+
 ## Källor och kvalificeringsscope
 
 Mängdbevis och korta källutdrag ligger vid respektive produktkoppling.
@@ -245,7 +322,7 @@ enskilda fullständiga korgprov, **ingen ny mätning av varm menyplaneringstid**
 
 [Sammanställningen](summary.json) och [manifestövergången](library-transition.json)
 är maskinläsbara. Övergången tillåter nya disjunkta, hashbundna paket och
-uttryckliga återkallelser av just de 76 nyutgivna föregångarna, bundna till
+uttryckliga återkallelser av just de 77 nyutgivna föregångarna, bundna till
 efterföljare av samma bas/variant med strikt stigande versionsnummer.
 Den underkända lokala versionen binds dessutom till sitt fullständiga misslyckade
 korgprov, ursprungspaketets hash och återkallelseskäl. Den kan inte väljas som
@@ -267,7 +344,7 @@ bibliotekets kvalitetskrav samt 19 för portions-/versionskedjor, frysta
 produktformer och kostkategorier. Alla slutliga nya versioner har egna
 godkända korgprov; inget gammalt prov har skrivits om för att få ett godkännande.
 
-Slutkontrollen av samtliga 224 varianter gav **825 godkända offline-tester**,
+Slutkontrollen av samtliga 250 varianter gav **840 godkända offline-tester**,
 utan fel eller överhoppade testfall. Den omfattar alla importkvitton,
 versionskedjor, ingrediensgränser, portionsskalning, kostfilter och hela
 bibliotekets innehållskrav. Ruff, compileall och diffkontroll passerade.
@@ -275,15 +352,15 @@ De tidigare testkörningarnas antal överlappar och ska inte summeras.
 
 ## Kvarvarande kö och nästa leverans
 
-[Variantkön](queue.json) redovisar samtliga 501 käll-ID:n. De 169 kvarvarande
-består av **149 med register-/författarhinder** och **20 strukturellt giltiga
+[Variantkön](queue.json) redovisar samtliga 501 käll-ID:n. De 143 kvarvarande
+består av **123 med register-/författarhinder** och **20 strukturellt giltiga
 utkast med konkret saknat produktstöd**. De senare har omprovats i båda
 inköpslägena, se [ingrediensprovet](remaining-native-inputs.json).
 
 [Ingrediensliggaren](ingredient-blockers.json) rangordnar återstående
 hinder med sökord, antal träffar, produktetiketter, berörda recept och nästa
-åtgärd. Störst är räkpasta (15), curryblad (13), makrutlimeblad och thaibasilika
-(10 vardera), guajillochili (9) och palmsocker i inköpt form (8). Antalen överlappar. En tom sökning i den frysta
+åtgärd. Störst är räkpasta (15), curryblad (11), makrutlimeblad och thaibasilika
+(10 vardera), guajillochili (6) och palmsocker i inköpt form (8). Antalen överlappar. En tom sökning i den frysta
 referensen bevisar inte att en vara saknas i handeln.
 
 Thaibasilika i kruka har ingen verifierad bladmassa; ett framtida recept med

@@ -226,6 +226,42 @@ STAGES[48] = {
     'smako-indian-vada-pav': 'Kikärtsmjölsdoppad mosad potatis steks i grunt oljebad och läggs i mjukt bröd med separat torr kokos-vitlökschutney; skild från aloo tikki utan frityrsmet och grönsaksburgare. Dan Toombs anger mjuka hamburgerbröd https://greatcurryrecipes.net/2018/04/30/vada-pav/ och Rohit Ghai mjuka brödrullar https://www.greatbritishchefs.com/recipes/vada-pav-recipe . Vår uttryckliga Pågen-version har ny gramdos och behåller originalets enkla kryddning; syskon med curryblad är fortsatt blockerade.',
 }
 SELECTED_VARIANTS[48] = {'smako-indian-vada-pav': {'simple'}}
+STAGES[49] = {
+    'smako-indian-kosha-mangsho': 'Lamm i mörk reducerad lök-yoghurtmasala, utan tomat; skild från fänkålsdominerad rogan josh och rinnig curry. Uttryckligt alternativ med lamm och neutral olja stöds av Shinta https://carameltintedlife.com/203/ . Benfri lammstek och sjudning följd av koncentrerad reduktion stöds även av Lee Jackson https://www.cookeatworld.com/kosha-mangsho-bengali-lamb-curry/ . Doser och kryddvarianter kommer från leveransen, medan köttbasis och metod är egna angivna anpassningar.',
+}
+STAGES[50] = {
+    'smako-indian-recheado-makrill': 'Vinägerkryddpasta mellan två fiskfiléer steks i panna och serveras med ris; skild från såsig fiskcurry, kokosfisk och panerad fisk. Uttrycklig laxversion med rökt paprika. Kocken Tony Coelho anger både lax och rökt paprika som alternativ i sitt eget recheadorecept https://beta.kuwaittimes.com/article/13274/lifestyle/art-fashion/whats-cooking-in-our-kitchens/ . Ingen makrill- eller kashmirchiliidentitet påstås; originalet bevaras.',
+}
+STAGES[51] = {
+    'smako-indian-undhiyu-vardagsversion': 'Fyllda auberginebitar och rotfrukter ångkokas med formade kikärtsmjölsdumplingar ovanpå, i grov kokos-örtmasala. Skild från slät grönsakscurry och separat friterad pakora. Uttryckliga spenat-muthiya ersätter methi-muthiya; Dassana Amit beskriver spenat som eget muthiyagrönt i https://www.vegrecipesofindia.com/methi-muthia-steamed-methi-muthia-fried/ . Bockhornsklöverns smak påstås inte, och frön används inte som bladalias.',
+}
+STAGES[52] = {
+    'smako-italian-tiella-barese': 'Ris och tunna potatisskivor bakas lagrade med musselkött och tomat; skild från omrörd risotto och buljongrik arroz a la tumbada. Skalfri tiella finns i Miria Onestas eget recept https://www.dueamicheincucina.it/2020/06/riso-patate-e-cozze-ricetta-tiella-barese.html . Vår frysta produkt, nya dos 400 g och lagrade pecorino är uttryckliga anpassningar; inget skalutbyte antas.',
+}
+STAGES[53] = {
+    'smako-italian-zuppa-valpellinentze': 'Torkat bröd varvas med kål, egen grönsaksbuljong och smält ost och gratineras; skild från öppen brödsoppa, brödsallad och krutonger som tillbehör. Uttrycklig Gruyère- och vitkålsversion. Emily anger både Gruyère och vanlig grön kål som alternativ i https://www.insidetherustickitchen.com/zuppa-alla-valpellinese/ . Vår svenska surdegsfralla, grönsaksbas och vätskedos är öppet granskade, inte samma fontina/savojkål eller den lokala originalrätten.',
+}
+STAGES[54] = {
+    'smako-indian-vada-pav': 'Standardvarianten behåller separat senapsfrö-ingefärsfräs, potatisfyllning, kikärtssmet och torr kokos-vitlökschutney. Egen öppet namngiven version utan curryblad, inte ett påstående om samma arom. Raks Anands tidigare indexerade receptkort på https://rakskitchen.net/vada-pav-recipe-indian-snack-recipes/ angav curryblad som valfria; den nu öppnade uppdaterade sidan listar dem. Utelämningen är vår uttryckliga innehållsbedömning, inte en nuvarande källinstruktion. Svenskt mjukt hamburgerbröd enligt steg 48; utökad variant med tamarind behöver separat mängdbasis.',
+}
+SELECTED_VARIANTS[54] = {'smako-indian-vada-pav': {'standard'}}
+STAGES[55] = {
+    'smako-thai-woon-kati': 'Två gelélager med agar: klar sockerbas och saltad kokosmjölk, kylda och skurna. Skild från ångade stärkelselager, tapiokapärlor och fruktsorbet. Talard Thais eget recept https://talardthai.com/coconut-milk-jelly/ anger pandan som valfri arom. Här anges tydligt utan pandan, utan att tillföra färg eller falskt identitetsalias. Originalets agar-, socker- och kokosdoser behålls; 120 ml direkt processvatten ersätter den avsedda slutvolymen efter infusion.',
+}
+STAGES[56] = {
+    'smako-thai-kluai-buat-chi': 'Samma varsamt sjudna banan i söt-salt kokosmjölk som enkelversionen, nu med leveransens meningsfulla rostade kokos- och sesamtopping. Pandan utelämnas öppet, inte ersatt av identisk arom. Receptutgivaren anger valfri pandan i https://talardthai.com/bananas-in-coconut-milk/ . Övriga matdoser bevaras; ingen dublett av en ny grundrätt skapas.',
+}
+SELECTED_VARIANTS[56] = {'smako-thai-kluai-buat-chi': {'extended'}}
+STAGES[57] = {
+    'smako-mexican-cochinita-pibil': 'Citrusmarinerat fläsk tillagas länge under tätt lock och rivs i hela sitt saftiga spad, med separat limesyrad rödlök och mjuka majstortillas. Skild från chilorios ancho-vinägerpasta och avslutande torrstekning. Uttrycklig paprikaversion i pibilstil utan achiote; Cocina de Addys egen videobeskrivning https://www.youtube.com/watch?v=KopKSu9oFR4 anger söt paprika som alternativ. Även Milk Streets eget recept https://www.177milkstreet.com/recipes/dutch-oven-cochinita-pibil-tacos beskriver paprikabaserad ersättningspasta. Här granskas en egen dos 12 g paprikapulver; samma annattosmak eller traditionell bananblads-/jordugnsteknik påstås inte.',
+}
+STAGES[58] = {
+    'smako-mexican-tacos-al-pastor': 'Mycket tunna marinerade fläskskivor rostas glest vid hög ugnsvärme med separat ananas och hackas till mjuka majstacos; skild från chilorios förkokning/torrstekning och pibilstilens tre timmar under tätt lock. Rick Bayless egen https://www.rickbayless.com/recipe/pastor-style-tacos/ använder ancho, tillåter mald chili och anger achiote som rekommenderad men inte nödvändig. Här behålls leveransens öppna ugnsanpassning, 25 g mald ancho ersätter guajillo och achiote utelämnas synligt. Färdiga majstortillas och utökad färdig tomatillosalsa har nya uttryckliga doser; inte samma råvaror eller restaurangens trompo.',
+}
+STAGES[59] = {
+    'smako-indian-vada-pav': 'Utökad vada pav behåller standardens senapsfrö/ingefära och separata sötsyrliga dadelchutney. Samma öppna bröd-/utan-currybladsanpassning som steg 54. Det redan granskade tamarindkoncentratet i ml används som egen ny dos 20 ml i stället för 30 g pasta; ingen ny produktkälla, densitet eller gram/ml-konvertering. Alla 60 g urkärnade dadlar, 15 g koriander och 25 ml limejuice behålls; fryst koriander genomkokas i chutneyn.',
+}
+SELECTED_VARIANTS[59] = {'smako-indian-vada-pav': {'extended'}}
 
 
 def sha(raw):
@@ -281,8 +317,256 @@ def mark_process(row, index, ingredients, operation, description):
 
 def correct(row, vocabulary):
     base, changes = row['base_id'], []
+    if base.endswith('tacos-al-pastor'):
+        rename_ingredient(row,'guajillochili','anchochili')
+        rename_ingredient(row,'masa harina','majstortillas')
+        rename_ingredient(row,'tomatillo','salsa verde av tomatillo')
+        row['name']='Tacos al pastor i ugn – ancho utan achiote – '+{'simple':'enkel','standard':'med apelsin och kryddor','extended':'med tomatillosalsa'}[row['variant_id']]
+        row['flavor']=['ancho','vinäger','rostad ananas']
+        row['side']='färdiga mjuka majstortillas'
+        row['notes']='Granskad ugnsversion med 25 g mald Ancho Style-chili i stället för 25 g guajillo; 30 g achiotepasta utelämnas uttryckligen. Annan chilismak och utan achiotearom. 400 g färdiga mjuka majstortillas ersätter 280 g masa harina, degvatten och 2 g tortillassalt. Utökad använder 250 g färdig tomatillosalsa i stället för 300 g rå tomatillo och dess 2 g extra salt; löken, vitlöken och koriandern behålls och genomhettas. Alla köttråvaror, ananas, marinad, plåtsky och fett serveras. Inte provlagad.'
+        for c in row['components']:
+            has_tortilla=any(i['name']=='majstortillas' for i in c['ingredients'])
+            has_salsa=any(i['name']=='salsa verde av tomatillo' for i in c['ingredients'])
+            c['ingredients']=[i for i in c['ingredients'] if i['name']!='achiotepasta' and not (i['name']=='salt' and (has_tortilla or has_salsa))]
+            for i in c['ingredients']:
+                if i['name']=='anchochili':i['label']='Mald Ancho Style-chili'
+                if i['name']=='majstortillas':i.update(quantity=400,form='as_sold',label='Färdigbakade mjuka majstortillas')
+                if i['name']=='salsa verde av tomatillo':i.update(quantity=250,form='as_sold',label='Färdig kryddad tomatillosalsa, ny dos')
+                if i['name']=='ananas':i['label']='Frysta ansade ananasbitar, hela mängden och saften används'
+        extra=row['variant_id']!='simple'
+        row['steps']=[
+            {'text':'Mixa hela mängden mald anchochili med 20 ml vatten, äppelcidervinäger, färsk eller fryst hackad vitlök och köttets salt'+(' samt oregano, spiskummin och apelsinjuice' if extra else '')+'. Använd helt tinad benfri fläskkarré, väg rå ätlig mängd och skär tre till fyra millimeter tunna skivor tvärs fibrerna. Vänd med hela marinaden och täck. Ingen chili silas eller blötläggs separat.','uses':['anchochili','äppelcidervinäger','vitlök','salt','fläskkarré']+(['oregano','spiskummin','apelsinjuice'] if extra else []),'minutes':12},
+            {'text':'Marinera fyra timmar i kylskåp vid högst 4 °C, avskilt från färdig mat.','uses':['fläskkarré'],'minutes':240,'passive':True},
+        ]
+        if row['variant_id']=='extended':
+            row['steps'].append({'text':'Skala löken, väg ätlig mängd och hacka. Lägg i liten kastrull med 40 ml vatten och salsans färska eller frysta hackade vitlök. Sjud under omrörning cirka fem minuter. Tillsätt den uppvägda färdiga tomatillosalsan och all fryst koriander; sjud minst tre minuter eller längre enligt förpackningen. Mixa slätt med allt spad. Salsan innehåller redan kryddor och salt; tillsätt inget extra salt. Håll varm.','uses':['gul lök','vitlök','salsa verde av tomatillo','koriander'],'minutes':11})
+        row['steps'].extend([
+            {'text':'Värm ugnen till 230 °C. Fördela fläskskivorna glest i ett lager på ugnståliga plåtar med kanter, med hela marinaden tunt över. Lägg de tinade ananasbitarna bredvid och häll all fruktsaft på plåtarna. Använd fler plåtar eller omgångar om maten annars staplas.','uses':['fläskkarré','ananas','anchochili'],'minutes':6},
+            {'text':'Rosta under tillsyn cirka arton minuter, byt plats på plåtarna halvvägs och kontrollera noga mot slutet. Kött och marinad ska vara helt genomlagade, minst 72 °C i de tjockaste skivorna, och ananasen genomhet med brynta kanter; förläng vid behov. Håll färdiga omgångar varma över 60 °C.','uses':['fläskkarré','ananas'],'minutes':18},
+            {'text':'Lyft kött och ananas till ett fat. Skrapa all plåtsky och allt fett i en liten kastrull; använd sammanlagt 20 ml vatten för att lossa kvarvarande sky. Koka upp och reducera under omrörning cirka fem minuter till tjockare sås. Ingen sky eller fett hälls bort. Hacka kött och ananas grovt och vänd med hela såsen.','uses':['fläskkarré','ananas'],'minutes':8},
+            {'text':'Väg de färdiga mjuka majstortillorna, värm kort i torr panna och fördela jämnt mellan portionerna. Fyll med allt kött, ananas och sky'+(' och servera all tomatillosalsa till' if row['variant_id']=='extended' else '')+'.','uses':['majstortillas','fläskkarré','ananas']+(['salsa verde av tomatillo'] if row['variant_id']=='extended' else []),'minutes':5},
+        ])
+        prepend_thaw(row,'ananas',120,'Behåll hela den ansade uppvägda frukten och all saft; använd allt vid rostningen.')
+        for n,s in enumerate(row['steps']):s['after']=[n] if n else []
+        changes.append('Explicit oven-pastor adaptation with ground ancho 25 g instead of guajillo and no achiote; use 400 g ready corn tortillas instead of masa dough, remove dough salt/water. Extended salsa is an explicit 250 g prepared product plus retained onion/garlic/coriander with no extra salsa salt. Plan frozen-pineapple thaw, retain and boil all meat marinade/fruit juice/pan fat; four-hour marinade and supervised thin-slice roast remain distinct from slow braises.')
+    if base.endswith('cochinita-pibil'):
+        rename_ingredient(row,'achiotepasta','paprikapulver')
+        rename_ingredient(row,'tortillas','majstortillas')
+        row['name']='Citrusbräserat fläsk i pibilstil – paprikaversion – '+{'simple':'enkel','standard':'med oregano och spiskummin','extended':'med bönor och avokado'}[row['variant_id']]
+        row['family']='citrusbräserat fläsk i pibilstil'
+        row['flavor']=['paprika','citrus','rödlök']
+        row['notes']='Uttrycklig paprikaversion utan achiote. 12 g sött paprikapulver ersätter 35 g achiotepasta som ny författardos; inte samma arom, salt eller omräkningsfaktor. Övriga matmängder bevaras. Apelsin och lime är redan utkastets alternativ till pomerans, och tätt lock dess alternativ till jordugn/bananblad. Hela köttspadet, allt utsmält fett och lökens lag serveras. Standard behåller vitlök, oregano och spiskummin; utökad dessutom bönor och avokado. Inte provlagad.'
+        for c in row['components']:
+            if c['id']=='flask':c['name']='Citrus- och paprikabräserat fläsk'
+            for i in c['ingredients']:
+                if i['name']=='paprikapulver':i.update(quantity=12,form='dry',role='flavour',label='Sött paprikapulver, ny dos utan achiote')
+                if i['name']=='majstortillas':i['label']='Mjuka färdigbakade majstortillas'
+        extra=row['variant_id']!='simple'
+        row['steps']=[
+            {'text':'Använd helt tinad benfri fläskkarré. Väg rå ätlig mängd och skär cirka sex centimeter stora bitar. Rör ut paprikapulvret i apelsinjuice och köttdelens limejuice och salt.'+(' Rör ner färsk eller fryst hackad vitlök, oregano och spiskummin.' if extra else '')+' Vänd köttet i all marinad och täck.','uses':['fläskkarré','paprikapulver','apelsinjuice','limejuice','salt']+(['vitlök','oregano','spiskummin'] if extra else []),'minutes':10},
+            {'text':'Marinera två timmar i kylskåp, högst 4 °C. Håll kött och marinad åtskilda från råa tillbehör.','uses':['fläskkarré'],'minutes':120,'passive':True},
+            {'text':'Värm ugnen till 160 °C. Lägg kött och all marinad i en ugnssäker gryta, tillsätt 100 ml vatten och täck tätt med lock.','uses':['fläskkarré','paprikapulver'],'minutes':5},
+            {'text':'Tillaga i ugnen under tätt lock två timmar.','uses':['fläskkarré'],'minutes':120,'passive':True},
+            {'text':'Kontrollera att bottnen inte kokat torr. Tillsätt vid behov 100 ml vatten och sätt tillbaka locket.','uses':['fläskkarré'],'minutes':2},
+            {'text':'Fortsätt i ugnen under lock ytterligare cirka sextio minuter.','uses':['fläskkarré'],'minutes':60,'passive':True},
+            {'text':'Kontrollera att köttet faller isär lätt med gaffel och är helt genomlagat, minst 72 °C i tjockaste biten. Förläng annars tillagningen under lock. Behåll allt fett och spad. Ta ut grytan och håll täckt. Skala rödlöken, väg den ätliga mängden och skiva tunt. Krama med lökdelens limejuice och salt; behåll all lag.','uses':['fläskkarré','rödlök','limejuice','salt'],'minutes':8},
+            {'text':'Låt köttet vila tio minuter i spadet medan löken drar i sin lag.','uses':['fläskkarré','rödlök'],'minutes':10,'passive':True},
+            {'text':'Dra isär köttet med två gafflar och blanda med hela det heta paprika-citrusspadet och allt fett. Ingen sky silas eller hälls bort. Värm de mjuka majstortillorna kort i torr panna; förvara varmt under lock.','uses':['fläskkarré','majstortillas'],'minutes':8},
+        ]
+        if row['variant_id']=='extended':
+            row['steps'].append({'text':'Väg redan kokta svarta bönor efter avrinning. Värm med 30 ml vatten och all fryst hackad koriander, sjud minst tre minuter eller längre enligt förpackningen och behåll allt spad. Lägg den helt tinade avokadon med all sin saft bredvid.','uses':['svarta bönor','koriander','avokado'],'minutes':7})
+            prepend_thaw(row,'avokado',120,'Använd alla ansade frysta avokadobitar och all saft som tillbehör.')
+        row['steps'].append({'text':'Fördela hela köttet och allt spad, tortillorna, rödlöken med all lag och eventuella bönor/avokado jämnt mellan portionerna.','uses':[],'minutes':2})
+        for n,s in enumerate(row['steps']):s['after']=[n] if n else []
+        changes.append('Explicit pibil-style paprika/citrus adaptation: 12 g sweet paprika replaces 35 g achiote paste without equivalence; same 850 g pork and all other food doses retained, tortillas restricted to soft corn. Preserve 2 h cold marinade and 3 h covered oven braise with separate active liquid/tenderness checks. Serve every sauce/fat/onion liquid; extended frozen coriander boils with beans and avocado thaws with all juice.')
+    if base.endswith('woon-kati'):
+        for component in row['components']:
+            component['ingredients'] = [i for i in component['ingredients'] if i['name'] != 'pandanblad']
+            component['name'] = component['name'].replace('pandan', 'klar gelé').replace('Pandan', 'Klar gelé')
+        row['name'] = 'Woon kati – tvålagers kokosgelé utan pandan – ' + ('enkel' if row['variant_id']=='simple' else 'med mango och lime')
+        row['flavor'] = ['kokos', 'söt-salt'] + (['mango', 'lime'] if row['variant_id']=='extended' else [])
+        row['notes'] = 'Uttryckligen utan pandan och dess arom. Klar socker-agarbas med separat kokosmjölkslager; originalets 1,6 g agar, 100 ml kokosmjölk, 20 g socker och 0,2 g salt per portion bevaras. 120 ml vatten används direkt i klara lagret i stället för 160 ml till bladinfusion som sedan skulle mätas till 120 ml. Ingen infusion eller bladförlust återstår. Utökad variant behåller 100 g mango och 8 ml limejuice. Inte provlagad.'
+        row['steps'] = [
+            {'text':'Mät upp 120 ml vatten i en liten kastrull. Vispa ner hälften av agarpulvret. Koka upp under omrörning och koka försiktigt tre minuter eller längre enligt förpackningen tills agarn är helt löst. Rör ner hälften av sockret tills det lösts. Häll hela blandningen i en liten värmetålig form.','uses':['agar agar','strösocker'],'minutes':6},
+            {'text':'Låt det klara lagret stå cirka tio minuter tills ytan precis har satt sig men fortfarande är varm.','uses':[],'minutes':10,'passive':True},
+            {'text':'Vispa resten av agarn i kokosmjölken med 40 ml vatten. Koka upp under omrörning och småkoka tre minuter eller längre enligt förpackningen tills agarn är helt löst. Rör ner resten av sockret och saltet. Låt bara svalna kort så blandningen fortfarande är flytande. Kontrollera det klara lagret: ytan ska bära men vara varm och lite klibbig. Häll kokoslagret försiktigt över baksidan av en sked ovanpå det klara lagret.','uses':['agar agar','kokosmjölk','strösocker','salt'],'minutes':8},
+            {'text':'Låt de båda lagren sätta sig och svalna cirka tjugo minuter.','uses':[],'minutes':20,'passive':True},
+            {'text':'Flytta formen till kylskåp och täck när den inte längre avger ånga.','uses':[],'minutes':1},
+            {'text':'Kyl minst sextio minuter tills gelén är helt kall och stadig; förläng vid behov.','uses':[],'minutes':60,'passive':True},
+        ]
+        if row['variant_id']=='extended':
+            row['steps'].append({'text':'Dela vid behov de tinade mangobitarna och vänd med limejuice och all fruktsaft. Skär gelén i små bitar och servera hela mängden tillsammans med all mango och saft.','uses':['mango','limejuice','kokosmjölk','agar agar'],'minutes':4})
+            prepend_thaw(row,'mango',120,'Behåll hela mängden och all fruktsaft till serveringen; vikten avser fryst ansat fruktkött utan skal eller kärna.')
+        else:
+            row['steps'].append({'text':'Skär eller skeda upp hela den kalla gelén och servera.','uses':['kokosmjölk','agar agar'],'minutes':2})
+        for n,s in enumerate(row['steps']):s['after']=[n] if n else []
+        changes.append('Explicit no-pandan version of two-layer agar coconut jelly. Preserve all food amounts except removed 8 g leaves; use intended final 120 ml clear-layer water directly, retain separate 40 ml coconut-layer water, boil agar before sugar and separate fridge transfer from cooling. Extended thawed mango retains all juice and plans two hours.')
+    if base.endswith('zuppa-valpellinentze'):
+        rename_ingredient(row,'fontina','gruyère')
+        rename_ingredient(row,'savojkål','vitkål')
+        rename_ingredient(row,'bröd','surdegsfralla')
+        row['primary']='vitkål och gruyère'
+        row['name'] += ' – med gruyère, vitkål och surdegsfralla'
+        row['notes']='Granskad bröd- och kålgratäng med 220 g inköpt Gruyère före kantputsning i stället för fontina, 600 g ansad vitkål och 300 g surdegsfralla. Inga identiska ostar eller kålformer påstås. Brödet torkas i ugnen före lagring och allt grönsaksspad används. Initialt kokvatten minskas uttryckligen från 1000 till 400 ml för en saftig gratäng utan bortkastad buljong. Eventuell ostkant har okänt utbyte. Inte provlagad.'
+        for c in row['components']:
+            for i in c['ingredients']:
+                if i['name']=='gruyère':i['label']='Gruyère, inköpt mängd före borttagning av kant'
+                if i['name']=='surdegsfralla':i['label']='Svensk surdegsfralla, uppvägd före torkning'
+                if i['name']=='broccoli':i.update(form='as_sold',label='Frysta naturella broccolibuketter')
+        original=copy.deepcopy(row['steps'])
+        extra=row['variant_id']!='simple'
+        row['steps']=[
+            {'text':'Sätt ugnen på 150 °C. Väg surdegsfrallorna före torkning och skiva centimetertjockt. Lägg på en torr plåt; ingen extra olja används.','uses':['surdegsfralla'],'minutes':4},
+            {'text':'Torka brödskivorna i ugnen cirka tjugo minuter. De ska bli torra utan att brännas.','uses':['surdegsfralla'],'minutes':20,'passive':True},
+            {'text':'Ta ut brödet och höj ugnen till 210 °C. Väg osten före eventuell kantputsning, avlägsna hård kant och riv resten grovt utan att fylla på extra ost. Ta bort kålens hårda rotstock och ytterblad, väg den ätliga mängden och strimla tunt. Skala lök och morot, ansa selleri, väg ätliga mängder och tärna smått.'+(' Väg färsk eller fryst hackad vitlök.' if extra else ''),'uses':['surdegsfralla','gruyère','vitkål','gul lök','morot','selleri']+(['vitlök'] if extra else []),'minutes':13},
+            {**original[1], 'text':original[1]['text'].replace('1000 ml vatten','400 ml vatten')},
+            {'text':'Sjud kålen och övriga grönsaker under lock cirka tjugo minuter.','uses':['vitkål','gul lök','morot','selleri'],'minutes':20,'passive':True},
+            {'text':'Kontrollera att kålen är mjuk. Är den fortfarande hård, tillsätt vid behov 100 ml vatten och förläng sjudningen. Behåll alla grönsaker och allt spad. Smörj en ugnsform med en del av återstående smör. Varva torkat bröd, grönsaker och ost; avsluta med ost. Fördela allt spad jämnt och klicka resten av smöret ovanpå.'+(' Strö över muskot.' if extra else ''),'uses':['surdegsfralla','vitkål','gruyère','smör']+(['muskot'] if extra else []),'minutes':9},
+            {**original[4]},
+            {'text':'Kontrollera att mitten är genomhet och ytan gyllene; förläng gräddningen vid behov. Behåll och servera hela formens innehåll.','uses':['surdegsfralla','gruyère','vitkål'],'minutes':2},
+        ]
+        if row['variant_id']=='extended':
+            row['steps'].extend([
+                {'text':'Väg frysta broccolibuketter utan att tina eller sila. Vänd med tillbehörets olivolja på en plåt. Håll brödformen täckt och varm över 60 °C medan broccolin rostas.','uses':['broccoli','olivolja'],'minutes':3},
+                {'text':'Rosta broccolin i den varma ugnen cirka tjugotvå minuter eller längre enligt förpackningen.','uses':['broccoli'],'minutes':22,'passive':True},
+                {'text':'Kontrollera mjuk, helt genomhet broccoli. Vänd med citronjuicen och all kvarvarande plåtsky och servera med den varma gratängen.','uses':['broccoli','citronjuice','olivolja'],'minutes':3},
+            ])
+        else:row['steps'].append({'text':'Fördela den varma gratängen och all dess sky mellan portionerna.','uses':[],'minutes':2})
+        row['unmeasured_processes']=[]
+        mark_process(row,3,['gruyère'],'trim_before_cooking','Gruyère vägs före eventuell kantputsning. Kantens andel och kvarvarande ätlig vikt är inte uppmätta.')
+        for n,s in enumerate(row['steps']):s['after']=[n] if n else []
+        changes.append('Explicit Gruyere/white-cabbage/sourdough-roll version, retaining numerical food doses but measuring cheese before rind trimming with unknown yield. Dry bread 20 minutes, then cook cabbage with 400 ml initial water rather than discard part of a litre. All vegetable broth/butter is layered and served. Extended frozen broccoli is oven-roasted with all oil/juice, not treated as fresh raw heads.')
+    if base.endswith('tiella-barese'):
+        rename_ingredient(row,'blåmusslor med skal','blåmusselkött utan skal')
+        rename_ingredient(row,'pecorino romano','lagrad pecorino')
+        row['primary']='blåmusselkött utan skal'
+        row['name']+=' – med fryst musselkött utan skal'
+        row['equipment']=['ugn','djup ugnsform med lock','kanna','rivjärn','termometer']
+        row['notes']='Granskad skalfri tiella med 400 g fryst musselkött i stället för 1600 g levande musslor med skal. Ny kulinarisk dos, ingen faktor för skalutbyte. Standard och utökad använder 45 g inköpt lagrad pecorino före eventuell kantputsning. Tolv timmars kylupptining ingår. All vätska används i lagren; inga levande musslor öppnas. Inte provlagad.'
+        for c in row['components']:
+            for i in c['ingredients']:
+                if i['name']=='blåmusselkött utan skal':i.update(quantity=400,label='Fryst musselkött utan skal, deklarerad produktvikt')
+                if i['name']=='lagrad pecorino':i['label']='Lagrad pecorino, inköpt gramvikt före kantputsning'
+        extra=row['variant_id']!='simple'
+        row['steps']=[
+            {'text':'Väg upp fryst musselkött utan skal i ett täckt kärl i kylskåp. Behåll all vätska.','uses':['blåmusselkött utan skal'],'minutes':1},
+            {'text':'Tina helt i kylskåp enligt förpackningen; planera tolv timmar och förläng vid behov.','uses':['blåmusselkött utan skal'],'minutes':720,'passive':True},
+            {'text':'Sätt ugnen på 190 °C. Skala potatis och lök, väg rå ätlig mängd och skiva cirka två millimeter tunt. Hacka tomaten och väg färsk eller fryst hackad vitlök. Väg riset torrt.'+(' Väg osten före eventuell kantputsning, ta bort hård kant och riv resten utan att fylla på extra ost. Väg fryst hackad persilja.' if extra else ''),'uses':['potatis','gul lök','tomat','vitlök','ris']+(['lagrad pecorino','persilja'] if extra else []),'minutes':12},
+            {'text':'Olja en djup form med hälften av tiellans olivolja. Lägg lök och hälften av potatisen i botten, sedan musselkött, ris, tomat och vitlök'+(' samt hälften av persiljan och osten' if extra else '')+'. Täck med resten av potatisen. Tillsätt salt och svartpeppar. Mät upp 850 ml vatten i en kanna; ta bort lika mycket vatten som mängden upptiningsvätska och ersätt med denna. Häll hela blandningen runt kanten. Behåll alla lager och all vätska.','uses':['olivolja','gul lök','potatis','blåmusselkött utan skal','ris','tomat','vitlök','salt','svartpeppar']+(['lagrad pecorino','persilja'] if extra else []),'minutes':10},
+            {'text':'Fördela resten av olivoljan över ytan'+(' tillsammans med ströbröd och resten av osten och persiljan' if extra else '')+'. Täck formen med ugnssäkert lock och sätt in i ugnen.','uses':['olivolja']+(['ströbröd','lagrad pecorino','persilja'] if extra else []),'minutes':2},
+            {'text':'Baka täckt i trettiofem minuter.','uses':['ris','potatis','blåmusselkött utan skal'],'minutes':35,'passive':True},
+            {'text':'Ta av locket och kontrollera vätskan utan att röra om lagren. Tillsätt vid behov 100 ml vatten om det torkat innan riset mjuknat.','uses':['ris','potatis'],'minutes':2},
+            {'text':'Baka ytterligare tjugo minuter utan lock.','uses':['ris','potatis','blåmusselkött utan skal'],'minutes':20,'passive':True},
+            {'text':'Kontrollera att ris och potatis är helt mjuka, mitten minst 75 °C och musselköttet genomhett enligt förpackningen. Förläng annars täckt med 100 ml vatten vid behov. Ta ut formen.','uses':['ris','potatis','blåmusselkött utan skal'],'minutes':2},
+            {'text':'Låt formen vila tio minuter.','uses':[],'minutes':10,'passive':True},
+        ]
+        if row['variant_id']=='extended':row['steps'].append({'text':'Ansa fänkålen, väg den råa ätliga mängden och strimla tunt. Vänd med tillbehörets olivolja och citronjuice; behåll all dressing.','uses':['fänkål','olivolja','citronjuice'],'minutes':5})
+        row['steps'].append({'text':'Fördela tiellan mellan portionerna med allt musselkött, ris, potatis och all kvarvarande sky.'+(' Servera fänkålen och all dess dressing till.' if row['variant_id']=='extended' else ''),'uses':[],'minutes':2})
+        row['unmeasured_processes']=[]
+        if extra:mark_process(row,3,['lagrad pecorino'],'trim_before_cooking','Osten vägs före kantputsning utan antagen ätlig andel.')
+        for n,s in enumerate(row['steps']):s['after']=[n] if n else []
+        changes.append('New 400 g frozen shell-free mussel-meat dose replaces 1600 g live shell-on mussels with no yield equivalence. Retain all thaw liquid within the authored 850 ml total liquid. Keep dry rice/potato layers; separately time lid removal, temperature/softness check and passive rest. Standard/extended use purchased aged pecorino with unknown rind loss; all frozen parsley/garlic bakes through and all oil/juice is served.')
+    if base.endswith('undhiyu-vardagsversion'):
+        rename_ingredient(row,'bockhornsklöverblad','spenat')
+        rename_ingredient(row,'jordnötter','rostade jordnötter')
+        row['name']=row['name'].replace('methi-muthiya','spenat-muthiya')
+        row['side']='spenat-muthiya'
+        row['flavor']=['kokos','koriander','spenat']
+        row['notes']='Uttrycklig granskad vardags-undhiyu med spenat-muthiya. 80 g fryst naturell spenat ersätter 80 g färska bockhornsklöverblad; annan grönsak och smak, ingen utbytesfaktor. Spenaten värms och all vätska används i degen. 70 g rostade osaltade jordnötter anges öppet. Grönsaker, kokos-örtmasala och dumplingar ångkokas tillsammans, utan att sila eller kasta någon sky. Inte provlagad.'
+        for c in row['components']:
+            c['name']=c['name'].replace('Methi-muthiya','Spenat-muthiya')
+            for i in c['ingredients']:
+                if i['name']=='spenat':i.update(form='as_sold',label='Fryst naturell spenat')
+                if i['name']=='rostade jordnötter':i['label']='Rostade osaltade jordnötter'
+        original=copy.deepcopy(row['steps'])
+        row['steps']=[
+            {'text':'Väg fryst naturell spenat och lägg i en liten kastrull med 20 ml vatten. Värm under omrörning tills allt tinat och är genomhett; sjud minst tre minuter eller längre enligt förpackningen. Behåll all vätska. Finhacka eventuella hela blad.','uses':['spenat'],'minutes':7},
+            {'text':'Låt spenaten med sin vätska svalna tio minuter så att degen kan hanteras.','uses':['spenat'],'minutes':10,'passive':True},
+            {'text':'Arbeta ihop all spenat och vätska med kikärtsmjöl, muthiyans olja och salt samt 25 ml vatten. Degen ska vara fast och formbar; tillsätt vid behov ytterligare 15 ml vatten efter vilan, inte extra mjöl.','uses':['spenat','kikärtsmjöl','rapsolja','salt'],'minutes':4},
+            {'text':'Låt degen vila tio minuter medan mjölet suger upp vätskan.','uses':['kikärtsmjöl','spenat'],'minutes':10,'passive':True},
+            {**original[1], 'text':original[1]['text'].replace('jordnötter, koriander, vitlök','rostade osaltade jordnötter, fryst hackad koriander, färsk eller fryst hackad vitlök')+' Skala eventuell ingefära och väg efter skalning. All ört- och vitlöksvätska används och genomkokas senare i grytan.'},
+            {**original[2], 'text':original[2]['text'].replace('Skala potatisen och dela i grova bitar.','Skala potatisen, väg den råa ätliga mängden och dela i bitar omkring tre centimeter. Ansa och väg auberginen.').replace('Skala och dela sötpotatisen grovt.','Skala sötpotatisen, väg efter skalning och dela i tre centimeter stora bitar.').replace('tolv små avlånga bitar','tre små avlånga bitar per portion, högst två centimeter tjocka')},
+            original[3],
+            {'text':'Sjud försiktigt under tätt lock tjugo minuter; dumplingarna ska ligga ovanpå grönsakerna.','uses':['potatis','aubergine','spenat','kikärtsmjöl'],'minutes':20,'passive':True},
+            {'text':'Skaka grytan försiktigt och kontrollera bottnen utan att röra sönder dumplingarna. Tillsätt vid behov 100 ml vatten.','uses':['potatis','kikärtsmjöl'],'minutes':2},
+            {'text':'Sjud ytterligare tjugo minuter under lock.','uses':['potatis','aubergine','spenat','kikärtsmjöl'],'minutes':20,'passive':True},
+            {'text':'Kontrollera mjuk potatis och genomkokta dumplingar utan rå mjölkärna; förläng annars sjudningen. Lyft locket och reducera försiktigt vid behov. Fördela alla grönsaker, hela kokosmasalan och tre muthiya per portion med all sky. Ingen olja eller vätska hälls bort.','uses':['potatis','aubergine','kokosflingor','kikärtsmjöl','spenat'],'minutes':8},
+        ]
+        for n,s in enumerate(row['steps']):s['after']=[n] if n else []
+        changes.append('Explicit spinach-muthiya version: 80 g frozen plain spinach replaces fresh fenugreek leaf, not its aroma or an alias. Heat then retain all spinach liquid in besan dough; total initial process water stays 45 ml split 20/25 ml. Use reviewed roasted unsalted peanuts. Frozen coriander/garlic cook in retained masala; three dumplings per portion and separate active checks preserve scaling and honest waiting time.')
+    if base.endswith('kosha-mangsho'):
+        rename_ingredient(row, 'getkött', 'benfri lammstek')
+        rename_ingredient(row, 'senapsolja', 'rapsolja')
+        row['primary'] = 'benfri lammstek'
+        row['family'] = 'kosha mangsho i reducerad lök-yoghurtmasala'
+        row['name'] = 'Kosha mangsho med benfri lammstek och rapsolja – ' + row['variant_id']
+        row['equipment'].append('termometer')
+        row['notes'] = 'Uttrycklig lamm- och rapsoljeversion. 800 g inköpt benfri stek före putsning ersätter 800 g ätligt getkött; ingen utbytesfaktor eller samma senapsarom påstås. Upptining 24 timmar och marinering två timmar ingår. Ny metod med brynt lök, 90 minuters varsam sjudning och cirka 15 minuters aktiv reduktion ersätter utkastets långa ständiga bryning. Alla tider är uppskattningar, inte provlagade eller uppmätta; segt kött kräver längre tillagning. All marinad, upptiningsvätska och steksky används, putsförlusten är okänd.'
+        for c in row['components']:
+            c['name'] = c['name'].replace('getkött', 'lammstek')
+            for i in c['ingredients']:
+                if i['name'] == 'benfri lammstek': i.update(form='as_sold', label='Benfri lammstek, inköpt vikt före putsning')
+        original = copy.deepcopy(row['steps'])
+        names = {i['name'] for c in row['components'] for i in c['ingredients']}
+        row['steps'] = [
+            {'text':'Tina vid behov hela förpackningen benfri lammstek i ett täckt läckagesäkert kärl i kylskåp. Behåll all vätska.','uses':['benfri lammstek'],'minutes':2},
+            {'text':'Planera 24 timmars kylupptining, eller längre enligt förpackningen tills ingen iskärna återstår. Redan kylförvarat kött går direkt vidare.','uses':['benfri lammstek'],'minutes':1440,'passive':True},
+            {'text':'Väg den angivna inköpta mängden som kött med tillhörande upptiningsvätska före putsning. Spara vätskan kallt. Putsa endast bort grova senor utan att fylla på extra kött. Skär i jämna bitar omkring 2,5 cm. Skala lök och ingefära och väg efter ansning; skiva löken och riv ingefäran. Blanda köttet med hälften av yoghurten, hälften av ingefäran och grytans salt'+(' samt gurkmejan. Väg färsk eller fryst hackad vitlök och spara kallt till stekningen.' if 'vitlök' in names else '.')+' Ställ kött och övriga kylvaror täckta i kylskåp.','uses':['benfri lammstek','gul lök','ingefära','yoghurt naturell','salt']+(['gurkmeja','vitlök'] if 'vitlök' in names else []),'minutes':16},
+            original[1],
+            {**original[2], 'text':original[2]['text'].replace('senapsoljan','rapsoljan')},
+            {**original[3], 'text':original[3]['text'].replace('samt kanel och kardemumma','samt malen kanel och malen kardemumma')+' Häll i all sparad upptiningsvätska och koka upp ordentligt. Allt fett och all marinad stannar i grytan.', 'minutes':17},
+            {'text':'Tillsätt 350 ml vatten, rör upp bottenskyn och koka upp. Sänk värmen och lägg på lock.','uses':['benfri lammstek','yoghurt naturell'],'minutes':3},
+            {'text':'Sjud försiktigt under lock trettio minuter.','uses':['benfri lammstek'],'minutes':30,'passive':True},
+            {'text':'Rör om och kontrollera bottnen. Tillsätt vid behov 100 ml vatten så att det inte bränner.','uses':['benfri lammstek'],'minutes':1},
+            {'text':'Sjud ytterligare trettio minuter under lock.','uses':['benfri lammstek'],'minutes':30,'passive':True},
+            {'text':('Skala potatisen, väg den råa ätliga mängden och skär i två centimeter stora bitar. Lägg i grytan. ' if 'potatis' in names else '')+'Rör om och kontrollera vätskan; tillsätt vid behov 100 ml vatten.','uses':['benfri lammstek']+(['potatis'] if 'potatis' in names else []),'minutes':5 if 'potatis' in names else 1},
+            {'text':'Sjud ytterligare cirka trettio minuter under lock.','uses':['benfri lammstek'],'minutes':30,'passive':True},
+            {'text':'Kontrollera att lammet är helt genomlagat och delar sig lätt med gaffel'+(' och att potatisen är mjuk' if 'potatis' in names else '')+'. Förläng annars sjudningen. Ta av locket och reducera under tät omrörning cirka femton minuter tills mörk löksås klär köttet tätt. Skrapa bottnen ofta och sänk värmen om den bränner. Ingen sås eller fett hälls bort.','uses':['benfri lammstek','gul lök','yoghurt naturell']+(['potatis'] if 'potatis' in names else []),'minutes':17},
+        ]
+        finish = next(n for n,s in enumerate(original) if s['text'].startswith('Rör ner garam masala'))
+        row['steps'].extend(original[finish:])
+        for s in row['steps']:
+            s['text'] = s['text'].replace('getköttet','lammet').replace('Skölj riset i sil. ','')
+            if s['text'].startswith('Sjud riset'): s['text']='Sjud riset under lock cirka arton minuter eller längre enligt förpackningen tills kornen är mjuka och vattnet absorberats.'
+        rice_rest = next(n for n,s in enumerate(row['steps'],1) if s['text'].startswith('Ta riset från'))
+        insert_step(row,rice_rest,{'text':'Kontrollera riset; tillsätt vid behov 50 ml vatten och fortsätt sjuda före vilan. Ta från värmen när riset är mjukt.','uses':['ris'],'minutes':1})
+        row['steps'][rice_rest]['text']='Låt riset vila fem minuter under lock.'
+        row['unmeasured_processes']=[]
+        mark_process(row,3,['benfri lammstek'],'trim_before_cooking','Benfri lammstek vägs före putsning; borttagna senor och kvarvarande ätlig vikt är inte uppmätta.')
+        for n,s in enumerate(row['steps']): s['after']=[n] if n else []
+        changes.append('New explicit boneless-lamb/rapeseed version: 800 g purchased leg replaces edible goat; unknown trim loss and 24-hour thaw retained. Replace constant 130-minute active frying with 90-minute covered lamb simmer plus 15-minute active reduction, with separate checks and extensions if not tender. Preserve onion/yoghurt/spices and extended potato; all sauce/fat/ground spices served. No measured speed or cooking claim.')
+    if base.endswith('recheado-makrill'):
+        rename_ingredient(row,'makrill','lax')
+        rename_ingredient(row,'kashmirchili','rökt paprikapulver')
+        row['primary']='lax'
+        row['family']='recheadofisk med vinägerpasta mellan filéer'
+        row['name']='Lax recheado med rökt paprika – '+row['variant_id']
+        row['notes']='Uttrycklig laxversion av recheadotekniken: 700 g rå benfri lax ersätter 700 g makrill och 6 g rökt paprika ersätter 8 g kashmirchili. Både fisksmak och hetta ändras; inga identiska råvaror påstås. Filépar med vinägerpasta behålls. Kylupptining ingår, vätska och all stekolja genomkokas och serveras. Ingen panering eller ny kryddstyrka tillsätts. Inte provlagad.'
+        for c in row['components']:
+            for i in c['ingredients']:
+                if i['name']=='lax':i.update(label='Rå benfri laxfilé, ätlig vikt')
+                if i['name']=='rökt paprikapulver':i.update(quantity=6,label='Rökt paprikapulver, ny mildare kryddversion')
+        for s in row['steps']:
+            if s['text'].startswith('Kontrollera makrillfiléerna'):
+                s['text']='Kontrollera att laxfiléerna är helt tinade och utan ben. Behåll all upptiningsvätska för genomkokning i pannan. Dela i jämntjocka filébitar; skär vid behov längs tjockleken så att två lagda ihop blir högst cirka 3 cm. Mixa rökt paprika, vinäger, färsk eller fryst hackad vitlök, skalad uppvägd ingefära och fiskdelens salt till pasta.'+(' Mixa också ner spiskummin och gurkmeja. Skala och väg löken, skiva tunt.' if row['variant_id']!='simple' else '')
+                s['minutes']=10
+            if s['text'].startswith('Fördela pastan'):
+                s['text']='Fördela all kryddpasta på hälften av laxfilébitarna och lägg de återstående ovanpå. Eventuellt skinn ska vara utåt och tillagas och serveras med fisken. Håll paren högst cirka 3 cm tjocka; fäst vid behov med tandpetare.'
+            if s['text'].startswith('Värm oljan') or s['text'].startswith('Värm återstående olja'):
+                s['text']='Värm '+('oljan' if row['variant_id']=='simple' else 'återstående olja')+' på medelvärme. Stek laxparen cirka fyra minuter per sida. Tillsätt all sparad upptiningsvätska och 30 ml vatten. Lägg på lock och sjud ytterligare minst fem minuter tills mitten mellan filéerna når minst 72 °C och vitlökspastan är genomlagad; förläng enligt förpackningen. Behåll all sky och olja.'
+                s['minutes']=15
+            if s['text'].startswith('Ta bort samtliga'):
+                s['text']='Ta bort samtliga tandpetare och fördela laxen med ris och alla tillbehör. Skrapa ur och servera hela pannans genomkokta sky och olja.'
+            if s['text'].startswith('Ta av värmen'):
+                s['text']='Låt riset vila fem minuter under lock; det ska sedan hållas över 60 °C fram till servering.'
+        rice_rest=next(n for n,s in enumerate(row['steps'],1) if s['text'].startswith('Låt riset vila'))
+        insert_step(row,rice_rest,{'text':'Kontrollera riset. Är det hårt, tillsätt 50 ml vatten och förläng sjudningen; ta från värmen när det är mjukt.','uses':['ris'],'minutes':1})
+        prepend_thaw(row,'lax',720,'Behåll all upptiningsvätska och koka den med fisken i pannan. Redan kylförvarad rå lax kan gå direkt vidare.')
+        for n,s in enumerate(row['steps']):s['after']=[n] if n else []
+        changes.append('Explicit salmon/smoked-paprika version supported by chef; raw salmon 700 g replaces unavailable raw mackerel and new 6 g smoked paprika replaces 8 g Kashmiri chili. No canned-tomato mackerel or false identity. Preserve paired-fillet vinegar filling, thaw planning, rice and variant sides. All thaw juice/30 ml pan water/oil are cooked and served; frozen garlic filling heats through to at least 72 C.')
     if base.endswith('vada-pav'):
-        assert row['variant_id']=='simple', 'Curry-leaf siblings need a separate review'
+        assert row['variant_id'] in {'simple', 'standard', 'extended'}
         rename_ingredient(row,'pavbröd','mjukt hamburgerbröd')
         row['name'] += ' – med mjukt svenskt hamburgerbröd'
         row['notes'] = 'Granskad enkel vada pav med 416 g mjukt svenskt hamburgerbröd i stället för 480 g pavbröd. Brödet innehåller sesam och är ingen identisk ladi pav-produkt. Potatis och all kikärtssmet serveras; överbliven smet steks som små frasiga bitar. Okänd potatisförlust vid avrinning och okänt upptag av det grunda oljebadet redovisas utan faktor. Enkelvariantens kryddning bevaras. Inte provlagad.'
@@ -302,6 +586,25 @@ def correct(row, vocabulary):
         row['unmeasured_processes']=[]
         mark_process(row,3,['potatis'],'drain_after_cooking','Kokvattnet kasseras; potatisens kokförlust och slutvikt är inte uppmätta.')
         mark_process(row,7,['rapsolja'],'deep_fry_and_drain','Grunt oljebad, avrinning på galler och kvarvarande olja i pannan. Ingen oljeupptagningsandel antas.')
+        if row['variant_id']!='simple':
+            for component in row['components']:
+                component['ingredients'] = [i for i in component['ingredients'] if i['name'] != 'curryblad']
+            row['name'] += ', utan curryblad'
+            row['notes'] = row['notes'].replace('Granskad enkel vada pav', 'Granskad vada pav, standardvariant').replace('Enkelvariantens kryddning bevaras.', 'Senapsfrö och ingefära bevaras i separat fräs. De 4 g curryblad som saknar kvalificerad produkt utelämnas uttryckligen; samma arom påstås inte. En sextondel av oljan används i fräset och resten i det grunda oljebadet.')
+            row['steps'][6]['text'] = row['steps'][6]['text'].replace('hela den angivna oljan', 'resten av den angivna oljan')
+            insert_step(row,6,{'text':'Skala, väg och finriv ingefäran. Mät ut en sextondel av den angivna rapsoljan och värm i panna på medelvärme. Låt senapsfröna börja knäppa och fräs sedan ingefäran en minut under omrörning. Häll allt fräs och all dess olja över potatisen; skrapa ur pannan. Resterande olja sparas till stekningen.','uses':['ingefära','rapsolja','senapsfrön','potatis'],'minutes':5})
+            changes.append('Standard only: explicitly omit 4 g unavailable curry leaves without aromatic-equivalence claim; retain mustard 2 g and ginger 18 g in tempering. One sixteenth of total oil goes into retained tempering, remaining fifteen sixteenths into unmeasured shallow-fry process. Extended tamarind version remains blocked.')
+            if row['variant_id']=='extended':
+                changes[-1] = changes[-1].replace('Standard only:', 'Extended:').replace(' Extended tamarind version remains blocked.', '')
+                rename_ingredient(row,'tamarindpasta','tamarindkoncentrat')
+                for c in row['components']:
+                    for i in c['ingredients']:
+                        if i['name']=='tamarindkoncentrat':i.update(quantity=20,unit='ml',label='Syrligt tamarindkoncentrat, ny dos i milliliter')
+                row['notes']=row['notes'].replace('standardvariant','utökad variant')+' Dadelchutneyn använder 20 ml redan granskat tamarindkoncentrat i stället för 30 g tamarindpasta. Ny kulinarisk dos, ingen densitet eller samma syrastyrka antas. Alla dadlar, koriander och limejuice behålls; fryst koriander genomkokas.'
+                insert_step(row,8,{'text':'Kontrollera att dadlarna är urkärnade och väg den ätliga mängden utan kärnor. Hacka och sjud med det uppmätta tamarindkoncentratet och 120 ml vatten under omrörning cirka sex minuter tills mjuka. Mixa slätt. Rör ner all fryst hackad koriander och sjud under omrörning minst tre minuter eller längre enligt förpackningen. Ta från värmen och rör i all limejuice. Behåll hela chutneyn.','uses':['dadlar','tamarindkoncentrat','koriander','limejuice'],'minutes':13})
+                row['steps'][-1]['text'] += ' Lägg en del av hela dadelchutneyn i bröden och servera resten vid sidan; inget silas eller kastas.'
+                row['steps'][-1]['uses'] += ['dadlar','tamarindkoncentrat','koriander','limejuice']
+                changes.append('New 20 ml already reviewed sour tamarind concentrate instead of 30 g generic tamarind paste, no density conversion. Preserve all pitted dates/coriander/lime; simmer frozen coriander at least three minutes and serve entire chutney. Keep same potato-drain and shallow-fry losses with step indices shifted by insertion.')
         for n,s in enumerate(row['steps']):s['after']=[n] if n else []
         changes.append('New 416 g soft Swedish sesame burger-bun version, not pav identity. Weigh peeled potato; separate simmer/drain/drying; boil frozen garlic then dry it for chutney. Two fritters per portion, all batter served, shallow-fry oil uptake unknown, process-water amounts scale.')
     if base.endswith('papadzules'):
@@ -1593,10 +1896,26 @@ def correct(row, vocabulary):
         row['unmeasured_processes'][0]['step'] += 2
         changes.append('Explicit frozen-fish thaw, all juice cooked in the custard, and shell-free raw egg weight. Mark steamed-cabbage draining as unknown loss. Schedule steamer loading, water inspection and final temperature checks as active work.')
     if base.endswith('kluai-buat-chi'):
-        row['steps'][1]['text'] = row['steps'][1]['text'].replace('Dela bananen', 'Skala bananen, väg den angivna ätliga mängden och dela den')
-        row['steps'][2].update(text='Låt svalna lite före servering.', passive=True)
-        row['steps'].append({'text': 'Servera alla bananbitar och hela kokosmjölksåsen ljumma.', 'uses': ['banan', 'kokosmjölk'], 'minutes': 1})
-        changes.append('Weigh peeled edible banana, keep all coconut sauce, and separate passive cooling from serving.')
+        if row['variant_id']=='extended':
+            for component in row['components']:
+                component['ingredients']=[i for i in component['ingredients'] if i['name']!='pandanblad']
+            row['name']='Kluai buat chi – med rostad kokos och sesam, utan pandan'
+            row['flavor']=['banan','kokos','sesam','söt-salt']
+            row['notes']='Granskad utökad variant utan 2 g pandanblad. Bladets arom utelämnas uttryckligen; ingen annan ingrediens kallas pandan. Samtliga övriga matmängder bevaras. Rosta 8 g kokosflingor och 5 g torra sesamfrön per portion och servera hela toppingen till banan i kokosmjölk. Inte provlagad.'
+            row['steps']=[
+                row['steps'][0],
+                {'text':'Häll kokosmjölk, socker och salt i en liten kastrull med 30 ml vatten. Värm försiktigt till svag sjudning under omrörning; undvik häftig kokning.','uses':['kokosmjölk','strösocker','salt'],'minutes':4},
+                row['steps'][3],
+                {'text':'Låt banan och kokosmjölk svalna lite före servering.','uses':[],'minutes':3,'passive':True},
+                {'text':'Servera alla bananbitar och hela kokosmjölksåsen ljumma med all rostad kokos och sesam ovanpå.','uses':['banan','kokosmjölk','kokosflingor','sesamfrön'],'minutes':1},
+            ]
+            row['steps'][2]['text']=row['steps'][2]['text'].replace('Dela bananen', 'Skala bananen, väg den angivna ätliga mängden och dela den')
+            changes.append('Extended only: omit pandan explicitly, retain original toasted coconut and sesame doses and as-sold seed identity. No leaf infusion, no unknown extraction, all coconut sauce and topping served.')
+        else:
+            row['steps'][1]['text'] = row['steps'][1]['text'].replace('Dela bananen', 'Skala bananen, väg den angivna ätliga mängden och dela den')
+            row['steps'][2].update(text='Låt svalna lite före servering.', passive=True)
+            row['steps'].append({'text': 'Servera alla bananbitar och hela kokosmjölksåsen ljumma.', 'uses': ['banan', 'kokosmjölk'], 'minutes': 1})
+            changes.append('Weigh peeled edible banana, keep all coconut sauce, and separate passive cooling from serving.')
     if base.endswith('pasticciotto-leccese'):
         row['name'] += ' – mördeg med smör'
         row['steps'][3]['text'] = 'Kyl krämen i kylskåp cirka 35 minuter tills den är helt kall och inte smälter smöret vid fyllning.'

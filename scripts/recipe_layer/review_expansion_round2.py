@@ -9,6 +9,10 @@ from app.services.personal_policy import ProductFacts
 
 TARGET = Path('backend/app/data/ingredients/expansion-round2-20261101.json')
 REVIEWS = {
+    'gruyère|as_sold|g': (
+        [('Gruyére Hårdost', 'Lustenberger')],
+        'Lustenberger schweizisk Gruyère-hårdost, 150 g, artikel 101774848_ST. Källan deklarerar opastöriserad komjölk, salt, syrningskulturer och löpe. Ingen fontinaidentitet, generisk ostblandning eller vegetarisk löpedeklaration. Inköpt gramvikt inkluderar eventuell ostkant som receptet putsar med okänd förlust; ingen avdragsandel eller serverad näring antas.',
+        'https://www.hemkop.se/produkt/Gruyere-Hardost-101774848_ST'),
     'mjukt hamburgerbröd|as_sold|g': (
         [('Hamburgerbröd Ljusa 8-pack', 'Pågen')],
         'Pågen färdigbakade mjuka ljusa hamburgerbröd med sesam, 416 g per åttapack. Innehåller bland annat vete, havre, socker och sesam; inte indiskt ladi pav, osötat bröd eller allergenfritt. Ny synligt namngiven brödversion doserar uppvägd gramvikt; ingen styckvikt eller rå deg används i beräkningen.',
@@ -285,7 +289,7 @@ def main(args):
                      'review_basis': 'Exact source/product/package bindings; culinary review only. ' + definition,
                      'evidence': [{'kind': 'reviewed_whole_label_and_form', 'source_url': source_url}],
                      'reviewed_links': links})
-        if gross_variable or key in {'ägg|as_sold|st', 'lagrad pecorino|as_sold|g', 'färsk chorizokorv|as_sold|g', 'torkade makrutlimeblad|dry|g'}:
+        if gross_variable or key in {'ägg|as_sold|st', 'lagrad pecorino|as_sold|g', 'gruyère|as_sold|g', 'färsk chorizokorv|as_sold|g', 'torkade makrutlimeblad|dry|g'}:
             rows[-1]['gross_inedible_mass'] = True
     if selected:
         existing = json.loads(TARGET.read_bytes())

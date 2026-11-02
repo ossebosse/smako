@@ -1,0 +1,1391 @@
+{
+  "library_version": "smako-meal-pack-v1",
+  "recipes": [
+    {
+      "design": {
+        "active_minutes": 50,
+        "base_id": "smako-mexican-tacos-al-pastor",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "fläskkarré|raw_edible",
+                "name": "fläskkarré",
+                "note": "",
+                "quantity": 750.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "anchochili|dry",
+                "name": "Mald Ancho Style-chili",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "äppelcidervinäger|as_sold",
+                "name": "äppelcidervinäger",
+                "note": "",
+                "quantity": 45.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "vitlök",
+                "note": "",
+                "quantity": 18.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 4.0,
+                "unit": "g"
+              }
+            ],
+            "id": "adobo",
+            "name": "Chilimarinerat fläsk"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ananas|raw_edible",
+                "name": "Frysta ansade ananasbitar, hela mängden och saften används",
+                "note": "",
+                "quantity": 350.0,
+                "unit": "g"
+              }
+            ],
+            "id": "ananas",
+            "name": "Rostad ananas"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "majstortillas|as_sold",
+                "name": "Färdigbakade mjuka majstortillas",
+                "note": "",
+                "quantity": 400.0,
+                "unit": "g"
+              }
+            ],
+            "id": "majsbrod",
+            "name": "Hemlagade majstortillas"
+          }
+        ],
+        "content_sha256": "cd8b24a3a54b4c9e0309223ef80daeabae479669672faef0bae6923c51071af6",
+        "content_source": {
+          "active_minutes": 50,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "reviewed-expansion-round2-stage58",
+          "priority": 1,
+          "proposal_id": "smako-mexican-tacos-al-pastor",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "bac600f9266cb00ef66a0adc2f2092cbbc2f695e858fdd17c470c5fd6406d9b8",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "mexican"
+        ],
+        "equipment": [
+          "ugn",
+          "plåt",
+          "mixer",
+          "stekpanna",
+          "tortillapress eller kavel",
+          "termometer"
+        ],
+        "estimated_minutes": 410,
+        "family": "tacos al pastor",
+        "fish": false,
+        "flavor_profile": [
+          "ancho",
+          "vinäger",
+          "rostad ananas"
+        ],
+        "ingredient_count": 6,
+        "method": "oven",
+        "primary_ingredient": "fläskkarré",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Granskad ugnsversion med 25 g mald Ancho Style-chili i stället för 25 g guajillo; 30 g achiotepasta utelämnas uttryckligen. Annan chilismak och utan achiotearom. 400 g färdiga mjuka majstortillas ersätter 280 g masa harina, degvatten och 2 g tortillassalt. Utökad använder 250 g färdig tomatillosalsa i stället för 300 g rå tomatillo och dess 2 g extra salt; löken, vitlöken och koriandern behålls och genomhettas. Alla köttråvaror, ananas, marinad, plåtsky och fett serveras. Inte provlagad. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "färdiga mjuka majstortillas",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 1,
+            "id": "s1",
+            "ingredient_keys": [
+              "ananas|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Väg upp fryst ananas i ett täckt kärl i kylskåp. Behåll all vätska."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 120,
+            "id": "s2",
+            "ingredient_keys": [
+              "ananas|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Tina helt i kylskåp enligt förpackningen. Planera 120 minuter och förläng vid behov tills ingen iskärna återstår. Behåll hela den ansade uppvägda frukten och all saft; använd allt vid rostningen."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 12,
+            "id": "s3",
+            "ingredient_keys": [
+              "anchochili|dry",
+              "fläskkarré|raw_edible",
+              "salt|as_sold",
+              "vitlök|raw_edible",
+              "äppelcidervinäger|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "20 ml",
+                20.0
+              ]
+            ],
+            "text": "Mixa hela mängden mald anchochili med 20 ml vatten, äppelcidervinäger, färsk eller fryst hackad vitlök och köttets salt. Använd helt tinad benfri fläskkarré, väg rå ätlig mängd och skär tre till fyra millimeter tunna skivor tvärs fibrerna. Vänd med hela marinaden och täck. Ingen chili silas eller blötläggs separat."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 240,
+            "id": "s4",
+            "ingredient_keys": [
+              "fläskkarré|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Marinera fyra timmar i kylskåp vid högst 4 °C, avskilt från färdig mat."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 6,
+            "id": "s5",
+            "ingredient_keys": [
+              "ananas|raw_edible",
+              "anchochili|dry",
+              "fläskkarré|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Värm ugnen till 230 °C. Fördela fläskskivorna glest i ett lager på ugnståliga plåtar med kanter, med hela marinaden tunt över. Lägg de tinade ananasbitarna bredvid och häll all fruktsaft på plåtarna. Använd fler plåtar eller omgångar om maten annars staplas."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 18,
+            "id": "s6",
+            "ingredient_keys": [
+              "ananas|raw_edible",
+              "fläskkarré|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Rosta under tillsyn cirka arton minuter, byt plats på plåtarna halvvägs och kontrollera noga mot slutet. Kött och marinad ska vara helt genomlagade, minst 72 °C i de tjockaste skivorna, och ananasen genomhet med brynta kanter; förläng vid behov. Håll färdiga omgångar varma över 60 °C."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 8,
+            "id": "s7",
+            "ingredient_keys": [
+              "ananas|raw_edible",
+              "fläskkarré|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "20 ml",
+                20.0
+              ]
+            ],
+            "text": "Lyft kött och ananas till ett fat. Skrapa all plåtsky och allt fett i en liten kastrull; använd sammanlagt 20 ml vatten för att lossa kvarvarande sky. Koka upp och reducera under omrörning cirka fem minuter till tjockare sås. Ingen sky eller fett hälls bort. Hacka kött och ananas grovt och vänd med hela såsen."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 5,
+            "id": "s8",
+            "ingredient_keys": [
+              "ananas|raw_edible",
+              "fläskkarré|raw_edible",
+              "majstortillas|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Väg de färdiga mjuka majstortillorna, värm kort i torr panna och fördela jämnt mellan portionerna. Fyll med allt kött, ananas och sky."
+          }
+        ],
+        "total_minutes": 410,
+        "variant_id": "simple",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 360
+      },
+      "ingredients": [
+        {
+          "canonical_name": "fläskkarré",
+          "component": "adobo",
+          "form": "raw_edible",
+          "name": "fläskkarré",
+          "product_requirements": [
+            "pack:intake_all_expansion_487e551f21df"
+          ],
+          "quantity": 750.0,
+          "quantity_max": 750.0,
+          "quantity_min": 750.0,
+          "quantity_step": 750.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "anchochili",
+          "component": "adobo",
+          "form": "dry",
+          "name": "anchochili",
+          "product_requirements": [
+            "pack:intake_all_round2_637eba129fe4"
+          ],
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 25.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "äppelcidervinäger",
+          "component": "adobo",
+          "form": "as_sold",
+          "name": "äppelcidervinäger",
+          "product_requirements": [
+            "pack:intake_all_be24da3ca83d"
+          ],
+          "quantity": 45.0,
+          "quantity_max": 45.0,
+          "quantity_min": 45.0,
+          "quantity_step": 45.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "adobo",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 18.0,
+          "quantity_max": 18.0,
+          "quantity_min": 18.0,
+          "quantity_step": 18.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "adobo",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 4.0,
+          "quantity_max": 4.0,
+          "quantity_min": 4.0,
+          "quantity_step": 4.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ananas",
+          "component": "ananas",
+          "form": "raw_edible",
+          "name": "ananas",
+          "product_requirements": [
+            "pack:intake_all_5e01993f43fb"
+          ],
+          "quantity": 350.0,
+          "quantity_max": 350.0,
+          "quantity_min": 350.0,
+          "quantity_step": 350.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "majstortillas",
+          "component": "majsbrod",
+          "form": "as_sold",
+          "name": "majstortillas",
+          "product_requirements": [
+            "pack:intake_all_round2_4e0f777e646a"
+          ],
+          "quantity": 400.0,
+          "quantity_max": 400.0,
+          "quantity_min": 400.0,
+          "quantity_step": 400.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Väg upp fryst ananas i ett täckt kärl i kylskåp. Behåll all vätska.",
+        "Tina helt i kylskåp enligt förpackningen. Planera 120 minuter och förläng vid behov tills ingen iskärna återstår. Behåll hela den ansade uppvägda frukten och all saft; använd allt vid rostningen.",
+        "Mixa hela mängden mald anchochili med 20 ml vatten, äppelcidervinäger, färsk eller fryst hackad vitlök och köttets salt. Använd helt tinad benfri fläskkarré, väg rå ätlig mängd och skär tre till fyra millimeter tunna skivor tvärs fibrerna. Vänd med hela marinaden och täck. Ingen chili silas eller blötläggs separat.",
+        "Marinera fyra timmar i kylskåp vid högst 4 °C, avskilt från färdig mat.",
+        "Värm ugnen till 230 °C. Fördela fläskskivorna glest i ett lager på ugnståliga plåtar med kanter, med hela marinaden tunt över. Lägg de tinade ananasbitarna bredvid och häll all fruktsaft på plåtarna. Använd fler plåtar eller omgångar om maten annars staplas.",
+        "Rosta under tillsyn cirka arton minuter, byt plats på plåtarna halvvägs och kontrollera noga mot slutet. Kött och marinad ska vara helt genomlagade, minst 72 °C i de tjockaste skivorna, och ananasen genomhet med brynta kanter; förläng vid behov. Håll färdiga omgångar varma över 60 °C.",
+        "Lyft kött och ananas till ett fat. Skrapa all plåtsky och allt fett i en liten kastrull; använd sammanlagt 20 ml vatten för att lossa kvarvarande sky. Koka upp och reducera under omrörning cirka fem minuter till tjockare sås. Ingen sky eller fett hälls bort. Hacka kött och ananas grovt och vänd med hela såsen.",
+        "Väg de färdiga mjuka majstortillorna, värm kort i torr panna och fördela jämnt mellan portionerna. Fyll med allt kött, ananas och sky."
+      ],
+      "name": "Tacos al pastor i ugn – ancho utan achiote – enkel",
+      "preparation": {
+        "family": "tacos al pastor",
+        "input_forms": {
+          "ananas": "raw_edible",
+          "anchochili": "dry",
+          "fläskkarré": "raw_edible",
+          "majstortillas": "as_sold",
+          "salt": "as_sold",
+          "vitlök": "raw_edible",
+          "äppelcidervinäger": "as_sold"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "cd8b24a3a54b4c9e0309223ef80daeabae479669672faef0bae6923c51071af6",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 50,
+        "base_id": "smako-mexican-tacos-al-pastor",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "fläskkarré|raw_edible",
+                "name": "fläskkarré",
+                "note": "",
+                "quantity": 750.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "anchochili|dry",
+                "name": "Mald Ancho Style-chili",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "äppelcidervinäger|as_sold",
+                "name": "äppelcidervinäger",
+                "note": "",
+                "quantity": 45.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "vitlök",
+                "note": "",
+                "quantity": 18.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 4.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "oregano|dry",
+                "name": "oregano",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "spiskummin|dry",
+                "name": "spiskummin",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "apelsinjuice|as_sold",
+                "name": "apelsinjuice",
+                "note": "",
+                "quantity": 90.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "adobo",
+            "name": "Chilimarinerat fläsk"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ananas|raw_edible",
+                "name": "Frysta ansade ananasbitar, hela mängden och saften används",
+                "note": "",
+                "quantity": 350.0,
+                "unit": "g"
+              }
+            ],
+            "id": "ananas",
+            "name": "Rostad ananas"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "majstortillas|as_sold",
+                "name": "Färdigbakade mjuka majstortillas",
+                "note": "",
+                "quantity": 400.0,
+                "unit": "g"
+              }
+            ],
+            "id": "majsbrod",
+            "name": "Hemlagade majstortillas"
+          }
+        ],
+        "content_sha256": "e1bf6b9ecce58c440576239129983ed460ba5480bdf0bf81d5e7def65ed8cb8e",
+        "content_source": {
+          "active_minutes": 50,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "reviewed-expansion-round2-stage58",
+          "priority": 1,
+          "proposal_id": "smako-mexican-tacos-al-pastor",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "bac600f9266cb00ef66a0adc2f2092cbbc2f695e858fdd17c470c5fd6406d9b8",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "mexican"
+        ],
+        "equipment": [
+          "ugn",
+          "plåt",
+          "mixer",
+          "stekpanna",
+          "tortillapress eller kavel",
+          "termometer"
+        ],
+        "estimated_minutes": 410,
+        "family": "tacos al pastor",
+        "fish": false,
+        "flavor_profile": [
+          "ancho",
+          "vinäger",
+          "rostad ananas"
+        ],
+        "ingredient_count": 9,
+        "method": "oven",
+        "primary_ingredient": "fläskkarré",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Granskad ugnsversion med 25 g mald Ancho Style-chili i stället för 25 g guajillo; 30 g achiotepasta utelämnas uttryckligen. Annan chilismak och utan achiotearom. 400 g färdiga mjuka majstortillas ersätter 280 g masa harina, degvatten och 2 g tortillassalt. Utökad använder 250 g färdig tomatillosalsa i stället för 300 g rå tomatillo och dess 2 g extra salt; löken, vitlöken och koriandern behålls och genomhettas. Alla köttråvaror, ananas, marinad, plåtsky och fett serveras. Inte provlagad. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "färdiga mjuka majstortillas",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 1,
+            "id": "s1",
+            "ingredient_keys": [
+              "ananas|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Väg upp fryst ananas i ett täckt kärl i kylskåp. Behåll all vätska."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 120,
+            "id": "s2",
+            "ingredient_keys": [
+              "ananas|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Tina helt i kylskåp enligt förpackningen. Planera 120 minuter och förläng vid behov tills ingen iskärna återstår. Behåll hela den ansade uppvägda frukten och all saft; använd allt vid rostningen."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 12,
+            "id": "s3",
+            "ingredient_keys": [
+              "anchochili|dry",
+              "apelsinjuice|as_sold",
+              "fläskkarré|raw_edible",
+              "oregano|dry",
+              "salt|as_sold",
+              "spiskummin|dry",
+              "vitlök|raw_edible",
+              "äppelcidervinäger|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "20 ml",
+                20.0
+              ]
+            ],
+            "text": "Mixa hela mängden mald anchochili med 20 ml vatten, äppelcidervinäger, färsk eller fryst hackad vitlök och köttets salt samt oregano, spiskummin och apelsinjuice. Använd helt tinad benfri fläskkarré, väg rå ätlig mängd och skär tre till fyra millimeter tunna skivor tvärs fibrerna. Vänd med hela marinaden och täck. Ingen chili silas eller blötläggs separat."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 240,
+            "id": "s4",
+            "ingredient_keys": [
+              "fläskkarré|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Marinera fyra timmar i kylskåp vid högst 4 °C, avskilt från färdig mat."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 6,
+            "id": "s5",
+            "ingredient_keys": [
+              "ananas|raw_edible",
+              "anchochili|dry",
+              "fläskkarré|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Värm ugnen till 230 °C. Fördela fläskskivorna glest i ett lager på ugnståliga plåtar med kanter, med hela marinaden tunt över. Lägg de tinade ananasbitarna bredvid och häll all fruktsaft på plåtarna. Använd fler plåtar eller omgångar om maten annars staplas."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 18,
+            "id": "s6",
+            "ingredient_keys": [
+              "ananas|raw_edible",
+              "fläskkarré|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Rosta under tillsyn cirka arton minuter, byt plats på plåtarna halvvägs och kontrollera noga mot slutet. Kött och marinad ska vara helt genomlagade, minst 72 °C i de tjockaste skivorna, och ananasen genomhet med brynta kanter; förläng vid behov. Håll färdiga omgångar varma över 60 °C."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 8,
+            "id": "s7",
+            "ingredient_keys": [
+              "ananas|raw_edible",
+              "fläskkarré|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "20 ml",
+                20.0
+              ]
+            ],
+            "text": "Lyft kött och ananas till ett fat. Skrapa all plåtsky och allt fett i en liten kastrull; använd sammanlagt 20 ml vatten för att lossa kvarvarande sky. Koka upp och reducera under omrörning cirka fem minuter till tjockare sås. Ingen sky eller fett hälls bort. Hacka kött och ananas grovt och vänd med hela såsen."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 5,
+            "id": "s8",
+            "ingredient_keys": [
+              "ananas|raw_edible",
+              "fläskkarré|raw_edible",
+              "majstortillas|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Väg de färdiga mjuka majstortillorna, värm kort i torr panna och fördela jämnt mellan portionerna. Fyll med allt kött, ananas och sky."
+          }
+        ],
+        "total_minutes": 410,
+        "variant_id": "standard",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 360
+      },
+      "ingredients": [
+        {
+          "canonical_name": "fläskkarré",
+          "component": "adobo",
+          "form": "raw_edible",
+          "name": "fläskkarré",
+          "product_requirements": [
+            "pack:intake_all_expansion_487e551f21df"
+          ],
+          "quantity": 750.0,
+          "quantity_max": 750.0,
+          "quantity_min": 750.0,
+          "quantity_step": 750.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "anchochili",
+          "component": "adobo",
+          "form": "dry",
+          "name": "anchochili",
+          "product_requirements": [
+            "pack:intake_all_round2_637eba129fe4"
+          ],
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 25.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "äppelcidervinäger",
+          "component": "adobo",
+          "form": "as_sold",
+          "name": "äppelcidervinäger",
+          "product_requirements": [
+            "pack:intake_all_be24da3ca83d"
+          ],
+          "quantity": 45.0,
+          "quantity_max": 45.0,
+          "quantity_min": 45.0,
+          "quantity_step": 45.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "adobo",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 18.0,
+          "quantity_max": 18.0,
+          "quantity_min": 18.0,
+          "quantity_step": 18.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "adobo",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 4.0,
+          "quantity_max": 4.0,
+          "quantity_min": 4.0,
+          "quantity_step": 4.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "oregano",
+          "component": "adobo",
+          "form": "dry",
+          "name": "oregano",
+          "product_requirements": [
+            "dried_leaf"
+          ],
+          "quantity": 2.0,
+          "quantity_max": 2.0,
+          "quantity_min": 2.0,
+          "quantity_step": 2.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "spiskummin",
+          "component": "adobo",
+          "form": "dry",
+          "name": "spiskummin",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 2.0,
+          "quantity_max": 2.0,
+          "quantity_min": 2.0,
+          "quantity_step": 2.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "apelsinjuice",
+          "component": "adobo",
+          "form": "as_sold",
+          "name": "apelsinjuice",
+          "product_requirements": [
+            "pack:intake_all_bac4ad0c4dc5"
+          ],
+          "quantity": 90.0,
+          "quantity_max": 90.0,
+          "quantity_min": 90.0,
+          "quantity_step": 90.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "ananas",
+          "component": "ananas",
+          "form": "raw_edible",
+          "name": "ananas",
+          "product_requirements": [
+            "pack:intake_all_5e01993f43fb"
+          ],
+          "quantity": 350.0,
+          "quantity_max": 350.0,
+          "quantity_min": 350.0,
+          "quantity_step": 350.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "majstortillas",
+          "component": "majsbrod",
+          "form": "as_sold",
+          "name": "majstortillas",
+          "product_requirements": [
+            "pack:intake_all_round2_4e0f777e646a"
+          ],
+          "quantity": 400.0,
+          "quantity_max": 400.0,
+          "quantity_min": 400.0,
+          "quantity_step": 400.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Väg upp fryst ananas i ett täckt kärl i kylskåp. Behåll all vätska.",
+        "Tina helt i kylskåp enligt förpackningen. Planera 120 minuter och förläng vid behov tills ingen iskärna återstår. Behåll hela den ansade uppvägda frukten och all saft; använd allt vid rostningen.",
+        "Mixa hela mängden mald anchochili med 20 ml vatten, äppelcidervinäger, färsk eller fryst hackad vitlök och köttets salt samt oregano, spiskummin och apelsinjuice. Använd helt tinad benfri fläskkarré, väg rå ätlig mängd och skär tre till fyra millimeter tunna skivor tvärs fibrerna. Vänd med hela marinaden och täck. Ingen chili silas eller blötläggs separat.",
+        "Marinera fyra timmar i kylskåp vid högst 4 °C, avskilt från färdig mat.",
+        "Värm ugnen till 230 °C. Fördela fläskskivorna glest i ett lager på ugnståliga plåtar med kanter, med hela marinaden tunt över. Lägg de tinade ananasbitarna bredvid och häll all fruktsaft på plåtarna. Använd fler plåtar eller omgångar om maten annars staplas.",
+        "Rosta under tillsyn cirka arton minuter, byt plats på plåtarna halvvägs och kontrollera noga mot slutet. Kött och marinad ska vara helt genomlagade, minst 72 °C i de tjockaste skivorna, och ananasen genomhet med brynta kanter; förläng vid behov. Håll färdiga omgångar varma över 60 °C.",
+        "Lyft kött och ananas till ett fat. Skrapa all plåtsky och allt fett i en liten kastrull; använd sammanlagt 20 ml vatten för att lossa kvarvarande sky. Koka upp och reducera under omrörning cirka fem minuter till tjockare sås. Ingen sky eller fett hälls bort. Hacka kött och ananas grovt och vänd med hela såsen.",
+        "Väg de färdiga mjuka majstortillorna, värm kort i torr panna och fördela jämnt mellan portionerna. Fyll med allt kött, ananas och sky."
+      ],
+      "name": "Tacos al pastor i ugn – ancho utan achiote – med apelsin och kryddor",
+      "preparation": {
+        "family": "tacos al pastor",
+        "input_forms": {
+          "ananas": "raw_edible",
+          "anchochili": "dry",
+          "apelsinjuice": "as_sold",
+          "fläskkarré": "raw_edible",
+          "majstortillas": "as_sold",
+          "oregano": "dry",
+          "salt": "as_sold",
+          "spiskummin": "dry",
+          "vitlök": "raw_edible",
+          "äppelcidervinäger": "as_sold"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "e1bf6b9ecce58c440576239129983ed460ba5480bdf0bf81d5e7def65ed8cb8e",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 61,
+        "base_id": "smako-mexican-tacos-al-pastor",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "fläskkarré|raw_edible",
+                "name": "fläskkarré",
+                "note": "",
+                "quantity": 750.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "anchochili|dry",
+                "name": "Mald Ancho Style-chili",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "äppelcidervinäger|as_sold",
+                "name": "äppelcidervinäger",
+                "note": "",
+                "quantity": 45.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "vitlök",
+                "note": "",
+                "quantity": 18.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 4.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "oregano|dry",
+                "name": "oregano",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "spiskummin|dry",
+                "name": "spiskummin",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "apelsinjuice|as_sold",
+                "name": "apelsinjuice",
+                "note": "",
+                "quantity": 90.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "adobo",
+            "name": "Chilimarinerat fläsk"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ananas|raw_edible",
+                "name": "Frysta ansade ananasbitar, hela mängden och saften används",
+                "note": "",
+                "quantity": 350.0,
+                "unit": "g"
+              }
+            ],
+            "id": "ananas",
+            "name": "Rostad ananas"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "salsa verde av tomatillo|as_sold",
+                "name": "Färdig kryddad tomatillosalsa, ny dos",
+                "note": "",
+                "quantity": 250.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "gul lök",
+                "note": "",
+                "quantity": 90.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "koriander|raw_edible",
+                "name": "koriander",
+                "note": "",
+                "quantity": 12.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "vitlök",
+                "note": "",
+                "quantity": 8.0,
+                "unit": "g"
+              }
+            ],
+            "id": "salsa",
+            "name": "Rostad tomatillosalsa"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "majstortillas|as_sold",
+                "name": "Färdigbakade mjuka majstortillas",
+                "note": "",
+                "quantity": 400.0,
+                "unit": "g"
+              }
+            ],
+            "id": "majsbrod",
+            "name": "Hemlagade majstortillas"
+          }
+        ],
+        "content_sha256": "17de473a67c823ed0a6bb90baef06924dafb2981afcb755f949f96a91161a57c",
+        "content_source": {
+          "active_minutes": 61,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "reviewed-expansion-round2-stage58",
+          "priority": 1,
+          "proposal_id": "smako-mexican-tacos-al-pastor",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "bac600f9266cb00ef66a0adc2f2092cbbc2f695e858fdd17c470c5fd6406d9b8",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "mexican"
+        ],
+        "equipment": [
+          "ugn",
+          "plåt",
+          "mixer",
+          "stekpanna",
+          "tortillapress eller kavel",
+          "termometer"
+        ],
+        "estimated_minutes": 421,
+        "family": "tacos al pastor",
+        "fish": false,
+        "flavor_profile": [
+          "ancho",
+          "vinäger",
+          "rostad ananas"
+        ],
+        "ingredient_count": 12,
+        "method": "oven",
+        "primary_ingredient": "fläskkarré",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Granskad ugnsversion med 25 g mald Ancho Style-chili i stället för 25 g guajillo; 30 g achiotepasta utelämnas uttryckligen. Annan chilismak och utan achiotearom. 400 g färdiga mjuka majstortillas ersätter 280 g masa harina, degvatten och 2 g tortillassalt. Utökad använder 250 g färdig tomatillosalsa i stället för 300 g rå tomatillo och dess 2 g extra salt; löken, vitlöken och koriandern behålls och genomhettas. Alla köttråvaror, ananas, marinad, plåtsky och fett serveras. Inte provlagad. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "färdiga mjuka majstortillas",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 1,
+            "id": "s1",
+            "ingredient_keys": [
+              "ananas|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Väg upp fryst ananas i ett täckt kärl i kylskåp. Behåll all vätska."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 120,
+            "id": "s2",
+            "ingredient_keys": [
+              "ananas|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Tina helt i kylskåp enligt förpackningen. Planera 120 minuter och förläng vid behov tills ingen iskärna återstår. Behåll hela den ansade uppvägda frukten och all saft; använd allt vid rostningen."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 12,
+            "id": "s3",
+            "ingredient_keys": [
+              "anchochili|dry",
+              "apelsinjuice|as_sold",
+              "fläskkarré|raw_edible",
+              "oregano|dry",
+              "salt|as_sold",
+              "spiskummin|dry",
+              "vitlök|raw_edible",
+              "äppelcidervinäger|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "20 ml",
+                20.0
+              ]
+            ],
+            "text": "Mixa hela mängden mald anchochili med 20 ml vatten, äppelcidervinäger, färsk eller fryst hackad vitlök och köttets salt samt oregano, spiskummin och apelsinjuice. Använd helt tinad benfri fläskkarré, väg rå ätlig mängd och skär tre till fyra millimeter tunna skivor tvärs fibrerna. Vänd med hela marinaden och täck. Ingen chili silas eller blötläggs separat."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 240,
+            "id": "s4",
+            "ingredient_keys": [
+              "fläskkarré|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Marinera fyra timmar i kylskåp vid högst 4 °C, avskilt från färdig mat."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 11,
+            "id": "s5",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "koriander|raw_edible",
+              "salsa verde av tomatillo|as_sold",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "40 ml",
+                40.0
+              ]
+            ],
+            "text": "Skala löken, väg ätlig mängd och hacka. Lägg i liten kastrull med 40 ml vatten och salsans färska eller frysta hackade vitlök. Sjud under omrörning cirka fem minuter. Tillsätt den uppvägda färdiga tomatillosalsan och all fryst koriander; sjud minst tre minuter eller längre enligt förpackningen. Mixa slätt med allt spad. Salsan innehåller redan kryddor och salt; tillsätt inget extra salt. Håll varm."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 6,
+            "id": "s6",
+            "ingredient_keys": [
+              "ananas|raw_edible",
+              "anchochili|dry",
+              "fläskkarré|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Värm ugnen till 230 °C. Fördela fläskskivorna glest i ett lager på ugnståliga plåtar med kanter, med hela marinaden tunt över. Lägg de tinade ananasbitarna bredvid och häll all fruktsaft på plåtarna. Använd fler plåtar eller omgångar om maten annars staplas."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 18,
+            "id": "s7",
+            "ingredient_keys": [
+              "ananas|raw_edible",
+              "fläskkarré|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Rosta under tillsyn cirka arton minuter, byt plats på plåtarna halvvägs och kontrollera noga mot slutet. Kött och marinad ska vara helt genomlagade, minst 72 °C i de tjockaste skivorna, och ananasen genomhet med brynta kanter; förläng vid behov. Håll färdiga omgångar varma över 60 °C."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 8,
+            "id": "s8",
+            "ingredient_keys": [
+              "ananas|raw_edible",
+              "fläskkarré|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "20 ml",
+                20.0
+              ]
+            ],
+            "text": "Lyft kött och ananas till ett fat. Skrapa all plåtsky och allt fett i en liten kastrull; använd sammanlagt 20 ml vatten för att lossa kvarvarande sky. Koka upp och reducera under omrörning cirka fem minuter till tjockare sås. Ingen sky eller fett hälls bort. Hacka kött och ananas grovt och vänd med hela såsen."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 5,
+            "id": "s9",
+            "ingredient_keys": [
+              "ananas|raw_edible",
+              "fläskkarré|raw_edible",
+              "majstortillas|as_sold",
+              "salsa verde av tomatillo|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Väg de färdiga mjuka majstortillorna, värm kort i torr panna och fördela jämnt mellan portionerna. Fyll med allt kött, ananas och sky och servera all tomatillosalsa till."
+          }
+        ],
+        "total_minutes": 421,
+        "variant_id": "extended",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 360
+      },
+      "ingredients": [
+        {
+          "canonical_name": "fläskkarré",
+          "component": "adobo",
+          "form": "raw_edible",
+          "name": "fläskkarré",
+          "product_requirements": [
+            "pack:intake_all_expansion_487e551f21df"
+          ],
+          "quantity": 750.0,
+          "quantity_max": 750.0,
+          "quantity_min": 750.0,
+          "quantity_step": 750.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "anchochili",
+          "component": "adobo",
+          "form": "dry",
+          "name": "anchochili",
+          "product_requirements": [
+            "pack:intake_all_round2_637eba129fe4"
+          ],
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 25.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "äppelcidervinäger",
+          "component": "adobo",
+          "form": "as_sold",
+          "name": "äppelcidervinäger",
+          "product_requirements": [
+            "pack:intake_all_be24da3ca83d"
+          ],
+          "quantity": 45.0,
+          "quantity_max": 45.0,
+          "quantity_min": 45.0,
+          "quantity_step": 45.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "adobo",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 26.0,
+          "quantity_max": 26.0,
+          "quantity_min": 26.0,
+          "quantity_step": 26.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "adobo",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 4.0,
+          "quantity_max": 4.0,
+          "quantity_min": 4.0,
+          "quantity_step": 4.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "oregano",
+          "component": "adobo",
+          "form": "dry",
+          "name": "oregano",
+          "product_requirements": [
+            "dried_leaf"
+          ],
+          "quantity": 2.0,
+          "quantity_max": 2.0,
+          "quantity_min": 2.0,
+          "quantity_step": 2.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "spiskummin",
+          "component": "adobo",
+          "form": "dry",
+          "name": "spiskummin",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 2.0,
+          "quantity_max": 2.0,
+          "quantity_min": 2.0,
+          "quantity_step": 2.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "apelsinjuice",
+          "component": "adobo",
+          "form": "as_sold",
+          "name": "apelsinjuice",
+          "product_requirements": [
+            "pack:intake_all_bac4ad0c4dc5"
+          ],
+          "quantity": 90.0,
+          "quantity_max": 90.0,
+          "quantity_min": 90.0,
+          "quantity_step": 90.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "ananas",
+          "component": "ananas",
+          "form": "raw_edible",
+          "name": "ananas",
+          "product_requirements": [
+            "pack:intake_all_5e01993f43fb"
+          ],
+          "quantity": 350.0,
+          "quantity_max": 350.0,
+          "quantity_min": 350.0,
+          "quantity_step": 350.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salsa verde av tomatillo",
+          "component": "salsa",
+          "form": "as_sold",
+          "name": "salsa verde av tomatillo",
+          "product_requirements": [
+            "pack:intake_all_round2_8e7a9dc5fbef"
+          ],
+          "quantity": 250.0,
+          "quantity_max": 250.0,
+          "quantity_min": 250.0,
+          "quantity_step": 250.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "salsa",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 90.0,
+          "quantity_max": 90.0,
+          "quantity_min": 90.0,
+          "quantity_step": 90.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "koriander",
+          "component": "salsa",
+          "form": "raw_edible",
+          "name": "koriander",
+          "product_requirements": [
+            "pack:intake_all_9b2370e0e926"
+          ],
+          "quantity": 12.0,
+          "quantity_max": 12.0,
+          "quantity_min": 12.0,
+          "quantity_step": 12.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "majstortillas",
+          "component": "majsbrod",
+          "form": "as_sold",
+          "name": "majstortillas",
+          "product_requirements": [
+            "pack:intake_all_round2_4e0f777e646a"
+          ],
+          "quantity": 400.0,
+          "quantity_max": 400.0,
+          "quantity_min": 400.0,
+          "quantity_step": 400.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Väg upp fryst ananas i ett täckt kärl i kylskåp. Behåll all vätska.",
+        "Tina helt i kylskåp enligt förpackningen. Planera 120 minuter och förläng vid behov tills ingen iskärna återstår. Behåll hela den ansade uppvägda frukten och all saft; använd allt vid rostningen.",
+        "Mixa hela mängden mald anchochili med 20 ml vatten, äppelcidervinäger, färsk eller fryst hackad vitlök och köttets salt samt oregano, spiskummin och apelsinjuice. Använd helt tinad benfri fläskkarré, väg rå ätlig mängd och skär tre till fyra millimeter tunna skivor tvärs fibrerna. Vänd med hela marinaden och täck. Ingen chili silas eller blötläggs separat.",
+        "Marinera fyra timmar i kylskåp vid högst 4 °C, avskilt från färdig mat.",
+        "Skala löken, väg ätlig mängd och hacka. Lägg i liten kastrull med 40 ml vatten och salsans färska eller frysta hackade vitlök. Sjud under omrörning cirka fem minuter. Tillsätt den uppvägda färdiga tomatillosalsan och all fryst koriander; sjud minst tre minuter eller längre enligt förpackningen. Mixa slätt med allt spad. Salsan innehåller redan kryddor och salt; tillsätt inget extra salt. Håll varm.",
+        "Värm ugnen till 230 °C. Fördela fläskskivorna glest i ett lager på ugnståliga plåtar med kanter, med hela marinaden tunt över. Lägg de tinade ananasbitarna bredvid och häll all fruktsaft på plåtarna. Använd fler plåtar eller omgångar om maten annars staplas.",
+        "Rosta under tillsyn cirka arton minuter, byt plats på plåtarna halvvägs och kontrollera noga mot slutet. Kött och marinad ska vara helt genomlagade, minst 72 °C i de tjockaste skivorna, och ananasen genomhet med brynta kanter; förläng vid behov. Håll färdiga omgångar varma över 60 °C.",
+        "Lyft kött och ananas till ett fat. Skrapa all plåtsky och allt fett i en liten kastrull; använd sammanlagt 20 ml vatten för att lossa kvarvarande sky. Koka upp och reducera under omrörning cirka fem minuter till tjockare sås. Ingen sky eller fett hälls bort. Hacka kött och ananas grovt och vänd med hela såsen.",
+        "Väg de färdiga mjuka majstortillorna, värm kort i torr panna och fördela jämnt mellan portionerna. Fyll med allt kött, ananas och sky och servera all tomatillosalsa till."
+      ],
+      "name": "Tacos al pastor i ugn – ancho utan achiote – med tomatillosalsa",
+      "preparation": {
+        "family": "tacos al pastor",
+        "input_forms": {
+          "ananas": "raw_edible",
+          "anchochili": "dry",
+          "apelsinjuice": "as_sold",
+          "fläskkarré": "raw_edible",
+          "gul lök": "raw_edible",
+          "koriander": "raw_edible",
+          "majstortillas": "as_sold",
+          "oregano": "dry",
+          "salsa verde av tomatillo": "as_sold",
+          "salt": "as_sold",
+          "spiskummin": "dry",
+          "vitlök": "raw_edible",
+          "äppelcidervinäger": "as_sold"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "17de473a67c823ed0a6bb90baef06924dafb2981afcb755f949f96a91161a57c",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 4
+    }
+  ]
+}

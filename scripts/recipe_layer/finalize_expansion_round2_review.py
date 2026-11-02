@@ -21,7 +21,7 @@ from review_product_search import review_search_key, review_search_matches
 
 REPORT = Path('docs/reviews/recipe-unblock-round2-20261101')
 BASE = '545dad2a1b78566e0bff0c4ff616c053c038cc58'
-STAGE_NUMBERS = (*range(1, 34), *range(35, 49))
+STAGE_NUMBERS = (*range(1, 34), *range(35, 60))
 REJECTED_STAGES = (34,)
 EXTRA_QUERIES = {
     'makrutlimeblad': ['makrut', 'kaffir', 'limeblad', 'lime leaves', 'limblad', 'lime leaf'],
@@ -49,7 +49,9 @@ EXTRA_QUERIES = {
     'klibbigt ris': ['klibb', 'sticky rice', 'glutinous', 'sweet rice'],
 }
 REASONS = {
-    'pavbröd': 'Den enkla vada pav-varianten har godkänd separat version med mjukt svenskt hamburgerbröd och ny gramdos. Standard och utökad har fortfarande curryblad som separat hinder; brödet har inte lagts in som pav-alias.',
+    'pavbröd': 'Alla tre vada pav-nivåer har separata granskade versioner med mjukt svenskt hamburgerbröd. Standard/utökad utelämnar uttryckligen curryblad men bevarar senapsfrö och ingefära. Utökad använder redan granskat tamarindkoncentrat med ny dos i ml. Brödet har inte lagts in som pav-alias och ingen gram/ml-konvertering antas.',
+    'pandanblad': 'Tvålagers kokosgelé och utökad banan i kokosmjölk har godkända uttryckliga versioner utan pandan; respektive receptkälla anger bladen som valfri arom. Bladen har inte fått ett falskt alias. Kvarvarande rätter behöver annan genomgång: blad som omslag, grön färg eller dominerande arom kan inte tas bort generellt.',
+    'achiotepasta': 'Tre separata paprikaversioner av citrusbräserat fläsk i pibilstil och tre ancho-versioner av ugnstacos utan achiote är granskade. Kvarvarande mucbipollo-utkast har även epazote, bananblad och degrelaterade hinder; paprika/ancho är inte registeralias eller lika-smak-konverteringar för achiote.',
     'epazote': 'Separata granskade korianderversioner öppnade papadzules och två arroz a la tumbada-varianter. Kvarvarande krabbsoppa och mucbipollo kräver ytterligare sakgranskning och har även andra hinder; koriander är ingen identitetsalias för epazote.',
     'grön papaya': 'De tre kvarvarande recepten är galouti kebab, där rå grön papaya används för enzymatisk mörning av färs. Ett salladsalternativ som äpple eller gurka löser inte den funktionen. Ingen verifierad grön papaya eller uppmätt alternativ mörningsmetod finns i referensen.',
     'klibbigt ris': 'Khao tom mats granskade bakpappersversion stoppades i fullständigt korgprov: inget verifierat köp av glutinöst ris. Sushiris är en separat rundkornig produkt och har inte bytts in i denna ångade kärna. Den lokalt utfärdade testversionen återkallades med bevarade bytes och felkvitto.',
@@ -114,7 +116,7 @@ def main(args):
                        'modes': {m: dict(Counter(r['status'] for r in probe['modes'][m]['recipes'])) for m in modes}})
     corrections, new_revocations, correction_proofs = {}, {}, []
     corrected_results = {mode: [] for mode in modes}
-    for correction_name in ('portion-corrections', 'lamb-corrections', 'selected-product-corrections', 'alternative-portion-corrections', 'pasta-shape-corrections', 'pindi-portion-corrections'):
+    for correction_name in ('portion-corrections', 'lamb-corrections', 'selected-product-corrections', 'alternative-portion-corrections', 'pasta-shape-corrections', 'pindi-portion-corrections', 'date-basis-corrections'):
         review = json.loads((REPORT / f'{correction_name}.json').read_bytes())
         receipt = json.loads((REPORT / f'import-{correction_name}.json').read_bytes())
         raw = (REPORT / f'qualification-{correction_name}.json').read_bytes()

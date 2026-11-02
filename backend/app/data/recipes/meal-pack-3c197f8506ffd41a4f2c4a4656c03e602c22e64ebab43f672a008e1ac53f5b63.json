@@ -1,0 +1,1510 @@
+{
+  "library_version": "smako-meal-pack-v1",
+  "recipes": [
+    {
+      "design": {
+        "active_minutes": 35,
+        "base_id": "smako-mexican-cochinita-pibil",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "fläskkarré|raw_edible",
+                "name": "Fläskkarré",
+                "note": "",
+                "quantity": 850.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "paprikapulver|dry",
+                "name": "Sött paprikapulver, ny dos utan achiote",
+                "note": "",
+                "quantity": 12.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "apelsinjuice|as_sold",
+                "name": "Apelsinjuice",
+                "note": "",
+                "quantity": 180.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "limejuice|as_sold",
+                "name": "Limejuice",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 4.0,
+                "unit": "g"
+              }
+            ],
+            "id": "flask",
+            "name": "Citrus- och paprikabräserat fläsk"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "rödlök|raw_edible",
+                "name": "Rödlök",
+                "note": "",
+                "quantity": 200.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "limejuice|as_sold",
+                "name": "Limejuice",
+                "note": "",
+                "quantity": 35.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              }
+            ],
+            "id": "lok",
+            "name": "Syrad rödlök"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "majstortillas|as_sold",
+                "name": "Mjuka färdigbakade majstortillas",
+                "note": "",
+                "quantity": 320.0,
+                "unit": "g"
+              }
+            ],
+            "id": "tortillas",
+            "name": "Tortillas"
+          }
+        ],
+        "content_sha256": "8c74fa5e6b017a0dbbb3fdc6b92212a813ea25d87ea915200c68bc1f17b20248",
+        "content_source": {
+          "active_minutes": 35,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "reviewed-expansion-round2-stage57",
+          "priority": 1,
+          "proposal_id": "smako-mexican-cochinita-pibil",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "c378d34ace64717b2f0c17893839dbde2edf0a6f68ebb5655da3289fd1184229",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "mexican"
+        ],
+        "equipment": [
+          "ugn",
+          "ugnssäker gryta med lock",
+          "bunke",
+          "termometer"
+        ],
+        "estimated_minutes": 345,
+        "family": "citrusbräserat fläsk i pibilstil",
+        "fish": false,
+        "flavor_profile": [
+          "paprika",
+          "citrus",
+          "rödlök"
+        ],
+        "ingredient_count": 6,
+        "method": "oven",
+        "primary_ingredient": "fläskkarré",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Uttrycklig paprikaversion utan achiote. 12 g sött paprikapulver ersätter 35 g achiotepasta som ny författardos; inte samma arom, salt eller omräkningsfaktor. Övriga matmängder bevaras. Apelsin och lime är redan utkastets alternativ till pomerans, och tätt lock dess alternativ till jordugn/bananblad. Hela köttspadet, allt utsmält fett och lökens lag serveras. Standard behåller vitlök, oregano och spiskummin; utökad dessutom bönor och avokado. Inte provlagad. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "tortillas",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 10,
+            "id": "s1",
+            "ingredient_keys": [
+              "apelsinjuice|as_sold",
+              "fläskkarré|raw_edible",
+              "limejuice|as_sold",
+              "paprikapulver|dry",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Använd helt tinad benfri fläskkarré. Väg rå ätlig mängd och skär cirka sex centimeter stora bitar. Rör ut paprikapulvret i apelsinjuice och köttdelens limejuice och salt. Vänd köttet i all marinad och täck."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 120,
+            "id": "s2",
+            "ingredient_keys": [
+              "fläskkarré|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Marinera två timmar i kylskåp, högst 4 °C. Håll kött och marinad åtskilda från råa tillbehör."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 5,
+            "id": "s3",
+            "ingredient_keys": [
+              "fläskkarré|raw_edible",
+              "paprikapulver|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "100 ml",
+                100.0
+              ]
+            ],
+            "text": "Värm ugnen till 160 °C. Lägg kött och all marinad i en ugnssäker gryta, tillsätt 100 ml vatten och täck tätt med lock."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 120,
+            "id": "s4",
+            "ingredient_keys": [
+              "fläskkarré|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Tillaga i ugnen under tätt lock två timmar."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 2,
+            "id": "s5",
+            "ingredient_keys": [
+              "fläskkarré|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "100 ml",
+                100.0
+              ]
+            ],
+            "text": "Kontrollera att bottnen inte kokat torr. Tillsätt vid behov 100 ml vatten och sätt tillbaka locket."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 60,
+            "id": "s6",
+            "ingredient_keys": [
+              "fläskkarré|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Fortsätt i ugnen under lock ytterligare cirka sextio minuter."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 8,
+            "id": "s7",
+            "ingredient_keys": [
+              "fläskkarré|raw_edible",
+              "limejuice|as_sold",
+              "rödlök|raw_edible",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Kontrollera att köttet faller isär lätt med gaffel och är helt genomlagat, minst 72 °C i tjockaste biten. Förläng annars tillagningen under lock. Behåll allt fett och spad. Ta ut grytan och håll täckt. Skala rödlöken, väg den ätliga mängden och skiva tunt. Krama med lökdelens limejuice och salt; behåll all lag."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 10,
+            "id": "s8",
+            "ingredient_keys": [
+              "fläskkarré|raw_edible",
+              "rödlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Låt köttet vila tio minuter i spadet medan löken drar i sin lag."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 8,
+            "id": "s9",
+            "ingredient_keys": [
+              "fläskkarré|raw_edible",
+              "majstortillas|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Dra isär köttet med två gafflar och blanda med hela det heta paprika-citrusspadet och allt fett. Ingen sky silas eller hälls bort. Värm de mjuka majstortillorna kort i torr panna; förvara varmt under lock."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 2,
+            "id": "s10",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Fördela hela köttet och allt spad, tortillorna, rödlöken med all lag och eventuella bönor/avokado jämnt mellan portionerna."
+          }
+        ],
+        "total_minutes": 345,
+        "variant_id": "simple",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 310
+      },
+      "ingredients": [
+        {
+          "canonical_name": "fläskkarré",
+          "component": "flask",
+          "form": "raw_edible",
+          "name": "fläskkarré",
+          "product_requirements": [
+            "pack:intake_all_expansion_487e551f21df"
+          ],
+          "quantity": 850.0,
+          "quantity_max": 850.0,
+          "quantity_min": 850.0,
+          "quantity_step": 850.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "paprikapulver",
+          "component": "flask",
+          "form": "dry",
+          "name": "paprikapulver",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 12.0,
+          "quantity_max": 12.0,
+          "quantity_min": 12.0,
+          "quantity_step": 12.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "apelsinjuice",
+          "component": "flask",
+          "form": "as_sold",
+          "name": "apelsinjuice",
+          "product_requirements": [
+            "pack:intake_all_bac4ad0c4dc5"
+          ],
+          "quantity": 180.0,
+          "quantity_max": 180.0,
+          "quantity_min": 180.0,
+          "quantity_step": 180.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "limejuice",
+          "component": "flask",
+          "form": "as_sold",
+          "name": "limejuice",
+          "product_requirements": [
+            "pure_juice"
+          ],
+          "quantity": 65.0,
+          "quantity_max": 65.0,
+          "quantity_min": 65.0,
+          "quantity_step": 65.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "flask",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rödlök",
+          "component": "lok",
+          "form": "raw_edible",
+          "name": "rödlök",
+          "quantity": 200.0,
+          "quantity_max": 200.0,
+          "quantity_min": 200.0,
+          "quantity_step": 200.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "majstortillas",
+          "component": "tortillas",
+          "form": "as_sold",
+          "name": "majstortillas",
+          "product_requirements": [
+            "pack:intake_all_round2_4e0f777e646a"
+          ],
+          "quantity": 320.0,
+          "quantity_max": 320.0,
+          "quantity_min": 320.0,
+          "quantity_step": 320.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Använd helt tinad benfri fläskkarré. Väg rå ätlig mängd och skär cirka sex centimeter stora bitar. Rör ut paprikapulvret i apelsinjuice och köttdelens limejuice och salt. Vänd köttet i all marinad och täck.",
+        "Marinera två timmar i kylskåp, högst 4 °C. Håll kött och marinad åtskilda från råa tillbehör.",
+        "Värm ugnen till 160 °C. Lägg kött och all marinad i en ugnssäker gryta, tillsätt 100 ml vatten och täck tätt med lock.",
+        "Tillaga i ugnen under tätt lock två timmar.",
+        "Kontrollera att bottnen inte kokat torr. Tillsätt vid behov 100 ml vatten och sätt tillbaka locket.",
+        "Fortsätt i ugnen under lock ytterligare cirka sextio minuter.",
+        "Kontrollera att köttet faller isär lätt med gaffel och är helt genomlagat, minst 72 °C i tjockaste biten. Förläng annars tillagningen under lock. Behåll allt fett och spad. Ta ut grytan och håll täckt. Skala rödlöken, väg den ätliga mängden och skiva tunt. Krama med lökdelens limejuice och salt; behåll all lag.",
+        "Låt köttet vila tio minuter i spadet medan löken drar i sin lag.",
+        "Dra isär köttet med två gafflar och blanda med hela det heta paprika-citrusspadet och allt fett. Ingen sky silas eller hälls bort. Värm de mjuka majstortillorna kort i torr panna; förvara varmt under lock.",
+        "Fördela hela köttet och allt spad, tortillorna, rödlöken med all lag och eventuella bönor/avokado jämnt mellan portionerna."
+      ],
+      "name": "Citrusbräserat fläsk i pibilstil – paprikaversion – enkel",
+      "preparation": {
+        "family": "citrusbräserat fläsk i pibilstil",
+        "input_forms": {
+          "apelsinjuice": "as_sold",
+          "fläskkarré": "raw_edible",
+          "limejuice": "as_sold",
+          "majstortillas": "as_sold",
+          "paprikapulver": "dry",
+          "rödlök": "raw_edible",
+          "salt": "as_sold"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "8c74fa5e6b017a0dbbb3fdc6b92212a813ea25d87ea915200c68bc1f17b20248",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 35,
+        "base_id": "smako-mexican-cochinita-pibil",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "fläskkarré|raw_edible",
+                "name": "Fläskkarré",
+                "note": "",
+                "quantity": 850.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "paprikapulver|dry",
+                "name": "Sött paprikapulver, ny dos utan achiote",
+                "note": "",
+                "quantity": 12.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "apelsinjuice|as_sold",
+                "name": "Apelsinjuice",
+                "note": "",
+                "quantity": 180.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "limejuice|as_sold",
+                "name": "Limejuice",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 4.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "Vitlök",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "oregano|dry",
+                "name": "Oregano",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "spiskummin|dry",
+                "name": "Spiskummin",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              }
+            ],
+            "id": "flask",
+            "name": "Citrus- och paprikabräserat fläsk"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "rödlök|raw_edible",
+                "name": "Rödlök",
+                "note": "",
+                "quantity": 200.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "limejuice|as_sold",
+                "name": "Limejuice",
+                "note": "",
+                "quantity": 35.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              }
+            ],
+            "id": "lok",
+            "name": "Syrad rödlök"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "majstortillas|as_sold",
+                "name": "Mjuka färdigbakade majstortillas",
+                "note": "",
+                "quantity": 320.0,
+                "unit": "g"
+              }
+            ],
+            "id": "tortillas",
+            "name": "Tortillas"
+          }
+        ],
+        "content_sha256": "6fc472b3b68529ba1d0e48f466d97aa963a17446611ca2643e0a28ce7ddd0993",
+        "content_source": {
+          "active_minutes": 35,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "reviewed-expansion-round2-stage57",
+          "priority": 1,
+          "proposal_id": "smako-mexican-cochinita-pibil",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "c378d34ace64717b2f0c17893839dbde2edf0a6f68ebb5655da3289fd1184229",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "mexican"
+        ],
+        "equipment": [
+          "ugn",
+          "ugnssäker gryta med lock",
+          "bunke",
+          "termometer"
+        ],
+        "estimated_minutes": 345,
+        "family": "citrusbräserat fläsk i pibilstil",
+        "fish": false,
+        "flavor_profile": [
+          "paprika",
+          "citrus",
+          "rödlök"
+        ],
+        "ingredient_count": 9,
+        "method": "oven",
+        "primary_ingredient": "fläskkarré",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Uttrycklig paprikaversion utan achiote. 12 g sött paprikapulver ersätter 35 g achiotepasta som ny författardos; inte samma arom, salt eller omräkningsfaktor. Övriga matmängder bevaras. Apelsin och lime är redan utkastets alternativ till pomerans, och tätt lock dess alternativ till jordugn/bananblad. Hela köttspadet, allt utsmält fett och lökens lag serveras. Standard behåller vitlök, oregano och spiskummin; utökad dessutom bönor och avokado. Inte provlagad. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "tortillas",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 10,
+            "id": "s1",
+            "ingredient_keys": [
+              "apelsinjuice|as_sold",
+              "fläskkarré|raw_edible",
+              "limejuice|as_sold",
+              "oregano|dry",
+              "paprikapulver|dry",
+              "salt|as_sold",
+              "spiskummin|dry",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Använd helt tinad benfri fläskkarré. Väg rå ätlig mängd och skär cirka sex centimeter stora bitar. Rör ut paprikapulvret i apelsinjuice och köttdelens limejuice och salt. Rör ner färsk eller fryst hackad vitlök, oregano och spiskummin. Vänd köttet i all marinad och täck."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 120,
+            "id": "s2",
+            "ingredient_keys": [
+              "fläskkarré|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Marinera två timmar i kylskåp, högst 4 °C. Håll kött och marinad åtskilda från råa tillbehör."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 5,
+            "id": "s3",
+            "ingredient_keys": [
+              "fläskkarré|raw_edible",
+              "paprikapulver|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "100 ml",
+                100.0
+              ]
+            ],
+            "text": "Värm ugnen till 160 °C. Lägg kött och all marinad i en ugnssäker gryta, tillsätt 100 ml vatten och täck tätt med lock."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 120,
+            "id": "s4",
+            "ingredient_keys": [
+              "fläskkarré|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Tillaga i ugnen under tätt lock två timmar."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 2,
+            "id": "s5",
+            "ingredient_keys": [
+              "fläskkarré|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "100 ml",
+                100.0
+              ]
+            ],
+            "text": "Kontrollera att bottnen inte kokat torr. Tillsätt vid behov 100 ml vatten och sätt tillbaka locket."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 60,
+            "id": "s6",
+            "ingredient_keys": [
+              "fläskkarré|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Fortsätt i ugnen under lock ytterligare cirka sextio minuter."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 8,
+            "id": "s7",
+            "ingredient_keys": [
+              "fläskkarré|raw_edible",
+              "limejuice|as_sold",
+              "rödlök|raw_edible",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Kontrollera att köttet faller isär lätt med gaffel och är helt genomlagat, minst 72 °C i tjockaste biten. Förläng annars tillagningen under lock. Behåll allt fett och spad. Ta ut grytan och håll täckt. Skala rödlöken, väg den ätliga mängden och skiva tunt. Krama med lökdelens limejuice och salt; behåll all lag."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 10,
+            "id": "s8",
+            "ingredient_keys": [
+              "fläskkarré|raw_edible",
+              "rödlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Låt köttet vila tio minuter i spadet medan löken drar i sin lag."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 8,
+            "id": "s9",
+            "ingredient_keys": [
+              "fläskkarré|raw_edible",
+              "majstortillas|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Dra isär köttet med två gafflar och blanda med hela det heta paprika-citrusspadet och allt fett. Ingen sky silas eller hälls bort. Värm de mjuka majstortillorna kort i torr panna; förvara varmt under lock."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 2,
+            "id": "s10",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Fördela hela köttet och allt spad, tortillorna, rödlöken med all lag och eventuella bönor/avokado jämnt mellan portionerna."
+          }
+        ],
+        "total_minutes": 345,
+        "variant_id": "standard",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 310
+      },
+      "ingredients": [
+        {
+          "canonical_name": "fläskkarré",
+          "component": "flask",
+          "form": "raw_edible",
+          "name": "fläskkarré",
+          "product_requirements": [
+            "pack:intake_all_expansion_487e551f21df"
+          ],
+          "quantity": 850.0,
+          "quantity_max": 850.0,
+          "quantity_min": 850.0,
+          "quantity_step": 850.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "paprikapulver",
+          "component": "flask",
+          "form": "dry",
+          "name": "paprikapulver",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 12.0,
+          "quantity_max": 12.0,
+          "quantity_min": 12.0,
+          "quantity_step": 12.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "apelsinjuice",
+          "component": "flask",
+          "form": "as_sold",
+          "name": "apelsinjuice",
+          "product_requirements": [
+            "pack:intake_all_bac4ad0c4dc5"
+          ],
+          "quantity": 180.0,
+          "quantity_max": 180.0,
+          "quantity_min": 180.0,
+          "quantity_step": 180.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "limejuice",
+          "component": "flask",
+          "form": "as_sold",
+          "name": "limejuice",
+          "product_requirements": [
+            "pure_juice"
+          ],
+          "quantity": 65.0,
+          "quantity_max": 65.0,
+          "quantity_min": 65.0,
+          "quantity_step": 65.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "flask",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "flask",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "oregano",
+          "component": "flask",
+          "form": "dry",
+          "name": "oregano",
+          "product_requirements": [
+            "dried_leaf"
+          ],
+          "quantity": 2.0,
+          "quantity_max": 2.0,
+          "quantity_min": 2.0,
+          "quantity_step": 2.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "spiskummin",
+          "component": "flask",
+          "form": "dry",
+          "name": "spiskummin",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 2.0,
+          "quantity_max": 2.0,
+          "quantity_min": 2.0,
+          "quantity_step": 2.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rödlök",
+          "component": "lok",
+          "form": "raw_edible",
+          "name": "rödlök",
+          "quantity": 200.0,
+          "quantity_max": 200.0,
+          "quantity_min": 200.0,
+          "quantity_step": 200.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "majstortillas",
+          "component": "tortillas",
+          "form": "as_sold",
+          "name": "majstortillas",
+          "product_requirements": [
+            "pack:intake_all_round2_4e0f777e646a"
+          ],
+          "quantity": 320.0,
+          "quantity_max": 320.0,
+          "quantity_min": 320.0,
+          "quantity_step": 320.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Använd helt tinad benfri fläskkarré. Väg rå ätlig mängd och skär cirka sex centimeter stora bitar. Rör ut paprikapulvret i apelsinjuice och köttdelens limejuice och salt. Rör ner färsk eller fryst hackad vitlök, oregano och spiskummin. Vänd köttet i all marinad och täck.",
+        "Marinera två timmar i kylskåp, högst 4 °C. Håll kött och marinad åtskilda från råa tillbehör.",
+        "Värm ugnen till 160 °C. Lägg kött och all marinad i en ugnssäker gryta, tillsätt 100 ml vatten och täck tätt med lock.",
+        "Tillaga i ugnen under tätt lock två timmar.",
+        "Kontrollera att bottnen inte kokat torr. Tillsätt vid behov 100 ml vatten och sätt tillbaka locket.",
+        "Fortsätt i ugnen under lock ytterligare cirka sextio minuter.",
+        "Kontrollera att köttet faller isär lätt med gaffel och är helt genomlagat, minst 72 °C i tjockaste biten. Förläng annars tillagningen under lock. Behåll allt fett och spad. Ta ut grytan och håll täckt. Skala rödlöken, väg den ätliga mängden och skiva tunt. Krama med lökdelens limejuice och salt; behåll all lag.",
+        "Låt köttet vila tio minuter i spadet medan löken drar i sin lag.",
+        "Dra isär köttet med två gafflar och blanda med hela det heta paprika-citrusspadet och allt fett. Ingen sky silas eller hälls bort. Värm de mjuka majstortillorna kort i torr panna; förvara varmt under lock.",
+        "Fördela hela köttet och allt spad, tortillorna, rödlöken med all lag och eventuella bönor/avokado jämnt mellan portionerna."
+      ],
+      "name": "Citrusbräserat fläsk i pibilstil – paprikaversion – med oregano och spiskummin",
+      "preparation": {
+        "family": "citrusbräserat fläsk i pibilstil",
+        "input_forms": {
+          "apelsinjuice": "as_sold",
+          "fläskkarré": "raw_edible",
+          "limejuice": "as_sold",
+          "majstortillas": "as_sold",
+          "oregano": "dry",
+          "paprikapulver": "dry",
+          "rödlök": "raw_edible",
+          "salt": "as_sold",
+          "spiskummin": "dry",
+          "vitlök": "raw_edible"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "6fc472b3b68529ba1d0e48f466d97aa963a17446611ca2643e0a28ce7ddd0993",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 43,
+        "base_id": "smako-mexican-cochinita-pibil",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "fläskkarré|raw_edible",
+                "name": "Fläskkarré",
+                "note": "",
+                "quantity": 850.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "paprikapulver|dry",
+                "name": "Sött paprikapulver, ny dos utan achiote",
+                "note": "",
+                "quantity": 12.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "apelsinjuice|as_sold",
+                "name": "Apelsinjuice",
+                "note": "",
+                "quantity": 180.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "limejuice|as_sold",
+                "name": "Limejuice",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 4.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "Vitlök",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "oregano|dry",
+                "name": "Oregano",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "spiskummin|dry",
+                "name": "Spiskummin",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              }
+            ],
+            "id": "flask",
+            "name": "Citrus- och paprikabräserat fläsk"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "rödlök|raw_edible",
+                "name": "Rödlök",
+                "note": "",
+                "quantity": 200.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "limejuice|as_sold",
+                "name": "Limejuice",
+                "note": "",
+                "quantity": 35.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              }
+            ],
+            "id": "lok",
+            "name": "Syrad rödlök"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "majstortillas|as_sold",
+                "name": "Mjuka färdigbakade majstortillas",
+                "note": "",
+                "quantity": 320.0,
+                "unit": "g"
+              }
+            ],
+            "id": "tortillas",
+            "name": "Tortillas"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "svarta bönor|cooked_drained",
+                "name": "Svarta bönor",
+                "note": "",
+                "quantity": 400.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "avokado|raw_edible",
+                "name": "Avokado",
+                "note": "",
+                "quantity": 200.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "koriander|raw_edible",
+                "name": "Koriander",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "g"
+              }
+            ],
+            "id": "bonor",
+            "name": "Bönor och avokado"
+          }
+        ],
+        "content_sha256": "4d993ef0426aaed8cb451ea2d9fbc91460010a3b50bd02f3d7545944d8bdede0",
+        "content_source": {
+          "active_minutes": 43,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "reviewed-expansion-round2-stage57",
+          "priority": 1,
+          "proposal_id": "smako-mexican-cochinita-pibil",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "c378d34ace64717b2f0c17893839dbde2edf0a6f68ebb5655da3289fd1184229",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "mexican"
+        ],
+        "equipment": [
+          "ugn",
+          "ugnssäker gryta med lock",
+          "bunke",
+          "termometer"
+        ],
+        "estimated_minutes": 473,
+        "family": "citrusbräserat fläsk i pibilstil",
+        "fish": false,
+        "flavor_profile": [
+          "paprika",
+          "citrus",
+          "rödlök"
+        ],
+        "ingredient_count": 12,
+        "method": "oven",
+        "primary_ingredient": "fläskkarré",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Uttrycklig paprikaversion utan achiote. 12 g sött paprikapulver ersätter 35 g achiotepasta som ny författardos; inte samma arom, salt eller omräkningsfaktor. Övriga matmängder bevaras. Apelsin och lime är redan utkastets alternativ till pomerans, och tätt lock dess alternativ till jordugn/bananblad. Hela köttspadet, allt utsmält fett och lökens lag serveras. Standard behåller vitlök, oregano och spiskummin; utökad dessutom bönor och avokado. Inte provlagad. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "tortillas",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 1,
+            "id": "s1",
+            "ingredient_keys": [
+              "avokado|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Väg upp fryst avokado i ett täckt kärl i kylskåp. Behåll all vätska."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 120,
+            "id": "s2",
+            "ingredient_keys": [
+              "avokado|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Tina helt i kylskåp enligt förpackningen. Planera 120 minuter och förläng vid behov tills ingen iskärna återstår. Använd alla ansade frysta avokadobitar och all saft som tillbehör."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 10,
+            "id": "s3",
+            "ingredient_keys": [
+              "apelsinjuice|as_sold",
+              "fläskkarré|raw_edible",
+              "limejuice|as_sold",
+              "oregano|dry",
+              "paprikapulver|dry",
+              "salt|as_sold",
+              "spiskummin|dry",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Använd helt tinad benfri fläskkarré. Väg rå ätlig mängd och skär cirka sex centimeter stora bitar. Rör ut paprikapulvret i apelsinjuice och köttdelens limejuice och salt. Rör ner färsk eller fryst hackad vitlök, oregano och spiskummin. Vänd köttet i all marinad och täck."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 120,
+            "id": "s4",
+            "ingredient_keys": [
+              "fläskkarré|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Marinera två timmar i kylskåp, högst 4 °C. Håll kött och marinad åtskilda från råa tillbehör."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 5,
+            "id": "s5",
+            "ingredient_keys": [
+              "fläskkarré|raw_edible",
+              "paprikapulver|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "100 ml",
+                100.0
+              ]
+            ],
+            "text": "Värm ugnen till 160 °C. Lägg kött och all marinad i en ugnssäker gryta, tillsätt 100 ml vatten och täck tätt med lock."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 120,
+            "id": "s6",
+            "ingredient_keys": [
+              "fläskkarré|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Tillaga i ugnen under tätt lock två timmar."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 2,
+            "id": "s7",
+            "ingredient_keys": [
+              "fläskkarré|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "100 ml",
+                100.0
+              ]
+            ],
+            "text": "Kontrollera att bottnen inte kokat torr. Tillsätt vid behov 100 ml vatten och sätt tillbaka locket."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 60,
+            "id": "s8",
+            "ingredient_keys": [
+              "fläskkarré|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Fortsätt i ugnen under lock ytterligare cirka sextio minuter."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 8,
+            "id": "s9",
+            "ingredient_keys": [
+              "fläskkarré|raw_edible",
+              "limejuice|as_sold",
+              "rödlök|raw_edible",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Kontrollera att köttet faller isär lätt med gaffel och är helt genomlagat, minst 72 °C i tjockaste biten. Förläng annars tillagningen under lock. Behåll allt fett och spad. Ta ut grytan och håll täckt. Skala rödlöken, väg den ätliga mängden och skiva tunt. Krama med lökdelens limejuice och salt; behåll all lag."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 10,
+            "id": "s10",
+            "ingredient_keys": [
+              "fläskkarré|raw_edible",
+              "rödlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Låt köttet vila tio minuter i spadet medan löken drar i sin lag."
+          },
+          {
+            "depends_on": [
+              "s10"
+            ],
+            "duration_minutes": 8,
+            "id": "s11",
+            "ingredient_keys": [
+              "fläskkarré|raw_edible",
+              "majstortillas|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Dra isär köttet med två gafflar och blanda med hela det heta paprika-citrusspadet och allt fett. Ingen sky silas eller hälls bort. Värm de mjuka majstortillorna kort i torr panna; förvara varmt under lock."
+          },
+          {
+            "depends_on": [
+              "s11"
+            ],
+            "duration_minutes": 7,
+            "id": "s12",
+            "ingredient_keys": [
+              "avokado|raw_edible",
+              "koriander|raw_edible",
+              "svarta bönor|cooked_drained"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "30 ml",
+                30.0
+              ]
+            ],
+            "text": "Väg redan kokta svarta bönor efter avrinning. Värm med 30 ml vatten och all fryst hackad koriander, sjud minst tre minuter eller längre enligt förpackningen och behåll allt spad. Lägg den helt tinade avokadon med all sin saft bredvid."
+          },
+          {
+            "depends_on": [
+              "s12"
+            ],
+            "duration_minutes": 2,
+            "id": "s13",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Fördela hela köttet och allt spad, tortillorna, rödlöken med all lag och eventuella bönor/avokado jämnt mellan portionerna."
+          }
+        ],
+        "total_minutes": 473,
+        "variant_id": "extended",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 430
+      },
+      "ingredients": [
+        {
+          "canonical_name": "fläskkarré",
+          "component": "flask",
+          "form": "raw_edible",
+          "name": "fläskkarré",
+          "product_requirements": [
+            "pack:intake_all_expansion_487e551f21df"
+          ],
+          "quantity": 850.0,
+          "quantity_max": 850.0,
+          "quantity_min": 850.0,
+          "quantity_step": 850.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "paprikapulver",
+          "component": "flask",
+          "form": "dry",
+          "name": "paprikapulver",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 12.0,
+          "quantity_max": 12.0,
+          "quantity_min": 12.0,
+          "quantity_step": 12.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "apelsinjuice",
+          "component": "flask",
+          "form": "as_sold",
+          "name": "apelsinjuice",
+          "product_requirements": [
+            "pack:intake_all_bac4ad0c4dc5"
+          ],
+          "quantity": 180.0,
+          "quantity_max": 180.0,
+          "quantity_min": 180.0,
+          "quantity_step": 180.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "limejuice",
+          "component": "flask",
+          "form": "as_sold",
+          "name": "limejuice",
+          "product_requirements": [
+            "pure_juice"
+          ],
+          "quantity": 65.0,
+          "quantity_max": 65.0,
+          "quantity_min": 65.0,
+          "quantity_step": 65.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "flask",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "flask",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "oregano",
+          "component": "flask",
+          "form": "dry",
+          "name": "oregano",
+          "product_requirements": [
+            "dried_leaf"
+          ],
+          "quantity": 2.0,
+          "quantity_max": 2.0,
+          "quantity_min": 2.0,
+          "quantity_step": 2.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "spiskummin",
+          "component": "flask",
+          "form": "dry",
+          "name": "spiskummin",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 2.0,
+          "quantity_max": 2.0,
+          "quantity_min": 2.0,
+          "quantity_step": 2.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rödlök",
+          "component": "lok",
+          "form": "raw_edible",
+          "name": "rödlök",
+          "quantity": 200.0,
+          "quantity_max": 200.0,
+          "quantity_min": 200.0,
+          "quantity_step": 200.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "majstortillas",
+          "component": "tortillas",
+          "form": "as_sold",
+          "name": "majstortillas",
+          "product_requirements": [
+            "pack:intake_all_round2_4e0f777e646a"
+          ],
+          "quantity": 320.0,
+          "quantity_max": 320.0,
+          "quantity_min": 320.0,
+          "quantity_step": 320.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svarta bönor",
+          "component": "bonor",
+          "form": "cooked_drained",
+          "name": "svarta bönor",
+          "quantity": 400.0,
+          "quantity_max": 400.0,
+          "quantity_min": 400.0,
+          "quantity_step": 400.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "avokado",
+          "component": "bonor",
+          "form": "raw_edible",
+          "name": "avokado",
+          "product_requirements": [
+            "pack:intake_all_416f9df16b84"
+          ],
+          "quantity": 200.0,
+          "quantity_max": 200.0,
+          "quantity_min": 200.0,
+          "quantity_step": 200.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "koriander",
+          "component": "bonor",
+          "form": "raw_edible",
+          "name": "koriander",
+          "product_requirements": [
+            "pack:intake_all_9b2370e0e926"
+          ],
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 10.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Väg upp fryst avokado i ett täckt kärl i kylskåp. Behåll all vätska.",
+        "Tina helt i kylskåp enligt förpackningen. Planera 120 minuter och förläng vid behov tills ingen iskärna återstår. Använd alla ansade frysta avokadobitar och all saft som tillbehör.",
+        "Använd helt tinad benfri fläskkarré. Väg rå ätlig mängd och skär cirka sex centimeter stora bitar. Rör ut paprikapulvret i apelsinjuice och köttdelens limejuice och salt. Rör ner färsk eller fryst hackad vitlök, oregano och spiskummin. Vänd köttet i all marinad och täck.",
+        "Marinera två timmar i kylskåp, högst 4 °C. Håll kött och marinad åtskilda från råa tillbehör.",
+        "Värm ugnen till 160 °C. Lägg kött och all marinad i en ugnssäker gryta, tillsätt 100 ml vatten och täck tätt med lock.",
+        "Tillaga i ugnen under tätt lock två timmar.",
+        "Kontrollera att bottnen inte kokat torr. Tillsätt vid behov 100 ml vatten och sätt tillbaka locket.",
+        "Fortsätt i ugnen under lock ytterligare cirka sextio minuter.",
+        "Kontrollera att köttet faller isär lätt med gaffel och är helt genomlagat, minst 72 °C i tjockaste biten. Förläng annars tillagningen under lock. Behåll allt fett och spad. Ta ut grytan och håll täckt. Skala rödlöken, väg den ätliga mängden och skiva tunt. Krama med lökdelens limejuice och salt; behåll all lag.",
+        "Låt köttet vila tio minuter i spadet medan löken drar i sin lag.",
+        "Dra isär köttet med två gafflar och blanda med hela det heta paprika-citrusspadet och allt fett. Ingen sky silas eller hälls bort. Värm de mjuka majstortillorna kort i torr panna; förvara varmt under lock.",
+        "Väg redan kokta svarta bönor efter avrinning. Värm med 30 ml vatten och all fryst hackad koriander, sjud minst tre minuter eller längre enligt förpackningen och behåll allt spad. Lägg den helt tinade avokadon med all sin saft bredvid.",
+        "Fördela hela köttet och allt spad, tortillorna, rödlöken med all lag och eventuella bönor/avokado jämnt mellan portionerna."
+      ],
+      "name": "Citrusbräserat fläsk i pibilstil – paprikaversion – med bönor och avokado",
+      "preparation": {
+        "family": "citrusbräserat fläsk i pibilstil",
+        "input_forms": {
+          "apelsinjuice": "as_sold",
+          "avokado": "raw_edible",
+          "fläskkarré": "raw_edible",
+          "koriander": "raw_edible",
+          "limejuice": "as_sold",
+          "majstortillas": "as_sold",
+          "oregano": "dry",
+          "paprikapulver": "dry",
+          "rödlök": "raw_edible",
+          "salt": "as_sold",
+          "spiskummin": "dry",
+          "svarta bönor": "cooked_drained",
+          "vitlök": "raw_edible"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "4d993ef0426aaed8cb451ea2d9fbc91460010a3b50bd02f3d7545944d8bdede0",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 4
+    }
+  ]
+}

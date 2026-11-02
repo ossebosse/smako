@@ -187,6 +187,18 @@ def test_new_pecorino_is_separate_from_romano_and_remains_nonvegan():
     assert _excluded_by_diet('lagrad pecorino', DietPreference.VEGAN)
 
 
+def test_gruyere_requires_its_exact_source_and_unknown_rind_loss():
+    row = next(r for r in ROWS if r['name'] == 'gruyère')
+    assert row['form'] == 'as_sold' and row['gross_inedible_mass']
+    assert len(row['reviewed_links']) == 8
+    assert {x['retailer_product_id'] for x in row['reviewed_links']} == {'101774848_ST'}
+    p, f = source(row)
+    key = row['requirements'][0].removeprefix('pack:')
+    assert compatible(key, p, f)
+    assert not compatible(key, p.model_copy(update={'name': 'Fontina'}), f)
+    assert _excluded_by_diet('gruyère', DietPreference.VEGAN)
+
+
 @pytest.mark.parametrize('name', ['råa skalade vannameiräkor', 'blåmusselkött utan skal',
                                   'ätklar inläggningssill', 'corned beef på burk'])
 def test_shellfish_adaptations_do_not_pass_vegetarian_or_vegan_requests(name):

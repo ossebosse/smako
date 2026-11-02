@@ -18,10 +18,78 @@ from app.services.recipe_library import (
 REPORT = Path('docs/reviews/recipe-unblock-round2-20261101')
 
 
+def test_oven_pastor_has_ground_ancho_ready_tortillas_and_no_raw_salsa_or_lost_pan_juices():
+    recipes = [r for r in current_recipes() if r.design.base_id == 'smako-mexican-tacos-al-pastor']
+    assert len(recipes) == 3
+    for recipe in recipes:
+        names = {i.canonical_name: i for i in recipe.ingredients}
+        assert not {'achiotepasta', 'guajillochili', 'masa harina'} & names.keys()
+        assert names['anchochili'].quantity == 25 and names['majstortillas'].quantity == 400
+        assert names['fläskkarré'].quantity == 750 and names['ananas'].quantity == 350
+        assert 'utan achiote' in recipe.name and recipe.design.waiting_minutes >= 360
+        assert not recipe.design.unmeasured_processes
+        doubled = _scaled(recipe, 8)
+        validate_recipe_design(doubled)
+        text = ' '.join(doubled.instructions)
+        assert '40 ml vatten' in text and 'Ingen sky eller fett hälls bort' in text
+        assert 'minst 72 °C' in text and 'hela marinaden' in text
+        if recipe.design.variant_id == 'extended':
+            assert 'tomatillo' not in names and names['salsa verde av tomatillo'].quantity == 250
+            assert '80 ml vatten' in text and 'minst tre minuter' in text
+
+
+def test_pandan_free_desserts_preserve_distinct_layers_topping_and_cold_fruit():
+    recipes = [r for r in current_recipes()
+               if r.design.base_id == 'smako-thai-woon-kati'
+               or r.design.base_id == 'smako-thai-kluai-buat-chi' and r.design.variant_id == 'extended']
+    assert len(recipes) == 3
+    for recipe in recipes:
+        names = {i.canonical_name: i for i in recipe.ingredients}
+        assert 'pandanblad' not in names and 'utan pandan' in recipe.name
+        assert not recipe.design.unmeasured_processes
+        scaled = _scaled(recipe, 2)
+        validate_recipe_design(scaled)
+        text = ' '.join(scaled.instructions)
+        if recipe.design.base_id.endswith('woon-kati'):
+            assert names['agar agar'].quantity == 1.6 and names['kokosmjölk'].quantity == 100
+            assert '240 ml vatten' in text and '80 ml vatten' in text
+            assert 'klara lagret' in text and 'Kyl minst sextio minuter' in text
+            if recipe.design.variant_id == 'extended':
+                assert names['mango'].quantity == 100 and recipe.design.waiting_minutes >= 210
+                assert 'all fruktsaft' in text
+        else:
+            assert names['banan'].quantity == 120
+            assert names['sesamfrön'].quantity == 5 and names['kokosflingor'].quantity == 8
+            assert '60 ml vatten' in text and 'hela kokosmjölksåsen' in text
+
+
+def test_pibil_paprika_adaptation_keeps_saucy_braise_and_variant_sides():
+    recipes = [r for r in current_recipes() if r.design.base_id == 'smako-mexican-cochinita-pibil']
+    assert len(recipes) == 3
+    for recipe in recipes:
+        names = {i.canonical_name: i for i in recipe.ingredients}
+        assert 'achiotepasta' not in names and 'paprikaversion' in recipe.name
+        assert names['paprikapulver'].quantity == 12 and names['paprikapulver'].form == 'dry'
+        assert names['fläskkarré'].quantity == 850 and names['majstortillas'].quantity == 320
+        assert not recipe.design.unmeasured_processes
+        doubled = _scaled(recipe, 8)
+        validate_recipe_design(doubled)
+        text = ' '.join(doubled.instructions)
+        assert '200 ml vatten' in text and 'Ingen sky silas eller hälls bort' in text
+        assert 'minst 72 °C' in text
+        assert recipe.design.waiting_minutes >= 310
+        if recipe.design.variant_id != 'simple':
+            assert {'vitlök', 'oregano', 'spiskummin'} <= names.keys()
+        if recipe.design.variant_id == 'extended':
+            assert names['svarta bönor'].quantity == 400 and names['avokado'].quantity == 200
+            assert '60 ml vatten' in text and 'minst tre minuter' in text
+            assert recipe.design.waiting_minutes >= 430
+
+
 def test_vada_bread_version_keeps_batter_and_explicit_unknown_frying_loss():
     recipes=[r for r in current_recipes() if r.design.base_id=='smako-indian-vada-pav']
-    assert len(recipes)==1 and recipes[0].design.variant_id=='simple'
-    recipe=recipes[0]
+    assert {r.design.variant_id for r in recipes} == {'simple', 'standard', 'extended'}
+    recipe=next(r for r in recipes if r.design.variant_id=='simple')
     names={i.canonical_name:i for i in recipe.ingredients}
     assert 'pavbröd' not in names and names['mjukt hamburgerbröd'].quantity==416
     assert names['rapsolja'].quantity==220 and names['potatis'].quantity==750
@@ -31,6 +99,129 @@ def test_vada_bread_version_keeps_batter_and_explicit_unknown_frying_loss():
     text=' '.join(doubled.instructions)
     assert '2400 ml vatten' in text and '320 ml vatten' in text and '40 ml vatten' in text
     assert 'kvarvarande smet' in text and 'två vada per portion' in text
+
+
+def test_vada_standard_keeps_extra_spices_and_one_total_oil_purchase():
+    recipe = next(r for r in current_recipes()
+                  if r.design.base_id == 'smako-indian-vada-pav' and r.design.variant_id == 'standard')
+    names = {i.canonical_name: i for i in recipe.ingredients}
+    assert 'curryblad' not in names and 'utan curryblad' in recipe.name
+    assert names['senapsfrön'].quantity == 2 and names['ingefära'].quantity == 18
+    assert names['rapsolja'].quantity == 220
+    for portions in (2, 8):
+        scaled = _scaled(recipe, portions)
+        validate_recipe_design(scaled)
+        text = ' '.join(scaled.instructions)
+        assert 'en sextondel' in text and 'resten av den angivna oljan' in text
+        process = next(p for p in scaled.design.unmeasured_processes if p.operation == 'deep_fry_and_drain')
+        step = next(s for s in scaled.design.steps if s.id == process.step_id)
+        assert '170 °C' in step.text and 'rapsolja|as_sold' in process.ingredient_keys
+
+
+def test_vada_extended_uses_existing_volume_concentrate_without_mass_conversion():
+    recipe = next(r for r in current_recipes()
+                  if r.design.base_id == 'smako-indian-vada-pav' and r.design.variant_id == 'extended')
+    names = {i.canonical_name: i for i in recipe.ingredients}
+    assert 'tamarindpasta' not in names and 'curryblad' not in names
+    assert names['tamarindkoncentrat'].quantity == 20 and names['tamarindkoncentrat'].unit == 'ml'
+    assert names['tamarindkoncentrat'].product_requirements == ('pack:intake_all_shape_top5_tamarind_concentrate',)
+    assert names['dadlar'].quantity == 60 and names['koriander'].quantity == 15
+    assert recipe.design.version == '1.0.2'
+    date_process = next(p for p in recipe.design.unmeasured_processes if p.ingredient_keys == ('dadlar|as_sold',))
+    assert date_process.operation == 'trim_before_cooking'
+    date_step = next(s for s in recipe.design.steps if s.id == date_process.step_id)
+    assert 'Väg dadlarna med kärnor' in date_step.text and 'fyll inte på extra dadlar' in date_step.text
+    proof = json.loads((REPORT / 'qualification-date-basis-corrections.json').read_bytes())
+    assert not proof['input_only']
+    assert proof['modes']['estimated']['recipes'][0]['id'].endswith(':1.0.2:extended')
+    assert proof['modes']['estimated']['recipes'][0]['status'] == 'verified'
+    doubled = _scaled(recipe, 8)
+    validate_recipe_design(doubled)
+    text = ' '.join(doubled.instructions)
+    assert '240 ml vatten' in text and 'minst tre minuter' in text
+    assert 'inget silas eller kastas' in text
+    process = next(p for p in recipe.design.unmeasured_processes if p.operation == 'deep_fry_and_drain')
+    assert '170 °C' in next(s for s in recipe.design.steps if s.id == process.step_id).text
+
+
+@pytest.mark.parametrize('base,water', [
+    ('smako-indian-kosha-mangsho', ('700 ml vatten', '1120 ml vatten')),
+    ('smako-indian-recheado-makrill', ('60 ml vatten', '1120 ml vatten')),
+    ('smako-indian-undhiyu-vardagsversion', ('40 ml vatten', '50 ml vatten', '1300 ml vatten')),
+    ('smako-italian-tiella-barese', ('1700 ml vatten', '200 ml vatten')),
+    ('smako-italian-zuppa-valpellinentze', ('800 ml vatten', '200 ml vatten')),
+])
+def test_final_adaptations_scale_process_water_and_retain_all_three_variant_levels(base, water):
+    recipes = [r for r in current_recipes() if r.design.base_id == base]
+    assert {r.design.variant_id for r in recipes} == {'simple', 'standard', 'extended'}
+    for recipe in recipes:
+        doubled = _scaled(recipe, recipe.servings * 2)
+        validate_recipe_design(doubled)
+        assert all(token in ' '.join(doubled.instructions) for token in water)
+        assert recipe.design.provenance.cooking_test == 'not_cooked'
+
+
+def test_new_frozen_lamb_and_salmon_versions_plan_thaw_and_keep_cooking_juices():
+    for recipe in current_recipes():
+        base = recipe.design.base_id
+        if base not in {'smako-indian-kosha-mangsho', 'smako-indian-recheado-makrill'}:
+            continue
+        names = {i.canonical_name: i for i in recipe.ingredients}
+        text = ' '.join(recipe.instructions)
+        if base.endswith('kosha-mangsho'):
+            assert 'getkött' not in names and 'senapsolja' not in names
+            assert names['benfri lammstek'].quantity == 800 and names['benfri lammstek'].form == 'as_sold'
+            assert recipe.design.steps[1].duration_minutes == 1440
+            assert recipe.design.waiting_minutes > 1560
+            process, = recipe.design.unmeasured_processes
+            assert process.operation == 'trim_before_cooking' and process.step_id == 's3'
+            assert 'Allt fett och all marinad stannar i grytan' in text
+            assert 'Förläng annars sjudningen' in text
+        else:
+            assert 'makrill' not in names and 'kashmirichilipulver' not in names
+            assert names['lax'].quantity == 700 and names['rökt paprikapulver'].quantity == 6
+            assert recipe.design.waiting_minutes >= 720 and not recipe.design.unmeasured_processes
+            assert 'minst 72 °C' in text and 'genomkokta sky och olja' in text
+
+
+def test_spinach_muthiya_keep_liquid_and_use_roasted_peanuts_and_portion_counts():
+    for recipe in current_recipes():
+        if recipe.design.base_id != 'smako-indian-undhiyu-vardagsversion':
+            continue
+        names = {i.canonical_name: i for i in recipe.ingredients}
+        assert names['spenat'].quantity == 80 and names['spenat'].form == 'as_sold'
+        assert names['rostade jordnötter'].quantity == 70
+        assert 'bockhornsklöverblad' not in names and 'spenat-muthiya' in recipe.name
+        text = ' '.join(recipe.instructions)
+        assert 'tre muthiya per portion' in text and 'Ingen olja eller vätska hälls bort' in text
+        assert not recipe.design.unmeasured_processes
+
+
+def test_tiella_and_bread_gratin_use_actual_mussel_and_cheese_basis():
+    for recipe in current_recipes():
+        base = recipe.design.base_id
+        if base not in {'smako-italian-tiella-barese', 'smako-italian-zuppa-valpellinentze'}:
+            continue
+        names = {i.canonical_name: i for i in recipe.ingredients}
+        text = ' '.join(recipe.instructions)
+        if base.endswith('tiella-barese'):
+            assert names['blåmusselkött utan skal'].quantity == 400 and 'blåmusslor med skal' not in names
+            assert recipe.design.steps[1].duration_minutes == 720
+            assert 'upptiningsvätska' in text and 'minst 75 °C' in text
+            if recipe.design.variant_id == 'simple':
+                assert not recipe.design.unmeasured_processes
+                continue
+            assert names['lagrad pecorino'].quantity == 45 and 'pecorino romano' not in names
+        else:
+            assert names['gruyère'].quantity == 220 and names['gruyère'].form == 'as_sold'
+            assert names['surdegsfralla'].quantity == 300 and names['vitkål'].quantity == 600
+            assert 'fontina' not in names and 'savojkål' not in names
+            assert 'Fördela allt spad' in text
+            if recipe.design.variant_id == 'extended':
+                assert names['broccoli'].form == 'as_sold'
+                assert 'frysta broccolibuketter' in text and 'all kvarvarande plåtsky' in text
+        process, = recipe.design.unmeasured_processes
+        assert process.operation == 'trim_before_cooking' and process.step_id == 's3'
 
 
 def test_cornflakes_chivda_uses_ready_to_eat_flakes_and_preserves_extended_variation():
