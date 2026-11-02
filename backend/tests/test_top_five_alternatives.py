@@ -111,7 +111,7 @@ def test_tamarind_volume_never_acquires_a_gram_conversion():
 
 def test_successors_preserve_all_originals_other_ingredients_safety_and_scaling():
     review, issued, active = recipes()
-    assert len(active) == 2740 and len(review['corrected']) == 192
+    assert len(active) == 2794 and len(review['corrected']) == 192
     assert Counter(g for t in review['corrected'] for g in t['groups']) == {
         'tamarindpasta': 93, 'masa harina': 31, 'pärlkorn': 27, 'citrongräs': 27, 'klibbigt ris': 20}
     for t in review['corrected']:

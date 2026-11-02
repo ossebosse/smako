@@ -29,13 +29,41 @@ def sha(raw):
     return hashlib.sha256(raw).hexdigest()
 
 
+def test_new_stage_preflight_catches_unscaled_water_before_issue(scripts):
+    from admit_expansion_round2_20261101 import check_process_water
+
+    current = current_recipes()
+    pindi = next(r for r in current if r.design.base_id == 'smako-indian-pindi-chole')
+    check_process_water([pindi])
+    step = pindi.design.steps[0].model_copy(update={'scalable_amounts': (), 'text': 'Blötlägg i 1200 ml kallt vatten.'})
+    design = pindi.design.model_copy(update={'steps': (step, *pindi.design.steps[1:])})
+    broken = pindi.model_copy(update={'design': design})
+    with pytest.raises(ValueError, match='so it scales'):
+        check_process_water([broken])
+
+
+def test_review_search_finds_spaced_labels_without_approving_fresh_or_dried_identity(scripts):
+    from review_product_search import review_search_key, review_search_matches
+
+    queries = [review_search_key(q) for q in ('makrut', 'limeblad', 'kaffir')]
+    assert review_search_matches(review_search_key('Lime Blad Torkade'), queries)
+    assert review_search_matches(review_search_key('Lime-blad Torkade'), queries)
+    assert not review_search_matches(review_search_key('Limejuice'), queries)
+    assert not review_search_matches(review_search_key('Lime Blad Torkade'), [''])
+    ledger = json.loads((REPORT / 'ingredient-blockers.json').read_bytes())
+    leaf = next(r for r in ledger['blockers'] if r['identity'] == 'makrutlimeblad|raw_edible')
+    assert leaf['retrieved_product_rows'] == 2
+    assert leaf['status'] == 'pending_source_form_or_content_review'
+    assert 'färska blad' in leaf['reason']
+
+
 def test_each_issued_stage_matches_reviewed_source_changes_and_complete_basket_proof(scripts):
     from admit_expansion_round2_20261101 import amount_changes
 
     manifest = manifest_entries()
     issued = {identity(r): r for r in load_entries(manifest['current'] + manifest['history'])}
     accepted = set()
-    for stage in range(1, 28):
+    for stage in (*range(1, 34), *range(35, 49)):
         authors = json.loads((AUTHORED / f'authoring-stage{stage}.json').read_bytes())['recipes']
         raw = (AUTHORED / f'standardized-stage{stage}.json').read_bytes()
         review = json.loads((REPORT / f'recipe-review-stage{stage}.json').read_bytes())
@@ -65,7 +93,7 @@ def test_each_issued_stage_matches_reviewed_source_changes_and_complete_basket_p
         baskets = proof['modes']['estimated']['recipes']
         assert {r['id'] for r in baskets} == ids and len(baskets) == len(ids)
         assert all(r['status'] == 'verified' and r['audit']['passed'] for r in baskets)
-    assert len(accepted) == 170
+    assert len(accepted) == 224
 
 
 def test_every_received_identity_has_one_final_decision_and_old_imports_are_retained():
@@ -74,14 +102,15 @@ def test_every_received_identity_has_one_final_decision_and_old_imports_are_reta
     rows = queue['variants']
     assert len(rows) == len({r['source_id'] for r in rows}) == 501
     assert len({r['base_id'] for r in rows}) == 189
-    assert sum(r['status'] == 'imported_reviewed_version' for r in rows) == 278
-    assert sum(r['status'] == 'pending_qualified_input' for r in rows) == 22
-    assert summary['newly_imported_variants'] == 170
-    assert summary['newly_imported_bases'] == 70
-    assert summary['current_variants'] == 2740 and summary['current_bases'] == 1045
+    assert sum(r['status'] == 'imported_reviewed_version' for r in rows) == 332
+    assert sum(r['status'] == 'pending_qualified_input' for r in rows) == 20
+    assert summary['newly_imported_variants'] == 224
+    assert summary['newly_imported_bases'] == 89
+    assert summary['current_variants'] == 2794 and summary['current_bases'] == 1064
     assert summary['preserved_issued_variants'] == 3625
     assert summary['original_reference_ids'] == 2200
-    assert summary['corrected_new_versions'] == 67 and summary['corrected_current_variants'] == 64
+    assert summary['corrected_new_versions'] == 76 and summary['corrected_current_variants'] == 73
+    assert summary['rejected_local_versions'] == 1
     assert summary['batch_limited_variants'] == 6
     assert not summary['beta_activation'] and summary['cooking_test'] == 'not_cooked'
     active = {identity(r): r for r in current_recipes()}
@@ -192,3 +221,30 @@ def test_unqualified_stage_cannot_be_finalized(scripts, tmp_path, monkeypatch):
         assert (tmp_path / f'import-stage{stage}.json').read_bytes() == receipt_before
     with pytest.raises(ValueError, match='already issued and immutable'):
         admission.build(stage)
+
+
+def test_rejected_local_stage_is_hash_bound_and_never_changes_old_reference_scope(scripts):
+    from coverage_reference import checked_additive_transition
+
+    review = json.loads((REPORT / 'library-transition.json').read_bytes())
+    row, = review['rejected_new_versions']
+    assert row['runtime_id'] == 'smako-thai-khao-tom-mat:1.0.1:simple'
+    assert row['runtime_id'] not in {identity(r) for r in current_recipes()}
+    assert checked_additive_transition(review) == review
+    for change in ('hash', 'proof_hash', 'proof_path', 'duplicate', 'unexplained', 'reason'):
+        mutated = copy.deepcopy(review)
+        rejected = mutated['rejected_new_versions'][0]
+        if change == 'hash':
+            rejected['content_sha256'] = 'changed'
+        elif change == 'proof_hash':
+            rejected['qualification_sha256'] = 'changed'
+        elif change == 'proof_path':
+            rejected['qualification_path'] = 'ci/coverage-reference.json'
+        elif change == 'duplicate':
+            mutated['rejected_new_versions'].append(copy.deepcopy(rejected))
+        elif change == 'unexplained':
+            mutated['rejected_new_versions'] = []
+        else:
+            rejected['reason'] = ''
+        with pytest.raises(ValueError, match='unreviewed'):
+            checked_additive_transition(mutated)

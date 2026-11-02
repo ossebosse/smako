@@ -26,12 +26,19 @@ ROUND2_REVIEW = Path('docs/reviews/recipe-unblock-round2-20261101/library-transi
 
 def checked_additive_transition(review):
     """Append disjoint recipes; reviewed successors may retire only new versions."""
-    from app.services.meal_library_content import encoded, identity, load_entries
+    from app.services.meal_library_content import (
+        ROOT,
+        encoded,
+        identity,
+        load_entries,
+        validate_pack_bytes,
+    )
 
     before, after = review['before_manifest'], review['after_manifest']
     expected = {**before, 'current': before['current'] + review['added_entries']}
     revoked = review.get('new_revocations', {})
     corrections = review.get('superseded_new_versions', [])
+    rejected = review.get('rejected_new_versions', [])
     if revoked:
         expected['revocations'] = {**before.get('revocations', {}), **revoked}
     if (after != expected or review['corrected']
@@ -45,9 +52,39 @@ def checked_additive_transition(review):
         raise ValueError('Changed coverage comparison scope: unreviewed additive recipes')
     correction_ids = [r['previous_id'] for r in corrections]
     successors = [r['runtime_id'] for r in corrections]
-    if (set(revoked) != set(correction_ids) or len(set(correction_ids)) != len(correction_ids)
+    rejected_ids = [r['runtime_id'] for r in rejected]
+    if (set(revoked) != set(correction_ids) | set(rejected_ids)
+            or len(set(rejected_ids)) != len(rejected_ids)
+            or set(rejected_ids).intersection(correction_ids + successors)
+            or len(set(correction_ids)) != len(correction_ids)
             or len(set(successors)) != len(successors) or set(revoked).intersection(old)):
         raise ValueError('Changed coverage comparison scope: unreviewed new-version revocations')
+    for row in rejected:
+        key = row['runtime_id']
+        if (key not in added or added[key] != row['content_sha256']
+                or not row.get('reason') or revoked.get(key) != row['reason']):
+            raise ValueError('Changed coverage comparison scope: unreviewed rejected new version')
+        proof_path = Path(row['qualification_path'])
+        if proof_path.parent != ROUND2_REVIEW.parent:
+            raise ValueError('Changed coverage comparison scope: unreviewed rejection proof path')
+        proof_raw = proof_path.read_bytes()
+        proof = json.loads(proof_raw)
+        pack_path = Path(row['standardized_pack_path'])
+        if pack_path.is_absolute() or pack_path.parent.resolve() != ROOT / 'reviewed-expansion-round2-20261101':
+            raise ValueError('Changed coverage comparison scope: unreviewed rejected pack path')
+        pack_raw = pack_path.read_bytes()
+        checked = validate_pack_bytes(pack_raw)
+        candidates = [r for r in checked['recipes'] if identity(r) == key]
+        rows = [r for r in proof['modes']['estimated']['recipes'] if r['id'] == key]
+        if (hashlib.sha256(proof_raw).hexdigest() != row['qualification_sha256']
+                or proof['input_only'] or checked['rejections'] or len(candidates) != 1
+                or candidates[0].design.content_sha256 != added[key]
+                or proof['pack_sha256'] != hashlib.sha256(pack_raw).hexdigest()
+                or proof['pack_sha256'] != row['pack_sha256']
+                or len(rows) != 1 or rows[0]['status'] != 'data_blocked'
+                or not rows[0].get('input_blocks')
+                or any(b['code'] != 'DATA_BLOCKED' for b in rows[0]['input_blocks'])):
+            raise ValueError('Changed coverage comparison scope: unreviewed rejection proof')
     for row in corrections:
         previous_id, successor_id = row['previous_id'], row['runtime_id']
         previous_parts, successor_parts = previous_id.split(':'), successor_id.split(':')

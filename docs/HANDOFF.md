@@ -1,21 +1,21 @@
-# 2026-11-01: Ytterligare 170 receptvarianter granskade och importerade
+# 2026-11-01: Ytterligare 224 receptvarianter granskade och importerade
 
 Se [rapporten för andra hinderomgången](reviews/recipe-unblock-round2-20261101/REPORT.md),
 [variantkön](reviews/recipe-unblock-round2-20261101/queue.json) och
 [ingrediensliggaren](reviews/recipe-unblock-round2-20261101/ingredient-blockers.json).
-Biblioteket innehåller nu **1 045 grundrätter / 2 740 aktuella varianter**,
-en ökning med **70 grundrätter / 170 varianter**. Alla 170 har slutligt
-godkända korgar i referensens uppskattade inköpsläge, 94 även i exakt läge.
+Biblioteket innehåller nu **1 064 grundrätter / 2 794 aktuella varianter**,
+en ökning med **89 grundrätter / 224 varianter**. Alla 224 har slutligt
+godkända korgar i referensens uppskattade inköpsläge, 127 även i exakt läge.
 Recepten är innehållsgranskade men inte provlagade. Ingen betaaktivering ingår.
 
 Fem mottagna ZIP innehåller **189 grundrätter / 501 varianter**. Totalt
-**278 varianter** har importerats: 105 hela familjer och sex delvis importerade.
-Senaste 24/62-leveransen är bytebevarad; 39 av dess varianter är importerade.
-**223 varianter återstår**, varav 22 med konkret saknat produktstöd och
-201 med register-/författarhinder. Fortsätt ta emot löpande mindre ZIP.
+**332 varianter** har importerats: 124 hela familjer och sex delvis importerade.
+Senaste 24/62-leveransen är bytebevarad; 44 av dess varianter är importerade.
+**169 varianter återstår**, varav 20 med konkret saknat produktstöd och
+149 med register-/författarhinder. Fortsätt ta emot löpande mindre ZIP.
 Det finns inget separat 72/194-arkiv. Nästa författarpaket är **022**.
 
-39 ytterligare ingrediens/form/enhetsidentiteter och 232 produktkopplingar
+43 ytterligare ingrediens/form/enhetsidentiteter och 258 produktkopplingar
 har granskats. Separat finns 17 nya butikskopplingar för redan granskade
 kardemumma-, koriander- och avokadoprodukter. Följ exakta käll-/mängdbevis;
 inga nya råvarualias, densiteter eller utbytesprocent får antas.
@@ -28,8 +28,10 @@ vikt/näring förblir okänd och hårda sådana användargränser ger `DATA_BLOC
 
 Riktade tester omfattar riktiga utgivna recept, mängd-/identitetsgränser,
 samtliga importkvitton, gamla hashvärden och hela bibliotekets innehållskrav.
+Slutlig lokal verifiering: 825 godkända offline-tester, noll fel/skippar,
+samt godkända Ruff-, compileall- och diffkontroller.
 Full CI måste vara grön före main-merge; täckningsbaslinjer ändras inte.
-Ingen ny varm tidsmätning har gjorts för dessa 170; äldre tidsprov har eget scope.
+Ingen ny varm tidsmätning har gjorts för dessa 224; äldre tidsprov har eget scope.
 
 Kostfiltren känner igen de nya fisk-/skaldjursnamnen och hel kyckling även
 vid äldre förseglade metadata. Fiskavstängning och menyfördelning är testade;
@@ -47,10 +49,31 @@ inga versioner från före denna arbetsomgång berörs.
 De sista nio lammvarianterna har särskilda efterföljare med benfri lammstek,
 24 timmars planerad kylupptining och okänd putsförlust. Åtta andra efterföljare
 anpassar instruktionerna till faktiskt valda frysta produkter. Totalt finns
-67 återkallade nyutgivna mellanversioner för 64 aktuella varianter; samtliga
+76 återkallade nyutgivna mellanversioner för 73 aktuella varianter; samtliga
 bytes och provkvitton bevaras, inklusive tre kedjor till 1.0.3.
 Väntetidens modellgräns följer nu totalens 48 timmar; användarens kortare
 tidsfilter är oförändrade och utesluter längre recept.
+
+Ytterligare granskade alternativ omfattar salsiccia, pecorino/feta, paprika,
+fisksås, muscovado, avrunnen mozzarella och citrongräs. Tre Norma-versioner
+rättar processvattnets skalning och tre pasta ’ncasciata-versioner kräver kort
+pasta efter granskning av verkligt korgval. Alla 224 har godkänt uppskattat
+inköp; exakt läge ger 127 godkända, 95 datablockerade och två checkoutblockerade.
+
+En lokalt utgiven khao tom mat-version underkändes för saknat glutinöst ris
+även efter ett uttryckligt bakpappersalternativ. Den återkallades före main
+med bevarade bytes och misslyckat korgprov, och räknas inte som import.
+Använd ingrediensprov före utgivning och full korgaudit före godkänd import.
+Återstående största hinder är räkpasta (15), curryblad (13),
+makrutlimeblad och thaibasilika (10 vardera); antalen överlappar.
+
+Senare steg omfattar även Chicken 65, torkade limebladsinfusioner i tofu och
+khua kling, paprika en nogada, pölsa, Pindi chole, cornflakes-chivda,
+korianderversioner av papadzules/arroz a la tumbada och enkel vada pav.
+Pindi chole har tre ytterligare efterföljare för skalbart blötläggningsvatten.
+Den manuella produktsökningen fångar nu särskrivningar som Lime Blad Torkade;
+träffar måste fortfarande granskas för exakt identitet, form och källa.
+Nya steg har dessutom kontroll av processvattnets portionsskalning före utgivning.
 
 ---
 

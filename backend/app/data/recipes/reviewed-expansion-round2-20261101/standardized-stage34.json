@@ -1,0 +1,376 @@
+{
+  "pack_id": "reviewed-expansion-round2-stage34",
+  "recipes": [
+    {
+      "design": {
+        "active_minutes": 40,
+        "base_id": "smako-thai-khao-tom-mat",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "klibbigt ris|dry",
+                "name": "klibbigt ris",
+                "note": "",
+                "quantity": 45.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kokosmjölk|as_sold",
+                "name": "kokosmjölk",
+                "note": "",
+                "quantity": 65.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "banan|raw_edible",
+                "name": "banan",
+                "note": "",
+                "quantity": 65.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "strösocker",
+                "note": "",
+                "quantity": 9.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 0.4,
+                "unit": "g"
+              }
+            ],
+            "id": "paket",
+            "name": "Två små ångpaket"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "thai"
+        ],
+        "equipment": [
+          "ångkastrull med insats och lock",
+          "kastrull",
+          "sil",
+          "livsmedelsgodkänt bakplåtspapper",
+          "livsmedelssnöre"
+        ],
+        "estimated_minutes": 588,
+        "family": "khao tom mat",
+        "fish": false,
+        "flavor_profile": [
+          "kokos",
+          "banan"
+        ],
+        "ingredient_count": 4,
+        "meal_types": [
+          "snack"
+        ],
+        "method": "pot",
+        "primary_ingredient": "klibbigt ris",
+        "provenance": {
+          "notes": "Granskad bakpappersversion: bananbladens arom saknas. Papper och snöre är tillagningsutrustning som tas bort, inte livsmedel. Vanlig fast mogen banan används; ingen nam wa-sort påstås. Inte provlagad. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "ingen",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 3,
+            "id": "s1",
+            "ingredient_keys": [
+              "klibbigt ris|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "180 ml",
+                180.0
+              ]
+            ],
+            "text": "Skölj klibbigt ris i sil och lägg i 180 ml vatten. Täck och ställ i kylskåp vid 4 °C."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 480,
+            "id": "s2",
+            "ingredient_keys": [
+              "klibbigt ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Blötlägg riset åtta timmar i kylskåp."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 2,
+            "id": "s3",
+            "ingredient_keys": [
+              "klibbigt ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Häll bort blötläggningsvattnet och låt riset rinna av i sil."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 15,
+            "id": "s4",
+            "ingredient_keys": [
+              "klibbigt ris|dry",
+              "kokosmjölk|as_sold",
+              "salt|as_sold",
+              "strösocker|dry"
+            ],
+            "parallel_group": null,
+            "text": "Värm kokosmjölk, socker och salt i en liten kastrull. Lägg i riset och sjud under tät omrörning cirka tolv minuter tills vätskan absorberats och kornen mjuknat på ytan. Behåll hela kokosblandningen."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 5,
+            "id": "s5",
+            "ingredient_keys": [
+              "banan|raw_edible",
+              "klibbigt ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Bred ut riset i en grund skål. Klipp bakplåtspapper till dubbla omslag för två små paket per portion. Skala bananen och väg den angivna ätliga mängden; dela i bitar som ryms i paketen."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 8,
+            "id": "s6",
+            "ingredient_keys": [
+              "klibbigt ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Låt riset svalna åtta minuter tills det går att hantera."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 10,
+            "id": "s7",
+            "ingredient_keys": [
+              "banan|raw_edible",
+              "klibbigt ris|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "1000 ml",
+                1000.0
+              ]
+            ],
+            "text": "Fördela ris och banan i två små paket per portion, med ris runt bananen. Vik in papprets sidor och ändar tätt och bind med livsmedelssnöre. Fyll ångkastrullen med 1000 ml vatten under insatsen, koka upp och lägg paketen i insatsen med plats för ångan."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 25,
+            "id": "s8",
+            "ingredient_keys": [
+              "banan|raw_edible",
+              "klibbigt ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Ånga paketen under lock över stadig ånga i 25 minuter."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 1,
+            "id": "s9",
+            "ingredient_keys": [
+              "klibbigt ris|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "300 ml",
+                300.0
+              ]
+            ],
+            "text": "Kontrollera vattennivån försiktigt och fyll vid behov på 300 ml vatten (hett) utan att vattnet når paketen. Lägg tillbaka locket."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 25,
+            "id": "s10",
+            "ingredient_keys": [
+              "banan|raw_edible",
+              "klibbigt ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Ånga ytterligare 25 minuter."
+          },
+          {
+            "depends_on": [
+              "s10"
+            ],
+            "duration_minutes": 2,
+            "id": "s11",
+            "ingredient_keys": [
+              "banan|raw_edible",
+              "klibbigt ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Öppna ett paket försiktigt: riset ska sakna hård kärna. Förläng ångningen vid behov. Lyft paketen till ett fat."
+          },
+          {
+            "depends_on": [
+              "s11"
+            ],
+            "duration_minutes": 10,
+            "id": "s12",
+            "ingredient_keys": [
+              "banan|raw_edible",
+              "klibbigt ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Låt paketen svalna tio minuter."
+          },
+          {
+            "depends_on": [
+              "s12"
+            ],
+            "duration_minutes": 2,
+            "id": "s13",
+            "ingredient_keys": [
+              "banan|raw_edible",
+              "klibbigt ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Ta bort allt papper och snöre. Servera hela ris- och bananfyllningen, två små paket per portion. Kyl eventuella rester snabbt i små portioner och förvara vid 4 °C."
+          }
+        ],
+        "total_minutes": 588,
+        "unmeasured_processes": [
+          {
+            "description": "Blötläggningsvattnet hälls bort; eventuell överföring av risets ämnen är inte uppmätt.",
+            "ingredient_keys": [
+              "klibbigt ris|dry"
+            ],
+            "operation": "drain_before_cooking",
+            "step_id": "s3"
+          }
+        ],
+        "variant_id": "simple",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 548
+      },
+      "ingredients": [
+        {
+          "canonical_name": "klibbigt ris",
+          "component": "paket",
+          "form": "dry",
+          "name": "klibbigt ris",
+          "product_requirements": [
+            "pack:intake_all_ee2565e2b272"
+          ],
+          "quantity": 45.0,
+          "quantity_max": 45.0,
+          "quantity_min": 45.0,
+          "quantity_step": 45.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kokosmjölk",
+          "component": "paket",
+          "form": "as_sold",
+          "name": "kokosmjölk",
+          "quantity": 65.0,
+          "quantity_max": 65.0,
+          "quantity_min": 65.0,
+          "quantity_step": 65.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "banan",
+          "component": "paket",
+          "form": "raw_edible",
+          "name": "banan",
+          "product_requirements": [
+            "pack:intake_all_973660201bf8"
+          ],
+          "quantity": 65.0,
+          "quantity_max": 65.0,
+          "quantity_min": 65.0,
+          "quantity_step": 65.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "strösocker",
+          "component": "paket",
+          "form": "dry",
+          "name": "strösocker",
+          "product_requirements": [
+            "pack:sugar"
+          ],
+          "quantity": 9.0,
+          "quantity_max": 9.0,
+          "quantity_min": 9.0,
+          "quantity_step": 9.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "paket",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 0.4,
+          "quantity_max": 0.4,
+          "quantity_min": 0.4,
+          "quantity_step": 0.4,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Skölj klibbigt ris i sil och lägg i 180 ml vatten. Täck och ställ i kylskåp vid 4 °C.",
+        "Blötlägg riset åtta timmar i kylskåp.",
+        "Häll bort blötläggningsvattnet och låt riset rinna av i sil.",
+        "Värm kokosmjölk, socker och salt i en liten kastrull. Lägg i riset och sjud under tät omrörning cirka tolv minuter tills vätskan absorberats och kornen mjuknat på ytan. Behåll hela kokosblandningen.",
+        "Bred ut riset i en grund skål. Klipp bakplåtspapper till dubbla omslag för två små paket per portion. Skala bananen och väg den angivna ätliga mängden; dela i bitar som ryms i paketen.",
+        "Låt riset svalna åtta minuter tills det går att hantera.",
+        "Fördela ris och banan i två små paket per portion, med ris runt bananen. Vik in papprets sidor och ändar tätt och bind med livsmedelssnöre. Fyll ångkastrullen med 1000 ml vatten under insatsen, koka upp och lägg paketen i insatsen med plats för ångan.",
+        "Ånga paketen under lock över stadig ånga i 25 minuter.",
+        "Kontrollera vattennivån försiktigt och fyll vid behov på 300 ml vatten (hett) utan att vattnet når paketen. Lägg tillbaka locket.",
+        "Ånga ytterligare 25 minuter.",
+        "Öppna ett paket försiktigt: riset ska sakna hård kärna. Förläng ångningen vid behov. Lyft paketen till ett fat.",
+        "Låt paketen svalna tio minuter.",
+        "Ta bort allt papper och snöre. Servera hela ris- och bananfyllningen, två små paket per portion. Kyl eventuella rester snabbt i små portioner och förvara vid 4 °C."
+      ],
+      "name": "Khao tom mat – kokosris med banan i ångpaket – enkel – i bakpapperspaket utan bananblad",
+      "servings": 1
+    }
+  ],
+  "schema_version": "smako-meal-pack-v1"
+}

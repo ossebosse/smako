@@ -1,0 +1,930 @@
+{
+  "pack_id": "reviewed-expansion-round2-stage45",
+  "recipes": [
+    {
+      "base_id": "smako-thai-khua-kling",
+      "components": [
+        {
+          "id": "fars",
+          "ingredients": [
+            {
+              "form": "raw_edible",
+              "label": "fläskfärs",
+              "name": "fläskfärs",
+              "quantity": 650,
+              "role": "primary",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "röd currypasta",
+              "name": "röd currypasta",
+              "quantity": 55,
+              "role": "flavour",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "Helt citrongräs före ansning",
+              "name": "citrongräs",
+              "quantity": 40,
+              "requirements": [
+                "pack:intake_all_shape_top5_whole_lemongrass"
+              ],
+              "role": "flavour",
+              "unit": "g"
+            },
+            {
+              "form": "dry",
+              "label": "torkade makrutlimeblad",
+              "name": "torkade makrutlimeblad",
+              "quantity": 1,
+              "role": "flavour",
+              "unit": "g"
+            },
+            {
+              "form": "dry",
+              "label": "strösocker",
+              "name": "strösocker",
+              "quantity": 10,
+              "role": "flavour",
+              "unit": "g"
+            }
+          ],
+          "name": "Torr färscurry"
+        },
+        {
+          "id": "ris",
+          "ingredients": [
+            {
+              "form": "dry",
+              "label": "ris",
+              "name": "ris",
+              "quantity": 280,
+              "role": "side",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "salt",
+              "name": "salt",
+              "quantity": 2,
+              "role": "flavour",
+              "unit": "g"
+            }
+          ],
+          "name": "Kokt ris"
+        },
+        {
+          "id": "gurka",
+          "ingredients": [
+            {
+              "form": "raw_edible",
+              "label": "gurka",
+              "name": "gurka",
+              "quantity": 350,
+              "role": "vegetable",
+              "unit": "g"
+            }
+          ],
+          "name": "Frisk grönsaksservering"
+        }
+      ],
+      "cuisine": "thai",
+      "equipment": [
+        "stekpanna",
+        "kastrull",
+        "termometer"
+      ],
+      "family": "khua kling",
+      "flavor": [
+        "sydthailändsk curry",
+        "citrongräs",
+        "makrut"
+      ],
+      "meal_type": "dinner",
+      "method": "pan",
+      "name": "Khua kling – torrstekt currykryddad fläskfärs – enkel – röd currypasta och torkade limeblad",
+      "notes": "Granskad Khua kling-anpassning med 55 g röd currypasta, 1 g torkade makrutlimeblad i silad infusion och 40 g helt citrongräs före ansning. Detta ersätter författarutkastets sydthailändska pasta, 4 g färska blad och 30 g rensat citrongräs utan lika smak eller ätlig vikt. Standard/utökad får fyra råa hela ägg i stället för 200 g färdigkokt ägg. Bladextraktion, citrongräsputsning och äggskal har okända förluster. Allt köttfett och all såskrydda serveras; rätten reduceras torr. Inte provlagad. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+      "primary": "fläskfärs",
+      "servings": 4,
+      "side": "ris och gurka",
+      "steps": [
+        {
+          "after": [],
+          "minutes": 3,
+          "text": "Lägg de uppvägda torkade limebladen i en liten kastrull med 100 ml vatten. Koka upp och sänk värmen.",
+          "uses": [
+            "torkade makrutlimeblad"
+          ]
+        },
+        {
+          "after": [
+            1
+          ],
+          "minutes": 15,
+          "passive": true,
+          "text": "Sjud bladen under lock i femton minuter.",
+          "uses": [
+            "torkade makrutlimeblad"
+          ]
+        },
+        {
+          "after": [
+            2
+          ],
+          "minutes": 3,
+          "text": "Sila genom finmaskig sil och kasta alla blad och hårda fragment. Behåll hela infusionen och fyll upp till 100 ml vatten.",
+          "uses": [
+            "torkade makrutlimeblad"
+          ]
+        },
+        {
+          "after": [
+            3
+          ],
+          "minutes": 7,
+          "text": "Väg citrongräset före ansning. Skär bort torr rotände, hårda yttre lager och vedartad topp. Finhacka och mortla allt mjukt innanmäte mycket fint.",
+          "uses": [
+            "citrongräs"
+          ]
+        },
+        {
+          "after": [
+            4
+          ],
+          "minutes": 4,
+          "text": "Lägg riset och dess salt i en kastrull med 560 ml vatten. Koka upp och sänk värmen.",
+          "uses": [
+            "ris",
+            "salt"
+          ]
+        },
+        {
+          "after": [
+            5
+          ],
+          "minutes": 18,
+          "passive": true,
+          "text": "Sjud riset under lock cirka arton minuter, eller enligt förpackningen.",
+          "uses": [
+            "ris"
+          ]
+        },
+        {
+          "after": [
+            6
+          ],
+          "minutes": 2,
+          "text": "Kontrollera att riset är mjukt och vattnet absorberat. Tillsätt vid behov 50 ml vatten och fortsätt tills mjukt innan kastrullen tas från värmen.",
+          "uses": [
+            "ris"
+          ]
+        },
+        {
+          "after": [
+            7
+          ],
+          "minutes": 5,
+          "passive": true,
+          "text": "Låt riset vila under lock fem minuter.",
+          "uses": [
+            "ris"
+          ]
+        },
+        {
+          "after": [
+            8
+          ],
+          "minutes": 3,
+          "text": "Luckra riset och håll det varmt över 60 °C under lock. Skiva gurkan.",
+          "uses": [
+            "ris",
+            "gurka"
+          ]
+        },
+        {
+          "after": [
+            9
+          ],
+          "minutes": 7,
+          "text": "Häll hela limebladsinfusionen i en vid panna. Lägg i fläskfärsen och finfördela under uppvärmning. Arbeta in all röd currypasta och det finmortlade citrongräset. Tillsätt ingen olja och häll inte bort fett eller köttsaft.",
+          "uses": [
+            "fläskfärs",
+            "röd currypasta",
+            "torkade makrutlimeblad",
+            "citrongräs"
+          ]
+        },
+        {
+          "after": [
+            10
+          ],
+          "minutes": 12,
+          "text": "Stek under tät omrörning tills färsen är helt genomlagad och minst 72 °C. Rör ner sockret. Fortsätt på låg till medelhög värme, skrapa bottnen och låt vattnet avdunsta tills små torra färssmulor är täckta av kryddpastan. Behåll allt köttfett; inget spad ska hällas bort. Förläng vid behov, utan att bränna pastan.",
+          "uses": [
+            "fläskfärs",
+            "röd currypasta",
+            "strösocker"
+          ]
+        },
+        {
+          "after": [
+            11
+          ],
+          "minutes": 3,
+          "text": "Fördela hela färscurryn med allt varmt ris och grönsakstillbehör över det angivna antalet portioner.",
+          "uses": [
+            "fläskfärs",
+            "ris",
+            "gurka"
+          ]
+        }
+      ],
+      "unmeasured_processes": [
+        {
+          "description": "Torra blad och fragment silas bort; överförd ämnesmängd är okänd. Ingen torr/färsk- eller näringsfaktor antas.",
+          "ingredients": [
+            "torkade makrutlimeblad"
+          ],
+          "operation": "remove_after_infusion",
+          "step": 3
+        },
+        {
+          "description": "Helt citrongräs vägs före borttagning av hårda delar; ingen uppmätt ätlig andel finns.",
+          "ingredients": [
+            "citrongräs"
+          ],
+          "operation": "trim_before_cooking",
+          "step": 4
+        }
+      ],
+      "variant_id": "simple",
+      "version": "1.0.1"
+    },
+    {
+      "base_id": "smako-thai-khua-kling",
+      "components": [
+        {
+          "id": "fars",
+          "ingredients": [
+            {
+              "form": "raw_edible",
+              "label": "fläskfärs",
+              "name": "fläskfärs",
+              "quantity": 650,
+              "role": "primary",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "röd currypasta",
+              "name": "röd currypasta",
+              "quantity": 55,
+              "role": "flavour",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "Helt citrongräs före ansning",
+              "name": "citrongräs",
+              "quantity": 40,
+              "requirements": [
+                "pack:intake_all_shape_top5_whole_lemongrass"
+              ],
+              "role": "flavour",
+              "unit": "g"
+            },
+            {
+              "form": "dry",
+              "label": "torkade makrutlimeblad",
+              "name": "torkade makrutlimeblad",
+              "quantity": 1,
+              "role": "flavour",
+              "unit": "g"
+            },
+            {
+              "form": "dry",
+              "label": "strösocker",
+              "name": "strösocker",
+              "quantity": 10,
+              "role": "flavour",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "fisksås",
+              "name": "fisksås",
+              "quantity": 15,
+              "role": "flavour",
+              "unit": "ml"
+            },
+            {
+              "form": "as_sold",
+              "label": "Råa hela ägg, räknade före kokning",
+              "name": "ägg",
+              "quantity": 4,
+              "role": "primary",
+              "unit": "st"
+            }
+          ],
+          "name": "Torr färscurry"
+        },
+        {
+          "id": "ris",
+          "ingredients": [
+            {
+              "form": "dry",
+              "label": "ris",
+              "name": "ris",
+              "quantity": 280,
+              "role": "side",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "salt",
+              "name": "salt",
+              "quantity": 2,
+              "role": "flavour",
+              "unit": "g"
+            }
+          ],
+          "name": "Kokt ris"
+        },
+        {
+          "id": "gurka",
+          "ingredients": [
+            {
+              "form": "raw_edible",
+              "label": "gurka",
+              "name": "gurka",
+              "quantity": 350,
+              "role": "vegetable",
+              "unit": "g"
+            }
+          ],
+          "name": "Frisk grönsaksservering"
+        }
+      ],
+      "cuisine": "thai",
+      "equipment": [
+        "stekpanna",
+        "kastrull",
+        "termometer"
+      ],
+      "family": "khua kling",
+      "flavor": [
+        "sydthailändsk curry",
+        "citrongräs",
+        "makrut"
+      ],
+      "meal_type": "dinner",
+      "method": "pan",
+      "name": "Khua kling – torrstekt currykryddad fläskfärs – standard – röd currypasta och torkade limeblad",
+      "notes": "Granskad Khua kling-anpassning med 55 g röd currypasta, 1 g torkade makrutlimeblad i silad infusion och 40 g helt citrongräs före ansning. Detta ersätter författarutkastets sydthailändska pasta, 4 g färska blad och 30 g rensat citrongräs utan lika smak eller ätlig vikt. Standard/utökad får fyra råa hela ägg i stället för 200 g färdigkokt ägg. Bladextraktion, citrongräsputsning och äggskal har okända förluster. Allt köttfett och all såskrydda serveras; rätten reduceras torr. Inte provlagad. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+      "primary": "fläskfärs",
+      "servings": 4,
+      "side": "ris och gurka",
+      "steps": [
+        {
+          "after": [],
+          "minutes": 3,
+          "text": "Lägg de uppvägda torkade limebladen i en liten kastrull med 100 ml vatten. Koka upp och sänk värmen.",
+          "uses": [
+            "torkade makrutlimeblad"
+          ]
+        },
+        {
+          "after": [
+            1
+          ],
+          "minutes": 15,
+          "passive": true,
+          "text": "Sjud bladen under lock i femton minuter.",
+          "uses": [
+            "torkade makrutlimeblad"
+          ]
+        },
+        {
+          "after": [
+            2
+          ],
+          "minutes": 3,
+          "text": "Sila genom finmaskig sil och kasta alla blad och hårda fragment. Behåll hela infusionen och fyll upp till 100 ml vatten.",
+          "uses": [
+            "torkade makrutlimeblad"
+          ]
+        },
+        {
+          "after": [
+            3
+          ],
+          "minutes": 7,
+          "text": "Väg citrongräset före ansning. Skär bort torr rotände, hårda yttre lager och vedartad topp. Finhacka och mortla allt mjukt innanmäte mycket fint.",
+          "uses": [
+            "citrongräs"
+          ]
+        },
+        {
+          "after": [
+            4
+          ],
+          "minutes": 4,
+          "text": "Lägg riset och dess salt i en kastrull med 560 ml vatten. Koka upp och sänk värmen.",
+          "uses": [
+            "ris",
+            "salt"
+          ]
+        },
+        {
+          "after": [
+            5
+          ],
+          "minutes": 18,
+          "passive": true,
+          "text": "Sjud riset under lock cirka arton minuter, eller enligt förpackningen.",
+          "uses": [
+            "ris"
+          ]
+        },
+        {
+          "after": [
+            6
+          ],
+          "minutes": 2,
+          "text": "Kontrollera att riset är mjukt och vattnet absorberat. Tillsätt vid behov 50 ml vatten och fortsätt tills mjukt innan kastrullen tas från värmen.",
+          "uses": [
+            "ris"
+          ]
+        },
+        {
+          "after": [
+            7
+          ],
+          "minutes": 5,
+          "passive": true,
+          "text": "Låt riset vila under lock fem minuter.",
+          "uses": [
+            "ris"
+          ]
+        },
+        {
+          "after": [
+            8
+          ],
+          "minutes": 3,
+          "text": "Luckra riset och håll det varmt över 60 °C under lock. Skiva gurkan.",
+          "uses": [
+            "ris",
+            "gurka"
+          ]
+        },
+        {
+          "after": [
+            9
+          ],
+          "minutes": 5,
+          "text": "Lägg det angivna antalet råa hela ägg i en kastrull med 1000 ml vatten. Koka upp försiktigt.",
+          "uses": [
+            "ägg"
+          ]
+        },
+        {
+          "after": [
+            10
+          ],
+          "minutes": 12,
+          "passive": true,
+          "text": "Sjud äggen tolv minuter så vitor och gulor blir fasta.",
+          "uses": [
+            "ägg"
+          ]
+        },
+        {
+          "after": [
+            11
+          ],
+          "minutes": 5,
+          "text": "Häll bort kokvattnet, kyl hastigt med kallt vatten och skala äggen. Kasta skalen och skölj bort skalrester. Kontrollera att vita och gula är fasta och håll äggen varmt över 60 °C till servering.",
+          "uses": [
+            "ägg"
+          ]
+        },
+        {
+          "after": [
+            12
+          ],
+          "minutes": 7,
+          "text": "Häll hela limebladsinfusionen i en vid panna. Lägg i fläskfärsen och finfördela under uppvärmning. Arbeta in all röd currypasta och det finmortlade citrongräset. Tillsätt ingen olja och häll inte bort fett eller köttsaft.",
+          "uses": [
+            "fläskfärs",
+            "röd currypasta",
+            "torkade makrutlimeblad",
+            "citrongräs"
+          ]
+        },
+        {
+          "after": [
+            13
+          ],
+          "minutes": 12,
+          "text": "Stek under tät omrörning tills färsen är helt genomlagad och minst 72 °C. Rör ner sockret och fisksåsen. Fortsätt på låg till medelhög värme, skrapa bottnen och låt vattnet avdunsta tills små torra färssmulor är täckta av kryddpastan. Behåll allt köttfett; inget spad ska hällas bort. Förläng vid behov, utan att bränna pastan.",
+          "uses": [
+            "fläskfärs",
+            "röd currypasta",
+            "strösocker",
+            "fisksås"
+          ]
+        },
+        {
+          "after": [
+            14
+          ],
+          "minutes": 3,
+          "text": "Fördela hela färscurryn med allt varmt ris och grönsakstillbehör över det angivna antalet portioner. Dela de nykokta äggen och servera dem till.",
+          "uses": [
+            "fläskfärs",
+            "ris",
+            "gurka",
+            "ägg"
+          ]
+        }
+      ],
+      "unmeasured_processes": [
+        {
+          "description": "Torra blad och fragment silas bort; överförd ämnesmängd är okänd. Ingen torr/färsk- eller näringsfaktor antas.",
+          "ingredients": [
+            "torkade makrutlimeblad"
+          ],
+          "operation": "remove_after_infusion",
+          "step": 3
+        },
+        {
+          "description": "Helt citrongräs vägs före borttagning av hårda delar; ingen uppmätt ätlig andel finns.",
+          "ingredients": [
+            "citrongräs"
+          ],
+          "operation": "trim_before_cooking",
+          "step": 4
+        },
+        {
+          "description": "Fyra råa hela ägg ersätter angiven kokt gramvikt; skal och färdig vikt är okända, ingen styckvikt antas.",
+          "ingredients": [
+            "ägg"
+          ],
+          "operation": "peel_after_cooking",
+          "step": 12
+        }
+      ],
+      "variant_id": "standard",
+      "version": "1.0.1"
+    },
+    {
+      "base_id": "smako-thai-khua-kling",
+      "components": [
+        {
+          "id": "fars",
+          "ingredients": [
+            {
+              "form": "raw_edible",
+              "label": "fläskfärs",
+              "name": "fläskfärs",
+              "quantity": 650,
+              "role": "primary",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "röd currypasta",
+              "name": "röd currypasta",
+              "quantity": 55,
+              "role": "flavour",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "Helt citrongräs före ansning",
+              "name": "citrongräs",
+              "quantity": 40,
+              "requirements": [
+                "pack:intake_all_shape_top5_whole_lemongrass"
+              ],
+              "role": "flavour",
+              "unit": "g"
+            },
+            {
+              "form": "dry",
+              "label": "torkade makrutlimeblad",
+              "name": "torkade makrutlimeblad",
+              "quantity": 1,
+              "role": "flavour",
+              "unit": "g"
+            },
+            {
+              "form": "dry",
+              "label": "strösocker",
+              "name": "strösocker",
+              "quantity": 10,
+              "role": "flavour",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "fisksås",
+              "name": "fisksås",
+              "quantity": 15,
+              "role": "flavour",
+              "unit": "ml"
+            },
+            {
+              "form": "as_sold",
+              "label": "Råa hela ägg, räknade före kokning",
+              "name": "ägg",
+              "quantity": 4,
+              "role": "primary",
+              "unit": "st"
+            }
+          ],
+          "name": "Torr färscurry"
+        },
+        {
+          "id": "ris",
+          "ingredients": [
+            {
+              "form": "dry",
+              "label": "ris",
+              "name": "ris",
+              "quantity": 280,
+              "role": "side",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "salt",
+              "name": "salt",
+              "quantity": 2,
+              "role": "flavour",
+              "unit": "g"
+            }
+          ],
+          "name": "Kokt ris"
+        },
+        {
+          "id": "gurka",
+          "ingredients": [
+            {
+              "form": "raw_edible",
+              "label": "gurka",
+              "name": "gurka",
+              "quantity": 350,
+              "role": "vegetable",
+              "unit": "g"
+            },
+            {
+              "form": "raw_edible",
+              "label": "morot",
+              "name": "morot",
+              "quantity": 200,
+              "role": "vegetable",
+              "unit": "g"
+            },
+            {
+              "form": "raw_edible",
+              "label": "vitkål",
+              "name": "vitkål",
+              "quantity": 200,
+              "role": "vegetable",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "limejuice",
+              "name": "limejuice",
+              "quantity": 30,
+              "role": "flavour",
+              "unit": "ml"
+            }
+          ],
+          "name": "Frisk grönsaksservering"
+        }
+      ],
+      "cuisine": "thai",
+      "equipment": [
+        "stekpanna",
+        "kastrull",
+        "termometer"
+      ],
+      "family": "khua kling",
+      "flavor": [
+        "sydthailändsk curry",
+        "citrongräs",
+        "makrut"
+      ],
+      "meal_type": "dinner",
+      "method": "pan",
+      "name": "Khua kling – torrstekt currykryddad fläskfärs – utökad – röd currypasta och torkade limeblad",
+      "notes": "Granskad Khua kling-anpassning med 55 g röd currypasta, 1 g torkade makrutlimeblad i silad infusion och 40 g helt citrongräs före ansning. Detta ersätter författarutkastets sydthailändska pasta, 4 g färska blad och 30 g rensat citrongräs utan lika smak eller ätlig vikt. Standard/utökad får fyra råa hela ägg i stället för 200 g färdigkokt ägg. Bladextraktion, citrongräsputsning och äggskal har okända förluster. Allt köttfett och all såskrydda serveras; rätten reduceras torr. Inte provlagad. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+      "primary": "fläskfärs",
+      "servings": 4,
+      "side": "ris och gurka",
+      "steps": [
+        {
+          "after": [],
+          "minutes": 3,
+          "text": "Lägg de uppvägda torkade limebladen i en liten kastrull med 100 ml vatten. Koka upp och sänk värmen.",
+          "uses": [
+            "torkade makrutlimeblad"
+          ]
+        },
+        {
+          "after": [
+            1
+          ],
+          "minutes": 15,
+          "passive": true,
+          "text": "Sjud bladen under lock i femton minuter.",
+          "uses": [
+            "torkade makrutlimeblad"
+          ]
+        },
+        {
+          "after": [
+            2
+          ],
+          "minutes": 3,
+          "text": "Sila genom finmaskig sil och kasta alla blad och hårda fragment. Behåll hela infusionen och fyll upp till 100 ml vatten.",
+          "uses": [
+            "torkade makrutlimeblad"
+          ]
+        },
+        {
+          "after": [
+            3
+          ],
+          "minutes": 7,
+          "text": "Väg citrongräset före ansning. Skär bort torr rotände, hårda yttre lager och vedartad topp. Finhacka och mortla allt mjukt innanmäte mycket fint.",
+          "uses": [
+            "citrongräs"
+          ]
+        },
+        {
+          "after": [
+            4
+          ],
+          "minutes": 4,
+          "text": "Lägg riset och dess salt i en kastrull med 560 ml vatten. Koka upp och sänk värmen.",
+          "uses": [
+            "ris",
+            "salt"
+          ]
+        },
+        {
+          "after": [
+            5
+          ],
+          "minutes": 18,
+          "passive": true,
+          "text": "Sjud riset under lock cirka arton minuter, eller enligt förpackningen.",
+          "uses": [
+            "ris"
+          ]
+        },
+        {
+          "after": [
+            6
+          ],
+          "minutes": 2,
+          "text": "Kontrollera att riset är mjukt och vattnet absorberat. Tillsätt vid behov 50 ml vatten och fortsätt tills mjukt innan kastrullen tas från värmen.",
+          "uses": [
+            "ris"
+          ]
+        },
+        {
+          "after": [
+            7
+          ],
+          "minutes": 5,
+          "passive": true,
+          "text": "Låt riset vila under lock fem minuter.",
+          "uses": [
+            "ris"
+          ]
+        },
+        {
+          "after": [
+            8
+          ],
+          "minutes": 7,
+          "text": "Luckra riset och håll det varmt över 60 °C under lock. Skiva gurkan. Skala och väg moroten, ansa och väg vitkålen. Strimla och vänd med gurkan och all limejuice; behåll hela salladens vätska.",
+          "uses": [
+            "ris",
+            "gurka",
+            "morot",
+            "vitkål",
+            "limejuice"
+          ]
+        },
+        {
+          "after": [
+            9
+          ],
+          "minutes": 5,
+          "text": "Lägg det angivna antalet råa hela ägg i en kastrull med 1000 ml vatten. Koka upp försiktigt.",
+          "uses": [
+            "ägg"
+          ]
+        },
+        {
+          "after": [
+            10
+          ],
+          "minutes": 12,
+          "passive": true,
+          "text": "Sjud äggen tolv minuter så vitor och gulor blir fasta.",
+          "uses": [
+            "ägg"
+          ]
+        },
+        {
+          "after": [
+            11
+          ],
+          "minutes": 5,
+          "text": "Häll bort kokvattnet, kyl hastigt med kallt vatten och skala äggen. Kasta skalen och skölj bort skalrester. Kontrollera att vita och gula är fasta och håll äggen varmt över 60 °C till servering.",
+          "uses": [
+            "ägg"
+          ]
+        },
+        {
+          "after": [
+            12
+          ],
+          "minutes": 7,
+          "text": "Häll hela limebladsinfusionen i en vid panna. Lägg i fläskfärsen och finfördela under uppvärmning. Arbeta in all röd currypasta och det finmortlade citrongräset. Tillsätt ingen olja och häll inte bort fett eller köttsaft.",
+          "uses": [
+            "fläskfärs",
+            "röd currypasta",
+            "torkade makrutlimeblad",
+            "citrongräs"
+          ]
+        },
+        {
+          "after": [
+            13
+          ],
+          "minutes": 12,
+          "text": "Stek under tät omrörning tills färsen är helt genomlagad och minst 72 °C. Rör ner sockret och fisksåsen. Fortsätt på låg till medelhög värme, skrapa bottnen och låt vattnet avdunsta tills små torra färssmulor är täckta av kryddpastan. Behåll allt köttfett; inget spad ska hällas bort. Förläng vid behov, utan att bränna pastan.",
+          "uses": [
+            "fläskfärs",
+            "röd currypasta",
+            "strösocker",
+            "fisksås"
+          ]
+        },
+        {
+          "after": [
+            14
+          ],
+          "minutes": 3,
+          "text": "Fördela hela färscurryn med allt varmt ris och grönsakstillbehör över det angivna antalet portioner. Dela de nykokta äggen och servera dem till.",
+          "uses": [
+            "fläskfärs",
+            "ris",
+            "gurka",
+            "ägg"
+          ]
+        }
+      ],
+      "unmeasured_processes": [
+        {
+          "description": "Torra blad och fragment silas bort; överförd ämnesmängd är okänd. Ingen torr/färsk- eller näringsfaktor antas.",
+          "ingredients": [
+            "torkade makrutlimeblad"
+          ],
+          "operation": "remove_after_infusion",
+          "step": 3
+        },
+        {
+          "description": "Helt citrongräs vägs före borttagning av hårda delar; ingen uppmätt ätlig andel finns.",
+          "ingredients": [
+            "citrongräs"
+          ],
+          "operation": "trim_before_cooking",
+          "step": 4
+        },
+        {
+          "description": "Fyra råa hela ägg ersätter angiven kokt gramvikt; skal och färdig vikt är okända, ingen styckvikt antas.",
+          "ingredients": [
+            "ägg"
+          ],
+          "operation": "peel_after_cooking",
+          "step": 12
+        }
+      ],
+      "variant_id": "extended",
+      "version": "1.0.1"
+    }
+  ],
+  "schema_version": "smako-recipe-authoring-v1"
+}

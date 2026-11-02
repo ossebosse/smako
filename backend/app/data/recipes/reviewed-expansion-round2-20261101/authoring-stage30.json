@@ -1,0 +1,417 @@
+{
+  "pack_id": "reviewed-expansion-round2-stage30",
+  "recipes": [
+    {
+      "base_id": "smako-greek-pitarakia-milos",
+      "components": [
+        {
+          "id": "dough",
+          "ingredients": [
+            {
+              "form": "dry",
+              "label": "Vetemjöl",
+              "name": "vetemjöl",
+              "quantity": 45,
+              "role": "side",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "Olivolja",
+              "name": "olivolja",
+              "quantity": 5,
+              "role": "cooking",
+              "unit": "ml"
+            },
+            {
+              "form": "as_sold",
+              "label": "Salt",
+              "name": "salt",
+              "quantity": 0.2,
+              "role": "flavour",
+              "unit": "g"
+            }
+          ],
+          "name": "Tunn oljedeg"
+        },
+        {
+          "id": "fill",
+          "ingredients": [
+            {
+              "form": "as_sold",
+              "label": "Lagrad pecorino, vikt före eventuell hård kant",
+              "name": "lagrad pecorino",
+              "quantity": 15,
+              "role": "primary",
+              "unit": "g"
+            },
+            {
+              "form": "raw_edible",
+              "label": "Gul lök",
+              "name": "gul lök",
+              "quantity": 15,
+              "role": "vegetable",
+              "unit": "g"
+            },
+            {
+              "form": "dry",
+              "label": "Svartpeppar",
+              "name": "svartpeppar",
+              "quantity": 0.1,
+              "role": "flavour",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "Fetaost utan fri lag",
+              "name": "fetaost",
+              "quantity": 15,
+              "role": "primary",
+              "unit": "g"
+            }
+          ],
+          "name": "Ost- och lökfyllning"
+        },
+        {
+          "id": "fry",
+          "ingredients": [
+            {
+              "form": "as_sold",
+              "label": "Rapsolja till frityrbad; kvarvarande olja är inte konsumtionsmängd",
+              "name": "rapsolja",
+              "quantity": 200,
+              "role": "cooking",
+              "unit": "ml"
+            }
+          ],
+          "name": "Frityrbad"
+        }
+      ],
+      "cuisine": "greek",
+      "equipment": [
+        "bunke",
+        "kavel",
+        "liten kastrull",
+        "frityrtermometer",
+        "hålslev"
+      ],
+      "family": "friterade ost-lökhalvmånar av oljedeg",
+      "flavor": [
+        "lagrad ost",
+        "lök"
+      ],
+      "meal_type": "snack",
+      "method": "pan",
+      "name": "Pitarakia – spröda ost- och lökhalvmånar – enkel – med feta och lagrad pecorino",
+      "notes": "Granskad feta- och pecorinoversion, inte manoura från Milos. Ny fyllning av 15 g pecorino före putsning och 15 g feta ersätter 30 g manoura. Ostkant och oljeupptag är inte uppmätta. Inte provlagad. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+      "primary": "lagrad pecorino",
+      "servings": 1,
+      "side": "tomat och yoghurt i utökad variant",
+      "steps": [
+        {
+          "after": [],
+          "minutes": 5,
+          "passive": false,
+          "text": "Blanda vetemjöl, salt och olivolja med 22 ml vatten. Knåda till en slät fast deg; tillsätt vid behov ytterligare 3 ml vatten. Täck skålen.",
+          "uses": [
+            "vetemjöl",
+            "salt",
+            "olivolja"
+          ]
+        },
+        {
+          "after": [
+            1
+          ],
+          "minutes": 25,
+          "passive": true,
+          "text": "Låt degen vila täckt i 25 minuter så att den går att kavla tunt.",
+          "uses": []
+        },
+        {
+          "after": [
+            2
+          ],
+          "minutes": 10,
+          "passive": false,
+          "text": "Väg pecorinon före borttagning av eventuell hård kant, skär bort kanten och riv resten. Smula den uppvägda fetaosten. Skala och väg löken, hacka mycket fint. Blanda ost, lök och svartpeppar. Kavla degen tunt mellan bakplåtspapper utan extra mjöl. Forma små rundlar med högst cirka en tesked fyllning i varje, vik till halvmånar och förslut kanterna noga. Använd hela degen och fyllningen.",
+          "uses": [
+            "lagrad pecorino",
+            "gul lök",
+            "svartpeppar",
+            "vetemjöl",
+            "fetaost"
+          ]
+        },
+        {
+          "after": [
+            3
+          ],
+          "minutes": 12,
+          "passive": false,
+          "text": "Värm rapsoljan i en liten stadig kastrull till 170 °C. Fyll aldrig kärlet mer än till hälften och håll ett lock nära. Lägg ner halvmånarna i omgångar och fritera omkring 4 minuter per omgång tills både deg och lökfyllning är tillagade och skalet gyllenbrunt. Vänd försiktigt; håll temperaturen mellan 165 och 175 °C.",
+          "uses": [
+            "rapsolja"
+          ]
+        },
+        {
+          "after": [
+            4
+          ],
+          "minutes": 4,
+          "passive": false,
+          "text": "Lyft med hålslev, låt droppa av på galler och vila några minuter så att fyllningen inte bränner. Servera de färdiga portionerna. Låt överskottsoljan svalna säkert; den ska inte hällas på maten.",
+          "uses": []
+        }
+      ],
+      "unmeasured_processes": [
+        {
+          "description": "Eventuell hård ostkant tas bort efter vägning. Ingen ätlig andel antas.",
+          "ingredients": [
+            "lagrad pecorino"
+          ],
+          "operation": "trim_before_cooking",
+          "step": 3
+        },
+        {
+          "description": "Frityrbadets oljeupptag och kvarvarande olja är okända. Inköpsoljan är inte serverad konsumtionsmängd.",
+          "ingredients": [
+            "rapsolja"
+          ],
+          "operation": "deep_fry_and_drain",
+          "step": 4
+        }
+      ],
+      "variant_id": "simple",
+      "version": "1.0.1"
+    },
+    {
+      "base_id": "smako-greek-pitarakia-milos",
+      "components": [
+        {
+          "id": "dough",
+          "ingredients": [
+            {
+              "form": "dry",
+              "label": "Vetemjöl",
+              "name": "vetemjöl",
+              "quantity": 45,
+              "role": "side",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "Olivolja",
+              "name": "olivolja",
+              "quantity": 5,
+              "role": "cooking",
+              "unit": "ml"
+            },
+            {
+              "form": "as_sold",
+              "label": "Salt",
+              "name": "salt",
+              "quantity": 0.2,
+              "role": "flavour",
+              "unit": "g"
+            }
+          ],
+          "name": "Tunn oljedeg"
+        },
+        {
+          "id": "fill",
+          "ingredients": [
+            {
+              "form": "as_sold",
+              "label": "Lagrad pecorino, vikt före eventuell hård kant",
+              "name": "lagrad pecorino",
+              "quantity": 15,
+              "role": "primary",
+              "unit": "g"
+            },
+            {
+              "form": "raw_edible",
+              "label": "Gul lök",
+              "name": "gul lök",
+              "quantity": 15,
+              "role": "vegetable",
+              "unit": "g"
+            },
+            {
+              "form": "dry",
+              "label": "Svartpeppar",
+              "name": "svartpeppar",
+              "quantity": 0.1,
+              "role": "flavour",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "Fetaost utan fri lag",
+              "name": "fetaost",
+              "quantity": 15,
+              "role": "primary",
+              "unit": "g"
+            }
+          ],
+          "name": "Ost- och lökfyllning"
+        },
+        {
+          "id": "fry",
+          "ingredients": [
+            {
+              "form": "as_sold",
+              "label": "Rapsolja till frityrbad; kvarvarande olja är inte konsumtionsmängd",
+              "name": "rapsolja",
+              "quantity": 200,
+              "role": "cooking",
+              "unit": "ml"
+            }
+          ],
+          "name": "Frityrbad"
+        },
+        {
+          "id": "fresh",
+          "ingredients": [
+            {
+              "form": "raw_edible",
+              "label": "Tomat",
+              "name": "tomat",
+              "quantity": 100,
+              "role": "vegetable",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "Yoghurt naturell",
+              "name": "yoghurt naturell",
+              "quantity": 60,
+              "role": "sauce",
+              "unit": "g"
+            },
+            {
+              "form": "raw_edible",
+              "label": "Mynta",
+              "name": "mynta",
+              "quantity": 2,
+              "role": "flavour",
+              "unit": "g"
+            }
+          ],
+          "name": "Yoghurt och tomat"
+        }
+      ],
+      "cuisine": "greek",
+      "equipment": [
+        "bunke",
+        "kavel",
+        "liten kastrull",
+        "frityrtermometer",
+        "hålslev"
+      ],
+      "family": "friterade ost-lökhalvmånar av oljedeg",
+      "flavor": [
+        "lagrad ost",
+        "lök"
+      ],
+      "meal_type": "snack",
+      "method": "pan",
+      "name": "Pitarakia – spröda ost- och lökhalvmånar – utökad – med feta och lagrad pecorino",
+      "notes": "Granskad feta- och pecorinoversion, inte manoura från Milos. Ny fyllning av 15 g pecorino före putsning och 15 g feta ersätter 30 g manoura. Ostkant och oljeupptag är inte uppmätta. Inte provlagad. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+      "primary": "lagrad pecorino",
+      "servings": 1,
+      "side": "tomat och yoghurt i utökad variant",
+      "steps": [
+        {
+          "after": [],
+          "minutes": 5,
+          "passive": false,
+          "text": "Blanda vetemjöl, salt och olivolja med 22 ml vatten. Knåda till en slät fast deg; tillsätt vid behov ytterligare 3 ml vatten. Täck skålen.",
+          "uses": [
+            "vetemjöl",
+            "salt",
+            "olivolja"
+          ]
+        },
+        {
+          "after": [
+            1
+          ],
+          "minutes": 25,
+          "passive": true,
+          "text": "Låt degen vila täckt i 25 minuter så att den går att kavla tunt.",
+          "uses": []
+        },
+        {
+          "after": [
+            2
+          ],
+          "minutes": 10,
+          "passive": false,
+          "text": "Väg pecorinon före borttagning av eventuell hård kant, skär bort kanten och riv resten. Smula den uppvägda fetaosten. Skala och väg löken, hacka mycket fint. Blanda ost, lök och svartpeppar. Kavla degen tunt mellan bakplåtspapper utan extra mjöl. Forma små rundlar med högst cirka en tesked fyllning i varje, vik till halvmånar och förslut kanterna noga. Använd hela degen och fyllningen.",
+          "uses": [
+            "lagrad pecorino",
+            "gul lök",
+            "svartpeppar",
+            "vetemjöl",
+            "fetaost"
+          ]
+        },
+        {
+          "after": [
+            3
+          ],
+          "minutes": 3,
+          "passive": false,
+          "text": "Hacka myntan och blanda i yoghurten. Skär tomaten i klyftor och lägg upp med yoghurten.",
+          "uses": [
+            "mynta",
+            "yoghurt naturell",
+            "tomat"
+          ]
+        },
+        {
+          "after": [
+            4
+          ],
+          "minutes": 12,
+          "passive": false,
+          "text": "Värm rapsoljan i en liten stadig kastrull till 170 °C. Fyll aldrig kärlet mer än till hälften och håll ett lock nära. Lägg ner halvmånarna i omgångar och fritera omkring 4 minuter per omgång tills både deg och lökfyllning är tillagade och skalet gyllenbrunt. Vänd försiktigt; håll temperaturen mellan 165 och 175 °C.",
+          "uses": [
+            "rapsolja"
+          ]
+        },
+        {
+          "after": [
+            5
+          ],
+          "minutes": 4,
+          "passive": false,
+          "text": "Lyft med hålslev, låt droppa av på galler och vila några minuter så att fyllningen inte bränner. Servera de färdiga portionerna med tomat och myntayoghurt. Låt överskottsoljan svalna säkert; den ska inte hällas på maten.",
+          "uses": []
+        }
+      ],
+      "unmeasured_processes": [
+        {
+          "description": "Eventuell hård ostkant tas bort efter vägning. Ingen ätlig andel antas.",
+          "ingredients": [
+            "lagrad pecorino"
+          ],
+          "operation": "trim_before_cooking",
+          "step": 3
+        },
+        {
+          "description": "Frityrbadets oljeupptag och kvarvarande olja är okända. Inköpsoljan är inte serverad konsumtionsmängd.",
+          "ingredients": [
+            "rapsolja"
+          ],
+          "operation": "deep_fry_and_drain",
+          "step": 5
+        }
+      ],
+      "variant_id": "extended",
+      "version": "1.0.1"
+    }
+  ],
+  "schema_version": "smako-recipe-authoring-v1"
+}

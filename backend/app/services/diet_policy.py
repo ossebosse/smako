@@ -68,7 +68,7 @@ _MEAT_OR_FISH = frozenset(
         "nöthjärta", "oxtunga", "nötblod", "räkpasta", "torkade räkor",
         "svensk ansjovis", "svensk ansjovis med spad", "isterband", "ister",
         "nötkött för snabbstekning", "ostronsås", "worcestershiresås",
-        "oxsvans med ben", "rimmat fläsklägg", "ätklar inläggningssill", "corned beef på burk", "färsk chorizokorv", "benfri lammstek",
+        "oxsvans med ben", "rimmat fläsklägg", "ätklar inläggningssill", "corned beef på burk", "färsk chorizokorv", "benfri lammstek", "färsk salsicciakorv",
     }
 )
 _MEAT_OR_FISH_FAMILIES = frozenset(
@@ -85,6 +85,7 @@ POULTRY_INGREDIENTS = frozenset({"kyckling", "hel kyckling", "kalkon"})
 # This reviewed sausage is explicitly pork + beef. This only narrows user
 # exclusions; it never aliases product identity or supplies nutrition facts.
 _REVIEWED_MEAT_COMPONENTS = {"färsk chorizokorv": frozenset({"fläskkött", "nötkött"}),
+                             "färsk salsicciakorv": frozenset({"fläskkött"}),
                              "benfri lammstek": frozenset({"lamm", "lammkött"})}
 _OTHER_ANIMAL = frozenset(
     {

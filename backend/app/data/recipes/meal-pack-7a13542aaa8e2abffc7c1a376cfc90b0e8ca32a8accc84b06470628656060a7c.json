@@ -1,0 +1,715 @@
+{
+  "library_version": "smako-meal-pack-v1",
+  "recipes": [
+    {
+      "design": {
+        "active_minutes": 25,
+        "base_id": "smako-indian-patishapta",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "rismjöl|dry",
+                "name": "Rismjöl",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vetemjöl|dry",
+                "name": "Vetemjöl",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ghee|as_sold",
+                "name": "Ghee",
+                "note": "",
+                "quantity": 4.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 0.2,
+                "unit": "g"
+              }
+            ],
+            "id": "smet",
+            "name": "Rispannkakssmet"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "kokosflingor|dry",
+                "name": "Torkade kokosflingor, inte färskt kokoskött",
+                "note": "",
+                "quantity": 14.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "mörkt muscovadosocker|dry",
+                "name": "Mörkt muscovadosocker",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "g"
+              }
+            ],
+            "id": "fyllning",
+            "name": "Kokt kokos och muscovado"
+          }
+        ],
+        "content_sha256": "dbf8cbdb25a62ecb4b46af8792d88a708b11138b7784089d383920d92279f8a2",
+        "content_source": {
+          "active_minutes": 25,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "reviewed-expansion-round2-stage33",
+          "priority": 1,
+          "proposal_id": "smako-indian-patishapta",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "a7ae69da00dcd525058c55face4fdc60edb86a22da65ec81807adbdf0bc226d9",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "indian"
+        ],
+        "equipment": [
+          "släpplätt stekpanna",
+          "kastrull",
+          "visp"
+        ],
+        "estimated_minutes": 60,
+        "family": "tunn fylld riscrêpe",
+        "fish": false,
+        "flavor_profile": [
+          "kokos",
+          "muscovado"
+        ],
+        "ingredient_count": 5,
+        "meal_types": [
+          "snack"
+        ],
+        "method": "pan",
+        "primary_ingredient": "rismjöl",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Granskad version med mörkt muscovadosocker, inte jaggery. Ny dos 10 g ersätter 12 g jaggery per portion utan påstående om samma sötma eller melassmak. Kokosfyllningen och de tunna ris-vetepannkakorna behålls. Inte provlagad. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "kokos-muscovadofyllning",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 4,
+            "id": "s1",
+            "ingredient_keys": [
+              "ghee|as_sold",
+              "rismjöl|dry",
+              "salt|as_sold",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "80 ml",
+                80.0
+              ]
+            ],
+            "text": "Vispa ris- och vetemjölet med salt och 80 ml vatten. Spara ghee till pannan. Smeten ska vara tunn nog att rinna ut, inte en fast dosa-deg."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 35,
+            "id": "s2",
+            "ingredient_keys": [
+              "ghee|as_sold",
+              "rismjöl|dry",
+              "salt|as_sold",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Låt smeten vila täckt 35 minuter så att mjölet hinner ta upp vätska."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 10,
+            "id": "s3",
+            "ingredient_keys": [
+              "kokosflingor|dry",
+              "mörkt muscovadosocker|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "50 ml",
+                50.0
+              ]
+            ],
+            "text": "Lägg de torkade kokosflingorna i en liten kastrull med 50 ml vatten. Värm och rör tills kokosflingorna mjuknar. Rör ner det uppvägda mörka muscovadosockret. Sjud under omrörning cirka 8 minuter till en saftig men sammanhållen fyllning; allt socker ska ha lösts. Behåll hela kokos- och sockerblandningen; koka endast bort överskottsvatten."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 9,
+            "id": "s4",
+            "ingredient_keys": [
+              "ghee|as_sold",
+              "kokosflingor|dry",
+              "mörkt muscovadosocker|dry",
+              "rismjöl|dry",
+              "salt|as_sold",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Rör om smeten. Värm en släpplätt panna på medelvärme och smörj med en del av gheen. Fördela smeten över två tunna pannkakor per portion, med återstående ghee mellan gräddningarna. Vrid pannan så smeten blir tunn. Grädda varje pannkaka tills ovansidan är satt och undersidan fått mycket lätt färg, cirka 2 minuter. Lägg en sträng av fyllningen på varje och rulla direkt i pannan."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 2,
+            "id": "s5",
+            "ingredient_keys": [
+              "ghee|as_sold",
+              "kokosflingor|dry",
+              "mörkt muscovadosocker|dry",
+              "rismjöl|dry",
+              "salt|as_sold",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Lägg rullarna på tallrikar och låt svalna något. Fördela hela fyllningen och alla pannkakor mellan portionerna; ingen extra sås behövs."
+          }
+        ],
+        "total_minutes": 60,
+        "variant_id": "simple",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 35
+      },
+      "ingredients": [
+        {
+          "canonical_name": "rismjöl",
+          "component": "smet",
+          "form": "dry",
+          "name": "rismjöl",
+          "product_requirements": [
+            "pack:intake_rice_flour"
+          ],
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 25.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vetemjöl",
+          "component": "smet",
+          "form": "dry",
+          "name": "vetemjöl",
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ghee",
+          "component": "smet",
+          "form": "as_sold",
+          "name": "ghee",
+          "product_requirements": [
+            "pack:intake_all_expansion_94bffb8b7bee"
+          ],
+          "quantity": 4.0,
+          "quantity_max": 4.0,
+          "quantity_min": 4.0,
+          "quantity_step": 4.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "smet",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 0.2,
+          "quantity_max": 0.2,
+          "quantity_min": 0.2,
+          "quantity_step": 0.2,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kokosflingor",
+          "component": "fyllning",
+          "form": "dry",
+          "name": "kokosflingor",
+          "product_requirements": [
+            "pack:intake_coconut"
+          ],
+          "quantity": 14.0,
+          "quantity_max": 14.0,
+          "quantity_min": 14.0,
+          "quantity_step": 14.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "mörkt muscovadosocker",
+          "component": "fyllning",
+          "form": "dry",
+          "name": "mörkt muscovadosocker",
+          "product_requirements": [
+            "pack:intake_all_expansion_ac284f871634"
+          ],
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 10.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Vispa ris- och vetemjölet med salt och 80 ml vatten. Spara ghee till pannan. Smeten ska vara tunn nog att rinna ut, inte en fast dosa-deg.",
+        "Låt smeten vila täckt 35 minuter så att mjölet hinner ta upp vätska.",
+        "Lägg de torkade kokosflingorna i en liten kastrull med 50 ml vatten. Värm och rör tills kokosflingorna mjuknar. Rör ner det uppvägda mörka muscovadosockret. Sjud under omrörning cirka 8 minuter till en saftig men sammanhållen fyllning; allt socker ska ha lösts. Behåll hela kokos- och sockerblandningen; koka endast bort överskottsvatten.",
+        "Rör om smeten. Värm en släpplätt panna på medelvärme och smörj med en del av gheen. Fördela smeten över två tunna pannkakor per portion, med återstående ghee mellan gräddningarna. Vrid pannan så smeten blir tunn. Grädda varje pannkaka tills ovansidan är satt och undersidan fått mycket lätt färg, cirka 2 minuter. Lägg en sträng av fyllningen på varje och rulla direkt i pannan.",
+        "Lägg rullarna på tallrikar och låt svalna något. Fördela hela fyllningen och alla pannkakor mellan portionerna; ingen extra sås behövs."
+      ],
+      "name": "Patishapta – rispannkaka med kokosfyllning – enkel – med mörkt muscovadosocker",
+      "preparation": {
+        "family": "tunn fylld riscrêpe",
+        "input_forms": {
+          "ghee": "as_sold",
+          "kokosflingor": "dry",
+          "mörkt muscovadosocker": "dry",
+          "rismjöl": "dry",
+          "salt": "as_sold",
+          "vetemjöl": "dry"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "dbf8cbdb25a62ecb4b46af8792d88a708b11138b7784089d383920d92279f8a2",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 25,
+        "base_id": "smako-indian-patishapta",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "rismjöl|dry",
+                "name": "Rismjöl",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vetemjöl|dry",
+                "name": "Vetemjöl",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ghee|as_sold",
+                "name": "Ghee",
+                "note": "",
+                "quantity": 4.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 0.2,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "mannagryn|dry",
+                "name": "Mannagryn",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "mjölk|as_sold",
+                "name": "Mjölk",
+                "note": "",
+                "quantity": 60.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "smet",
+            "name": "Rispannkakssmet"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "kokosflingor|dry",
+                "name": "Torkade kokosflingor, inte färskt kokoskött",
+                "note": "",
+                "quantity": 14.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "mörkt muscovadosocker|dry",
+                "name": "Mörkt muscovadosocker",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "mjölk|as_sold",
+                "name": "Mjölk",
+                "note": "",
+                "quantity": 50.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "kardemumma|dry",
+                "name": "Kardemumma",
+                "note": "",
+                "quantity": 0.3,
+                "unit": "g"
+              }
+            ],
+            "id": "fyllning",
+            "name": "Kokt kokos och muscovado"
+          }
+        ],
+        "content_sha256": "d35acc54fb4410776fd38df92b06284b780588ba7a4ac3ec0d67b95f23d328a4",
+        "content_source": {
+          "active_minutes": 25,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "reviewed-expansion-round2-stage33",
+          "priority": 1,
+          "proposal_id": "smako-indian-patishapta",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "a7ae69da00dcd525058c55face4fdc60edb86a22da65ec81807adbdf0bc226d9",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "indian"
+        ],
+        "equipment": [
+          "släpplätt stekpanna",
+          "kastrull",
+          "visp"
+        ],
+        "estimated_minutes": 60,
+        "family": "tunn fylld riscrêpe",
+        "fish": false,
+        "flavor_profile": [
+          "kokos",
+          "muscovado"
+        ],
+        "ingredient_count": 8,
+        "meal_types": [
+          "snack"
+        ],
+        "method": "pan",
+        "primary_ingredient": "rismjöl",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Granskad version med mörkt muscovadosocker, inte jaggery. Ny dos 10 g ersätter 12 g jaggery per portion utan påstående om samma sötma eller melassmak. Kokosfyllningen och de tunna ris-vetepannkakorna behålls. Inte provlagad. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "kokos-muscovadofyllning",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 4,
+            "id": "s1",
+            "ingredient_keys": [
+              "ghee|as_sold",
+              "mannagryn|dry",
+              "mjölk|as_sold",
+              "rismjöl|dry",
+              "salt|as_sold",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "40 ml",
+                40.0
+              ]
+            ],
+            "text": "Vispa ris- och vetemjölet med salt, mannagryn och smetens mjölk samt 40 ml vatten. Spara ghee till pannan. Smeten ska vara tunn nog att rinna ut, inte en fast dosa-deg."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 35,
+            "id": "s2",
+            "ingredient_keys": [
+              "ghee|as_sold",
+              "mannagryn|dry",
+              "mjölk|as_sold",
+              "rismjöl|dry",
+              "salt|as_sold",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Låt smeten vila täckt 35 minuter så att mjölet hinner ta upp vätska."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 10,
+            "id": "s3",
+            "ingredient_keys": [
+              "kardemumma|dry",
+              "kokosflingor|dry",
+              "mjölk|as_sold",
+              "mörkt muscovadosocker|dry"
+            ],
+            "parallel_group": null,
+            "text": "Lägg de torkade kokosflingorna i en liten kastrull med fyllningens mjölk. Värm och rör tills kokosflingorna mjuknar. Rör ner det uppvägda mörka muscovadosockret och tillsätt malen kardemumma. Sjud under omrörning cirka 8 minuter till en saftig men sammanhållen fyllning; allt socker ska ha lösts. Behåll hela kokos- och sockerblandningen; koka endast bort överskottsvatten."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 9,
+            "id": "s4",
+            "ingredient_keys": [
+              "ghee|as_sold",
+              "kardemumma|dry",
+              "kokosflingor|dry",
+              "mannagryn|dry",
+              "mjölk|as_sold",
+              "mörkt muscovadosocker|dry",
+              "rismjöl|dry",
+              "salt|as_sold",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Rör om smeten. Värm en släpplätt panna på medelvärme och smörj med en del av gheen. Fördela smeten över två tunna pannkakor per portion, med återstående ghee mellan gräddningarna. Vrid pannan så smeten blir tunn. Grädda varje pannkaka tills ovansidan är satt och undersidan fått mycket lätt färg, cirka 2 minuter. Lägg en sträng av fyllningen på varje och rulla direkt i pannan."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 2,
+            "id": "s5",
+            "ingredient_keys": [
+              "ghee|as_sold",
+              "kardemumma|dry",
+              "kokosflingor|dry",
+              "mannagryn|dry",
+              "mjölk|as_sold",
+              "mörkt muscovadosocker|dry",
+              "rismjöl|dry",
+              "salt|as_sold",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Lägg rullarna på tallrikar och låt svalna något. Fördela hela fyllningen och alla pannkakor mellan portionerna; ingen extra sås behövs."
+          }
+        ],
+        "total_minutes": 60,
+        "variant_id": "extended",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 35
+      },
+      "ingredients": [
+        {
+          "canonical_name": "rismjöl",
+          "component": "smet",
+          "form": "dry",
+          "name": "rismjöl",
+          "product_requirements": [
+            "pack:intake_rice_flour"
+          ],
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 25.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vetemjöl",
+          "component": "smet",
+          "form": "dry",
+          "name": "vetemjöl",
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ghee",
+          "component": "smet",
+          "form": "as_sold",
+          "name": "ghee",
+          "product_requirements": [
+            "pack:intake_all_expansion_94bffb8b7bee"
+          ],
+          "quantity": 4.0,
+          "quantity_max": 4.0,
+          "quantity_min": 4.0,
+          "quantity_step": 4.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "smet",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 0.2,
+          "quantity_max": 0.2,
+          "quantity_min": 0.2,
+          "quantity_step": 0.2,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "mannagryn",
+          "component": "smet",
+          "form": "dry",
+          "name": "mannagryn",
+          "product_requirements": [
+            "pack:intake_all_fbd02229c232"
+          ],
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "mjölk",
+          "component": "smet",
+          "form": "as_sold",
+          "name": "mjölk",
+          "quantity": 110.0,
+          "quantity_max": 110.0,
+          "quantity_min": 110.0,
+          "quantity_step": 110.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "kokosflingor",
+          "component": "fyllning",
+          "form": "dry",
+          "name": "kokosflingor",
+          "product_requirements": [
+            "pack:intake_coconut"
+          ],
+          "quantity": 14.0,
+          "quantity_max": 14.0,
+          "quantity_min": 14.0,
+          "quantity_step": 14.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "mörkt muscovadosocker",
+          "component": "fyllning",
+          "form": "dry",
+          "name": "mörkt muscovadosocker",
+          "product_requirements": [
+            "pack:intake_all_expansion_ac284f871634"
+          ],
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 10.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kardemumma",
+          "component": "fyllning",
+          "form": "dry",
+          "name": "kardemumma",
+          "product_requirements": [
+            "pack:intake_all_930d08a8d175"
+          ],
+          "quantity": 0.3,
+          "quantity_max": 0.3,
+          "quantity_min": 0.3,
+          "quantity_step": 0.3,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Vispa ris- och vetemjölet med salt, mannagryn och smetens mjölk samt 40 ml vatten. Spara ghee till pannan. Smeten ska vara tunn nog att rinna ut, inte en fast dosa-deg.",
+        "Låt smeten vila täckt 35 minuter så att mjölet hinner ta upp vätska.",
+        "Lägg de torkade kokosflingorna i en liten kastrull med fyllningens mjölk. Värm och rör tills kokosflingorna mjuknar. Rör ner det uppvägda mörka muscovadosockret och tillsätt malen kardemumma. Sjud under omrörning cirka 8 minuter till en saftig men sammanhållen fyllning; allt socker ska ha lösts. Behåll hela kokos- och sockerblandningen; koka endast bort överskottsvatten.",
+        "Rör om smeten. Värm en släpplätt panna på medelvärme och smörj med en del av gheen. Fördela smeten över två tunna pannkakor per portion, med återstående ghee mellan gräddningarna. Vrid pannan så smeten blir tunn. Grädda varje pannkaka tills ovansidan är satt och undersidan fått mycket lätt färg, cirka 2 minuter. Lägg en sträng av fyllningen på varje och rulla direkt i pannan.",
+        "Lägg rullarna på tallrikar och låt svalna något. Fördela hela fyllningen och alla pannkakor mellan portionerna; ingen extra sås behövs."
+      ],
+      "name": "Patishapta – rispannkaka med kokosfyllning – utökad – med mörkt muscovadosocker",
+      "preparation": {
+        "family": "tunn fylld riscrêpe",
+        "input_forms": {
+          "ghee": "as_sold",
+          "kardemumma": "dry",
+          "kokosflingor": "dry",
+          "mannagryn": "dry",
+          "mjölk": "as_sold",
+          "mörkt muscovadosocker": "dry",
+          "rismjöl": "dry",
+          "salt": "as_sold",
+          "vetemjöl": "dry"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "d35acc54fb4410776fd38df92b06284b780588ba7a4ac3ec0d67b95f23d328a4",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 1
+    }
+  ]
+}

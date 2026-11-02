@@ -79,3 +79,27 @@ def test_fresh_chorizo_keeps_both_reviewed_meat_exclusions_and_meat_category():
         assert ingredient_is_excluded('färsk chorizokorv', [meat])
         assert not recipe_respects_diet(recipe, preference='mixed', avoid_ingredients=[meat])
     assert not ingredient_is_excluded('färsk chorizokorv', ['kyckling', 'fisk'])
+
+
+def test_salsiccia_alternative_keeps_pork_exclusion_and_meat_distribution():
+    from app.services.diet_policy import recipe_respects_diet
+
+    recipe = next(r for r in current_recipes() if r.design.base_id == 'smako-greek-spetsofai')
+    assert protein_category(recipe) == 'meat' and not recipe.design.vegetarian
+    assert not recipe_respects_diet(recipe, preference='mixed', avoid_ingredients=['fläskkött'])
+    assert not recipe_respects_diet(recipe, preference='vegetarian')
+    assert not ingredient_is_excluded('färsk salsicciakorv', ['kyckling', 'fisk'])
+
+
+def test_fish_sauce_dip_keeps_meat_distribution_but_obeys_fish_exclusion():
+    recipes = [r for r in current_recipes() if r.design.base_id == 'smako-thai-nam-prik-ong']
+    assert len(recipes) == 3
+    prefs = RecipePreferences(mode='complete', allow_fish=False, min_ingredients=3, max_ingredients=20)
+    meal = MealSettings(count=1, servings=4, recipe_choices={'min_ingredients': 1, 'max_ingredients': 40})
+    for recipe in recipes:
+        assert recipe_contains_fish(recipe) and recipe.design.fish
+        assert protein_category(recipe) == 'meat'
+        assert not matches_preferences(recipe, prefs) and not matches_meal(recipe, meal, prefs)
+        names = {i.canonical_name: i.quantity for i in recipe.ingredients}
+        assert 'räkpasta' not in names
+        assert names['fisksås'] == (20 if recipe.design.variant_id == 'simple' else 30)

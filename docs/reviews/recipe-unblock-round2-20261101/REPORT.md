@@ -1,30 +1,31 @@
 # Fortsatt hinderarbete och receptimport 2026-11-01
 
-**170 ytterligare varianter och 70 nya grundrätter är innehållsgranskade och
-importerade.** Biblioteket växer från **975/2 570 till 1 045/2 740**. Alla
-170 har klarat ordinarie slutlig inköpskontroll med tillåtna uppskattningar
-i den frysta referensen. **94 klarar även exakt inköp**; 76 är datablockerade
-i det läget. Inget av dessa korgprov nådde tidsgränsen.
+**224 ytterligare varianter och 89 nya grundrätter är innehållsgranskade och
+importerade.** Biblioteket växer från **975/2 570 till 1 064/2 794**. Alla
+224 har klarat ordinarie slutlig inköpskontroll med tillåtna uppskattningar
+i den frysta referensen. **127 klarar även exakt inköp**; 95 är datablockerade
+och två stoppas i checkout i det läget. Inget av dessa korgprov nådde tidsgränsen.
 
 De fem faktiskt mottagna leveranserna innehåller **189 grundrätter / 501
-varianter**. Totalt har **278 varianter i 111 grundrätter** importerats:
-105 hela familjer och sex delvis importerade. **223 varianter återstår**.
-Den senast mottagna ZIP-filen med 24 grundrätter / 62 varianter har 39
-importerade varianter och 23 kvar i kön. Ett godkänt syskon gör inte hela
+varianter**. Totalt har **332 varianter i 130 grundrätter** importerats:
+124 hela familjer och sex delvis importerade. **169 varianter återstår**.
+Den senast mottagna ZIP-filen med 24 grundrätter / 62 varianter har 44
+importerade varianter och 18 kvar i kön. Ett godkänt syskon gör inte hela
 familjen godkänd.
 
-Originalfilerna är bytebevarade. Först utfärdades 170 versioner 1.0.1.
-Därefter utfärdades 67 efterföljare för 64 av varianterna: 50 för portionsinstruktioner,
-satsstorlek eller fiskmetadata, nio för lammstek/upptining och åtta efter kontroll
-av faktiskt valda frysta produkter. Tre pastavarianter har kedjan 1.0.1 → 1.0.2 → 1.0.3.
-Alla 67 ersatta versioner är återkallade men bytebevarade. Samtliga recept är **inte provlagade**. Tider och nya kulinariska doser är granskade
+Originalfilerna är bytebevarade. 224 godkända varianter fick först version 1.0.1.
+Därefter utfärdades 76 efterföljare för 73 av varianterna: 50 för portionsinstruktioner,
+satsstorlek eller fiskmetadata, nio för lammstek/upptining, åtta efter kontroll
+av faktiskt valda frysta produkter, tre för skalbart kokvatten, tre för kort pasta och tre för Pindi choles blötläggningsvatten. Tre pastavarianter har kedjan 1.0.1 → 1.0.2 → 1.0.3.
+Alla 76 ersatta versioner är återkallade men bytebevarade. En ytterligare lokalt
+utgiven version underkändes i korgprovet och återkallades; den räknas inte som import. Recepten är **inte provlagade**. Tider och nya kulinariska doser är granskade
 författaruppskattningar. De 3 625 tidigare utgivna versionerna, samtliga
 2 570 tidigare aktuella varianter och de 2 200 ursprungsreferenserna bevaras.
 Ingen betaaktivering, insamling eller ändring av användarprofiler ingår.
 
 ## Åtgärder som öppnade recepten
 
-39 ytterligare namn/form/enhetsidentiteter har **232 individuellt granskade
+43 ytterligare namn/form/enhetsidentiteter har **258 individuellt granskade
 produktkopplingar** i befintliga butikskontexter. Registret finns i
 [`expansion-round2-20261101.json`](../../../backend/app/data/ingredients/expansion-round2-20261101.json).
 Varje koppling behåller artikel/GTIN, butik, hela produktnamnet, märke,
@@ -41,7 +42,7 @@ Ingen ny närings-, allergen- eller ekologisk deklaration har lagts till.
 | Kulinariska alternativ | Bland annat svensk surdegsfralla, lagrad pecorino, ungnötslever, färdig tomatillosalsa, musselkött utan skal och corned beef. Nytt namn, ny uttrycklig dos/metod där det behövs; inga falska råvarualias. |
 
 Varje steg har separat `recipe-review-stageN.json`, `import-stageN.json`
-och `qualification-stageN.json` (N = 1–27). Granskningarna binder
+och `qualification-stageN.json` (N = 1–48, där steg 34 är underkänt och återkallat). Granskningarna binder
 original-ID, originalfilens hash, nytt versions-ID, innehållshash, samtliga
 mängdändringar och kulinarisk jämförelse. Receptens ingrediensantal,
 arbetssteg och synliga instruktioner följer samma innehåll.
@@ -61,7 +62,7 @@ passiv kokning, ugnstid och väntan.
 
 ## Senare granskning av fem ytterligare hinder
 
-Steg 23–27 gav ytterligare 13 av totalens 170 varianter: två pasqualina
+Steg 23–27 gav ytterligare 13 av totalens 224 varianter: två pasqualina
 med uttryckligen 600 g spenat och kvarvarande mejram/muskot, två frijoles
 puercos med svensk färsk chorizo, tre rogan josh med paprika/cayenne samt
 sex patatato/tsigariasto med lamm. Tillbehör och kryddskillnader bevarar
@@ -102,6 +103,41 @@ Ett enskilt steg är fortfarande högst 24 timmar. Användarens tidsfilter
 respekteras: exempelvis högst 24 timmars väntan utesluter dessa längre recept.
 Redan kylförvarat kött behöver ingen upptining; beräknad total tid är försiktigt
 planerad för det frysta alternativet. Inget av detta är en uppmätt provlagning.
+
+## Ytterligare prövningar av enskilda rätter
+
+Steg 28–38 gav ytterligare **28 godkända varianter**. Varje alternativ har
+synligt ändrat namn, egna doser och granskad beredning. Underlagen styrker
+valet av alternativ; de bevisar inte likvärdig smak, näring eller vikt.
+
+| Rätt / antal | Granskat alternativ och metodstöd |
+|---|---|
+| Spetsofai / 3 | Färsk salsiccia med ätligt fjälster, kvarvarande stekfett och temperaturkontroll. [Receptförfattarens korvalternativ](https://www.mygreekdish.com/recipe/spetsofai-sausages-with-peppers-and-tomato-sauce/) och [Garants produkt](https://production.garantskafferiet.se/vara-produkter/chark/korv/salsiccia/). |
+| Pasta alla Norma / 3 | 75 g pecorino med okänd kantputsning i stället för ricotta salata. [Jamie Olivers alternativ](https://www.jamieoliver.com/recipes/pasta/sicilian-spaghetti-alla-norma/). Skalbart kokvatten rättades i version 1.0.2. |
+| Pitarakia / 2 | Feta och pecorino i en tunn ostpaj, med okänd putsning och frityroljeupptagning. [My Greek Dish](https://www.mygreekdish.com/recipe/greek-cheese-pies-milos-pitarakia-milou/). |
+| Rajas con crema / 3 | Grillad paprika och jalapeño, färdiga majstortillas och avrunnen mozzarella. Okänd förlust vid skalning; fryst koriander genomhettas i såsen. [Maricruz Avalos](https://www.maricruzavalos.com/rajas-con-crema/). |
+| Nam prik ong / 3 | Uttrycklig fisksåsversion av fläskfärsdippen utan räkpasta. Alla varianter spärras vid fiskundantag men räknas som kött i menyfördelningen. [Thai Foodie](https://thai-foodie.com/thaifood/thai-style-lettuce-wraps-nam-prik-ong-น้ำพริกอ่อง/). |
+| Patishapta / 2 | Mörkt muscovadosocker i kokosfyllningen, med bevarade skillnader mellan variantnivåerna. [Receptförfattarens sockerbruksalternativ hos Culture](https://culturecheesemag.com/recipes/indian-sweet-crepes-patishapta/). |
+| Pasta ’ncasciata / 3 | Avrunnen mozzarella i stället för caciocavallo; faktiskt köp måste ge kort pasta. [Galbanis version](https://www.galbani.it/ricette/pasta-ncasciata). |
+| Tod man pla / 3 | Färskt citrongräs i stället för limeblad, finfördelad fisk och ägg, temperaturkontroll samt okända puts-, upptinings- och oljeförluster. [Ateliers & Saveurs recept](https://www.ateliersetsaveurs.com/uploads/recipes/culinary/pdf/thai-fish-cakes-with-sweet-and-sour-chili-sauce-en-751-v1.pdf). |
+| Tsouxti / 3 | Smöret bryns separat; feta tillsätts efter pastan och behandlas inte som torr myzithra. Fryst persilja genomhettas. [Greek Cooking Made Easy](https://www.greekcookingmadeeasy.com/allrecipes/greek-sizzling-tsouhti-pasta-with-charred-butter-grated-cheese-and-fried-eggs-from-mani). |
+| Pasta e patate / 3 | Uttryckligen orökt, avrunnen mozzarella och kort pasta. Stärkelsevattnet stannar i grytan och vattenmängderna skalas. [Gennarinos metod](https://www.gennarino.org/wordpress2/ricetta-della-pasta-e-patate/). |
+
+Granskningen av faktiskt köpt pasta hittade spaghetti till pasta ’ncasciata.
+Tre nya versioner kräver därför befintliga `pack:pasta` för kort pasta;
+[korgprovet](qualification-pasta-shape-corrections.json) verifierar 3/3 med
+uppskattningar och 2/3 exakt. Separat rättades kokvattnets portionsskalning
+för Norma; [dess korgprov](qualification-alternative-portion-corrections.json)
+verifierar 3/3 med uppskattningar. Föregångarna är bevarade och återkallade.
+
+Khao tom mat prövades med bakpapper i stället för bananblad med stöd från
+[Charinyas egen metod](https://charinyaskitchen.wordpress.com/2018/06/22/khow-tom-mud/).
+Det fullständiga korgprovet visade därefter att **glutinöst ris saknar verifierat
+köp**. Vanligt sushiris ersätter inte den rissorten. Den lokala versionen
+återkallades före main och räknas varken som importerad eller godkänd.
+[Avslagskvittot](rejected-stage34.json), [provet](qualification-stage34.json)
+och de utgivna originalfilerna är bevarade. Efter detta används ingrediensprov
+före lokal utgivning och alltid ett fullständigt korgprov före godkänd import.
 
 ## Okända processförluster förblir okända
 
@@ -146,6 +182,42 @@ enhetsalternativ och processförluster. Den nya gramfilen för filmjölk tappas
 alltså inte bort när ml fortfarande är standardenheten. En riktad kontroll
 av export, kostgränser och befintliga författarkontrakt gav 117 godkända tester.
 
+## Fortsatt genomgång av produkt- och örtblockeringar
+
+Steg 39–48 öppnade ytterligare **26 varianter**. Samtliga har fullständiga
+korgprov och synligt namngivna anpassningar. Den enkla vada pav-varianten
+släpps in separat; dess två syskon med curryblad kvarstår i kön.
+
+| Rätt / antal | Granskat alternativ och metodstöd |
+|---|---|
+| Chicken 65 / 3 | Uttrycklig version utan curryblad och med egen paprika/cayenne-dos. [Misty Ricardo](https://mistyricardo.com/chicken-65-recipe/) gör bladen valfria; [Genevieve Taylor](https://curryforchange.org.uk/recipes/chicken-65) använder paprika/chili. Kycklingens upptining och okända oljeupptag är uttryckliga. |
+| Pad prik king tofu / 3 | Egen infusion av 1 g torkade makrutblad. [Importören A Chau Lien](https://achaulien.se/products/dried-lime-leaves-12-x-25g-krua) bekräftar KRUA-produktens bladidentitet. Alla blad silas bort; ingen färsk-torr-faktor eller näringsöverföring antas. |
+| Paprika en nogada / 3 | Mild paprika med fruktig fläskfärs, valnötssås och granatäpple. [Receptförfattaren](https://stefangourmet.com/2019/12/20/chile-relleno-en-nogada-stuffed-chile-with-walnut-sauce-and-pomegranate/) anger paprika som alternativ. Råvaran vägs efter urkärning men före rostning; skalförlust är okänd. |
+| Pölsa / 3 | Högrev och gross ungnötslever med korngryn; ingen identitetsalias för hjärta eller fläsklever. Kött-/levermetoden stöds av [ICA](https://www.ica.se/recept/polsa-729947/) och [Coop](https://www.coop.se/recept/polsa/). Leverputsning och bortkastade kokspad är okända förluster. |
+| Pindi chole / 3 | Egen kryddblandning enligt metodstödet från [Padhuskitchen](https://www.padhuskitchen.com/2015/02/pindi-chole-recipe-how-to-make-pindi.html), med citronalternativ från [Spicing Your Life](https://www.spicingyourlife.com/how-to-make-pindi-chole/). Teet, kikärtsmetoden och handgräddat bröd bevaras. Version 1.0.2 rättar blötläggningsvattnets skalning; tre nya korgprov. |
+| Cornflakes-chivda / 2 | Naturella färdigrostade frukostflingor, rostade osaltade jordnötter och kvarvarande kryddolja. [Manali Singh](https://www.cookwithmanali.com/cornflakes-chivda/) skiljer färdiga cornflakes från rå makai poha; [Coles kök](https://www.coles.com.au/recipes-inspiration/recipes/chivda) gör curryblad valfria. |
+| Khua kling / 3 | Röd currypasta, silad torr limebladsinfusion och citrongräs vägt före ansning. [Praews recept](https://hungryinthailand.com/khua-kling/) anger röd pasta som alternativ. Allt köttfett behålls medan vattnet kokas bort; syskonens ägg köps råa i antal. |
+| Arroz a la tumbada / 2 | Korianderversionerna behåller skalade skaldjur, all upptiningsvätska och den soppiga risformen. [Irenes eget recept](https://mysliceofmexico.ca/2025/02/06/arroz-a-la-tumbada-a-rice-and-seafood-mish-mash/) använder koriander och valfri epazote. |
+| Papadzules / 3 | Pumpakärnssås med koriander, räknade råa ägg och färdiga mjuka majstortillas. [Barilla Foundations recept](https://fondazionebarilla.com/en/recipes-archive/papadzules/) anger koriander som örtalternativ. All sås serveras; fryst avokado får egen upptining. |
+| Vada pav / 1 | Enkelvarianten får 416 g mjukt svenskt hamburgerbröd. [Dan Toombs](https://greatcurryrecipes.net/2018/04/30/vada-pav/) använder mjuka hamburgerbröd. All kikärtssmet serveras, fryst vitlök genomkokas och frityroljeupptaget förblir okänt. |
+
+Den manuella produktsökningen missade tidigare särskrivningen **Lime Blad
+Torkade**. Den hittar nu även sådana etiketter, men ger fortfarande bara
+kandidater för sakgranskning. De två verifierade KRUA-kopplingarna gäller
+endast den separata torra identiteten. Inga automatiska produkt-/prisalias
+eller färsk-torr-omräkningar införs.
+
+De två andra tillkommande produktformerna är [Garants färdiga cornflakes](https://www.garantskafferiet.se/vara-produkter/skafferi/flingor--musli/corn-flakes/)
+och [Pågens mjuka hamburgerbröd](https://www.pagen.se/produkter/korvbrod-hamburgerbrod/hamburgerbrod/),
+med åtta exakta butikskopplingar vardera. Befintlig deklaration för socker,
+salt, kornmalt eller sesam raderas inte; ingen ny närings- eller allergenfakta
+kopieras från webbsidorna.
+
+Nya steg stoppas före lokal utgivning om en uttrycklig vattenmängd inte
+följer portionsantalet. Granskade ingrediensrader kan återskapas selektivt
+med `review_expansion_round2.py --only 'namn|form|enhet' --inventory ...`.
+Kommandot kräver samma frysta referens och bevarar andra registerrader.
+
 ## Källor och kvalificeringsscope
 
 Mängdbevis och korta källutdrag ligger vid respektive produktkoppling.
@@ -173,9 +245,12 @@ enskilda fullständiga korgprov, **ingen ny mätning av varm menyplaneringstid**
 
 [Sammanställningen](summary.json) och [manifestövergången](library-transition.json)
 är maskinläsbara. Övergången tillåter nya disjunkta, hashbundna paket och
-uttryckliga återkallelser av just de 67 nyutgivna föregångarna, bundna till
+uttryckliga återkallelser av just de 76 nyutgivna föregångarna, bundna till
 efterföljare av samma bas/variant med strikt stigande versionsnummer.
-Varje mellanversion och dess kvalificeringskvitto bevaras. Inga versioner som fanns före denna
+Den underkända lokala versionen binds dessutom till sitt fullständiga misslyckade
+korgprov, ursprungspaketets hash och återkallelseskäl. Den kan inte väljas som
+aktuellt recept. Varje mellanversion och dess kvalificeringskvitto bevaras.
+Inga versioner som fanns före denna
 omgång får återkallas eller ändras. Tidigare återkallelser och referens-ID:n
 bevaras. Ingen
 täckningsbaslinje regenereras för att göra testresultat gröna.
@@ -186,29 +261,39 @@ Den samlade riktade verifieringen gav **679 godkända tester** i två körningar
 Ruff på samtliga ändrade Pythonfiler, compileall och `git diff --check` passerade.
 Full CI och täckningsöverblicken krävs därutöver före merge till main.
 
-Efter de sista innehållsrättningarna passerade ytterligare **610 riktade tester**:
+Efter de tidigare innehållsrättningarna i steg 23–27 passerade ytterligare **610 riktade tester**:
 591 för importkvitton, ingrediens-/processgränser, gamla hashvärden och
 bibliotekets kvalitetskrav samt 19 för portions-/versionskedjor, frysta
 produktformer och kostkategorier. Alla slutliga nya versioner har egna
 godkända korgprov; inget gammalt prov har skrivits om för att få ett godkännande.
 
+Slutkontrollen av samtliga 224 varianter gav **825 godkända offline-tester**,
+utan fel eller överhoppade testfall. Den omfattar alla importkvitton,
+versionskedjor, ingrediensgränser, portionsskalning, kostfilter och hela
+bibliotekets innehållskrav. Ruff, compileall och diffkontroll passerade.
+De tidigare testkörningarnas antal överlappar och ska inte summeras.
+
 ## Kvarvarande kö och nästa leverans
 
-[Variantkön](queue.json) redovisar samtliga 501 käll-ID:n. De 223 kvarvarande
-består av **201 med register-/författarhinder** och **22 strukturellt giltiga
+[Variantkön](queue.json) redovisar samtliga 501 käll-ID:n. De 169 kvarvarande
+består av **149 med register-/författarhinder** och **20 strukturellt giltiga
 utkast med konkret saknat produktstöd**. De senare har omprovats i båda
 inköpslägena, se [ingrediensprovet](remaining-native-inputs.json).
 
 [Ingrediensliggaren](ingredient-blockers.json) rangordnar återstående
 hinder med sökord, antal träffar, produktetiketter, berörda recept och nästa
-åtgärd. Störst är makrutlimeblad (19), räkpasta (18), curryblad (16), epazote
-och thaibasilika (10 vardera). Antalen överlappar. En tom sökning i den frysta
+åtgärd. Störst är räkpasta (15), curryblad (13), makrutlimeblad och thaibasilika
+(10 vardera), guajillochili (9) och palmsocker i inköpt form (8). Antalen överlappar. En tom sökning i den frysta
 referensen bevisar inte att en vara saknas i handeln.
 
 Thaibasilika i kruka har ingen verifierad bladmassa; ett framtida recept med
 styckdos behöver ett eget inköpsbevis. Makrutlimeskal i currypasta är inte
 limeblad. Surimi är inte krabbkött. Vanligt majsmjöl är inte verifierad masa
 harina. Dessa skillnader har inte tagits bort för att öka antalet importer.
+Grön papaya behövs som enzymatiskt mörningsmedel i Galouti kebab; gurka eller
+äpple fyller inte den funktionen. Färsk majs i uchepos behöver rå stärkelse;
+förkokta majskolvar är inte samma insats. Den påträffade misopastan saknar
+tillräcklig ingrediensdeklaration och är inte automatiskt thailändsk Tao Jiao.
 Andra kvarvarande hinder är bland annat tapiokastärkelse/pärlor, risflingor,
 mangold, rensad bläckfisk, vissa bönformer, specialostar och fermenterade
 smaksättare. Befintliga råvarualternativ i liggaren behöver separat
@@ -225,6 +310,6 @@ alla mottagna utkast i nästa dubblettunderlag.
 Efter ny leverans: kör `audit_expansion_queue.py` till en ny lokal katalog.
 För att återskapa denna avslutade rapports beslut används
 `finalize_expansion_round2_review.py --universe .local/coverage-inputs/universe.json
---native-probe .local/recipe-unblock-round2/pending-latest-inputs.json` med dess
+--native-probe .local/recipe-unblock-round2/pending-final20-inputs.json` med dess
 hashbundna underlag. Ändra inte redan utgivna steg; skapa en ny version för
 senare korrigeringar och en ny rapport för nästa granskningsomgång.

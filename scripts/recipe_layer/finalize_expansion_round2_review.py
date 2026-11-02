@@ -6,7 +6,6 @@ import subprocess
 from collections import Counter, defaultdict
 from pathlib import Path
 
-from app.services.ingredient_normalizer import _search_text
 from app.services.meal_library_content import (
     ROOT,
     encoded,
@@ -18,10 +17,12 @@ from app.services.recipe_authoring import library_vocabulary
 from app.services.recipe_library import current_recipes
 from audit_expansion_queue import SOURCE, audit
 from coverage_reference import checked_additive_transition, imported_recipes
+from review_product_search import review_search_key, review_search_matches
 
 REPORT = Path('docs/reviews/recipe-unblock-round2-20261101')
 BASE = '545dad2a1b78566e0bff0c4ff616c053c038cc58'
-STAGE_NUMBERS = range(1, 28)
+STAGE_NUMBERS = (*range(1, 34), *range(35, 49))
+REJECTED_STAGES = (34,)
 EXTRA_QUERIES = {
     'makrutlimeblad': ['makrut', 'kaffir', 'limeblad', 'lime leaves', 'limblad', 'lime leaf'],
     'räkpasta': ['räkpasta', 'räk pasta', 'shrimp paste', 'gapi', 'kapi', 'belacan', 'trassi', 'terasi'],
@@ -37,7 +38,7 @@ EXTRA_QUERIES = {
     'torkade räkor': ['torkade räk', 'räkor tork', 'dried shrimp'],
     'guajillochili': ['guajillo'], 'pandanblad': ['pandan'], 'achiotepasta': ['achiote', 'annatto'],
     'toor dal': ['toor', 'tuvar', 'tur dal'], 'kashmirichilipulver': ['kashmir'],
-    'fermenterade sojabönor': ['fermenter', 'tao jiao', 'taotjo', 'misopasta'],
+    'fermenterade sojabönor': ['fermenter', 'tao jiao', 'taotjo', 'misopasta', 'miso'],
     'krachai': ['krachai', 'fingerroot'], 'getkött': ['getkött', 'goat'],
     'krabbkött': ['krabb', 'crab', 'surimi'], 'amaretti': ['amarett', 'mandelbiskv'],
     'rucola': ['rucola', 'ruccola'], 'stracchino': ['stracchino', 'crescenza'],
@@ -45,9 +46,16 @@ EXTRA_QUERIES = {
     'palmsocker': ['palmsocker', 'palm socker', 'jaggery'],
     'ung jackfrukt': ['jackfrukt', 'jackfruit'], 'lotusrot': ['lotus'],
     'blåmusslor med skal': ['mussl', 'mussel'],
+    'klibbigt ris': ['klibb', 'sticky rice', 'glutinous', 'sweet rice'],
 }
 REASONS = {
-    'makrutlimeblad': 'Inga blad påvisade med dessa sökord. Makrutlimeskal i currypasta är inte blad; bladens dos kan inte härledas ur pastan.',
+    'pavbröd': 'Den enkla vada pav-varianten har godkänd separat version med mjukt svenskt hamburgerbröd och ny gramdos. Standard och utökad har fortfarande curryblad som separat hinder; brödet har inte lagts in som pav-alias.',
+    'epazote': 'Separata granskade korianderversioner öppnade papadzules och två arroz a la tumbada-varianter. Kvarvarande krabbsoppa och mucbipollo kräver ytterligare sakgranskning och har även andra hinder; koriander är ingen identitetsalias för epazote.',
+    'grön papaya': 'De tre kvarvarande recepten är galouti kebab, där rå grön papaya används för enzymatisk mörning av färs. Ett salladsalternativ som äpple eller gurka löser inte den funktionen. Ingen verifierad grön papaya eller uppmätt alternativ mörningsmetod finns i referensen.',
+    'klibbigt ris': 'Khao tom mats granskade bakpappersversion stoppades i fullständigt korgprov: inget verifierat köp av glutinöst ris. Sushiris är en separat rundkornig produkt och har inte bytts in i denna ångade kärna. Den lokalt utfärdade testversionen återkallades med bevarade bytes och felkvitto.',
+    'fermenterade sojabönor': 'Bredare misosökning hittar Kikuzuru Miso Pasta 300 g, men referensens fakta saknar innehållsdeklaration. Japansk misopasta är inte automatiskt thailändska fermenterade sojabönor/tao jiao; även kapokblommor eller palmsocker återstår i berörda recept.',
+    'färska majskorn': 'Referensen visar förvällda frysta majskolvar och tillagade majskärnor. Ingen kvalificerad färsk rå majskärna eller rå kolv med användbar kärnmängd påvisad. Förvälld majs byts inte in i uchepos råa smet som om stärkelsefunktionen var oförändrad.',
+    'makrutlimeblad': 'Särskrivningen Lime Blad Torkade dolde två KRUA 25 g-produkter i den tidigare sökningen. Separat torr identitet har nu granskade källkopplingar; pad prik king och khua kling har godkända infusionsversioner. De kvarvarande utkasten kräver färska blad och har även andra hinder. En torr dos eller metod måste författas och provas separat; ingen automatisk färsk-torr-konvertering. Makrutlimeskal i currypasta är fortfarande inte blad.',
     'räkpasta': 'Ingen separat kvalificerad fermenterad räkpasta påvisad. Currypasta, fisksås och färdig räkmat är inte identiska insatser.',
     'thaibasilika': 'Garant-krukorna har cirka 190 g bruttovikt, City Gross 429 g. Ätlig bladmassa är inte verifierad. Styckdos skulle kräva separat inköpsbevis och ny receptversion; samtliga tio utkast har även andra hinder.',
     'palmsocker': 'Sockertyp, förpackningsmängd och form måste bindas; vanligt socker eller kokossocker blir inte automatiskt palmsocker.',
@@ -106,7 +114,7 @@ def main(args):
                        'modes': {m: dict(Counter(r['status'] for r in probe['modes'][m]['recipes'])) for m in modes}})
     corrections, new_revocations, correction_proofs = {}, {}, []
     corrected_results = {mode: [] for mode in modes}
-    for correction_name in ('portion-corrections', 'lamb-corrections', 'selected-product-corrections'):
+    for correction_name in ('portion-corrections', 'lamb-corrections', 'selected-product-corrections', 'alternative-portion-corrections', 'pasta-shape-corrections', 'pindi-portion-corrections'):
         review = json.loads((REPORT / f'{correction_name}.json').read_bytes())
         receipt = json.loads((REPORT / f'import-{correction_name}.json').read_bytes())
         raw = (REPORT / f'qualification-{correction_name}.json').read_bytes()
@@ -148,6 +156,17 @@ def main(args):
                 assert row['status'] == 'verified' and row['audit']['passed']
     manifest = manifest_entries()
     issued = {identity(r): r for r in load_entries(manifest['current'] + manifest['history'])}
+    rejected_versions = []
+    for stage in REJECTED_STAGES:
+        rejected = json.loads((REPORT / f'rejected-stage{stage}.json').read_bytes())
+        receipt = json.loads((REPORT / f'import-stage{stage}.json').read_bytes())
+        assert receipt['basket_status'] == 'data_blocked_revoked'
+        for row in rejected['recipes']:
+            assert issued[row['runtime_id']].design.content_sha256 == row['content_sha256']
+            assert manifest['revocations'][row['runtime_id']] == row['reason']
+            assert row['qualification_sha256'] == receipt['qualification_sha256']
+        rejected_versions.extend(rejected['recipes'])
+        new_revocations.update(rejected['new_revocations'])
     for row in records:
         assert issued[row['runtime_id']].design.content_sha256 == row['content_sha256']
     accepted = {}
@@ -187,11 +206,21 @@ def main(args):
             row['status'] = 'pending_register_or_authoring'
     queue['status'] = dict(Counter(r['status'] for r in queue['variants']))
     pending = [r for r in queue['variants'] if r['source_id'] not in accepted]
+    rejected_by_source = {r['source_id']: r for r in rejected_versions}
+    for row in pending:
+        if row['source_id'] in rejected_by_source:
+            rejected = rejected_by_source[row['source_id']]
+            probe = json.loads(Path(rejected['qualification_path']).read_bytes())
+            result, = [r for r in probe['modes']['estimated']['recipes'] if r['id'] == rejected['runtime_id']]
+            row['reviewed_alternative_blockers'] = result['input_blocks']
+            row['rejected_alternative_id'] = rejected['runtime_id']
     blockers = defaultdict(set)
     for row in pending:
         for key in row['unknown_ingredients']:
             blockers[key].add(row['source_id'])
         for block in row.get('input_blocks', []):
+            blockers[block['identity']].add(row['source_id'])
+        for block in row.get('reviewed_alternative_blockers', []):
             blockers[block['identity']].add(row['source_id'])
     queue['ranked_register_blockers'] = [
         {**r, 'source_ids': sorted(set(r['source_ids']) - accepted.keys()),
@@ -207,14 +236,15 @@ def main(args):
     universe_raw = args.universe.read_bytes()
     assert sha(universe_raw) == reference['files']['universe']['sha256']
     products = json.loads(universe_raw)['universe']['products']
-    texts = [(p, _search_text(p['name'])) for p in products]
+    texts = [(p, review_search_key(p['name'])) for p in products]
     old_ledger = {r['identity']: r for r in json.loads(Path('docs/reviews/recipe-unblock-20261101/ingredient-blockers.json').read_bytes())['blockers']}
     ledger = []
     for key, ids in blockers.items():
         name = key.split('|')[0]
         old = old_ledger.get(key, {})
         queries = list(dict.fromkeys([name, *old.get('search_queries', []), *EXTRA_QUERIES.get(name, [])]))
-        matches = [p for p, text in texts if any(_search_text(q) in text for q in queries)]
+        query_keys = [review_search_key(q) for q in queries]
+        matches = [p for p, text in texts if review_search_matches(text, query_keys)]
         labels = sorted({(p['name'], p.get('brand') or '', str(p['package_quantity']), p['package_unit']) for p in matches})
         ledger.append({'identity': key, 'variants': len(ids), 'source_ids': sorted(ids), 'search_queries': queries,
             'retrieved_product_rows': len(matches), 'retrieved_labels': labels,
@@ -240,10 +270,12 @@ def main(args):
         'added_entries': added_entries, 'corrected': [],
         'new_revocations': new_revocations,
         'superseded_new_versions': list(corrections.values()),
+        'rejected_new_versions': rejected_versions,
         'added': [{'runtime_id': k, 'content_sha256': v} for k, v in new.items() if k not in old],
         'preserved_issued_variants': len(old), 'preserved_active_variants': len(previous_active)}
     checked_additive_transition(transition)
-    assert {r['runtime_id'] for r in transition['added']} == {r['runtime_id'] for r in records} | corrected_ids
+    assert {r['runtime_id'] for r in transition['added']} == (
+        {r['runtime_id'] for r in records} | corrected_ids | {r['runtime_id'] for r in rejected_versions})
     references, _ = imported_recipes()
     assert len(references) == 2200
     (REPORT / 'library-transition.json').write_bytes(encoded(transition))
@@ -258,6 +290,7 @@ def main(args):
         'newly_imported_variants': len(records), 'newly_imported_bases': len({r.design.base_id for r in current}) - len({r.design.base_id for r in previous_active}),
         'corrected_new_versions': len(corrections),
         'corrected_current_variants': len(corrected_ids - corrections.keys()),
+        'rejected_local_versions': len(rejected_versions),
         'batch_limited_variants': sum(bool(r['servings_multiple']) for r in corrections.values()),
         'correction_qualification_sha256': correction_proofs[0]['qualification_sha256'],
         'correction_qualifications': correction_proofs,

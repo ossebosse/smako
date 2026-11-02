@@ -20,6 +20,37 @@ ROOT = Path(__file__).parents[1] / 'app/data'
 ROWS = json.loads((ROOT / 'ingredients/expansion-round2-20261101.json').read_bytes())['ingredients']
 
 
+def test_soft_bun_binding_preserves_sesame_and_weight_without_pav_identity():
+    row=next(r for r in ROWS if r['name']=='mjukt hamburgerbröd')
+    assert row['form']=='as_sold' and row['unit']=='g' and len(row['reviewed_links'])==8
+    assert all(p['name']=='Hamburgerbröd Ljusa 8-pack' and p['brand']=='Pågen' and p['package_quantity']==416
+               for p in row['reviewed_links'])
+    assert 'sesam' in row['definition'] and 'styckvikt' in row['definition']
+    assert 'pavbröd|as_sold' not in library_vocabulary(current_recipes())
+
+
+def test_cornflakes_binding_is_ready_to_eat_and_not_rice_or_raw_maize():
+    row = next(r for r in ROWS if r['name'] == 'cornflakes')
+    assert row['form'] == 'as_sold' and row['unit'] == 'g'
+    assert len(row['reviewed_links']) == 8
+    assert all(p['name'] == 'Cornflakes' and p['brand'] == 'Garant' and p['package_quantity'] == 500
+               for p in row['reviewed_links'])
+    assert 'kornmalt' in row['definition'] and 'risflingor' in row['definition']
+    assert library_vocabulary(current_recipes())['cornflakes|as_sold'] == ('g', row['requirements'])
+
+
+def test_dried_lime_leaf_binding_is_separate_from_fresh_leaf_quantity():
+    row = next(r for r in ROWS if r['name'] == 'torkade makrutlimeblad')
+    assert row['form'] == 'dry' and row['unit'] == 'g' and row['gross_inedible_mass']
+    assert len(row['reviewed_links']) == 2
+    assert all(p['name'] == 'Lime Blad Torkade' and p['brand'] == 'Krua'
+               and p['package_quantity'] == 25 and p['retailer_product_id'] == '101255053_ST'
+               for p in row['reviewed_links'])
+    vocabulary = library_vocabulary(current_recipes())
+    assert 'makrutlimeblad|raw_edible' not in vocabulary
+    assert vocabulary['torkade makrutlimeblad|dry'] == ('g',row['requirements'])
+
+
 @pytest.mark.parametrize('row', ROWS, ids=lambda row: row['name'])
 def test_source_bound_whole_products_reject_changed_food_or_quantity(row):
     p, f = source(row)
@@ -185,3 +216,16 @@ def test_raw_fresh_chorizo_keeps_gross_mass_and_cannot_become_other_sausage():
     assert 'mexikansk färsk chorizo|raw_edible' not in library_vocabulary(current_recipes())
     assert _excluded_by_diet('färsk chorizokorv', DietPreference.VEGETARIAN)
     assert _excluded_by_diet('färsk chorizokorv', DietPreference.VEGAN)
+
+
+def test_whole_fresh_salsiccia_is_source_bound_and_cannot_become_cooked_sausage():
+    row = next(r for r in ROWS if r['name'] == 'färsk salsicciakorv')
+    assert row['form'] == 'as_sold' and len(row['reviewed_links']) == 8
+    assert {x['retailer_product_id'] for x in row['reviewed_links']} == {'101236336_ST'}
+    p, f = source(row)
+    key = row['requirements'][0].removeprefix('pack:')
+    assert compatible(key, p, f)
+    for label in ('Salsiccia Smal', 'Salsicciafärs Original', 'Ravioli Salsiccia', 'grekisk lantkorv'):
+        assert not compatible(key, p.model_copy(update={'name': label}), f)
+    for preference in (DietPreference.VEGETARIAN, DietPreference.VEGAN):
+        assert _excluded_by_diet('färsk salsicciakorv', preference)

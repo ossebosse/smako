@@ -1,0 +1,1555 @@
+{
+  "pack_id": "reviewed-expansion-round2-stage41",
+  "recipes": [
+    {
+      "design": {
+        "active_minutes": 65,
+        "base_id": "smako-mexican-chiles-en-nogada",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "paprika|raw_edible",
+                "name": "Paprika, urkärnad rå vikt före rostning",
+                "note": "",
+                "quantity": 700.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "fläskfärs|raw_edible",
+                "name": "fläskfärs",
+                "note": "",
+                "quantity": 650.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "äpple|raw_edible",
+                "name": "äpple",
+                "note": "",
+                "quantity": 280.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "rapsolja",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "svartpeppar",
+                "note": "",
+                "quantity": 0.6,
+                "unit": "g"
+              }
+            ],
+            "id": "fyllning",
+            "name": "Fruktig färsfyllning"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "valnötter|as_sold",
+                "name": "valnötter",
+                "note": "",
+                "quantity": 130.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "mjölk|as_sold",
+                "name": "mjölk",
+                "note": "",
+                "quantity": 200.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              }
+            ],
+            "id": "nogada",
+            "name": "Sval valnötssås"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "granatäppelkärnor|raw_edible",
+                "name": "granatäppelkärnor",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              }
+            ],
+            "id": "karnor",
+            "name": "Syrlig servering"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "mexican"
+        ],
+        "equipment": [
+          "ugn",
+          "plåt",
+          "stekpanna",
+          "mixer",
+          "termometer"
+        ],
+        "estimated_minutes": 267,
+        "family": "chiles en nogada",
+        "fish": false,
+        "flavor_profile": [
+          "valnöt",
+          "fruktig färs",
+          "granatäpple"
+        ],
+        "ingredient_count": 7,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "oven",
+        "primary_ingredient": "fläskfärs",
+        "provenance": {
+          "notes": "Granskad mild paprikaversion av nogada, utan påstående om poblanohetta eller traditionell grön färg. Välj paprika enligt korgens produkt; den kan ha annan färg. 700 g avser urkärnade råa halvor före rostning och skalning. Skalningsförlusten är okänd. Fyllningen har frukt och fläsk; all valnötsmjölk, stekfett och granatäppelsaft serveras. Inte provlagad. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "fylld poblano",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 1,
+            "id": "s1",
+            "ingredient_keys": [
+              "granatäppelkärnor|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Väg upp fryst granatäppelkärnor i ett täckt kärl i kylskåp. Behåll all vätska."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 120,
+            "id": "s2",
+            "ingredient_keys": [
+              "granatäppelkärnor|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Tina helt i kylskåp enligt förpackningen. Planera 120 minuter och förläng vid behov tills ingen iskärna återstår. Behåll all kärnsaft till serveringen. Färska kärnor behöver inte upptining."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 2,
+            "id": "s3",
+            "ingredient_keys": [
+              "mjölk|as_sold",
+              "valnötter|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Lägg valnötterna och all mjölk i ett täckt kärl i kylskåp vid cirka 4 °C."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 60,
+            "id": "s4",
+            "ingredient_keys": [
+              "mjölk|as_sold",
+              "valnötter|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Låt valnötterna mjukna i mjölken i ett täckt kärl i kylskåp vid cirka 4 °C i 60 minuter. All mjölk ska användas."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 18,
+            "id": "s5",
+            "ingredient_keys": [
+              "paprika|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sätt ugnen på 240 °C grill. Skölj och halvera paprikan, ta bort kärnhus och stjälk och väg halvorna före rostning. Lägg med skinnet uppåt på plåt. Rosta nära grillelementet under aktiv tillsyn tills skinnet får svarta blåsor; undvik att bränna bort fruktköttet."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 10,
+            "id": "s6",
+            "ingredient_keys": [
+              "paprika|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Lägg de rostade frukterna i en värmetålig skål med lock. Låt ånga och svalna 10 minuter så att skalet lossnar."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 12,
+            "id": "s7",
+            "ingredient_keys": [
+              "paprika|raw_edible",
+              "äpple|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Dra av löst svartnat skal från paprikahalvorna. Sänk ugnen till 180 °C. Kärna ur äpplet, väg ätlig mängd med skal och tärna."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 22,
+            "id": "s8",
+            "ingredient_keys": [
+              "fläskfärs|raw_edible",
+              "rapsolja|as_sold",
+              "salt|as_sold",
+              "svartpeppar|dry",
+              "äpple|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Värm rapsolja i pannan. Tillsätt fläskfärs och finfördela. Stek tills den är genomlagad och når 72 °C. Vänd ner äpple, fyllningens salt och svartpeppar. Sjud tills frukten mjuknat och fyllningen inte är vattnig. Behåll allt stekfett och all kött- och fruktsaft i fyllningen; reducera vid behov under omrörning."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 4,
+            "id": "s9",
+            "ingredient_keys": [
+              "fläskfärs|raw_edible",
+              "paprika|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Fördela all färsblandning i paprikahalvorna i en ugnsform. Lägg eventuell fyllning som inte ryms bredvid halvorna i samma form; hela mängden ska serveras."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 12,
+            "id": "s10",
+            "ingredient_keys": [
+              "fläskfärs|raw_edible",
+              "paprika|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Värm de fyllda paprikahalvorna och eventuell fyllning bredvid i formen 12 minuter vid 180 °C."
+          },
+          {
+            "depends_on": [
+              "s10"
+            ],
+            "duration_minutes": 6,
+            "id": "s11",
+            "ingredient_keys": [
+              "granatäppelkärnor|raw_edible",
+              "mjölk|as_sold",
+              "paprika|raw_edible",
+              "salt|as_sold",
+              "valnötter|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "30 ml",
+                30.0
+              ]
+            ],
+            "text": "Mixa de mjuknade valnötterna och all mjölk med såsens salt till slät, tjock men hällbar sås. Tillsätt vid behov 30 ml vatten. Kontrollera att fyllningen är genomvarm. Fördela paprikahalvorna och all eventuell fyllning bredvid mellan det angivna antalet portioner, skeda över sval nogada och granatäppelkärnor med all tiningssaft. Servera direkt."
+          }
+        ],
+        "total_minutes": 267,
+        "unmeasured_processes": [
+          {
+            "description": "Urkärnad rå paprika vägs före rostning. Svartnat skal dras av efteråt; kvarvarande ätlig massa och näring är inte uppmätta.",
+            "ingredient_keys": [
+              "paprika|raw_edible"
+            ],
+            "operation": "peel_after_cooking",
+            "step_id": "s5"
+          }
+        ],
+        "variant_id": "simple",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 202
+      },
+      "ingredients": [
+        {
+          "canonical_name": "paprika",
+          "component": "fyllning",
+          "form": "raw_edible",
+          "name": "paprika",
+          "quantity": 700.0,
+          "quantity_max": 700.0,
+          "quantity_min": 700.0,
+          "quantity_step": 700.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "fläskfärs",
+          "component": "fyllning",
+          "form": "raw_edible",
+          "name": "fläskfärs",
+          "product_requirements": [
+            "pack:pork_mince"
+          ],
+          "quantity": 650.0,
+          "quantity_max": 650.0,
+          "quantity_min": 650.0,
+          "quantity_step": 650.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "äpple",
+          "component": "fyllning",
+          "form": "raw_edible",
+          "name": "äpple",
+          "quantity": 280.0,
+          "quantity_max": 280.0,
+          "quantity_min": 280.0,
+          "quantity_step": 280.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "fyllning",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "fyllning",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 6.0,
+          "quantity_max": 6.0,
+          "quantity_min": 6.0,
+          "quantity_step": 6.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "fyllning",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 0.6,
+          "quantity_max": 0.6,
+          "quantity_min": 0.6,
+          "quantity_step": 0.6,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "valnötter",
+          "component": "nogada",
+          "form": "as_sold",
+          "name": "valnötter",
+          "product_requirements": [
+            "pack:intake_walnuts"
+          ],
+          "quantity": 130.0,
+          "quantity_max": 130.0,
+          "quantity_min": 130.0,
+          "quantity_step": 130.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "mjölk",
+          "component": "nogada",
+          "form": "as_sold",
+          "name": "mjölk",
+          "quantity": 200.0,
+          "quantity_max": 200.0,
+          "quantity_min": 200.0,
+          "quantity_step": 200.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "granatäppelkärnor",
+          "component": "karnor",
+          "form": "raw_edible",
+          "name": "granatäppelkärnor",
+          "product_requirements": [
+            "pack:intake_all_round2_a690909896ca"
+          ],
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Väg upp fryst granatäppelkärnor i ett täckt kärl i kylskåp. Behåll all vätska.",
+        "Tina helt i kylskåp enligt förpackningen. Planera 120 minuter och förläng vid behov tills ingen iskärna återstår. Behåll all kärnsaft till serveringen. Färska kärnor behöver inte upptining.",
+        "Lägg valnötterna och all mjölk i ett täckt kärl i kylskåp vid cirka 4 °C.",
+        "Låt valnötterna mjukna i mjölken i ett täckt kärl i kylskåp vid cirka 4 °C i 60 minuter. All mjölk ska användas.",
+        "Sätt ugnen på 240 °C grill. Skölj och halvera paprikan, ta bort kärnhus och stjälk och väg halvorna före rostning. Lägg med skinnet uppåt på plåt. Rosta nära grillelementet under aktiv tillsyn tills skinnet får svarta blåsor; undvik att bränna bort fruktköttet.",
+        "Lägg de rostade frukterna i en värmetålig skål med lock. Låt ånga och svalna 10 minuter så att skalet lossnar.",
+        "Dra av löst svartnat skal från paprikahalvorna. Sänk ugnen till 180 °C. Kärna ur äpplet, väg ätlig mängd med skal och tärna.",
+        "Värm rapsolja i pannan. Tillsätt fläskfärs och finfördela. Stek tills den är genomlagad och når 72 °C. Vänd ner äpple, fyllningens salt och svartpeppar. Sjud tills frukten mjuknat och fyllningen inte är vattnig. Behåll allt stekfett och all kött- och fruktsaft i fyllningen; reducera vid behov under omrörning.",
+        "Fördela all färsblandning i paprikahalvorna i en ugnsform. Lägg eventuell fyllning som inte ryms bredvid halvorna i samma form; hela mängden ska serveras.",
+        "Värm de fyllda paprikahalvorna och eventuell fyllning bredvid i formen 12 minuter vid 180 °C.",
+        "Mixa de mjuknade valnötterna och all mjölk med såsens salt till slät, tjock men hällbar sås. Tillsätt vid behov 30 ml vatten. Kontrollera att fyllningen är genomvarm. Fördela paprikahalvorna och all eventuell fyllning bredvid mellan det angivna antalet portioner, skeda över sval nogada och granatäppelkärnor med all tiningssaft. Servera direkt."
+      ],
+      "name": "Paprika en nogada – fyllda paprikahalvor med valnötssås – enkel – milt paprikaalternativ",
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 65,
+        "base_id": "smako-mexican-chiles-en-nogada",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "paprika|raw_edible",
+                "name": "Paprika, urkärnad rå vikt före rostning",
+                "note": "",
+                "quantity": 700.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "fläskfärs|raw_edible",
+                "name": "fläskfärs",
+                "note": "",
+                "quantity": 650.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "äpple|raw_edible",
+                "name": "äpple",
+                "note": "",
+                "quantity": 280.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "rapsolja",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "svartpeppar",
+                "note": "",
+                "quantity": 0.6,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "päron|raw_edible",
+                "name": "päron",
+                "note": "",
+                "quantity": 180.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "russin|as_sold",
+                "name": "russin",
+                "note": "",
+                "quantity": 45.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "tomat|raw_edible",
+                "name": "tomat",
+                "note": "",
+                "quantity": 180.0,
+                "unit": "g"
+              }
+            ],
+            "id": "fyllning",
+            "name": "Fruktig färsfyllning"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "valnötter|as_sold",
+                "name": "valnötter",
+                "note": "",
+                "quantity": 130.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "mjölk|as_sold",
+                "name": "mjölk",
+                "note": "",
+                "quantity": 200.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              }
+            ],
+            "id": "nogada",
+            "name": "Sval valnötssås"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "granatäppelkärnor|raw_edible",
+                "name": "granatäppelkärnor",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              }
+            ],
+            "id": "karnor",
+            "name": "Syrlig servering"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "mexican"
+        ],
+        "equipment": [
+          "ugn",
+          "plåt",
+          "stekpanna",
+          "mixer",
+          "termometer"
+        ],
+        "estimated_minutes": 267,
+        "family": "chiles en nogada",
+        "fish": false,
+        "flavor_profile": [
+          "valnöt",
+          "fruktig färs",
+          "granatäpple"
+        ],
+        "ingredient_count": 10,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "oven",
+        "primary_ingredient": "fläskfärs",
+        "provenance": {
+          "notes": "Granskad mild paprikaversion av nogada, utan påstående om poblanohetta eller traditionell grön färg. Välj paprika enligt korgens produkt; den kan ha annan färg. 700 g avser urkärnade råa halvor före rostning och skalning. Skalningsförlusten är okänd. Fyllningen har frukt och fläsk; all valnötsmjölk, stekfett och granatäppelsaft serveras. Inte provlagad. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "fylld poblano",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 1,
+            "id": "s1",
+            "ingredient_keys": [
+              "granatäppelkärnor|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Väg upp fryst granatäppelkärnor i ett täckt kärl i kylskåp. Behåll all vätska."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 120,
+            "id": "s2",
+            "ingredient_keys": [
+              "granatäppelkärnor|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Tina helt i kylskåp enligt förpackningen. Planera 120 minuter och förläng vid behov tills ingen iskärna återstår. Behåll all kärnsaft till serveringen. Färska kärnor behöver inte upptining."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 2,
+            "id": "s3",
+            "ingredient_keys": [
+              "mjölk|as_sold",
+              "valnötter|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Lägg valnötterna och all mjölk i ett täckt kärl i kylskåp vid cirka 4 °C."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 60,
+            "id": "s4",
+            "ingredient_keys": [
+              "mjölk|as_sold",
+              "valnötter|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Låt valnötterna mjukna i mjölken i ett täckt kärl i kylskåp vid cirka 4 °C i 60 minuter. All mjölk ska användas."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 18,
+            "id": "s5",
+            "ingredient_keys": [
+              "paprika|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sätt ugnen på 240 °C grill. Skölj och halvera paprikan, ta bort kärnhus och stjälk och väg halvorna före rostning. Lägg med skinnet uppåt på plåt. Rosta nära grillelementet under aktiv tillsyn tills skinnet får svarta blåsor; undvik att bränna bort fruktköttet."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 10,
+            "id": "s6",
+            "ingredient_keys": [
+              "paprika|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Lägg de rostade frukterna i en värmetålig skål med lock. Låt ånga och svalna 10 minuter så att skalet lossnar."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 12,
+            "id": "s7",
+            "ingredient_keys": [
+              "paprika|raw_edible",
+              "päron|raw_edible",
+              "tomat|raw_edible",
+              "äpple|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Dra av löst svartnat skal från paprikahalvorna. Sänk ugnen till 180 °C. Kärna ur äpplet, väg ätlig mängd med skal och tärna. Kärna även ur päronet, väg ätlig mängd och tärna det samt tomaten."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 22,
+            "id": "s8",
+            "ingredient_keys": [
+              "fläskfärs|raw_edible",
+              "päron|raw_edible",
+              "rapsolja|as_sold",
+              "russin|as_sold",
+              "salt|as_sold",
+              "svartpeppar|dry",
+              "tomat|raw_edible",
+              "äpple|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Värm rapsolja i pannan. Tillsätt fläskfärs och finfördela. Stek tills den är genomlagad och når 72 °C. Vänd ner äpple, päron, russin och tomat, fyllningens salt och svartpeppar. Sjud tills frukten mjuknat och fyllningen inte är vattnig. Behåll allt stekfett och all kött- och fruktsaft i fyllningen; reducera vid behov under omrörning."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 4,
+            "id": "s9",
+            "ingredient_keys": [
+              "fläskfärs|raw_edible",
+              "paprika|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Fördela all färsblandning i paprikahalvorna i en ugnsform. Lägg eventuell fyllning som inte ryms bredvid halvorna i samma form; hela mängden ska serveras."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 12,
+            "id": "s10",
+            "ingredient_keys": [
+              "fläskfärs|raw_edible",
+              "paprika|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Värm de fyllda paprikahalvorna och eventuell fyllning bredvid i formen 12 minuter vid 180 °C."
+          },
+          {
+            "depends_on": [
+              "s10"
+            ],
+            "duration_minutes": 6,
+            "id": "s11",
+            "ingredient_keys": [
+              "granatäppelkärnor|raw_edible",
+              "mjölk|as_sold",
+              "paprika|raw_edible",
+              "salt|as_sold",
+              "valnötter|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "30 ml",
+                30.0
+              ]
+            ],
+            "text": "Mixa de mjuknade valnötterna och all mjölk med såsens salt till slät, tjock men hällbar sås. Tillsätt vid behov 30 ml vatten. Kontrollera att fyllningen är genomvarm. Fördela paprikahalvorna och all eventuell fyllning bredvid mellan det angivna antalet portioner, skeda över sval nogada och granatäppelkärnor med all tiningssaft. Servera direkt."
+          }
+        ],
+        "total_minutes": 267,
+        "unmeasured_processes": [
+          {
+            "description": "Urkärnad rå paprika vägs före rostning. Svartnat skal dras av efteråt; kvarvarande ätlig massa och näring är inte uppmätta.",
+            "ingredient_keys": [
+              "paprika|raw_edible"
+            ],
+            "operation": "peel_after_cooking",
+            "step_id": "s5"
+          }
+        ],
+        "variant_id": "standard",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 202
+      },
+      "ingredients": [
+        {
+          "canonical_name": "paprika",
+          "component": "fyllning",
+          "form": "raw_edible",
+          "name": "paprika",
+          "quantity": 700.0,
+          "quantity_max": 700.0,
+          "quantity_min": 700.0,
+          "quantity_step": 700.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "fläskfärs",
+          "component": "fyllning",
+          "form": "raw_edible",
+          "name": "fläskfärs",
+          "product_requirements": [
+            "pack:pork_mince"
+          ],
+          "quantity": 650.0,
+          "quantity_max": 650.0,
+          "quantity_min": 650.0,
+          "quantity_step": 650.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "äpple",
+          "component": "fyllning",
+          "form": "raw_edible",
+          "name": "äpple",
+          "quantity": 280.0,
+          "quantity_max": 280.0,
+          "quantity_min": 280.0,
+          "quantity_step": 280.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "fyllning",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "fyllning",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 6.0,
+          "quantity_max": 6.0,
+          "quantity_min": 6.0,
+          "quantity_step": 6.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "fyllning",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 0.6,
+          "quantity_max": 0.6,
+          "quantity_min": 0.6,
+          "quantity_step": 0.6,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "päron",
+          "component": "fyllning",
+          "form": "raw_edible",
+          "name": "päron",
+          "product_requirements": [
+            "pack:intake_all_c0cf793979aa"
+          ],
+          "quantity": 180.0,
+          "quantity_max": 180.0,
+          "quantity_min": 180.0,
+          "quantity_step": 180.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "russin",
+          "component": "fyllning",
+          "form": "as_sold",
+          "name": "russin",
+          "product_requirements": [
+            "pack:intake_all_c84b87d5ba4a"
+          ],
+          "quantity": 45.0,
+          "quantity_max": 45.0,
+          "quantity_min": 45.0,
+          "quantity_step": 45.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "tomat",
+          "component": "fyllning",
+          "form": "raw_edible",
+          "name": "tomat",
+          "quantity": 180.0,
+          "quantity_max": 180.0,
+          "quantity_min": 180.0,
+          "quantity_step": 180.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "valnötter",
+          "component": "nogada",
+          "form": "as_sold",
+          "name": "valnötter",
+          "product_requirements": [
+            "pack:intake_walnuts"
+          ],
+          "quantity": 130.0,
+          "quantity_max": 130.0,
+          "quantity_min": 130.0,
+          "quantity_step": 130.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "mjölk",
+          "component": "nogada",
+          "form": "as_sold",
+          "name": "mjölk",
+          "quantity": 200.0,
+          "quantity_max": 200.0,
+          "quantity_min": 200.0,
+          "quantity_step": 200.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "granatäppelkärnor",
+          "component": "karnor",
+          "form": "raw_edible",
+          "name": "granatäppelkärnor",
+          "product_requirements": [
+            "pack:intake_all_round2_a690909896ca"
+          ],
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Väg upp fryst granatäppelkärnor i ett täckt kärl i kylskåp. Behåll all vätska.",
+        "Tina helt i kylskåp enligt förpackningen. Planera 120 minuter och förläng vid behov tills ingen iskärna återstår. Behåll all kärnsaft till serveringen. Färska kärnor behöver inte upptining.",
+        "Lägg valnötterna och all mjölk i ett täckt kärl i kylskåp vid cirka 4 °C.",
+        "Låt valnötterna mjukna i mjölken i ett täckt kärl i kylskåp vid cirka 4 °C i 60 minuter. All mjölk ska användas.",
+        "Sätt ugnen på 240 °C grill. Skölj och halvera paprikan, ta bort kärnhus och stjälk och väg halvorna före rostning. Lägg med skinnet uppåt på plåt. Rosta nära grillelementet under aktiv tillsyn tills skinnet får svarta blåsor; undvik att bränna bort fruktköttet.",
+        "Lägg de rostade frukterna i en värmetålig skål med lock. Låt ånga och svalna 10 minuter så att skalet lossnar.",
+        "Dra av löst svartnat skal från paprikahalvorna. Sänk ugnen till 180 °C. Kärna ur äpplet, väg ätlig mängd med skal och tärna. Kärna även ur päronet, väg ätlig mängd och tärna det samt tomaten.",
+        "Värm rapsolja i pannan. Tillsätt fläskfärs och finfördela. Stek tills den är genomlagad och når 72 °C. Vänd ner äpple, päron, russin och tomat, fyllningens salt och svartpeppar. Sjud tills frukten mjuknat och fyllningen inte är vattnig. Behåll allt stekfett och all kött- och fruktsaft i fyllningen; reducera vid behov under omrörning.",
+        "Fördela all färsblandning i paprikahalvorna i en ugnsform. Lägg eventuell fyllning som inte ryms bredvid halvorna i samma form; hela mängden ska serveras.",
+        "Värm de fyllda paprikahalvorna och eventuell fyllning bredvid i formen 12 minuter vid 180 °C.",
+        "Mixa de mjuknade valnötterna och all mjölk med såsens salt till slät, tjock men hällbar sås. Tillsätt vid behov 30 ml vatten. Kontrollera att fyllningen är genomvarm. Fördela paprikahalvorna och all eventuell fyllning bredvid mellan det angivna antalet portioner, skeda över sval nogada och granatäppelkärnor med all tiningssaft. Servera direkt."
+      ],
+      "name": "Paprika en nogada – fyllda paprikahalvor med valnötssås – standard – milt paprikaalternativ",
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 65,
+        "base_id": "smako-mexican-chiles-en-nogada",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "paprika|raw_edible",
+                "name": "Paprika, urkärnad rå vikt före rostning",
+                "note": "",
+                "quantity": 700.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "fläskfärs|raw_edible",
+                "name": "fläskfärs",
+                "note": "",
+                "quantity": 650.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "äpple|raw_edible",
+                "name": "äpple",
+                "note": "",
+                "quantity": 280.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "rapsolja",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "svartpeppar",
+                "note": "",
+                "quantity": 0.6,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "päron|raw_edible",
+                "name": "päron",
+                "note": "",
+                "quantity": 180.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "russin|as_sold",
+                "name": "russin",
+                "note": "",
+                "quantity": 45.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "tomat|raw_edible",
+                "name": "tomat",
+                "note": "",
+                "quantity": 180.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "gul lök",
+                "note": "",
+                "quantity": 130.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "vitlök",
+                "note": "",
+                "quantity": 12.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "mandel|as_sold",
+                "name": "mandel",
+                "note": "",
+                "quantity": 45.0,
+                "unit": "g"
+              }
+            ],
+            "id": "fyllning",
+            "name": "Fruktig färsfyllning"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "valnötter|as_sold",
+                "name": "valnötter",
+                "note": "",
+                "quantity": 130.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "mjölk|as_sold",
+                "name": "mjölk",
+                "note": "",
+                "quantity": 200.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "färskost|as_sold",
+                "name": "färskost",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              }
+            ],
+            "id": "nogada",
+            "name": "Sval valnötssås"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "granatäppelkärnor|raw_edible",
+                "name": "granatäppelkärnor",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              }
+            ],
+            "id": "karnor",
+            "name": "Syrlig servering"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "mexican"
+        ],
+        "equipment": [
+          "ugn",
+          "plåt",
+          "stekpanna",
+          "mixer",
+          "termometer"
+        ],
+        "estimated_minutes": 267,
+        "family": "chiles en nogada",
+        "fish": false,
+        "flavor_profile": [
+          "valnöt",
+          "fruktig färs",
+          "granatäpple"
+        ],
+        "ingredient_count": 14,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "oven",
+        "primary_ingredient": "fläskfärs",
+        "provenance": {
+          "notes": "Granskad mild paprikaversion av nogada, utan påstående om poblanohetta eller traditionell grön färg. Välj paprika enligt korgens produkt; den kan ha annan färg. 700 g avser urkärnade råa halvor före rostning och skalning. Skalningsförlusten är okänd. Fyllningen har frukt och fläsk; all valnötsmjölk, stekfett och granatäppelsaft serveras. Inte provlagad. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "fylld poblano",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 1,
+            "id": "s1",
+            "ingredient_keys": [
+              "granatäppelkärnor|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Väg upp fryst granatäppelkärnor i ett täckt kärl i kylskåp. Behåll all vätska."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 120,
+            "id": "s2",
+            "ingredient_keys": [
+              "granatäppelkärnor|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Tina helt i kylskåp enligt förpackningen. Planera 120 minuter och förläng vid behov tills ingen iskärna återstår. Behåll all kärnsaft till serveringen. Färska kärnor behöver inte upptining."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 2,
+            "id": "s3",
+            "ingredient_keys": [
+              "mjölk|as_sold",
+              "valnötter|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Lägg valnötterna och all mjölk i ett täckt kärl i kylskåp vid cirka 4 °C."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 60,
+            "id": "s4",
+            "ingredient_keys": [
+              "mjölk|as_sold",
+              "valnötter|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Låt valnötterna mjukna i mjölken i ett täckt kärl i kylskåp vid cirka 4 °C i 60 minuter. All mjölk ska användas."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 18,
+            "id": "s5",
+            "ingredient_keys": [
+              "paprika|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sätt ugnen på 240 °C grill. Skölj och halvera paprikan, ta bort kärnhus och stjälk och väg halvorna före rostning. Lägg med skinnet uppåt på plåt. Rosta nära grillelementet under aktiv tillsyn tills skinnet får svarta blåsor; undvik att bränna bort fruktköttet."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 10,
+            "id": "s6",
+            "ingredient_keys": [
+              "paprika|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Lägg de rostade frukterna i en värmetålig skål med lock. Låt ånga och svalna 10 minuter så att skalet lossnar."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 12,
+            "id": "s7",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "mandel|as_sold",
+              "paprika|raw_edible",
+              "päron|raw_edible",
+              "tomat|raw_edible",
+              "vitlök|raw_edible",
+              "äpple|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Dra av löst svartnat skal från paprikahalvorna. Sänk ugnen till 180 °C. Kärna ur äpplet, väg ätlig mängd med skal och tärna. Kärna även ur päronet, väg ätlig mängd och tärna det samt tomaten. Hacka löken, väg färsk eller fryst hackad vitlök och hacka mandeln."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 22,
+            "id": "s8",
+            "ingredient_keys": [
+              "fläskfärs|raw_edible",
+              "gul lök|raw_edible",
+              "mandel|as_sold",
+              "päron|raw_edible",
+              "rapsolja|as_sold",
+              "russin|as_sold",
+              "salt|as_sold",
+              "svartpeppar|dry",
+              "tomat|raw_edible",
+              "vitlök|raw_edible",
+              "äpple|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Värm rapsolja i pannan och mjukstek lök/vitlök 4 minuter. Tillsätt fläskfärs och finfördela. Stek tills den är genomlagad och når 72 °C. Vänd ner äpple, päron, russin och tomat samt mandel, fyllningens salt och svartpeppar. Sjud tills frukten mjuknat och fyllningen inte är vattnig. Behåll allt stekfett och all kött- och fruktsaft i fyllningen; reducera vid behov under omrörning."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 4,
+            "id": "s9",
+            "ingredient_keys": [
+              "fläskfärs|raw_edible",
+              "paprika|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Fördela all färsblandning i paprikahalvorna i en ugnsform. Lägg eventuell fyllning som inte ryms bredvid halvorna i samma form; hela mängden ska serveras."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 12,
+            "id": "s10",
+            "ingredient_keys": [
+              "fläskfärs|raw_edible",
+              "paprika|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Värm de fyllda paprikahalvorna och eventuell fyllning bredvid i formen 12 minuter vid 180 °C."
+          },
+          {
+            "depends_on": [
+              "s10"
+            ],
+            "duration_minutes": 6,
+            "id": "s11",
+            "ingredient_keys": [
+              "färskost|as_sold",
+              "granatäppelkärnor|raw_edible",
+              "mjölk|as_sold",
+              "paprika|raw_edible",
+              "salt|as_sold",
+              "valnötter|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "30 ml",
+                30.0
+              ]
+            ],
+            "text": "Mixa de mjuknade valnötterna och all mjölk med såsens salt och färskost till slät, tjock men hällbar sås. Tillsätt vid behov 30 ml vatten. Kontrollera att fyllningen är genomvarm. Fördela paprikahalvorna och all eventuell fyllning bredvid mellan det angivna antalet portioner, skeda över sval nogada och granatäppelkärnor med all tiningssaft. Servera direkt."
+          }
+        ],
+        "total_minutes": 267,
+        "unmeasured_processes": [
+          {
+            "description": "Urkärnad rå paprika vägs före rostning. Svartnat skal dras av efteråt; kvarvarande ätlig massa och näring är inte uppmätta.",
+            "ingredient_keys": [
+              "paprika|raw_edible"
+            ],
+            "operation": "peel_after_cooking",
+            "step_id": "s5"
+          }
+        ],
+        "variant_id": "extended",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 202
+      },
+      "ingredients": [
+        {
+          "canonical_name": "paprika",
+          "component": "fyllning",
+          "form": "raw_edible",
+          "name": "paprika",
+          "quantity": 700.0,
+          "quantity_max": 700.0,
+          "quantity_min": 700.0,
+          "quantity_step": 700.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "fläskfärs",
+          "component": "fyllning",
+          "form": "raw_edible",
+          "name": "fläskfärs",
+          "product_requirements": [
+            "pack:pork_mince"
+          ],
+          "quantity": 650.0,
+          "quantity_max": 650.0,
+          "quantity_min": 650.0,
+          "quantity_step": 650.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "äpple",
+          "component": "fyllning",
+          "form": "raw_edible",
+          "name": "äpple",
+          "quantity": 280.0,
+          "quantity_max": 280.0,
+          "quantity_min": 280.0,
+          "quantity_step": 280.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "fyllning",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "fyllning",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 6.0,
+          "quantity_max": 6.0,
+          "quantity_min": 6.0,
+          "quantity_step": 6.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "fyllning",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 0.6,
+          "quantity_max": 0.6,
+          "quantity_min": 0.6,
+          "quantity_step": 0.6,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "päron",
+          "component": "fyllning",
+          "form": "raw_edible",
+          "name": "päron",
+          "product_requirements": [
+            "pack:intake_all_c0cf793979aa"
+          ],
+          "quantity": 180.0,
+          "quantity_max": 180.0,
+          "quantity_min": 180.0,
+          "quantity_step": 180.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "russin",
+          "component": "fyllning",
+          "form": "as_sold",
+          "name": "russin",
+          "product_requirements": [
+            "pack:intake_all_c84b87d5ba4a"
+          ],
+          "quantity": 45.0,
+          "quantity_max": 45.0,
+          "quantity_min": 45.0,
+          "quantity_step": 45.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "tomat",
+          "component": "fyllning",
+          "form": "raw_edible",
+          "name": "tomat",
+          "quantity": 180.0,
+          "quantity_max": 180.0,
+          "quantity_min": 180.0,
+          "quantity_step": 180.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "fyllning",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 130.0,
+          "quantity_max": 130.0,
+          "quantity_min": 130.0,
+          "quantity_step": 130.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "fyllning",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 12.0,
+          "quantity_max": 12.0,
+          "quantity_min": 12.0,
+          "quantity_step": 12.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "mandel",
+          "component": "fyllning",
+          "form": "as_sold",
+          "name": "mandel",
+          "product_requirements": [
+            "pack:intake_almonds"
+          ],
+          "quantity": 45.0,
+          "quantity_max": 45.0,
+          "quantity_min": 45.0,
+          "quantity_step": 45.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "valnötter",
+          "component": "nogada",
+          "form": "as_sold",
+          "name": "valnötter",
+          "product_requirements": [
+            "pack:intake_walnuts"
+          ],
+          "quantity": 130.0,
+          "quantity_max": 130.0,
+          "quantity_min": 130.0,
+          "quantity_step": 130.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "mjölk",
+          "component": "nogada",
+          "form": "as_sold",
+          "name": "mjölk",
+          "quantity": 200.0,
+          "quantity_max": 200.0,
+          "quantity_min": 200.0,
+          "quantity_step": 200.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "färskost",
+          "component": "nogada",
+          "form": "as_sold",
+          "name": "färskost",
+          "product_requirements": [
+            "pack:intake_all_536538040095"
+          ],
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "granatäppelkärnor",
+          "component": "karnor",
+          "form": "raw_edible",
+          "name": "granatäppelkärnor",
+          "product_requirements": [
+            "pack:intake_all_round2_a690909896ca"
+          ],
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Väg upp fryst granatäppelkärnor i ett täckt kärl i kylskåp. Behåll all vätska.",
+        "Tina helt i kylskåp enligt förpackningen. Planera 120 minuter och förläng vid behov tills ingen iskärna återstår. Behåll all kärnsaft till serveringen. Färska kärnor behöver inte upptining.",
+        "Lägg valnötterna och all mjölk i ett täckt kärl i kylskåp vid cirka 4 °C.",
+        "Låt valnötterna mjukna i mjölken i ett täckt kärl i kylskåp vid cirka 4 °C i 60 minuter. All mjölk ska användas.",
+        "Sätt ugnen på 240 °C grill. Skölj och halvera paprikan, ta bort kärnhus och stjälk och väg halvorna före rostning. Lägg med skinnet uppåt på plåt. Rosta nära grillelementet under aktiv tillsyn tills skinnet får svarta blåsor; undvik att bränna bort fruktköttet.",
+        "Lägg de rostade frukterna i en värmetålig skål med lock. Låt ånga och svalna 10 minuter så att skalet lossnar.",
+        "Dra av löst svartnat skal från paprikahalvorna. Sänk ugnen till 180 °C. Kärna ur äpplet, väg ätlig mängd med skal och tärna. Kärna även ur päronet, väg ätlig mängd och tärna det samt tomaten. Hacka löken, väg färsk eller fryst hackad vitlök och hacka mandeln.",
+        "Värm rapsolja i pannan och mjukstek lök/vitlök 4 minuter. Tillsätt fläskfärs och finfördela. Stek tills den är genomlagad och når 72 °C. Vänd ner äpple, päron, russin och tomat samt mandel, fyllningens salt och svartpeppar. Sjud tills frukten mjuknat och fyllningen inte är vattnig. Behåll allt stekfett och all kött- och fruktsaft i fyllningen; reducera vid behov under omrörning.",
+        "Fördela all färsblandning i paprikahalvorna i en ugnsform. Lägg eventuell fyllning som inte ryms bredvid halvorna i samma form; hela mängden ska serveras.",
+        "Värm de fyllda paprikahalvorna och eventuell fyllning bredvid i formen 12 minuter vid 180 °C.",
+        "Mixa de mjuknade valnötterna och all mjölk med såsens salt och färskost till slät, tjock men hällbar sås. Tillsätt vid behov 30 ml vatten. Kontrollera att fyllningen är genomvarm. Fördela paprikahalvorna och all eventuell fyllning bredvid mellan det angivna antalet portioner, skeda över sval nogada och granatäppelkärnor med all tiningssaft. Servera direkt."
+      ],
+      "name": "Paprika en nogada – fyllda paprikahalvor med valnötssås – utökad – milt paprikaalternativ",
+      "servings": 4
+    }
+  ],
+  "schema_version": "smako-meal-pack-v1"
+}

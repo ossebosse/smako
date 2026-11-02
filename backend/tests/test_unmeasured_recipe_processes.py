@@ -157,7 +157,8 @@ def test_issued_food_with_unmeasured_losses_rejects_hard_limits(base):
                                      ('oxsvans med ben', 'g'), ('rimmat fläsklägg', 'g'),
                                      ('nötblod', 'ml'), ('ungnötslever', 'g'),
                                      ('råa skalade vannameiräkor', 'g'), ('blåmusselkött utan skal', 'g'),
-                                     ('färsk chorizokorv', 'g'), ('benfri lammstek', 'g')])
+                                     ('färsk chorizokorv', 'g'), ('benfri lammstek', 'g'),
+                                     ('färsk salsicciakorv', 'g')])
 @pytest.mark.parametrize('method', ['salad', 'cold_assembly', 'refrigerated_assembly'])
 def test_gross_raw_animal_inputs_still_require_a_hot_method(name, unit, method):
     document = source()

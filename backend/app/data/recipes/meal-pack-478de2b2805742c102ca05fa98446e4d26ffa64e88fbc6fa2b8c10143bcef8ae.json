@@ -1,0 +1,1669 @@
+{
+  "library_version": "smako-meal-pack-v1",
+  "recipes": [
+    {
+      "design": {
+        "active_minutes": 47,
+        "base_id": "smako-thai-pad-prik-king-tofu",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "tofu|as_sold",
+                "name": "Fast naturell tofu, vägd före pressning",
+                "note": "",
+                "quantity": 700.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "haricots verts|as_sold",
+                "name": "haricots verts",
+                "note": "",
+                "quantity": 450.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "röd currypasta|as_sold",
+                "name": "röd currypasta",
+                "note": "",
+                "quantity": 45.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "torkade makrutlimeblad|dry",
+                "name": "Torkade makrutlimeblad, vägs före infusion",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "rapsolja",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "sojasås|as_sold",
+                "name": "sojasås",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "strösocker",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              }
+            ],
+            "id": "wok",
+            "name": "Torr currywok"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ris|dry",
+                "name": "ris",
+                "note": "",
+                "quantity": 280.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              }
+            ],
+            "id": "ris",
+            "name": "Kokt ris"
+          }
+        ],
+        "content_sha256": "2ff6c86c395c7c6ad518cbdab55887988b28087924b416db373531c5a97a0ab0",
+        "content_source": {
+          "active_minutes": 47,
+          "method_note": "Ingredienslistan anger hela insatsen, även den del som senare hälls eller silas bort. Förlusten är inte uppmätt. Näring och färdig portionsvikt är okända; receptet kan inte styrka valda närings- eller viktgränser. Inköp och personliga kostkrav kontrolleras för samtliga insatser.",
+          "pack_id": "reviewed-expansion-round2-stage40",
+          "priority": 1,
+          "proposal_id": "smako-thai-pad-prik-king-tofu",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "c6c14a65bb12930c18e56e0f0b83cd0ed9bc1d464ea6bdf1c61f3f4228ef690b",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "thai"
+        ],
+        "equipment": [
+          "stekpanna",
+          "kastrull",
+          "finmaskig sil",
+          "liten kastrull med lock"
+        ],
+        "estimated_minutes": 85,
+        "family": "pad prik king",
+        "fish": false,
+        "flavor_profile": [
+          "röd curry",
+          "torkade makrutlimeblad",
+          "soja"
+        ],
+        "ingredient_count": 8,
+        "method": "pan",
+        "primary_ingredient": "tofu",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Granskad torrbladsvariant: 1 g torkade makrutlimeblad ersätter 4 g färska blad. Ingen färsk-torr-faktor eller lika arom påstås. Bladen sjuds separat och silas bort; all silad vätska kokas in i currypastan, men extraktion är okänd. Tofun pressas med okänd vätskeförlust. Alla stekfetter, bönornas kokvätska och eventuell gurkdressing används. Ingen kokosmjölk. Inte provlagad. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "ris",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 3,
+            "id": "s1",
+            "ingredient_keys": [
+              "torkade makrutlimeblad|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "100 ml",
+                100.0
+              ]
+            ],
+            "text": "Väg de torkade limebladen och lägg i en liten kastrull med 100 ml vatten. Koka upp och sänk värmen."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 15,
+            "id": "s2",
+            "ingredient_keys": [
+              "torkade makrutlimeblad|dry"
+            ],
+            "parallel_group": null,
+            "text": "Sjud limebladen under lock på låg värme i 15 minuter."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 3,
+            "id": "s3",
+            "ingredient_keys": [
+              "torkade makrutlimeblad|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "100 ml",
+                100.0
+              ]
+            ],
+            "text": "Sila infusionen genom en finmaskig sil. Ta bort alla blad och hårda fragment. Behåll hela den silade vätskan och fyll på med vatten till totalt 100 ml vatten."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 3,
+            "id": "s4",
+            "ingredient_keys": [
+              "ris|dry",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "560 ml",
+                560.0
+              ]
+            ],
+            "text": "Lägg det i en kastrull med risets salt och 560 ml vatten; koka upp och sänk till låg värme."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 18,
+            "id": "s5",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Sjud riset under lock cirka 18 minuter tills kornen är mjuka och vattnet absorberats. Följ längre koktid på förpackningen vid behov."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 1,
+            "id": "s6",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Kontrollera att riset är mjukt och stäng av värmen."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 5,
+            "id": "s7",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Låt riset vila fem minuter under lock."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 9,
+            "id": "s8",
+            "ingredient_keys": [
+              "haricots verts|as_sold",
+              "tofu|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Väg tofun före pressning, pressa den lätt och torka ytan; skär i jämna bitar. Väg frysta gröna bönor direkt utan upptining."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 12,
+            "id": "s9",
+            "ingredient_keys": [
+              "rapsolja|as_sold",
+              "tofu|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Värm hälften av oljan i en vid panna och stek tofun i omgångar tills ytan är gyllene. Lyft ur."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 10,
+            "id": "s10",
+            "ingredient_keys": [
+              "haricots verts|as_sold",
+              "rapsolja|as_sold",
+              "röd currypasta|as_sold",
+              "sojasås|as_sold",
+              "strösocker|dry",
+              "torkade makrutlimeblad|dry"
+            ],
+            "parallel_group": null,
+            "text": "Sänk värmen. Fräs currypastan med återstående olja kort och tillsätt soja, socker och hela den silade limebladsinfusionen. Rör tills sockret lösts. Vänd ner de frysta bönorna och koka under omrörning minst sju minuter eller längre enligt bönförpackningen tills bönorna är genomvarma och mjuka. Låt vätskan nästan koka bort; ingen bönvätska hälls bort."
+          },
+          {
+            "depends_on": [
+              "s10"
+            ],
+            "duration_minutes": 6,
+            "id": "s11",
+            "ingredient_keys": [
+              "ris|dry",
+              "röd currypasta|as_sold",
+              "tofu|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Vänd tillbaka tofun och stek tills pastan täcker bitarna utan någon lös sås i botten. Servera genast med ris. Skrapa ur och servera all kryddpasta och stekolja samt eventuell gurkdressing."
+          }
+        ],
+        "total_minutes": 85,
+        "unmeasured_processes": [
+          {
+            "description": "Torra blad och fragment silas bort efter infusion. Överföring till vattnet och kvarvarande ämnesmängd är inte uppmätta.",
+            "ingredient_keys": [
+              "torkade makrutlimeblad|dry"
+            ],
+            "operation": "remove_after_infusion",
+            "step_id": "s3"
+          },
+          {
+            "description": "Tofun vägs före lätt pressning och avtorkning. Förlorad vätskemassa är inte uppmätt.",
+            "ingredient_keys": [
+              "tofu|as_sold"
+            ],
+            "operation": "drain_before_cooking",
+            "step_id": "s8"
+          }
+        ],
+        "variant_id": "simple",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 38
+      },
+      "ingredients": [
+        {
+          "canonical_name": "tofu",
+          "component": "wok",
+          "form": "as_sold",
+          "name": "tofu",
+          "product_requirements": [
+            "firm",
+            "plain"
+          ],
+          "quantity": 700.0,
+          "quantity_max": 700.0,
+          "quantity_min": 700.0,
+          "quantity_step": 700.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "haricots verts",
+          "component": "wok",
+          "form": "as_sold",
+          "name": "haricots verts",
+          "product_requirements": [
+            "frozen",
+            "plain"
+          ],
+          "quantity": 450.0,
+          "quantity_max": 450.0,
+          "quantity_min": 450.0,
+          "quantity_step": 450.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "röd currypasta",
+          "component": "wok",
+          "form": "as_sold",
+          "name": "röd currypasta",
+          "product_requirements": [
+            "pack:intake_all_fdde79afdb70"
+          ],
+          "quantity": 45.0,
+          "quantity_max": 45.0,
+          "quantity_min": 45.0,
+          "quantity_step": 45.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "torkade makrutlimeblad",
+          "component": "wok",
+          "form": "dry",
+          "name": "torkade makrutlimeblad",
+          "product_requirements": [
+            "pack:intake_all_round2_a877829de5d0"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "wok",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 30.0,
+          "quantity_max": 30.0,
+          "quantity_min": 30.0,
+          "quantity_step": 30.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "sojasås",
+          "component": "wok",
+          "form": "as_sold",
+          "name": "sojasås",
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "strösocker",
+          "component": "wok",
+          "form": "dry",
+          "name": "strösocker",
+          "product_requirements": [
+            "pack:sugar"
+          ],
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ris",
+          "component": "ris",
+          "form": "dry",
+          "name": "ris",
+          "product_requirements": [
+            "white_rice"
+          ],
+          "quantity": 280.0,
+          "quantity_max": 280.0,
+          "quantity_min": 280.0,
+          "quantity_step": 280.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "ris",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 2.0,
+          "quantity_max": 2.0,
+          "quantity_min": 2.0,
+          "quantity_step": 2.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Väg de torkade limebladen och lägg i en liten kastrull med 100 ml vatten. Koka upp och sänk värmen.",
+        "Sjud limebladen under lock på låg värme i 15 minuter.",
+        "Sila infusionen genom en finmaskig sil. Ta bort alla blad och hårda fragment. Behåll hela den silade vätskan och fyll på med vatten till totalt 100 ml vatten.",
+        "Lägg det i en kastrull med risets salt och 560 ml vatten; koka upp och sänk till låg värme.",
+        "Sjud riset under lock cirka 18 minuter tills kornen är mjuka och vattnet absorberats. Följ längre koktid på förpackningen vid behov.",
+        "Kontrollera att riset är mjukt och stäng av värmen.",
+        "Låt riset vila fem minuter under lock.",
+        "Väg tofun före pressning, pressa den lätt och torka ytan; skär i jämna bitar. Väg frysta gröna bönor direkt utan upptining.",
+        "Värm hälften av oljan i en vid panna och stek tofun i omgångar tills ytan är gyllene. Lyft ur.",
+        "Sänk värmen. Fräs currypastan med återstående olja kort och tillsätt soja, socker och hela den silade limebladsinfusionen. Rör tills sockret lösts. Vänd ner de frysta bönorna och koka under omrörning minst sju minuter eller längre enligt bönförpackningen tills bönorna är genomvarma och mjuka. Låt vätskan nästan koka bort; ingen bönvätska hälls bort.",
+        "Vänd tillbaka tofun och stek tills pastan täcker bitarna utan någon lös sås i botten. Servera genast med ris. Skrapa ur och servera all kryddpasta och stekolja samt eventuell gurkdressing."
+      ],
+      "name": "Pad prik king med tofu och gröna bönor – enkel – med infusion av torkade limeblad",
+      "preparation": {
+        "family": "pad prik king",
+        "input_forms": {
+          "haricots verts": "as_sold",
+          "rapsolja": "as_sold",
+          "ris": "dry",
+          "röd currypasta": "as_sold",
+          "salt": "as_sold",
+          "sojasås": "as_sold",
+          "strösocker": "dry",
+          "tofu": "as_sold",
+          "torkade makrutlimeblad": "dry"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "2ff6c86c395c7c6ad518cbdab55887988b28087924b416db373531c5a97a0ab0",
+        "version": "smako-authored-losses-v3"
+      },
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 50,
+        "base_id": "smako-thai-pad-prik-king-tofu",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "tofu|as_sold",
+                "name": "Fast naturell tofu, vägd före pressning",
+                "note": "",
+                "quantity": 700.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "haricots verts|as_sold",
+                "name": "haricots verts",
+                "note": "",
+                "quantity": 450.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "röd currypasta|as_sold",
+                "name": "röd currypasta",
+                "note": "",
+                "quantity": 45.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "torkade makrutlimeblad|dry",
+                "name": "Torkade makrutlimeblad, vägs före infusion",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "rapsolja",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "sojasås|as_sold",
+                "name": "sojasås",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "strösocker",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              }
+            ],
+            "id": "wok",
+            "name": "Torr currywok"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "gurka|raw_edible",
+                "name": "gurka",
+                "note": "",
+                "quantity": 350.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "limejuice|as_sold",
+                "name": "limejuice",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "gurka",
+            "name": "Gurka med lime"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ris|dry",
+                "name": "ris",
+                "note": "",
+                "quantity": 280.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              }
+            ],
+            "id": "ris",
+            "name": "Kokt ris"
+          }
+        ],
+        "content_sha256": "e202c6f148306f97fcd48f0e1e2196333fb1dbe9395fcb1833eca104714213ac",
+        "content_source": {
+          "active_minutes": 50,
+          "method_note": "Ingredienslistan anger hela insatsen, även den del som senare hälls eller silas bort. Förlusten är inte uppmätt. Näring och färdig portionsvikt är okända; receptet kan inte styrka valda närings- eller viktgränser. Inköp och personliga kostkrav kontrolleras för samtliga insatser.",
+          "pack_id": "reviewed-expansion-round2-stage40",
+          "priority": 1,
+          "proposal_id": "smako-thai-pad-prik-king-tofu",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "c6c14a65bb12930c18e56e0f0b83cd0ed9bc1d464ea6bdf1c61f3f4228ef690b",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "thai"
+        ],
+        "equipment": [
+          "stekpanna",
+          "kastrull",
+          "finmaskig sil",
+          "liten kastrull med lock"
+        ],
+        "estimated_minutes": 88,
+        "family": "pad prik king",
+        "fish": false,
+        "flavor_profile": [
+          "röd curry",
+          "torkade makrutlimeblad",
+          "soja"
+        ],
+        "ingredient_count": 10,
+        "method": "pan",
+        "primary_ingredient": "tofu",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Granskad torrbladsvariant: 1 g torkade makrutlimeblad ersätter 4 g färska blad. Ingen färsk-torr-faktor eller lika arom påstås. Bladen sjuds separat och silas bort; all silad vätska kokas in i currypastan, men extraktion är okänd. Tofun pressas med okänd vätskeförlust. Alla stekfetter, bönornas kokvätska och eventuell gurkdressing används. Ingen kokosmjölk. Inte provlagad. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "ris",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 3,
+            "id": "s1",
+            "ingredient_keys": [
+              "torkade makrutlimeblad|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "100 ml",
+                100.0
+              ]
+            ],
+            "text": "Väg de torkade limebladen och lägg i en liten kastrull med 100 ml vatten. Koka upp och sänk värmen."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 15,
+            "id": "s2",
+            "ingredient_keys": [
+              "torkade makrutlimeblad|dry"
+            ],
+            "parallel_group": null,
+            "text": "Sjud limebladen under lock på låg värme i 15 minuter."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 3,
+            "id": "s3",
+            "ingredient_keys": [
+              "torkade makrutlimeblad|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "100 ml",
+                100.0
+              ]
+            ],
+            "text": "Sila infusionen genom en finmaskig sil. Ta bort alla blad och hårda fragment. Behåll hela den silade vätskan och fyll på med vatten till totalt 100 ml vatten."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 3,
+            "id": "s4",
+            "ingredient_keys": [
+              "ris|dry",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "560 ml",
+                560.0
+              ]
+            ],
+            "text": "Lägg det i en kastrull med risets salt och 560 ml vatten; koka upp och sänk till låg värme."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 18,
+            "id": "s5",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Sjud riset under lock cirka 18 minuter tills kornen är mjuka och vattnet absorberats. Följ längre koktid på förpackningen vid behov."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 1,
+            "id": "s6",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Kontrollera att riset är mjukt och stäng av värmen."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 5,
+            "id": "s7",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Låt riset vila fem minuter under lock."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 9,
+            "id": "s8",
+            "ingredient_keys": [
+              "haricots verts|as_sold",
+              "tofu|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Väg tofun före pressning, pressa den lätt och torka ytan; skär i jämna bitar. Väg frysta gröna bönor direkt utan upptining."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 3,
+            "id": "s9",
+            "ingredient_keys": [
+              "gurka|raw_edible",
+              "limejuice|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Skiva gurkan och vänd med limejuice. Ställ åt sidan som frisk kontrast till den koncentrerade curryn."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 12,
+            "id": "s10",
+            "ingredient_keys": [
+              "rapsolja|as_sold",
+              "tofu|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Värm hälften av oljan i en vid panna och stek tofun i omgångar tills ytan är gyllene. Lyft ur."
+          },
+          {
+            "depends_on": [
+              "s10"
+            ],
+            "duration_minutes": 10,
+            "id": "s11",
+            "ingredient_keys": [
+              "haricots verts|as_sold",
+              "rapsolja|as_sold",
+              "röd currypasta|as_sold",
+              "sojasås|as_sold",
+              "strösocker|dry",
+              "torkade makrutlimeblad|dry"
+            ],
+            "parallel_group": null,
+            "text": "Sänk värmen. Fräs currypastan med återstående olja kort och tillsätt soja, socker och hela den silade limebladsinfusionen. Rör tills sockret lösts. Vänd ner de frysta bönorna och koka under omrörning minst sju minuter eller längre enligt bönförpackningen tills bönorna är genomvarma och mjuka. Låt vätskan nästan koka bort; ingen bönvätska hälls bort."
+          },
+          {
+            "depends_on": [
+              "s11"
+            ],
+            "duration_minutes": 6,
+            "id": "s12",
+            "ingredient_keys": [
+              "gurka|raw_edible",
+              "limejuice|as_sold",
+              "ris|dry",
+              "röd currypasta|as_sold",
+              "tofu|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Vänd tillbaka tofun och stek tills pastan täcker bitarna utan någon lös sås i botten. Servera genast med ris och limegurka. Skrapa ur och servera all kryddpasta och stekolja samt eventuell gurkdressing."
+          }
+        ],
+        "total_minutes": 88,
+        "unmeasured_processes": [
+          {
+            "description": "Torra blad och fragment silas bort efter infusion. Överföring till vattnet och kvarvarande ämnesmängd är inte uppmätta.",
+            "ingredient_keys": [
+              "torkade makrutlimeblad|dry"
+            ],
+            "operation": "remove_after_infusion",
+            "step_id": "s3"
+          },
+          {
+            "description": "Tofun vägs före lätt pressning och avtorkning. Förlorad vätskemassa är inte uppmätt.",
+            "ingredient_keys": [
+              "tofu|as_sold"
+            ],
+            "operation": "drain_before_cooking",
+            "step_id": "s8"
+          }
+        ],
+        "variant_id": "standard",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 38
+      },
+      "ingredients": [
+        {
+          "canonical_name": "tofu",
+          "component": "wok",
+          "form": "as_sold",
+          "name": "tofu",
+          "product_requirements": [
+            "firm",
+            "plain"
+          ],
+          "quantity": 700.0,
+          "quantity_max": 700.0,
+          "quantity_min": 700.0,
+          "quantity_step": 700.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "haricots verts",
+          "component": "wok",
+          "form": "as_sold",
+          "name": "haricots verts",
+          "product_requirements": [
+            "frozen",
+            "plain"
+          ],
+          "quantity": 450.0,
+          "quantity_max": 450.0,
+          "quantity_min": 450.0,
+          "quantity_step": 450.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "röd currypasta",
+          "component": "wok",
+          "form": "as_sold",
+          "name": "röd currypasta",
+          "product_requirements": [
+            "pack:intake_all_fdde79afdb70"
+          ],
+          "quantity": 45.0,
+          "quantity_max": 45.0,
+          "quantity_min": 45.0,
+          "quantity_step": 45.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "torkade makrutlimeblad",
+          "component": "wok",
+          "form": "dry",
+          "name": "torkade makrutlimeblad",
+          "product_requirements": [
+            "pack:intake_all_round2_a877829de5d0"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "wok",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 30.0,
+          "quantity_max": 30.0,
+          "quantity_min": 30.0,
+          "quantity_step": 30.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "sojasås",
+          "component": "wok",
+          "form": "as_sold",
+          "name": "sojasås",
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "strösocker",
+          "component": "wok",
+          "form": "dry",
+          "name": "strösocker",
+          "product_requirements": [
+            "pack:sugar"
+          ],
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gurka",
+          "component": "gurka",
+          "form": "raw_edible",
+          "name": "gurka",
+          "quantity": 350.0,
+          "quantity_max": 350.0,
+          "quantity_min": 350.0,
+          "quantity_step": 350.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "limejuice",
+          "component": "gurka",
+          "form": "as_sold",
+          "name": "limejuice",
+          "product_requirements": [
+            "pure_juice"
+          ],
+          "quantity": 30.0,
+          "quantity_max": 30.0,
+          "quantity_min": 30.0,
+          "quantity_step": 30.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "ris",
+          "component": "ris",
+          "form": "dry",
+          "name": "ris",
+          "product_requirements": [
+            "white_rice"
+          ],
+          "quantity": 280.0,
+          "quantity_max": 280.0,
+          "quantity_min": 280.0,
+          "quantity_step": 280.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "ris",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 2.0,
+          "quantity_max": 2.0,
+          "quantity_min": 2.0,
+          "quantity_step": 2.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Väg de torkade limebladen och lägg i en liten kastrull med 100 ml vatten. Koka upp och sänk värmen.",
+        "Sjud limebladen under lock på låg värme i 15 minuter.",
+        "Sila infusionen genom en finmaskig sil. Ta bort alla blad och hårda fragment. Behåll hela den silade vätskan och fyll på med vatten till totalt 100 ml vatten.",
+        "Lägg det i en kastrull med risets salt och 560 ml vatten; koka upp och sänk till låg värme.",
+        "Sjud riset under lock cirka 18 minuter tills kornen är mjuka och vattnet absorberats. Följ längre koktid på förpackningen vid behov.",
+        "Kontrollera att riset är mjukt och stäng av värmen.",
+        "Låt riset vila fem minuter under lock.",
+        "Väg tofun före pressning, pressa den lätt och torka ytan; skär i jämna bitar. Väg frysta gröna bönor direkt utan upptining.",
+        "Skiva gurkan och vänd med limejuice. Ställ åt sidan som frisk kontrast till den koncentrerade curryn.",
+        "Värm hälften av oljan i en vid panna och stek tofun i omgångar tills ytan är gyllene. Lyft ur.",
+        "Sänk värmen. Fräs currypastan med återstående olja kort och tillsätt soja, socker och hela den silade limebladsinfusionen. Rör tills sockret lösts. Vänd ner de frysta bönorna och koka under omrörning minst sju minuter eller längre enligt bönförpackningen tills bönorna är genomvarma och mjuka. Låt vätskan nästan koka bort; ingen bönvätska hälls bort.",
+        "Vänd tillbaka tofun och stek tills pastan täcker bitarna utan någon lös sås i botten. Servera genast med ris och limegurka. Skrapa ur och servera all kryddpasta och stekolja samt eventuell gurkdressing."
+      ],
+      "name": "Pad prik king med tofu och gröna bönor – standard – med infusion av torkade limeblad",
+      "preparation": {
+        "family": "pad prik king",
+        "input_forms": {
+          "gurka": "raw_edible",
+          "haricots verts": "as_sold",
+          "limejuice": "as_sold",
+          "rapsolja": "as_sold",
+          "ris": "dry",
+          "röd currypasta": "as_sold",
+          "salt": "as_sold",
+          "sojasås": "as_sold",
+          "strösocker": "dry",
+          "tofu": "as_sold",
+          "torkade makrutlimeblad": "dry"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "e202c6f148306f97fcd48f0e1e2196333fb1dbe9395fcb1833eca104714213ac",
+        "version": "smako-authored-losses-v3"
+      },
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 54,
+        "base_id": "smako-thai-pad-prik-king-tofu",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "tofu|as_sold",
+                "name": "Fast naturell tofu, vägd före pressning",
+                "note": "",
+                "quantity": 700.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "haricots verts|as_sold",
+                "name": "haricots verts",
+                "note": "",
+                "quantity": 450.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "röd currypasta|as_sold",
+                "name": "röd currypasta",
+                "note": "",
+                "quantity": 45.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "torkade makrutlimeblad|dry",
+                "name": "Torkade makrutlimeblad, vägs före infusion",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "rapsolja",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "sojasås|as_sold",
+                "name": "sojasås",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "strösocker",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              }
+            ],
+            "id": "wok",
+            "name": "Torr currywok"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "gurka|raw_edible",
+                "name": "gurka",
+                "note": "",
+                "quantity": 350.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "limejuice|as_sold",
+                "name": "limejuice",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "gurka",
+            "name": "Gurka med lime"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "cashewnötter|as_sold",
+                "name": "cashewnötter",
+                "note": "",
+                "quantity": 70.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "paprika|raw_edible",
+                "name": "paprika",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salladslök|raw_edible",
+                "name": "salladslök",
+                "note": "",
+                "quantity": 70.0,
+                "unit": "g"
+              }
+            ],
+            "id": "extra",
+            "name": "Rostade nötter och mjuk paprika"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ris|dry",
+                "name": "ris",
+                "note": "",
+                "quantity": 280.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              }
+            ],
+            "id": "ris",
+            "name": "Kokt ris"
+          }
+        ],
+        "content_sha256": "6675d2088182df34634ae2519be951232cc68558f5fd61db6c1bfb14f135dbac",
+        "content_source": {
+          "active_minutes": 54,
+          "method_note": "Ingredienslistan anger hela insatsen, även den del som senare hälls eller silas bort. Förlusten är inte uppmätt. Näring och färdig portionsvikt är okända; receptet kan inte styrka valda närings- eller viktgränser. Inköp och personliga kostkrav kontrolleras för samtliga insatser.",
+          "pack_id": "reviewed-expansion-round2-stage40",
+          "priority": 1,
+          "proposal_id": "smako-thai-pad-prik-king-tofu",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "c6c14a65bb12930c18e56e0f0b83cd0ed9bc1d464ea6bdf1c61f3f4228ef690b",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "thai"
+        ],
+        "equipment": [
+          "stekpanna",
+          "kastrull",
+          "finmaskig sil",
+          "liten kastrull med lock"
+        ],
+        "estimated_minutes": 92,
+        "family": "pad prik king",
+        "fish": false,
+        "flavor_profile": [
+          "röd curry",
+          "torkade makrutlimeblad",
+          "soja"
+        ],
+        "ingredient_count": 13,
+        "method": "pan",
+        "primary_ingredient": "tofu",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Granskad torrbladsvariant: 1 g torkade makrutlimeblad ersätter 4 g färska blad. Ingen färsk-torr-faktor eller lika arom påstås. Bladen sjuds separat och silas bort; all silad vätska kokas in i currypastan, men extraktion är okänd. Tofun pressas med okänd vätskeförlust. Alla stekfetter, bönornas kokvätska och eventuell gurkdressing används. Ingen kokosmjölk. Inte provlagad. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "ris",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 3,
+            "id": "s1",
+            "ingredient_keys": [
+              "torkade makrutlimeblad|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "100 ml",
+                100.0
+              ]
+            ],
+            "text": "Väg de torkade limebladen och lägg i en liten kastrull med 100 ml vatten. Koka upp och sänk värmen."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 15,
+            "id": "s2",
+            "ingredient_keys": [
+              "torkade makrutlimeblad|dry"
+            ],
+            "parallel_group": null,
+            "text": "Sjud limebladen under lock på låg värme i 15 minuter."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 3,
+            "id": "s3",
+            "ingredient_keys": [
+              "torkade makrutlimeblad|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "100 ml",
+                100.0
+              ]
+            ],
+            "text": "Sila infusionen genom en finmaskig sil. Ta bort alla blad och hårda fragment. Behåll hela den silade vätskan och fyll på med vatten till totalt 100 ml vatten."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 3,
+            "id": "s4",
+            "ingredient_keys": [
+              "ris|dry",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "560 ml",
+                560.0
+              ]
+            ],
+            "text": "Lägg det i en kastrull med risets salt och 560 ml vatten; koka upp och sänk till låg värme."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 18,
+            "id": "s5",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Sjud riset under lock cirka 18 minuter tills kornen är mjuka och vattnet absorberats. Följ längre koktid på förpackningen vid behov."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 1,
+            "id": "s6",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Kontrollera att riset är mjukt och stäng av värmen."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 5,
+            "id": "s7",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Låt riset vila fem minuter under lock."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 9,
+            "id": "s8",
+            "ingredient_keys": [
+              "haricots verts|as_sold",
+              "paprika|raw_edible",
+              "salladslök|raw_edible",
+              "tofu|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Väg tofun före pressning, pressa den lätt och torka ytan; skär i jämna bitar. Väg frysta gröna bönor direkt utan upptining. Kärna ur paprikan och ansa salladslöken, väg den ätliga mängden och strimla."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 3,
+            "id": "s9",
+            "ingredient_keys": [
+              "gurka|raw_edible",
+              "limejuice|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Skiva gurkan och vänd med limejuice. Ställ åt sidan som frisk kontrast till den koncentrerade curryn."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 4,
+            "id": "s10",
+            "ingredient_keys": [
+              "cashewnötter|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Rosta cashewnötter i torr panna tills ljust gyllene och lyft ur. Använd samma panna till wokningen."
+          },
+          {
+            "depends_on": [
+              "s10"
+            ],
+            "duration_minutes": 12,
+            "id": "s11",
+            "ingredient_keys": [
+              "rapsolja|as_sold",
+              "tofu|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Värm hälften av oljan i en vid panna och stek tofun i omgångar tills ytan är gyllene. Lyft ur."
+          },
+          {
+            "depends_on": [
+              "s11"
+            ],
+            "duration_minutes": 10,
+            "id": "s12",
+            "ingredient_keys": [
+              "haricots verts|as_sold",
+              "paprika|raw_edible",
+              "rapsolja|as_sold",
+              "röd currypasta|as_sold",
+              "sojasås|as_sold",
+              "strösocker|dry",
+              "torkade makrutlimeblad|dry"
+            ],
+            "parallel_group": null,
+            "text": "Sänk värmen. Fräs currypastan med återstående olja kort och tillsätt soja, socker och hela den silade limebladsinfusionen. Rör tills sockret lösts. Vänd ner de frysta bönorna och paprikan och koka under omrörning minst sju minuter eller längre enligt bönförpackningen tills bönorna är genomvarma och mjuka. Låt vätskan nästan koka bort; ingen bönvätska hälls bort."
+          },
+          {
+            "depends_on": [
+              "s12"
+            ],
+            "duration_minutes": 6,
+            "id": "s13",
+            "ingredient_keys": [
+              "cashewnötter|as_sold",
+              "gurka|raw_edible",
+              "limejuice|as_sold",
+              "ris|dry",
+              "röd currypasta|as_sold",
+              "salladslök|raw_edible",
+              "tofu|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Vänd tillbaka tofun och stek tills pastan täcker bitarna utan någon lös sås i botten; vänd ner salladslök och de rostade cashewnötterna sista minuten. Servera genast med ris och limegurka. Skrapa ur och servera all kryddpasta och stekolja samt eventuell gurkdressing."
+          }
+        ],
+        "total_minutes": 92,
+        "unmeasured_processes": [
+          {
+            "description": "Torra blad och fragment silas bort efter infusion. Överföring till vattnet och kvarvarande ämnesmängd är inte uppmätta.",
+            "ingredient_keys": [
+              "torkade makrutlimeblad|dry"
+            ],
+            "operation": "remove_after_infusion",
+            "step_id": "s3"
+          },
+          {
+            "description": "Tofun vägs före lätt pressning och avtorkning. Förlorad vätskemassa är inte uppmätt.",
+            "ingredient_keys": [
+              "tofu|as_sold"
+            ],
+            "operation": "drain_before_cooking",
+            "step_id": "s8"
+          }
+        ],
+        "variant_id": "extended",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 38
+      },
+      "ingredients": [
+        {
+          "canonical_name": "tofu",
+          "component": "wok",
+          "form": "as_sold",
+          "name": "tofu",
+          "product_requirements": [
+            "firm",
+            "plain"
+          ],
+          "quantity": 700.0,
+          "quantity_max": 700.0,
+          "quantity_min": 700.0,
+          "quantity_step": 700.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "haricots verts",
+          "component": "wok",
+          "form": "as_sold",
+          "name": "haricots verts",
+          "product_requirements": [
+            "frozen",
+            "plain"
+          ],
+          "quantity": 450.0,
+          "quantity_max": 450.0,
+          "quantity_min": 450.0,
+          "quantity_step": 450.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "röd currypasta",
+          "component": "wok",
+          "form": "as_sold",
+          "name": "röd currypasta",
+          "product_requirements": [
+            "pack:intake_all_fdde79afdb70"
+          ],
+          "quantity": 45.0,
+          "quantity_max": 45.0,
+          "quantity_min": 45.0,
+          "quantity_step": 45.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "torkade makrutlimeblad",
+          "component": "wok",
+          "form": "dry",
+          "name": "torkade makrutlimeblad",
+          "product_requirements": [
+            "pack:intake_all_round2_a877829de5d0"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "wok",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 30.0,
+          "quantity_max": 30.0,
+          "quantity_min": 30.0,
+          "quantity_step": 30.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "sojasås",
+          "component": "wok",
+          "form": "as_sold",
+          "name": "sojasås",
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "strösocker",
+          "component": "wok",
+          "form": "dry",
+          "name": "strösocker",
+          "product_requirements": [
+            "pack:sugar"
+          ],
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gurka",
+          "component": "gurka",
+          "form": "raw_edible",
+          "name": "gurka",
+          "quantity": 350.0,
+          "quantity_max": 350.0,
+          "quantity_min": 350.0,
+          "quantity_step": 350.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "limejuice",
+          "component": "gurka",
+          "form": "as_sold",
+          "name": "limejuice",
+          "product_requirements": [
+            "pure_juice"
+          ],
+          "quantity": 30.0,
+          "quantity_max": 30.0,
+          "quantity_min": 30.0,
+          "quantity_step": 30.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "cashewnötter",
+          "component": "extra",
+          "form": "as_sold",
+          "name": "cashewnötter",
+          "product_requirements": [
+            "pack:intake_all_048a3aee2a0e"
+          ],
+          "quantity": 70.0,
+          "quantity_max": 70.0,
+          "quantity_min": 70.0,
+          "quantity_step": 70.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "paprika",
+          "component": "extra",
+          "form": "raw_edible",
+          "name": "paprika",
+          "quantity": 300.0,
+          "quantity_max": 300.0,
+          "quantity_min": 300.0,
+          "quantity_step": 300.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salladslök",
+          "component": "extra",
+          "form": "raw_edible",
+          "name": "salladslök",
+          "product_requirements": [
+            "pack:intake_all_ed5c6da604b5"
+          ],
+          "quantity": 70.0,
+          "quantity_max": 70.0,
+          "quantity_min": 70.0,
+          "quantity_step": 70.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ris",
+          "component": "ris",
+          "form": "dry",
+          "name": "ris",
+          "product_requirements": [
+            "white_rice"
+          ],
+          "quantity": 280.0,
+          "quantity_max": 280.0,
+          "quantity_min": 280.0,
+          "quantity_step": 280.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "ris",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 2.0,
+          "quantity_max": 2.0,
+          "quantity_min": 2.0,
+          "quantity_step": 2.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Väg de torkade limebladen och lägg i en liten kastrull med 100 ml vatten. Koka upp och sänk värmen.",
+        "Sjud limebladen under lock på låg värme i 15 minuter.",
+        "Sila infusionen genom en finmaskig sil. Ta bort alla blad och hårda fragment. Behåll hela den silade vätskan och fyll på med vatten till totalt 100 ml vatten.",
+        "Lägg det i en kastrull med risets salt och 560 ml vatten; koka upp och sänk till låg värme.",
+        "Sjud riset under lock cirka 18 minuter tills kornen är mjuka och vattnet absorberats. Följ längre koktid på förpackningen vid behov.",
+        "Kontrollera att riset är mjukt och stäng av värmen.",
+        "Låt riset vila fem minuter under lock.",
+        "Väg tofun före pressning, pressa den lätt och torka ytan; skär i jämna bitar. Väg frysta gröna bönor direkt utan upptining. Kärna ur paprikan och ansa salladslöken, väg den ätliga mängden och strimla.",
+        "Skiva gurkan och vänd med limejuice. Ställ åt sidan som frisk kontrast till den koncentrerade curryn.",
+        "Rosta cashewnötter i torr panna tills ljust gyllene och lyft ur. Använd samma panna till wokningen.",
+        "Värm hälften av oljan i en vid panna och stek tofun i omgångar tills ytan är gyllene. Lyft ur.",
+        "Sänk värmen. Fräs currypastan med återstående olja kort och tillsätt soja, socker och hela den silade limebladsinfusionen. Rör tills sockret lösts. Vänd ner de frysta bönorna och paprikan och koka under omrörning minst sju minuter eller längre enligt bönförpackningen tills bönorna är genomvarma och mjuka. Låt vätskan nästan koka bort; ingen bönvätska hälls bort.",
+        "Vänd tillbaka tofun och stek tills pastan täcker bitarna utan någon lös sås i botten; vänd ner salladslök och de rostade cashewnötterna sista minuten. Servera genast med ris och limegurka. Skrapa ur och servera all kryddpasta och stekolja samt eventuell gurkdressing."
+      ],
+      "name": "Pad prik king med tofu och gröna bönor – utökad – med infusion av torkade limeblad",
+      "preparation": {
+        "family": "pad prik king",
+        "input_forms": {
+          "cashewnötter": "as_sold",
+          "gurka": "raw_edible",
+          "haricots verts": "as_sold",
+          "limejuice": "as_sold",
+          "paprika": "raw_edible",
+          "rapsolja": "as_sold",
+          "ris": "dry",
+          "röd currypasta": "as_sold",
+          "salladslök": "raw_edible",
+          "salt": "as_sold",
+          "sojasås": "as_sold",
+          "strösocker": "dry",
+          "tofu": "as_sold",
+          "torkade makrutlimeblad": "dry"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "6675d2088182df34634ae2519be951232cc68558f5fd61db6c1bfb14f135dbac",
+        "version": "smako-authored-losses-v3"
+      },
+      "servings": 4
+    }
+  ]
+}

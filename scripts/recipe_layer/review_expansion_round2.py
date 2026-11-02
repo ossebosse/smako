@@ -9,6 +9,22 @@ from app.services.personal_policy import ProductFacts
 
 TARGET = Path('backend/app/data/ingredients/expansion-round2-20261101.json')
 REVIEWS = {
+    'mjukt hamburgerbröd|as_sold|g': (
+        [('Hamburgerbröd Ljusa 8-pack', 'Pågen')],
+        'Pågen färdigbakade mjuka ljusa hamburgerbröd med sesam, 416 g per åttapack. Innehåller bland annat vete, havre, socker och sesam; inte indiskt ladi pav, osötat bröd eller allergenfritt. Ny synligt namngiven brödversion doserar uppvägd gramvikt; ingen styckvikt eller rå deg används i beräkningen.',
+        'https://www.pagen.se/produkter/korvbrod-hamburgerbrod/hamburgerbrod/'),
+    'cornflakes|as_sold|g': (
+        [('Cornflakes', 'Garant')],
+        'Garant naturella färdigrostade majsflingor, 500 g, för direkt konsumtion. Innehåller redan socker, salt och kornmalt; inte osötad ren majs, glutenfri produkt, rå makai poha eller risflingor. Ingen smakbeläggning eller choklad. Hela uppvägda produkten används i uttrycklig cornflakes-chivda. Tillverkarens aktuella procent/näring skrivs inte över butikskällans historiska deklaration.',
+        'https://www.garantskafferiet.se/vara-produkter/skafferi/flingor--musli/corn-flakes/'),
+    'torkade makrutlimeblad|dry|g': (
+        [('Lime Blad Torkade', 'Krua')],
+        'KRUA torkade makrutlimeblad, 25 g, artikel 101255053_ST. Importörens produkt T05164 beskriver kaffir lime leaves och 100 procent limeblad; leverantörsdeklarationen hos Mathem anger samma märke, vikt och limeblad. Inte färska blad, vanligt limeskal eller currypasta. Gram avser torra inköpta blad före infusion och borttagning. Receptet anger en egen torr dos och okänd överföring till vätskan; inga färsk-torr-faktorer, ätlig slutmassa eller näringsvärden antas.',
+        'https://achaulien.se/products/dried-lime-leaves-12-x-25g-krua'),
+    'färsk salsicciakorv|as_sold|g': (
+        [('Salsicciakorv Färsk Sverige', 'Garant')],
+        'Rå färsk salsicciakorv av fläsk från Garant, 350 g. Hela korven inklusive ätlig svintarm används; inte skinnfri färs, tillagad grillkorv eller grekisk loukaniko. Tillverkaren beskriver fänkål, vitlök och örter. Kräver genomstekning i uttrycklig receptversion; all steksky används. Ingen närings- eller allergengodkännande följer av denna identitetsgranskning.',
+        'https://production.garantskafferiet.se/vara-produkter/chark/korv/salsiccia/'),
     'benfri lammstek|as_sold|g': (
         [('Lammstek Benfri Sverige', 'Scan'), ('Lammstek Benfri Nya Zeeland', 'Farmers'),
          ('Lammstek Benfri Fryst Nya Zeeland', 'Affco')],
@@ -175,6 +191,9 @@ def digest(value):
 
 
 def main(args):
+    selected = getattr(args, 'only', None)
+    if selected and not set(selected) <= REVIEWS.keys():
+        raise ValueError('Unknown explicitly selected review')
     candidates = {}
     reference = None
     for path in args.inventory:
@@ -191,6 +210,8 @@ def main(args):
                 candidates[key] = candidate
     rows = []
     for key, (labels, definition, source_url) in REVIEWS.items():
+        if selected and key not in selected:
+            continue
         name, form, unit = key.split('|')
         gross_variable = key in {'hel kyckling|as_sold|g', 'oxsvans med ben|as_sold|g',
                                  'rimmat fläsklägg|as_sold|g', 'ungnötslever|as_sold|g',
@@ -264,8 +285,17 @@ def main(args):
                      'review_basis': 'Exact source/product/package bindings; culinary review only. ' + definition,
                      'evidence': [{'kind': 'reviewed_whole_label_and_form', 'source_url': source_url}],
                      'reviewed_links': links})
-        if gross_variable or key in {'ägg|as_sold|st', 'lagrad pecorino|as_sold|g', 'färsk chorizokorv|as_sold|g'}:
+        if gross_variable or key in {'ägg|as_sold|st', 'lagrad pecorino|as_sold|g', 'färsk chorizokorv|as_sold|g', 'torkade makrutlimeblad|dry|g'}:
             rows[-1]['gross_inedible_mass'] = True
+    if selected:
+        existing = json.loads(TARGET.read_bytes())
+        assert existing['universe_sha256'] == reference['files']['universe']['sha256']
+        assert existing['facts_sha256'] == reference['files']['facts']['sha256']
+        assert existing['source_scope'] == reference['source_scope']
+        replacement = {'|'.join(r[k] for k in ('name', 'form', 'unit')): r for r in rows}
+        old_keys = {'|'.join(r[k] for k in ('name', 'form', 'unit')) for r in existing['ingredients']}
+        rows = [replacement.get('|'.join(r[k] for k in ('name', 'form', 'unit')), r)
+                for r in existing['ingredients']] + [r for k, r in replacement.items() if k not in old_keys]
     TARGET.write_text(json.dumps({'schema_version': 'smako-authoring-vocabulary-v1',
         'reviewed_at': '2026-11-01', 'source_scope': reference['source_scope'],
         'universe_sha256': reference['files']['universe']['sha256'],
@@ -277,4 +307,5 @@ def main(args):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--inventory', type=Path, action='append', required=True)
+    parser.add_argument('--only', action='append', help='Review selected name|form|unit keys and preserve other rows; requires the same reference.')
     main(parser.parse_args())

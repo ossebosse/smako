@@ -1,0 +1,1322 @@
+{
+  "library_version": "smako-meal-pack-v1",
+  "recipes": [
+    {
+      "design": {
+        "active_minutes": 26,
+        "base_id": "smako-greek-spetsofai",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "färsk salsicciakorv|as_sold",
+                "name": "färsk salsicciakorv",
+                "note": "",
+                "quantity": 550.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "paprika|raw_edible",
+                "name": "paprika",
+                "note": "",
+                "quantity": 650.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "gul lök",
+                "note": "",
+                "quantity": 180.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "krossade tomater|as_sold",
+                "name": "krossade tomater",
+                "note": "",
+                "quantity": 500.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "olivolja|as_sold",
+                "name": "olivolja",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "oregano|dry",
+                "name": "oregano",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "svartpeppar",
+                "note": "",
+                "quantity": 0.6,
+                "unit": "g"
+              }
+            ],
+            "id": "panna",
+            "name": "Korv och paprika"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "bröd|as_sold",
+                "name": "bröd",
+                "note": "",
+                "quantity": 260.0,
+                "unit": "g"
+              }
+            ],
+            "id": "brod",
+            "name": "Bröd till såsen"
+          }
+        ],
+        "content_sha256": "bda6e8024919d352eae386fcf1b2437852c7ac224f914667f37c38bbb108acde",
+        "content_source": {
+          "active_minutes": 26,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "reviewed-expansion-round2-stage28",
+          "priority": 1,
+          "proposal_id": "smako-greek-spetsofai",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "852a99d15b5dbb3152edb3033d119c452c1ed32ab6f07510c580a8976cc65524",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "greek"
+        ],
+        "equipment": [
+          "djup stekpanna",
+          "termometer"
+        ],
+        "estimated_minutes": 44,
+        "family": "spetsofai",
+        "fish": false,
+        "flavor_profile": [
+          "paprika",
+          "tomat",
+          "oregano"
+        ],
+        "ingredient_count": 7,
+        "method": "pan",
+        "primary_ingredient": "färsk salsicciakorv",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Granskad salsicciaversion med fläsk, fänkål och örter, inte grekisk loukaniko. Korven är rå och behåller sin ätliga svintarm. All olja, steksky och sås används. Inte provlagad. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "bröd",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 9,
+            "id": "s1",
+            "ingredient_keys": [
+              "färsk salsicciakorv|as_sold",
+              "gul lök|raw_edible",
+              "paprika|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Väg den råa färska salsicciakorven med sitt ätliga korvskinn kvar. Skär korven i tjocka skivor. Kärna ur paprikan, väg den ätliga mängden och skär i breda strimlor; skiva gul lök. Håll rå korv och dess redskap åtskilda från serveringsmaten. Skalad lök och ansad aubergine vägs som rå ätlig mängd när de ingår. Färsk vitlök hackas; fryst hackad vitlök används direkt i den varma pannan."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 10,
+            "id": "s2",
+            "ingredient_keys": [
+              "färsk salsicciakorv|as_sold",
+              "gul lök|raw_edible",
+              "olivolja|as_sold",
+              "paprika|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Hetta upp pannans olivolja. Bryn korven runtom och lyft åt sidan. Stek paprika och lök tills de börjar mjukna och få färg. Behåll allt utsmält fett och köttsaft i pannan och återför saften från den undanlagda korven."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 3,
+            "id": "s3",
+            "ingredient_keys": [
+              "färsk salsicciakorv|as_sold",
+              "krossade tomater|as_sold",
+              "oregano|dry",
+              "salt|as_sold",
+              "svartpeppar|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "100 ml",
+                100.0
+              ]
+            ],
+            "text": "Lägg tillbaka korven, tillsätt krossade tomater, oregano, salt, svartpeppar och 100 ml vatten. Koka upp."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 20,
+            "id": "s4",
+            "ingredient_keys": [
+              "färsk salsicciakorv|as_sold",
+              "paprika|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud försiktigt under lock på glänt cirka 20 minuter."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 2,
+            "id": "s5",
+            "ingredient_keys": [
+              "färsk salsicciakorv|as_sold",
+              "paprika|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Rör om och kontrollera att paprikan är mjuk, såsen omsluter korven och korvens mitt håller minst 72 °C. Följ även förpackningens tillagning och fortsätt vid behov tills korven är genomlagad. Behåll hela såsen."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 2,
+            "id": "s6",
+            "ingredient_keys": [
+              "bröd|as_sold",
+              "färsk salsicciakorv|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Skär brödet och fördela korvpannan mellan portionerna. Ät brödet till såsen."
+          }
+        ],
+        "total_minutes": 44,
+        "variant_id": "simple",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 18
+      },
+      "ingredients": [
+        {
+          "canonical_name": "färsk salsicciakorv",
+          "component": "panna",
+          "form": "as_sold",
+          "name": "färsk salsicciakorv",
+          "product_requirements": [
+            "pack:intake_all_round2_0dc5b5e57958"
+          ],
+          "quantity": 550.0,
+          "quantity_max": 550.0,
+          "quantity_min": 550.0,
+          "quantity_step": 550.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "paprika",
+          "component": "panna",
+          "form": "raw_edible",
+          "name": "paprika",
+          "quantity": 650.0,
+          "quantity_max": 650.0,
+          "quantity_min": 650.0,
+          "quantity_step": 650.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "panna",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 180.0,
+          "quantity_max": 180.0,
+          "quantity_min": 180.0,
+          "quantity_step": 180.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "krossade tomater",
+          "component": "panna",
+          "form": "as_sold",
+          "name": "krossade tomater",
+          "quantity": 500.0,
+          "quantity_max": 500.0,
+          "quantity_min": 500.0,
+          "quantity_step": 500.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "olivolja",
+          "component": "panna",
+          "form": "as_sold",
+          "name": "olivolja",
+          "product_requirements": [
+            "pack:intake_all_expansion_86ac9b2c5ae6"
+          ],
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 25.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "oregano",
+          "component": "panna",
+          "form": "dry",
+          "name": "oregano",
+          "product_requirements": [
+            "dried_leaf"
+          ],
+          "quantity": 2.0,
+          "quantity_max": 2.0,
+          "quantity_min": 2.0,
+          "quantity_step": 2.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "panna",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 2.0,
+          "quantity_max": 2.0,
+          "quantity_min": 2.0,
+          "quantity_step": 2.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "panna",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 0.6,
+          "quantity_max": 0.6,
+          "quantity_min": 0.6,
+          "quantity_step": 0.6,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "bröd",
+          "component": "brod",
+          "form": "as_sold",
+          "name": "bröd",
+          "quantity": 260.0,
+          "quantity_max": 260.0,
+          "quantity_min": 260.0,
+          "quantity_step": 260.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Väg den råa färska salsicciakorven med sitt ätliga korvskinn kvar. Skär korven i tjocka skivor. Kärna ur paprikan, väg den ätliga mängden och skär i breda strimlor; skiva gul lök. Håll rå korv och dess redskap åtskilda från serveringsmaten. Skalad lök och ansad aubergine vägs som rå ätlig mängd när de ingår. Färsk vitlök hackas; fryst hackad vitlök används direkt i den varma pannan.",
+        "Hetta upp pannans olivolja. Bryn korven runtom och lyft åt sidan. Stek paprika och lök tills de börjar mjukna och få färg. Behåll allt utsmält fett och köttsaft i pannan och återför saften från den undanlagda korven.",
+        "Lägg tillbaka korven, tillsätt krossade tomater, oregano, salt, svartpeppar och 100 ml vatten. Koka upp.",
+        "Sjud försiktigt under lock på glänt cirka 20 minuter.",
+        "Rör om och kontrollera att paprikan är mjuk, såsen omsluter korven och korvens mitt håller minst 72 °C. Följ även förpackningens tillagning och fortsätt vid behov tills korven är genomlagad. Behåll hela såsen.",
+        "Skär brödet och fördela korvpannan mellan portionerna. Ät brödet till såsen."
+      ],
+      "name": "Spetsofai med färsk salsiccia – korv- och paprikagryta – enkel",
+      "preparation": {
+        "family": "spetsofai",
+        "input_forms": {
+          "bröd": "as_sold",
+          "färsk salsicciakorv": "as_sold",
+          "gul lök": "raw_edible",
+          "krossade tomater": "as_sold",
+          "olivolja": "as_sold",
+          "oregano": "dry",
+          "paprika": "raw_edible",
+          "salt": "as_sold",
+          "svartpeppar": "dry"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "bda6e8024919d352eae386fcf1b2437852c7ac224f914667f37c38bbb108acde",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 29,
+        "base_id": "smako-greek-spetsofai",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "färsk salsicciakorv|as_sold",
+                "name": "färsk salsicciakorv",
+                "note": "",
+                "quantity": 550.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "paprika|raw_edible",
+                "name": "paprika",
+                "note": "",
+                "quantity": 650.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "gul lök",
+                "note": "",
+                "quantity": 180.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "krossade tomater|as_sold",
+                "name": "krossade tomater",
+                "note": "",
+                "quantity": 500.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "olivolja|as_sold",
+                "name": "olivolja",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "oregano|dry",
+                "name": "oregano",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "svartpeppar",
+                "note": "",
+                "quantity": 0.6,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "aubergine|raw_edible",
+                "name": "aubergine",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "vitlök",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              }
+            ],
+            "id": "panna",
+            "name": "Korv och paprika"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "bröd|as_sold",
+                "name": "bröd",
+                "note": "",
+                "quantity": 260.0,
+                "unit": "g"
+              }
+            ],
+            "id": "brod",
+            "name": "Bröd till såsen"
+          }
+        ],
+        "content_sha256": "599ed40c44789260b82e89f0c23da1225413f851fc018aabe4299bf54f2602f7",
+        "content_source": {
+          "active_minutes": 29,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "reviewed-expansion-round2-stage28",
+          "priority": 1,
+          "proposal_id": "smako-greek-spetsofai",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "852a99d15b5dbb3152edb3033d119c452c1ed32ab6f07510c580a8976cc65524",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "greek"
+        ],
+        "equipment": [
+          "djup stekpanna",
+          "termometer"
+        ],
+        "estimated_minutes": 47,
+        "family": "spetsofai",
+        "fish": false,
+        "flavor_profile": [
+          "paprika",
+          "tomat",
+          "oregano"
+        ],
+        "ingredient_count": 9,
+        "method": "pan",
+        "primary_ingredient": "färsk salsicciakorv",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Granskad salsicciaversion med fläsk, fänkål och örter, inte grekisk loukaniko. Korven är rå och behåller sin ätliga svintarm. All olja, steksky och sås används. Inte provlagad. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "bröd",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 9,
+            "id": "s1",
+            "ingredient_keys": [
+              "aubergine|raw_edible",
+              "färsk salsicciakorv|as_sold",
+              "gul lök|raw_edible",
+              "paprika|raw_edible",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Väg den råa färska salsicciakorven med sitt ätliga korvskinn kvar. Skär korven i tjocka skivor. Kärna ur paprikan, väg den ätliga mängden och skär i breda strimlor; skiva gul lök. Tärna aubergine och hacka vitlök. Håll rå korv och dess redskap åtskilda från serveringsmaten. Skalad lök och ansad aubergine vägs som rå ätlig mängd när de ingår. Färsk vitlök hackas; fryst hackad vitlök används direkt i den varma pannan."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 13,
+            "id": "s2",
+            "ingredient_keys": [
+              "aubergine|raw_edible",
+              "färsk salsicciakorv|as_sold",
+              "gul lök|raw_edible",
+              "olivolja|as_sold",
+              "paprika|raw_edible",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Hetta upp pannans olivolja. Bryn korven runtom och lyft åt sidan. Stek paprika och lök samt aubergine tills de börjar mjukna och få färg; rör ner vitlök mot slutet. Behåll allt utsmält fett och köttsaft i pannan och återför saften från den undanlagda korven."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 3,
+            "id": "s3",
+            "ingredient_keys": [
+              "färsk salsicciakorv|as_sold",
+              "krossade tomater|as_sold",
+              "oregano|dry",
+              "salt|as_sold",
+              "svartpeppar|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "100 ml",
+                100.0
+              ]
+            ],
+            "text": "Lägg tillbaka korven, tillsätt krossade tomater, oregano, salt, svartpeppar och 100 ml vatten. Koka upp."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 20,
+            "id": "s4",
+            "ingredient_keys": [
+              "färsk salsicciakorv|as_sold",
+              "paprika|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud försiktigt under lock på glänt cirka 20 minuter."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 2,
+            "id": "s5",
+            "ingredient_keys": [
+              "färsk salsicciakorv|as_sold",
+              "paprika|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Rör om och kontrollera att paprikan är mjuk, såsen omsluter korven och korvens mitt håller minst 72 °C. Följ även förpackningens tillagning och fortsätt vid behov tills korven är genomlagad. Behåll hela såsen."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 2,
+            "id": "s6",
+            "ingredient_keys": [
+              "bröd|as_sold",
+              "färsk salsicciakorv|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Skär brödet och fördela korvpannan mellan portionerna. Ät brödet till såsen."
+          }
+        ],
+        "total_minutes": 47,
+        "variant_id": "standard",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 18
+      },
+      "ingredients": [
+        {
+          "canonical_name": "färsk salsicciakorv",
+          "component": "panna",
+          "form": "as_sold",
+          "name": "färsk salsicciakorv",
+          "product_requirements": [
+            "pack:intake_all_round2_0dc5b5e57958"
+          ],
+          "quantity": 550.0,
+          "quantity_max": 550.0,
+          "quantity_min": 550.0,
+          "quantity_step": 550.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "paprika",
+          "component": "panna",
+          "form": "raw_edible",
+          "name": "paprika",
+          "quantity": 650.0,
+          "quantity_max": 650.0,
+          "quantity_min": 650.0,
+          "quantity_step": 650.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "panna",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 180.0,
+          "quantity_max": 180.0,
+          "quantity_min": 180.0,
+          "quantity_step": 180.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "krossade tomater",
+          "component": "panna",
+          "form": "as_sold",
+          "name": "krossade tomater",
+          "quantity": 500.0,
+          "quantity_max": 500.0,
+          "quantity_min": 500.0,
+          "quantity_step": 500.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "olivolja",
+          "component": "panna",
+          "form": "as_sold",
+          "name": "olivolja",
+          "product_requirements": [
+            "pack:intake_all_expansion_86ac9b2c5ae6"
+          ],
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 25.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "oregano",
+          "component": "panna",
+          "form": "dry",
+          "name": "oregano",
+          "product_requirements": [
+            "dried_leaf"
+          ],
+          "quantity": 2.0,
+          "quantity_max": 2.0,
+          "quantity_min": 2.0,
+          "quantity_step": 2.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "panna",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 2.0,
+          "quantity_max": 2.0,
+          "quantity_min": 2.0,
+          "quantity_step": 2.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "panna",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 0.6,
+          "quantity_max": 0.6,
+          "quantity_min": 0.6,
+          "quantity_step": 0.6,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "aubergine",
+          "component": "panna",
+          "form": "raw_edible",
+          "name": "aubergine",
+          "quantity": 300.0,
+          "quantity_max": 300.0,
+          "quantity_min": 300.0,
+          "quantity_step": 300.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "panna",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "bröd",
+          "component": "brod",
+          "form": "as_sold",
+          "name": "bröd",
+          "quantity": 260.0,
+          "quantity_max": 260.0,
+          "quantity_min": 260.0,
+          "quantity_step": 260.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Väg den råa färska salsicciakorven med sitt ätliga korvskinn kvar. Skär korven i tjocka skivor. Kärna ur paprikan, väg den ätliga mängden och skär i breda strimlor; skiva gul lök. Tärna aubergine och hacka vitlök. Håll rå korv och dess redskap åtskilda från serveringsmaten. Skalad lök och ansad aubergine vägs som rå ätlig mängd när de ingår. Färsk vitlök hackas; fryst hackad vitlök används direkt i den varma pannan.",
+        "Hetta upp pannans olivolja. Bryn korven runtom och lyft åt sidan. Stek paprika och lök samt aubergine tills de börjar mjukna och få färg; rör ner vitlök mot slutet. Behåll allt utsmält fett och köttsaft i pannan och återför saften från den undanlagda korven.",
+        "Lägg tillbaka korven, tillsätt krossade tomater, oregano, salt, svartpeppar och 100 ml vatten. Koka upp.",
+        "Sjud försiktigt under lock på glänt cirka 20 minuter.",
+        "Rör om och kontrollera att paprikan är mjuk, såsen omsluter korven och korvens mitt håller minst 72 °C. Följ även förpackningens tillagning och fortsätt vid behov tills korven är genomlagad. Behåll hela såsen.",
+        "Skär brödet och fördela korvpannan mellan portionerna. Ät brödet till såsen."
+      ],
+      "name": "Spetsofai med färsk salsiccia – korv- och paprikagryta – standard",
+      "preparation": {
+        "family": "spetsofai",
+        "input_forms": {
+          "aubergine": "raw_edible",
+          "bröd": "as_sold",
+          "färsk salsicciakorv": "as_sold",
+          "gul lök": "raw_edible",
+          "krossade tomater": "as_sold",
+          "olivolja": "as_sold",
+          "oregano": "dry",
+          "paprika": "raw_edible",
+          "salt": "as_sold",
+          "svartpeppar": "dry",
+          "vitlök": "raw_edible"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "599ed40c44789260b82e89f0c23da1225413f851fc018aabe4299bf54f2602f7",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 33,
+        "base_id": "smako-greek-spetsofai",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "färsk salsicciakorv|as_sold",
+                "name": "färsk salsicciakorv",
+                "note": "",
+                "quantity": 550.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "paprika|raw_edible",
+                "name": "paprika",
+                "note": "",
+                "quantity": 650.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "gul lök",
+                "note": "",
+                "quantity": 180.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "krossade tomater|as_sold",
+                "name": "krossade tomater",
+                "note": "",
+                "quantity": 500.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "olivolja|as_sold",
+                "name": "olivolja",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "oregano|dry",
+                "name": "oregano",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "svartpeppar",
+                "note": "",
+                "quantity": 0.6,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "aubergine|raw_edible",
+                "name": "aubergine",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "vitlök",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              }
+            ],
+            "id": "panna",
+            "name": "Korv och paprika"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "bröd|as_sold",
+                "name": "bröd",
+                "note": "",
+                "quantity": 260.0,
+                "unit": "g"
+              }
+            ],
+            "id": "brod",
+            "name": "Bröd till såsen"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "fetaost|as_sold",
+                "name": "fetaost",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gurka|raw_edible",
+                "name": "gurka",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rödvinsvinäger|as_sold",
+                "name": "rödvinsvinäger",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "olivolja|as_sold",
+                "name": "olivolja",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "sval",
+            "name": "Sval feta- och gurksallad"
+          }
+        ],
+        "content_sha256": "6e98b84fdbd52bb95cddd9f996114919cd22e9f18d309b93b52b9f0e7b153026",
+        "content_source": {
+          "active_minutes": 33,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "reviewed-expansion-round2-stage28",
+          "priority": 1,
+          "proposal_id": "smako-greek-spetsofai",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "852a99d15b5dbb3152edb3033d119c452c1ed32ab6f07510c580a8976cc65524",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "greek"
+        ],
+        "equipment": [
+          "djup stekpanna",
+          "termometer"
+        ],
+        "estimated_minutes": 51,
+        "family": "spetsofai",
+        "fish": false,
+        "flavor_profile": [
+          "paprika",
+          "tomat",
+          "oregano"
+        ],
+        "ingredient_count": 12,
+        "method": "pan",
+        "primary_ingredient": "färsk salsicciakorv",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Granskad salsicciaversion med fläsk, fänkål och örter, inte grekisk loukaniko. Korven är rå och behåller sin ätliga svintarm. All olja, steksky och sås används. Inte provlagad. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "bröd",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 9,
+            "id": "s1",
+            "ingredient_keys": [
+              "aubergine|raw_edible",
+              "färsk salsicciakorv|as_sold",
+              "gul lök|raw_edible",
+              "paprika|raw_edible",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Väg den råa färska salsicciakorven med sitt ätliga korvskinn kvar. Skär korven i tjocka skivor. Kärna ur paprikan, väg den ätliga mängden och skär i breda strimlor; skiva gul lök. Tärna aubergine och hacka vitlök. Håll rå korv och dess redskap åtskilda från serveringsmaten. Skalad lök och ansad aubergine vägs som rå ätlig mängd när de ingår. Färsk vitlök hackas; fryst hackad vitlök används direkt i den varma pannan."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 13,
+            "id": "s2",
+            "ingredient_keys": [
+              "aubergine|raw_edible",
+              "färsk salsicciakorv|as_sold",
+              "gul lök|raw_edible",
+              "olivolja|as_sold",
+              "paprika|raw_edible",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Hetta upp pannans olivolja. Bryn korven runtom och lyft åt sidan. Stek paprika och lök samt aubergine tills de börjar mjukna och få färg; rör ner vitlök mot slutet. Behåll allt utsmält fett och köttsaft i pannan och återför saften från den undanlagda korven."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 3,
+            "id": "s3",
+            "ingredient_keys": [
+              "färsk salsicciakorv|as_sold",
+              "krossade tomater|as_sold",
+              "oregano|dry",
+              "salt|as_sold",
+              "svartpeppar|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "100 ml",
+                100.0
+              ]
+            ],
+            "text": "Lägg tillbaka korven, tillsätt krossade tomater, oregano, salt, svartpeppar och 100 ml vatten. Koka upp."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 20,
+            "id": "s4",
+            "ingredient_keys": [
+              "färsk salsicciakorv|as_sold",
+              "paprika|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud försiktigt under lock på glänt cirka 20 minuter."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 2,
+            "id": "s5",
+            "ingredient_keys": [
+              "färsk salsicciakorv|as_sold",
+              "paprika|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Rör om och kontrollera att paprikan är mjuk, såsen omsluter korven och korvens mitt håller minst 72 °C. Följ även förpackningens tillagning och fortsätt vid behov tills korven är genomlagad. Behåll hela såsen."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 4,
+            "id": "s6",
+            "ingredient_keys": [
+              "fetaost|as_sold",
+              "gurka|raw_edible",
+              "olivolja|as_sold",
+              "rödvinsvinäger|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Tärna gurka och fetaost och vänd med salladens olivolja och rödvinsvinäger."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 2,
+            "id": "s7",
+            "ingredient_keys": [
+              "bröd|as_sold",
+              "fetaost|as_sold",
+              "färsk salsicciakorv|as_sold",
+              "gurka|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Skär brödet och fördela korvpannan mellan portionerna. Ät brödet till såsen och servera gurk-/fetasalladen vid sidan."
+          }
+        ],
+        "total_minutes": 51,
+        "variant_id": "extended",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 18
+      },
+      "ingredients": [
+        {
+          "canonical_name": "färsk salsicciakorv",
+          "component": "panna",
+          "form": "as_sold",
+          "name": "färsk salsicciakorv",
+          "product_requirements": [
+            "pack:intake_all_round2_0dc5b5e57958"
+          ],
+          "quantity": 550.0,
+          "quantity_max": 550.0,
+          "quantity_min": 550.0,
+          "quantity_step": 550.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "paprika",
+          "component": "panna",
+          "form": "raw_edible",
+          "name": "paprika",
+          "quantity": 650.0,
+          "quantity_max": 650.0,
+          "quantity_min": 650.0,
+          "quantity_step": 650.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "panna",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 180.0,
+          "quantity_max": 180.0,
+          "quantity_min": 180.0,
+          "quantity_step": 180.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "krossade tomater",
+          "component": "panna",
+          "form": "as_sold",
+          "name": "krossade tomater",
+          "quantity": 500.0,
+          "quantity_max": 500.0,
+          "quantity_min": 500.0,
+          "quantity_step": 500.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "olivolja",
+          "component": "panna",
+          "form": "as_sold",
+          "name": "olivolja",
+          "product_requirements": [
+            "pack:intake_all_expansion_86ac9b2c5ae6"
+          ],
+          "quantity": 35.0,
+          "quantity_max": 35.0,
+          "quantity_min": 35.0,
+          "quantity_step": 35.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "oregano",
+          "component": "panna",
+          "form": "dry",
+          "name": "oregano",
+          "product_requirements": [
+            "dried_leaf"
+          ],
+          "quantity": 2.0,
+          "quantity_max": 2.0,
+          "quantity_min": 2.0,
+          "quantity_step": 2.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "panna",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 2.0,
+          "quantity_max": 2.0,
+          "quantity_min": 2.0,
+          "quantity_step": 2.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "panna",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 0.6,
+          "quantity_max": 0.6,
+          "quantity_min": 0.6,
+          "quantity_step": 0.6,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "aubergine",
+          "component": "panna",
+          "form": "raw_edible",
+          "name": "aubergine",
+          "quantity": 300.0,
+          "quantity_max": 300.0,
+          "quantity_min": 300.0,
+          "quantity_step": 300.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "panna",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "bröd",
+          "component": "brod",
+          "form": "as_sold",
+          "name": "bröd",
+          "quantity": 260.0,
+          "quantity_max": 260.0,
+          "quantity_min": 260.0,
+          "quantity_step": 260.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "fetaost",
+          "component": "sval",
+          "form": "as_sold",
+          "name": "fetaost",
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gurka",
+          "component": "sval",
+          "form": "raw_edible",
+          "name": "gurka",
+          "quantity": 300.0,
+          "quantity_max": 300.0,
+          "quantity_min": 300.0,
+          "quantity_step": 300.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rödvinsvinäger",
+          "component": "sval",
+          "form": "as_sold",
+          "name": "rödvinsvinäger",
+          "product_requirements": [
+            "pack:intake_all_d0351d1f36c1"
+          ],
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        }
+      ],
+      "instructions": [
+        "Väg den råa färska salsicciakorven med sitt ätliga korvskinn kvar. Skär korven i tjocka skivor. Kärna ur paprikan, väg den ätliga mängden och skär i breda strimlor; skiva gul lök. Tärna aubergine och hacka vitlök. Håll rå korv och dess redskap åtskilda från serveringsmaten. Skalad lök och ansad aubergine vägs som rå ätlig mängd när de ingår. Färsk vitlök hackas; fryst hackad vitlök används direkt i den varma pannan.",
+        "Hetta upp pannans olivolja. Bryn korven runtom och lyft åt sidan. Stek paprika och lök samt aubergine tills de börjar mjukna och få färg; rör ner vitlök mot slutet. Behåll allt utsmält fett och köttsaft i pannan och återför saften från den undanlagda korven.",
+        "Lägg tillbaka korven, tillsätt krossade tomater, oregano, salt, svartpeppar och 100 ml vatten. Koka upp.",
+        "Sjud försiktigt under lock på glänt cirka 20 minuter.",
+        "Rör om och kontrollera att paprikan är mjuk, såsen omsluter korven och korvens mitt håller minst 72 °C. Följ även förpackningens tillagning och fortsätt vid behov tills korven är genomlagad. Behåll hela såsen.",
+        "Tärna gurka och fetaost och vänd med salladens olivolja och rödvinsvinäger.",
+        "Skär brödet och fördela korvpannan mellan portionerna. Ät brödet till såsen och servera gurk-/fetasalladen vid sidan."
+      ],
+      "name": "Spetsofai med färsk salsiccia – korv- och paprikagryta – utökad",
+      "preparation": {
+        "family": "spetsofai",
+        "input_forms": {
+          "aubergine": "raw_edible",
+          "bröd": "as_sold",
+          "fetaost": "as_sold",
+          "färsk salsicciakorv": "as_sold",
+          "gul lök": "raw_edible",
+          "gurka": "raw_edible",
+          "krossade tomater": "as_sold",
+          "olivolja": "as_sold",
+          "oregano": "dry",
+          "paprika": "raw_edible",
+          "rödvinsvinäger": "as_sold",
+          "salt": "as_sold",
+          "svartpeppar": "dry",
+          "vitlök": "raw_edible"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "6e98b84fdbd52bb95cddd9f996114919cd22e9f18d309b93b52b9f0e7b153026",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 4
+    }
+  ]
+}
