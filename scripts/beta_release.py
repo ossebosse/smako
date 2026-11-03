@@ -67,6 +67,31 @@ def remote(host, code):
     )
 
 
+# Test-only inputs never reach the running app: the app-only flow patches
+# backend/app files onto the active image and does not reinstall packages.
+DEV_ONLY_FILES = {"requirements-dev.txt"}
+DEV_ONLY_PREFIXES = ("grocery_data/tests/",)
+# The Dockerfile uses this lock as a pip constraint for the runtime image. Pure
+# additions cannot change which runtime pins resolve (the runtime requirement
+# files stay behind the boundary); any removed or changed pin still stops.
+ADDITIVE_ONLY_FILES = {"requirements-dev.lock"}
+
+
+def dev_only_change(path, before, commit):
+    if path in DEV_ONLY_FILES or path.startswith(DEV_ONLY_PREFIXES):
+        return True
+    if path in ADDITIVE_ONLY_FILES:
+        old, new = blob(before, path), blob(commit, path)
+        if old is None or new is None:
+            return False
+        old_lines = [line for line in old.decode().splitlines() if line.strip()]
+        new_lines = [line for line in new.decode().splitlines() if line.strip()]
+        remaining = iter(new_lines)
+        # Every previous line must survive unchanged and in order.
+        return all(any(line == candidate for candidate in remaining) for line in old_lines)
+    return False
+
+
 def prepare(args):
     before = git("rev-parse", "--verify", args.from_commit + "^{commit}")
     commit = git("rev-parse", "--verify", args.commit + "^{commit}")
@@ -97,7 +122,8 @@ def prepare(args):
     # app-only flow; the active environment is preserved and checked at swap.
     boundary = [p for p in boundary_candidates
                 if not (p.startswith("backend/app/") and p.endswith(".py"))
-                and p != "deploy/.env.production.example"]
+                and p != "deploy/.env.production.example"
+                and not dev_only_change(p, before, commit)]
     if boundary:
         raise ValueError(
             "Dependencies/schema/compose changed: use a separately reviewed full release: "

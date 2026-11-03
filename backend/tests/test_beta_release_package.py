@@ -164,3 +164,57 @@ def test_documentation_only_commit_needs_no_deployment(release, monkeypatch):
 )
 def test_unsupported_paths(release, path):
     assert not release[0].valid_path(path)
+
+
+def _commit_extra(git, root, files):
+    for name, text in files.items():
+        path = root / name
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(text, encoding="utf8")
+    git("add", "-A")
+    git("commit", "-qm", "extra")
+    return git("rev-parse", "HEAD")
+
+
+def test_test_only_changes_do_not_block_app_release(release):
+    module, args, _source, git = release
+    root = module.ROOT
+    git("checkout", "-q", args.from_commit)
+    args.from_commit = _commit_extra(git, root, {
+        "requirements-dev.lock": "pytest==8.0.0\n",
+        "requirements-dev.txt": "pytest\n",
+        "grocery_data/tests/test_x.py": "def test_x():\n    pass\n",
+    })
+    (root / "backend/app/example.py").write_text("value = 2\n", encoding="utf8")
+    args.commit = _commit_extra(git, root, {
+        "requirements-dev.lock": "pytest==8.0.0\nexecnet==2.1.2\npytest-xdist==3.8.0\n",
+        "requirements-dev.txt": "pytest\npytest-xdist\n",
+        "grocery_data/tests/test_x.py": "import pytest\n\n@pytest.mark.slow\ndef test_x():\n    pass\n",
+    })
+    module.prepare(args)
+    review = json.loads((args.workdir / "review.json").read_text(encoding="utf8"))
+    assert review
+
+
+@pytest.mark.parametrize("lock", ["pytest==8.1.0\n", ""])
+def test_changed_or_removed_lock_pins_still_block(release, monkeypatch, lock):
+    module, args, _source, git = release
+    root = module.ROOT
+    git("checkout", "-q", args.from_commit)
+    args.from_commit = _commit_extra(git, root, {"requirements-dev.lock": "pytest==8.0.0\n"})
+    (root / "backend/app/example.py").write_text("value = 2\n", encoding="utf8")
+    args.commit = _commit_extra(git, root, {"requirements-dev.lock": lock})
+    monkeypatch.setattr(module, "remote", lambda *_: pytest.fail("must stop before SSH"))
+    with pytest.raises(ValueError, match="Dependencies/schema/compose"):
+        module.prepare(args)
+
+
+def test_grocery_runtime_change_still_blocks_next_to_tests(release, monkeypatch):
+    module, args, _source, git = release
+    args.commit = _commit_extra(git, module.ROOT, {
+        "grocery_data/tests/test_x.py": "x = 1\n",
+        "grocery_data/app/model.py": "x = 1\n",
+    })
+    monkeypatch.setattr(module, "remote", lambda *_: pytest.fail("must stop before SSH"))
+    with pytest.raises(ValueError, match="grocery_data/app/model.py"):
+        module.prepare(args)
