@@ -95,7 +95,7 @@
       const postal=document.getElementById("postal-code")?.value.replace(/\s/g,"");if(!/^\d{5}$/.test(postal||""))return;
       const epoch=++contextEpoch;contextStatus.textContent="Hämtar inköpsställen i ditt prisområde…";
       const positionQuery=contextPosition?`&latitude=${contextPosition.latitude}&longitude=${contextPosition.longitude}`:"";
-      try {const response=await fetch(`/api/price-contexts?postal_code=${encodeURIComponent(postal)}${positionQuery}`,{headers:{Accept:"application/json"},cache:"no-store"});const data=await response.json();if(epoch!==contextEpoch)return;if(!response.ok)throw new Error(typeof data.detail==="string"?data.detail:"Inköpsställena kunde inte hämtas. Dina val är kvar.");
+      try {const response=await fetch(`/api/price-contexts?postal_code=${encodeURIComponent(postal)}${positionQuery}`,{headers:{Accept:"application/json"},cache:"no-store"});const data=await readJson(response);if(epoch!==contextEpoch)return;if(!response.ok)throw new Error(typeof data.detail==="string"?data.detail:"Inköpsställena kunde inte hämtas. Dina val är kvar.");
         contextOptions.replaceChildren();const available=new Set();
         for(const row of data.contexts||[]){available.add(row.context_id);const option=input(`context-${row.context_id}`,"checkbox",row.context_id,{checked:selectedContexts.includes(row.context_id)});const distance=row.distance_km!=null?` · ${number(row.distance_km)} km${row.distance_basis==="pickup"?" till upphämtning":""}`:contextPosition?" · avstånd okänt":"";const label=field(`${row.display_name}${row.address?` · ${row.address}`:""}${row.price_scope_label?` · ${row.price_scope_label}`:row.price_semantics?` · ${row.price_semantics}`:""}${distance}`,option);label.className="check-label";contextOptions.append(label);}
         for(const id of selectedContexts.filter(id=>!available.has(id))){const option=input(`context-${id}`,"checkbox",id,{checked:true});contextOptions.append(field(`En butik du valt tidigare finns inte längre hos oss (${id}). Avmarkera den för att ändra ditt val.`,option));}
@@ -429,7 +429,7 @@
         // This local capability is never the authority for plan ownership.
         let feedbackSession=localStorage.getItem("grocery-anonymous-session-id");
         if(!feedbackSession){feedbackSession=crypto.randomUUID().replaceAll("-","");localStorage.setItem("grocery-anonymous-session-id",feedbackSession);}
-        const response=await fetch("/api/feedback",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({category:"suggestion",anonymous_session_id:feedbackSession,message:message.value.trim()||`Receptåterkoppling för ${recipe.name}`,page_context:location.pathname,plan_id:planId,recipe_feedback:ratings})});const data=await response.json();if(!response.ok)throw new Error(typeof data.detail==="string"?data.detail:"Återkopplingen kunde inte sparas.");status.textContent="Tack! Återkopplingen är sparad till den här receptversionen.";submit.hidden=true;
+        const response=await fetch("/api/feedback",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({category:"suggestion",anonymous_session_id:feedbackSession,message:message.value.trim()||`Receptåterkoppling för ${recipe.name}`,page_context:location.pathname,plan_id:planId,recipe_feedback:ratings})});const data=await readJson(response);if(!response.ok)throw new Error(typeof data.detail==="string"?data.detail:"Återkopplingen kunde inte sparas.");status.textContent="Tack! Återkopplingen är sparad till den här receptversionen.";submit.hidden=true;
       }catch(error){status.textContent=error.message;}finally{submit.disabled=false;}
     });dialog.showModal();taste.focus();
   }
@@ -552,6 +552,20 @@
   function reconnectError() {const e=new Error("Vi når inte servern just nu. Tryck på Fortsätt följa beräkningen. Ingen ny beräkning startas.");e.reconnect=true;return e;}
   // These are explicit pre-admission refusals, not uncertain transport failures.
   const planningBlocks={price_universe_unusable:"Priserna behöver uppdateras innan du kan göra en ny beräkning. Din sparade plan och inköpslista finns kvar.",price_universe_unavailable:"Priserna går inte att hämta just nu. Din sparade plan och inköpslista finns kvar."};
+  // Ordinary API reads: a proxy or server error page is HTML, not JSON. Never
+  // show the browser's parser or network message to the user.
+  const OFFLINE_MESSAGE="Vi får ingen kontakt med servern. Kontrollera uppkopplingen och försök igen.";
+  const UNEXPECTED_MESSAGE="Servern svarade på ett oväntat sätt. Försök igen om en stund.";
+  async function readJson(response) {
+    let text="";try{text=await response.text();}catch(error){throw userError(error);}
+    try{return text?JSON.parse(text):{};}
+    catch{if(!response.ok)return {};const id=response.headers.get("X-Request-ID");const error=new Error(`${UNEXPECTED_MESSAGE}${id?` Fel-ID: ${id}`:""}`);error.status=response.status;throw error;}
+  }
+  function userError(error) {
+    if(error?.name==="TypeError"&&!error.userFacing){const friendly=new Error(OFFLINE_MESSAGE);friendly.userFacing=true;return friendly;}
+    if(error instanceof SyntaxError){const friendly=new Error(UNEXPECTED_MESSAGE);friendly.userFacing=true;return friendly;}
+    return error;
+  }
   function schemaError(message) {const error=new Error(message);error.schema=true;return error;}
   async function readResponse(response,flow) {
     const type=response.headers.get("Content-Type")||"";
@@ -632,5 +646,5 @@
       }
     }finally{signal?.removeEventListener("abort",abort);if(reader===flow)reader=null;}
   }
-  window.SmakoRecipes=Object.freeze({controls,renderRecipe,recipeFeedback,searchNotice,financials,membershipSummary,productDetails,diagnostics,ingredientCount,nutritionNumber,nutritionInformation,mealDescription,cookingPresentation,cuisines,jobRequest,pendingJob,forgetJob,cancelJob,clearPrivateDrafts,storage});
+  window.SmakoRecipes=Object.freeze({readJson,userError,controls,renderRecipe,recipeFeedback,searchNotice,financials,membershipSummary,productDetails,diagnostics,ingredientCount,nutritionNumber,nutritionInformation,mealDescription,cookingPresentation,cuisines,jobRequest,pendingJob,forgetJob,cancelJob,clearPrivateDrafts,storage});
 })();

@@ -52,11 +52,11 @@
       let r;
       if(planning||url.startsWith("/api/plan-jobs/")||url.startsWith("/api/plan-job-requests/"))r=await window.SmakoRecipes.jobRequest({scope:"personal",url,payload,signal:controller.signal,onProgress:(text,data)=>{notify(text);progress?.update(text,data);},context:planning?{kind:url==="/api/plans"?"create":"change"}:null});
       else r=await fetch(url,{method:payload===undefined?"GET":method,headers:{"Content-Type":"application/json"},body:payload===undefined?undefined:JSON.stringify(payload),signal:controller.signal,cache:"no-store"});
-      const d=await r.json();
+      const d=await window.SmakoRecipes.readJson(r);
       r.smakoCheck?.();
-      if(!r.ok){const message=typeof d.detail==="string"?d.detail:Array.isArray(d.detail)?d.detail.map(e=>e.msg).join(" · "):"Begäran kunde inte genomföras.";const error=new Error(r.smakoPlanningBlock||`${d.code==="DATA_BLOCKED"?"Uppgifter saknas: ":""}${message}${r.headers.get("X-Request-ID")?` Fel-ID: ${r.headers.get("X-Request-ID")}`:""}`);error.status=r.status;error.code=d.code||r.headers.get("X-Error-Code");error.diagnostics=d.planning_diagnostics;throw error;}
+      if(!r.ok){const message=typeof d.detail==="string"?d.detail:Array.isArray(d.detail)?d.detail.map(e=>e.msg).join(" · "):r.status>=500?"Servern svarar inte just nu. Försök igen om en stund.":"Det gick inte att genomföra. Försök igen.";const error=new Error(r.smakoPlanningBlock||`${d.code==="DATA_BLOCKED"?"Uppgifter saknas: ":""}${message}${r.headers.get("X-Request-ID")?` Fel-ID: ${r.headers.get("X-Request-ID")}`:""}`);error.status=r.status;error.code=d.code||r.headers.get("X-Error-Code");error.diagnostics=d.planning_diagnostics;throw error;}
       return d;
-    } catch(e){if(e.lifecycle)throw e;if(e.name==="AbortError")throw new Error("Svarstiden överskreds. Ladda om för att återansluta till samma beräkning. Dina val och tidigare plan finns kvar.");throw e;} finally{clearTimeout(timer);}
+    } catch(e){if(e.lifecycle)throw e;if(e.name==="AbortError")throw new Error("Svarstiden överskreds. Ladda om för att återansluta till samma beräkning. Dina val och tidigare plan finns kvar.");throw window.SmakoRecipes.userError(e);} finally{clearTimeout(timer);}
   }
 
   function renderDiagnostics(d) {
@@ -320,7 +320,7 @@
     if(!text){++searchGeneration;searchAbort?.abort();shoppingGenerics=[];closeShoppingSuggestions();return;}
     const generation=++searchGeneration;searchAbort?.abort();const controller=new AbortController();searchAbort=controller;
     const parsedPromise=alternativeTarget?null:api("/api/personal/interpret-extra",{text}).catch(e=>({error:e.message}));
-    try{const response=await fetch(`/api/personal/shopping-suggestions?q=${encodeURIComponent($('shopping-query').value)}&postal_code=${encodeURIComponent($('postal-code').value.trim())}`,{signal:controller.signal,cache:"no-store"});const data=await response.json();if(generation!==searchGeneration)return;if(!response.ok)throw new Error(typeof data.detail==="string"?data.detail:"Sökningen kunde inte läsas.");
+    try{const response=await fetch(`/api/personal/shopping-suggestions?q=${encodeURIComponent($('shopping-query').value)}&postal_code=${encodeURIComponent($('postal-code').value.trim())}`,{signal:controller.signal,cache:"no-store"});const data=await window.SmakoRecipes.readJson(response);if(generation!==searchGeneration)return;if(!response.ok)throw new Error(typeof data.detail==="string"?data.detail:"Sökningen kunde inte läsas.");
       const out=$('shopping-suggestions');shoppingGenerics=data.generics;out.replaceChildren();out.hidden=false;$('shopping-query').setAttribute("aria-expanded","true");const generic=el("div"),specific=el("div");generic.id="shopping-generic-results";specific.id="shopping-specific-results";out.append(generic,specific);
       const parsed=parsedPromise?await parsedPromise:null;if(generation!==searchGeneration)return;
       if(!alternativeTarget){

@@ -48,7 +48,7 @@
       const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),20000);
       try{
         const response=await fetch(`/api/shopping-location?postal_code=${encodeURIComponent(postal)}`,{cache:"no-store",headers:{Accept:"application/json"},signal:controller.signal});
-        const data=await response.json();if(requestEpoch!==epoch)return;
+        const data=await window.SmakoRecipes.readJson(response);if(requestEpoch!==epoch)return;
         if(!response.ok)throw new Error(typeof data.detail==="string"?data.detail:"Vi kunde inte hitta platsen.");
         if(data.status!=="eligible"){status.textContent=messages[data.status]||"Platsen kunde inte kontrolleras.";return;}
         location=data;status.textContent=`${data.municipality_name} kommun · närmaste butik ungefär ${number(data.nearest_distance_km)} km bort. Visar butiker i ${data.area_name}.`;
@@ -60,7 +60,7 @@
         if(restored&&restored.postal_code===data.area_postal_code&&restored.allowed_store_ids?.length){mode.value="specific";selected=restored.allowed_store_ids.slice();restored=null;}
         if(mode.value==="municipality"&&!data.municipality_available)mode.value="radius";
         $('location-store-settings').hidden=false;updateSelection({automatic:mode.value!=="specific"});
-      }catch(error){if(requestEpoch===epoch)status.textContent=error.name==="AbortError"?"Det tog för lång tid att hitta platsen. Försök igen.":error.message;}
+      }catch(error){if(requestEpoch===epoch)status.textContent=error.name==="AbortError"?"Det tog för lång tid att hitta platsen. Försök igen.":window.SmakoRecipes.userError(error).message;}
       finally{clearTimeout(timer);}
     }
     $('check-postcode').addEventListener("click",()=>void lookup());

@@ -125,7 +125,7 @@
       view: selection, unit: unit || null, product_key: detailKey};
     try {
       const response = await fetch("/api/product-search", {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(payload), signal: controller.signal});
-      const data = await response.json();
+      const data = await window.SmakoRecipes.readJson(response);
       if (!response.ok) throw new Error(typeof data.detail === "string" ? data.detail : "Kontrollera söktext, streckkod och postnummer.");
       if (current !== sequence) return;
       showCoverage(data.chain_coverage || []);
@@ -134,7 +134,7 @@
       next = data.next_offset;
       more.hidden = next == null;
     } catch (error) {
-      if (error.name !== "AbortError" && current === sequence) status.textContent = error.message || "Sökningen kunde inte slutföras. Försök igen.";
+      if (error.name !== "AbortError" && current === sequence) status.textContent = window.SmakoRecipes.userError(error).message || "Sökningen kunde inte slutföras. Försök igen.";
     } finally {
       if (current === sequence) form.setAttribute("aria-busy", "false");
     }
