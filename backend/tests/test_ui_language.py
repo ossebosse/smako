@@ -43,7 +43,7 @@ BANNED = {
 }
 
 STRING = re.compile(r'"(?:[^"\\\n]|\\.)*"|\'(?:[^\'\\\n]|\\.)*\'|`(?:[^`\\]|\\.)*`')
-TAG = re.compile(r"<script.*?</script>|<style.*?</style>|<[^>]+>", re.S)
+TAG = re.compile(r"<script.*?</script>|<style.*?</style>|<[^>]+>", re.DOTALL)
 ATTR = re.compile(r'(?:placeholder|aria-label|title|alt)="([^"]*)"')
 
 
@@ -63,7 +63,7 @@ def test_consumer_copy_avoids_internal_vocabulary():
             if not re.search(r"[A-Za-zÅÄÖåäö]{3} [A-Za-zÅÄÖåäö]", line):
                 continue
             for pattern, instead in BANNED.items():
-                hit = re.search(pattern, line, re.I)
+                hit = re.search(pattern, line, re.IGNORECASE)
                 if hit:
                     found.append(f"{name}: '{hit.group(0)}' → skriv {instead}: {line.strip()[:120]}")
     assert not found, "Interna ord i användartext (se docs/UI-LANGUAGE.md):\n" + "\n".join(found)
