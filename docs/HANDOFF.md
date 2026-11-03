@@ -14,11 +14,12 @@
   som stoppar orden i texterna som `/personal` laddar (74 träffar på main, 0 nu).
 - `index.html`/`app.js` används inte och är orörda.
 
-Textbundna tester är uppdaterade. Kört: JS-syntax, node-testerna
-(`plan_transport` 10/10; `barcode-scanner/scanner.test.js` fallerar redan på
-main), Ruff/compileall på ändrade filer och språktestet. **Python-sviten och
-webbläsarproven är inte körda** eftersom molnmiljön saknade åtkomst till PyPI;
-kör riktade tester lokalt före merge. Ingen betaaktivering ingår.
+Textbundna tester är uppdaterade. Hela Python-sviten är körd: de enda
+fel som återstår finns redan på main (receptbibliotekets historik, ICA-reklamblad
+och PWA-cachen, 5 testfiler). Webbläsarproven för /personal och medlemskap är
+godkända i Chromium; WebKit fanns inte i molnmiljön. JS-syntax, node-testerna
+(`barcode-scanner/scanner.test.js` fallerar redan på main), Ruff/compileall och
+språktestet är godkända. Ingen betaaktivering ingår.
 
 Iakttaget, inte åtgärdat: när API:t svarar med HTML visas JavaScript-felet
 (”Unexpected token '<' …”) rått för användaren i `/personal`.

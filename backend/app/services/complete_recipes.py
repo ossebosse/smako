@@ -148,7 +148,7 @@ def validate_content_capacity(preferences, meal, profile, candidates):
         f"Biblioteket innehåller {count} distinkta grundrätter för {meal.servings} personer "
         f"med dina val av matkök, ingrediensantal, tid, anpassningar och kost; du har valt {meal.count} middagar. "
         + ", eller ".join(suggestions) + ". "
-        "Det är bara en första kontroll av recepten. Fler recept betyder inte säkert att det går att handla till en meny.",
+        "Det är bara en första kontroll av recepten. Fler recept betyder inte säkert att det går att handla till en meny. Dina krav har inte ändrats.",
         code="RECIPE_CHOICES_CONFLICT", stage="policy_taste")
 
 

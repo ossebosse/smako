@@ -107,7 +107,7 @@ def test_checkout_preserves_constraints_and_reports_unknown_without_zero_values(
     planner.meals = {'dinner': MealSettings(meal_type='dinner', count=1, servings=1, limits=PortionLimits(**limits))}
     slot = MealSlot(id='test-slot', day=1, meal_type='dinner', recipe=recipe)
     if limits:
-        with pytest.raises(PolicyConflict, match='inte uppmätt') as exc:
+        with pytest.raises(PolicyConflict, match='hur mycket som försvinner') as exc:
             planner._check_nutrition_uncached([slot], {}, [], [])
         assert exc.value.code == 'DATA_BLOCKED'
     else:

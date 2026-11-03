@@ -153,7 +153,7 @@ def _measured_preparation(choices, tmp_path, method, mint):
     page.goto(url.split("#")[0] + "#plan=" + saved.plan_id)
     page.locator('.personal-nav [data-open="shopping"]').click()
     if mint:
-        expect(page.locator('#shopping-content')).to_contain_text('begränsat studieunderlag')
+        expect(page.locator('#shopping-content')).to_contain_text('Mängden myntablad är en uppskattning')
         expect(page.locator('#shopping-content')).to_contain_text('alla stjälkar')
     page.get_by_role("button", name="Registrera vikter för mynta" if mint else "Registrera vikter för ägg").click()
     dialog = page.get_by_role("dialog")

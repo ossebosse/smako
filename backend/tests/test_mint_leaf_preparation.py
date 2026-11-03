@@ -168,7 +168,7 @@ def test_direct_and_other_method_or_plan_reservations_are_protected(tmp_path):
         'source': 'other', 'demand_key': 'other', 'kind': 'preparation_input', 'method': 'other'})
     with private.plans._connect() as conn:
         changed = write_state(conn, OWNER, changed, stock['revision'])
-    with pytest.raises(PersonalConflict, match='disponibelt'):
+    with pytest.raises(PersonalConflict, match='avsatt till något annat'):
         private.inventory_action(OWNER, saved, 'prepare', changed['revision'], operation_id='mint-protected', preparation=batch())
     assert private.read(OWNER) == changed
 

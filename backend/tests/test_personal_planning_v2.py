@@ -371,7 +371,7 @@ def test_nutrition_is_per_portion_and_rechecked_after_servings_change():
         run(p, req, facts=facts)
     req.personal.slots[0].recipe = recipe()
     req.personal.meals[0].limits.min_weight_g = 200
-    with pytest.raises(PolicyConflict, match="tillagningsutbyte"):
+    with pytest.raises(PolicyConflict, match="färdig portion väger"):
         run(p, req, facts=facts)
 
 
@@ -391,7 +391,7 @@ def test_organic_animals_includes_eggs_and_dairy_and_unknown_composites():
         req = request(
             extras=[ExtraNeed(query=n, quantity=1, unit=u, confirmed=True)], organic_animals=True
         )
-        with pytest.raises(PolicyConflict, match="animalier"):
+        with pytest.raises(PolicyConflict, match="märkt som ekologisk"):
             run(p, req, facts=facts)
 
 
@@ -556,7 +556,7 @@ def test_distribution_controls_candidate_selection_and_rejects_contradictions(mo
     )
     result = run(p, req)
     assert sorted(protein_category(r) for r in result.recipes) == ["chicken", "fish", "vegetarian"]
-    with pytest.raises(ValidationError, match="överstiger"):
+    with pytest.raises(ValidationError, match="fler rätter än"):
         MealSettings(count=2, distribution={"vegetarian": 2, "fish": 1})
     with pytest.raises(ValidationError, match="Vegetarisk"):
         MealSettings(diet="vegan", distribution={"fish": 1})
@@ -658,7 +658,7 @@ def test_conflicting_nutrition_never_passes(value):
             nutrition={"protein_g": value},
         )
     }
-    with pytest.raises(PolicyConflict, match="konfliktfyllda"):
+    with pytest.raises(PolicyConflict, match="motsäger varandra"):
         run(p, req, facts=facts)
 
 

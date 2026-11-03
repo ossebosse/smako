@@ -201,7 +201,7 @@ def check_product(product, profile, facts=None, *, organic_animals=False):
         if _contains(term, (product.name, product.canonical_name)) or (
             search_text(term) == "fisk" and getattr(product, "food_family", None) == "fish"
         ):
-            raise PolicyConflict(f"{product.name} strider mot ditt hårda val: {term}.")
+            raise PolicyConflict(f"{product.name} innehåller något du har valt bort: {term}.")
     if hard:
         if facts and facts.ingredients:
             for term in hard:

@@ -85,7 +85,7 @@ def test_distinct_content_shortage_precedes_product_search_and_suggests_actual_t
     assert stopped.value.code == "RECIPE_CHOICES_CONFLICT"
     assert "4 distinkta grundrätter" in str(stopped.value)
     assert "43 minuter" in str(stopped.value)
-    assert "garanterar inte" in str(stopped.value)
+    assert "betyder inte säkert" in str(stopped.value)
     request = PlanRequest(recipes=5, servings=4, recipe_preferences=prefs)
     planner = PersonalPlanner(request, Settings(complete_recipes_enabled=True), prepared(), state(), facts={}, now=NOW)
     def products_must_not_run(*args):

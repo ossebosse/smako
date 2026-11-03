@@ -58,7 +58,7 @@ def test_per_portion_protein_does_not_change_with_servings_or_require_final_weig
     assert result.portions == servings
     assert not req.personal.allow_nutrition_estimates
     req.personal.meals[0].limits.min_weight_g = 100
-    with pytest.raises(PolicyConflict, match="tillagningsutbyte"):
+    with pytest.raises(PolicyConflict, match="färdig portion väger"):
         run(p, req, facts=evidence)
 
 

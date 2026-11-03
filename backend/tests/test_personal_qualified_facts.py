@@ -240,7 +240,7 @@ def test_exact_pantry_and_explicit_extra_share_packages_but_all_nutrition_is_cou
     assert result.personal.checks["organic_evidence"]["food_cost"] == 20
     assert repr(inventory) == before
     inventory["items"][0]["product_key"] = None
-    with pytest.raises(PolicyConflict, match="exakta produkt"):
+    with pytest.raises(PolicyConflict, match="vi vet inte näringen"):
         run(p, req, inventory, facts={("coop", "mjölk"): f})
 
 
