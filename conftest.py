@@ -16,6 +16,20 @@ import os
 
 os.environ["PYTHON_DOTENV_DISABLED"] = "1"
 
+# --- Private default databases per pytest-xdist worker -------------------------
+# Importing grocery_data.app.main creates the default ./grocery_data.sqlite, and
+# the consumer app defaults to data/consumer_plans.sqlite3. Parallel workers
+# would race on the same files ("table stores already exists"). Give each
+# worker its own defaults; tests that need a specific database still set it.
+if os.environ.get("PYTEST_XDIST_WORKER"):
+    import tempfile as _tempfile
+    from pathlib import Path as _DbPath
+
+    _worker_dir = _DbPath(_tempfile.mkdtemp(prefix=f"smako-{os.environ['PYTEST_XDIST_WORKER']}-"))
+    os.environ.setdefault("GROCERY_DATABASE_URL",
+                          "sqlite+pysqlite:///" + (_worker_dir / "grocery_data.sqlite").as_posix())
+    os.environ.setdefault("PLAN_STORE_PATH", str(_worker_dir / "consumer_plans.sqlite3"))
+
 # --- Offline guard in pytest-xdist workers -------------------------------------
 # scripts/verify_offline.py blocks external network and old source roots in its
 # own process. Workers are separate processes, so install the same guard here.
