@@ -70,6 +70,7 @@ def planner(request, universe, facts, pantry):
 
 
 @pytest.mark.parametrize("budget_stop", [False, True])
+@pytest.mark.slow
 def test_content_expansion_retains_real_revalidated_checkout(monkeypatch, budget_stop):
     request, universe, facts, pantry = fixture()
     baseline = PersonalPlanner(request, Settings(complete_recipes_enabled=True), universe,
@@ -104,6 +105,7 @@ def test_content_expansion_retains_real_revalidated_checkout(monkeypatch, budget
 
 @pytest.mark.parametrize("expansion", ["exact_to_estimated", "one_to_two_stores"])
 @pytest.mark.parametrize("wide_result", ["more_expensive", "budget_stop"])
+@pytest.mark.slow
 def test_complete_cheapest_keeps_audited_narrow_incumbent_under_wider_request(monkeypatch, tmp_path, expansion, wide_result):
     from app.services.personal_store import PersonalStore
     from app.services.plan_store import PlanStore
@@ -190,6 +192,7 @@ def test_complete_cheapest_keeps_audited_narrow_incumbent_under_wider_request(mo
     assert reopened.plan.personal == retained.personal
 
 
+@pytest.mark.slow
 def test_complete_incumbents_do_not_cross_private_stock_or_changed_food_choices():
     request, universe, facts, first_pantry = fixture()
     request.purchase_planning_mode = "estimated"

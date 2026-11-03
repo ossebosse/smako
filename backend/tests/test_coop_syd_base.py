@@ -81,6 +81,7 @@ def physical(official):
 ])
 @pytest.mark.parametrize("has_campaign", [False, True])
 @pytest.mark.parametrize("native_product_id", [False, True])
+@pytest.mark.slow
 async def test_one_physical_checkout_ordinary_source_and_unchanged_campaign(code, city, expected, has_campaign, native_product_id):
     inv = inventory(code, city)
     targets = assigned_stores(inv)

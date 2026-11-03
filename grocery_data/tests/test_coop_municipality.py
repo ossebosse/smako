@@ -39,6 +39,7 @@ def inventory(code, name):
                            coop, xtra, evidence(code), sources)
 
 
+@pytest.mark.slow
 def test_real_lund_all_concepts_and_non_lund_localities():
     report = inventory('1281', 'Lund')
     inside = [r for r in report['stores'] if r['geographic_evidence']['status']=='inside']
@@ -50,6 +51,7 @@ def test_real_lund_all_concepts_and_non_lund_localities():
     assert {r['store']['source_fields']['concept'] for r in inside}=={'Coop','Stora Coop','X:-tra'}
 
 
+@pytest.mark.slow
 def test_same_code_second_municipality_no_manual_list():
     report = inventory('1280', 'Malmö')
     assert '3815' in report['selected_store_ids']  # Bulltofta, independently positioned

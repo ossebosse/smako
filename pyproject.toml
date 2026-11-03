@@ -5,6 +5,7 @@ asyncio_mode = "auto"
 addopts = "-q"
 markers = [
     "live: opt-in connector canaries that make small public network requests",
+    "slow: over ~4 s each; skip locally with -m \"not slow\", CI runs them (docs/TESTING.md)",
 ]
 
 [tool.ruff]

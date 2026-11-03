@@ -3,10 +3,13 @@ import json
 import sqlite3
 from datetime import UTC, datetime, timedelta
 
+import pytest
+
 from grocery_data.app.services import citygross_municipal_job as job
 from grocery_data.tests.test_citygross_municipality import inventory
 
 
+@pytest.mark.slow
 async def test_partial_success_preserves_full_lkg_retry_then_expires_and_recovers(tmp_path, monkeypatch):
     from grocery_data.scripts import collect_citygross_municipality as collector
 

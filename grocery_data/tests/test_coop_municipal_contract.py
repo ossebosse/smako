@@ -71,6 +71,7 @@ def test_actual_second_municipality_pdf_bound_to_store_not_shared_prices():
     assert not accepted.products and evidence["shared_blockers"]
 
 
+@pytest.mark.slow
 def test_unrecognized_pdf_layout_is_explicit_not_empty_success(tmp_path, monkeypatch):
     from grocery_data.scripts import collect_coop_municipality as pipeline
     from grocery_data.scripts import import_xtra_pdf_text as importer
@@ -103,6 +104,7 @@ def test_unrecognized_pdf_layout_is_explicit_not_empty_success(tmp_path, monkeyp
     assert result["editions"][0]["unclassified_ads"] is None
 
 
+@pytest.mark.slow
 def test_scope_drives_all_concepts_and_never_drops_unknown(municipal):
     approved = approved_municipal_stores(municipal, concepts=("Coop", "Stora Coop", "X:-tra"))
     selection = update_selection(municipal, now=NOW)

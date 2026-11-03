@@ -233,6 +233,7 @@ def test_default_balanced_response_prices_all_modes_from_one_provider_snapshot(
     assert selected_ids <= snapshot_ids
 
 
+@pytest.mark.slow
 def test_api_store_cap_relaxation_is_monotone_for_all_returned_modes(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
@@ -288,6 +289,7 @@ def test_request_selects_requested_diversity_plan(
     _assert_selected_projection(plan, mode)
 
 
+@pytest.mark.slow
 def test_explicit_legacy_schema_defaults_preserve_named_plan_results(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:

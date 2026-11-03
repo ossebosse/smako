@@ -105,6 +105,7 @@ def test_exact_ingredient_identity_counts_once_across_components():
 
 
 @pytest.mark.parametrize("kind", ["quantity", "instructions", "form", "identity", "time", "requirements"])
+@pytest.mark.slow
 def test_untrusted_self_signed_edit_cannot_borrow_approved_preparation(kind):
     recipe = prior_candidates(complete())[0]
     raw = recipe.model_dump(mode="json")

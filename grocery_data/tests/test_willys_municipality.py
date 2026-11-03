@@ -26,6 +26,7 @@ def inventory(code):
 
 
 @pytest.mark.parametrize("code,inside,online", [("1281", 3, 2), ("1280", 10, 4)])
+@pytest.mark.slow
 def test_same_saved_register_and_geometry_code_selects_both_municipalities(code, inside, online):
     result = inventory(code)
     assert sum(r["geographic_evidence"]["status"] == "inside" for r in result["stores"]) == inside
@@ -104,6 +105,7 @@ def municipal_artifact(tmp_path, monkeypatch, code):
 
 
 @pytest.mark.parametrize("code", ["1281", "1280"])
+@pytest.mark.slow
 def test_municipal_artifact_independently_recomputes_all_contexts(tmp_path, monkeypatch, code):
     path = municipal_artifact(tmp_path, monkeypatch, code)
     verified = m.verify_source_artifact(path)
@@ -113,6 +115,7 @@ def test_municipal_artifact_independently_recomputes_all_contexts(tmp_path, monk
         m.verify_source_artifact(path, now=RAW.documents[0].fetched_at + timedelta(hours=48))
 
 
+@pytest.mark.slow
 def test_wrong_municipality_and_context_are_rejected(tmp_path, monkeypatch):
     from grocery_data.tests.test_source_artifact import rewrite_manifest
     path = municipal_artifact(tmp_path, monkeypatch, "1281")
@@ -155,6 +158,7 @@ def test_connector_cannot_treat_missing_boundary_as_municipal_evidence():
 
 @pytest.mark.asyncio
 @pytest.mark.parametrize("code", ["1281", "1280"])
+@pytest.mark.slow
 async def test_import_needs_explicit_config_and_uses_normal_own_idempotently(tmp_path, monkeypatch, code):
     from grocery_data.app.services.raw_storage import FilesystemRawSnapshotStore
     from grocery_data.app.services.snapshot_manager import SnapshotManager
@@ -185,6 +189,7 @@ async def test_import_needs_explicit_config_and_uses_normal_own_idempotently(tmp
 
 
 @pytest.mark.asyncio
+@pytest.mark.slow
 async def test_scope_migration_requires_identical_raw_observations_not_just_same_dates(tmp_path, monkeypatch):
     from grocery_data.app.services.raw_storage import FilesystemRawSnapshotStore
     from grocery_data.app.services.snapshot_manager import SnapshotManager

@@ -83,6 +83,7 @@ def test_count_specific_instructions_and_pasta_water_follow_actual_portions():
     assert 'satser om 4 portioner' in hock.instructions[0]
 
 
+@pytest.mark.slow
 def test_whole_piece_batches_are_filtered_before_scaling_in_all_candidate_paths():
     limited = {identity(r) for r in current_recipes() if r.design.servings_multiple}
     assert len(limited) == 6

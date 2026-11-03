@@ -112,6 +112,7 @@ async def test_optional_unlimited_comparison_cannot_enumerate_33_context_power_s
     assert scenarios[-1].error
 
 
+@pytest.mark.slow
 def test_browser_error_classes_retain_choices_and_identify_actual_field():
     static = Path(__file__).resolve().parents[1] / 'app/static'
     case = {}

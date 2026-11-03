@@ -100,6 +100,7 @@ def test_each_issued_stage_matches_reviewed_source_changes_and_complete_basket_p
     assert len(accepted) == 252
 
 
+@pytest.mark.slow
 def test_every_received_identity_has_one_final_decision_and_old_imports_are_retained():
     queue = json.loads((REPORT / 'queue.json').read_bytes())
     summary = json.loads((REPORT / 'summary.json').read_bytes())

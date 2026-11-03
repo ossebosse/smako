@@ -31,6 +31,7 @@ def recipe():
                 if r.design.base_id == 'smako-greek-fish-plaki')
 
 
+@pytest.mark.slow
 def test_official_black_oiled_drained_reference_keeps_complete_source_and_unknown_brand_basis():
     entry = reference_data()['foods']['402']
     assert entry['food']['namn'] == 'Oliver svarta m. olja avrunna'

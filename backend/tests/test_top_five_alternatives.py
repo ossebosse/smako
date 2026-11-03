@@ -111,6 +111,7 @@ def test_tamarind_volume_never_acquires_a_gram_conversion():
     assert not links.ingredient_product('tamarindpasta', 'as_sold', row['requirements'], p, fact)
 
 
+@pytest.mark.slow
 def test_successors_preserve_all_originals_other_ingredients_safety_and_scaling():
     review, issued, active = recipes()
     assert len(active) == 2851 and len(review['corrected']) == 192
@@ -166,6 +167,7 @@ def test_rice_and_grain_methods_are_actual_cooking_changes():
             assert 'masa harina' not in text
 
 
+@pytest.mark.slow
 def test_all_original_coverage_identities_follow_the_reviewed_transition(monkeypatch):
     monkeypatch.syspath_prepend(str(Path(__file__).resolve().parents[2] / 'scripts/recipe_layer'))
     from coverage_reference import digest, file_sha, imported_recipes, reviewed_recipe_transition

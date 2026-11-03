@@ -355,6 +355,7 @@ async def test_optimized_llm_pass_is_disabled_without_openai_key(
 
 
 @pytest.mark.asyncio
+@pytest.mark.slow
 async def test_replacement_union_is_searched_identically_for_every_requested_mode(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:

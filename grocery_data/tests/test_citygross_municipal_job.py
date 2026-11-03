@@ -20,6 +20,7 @@ def env(tmp_path):
             "CITYGROSS_MUNICIPAL_INVENTORY": str(seed)}
 
 
+@pytest.mark.slow
 async def test_retained_reference_restart_failure_backoff_expiry_recovery(env, monkeypatch):
     from grocery_data.scripts import collect_citygross_municipality as collector
 

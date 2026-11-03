@@ -79,6 +79,7 @@ async def test_restart_no_due_failure_expiry_recovery_and_withdrawal(env, monkey
     assert job.read(path)["last_outcomes"]["3839"]["status"] == "confirmed_no_qualified_rows"
 
 
+@pytest.mark.slow
 async def test_xtra_failure_independent_toggle_and_source_integrity(env, monkeypatch):
     from grocery_data.scripts import collect_coop_municipality as pipeline
     from grocery_data.scripts import collect_coop_physical_offers as collector
@@ -106,6 +107,7 @@ async def test_xtra_failure_independent_toggle_and_source_integrity(env, monkeyp
     assert not job.configuration({"COOP_MUNICIPAL_OFFERS_ROOT": str(root)})[1]["enabled"]
 
 
+@pytest.mark.slow
 def test_fetch_is_not_publication_and_reload_must_match_built_manifest(env):
     root, config = job.configuration(env)
     path = job.location(root, config)

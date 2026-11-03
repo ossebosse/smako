@@ -1,10 +1,13 @@
 """Coop has no ICA campaign-only age exception; refresh before the hard stop."""
 from datetime import UTC, datetime, timedelta
 
+import pytest
+
 from grocery_data.app.services.coop_municipal_refresh import update_selection
 from grocery_data.tests.test_coop_municipality import inventory
 
 
+@pytest.mark.slow
 def test_campaign_cannot_schedule_coop_after_its_48h_price_stop():
     inv=inventory('1281','Lund');now=datetime(2026,9,22,9,tzinfo=UTC)
     observed=now-timedelta(hours=34)
@@ -23,6 +26,7 @@ def test_campaign_cannot_schedule_coop_after_its_48h_price_stop():
     assert row['price_hard_stop_at']==(observed+timedelta(hours=48)).isoformat()
 
 
+@pytest.mark.slow
 def test_nearer_xtra_day_campaign_still_precedes_age_deadline():
     inv=inventory('1281','Lund');now=datetime(2026,9,23,19,tzinfo=UTC)
     state=update_selection(inv,{'3658':{'status':'partial_text_candidate','observed_at':now.isoformat(),
