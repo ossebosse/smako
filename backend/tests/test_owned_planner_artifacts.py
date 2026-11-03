@@ -64,6 +64,7 @@ def test_owner_migration_transfers_artifacts_and_invalidates_old_worker(tmp_path
     assert OwnedPlannerArtifacts(store, "b" * 64).load("view", "context") == {"rows": [1]}
 
 
+@pytest.mark.slow
 def test_saved_delivery_identities_survive_total_artifact_loss_and_respect_privacy_epoch(tmp_path):
     from app.services.library_publications import slots_record
 
@@ -124,6 +125,7 @@ def test_budget_refuses_growth_without_deleting_certificates(tmp_path, monkeypat
     assert cache.load("certificate", "x") == {}
 
 
+@pytest.mark.slow
 def test_qualification_and_verified_menu_survive_new_planner_instances(tmp_path):
     from app.services.personal_planner import PersonalPlanner
 
@@ -155,6 +157,7 @@ def test_qualification_and_verified_menu_survive_new_planner_instances(tmp_path)
     assert cold.personal.slots == first.personal.slots
 
 
+@pytest.mark.slow
 def test_failed_prepared_checkout_returns_to_ordinary_search(tmp_path):
     from app.services.personal_planner import PersonalPlanner
     from app.services.personal_policy import PolicyConflict
@@ -218,6 +221,7 @@ def _expensive_prepared_delivery(tmp_path):
 
 @pytest.mark.parametrize("cache_path", ["prepared", "certificate"])
 @pytest.mark.parametrize("valid", [True, False])
+@pytest.mark.slow
 def test_new_owned_delivery_competes_on_both_cache_paths(tmp_path, cache_path, valid):
     from app.services.personal_policy import PolicyConflict
 
@@ -262,6 +266,7 @@ def test_new_owned_delivery_competes_on_both_cache_paths(tmp_path, cache_path, v
         assert rejected and report["publications"][-1]["audit_rejected"] > 0
 
 
+@pytest.mark.slow
 def test_other_owners_delivery_cannot_invalidate_or_enter_prepared_candidates(tmp_path):
     subject, cache, request, cheap, expensive = _expensive_prepared_delivery(tmp_path)
     OwnedPlannerArtifacts(cache.store, "b" * 64)
@@ -273,6 +278,7 @@ def test_other_owners_delivery_cannot_invalidate_or_enter_prepared_candidates(tm
 
 
 @pytest.mark.parametrize("legacy_outcome", ["cheaper", "invalid", "search_miss"])
+@pytest.mark.slow
 def test_full_library_legacy_candidate_competes_independently_once(tmp_path, legacy_outcome):
     from app.errors import IncompleteBasketError
     from app.services.personal_policy import PolicyConflict
@@ -399,6 +405,7 @@ def test_capacity_cache_requires_current_full_qualification_views(tmp_path):
     assert not fresh._reuse_capacity_proof()
 
 
+@pytest.mark.slow
 def test_new_facts_requalify_owned_old_menu_and_never_reuse_old_nutrition(tmp_path):
     from app.services.personal_planner import PersonalPlanner
     from app.services.personal_source_facts import FactsCollection

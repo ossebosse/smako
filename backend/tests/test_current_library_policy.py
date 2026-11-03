@@ -44,6 +44,7 @@ async def test_deadline_includes_save_and_escapes_valueerror_retries(monkeypatch
     assert await _with_current_deadline(SimpleNamespace(library_search_policy='legacy'),save_finishes_late)=='saved'
 
 
+@pytest.mark.slow
 def test_current_registered_value_does_not_require_historical_materialization(monkeypatch):
     recipe_library.reset_library_caches()
     current=recipe_library.current_recipes()[0]

@@ -26,6 +26,36 @@ utan webbläsarkrav i integration. Det exakta urvalet finns i workflow-filen.
 JUnit sparas i sju dagar och
 de 30 långsammaste testerna skrivs ut. Ersatta PR-körningar avbryts.
 
+## Snabbare körningar
+
+Hela sviten är cirka 6 800 tester. Nästan alla tar under en halv sekund; ett
+sextiotal tunga tester (≥ 4 s, fullbiblioteks-sökningar och kommunleverantörer)
+är markerade `@pytest.mark.slow` och står för större delen av tiden.
+
+| Läge | Kommando | Ungefärlig tid* |
+| --- | --- | --- |
+| Under arbete: berörda filer | `scripts\verify_offline.py backend/tests/test_x.py -m "not live" -q` | sekunder |
+| Före PR: allt utom tunga | `scripts\verify_offline.py backend/tests -n auto --dist loadfile -m "not live and not slow" -q` | några minuter |
+| Hela sviten (gör CI) | `scripts\verify_offline.py backend/tests grocery_data/tests -n auto --dist loadfile -m "not live" -q` | se nedan |
+
+\*Uppmätt 2026-11-03 i en molnmiljö med två kärnor, hela `backend/tests` +
+`grocery_data/tests`: 32 min seriellt före ändringarna, 16,5 min med `-n 2`
+och 10,4 min med `-n 2` plus GC-ändringen nedan. Samma tester fallerade i alla
+tre körningarna. Fler kärnor ger mer.
+
+- `-n auto` kör med `pytest-xdist` en process per kärna. `--dist loadfile` håller
+  varje testfil i samma process så att modulfixturer byggs en gång.
+- `verify_offline.py` installerar nät- och källspärren även i varje
+  xdist-process (via `conftest.py`) och slår ihop processernas
+  `<etikett>-access.json`.
+- `conftest.py` låter planerarens minnesåtervinning (`release_idle_memory`)
+  göra en snabb GC av unga objekt i stället för full GC. I en testprocess med
+  alla tidigare testers cacher tog full GC mer än halva tiden i
+  fullbibliotekstester. Minnestesterna använder riktig GC;
+  `SMAKO_TEST_FULL_GC=1` slår på den överallt.
+- CI kör allt, även `slow`, med `-n auto` i alla tre partitioner.
+- Ett nytt test som tar mer än cirka 4 s markeras `@pytest.mark.slow`.
+
 ## Lokal evidens (överhoppade tester)
 
 Några tester spelar upp sparade källfångster under `reports/`. Där spåras bara

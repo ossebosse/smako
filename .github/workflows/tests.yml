@@ -90,7 +90,7 @@ jobs:
             targets=(backend/tests)
             for path in "${planner_tests[@]}" "${integration_tests[@]}"; do targets+=("--ignore=$path"); done
           fi
-          python scripts/verify_offline.py "${targets[@]}" -m "not live" -q --no-header -rfEs --durations=30 --junitxml=.local/verification/backend-tests.xml
+          python scripts/verify_offline.py "${targets[@]}" -n auto --dist loadfile -m "not live" -q --no-header -rfEs --durations=30 --junitxml=.local/verification/backend-tests.xml
       - name: Preserve test timings
         if: always()
         uses: actions/upload-artifact@v4

@@ -604,6 +604,7 @@ async def test_citygross_full_online_staged_replay_failures_and_local_repair(
 
 
 @pytest.mark.asyncio
+@pytest.mark.slow
 async def test_citygross_manual_promotion_rechecks_production_10000_product_floor(
     tmp_path: Path,
 ) -> None:

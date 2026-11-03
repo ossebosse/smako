@@ -100,6 +100,7 @@ def test_window_defers_unstarted_store_and_partial_is_not_checkpointed(tmp_path)
 
 
 @pytest.mark.parametrize('code', ['1281', '1280'])
+@pytest.mark.slow
 def test_municipal_resume_revalidates_geometry_and_complete_artifact(tmp_path, monkeypatch, code):
     from grocery_data.app.services.source_artifact import write_source_artifact
     from grocery_data.tests.test_willys_municipality import municipal_artifact

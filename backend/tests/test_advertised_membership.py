@@ -42,6 +42,7 @@ def test_all_chains_member_offer_is_conditional_and_cache_isolated(program):
     assert search(p) == public
 
 
+@pytest.mark.slow
 def test_real_weight_basket_without_membership_selection_keeps_audit_and_terms():
     req = PlanRequest(recipes=0, diversity_mode="cheapest", purchase_planning_mode="estimated",
         membership_price_policy="all_advertised", personal=PersonalPlanning(extras=[

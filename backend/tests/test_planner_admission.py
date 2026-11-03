@@ -40,6 +40,7 @@ def test_queue_wait_has_separate_performance_span():
     asyncio.run(scenario())
 
 
+@pytest.mark.slow
 def test_distinct_cold_jobs_are_admitted_one_at_a_time() -> None:
     async def scenario() -> None:
         controller = PlannerAdmissionController(max_concurrent=1, max_queued=5)

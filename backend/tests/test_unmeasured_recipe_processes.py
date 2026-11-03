@@ -50,6 +50,7 @@ def recipe(monkeypatch):
     return result['recipes'][0]
 
 
+@pytest.mark.slow
 def test_new_contract_does_not_register_a_recipe_or_reinterpret_old_content():
     result = checked()
     r = result['recipes'][0]

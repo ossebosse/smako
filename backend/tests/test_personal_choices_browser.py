@@ -353,6 +353,7 @@ def test_draft_restores_sliders_and_consolidates_hard_requirements(choices):
     assert restored["personal"]["meals"][0]["limits"]["min_protein_g"] == 30.5
 
 
+@pytest.mark.slow
 def test_ingredient_interval_drives_candidates_and_survives_reload(choices):
     from app.services.recipe_library import ingredient_count, meal_candidates
 
@@ -1028,6 +1029,7 @@ def test_overview_layout_shows_every_step_as_a_card_and_creates_the_plan(choices
 
 
 @pytest.mark.parametrize("width", [390, 1280])
+@pytest.mark.slow
 def test_plan_progress_replaces_the_create_button_and_can_cancel(choices, width):
     page, url, captured = choices
     page.set_viewport_size({"width": width, "height": 844})

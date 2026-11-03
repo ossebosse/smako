@@ -139,7 +139,8 @@
   unless an exact disposable target has been verified first.
 - Use Python 3.12. After relevant changes, run focused tests, Ruff and
   compileall; reuse unchanged, hash-stable verification instead of needlessly
-  repeating expensive live collections.
+  repeating expensive live collections. Use `-m "not slow" -n auto --dist loadfile`
+  for wider local runs and leave the full suite to CI (docs/TESTING.md).
 
 - Permanent municipal acceptance: Coop, Stora Coop and X:-tra must use the same
   official municipality parameter through discovery, store-bound collection,

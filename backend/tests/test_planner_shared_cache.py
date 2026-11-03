@@ -40,6 +40,7 @@ def isolated(monkeypatch):
     SHARED_RESOLUTION.clear()
 
 
+@pytest.mark.slow
 def test_identical_request_reuses_and_equals_a_fresh_calculation(isolated, monkeypatch):
     request, universe, facts, pantry = fixture()
     monkeypatch.setenv("SMAKO_PLANNER_SHARED_RESOLUTION", "0")
@@ -52,6 +53,7 @@ def test_identical_request_reuses_and_equals_a_fresh_calculation(isolated, monke
     assert fresh == first == second
 
 
+@pytest.mark.slow
 def test_other_purchase_mode_or_stores_get_their_own_resolution_scope(isolated):
     request, universe, facts, pantry = fixture()
     outcome(request, universe, facts, pantry)

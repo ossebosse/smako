@@ -169,6 +169,7 @@ def test_gross_bone_shell_pod_and_cob_mass_cannot_supply_edible_nutrients():
         assert input_evidence(recipe, None, row["name"], "g", True, None) is None
 
 
+@pytest.mark.slow
 def test_entire_intake_is_imported_and_scales_without_changing_original_library():
     import hashlib
     import json

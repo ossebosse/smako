@@ -20,6 +20,7 @@ from app.services.recipe_library import (
 ROOT = Path(__file__).parents[2]
 
 
+@pytest.mark.slow
 def test_deterministic_import_preserves_every_amount_and_own_instruction():
     importer = runpy.run_path(str(ROOT / "scripts/recipe_layer/import_content_pack.py"))
     # The importer reproduces the issued expansion pack; later reviewed

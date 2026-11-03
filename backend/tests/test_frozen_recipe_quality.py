@@ -15,6 +15,7 @@ def recipe(base, variant="simple"):
     return next(r for r in current_recipes() if r.design.base_id == base and r.design.variant_id == variant)
 
 
+@pytest.mark.slow
 def test_cold_mango_topping_is_not_boiled_with_tapioca_and_has_real_thaw_time():
     r = recipe("smako-thai-snack-tapioca-pearl-pudding")
     assert tuple(map(int, r.design.version.split("."))) >= (1, 0, 2)

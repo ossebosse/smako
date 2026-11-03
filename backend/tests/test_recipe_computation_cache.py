@@ -25,6 +25,7 @@ def authored():
     return candidates(RecipePreferences(mode="complete"), 2)[0]
 
 
+@pytest.mark.slow
 def test_value_key_covers_the_whole_current_recipe_contract():
     # A future field must be deliberately included, never silently omitted.
     assert set(Recipe.model_fields) == {

@@ -130,6 +130,7 @@ def test_pinned_reference_keeps_publication_order_and_exact_values():
     assert len(pin["recipes"]) == 262
 
 
+@pytest.mark.slow
 def test_real_planner_reference_is_audited_and_policy_stays_opt_in():
     from dataclasses import replace
 
@@ -177,6 +178,7 @@ def test_synthetic_enrichment_search_miss_keeps_old_valid_menu_without_copying_i
     assert cost == Decimal("340.64") and all(s.recipe.name == "A" for s in chosen)
 
 
+@pytest.mark.slow
 def test_previous_menu_is_reaudited_even_when_ordinary_search_misses(monkeypatch):
     from app.errors import IncompleteBasketError
     from app.services.library_publications import slots_record

@@ -48,6 +48,7 @@ def inventory(store):
 
 
 @pytest.mark.parametrize("change", ["outside", "unknown", "xtra", "conflict", "duplicate"])
+@pytest.mark.slow
 def test_inventory_cannot_guess_scope_or_concept(change):
     store, _ = source("3839")
     inv = inventory(store)
@@ -64,6 +65,7 @@ def test_inventory_cannot_guess_scope_or_concept(change):
         approved_inventory(inv)
 
 
+@pytest.mark.slow
 async def test_missing_optional_database_keeps_base(tmp_path):
     store, _ = source("3839")
     base = Base([Store(store_id="baseline", name="Baseline", chain="willys", city="Lund")])
@@ -76,6 +78,7 @@ async def test_missing_optional_database_keeps_base(tmp_path):
 
 @pytest.mark.parametrize("duplicate_base", [False, True])
 @pytest.mark.parametrize("parser_version", [None, "coop-parser-v3", "coop-parser-v4", "coop-parser-v5", "coop-parser-v6", "coop-parser-v7", "coop-parser-v8"])
+@pytest.mark.slow
 async def test_actual_rows_locality_inventory_caps_and_wrong_store(
     tmp_path, monkeypatch, duplicate_base, parser_version
 ):
@@ -183,6 +186,7 @@ async def test_actual_rows_locality_inventory_caps_and_wrong_store(
 
 
 @pytest.mark.parametrize("failure", ["missing", "corrupt"])
+@pytest.mark.slow
 async def test_optional_setup_failure_preserves_actual_base_build(tmp_path, failure):
     from app.services.price_universe_runtime import PreparedPriceUniverseArtifact
     from app.services.production_price_universe_build import build_city_price_universe

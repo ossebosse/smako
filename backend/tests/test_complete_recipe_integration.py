@@ -63,6 +63,7 @@ def test_existing_personal_limits_are_not_lowered_or_opted_in():
     assert request.personal.meals[0].limits.min_protein_g == 40
 
 
+@pytest.mark.slow
 def test_distinct_content_shortage_precedes_product_search_and_suggests_actual_time(monkeypatch):
     # Regression of the issued 1.x pool. The expanded library can satisfy this
     # content count, which is not a promise of product/nutrition qualification.

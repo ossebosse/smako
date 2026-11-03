@@ -43,6 +43,7 @@ def test_official_register_drives_catalog_selection_independently_of_predefined_
 
 
 @pytest.mark.parametrize('code,city,postal', [('1281', 'Lund', '22350'), ('1280', 'Malmö', '21120')])
+@pytest.mark.slow
 async def test_municipal_transport_rechecks_official_inventory_and_opt_in(tmp_path, monkeypatch, code, city, postal):
     from grocery_data.app.connectors.hemkop import HemkopConnector
     from grocery_data.app.connectors.hemkop.client import HemkopSourcePolicyError

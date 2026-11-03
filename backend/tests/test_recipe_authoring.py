@@ -109,6 +109,7 @@ def test_author_registers_each_amount_once_with_decimals():
         [("100 ml", 100.0), ("125,5 ml", 125.5)]
 
 
+@pytest.mark.slow
 def test_issued_water_steps_scale_as_before():
     """Every issued water step keeps its exact text at all five serving counts."""
     from app.services.meal_library_content import manifest_entries

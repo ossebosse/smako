@@ -22,6 +22,7 @@ from backend.tests.recipe_language_history import after_language_id, assert_curr
 REPORT = Path('docs/reviews/recipe-unblock-round2-20261101')
 
 
+@pytest.mark.slow
 def test_successors_keep_food_inputs_and_original_bytes_and_have_complete_baskets():
     manifest = manifest_entries()
     issued = {identity(r): r for r in load_entries(manifest['current'] + manifest['history'])}
@@ -83,6 +84,7 @@ def test_count_specific_instructions_and_pasta_water_follow_actual_portions():
     assert 'satser om 4 portioner' in hock.instructions[0]
 
 
+@pytest.mark.slow
 def test_whole_piece_batches_are_filtered_before_scaling_in_all_candidate_paths():
     limited = {identity(r) for r in current_recipes() if r.design.servings_multiple}
     assert len(limited) == 6

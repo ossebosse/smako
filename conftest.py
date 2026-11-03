@@ -16,6 +16,34 @@ import os
 
 os.environ["PYTHON_DOTENV_DISABLED"] = "1"
 
+# --- Private default databases per pytest-xdist worker -------------------------
+# Importing grocery_data.app.main creates the default ./grocery_data.sqlite, and
+# the consumer app defaults to data/consumer_plans.sqlite3. Parallel workers
+# would race on the same files ("table stores already exists"). Give each
+# worker its own defaults; tests that need a specific database still set it.
+if os.environ.get("PYTEST_XDIST_WORKER"):
+    import tempfile as _tempfile
+    from pathlib import Path as _DbPath
+
+    _worker_dir = _DbPath(_tempfile.mkdtemp(prefix=f"smako-{os.environ['PYTEST_XDIST_WORKER']}-"))
+    os.environ.setdefault("GROCERY_DATABASE_URL",
+                          "sqlite+pysqlite:///" + (_worker_dir / "grocery_data.sqlite").as_posix())
+    os.environ.setdefault("PLAN_STORE_PATH", str(_worker_dir / "consumer_plans.sqlite3"))
+
+# --- Offline guard in pytest-xdist workers -------------------------------------
+# scripts/verify_offline.py blocks external network and old source roots in its
+# own process. Workers are separate processes, so install the same guard here.
+if os.environ.get("SMAKO_OFFLINE_GUARD_LABEL") and os.environ.get("PYTEST_XDIST_WORKER"):
+    import sys as _sys
+    from pathlib import Path as _GuardPath
+
+    _sys.path.insert(0, str(_GuardPath(__file__).resolve().parent / "scripts"))
+    import offline_guard as _offline_guard
+
+    _offline_guard.install(os.environ["SMAKO_OFFLINE_GUARD_ROOT"],
+                           os.environ["SMAKO_OFFLINE_GUARD_LABEL"],
+                           suffix="-" + os.environ["PYTEST_XDIST_WORKER"])
+
 
 # --- Local evidence -----------------------------------------------------------
 # Some tests replay retained source captures under reports/. Only *.py and *.md
@@ -89,3 +117,32 @@ def _empty_shared_planner_resolution():
     SHARED_RESOLUTION.clear()
     yield
     SHARED_RESOLUTION.clear()
+
+
+# --- Planner memory reclamation -----------------------------------------------
+# release_idle_memory() runs a full gc.collect(2) at every planner phase
+# boundary. In production that returns pages between requests; in a test
+# process that holds every earlier test's caches it is pure overhead (about
+# 60 % of a full-library planner test). Tests keep the young-generation
+# collection and the real counters. Memory tests use the real collector, and
+# SMAKO_TEST_FULL_GC=1 restores it everywhere.
+_REAL_GC_MODULES = ("test_planner_memory", "test_planner_admission")
+
+
+@_pytest.fixture(autouse=True)
+def _young_generation_planner_gc(request, monkeypatch):
+    module = getattr(request.module, "__name__", "")
+    if os.environ.get("SMAKO_TEST_FULL_GC") or module.endswith(_REAL_GC_MODULES):
+        yield
+        return
+    import gc as _gc
+    from types import SimpleNamespace as _Namespace
+
+    try:
+        from app.services import planner_memory as _planner_memory
+    except ImportError:  # grocery_data-only test runs
+        yield
+        return
+    monkeypatch.setattr(_planner_memory, "gc",
+                        _Namespace(collect=lambda generation=2: _gc.collect(0)))
+    yield
