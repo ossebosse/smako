@@ -95,6 +95,8 @@ def test_frozen_successors_scale_count_and_keep_originals_and_unknown_nutrition(
     from app.services.recipe_library import _scaled, current_recipes, validate_recipe_design
     from app.services.recipe_preparation import input_evidence
 
+    from backend.tests.recipe_language_history import after_language_id
+
     review = json.loads((ROOT.parents[3]/'docs/reviews/whole-corn-20261028/recipe-review.json').read_bytes())
     manifest = manifest_entries()
     history = {identity(r):r for r in load_entries([*manifest['current'], *manifest['history']], ROOT)}
@@ -102,7 +104,8 @@ def test_frozen_successors_scale_count_and_keep_originals_and_unknown_nutrition(
     assert len(review['corrected']) == 2
     for transition in review['corrected']:
         old = history[transition['previous_id']]
-        new = current[transition['runtime_id']]
+        # The 2026-11-02 language review issued wording-only successors.
+        new = current[after_language_id(transition['runtime_id'])]
         assert old.design.content_sha256 == transition['before_content_sha256']
         assert transition['previous_id'] not in current
         assert any('hel rå majskolv' in s.text for s in old.design.steps)

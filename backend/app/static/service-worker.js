@@ -2,14 +2,14 @@
 
 // Only the versioned, presentation-only shell is cached. Plan responses,
 // prices and every API request deliberately stay on the network.
-const SHELL_CACHE = "billigaste-veckomenyn-shell-v33";
+const SHELL_CACHE = "billigaste-veckomenyn-shell-v34";
 const SHELL_ASSETS = Object.freeze([
   "/static/styles.css",
   "/static/complete-recipes.css?v=complete-recipes-1",
   "/static/frontend-bootstrap.js?v=loading-hotfix-20260909",
-  "/static/complete-recipes.js?v=municipality-rollout-2",
+  "/static/complete-recipes.js?v=20261102-language",
   "/static/municipal-areas.js?v=1",
-  "/static/app.js?v=municipal-20261010",
+  "/static/app.js?v=20261102-language",
   "/static/product-search.js?v=comparability-20261010",
   "/static/styles.css?v=personal-v2-1",
   "/static/personal.css?v=generic-first-20261030",
@@ -17,12 +17,13 @@ const SHELL_ASSETS = Object.freeze([
   "/static/configurator.css?v=configurator-20261031",
   "/static/plan-progress.css?v=progress-20261031b",
   "/static/plan-view.css?v=planview-20261031b",
-  "/static/configurator.js?v=planview-20261031",
-  "/static/complete-recipes.js?v=planview-20261031",
-  "/static/shopping-location.js?v=location-20261011",
+  "/static/complete-recipes.js?v=20261103-errors",
+  "/static/shopping-location.js?v=20261103-errors",
   "/static/choice-controls.js?v=option3-1",
-  "/static/plan-progress.js?v=progress-20261031b",
-  "/static/personal.js?v=planview-20261031",
+  "/static/plan-progress.js?v=20261102-language",
+  "/static/personal.js?v=20261103-errors",
+  "/static/product-search.js?v=20261103-errors",
+  "/static/configurator.js?v=20261102-deslop",
   "/static/privacy.js",
   "/static/icons/app-icon.svg",
   "/static/icons/app-icon-maskable.svg",

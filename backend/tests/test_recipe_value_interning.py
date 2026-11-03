@@ -5,7 +5,12 @@ from unittest.mock import patch
 import pytest
 from app.models import PlanRequest
 from app.models.personal import MealSettings, PersonalPlanning, PortionLimits
-from app.models.recipe import RecipeDesign, RecipeIngredient, RecipeUnmeasuredProcess
+from app.models.recipe import (
+    RecipeBatchScaling,
+    RecipeDesign,
+    RecipeIngredient,
+    RecipeUnmeasuredProcess,
+)
 from app.models.recipe_preferences import RecipePreferences
 from app.services.ingredient_normalizer import canonicalize_ingredient_name
 from app.services.recipe_computation_cache import (
@@ -84,7 +89,9 @@ def test_every_frozen_design_field_changes_key_even_with_reused_content_sha(fiel
         "servings_multiple": 4,
         "unmeasured_processes": (RecipeUnmeasuredProcess(step_id=design.steps[0].id,
             ingredient_keys=(f'{recipe.ingredients[0].canonical_name}|{recipe.ingredients[0].form}',),
-            operation='drain_after_cooking', description='Reviewed test process loss.'),)}
+            operation='drain_after_cooking', description='Reviewed test process loss.'),),
+        "batch_scaling": RecipeBatchScaling(step_id=design.steps[0].id, duration_minutes=(
+            design.batch_scaling.duration_minutes + 1 if design.batch_scaling else 17))}
     assert set(updates) == set(RecipeDesign.model_fields)
     assert updates[field] != getattr(design, field)
     changed = recipe.model_copy(update={"design": design.model_copy(update={field: updates[field]})})

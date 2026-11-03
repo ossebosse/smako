@@ -9,6 +9,8 @@ from app.services.meal_library_content import ROOT, encoded, identity, validate_
 from app.services.recipe_authoring import library_vocabulary
 from app.services.recipe_library import current_recipes
 
+from backend.tests.recipe_language_history import after_language_id, assert_current_language_version
+
 REPORT = Path('docs/reviews/recipe-unblock-20261101')
 AUTHORED = ROOT / 'reviewed-expansion-20261101'
 SOURCE = ROOT / 'incoming/authoring-1000-20261101'
@@ -33,8 +35,9 @@ def test_all_admitted_variants_keep_original_quantities_and_reviewed_hashes():
         amounts = lambda r: [[(i['name'], i['quantity'], i['unit'], i['form'])
                               for i in c['ingredients']] for c in r['components']]
         assert amounts(author) == amounts(original)
-        assert active[record['runtime_id']].design.content_sha256 == record['content_sha256']
-        assert active[record['runtime_id']].design.provenance.cooking_test == 'not_cooked'
+        # Issued bytes are unchanged; a reviewed language successor may be active.
+        assert_current_language_version(record['runtime_id'], record['content_sha256'])
+        assert active[after_language_id(record['runtime_id'])].design.provenance.cooking_test == 'not_cooked'
 
 
 def test_reviewed_preparation_is_in_the_recipe_and_not_only_a_registry_tag():
