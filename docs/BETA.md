@@ -99,8 +99,16 @@ git status --short
 .venv/Scripts/python.exe -X utf8 scripts/smako_ops.py status
 
 # Använd den granskade Git-bas som motsvarar faktiskt aktiva filer enligt senaste journalen.
-.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit b7c8d0506e23 --commit main --workdir .local/beta-release
+.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit 78403f6154cd --commit main --workdir .local/beta-release
 ```
+
+`78403f6154cd` är `b7c8d0506e23` plus de exakta driftsatta adminfilerna
+(lösenordsinloggning, `/api/admin/stores`, `/admin`-sidan) som tidigare bara
+fanns i runtime; de är sedan 2026-11-03 sammanfogade i `main`. De äldre
+Coop-filerna i runtime (`price_universe_runtime.py`,
+`production_price_universe_build.py`, saknad `coop_syd_base.py`) är medvetet
+kvar på Git-versionen i basen och ändras inte av ett appflöde. Byt bas efter
+nästa aktivering till den commit som då körs.
 
 Arbetskopian ska vara ren; paketet läser enbart committade Git-blobbar.
 `prepare` läser aktuell app via SSH, men ändrar inget på servern. Granska
