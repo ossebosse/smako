@@ -137,6 +137,7 @@ def _assert_audited_basket_contract(plan: dict) -> None:
     assert surplus["unit_totals"] == audit["unit_totals"]
 
 
+@pytest.mark.slow
 def test_optimized_mock_response_proves_usable_coverage_and_store_tradeoff(
     monkeypatch,
 ) -> None:

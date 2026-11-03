@@ -47,6 +47,7 @@ def native_store(tmp_path):
     return store,private,owner,request,plan,universe,facts
 
 
+@pytest.mark.slow
 def test_stale_private_revision_is_rejected_instead_of_rewound(entry,tmp_path):
     store,*_ = native_store(tmp_path)
     with pytest.raises(AssertionError,match='actual current private revision'):

@@ -65,6 +65,7 @@ def test_inventory_cannot_guess_scope_or_concept(change):
         approved_inventory(inv)
 
 
+@pytest.mark.slow
 async def test_missing_optional_database_keeps_base(tmp_path):
     store, _ = source("3839")
     base = Base([Store(store_id="baseline", name="Baseline", chain="willys", city="Lund")])

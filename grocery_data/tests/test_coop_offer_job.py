@@ -29,6 +29,7 @@ def closed_source(path, identity, snapshot="snapshot-1"):
         db.execute("INSERT INTO source_products VALUES (?,'coop',?)", (snapshot, identity))
 
 
+@pytest.mark.slow
 async def test_restart_no_due_failure_expiry_recovery_and_withdrawal(env, monkeypatch):
     from grocery_data.scripts import collect_coop_physical_offers as collector
     calls = []

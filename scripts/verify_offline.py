@@ -1,11 +1,15 @@
-"""Run existing pytest tests with source isolation and no retailer network."""
+"""Run existing pytest tests with source isolation and no retailer network.
 
-import atexit
-import ipaddress
-import json
+Works with pytest-xdist (``-n auto``): the root conftest.py installs the same
+guard in every worker, and the worker records are merged into one access file.
+"""
+
 import os
 import pathlib
 import sys
+
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+import offline_guard
 
 ROOT = pathlib.Path.cwd().resolve()
 OUT = ROOT / ".local/verification"
@@ -17,60 +21,16 @@ scratch = OUT / "tmp"
 scratch.mkdir(exist_ok=True)
 os.environ.update(TMP=str(scratch), TEMP=str(scratch), TMPDIR=str(scratch))
 label = os.getenv("SMAKO_VERIFY_LABEL", "tests")
-reads = set()
-blocked = []
-forbidden = ["c:/users/ossia/documents/codex/"]
-forbidden += [
-    pathlib.Path(p).resolve().as_posix().lower().rstrip("/") + "/"
-    for p in os.getenv("SMAKO_FORBIDDEN_ROOTS", "").split(";")
-    if p
-]
-
-
-def audit(event, args):
-    if (
-        event in {"open", "sqlite3.connect"}
-        and args
-        and isinstance(args[0], (str, bytes, os.PathLike))
-    ):
-        name = os.fsdecode(args[0])
-        if name == ":memory:":
-            return
-        p = pathlib.Path(name).resolve()
-        lower = p.as_posix().lower()
-        if any(lower.startswith(prefix) for prefix in forbidden):
-            blocked.append({"event": "old_source_read", "path": str(p)})
-            raise RuntimeError("Old dated source dependency blocked: " + str(p))
-        try:
-            rel = p.relative_to(ROOT).as_posix()
-            if rel.startswith("reports/"):
-                reads.add(rel)
-        except ValueError:
-            pass
-    if event == "socket.connect":
-        address = args[1]
-        if isinstance(address, tuple):
-            host = address[0]
-            try:
-                allowed = ipaddress.ip_address(host).is_loopback
-            except ValueError:
-                allowed = host in {"localhost"}
-            if not allowed:
-                blocked.append({"event": "external_network_blocked"})
-                raise RuntimeError("External network disabled for consolidation verification")
-
-
-sys.addaudithook(audit)
+save = offline_guard.install(ROOT, label, register=False)
 os.environ.update(PYTHON_DOTENV_DISABLED="1", PYTHONDONTWRITEBYTECODE="1")
+os.environ[offline_guard.ENV_LABEL] = label
+os.environ[offline_guard.ENV_ROOT] = str(ROOT)
 
-
-def save():
-    (OUT / (label + "-access.json")).write_text(
-        json.dumps({"report_reads": sorted(reads), "blocked": blocked}, indent=2), encoding="utf8"
-    )
-
-
-atexit.register(save)
 import pytest
 
-raise SystemExit(pytest.main(sys.argv[1:]))
+try:
+    code = pytest.main(sys.argv[1:])
+finally:
+    save()
+    offline_guard.merge(ROOT, label)
+raise SystemExit(code)

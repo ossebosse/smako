@@ -1,4 +1,6 @@
 -r deploy/requirements.txt
 -r grocery_data/requirements.txt
 -r backend/requirements.txt
+# Parallel test runs (-n auto); see docs/TESTING.md.
+pytest-xdist
 -c requirements-dev.lock

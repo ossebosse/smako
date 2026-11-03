@@ -22,6 +22,7 @@ from backend.tests.recipe_language_history import after_language_id, assert_curr
 REPORT = Path('docs/reviews/recipe-unblock-round2-20261101')
 
 
+@pytest.mark.slow
 def test_successors_keep_food_inputs_and_original_bytes_and_have_complete_baskets():
     manifest = manifest_entries()
     issued = {identity(r): r for r in load_entries(manifest['current'] + manifest['history'])}
