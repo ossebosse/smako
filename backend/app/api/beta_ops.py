@@ -5,14 +5,15 @@ from __future__ import annotations
 import base64
 import hashlib
 import hmac
-import html
 import json
 import re
 from datetime import datetime
+from pathlib import Path
 from typing import Annotated, Any, Literal
 from urllib.parse import urlsplit
 
 from app.config import Settings, get_settings
+from app.services.admin_password import verify_password
 from app.services.beta_observability import (
     active_price_status,
     admin_aggregates,
@@ -24,8 +25,9 @@ from app.services.beta_observability import (
     reload_active_price_universe,
 )
 from app.services.plan_store import PlanStore
+from app.services.store_operations import MUNICIPALITIES, municipal_store_status
 from fastapi import APIRouter, Depends, Header, HTTPException, Request, Response, status
-from fastapi.responses import HTMLResponse, JSONResponse
+from fastapi.responses import FileResponse, JSONResponse
 from pydantic import BaseModel, ConfigDict, Field, ValidationError, field_validator, model_validator
 from sqlalchemy import or_, select, update
 from sqlalchemy.orm import Session
@@ -350,7 +352,14 @@ def _admin_authorized(
         elif scheme.casefold() == "basic":
             try:
                 decoded = base64.b64decode(value, validate=True).decode("utf-8")
-                supplied = decoded.partition(":")[2]
+                username, _, password = decoded.partition(":")
+                password_hash = _settings(request).beta_admin_password_hash
+                if password_hash is not None:
+                    if username == "admin" and verify_password(password, password_hash):
+                        return
+                    supplied = None
+                else:
+                    supplied = password
             except (ValueError, UnicodeDecodeError):
                 supplied = None
     if not supplied or not hmac.compare_digest(supplied, expected):
@@ -785,23 +794,20 @@ def admin_status(
     return _admin_payload(session, _settings(request))
 
 
-@router.get("/admin", response_class=HTMLResponse, dependencies=[AdminAuth])
-def admin_page(request: Request, session: SessionDep) -> HTMLResponse:
-    payload = json.dumps(
-        _admin_payload(session, _settings(request)),
-        indent=2,
-        default=str,
-        ensure_ascii=False,
-    )
-    return HTMLResponse(
-        "<!doctype html><html lang='sv'><head><meta charset='utf-8'>"
-        "<meta name='viewport' content='width=device-width,initial-scale=1'>"
-        "<meta http-equiv='refresh' content='30'><title>Beta admin</title>"
-        "<style>body{font:16px system-ui;max-width:78rem;margin:2rem auto;padding:0 1rem;"
-        "background:#101711;color:#ecf7ed}pre{white-space:pre-wrap;background:#17221a;"
-        "padding:1rem;border-radius:.7rem}</style></head><body>"
-        "<h1>Beta admin</h1><p>Automatisk uppdatering var 30:e sekund.</p><pre>"
-        f"{html.escape(payload)}</pre></body></html>",
+@router.get("/api/admin/stores", dependencies=[AdminAuth])
+def admin_stores(
+    request: Request, response: Response, session: SessionDep, city: str = "Lund",
+) -> dict[str, Any]:
+    if city.casefold() not in {name.casefold() for name in MUNICIPALITIES}:
+        raise HTTPException(status_code=422, detail="Välj Lund eller Malmö")
+    response.headers["Cache-Control"] = "no-store"
+    return municipal_store_status(session, _settings(request), city)
+
+
+@router.get("/admin", response_class=FileResponse, dependencies=[AdminAuth])
+def admin_page() -> FileResponse:
+    return FileResponse(
+        Path(__file__).resolve().parents[1] / "static" / "admin.html",
         headers={"Cache-Control": "no-store"},
     )
 

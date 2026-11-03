@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Drift & priser · Smako</title>
+  <link rel="stylesheet" href="/static/admin.css?v=store-status-20261013">
+  <script defer src="/static/admin.js?v=store-status-20261013"></script>
+</head>
+<body>
+  <header><a class="brand" href="/">smako<span>DRIFT</span></a><span class="private">Administratör</span></header>
+  <main>
+    <div class="heading"><div><p class="eyebrow">INSAMLING & PRISTÄCKNING</p><h1>Hur mår våra butiker?</h1><p>Följ prisunderlaget, från senaste insamling till tillgängliga priser.</p></div><button id="refresh" type="button">↻ Uppdatera</button></div>
+    <nav aria-label="Kommun" id="cities"><button type="button" data-city="Lund" aria-pressed="true">Lund</button><button type="button" data-city="Malmö" aria-pressed="false">Malmö</button><span>2 kommuner driftsatta</span></nav>
+    <p id="updated" role="status">Hämtar driftstatus…</p>
+    <p id="error" role="alert" hidden></p>
+    <section class="metrics" aria-label="Översikt" id="metrics"></section>
+    <p id="runtime-note" class="notice" hidden></p>
+    <section class="panel">
+      <div class="section-heading"><div><h2>Butiker <span id="city-title">i Lund</span></h2><p>Öppna en butik för prisunderlag och insamlingsstatus.</p></div><span id="visible-count"></span></div>
+      <div class="filters"><label>Sök butik<input id="search" type="search" placeholder="Butiksnamn, kedja eller adress"></label><label>Kedja<select id="chain"><option value="">Alla kedjor</option></select></label><label class="check"><input id="attention" type="checkbox"> Visa bara avvikelser</label></div>
+      <div id="stores"><p class="empty">Laddar butiker…</p></div>
+    </section>
+    <section class="panel" id="other-panel" hidden><h2>Övriga aktiva prisunderlag</h2><p>Online- eller andra prisunderlag utan verifierad koppling till en butik ovan.</p><div id="other"></div></section>
+    <section class="panel"><h2>Gemensam drift</h2><p>Insamlingens schema och applikationens status gäller den konfigurerade driften.</p><div id="operations" class="operation-grid"></div><details><summary>Teknisk driftöversikt</summary><pre id="technical">Laddar…</pre></details></section>
+    <footer><p id="policy"></p><p>Prisantal avser produktpriser per prisunderlag, inte unika varor eller lagerbesked. Delade online- och regionala underlag räknas en gång i totalsumman. Okänd insamlingsstatus betyder att ett verifierat körningsresultat saknas.</p></footer>
+    <noscript>Aktivera JavaScript för att visa dashboarden. Driftdata finns även på /api/admin/stores.</noscript>
+  </main>
+</body>
+</html>
