@@ -56,7 +56,7 @@ def check(base, output):
             blocked = generate()
             assert blocked.status == 422, blocked.text()
             assert blocked.json().get("code") == "SEARCH_BLOCKED", blocked.text()
-            expect(page.locator("#personal-status")).to_contain_text("Inga krav har sänkts")
+            expect(page.locator("#personal-status")).to_contain_text("Vi hittade ingen meny som uppfyller alla dina krav")
             page.locator("#dinner-count").fill("3")
             r = generate()
             assert r.status == 201, r.text()

@@ -13,13 +13,13 @@
   <link rel="stylesheet" href="/static/plan-progress.css?v=progress-20261031b" />
   <link rel="stylesheet" href="/static/plan-view.css?v=planview-20261031b" />
   <script src="/scanner-assets/physical-barcode-scanner.js" defer></script>
-  <script src="/static/complete-recipes.js?v=20261102-language" defer></script>
-  <script src="/static/shopping-location.js?v=location-20261011" defer></script>
+  <script src="/static/complete-recipes.js?v=20261102-deslop" defer></script>
+  <script src="/static/shopping-location.js?v=20261102-deslop" defer></script>
   <script src="/static/choice-controls.js?v=option3-1" defer></script>
   <script src="/static/plan-progress.js?v=20261102-language" defer></script>
-  <script src="/static/personal.js?v=20261102-language" defer></script>
-  <script src="/static/product-search.js?v=comparability-20261010" defer></script>
-  <script src="/static/configurator.js?v=planview-20261031" defer></script>
+  <script src="/static/personal.js?v=20261102-deslop" defer></script>
+  <script src="/static/product-search.js?v=20261102-deslop" defer></script>
+  <script src="/static/configurator.js?v=20261102-deslop" defer></script>
 </head>
 <body class="personal-app">
   <a class="skip-link" href="#personal-main">Hoppa till innehållet</a>
@@ -53,11 +53,11 @@
       <h3>Vanliga val</h3><div id="shopping-common"></div>
       <p id="shopping-draft-status" role="status"></p>
       <div id="extras-list"></div>
-      <p>Uppskattad vikt och kostnad räknas med när underlag finns. Viktvarornas slutbelopp beror på uppvägning.</p>
+      <p>Varor som säljs per vikt får ett uppskattat pris. Det slutliga priset beror på vad varan väger.</p>
       <button type="button" class="primary-button" id="calculate-extras">Beräkna inköpslistan</button>
       <button type="button" class="secondary-button" id="calculate-own-list">Beräkna bara mina varor – utan recept</button>
       <button type="button" class="secondary-button" id="shopping-back-to-choices" data-open="choices">Tillbaka till Mina val och skapa plan med recept</button>
-      <p>Om en plan redan är öppen läggs varorna till dess recept. Välj ”utan recept” för en fristående lista. Butikstak, postnummer och medlemskap väljs under Mina val.</p>
+      <p>Har du en plan öppen läggs varorna till i den. Välj ”utan recept” om du bara vill ha en lista med dina varor. Butiker, postnummer och medlemskap väljer du under Mina val.</p>
     </section>
     <section data-view="pantry" id="personal-pantry" hidden><h1>Mitt skafferi</h1><p id="account-status">Ditt skafferi sparas i gästsessionen. Skapa konto för att nå det på fler enheter.</p>
       <button type="button" class="secondary-button" data-open="account">Spara skafferiet på mitt konto</button><p>Här ser du vad du har hemma och vad som behövs till din plan. Nya inköp läggs till när du bekräftar att du har handlat.</p>
@@ -81,12 +81,12 @@
       </form><p id="product-search-status" role="status"></p><div id="product-search-coverage" hidden></div><div id="product-search-results"></div><button type="button" id="product-search-more" class="secondary-button" hidden>Visa fler produkter</button>
     </section>
     <section data-view="choices" id="personal-choices" hidden>
-      <div class="choices-intro"><p class="eyebrow">Din vecka. Dina smaker.</p><h1>Skapa din matplan</h1><p>Goda måltider. Lägre matkostnad. Enklare vardag.</p></div>
+      <div class="choices-intro"><p class="eyebrow">Ny plan</p><h1>Skapa din matplan</h1><p>Välj var du handlar och vad du vill äta. Smako föreslår recept och räknar ut vad inköpen kostar.</p></div>
       <div class="choices-workspace">
       <form id="personal-form">
         <section id="location-step" class="location-card" aria-labelledby="location-title">
           <h2 id="location-title">Var vill du handla?</h2>
-          <p>Hitta butiker nära dig. En kartlagd butik behöver finnas inom ungefär 10 km.</p>
+          <p>Ange ditt postnummer. Det behöver finnas en butik vi har priser från inom ungefär 10 km.</p>
           <div class="postcode-entry"><label for="customer-postcode">Ditt postnummer<input id="customer-postcode" inputmode="numeric" autocomplete="postal-code" maxlength="6" placeholder="Ditt postnummer" /></label><button id="check-postcode" type="button" class="primary-button">Hitta butiker</button></div>
           <p id="location-status" role="status" aria-live="polite"></p>
           <div id="location-store-settings" hidden>
@@ -96,26 +96,26 @@
             <p id="location-selection-status" role="status"></p>
             <button id="confirm-location" type="button" class="primary-button">Fortsätt till måltider</button>
           </div>
-          <details><summary>Om avstånd och prisunderlag</summary><p class="small">Avstånden är ungefärliga och mäts fågelvägen från postnumrets referenspunkt, inte från din adress. Butiker utan känd position ingår bara i kommunval eller egna butiksval. Onlinepriser märks separat.</p>
-          <p class="small">© European Union - GISCO, 2024, postal code point dataset, <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC-BY-SA 4.0</a>. Svenskt utdrag ur 2025 års data. Vissa postnummer delar referenspunkt eller kan saknas. <a href="https://ec.europa.eu/eurostat/web/gisco/geodata/administrative-units/postal-codes">Läs om underlaget</a>.</p></details>
+          <details><summary>Om avstånd och priser</summary><p class="small">Avstånden mäts fågelvägen från en punkt i postnummerområdet, inte från din adress. Butiker vars läge vi inte känner till kommer bara med om du väljer hela kommunen eller väljer butiken själv. Priser från nätbutiker är märkta.</p>
+          <p class="small">© European Union - GISCO, 2024, postal code point dataset, <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC-BY-SA 4.0</a>. Svenskt utdrag ur 2025 års data. Vissa postnummer saknas eller delar punkt med andra. <a href="https://ec.europa.eu/eurostat/web/gisco/geodata/administrative-units/postal-codes">Om postnummerdatan</a>.</p></details>
         </section>
         <input type="hidden" id="postal-code" value="" />
         <fieldset id="planning-choices" hidden disabled>
         <p class="sr-only" id="meal-announcement" aria-live="polite"></p>
         <p>Gästläget omfattar totalt 3 recept och högst 2 portioner per rätt. <button type="button" class="secondary-button" data-open="account">Bli medlem</button></p><div id="meal-settings"></div>
         <fieldset class="choices-primary"><legend>Inköpsställen</legend><div id="store-count-control"></div></fieldset>
-        <section class="choice-shortcuts"><h2>Gör planen mer din</h2><p>Genvägar till dina extraval.</p><div class="personal-actions"><button type="button" data-choice-jump="taste-choices">Smakval</button><button type="button" data-choice-jump="complete-recipe-controls">Receptval</button><button type="button" data-choice-jump="organic-choices">Ekologiskt</button><button type="button" data-choice-jump="surplus-choices">Överskott</button></div></section>
+        <section class="choice-shortcuts"><h2>Fler val</h2><p>Hoppa direkt till:</p><div class="personal-actions"><button type="button" data-choice-jump="taste-choices">Smakval</button><button type="button" data-choice-jump="complete-recipe-controls">Receptval</button><button type="button" data-choice-jump="organic-choices">Ekologiskt</button><button type="button" data-choice-jump="surplus-choices">Överskott</button></div></section>
         <details id="extra-choices" class="extra-choices"><summary>Extraval <span>Fler måltider, smakval och egna gränser</span></summary>
-        <p>Fler måltider, smakval, butiker och egna gränser. Standardvalen gäller tills du ändrar dem.</p>
+        <p>Standardvalen gäller tills du ändrar dem.</p>
         <fieldset><legend>Fler måltider</legend><div id="extra-meal-toggles" class="personal-checks"></div><p>Valda måltider visas under Middag, med egna inställningar.</p><button type="button" id="go-to-meals" class="secondary-button">Gå till måltider ↑</button></fieldset>
         <div id="memberships" hidden></div>
-        <fieldset id="taste-choices"><legend>Smak, uteslutningar och allergier</legend><label>Beskriv dina val<textarea id="profile-text" maxlength="2000" placeholder="Gillar kyckling, ogillar koriander, måste undvika jordnötter"></textarea></label><button type="button" id="interpret-profile" class="secondary-button">Tolka och granska</button><p>Kontrollera att vi har tolkat dina val rätt. Vi försöker undvika det du ogillar. Ingredienser som du utesluter och allergier måste alltid respekteras.</p><div id="profile-fields" class="personal-grid"></div>
+        <fieldset id="taste-choices"><legend>Smak, uteslutningar och allergier</legend><label>Beskriv dina val<textarea id="profile-text" maxlength="2000" placeholder="Gillar kyckling, ogillar koriander, måste undvika jordnötter"></textarea></label><button type="button" id="interpret-profile" class="secondary-button">Tolka och granska</button><p>Kontrollera att vi har tolkat dina val rätt. Det du ogillar försöker vi undvika. Uteslutna ingredienser och allergier tar vi alltid bort.</p><div id="profile-fields" class="personal-grid"></div>
           <label id="unresolved-label" hidden>Inte tolkat – flytta till rätt fält och töm sedan rutan<textarea id="unresolved-text"></textarea></label>
           <p class="data-note">Vi utesluter ingrediensen även ur såser och buljonger. Produkter vars innehåll inte kan kontrolleras väljs bort. Ange allergier separat, så att även allergenmärkning och deklarerade spår kontrolleras. Att utesluta en ingrediens ersätter inte allergivalet.</p>
           <button type="button" id="save-profile" class="secondary-button">Spara min profil i gästsessionen</button><p>Spara profilen om du vill använda samma val nästa gång. Dina val sparas också med planen.</p>
         </fieldset>
         <div id="complete-recipe-controls"></div>
-        <fieldset id="organic-choices"><legend>Ekologiskt</legend><div id="organic-percent-control"></div><p>Välj hur stor del av matkostnaden som minst ska gå till ekologiska varor. Vi räknar priset efter rabatt, inklusive dina egna matvaror. Varor hemma, avgifter och annat än mat ingår inte. Bara varor med bekräftad ekologisk märkning räknas som ekologiska.</p><label class="check-label"><input type="checkbox" id="organic-animals"/> Kräv ekologiskt för alla animaliska produkter, även ägg och mejeri</label><p class="data-note">Vi kan sakna uppgifter om ekologisk märkning eller animaliska ingredienser för vissa produkter. Då kan vi inte bekräfta att de uppfyller ditt val.</p></fieldset>
+        <fieldset id="organic-choices"><legend>Ekologiskt</legend><div id="organic-percent-control"></div><p>Välj hur stor del av matkostnaden som minst ska vara ekologisk. Andelen räknas på maten du köper, efter rabatt. Bara varor med ekologisk märkning räknas.</p><label class="check-label"><input type="checkbox" id="organic-animals"/> Kräv ekologiskt för alla animaliska produkter, även ägg och mejeri</label><p class="data-note">Vi kan sakna uppgifter om ekologisk märkning eller animaliska ingredienser för vissa produkter. Då kan vi inte bekräfta att de uppfyller ditt val.</p></fieldset>
         <fieldset id="pantry-choices"><legend>Skafferi</legend><label class="check-label"><input type="checkbox" id="planning-use-pantry" checked/> Använd mitt bekräftade skafferi i planen</label><p>Avmarkera för att beräkna inköp utan att använda skafferiet. Valet sparas med planen.</p></fieldset>
         <fieldset id="surplus-choices"><legend>Överskott</legend><label>Inköpsstrategi<select id="surplus-mode"><option value="minimize">Minimera överskott</option><option value="allow_larger">Tillåt större köp och föreslå användning av resten</option></select></label><p>Det kan bli mat över när du köper hela förpackningar. Om du tillåter större köp visar vi mängden och den extra kostnaden. Hur länge resterna håller är inte beräknat.</p></fieldset>
         </details>

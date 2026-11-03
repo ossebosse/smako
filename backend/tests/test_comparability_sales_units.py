@@ -40,7 +40,7 @@ def test_actual_unknown_content_can_be_bought_as_explicit_packs(name,cost):
     assert result.optimized_basket.total==round(cost*2,2)
     item=result.optimized_basket.stores[0].items[0]
     assert item.purchase_units and item.packages_needed==2 and item.unit=='st'
-    assert 'okänd innehållsmängd' in item.purchase_warning
+    assert 'hur mycket förpackningen innehåller' in item.purchase_warning
     assert result.personal.checks['checkout_audit']['passed']
     assert product.package_quantity is None
     extra=extra.model_copy(update={'purchase_units':False,'unit':'g','quantity':150})
@@ -99,5 +99,5 @@ def test_actual_open_campaigns_and_lidl_weight_use_ordinary_planner(name,tmp_pat
 def test_missing_chain_is_coverage_gap_not_zero_defects():
     p=Product.model_validate(ROWS[0]);data=search(prepare(p),'kaffe',now=NOW)
     city=next(c for c in data['chain_coverage'] if c['chain']=='citygross')
-    assert city['status']=='INELIGIBLE' and 'underlag' in city['next_step']
+    assert city['status']=='INELIGIBLE' and 'priser' in city['next_step']
     assert data['live_provider_calls']==0

@@ -152,11 +152,11 @@ def test_measured_leaf_loss_partial_consumption_release_and_idempotency(tmp_path
 
 def test_short_leaf_yield_is_real_but_never_counts_as_ready(tmp_path):
     private, saved, stock = measured_plan(tmp_path)
-    with pytest.raises(PersonalConflict, match='bokför'):
+    with pytest.raises(PersonalConflict, match='registrera vikterna'):
         private.inventory_action(OWNER, saved, 'consume', stock['revision'])
     booked = private.inventory_action(OWNER, saved, 'prepare', stock['revision'], operation_id='mint-short-yield', preparation=batch(20))
     assert booked['ledger'][-1]['preparation']['loss_g'] == 20
-    with pytest.raises(PersonalConflict, match='täcker inte'):
+    with pytest.raises(PersonalConflict, match='räcker inte'):
         private.inventory_action(OWNER, saved, 'consume', booked['revision'])
     assert private.read(OWNER) == booked
 
@@ -168,7 +168,7 @@ def test_direct_and_other_method_or_plan_reservations_are_protected(tmp_path):
         'source': 'other', 'demand_key': 'other', 'kind': 'preparation_input', 'method': 'other'})
     with private.plans._connect() as conn:
         changed = write_state(conn, OWNER, changed, stock['revision'])
-    with pytest.raises(PersonalConflict, match='disponibelt'):
+    with pytest.raises(PersonalConflict, match='avsatt till något annat'):
         private.inventory_action(OWNER, saved, 'prepare', changed['revision'], operation_id='mint-protected', preparation=batch())
     assert private.read(OWNER) == changed
 

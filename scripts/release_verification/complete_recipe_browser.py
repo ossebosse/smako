@@ -142,7 +142,7 @@ def wait_operation(page, observed, begin, *, timeout, reload_after=None, offline
                     page.evaluate("Object.defineProperty(document,'hidden',{configurable:true,get:()=>false});document.dispatchEvent(new Event('visibilitychange'))")
                 fault['lifecycle_done']=True
             if (scenario=='long-outage' and fault.get('aborts',0)>=8 or scenario=='invalid-body' and fault.get('invalid_body')) and not fault.get('manual_resume'):
-                control=page.get_by_role('button',name='Återuppta statuskontrollen',exact=True).last
+                control=page.get_by_role('button',name='Fortsätt följa beräkningen',exact=True).last
                 if control.is_visible() and control.is_enabled():
                     fault['recovery_dom']=page.locator('#personal-status, #error-message').all_text_contents()
                     if scenario=='invalid-body':assert any('oväntad svarstyp' in text for text in fault['recovery_dom'])

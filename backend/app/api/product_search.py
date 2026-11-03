@@ -17,7 +17,7 @@ def search_products(request: ProductSearchRequest, response: Response) -> dict:
     request = request.model_copy(update={"membership_price_policy": "all_advertised"})
     prepared = GLOBAL_PREPARED_PRICE_UNIVERSES.get_for_request(request.postal_code, {})
     if prepared is None:
-        raise HTTPException(422, "Det finns inget aktiverat prisunderlag för postnumret.")
+        raise HTTPException(422, "Vi har inga priser för det här postnumret än.")
     if request.view == "unit" and request.unit is None:
         raise HTTPException(422, "Välj kg, liter eller styck för jämförbara jämförpriser.")
     settings = get_settings()

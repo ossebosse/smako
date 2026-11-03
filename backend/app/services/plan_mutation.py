@@ -270,7 +270,7 @@ def replace_product(
         raise IncompleteBasketError("replacement basket does not cover the saved recipes")
     warnings = [
         *plan.warnings,
-        "Varan byttes och räknades om lokalt mot samma sparade prisunderlag.",
+        "Varan är bytt. Priserna är samma som när planen sparades.",
     ]
     return plan.model_copy(
         update={
@@ -460,7 +460,7 @@ async def replace_recipe(
             scenarios = await service._build_scenarios(evaluated, stores)
             warnings = [
                 *plan.warnings,
-                "Receptet byttes och hela korgen räknades om lokalt mot samma sparade prisunderlag.",
+                "Receptet är bytt och inköpslistan omräknad. Priserna är samma som när planen sparades.",
             ]
             return plan.model_copy(
                 update={

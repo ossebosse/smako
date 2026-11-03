@@ -10,7 +10,7 @@
     if(previous?.postcode)$('customer-postcode').value=previous.postcode;
     const gate=$('planning-choices'),status=$('location-status'),selectionStatus=$('location-selection-status');
     const mode=$('location-store-mode'),radius=$('location-radius'),dialog=$('location-stores-dialog');
-    const messages={unknown_postcode:"Postnumret finns inte i vårt geografiska underlag. Kontrollera siffrorna eller prova ett annat postnummer.",ambiguous_postcode:"Postnumret har flera geografiska lägen. Vi kan inte avgöra avståndet säkert med detta underlag.",unavailable:"Aktuella butikspriser saknas för området just nu. Försök igen senare.",outside_coverage:"Smako har ännu ingen kartlagd butik inom ungefär 10 km från detta postnummer."};
+    const messages={unknown_postcode:"Vi hittar inte postnumret. Kontrollera siffrorna eller prova ett annat.",ambiguous_postcode:"Postnumret täcker flera områden, så vi kan inte räkna ut avståndet.",unavailable:"Aktuella butikspriser saknas för området just nu. Försök igen senare.",outside_coverage:"Smako har ännu ingen kartlagd butik inom ungefär 10 km från detta postnummer."};
     function hideMeals(){confirmed=false;gate.hidden=true;gate.disabled=true;}
     function currentIds(){return new Set((location?.contexts||[]).map(row=>row.context_id));}
     function validSelection(){const current=currentIds();return selected.length>0&&selected.length<=1000&&selected.every(id=>current.has(id));}
@@ -23,7 +23,7 @@
         if(mode.value==="radius")selected=location.contexts.filter(row=>row.distance_km!=null&&row.distance_km<=Number(radius.value)).map(row=>row.context_id);
       }
       const unavailable=selected.filter(id=>!currentIds().has(id));
-      const text=unavailable.length?"En tidigare vald butik saknas i aktuellt underlag. Öppna butiksvalet och granska dina val.":selected.length>1000?"Fler än 1 000 inköpsställen valda. Välj en mindre radie eller välj specifika butiker.":selected.length?`${selected.length} inköpsställen valda${mode.value==="radius"?` inom ungefär ${radius.value} km`:mode.value==="municipality"?` i ${location.municipality_name} kommun`:""}.`:"Inga butiker valda. Öka radien, välj kommunen eller bocka i specifika butiker.";
+      const text=unavailable.length?"En butik du valt tidigare finns inte längre hos oss. Öppna butiksvalet och kontrollera dina val.":selected.length>1000?"Fler än 1 000 inköpsställen valda. Välj en mindre radie eller välj specifika butiker.":selected.length?`${selected.length} inköpsställen valda${mode.value==="radius"?` inom ungefär ${radius.value} km`:mode.value==="municipality"?` i ${location.municipality_name} kommun`:""}.`:"Inga butiker valda. Öka radien, välj kommunen eller bocka i specifika butiker.";
       selectionStatus.textContent=text;$('location-modal-status').textContent=text;
       // No empty selection can silently expand to every store in the area.
       $('confirm-location').disabled=!validSelection();persist();
@@ -31,7 +31,7 @@
     function renderStores(){
       const list=$('location-store-list');list.replaceChildren();
       const rows=[...(location?.contexts||[])];
-      for(const id of selected.filter(id=>!currentIds().has(id)))rows.push({context_id:id,display_name:"Tidigare vald butik saknas i aktuellt underlag",missing:true});
+      for(const id of selected.filter(id=>!currentIds().has(id)))rows.push({context_id:id,display_name:"Butiken finns inte längre hos oss",missing:true});
       for(const row of rows){
         const label=document.createElement("label");label.className="check-label";
         const box=document.createElement("input");box.type="checkbox";box.id=`context-${row.context_id}`;box.value=row.context_id;box.checked=selected.includes(row.context_id);
@@ -49,9 +49,9 @@
       try{
         const response=await fetch(`/api/shopping-location?postal_code=${encodeURIComponent(postal)}`,{cache:"no-store",headers:{Accept:"application/json"},signal:controller.signal});
         const data=await response.json();if(requestEpoch!==epoch)return;
-        if(!response.ok)throw new Error(typeof data.detail==="string"?data.detail:"Platskontrollen kunde inte genomföras.");
+        if(!response.ok)throw new Error(typeof data.detail==="string"?data.detail:"Vi kunde inte hitta platsen.");
         if(data.status!=="eligible"){status.textContent=messages[data.status]||"Platsen kunde inte kontrolleras.";return;}
-        location=data;status.textContent=`${data.municipality_name} kommun · närmaste kartlagda butik cirka ${number(data.nearest_distance_km)} km bort. Visar kartlagda inköpsställen i ${data.area_name}.`;
+        location=data;status.textContent=`${data.municipality_name} kommun · närmaste butik ungefär ${number(data.nearest_distance_km)} km bort. Visar butiker i ${data.area_name}.`;
         const area=$('postal-code');area.value=data.area_postal_code;area.dispatchEvent(new Event("change",{bubbles:true}));
         mode.querySelector('[value="municipality"]').disabled=!data.municipality_available;
         mode.value="radius";radius.value="3";selected=[];
@@ -60,7 +60,7 @@
         if(restored&&restored.postal_code===data.area_postal_code&&restored.allowed_store_ids?.length){mode.value="specific";selected=restored.allowed_store_ids.slice();restored=null;}
         if(mode.value==="municipality"&&!data.municipality_available)mode.value="radius";
         $('location-store-settings').hidden=false;updateSelection({automatic:mode.value!=="specific"});
-      }catch(error){if(requestEpoch===epoch)status.textContent=error.name==="AbortError"?"Platskontrollen tog för lång tid. Försök igen.":error.message;}
+      }catch(error){if(requestEpoch===epoch)status.textContent=error.name==="AbortError"?"Det tog för lång tid att hitta platsen. Försök igen.":error.message;}
       finally{clearTimeout(timer);}
     }
     $('check-postcode').addEventListener("click",()=>void lookup());

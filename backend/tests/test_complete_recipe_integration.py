@@ -85,7 +85,7 @@ def test_distinct_content_shortage_precedes_product_search_and_suggests_actual_t
     assert stopped.value.code == "RECIPE_CHOICES_CONFLICT"
     assert "4 distinkta grundrätter" in str(stopped.value)
     assert "43 minuter" in str(stopped.value)
-    assert "garanterar inte" in str(stopped.value)
+    assert "betyder inte säkert" in str(stopped.value)
     request = PlanRequest(recipes=5, servings=4, recipe_preferences=prefs)
     planner = PersonalPlanner(request, Settings(complete_recipes_enabled=True), prepared(), state(), facts={}, now=NOW)
     def products_must_not_run(*args):
@@ -130,7 +130,7 @@ def test_valid_solution_reports_nutrition_budget_separately_from_checkout_validi
     assert result["search_budget"]["nutrition_status"] == "REACHED"
     assert result["search_budget"]["nutrition_budget_exhausted_recorded"] == 1
     assert result["search_budget"]["distinct_week_proposals_pruned"] == 6
-    assert "En giltig meny hittades" in result["budget_message"]
+    assert "Vi hittade en meny som uppfyller dina val" in result["budget_message"]
 
 
 def test_omitted_nutrition_details_do_not_claim_no_search_limit_was_reached():

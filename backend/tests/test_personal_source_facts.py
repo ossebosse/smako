@@ -111,7 +111,7 @@ def test_verified_product_nutrition_affects_product_selection():
     result = run(p, req, facts={("coop", "mjölk"): fact(label())})
     assert result.optimized_basket.total == 20
     req.personal.meals[0].limits.min_weight_g = 100
-    with pytest.raises(PolicyConflict, match="tillagningsutbyte"):
+    with pytest.raises(PolicyConflict, match="färdig portion väger"):
         run(p, req, facts={("coop", "mjölk"): fact(label())})
 
 

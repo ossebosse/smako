@@ -89,6 +89,12 @@
 - Read the current `docs/HANDOFF.md` and `docs/CONSOLIDATION.md` before continuing.
   Historical chats keep their old working directories; do not edit Codex databases.
 
+## User-facing language
+
+- Write consumer copy and user-visible server messages by `docs/UI-LANGUAGE.md`:
+  plain Swedish to the user, what happened and what to do, no internal terms.
+  `backend/tests/test_ui_language.py` guards the /personal UI vocabulary.
+
 ## Application rules retained from the source projects
 
 - Preserve the existing snapshot, source-strategy, promotion, PriceUniverse,

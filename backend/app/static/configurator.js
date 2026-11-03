@@ -21,17 +21,17 @@
   // sheet, so items are added before the plan and optimised with the recipes.
   const itemsBox=el("section",null,"config-items");itemsBox.setAttribute("aria-labelledby","config-items-title");
   const itemsTitle=el("h2","Egna varor");itemsTitle.id="config-items-title";
-  itemsBox.append(itemsTitle,el("p","Skriv vad du behöver, till exempel ”mjölk 1,5 % 1 l”, och tryck Lägg till. Smako väljer billigaste varianten tillsammans med recepten, eller bara för dina varor om du inte planerar måltider."));
+  itemsBox.append(itemsTitle,el("p","Skriv vad du behöver, till exempel ”mjölk 1,5 % 1 l”, och tryck Lägg till. Smako väljer den billigaste varianten."));
   const movedItems=()=>[$('shopping-search-box'),$('shopping-search-status'),$('cancel-alternative'),$('shopping-common')?.previousElementSibling,$('shopping-common'),$('shopping-draft-status'),$('extras-list')].filter(Boolean);
   const itemSlots=new Map();
   const steps=[
     {title:"Plats",lead:"Var vill du handla?",art:"place",nodes:()=>[$('location-step')]},
     {title:"Måltider",lead:"Hur många måltider och portioner?",art:"meals",nodes:()=>[gate.querySelector(':scope>p:not(.sr-only)'),$('meal-settings'),fieldsetOf('extra-meal-toggles')]},
-    {title:"Butiker",lead:"Hur många butiker får korgen delas på?",art:"stores",nodes:()=>[fieldsetOf('store-count-control')]},
+    {title:"Butiker",lead:"I hur många butiker vill du handla?",art:"stores",nodes:()=>[fieldsetOf('store-count-control')]},
     {title:"Smak",lead:"Vad gillar du – och vad måste undvikas?",art:"taste",nodes:()=>[$('taste-choices')]},
     {title:"Recept",lead:"Vilka recept passar dig?",art:"recipes",nodes:()=>[$('complete-recipe-controls')]},
     {title:"Mer",lead:"Ekologiskt, skafferi och överskott",art:"more",nodes:()=>[$('organic-choices'),$('pantry-choices'),$('surplus-choices')]},
-    {title:"Varor",lead:"Egna varor i samma korg",art:"items",nodes:()=>[itemsBox]},
+    {title:"Varor",lead:"Egna varor i samma inköpslista",art:"items",nodes:()=>[itemsBox]},
     {title:"Sammanfattning",lead:"Din plan i korthet",art:"done",nodes:()=>[document.querySelector('.choice-summary')]},
   ];
   const summaryIndex=steps.length-1;

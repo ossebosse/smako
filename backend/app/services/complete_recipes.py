@@ -148,7 +148,7 @@ def validate_content_capacity(preferences, meal, profile, candidates):
         f"Biblioteket innehåller {count} distinkta grundrätter för {meal.servings} personer "
         f"med dina val av matkök, ingrediensantal, tid, anpassningar och kost; du har valt {meal.count} middagar. "
         + ", eller ".join(suggestions) + ". "
-        "Detta är en innehållskontroll före produkt-, närings- och inköpskvalificering; fler kandidater garanterar inte en köpbar meny. Dina krav har inte ändrats.",
+        "Det är bara en första kontroll av recepten. Fler recept betyder inte säkert att det går att handla till en meny. Dina krav har inte ändrats.",
         code="RECIPE_CHOICES_CONFLICT", stage="policy_taste")
 
 
@@ -169,15 +169,14 @@ def completed_search_outcome(diagnostics):
                      if row.get('library_phase') == 'complete_first' and row.get('depth')
                      and 'full_candidates' in row]
     if exhausted:
-        message = (f"En giltig meny hittades. Sökbudgeten nåddes i {exhausted} registrerade "
-                   "näringsdelberäkningar; andra godkända produktkombinationer kan finnas.")
+        message = (f"Vi hittade en meny som uppfyller dina val. Sökningen avbröts i förtid i {exhausted} "
+                   "näringsberäkningar, så det kan finnas andra kombinationer.")
     elif omitted:
-        message = ("En giltig meny hittades. Sökningen är begränsad och delar av sökloggen "
-                   "saknas; det går inte att fastställa om alla näringsdelberäkningar höll sig inom sin budget.")
+        message = "Vi hittade en meny som uppfyller dina val. Vi har inte testat alla kombinationer."
     else:
-        message = "En giltig meny hittades inom en begränsad sökning. Inget näringsdelsteg nådde sin registrerade sökbudget."
+        message = "Vi hittade en meny som uppfyller dina val. Vi har inte testat alla kombinationer."
     if any(row.get('stop_reason') == 'reserved_current_checkout_audit_save_time' for row in complete_rows):
-        message += " Förbättringssökningen stoppades med reserverad tid för aktuell slutkontroll och sparande."
+        message += " Vi slutade leta efter bättre alternativ för att hinna kontrollera och spara planen."
     return {
         "status": "VALID_SOLUTION", "global_optimum_proven": False,
         "label": "Lägsta hittade inköpskostnad inom dina val",

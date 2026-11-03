@@ -259,7 +259,7 @@ def run_case(browser, engine: str, mobile: bool, personal: bool, output: Path):
     assert "Saknade näringsvärden är okända" in rendered["unknown"]
     assert "0 g protein" not in rendered["unknown"] and "0 kcal" not in rendered["unknown"]
     assert "Ingrediens: okänd" in rendered["unknown"]
-    assert "Källstatus okänd" in rendered["unknown"] and "Spårbar uppskattning" not in rendered["unknown"]
+    assert "Okänd källa" in rendered["unknown"] and ". Uppskattat." not in rendered["unknown"]
     assert "0 g protein" in rendered["knownZero"]
     search_status = page.evaluate("""() => {
       const plan={recipes:[testRecipe],personal:{checks:{search_outcome:{budget_message:'En delberäkning nådde sökbudgeten. Menyn är fortfarande helt validerad.'}}}};

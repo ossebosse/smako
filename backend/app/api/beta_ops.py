@@ -462,7 +462,7 @@ def create_feedback(
         try:
             saved = _store(request).get_owned(payload.plan_id, owner_actor_hash=_plan_actor_hash(request, settings), revision=feedback.revision)
         except (PlanNotFoundError, PlanOwnerMismatchError, PlanReadOnlyError) as exc:
-            raise HTTPException(404, "Planrevisionen finns inte i din session.") from exc
+            raise HTTPException(404, "Den versionen av planen finns inte. Ladda om sidan.") from exc
         if feedback.recipe_index >= len(saved.plan.recipes):
             raise HTTPException(422, "Receptet saknas i planrevisionen.")
         recipe = saved.plan.recipes[feedback.recipe_index]
@@ -576,7 +576,7 @@ def erase_anonymous_beta_data(
     except ValidationError as exc:
         raise HTTPException(
             status_code=422,
-            detail="Den lokala anonyma sessionen är ogiltig.",
+            detail="Din gästsession har gått ut. Ladda om sidan.",
             headers={"X-Error-Code": "privacy_erasure_invalid_session"},
         ) from exc
 

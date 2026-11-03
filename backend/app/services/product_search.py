@@ -498,11 +498,11 @@ class ProductSearchIndex:
             "comparison_label": (
                 "Pris per köpförpackning. Kan köpas som exakt vara i hela antal. Innehållets vikt/volym är okänd; ingen gram-, liter- eller receptjämförelse." if sales_unit_only else
                 "Jämförpriset är belagt. Välj uppskattad vikt och kostnad för inköpsberäkning; slutbeloppet beror på faktisk vikt." if weight_rate else
-                "Varupris bevarat; komplett köpberäkning kräver komplettering: " + "; ".join(product.purchase_terms.critical_blockers or ("pant/mängdunderlag saknas",))
+                "Varupris bevarat; komplett köpberäkning kräver komplettering: " + "; ".join(product.purchase_terms.critical_blockers or ("okänd pant eller mängd",))
                 if product.purchase_terms and product.purchase_terms.usage == "blocked" else
-                ("Välj en kampanjmärkt variant; variantens innehåll och näring är inte verifierade."
+                ("Välj en variant som ingår i kampanjen. Vi har inte kontrollerat innehåll och näring för varianterna."
                  if product.purchase_terms and product.purchase_terms.variant_selection == 'required'
-                 else "Belagt kilopris; vikt och slutbelopp kräver uppskattningsläge/uppvägning."
+                 else "Pris per kilo. Vad du betalar beror på vad varan väger."
                  if product.purchase_terms and product.purchase_terms.usage == 'estimated'
                  else "Relevant produkt, men förpackningens pris eller mängd kan inte jämföras säkert.")
                 if not fixed
@@ -634,7 +634,7 @@ class ProductSearchIndex:
                     "Saknar aktuellt verifierat prisunderlag",
                 )
             elif not current:
-                status, reason, label = "STALE", "stale_price_contexts", "Prisunderlag för gammalt"
+                status, reason, label = "STALE", "stale_price_contexts", "Priset är för gammalt"
             elif chain in page_chains:
                 status, reason, label = "VISIBLE", "current_match", "Aktuell"
             elif chain in result_chains:
@@ -649,7 +649,7 @@ class ProductSearchIndex:
                 status, reason, label = (
                     "NO_MATCH",
                     "no_exact_identity" if barcode else "no_relevant_match",
-                    "Ingen verifierad streckkodsträff" if barcode else "Ingen relevant träff",
+                    "Ingen produkt med den streckkoden" if barcode else "Ingen relevant träff",
                 )
             coverage.append(
                 {
@@ -660,7 +660,7 @@ class ProductSearchIndex:
                     "status_label": label,
                     "current_contexts": len(current),
                     "stale_contexts": len(old),
-                    "next_step": ("Ett godkänt, aktuellt underlag för vald butik och kanal behövs. Saknade rader betyder inte att butiken saknar varan." if not current else None),
+                    "next_step": ("Vi har inga aktuella priser från butiken. Det betyder inte att butiken saknar varan." if not current else None),
                 }
             )
         return {

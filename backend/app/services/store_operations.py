@@ -35,12 +35,12 @@ def _describe_context(context):
         reasons.append(f"{attempts} misslyckade insamlingsförsök i följd." if attempts
                        else "Senaste insamlingen misslyckades.")
     if not context["runtime_active"]:
-        reasons.append("Prisunderlaget är inte aktivt i Smako.")
+        reasons.append("Vi har inga priser från butiken just nu.")
     if not context["available_prices"]:
-        reasons.append("Inga tillgängliga priser i detta underlag.")
+        reasons.append("Inga priser tillgängliga.")
     if not context["campaign_only"] and context["freshness"] in {"aging", "stale"}:
-        reasons.append("Underlaget har passerat varningsgränsen för ålder." if
-                       context["freshness"] == "aging" else "Underlaget har passerat 48-timmarsvarningen. Kvalificerade baspriser behålls tills de ersätts.")
+        reasons.append("Priserna är mer än 36 timmar gamla." if
+                       context["freshness"] == "aging" else "Priserna är mer än 48 timmar gamla. Vi använder de senaste ordinarie priserna tills nya finns.")
     price_status = ("campaign" if context["campaign_valid"] else
                     "expired" if context["campaign_only"] and not context["available_prices"] else
                     context["freshness"] if context["available_prices"] or context["freshness"] == "stale"
@@ -58,7 +58,7 @@ def _describe_store(row):
     collection = row.get("collection", {})
     if collection.get("source_empty") and not any(c["available_prices"] for c in contexts):
         row.update(status="empty", attention_reasons=[], needs_attention=False,
-                   source_message="Källan kontrollerades. Inga aktuella kvalificerade erbjudanden finns publicerade.")
+                   source_message="Butiken har inga aktuella erbjudanden.")
         return
     priority = {"failed": 0, "stale": 1, "expired": 2, "missing": 3,
                 "broken": 3, "aging": 4, "campaign": 5, "fresh": 6}
@@ -66,7 +66,7 @@ def _describe_store(row):
                         key=lambda s: priority.get(s, 3), default="missing")
     row["attention_reasons"] = list(dict.fromkeys(
         reason for c in contexts for reason in c["attention_reasons"]
-    )) if contexts else ["Ingen verifierad priskälla är kopplad till butiken."]
+    )) if contexts else ["Vi hämtar inga priser från butiken."]
     row["needs_attention"] = not contexts or any(c["needs_attention"] for c in contexts)
     if collection.get("status") == "failed" and not contexts:
         row.update(status="failed", attention_reasons=["Senaste insamlingen misslyckades."], needs_attention=True)

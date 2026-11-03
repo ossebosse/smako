@@ -1013,7 +1013,7 @@ class BasketCalculator:
             offer_description = applied_offer.description
             regular_total = None if checkout_candidate.price is None else regular_total
 
-        resolution_warning = ("Villkorat kampanjval: välj en kampanjmärkt variant. Innehåll, allergener och näring är inte verifierade. " + "; ".join(checkout_candidate.purchase_terms.exclusions)) if checkout_candidate.conditional_variant_choice else resolution.warning
+        resolution_warning = ("Kampanj: välj en variant som ingår i kampanjen. Vi har inte kontrollerat innehåll, allergener och näring för varianterna. " + "; ".join(checkout_candidate.purchase_terms.exclusions)) if checkout_candidate.conditional_variant_choice else resolution.warning
         if (checkout_candidate.purchase_terms and checkout_candidate.purchase_terms.minimum_package_g
                 and checkout_candidate.purchase_terms.maximum_package_g):
             terms = checkout_candidate.purchase_terms
@@ -1023,7 +1023,7 @@ class BasketCalculator:
         if applied_offer and applied_offer.deposit and applied_offer.deposit.confidence == 'estimated':
             resolution_warning = '; '.join(filter(None, [resolution_warning, applied_offer.deposit.assumption]))
         if checkout_candidate.purchase_units:
-            resolution_warning = "Köpförpackningar med okänd innehållsmängd. Ingen gram-/literjämförelse eller näringsberäkning. Verifiera innehållsmängden före bokföring i skafferiet."
+            resolution_warning = "Vi vet inte hur mycket förpackningen innehåller, så vi kan inte jämföra pris per kilo eller räkna näring. Ange mängden innan du lägger varan i skafferiet."
         if has_counted_weight_contract(checkout_candidate, checkout_candidate.offers):
             resolution_warning = (f"Uppskattad förpackningsvikt. Rabatten gäller högst {applied_offer.max_quantity if applied_offer else 0} förpackningar; "
                 f"övriga beräknas med belagt ordinarie pris {checkout_candidate.price:g} kr/kg. Slutbeloppet beror på verklig vikt.")

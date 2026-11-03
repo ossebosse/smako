@@ -29,7 +29,7 @@ def test_fish_exclusion_covers_recipe_species(name):
 ])
 def test_fish_exclusion_checks_product_classification(name, canonical, family):
     product = SimpleNamespace(name=name, canonical_name=canonical, food_family=family)
-    with pytest.raises(PolicyConflict, match="hårda val"):
+    with pytest.raises(PolicyConflict, match="valt bort"):
         check_product(product, TasteProfile(exclusions=["fisk"]), evidence(ingredients_complete=True))
 
 

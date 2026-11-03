@@ -116,12 +116,12 @@ def test_measured_prepare_partial_consume_release_conserve_inventory_and_retry(t
 
 def test_short_yield_is_recorded_truthfully_and_blocks_consumption(tmp_path):
     private, saved, stock = measured_plan(tmp_path)
-    with pytest.raises(PersonalConflict, match="Separera"):
+    with pytest.raises(PersonalConflict, match="Väg äggen"):
         private.inventory_action(OWNER, saved, "consume", stock["revision"])
     result = private.inventory_action(OWNER, saved, "prepare", stock["revision"], operation_id="prepare-short", preparation=batch(20, 60))
     assert result["ledger"][-1]["preparation"]["loss_g"] == 10
     assert sum(i["quantity"] for i in result["items"]) == 290
-    with pytest.raises(PersonalConflict, match="täcker inte"):
+    with pytest.raises(PersonalConflict, match="räcker inte"):
         private.inventory_action(OWNER, saved, "consume", result["revision"])
     assert private.read(OWNER) == result
 
@@ -143,7 +143,7 @@ def test_preparation_conservation_stale_stock_and_other_plan_reservations(tmp_pa
     changed["reservations"]["other-plan"] = [{"item_id": "egg-lot", "quantity": 250}]
     with private.plans._connect() as conn:
         changed = write_state(conn, OWNER, changed, stock["revision"])
-    with pytest.raises(PersonalConflict, match="disponibelt"):
+    with pytest.raises(PersonalConflict, match="avsatt till något annat"):
         private.inventory_action(OWNER, saved, "prepare", changed["revision"], operation_id="prepare-0001", preparation=batch())
     assert private.read(OWNER) == changed
 

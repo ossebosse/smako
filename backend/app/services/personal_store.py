@@ -96,7 +96,7 @@ def write_state(connection, owner, state, expected):
     current = read_state(connection, owner)
     if current["revision"] != expected:
         raise PersonalConflict(
-            "Skafferiet eller reservationerna ändrades. Läs om och beräkna igen."
+            "Skafferiet har ändrats. Ladda om sidan och räkna om."
         )
     state = deepcopy(state)
     identity = current["id"] or uuid4().hex
@@ -187,7 +187,7 @@ class PersonalStore:
                     )
                 ):
                     raise PersonalConflict(
-                        "Varan är reserverad. Frigör berörd plan innan ändringen."
+                        "Varan är avsatt till en plan. Frigör råvarorna i planen först."
                     )
             state["items"] = [i.model_dump() for i in items]
             return write_state(connection, owner, state, revision)
@@ -273,14 +273,14 @@ class PersonalStore:
                 (saved.plan_id,),
             ).fetchone()[0]
             if latest != saved.revision:
-                raise PersonalConflict("Planen ändrades. Läs senaste revisionen före bokföring.")
+                raise PersonalConflict("Planen har ändrats. Ladda om sidan innan du registrerar inköpet.")
             if action == "release":
                 state["reservations"].pop(saved.plan_id, None)
                 booked = []
             elif action == "purchase":
                 if revision_purchased(state, saved.plan_id, saved.revision):
                     raise PersonalConflict(
-                        "Revisionens inköp är redan bokfört. Räkna om före nästa köp."
+                        "Inköpet är redan registrerat. Räkna om planen före nästa inköp."
                     )
                 rows = list(state["reservations"].get(saved.plan_id, []))
                 if saved.plan.personal.allocations and not rows:
@@ -295,9 +295,9 @@ class PersonalStore:
                         )
                         item_key = need.get("selected_product_key")
                         if item.purchase_units:
-                            raise PersonalConflict("Verifiera innehållets verkliga mängd före bokföring i skafferiet. Köpförpackningar är inte ätbara stycken.")
+                            raise PersonalConflict("Ange hur mycket förpackningen innehåller innan du lägger den i skafferiet.")
                         if item.conditional_variant_choice:
-                            raise PersonalConflict('Välj den faktiskt köpta produktvarianten före bokföring i skafferiet.')
+                            raise PersonalConflict('Välj vilken variant du köpte innan du lägger den i skafferiet.')
                         quantity = item.purchased_usable_quantity
                         if item.quantity_confidence == 'estimated' or need.get("preparation") or item.unit != item.purchased_unit:
                             quantity = (measured_purchase_quantities or {}).get(item.store_id + '|' + item.product_id + '|' + item.ingredient)
@@ -305,7 +305,7 @@ class PersonalStore:
                                 raise PersonalConflict('Ange verklig användbar inköpsmängd som täcker behovet; annars räkna om planen.')
                         if quantity is None:
                             raise PersonalConflict(
-                                "Verklig inköpt mängd behöver verifieras före bokföring."
+                                "Ange hur mycket du faktiskt köpte."
                             )
                         state["items"].append(
                             PantryItem(
@@ -358,7 +358,7 @@ class PersonalStore:
                             prep = need["preparation"]
                             used = prep["purchase_input_quantity_g"]
                             if abs(remaining - used) > 1e-7:
-                                raise PersonalConflict("Beredningsinsatsen stämmer inte med inköpet.")
+                                raise PersonalConflict("Vikten före beredning stämmer inte med inköpet.")
                             if used > 1e-8:
                                 from app.services.ingredient_preparations import source_name
                                 rows.append({"item_id": identity, "quantity": used, "unit": "g", "name": source_name(prep['method']),
@@ -367,7 +367,7 @@ class PersonalStore:
                             remaining -= used
                         if remaining > 1e-7:
                             raise PersonalConflict(
-                                "Inköpet saknar verifierad koppling till planens behov."
+                                "Inköpet hör inte till något i planen."
                             )
                 state["reservations"][saved.plan_id] = rows
             elif action == "prepare":
@@ -379,13 +379,13 @@ class PersonalStore:
                     raise PersonalConflict("Bekräfta verkligt inköp före planens förbrukning.")
                 rows = state["reservations"].get(saved.plan_id)
                 if rows is None:
-                    raise PersonalConflict("Planens reservation är frigjord. Beräkna om först.")
+                    raise PersonalConflict("Råvarorna är frigjorda från planen. Räkna om planen först.")
                 if any(r.get("kind") == "preparation_input" for r in rows):
-                    raise PersonalConflict("Separera eller plocka och bokför uppmätta beredningsutfall före förbrukning.")
+                    raise PersonalConflict("Väg äggen eller myntan och registrera vikterna innan du registrerar användningen.")
                 for demand in self._unconsumed_component_demands(state, saved):
                     reserved = sum(r["quantity"] for r in rows if r.get("demand_key") == demand["demand_key"])
                     if reserved + 1e-7 < demand["quantity"]:
-                        raise PersonalConflict("Uppmätt beredningsutfall täcker inte återstående behov. Räkna om eller komplettera.")
+                        raise PersonalConflict("Det du har vägt räcker inte till recepten. Räkna om planen eller köp mer.")
                 amounts = defaultdict(float)
                 booked = []
                 for row in rows:
@@ -435,7 +435,7 @@ class PersonalStore:
             raise PersonalConflict("Planen saknar den angivna granskade beredningen.")
         rows = state["reservations"].get(saved.plan_id)
         if rows is None:
-            raise PersonalConflict("Planens reservation är frigjord. Räkna om först.")
+            raise PersonalConflict("Råvarorna är frigjorda från planen. Räkna om planen först.")
         inputs = []
         available = {i["id"]: i for i in available_items(state, plan_id=saved.plan_id)}
         allowed = {a["product_key"] for p in planned_preparations for a in p["input_allocations"]}
@@ -448,11 +448,11 @@ class PersonalStore:
             if (not item or item["unusable"] or item["unit"] != "g" or item.get("prepared_origin")
                     or not item.get("product_key") or item["product_key"] not in allowed
                     or quantity > item["available"] - protected + 1e-7):
-                raise PersonalConflict("Insatsen saknar kvalificerat disponibelt parti eller är reserverad för annat behov.")
+                raise PersonalConflict("Varan finns inte i skafferiet eller är redan avsatt till något annat.")
             inputs.append({"item_id": identity, "quantity": quantity, "unit": "g", "product_key": item["product_key"]})
         keys = {r["product_key"] for r in inputs}
         if len(keys) != 1:
-            raise PersonalConflict("Separera olika produktidentiteter i egna uppmätta beredningsomgångar.")
+            raise PersonalConflict("Väg en produkt i taget.")
         product_key = next(iter(keys))
         compatible_demands = set()
         for planned in planned_preparations:
@@ -578,7 +578,7 @@ class PersonalStore:
                         demand["quantity"] -= used
                 if remaining > 1e-7:
                     raise PersonalConflict(
-                        "Äldre reservation saknar entydig behovskoppling. Frigör och räkna om planen."
+                        "Frigör råvarorna och räkna om planen."
                     )
             state["reservations"][saved.plan_id] = upgraded
         old = state["events"].get(saved.plan_id, {})

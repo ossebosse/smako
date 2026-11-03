@@ -164,7 +164,7 @@ def test_combined_pantry_packages_and_estimate_without_stock_mutation():
 
 def test_generic_pantry_requires_own_confirmation_even_with_mode_enabled():
     inventory = state([PantryItem(name="ris", quantity=500, unit="g")])
-    with pytest.raises(PolicyConflict, match="bekräftat"):
+    with pytest.raises(PolicyConflict, match="vilket livsmedel"):
         run(products(), dinner_request(allow_nutrition_estimates=True), inventory, facts={})
 
 
