@@ -15,7 +15,11 @@ from pathlib import Path
 from zoneinfo import ZoneInfo
 
 from grocery_data.app.connectors.lidl.connector import LidlConnector
-from grocery_data.app.connectors.lidl.document_qualification import national_metadata, qualify
+from grocery_data.app.connectors.lidl.document_qualification import (
+    national_metadata,
+    qualify,
+    structured_offer_proof,
+)
 from grocery_data.app.connectors.lidl.parser import LidlParser
 from grocery_data.app.domain import (
     ProductParseResult,
@@ -110,6 +114,16 @@ class MunicipalLidlOfferConnector(LidlConnector):
                 reviewed.pop(proof['product_id'])
                 continue
             reviewed[proof['product_id']] = proof
+        # Captions that cannot be bound exactly fall back to Lidl's own
+        # structured national offer row, under closed conditions only.
+        # A product the document did bind to a caption keeps that verdict: a
+        # document conflict is never overridden by the structured row.
+        documented = {d.get("product_id") for d in self.document_decisions if d.get("product_id")}
+        for product in extracted.products:
+            if product.external_product_id not in reviewed and product.external_product_id not in documented:
+                proof = structured_offer_proof(product, source_rows.get(product.external_product_id, []), self.review)
+                if proof is not None:
+                    reviewed[product.external_product_id] = proof
         candidates = []
         # Parser failures remain quarantined, never qualify for publication.
         # A page/envelope failure blocks the whole source; only records with an

@@ -27,6 +27,12 @@ EXPECTED.update({'11217807':('49.9','1,1 kg'), '11219129':('27.9','500 g'),
                  '11029883':('11.9','/st'), '11150856':('26.9','/kg'), '11217379':('69.9',None)})
 
 
+def documented(result):
+    """Products bound to the PDF caption; structured-row fallbacks are separate."""
+    return [p for p in result.products if p.source_fields['document_product_binding'].get('identity_method')
+            != 'lidl-structured-national-offer-v1']
+
+
 def parse(mutate=None, pdf=None):
     bundle = retained_bundle(ROOT / 'source')
     batch = bundle['catalog']
@@ -49,9 +55,9 @@ def parse(mutate=None, pdf=None):
 def test_all_independently_verified_foods_qualify_without_manual_registry(monkeypatch):
     monkeypatch.setattr(municipal_offers, 'REVIEW', Path('absent-manual-register.json'))
     result, c = parse()
-    assert {p.external_product_id for p in result.products} == EXPECTED.keys()
-    assert len(result.products) == 26 and len(result.failures) == 354
-    for p in result.products:
+    assert {p.external_product_id for p in documented(result)} == EXPECTED.keys()
+    assert len(documented(result)) == 26 and len(result.products) + len(result.failures) == 380
+    for p in documented(result):
         assert (str(p.offers[0].price), p.package_text) == EXPECTED[p.external_product_id]
         assert p.source_fields['document_product_binding']['identity_method'] == METHOD
         assert p.offers[0].valid_from.isoformat() == '2026-09-21'
@@ -77,8 +83,15 @@ def test_all_independently_verified_foods_qualify_without_manual_registry(monkey
 ])
 def test_wrong_price_variant_package_membership_limit_expiry_or_scope_isolated(mutate):
     result, _ = parse(mutate)
-    assert '11209202' not in {p.external_product_id for p in result.products}
-    assert len(result.products) == len(EXPECTED)-1
+    assert '11209202' not in {p.external_product_id for p in documented(result)}
+    assert len(documented(result)) == len(EXPECTED)-1
+    # Only a self-consistent renamed row may still qualify, at its own price.
+    for p in result.products:
+        if p.external_product_id == '11209202':
+            binding = p.source_fields['document_product_binding']
+            assert binding['identity_method'] == 'lidl-structured-national-offer-v1'
+            assert binding['full_title'].replace(' ', '') == ((p.brand or '') + p.name).replace(' ', '')
+            assert str(p.offers[0].price) == '99.0'
 
 
 def test_unknown_pdf_digest_does_not_inherit_old_manual_approvals():
@@ -87,7 +100,7 @@ def test_unknown_pdf_digest_does_not_inherit_old_manual_approvals():
         doc.set_metadata({'subject': 'synthetic digest change, not a real next campaign'})
         pdf = doc.tobytes()
     result, _ = parse(pdf=pdf)
-    assert {p.external_product_id for p in result.products} == EXPECTED.keys()
+    assert {p.external_product_id for p in documented(result)} == EXPECTED.keys()
 
 
 def test_retained_real_week40_text_bindings_cannot_be_bought_before_start():

@@ -281,3 +281,70 @@ def qualify_caption(page, block, spans, captions, prices, product, source_rows, 
             "binding_checks": ["exact_complete_branded_caption", "unique_source_identity",
                 "literal_single_package", "price_typography_geometry", "closed_caption_grammar",
                 "document_price_equals_source", "explicit_page_dates", "national_publication_scope"]}
+
+
+STRUCTURED_METHOD = "lidl-structured-national-offer-v1"
+_NON_BEVERAGE_LIQUIDS = ('Oljor, kryddor och såser', 'Färdigrätter')
+
+
+def structured_offer_proof(product, rows, metadata):
+    """National campaign proof from Lidl's own structured offer row.
+
+    Used when the PDF caption cannot be bound exactly. Lidl's offer list is the
+    national campaign for all Swedish stores; only closed cases qualify: one
+    food row with complete identity, one current non-multibuy offer for a fixed
+    g/kg (or non-beverage ml/l) package, inside the national publication
+    period, nationally eligible and without coupon, activation, variant or
+    deposit conditions. Returns None when any condition is unproven.
+    """
+    p = product
+    if len(rows) != 1 or "Mat och nära mat" not in p.category_path or not p.gtin:
+        return None
+    row = rows[0]
+    if normalized(row.get('fullTitle', '')) != normalized((p.brand or '') + p.name):
+        return None
+    if len(p.offers) != 1 or p.offers[0].quantity or p.sale_unit != 'st':
+        return None
+    if not p.package_quantity or p.package_unit not in {'g', 'kg', 'ml', 'l'}:
+        return None
+    if p.package_unit in {'ml', 'l'} and not any(c in p.category_path for c in _NON_BEVERAGE_LIQUIDS):
+        return None
+    fields = p.source_fields
+    if (not fields.get('price_valid_at_observation') or not fields.get('shared_price_universe_eligible')
+            or fields.get('geographic_restrictions')):
+        return None
+    offer = p.offers[0]
+    if not offer.valid_from or not offer.valid_to or offer.price is None or offer.price <= 0:
+        return None
+    # Any price legend or note (e.g. "Gäller endast i …") is a local condition.
+    for region in (row.get('regionsPrices') or {}).values():
+        for key in ('currentPrice', 'currentLidlPlusPrice'):
+            price = (region or {}).get(key) or {}
+            price = price.get('price', price) if key == 'currentLidlPlusPrice' else price
+            if any(price.get(k) for k in ('priceLegendName', 'priceLegendText')):
+                return None
+    start, end = offer.valid_from.isoformat(), offer.valid_to.isoformat()
+    if not (metadata['offer_start'][:10] <= start <= end <= metadata['offer_end'][:10]):
+        return None
+    description = html.unescape(re.sub("<[^>]+>", " ", row.get("keyfacts", {}).get("description", "")))
+    conditions = re.sub(r'Max\s+\d+\s+förp\.?/hushåll', '', description, flags=re.IGNORECASE)
+    if re.search(r"välj|olika|sorter|max|kupong|aktiver|personlig|pant|just for you", conditions, re.IGNORECASE):
+        return None
+    limits = re.findall(r"Max\s+(\d+)\s+förp", description, re.IGNORECASE)
+    if len(set(limits)) > 1:
+        return None
+    from grocery_data.app.domain.purchase_terms import PurchaseTerms
+    terms = PurchaseTerms(source_reference='lidl-structured-offer:' + p.external_product_id,
+        purchase_form='fixed_package', quantity_basis='source_exact', limit_scope='household_campaign')
+    text = f"{row['fullTitle']} {p.package_text} {offer.price} kr ({start}–{end})"
+    return {"purchase_terms": terms.model_dump(mode='json'), "price_basis_unit": 'package',
+            "product_id": p.external_product_id, "gtin": p.gtin, "source_name": p.name,
+            "package_label": None, "explicit_piece_purchase": False,
+            "full_title": row["fullTitle"], "brand": p.brand, "package_text": p.package_text,
+            "page_number": None, "bbox": None, "text": text, "price_bbox": None,
+            "text_sha256": hashlib.sha256(text.encode()).hexdigest(), "price": str(offer.price),
+            "member_only": offer.member_only, "max_packages_per_household": int(limits[0]) if limits else None,
+            "drained_quantity_g": None,
+            "deposit_status": "not_applicable_verified_non_beverage_package",
+            "identity_method": STRUCTURED_METHOD, "required_source_text": [], "price_token": str(offer.price),
+            "valid_from": start, "valid_to": end, "reviewed_source_description": description}

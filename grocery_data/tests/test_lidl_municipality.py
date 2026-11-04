@@ -65,9 +65,15 @@ def test_failed_official_detail_remains_unknown_and_visible():
     assert len(rebuilt["stores"]) == len(inv["stores"])
 
 
+def documented(result):
+    """Products bound to the PDF caption; structured-row fallbacks are separate."""
+    return [p for p in result.products if p.source_fields['document_product_binding'].get('identity_method')
+            != 'lidl-structured-national-offer-v1']
+
+
 def test_bound_rows_no_ordinary_prices_and_original_observation():
     parsed, adapter = parse()
-    assert len(parsed.products) == 26 and len(parsed.failures) == 354
+    assert len(documented(parsed)) == 26 and len(parsed.products) + len(parsed.failures) == 380
     assert not adapter.row_acceptance["shared_blockers"]
     for p in parsed.products:
         assert p.regular_price is p.sale_price is p.member_price is None
@@ -88,8 +94,8 @@ def test_uncertain_row_is_quarantined_while_independent_rows_continue(mutation):
     parsed, _ = parse(mutation)
     assert "11214016" not in {p.external_product_id for p in parsed.products}
     assert {"11137878", "11218552"}.issubset({p.external_product_id for p in parsed.products})
-    assert len(parsed.products) == 25
-    assert len(parsed.failures) == 355
+    assert len(documented(parsed)) == 25
+    assert len(parsed.products) + len(parsed.failures) == 380
 
 
 def test_changed_document_or_regional_publication_not_nationalized():
