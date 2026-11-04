@@ -43,6 +43,38 @@ def scheduled_fetch_due(observed_at: datetime | None, *, now: datetime) -> datet
     return following
 
 
+DAILY_OFFER_TIME = time(5, 17)
+
+
+def daily_offer_slots(now: datetime) -> tuple[datetime, datetime]:
+    """Previous and next daily 05:17 Swedish time for store-bound one-day offers."""
+    if now.tzinfo is None or now.utcoffset() is None:
+        raise ValueError('aware clock required')
+    local = now.astimezone(STOCKHOLM)
+    slots = [datetime.combine(local.date() + timedelta(days=offset), DAILY_OFFER_TIME, STOCKHOLM)
+             .astimezone(UTC) for offset in (-1, 0, 1)]
+    return max(s for s in slots if s <= now), min(s for s in slots if s > now)
+
+
+def daily_offer_times(rows, *, now):
+    """Hemkop club days last one day: offers-only rows refresh every morning.
+
+    Same bounded three-hour retry window as the twice-weekly collection; base
+    catalogs and store inventories keep their own schedule.
+    """
+    previous, following = daily_offer_slots(now)
+    for row in rows:
+        stamp = row.get('last_success_at')
+        observed = datetime.fromisoformat(stamp) if stamp else None
+        due = now if (observed is None or observed < previous) and now < previous + timedelta(hours=3) else following
+        if row.get('failed_attempts') and row.get('next_fetch_at'):
+            retry = datetime.fromisoformat(row['next_fetch_at'])
+            if previous <= retry < previous + timedelta(hours=3):
+                due = max(due, retry)
+        row['next_fetch_at'] = due.isoformat()
+        row['reason'] = 'daily_offer_collection'
+
+
 def scheduled_source_times(rows, *, state, now, environment=None):
     """Project persisted legacy offer timers into the explicitly selected cadence."""
     if not twice_weekly(environment):

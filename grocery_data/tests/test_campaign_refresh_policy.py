@@ -39,3 +39,24 @@ def test_base_refresh_never_waits_for_next_week_and_coalesces_once():
     assert base_fetch_due(NOW,now=NOW,campaign_at=NOW+timedelta(days=7)) == NOW+timedelta(hours=35)
     assert base_fetch_due(NOW,now=NOW,campaign_at=NOW+timedelta(hours=25)) == NOW+timedelta(hours=25)
     assert base_fetch_due(NOW,now=NOW,campaign_at=NOW+timedelta(hours=2)) == NOW+timedelta(hours=35)
+
+
+def test_daily_offer_times_collect_each_morning_with_bounded_retry():
+    from grocery_data.app.services.campaign_refresh_policy import daily_offer_times
+
+    # Wednesday 2026-11-04 05:20 Stockholm (04:20 UTC): Monday's success is stale.
+    now = datetime(2026, 11, 4, 4, 20, tzinfo=UTC)
+    rows = [{'last_success_at': '2026-11-02T03:34:54+00:00', 'failed_attempts': 0},
+            {'last_success_at': '2026-11-04T04:18:00+00:00', 'failed_attempts': 0},
+            {'last_success_at': '2026-11-02T03:34:54+00:00', 'failed_attempts': 2,
+             'next_fetch_at': '2026-11-04T05:00:00+00:00'}]
+    daily_offer_times(rows, now=now)
+    assert rows[0]['next_fetch_at'] == now.isoformat()
+    assert rows[1]['next_fetch_at'] == '2026-11-05T04:17:00+00:00'
+    assert rows[2]['next_fetch_at'] == '2026-11-04T05:00:00+00:00'
+    assert {r['reason'] for r in rows} == {'daily_offer_collection'}
+    # Missed the morning window: wait for tomorrow, never a daytime collection.
+    late = datetime(2026, 11, 4, 12, 0, tzinfo=UTC)
+    stale = [{'last_success_at': '2026-11-02T03:34:54+00:00'}]
+    daily_offer_times(stale, now=late)
+    assert stale[0]['next_fetch_at'] == '2026-11-05T04:17:00+00:00'

@@ -27,9 +27,15 @@ def source_plan(*, city=None, environment=None, now=None):
     area, root, enabled = configuration(city, environment=environment)
     state = read(root / 'source-state.json') if enabled else {}
     schedules = state.get('store_schedule', {})
-    from grocery_data.app.services.campaign_refresh_policy import scheduled_source_times
+    from grocery_data.app.services.campaign_refresh_policy import (
+        daily_offer_times,
+        scheduled_source_times,
+    )
     inventory_fetch = scheduled_source_times(schedules.values(), state=state, now=now,
                                              environment=environment)
+    if inventory_fetch is not None:
+        # Store inventory stays twice weekly; one-day club prices need a daily check.
+        daily_offer_times(schedules.values(), now=now)
     for schedule in schedules.values():
         if inventory_fetch is None and schedule.get('last_success_at') and not schedule.get('failed_attempts'):
             schedule['next_fetch_at'] = min(datetime.fromisoformat(schedule['next_fetch_at']),

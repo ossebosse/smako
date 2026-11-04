@@ -244,6 +244,17 @@ def _review_schema_diff(
         required_type_changes = tuple(
             change for change in diff.type_changed if not reviewed_hemkop_type_change(change)
         )
+    elif chain == Chain.HEMKOP and parser_version == "hemkop-physical-offers-v2":
+        from grocery_data.app.connectors.hemkop.schema_review import (
+            reviewed_hemkop_physical_offer_schema_diff,
+            reviewed_hemkop_physical_offer_type_change,
+        )
+
+        reviewed = reviewed_hemkop_physical_offer_schema_diff(diff, schemas=schemas)
+        required_type_changes = tuple(
+            change for change in diff.type_changed
+            if not reviewed_hemkop_physical_offer_type_change(change)
+        )
     elif chain == Chain.WILLYS and parser_version in {"willys-parser-v3", "willys-parser-v4", "willys-parser-v5", "willys-parser-v6-picking-contract"}:
         from grocery_data.app.connectors.willys.schema_review import (
             reviewed_willys_schema_diff,

@@ -118,8 +118,9 @@ att det saknas appändringar. Använd en ny utdatamapp för varje nytt paket.
 
 Om aktiv fil har andra ändringar än Git-basen, om en fil tas bort eller om
 beroenden, databasstruktur, grocery-kod eller körbara deploy-filer har ändrats i
-intervallet, avbryts detta begränsade appflöde. Gör en separat granskad release
-för den förändringen; kopiera inte hela main över den aktiva bilden på chans.
+intervallet, avbryts detta begränsade appflöde. Leverera då förändringen med
+schedulerpatch eller full release nedan; kopiera inte hela main över den aktiva
+bilden på chans.
 `deploy/.env.production.example` är dokumentation och paketeras aldrig.
 Ändringar där ändrar inte serverns miljöfil. Appmoduler vars namn innehåller
 `requirements` är vanlig appkod och ingår i den exakta filgranskningen.
@@ -211,8 +212,11 @@ Spara aldrig full compose-miljö, cookies, privata profiler eller backupfiler i 
 
 ## Andra releasetyper
 
-För ny server, scheduler, databasmigrering eller Windowsrelä behövs separat
-verifierad plan.
+Ny server, databasmigrering och Windowsrelä kräver en egen plan.
+Scheduler- och grocery-kodändringar får aktiveras direkt, utan separat
+granskningsrelease, när relevanta tester är gröna: paketera med
+`build_source_patch.py` enligt nedan, ta backup och byt schedulerbild.
+Verifiera första körningen efteråt i driftstatus och journalföra som vanligt.
 
 En samlad release måste prova faktisk schedulerbild mot ett helt inaktivt
 prisbygge i berörda kommuner. Kommuterande filpatchar bevisar inte kompatibla
@@ -242,7 +246,7 @@ Endast bevisat identiskt Pythoninnehåll efter radslutsnormalisering tillåts;
 byggkontrollen kräver fortfarande originalets exakta bytehash. Andra
 runtimeavvikelser avvisas.
 Jämför dess `Config` med paketets `IMAGE-CONFIG.json`, verifiera granskade
-filhashar och kör relevanta offlineprov före separat kontrollerad aktivering.
+filhashar och kör relevanta offlineprov före aktivering.
 En ny installation eller uppdaterad scheduler kör städningen vid start och
 via befintliga backup-/refreshjobb; ingen extra timer installeras.
 

@@ -71,3 +71,39 @@ def reviewed_hemkop_schema_diff(diff: SchemaDiff, *, schemas=None, picking_contr
         removed=tuple(path for path in diff.removed if not reviewed_removal(path)),
         type_changed=tuple(c for c in diff.type_changed if not reviewed_hemkop_type_change(c)),
     )
+
+
+# Physical campaign source (hemkop-physical-offers-v2). Row prices are never
+# read from the product row; promotion price, dates and limits are validated
+# per row by physical_offers.parse. Week-to-week these optional fields gain or
+# lose null as campaigns with/without ordinary price or purchase limits rotate.
+_OFFER_PREFIX = r"(?:[0-9]+:)?physical_offers:\$\[\]\.results\[\]"
+_OFFER_NULLABLE = {
+    re.compile(_OFFER_PREFIX + r"\.(?:price|priceNoUnit)\Z"): {"string"},
+    re.compile(_OFFER_PREFIX + r"\.potentialPromotions\[\]\.(?:redeemLimit|promotionRedeemLimit)\Z"): {"number"},
+}
+
+
+def reviewed_hemkop_physical_offer_type_change(change: SchemaTypeChange) -> bool:
+    before, after = set(change.old_types), set(change.new_types)
+    for pattern, allowed in _OFFER_NULLABLE.items():
+        if pattern.fullmatch(change.path):
+            # Only null and the field's single reviewed type may come and go;
+            # any other non-null type is blocked.
+            union = {str(t) for t in before | after}
+            return "null" in union and union <= allowed | {"null"}
+    return False
+
+
+def reviewed_hemkop_physical_offer_schema_diff(diff: SchemaDiff, *, schemas=None) -> SchemaDiff:
+    picking = reviewed_hemkop_schema_diff(
+        SchemaDiff(added=diff.added, removed=diff.removed, type_changed=()),
+        schemas=schemas, picking_contract=True,
+    )
+    def store_flag(path):
+        return _PICKING.fullmatch(path) is not None
+    return SchemaDiff(
+        added=tuple(path for path in diff.added if path in picking.added or not store_flag(path)),
+        removed=tuple(path for path in diff.removed if path in picking.removed or not store_flag(path)),
+        type_changed=tuple(c for c in diff.type_changed if not reviewed_hemkop_physical_offer_type_change(c)),
+    )
