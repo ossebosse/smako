@@ -218,3 +218,35 @@ def test_grocery_runtime_change_still_blocks_next_to_tests(release, monkeypatch)
     monkeypatch.setattr(module, "remote", lambda *_: pytest.fail("must stop before SSH"))
     with pytest.raises(ValueError, match="grocery_data/app/model.py"):
         module.prepare(args)
+
+
+def test_grocery_code_can_ride_along_only_when_asked_and_exactly_checked(release, monkeypatch):
+    module, args, _source, git = release
+    root = module.ROOT
+    (root / "grocery_data/app").mkdir(parents=True)
+    (root / "grocery_data/app/model.py").write_text("x = 1\n", encoding="utf8")
+    git("add", ".")
+    git("commit", "-qm", "grocery base")
+    args.from_commit = git("rev-parse", "HEAD")
+    args.commit = _commit_extra(git, root, {"grocery_data/app/model.py": "x = 2\n",
+                                            "backend/app/example.py": "value = 3\n"})
+    live = {"backend/app/example.py": base64.b64encode(b"value = 2\n").decode(),
+            "grocery_data/app/model.py": base64.b64encode(b"x = 1\n").decode()}
+    monkeypatch.setattr(module, "remote", lambda *_: json.dumps(
+        {"image": "sha256:" + "a" * 64, "files": live}).encode())
+    args.include_grocery_code = True
+    module.prepare(args)
+    review = json.loads((args.workdir / "review.json").read_text())
+    assert review["review"]["include_grocery_code"] is True
+    assert set(review["review"]["files"]) == {"backend/app/example.py", "grocery_data/app/model.py"}
+    with zipfile.ZipFile(args.workdir / "candidate.zip") as archive:
+        assert archive.read("grocery_data/app/model.py") == b"x = 2\n"
+    # A diverging live grocery file still stops, and non-Python grocery files never ride along.
+    live["grocery_data/app/model.py"] = base64.b64encode(b"x = 9\n").decode()
+    args.workdir = args.workdir.parent / "out2"
+    with pytest.raises(ValueError, match="Runtime differs|lineage|ambiguous"):
+        module.prepare(args)
+    args.commit = _commit_extra(git, root, {"grocery_data/app/data.json": "{}\n"})
+    args.workdir = args.workdir.parent / "out3"
+    with pytest.raises(ValueError, match="grocery_data/app/data.json"):
+        module.prepare(args)
