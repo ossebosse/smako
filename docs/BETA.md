@@ -1,3 +1,17 @@
+# 2026-11-05: Mina val (Din mat, Inköp), Pescetariskt och omväxling aktiverat
+
+Main `431ddb3ac0f2`. App **app-431ddb3ac0f2-28522b51**, scheduler orörd
+(source-ops-e6d4ceaca5bc). Hela main sedan 2026-11-01 följde med: textgenomgång,
+receptvarianter och adminfiler. Mina val har sex steg; Gillar/Undvik med
+allergimarkering; Pescetariskt som kostval; omväxling Lite/Lagom/Mer.
+Grocery-ändringar som redan fanns i schedulern lämnades på appbildens version
+(`--keep-app-grocery`). Publikt prov: tre pescetariska middagar, en fisk, tre
+matkök, VERIFIED, 278,70 kr, återläst. Bevarat: 333 planversioner,
+147 privata tillstånd. Backup `/srv/smako/backups/20261105T203020Z`.
+[Aktiveringsjournal](releases/mina-val-dinmat-20261105/ACTIVATED.md).
+
+---
+
 # 2026-11-01: Uppvärmda prov och samordnad faktaläsning/GC aktiverat
 
 [PR 59](https://github.com/ossebosse/smako/pull/59), main `b47e07febe6e`.
@@ -51,7 +65,7 @@ på `main` inte ändrar en pågående release.
   `smako-app-1`, `smako-scheduler-1`, `smako-caddy-1`, data i `/srv/smako/data`
   och det gemensamma driftlåset. Detta flöde installerar inte en ny server.
 - Läs aktuell [HANDOFF.md](HANDOFF.md), [OPERATIONS.md](OPERATIONS.md) och
-  senaste aktiveringsrapport. Appens BUILD_ID är `app-b7c8d0506e23-c18e4ba9`;
+  senaste aktiveringsrapport. Appens BUILD_ID är `app-431ddb3ac0f2-28522b51`;
   schedulern är `source-ops-8a53beb80e43`.
   [Uppvärmda prov och samordnad faktaläsning/GC](releases/warm-facts-gc-20261101/ACTIVATED.md)
   är senaste appaktiveringen. Sex Pythonfiler från kod `b7c8d0506e23`;
@@ -99,12 +113,12 @@ git status --short
 .venv/Scripts/python.exe -X utf8 scripts/smako_ops.py status
 
 # Använd den granskade Git-bas som motsvarar faktiskt aktiva filer enligt senaste journalen.
-.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit 78403f6154cd --commit main --workdir .local/beta-release
+.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit 431ddb3ac0f2 --commit main --workdir .local/beta-release
 ```
 
-`78403f6154cd` är `b7c8d0506e23` plus de exakta driftsatta adminfilerna
-(lösenordsinloggning, `/api/admin/stores`, `/admin`-sidan) som tidigare bara
-fanns i runtime; de är sedan 2026-11-03 sammanfogade i `main`. De äldre
+`431ddb3ac0f2` är appen som aktiverades 2026-11-05. Appbildens egen
+grocery-kopia är äldre än Git; använd `--keep-app-grocery` om intervallet
+bara innehåller grocery-Python som redan levererats till schedulern. De äldre
 Coop-filerna i runtime (`price_universe_runtime.py`,
 `production_price_universe_build.py`, saknad `coop_syd_base.py`) är medvetet
 kvar på Git-versionen i basen och ändras inte av ett appflöde. Byt bas efter
