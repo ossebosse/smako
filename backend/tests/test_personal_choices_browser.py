@@ -461,6 +461,22 @@ def test_distribution_conflict_preserves_explicit_values(choices):
     assert submit(page, captured)["personal"]["meals"][0]["diet"] == "mixed"
 
 
+def test_pescetarian_is_a_diet_choice_that_allows_fish_but_not_meat(choices):
+    page, url, captured = choices
+    page.goto(url)
+    choose_location(page)
+    page.locator("#dinner-distribution-open").click()
+    page.locator("#dinner-diet").select_option("pescetarian")
+    edit(page, "dinner-fish", 2)
+    done(page, "dinner", "distribution")
+    expect(page.locator("#dinner-distribution-open")).to_contain_text("Pescetariskt")
+    meal = submit(page, captured)["personal"]["meals"][0]
+    assert (meal["diet"], meal["distribution"]) == ("pescetarian", {"fish": 2})
+    page.locator("#dinner-distribution-open").click()
+    edit(page, "dinner-meat", 1)
+    expect(page.locator("#dinner-conflict")).to_contain_text("Pescetariskt")
+
+
 def test_all_nine_dialogs_are_independent_transactional_and_accessible(choices):
     page, url, captured = choices
     page.goto(url)
@@ -733,13 +749,23 @@ def test_quick_recipe_choices_write_the_detailed_limits(choices):
     expect(page.locator("#recipe-details")).not_to_have_attribute("open", "")
     page.locator("#recipe-quick-time").select_option("30")
     page.locator("#recipe-quick-ingredients").select_option("8")
-    page.locator("#recipe-variety").select_option("more")
+    page.locator("#recipe-variety").select_option("normal")
     body = submit(page, captured)
     dinner = body["personal"]["meals"][0]["recipe_choices"]
     assert (dinner["max_active_minutes"], dinner["min_ingredients"], dinner["max_ingredients"]) == (30, None, 8)
     prefs = body["recipe_preferences"]
     assert (prefs["cuisine_distribution"], prefs["min_distinct_cuisines"],
             prefs["max_same_main_protein_dinners"]) == ("minimum", 3, 2)
+    # Mer: as many cuisines as the dinners allow and no main protein twice.
+    page.locator("#recipe-variety").select_option("max")
+    prefs = submit(page, captured)["recipe_preferences"]
+    assert (prefs["cuisine_distribution"], prefs["min_distinct_cuisines"],
+            prefs["max_same_main_protein_dinners"]) == ("minimum", 3, 1)
+    page.locator("#recipe-variety").select_option("low")
+    prefs = submit(page, captured)["recipe_preferences"]
+    assert (prefs["cuisine_distribution"], prefs.get("min_distinct_cuisines"),
+            prefs.get("max_same_main_protein_dinners")) == ("free", None, None)
+    expect(page.locator("#recipe-allow-fish")).to_be_hidden()
     # A detailed change the quick choices cannot express shows as your own choice.
     page.locator("#recipe-details>summary").click()
     page.locator("#meal-dinner-max_active_minutes").fill("25")

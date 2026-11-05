@@ -28,6 +28,7 @@ class DietPreference(StrEnum):
 
     MIXED = "mixed"
     MEAT_ALLOWED = "meat_allowed"
+    PESCETARIAN = "pescetarian"
     VEGETARIAN = "vegetarian"
     VEGAN = "vegan"
 

@@ -28,7 +28,7 @@ def prepare_request(request, settings, *, pantry_revision=0):
     if request.personal is None:
         spec = PersonalPlanning(
             meals=[MealSettings(count=request.recipes, servings=request.servings,
-                                diet=request.diet_preference.value if request.diet_preference.value in {"vegetarian", "vegan"} else "mixed")],
+                                diet=request.diet_preference.value if request.diet_preference.value in {"pescetarian", "vegetarian", "vegan"} else "mixed")],
             pantry_revision=pantry_revision,
             allow_nutrition_estimates=request.allow_nutrition_estimates,
             use_pantry=request.use_pantry,
@@ -38,7 +38,7 @@ def prepare_request(request, settings, *, pantry_revision=0):
     for meal in spec.meals:
         if meal.meal_type != "dinner" or not meal.count:
             continue
-        if request.diet_preference.value in {"vegetarian", "vegan"} and meal.diet != request.diet_preference.value:
+        if request.diet_preference.value in {"pescetarian", "vegetarian", "vegan"} and meal.diet != request.diet_preference.value:
             raise PolicyConflict("Måltidens kostval strider mot planens kostval. Använd samma kostinriktning i båda valen.", code="RECIPE_CHOICES_CONFLICT")
         if not prefs.allow_fish and meal.distribution.get("fish", 0):
             raise PolicyConflict("Fisk är avstängd men ingår i vald fördelning. Ta bort fiskmåltiderna eller tillåt fisk.", code="RECIPE_CHOICES_CONFLICT")

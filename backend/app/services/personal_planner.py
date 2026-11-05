@@ -147,7 +147,7 @@ class PersonalPlanner:
         request = prepare_request(request, settings, pantry_revision=state["revision"])
         self.complete = enabled(request)
         self.request, self.settings, self.prepared, self.state = request, settings, prepared, state
-        if request.diet_preference in {"vegetarian", "vegan"} and not self.complete:
+        if request.diet_preference in {"pescetarian", "vegetarian", "vegan"} and not self.complete:
             raise PolicyConflict(
                 "Personlig planering har kostval per måltidstyp. Det äldre globala kostkravet kan inte ignoreras: ange det i måltidsvalen och ta bort det globala fältet innan du bekräftar."
             )

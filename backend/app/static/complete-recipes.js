@@ -62,7 +62,10 @@
     if(!personal)grid.append(field("Minst protein per portion (g)",protein));
     grid.append(field("Tillåtna anpassningar",adaptation));
     const countHint=el("p","Alla delar av rätten räknas, även olja, kryddor och såser, men inte salt, peppar och vatten. Det du har hemma räknas också.","field-hint");
-    advanced.append(grid,custom,...(personal?[]:[countHint]),field("Tillåt fisk när övriga kostval medger det",fish));
+    // Personal planning chooses fish through the diet and the meal distribution;
+    // this older choice is only shown when a restored plan has turned fish off.
+    const fishField=field("Tillåt fisk när övriga kostval medger det",fish);if(personal)fishField.hidden=true;
+    advanced.append(grid,custom,...(personal?[]:[countHint]),fishField);
     const contexts=el("fieldset",null,"recipe-contexts complete-recipe-options");contexts.id="recipe-price-contexts";contexts.append(el("legend","Butiker och nätbutiker"),el("p","Markerar du inget jämför vi alla butiker i ditt område. Väljer du butiker letar vi bara där. Högsta antal butiker gäller fortfarande.","field-hint"));
     const contextOptions=el("div");const contextStatus=el("p",null,"field-hint");contextStatus.setAttribute("role","status");contexts.append(contextOptions,contextStatus);advanced.append(contexts);
     let selectedContexts=[],contextEpoch=0,contextPosition=null;
@@ -149,16 +152,18 @@
     // Personal planning: three quick choices and the cuisines up front; every
     // detailed limit stays available under "Anpassa i detalj". The quick
     // choices only write the detailed fields, so the request is unchanged.
-    let quick=null;
+    let quick=null,maxVariety=false;
+    // "Mer" asks for as many cuisines as the dinners and allowed cuisines permit.
+    const maxCuisines=()=>Math.min(Number(document.getElementById("dinner-count")?.value||0),cuisineInputs.filter(n=>n.checked).length||6);
     if(personal){
       quick={
-        variety:select("recipe-variety",[["normal","Lagom omväxling"],["more","Mer omväxling"],["custom","Egen omväxling"]],"normal"),
+        variety:select("recipe-variety",[["low","Lite omväxling"],["normal","Lagom omväxling"],["max","Mer omväxling"],["custom","Egen omväxling"]],"low"),
         time:select("recipe-quick-time",[["","Ingen tidsgräns"],["15","Högst 15 min"],["30","Högst 30 min"],["45","Högst 45 min"],["60","Högst 60 min"],["custom","Egna tider"]],""),
         count:select("recipe-quick-ingredients",[["","Inget ingredienstak"],["12","Högst 12 ingredienser"],["8","Högst 8 ingredienser"],["custom","Eget antal"]],""),
       };
       const quickGrid=el("div",null,"complete-recipe-grid recipe-quick");
       quickGrid.append(field("Omväxling",quick.variety),field("Aktiv tid i köket",quick.time),field("Ingredienser",quick.count));
-      const varietyHint=el("p","Mer omväxling ger minst tre matkök och högst två middagar med samma huvudprotein.","field-hint");
+      const varietyHint=el("p","Lagom ger minst tre matkök och högst två middagar med samma huvudprotein. Mer ger så många matkök som middagarna räcker till och aldrig samma huvudprotein två gånger.","field-hint");
       const details=el("details",null,"recipe-details");details.id="recipe-details";details.append(el("summary","Anpassa i detalj"));
       const legend=advanced.querySelector(":scope>legend");legend.className="sr-only";
       moreVariety.remove();
@@ -166,7 +171,14 @@
       advanced.append(quickGrid,varietyHint,cuisineField,details);
       // "input" runs before the box listeners re-read the detailed fields.
       const rows=()=>Object.values(mealRows);
-      quick.variety.addEventListener("input",()=>{if(quick.variety.value==="more"){cuisineDistribution.value="minimum";minCuisines.value=3;proteinCap.value=2;}else if(quick.variety.value==="normal"){cuisineDistribution.value="free";proteinCap.value="";}});
+      quick.variety.addEventListener("input",()=>{
+        const value=quick.variety.value;maxVariety=value==="max";
+        if(value==="low"){cuisineDistribution.value="free";proteinCap.value="";}
+        else if(value==="normal"){cuisineDistribution.value="minimum";minCuisines.value=3;proteinCap.value=2;}
+        else if(value==="max"){cuisineDistribution.value="minimum";minCuisines.value=maxCuisines();proteinCap.value=1;}
+      });
+      // A detailed change leaves "Mer" so the cuisine count is no longer kept up to date.
+      for(const node of [cuisineDistribution,minCuisines,proteinCap])node.addEventListener("input",()=>{maxVariety=false;});
       quick.time.addEventListener("input",()=>{if(quick.time.value!=="custom")for(const row of rows())row.max_active_minutes.value=quick.time.value;});
       quick.count.addEventListener("input",()=>{if(quick.count.value!=="custom")for(const row of rows()){row.min_ingredients.value="";row.max_ingredients.value=quick.count.value;}});
     }
@@ -176,15 +188,18 @@
       const pick=(node,value)=>{const known=value!==null&&value!=="custom"&&[...node.options].some(o=>o.value===value);node.value=known?value:"custom";const custom=node.querySelector('option[value="custom"]');custom.hidden=custom.disabled=node.value!=="custom";};
       pick(quick.time,same("max_active_minutes"));
       pick(quick.count,Object.values(mealRows).every(r=>r.min_ingredients.value==="")?same("max_ingredients"):null);
-      pick(quick.variety,cuisineDistribution.value==="free"&&proteinCap.value===""?"normal":cuisineDistribution.value==="minimum"&&Number(minCuisines.value)===3&&proteinCap.value==="2"?"more":"custom");
+      const varietyValue=cuisineDistribution.value==="free"&&proteinCap.value===""?"low":cuisineDistribution.value==="minimum"&&proteinCap.value==="1"&&Number(minCuisines.value)===maxCuisines()&&maxCuisines()>=3?"max":cuisineDistribution.value==="minimum"&&Number(minCuisines.value)===3&&proteinCap.value==="2"?"normal":"custom";
+      maxVariety=varietyValue==="max";pick(quick.variety,varietyValue);
       quick.variety.disabled=inactiveDinner||advanced.disabled;
       quick.time.disabled=quick.count.disabled=mealFields.disabled;
-      quick.variety.querySelector('option[value="more"]').disabled=quick.variety.value!=="more"&&(dinners<3||(selected>0&&selected<3));
-      quick.variety.setCustomValidity(quick.variety.value==="more"?cuisineDistribution.validationMessage:"");
+      for(const value of ["normal","max"])quick.variety.querySelector(`option[value="${value}"]`).disabled=quick.variety.value!==value&&(dinners<3||(selected>0&&selected<3));
+      quick.variety.setCustomValidity(["normal","max"].includes(quick.variety.value)?cuisineDistribution.validationMessage:"");
     }
     const feedback=el("p",null,"field-hint");feedback.setAttribute("role","status");advanced.append(feedback);box.append(advanced);if(personal)contexts.remove();host.replaceChildren(...(personal?[box]:[contexts,box]));
     let enabled=false;
     function sync() {
+      // Keep "Mer" at as many cuisines as possible when dinners or cuisines change.
+      if(maxVariety){const target=maxCuisines();if(cuisineDistribution.value==="minimum"&&proteinCap.value==="1"&&target>=3)minCuisines.value=target;else maxVariety=false;}
       advanced.hidden=!["complete","library"].includes(mode.value);advanced.disabled=!enabled||advanced.hidden;
       mealFields.hidden=mode.value!=="library";mealFields.disabled=advanced.disabled||mealFields.hidden;
       grid.hidden=mode.value==="library";grid.querySelectorAll("input,select").forEach(n=>n.disabled=grid.hidden);
@@ -250,6 +265,7 @@
       const primaryOverride=variationOrigins.max_same_primary_ingredient_meals==="default"&&Object.hasOwn(retainedOverrides||{},"max_same_primary_ingredient_meals");
       inheritedVariation.checked=variationOrigins.max_same_primary_ingredient_meals==="default"&&!primaryOverride;
       inheritedVariation.disabled=variationOrigins.max_same_primary_ingredient_meals==="explicit"||primaryOverride;
+      maxVariety=false;
       const preferences=request?.recipe_preferences||{};mode.value=personal?"library":preferences.mode==="complete"?"complete":"legacy";
       if(request.personal?.meals?.some(m=>m.recipe_choices!=null))mode.value="library";
       for(const [type,row] of Object.entries(mealRows)){
@@ -273,7 +289,7 @@
       cuisineInputs.forEach(n=>n.checked=(preferences.cuisines||[]).includes(n.value));
       min.value=preferences.min_ingredients??10;max.value=preferences.max_ingredients??15;
       const pair=`${min.value}-${max.value}`;preset.value=["10-15","6-10","10-20"].includes(pair)?pair:"custom";
-      minutes.value=preferences.max_minutes??"";protein.value=preferences.min_protein_g??"";adaptation.value=preferences.adaptation||"approved";fish.checked=preferences.allow_fish!==false;
+      minutes.value=preferences.max_minutes??"";protein.value=preferences.min_protein_g??"";adaptation.value=preferences.adaptation||"approved";fish.checked=preferences.allow_fish!==false;if(personal)fishField.hidden=fish.checked;
       cuisineDistribution.value=preferences.cuisine_distribution||"free";minCuisines.value=preferences.min_distinct_cuisines??3;proteinCap.value=preferences.max_same_main_protein_dinners??"";
       if(estimates)estimates.checked=request.allow_nutrition_estimates===true;
       if(pantry)pantry.checked=request.use_pantry!==false;

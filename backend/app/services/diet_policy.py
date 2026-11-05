@@ -87,6 +87,11 @@ POULTRY_INGREDIENTS = frozenset({"kyckling", "hel kyckling", "kalkon"})
 _REVIEWED_MEAT_COMPONENTS = {"färsk chorizokorv": frozenset({"fläskkött", "nötkött"}),
                              "färsk salsicciakorv": frozenset({"fläskkött"}),
                              "benfri lammstek": frozenset({"lamm", "lammkött"})}
+# Pescetarian keeps fish and seafood, including fish-based flavourings.
+_SEAFOOD = (FINFISH_INGREDIENTS | FISH_FLAVOURINGS | SHELLFISH_INGREDIENTS
+            | frozenset({"räkpasta", "torkade räkor"}))
+_MEAT = _MEAT_OR_FISH - _SEAFOOD
+_MEAT_FAMILIES = frozenset({"meat", "poultry", "organ"})
 _OTHER_ANIMAL = frozenset(
     {
         "ägg",
@@ -125,6 +130,8 @@ _OTHER_ANIMAL_FAMILIES = frozenset({"dairy", "egg"})
 def _excluded_by_diet(name: str, preference: DietPreference) -> bool:
     canonical = canonicalize_ingredient_name(name)
     family = semantic_requirement(canonical).food_family
+    if preference is DietPreference.PESCETARIAN:
+        return canonical in _MEAT or family in _MEAT_FAMILIES
     if preference is DietPreference.VEGETARIAN:
         return canonical in _MEAT_OR_FISH or family in _MEAT_OR_FISH_FAMILIES
     if preference is DietPreference.VEGAN:
@@ -168,7 +175,9 @@ def excluded_ingredients(
         for value in avoid_ingredients
         if str(value).strip()
     }
-    if preference is DietPreference.VEGETARIAN:
+    if preference is DietPreference.PESCETARIAN:
+        excluded.update(_MEAT)
+    elif preference is DietPreference.VEGETARIAN:
         excluded.update(_MEAT_OR_FISH)
     elif preference is DietPreference.VEGAN:
         excluded.update(_MEAT_OR_FISH)

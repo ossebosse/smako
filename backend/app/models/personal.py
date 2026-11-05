@@ -82,7 +82,7 @@ class MealSettings(PrivateModel):
     meal_type: MealType = "dinner"
     count: int = Field(default=5, ge=0, le=7)
     servings: int = Field(default=4, ge=1, le=8)
-    diet: Literal["mixed", "vegetarian", "vegan"] = "mixed"
+    diet: Literal["mixed", "pescetarian", "vegetarian", "vegan"] = "mixed"
     profile: TasteProfile = Field(default_factory=TasteProfile)
     distribution: dict[Protein, int] = Field(default_factory=dict)
     limits: PortionLimits = Field(default_factory=PortionLimits)
@@ -99,14 +99,18 @@ class MealSettings(PrivateModel):
             raise ValueError("Antalet rätter kan inte vara negativt.")
         if sum(self.distribution.values()) > self.count:
             raise ValueError("Du har fördelat fler rätter än du har måltider.")
-        if self.diet != "mixed" and any(
+        if self.diet == "pescetarian" and any(
+            self.distribution.get(k, 0) for k in ("meat", "chicken")
+        ):
+            raise ValueError("Pescetarisk kost kan inte innehålla kyckling eller kött.")
+        if self.diet in {"vegetarian", "vegan"} and any(
             self.distribution.get(k, 0) for k in ("meat", "fish", "chicken")
         ):
             raise ValueError(
                 "Vegetarisk/vegansk kost kan inte innehålla kyckling, fisk eller kött."
             )
         if (
-            self.diet != "mixed"
+            self.diet in {"vegetarian", "vegan"}
             and "vegetarian" in self.distribution
             and self.distribution["vegetarian"] != self.count
         ):
