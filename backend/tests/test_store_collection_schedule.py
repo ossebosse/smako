@@ -24,7 +24,8 @@ def test_dashboard_projects_current_cadence_without_changing_source_history(tmp_
     path.write_bytes(original)
     result = offer_collection_history("Lund", str(tmp_path / "db.sqlite"),
                                       now=datetime.fromisoformat("2026-10-28T21:00:00+00:00"))[(chain, "123")]
-    assert result["next_fetch_at"].isoformat() == "2026-10-29T02:17:00+00:00"
+    # Store offers are checked every morning at 05:17 Stockholm (04:17 UTC).
+    assert result["next_fetch_at"].isoformat() == "2026-10-29T04:17:00+00:00"
     assert result["last_success_at"].isoformat() == row["last_success"]
     assert result["failed_attempts"] == 14 and result["status"] == "failed"
     assert path.read_bytes() == original

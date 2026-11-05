@@ -62,9 +62,11 @@ def test_legacy_offer_timers_migrate_and_backoff_is_preserved():
              'next_fetch_at': local('2026-10-27', 15).isoformat()}]
     now = local('2026-10-28', 12)
     inventory = scheduled_source_times(rows, state={}, now=now, environment=ENV)
-    assert inventory == local('2026-10-29')
-    assert datetime.fromisoformat(rows[0]['next_fetch_at']) == inventory
-    now = local('2026-10-29')
+    assert inventory == local('2026-10-29')  # store inventory stays Mon/Thu
+    # Store offers: every morning 05:17; a missed window waits for tomorrow.
+    assert datetime.fromisoformat(rows[0]['next_fetch_at']) == local('2026-10-29', 5, 17)
+    assert rows[0]['reason'] == 'daily_offer_collection'
+    now = local('2026-10-29', 5, 17)
     rows[0].update(failed_attempts=1, next_fetch_at=(now + timedelta(minutes=15)).isoformat())
     scheduled_source_times(rows, state={}, now=now, environment=ENV)
     assert datetime.fromisoformat(rows[0]['next_fetch_at']) == now + timedelta(minutes=15)
@@ -80,7 +82,7 @@ def test_cron_and_admin_projection_agree():
 
 @pytest.mark.parametrize('name', ['coop_offer_job', 'willys_flyer_job',
                                   'citygross_municipal_job', 'lidl_municipal_job'])
-def test_every_municipal_offer_plan_uses_the_same_nights(name, monkeypatch, tmp_path):
+def test_every_municipal_offer_plan_uses_the_same_mornings(name, monkeypatch, tmp_path):
     from importlib import import_module
 
     module = import_module('grocery_data.app.services.' + name)
@@ -92,10 +94,14 @@ def test_every_municipal_offer_plan_uses_the_same_nights(name, monkeypatch, tmp_
              'inventory_status': {'checked_at': local('2026-10-26', 4).isoformat()}}
     monkeypatch.setattr(module, 'configuration', lambda *args: (tmp_path, config))
     monkeypatch.setattr(module, 'read', lambda *args: state)
-    midweek = module.source_plan(environment=ENV, now=local('2026-10-28', 12))
-    assert not midweek['due_store_ids'] and not midweek['inventory_due']
+    midday = module.source_plan(environment=ENV, now=local('2026-10-28', 12))
+    assert not midday['due_store_ids'] and not midday['inventory_due']
+    # Wednesday morning: offers due (one-day offers), inventory not.
+    wednesday = module.source_plan(environment=ENV, now=local('2026-10-28', 5, 20))
+    assert wednesday['due_store_ids'] == ['verified'] and not wednesday['inventory_due']
+    # Thursday collection night: inventory due as before.
     thursday = module.source_plan(environment=ENV, now=local('2026-10-29'))
-    assert thursday['due_store_ids'] == ['verified'] and thursday['inventory_due']
+    assert thursday['inventory_due']
     assert row['last_success'] == local('2026-10-26', 4).isoformat()
 
 

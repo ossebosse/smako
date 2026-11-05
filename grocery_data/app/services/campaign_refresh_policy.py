@@ -64,7 +64,9 @@ def daily_offer_times(rows, *, now):
     """
     previous, following = daily_offer_slots(now)
     for row in rows:
-        stamp = row.get('last_success_at')
+        stamp = row.get('last_success_at') or row.get('last_success')
+        if not stamp and not row.get('failed_attempts'):
+            stamp = row.get('last_attempt_at') or row.get('last_attempt')
         observed = datetime.fromisoformat(stamp) if stamp else None
         due = now if (observed is None or observed < previous) and now < previous + timedelta(hours=3) else following
         if row.get('failed_attempts') and row.get('next_fetch_at'):
@@ -76,23 +78,15 @@ def daily_offer_times(rows, *, now):
 
 
 def scheduled_source_times(rows, *, state, now, environment=None):
-    """Project persisted legacy offer timers into the explicitly selected cadence."""
+    """Project persisted offer timers into the explicitly selected cadence.
+
+    Under mon_thu, store offers of every chain are checked each morning
+    (one-day club and price-party offers); store inventory keeps the
+    twice-weekly collection night.
+    """
     if not twice_weekly(environment):
         return None
-    for row in rows:
-        stamp = row.get('last_success_at') or row.get('last_success')
-        if not stamp and not row.get('failed_attempts'):
-            stamp = row.get('last_attempt_at') or row.get('last_attempt')
-        due = scheduled_fetch_due(datetime.fromisoformat(stamp) if stamp else None, now=now)
-        # Preserve provider backoff within a collection night. A future legacy
-        # timer must not skip Thursday's complete collection after Monday.
-        if row.get('failed_attempts') and row.get('next_fetch_at'):
-            retry = datetime.fromisoformat(row['next_fetch_at'])
-            previous, following = collection_slots(now)
-            if previous <= retry < following:
-                due = max(due, retry) if retry < previous + timedelta(hours=3) else following
-        row['next_fetch_at'] = due.isoformat()
-        row['reason'] = 'mon_thu_collection'
+    daily_offer_times(rows, now=now)
     checked = (state.get('inventory_status') or {}).get('checked_at') or state.get('inventory_checked_at')
     return scheduled_fetch_due(datetime.fromisoformat(checked) if checked else None, now=now)
 
