@@ -164,10 +164,11 @@
       moreVariety.remove();
       details.append(...[...advanced.children].filter(n=>n!==legend&&n!==cuisineField&&n!==contexts),countHint);
       advanced.append(quickGrid,varietyHint,cuisineField,details);
+      // "input" runs before the box listeners re-read the detailed fields.
       const rows=()=>Object.values(mealRows);
-      quick.variety.addEventListener("change",()=>{if(quick.variety.value==="more"){cuisineDistribution.value="minimum";minCuisines.value=3;proteinCap.value=2;}else if(quick.variety.value==="normal"){cuisineDistribution.value="free";proteinCap.value="";}});
-      quick.time.addEventListener("change",()=>{if(quick.time.value!=="custom")for(const row of rows())row.max_active_minutes.value=quick.time.value;});
-      quick.count.addEventListener("change",()=>{if(quick.count.value!=="custom")for(const row of rows()){row.min_ingredients.value="";row.max_ingredients.value=quick.count.value;}});
+      quick.variety.addEventListener("input",()=>{if(quick.variety.value==="more"){cuisineDistribution.value="minimum";minCuisines.value=3;proteinCap.value=2;}else if(quick.variety.value==="normal"){cuisineDistribution.value="free";proteinCap.value="";}});
+      quick.time.addEventListener("input",()=>{if(quick.time.value!=="custom")for(const row of rows())row.max_active_minutes.value=quick.time.value;});
+      quick.count.addEventListener("input",()=>{if(quick.count.value!=="custom")for(const row of rows()){row.min_ingredients.value="";row.max_ingredients.value=quick.count.value;}});
     }
     function syncQuick({dinners,selected,inactiveDinner}){
       if(!quick)return;
