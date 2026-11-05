@@ -361,6 +361,7 @@ def test_ingredient_interval_drives_candidates_and_survives_reload(choices):
     page.goto(url)
     choose_location(page)
     page.locator("#extra-choices>summary").click()
+    page.locator("#recipe-details>summary").click()
     minimum = page.locator("#meal-dinner-min_ingredients")
     maximum = page.locator("#meal-dinner-max_ingredients")
     expect(minimum).to_be_visible()
@@ -381,6 +382,7 @@ def test_ingredient_interval_drives_candidates_and_survives_reload(choices):
     page.reload()
     choose_location(page)
     page.locator("#extra-choices>summary").click()
+    page.locator("#recipe-details>summary").click()
     expect(minimum).to_have_value("10")
     expect(maximum).to_have_value("15")
     minimum.fill("")
@@ -656,6 +658,16 @@ def test_backend_error_keeps_choices_and_never_falls_back(choices, status):
     expect(page.locator("#plan-content")).to_be_empty()
 
 
+def avoid(page, name, allergy=False, prefix="profile"):
+    page.locator(f"#{prefix}-avoid-entry").fill(name)
+    page.locator(f"#{prefix}-avoid-entry").press("Enter")
+    chip = page.locator(f"#{prefix}-avoid-list .taste-chip", has_text=name)
+    expect(chip).to_have_count(1)
+    if allergy:
+        chip.locator(".taste-allergy").click()
+        expect(chip.locator(".taste-allergy")).to_have_attribute("aria-pressed", "true")
+
+
 def test_profile_review_does_not_replace_confirmed_hard_requirements(choices):
     page, url, _captured = choices
     page.route("**/api/personal/interpret-profile", lambda route: route.fulfill(
@@ -665,8 +677,9 @@ def test_profile_review_does_not_replace_confirmed_hard_requirements(choices):
     page.goto(url)
     choose_location(page)
     page.locator("#extra-choices>summary").click()
-    page.locator("#profile-allergies").fill("jordnötter")
-    page.locator("#profile-exclusions").fill("fisk")
+    avoid(page, "jordnötter", allergy=True)
+    avoid(page, "fisk")
+    page.locator("#profile-free-text>summary").click()
     page.locator("#profile-text").fill("Gillar kyckling")
     page.locator("#interpret-profile").click()
     expect(page.locator("#review-allergies")).to_have_value("jordnötter")
@@ -675,6 +688,63 @@ def test_profile_review_does_not_replace_confirmed_hard_requirements(choices):
     page.locator("#personal-dialog").get_by_role("button", name="Använd valen").click()
     expect(page.locator("#profile-likes")).to_have_value("kyckling")
     expect(page.locator("#profile-allergies")).to_have_value("jordnötter")
+
+
+def test_one_avoid_list_keeps_allergies_and_absorbs_old_dislikes(choices):
+    page, url, captured = choices
+    draft = {"postal_code": "22350", "personal": {
+        "profile": {"likes": ["kyckling"], "dislikes": ["koriander"],
+                    "exclusions": ["svamp"], "allergies": ["jordnötter"]},
+        "meals": [{"meal_type": "dinner", "count": 3, "servings": 2}]}}
+    page.add_init_script("sessionStorage.setItem('smako.personal.requestDraft', "
+                         + json.dumps(json.dumps(draft)) + ");")
+    page.goto(url)
+    choose_location(page)
+    page.locator("#extra-choices>summary").click()
+    chips = page.locator("#profile-avoid-list .taste-chip")
+    expect(chips).to_have_count(3)
+    expect(page.locator("#taste-choices .data-note").first).to_contain_text("Undvik")
+    # Only known allergens can be marked as an allergy.
+    expect(chips.filter(has_text="svamp").locator(".taste-allergy")).to_have_count(0)
+    expect(chips.filter(has_text="jordnötter").locator(".taste-allergy")).to_have_attribute("aria-pressed", "true")
+    avoid(page, "fisk", allergy=True)
+    # Avoiding something you liked moves it; liking something avoided is refused.
+    avoid(page, "kyckling")
+    expect(page.locator("#profile-likes-list .taste-chip")).to_have_count(0)
+    page.locator("#profile-likes-entry").fill("svamp")
+    page.locator("#profile-likes-entry").press("Enter")
+    expect(page.locator("#taste-choices .taste-status")).to_contain_text("Undvik")
+    page.locator("#profile-likes-entry").fill("")
+    chips.filter(has_text="svamp").get_by_role("button", name="Ta bort svamp").click()
+    profile = submit(page, captured)["personal"]["profile"]
+    assert profile["dislikes"] == []
+    assert profile["exclusions"] == ["koriander", "kyckling"]
+    assert profile["allergies"] == ["jordnötter", "fisk"]
+    assert profile["likes"] == []
+
+
+def test_quick_recipe_choices_write_the_detailed_limits(choices):
+    page, url, captured = choices
+    page.goto(url)
+    choose_location(page)
+    page.locator("#extra-choices>summary").click()
+    expect(page.locator("#recipe-details")).not_to_have_attribute("open", "")
+    page.locator("#recipe-quick-time").select_option("30")
+    page.locator("#recipe-quick-ingredients").select_option("8")
+    page.locator("#recipe-variety").select_option("more")
+    body = submit(page, captured)
+    dinner = body["personal"]["meals"][0]["recipe_choices"]
+    assert (dinner["max_active_minutes"], dinner["min_ingredients"], dinner["max_ingredients"]) == (30, None, 8)
+    prefs = body["recipe_preferences"]
+    assert (prefs["cuisine_distribution"], prefs["min_distinct_cuisines"],
+            prefs["max_same_main_protein_dinners"]) == ("minimum", 3, 2)
+    # A detailed change the quick choices cannot express shows as your own choice.
+    page.locator("#recipe-details>summary").click()
+    page.locator("#meal-dinner-max_active_minutes").fill("25")
+    expect(page.locator("#recipe-quick-time")).to_have_value("custom")
+    page.locator("#recipe-quick-time").select_option("")
+    expect(page.locator("#meal-dinner-max_active_minutes")).to_have_value("")
+    assert submit(page, captured)["personal"]["meals"][0]["recipe_choices"]["max_active_minutes"] is None
 
 
 def test_snack_without_breakfast_and_zero_dinners(choices):
@@ -957,7 +1027,7 @@ def test_mobile_layout_switch_keeps_choices_and_is_remembered(choices):
     expect(page.locator(".config-tab[aria-current]")).to_contain_text("Måltider")
     expect(page.locator("#dinner-count-value")).to_have_value("4")
     page.locator(".config-bar-next").click()
-    expect(page.locator(".config-tab[aria-current]")).to_contain_text("Butiker")
+    expect(page.locator(".config-tab[aria-current]")).to_contain_text("Din mat")
     page.reload()
     expect(page.locator("body.config-kompakt")).to_have_count(1)
     choose_location(page)
@@ -1003,7 +1073,7 @@ def test_overview_layout_shows_every_step_as_a_card_and_creates_the_plan(choices
     choose_layout(page, "Översikt")
     expect(page.locator("body.config-oversikt")).to_have_count(1)
     cards = page.locator(".config-card")
-    expect(cards).to_have_count(8)
+    expect(cards).to_have_count(6)
     expect(page.locator(".config-hero")).to_be_hidden()
     expect(page.locator(".config-tabs")).to_be_hidden()
     expect(page.locator(".config-cta-button")).to_be_disabled()

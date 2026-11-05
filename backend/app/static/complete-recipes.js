@@ -26,10 +26,9 @@
     const variationFields=["max_same_primary_ingredient_meals","max_same_recipe_family","max_same_carbohydrate_meals","max_same_cooking_method_meals","max_same_dish_form_meals","max_pairwise_culinary_similarity","max_pairwise_recipe_similarity"];
     let variationEnabled=false,retainedIntent=false,newIntent=true,variationOrigins=Object.fromEntries(variationFields.map(k=>[k,"default"])),retainedVariation={},retainedOverrides=null;
     const box=el("fieldset",null,"complete-recipe-options");box.hidden=true;box.disabled=true;
-    box.append(el("legend",personal?"Antal ingredienser":"Receptstil"));
+    box.append(el("legend",personal?"Recept":"Receptstil"));
     const mode=select("recipe-style",[["legacy","Befintliga vardagsrecept"],["complete","Genomarbetade middagar"],["library","Måltidsbibliotek: middag, frukost och mellanmål"]],"legacy");
     if(!personal)box.append(field("Välj receptläge",mode),el("p","Receptstilen gäller middagar. Billigast, Balanserad och Varierad behåller sina mål.","field-hint"));
-    else box.append(el("p","Välj minsta och högsta antal ingredienser per recept. Lämna tomt för ingen gräns.","field-hint"));
     const advanced=el("fieldset",null,"complete-recipe-fields");advanced.hidden=true;advanced.disabled=true;
     advanced.append(el("legend",personal?"Val för recepten":"Dina middagar"));
     const cuisineField=el("fieldset",null,"recipe-cuisines");cuisineField.append(el("legend","Matkök och inspiration"));
@@ -64,7 +63,6 @@
     grid.append(field("Tillåtna anpassningar",adaptation));
     const countHint=el("p","Alla delar av rätten räknas, även olja, kryddor och såser, men inte salt, peppar och vatten. Det du har hemma räknas också.","field-hint");
     advanced.append(grid,custom,...(personal?[]:[countHint]),field("Tillåt fisk när övriga kostval medger det",fish));
-    if(personal)box.append(countHint);
     const contexts=el("fieldset",null,"recipe-contexts complete-recipe-options");contexts.id="recipe-price-contexts";contexts.append(el("legend","Butiker och nätbutiker"),el("p","Markerar du inget jämför vi alla butiker i ditt område. Väljer du butiker letar vi bara där. Högsta antal butiker gäller fortfarande.","field-hint"));
     const contextOptions=el("div");const contextStatus=el("p",null,"field-hint");contextStatus.setAttribute("role","status");contexts.append(contextOptions,contextStatus);advanced.append(contexts);
     let selectedContexts=[],contextEpoch=0,contextPosition=null;
@@ -148,6 +146,41 @@
         return result;
       });
     }
+    // Personal planning: three quick choices and the cuisines up front; every
+    // detailed limit stays available under "Anpassa i detalj". The quick
+    // choices only write the detailed fields, so the request is unchanged.
+    let quick=null;
+    if(personal){
+      quick={
+        variety:select("recipe-variety",[["normal","Lagom omväxling"],["more","Mer omväxling"],["custom","Egen omväxling"]],"normal"),
+        time:select("recipe-quick-time",[["","Ingen tidsgräns"],["15","Högst 15 min"],["30","Högst 30 min"],["45","Högst 45 min"],["60","Högst 60 min"],["custom","Egna tider"]],""),
+        count:select("recipe-quick-ingredients",[["","Inget ingredienstak"],["12","Högst 12 ingredienser"],["8","Högst 8 ingredienser"],["custom","Eget antal"]],""),
+      };
+      const quickGrid=el("div",null,"complete-recipe-grid recipe-quick");
+      quickGrid.append(field("Omväxling",quick.variety),field("Aktiv tid i köket",quick.time),field("Ingredienser",quick.count));
+      const varietyHint=el("p","Mer omväxling ger minst tre matkök och högst två middagar med samma huvudprotein.","field-hint");
+      const details=el("details",null,"recipe-details");details.id="recipe-details";details.append(el("summary","Anpassa i detalj"));
+      const legend=advanced.querySelector(":scope>legend");legend.className="sr-only";
+      moreVariety.remove();
+      details.append(...[...advanced.children].filter(n=>n!==legend&&n!==cuisineField&&n!==contexts),countHint);
+      advanced.append(quickGrid,varietyHint,cuisineField,details);
+      const rows=()=>Object.values(mealRows);
+      quick.variety.addEventListener("change",()=>{if(quick.variety.value==="more"){cuisineDistribution.value="minimum";minCuisines.value=3;proteinCap.value=2;}else if(quick.variety.value==="normal"){cuisineDistribution.value="free";proteinCap.value="";}});
+      quick.time.addEventListener("change",()=>{if(quick.time.value!=="custom")for(const row of rows())row.max_active_minutes.value=quick.time.value;});
+      quick.count.addEventListener("change",()=>{if(quick.count.value!=="custom")for(const row of rows()){row.min_ingredients.value="";row.max_ingredients.value=quick.count.value;}});
+    }
+    function syncQuick({dinners,selected,inactiveDinner}){
+      if(!quick)return;
+      const same=key=>{const values=Object.values(mealRows).map(r=>r[key].value);return values.every(v=>v===values[0])?values[0]:null;};
+      const pick=(node,value)=>{const known=value!==null&&value!=="custom"&&[...node.options].some(o=>o.value===value);node.value=known?value:"custom";const custom=node.querySelector('option[value="custom"]');custom.hidden=custom.disabled=node.value!=="custom";};
+      pick(quick.time,same("max_active_minutes"));
+      pick(quick.count,Object.values(mealRows).every(r=>r.min_ingredients.value==="")?same("max_ingredients"):null);
+      pick(quick.variety,cuisineDistribution.value==="free"&&proteinCap.value===""?"normal":cuisineDistribution.value==="minimum"&&Number(minCuisines.value)===3&&proteinCap.value==="2"?"more":"custom");
+      quick.variety.disabled=inactiveDinner||advanced.disabled;
+      quick.time.disabled=quick.count.disabled=mealFields.disabled;
+      quick.variety.querySelector('option[value="more"]').disabled=quick.variety.value!=="more"&&(dinners<3||(selected>0&&selected<3));
+      quick.variety.setCustomValidity(quick.variety.value==="more"?cuisineDistribution.validationMessage:"");
+    }
     const feedback=el("p",null,"field-hint");feedback.setAttribute("role","status");advanced.append(feedback);box.append(advanced);if(personal)contexts.remove();host.replaceChildren(...(personal?[box]:[contexts,box]));
     let enabled=false;
     function sync() {
@@ -178,6 +211,7 @@
       const required=cuisineDistribution.value==="each_selected"?selected:cuisineDistribution.value==="minimum"?Number(minCuisines.value):0;
       cuisineDistribution.setCustomValidity(inactiveDinner?"":cuisineDistribution.value==="each_selected"&&!selected?"Välj minst ett matkök.":required>dinners?"Fler obligatoriska matkök än middagar.":cuisineDistribution.value==="minimum"&&required>(selected||6)?"Välj fler tillåtna matkök eller sänk minimiantalet.":"");
       feedback.textContent=inactiveDinner?"Middagsvalen gäller när du lägger till middagar.":"";
+      syncQuick({dinners,selected,inactiveDinner});
     }
     function values() {
       if(!["complete","library"].includes(mode.value))return selectedContexts.length?{allowed_store_ids:selectedContexts.slice()}:{};
@@ -258,7 +292,7 @@
       values(){return enabled?values():selectedContexts.length?{allowed_store_ids:selectedContexts.slice()}:{};}, mealValues, restore,
       enabled(value,{variationIntent=false}={}){enabled=value===true;variationEnabled=variationIntent===true;inheritedField.hidden=!variationEnabled;box.hidden=!enabled;box.disabled=!enabled;sync();if(enabled)void loadContexts();},
       reset(){restore({});storage.remove(key);},
-      validate(){sync();return !enabled||advanced.hidden||[...advanced.querySelectorAll("input,select")].every(node=>node.disabled||node.checkValidity());},
+      validate(){sync();if(!enabled||advanced.hidden)return true;const bad=[...advanced.querySelectorAll("input,select")].find(node=>!node.disabled&&!node.checkValidity());if(bad)bad.closest("details")?.setAttribute("open","");return !bad;},
     };
   }
 

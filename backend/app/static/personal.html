@@ -8,18 +8,18 @@
   <link rel="stylesheet" href="/static/styles.css?v=personal-v2-1" />
   <link rel="stylesheet" href="/static/personal.css?v=generic-first-20261030" />
   <link rel="stylesheet" href="/static/complete-recipes.css?v=complete-recipes-1" />
-  <link rel="stylesheet" href="/static/choices.css?v=items-20261030" />
+  <link rel="stylesheet" href="/static/choices.css?v=20261105-dinmat" />
   <link rel="stylesheet" href="/static/configurator.css?v=configurator-20261031" />
   <link rel="stylesheet" href="/static/plan-progress.css?v=progress-20261031b" />
   <link rel="stylesheet" href="/static/plan-view.css?v=planview-20261031b" />
   <script src="/scanner-assets/physical-barcode-scanner.js" defer></script>
-  <script src="/static/complete-recipes.js?v=20261103-errors" defer></script>
+  <script src="/static/complete-recipes.js?v=20261105-dinmat" defer></script>
   <script src="/static/shopping-location.js?v=20261103-errors" defer></script>
   <script src="/static/choice-controls.js?v=option3-1" defer></script>
   <script src="/static/plan-progress.js?v=20261102-language" defer></script>
-  <script src="/static/personal.js?v=20261103-errors" defer></script>
+  <script src="/static/personal.js?v=20261105-dinmat" defer></script>
   <script src="/static/product-search.js?v=20261103-errors" defer></script>
-  <script src="/static/configurator.js?v=20261102-deslop" defer></script>
+  <script src="/static/configurator.js?v=20261105-dinmat" defer></script>
 </head>
 <body class="personal-app">
   <a class="skip-link" href="#personal-main">Hoppa till innehållet</a>
@@ -104,15 +104,16 @@
         <p class="sr-only" id="meal-announcement" aria-live="polite"></p>
         <p>Gästläget omfattar totalt 3 recept och högst 2 portioner per rätt. <button type="button" class="secondary-button" data-open="account">Bli medlem</button></p><div id="meal-settings"></div>
         <fieldset class="choices-primary"><legend>Inköpsställen</legend><div id="store-count-control"></div></fieldset>
-        <section class="choice-shortcuts"><h2>Fler val</h2><p>Hoppa direkt till:</p><div class="personal-actions"><button type="button" data-choice-jump="taste-choices">Smakval</button><button type="button" data-choice-jump="complete-recipe-controls">Receptval</button><button type="button" data-choice-jump="organic-choices">Ekologiskt</button><button type="button" data-choice-jump="surplus-choices">Överskott</button></div></section>
-        <details id="extra-choices" class="extra-choices"><summary>Extraval <span>Fler måltider, smakval och egna gränser</span></summary>
+        <section class="choice-shortcuts"><h2>Fler val</h2><p>Hoppa direkt till:</p><div class="personal-actions"><button type="button" data-choice-jump="taste-choices">Din mat</button><button type="button" data-choice-jump="complete-recipe-controls">Recept</button><button type="button" data-choice-jump="organic-choices">Inköp</button></div></section>
+        <details id="extra-choices" class="extra-choices"><summary>Extraval <span>Fler måltider, din mat och inköp</span></summary>
         <p>Standardvalen gäller tills du ändrar dem.</p>
         <fieldset><legend>Fler måltider</legend><div id="extra-meal-toggles" class="personal-checks"></div><p>Valda måltider visas under Middag, med egna inställningar.</p><button type="button" id="go-to-meals" class="secondary-button">Gå till måltider ↑</button></fieldset>
         <div id="memberships" hidden></div>
-        <fieldset id="taste-choices"><legend>Smak, uteslutningar och allergier</legend><label>Beskriv dina val<textarea id="profile-text" maxlength="2000" placeholder="Gillar kyckling, ogillar koriander, måste undvika jordnötter"></textarea></label><button type="button" id="interpret-profile" class="secondary-button">Tolka och granska</button><p>Kontrollera att vi har tolkat dina val rätt. Det du ogillar försöker vi undvika. Uteslutna ingredienser och allergier tar vi alltid bort.</p><div id="profile-fields" class="personal-grid"></div>
-          <label id="unresolved-label" hidden>Inte tolkat – flytta till rätt fält och töm sedan rutan<textarea id="unresolved-text"></textarea></label>
-          <p class="data-note">Vi utesluter ingrediensen även ur såser och buljonger. Produkter vars innehåll inte kan kontrolleras väljs bort. Ange allergier separat, så att även allergenmärkning och deklarerade spår kontrolleras. Att utesluta en ingrediens ersätter inte allergivalet.</p>
-          <button type="button" id="save-profile" class="secondary-button">Spara min profil i gästsessionen</button><p>Spara profilen om du vill använda samma val nästa gång. Dina val sparas också med planen.</p>
+        <fieldset id="taste-choices"><legend>Gillar och undvik</legend><div id="profile-fields" class="taste-fields"></div>
+          <details id="profile-free-text" class="taste-free-text"><summary>Skriv med egna ord</summary><label>Beskriv vad du gillar och vill undvika<textarea id="profile-text" maxlength="2000" placeholder="Gillar kyckling, inte koriander, allergisk mot jordnötter"></textarea></label><button type="button" id="interpret-profile" class="secondary-button">Tolka</button><p class="field-hint">Du får granska förslaget innan listorna ändras.</p></details>
+          <label id="unresolved-label" hidden>Inte tolkat – lägg till det i listorna ovan och töm sedan rutan<textarea id="unresolved-text"></textarea></label>
+          <p class="data-note">Det du undviker tas bort även ur såser och buljonger, och varor vi inte kan kontrollera väljs bort. Allergi gäller bara vanliga allergener som jordnötter, mjölk, gluten och fisk.</p>
+          <button type="button" id="save-profile" class="secondary-button">Spara listorna till nästa gång</button>
         </fieldset>
         <div id="complete-recipe-controls"></div>
         <fieldset id="organic-choices"><legend>Ekologiskt</legend><div id="organic-percent-control"></div><p>Välj hur stor del av matkostnaden som minst ska vara ekologisk. Andelen räknas på maten du köper, efter rabatt. Bara varor med ekologisk märkning räknas.</p><label class="check-label"><input type="checkbox" id="organic-animals"/> Kräv ekologiskt för alla animaliska produkter, även ägg och mejeri</label><p class="data-note">Vi kan sakna uppgifter om ekologisk märkning eller animaliska ingredienser för vissa produkter. Då kan vi inte bekräfta att de uppfyller ditt val.</p></fieldset>

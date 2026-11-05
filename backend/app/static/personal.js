@@ -82,11 +82,89 @@
 
   function listText(value){return value.split(/[,;\n]/).map(v=>v.trim()).filter(Boolean);}
 
-  function profile(prefix="profile") {return Object.fromEntries(Object.keys(profileLabels).map(k=>[k,listText($(`${prefix}-${k}`).value)]));}
+  function profile(prefix="profile") {return tasteEditors[prefix].get();}
 
-  function putProfile(value,prefix="profile"){Object.keys(profileLabels).forEach(k=>$(`${prefix}-${k}`).value=(value?.[k]||[]).join(", "));}
+  function putProfile(value,prefix="profile"){tasteEditors[prefix].set(value);}
 
-  function profileFields(container,prefix) {for(const [k,label] of Object.entries(profileLabels)){const n=input("text","");n.id=`${prefix}-${k}`;n.maxLength=1500;container.append(field(`${label} (kommaseparerat)`,n));}}
+  // Taste choices are two lists: what you like and what to avoid. Everything
+  // avoided is removed from the recipes; a known allergen can also be marked as
+  // an allergy, which adds the allergen and trace check. The hidden fields keep
+  // the four profile lists the plan request has always carried.
+  const ALLERGENS=new Set(["jordnöt","jordnötter","mjölk","ägg","fisk","skaldjur","gluten","vete","soja","sesam","nötter","selleri","senap","lupin","sulfit","blötdjur"]);
+  const PROFILE_MAX=30;
+  const tasteKey=value=>value.trim().toLocaleLowerCase("sv-SE").replace(/\s+/g," ");
+  const tasteEditors={};
+  function profileFields(container,prefix) {
+    let likes=[],avoid=[];
+    const hidden=Object.fromEntries(Object.keys(profileLabels).map(k=>{const n=input("hidden","");n.id=`${prefix}-${k}`;container.append(n);return [k,n];}));
+    const status=el("p",null,"field-hint taste-status");status.setAttribute("role","status");
+    const note=el("p",null,"data-note");note.hidden=true;
+    const groups={};
+    for(const [kind,label,hint,placeholder] of [
+      ["likes","Gillar","Smako väljer gärna recept med det här.","Till exempel kyckling"],
+      ["avoid","Undvik","Tas bort ur alla recept. Markera Allergi för att också kontrollera allergenmärkning och spår.","Till exempel koriander, jordnötter"]]){
+      const box=el("div",null,"taste-group");box.dataset.kind=kind;
+      const entry=input("text","",{maxLength:100,placeholder});entry.id=`${prefix}-${kind}-entry`;
+      const title=el("label",label);title.htmlFor=entry.id;
+      const add=el("button","Lägg till","secondary-button");add.type="button";add.setAttribute("aria-label",`Lägg till under ${label}`);
+      const row=el("div",null,"taste-entry");row.append(entry,add);
+      const list=el("ul",null,"taste-chips");list.id=`${prefix}-${kind}-list`;list.setAttribute("aria-label",label);
+      box.append(title,row,el("p",hint,"field-hint"),list);container.append(box);
+      const commit=()=>{const names=listText(entry.value);if(!names.length)return;status.textContent="";names.forEach(name=>addItem(kind,name));entry.value="";render(true);};
+      add.addEventListener("click",commit);
+      entry.addEventListener("keydown",event=>{if(event.key==="Enter"){event.preventDefault();commit();}});
+      entry.addEventListener("change",commit);
+      groups[kind]=list;
+    }
+    container.append(status,note);
+    function addItem(kind,name){
+      const key=tasteKey(name);if(!key)return;
+      if(kind==="likes"){
+        if(avoid.some(row=>row.key===key)){status.textContent=`${name.trim()} finns redan under Undvik. Ta bort det där först.`;return;}
+        if(likes.some(row=>row.key===key))return;
+        if(likes.length>=PROFILE_MAX){status.textContent=`Du kan ange högst ${PROFILE_MAX} saker du gillar.`;return;}
+        likes.push({key,name:name.trim()});
+      } else {
+        likes=likes.filter(row=>row.key!==key);
+        if(avoid.some(row=>row.key===key))return;
+        if(avoid.length>=PROFILE_MAX){status.textContent=`Du kan ange högst ${PROFILE_MAX} saker att undvika.`;return;}
+        avoid.push({key,name:name.trim(),allergy:false});
+      }
+    }
+    function chip(row,kind){
+      const item=el("li",null,`taste-chip${row.allergy?" is-allergy":""}`);item.dataset.key=row.key;item.append(el("span",row.name,"taste-chip-name"));
+      if(kind==="avoid"&&(ALLERGENS.has(row.key)||row.allergy)){
+        const allergy=el("button","Allergi","taste-allergy");allergy.type="button";allergy.setAttribute("aria-pressed",String(row.allergy));
+        allergy.setAttribute("aria-label",`${row.name} är en allergi`);
+        allergy.addEventListener("click",()=>{row.allergy=!row.allergy;render(true);groups.avoid.querySelector(`[data-key="${CSS.escape(row.key)}"] .taste-allergy`)?.focus();});
+        item.append(allergy);
+      }
+      const remove=el("button","×","taste-remove");remove.type="button";remove.setAttribute("aria-label",`Ta bort ${row.name}`);
+      remove.addEventListener("click",()=>{if(kind==="likes")likes=likes.filter(r=>r!==row);else avoid=avoid.filter(r=>r!==row);render(true);$(`${prefix}-${kind}-entry`)?.focus();});
+      item.append(remove);return item;
+    }
+    function get(){return {likes:likes.map(r=>r.name),dislikes:[],exclusions:avoid.filter(r=>!r.allergy).map(r=>r.name),allergies:avoid.filter(r=>r.allergy).map(r=>r.name)};}
+    function render(changed=false){
+      groups.likes.replaceChildren(...likes.map(row=>chip(row,"likes")));
+      groups.avoid.replaceChildren(...avoid.map(row=>chip(row,"avoid")));
+      const values=get();for(const [k,node] of Object.entries(hidden))node.value=values[k].join(", ");
+      if(changed){container.dispatchEvent(new Event("change",{bubbles:true}));}
+    }
+    function set(value={}){
+      likes=[];avoid=[];status.textContent="";
+      const allergic=new Set((value?.allergies||[]).map(tasteKey));
+      for(const name of [...(value?.dislikes||[]),...(value?.exclusions||[]),...(value?.allergies||[])]){
+        const key=tasteKey(name),known=avoid.find(row=>row.key===key);
+        if(known){known.allergy||=allergic.has(key);continue;}
+        if(key)avoid.push({key,name:name.trim(),allergy:allergic.has(key)});
+      }
+      for(const name of value?.likes||[]){const key=tasteKey(name);if(key&&!avoid.some(r=>r.key===key)&&!likes.some(r=>r.key===key))likes.push({key,name:name.trim()});}
+      note.hidden=!(value?.dislikes||[]).length;
+      note.textContent=note.hidden?"":"Det du tidigare ville undvika om möjligt ligger nu under Undvik och tas bort ur recepten. Ta bort det du ändå kan tänka dig.";
+      render();
+    }
+    tasteEditors[prefix]={get,set};set({});
+  }
 
   profileFields($('profile-fields'),"profile");
 
@@ -130,7 +208,9 @@
     const nutrition=el("div");nutrition.append(el("p","Dra i ändarna för att sätta egna gränser per portion. Med Standard gäller Smakos vanliga gränser."));
     for(const [key,title,max,contractMax] of [["protein_g","Protein",100,300],["carbs_g","Kolhydrater",400,500],["fat_g","Fett",300,300]])nutrition.append(interval(type,key,title,max,contractMax));
     nutrition.append(slider(`${type}-max_kcal`,"Högsta energi",null,{optional:true,max:4000,unit:"kcal"}),el("p","Energi kan begränsas med ett maxvärde. Tomt behåller Standard.","small"));
-    const organic=input("checkbox","");organic.id=`${type}-organic`;options.append(field("Kräv ekologiska animalier för denna måltidstyp",organic));
+    // The plan-wide choice under Inköp is the main one. This per-meal choice is
+    // only shown when a restored plan uses it, so it can still be turned off.
+    const organic=input("checkbox","");organic.id=`${type}-organic`;const organicField=field("Kräv ekologiska animalier för denna måltidstyp",organic);organicField.hidden=true;options.append(organicField);
     mealDialog(type,"distribution","Fördelning",options,actions);mealDialog(type,"weight","Portionsvikt",weight,actions);mealDialog(type,"nutrition","Näringsvärden",nutrition,actions);
     if(type!=="dinner"){
       const toggle=input("checkbox","");toggle.id=`enable-${type}`;toggle.setAttribute("role","switch");toggle.setAttribute("aria-controls",`${type}-meals`);box.id=`${type}-meals`;
@@ -171,7 +251,7 @@
   new MutationObserver(updateChoiceSummary).observe($('location-selection-status'),{childList:true});
   $('choice-submit').addEventListener("click",()=>$('generate-plan').click());
   $('go-to-meals').addEventListener("click",()=>{$('meal-settings').scrollIntoView({block:"start"});$('dinner-count-value').focus({preventScroll:true});});
-  document.querySelectorAll('[data-choice-jump]').forEach(node=>node.addEventListener('click',()=>{$('extra-choices').open=true;const target=$(node.dataset.choiceJump);target.scrollIntoView({block:"start"});target.querySelector('input,textarea,select')?.focus({preventScroll:true});}));
+  document.querySelectorAll('[data-choice-jump]').forEach(node=>node.addEventListener('click',()=>{$('extra-choices').open=true;const target=$(node.dataset.choiceJump);target.scrollIntoView({block:"start"});target.querySelector('input:not([type=hidden]),textarea,select')?.focus({preventScroll:true});}));
   updateChoiceSummary();
 
   function readMeals(){return Object.keys(names).map(t=>{
@@ -185,9 +265,9 @@
 
     if(!privateState)throw new Error("Gästskafferiet måste kunna läsas innan beräkning.");
 
-    if($('profile-text').value.trim()!==parsedText)throw new Error("Tryck på Tolka och granska först, eller töm textrutan och fyll i fälten själv.");
+    if($('profile-text').value.trim()!==parsedText)throw new Error("Tryck på Tolka under Skriv med egna ord, eller töm textrutan.");
 
-    if($('unresolved-text').value.trim())throw new Error("Några av dina val kunde inte tolkas. Skriv in dem i rätt fält först.");
+    if($('unresolved-text').value.trim())throw new Error("Några av dina val kunde inte tolkas. Lägg till dem under Gillar eller Undvik och töm rutan.");
 
     if(!standalone){
       const active=Object.keys(names).filter(t=>t==="dinner"||$(`enable-${t}`).checked);
@@ -219,7 +299,7 @@
       Object.keys(proteinNames).forEach(k=>{sliders.get(`${t}-${k}`).maximum(7);setSlider(`${t}-${k}`,meal.distribution?.[k]);});
       Object.keys(limitLabels).forEach(k=>setSlider(`${t}-${k}`,meal.limits?.[k]));
       if(t==="dinner"&&request.recipe_preferences?.min_protein_g!=null)setSlider(`${t}-min_protein_g`,Math.max(meal.limits?.min_protein_g??0,request.recipe_preferences.min_protein_g));
-      $(`${t}-organic`).checked=meal.organic_animals===true;syncMeal(t);distributionSync[t]();
+      $(`${t}-organic`).checked=meal.organic_animals===true;$(`${t}-organic`).closest("label").hidden=meal.organic_animals!==true;syncMeal(t);distributionSync[t]();
     }
     setSlider('organic-percent',spec.organic_percent??0);$('organic-animals').checked=spec.organic_animals===true;$('surplus-mode').value=spec.surplus_mode||"minimize";
     setSlider('max-stores',request.max_stores??2);$('postal-code').value=request.postal_code||"";
@@ -232,7 +312,7 @@
     const source=$('profile-text').value;
     const parsed=await api("/api/personal/interpret-profile",{text:source});
     if($('profile-text').value!==source)throw new Error("Texten ändrades under tolkningen. Tolka den nya texten igen.");
-    const box=el("div");box.append(el("h2","Kontrollera dina val"),el("p","Kontrollera att förslaget stämmer. Dina tidigare begränsningar ligger kvar tills du ändrar dem i fälten."));
+    const box=el("div");box.append(el("h2","Kontrollera dina val"),el("p","Kontrollera att förslaget stämmer. Det du redan undviker ligger kvar."));
     const fields=el("div",null,"personal-grid");profileFields(fields,"review");box.append(fields);
     openDialog(box);
     const current=profile(),proposed={...parsed.profile};

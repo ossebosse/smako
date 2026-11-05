@@ -27,10 +27,8 @@
   const steps=[
     {title:"Plats",lead:"Var vill du handla?",art:"place",nodes:()=>[$('location-step')]},
     {title:"Måltider",lead:"Hur många måltider och portioner?",art:"meals",nodes:()=>[gate.querySelector(':scope>p:not(.sr-only)'),$('meal-settings'),fieldsetOf('extra-meal-toggles')]},
-    {title:"Butiker",lead:"I hur många butiker vill du handla?",art:"stores",nodes:()=>[fieldsetOf('store-count-control')]},
-    {title:"Smak",lead:"Vad gillar du – och vad måste undvikas?",art:"taste",nodes:()=>[$('taste-choices')]},
-    {title:"Recept",lead:"Vilka recept passar dig?",art:"recipes",nodes:()=>[$('complete-recipe-controls')]},
-    {title:"Mer",lead:"Ekologiskt, skafferi och överskott",art:"more",nodes:()=>[$('organic-choices'),$('pantry-choices'),$('surplus-choices')]},
+    {title:"Din mat",lead:"Vad gillar du, vad ska bort och hur ska recepten vara?",art:"food",nodes:()=>[$('taste-choices'),$('complete-recipe-controls')]},
+    {title:"Inköp",lead:"Butiker, ekologiskt, skafferi och överskott",art:"purchases",nodes:()=>[fieldsetOf('store-count-control'),$('organic-choices'),$('pantry-choices'),$('surplus-choices')]},
     {title:"Varor",lead:"Egna varor i samma inköpslista",art:"items",nodes:()=>[itemsBox]},
     {title:"Sammanfattning",lead:"Din plan i korthet",art:"done",nodes:()=>[document.querySelector('.choice-summary')]},
   ];
@@ -44,10 +42,8 @@
   const art={
     place:svg('<rect width="360" height="220" fill="#e9efe4"/><path d="M-10 150 C80 120 140 190 230 150 S330 90 380 110" stroke="#fff" stroke-width="16" fill="none"/><path d="M90 -10 C110 60 70 120 120 230" stroke="#fff" stroke-width="12" fill="none"/><path d="M250 -10 L280 230" stroke="#fff" stroke-width="10" fill="none"/><rect x="28" y="40" width="44" height="34" rx="6" fill="#cfdcc8"/><rect x="290" y="150" width="50" height="40" rx="6" fill="#cfdcc8"/><rect x="150" y="30" width="60" height="40" rx="6" fill="#d9e3d2"/><circle cx="180" cy="168" r="34" fill="#164b3e" opacity=".12"/><path d="M180 70c-22 0-38 16-38 37 0 27 38 63 38 63s38-36 38-63c0-21-16-37-38-37z" fill="#c5523f"/><circle cx="180" cy="106" r="13" fill="#fff"/>'),
     meals:svg('<rect width="360" height="220" fill="#efe7da"/><circle cx="180" cy="112" r="78" fill="#fff"/><circle cx="180" cy="112" r="60" fill="#f6f1e7"/><path d="M140 118c10-26 70-26 80 0-14 22-66 22-80 0z" fill="#e0a458"/><circle cx="162" cy="106" r="10" fill="#7fa36a"/><circle cx="192" cy="100" r="9" fill="#c5523f"/><circle cx="204" cy="116" r="8" fill="#7fa36a"/><circle cx="176" cy="122" r="7" fill="#c5523f"/><rect x="74" y="50" width="8" height="124" rx="4" fill="#9aa79a"/><path d="M66 50v34a12 12 0 0 0 24 0V50" stroke="#9aa79a" stroke-width="5" fill="none"/><rect x="280" y="50" width="9" height="124" rx="4" fill="#9aa79a"/><path d="M289 50c14 10 14 50 0 60z" fill="#9aa79a"/>'),
-    stores:svg('<rect width="360" height="220" fill="#e7edf0"/><rect y="176" width="360" height="44" fill="#d6dfd9"/>'+[[24,"#164b3e"],[134,"#c5523f"],[244,"#e0a458"]].map(([x,c])=>`<rect x="${x}" y="86" width="92" height="90" fill="#fff"/><path d="M${x-6} 86h104l-10-30H${x+4}z" fill="${c}"/><path d="M${x-6} 86h104v12H${x-6}z" fill="${c}" opacity=".75"/><rect x="${x+12}" y="112" width="30" height="64" fill="#cfdcc8"/><rect x="${x+52}" y="112" width="28" height="28" fill="#e9efe4"/>`).join("")),
-    taste:svg('<rect width="360" height="220" fill="#eef0e2"/><path d="M90 170c-40-50-10-120 60-130-10 60-20 100-60 130z" fill="#7fa36a"/><path d="M90 170c20-40 40-80 60-130" stroke="#4f7a45" stroke-width="3" fill="none"/><path d="M190 60c30 10 60 50 40 110-40-20-60-70-40-110z" fill="#c5523f"/><path d="M190 60c-4-14 4-24 14-28" stroke="#4f7a45" stroke-width="5" fill="none"/><circle cx="290" cy="150" r="30" fill="#e0a458"/><circle cx="282" cy="142" r="7" fill="#fff" opacity=".5"/><circle cx="270" cy="70" r="14" fill="#7fa36a"/><circle cx="292" cy="62" r="11" fill="#9cc086"/>'),
-    recipes:svg('<rect width="360" height="220" fill="#f3ead9"/><rect x="96" y="28" width="168" height="168" rx="10" fill="#fff" transform="rotate(-4 180 112)"/><rect x="120" y="54" width="90" height="12" rx="6" fill="#164b3e" transform="rotate(-4 180 112)"/>'+[84,104,124,144,164].map(y=>`<rect x="122" y="${y}" width="${y%40?110:80}" height="7" rx="3.5" fill="#d9dfd6" transform="rotate(-4 180 112)"/>`).join("")+'<circle cx="270" cy="160" r="30" fill="#c5523f"/><rect x="246" y="150" width="48" height="10" rx="5" fill="#a3402f"/>'),
-    more:svg('<rect width="360" height="220" fill="#e6efe6"/><rect x="58" y="70" width="80" height="110" rx="14" fill="#fff"/><rect x="66" y="56" width="64" height="20" rx="6" fill="#c5523f"/><rect x="72" y="110" width="52" height="40" rx="6" fill="#e0a458" opacity=".6"/><path d="M240 180c-70-10-80-90-20-130 40 50 60 90 20 130z" fill="#7fa36a"/><path d="M240 180c-10-40-20-80-20-130" stroke="#4f7a45" stroke-width="3" fill="none"/><circle cx="300" cy="80" r="22" fill="#e0a458"/>'),
+    purchases:svg('<rect width="360" height="220" fill="#e7edf0"/><rect y="176" width="360" height="44" fill="#d6dfd9"/>'+[[24,"#164b3e"],[134,"#c5523f"],[244,"#e0a458"]].map(([x,c])=>`<rect x="${x}" y="86" width="92" height="90" fill="#fff"/><path d="M${x-6} 86h104l-10-30H${x+4}z" fill="${c}"/><path d="M${x-6} 86h104v12H${x-6}z" fill="${c}" opacity=".75"/><rect x="${x+12}" y="112" width="30" height="64" fill="#cfdcc8"/><rect x="${x+52}" y="112" width="28" height="28" fill="#e9efe4"/>`).join("")),
+    food:svg('<rect width="360" height="220" fill="#eef0e2"/><path d="M90 170c-40-50-10-120 60-130-10 60-20 100-60 130z" fill="#7fa36a"/><path d="M90 170c20-40 40-80 60-130" stroke="#4f7a45" stroke-width="3" fill="none"/><path d="M190 60c30 10 60 50 40 110-40-20-60-70-40-110z" fill="#c5523f"/><path d="M190 60c-4-14 4-24 14-28" stroke="#4f7a45" stroke-width="5" fill="none"/><circle cx="290" cy="150" r="30" fill="#e0a458"/><circle cx="282" cy="142" r="7" fill="#fff" opacity=".5"/><circle cx="270" cy="70" r="14" fill="#7fa36a"/><circle cx="292" cy="62" r="11" fill="#9cc086"/>'),
     items:svg('<rect width="360" height="220" fill="#f3ede2"/><rect x="104" y="22" width="152" height="186" rx="8" fill="#fff"/>'+[58,92,126,160].map((y,i)=>`<rect x="124" y="${y}" width="18" height="18" rx="4" fill="${i<2?"#164b3e":"#fff"}" stroke="#164b3e" stroke-width="2"/>${i<2?`<path d="M128 ${y+9}l4 4 7-8" stroke="#fff" stroke-width="2.5" fill="none"/>`:""}<rect x="152" y="${y+5}" width="${[80,64,88,56][i]}" height="8" rx="4" fill="#d9dfd6"/>`).join("")+'<circle cx="286" cy="164" r="26" fill="#f6f1e7" stroke="#e0a458" stroke-width="4"/><rect x="62" y="132" width="30" height="58" rx="6" fill="#e9efe4" stroke="#7fa36a" stroke-width="3"/>'),
     done:svg('<rect width="360" height="220" fill="#e9efe4"/><path d="M118 80h124l-12 112H130z" fill="#164b3e"/><path d="M146 80c0-46 68-46 68 0" stroke="#164b3e" stroke-width="9" fill="none"/><circle cx="160" cy="56" r="20" fill="#7fa36a"/><circle cx="196" cy="50" r="16" fill="#c5523f"/><circle cx="180" cy="66" r="14" fill="#e0a458"/><path d="M160 136l14 14 28-30" stroke="#fff" stroke-width="9" fill="none" stroke-linecap="round" stroke-linejoin="round"/>'),
   };
@@ -85,7 +81,18 @@
     const pick=label=>lines.find(([l])=>l===label)?.[1];
     if(step.art==="place")return gate.disabled?"Ange postnummer och välj butiker":pick("Område")||topArea.textContent;
     if(step.art==="meals")return lines.filter(([l])=>!["Område","Handla i","Egna varor"].includes(l)).map(([l,v])=>`${l} ${v}`).join(" · ")||step.lead;
-    if(step.art==="stores")return pick("Handla i")||step.lead;
+    if(step.art==="food"){
+      const list=id=>($(id)?.value||"").split(",").map(v=>v.trim()).filter(Boolean);
+      const avoid=[...list('profile-allergies').map(v=>`${v} (allergi)`),...list('profile-exclusions')],likes=list('profile-likes');
+      const cuisines=[...document.querySelectorAll('#complete-recipe-controls .recipe-cuisines input:checked')].map(n=>n.closest("label")?.textContent.trim()).filter(Boolean);
+      const quick=["recipe-variety","recipe-quick-time","recipe-quick-ingredients"].map(id=>$(id)).filter(n=>n&&!["","normal"].includes(n.value)).map(n=>n.selectedOptions[0]?.text);
+      return [avoid.length?`Undvik ${avoid.join(", ")}`:"",likes.length?`Gillar ${likes.join(", ")}`:"",cuisines.join(", "),...quick].filter(Boolean).join(" · ")||step.lead;
+    }
+    if(step.art==="purchases"){
+      const organic=Number($('organic-percent')?.value||0);
+      return [pick("Handla i"),organic?`Minst ${organic} % ekologiskt`:"",$('organic-animals')?.checked?"Ekologiska animalier":"",
+        $('planning-use-pantry')&&!$('planning-use-pantry').checked?"Utan skafferiet":"",$('surplus-mode')?.value==="allow_larger"?"Större köp tillåtna":""].filter(Boolean).join(" · ")||step.lead;
+    }
     if(step.art==="items")return pick("Egna varor")||step.lead;
     return step.lead;
   }
