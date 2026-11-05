@@ -19,7 +19,9 @@
       hideMeals();
       $('location-radius-label').hidden=mode.value!=="radius";
       if(automatic&&location){
-        if(mode.value==="municipality")selected=location.municipality_available?location.contexts.map(row=>row.context_id):[];
+        // A Stora Coop priced from Coop Online Syd stands in for the online shop
+        // when every store is chosen; the online shop stays selectable by hand.
+        if(mode.value==="municipality"){const covered=new Set(location.contexts.map(row=>row.base_price_context_id).filter(Boolean));selected=location.municipality_available?location.contexts.filter(row=>!covered.has(row.context_id)).map(row=>row.context_id):[];}
         if(mode.value==="radius")selected=location.contexts.filter(row=>row.distance_km!=null&&row.distance_km<=Number(radius.value)).map(row=>row.context_id);
       }
       const unavailable=selected.filter(id=>!currentIds().has(id));

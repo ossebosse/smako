@@ -756,6 +756,36 @@ def test_consumer_price_context_coverage_separates_compared_and_stale_lineage() 
     assert unavailable[0].snapshot_ids == ("snapshot:willys:old",)
 
 
+def test_coverage_names_addresses_and_the_online_base_of_stora_coop() -> None:
+    observed_at = datetime(2026, 9, 1, 3, 17, tzinfo=UTC)
+
+    def lineage(role=None):
+        return SourceProvenance(source_provider="own", source_channel="catalog",
+                                source_snapshot_id="snapshot:syd", source_observed_at=observed_at,
+                                provider_store_id="730400", source_role=role)
+
+    online = Store(store_id="context:coop:online", name="Coop Online Syd", chain="coop",
+                   city="Lund", price_context_type="online_fulfillment",
+                   source_store_id="730400", source_provenance=lineage())
+    stora = Store(store_id="context:coop:stora", name="Stora Coop Lund", chain="coop",
+                  city="Lund", address="Bankgatan 1", price_context_type="physical_store",
+                  source_provenance=lineage("owner_assigned_base_price"))
+    willys = Store(store_id="context:willys:lund", name="Willys Lund", chain="willys",
+                   city="Lund", address="Magistratsvägen 22", price_context_type="online_store")
+    prepared = SimpleNamespace(stores=(online, stora, willys),
+                               universe=SimpleNamespace(products=()))
+    compared, _ = _consumer_price_context_coverage(
+        prepared, usable_context_ids=[s.store_id for s in prepared.stores],
+        excluded_stale_context_ids=())
+    rows = {row.context_id: row for row in compared}
+    assert rows["context:coop:stora"].base_price_context_id == "context:coop:online"
+    assert rows["context:coop:online"].base_price_context_id is None
+    assert rows["context:willys:lund"].address == "Magistratsvägen 22"
+    # Rows without these facts serialize exactly as before.
+    assert "address" not in rows["context:coop:online"].model_dump()
+    assert "base_price_context_id" not in rows["context:willys:lund"].model_dump()
+
+
 def test_saved_plan_endpoint_rejects_nonlocal_price_source(
     monkeypatch: pytest.MonkeyPatch,
     tmp_path: Path,

@@ -875,6 +875,30 @@ def test_full_municipality_and_radius_can_select_more_than_forty_stores(choices)
     assert len(submit(page, captured)["allowed_store_ids"]) == 63
 
 
+def test_whole_municipality_compares_stora_coop_instead_of_its_online_base(choices):
+    page, url, captured = choices
+    rows = [{"context_id": "online", "display_name": "Coop Online Syd", "distance_km": None},
+            {"context_id": "stora", "display_name": "Stora Coop Lund", "distance_km": 2.4,
+             "base_price_context_id": "online"},
+            {"context_id": "willys", "display_name": "Willys Lund", "distance_km": 2.6}]
+    page.route("**/api/shopping-location?**", lambda route: route.fulfill(
+        content_type="application/json", body=json.dumps({
+            "status": "eligible", "postal_code": "22350", "area_postal_code": "22350",
+            "municipality_name": "Lund", "area_name": "Lund", "municipality_available": True,
+            "nearest_distance_km": 0, "contexts": rows})))
+    page.goto(url)
+    choose_location(page)
+    page.locator("#location-store-mode").select_option("municipality")
+    page.locator("#confirm-location").click()
+    assert sorted(submit(page, captured)["allowed_store_ids"]) == ["stora", "willys"]
+    # Chosen by hand, the online shop is still compared.
+    page.locator("#choose-specific-stores").click()
+    page.locator("#location-stores-dialog input[value=online]").check()
+    page.locator("#location-stores-done").click()
+    page.locator("#confirm-location").click()
+    assert sorted(submit(page, captured)["allowed_store_ids"]) == ["online", "stora", "willys"]
+
+
 def test_estimate_change_only_applies_to_explicit_recalculation():
     for action in ("recalculate", "extras"):
         value = PersonalMutation(revision=1, pantry_revision=0, action=action,

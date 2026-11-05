@@ -355,6 +355,11 @@ class PriceContextCoverage(BaseModel):
     price_scope_label: str = Field(min_length=1)
     snapshot_ids: tuple[str, ...] = ()
     status: Literal["compared", "excluded_stale"]
+    # Street address, so two stores with similar names can be told apart.
+    address: str | None = Field(default=None, exclude_if=lambda value: value is None)
+    # A physical store whose ordinary prices come from this online context.
+    base_price_context_id: str | None = Field(default=None,
+                                              exclude_if=lambda value: value is None)
 
 
 class PlanPriceData(BaseModel):

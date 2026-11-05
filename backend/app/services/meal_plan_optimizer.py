@@ -189,6 +189,23 @@ def _consumer_price_context_coverage(
             return "butikskopplad prisdata"
         return "digital priskontext"
 
+    # Stores whose ordinary prices are assigned from an online context (Stora
+    # Coop from Coop Online Syd) name that context, so a selection of every
+    # store can compare the store itself instead of the online shop twice.
+    online_sources = {}
+    for store in prepared.stores:
+        if str(store.price_context_type or "").casefold() == "online_fulfillment":
+            for key in {store.source_store_id,
+                        getattr(store.source_provenance, "provider_store_id", None)} - {None}:
+                online_sources.setdefault(key, set()).add(store.store_id)
+
+    def base_source(store: Store) -> str | None:
+        provenance = store.source_provenance
+        if provenance is None or provenance.source_role != "owner_assigned_base_price":
+            return None
+        matches = online_sources.get(provenance.provider_store_id, set())
+        return next(iter(matches)) if len(matches) == 1 else None
+
     rows = {
         store.store_id: PriceContextCoverage(
             context_id=store.store_id,
@@ -201,6 +218,8 @@ def _consumer_price_context_coverage(
             status=(
                 "compared" if store.store_id in usable else "excluded_stale"
             ),
+            address=store.address or None,
+            base_price_context_id=base_source(store),
         )
         for store in prepared.stores
         if store.store_id in usable or store.store_id in excluded
