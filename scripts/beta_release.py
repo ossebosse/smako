@@ -23,13 +23,12 @@ ROOT = Path(__file__).resolve().parents[1]
 WORKERS = ROOT / "scripts/beta_release_workers"
 
 
-def valid_path(path, grocery_code=False):
+def valid_path(path):
     return (
         re.fullmatch(r"[A-Za-z0-9_./-]+", path) is not None
         and not PurePosixPath(path).is_absolute()
         and ".." not in PurePosixPath(path).parts
-        and (path.startswith("backend/app/")
-             or (grocery_code and path.startswith("grocery_data/app/") and path.endswith(".py")))
+        and path.startswith("backend/app/")
         and "__pycache__" not in path
         and not path.endswith((".pyc", ".sqlite", ".sqlite3", ".db"))
     )
@@ -93,6 +92,16 @@ def dev_only_change(path, before, commit):
     return False
 
 
+def imports_only_unchanged(old, new, modules):
+    """True when the lines that use the kept grocery modules are unchanged."""
+
+    def uses(text):
+        return sorted(line for line in text.decode().splitlines()
+                      if any(m in line for m in modules))
+
+    return uses(old) == uses(new)
+
+
 def prepare(args):
     before = git("rev-parse", "--verify", args.from_commit + "^{commit}")
     commit = git("rev-parse", "--verify", args.commit + "^{commit}")
@@ -104,15 +113,29 @@ def prepare(args):
     )
     if not paths:
         raise ValueError("No app changes: no deployment is needed for this commit range")
-    # Opt-in: grocery Python modules already shipped to the scheduler can ride
-    # along under the same exact runtime/base/candidate hash checks. Grocery
-    # requirements, data and any non-Python file still stop the app-only flow.
+    # Opt-in: grocery Python modules that were delivered to the scheduler stay
+    # as they are in the app image. The app image keeps its own grocery copy, so
+    # these are not packaged; the review lists them. A changed app file that
+    # imports one of them still stops, so new app code never meets old grocery
+    # code it was not run against. Grocery requirements and data still stop.
     grocery = sorted(
         p for p in git("diff", "--name-only", before, commit, "--", "grocery_data/app/").splitlines()
         if p.endswith(".py")
-    ) if getattr(args, "include_grocery_code", False) else []
-    paths = sorted(set(paths) | set(grocery))
-    if not all(valid_path(p, grocery_code=bool(grocery)) for p in paths):
+    ) if getattr(args, "keep_app_grocery", False) else []
+    if grocery:
+        modules = {p[:-3].replace("/", ".").removesuffix(".__init__") for p in grocery}
+        for path in paths:
+            if not path.endswith(".py"):
+                continue
+            old, new = blob(before, path), blob(commit, path)
+            if new is None:
+                continue
+            imported = set(re.findall(r"grocery_data\.app(?:\.[A-Za-z_][A-Za-z0-9_]*)+", new.decode()))
+            if imported & modules and (old is None or not imports_only_unchanged(old, new, modules)):
+                raise ValueError(
+                    "Changed app code imports grocery code kept at the app image version: " + path
+                )
+    if not all(valid_path(p) for p in paths):
         raise ValueError("Unsafe or unsupported app path")
     boundary_candidates = git(
         "diff",
@@ -179,7 +202,7 @@ print(json.dumps({'image':x['Image'],'files':files}))
         "unresolved": [],
     }
     if grocery:
-        manifest["include_grocery_code"] = True
+        manifest["grocery_kept_at_app_image"] = grocery
     data = io.BytesIO()
     with zipfile.ZipFile(data, "w", zipfile.ZIP_DEFLATED) as archive:
         for path, content in sorted(files.items()):
@@ -212,8 +235,7 @@ def execute(args):
     config = json.loads((args.workdir / "review.json").read_text(encoding="utf8"))
     if not re.fullmatch(r"app-[0-9a-f]{12}-[0-9a-f]{8}", config["release"]):
         raise ValueError("Invalid release identity")
-    grocery_code = config["review"].get("include_grocery_code") is True
-    if not all(valid_path(p, grocery_code=grocery_code) for p in config["review"]["files"]):
+    if not all(valid_path(p) for p in config["review"]["files"]):
         raise ValueError("Invalid manifest paths")
     if args.command == "build":
         data = (args.workdir / "candidate.zip").read_bytes()
@@ -303,9 +325,10 @@ def main():
     prep.add_argument("--host", default="smako")
     prep.add_argument("--workdir", type=Path, required=True, help="New, empty output directory")
     prep.add_argument(
-        "--include-grocery-code",
+        "--keep-app-grocery",
         action="store_true",
-        help="Also patch changed grocery_data/app Python modules (already active in the scheduler)",
+        help="Allow grocery_data/app Python changes already delivered to the scheduler; "
+        "the app image keeps its own grocery copy",
     )
     for name in ("build", "activate"):
         command = sub.add_parser(name)

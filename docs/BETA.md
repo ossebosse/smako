@@ -121,10 +121,12 @@ beroenden, databasstruktur, grocery-kod eller körbara deploy-filer har ändrats
 intervallet, avbryts detta begränsade appflöde. Leverera då förändringen med
 schedulerpatch eller full release nedan; kopiera inte hela main över den aktiva
 bilden på chans.
-Grocery-Pythonmoduler som redan är aktiva i schedulern kan följa med appen med
-`prepare --include-grocery-code`. De går igenom samma exakta kontroll: aktiv fil
-i appbilden måste vara identisk med Git-basen. Grocery-beroenden, data och
-andra filer än `.py` stoppar fortfarande flödet.
+Appbilden har en egen, äldre kopia av grocery-koden; schedulern får sina
+grocery-ändringar genom schedulerpatchar. Om intervallet bara innehåller sådana
+redan levererade grocery-Pythonfiler kan `prepare --keep-app-grocery` användas.
+De paketeras då inte, utan listas i granskningen som kvar på appbildens version.
+En ändrad appfil vars importrader mot en sådan modul har ändrats stoppar
+fortfarande, liksom grocery-beroenden, data och andra filer än `.py`.
 `deploy/.env.production.example` är dokumentation och paketeras aldrig.
 Ändringar där ändrar inte serverns miljöfil. Appmoduler vars namn innehåller
 `requirements` är vanlig appkod och ingår i den exakta filgranskningen.
