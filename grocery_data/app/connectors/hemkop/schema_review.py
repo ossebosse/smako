@@ -79,7 +79,7 @@ def reviewed_hemkop_schema_diff(diff: SchemaDiff, *, schemas=None, picking_contr
 # lose null as campaigns with/without ordinary price or purchase limits rotate.
 _OFFER_PREFIX = r"(?:[0-9]+:)?physical_offers:\$\[\]\.results\[\]"
 _OFFER_NULLABLE = {
-    re.compile(_OFFER_PREFIX + r"\.(?:price|priceNoUnit)\Z"): {"string"},
+    re.compile(_OFFER_PREFIX + r"\.(?:price|priceNoUnit|displayVolume|promotionProductOrdinaryComparePriceUnit)\Z"): {"string"},
     re.compile(_OFFER_PREFIX + r"\.potentialPromotions\[\]\.(?:redeemLimit|promotionRedeemLimit)\Z"): {"number"},
 }
 

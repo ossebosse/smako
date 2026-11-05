@@ -373,3 +373,17 @@ def test_top_level_partition_rejects_duplicate_source_paths() -> None:
 
     with pytest.raises((TypeError, ValueError)):
         top_level_category_paths(tree)
+
+
+def test_physical_campaign_terminal_page_may_be_empty_list() -> None:
+    # Store 4247 on 2026-11-05: 60 campaigns, page size 30, terminal page [].
+    terminal = _catalog_payload(current_page=2, number_of_pages=3, page_size=100,
+                                total_results=200, results=[])
+    terminal["facets"] = _facets("4247")
+    page = validated_catalog_page(terminal, requested_page=2, expected_store_id="4247",
+                                  empty_list_terminal=True)
+    assert page.results == ()
+    terminal["results"] = [{"code": "late-row"}]
+    with pytest.raises(ValueError):
+        validated_catalog_page(terminal, requested_page=2, expected_store_id="4247",
+                               empty_list_terminal=True)

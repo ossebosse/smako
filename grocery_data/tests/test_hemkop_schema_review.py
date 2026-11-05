@@ -96,3 +96,18 @@ def test_physical_offers_unknown_additions_and_bad_flag_type_still_block():
     assert set(reviewed.added) == set(diff.added)
     reviewed = _review_schema_diff(Chain.HEMKOP, _OFFERS, diff, schemas=_STORE_SCHEMA)
     assert reviewed.added == ("4123:physical_offers:$[].results[].newField",)
+
+
+def test_physical_offers_accept_malmo_nullable_package_and_compare_unit():
+    # Exact Malmö diff that rejected 4114/4199/4212 on 2026-11-05.
+    diff = SchemaDiff(added=(), removed=(), type_changed=(
+        SchemaTypeChange(path="4114:physical_offers:$[].results[].displayVolume",
+                         old_types=("string",), new_types=("null", "string")),
+        SchemaTypeChange(path="4114:physical_offers:$[].results[].promotionProductOrdinaryComparePriceUnit",
+                         old_types=("string",), new_types=("null", "string")),
+    ))
+    assert _review_schema_diff(Chain.HEMKOP, _OFFERS, diff, schemas=_STORE_SCHEMA) is None
+    bad = SchemaDiff(added=(), removed=(), type_changed=(
+        SchemaTypeChange(path="4114:physical_offers:$[].results[].displayVolume",
+                         old_types=("string",), new_types=("number",)),))
+    assert _review_schema_diff(Chain.HEMKOP, _OFFERS, bad, schemas=_STORE_SCHEMA) is not None

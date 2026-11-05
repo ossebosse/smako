@@ -48,7 +48,8 @@ def page_rows(document, store_id):
         raise ValueError('Hemkop physical campaign source/store/query mismatch')
     payload = document.json_payload()
     page = validated_catalog_page(payload, requested_page=document.page_number,
-                                  requested_size=int(document.query['size']), require_product_identity=False)
+                                  requested_size=int(document.query['size']), require_product_identity=False,
+                                  empty_list_terminal=True)
     for row in page.results:
         if set(row) - ROW_FIELDS:
             raise ValueError('Hemkop physical row schema changed: ' + ','.join(sorted(set(row) - ROW_FIELDS)))

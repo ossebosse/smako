@@ -104,6 +104,13 @@ _STORE_HEADING = re.compile(
     re.IGNORECASE | re.DOTALL,
 )
 _TNC = re.compile(r'(?:[?&]|&amp;)TNC=(?P<value>\d+)(?:[&#"\']|$)', re.IGNORECASE)
+# Since 2026-11-05 the Bing directions link is gone; the page's own
+# schema.org JSON-LD still carries the store position.
+_LD_POSITION = re.compile(
+    r'"geo"\s*:\s*\{\s*"@type"\s*:\s*"GeoCoordinates"\s*,\s*'
+    r'"latitude"\s*:\s*"?(?P<latitude>-?\d+(?:\.\d+)?)"?\s*,\s*'
+    r'"longitude"\s*:\s*"?(?P<longitude>-?\d+(?:\.\d+)?)"?\s*\}'
+)
 _BING_POSITION = re.compile(
     r"https://bing\.com/maps/default\.aspx\?rtp=~pos\."
     r"(?P<latitude>-?\d+(?:\.\d+)?)_(?P<longitude>-?\d+(?:\.\d+)?)_",
@@ -246,6 +253,16 @@ def sanitized_store_detail(payload: bytes, *, source_url: str) -> bytes:
         raise LidlSchemaError("Lidl store heading does not contain address, postal code and city")
     latitude = position_match.group("latitude") if position_match else None
     longitude = position_match.group("longitude") if position_match else None
+    ld_positions = {(m.group("latitude"), m.group("longitude")) for m in _LD_POSITION.finditer(text)}
+    if len(ld_positions) > 1:
+        raise LidlSchemaError("Lidl store page states conflicting JSON-LD positions")
+    if ld_positions:
+        ld_latitude, ld_longitude = ld_positions.pop()
+        if position_match is None:
+            latitude, longitude = ld_latitude, ld_longitude
+        elif (abs(float(ld_latitude) - float(latitude)) > 1e-4
+              or abs(float(ld_longitude) - float(longitude)) > 1e-4):
+            raise LidlSchemaError("Lidl store page map and JSON-LD positions disagree")
     envelope = {
         "schema": "lidl-public-store-detail-v1",
         "external_id": tnc_match.group("value"),

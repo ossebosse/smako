@@ -709,3 +709,31 @@ def test_source_policy_is_allow_and_bounded_factory_stays_bounded() -> None:
     assert audit.source_policy == SourcePolicy.ALLOW
     assert audit.operator_opt_in is False
     assert audit.max_concurrency == 1
+
+
+_LD_DETAIL = """
+    <span class="main-info__headline-store">Magistratsvägen 6, 226 43 Lund</span>
+    <script type="application/ld+json">{"@type":"GroceryStore","geo":{"@type":"GeoCoordinates","latitude":55.7205,"longitude":13.20542}}</script>
+    <a href="https://survey.example/?TNC=0163&token=must-not-survive">Survey</a>
+"""
+_LD_URL = "https://www.lidl.se/s/sv-SE/butiker/lund/magistratsvaegen-6/"
+
+
+def test_store_position_from_json_ld_when_map_link_is_gone() -> None:
+    # Live Lidl store pages since 2026-11-05: no Bing directions link.
+    row = json.loads(sanitized_store_detail(_LD_DETAIL.encode(), source_url=_LD_URL))
+    assert (row["latitude"], row["longitude"]) == ("55.7205", "13.20542")
+    assert row["external_id"] == "0163"
+
+
+def test_conflicting_store_positions_are_rejected() -> None:
+    from grocery_data.app.connectors.lidl.models import LidlSchemaError
+
+    with_map = _LD_DETAIL + '<a href="https://bing.com/maps/default.aspx?rtp=~pos.55.69938_13.17783_Lund">Map</a>'
+    with pytest.raises(LidlSchemaError, match="disagree"):
+        sanitized_store_detail(with_map.encode(), source_url=_LD_URL)
+    twice = _LD_DETAIL + '{"geo":{"@type":"GeoCoordinates","latitude":55.1,"longitude":13.1}}'
+    with pytest.raises(LidlSchemaError, match="conflicting"):
+        sanitized_store_detail(twice.encode(), source_url=_LD_URL)
+    agreeing = _LD_DETAIL + '<a href="https://bing.com/maps/default.aspx?rtp=~pos.55.7205_13.20542_Lund">Map</a>'
+    assert json.loads(sanitized_store_detail(agreeing.encode(), source_url=_LD_URL))["latitude"] == "55.7205"

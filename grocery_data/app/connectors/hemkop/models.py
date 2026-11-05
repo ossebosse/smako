@@ -107,6 +107,7 @@ def validated_catalog_page(
     requested_size: int | None = None,
     expected_store_id: str | None = None,
     require_product_identity: bool = True,
+    empty_list_terminal: bool = False,
 ) -> HemkopCatalogPage:
     """Fail closed unless one category page reconciles all pagination facts.
 
@@ -172,7 +173,11 @@ def validated_catalog_page(
             raise HemkopSchemaError(
                 "Hemköp terminal page shape is unverified (null versus empty list)"
             )
-        if _PROVEN_TERMINAL_RESULTS_SHAPE == "null" and raw_results is not None:
+        # The catalog serves null. The physical campaign endpoint serves an
+        # empty list (observed 2026-11-05, store 4247, 60 rows); its caller
+        # opts in explicitly. Either way the terminal page carries no rows.
+        allowed = (None, []) if empty_list_terminal else (None,)
+        if _PROVEN_TERMINAL_RESULTS_SHAPE == "null" and raw_results not in allowed:
             raise HemkopSchemaError("Hemköp terminal page no longer uses proven null results")
         if _PROVEN_TERMINAL_RESULTS_SHAPE == "empty" and raw_results != []:
             raise HemkopSchemaError(
