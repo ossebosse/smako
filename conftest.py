@@ -115,8 +115,19 @@ def _empty_shared_planner_resolution():
         yield
         return
     SHARED_RESOLUTION.clear()
+    _clear_qualification_memory()
     yield
     SHARED_RESOLUTION.clear()
+    _clear_qualification_memory()
+
+
+def _clear_qualification_memory():
+    # Process-local qualification rows are keyed by an exact context digest;
+    # tests patch code behind that digest, so never carry rows across tests.
+    from app.services.personal_planner import _QUALIFICATION_MEMORY
+
+    with _QUALIFICATION_MEMORY.lock:
+        _QUALIFICATION_MEMORY.rows.clear()
 
 
 # --- Planner memory reclamation -----------------------------------------------

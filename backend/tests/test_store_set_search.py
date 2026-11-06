@@ -226,3 +226,17 @@ def test_complete_menu_search_with_bound_pruning_returns_the_same_menu():
         assert len(evaluated) <= plain_evaluations
         saved += plain_evaluations - len(evaluated)
     assert saved > 0
+
+
+def test_sharing_orders_put_package_sharing_replacements_first_and_keep_ties_stable():
+    from app.services.menu_optimizer import MenuOptimizer
+
+    slot = lambda name: SimpleNamespace(id=name, recipe=SimpleNamespace(name=name))
+    a, b, c, d, e = (slot(n) for n in "abcde")
+    packages = {id(a): frozenset({"mince", "onion"}), id(b): frozenset({"rice"}),
+                id(c): frozenset({"mince", "onion", "cream"}), id(d): frozenset({"onion"}),
+                id(e): frozenset({"rice"})}
+    ordered = [[a, b], [b, e, d, c]]  # priority order within each slot
+    orders = MenuOptimizer._sharing_orders([a, b], ordered, packages)
+    assert orders[0] == [b, a]           # slot 0 vs slot 1 = b: "rice" shared by b only
+    assert orders[1] == [c, d, b, e]     # vs slot 0 = a: c shares 2, d 1, b/e none (stable)

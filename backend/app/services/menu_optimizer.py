@@ -1506,6 +1506,29 @@ class MenuOptimizer:
             return [], evaluate([], final=True)
         return min(states, key=lambda state: score(*state))
 
+    @staticmethod
+    def _sharing_orders(menu, ordered, package_sets):
+        """Per slot: candidates by packages shared with the other chosen slots.
+
+        A recipe that reuses what the rest of the menu already buys usually
+        adds the least to the joint checkout. Ties keep the existing priority
+        order (Python's sort is stable), so this only reorders proposals.
+        """
+        orders = []
+        for index, group in enumerate(ordered):
+            others = frozenset().union(*(package_sets[id(slot)] for position, slot in enumerate(menu)
+                                         if position != index))
+            if not others:
+                orders.append(group)
+                continue
+            shared = {}
+            for slot in group:
+                values = package_sets[id(slot)]
+                if values not in shared:
+                    shared[values] = -len(values & others)
+            orders.append(sorted(group, key=lambda slot: shared[package_sets[id(slot)]]))
+        return orders
+
     def _optimize_complete_slots(self, groups, *, evaluate, accepts, score, search_trace,
                                  state_identity, decision_observer, candidate_priority,
                                  candidate_packages, bounded_evaluate=None):
@@ -1682,6 +1705,8 @@ class MenuOptimizer:
                 # silently exclude the rest of the current library.
                 exchange_rank = 0
                 exchange_revision = 0
+                sharing_orders = None
+                overlap_exchange = bool(candidate_packages) and len(distinct_packages) > 1
                 trace['exchange_restarts'] = 0
                 for anchor in anchors:
                     checkpoint()
@@ -1707,17 +1732,23 @@ class MenuOptimizer:
                     if exchange_revision != trace['improvements']:
                         exchange_rank = 0
                         trace['exchange_restarts'] += 1
+                        sharing_orders = (self._sharing_orders(incumbent[1], ordered, package_sets)
+                                          if overlap_exchange else None)
                     exchange_revision = trace['improvements']
                     # Two ranks per anchor give the current complete basket a
                     # useful neighbourhood even when qualification leaves a
                     # short search window. This is proposal ordering only: all
                     # candidates still pass accepts and current joint checkout.
+                    # Each rank first tries the replacement sharing most
+                    # purchased packages with the rest of the incumbent, then
+                    # the individually cheapest one (the earlier order).
                     for rank in range(exchange_rank, exchange_rank + 2):
                         for index, group in enumerate(ordered):
-                            if rank < len(group):
-                                menu = list(incumbent[1]); menu[index] = group[rank]
-                                considered[index].add(id(group[rank]))
-                                propose(menu)
+                            for order in ((sharing_orders[index], group) if sharing_orders else (group,)):
+                                if rank < len(order):
+                                    menu = list(incumbent[1]); menu[index] = order[rank]
+                                    considered[index].add(id(order[rank]))
+                                    propose(menu)
                     exchange_rank += 2
         except SearchWindowClosed:
             soft_stopped = True
