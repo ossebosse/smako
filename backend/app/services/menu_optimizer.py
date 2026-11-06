@@ -884,6 +884,14 @@ class _EvaluationCache:
         )
 
 
+
+class MenuBoundPruned(Exception):
+    """A complete menu provably ranks no better than the current incumbent.
+
+    Deliberately not a ValueError: it is not a rejection, it records nothing
+    about the menu and it never becomes the search's last error.
+    """
+
 class MenuOptimizer:
     """Find a cheap diverse recipe set with package and store aware beam search."""
 
@@ -1325,7 +1333,7 @@ class MenuOptimizer:
     def optimize_slots(self, candidates_by_slot, *, evaluate, accepts, score, beam_width=12,
                        search_trace=None, state_identity=None, fallback_beam_width=None, decision_observer=None,
                        initial_evaluations=None, _attempt_offset=0, complete_first=False,
-                       candidate_priority=None, candidate_packages=None):
+                       candidate_priority=None, candidate_packages=None, bounded_evaluate=None):
         """Try the ordinary beam, then one explicitly bounded safe retry.
 
         A retry requires actual exhaustion AND earlier removal of different
@@ -1341,7 +1349,8 @@ class MenuOptimizer:
             return self._optimize_complete_slots(candidates_by_slot, evaluate=evaluate,
                 accepts=accepts, score=score, search_trace=search_trace,
                 state_identity=state_identity, decision_observer=decision_observer,
-                candidate_priority=candidate_priority, candidate_packages=candidate_packages)
+                candidate_priority=candidate_priority, candidate_packages=candidate_packages,
+                bounded_evaluate=bounded_evaluate)
         trace = search_trace if search_trace is not None else []
         start = len(trace)
         exhausted = {}
@@ -1499,7 +1508,7 @@ class MenuOptimizer:
 
     def _optimize_complete_slots(self, groups, *, evaluate, accepts, score, search_trace,
                                  state_identity, decision_observer, candidate_priority,
-                                 candidate_packages):
+                                 candidate_packages, bounded_evaluate=None):
         """Propose whole menus, then price them through the caller's exact checkout.
 
         Only the incumbent and current evaluation retain full baskets. Singleton
@@ -1584,7 +1593,15 @@ class MenuOptimizer:
                 # Existing cooperative checks also stop INSIDE an expensive
                 # improvement, while the outer request keeps its finalization time.
                 with planning_deadline(None if remaining is None else max(0, remaining-12)):
-                    result = evaluate(slots, final=True)
+                    if bounded_evaluate is not None and incumbent is not None:
+                        # The caller proves, before its whole-basket checkout,
+                        # that this menu cannot rank below the incumbent.
+                        result = bounded_evaluate(slots, incumbent[0])
+                    else:
+                        result = evaluate(slots, final=True)
+            except MenuBoundPruned:
+                trace['bound_pruned'] = trace.get('bound_pruned', 0) + 1
+                return
             except PlanningDeadlineExceeded:
                 remaining = remaining_planning_seconds()
                 if remaining is not None and remaining > 0:

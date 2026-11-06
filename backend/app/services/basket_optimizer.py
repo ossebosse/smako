@@ -2274,6 +2274,34 @@ class BasketOptimizer:
             return None
         return best[0], best[1], best_single
 
+    def lower_bound(
+        self,
+        ingredients: Sequence[NormalizedIngredient],
+        candidates_by_name: Mapping[str, Sequence[ProductCandidate]],
+    ) -> Decimal | None:
+        """Exact lower bound on ``optimize``'s total for these requirements.
+
+        Each line costs at least its cheapest qualified quote in any store:
+        a store cap, the verification order and the choice of stores can only
+        raise it. Returns None (no bound) where lines are priced jointly
+        (coupled campaigns), outside a quote session, or when a line has no
+        quote, so that ``optimize`` reports the real outcome.
+        """
+        session = self._quote_cache_context.get()
+        if (session is None or type(self) is not BasketOptimizer
+                or type(self.calculator) is not BasketCalculator
+                or _has_coupled_checkout(candidates_by_name, (i.canonical_name for i in ingredients),
+                                         session=session)):
+            return None
+        total = Decimal(0)
+        for ingredient in ingredients:
+            quotes, _key = self._store_best_quotes_with_key(
+                ingredient, self._ingredient_candidates(ingredient, candidates_by_name))
+            if not quotes:
+                return None
+            total += min(money(quote.total_price) for quote in quotes)
+        return money(total)
+
     def optimize(
         self,
         ingredients: Sequence[NormalizedIngredient],
