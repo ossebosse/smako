@@ -155,7 +155,7 @@ _SEARCH_ONLY_PREFERENCE_FIELDS = ("max_same_main_protein_dinners", "min_distinct
 class _QualificationMemory:
     """Process-local, bounded LRU of qualification rows by exact context digest."""
 
-    def __init__(self, limit=32):
+    def __init__(self, limit=128):
         import threading
 
         self.limit, self.rows, self.lock = limit, OrderedDict(), threading.Lock()
