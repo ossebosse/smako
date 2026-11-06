@@ -49,6 +49,9 @@ from app.services.performance_trace import (
 )
 from app.services.price_universe import PackageCostCache, PriceUniverse
 from app.services.purchase_quantity_resolver import PurchaseQuantityResolver
+from app.services.purchase_quantity_resolver import _ceil as _resolver_ceil
+from app.services.purchase_quantity_resolver import _decimal as _resolver_decimal
+from app.services.purchase_quantity_resolver import _to_base as _resolver_to_base
 
 type _CandidateFingerprint = tuple[object, ...]
 type _QuoteCacheKey = tuple[str, Decimal, str, _CandidateFingerprint]
@@ -275,6 +278,7 @@ class QuoteCacheStats:
     calculations: int = 0
     fixed_template_hits: int = 0
     fixed_template_misses: int = 0
+    fixed_shape_hits: int = 0
 
 
 @dataclass(frozen=True, slots=True)
@@ -316,6 +320,12 @@ class _QuoteCacheSession:
     # Same frozen source object and whole package count, inside this request.
     # Quantity resolution and purchase limits are still checked on every use.
     fixed_package_templates: dict[tuple, tuple[ProductCandidate, BasketItemQuote]] = field(default_factory=dict)
+    # Per plain fixed package: (source object, checkout projection, usable
+    # base quantity, base dimension) from its first successful resolution.
+    fixed_package_shapes: dict[int, tuple] = field(default_factory=dict)
+    # Per requirement key: each store's winning quote only (see
+    # BasketOptimizer._store_best_quotes_with_key).
+    best_quote_sets: dict = field(default_factory=dict)
     dominance_rows: dict = field(default_factory=dict)
     promotion_structure_rows: dict[int, tuple[tuple, tuple, tuple]] = field(default_factory=dict)
     promotion_structure_candidates: int = 0
@@ -956,10 +966,34 @@ class BasketOptimizer:
                 and not (candidate.purchase_terms or candidate.purchase_units
                          or candidate.offers or candidate.promotion_groups)):
             required, unit = normalize_quantity(ingredient.required_quantity, ingredient.unit)
+            shape = session.fixed_package_shapes.get(id(candidate))
+            if shape is not None and shape[0] is candidate:
+                # Same arithmetic as PurchaseQuantityResolver._fixed_package for
+                # this already resolved plain package: only the package count
+                # and the demand fields depend on the requested quantity.
+                _candidate, checkout, usable, dimension = shape
+                required_base = _resolver_to_base(_resolver_decimal(required), unit)
+                if required_base is not None and required_base[1] == dimension:
+                    package_count = _resolver_ceil(required_base[0] / usable)
+                    validate_purchase_unit_limit(checkout, package_count)
+                    cached = session.fixed_package_templates.get((id(candidate), dimension, package_count))
+                    if cached is not None and cached[0] is candidate:
+                        session.stats.fixed_template_hits += 1
+                        session.stats.fixed_shape_hits += 1
+                        return cached[1].with_request(ingredient=ingredient.canonical_name,
+                            required_quantity=float(required_base[0]),
+                            waste_quantity=float(usable * package_count - required_base[0]))
             checkout, _warning = _fail_closed_non_fixed_price(candidate)
             resolution = self.calculator.resolver.resolve(checkout, required_quantity=required, required_unit=unit)
             if resolution.resolved:
                 validate_purchase_unit_limit(checkout, resolution.packages_needed)
+                if shape is None and checkout.purchase_terms is None:
+                    usable_base = _resolver_to_base(_resolver_decimal(checkout.usable_quantity), checkout.usable_unit)
+                    if usable_base is not None and usable_base[1] == resolution.usable_unit:
+                        if len(session.fixed_package_shapes) >= 65536:
+                            session.fixed_package_shapes.clear()
+                        session.fixed_package_shapes[id(candidate)] = (
+                            candidate, checkout, usable_base[0], usable_base[1])
                 key = (id(candidate), resolution.usable_unit, resolution.packages_needed)
                 cached = session.fixed_package_templates.get(key)
                 if cached is not None and cached[0] is candidate:
@@ -1061,6 +1095,108 @@ class BasketOptimizer:
             )
             session.line_free_quote_sets[line_free_key] = (candidates, tuple(keyed))
         return result, key
+
+    def _plain_fixed_package_path(self, session, candidate) -> bool:
+        """Whether a quote takes the plain fixed-package template path."""
+
+        calculator = self.calculator
+        quote_method = getattr(calculator, "quote_item", None)
+        return (session is not None and type(calculator) is BasketCalculator
+                and getattr(quote_method, '__func__', None) is BasketCalculator.quote_item
+                and type(calculator.resolver) is PurchaseQuantityResolver
+                and candidate.sale_model == SaleModel.FIXED_PACKAGE and not candidate.variable_weight
+                and candidate.quantity_confidence == QuantityConfidence.EXACT
+                and not (candidate.purchase_terms or candidate.purchase_units
+                         or candidate.offers or candidate.promotion_groups))
+
+    def _store_best_quotes_with_key(
+        self,
+        ingredient: NormalizedIngredient,
+        candidates: Sequence[ProductCandidate],
+    ) -> tuple[tuple[BasketItemQuote, ...], _QuoteSetKey | None]:
+        """Return only each store's winning quote for one requirement.
+
+        Every store-set decision in ``optimize`` takes, per store, the minimum
+        of ``_quote_sort_key``; a store's other quotes can never be chosen.
+        A plain fixed package whose shape and same-count template are already
+        known gets its exact sort key from the template (only the package
+        count and waste depend on the quantity) without building a quote; the
+        full quote is built for winners only. Anything else is quoted in full.
+        The full set stays available through ``_candidate_quotes_with_key``.
+        """
+
+        session = self._quote_cache_context.get()
+        if not (session is not None and type(self) is BasketOptimizer
+                and type(self.calculator) is BasketCalculator and isinstance(candidates, tuple)):
+            return self._candidate_quotes_with_key(ingredient, candidates)
+        key = (ingredient.canonical_name, Decimal(str(ingredient.required_quantity)).normalize(),
+               ingredient.unit, id(candidates))
+        cached = session.best_quote_sets.get(key)
+        if cached is not None and cached[0] is candidates:
+            session.stats.quote_set_hits += 1
+            return cached[1], key
+        session.stats.quote_set_misses += 1
+        full = session.quote_sets.get(key)
+        if full is not None and full.candidates is candidates:
+            result = self._store_minima(full.quotes)
+        else:
+            required, unit = normalize_quantity(ingredient.required_quantity, ingredient.unit)
+            required_base = _resolver_to_base(_resolver_decimal(required), unit)
+            best: dict[str, tuple] = {}
+            for candidate in candidates:
+                row = None
+                shape = session.fixed_package_shapes.get(id(candidate))
+                if (required_base is not None and shape is not None and shape[0] is candidate
+                        and required_base[1] == shape[3] and self._plain_fixed_package_path(session, candidate)):
+                    _candidate, checkout, usable, dimension = shape
+                    package_count = _resolver_ceil(required_base[0] / usable)
+                    template = session.fixed_package_templates.get((id(candidate), dimension, package_count))
+                    if template is not None and template[0] is candidate:
+                        try:
+                            validate_purchase_unit_limit(checkout, package_count)
+                        except ValueError:
+                            continue
+                        quote = template[1]
+                        if not self.verification_policy.allows_quote(quote):
+                            continue
+                        waste = float(usable * package_count - required_base[0])
+                        row = ((self.verification_policy.rank_for_quote(quote), money(quote.total_price),
+                                -quote.match_score, waste, quote.product_name.casefold(),
+                                quote.store_id, quote.product_id), candidate, None)
+                if row is None:
+                    try:
+                        quote = self._quote_for_key(session, self._quote_cache_key(session, ingredient, candidate),
+                                                    ingredient, candidate)
+                    except ValueError:
+                        continue
+                    if not self.verification_policy.allows_quote(quote):
+                        continue
+                    row = (self._quote_sort_key(quote), candidate, quote)
+                incumbent = best.get(row[0][5])
+                if incumbent is None or row[0] < incumbent[0]:
+                    best[row[0][5]] = row
+            winners = []
+            for sort_key, candidate, quote in best.values():
+                if quote is None:
+                    quote = self._quote_for_key(session, self._quote_cache_key(session, ingredient, candidate),
+                                                ingredient, candidate)
+                    if self._quote_sort_key(quote) != sort_key:  # pragma: no cover - exactness guard
+                        raise AssertionError("fixed-package template sort key differs from its quote")
+                winners.append(quote)
+            result = tuple(winners)
+        if len(session.best_quote_sets) >= 16384:
+            session.best_quote_sets.clear()
+        session.best_quote_sets[key] = (candidates, result)
+        return result, key
+
+    def _store_minima(self, quotes):
+        best: dict[str, tuple] = {}
+        for quote in quotes:
+            sort_key = self._quote_sort_key(quote)
+            incumbent = best.get(quote.store_id)
+            if incumbent is None or sort_key < incumbent[0]:
+                best[quote.store_id] = (sort_key, quote)
+        return tuple(quote for _key, quote in best.values())
 
     def _cheapest_quote_for_set(
         self,
@@ -2190,7 +2326,7 @@ class BasketOptimizer:
         quoted_ingredients = [
             (
                 ingredient,
-                *self._candidate_quotes_with_key(
+                *self._store_best_quotes_with_key(
                     ingredient,
                     self._ingredient_candidates(ingredient, candidates_by_name),
                 ),

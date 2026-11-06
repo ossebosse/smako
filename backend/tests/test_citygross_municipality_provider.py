@@ -119,6 +119,10 @@ async def test_real_own_uuid_maps_to_official_external_identity_and_price_univer
             context = next(s.store_id for s in stores if s.chain == "citygross")
             assert context.startswith("context:citygross:")
             assert {s.store_id for s in stores} == {"own:willys:keep", context}
+            shown = next(s for s in stores if s.chain == "citygross")
+            # The source name is only the place; the chain is added once and the
+            # context id is still derived from the unchanged source identity.
+            assert shown.name.startswith("City Gross ") and not shown.name.startswith("City Gross City Gross")
             products = await provider.get_store_products(context)
             assert len(products) == 2
             assert provider.diagnostics["3211"]["accepted"] == 2
@@ -129,6 +133,7 @@ async def test_real_own_uuid_maps_to_official_external_identity_and_price_univer
             assert len(restored.products) == 2
             for product in restored.products:
                 assert product.store_id == context
+                assert product.store_name == shown.name
                 assert product.price_context_type == "online_store" and product.coverage == "offers_only"
                 assert product.price is None and product.offers
                 assert product.source_provenance.provider_store_id == "3211"

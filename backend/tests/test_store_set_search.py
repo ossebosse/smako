@@ -121,3 +121,43 @@ def test_cover_check_is_exact_without_listing_subsets():
     assert not _covered_within([offer("a"), []], 5)
     many = [offer(f"s{i}", f"s{i+1}") for i in range(0, 60, 2)]
     assert _covered_within(many, 30) and not _covered_within(many, 29)
+
+
+def _plain(item):
+    return item.model_copy(update={"sale_model": "fixed_package", "quantity_confidence": "exact"})
+
+
+@pytest.mark.parametrize("seed", range(20))
+def test_store_winner_quotes_match_full_quote_sets_over_a_search(seed):
+    """Only each store's winner is quoted in full; every basket is unchanged."""
+    rng = Random(900 + seed)
+    rows, _required, shops = instance(900 + seed, 9, 6, estimates=seed % 3 == 0)
+    rows = {name: tuple(_plain(item) if rng.random() < 0.8 else item for item in items)
+            for name, items in rows.items()}
+    # Several products per store, including ties on price.
+    rows = {name: (*items, *(item.model_copy(update={"product_id": item.product_id + "-twin",
+                                                     "product_name": item.product_name + " twin"})
+                             for item in items[:2]))
+            for name, items in rows.items()}
+    names = sorted(rows)
+    requests = [[NormalizedIngredient(canonical_name=n, required_quantity=rng.choice([120, 200, 250, 400, 499, 500, 650, 1000, 1001]), unit="g")
+                 for n in rng.sample(names, rng.randint(2, len(names)))] for _ in range(25)]
+    caps = [rng.choice([1, 2, 3, None]) for _ in requests]
+
+    def run(full):
+        optimizer = BasketOptimizer()
+        if full:
+            optimizer._store_best_quotes_with_key = optimizer._candidate_quotes_with_key
+        results = []
+        with optimizer.quote_cache() as stats:
+            for required, cap in zip(requests, caps):
+                try:
+                    results.append(optimizer.optimize(required, rows, [store(s) for s in shops], cap).model_dump())
+                except IncompleteBasketError as exc:
+                    results.append(("incomplete", str(exc)))
+        return results, stats
+
+    pruned, stats = run(False)
+    full, _ = run(True)
+    assert pruned == full
+    assert stats.fixed_template_hits > 0
