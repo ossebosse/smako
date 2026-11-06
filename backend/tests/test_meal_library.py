@@ -256,3 +256,20 @@ def test_import_never_publishes_a_pack_the_library_cannot_load(tmp_path, monkeyp
         content.import_pack(path, root=root)
     assert manifest == (root / content.MANIFEST.name).read_bytes()
     assert not list(root.glob("meal-pack-*.json"))
+
+
+def test_inventory_digest_is_hashed_once_per_immutable_product_tuple(monkeypatch):
+    from backend.tests.test_personal_planning_v2 import product
+
+    products = (product('bröd', 500, 'g', 20), product('mjölk', 1000, 'ml', 15))
+    first = artifacts._inventory_digest(products)
+    dumped = []
+    original = type(products[0]).model_dump_json
+    monkeypatch.setattr(type(products[0]), 'model_dump_json',
+                        lambda self, *a, **k: dumped.append(1) or original(self, *a, **k))
+    assert artifacts._inventory_digest(products) == first and not dumped
+    changed = (products[0].model_copy(update={'package_quantity': 600}), products[1])
+    assert artifacts._inventory_digest(changed) != first and len(dumped) == 2
+    # A mutable list is never memoized.
+    assert artifacts._inventory_digest(list(products)) == first and len(dumped) == 4
+    assert artifacts._inventory_digest(list(products)) == first and len(dumped) == 6

@@ -586,6 +586,34 @@ def _prepare_content(recipes, budget):
     return {"schema":SCHEMA,"method_signature":method_signature(),"dependencies":index,"stats":dict(STATS)}
 
 
+_INVENTORY_DIGESTS: dict[int, tuple[object, str]] = {}
+
+
+def _inventory_digest(products):
+    """Hash every exact product row; memoized per immutable inventory object.
+
+    A tuple of frozen product models cannot change, so the same object always
+    hashes the same. The entry keeps the object alive (its id cannot be
+    reused) and any other sequence, or a new tuple, is hashed again in full.
+    """
+    cached = _INVENTORY_DIGESTS.get(id(products))
+    if cached is not None and cached[0] is products:
+        return cached[1]
+    inventory = hashlib.sha256()
+    # Hash every exact product row without building a second large Python/JSON
+    # inventory tree. Order and all fields still bind additions and negatives.
+    for product in products:
+        inventory.update(product.model_dump_json().encode())
+        inventory.update(b"\n")
+    value = inventory.hexdigest()
+    if isinstance(products, tuple) and all(
+            getattr(type(product), "model_config", {}).get("frozen") for product in products):
+        if len(_INVENTORY_DIGESTS) >= 4:
+            _INVENTORY_DIGESTS.pop(next(iter(_INVENTORY_DIGESTS)))
+        _INVENTORY_DIGESTS[id(products)] = (products, value)
+    return value
+
+
 def declaration_index(universe, facts, source_facts, *, verified_version=None):
     """Snapshot/fact-bound declaration classes shared across meal types/requests.
 
@@ -597,13 +625,7 @@ def declaration_index(universe, facts, source_facts, *, verified_version=None):
     version = verified_version or getattr(facts,"version",None) or facts_version(facts)
     # The prepared universe also contains large search indexes. Classification
     # depends on the exact product inventory and facts, not those derived indexes.
-    inventory = hashlib.sha256()
-    # Hash every exact product row without building a second large Python/JSON
-    # inventory tree. Order and all fields still bind additions and negatives.
-    for product in universe.products:
-        inventory.update(product.model_dump_json().encode())
-        inventory.update(b"\n")
-    identity = [universe.universe_id, inventory.hexdigest(), version]
+    identity = [universe.universe_id, _inventory_digest(universe.products), version]
     def compute():
         return {str(i):food_class for i,product in enumerate(universe.products)
                 if (food_class := declaration_food_class(product,source_facts(product)))}
