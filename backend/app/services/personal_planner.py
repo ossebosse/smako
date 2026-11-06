@@ -1420,6 +1420,13 @@ class PersonalPlanner:
         with self.optimizer.quote_cache(reuse_existing=True, **self._quote_cache_args()):
             try:
                 package_started = perf_counter()
+                bound = getattr(self, "_search_bound", None)
+                if bound is not None and _retained is None and final:
+                    lower = self.optimizer.lower_bound(ingredients, candidate_map)
+                    # One öre of slack: the bound is a float score, the total money.
+                    if lower is not None and lower > Decimal(str(bound)) + Decimal("0.01"):
+                        from app.services.menu_optimizer import MenuBoundPruned
+                        raise MenuBoundPruned
                 with performance_span("personal_package_calculation"):
                     if _retained is None:
                         basket = self.optimizer.optimize(
@@ -3918,8 +3925,23 @@ class PersonalPlanner:
                 evidence = self.variant_search_evidence.get((slot.meal_type, self._recipe_id(slot.recipe)))
                 return evidence.packages if evidence is not None else frozenset()
 
+            def bounded_evaluate(chosen, incumbent_rank):
+                # score()[0] is total + 2 * taste; the taste term needs no
+                # basket. A menu whose cheapest possible total already exceeds
+                # the incumbent's leading score cannot replace it.
+                tastes = preference_score([s.recipe for s in chosen if s.recipe], self.spec.profile)
+                tastes += sum(preference_score([s.recipe], self.meals[s.meal_type].profile)
+                              for s in chosen if s.recipe)
+                self._search_bound = incumbent_rank[0] - tastes * 2
+                try:
+                    return evaluate(chosen, final=True)
+                finally:
+                    self._search_bound = None
+
             search_kwargs.update(complete_first=True, candidate_priority=candidate_priority,
                                  candidate_packages=candidate_packages)
+            if getattr(self.settings, "menu_lower_bound_pruning", True):
+                search_kwargs["bounded_evaluate"] = bounded_evaluate
         # Complete menus compared during the search are not audited; only the
         # chosen menu is, below. Should it fail the audit (not observed), the
         # search is repeated with every complete menu audited, which is the

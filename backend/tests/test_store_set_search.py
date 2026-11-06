@@ -1,5 +1,7 @@
 """The exact store-set search returns the enumeration's winner for any cap."""
 from random import Random
+from types import SimpleNamespace
+from decimal import Decimal
 
 import pytest
 from app.models.ingredient import NormalizedIngredient
@@ -161,3 +163,66 @@ def test_store_winner_quotes_match_full_quote_sets_over_a_search(seed):
     full, _ = run(True)
     assert pruned == full
     assert stats.fixed_template_hits > 0
+
+
+@pytest.mark.parametrize("seed", range(30))
+def test_lower_bound_never_exceeds_the_optimized_total(seed):
+    rng = Random(1300 + seed)
+    rows, required, shops = instance(1300 + seed, rng.randint(3, 9), rng.randint(2, 7), estimates=seed % 2 == 0)
+    rows = {name: tuple(_plain(item) if rng.random() < 0.7 else item for item in items)
+            for name, items in rows.items()}
+    optimizer = BasketOptimizer()
+    with optimizer.quote_cache():
+        bound = optimizer.lower_bound(required, rows)
+        for cap in (1, 2, 3, None):
+            try:
+                total = Decimal(str(optimizer.optimize(required, rows, [store(s) for s in shops], cap).total))
+            except IncompleteBasketError:
+                continue
+            assert bound is not None and bound <= total
+    assert BasketOptimizer().lower_bound(required, rows) is None  # no quote session, no bound
+
+
+def test_complete_menu_search_with_bound_pruning_returns_the_same_menu():
+    from app.services.menu_optimizer import MenuBoundPruned, MenuOptimizer
+
+    rng = Random(77)
+    saved = 0
+    for trial in range(40):
+        groups = [[SimpleNamespace(id=f"d{day}", recipe=SimpleNamespace(name=f"r{day}-{k}"))
+                   for k in range(rng.randint(3, 9))] for day in range(rng.randint(2, 4))]
+        price = {slot.recipe.name: rng.randint(10, 60) for group in groups for slot in group}
+        floor = {name: value - rng.randint(0, 8) for name, value in price.items()}
+        taste = {name: rng.choice([0, 0, 1, -1]) for name in price}
+        evaluated = []
+
+        def evaluate(slots, final=True):
+            evaluated.append(tuple(s.recipe.name for s in slots))
+            return {"total": sum(price[s.recipe.name] for s in slots)}
+
+        def score(slots, result):
+            tastes = sum(taste[s.recipe.name] for s in slots)
+            return (result["total"] + tastes * 2, result["total"], tuple(s.recipe.name for s in slots))
+
+        def bounded(slots, incumbent_rank):
+            bound = incumbent_rank[0] - sum(taste[s.recipe.name] for s in slots) * 2
+            if sum(floor[s.recipe.name] for s in slots) > bound + 0.01:
+                raise MenuBoundPruned
+            return evaluate(slots)
+
+        def run(**extra):
+            evaluated.clear()
+            return MenuOptimizer.__new__(MenuOptimizer)._optimize_complete_slots(
+                groups, evaluate=evaluate, accepts=lambda slots, final=False: True, score=score,
+                search_trace=[], state_identity=lambda slots: tuple(s.recipe.name for s in slots),
+                decision_observer=None,
+                candidate_priority=lambda slot: price[slot.recipe.name], candidate_packages=None, **extra)
+
+        plain = run()
+        plain_evaluations = len(evaluated)
+        pruned = run(bounded_evaluate=bounded)
+        assert [s.recipe.name for s in plain[0]] == [s.recipe.name for s in pruned[0]], trial
+        assert plain[1] == pruned[1]
+        assert len(evaluated) <= plain_evaluations
+        saved += plain_evaluations - len(evaluated)
+    assert saved > 0
