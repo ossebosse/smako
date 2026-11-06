@@ -1,3 +1,15 @@
+# 2026-11-06: Stora Coop i stället för nätbutiken och butiksadresser aktiverat
+
+Main `191f173f1e19`. App **app-191f173f1e19-e452c67c**, scheduler orörd.
+Med alla butiker i kommunen jämförs Stora Coop Lund i stället för Coop Online
+Syd, vars baspriser butiken redan har. Plan och inköpslista visar adress, t.ex.
+"Willys Lund, Magistratsvägen 22". Publikt prov i Lund: Stora Coop Lund och
+Willys Lund, 168,37 kr, VERIFIED. Bevarat: 335 planversioner, 149 privata
+tillstånd. Backup `/srv/smako/backups/20261106T074611Z`.
+[Aktiveringsjournal](releases/stores-stora-coop-20261106/ACTIVATED.md).
+
+---
+
 # 2026-11-05: Mina val (Din mat, Inköp), Pescetariskt och omväxling aktiverat
 
 Main `431ddb3ac0f2`. App **app-431ddb3ac0f2-28522b51**, scheduler orörd
@@ -65,7 +77,7 @@ på `main` inte ändrar en pågående release.
   `smako-app-1`, `smako-scheduler-1`, `smako-caddy-1`, data i `/srv/smako/data`
   och det gemensamma driftlåset. Detta flöde installerar inte en ny server.
 - Läs aktuell [HANDOFF.md](HANDOFF.md), [OPERATIONS.md](OPERATIONS.md) och
-  senaste aktiveringsrapport. Appens BUILD_ID är `app-431ddb3ac0f2-28522b51`;
+  senaste aktiveringsrapport. Appens BUILD_ID är `app-191f173f1e19-e452c67c`;
   schedulern är `source-ops-8a53beb80e43`.
   [Uppvärmda prov och samordnad faktaläsning/GC](releases/warm-facts-gc-20261101/ACTIVATED.md)
   är senaste appaktiveringen. Sex Pythonfiler från kod `b7c8d0506e23`;
@@ -113,10 +125,10 @@ git status --short
 .venv/Scripts/python.exe -X utf8 scripts/smako_ops.py status
 
 # Använd den granskade Git-bas som motsvarar faktiskt aktiva filer enligt senaste journalen.
-.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit 431ddb3ac0f2 --commit main --workdir .local/beta-release
+.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit 191f173f1e19 --commit main --workdir .local/beta-release
 ```
 
-`431ddb3ac0f2` är appen som aktiverades 2026-11-05. Appbildens egen
+`191f173f1e19` är appen som aktiverades 2026-11-06. Appbildens egen
 grocery-kopia är äldre än Git; använd `--keep-app-grocery` om intervallet
 bara innehåller grocery-Python som redan levererats till schedulern. De äldre
 Coop-filerna i runtime (`price_universe_runtime.py`,
