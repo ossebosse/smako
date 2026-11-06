@@ -899,6 +899,33 @@ def test_whole_municipality_compares_stora_coop_instead_of_its_online_base(choic
     assert sorted(submit(page, captured)["allowed_store_ids"]) == ["online", "stora", "willys"]
 
 
+def test_all_selected_stores_is_an_explicit_cap_that_is_restored(choices):
+    page, url, captured = choices
+    page.goto(url)
+    choose_location(page)
+    page.locator("#max-stores-all").check()
+    expect(page.locator("#max-stores").locator("xpath=ancestor::div[contains(@class,'choice-slider')]")).to_be_hidden()
+    body = submit(page, captured)
+    assert body["store_cap"] == "all_selected"
+    assert body["max_stores"] == len(body["allowed_store_ids"])
+    PlanRequest.model_validate(body)
+
+
+def test_all_selected_stores_is_restored_from_a_saved_request(choices):
+    page, url, captured = choices
+    draft = {"postal_code": "22350", "allowed_store_ids": ["near"], "max_stores": 1,
+             "store_cap": "all_selected",
+             "personal": {"meals": [{"meal_type": "dinner", "count": 3, "servings": 2}]}}
+    page.add_init_script("sessionStorage.setItem('smako.personal.requestDraft', "
+                         + json.dumps(json.dumps(draft)) + ");")
+    page.goto(url)
+    choose_location(page)
+    expect(page.locator("#max-stores-all")).to_be_checked()
+    page.locator("#max-stores-all").uncheck()
+    body = submit(page, captured)
+    assert "store_cap" not in body and body["max_stores"] == 3
+
+
 def test_estimate_change_only_applies_to_explicit_recalculation():
     for action in ("recalculate", "extras"):
         value = PersonalMutation(revision=1, pantry_revision=0, action=action,

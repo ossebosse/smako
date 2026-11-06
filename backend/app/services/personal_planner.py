@@ -108,6 +108,44 @@ def personal_policy_request(request, dinner_count):
 
 _AUDIT_FAILURE = "Vi kunde inte kontrollera mängderna eller priserna i inköpslistan."
 
+
+def _lower_caps(max_stores):
+    """Lower store caps compared next to the request: 1..min(cap-1, 3).
+
+    With every selected store as the cap, comparing each lower cap would
+    repeat the whole plan dozens of times; caps 1-3 keep today's set.
+    """
+    return range(1, min(max_stores, 4))
+
+
+def _covered_within(candidate_groups, max_stores):
+    """True if at most ``max_stores`` stores together offer every line.
+
+    Exact set-cover check: branch on the stores that offer the first line
+    not yet covered, never listing every store subset.
+    """
+    lines = [frozenset(c.store_id for c in group) for group in candidate_groups]
+    if any(not stores for stores in lines):
+        return False
+
+    def search(chosen, left):
+        uncovered = [stores for stores in lines if not stores & chosen]
+        if not uncovered:
+            return True
+        # Lines that pairwise share no store need one store each: a valid
+        # lower bound that stops impossible branches early.
+        packing, taken = 0, set()
+        for stores in sorted(uncovered, key=len):
+            if not stores & taken:
+                packing += 1
+                taken |= stores
+        if packing > left:
+            return False
+        tightest = min(uncovered, key=lambda stores: (len(stores), sorted(stores)))
+        return any(search(chosen | {store}, left - 1) for store in sorted(tightest))
+
+    return search(frozenset(), max_stores)
+
 class PersonalPlanner:
     def __init__(
         self,
@@ -1393,12 +1431,7 @@ class PersonalPlanner:
                             raise PolicyConflict("Tidigare inköp överskrider målbegärans butikstak.")
                 self.timings["package_calculation"] += perf_counter() - package_started
             except IncompleteBasketError as exc:
-                stores = sorted({c.store_id for cs in candidate_map.values() for c in cs})
-                covers = any(
-                    all(any(c.store_id in subset for c in cs) for cs in candidate_map.values())
-                    for n in range(1, min(len(stores), self.request.max_stores) + 1)
-                    for subset in combinations(stores, n)
-                )
+                covers = _covered_within(candidate_map.values(), self.request.max_stores)
                 raise PolicyConflict(
                     str(exc), stage="price_basket" if covers else "store_cap"
                 ) from exc
@@ -2741,11 +2774,13 @@ class PersonalPlanner:
         incumbent_scopes = {}
         if (self.complete and not self.current_library_search and _compare_scopes and self.request.diversity_mode == "cheapest"
                 and self.spec.slots is None and replace_slot is None):
-            scopes = [(cap, self.request.purchase_planning_mode) for cap in range(1, self.request.max_stores)]
+            scopes = [(cap, self.request.purchase_planning_mode) for cap in _lower_caps(self.request.max_stores)]
             if self.request.purchase_planning_mode == "estimated":
-                scopes.extend((cap, "exact") for cap in range(1, self.request.max_stores + 1))
+                scopes.extend((cap, "exact") for cap in (*_lower_caps(self.request.max_stores), self.request.max_stores))
             for cap, purchase_mode in scopes:
-                comparison_request = self.request.model_copy(update={"max_stores": cap, "purchase_planning_mode": purchase_mode})
+                comparison_request = self.request.model_copy(update={
+                    "max_stores": cap, "purchase_planning_mode": purchase_mode,
+                    "store_cap": self.request.store_cap if cap == self.request.max_stores else "count"})
                 try:
                     candidate = PersonalPlanner(comparison_request, self.settings, self.prepared, self.state,
                         plan_id=self.plan_id, facts=self.facts, cooked_weights=self.cooked_weights, now=self.now,
@@ -4002,8 +4037,8 @@ class PersonalPlanner:
             self._trace_final_alternatives(chosen, result)
         basket = result["basket"]
         comparisons = []
-        for cap in (() if self.current_library_search else range(1, self.request.max_stores)):
-            alternative_request = self.request.model_copy(update={"max_stores": cap})
+        for cap in (() if self.current_library_search else _lower_caps(self.request.max_stores)):
+            alternative_request = self.request.model_copy(update={"max_stores": cap, "store_cap": "count"})
             try:
                 alternative = PersonalPlanner(
                     alternative_request,

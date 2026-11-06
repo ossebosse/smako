@@ -437,6 +437,8 @@ def _named_quote(quote, ingredient):
 # measured enumeration. Larger caps, up to every selected store, use the exact
 # store-set search, which returns the same winner without listing subsets.
 STORE_SET_SEARCH_THRESHOLD = 20_000
+# Lower store caps that keep exact per-cap keys and their own menu frontier.
+_NESTED_EXACT_CAPS = 3
 
 
 class BasketOptimizer:
@@ -1555,6 +1557,18 @@ class BasketOptimizer:
                 increment_performance_counter("same_depth_store_limited_keys")
             return (best,) * requested_limit
 
+        if limit > _NESTED_EXACT_CAPS and self._use_store_set_search(len(store_ids), limit):
+            # Large caps: exact keys for caps 1..3 as before, and the exact
+            # best set for the requested cap from the store-set search. Menu
+            # search only runs frontiers for caps 1, 2, 3 and the requested
+            # cap (``MenuOptimizer._nested_store_limits``); caps in between
+            # repeat the requested cap's key, which never exceeds theirs.
+            lower = self._same_depth_nested_store_limited_quote_keys(
+                quoted_requirements, stores, max_stores=_NESTED_EXACT_CAPS)
+            found = self._search_store_sets(
+                [(None, quotes, key) for quotes, key in quoted_requirements], store_ids, limit)
+            top = found[0][:3] if found is not None else None
+            return (*lower, *([top] * (limit - _NESTED_EXACT_CAPS))) + (top,) * (requested_limit - limit)
         store_subsets = self._eligible_store_subsets(store_ids, limit)
         subset_vectors = tuple(
             self._quote_subset_vector(
@@ -1932,7 +1946,7 @@ class BasketOptimizer:
             for store_id, quote in self._cheapest_quotes_by_store(quotes, key).items():
                 if store_id not in position:
                     continue
-                named = quote if key is None else _line_named(session, quote, ingredient)
+                named = quote if key is None or ingredient is None else _line_named(session, quote, ingredient)
                 price = Decimal(str(quote.total_price)) if not isinstance(quote.total_price, Decimal) else quote.total_price
                 # Whole öre rounded down: a sum of these never exceeds the real
                 # total, so integer bounds stay valid lower bounds.

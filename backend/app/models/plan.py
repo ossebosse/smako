@@ -62,7 +62,12 @@ class PlanRequest(BaseModel):
     recipes: int = Field(default=5, ge=0, le=7)
     personal: PersonalPlanning | None = None
     servings: int = Field(default=4, ge=1, le=12)
-    max_stores: int = Field(default=2, ge=1, le=4)
+    max_stores: int = Field(default=2, ge=1, le=1000)
+    # "all_selected": no store cap beyond the chosen stores; max_stores is
+    # then the number of chosen stores. Saved so the intent is read back as
+    # chosen instead of as a number that later selections would clip.
+    store_cap: Literal["count", "all_selected"] = Field(
+        default="count", exclude_if=lambda value: value == "count")
     use_member_prices: bool = False
     membership_price_policy: Literal["selected", "all_advertised"] = Field(
         default="selected", exclude_if=lambda value: value == "selected",
@@ -139,6 +144,17 @@ class PlanRequest(BaseModel):
         if values is None:
             return None
         return DiversityPolicyOverrides.model_validate(values).model_dump(exclude_unset=True)
+
+    @model_validator(mode="after")
+    def validate_store_cap(self):
+        if self.store_cap == "all_selected":
+            if not self.allowed_store_ids:
+                raise ValueError("Alla valda butiker kräver att butikerna är valda.")
+            if self.max_stores != len(self.allowed_store_ids):
+                raise ValueError("Med alla valda butiker ska taket vara antalet valda butiker.")
+        elif self.max_stores > 4:
+            raise ValueError("Högst 4 inköpsställen, eller välj alla valda butiker.")
+        return self
 
     @model_validator(mode="after")
     def validate_recipe_distribution(self):
