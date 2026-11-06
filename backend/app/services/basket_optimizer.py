@@ -439,6 +439,8 @@ def _named_quote(quote, ingredient):
 STORE_SET_SEARCH_THRESHOLD = 20_000
 # Lower store caps that keep exact per-cap keys and their own menu frontier.
 _NESTED_EXACT_CAPS = 3
+# Above cap three, enumerate only very small subset counts.
+LARGE_CAP_SEARCH_THRESHOLD = 1_000
 
 
 class BasketOptimizer:
@@ -1915,9 +1917,21 @@ class BasketOptimizer:
         return result
 
     def _use_store_set_search(self, store_count: int, limit: int) -> bool:
+        """Search instead of enumerating for caps above three.
+
+        Enumeration builds a winner vector over every subset for each quote set,
+        which is cheap for caps 1-3 but costly once a cap above three leaves
+        thousands of subsets after dominance pruning (measured: 3 261 menu
+        checkouts over 4 095 subsets each). Caps 1-3 keep enumeration unless
+        the subset count is extreme.
+        """
         threshold = self.store_set_search_threshold
-        return (threshold is not None
-                and sum(comb(store_count, n) for n in range(1, limit + 1)) > threshold)
+        if threshold is None:
+            return False
+        subsets = sum(comb(store_count, n) for n in range(1, limit + 1))
+        if limit > _NESTED_EXACT_CAPS:
+            return subsets > min(threshold, LARGE_CAP_SEARCH_THRESHOLD)
+        return subsets > threshold
 
     def _search_store_sets(self, quoted_ingredients, store_ids, limit):
         """Exact best store set without enumerating every subset.

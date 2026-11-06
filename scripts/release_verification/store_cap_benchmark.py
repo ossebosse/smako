@@ -42,10 +42,10 @@ def main():
             raw = (root / pointer["artifact_file"]).read_bytes()
             loaded[city] = PreparedPriceUniverseArtifact.model_validate_json(raw).restore()
             print(json.dumps({"loaded": city, "seconds": round(time.perf_counter() - started, 3)}), flush=True)
-        request = PlanRequest.model_validate(case["request"])
         state = {"revision": 0, "items": [], "reservations": {}, "events": {}}
         started = time.perf_counter()
         try:
+            request = PlanRequest.model_validate(case["request"])
             plan = PersonalPlanner(request, settings, loaded[city], state).create()
             row = {"outcome": "PASS", "total": plan.optimized_basket.total,
                    "stores_used": plan.optimized_basket.store_count,
