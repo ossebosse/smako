@@ -1961,7 +1961,12 @@ class MenuOptimizer:
         effective_limit = min(max_stores, store_count)
         if effective_limit <= 1:
             return (max_stores,)
-        return (*range(1, effective_limit), max_stores)
+        # Above three stores, frontiers for caps 1-3 plus the requested cap.
+        # One frontier per cap up to "every selected store" would repeat the
+        # whole search dozens of times; the lower frontiers only seed an
+        # audited incumbent and caps 1-3 keep today's behaviour.
+        lower = range(1, min(effective_limit, 4))
+        return (*lower, max_stores)
 
     def _reprice_nested_incumbent(
         self,

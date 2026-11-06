@@ -8,7 +8,7 @@ from contextlib import contextmanager
 from contextvars import ContextVar
 from dataclasses import dataclass, field
 from dataclasses import replace as dataclass_replace
-from decimal import Decimal, getcontext
+from decimal import ROUND_FLOOR, Decimal, getcontext
 from itertools import combinations
 from math import comb
 from threading import RLock
@@ -433,6 +433,16 @@ def _named_quote(quote, ingredient):
     return dataclass_replace(quote, ingredient=ingredient.canonical_name)
 
 
+# Current consumer caps (1-3 among ~20-30 stores) stay below this and keep the
+# measured enumeration. Larger caps, up to every selected store, use the exact
+# store-set search, which returns the same winner without listing subsets.
+STORE_SET_SEARCH_THRESHOLD = 20_000
+# Lower store caps that keep exact per-cap keys and their own menu frontier.
+_NESTED_EXACT_CAPS = 3
+# Above cap three, enumerate only very small subset counts.
+LARGE_CAP_SEARCH_THRESHOLD = 1_000
+
+
 class BasketOptimizer:
     """Choose products by actual package cost, never theoretical unit cost."""
 
@@ -443,6 +453,7 @@ class BasketOptimizer:
         verification_policy: BasketVerificationPolicy | None = None,
         memoize_store_subsets: bool = False,
         prune_dominated_stores: bool = False,
+        store_set_search_threshold: int | None = STORE_SET_SEARCH_THRESHOLD,
     ) -> None:
         self.calculator = calculator or BasketCalculator()
         self.verification_policy = (
@@ -454,6 +465,9 @@ class BasketOptimizer:
         )
         self.memoize_store_subsets = memoize_store_subsets
         self.prune_dominated_stores = prune_dominated_stores
+        # Above this many store subsets the exact branch-and-bound search
+        # replaces enumeration; None always enumerates (the reference oracle).
+        self.store_set_search_threshold = store_set_search_threshold
         self._store_subset_lock = RLock()
         self._store_subsets: dict[
             tuple[tuple[str, ...], int], tuple[tuple[str, ...], ...]
@@ -1545,6 +1559,18 @@ class BasketOptimizer:
                 increment_performance_counter("same_depth_store_limited_keys")
             return (best,) * requested_limit
 
+        if limit > _NESTED_EXACT_CAPS and self._use_store_set_search(len(store_ids), limit):
+            # Large caps: exact keys for caps 1..3 as before, and the exact
+            # best set for the requested cap from the store-set search. Menu
+            # search only runs frontiers for caps 1, 2, 3 and the requested
+            # cap (``MenuOptimizer._nested_store_limits``); caps in between
+            # repeat the requested cap's key, which never exceeds theirs.
+            lower = self._same_depth_nested_store_limited_quote_keys(
+                quoted_requirements, stores, max_stores=_NESTED_EXACT_CAPS)
+            found = self._search_store_sets(
+                [(None, quotes, key) for quotes, key in quoted_requirements], store_ids, limit)
+            top = found[0][:3] if found is not None else None
+            return (*lower, *([top] * (limit - _NESTED_EXACT_CAPS))) + (top,) * (requested_limit - limit)
         store_subsets = self._eligible_store_subsets(store_ids, limit)
         subset_vectors = tuple(
             self._quote_subset_vector(
@@ -1890,6 +1916,228 @@ class BasketOptimizer:
         record_performance_seconds("basket_optimization", perf_counter() - started)
         return result
 
+    def _use_store_set_search(self, store_count: int, limit: int) -> bool:
+        """Search instead of enumerating for caps above three.
+
+        Enumeration builds a winner vector over every subset for each quote set,
+        which is cheap for caps 1-3 but costly once a cap above three leaves
+        thousands of subsets after dominance pruning (measured: 3 261 menu
+        checkouts over 4 095 subsets each). Caps 1-3 keep enumeration unless
+        the subset count is extreme.
+        """
+        threshold = self.store_set_search_threshold
+        if threshold is None:
+            return False
+        subsets = sum(comb(store_count, n) for n in range(1, limit + 1))
+        if limit > _NESTED_EXACT_CAPS:
+            return subsets > min(threshold, LARGE_CAP_SEARCH_THRESHOLD)
+        return subsets > threshold
+
+    def _search_store_sets(self, quoted_ingredients, store_ids, limit):
+        """Exact best store set without enumerating every subset.
+
+        Same objective, winners and tie-breakers as the subset loop in
+        :meth:`optimize`: in a store set each line takes its authoritative
+        winner (``_quote_sort_key``: verification rank first, then price), and
+        sets are ordered by (max rank, total, stores used, store IDs, product
+        key). Every set of at most ``limit`` stores is either evaluated or
+        excluded because no completion can beat the incumbent on
+        (max rank, total); ties are never pruned, so every later tie-breaker
+        is kept. The visiting order only affects speed, never the winner,
+        because candidates are compared by the full key. Coupled checkout
+        never reaches this path.
+
+        Returns ``(plan_key, chosen_quotes, best_single_key)`` or ``None``.
+        """
+
+        from app.services.plan_jobs import check_cancelled
+        session = self._quote_cache_context.get()
+        verified = _VERIFICATION_RANK[BasketVerificationStatus.VERIFIED]
+        position = {store_id: index for index, store_id in enumerate(store_ids)}
+        by_store = []
+        for ingredient, quotes, key in quoted_ingredients:
+            rows = {}
+            for store_id, quote in self._cheapest_quotes_by_store(quotes, key).items():
+                if store_id not in position:
+                    continue
+                named = quote if key is None or ingredient is None else _line_named(session, quote, ingredient)
+                price = Decimal(str(quote.total_price)) if not isinstance(quote.total_price, Decimal) else quote.total_price
+                # Whole öre rounded down: a sum of these never exceeds the real
+                # total, so integer bounds stay valid lower bounds.
+                cents = int((price * 100).to_integral_value(rounding=ROUND_FLOOR))
+                rows[store_id] = (self._quote_sort_key(quote), self.verification_policy.rank_for_quote(quote),
+                                  quote.total_price, named, cents)
+            by_store.append(rows)
+        line_count = len(by_store)
+
+        best = None  # (plan_key, chosen)
+        best_single = None
+        nodes = 0
+
+        def product_key(chosen):
+            return tuple(
+                f"{quote.ingredient}:{quote.unit}:{quote.store_id}:{quote.product_id}:{quote.packages_needed}"
+                for quote in sorted(chosen, key=lambda quote: (
+                    quote.ingredient, quote.unit, quote.store_id, quote.product_id)))
+
+        def evaluate(winners, size):
+            nonlocal best, best_single
+            if any(winner is None for winner in winners):
+                return
+            chosen = tuple(winner[3] for winner in winners)
+            total = money(sum((winner[2] for winner in winners), Decimal(0)))
+            rank = max((winner[1] for winner in winners), default=verified)
+            used = tuple(sorted({quote.store_id for quote in chosen}))
+            leading = (rank, total, len(used), used)
+            if size == 1 and (best_single is None or (rank, total) < best_single):
+                best_single = (rank, total)
+            if best is None or leading <= best[0][:4]:
+                key = (*leading, product_key(chosen))
+                if best is None or key < best[0]:
+                    best = (key, chosen)
+
+        def winners_for(stores):
+            result = []
+            for rows in by_store:
+                winner = None
+                for store_id in stores:
+                    row = rows.get(store_id)
+                    if row is not None and (winner is None or row[0] < winner[0]):
+                        winner = row
+                result.append(winner)
+            return result
+
+        # Single stores, then a greedy set: a strong early incumbent lets the
+        # exact search below prune almost everything.
+        for store_id in store_ids:
+            evaluate(winners_for((store_id,)), 1)
+        chosen_stores: list[str] = []
+        while len(chosen_stores) < limit:
+            current = winners_for(chosen_stores)
+            def gain(store_id):
+                covered = saved = 0
+                for winner, rows in zip(current, by_store, strict=True):
+                    row = rows.get(store_id)
+                    if row is None:
+                        continue
+                    if winner is None:
+                        covered += 1
+                    elif row[0] < winner[0]:
+                        saved += winner[4] - row[4]
+                return covered, saved
+            candidates = [(gain(store_id), store_id) for store_id in store_ids if store_id not in chosen_stores]
+            candidates = [item for item in candidates if item[0] > (0, 0)]
+            if not candidates:
+                break
+            chosen_stores.append(max(candidates, key=lambda item: (item[0], -position[item[1]]))[1])
+            evaluate(winners_for(chosen_stores), len(chosen_stores))
+
+        # Search order: stores that win many lines on price first.
+        cheapest = []
+        for rows in by_store:
+            low = min((row[4] for row in rows.values()), default=None)
+            cheapest.append(low)
+        wins = {store_id: sum(1 for rows, low in zip(by_store, cheapest, strict=True)
+                              if store_id in rows and rows[store_id][4] == low) for store_id in store_ids}
+        order = sorted(store_ids, key=lambda store_id: (-wins[store_id], position[store_id]))
+        n = len(order)
+        lines = [[rows.get(store_id) for store_id in order] for rows in by_store]
+        ranks = sorted({row[1] for rows in by_store for row in rows.values()}) or [verified]
+        big = 10 ** 18
+        # suffix[l][j]: (min rank, {r: min öre with rank <= r}) over order[j:].
+        suffix = []
+        for rows in lines:
+            table = [None] * (n + 1)
+            table[n] = (None, dict.fromkeys(ranks, big))
+            for j in range(n - 1, -1, -1):
+                low, prices = table[j + 1]
+                row = rows[j]
+                if row is None:
+                    table[j] = table[j + 1]
+                    continue
+                rank, cents = row[1], row[4]
+                prices = {r: (cents if rank <= r and cents < value else value) for r, value in prices.items()}
+                table[j] = (rank if low is None or rank < low else low, prices)
+            suffix.append(table)
+        top_rank = ranks[-1]
+
+        def bound(winners, start, capacity):
+            """Lower bound (max rank, öre) for adding at most ``capacity``
+            stores from ``order[start:]``. Each line pays at least its
+            cheapest reachable quote at no worse rank than its current winner;
+            with few places left, covered lines save at most the sum of the
+            ``capacity`` largest single-store savings."""
+            rank_bound = verified
+            total_bound = covered = uncovered = 0
+            for winner, table in zip(winners, suffix, strict=True):
+                low, prices = table[start]
+                if winner is None:
+                    if low is None:
+                        return None
+                    line_rank, line_price = low, prices[top_rank]
+                    uncovered += line_price
+                else:
+                    line_rank = winner[1] if low is None or winner[1] < low else low
+                    reachable = prices[winner[1]]
+                    line_price = winner[4] if winner[4] < reachable else reachable
+                    covered += winner[4]
+                if line_rank > rank_bound:
+                    rank_bound = line_rank
+                total_bound += line_price
+            if capacity < n - start and covered:
+                savings = []
+                for j in range(start, n):
+                    saving = 0
+                    for winner, rows in zip(winners, lines, strict=True):
+                        row = rows[j]
+                        if winner is not None and row is not None and row[1] <= winner[1] and row[4] < winner[4]:
+                            saving += winner[4] - row[4]
+                    if saving:
+                        savings.append(saving)
+                savings.sort(reverse=True)
+                limited = covered - sum(savings[:capacity]) + uncovered
+                if limited > total_bound:
+                    total_bound = limited
+            return rank_bound, total_bound
+
+        def beaten(lower):
+            if best is None:
+                return False
+            rank, total = best[0][0], best[0][1]
+            # Compare in öre; the incumbent total is already rounded to öre.
+            return lower[0] > rank or (lower[0] == rank and lower[1] > int(total * 100))
+
+        def visit(winners, size, start):
+            nonlocal nodes
+            nodes += 1
+            if nodes % 4096 == 0:
+                check_cancelled()
+            if size:
+                evaluate(winners, size)
+            if size == limit:
+                return
+            for j in range(start, n):
+                extended = []
+                for winner, rows in zip(winners, lines, strict=True):
+                    row = rows[j]
+                    extended.append(row if row is not None and (winner is None or row[0] < winner[0]) else winner)
+                # A set with a store that wins no line has the winners of the
+                # set without it, visited on another branch; winners only
+                # improve as stores are added, so that store stays idle below.
+                used = {winner[3].store_id for winner in extended if winner is not None}
+                if len(used) != size + 1:
+                    continue
+                lower = bound(extended, j + 1, limit - size - 1)
+                if lower is None or beaten(lower):
+                    continue
+                visit(extended, size + 1, j + 1)
+
+        visit([None] * line_count, 0, 0)
+        increment_performance_counter("store_set_search_nodes", nodes)
+        if best is None:
+            return None
+        return best[0], best[1], best_single
+
     def optimize(
         self,
         ingredients: Sequence[NormalizedIngredient],
@@ -1969,104 +2217,111 @@ class BasketOptimizer:
             limit = min(limit, len(store_ids))
             increment_performance_counter("store_subsets_avoided_by_dominance",
                 before - sum(comb(len(store_ids), n) for n in range(1, limit + 1)))
-        store_subsets = self._eligible_store_subsets(store_ids, limit)
-        # Same exact per-store minima and deterministic tie breakers as the
-        # scalar subset loop. Reuse the existing bounded, request-local quote
-        # vectors instead of millions of repeated dictionary lookups and rank
-        # calculations. Coupled campaigns take their separate joint path above.
-        store_combinations = len(store_subsets)
-        vectors = None
-        if any(key is None for _ingredient, _quotes, key in quoted_ingredients):
-            # Nutrition alternatives often make one-off baskets with very few
-            # feasible subsets. Without reusable quote identities, full vectors
-            # repeats work for every impossible subset. Use the same exact
-            # scalar checkout, rejecting only proven missing ingredient cover.
-            store_bits = {store_id: 1 << index for index, store_id in enumerate(store_ids)}
-            ingredient_store_masks = tuple(
-                sum({store_bits[q.store_id] for q in quotes if q.store_id in store_bits})
-                for _ingredient, quotes, _key in quoted_ingredients
-            )
-            winning_positions = (1 << store_combinations) - 1
-            infeasible_store_combinations = 0
-        else:
-            vectors = tuple(self._quote_subset_vector(quotes, key, store_ids, store_subsets, limit)
-                            for _ingredient, quotes, key in quoted_ingredients)
-            leading, infeasible_store_combinations, winning_positions = self._grouped_subset_keys(
-                vectors, store_subsets, limit, self._quote_cache_context.get(), winning_mask=True)
-            if leading and leading[0] is not None:
-                best_single_key, best_single_total = leading[0][:2], leading[0][1]
-        # With vectors every subset was included in exact aggregation; inspect
-        # only ties on its proven best leading key. The scalar path visits all
-        # subsets here. Both preserve ascending order and every tie breaker;
-        # neither reduces the menu search budget or prunes by comparison price.
         session = self._quote_cache_context.get()
-        from app.services.plan_jobs import check_cancelled
-        while winning_positions:
-            check_cancelled()
-            bit = winning_positions & -winning_positions
-            position = bit.bit_length() - 1
-            winning_positions ^= bit
-            combo_ids = store_subsets[position]
-            if vectors is None:
-                combo_mask = sum(store_bits[s] for s in combo_ids)
-                if any(mask & combo_mask == 0 for mask in ingredient_store_masks):
-                    infeasible_store_combinations += 1
-                    continue
-                chosen = tuple(self._cheapest_quote_for_subset_key(quotes, combo_ids, key)
-                               for _ingredient, quotes, key in quoted_ingredients)
-                if any(quote is None for quote in chosen):
-                    continue
-                total = _sum_quotes(chosen)
-                verification_rank = self._quotes_verification_rank(chosen)
-            else:
-                selections = tuple(vector[position] for vector in vectors)
-                chosen = tuple(_line_named(session, selection.quote, ingredient)
-                               for selection, (ingredient, _quotes, _key) in zip(
-                                   selections, quoted_ingredients, strict=True))
-                total = money(sum((selection.total_price for selection in selections), Decimal(0)))
-                verification_rank = max((selection.verification_rank for selection in selections),
-                                        default=_VERIFICATION_RANK[BasketVerificationStatus.VERIFIED])
-            used_store_ids = tuple(sorted({quote.store_id for quote in chosen}))
-            leading_key = (
-                verification_rank,
-                total,
-                len(used_store_ids),
-                used_store_ids,
-            )
-            # Product identity is only the final deterministic tie-breaker.
-            # Constructing and sorting those strings for every feasible store
-            # subset cannot affect a strict leading-key loser, so defer the
-            # work until a subset can actually replace the incumbent.
-            if best_key is None or leading_key <= best_key[:4]:
-                product_key = tuple(
-                    f"{quote.ingredient}:{quote.unit}:{quote.store_id}:"
-                    f"{quote.product_id}:{quote.packages_needed}"
-                    for quote in sorted(
-                        chosen,
-                        key=lambda quote: (
-                            quote.ingredient,
-                            quote.unit,
-                            quote.store_id,
-                            quote.product_id,
-                        ),
-                    )
+        if self._use_store_set_search(len(store_ids), limit):
+            found = self._search_store_sets(quoted_ingredients, store_ids, limit)
+            if found is not None:
+                best_key, best_quotes, single = found
+                best_single_total = single[1] if single is not None else None
+        else:
+            store_subsets = self._eligible_store_subsets(store_ids, limit)
+            # Same exact per-store minima and deterministic tie breakers as the
+            # scalar subset loop. Reuse the existing bounded, request-local quote
+            # vectors instead of millions of repeated dictionary lookups and rank
+            # calculations. Coupled campaigns take their separate joint path above.
+            store_combinations = len(store_subsets)
+            vectors = None
+            if any(key is None for _ingredient, _quotes, key in quoted_ingredients):
+                # Nutrition alternatives often make one-off baskets with very few
+                # feasible subsets. Without reusable quote identities, full vectors
+                # repeats work for every impossible subset. Use the same exact
+                # scalar checkout, rejecting only proven missing ingredient cover.
+                store_bits = {store_id: 1 << index for index, store_id in enumerate(store_ids)}
+                ingredient_store_masks = tuple(
+                    sum({store_bits[q.store_id] for q in quotes if q.store_id in store_bits})
+                    for _ingredient, quotes, _key in quoted_ingredients
                 )
-                plan_key = (*leading_key, product_key)
-                if best_key is None or plan_key < best_key:
-                    best_key = plan_key
-                    best_quotes = tuple(chosen)
-            single_key = (verification_rank, total)
-            if len(combo_ids) == 1 and (
-                best_single_key is None or single_key < best_single_key
-            ):
-                best_single_key = single_key
-                best_single_total = total
+                winning_positions = (1 << store_combinations) - 1
+                infeasible_store_combinations = 0
+            else:
+                vectors = tuple(self._quote_subset_vector(quotes, key, store_ids, store_subsets, limit)
+                                for _ingredient, quotes, key in quoted_ingredients)
+                leading, infeasible_store_combinations, winning_positions = self._grouped_subset_keys(
+                    vectors, store_subsets, limit, self._quote_cache_context.get(), winning_mask=True)
+                if leading and leading[0] is not None:
+                    best_single_key, best_single_total = leading[0][:2], leading[0][1]
+            # With vectors every subset was included in exact aggregation; inspect
+            # only ties on its proven best leading key. The scalar path visits all
+            # subsets here. Both preserve ascending order and every tie breaker;
+            # neither reduces the menu search budget or prunes by comparison price.
+            session = self._quote_cache_context.get()
+            from app.services.plan_jobs import check_cancelled
+            while winning_positions:
+                check_cancelled()
+                bit = winning_positions & -winning_positions
+                position = bit.bit_length() - 1
+                winning_positions ^= bit
+                combo_ids = store_subsets[position]
+                if vectors is None:
+                    combo_mask = sum(store_bits[s] for s in combo_ids)
+                    if any(mask & combo_mask == 0 for mask in ingredient_store_masks):
+                        infeasible_store_combinations += 1
+                        continue
+                    chosen = tuple(self._cheapest_quote_for_subset_key(quotes, combo_ids, key)
+                                   for _ingredient, quotes, key in quoted_ingredients)
+                    if any(quote is None for quote in chosen):
+                        continue
+                    total = _sum_quotes(chosen)
+                    verification_rank = self._quotes_verification_rank(chosen)
+                else:
+                    selections = tuple(vector[position] for vector in vectors)
+                    chosen = tuple(_line_named(session, selection.quote, ingredient)
+                                   for selection, (ingredient, _quotes, _key) in zip(
+                                       selections, quoted_ingredients, strict=True))
+                    total = money(sum((selection.total_price for selection in selections), Decimal(0)))
+                    verification_rank = max((selection.verification_rank for selection in selections),
+                                            default=_VERIFICATION_RANK[BasketVerificationStatus.VERIFIED])
+                used_store_ids = tuple(sorted({quote.store_id for quote in chosen}))
+                leading_key = (
+                    verification_rank,
+                    total,
+                    len(used_store_ids),
+                    used_store_ids,
+                )
+                # Product identity is only the final deterministic tie-breaker.
+                # Constructing and sorting those strings for every feasible store
+                # subset cannot affect a strict leading-key loser, so defer the
+                # work until a subset can actually replace the incumbent.
+                if best_key is None or leading_key <= best_key[:4]:
+                    product_key = tuple(
+                        f"{quote.ingredient}:{quote.unit}:{quote.store_id}:"
+                        f"{quote.product_id}:{quote.packages_needed}"
+                        for quote in sorted(
+                            chosen,
+                            key=lambda quote: (
+                                quote.ingredient,
+                                quote.unit,
+                                quote.store_id,
+                                quote.product_id,
+                            ),
+                        )
+                    )
+                    plan_key = (*leading_key, product_key)
+                    if best_key is None or plan_key < best_key:
+                        best_key = plan_key
+                        best_quotes = tuple(chosen)
+                single_key = (verification_rank, total)
+                if len(combo_ids) == 1 and (
+                    best_single_key is None or single_key < best_single_key
+                ):
+                    best_single_key = single_key
+                    best_single_total = total
 
-        increment_performance_counter("store_combinations", store_combinations)
-        increment_performance_counter(
-            "store_combinations_pruned_infeasible",
-            infeasible_store_combinations,
-        )
+            increment_performance_counter("store_combinations", store_combinations)
+            increment_performance_counter(
+                "store_combinations_pruned_infeasible",
+                infeasible_store_combinations,
+            )
 
         if best_key is None or best_quotes is None:
             missing = [

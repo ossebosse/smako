@@ -336,8 +336,8 @@ def _form_error(field: str, message: str) -> HTTPException:
 
 def _consumer_request(request: PlanRequest) -> PlanRequest:
     if request.personal is not None:
-        if request.max_stores > 3:
-            raise _form_error("max_stores", "Välj 1, 2 eller 3 inköpsställen")
+        if request.store_cap == "count" and request.max_stores > 3:
+            raise _form_error("max_stores", "Välj 1, 2 eller 3 inköpsställen, eller alla valda butiker")
         if request.strategy == "legacy":
             raise HTTPException(422, "Personlig planering använder den gemensamma optimeraren.")
         if request.diet_preference.value not in {"mixed", "meat_allowed"} and any(
