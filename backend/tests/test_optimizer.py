@@ -85,6 +85,34 @@ def test_same_fixed_package_count_reuses_every_quote_field_with_current_quantity
         assert next_request.fixed_template_hits == 0 and next_request.fixed_template_misses == 1
 
 
+def test_fixed_package_shape_matches_full_quote_for_many_quantities_and_units():
+    import random
+
+    rng = random.Random(20261106)
+    candidates = [
+        product('ris', 'fixed', 's1', 500, 19).model_copy(update={
+            'sale_model': 'fixed_package', 'quantity_confidence': 'exact'}),
+        # Drained weight below the gross package: usable quantity decides.
+        product('bönor', 'drained', 's1', 400, 12.5).model_copy(update={
+            'sale_model': 'fixed_package', 'quantity_confidence': 'exact',
+            'usable_quantity': 235, 'usable_unit': 'g'}),
+        product('mjölk', 'milk', 's2', 1500, 21.9, unit='ml').model_copy(update={
+            'sale_model': 'fixed_package', 'quantity_confidence': 'exact'}),
+    ]
+    calculator = BasketCalculator()
+    optimizer = BasketOptimizer()
+    with optimizer.quote_cache() as stats:
+        for _ in range(400):
+            candidate = rng.choice(candidates)
+            unit = candidate.package_unit
+            amount = rng.choice([round(rng.uniform(0.1, 6000), 2), rng.randint(1, 4000),
+                                 float(rng.randint(1, 8) * candidate.usable_quantity if candidate.usable_quantity
+                                       else rng.randint(1, 8) * candidate.package_quantity)])
+            ingredient = NormalizedIngredient(canonical_name=candidate.canonical_name, required_quantity=amount, unit=unit)
+            assert optimizer._calculate_quote(ingredient, candidate) == calculator.quote_item(ingredient, candidate)
+        assert stats.fixed_shape_hits == stats.fixed_template_hits > 200
+
+
 def test_fixed_template_preserves_source_cap_errors_and_repriced_copy():
     from app.models.provenance import SourceProvenance
 

@@ -89,6 +89,10 @@ class CityGrossMunicipalityProvider(IcaAreaOfferProvider):
                 continue
             store = matches[0]
             context = FederatedGroceryPriceProvider._context_id(store)
+            # City Gross publishes only the place ("Malmö Hyllie"). The context
+            # id above is derived from that source name and stays unchanged;
+            # only the shown name gains the chain, like every other store.
+            shown_name = _shown_name(store.name)
             rows = await (own.get_offers(store.store_id) if store.coverage == "offers_only"
                           else own.get_store_products(store.store_id))
             audit["received"] = len(rows)
@@ -118,7 +122,7 @@ class CityGrossMunicipalityProvider(IcaAreaOfferProvider):
                     continue
                 # Preserve online channel and exact source IDs. Coverage never
                 # implies that an online campaign is a physical shelf price.
-                accepted.append(product.model_copy(update={"store_id": context,
+                accepted.append(product.model_copy(update={"store_id": context, "store_name": shown_name,
                     "promotion_groups": groups_in_context(product, context),
                     "price_context_type": "online_store", "coverage": store.coverage,
                     "source_provenance": prov.model_copy(update={"store_id": context,
@@ -133,7 +137,7 @@ class CityGrossMunicipalityProvider(IcaAreaOfferProvider):
             if accepted:
                 if context in self.stores:
                     raise ValueError("duplicate approved City Gross price context")
-                self.stores[context] = store.model_copy(update={"store_id": context,
+                self.stores[context] = store.model_copy(update={"store_id": context, "name": shown_name,
                     "source_provenance": store.source_provenance.model_copy(update={
                         "store_id": context, "provider_store_id": identity,
                         "source_role": "offers" if store.coverage == "offers_only" else "basket"})})
@@ -162,3 +166,9 @@ class CityGrossMunicipalityProvider(IcaAreaOfferProvider):
 
     def report(self):
         return {**self.base.report(), "citygross_municipality": self.diagnostics}
+
+
+def _shown_name(name: str) -> str:
+    """Return the source store name with the chain name in front once."""
+
+    return name if name.casefold().startswith("city gross") else f"City Gross {name}"
