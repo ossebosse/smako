@@ -415,6 +415,8 @@ def _whole_food_identity(canonical, form, product, fact, requirements=()):
     if brand and brand != canonical and label.startswith(brand + " "):
         label = label[len(brand) + 1:]
     label = re.sub(r"\b\d+(?:[,.]\d+)?\s*(?:kg|g|ml|cl|l)\b", "", label)
+    # Shelf spellings of the same word: "Ryggfilè", "Babyplommon- tomater".
+    label = re.sub(r"(\w)- (\w)", r"\1\2", label.replace("è", "é"))
     label = " ".join(label.split())
     composition = " ".join(fact.ingredients).casefold() if fact else ""
     declared = re.split(r"kan innehålla|kan indeholde|may contain", composition)[0]
@@ -449,9 +451,9 @@ def _whole_food_identity(canonical, form, product, fact, requirements=()):
         # and edible-quantity checks still apply independently of this identity.
         return form == 'raw_edible' and reviewed_reference(product, canonical, fact) == 588
     produce = {
-        "potatis": r"(?:potatis|färskpotatis|delikatesspotatis|mandelpotatis|minipotatis)",
-        "tomat": r"(?:tomat|tomater|körsbärstomater|kvisttomater|plommontomater|cocktailtomater|pärltomater)(?: runda(?: import)?| san marzano| babyplommon| cocktail| kumato| cockt)?",
-        "vitlök": r"vitlök", "gul lök": r"(?:gul lök|lök gul)", "rödlök": r"(?:rödlök|röd lök|lök röd)",
+        "potatis": r"(?:potatis|färskpotatis|delikatesspotatis|mandelpotatis|minipotatis|bakpotatis|gourmetpotatis)(?: mandel| amandine| fina| gourmet| lösvikt| i lösvikt)*",
+        "tomat": r"(?:tomat|tomater|körsbärstomat|körsbärstomater|kvisttomat|kvisttomater|plommontomat|plommontomater|cocktailtomat|cocktailtomater|pärltomater|babyplommontomater)(?: runda(?: import)?| san marzano| babyplommon| cocktail| kumato| cockt| kvist| import)*",
+        "vitlök": r"vitlök", "gul lök": r"(?:gul lök|lök gul)(?: i säck| säck| i nät| nät)?", "rödlök": r"(?:rödlök|röd lök|lök röd)",
         "gurka": r"gurka", "morot": r"(?:morot|morötter)", "zucchini": r"(?:zucchini|squash)",
         # Sweet bell-pepper packs sold by gram ("Paprika Mix Klass 1" 400 g,
         # "Paprika Spets Mix", "Paprika Ramiro", "Paprika Snacks Mix"). Hot
@@ -479,14 +481,15 @@ def _whole_food_identity(canonical, form, product, fact, requirements=()):
         # Pantry shelves hold spice bags such as "Paprika Påse" (Santa Maria,
         # category "Skafferi"); without fresh produce evidence they are not
         # raw vegetables.
-        return not re.search(r"konserv|tork|krydd|skafferi", category) or fresh
+        # "Grönsakskonserver" contains "grönsak" but is never fresh produce.
+        return not re.search(r"konserv|tork|krydd|skafferi", category) or (fresh and "konserv" not in category)
     proteins = {
-        "kyckling": r"(?:kycklingfilé|kycklingbröstfilé|kycklingbröst|kyckling lårfilé|kycklinglårfilé|kyckling innerfilé|kycklinginnerfilé|kyckling bröstfilé|kyckling filé)",
+        "kyckling": r"(?:kycklingfilé|kycklingbröstfilé|kycklingbröst|kyckling lårfilé|kycklinglårfilé|kyckling innerfilé|kycklinginnerfilé|kyckling bröstfilé|kyckling filé|bröstfilé majskyckling|bröstfilé kyckling|majskyckling bröstfilé|majskycklingfilé|innerfilé av (?:svensk )?kyckling|bröstfilé av (?:svensk )?kyckling)",
         "nötfärs": r"nötfärs", "fläskfärs": r"fläskfärs", "blandfärs": r"blandfärs", "fläskkött": r"(?:fläskfilé|fläskytterfilé|fläskkarré benfri|benfri fläskkarré)",
-        "lax": r"(?:laxfilé|laxfile|lax filé|lax)", "fisk": r"(?:torsk|torskfilé|sejfilé|koljafilé|alaska pollock|alaska pollockfilé|torskrygg)",
+        "lax": r"(?:laxfilé|laxfile|lax filé|lax|laxloin)", "fisk": r"(?:torsk|torskfilé|sejfilé|koljafilé|alaska pollock|alaska pollockfilé|torskrygg|ryggfilé kolja|kolja ryggfilé|koljaryggfilé|sej ryggfilé|sej ryggfile|sejryggfilé|torsk ryggfilé|torskryggfilé)",
     }
     if canonical in proteins:
-        return (form == "raw_edible" and simple(proteins[canonical], r"benfri|skinnfri|utan skinn|utan ben|portionsbitar|bitar|naturell|strimlad|tärnad|fetthalt lägre än \d+%|\d+(?:[,.]\d+)?\s*%|naturbeteskött")
+        return (form == "raw_edible" and simple(proteins[canonical], r"benfri|skinnfri|utan skinn|utan ben|utan skinn (?:och |o |& )?ben|skinn (?:och |o |& )?benfri|portionsbitar|bitar|i bit|bit|grytbitar|c-trim|back loin|mid loin|loin|hel sida|sida|\d+/\d+|naturell|strimlad|finstrimlad|tärnad|storpack|import|irland|danmark|tyskland|polen|fetthalt lägre än \d+%|\d+(?:[,.]\d+)?\s*%|\d+-\d+\s*%|naturbeteskött")
                 and not re.search(r"\b(?:salt|socker|marinad|kryddor|vatten)\b", composition.split("kan innehålla")[0]))
     if canonical in {"yoghurt", "yoghurt naturell"}:
         return bool(re.fullmatch(r"(?:(?:mild|lätt|grekisk|turkisk|laktosfri|ekologisk|eko|naturell) )*yoghurt(?: (?:mild|lätt|naturell|laktosfri|ekologisk|eko|\d+(?:[,.]\d+)?\s*%))*", label)
@@ -519,7 +522,7 @@ def _whole_food_identity(canonical, form, product, fact, requirements=()):
         "sesamfrön": r"sesamfrön(?: vita| skalade| oskalade| eko| ekologiska| burk)*",
         "senap": r"(?:dijon )?senap(?: dijon| stark| mild| grov| skånsk| sötstark| finmalen)*",
         "kapris": r"kapris(?: små| fina| fin| medelstora| medelstor| non pareilles| i lag)*", "oliver": r"(?:(?:gröna|svarta|kalamata|halkidiki) )?oliver(?: utan kärnor| urkärnade| kalamata| halkidiki| gröna| svarta| eko| ekologiska)*",
-        "salt": r"(?:salt|hushållssalt|finkornigt salt)(?: med jod| utan jod| fint| finkornigt)*",
+        "salt": r"(?:fint )?(?:salt|hushållssalt|finkornigt salt)(?: med jod| utan jod| fint| finkornigt)*",
         "mjölk": r"(?:standardmjölk|mellanmjölk|lättmjölk|mjölk)(?: laktosfri| ekologisk| eko| \d+(?:[,.]\d+)?\s*%)*",
     }
     if canonical in staples:

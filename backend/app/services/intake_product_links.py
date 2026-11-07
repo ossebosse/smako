@@ -22,10 +22,100 @@ def entries():
     return {row["requirements"][0].removeprefix("pack:"): row for row in rows}
 
 
+# Authored recipes ask for fresh leaves ("raw_edible"); the reviewed registry
+# so far only listed frozen chopped packs. A plain fresh bunch of the same herb
+# is the same food. Owner decision 2026-11-07: accept it by identity, but only
+# on its own exact published package mass (no density, yield or per-piece
+# estimate) and only from a fresh-produce shelf, so dried jars stay out.
+FRESH_HERBS = {"koriander": r"koriander", "gräslök": r"gräslök"}
+FRESH_HERB_DESCRIPTORS = r"(?:eko|ekologisk|ekologiska|svensk|svenska|sverige|klass [12]|krav|färsk|färska|knippe|i knippe|i ask|ask|blad)"
+# Cut-herb bunches weigh grams to tens of grams. A larger "package" on a fresh
+# herb row is a source quantity we cannot trust as edible leaves.
+FRESH_HERB_MAX_GRAMS = 150.0
+
+
+def fresh_herb_alternative(row, product, fact=None):
+    canonical = row["name"]
+    if row["kind"] != "frozen_edible" or row["form"] != "raw_edible" or canonical not in FRESH_HERBS:
+        return False
+    label = " ".join(product.name.casefold().replace(",", " ").split())
+    brand = " ".join((getattr(product, "brand", None) or "").casefold().split())
+    if brand and brand != canonical and label.startswith(brand + " "):
+        label = label[len(brand) + 1:]
+    label = re.sub(r"\b\d+(?:[,.]\d+)?\s*(?:g|gr)\b", "", label)
+    label = " ".join(label.split())
+    descriptor = FRESH_HERB_DESCRIPTORS
+    if not re.fullmatch(rf"(?:{descriptor} )*{FRESH_HERBS[canonical]}(?: {descriptor})*", label):
+        return False
+    category = (getattr(product, "category", None) or "").casefold()
+    if not re.search(r"frukt|grönt|grönsak|kryddväxt", category) or re.search(r"fryst|skafferi|torkad", category):
+        return False
+    composition = " ".join(fact.ingredients).casefold().split("kan innehålla")[0] if fact else ""
+    if re.search(r"\b(?:salt|socker|olja|smör|grädde|vitlök)\b", composition):
+        return False
+    return (product.sale_model == "fixed_package" and product.purchase_terms is None
+            and product.package_unit == product.usable_unit == row["unit"] == "g"
+            and product.usable_quantity == product.package_quantity
+            and 0 < product.usable_quantity <= FRESH_HERB_MAX_GRAMS
+            and getattr(product, "quantity_confidence", None) == QuantityConfidence.EXACT)
+
+
+# Owner decision 2026-11-07: where an authored identity has no supplier
+# declaration of edible/drained mass, Smako may plan with the exact published
+# package mass instead. This only covers the identities listed here; for fresh
+# avocado that mass includes peel and stone, so the recipe gets somewhat less
+# flesh than written. Identity, shelf, composition and exact quantity remain.
+PACKAGE_WEIGHT_IDENTITIES = {
+    # Firm whole avocados for wedges/sticks; diced, frozen and ready-to-eat
+    # (soft) fruit are other authored forms.
+    ("avokado", "raw_edible"): (
+        r"(?:\d+-pack )?(?:avokado|avocado)(?: (?:hass|eko|ekologisk|ekologiska|klass [12]|stor|\d+-pack))*",
+        r"frukt|grönt", r"tärn|fryst|guacamole|kräm|mogen|olja", r"\b(?:salt|socker|olja|kryddor)\b|citron|syra"),
+    # Cheese without brine: shredded mozzarella is sold and used by its net mass.
+    ("mozzarella", "as_sold"): (
+        r"(?:riven )?mozzarella(?: (?:riven|familjefavoriter|laktosfri|eko|ekologisk|\d+%))*",
+        r"riven ost", r"pizza|sticks|paj|gnocchi|burrata|bufala|\blag\b|mini|kul|boll", r"\b(?:lag|vatten|kryddor|örter|vitlök)\b"),
+}
+
+
+def package_weight_alternative(row, product, fact=None):
+    entry = PACKAGE_WEIGHT_IDENTITIES.get((row["name"], row["form"]))
+    if entry is None or row["kind"] != "definition_only" or row["unit"] != "g":
+        return False
+    pattern, shelf, excluded, composition_excluded = entry
+    label = " ".join(re.sub(r"\b\d+(?:[,.]\d+)?\s*(?:kg|g)\b", "", product.name.casefold()).split())
+    category = (getattr(product, "category", None) or "").casefold()
+    if re.search(excluded, label) or re.search(excluded, category) or not re.search(shelf, category + " " + label):
+        return False
+    if not re.fullmatch(pattern, label):
+        return False
+    composition = " ".join(fact.ingredients).casefold().split("kan innehålla")[0] if fact else ""
+    if re.search(composition_excluded, composition):
+        return False
+    return (product.sale_model == "fixed_package" and product.purchase_terms is None
+            and product.package_unit == product.usable_unit == "g"
+            and product.usable_quantity == product.package_quantity and product.usable_quantity > 0
+            and getattr(product, "quantity_confidence", None) == QuantityConfidence.EXACT)
+
+
+def _article(product, fact):
+    provenance = getattr(product, "source_provenance", None)
+    article = getattr(provenance, "retailer_product_id", None) if provenance else None
+    if article:
+        return article
+    if (fact is not None and provenance is not None
+            and getattr(fact, "source_product_id", None) == product.product_id
+            and getattr(fact, "source_snapshot_id", None) == provenance.source_snapshot_id):
+        return getattr(fact, "retailer_product_id", None) or None
+    return None
+
+
 def compatible(key, product, fact=None):
     row = entries().get(key)
     if row is None:
         return False
+    if fresh_herb_alternative(row, product, fact) or package_weight_alternative(row, product, fact):
+        return True
     if row["kind"] == "definition_only":
         return reviewed_definition(row, product, fact) or declared_definition(row, product, fact)
     if fact is not None and row["kind"] in {"plain", "dry"}:
@@ -39,6 +129,13 @@ def compatible(key, product, fact=None):
         if evidence.get("gtin"):
             return str(getattr(product, "gtin", "")) == evidence["gtin"]
         provenance = getattr(product, "source_provenance", None)
+        if (evidence.get("retailer_product_id") and product.store_id == evidence["store_id"]
+                and _article(product, fact) == evidence["retailer_product_id"]):
+            # The retailer article id is the global identity that lets a
+            # reviewed link survive a new collection. It must come from this
+            # product's own provenance or from facts bound to this exact
+            # product and snapshot; never from its name.
+            return True
         return (product.product_id == evidence["product_id"] and product.store_id == evidence["store_id"]
                 and provenance is not None and provenance.source_snapshot_id
                 == evidence["source_provenance"]["source_snapshot_id"])
@@ -316,16 +413,21 @@ def reference_version():
     return hashlib.sha256(json.dumps(entries(), ensure_ascii=False, sort_keys=True).encode()).hexdigest()
 
 
-def search_positions(prepared):
+def search_positions(prepared, facts=None):
     """Index exact public identifiers once per existing prepared universe.
 
     Ingredient query spelling does not have to match a retailer's spelling.
     These positions are retrieval only; all request gates run after retrieval.
+    Retailer article ids come from each product's provenance or from facts
+    bound to that exact product and snapshot, so reviewed links keep finding
+    the same article after a new collection.
     """
     def compute():
-        gtins, scoped = {}, {}
+        gtins, scoped, articles = {}, {}, {}
         for row in entries().values():
             for evidence in row.get("reviewed_links", ()):
+                if evidence.get("retailer_product_id"):
+                    articles.setdefault((evidence["store_id"], evidence["retailer_product_id"]), set()).add(row["name"])
                 key = (evidence["store_id"], evidence["product_id"], evidence["source_snapshot_id"])
                 scoped.setdefault(key, set()).add(row["name"])
                 if evidence.get('gtin'):
@@ -336,14 +438,23 @@ def search_positions(prepared):
                 if evidence.get("gtin"):
                     gtins.setdefault(evidence["gtin"], set()).add(row["name"])
                 else:
+                    if evidence.get("retailer_product_id"):
+                        articles.setdefault((evidence["store_id"], evidence["retailer_product_id"]), set()).add(row["name"])
                     key = (evidence["store_id"], evidence["product_id"], evidence["source_provenance"]["source_snapshot_id"])
                     scoped.setdefault(key, set()).add(row["name"])
         positions = {}
         for n, product in enumerate(prepared.universe.products):
             provenance = product.source_provenance
             key = (product.store_id, product.product_id, provenance.source_snapshot_id if provenance else None)
-            for name in gtins.get(getattr(product, "gtin", None), set()) | scoped.get(key, set()):
+            names = gtins.get(getattr(product, "gtin", None), set()) | scoped.get(key, set())
+            if articles:
+                fact = facts.get((product.store_id, product.product_id)) if facts is not None else None
+                article = _article(product, fact)
+                if article:
+                    names = names | articles.get((product.store_id, article), set())
+            for name in names:
                 positions.setdefault(name, set()).add(n)
         return MappingProxyType({name: frozenset(values) for name, values in positions.items()})
 
-    return prepared.product_search_cache.get_or_compute("reviewed-intake-exact:" + reference_version(), compute)
+    version = "" if facts is None else ":" + str(getattr(facts, "version", None) or id(facts))
+    return prepared.product_search_cache.get_or_compute("reviewed-intake-exact:" + reference_version() + version, compute)

@@ -144,7 +144,7 @@ def compatible(keys, product, fact):
         if (key == "paprika_powder" and not re.search(r"\b(?:mild|milt|söt|sweet)\b", text + " " + composition)
                 and not _supplier_classification(product, fact, "mild_spice")):
             return False
-        if key == "black_pepper" and not re.search(r"\b(?:malen|finmalen|mald|ground)\b", text + " " + composition):
+        if key == "black_pepper" and not re.search(r"\b(?:malen|finmalen|grovmalen|mellanmalen|mald|ground)\b", text + " " + composition):
             return False
         if key == "spinach" and not re.search(r"\b(?:hackad|finhackad|hackat|chopped)\b", text + " " + composition):
             return False
@@ -171,7 +171,7 @@ def additional_whole_identity(canonical, form, label, composition):
     if canonical in INTAKE_IDENTITIES:
         return intake_whole_identity(canonical, form, label, composition)
     patterns = {
-        "svartpeppar": ("dry", r"(?:malen )?svartpeppar(?: malen| finmalen| burk)*"),
+        "svartpeppar": ("dry", r"(?:malen )?svartpeppar(?: malen| finmalen| grovmalen| mellanmalen| burk| påse)*"),
         # Swedish shelves label the same single spice "Rökt Paprika",
         # "Paprika Rökt" or "Paprika Smoked"; the composition check below
         # still rejects salt/sugar/onion blends.
