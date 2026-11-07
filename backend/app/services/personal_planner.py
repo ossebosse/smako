@@ -688,7 +688,7 @@ class PersonalPlanner:
                     search_positions as intake_search_positions,
                 )
 
-                positions.update(intake_search_positions(self.prepared).get(canonical, ()))
+                positions.update(intake_search_positions(self.prepared, self.facts).get(canonical, ()))
             # Reuse the semantic index first, and the existing product search for
             # goods outside the dinner taxonomy (including liver pâté/napkins).
             for candidate in self.view.economic_pool.candidates_by_name.get(canonical, ()):

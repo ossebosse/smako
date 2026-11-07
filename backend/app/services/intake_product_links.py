@@ -98,6 +98,18 @@ def package_weight_alternative(row, product, fact=None):
             and getattr(product, "quantity_confidence", None) == QuantityConfidence.EXACT)
 
 
+def _article(product, fact):
+    provenance = getattr(product, "source_provenance", None)
+    article = getattr(provenance, "retailer_product_id", None) if provenance else None
+    if article:
+        return article
+    if (fact is not None and provenance is not None
+            and getattr(fact, "source_product_id", None) == product.product_id
+            and getattr(fact, "source_snapshot_id", None) == provenance.source_snapshot_id):
+        return getattr(fact, "retailer_product_id", None) or None
+    return None
+
+
 def compatible(key, product, fact=None):
     row = entries().get(key)
     if row is None:
@@ -117,6 +129,13 @@ def compatible(key, product, fact=None):
         if evidence.get("gtin"):
             return str(getattr(product, "gtin", "")) == evidence["gtin"]
         provenance = getattr(product, "source_provenance", None)
+        if (evidence.get("retailer_product_id") and product.store_id == evidence["store_id"]
+                and _article(product, fact) == evidence["retailer_product_id"]):
+            # The retailer article id is the global identity that lets a
+            # reviewed link survive a new collection. It must come from this
+            # product's own provenance or from facts bound to this exact
+            # product and snapshot; never from its name.
+            return True
         return (product.product_id == evidence["product_id"] and product.store_id == evidence["store_id"]
                 and provenance is not None and provenance.source_snapshot_id
                 == evidence["source_provenance"]["source_snapshot_id"])
@@ -394,16 +413,21 @@ def reference_version():
     return hashlib.sha256(json.dumps(entries(), ensure_ascii=False, sort_keys=True).encode()).hexdigest()
 
 
-def search_positions(prepared):
+def search_positions(prepared, facts=None):
     """Index exact public identifiers once per existing prepared universe.
 
     Ingredient query spelling does not have to match a retailer's spelling.
     These positions are retrieval only; all request gates run after retrieval.
+    Retailer article ids come from each product's provenance or from facts
+    bound to that exact product and snapshot, so reviewed links keep finding
+    the same article after a new collection.
     """
     def compute():
-        gtins, scoped = {}, {}
+        gtins, scoped, articles = {}, {}, {}
         for row in entries().values():
             for evidence in row.get("reviewed_links", ()):
+                if evidence.get("retailer_product_id"):
+                    articles.setdefault((evidence["store_id"], evidence["retailer_product_id"]), set()).add(row["name"])
                 key = (evidence["store_id"], evidence["product_id"], evidence["source_snapshot_id"])
                 scoped.setdefault(key, set()).add(row["name"])
                 if evidence.get('gtin'):
@@ -414,14 +438,23 @@ def search_positions(prepared):
                 if evidence.get("gtin"):
                     gtins.setdefault(evidence["gtin"], set()).add(row["name"])
                 else:
+                    if evidence.get("retailer_product_id"):
+                        articles.setdefault((evidence["store_id"], evidence["retailer_product_id"]), set()).add(row["name"])
                     key = (evidence["store_id"], evidence["product_id"], evidence["source_provenance"]["source_snapshot_id"])
                     scoped.setdefault(key, set()).add(row["name"])
         positions = {}
         for n, product in enumerate(prepared.universe.products):
             provenance = product.source_provenance
             key = (product.store_id, product.product_id, provenance.source_snapshot_id if provenance else None)
-            for name in gtins.get(getattr(product, "gtin", None), set()) | scoped.get(key, set()):
+            names = gtins.get(getattr(product, "gtin", None), set()) | scoped.get(key, set())
+            if articles:
+                fact = facts.get((product.store_id, product.product_id)) if facts is not None else None
+                article = _article(product, fact)
+                if article:
+                    names = names | articles.get((product.store_id, article), set())
+            for name in names:
                 positions.setdefault(name, set()).add(n)
         return MappingProxyType({name: frozenset(values) for name, values in positions.items()})
 
-    return prepared.product_search_cache.get_or_compute("reviewed-intake-exact:" + reference_version(), compute)
+    version = "" if facts is None else ":" + str(getattr(facts, "version", None) or id(facts))
+    return prepared.product_search_cache.get_or_compute("reviewed-intake-exact:" + reference_version() + version, compute)
