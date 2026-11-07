@@ -1,3 +1,16 @@
+# 2026-11-07: Fler köpbara råvaror och Malmö-ersättningar aktiverat
+
+Main `bdd956c7351d`. App **app-bdd956c7351d-f0f775c9**, scheduler orörd.
+Godkännanden knutna till artikelnummer (nötkött, lamm, tempeh m.fl. planerbara
+igen), bredare råvaruidentiteter, förpackningsvikt för listade varor och
+134 receptversioner med köpbara ersättningar för råvaror som Malmö inte säljer.
+Publikt prov i Malmö: meny skapad, sparad och återläst, VERIFIED.
+Bevarat: 337 planversioner, 151 privata tillstånd. Backup
+`/srv/smako/backups/20261107T140021Z`.
+[Aktiveringsjournal](releases/produce-coverage-20261107/ACTIVATED.md).
+
+---
+
 # 2026-11-07: Snabbare planering, "alla valda butiker" och City Gross-namn aktiverat
 
 Main `e63953efb720`. App **app-e63953efb720-6d2ce025**, scheduler orörd.
@@ -91,7 +104,7 @@ på `main` inte ändrar en pågående release.
   `smako-app-1`, `smako-scheduler-1`, `smako-caddy-1`, data i `/srv/smako/data`
   och det gemensamma driftlåset. Detta flöde installerar inte en ny server.
 - Läs aktuell [HANDOFF.md](HANDOFF.md), [OPERATIONS.md](OPERATIONS.md) och
-  senaste aktiveringsrapport. Appens BUILD_ID är `app-e63953efb720-6d2ce025`;
+  senaste aktiveringsrapport. Appens BUILD_ID är `app-bdd956c7351d-f0f775c9`;
   schedulern är `source-ops-8a53beb80e43`.
   [Uppvärmda prov och samordnad faktaläsning/GC](releases/warm-facts-gc-20261101/ACTIVATED.md)
   är senaste appaktiveringen. Sex Pythonfiler från kod `b7c8d0506e23`;
@@ -139,10 +152,10 @@ git status --short
 .venv/Scripts/python.exe -X utf8 scripts/smako_ops.py status
 
 # Använd den granskade Git-bas som motsvarar faktiskt aktiva filer enligt senaste journalen.
-.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit e63953efb720 --commit main --workdir .local/beta-release
+.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit bdd956c7351d --commit main --workdir .local/beta-release
 ```
 
-`e63953efb720` är appen som aktiverades 2026-11-07. Appbildens egen
+`bdd956c7351d` är appen som aktiverades 2026-11-07 14:10 UTC. Appbildens egen
 grocery-kopia är äldre än Git; använd `--keep-app-grocery` om intervallet
 bara innehåller grocery-Python som redan levererats till schedulern. De äldre
 Coop-filerna i runtime (`price_universe_runtime.py`,
