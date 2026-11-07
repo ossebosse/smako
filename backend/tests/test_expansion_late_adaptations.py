@@ -19,6 +19,7 @@ from backend.tests.recipe_language_history import (
     after_language_id,
     assert_current_language_version,
     before_language_id,
+    before_malmo_id,
 )
 
 REPORT = Path('docs/reviews/recipe-unblock-round2-20261101')
@@ -153,8 +154,15 @@ def test_vada_standard_keeps_extra_spices_and_one_total_oil_purchase():
 
 
 def test_vada_extended_uses_existing_volume_concentrate_without_mass_conversion():
-    recipe = next(r for r in current_recipes()
-                  if r.design.base_id == 'smako-indian-vada-pav' and r.design.variant_id == 'extended')
+    current = next(r for r in current_recipes()
+                   if r.design.base_id == 'smako-indian-vada-pav' and r.design.variant_id == 'extended')
+    # Malmö stopped selling the concentrate on 2026-11-07; the current version
+    # uses lemon juice and the concentrate version stays issued unchanged.
+    current_names = {i.canonical_name: i for i in current.ingredients}
+    assert 'tamarindkoncentrat' not in current_names and current_names['citronjuice'].quantity == 20
+    manifest = manifest_entries()
+    issued = {identity(r): r for r in load_entries([*manifest['current'], *manifest['history']])}
+    recipe = issued[before_malmo_id(identity(current))]
     names = {i.canonical_name: i for i in recipe.ingredients}
     assert 'tamarindpasta' not in names and 'curryblad' not in names
     assert names['tamarindkoncentrat'].quantity == 20 and names['tamarindkoncentrat'].unit == 'ml'

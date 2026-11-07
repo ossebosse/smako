@@ -14,13 +14,26 @@ def language_review():
 @lru_cache(maxsize=1)
 def language_successors():
     followup = json.loads((ROOT.parents[3] / "docs/reviews/recipe-language-followup-20261102/library-transition.json").read_bytes())
-    return {r["previous_id"]: r for review in (language_review(), followup) for r in review["corrected"]}
+    # Later reviewed successors (ingredients Malmö no longer sells) keep the same chain.
+    malmo = json.loads((ROOT.parents[3] / "docs/reviews/malmo-unavailable-20261107/recipe-review.json").read_bytes())
+    return {r["previous_id"]: r for review in (language_review(), followup, malmo) for r in review["corrected"]}
 
 
 def after_language_id(recipe_id):
     while recipe_id in language_successors():
         recipe_id = language_successors()[recipe_id]["runtime_id"]
     return recipe_id
+
+
+@lru_cache(maxsize=1)
+def _malmo_previous():
+    review = json.loads((ROOT.parents[3] / "docs/reviews/malmo-unavailable-20261107/recipe-review.json").read_bytes())
+    return {r["runtime_id"]: r["previous_id"] for r in review["corrected"]}
+
+
+def before_malmo_id(recipe_id):
+    """The version just before an ingredient Malmö no longer sells was replaced."""
+    return _malmo_previous().get(recipe_id, recipe_id)
 
 
 def before_language_id(recipe_id):

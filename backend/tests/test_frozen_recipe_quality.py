@@ -48,9 +48,17 @@ def test_guacamole_uses_edible_frozen_cubes_without_whole_fruit_preparation():
 def test_green_mango_and_avocado_wedges_cannot_buy_frozen_ripe_cubes():
     from app.services.intake_product_links import compatible, entries
 
+    # No Malmö store sells green mango since 2026-11-07; the current version uses
+    # tart green apple and the preserved green-mango version keeps its boundary.
+    review = json.loads((ROOT.parents[3] / "docs/reviews/malmo-unavailable-20261107/recipe-review.json").read_bytes())
+    manifest = manifest_entries()
+    issued = {identity(r): r for r in load_entries([*manifest["current"], *manifest["history"]], ROOT)}
+    mango_row = next(r for r in review["corrected"]
+                     if r["previous_id"].startswith("smako-indian-fish-unripe-mango-puree-batons:"))
+    assert {i.canonical_name for i in recipe("smako-indian-fish-unripe-mango-puree-batons").ingredients} >= {"äpple"}
     for base, name, suffix in [("smako-indian-fish-unripe-mango-puree-batons", "mango", "green_mango"),
                                ("smako-swedish-breakfast-breaded-avocado-egg-cream", "avokado", "firm_avocado")]:
-        r = recipe(base)
+        r = issued[mango_row["previous_id"]] if name == "mango" else recipe(base)
         i = next(i for i in r.ingredients if i.canonical_name == name)
         assert list(i.product_requirements) == ["pack:intake_all_shape_" + suffix]
         old = next(row for row in entries().values() if row["name"] == name and row["kind"] == "frozen_edible")
@@ -87,6 +95,9 @@ def test_all_amended_versions_keep_history_and_original_library_and_source_bytes
     successors = {k: latest.get(v, v) for k, v in successors.items()} | latest
     followup = json.loads((ROOT.parents[3] / "docs/reviews/recipe-language-followup-20261102/library-transition.json").read_bytes())
     latest = {r["previous_id"]: r["runtime_id"] for r in followup["corrected"]}
+    successors = {k: latest.get(v, v) for k, v in successors.items()} | latest
+    malmo = json.loads((ROOT.parents[3] / "docs/reviews/malmo-unavailable-20261107/recipe-review.json").read_bytes())
+    latest = {r["previous_id"]: r["runtime_id"] for r in malmo["corrected"]}
     successors = {k: latest.get(v, v) for k, v in successors.items()} | latest
     assert report["affected_variants"] == 337
     assert len(current) == 2851
