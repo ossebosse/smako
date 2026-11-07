@@ -1522,7 +1522,7 @@ _CULINARY_LABELS.update({name: (entry[1], entry[2]) for name, entry in INTAKE_ID
 def _culinary_label_match(canonical, product):
     label = _search_text(str(_value(product, "name", "")))
     identity, role = _CULINARY_LABELS[canonical]
-    descriptors = r"(?:malen|mald|eko|ekologisk|ekologiska|burk|pase|tetra|hel|hela|torkad|krus|blad|knippe|kruka|i kruka|i ask|fryst|frysta|finhackad|farsk|vita|skalade|oskalade|klass 1)"
+    descriptors = r"(?:malen|finmalen|mellanmalen|grovmalen|mald|eko|ekologisk|ekologiska|burk|pase|tetra|hel|hela|torkad|krus|blad|knippe|kruka|i kruka|i ask|fryst|frysta|finhackad|farsk|vita|skalade|oskalade|klass 1)"
     if canonical == 'jordnötssmör':
         descriptors = r'(?:crunchy|smooth|creamy|crunch|super chunk|eko|ekologiskt|ekologisk)'
     if canonical == 'salt':

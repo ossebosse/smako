@@ -519,7 +519,7 @@ def _whole_food_identity(canonical, form, product, fact, requirements=()):
         "sesamfrön": r"sesamfrön(?: vita| skalade| oskalade| eko| ekologiska| burk)*",
         "senap": r"(?:dijon )?senap(?: dijon| stark| mild| grov| skånsk| sötstark| finmalen)*",
         "kapris": r"kapris(?: små| fina| fin| medelstora| medelstor| non pareilles| i lag)*", "oliver": r"(?:(?:gröna|svarta|kalamata|halkidiki) )?oliver(?: utan kärnor| urkärnade| kalamata| halkidiki| gröna| svarta| eko| ekologiska)*",
-        "salt": r"(?:salt|hushållssalt|finkornigt salt)(?: med jod| utan jod| fint| finkornigt)*",
+        "salt": r"(?:fint )?(?:salt|hushållssalt|finkornigt salt)(?: med jod| utan jod| fint| finkornigt)*",
         "mjölk": r"(?:standardmjölk|mellanmjölk|lättmjölk|mjölk)(?: laktosfri| ekologisk| eko| \d+(?:[,.]\d+)?\s*%)*",
     }
     if canonical in staples:

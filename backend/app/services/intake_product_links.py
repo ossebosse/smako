@@ -22,10 +22,50 @@ def entries():
     return {row["requirements"][0].removeprefix("pack:"): row for row in rows}
 
 
+# Authored recipes ask for fresh leaves ("raw_edible"); the reviewed registry
+# so far only listed frozen chopped packs. A plain fresh bunch of the same herb
+# is the same food. Owner decision 2026-11-07: accept it by identity, but only
+# on its own exact published package mass (no density, yield or per-piece
+# estimate) and only from a fresh-produce shelf, so dried jars stay out.
+FRESH_HERBS = {"koriander": r"koriander", "gräslök": r"gräslök"}
+FRESH_HERB_DESCRIPTORS = r"(?:eko|ekologisk|ekologiska|svensk|svenska|sverige|klass [12]|krav|färsk|färska|knippe|i knippe|i ask|ask|blad)"
+# Cut-herb bunches weigh grams to tens of grams. A larger "package" on a fresh
+# herb row is a source quantity we cannot trust as edible leaves.
+FRESH_HERB_MAX_GRAMS = 150.0
+
+
+def fresh_herb_alternative(row, product, fact=None):
+    canonical = row["name"]
+    if row["kind"] != "frozen_edible" or row["form"] != "raw_edible" or canonical not in FRESH_HERBS:
+        return False
+    label = " ".join(product.name.casefold().replace(",", " ").split())
+    brand = " ".join((getattr(product, "brand", None) or "").casefold().split())
+    if brand and brand != canonical and label.startswith(brand + " "):
+        label = label[len(brand) + 1:]
+    label = re.sub(r"\b\d+(?:[,.]\d+)?\s*(?:g|gr)\b", "", label)
+    label = " ".join(label.split())
+    descriptor = FRESH_HERB_DESCRIPTORS
+    if not re.fullmatch(rf"(?:{descriptor} )*{FRESH_HERBS[canonical]}(?: {descriptor})*", label):
+        return False
+    category = (getattr(product, "category", None) or "").casefold()
+    if not re.search(r"frukt|grönt|grönsak|kryddväxt", category) or re.search(r"fryst|skafferi|torkad", category):
+        return False
+    composition = " ".join(fact.ingredients).casefold().split("kan innehålla")[0] if fact else ""
+    if re.search(r"\b(?:salt|socker|olja|smör|grädde|vitlök)\b", composition):
+        return False
+    return (product.sale_model == "fixed_package" and product.purchase_terms is None
+            and product.package_unit == product.usable_unit == row["unit"] == "g"
+            and product.usable_quantity == product.package_quantity
+            and 0 < product.usable_quantity <= FRESH_HERB_MAX_GRAMS
+            and getattr(product, "quantity_confidence", None) == QuantityConfidence.EXACT)
+
+
 def compatible(key, product, fact=None):
     row = entries().get(key)
     if row is None:
         return False
+    if fresh_herb_alternative(row, product, fact):
+        return True
     if row["kind"] == "definition_only":
         return reviewed_definition(row, product, fact) or declared_definition(row, product, fact)
     if fact is not None and row["kind"] in {"plain", "dry"}:
