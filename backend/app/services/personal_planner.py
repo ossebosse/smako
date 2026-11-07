@@ -2592,7 +2592,6 @@ class PersonalPlanner:
             nutrition.append(row)
         return nutrition
 
-    @timed_stage("candidate_generation_and_qualification")
     def _qualification_context(self):
         """Everything per-recipe qualification reads, minus search-only fields.
 
@@ -2619,6 +2618,7 @@ class PersonalPlanner:
         finally:
             self.request = original
 
+    @timed_stage("candidate_generation_and_qualification")
     def _candidates(self, meal, *, qualified_results=None, fixed_slots=()):
         from app.services.plan_jobs import check_cancelled, report_stage
         report_stage("candidate_qualification")
@@ -2665,7 +2665,7 @@ class PersonalPlanner:
         # process for an identical qualification context (see
         # _qualification_context). Rows hold only per-recipe outcomes and the
         # singleton evidence, never a basket or anything user-identifying.
-        memory_reuse = (self.complete and not reuse
+        memory_reuse = (self.complete and not reuse and isinstance(self, PersonalPlanner)
                         and getattr(self.settings, "planner_qualification_memory", True))
         if memory_reuse:
             view_key = content_digest([self._qualification_context(), meal, fixed_slots])
