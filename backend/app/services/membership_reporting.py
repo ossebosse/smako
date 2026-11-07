@@ -132,8 +132,14 @@ def fixed_basket_membership_savings(
     shared_pool: EconomicIngredientPool,
     *,
     on_date: date,
-) -> MembershipSavings:
-    """Reprice the same selected products and quantities with memberships off."""
+) -> MembershipSavings | None:
+    """Reprice the same selected products and quantities with memberships off.
+
+    Returns None when a selected product has no public price on that date
+    (for example a member-only offer without an ordinary price): the saving
+    on exactly the same basket is then unknown. It is a report, so the plan
+    itself must not fail; no public price is invented.
+    """
 
     candidates = {
         (candidate.store_id, candidate.product_id): candidate
@@ -150,19 +156,22 @@ def fixed_basket_membership_savings(
                 raise ValueError(
                     "selected basket product is absent from the shared economic pool"
                 ) from exc
-            public_candidate = price_candidate_for_context(
-                shared_candidate,
-                UserPricingContext(),
-                on_date=on_date,
-            )
             requirement = NormalizedIngredient(
                 canonical_name=item.ingredient,
                 required_quantity=item.required_quantity,
                 unit=item.unit,
             )
-            public_total += _money(
-                calculator.quote_item(requirement, public_candidate).total_price
-            )
+            try:
+                public_candidate = price_candidate_for_context(
+                    shared_candidate,
+                    UserPricingContext(),
+                    on_date=on_date,
+                )
+                public_total += _money(
+                    calculator.quote_item(requirement, public_candidate).total_price
+                )
+            except ValueError:
+                return None
             if item.membership_required:
                 member_lines += 1
 

@@ -128,3 +128,30 @@ def test_membership_savings_reprices_same_exact_product_and_quantity() -> None:
     assert result.same_basket_public_total == 15
     assert result.amount == 5
     assert result.member_price_lines == 1
+
+
+def test_member_only_product_leaves_savings_unknown_instead_of_failing_the_plan() -> None:
+    # Live Lund 2026-11-07: a member-only price without an ordinary price made
+    # the whole menu fail with HTTP 500 while reporting membership savings.
+    shared = _candidate().model_copy(update={"price": None, "sale_price": None})
+    member = price_candidate_for_context(
+        shared,
+        UserPricingContext(memberships={MembershipProgram.COOP_MEMBER}),
+        on_date=TODAY,
+    )
+    requirement = NormalizedIngredient(canonical_name="pasta", required_quantity=500, unit="g")
+    item = BasketCalculator().calculate_item(requirement, member)
+    basket = OptimizedBasket(
+        total=item.total_price,
+        max_stores=1,
+        stores=[OptimizedStoreGroup(store_id=item.store_id, store_name=item.store_name,
+                                    items=[item], subtotal=item.total_price)],
+    )
+    try:
+        price_candidate_for_context(shared, UserPricingContext(), on_date=TODAY)
+    except ValueError:
+        pass
+    else:  # pragma: no cover - the fixture must reproduce the missing public price
+        raise AssertionError("fixture unexpectedly has a public price")
+
+    assert fixed_basket_membership_savings(basket, _pool(shared), on_date=TODAY) is None
