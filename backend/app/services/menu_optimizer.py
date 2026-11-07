@@ -885,9 +885,6 @@ class _EvaluationCache:
 
 
 
-SHARING_POLISH_WIDTH = 30
-
-
 class MenuBoundPruned(Exception):
     """A complete menu provably ranks no better than the current incumbent.
 
@@ -1509,29 +1506,6 @@ class MenuOptimizer:
             return [], evaluate([], final=True)
         return min(states, key=lambda state: score(*state))
 
-    @staticmethod
-    def _sharing_orders(menu, ordered, package_sets):
-        """Per slot: candidates by packages shared with the other chosen slots.
-
-        A recipe that reuses what the rest of the menu already buys usually
-        adds the least to the joint checkout. Ties keep the existing priority
-        order (Python's sort is stable), so this only reorders proposals.
-        """
-        orders = []
-        for index, group in enumerate(ordered):
-            others = frozenset().union(*(package_sets[id(slot)] for position, slot in enumerate(menu)
-                                         if position != index))
-            if not others:
-                orders.append(group)
-                continue
-            shared = {}
-            for slot in group:
-                values = package_sets[id(slot)]
-                if values not in shared:
-                    shared[values] = -len(values & others)
-            orders.append(sorted(group, key=lambda slot: shared[package_sets[id(slot)]]))
-        return orders
-
     def _optimize_complete_slots(self, groups, *, evaluate, accepts, score, search_trace,
                                  state_identity, decision_observer, candidate_priority,
                                  candidate_packages, bounded_evaluate=None):
@@ -1708,7 +1682,6 @@ class MenuOptimizer:
                 # silently exclude the rest of the current library.
                 exchange_rank = 0
                 exchange_revision = 0
-                overlap_exchange = bool(candidate_packages) and len(distinct_packages) > 1
                 trace['exchange_restarts'] = 0
                 for anchor in anchors:
                     checkpoint()
@@ -1746,31 +1719,6 @@ class MenuOptimizer:
                                 considered[index].add(id(group[rank]))
                                 propose(menu)
                     exchange_rank += 2
-                # After the unchanged sweep: replace one recipe at a time with
-                # those sharing most purchased packages with the rest of the
-                # incumbent, restarting on every improvement. It starts from
-                # the sweep's own winner and only keeps cheaper menus, so a
-                # search that completes can only end equal or cheaper.
-                if overlap_exchange and incumbent is not None:
-                    trace['sharing_polish_rounds'] = 0
-                    improved = True
-                    while improved:
-                        improved = False
-                        revision = trace['improvements']
-                        orders = self._sharing_orders(incumbent[1], ordered, package_sets)
-                        for index, order in enumerate(orders):
-                            for candidate in order[:SHARING_POLISH_WIDTH]:
-                                if candidate is incumbent[1][index]:
-                                    continue
-                                menu = list(incumbent[1]); menu[index] = candidate
-                                considered[index].add(id(candidate))
-                                propose(menu)
-                                if trace['improvements'] != revision:
-                                    improved = True
-                                    break
-                            if improved:
-                                break
-                        trace['sharing_polish_rounds'] += 1
         except SearchWindowClosed:
             soft_stopped = True
             trace['stop_reason'] = 'reserved_current_checkout_audit_save_time'
