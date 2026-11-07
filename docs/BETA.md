@@ -1,3 +1,12 @@
+# 2026-11-07 kväll: Kedjeövergripande produktgodkännanden aktiverat
+
+Main `e02a2ef7f0db`. App **app-e02a2ef7f0db-1d6fdb43**, scheduler orörd.
+Granskade varor med GTIN/artikelnummer gäller i alla butiker i kedjan: Lund 1 741 → 659
+blockerade receptvarianter. Kvarvarande fel: Lund 1 portion/3 butiker ger HTTP 500 i
+medlemsbesparingen (fanns före). [Aktiveringsjournal](releases/chain-wide-approvals-20261107/ACTIVATED.md).
+
+---
+
 # 2026-11-07: Fler köpbara råvaror och Malmö-ersättningar aktiverat
 
 Main `bdd956c7351d`. App **app-bdd956c7351d-f0f775c9**, scheduler orörd.
@@ -104,7 +113,7 @@ på `main` inte ändrar en pågående release.
   `smako-app-1`, `smako-scheduler-1`, `smako-caddy-1`, data i `/srv/smako/data`
   och det gemensamma driftlåset. Detta flöde installerar inte en ny server.
 - Läs aktuell [HANDOFF.md](HANDOFF.md), [OPERATIONS.md](OPERATIONS.md) och
-  senaste aktiveringsrapport. Appens BUILD_ID är `app-bdd956c7351d-f0f775c9`;
+  senaste aktiveringsrapport. Appens BUILD_ID är `app-e02a2ef7f0db-1d6fdb43`;
   schedulern är `source-ops-8a53beb80e43`.
   [Uppvärmda prov och samordnad faktaläsning/GC](releases/warm-facts-gc-20261101/ACTIVATED.md)
   är senaste appaktiveringen. Sex Pythonfiler från kod `b7c8d0506e23`;
@@ -152,10 +161,10 @@ git status --short
 .venv/Scripts/python.exe -X utf8 scripts/smako_ops.py status
 
 # Använd den granskade Git-bas som motsvarar faktiskt aktiva filer enligt senaste journalen.
-.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit bdd956c7351d --commit main --workdir .local/beta-release
+.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit e02a2ef7f0db --commit main --workdir .local/beta-release
 ```
 
-`bdd956c7351d` är appen som aktiverades 2026-11-07 14:10 UTC. Appbildens egen
+`e02a2ef7f0db` är appen som aktiverades 2026-11-07 19:08 UTC. Appbildens egen
 grocery-kopia är äldre än Git; använd `--keep-app-grocery` om intervallet
 bara innehåller grocery-Python som redan levererats till schedulern. De äldre
 Coop-filerna i runtime (`price_universe_runtime.py`,
