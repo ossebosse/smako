@@ -71,3 +71,23 @@ async def test_current_deadline_expires_during_admission_wait(monkeypatch):
     with pytest.raises(PolicyConflict) as error:
         await _with_current_deadline(SimpleNamespace(library_search_policy='smako-current-library-v2'),queued)
     assert error.value.code=='SEARCH_INCOMPLETE'
+
+
+def test_large_store_selections_get_a_longer_planning_limit():
+    import asyncio
+    from types import SimpleNamespace
+
+    from app.api.plan import _planning_seconds, _with_current_deadline
+    from app.services.plan_jobs import remaining_planning_seconds
+
+    assert _planning_seconds(SimpleNamespace(allowed_store_ids=None)) == 60
+    assert _planning_seconds(SimpleNamespace(allowed_store_ids=[f"s{i}" for i in range(30)])) == 60
+    assert _planning_seconds(SimpleNamespace(allowed_store_ids=[f"s{i}" for i in range(31)])) == 90
+    assert _planning_seconds(None) == 60
+
+    async def measured():
+        return remaining_planning_seconds()
+
+    settings = SimpleNamespace(library_search_policy='smako-current-library-v2')
+    assert 85 < asyncio.run(_with_current_deadline(settings, measured, seconds=90)) <= 90
+    assert 55 < asyncio.run(_with_current_deadline(settings, measured)) <= 60
