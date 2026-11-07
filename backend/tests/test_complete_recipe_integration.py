@@ -541,3 +541,39 @@ def test_conflicting_fat_is_never_product_class_evidence(conflicts, expected):
     # Thick yoghurt with no fat percentage in the name relies on declared fat.
     assert _requirements_compatible("yoghurt naturell", ("plain", "thick"), yoghurt, fact(10)) is expected
     assert compatible(["creme_fraiche"], creme, fact(32)) is expected
+
+
+def test_identical_qualification_context_reuses_rows_and_gives_the_same_plan():
+    from app.services.personal_planner import _QUALIFICATION_MEMORY, PersonalPlanner
+    from app.services.personal_policy import ProductFacts
+    from app.services.recipe_library import candidates
+    from backend.tests.test_personal_planning_v2 import NOW, prepared, product, state
+
+    prefs = RecipePreferences(mode="complete", cuisines=["greek"], adaptation="products")
+    recipe = candidates(prefs, 2)[0]
+    products = [product(i.name, max(100, i.quantity), i.unit, 10).model_copy(update={
+        "category": "Kryddor" if i.form == "dry" else "Frukt & grönsaker" if i.form == "raw_edible" else "Mat",
+        "name": "Grekisk Yoghurt Naturell 10%" if i.name == "yoghurt naturell" else i.name + " Malen" if i.name == "spiskummin" else i.name,
+    }) for i in recipe.ingredients]
+    universe = prepared(*products)
+    facts = {(p.store_id, p.product_id): ProductFacts(source="synthetic_test_declaration", source_product_id=p.product_id,
+        source_snapshot_id="v2-frozen", ingredients=(p.name,), ingredients_complete=True) for p in products}
+
+    def plan(**update):
+        request = PlanRequest(**{"recipes": 1, "servings": 2, "max_stores": 1, "recipe_preferences": prefs,
+            "personal": PersonalPlanning(meals=[MealSettings(count=1, servings=2)]), **update})
+        planner = PersonalPlanner(request, Settings(complete_recipes_enabled=True), universe, state(), facts=facts, now=NOW)
+        result = planner.create()
+        return result, planner.diagnostics.pools[0].get("qualification_cache_hits", 0)
+
+    first, first_hits = plan()
+    assert first_hits == 0 and len(_QUALIFICATION_MEMORY.rows) == 1
+    again, hits = plan()
+    assert hits > 0
+    assert again.recipes == first.recipes
+    assert again.optimized_basket.model_dump() == first.optimized_basket.model_dump()
+    # A search-only choice shares the rows; a store cap does not.
+    _varied, varied_hits = plan(diversity_mode="cheapest")
+    assert varied_hits > 0
+    _capped, capped_hits = plan(max_stores=2)
+    assert capped_hits == 0 and len(_QUALIFICATION_MEMORY.rows) == 2

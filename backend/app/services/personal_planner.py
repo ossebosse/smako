@@ -146,6 +146,37 @@ def _covered_within(candidate_groups, max_stores):
 
     return search(frozenset(), max_stores)
 
+
+_SEARCH_ONLY_REQUEST_FIELDS = ("recipes", "diversity_mode", "varied_budget_percent", "variation_intent")
+_SEARCH_ONLY_PREFERENCE_FIELDS = ("max_same_main_protein_dinners", "min_distinct_cuisines",
+                                  "cuisine_distribution")
+
+
+class _QualificationMemory:
+    """Process-local, bounded LRU of qualification rows by exact context digest."""
+
+    def __init__(self, limit=128):
+        import threading
+
+        self.limit, self.rows, self.lock = limit, OrderedDict(), threading.Lock()
+
+    def get(self, key):
+        with self.lock:
+            value = self.rows.get(key)
+            if value is not None:
+                self.rows.move_to_end(key)
+            return value
+
+    def put(self, key, value):
+        with self.lock:
+            self.rows[key] = value
+            self.rows.move_to_end(key)
+            while len(self.rows) > self.limit:
+                self.rows.popitem(last=False)
+
+
+_QUALIFICATION_MEMORY = _QualificationMemory()
+
 class PersonalPlanner:
     def __init__(
         self,
@@ -2562,6 +2593,32 @@ class PersonalPlanner:
         return nutrition
 
     @timed_stage("candidate_generation_and_qualification")
+    def _qualification_context(self):
+        """Everything per-recipe qualification reads, minus search-only fields.
+
+        Same digest as planner_context except that week-search choices
+        (variation, diversity/varied budget, menu-level recipe counts) are
+        removed: they decide which menus are combined, never whether one
+        recipe qualifies or what it costs alone. Store cap, stores, prices,
+        facts, taste, diet, pantry state, memberships and dates all remain.
+        """
+        from app.services.planner_context import planner_context
+
+        original = self.request
+        defaults = lambda model, names: {
+            name: type(model).model_fields[name].get_default(call_default_factory=True)
+            for name in names if name in type(model).model_fields}
+        update = defaults(original, _SEARCH_ONLY_REQUEST_FIELDS)
+        if original.recipe_preferences is not None:
+            update["recipe_preferences"] = original.recipe_preferences.model_copy(
+                update=defaults(original.recipe_preferences, _SEARCH_ONLY_PREFERENCE_FIELDS))
+        request = original.model_copy(update=update)
+        self.request = request
+        try:
+            return planner_context(self)
+        finally:
+            self.request = original
+
     def _candidates(self, meal, *, qualified_results=None, fixed_slots=()):
         from app.services.plan_jobs import check_cancelled, report_stage
         report_stage("candidate_qualification")
@@ -2604,8 +2661,19 @@ class PersonalPlanner:
         from app.services.planner_context import content_digest, planner_context
         reuse = (self.complete and getattr(self, "artifacts", None) is not None
                  and getattr(self.settings, "library_search_policy", "legacy") == "smako-verified-reference-v1")
-        view_key = (content_digest([planner_context(self), meal, fixed_slots]) if reuse else None)
-        stored = self.artifacts.load("qualification", view_key) if reuse else None
+        # Without owner artifacts, keep the same qualification rows in this
+        # process for an identical qualification context (see
+        # _qualification_context). Rows hold only per-recipe outcomes and the
+        # singleton evidence, never a basket or anything user-identifying.
+        memory_reuse = (self.complete and not reuse
+                        and getattr(self.settings, "planner_qualification_memory", True))
+        if memory_reuse:
+            view_key = content_digest([self._qualification_context(), meal, fixed_slots])
+            stored = _QUALIFICATION_MEMORY.get(view_key)
+            reuse = True
+        else:
+            view_key = (content_digest([planner_context(self), meal, fixed_slots]) if reuse else None)
+            stored = self.artifacts.load("qualification", view_key) if reuse else None
         stored_rows = stored.get("rows", {}) if isinstance(stored, dict) else {}
         if not isinstance(stored_rows, dict):
             stored_rows = {}
@@ -2733,7 +2801,10 @@ class PersonalPlanner:
         if reuse:
             # Only the completed meal view is atomically published. Retain
             # unchanged earlier rows so append-only recipes qualify once.
-            if self.artifacts.save("qualification", view_key,
+            if memory_reuse:
+                _QUALIFICATION_MEMORY.put(view_key, {"rows": {**stored_rows, **qualified_rows},
+                                                     "qualified": len(valid)})
+            elif self.artifacts.save("qualification", view_key,
                     {"rows": {**stored_rows, **qualified_rows}, "qualified": len(valid)}):
                 self._qualification_views[meal.meal_type] = view_key
             self.diagnostics.pools[-1]["qualification_cache_hits"] = qualification_hits

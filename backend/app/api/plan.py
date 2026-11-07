@@ -591,7 +591,8 @@ async def create_plan(
 ) -> PlanResponse:
     """Create a price-driven menu and a package-aware optimized basket."""
     settings = get_settings()
-    return await _with_current_deadline(settings, lambda: _create_plan_body(request, http_request, settings, debug))
+    return await _with_current_deadline(settings, lambda: _create_plan_body(request, http_request, settings, debug),
+                                       seconds=_planning_seconds(request))
 
 
 async def _create_plan_body(request: PlanRequest, http_request: Request, settings: Settings, debug=None):
@@ -603,7 +604,8 @@ async def _create_plan_body(request: PlanRequest, http_request: Request, setting
         _assert_offline_ready(request, settings)
     try:
         plan = _with_release(
-            await _with_current_deadline(settings, lambda: _run_admitted_plan(request, http_request, settings)),
+            await _with_current_deadline(settings, lambda: _run_admitted_plan(request, http_request, settings),
+                                         seconds=_planning_seconds(request)),
             settings,
         )
         if settings.price_universe_required:
@@ -627,7 +629,8 @@ async def _create_plan_body(request: PlanRequest, http_request: Request, setting
 async def create_saved_plan(request: PlanRequest, http_request: Request):
     """Create and persist a reproducible, provider-offline consumer plan."""
     settings = get_settings()
-    return await _with_current_deadline(settings, lambda: _prepare_saved_plan(request, http_request, settings))
+    return await _with_current_deadline(settings, lambda: _prepare_saved_plan(request, http_request, settings),
+                                       seconds=_planning_seconds(request))
 
 
 async def _prepare_saved_plan(request: PlanRequest, http_request: Request, settings: Settings):
@@ -762,7 +765,21 @@ async def find_plan_job(request_id: str, http_request: Request):
     return _pending_plan_job(job)
 
 
-async def _with_current_deadline(settings, work):
+LARGE_SELECTION_STORES = 30
+LARGE_SELECTION_DEADLINE_SECONDS = 90
+
+
+def _planning_seconds(request=None) -> int:
+    """Whole-request planning limit: 60 s, or 90 s for many selected stores.
+
+    Plans with a large explicit store selection need longer to search the
+    same recipes; without the extra time their result depends on load.
+    """
+    stores = getattr(request, "allowed_store_ids", None) or ()
+    return LARGE_SELECTION_DEADLINE_SECONDS if len(stores) > LARGE_SELECTION_STORES else 60
+
+
+async def _with_current_deadline(settings, work, *, seconds=60):
     if getattr(settings, "library_search_policy", "legacy") != "smako-current-library-v2":
         return await work()
     from app.services.plan_jobs import (
@@ -772,7 +789,7 @@ async def _with_current_deadline(settings, work):
         remaining_planning_seconds,
     )
     try:
-        with planning_deadline(60):
+        with planning_deadline(seconds):
             # Includes awaited admission, not only cooperative CPU-loop checks.
             timer = asyncio.timeout(remaining_planning_seconds())
             try:
@@ -800,7 +817,8 @@ async def _with_current_deadline(settings, work):
 
 
 async def _create_saved_plan(consumer_request: PlanRequest, http_request: Request, settings: Settings) -> SavedPlan:
-    return await _with_current_deadline(settings, lambda: _create_saved_plan_body(consumer_request, http_request, settings))
+    return await _with_current_deadline(settings, lambda: _create_saved_plan_body(consumer_request, http_request, settings),
+                                       seconds=_planning_seconds(consumer_request))
 
 
 async def _create_saved_plan_body(consumer_request: PlanRequest, http_request: Request, settings: Settings) -> SavedPlan:
