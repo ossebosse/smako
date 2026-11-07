@@ -1,3 +1,17 @@
+# 2026-11-07: Snabbare planering, "alla valda butiker" och City Gross-namn aktiverat
+
+Main `e63953efb720`. App **app-e63953efb720-6d2ce025**, scheduler orörd.
+Butikstak upp till alla valda butiker; exakt snabbare prissättning och
+menysökning (identiska korgar i 34/34 prov, Malmö hela kommunen ca 2–3 gånger
+snabbare); återanvänd receptkvalificering; 90 s för planer med fler än 30
+butiker. City Gross-namnet slår igenom först när schedulern uppdateras.
+Publikt prov i Lund: Stora Coop Lund och Willys Lund, 168,37 kr, VERIFIED.
+Bevarat: 336 planversioner, 150 privata tillstånd. Backup
+`/srv/smako/backups/20261107T081316Z`.
+[Aktiveringsjournal](releases/speed-storecap-20261107/ACTIVATED.md).
+
+---
+
 # 2026-11-06: Stora Coop i stället för nätbutiken och butiksadresser aktiverat
 
 Main `191f173f1e19`. App **app-191f173f1e19-e452c67c**, scheduler orörd.
@@ -77,7 +91,7 @@ på `main` inte ändrar en pågående release.
   `smako-app-1`, `smako-scheduler-1`, `smako-caddy-1`, data i `/srv/smako/data`
   och det gemensamma driftlåset. Detta flöde installerar inte en ny server.
 - Läs aktuell [HANDOFF.md](HANDOFF.md), [OPERATIONS.md](OPERATIONS.md) och
-  senaste aktiveringsrapport. Appens BUILD_ID är `app-191f173f1e19-e452c67c`;
+  senaste aktiveringsrapport. Appens BUILD_ID är `app-e63953efb720-6d2ce025`;
   schedulern är `source-ops-8a53beb80e43`.
   [Uppvärmda prov och samordnad faktaläsning/GC](releases/warm-facts-gc-20261101/ACTIVATED.md)
   är senaste appaktiveringen. Sex Pythonfiler från kod `b7c8d0506e23`;
@@ -125,10 +139,10 @@ git status --short
 .venv/Scripts/python.exe -X utf8 scripts/smako_ops.py status
 
 # Använd den granskade Git-bas som motsvarar faktiskt aktiva filer enligt senaste journalen.
-.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit 191f173f1e19 --commit main --workdir .local/beta-release
+.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit e63953efb720 --commit main --workdir .local/beta-release
 ```
 
-`191f173f1e19` är appen som aktiverades 2026-11-06. Appbildens egen
+`e63953efb720` är appen som aktiverades 2026-11-07. Appbildens egen
 grocery-kopia är äldre än Git; använd `--keep-app-grocery` om intervallet
 bara innehåller grocery-Python som redan levererats till schedulern. De äldre
 Coop-filerna i runtime (`price_universe_runtime.py`,
