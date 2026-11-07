@@ -26,6 +26,18 @@ ROUND3_REVIEW = Path('docs/reviews/recipe-unblock-round3-20261102/library-transi
 ROUND4_REVIEW = Path('docs/reviews/recipe-unblock-round4-20261102/library-transition.json')
 LANGUAGE_REVIEW = Path('docs/reviews/recipe-language-20261102/library-transition.json')
 LANGUAGE_FOLLOWUP_REVIEW = Path('docs/reviews/recipe-language-followup-20261102/library-transition.json')
+MALMO_REVIEW = Path('docs/reviews/malmo-unavailable-20261107/recipe-review.json')
+
+
+def checked_successor_bytes(review):
+    """Every recorded successor pair must be the exact issued bytes."""
+    from app.services.meal_library_content import load_entries, manifest_entries
+    manifest = manifest_entries()
+    issued = {identity(r): r for r in load_entries([*manifest['current'], *manifest['history']])}
+    for row in review['corrected']:
+        if (issued[row['previous_id']].design.content_sha256 != row['previous_content_sha256']
+                or issued[row['runtime_id']].design.content_sha256 != row['content_sha256']):
+            raise ValueError('Changed coverage comparison scope: unreviewed recipe transition')
 
 
 def checked_additive_transition(review):
@@ -125,7 +137,7 @@ def reviewed_recipe_transition(scope, compared_scope, variants):
     before = [r['current_id'] for r in variants]
     if digest(before) != scope['recipe_ids_sha256'] or len(set(before)) != len(before):
         raise ValueError('Changed coverage comparison scope: unreviewed recipe transition')
-    paths = (MINT_REVIEW, EGG_REVIEW, MINT_LEAF_REVIEW, CORN_REVIEW, TOP_FIVE_REVIEW, EXPANSION_REVIEW, ROUND2_REVIEW, ROUND3_REVIEW, ROUND4_REVIEW, LANGUAGE_REVIEW, LANGUAGE_FOLLOWUP_REVIEW)
+    paths = (MINT_REVIEW, EGG_REVIEW, MINT_LEAF_REVIEW, CORN_REVIEW, TOP_FIVE_REVIEW, EXPANSION_REVIEW, ROUND2_REVIEW, ROUND3_REVIEW, ROUND4_REVIEW, LANGUAGE_REVIEW, LANGUAGE_FOLLOWUP_REVIEW, MALMO_REVIEW)
     reviews = [(path, json.loads(path.read_bytes())) for path in paths if path.exists()]
     pending = [(scope['manifest_sha256'], before)]
     visited = set()
@@ -149,11 +161,15 @@ def reviewed_recipe_transition(scope, compared_scope, variants):
             if path == LANGUAGE_FOLLOWUP_REVIEW:
                 from rewrite_recipe_language_followup import checked_transition
                 checked_transition(review)
+            if path == MALMO_REVIEW:
+                checked_successor_bytes(review)
             replacements = {r['previous_id']: r['runtime_id'] for r in review['corrected']}
             after = [replacements.get(r, r) for r in ids]
             # Language review covers the whole library. Its complete immutable
             # transition is checked above; the original 2,200-ID scope stays fixed.
-            if (path not in {LANGUAGE_REVIEW, LANGUAGE_FOLLOWUP_REVIEW} and not set(replacements) <= set(ids)) or len(set(after)) != len(after):
+            # The Malmö review also replaced one variant outside the imported
+            # scope; its exact successor bytes are checked above.
+            if (path not in {LANGUAGE_REVIEW, LANGUAGE_FOLLOWUP_REVIEW, MALMO_REVIEW} and not set(replacements) <= set(ids)) or len(set(after)) != len(after):
                 raise ValueError('Changed coverage comparison scope: unreviewed recipe transition')
             pending.append((review['after_manifest_file_sha256'], after))
     raise ValueError('Changed coverage comparison scope: unreviewed manifest transition')

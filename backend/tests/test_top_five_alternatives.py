@@ -124,7 +124,8 @@ def test_successors_preserve_all_originals_other_ingredients_safety_and_scaling(
     assert Counter(g for t in review['corrected'] for g in t['groups']) == {
         'tamarindpasta': 93, 'masa harina': 31, 'pärlkorn': 27, 'citrongräs': 27, 'klibbigt ris': 20}
     for t in review['corrected']:
-        old, new = issued[t['previous_id']], active[after_language_id(t['runtime_id'])]
+        # Compare with the version before Malmö-unavailable ingredients were replaced.
+        old, new = issued[t['previous_id']], issued[before_malmo_id(after_language_id(t['runtime_id']))]
         assert t['previous_id'] not in active
         assert old.design.content_sha256 == t['before_content_sha256']
         assert_current_language_version(t['runtime_id'], t['content_sha256'])
