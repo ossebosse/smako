@@ -60,11 +60,49 @@ def fresh_herb_alternative(row, product, fact=None):
             and getattr(product, "quantity_confidence", None) == QuantityConfidence.EXACT)
 
 
+# Owner decision 2026-11-07: where an authored identity has no supplier
+# declaration of edible/drained mass, Smako may plan with the exact published
+# package mass instead. This only covers the identities listed here; for fresh
+# avocado that mass includes peel and stone, so the recipe gets somewhat less
+# flesh than written. Identity, shelf, composition and exact quantity remain.
+PACKAGE_WEIGHT_IDENTITIES = {
+    # Firm whole avocados for wedges/sticks; diced, frozen and ready-to-eat
+    # (soft) fruit are other authored forms.
+    ("avokado", "raw_edible"): (
+        r"(?:\d+-pack )?(?:avokado|avocado)(?: (?:hass|eko|ekologisk|ekologiska|klass [12]|stor|\d+-pack))*",
+        r"frukt|grönt", r"tärn|fryst|guacamole|kräm|mogen|olja", r"\b(?:salt|socker|olja|kryddor)\b|citron|syra"),
+    # Cheese without brine: shredded mozzarella is sold and used by its net mass.
+    ("mozzarella", "as_sold"): (
+        r"(?:riven )?mozzarella(?: (?:riven|familjefavoriter|laktosfri|eko|ekologisk|\d+%))*",
+        r"riven ost", r"pizza|sticks|paj|gnocchi|burrata|bufala|\blag\b|mini|kul|boll", r"\b(?:lag|vatten|kryddor|örter|vitlök)\b"),
+}
+
+
+def package_weight_alternative(row, product, fact=None):
+    entry = PACKAGE_WEIGHT_IDENTITIES.get((row["name"], row["form"]))
+    if entry is None or row["kind"] != "definition_only" or row["unit"] != "g":
+        return False
+    pattern, shelf, excluded, composition_excluded = entry
+    label = " ".join(re.sub(r"\b\d+(?:[,.]\d+)?\s*(?:kg|g)\b", "", product.name.casefold()).split())
+    category = (getattr(product, "category", None) or "").casefold()
+    if re.search(excluded, label) or re.search(excluded, category) or not re.search(shelf, category + " " + label):
+        return False
+    if not re.fullmatch(pattern, label):
+        return False
+    composition = " ".join(fact.ingredients).casefold().split("kan innehålla")[0] if fact else ""
+    if re.search(composition_excluded, composition):
+        return False
+    return (product.sale_model == "fixed_package" and product.purchase_terms is None
+            and product.package_unit == product.usable_unit == "g"
+            and product.usable_quantity == product.package_quantity and product.usable_quantity > 0
+            and getattr(product, "quantity_confidence", None) == QuantityConfidence.EXACT)
+
+
 def compatible(key, product, fact=None):
     row = entries().get(key)
     if row is None:
         return False
-    if fresh_herb_alternative(row, product, fact):
+    if fresh_herb_alternative(row, product, fact) or package_weight_alternative(row, product, fact):
         return True
     if row["kind"] == "definition_only":
         return reviewed_definition(row, product, fact) or declared_definition(row, product, fact)
