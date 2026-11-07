@@ -68,10 +68,13 @@ def test_same_article_with_changed_label_or_package_is_rejected(case):
     assert not compatible(key, product, fact)
 
 
-def test_article_must_belong_to_the_same_store(case):
+def test_article_applies_in_every_store_of_the_same_chain_only(case):
     key, _, evidence = case
     product = new_collection(evidence)
-    product.store_id = "context:other:store"
+    chain = evidence["store_id"].split(":")[1]
+    product.store_id = f"context:{chain}:another-store"
+    assert compatible(key, product, bound_fact(product, evidence["retailer_product_id"]))
+    product.store_id = "context:other-chain:store"
     assert not compatible(key, product, bound_fact(product, evidence["retailer_product_id"]))
 
 

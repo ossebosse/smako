@@ -176,8 +176,10 @@ def test_source_already_drained_quantity_is_not_reduced_again_or_used_as_gross(m
     assert not accepted(p.model_copy(update={'usable_quantity': net}))
     assert not accepted(p.model_copy(update={'package_quantity': net}))
     assert not accepted(p.model_copy(update={'quantity_confidence': 'estimated'}))
-    proof = row['reviewed_links'][0]['quantity']
-    proof['source']['declared_drained_g'] = net
+    # The same reviewed declaration is recorded per store and, since
+    # 2026-11-07, applies chain-wide: a wrong value must fail in every copy.
+    for link in row['reviewed_links']:
+        link['quantity']['source']['declared_drained_g'] = net
     assert not accepted()
 
 

@@ -121,16 +121,34 @@ def package_weight_alternative(row, product, fact=None):
             and getattr(product, "quantity_confidence", None) == QuantityConfidence.EXACT)
 
 
-def _article(product, fact):
+def _chain(store_id):
+    parts = (store_id or "").split(":")
+    return parts[1] if len(parts) > 2 and parts[0] == "context" else None
+
+
+def _articles(product, fact):
+    """Retailer article ids of this exact product: its own provenance (unless
+    that id is a flyer advertisement, not an article) and facts bound to this
+    product and snapshot. Owner decision 2026-11-07: an article id identifies
+    the same product in every store of the chain."""
     provenance = getattr(product, "source_provenance", None)
+    found = set()
     article = getattr(provenance, "retailer_product_id", None) if provenance else None
-    if article:
-        return article
+    namespace = getattr(provenance, "retailer_id_namespace", None) or ""
+    if article and not namespace.endswith("flyer-document-ad"):
+        found.add(article)
     if (fact is not None and provenance is not None
             and getattr(fact, "source_product_id", None) == product.product_id
-            and getattr(fact, "source_snapshot_id", None) == provenance.source_snapshot_id):
-        return getattr(fact, "retailer_product_id", None) or None
-    return None
+            and getattr(fact, "source_snapshot_id", None) == provenance.source_snapshot_id
+            and getattr(fact, "retailer_product_id", None)):
+        found.add(fact.retailer_product_id)
+    return found
+
+
+def same_chain_article(evidence, product, fact):
+    return bool(evidence.get("retailer_product_id") and _chain(product.store_id)
+                and _chain(product.store_id) == _chain(evidence["store_id"])
+                and evidence["retailer_product_id"] in _articles(product, fact))
 
 
 def compatible(key, product, fact=None):
@@ -152,12 +170,12 @@ def compatible(key, product, fact=None):
         if evidence.get("gtin"):
             return str(getattr(product, "gtin", "")) == evidence["gtin"]
         provenance = getattr(product, "source_provenance", None)
-        if (evidence.get("retailer_product_id") and product.store_id == evidence["store_id"]
-                and _article(product, fact) == evidence["retailer_product_id"]):
+        if same_chain_article(evidence, product, fact):
             # The retailer article id is the global identity that lets a
-            # reviewed link survive a new collection. It must come from this
-            # product's own provenance or from facts bound to this exact
-            # product and snapshot; never from its name.
+            # reviewed link survive a new collection and apply in every store
+            # of the chain. It must come from this product's own provenance or
+            # from facts bound to this exact product and snapshot; never from
+            # its name. Name, brand and package are still compared below.
             return True
         return (product.product_id == evidence["product_id"] and product.store_id == evidence["store_id"]
                 and provenance is not None and provenance.source_snapshot_id
@@ -188,23 +206,29 @@ def composition_signature(fact):
 def _review_identity(evidence, product, fact):
     provenance = getattr(product, "source_provenance", None)
     original = evidence.get('source_provenance', {})
-    article = (getattr(provenance, 'retailer_product_id', None)
-               or getattr(fact, 'retailer_product_id', None))
     # Stable, exact food identity; the live price, qualification and request
-    # scope remain downstream gates. Unidentified rows retain the snapshot gate.
+    # scope remain downstream gates. Unidentified rows retain the snapshot and
+    # store gate; a GTIN or retailer article identifies the product in every
+    # store of the same chain (owner decision 2026-11-07).
     if evidence.get('gtin'):
         identified = evidence['gtin'] == getattr(product, 'gtin', None)
+        global_identity = True
     elif evidence.get('retailer_product_id'):
-        identified = evidence['retailer_product_id'] == article
+        identified = same_chain_article(evidence, product, fact)
+        global_identity = True
     else:
         identified = (evidence['product_id'] == product.product_id and provenance
                       and evidence['source_snapshot_id'] == provenance.source_snapshot_id)
+        global_identity = False
+    same_store = evidence["store_id"] == product.store_id
+    same_chain = _chain(evidence["store_id"]) is not None and _chain(evidence["store_id"]) == _chain(product.store_id)
+    store_fields = ('source_provider', 'source_channel', 'source_role', 'chain', 'price_context', 'retailer_id_namespace')
+    if not global_identity or same_store:
+        store_fields += ('provider_store_id',)
     if (not provenance or not evidence.get("review") or not evidence.get("source_sha256")
-            or evidence["store_id"] != product.store_id
+            or not (same_store or (global_identity and same_chain))
             or not identified
-            or any(getattr(provenance, field, None) != original.get(field) for field in (
-                'source_provider', 'source_channel', 'source_role', 'chain', 'provider_store_id',
-                'price_context', 'retailer_id_namespace'))
+            or any(getattr(provenance, field, None) != original.get(field) for field in store_fields)
             or evidence.get("gtin") != getattr(product, "gtin", None)
             or any(getattr(product, field, None) != evidence.get(field)
                    for field in ("name", "brand", "category", "package_quantity", "package_unit", "sale_model"))):
@@ -291,8 +315,10 @@ def _quantity_reviews():
                 "reviewed_declared_drained_mass_v1",
                 "reviewed_declared_piece_count_v1",
             }:
-                key = (('gtin', proof['store_id'], proof['gtin']) if proof.get('gtin')
-                       else ('article', proof['store_id'], proof['retailer_product_id'])
+                # Global identities are looked up per chain; _review_identity
+                # still checks the exact product, label and package.
+                key = (('gtin', _chain(proof['store_id']), proof['gtin']) if proof.get('gtin')
+                       else ('article', _chain(proof['store_id']), proof['retailer_product_id'])
                        if proof.get('retailer_product_id') else ('product', proof['store_id'], proof['product_id']))
                 result.setdefault(key, []).append(proof)
     return result
@@ -306,10 +332,10 @@ def project_reviewed_quantity(product, fact, *, allow_estimates=False, required_
     """
     if required_unit not in {"g", "st"}:
         return product
-    article = (getattr(product.source_provenance, 'retailer_product_id', None)
-               or getattr(fact, 'retailer_product_id', None))
-    keys = [('gtin', product.store_id, getattr(product, 'gtin', None)),
-            ('article', product.store_id, article), ('product', product.store_id, product.product_id)]
+    chain = _chain(product.store_id)
+    keys = [('gtin', chain, getattr(product, 'gtin', None)),
+            *(('article', chain, article) for article in sorted(_articles(product, fact))),
+            ('product', product.store_id, product.product_id)]
     proofs = [proof for key in keys for proof in _quantity_reviews().get(key, ())]
     for proof in proofs:
         q = proof["quantity"]
@@ -461,7 +487,7 @@ def search_positions(prepared, facts=None):
         for row in entries().values():
             for evidence in row.get("reviewed_links", ()):
                 if evidence.get("retailer_product_id"):
-                    articles.setdefault((evidence["store_id"], evidence["retailer_product_id"]), set()).add(row["name"])
+                    articles.setdefault((_chain(evidence["store_id"]), evidence["retailer_product_id"]), set()).add(row["name"])
                 key = (evidence["store_id"], evidence["product_id"], evidence["source_snapshot_id"])
                 scoped.setdefault(key, set()).add(row["name"])
                 if evidence.get('gtin'):
@@ -473,7 +499,7 @@ def search_positions(prepared, facts=None):
                     gtins.setdefault(evidence["gtin"], set()).add(row["name"])
                 else:
                     if evidence.get("retailer_product_id"):
-                        articles.setdefault((evidence["store_id"], evidence["retailer_product_id"]), set()).add(row["name"])
+                        articles.setdefault((_chain(evidence["store_id"]), evidence["retailer_product_id"]), set()).add(row["name"])
                     key = (evidence["store_id"], evidence["product_id"], evidence["source_provenance"]["source_snapshot_id"])
                     scoped.setdefault(key, set()).add(row["name"])
         positions = {}
@@ -483,9 +509,8 @@ def search_positions(prepared, facts=None):
             names = gtins.get(getattr(product, "gtin", None), set()) | scoped.get(key, set())
             if articles:
                 fact = facts.get((product.store_id, product.product_id)) if facts is not None else None
-                article = _article(product, fact)
-                if article:
-                    names = names | articles.get((product.store_id, article), set())
+                for article in _articles(product, fact):
+                    names = names | articles.get((_chain(product.store_id), article), set())
             for name in names:
                 positions.setdefault(name, set()).add(n)
         return MappingProxyType({name: frozenset(values) for name, values in positions.items()})

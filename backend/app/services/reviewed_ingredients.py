@@ -103,6 +103,8 @@ def issued_compositions():
         json.dumps(proof, sort_keys=True, ensure_ascii=False)
         for row in entries().values() for proof in row.get("reviewed_links", ())
     }
+    from app.services.intake_product_links import _chain
+
     index = {}
     for row in document["products"]:
         proof = row["proof"]
@@ -118,13 +120,15 @@ def issued_compositions():
         assert row["sources"] and all(s.get("sha256") for s in row["sources"])
         identity = ("gtin", proof["gtin"]) if proof.get("gtin") else (
             "article", proof["retailer_product_id"])
-        index.setdefault((proof["store_id"], *identity), []).append(row)
+        # A GTIN or retailer article identifies the product in every store of
+        # the chain; _review_identity still checks the exact label and package.
+        index.setdefault((_chain(proof["store_id"]), *identity), []).append(row)
     return index
 
 
 def enrich_issued_compositions(prepared, original):
     """Fill missing reviewed composition; all other facts and prices stay intact."""
-    from app.services.intake_product_links import _review_identity
+    from app.services.intake_product_links import _articles, _chain, _review_identity
     from app.services.personal_policy import ProductFacts
 
     result = dict(original)
@@ -136,8 +140,10 @@ def enrich_issued_compositions(prepared, original):
         key = (product.store_id, product.product_id)
         fact = result.get(key)
         article = provenance.retailer_product_id or (fact.retailer_product_id if fact else None)
-        rows = index.get((product.store_id, "gtin", product.gtin), ())
-        rows = (*rows, *index.get((product.store_id, "article", article), ()))
+        chain = _chain(product.store_id)
+        rows = index.get((chain, "gtin", product.gtin), ())
+        for candidate_article in sorted(_articles(product, fact)):
+            rows = (*rows, *index.get((chain, "article", candidate_article), ()))
         for row in rows:
             ingredients = tuple(row["ingredients"])
             if fact and fact.ingredients and tuple(fact.ingredients) != ingredients:
