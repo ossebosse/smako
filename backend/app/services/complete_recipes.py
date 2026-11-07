@@ -273,8 +273,13 @@ def product_form_compatible(recipe, name, product, fact):
             if not ingredient_product(canonical, form, requirements, product, fact, reviewed_only=True):
                 return False
     if form in {"cooked_drained", "preserved_drained"}:
-        from app.services.intake_product_links import reviewed_drained_quantity
+        from app.services.intake_product_links import (
+            package_weight_product,
+            reviewed_drained_quantity,
+        )
 
+        if package_weight_product(canonical, form, requirements, product, fact):
+            return True
         return reviewed_drained_quantity(canonical, form, requirements, product, fact) or bool(fact and any(e.get("basis") == "drained" and e.get("unit") == "g"
                                 and e.get("quantity") == product.usable_quantity and e.get("source")
                                 for e in fact.field_sources.get("usable_quantity", ())))

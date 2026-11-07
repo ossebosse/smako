@@ -53,7 +53,7 @@ def fresh_herb_alternative(row, product, fact=None):
     composition = " ".join(fact.ingredients).casefold().split("kan innehålla")[0] if fact else ""
     if re.search(r"\b(?:salt|socker|olja|smör|grädde|vitlök)\b", composition):
         return False
-    return (product.sale_model == "fixed_package" and product.purchase_terms is None
+    return (getattr(product, "sale_model", None) == "fixed_package" and product.purchase_terms is None
             and product.package_unit == product.usable_unit == row["unit"] == "g"
             and product.usable_quantity == product.package_quantity
             and 0 < product.usable_quantity <= FRESH_HERB_MAX_GRAMS
@@ -75,12 +75,35 @@ PACKAGE_WEIGHT_IDENTITIES = {
     ("mozzarella", "as_sold"): (
         r"(?:riven )?mozzarella(?: (?:riven|familjefavoriter|laktosfri|eko|ekologisk|\d+%))*",
         r"riven ost", r"pizza|sticks|paj|gnocchi|burrata|bufala|\blag\b|mini|kul|boll", r"\b(?:lag|vatten|kryddor|örter|vitlök)\b"),
+    # Dry rice-paper sheets: the package mass is the dry sheet mass.
+    ("rispapper", "dry"): (
+        r"rispapper(?: (?:rund|runda|fyrkantig|\d+ ?cm|vietnamesisk|eko|ekologisk))*",
+        r"rispapper", r"rulle|rullar|färdig|wrap", r"\b(?:socker|olja)\b|kryddor"),
+    ("rispapper", "as_sold"): (
+        r"rispapper(?: (?:rund|runda|fyrkantig|\d+ ?cm|vietnamesisk|eko|ekologisk))*",
+        r"rispapper", r"rulle|rullar|färdig|wrap", r"\b(?:socker|olja)\b|kryddor"),
+    # Canned bamboo shoots: shops publish only the net mass including brine,
+    # so the recipe gets less drained bamboo than written.
+    ("bambuskott", "preserved_drained"): (
+        r"bambuskott(?: (?:skivade|strimlade|i bitar|hela|eko|ekologiska))*",
+        r"konserv|bambuskott", r"sås|wok|mix", r"\b(?:socker|olja|chili)\b|kryddor"),
+    # Plain hot-smoked salmon portions; the mass may include skin.
+    ("varmrökt lax", "as_sold"): (
+        r"varmrökt lax(?: (?:naturell|portionsbit|portionsbitar|dubbelbit|enkelfilé|i bit|bit))*",
+        r"fisk|rökt|lax", r"peppar|citron|glaze|chili|dill|örter|mexican|kryddad|honung",
+        r"\b(?:socker|peppar|kryddor|olja|honung)\b"),
+    # Blue-mould cheese itself; processed spreads ("Ädelost Mjukost", smältost)
+    # and flavoured cheeses are other foods.
+    ("ädelost", "as_sold"): (
+        r"(?:ädelost(?: danablu| special)?|danablu|gräddädel)(?: (?:eko|ekologisk|classic|halvmåne|extra creamy|grädd|\d+(?:[,.]\d+)? ?%))*",
+        r"ost|blåmögel", r"mjukost|päron|smält|bredbar",
+        r"smältsalt|vatten|hårdost|päron"),
 }
 
 
 def package_weight_alternative(row, product, fact=None):
     entry = PACKAGE_WEIGHT_IDENTITIES.get((row["name"], row["form"]))
-    if entry is None or row["kind"] != "definition_only" or row["unit"] != "g":
+    if entry is None or row["kind"] not in {"definition_only", "dairy"} or row["unit"] != "g":
         return False
     pattern, shelf, excluded, composition_excluded = entry
     label = " ".join(re.sub(r"\b\d+(?:[,.]\d+)?\s*(?:kg|g)\b", "", product.name.casefold()).split())
@@ -92,7 +115,7 @@ def package_weight_alternative(row, product, fact=None):
     composition = " ".join(fact.ingredients).casefold().split("kan innehålla")[0] if fact else ""
     if re.search(composition_excluded, composition):
         return False
-    return (product.sale_model == "fixed_package" and product.purchase_terms is None
+    return (getattr(product, "sale_model", None) == "fixed_package" and product.purchase_terms is None
             and product.package_unit == product.usable_unit == "g"
             and product.usable_quantity == product.package_quantity and product.usable_quantity > 0
             and getattr(product, "quantity_confidence", None) == QuantityConfidence.EXACT)
@@ -394,6 +417,16 @@ def recipe_product(recipe, name, product, fact=None):
     return False
 
 
+def package_weight_product(canonical, form, requirements, product, fact=None):
+    """An owner-approved package-mass identity counts as the reviewed form."""
+    for requirement in requirements:
+        if requirement.startswith("pack:intake_all_"):
+            row = entries().get(requirement.removeprefix("pack:"))
+            if row and row["name"] == canonical and row["form"] == form and package_weight_alternative(row, product, fact):
+                return True
+    return False
+
+
 def ingredient_product(canonical, form, requirements, product, fact=None, *, reviewed_only=False):
     for requirement in requirements:
         if requirement.startswith("pack:intake_all_"):
@@ -401,7 +434,8 @@ def ingredient_product(canonical, form, requirements, product, fact=None, *, rev
             row = entries().get(key)
             if row and row["name"] == canonical and row["form"] == form:
                 if reviewed_only:
-                    if row["kind"] == "definition_only" and reviewed_definition(row, product, fact):
+                    if row["kind"] == "definition_only" and (reviewed_definition(row, product, fact)
+                                                             or package_weight_alternative(row, product, fact)):
                         return True
                 elif compatible(key, product, fact):
                     return True

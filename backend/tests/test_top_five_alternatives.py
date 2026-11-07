@@ -18,7 +18,11 @@ from app.services.purchase_quantity_resolver import PurchaseQuantityResolver
 from app.services.recipe_library import _scaled, current_recipes, validate_recipe_design
 from app.services.recipe_preparation import input_evidence
 
-from backend.tests.recipe_language_history import after_language_id, assert_current_language_version
+from backend.tests.recipe_language_history import (
+    after_language_id,
+    assert_current_language_version,
+    before_malmo_id,
+)
 
 REPORT = ROOT.parents[3] / 'docs/reviews/top-five-ingredients-20261028'
 SOURCES = json.loads((REPORT / 'source-declarations.json').read_bytes())['sources']
@@ -58,13 +62,15 @@ def recipes():
 
 
 def test_every_exact_existing_context_qualifies_without_any_new_price():
-    review, issued, active = recipes()
+    review, issued, _ = recipes()
     count = 0
     for slug, source in SOURCES.items():
         key = 'intake_all_shape_top5_' + slug
         row = links.entries()[key]
         transition = next(t for t in review['corrected'] if source['group'] in t['groups'])
-        new, old = active[after_language_id(transition['runtime_id'])], issued[transition['previous_id']]
+        # The tamarind version was later replaced where Malmö stopped selling it;
+        # this check concerns the version that introduced the alternative.
+        new, old = issued[before_malmo_id(after_language_id(transition['runtime_id']))], issued[transition['previous_id']]
         for proof in row['reviewed_links']:
             p, fact = source_fixture(slug, proof)
             assert links.compatible(key, p, fact)

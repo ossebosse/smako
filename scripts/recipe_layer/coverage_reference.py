@@ -214,7 +214,8 @@ def imported_recipes():
                       ('whole-corn-20261028/recipe-review.json', 'corrected'),
                       ('top-five-ingredients-20261028/recipe-review.json', 'corrected'),
                       ('recipe-language-20261102/library-transition.json', 'corrected'),
-                      ('recipe-language-followup-20261102/library-transition.json', 'corrected')]:
+                      ('recipe-language-followup-20261102/library-transition.json', 'corrected'),
+                      ('malmo-unavailable-20261107/recipe-review.json', 'corrected')]:
         for row in json.loads((Path('docs/reviews') / file).read_bytes())[key]:
             replacements[row['previous_id']] = row['runtime_id']
     active = {identity(r): r for r in current_recipes()}
