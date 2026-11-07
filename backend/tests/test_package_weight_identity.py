@@ -62,3 +62,37 @@ def test_composition_with_brine_or_seasoning_is_rejected():
 def test_only_listed_identities_use_package_mass():
     other = next(r for r in entries().values() if r["kind"] == "definition_only" and r["name"] == "purjolök")
     assert not package_weight_alternative(other, item("Purjolök Klass 1", "Frukt & grönt", 200.0))
+
+
+def row_key(name, form):
+    return next(k for k, row in entries().items() if row["name"] == name and row["form"] == form)
+
+
+SHELF = [
+    ("rispapper", "dry", "Rispapper", "Skafferi > Asien > Tillbehör", None),
+    ("rispapper", "as_sold", "Rispapper Rund 22 cm", "Tillbehör", None),
+    ("bambuskott", "preserved_drained", "Bambuskott Skivade", "Konserver > Grönsakskonserver", None),
+    ("varmrökt lax", "as_sold", "Varmrökt Lax Naturell Portionsbit", "Fisk & skaldjur > Fisk > Rökt & gravat", None),
+    ("ädelost", "as_sold", "Ädelost Danablu", "Mejeri > Ädelost > Mjuka dessertostar",
+     ["pastöriserad komjölk", "salt", "penicillium roqueforti"]),
+]
+
+
+@pytest.mark.parametrize("name,form,label,category,ingredients", SHELF)
+def test_shelf_items_on_exact_package_mass(name, form, label, category, ingredients):
+    fact = SimpleNamespace(ingredients=ingredients, field_sources={}, conflicts=()) if ingredients else None
+    assert compatible(row_key(name, form), item(label, category, 200.0), fact)
+
+
+@pytest.mark.parametrize("name,form,label,category,ingredients", [
+    ("rispapper", "dry", "Rispapper Rullar Räkor", "Kylt > Färdigmat", None),
+    ("bambuskott", "preserved_drained", "Bambuskott i Sötsur Sås", "Konserver", None),
+    ("varmrökt lax", "as_sold", "Varmrökt Lax Citronpeppar Portionsbit", "Fisk & skaldjur > Fisk > Rökt & gravat", None),
+    ("varmrökt lax", "as_sold", "Kallrökt Lax Skivad", "Fisk & skaldjur > Fisk > Rökt & gravat", None),
+    ("ädelost", "as_sold", "Ädelost Mjukost", "Mejeri, ost & ägg > Mjukost", None),
+    ("ädelost", "as_sold", "Ädelost Päron", "Mejeri, ost & ägg > Mjukost", None),
+    ("ädelost", "as_sold", "Ädelost", "Mjukost", ["grönmögelost", "vatten", "hårdost", "smältsalter"]),
+])
+def test_flavoured_processed_or_other_products_stay_rejected(name, form, label, category, ingredients):
+    fact = SimpleNamespace(ingredients=ingredients, field_sources={}, conflicts=()) if ingredients else None
+    assert not compatible(row_key(name, form), item(label, category, 200.0), fact)
