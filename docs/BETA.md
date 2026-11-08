@@ -1,3 +1,12 @@
+# 2026-11-08: Snabbare sökning vid tre butiker aktiverat
+
+Main `979312084e7c`. App **app-979312084e7c-84cf5cea**, scheduler orörd.
+Malmö 1 portion/3 butiker 64 s (avbrott) → 40 s; Lund 1/3 fungerar (medlemsbesparingsfixen).
+Kvar: Malmö 2 portioner/3 butiker och 4+ butiker hinner inte inom 60 s.
+[Aktiveringsjournal](releases/cap3-store-search-20261108/ACTIVATED.md).
+
+---
+
 # 2026-11-07 kväll: Kedjeövergripande produktgodkännanden aktiverat
 
 Main `e02a2ef7f0db`. App **app-e02a2ef7f0db-1d6fdb43**, scheduler orörd.
@@ -113,7 +122,7 @@ på `main` inte ändrar en pågående release.
   `smako-app-1`, `smako-scheduler-1`, `smako-caddy-1`, data i `/srv/smako/data`
   och det gemensamma driftlåset. Detta flöde installerar inte en ny server.
 - Läs aktuell [HANDOFF.md](HANDOFF.md), [OPERATIONS.md](OPERATIONS.md) och
-  senaste aktiveringsrapport. Appens BUILD_ID är `app-e02a2ef7f0db-1d6fdb43`;
+  senaste aktiveringsrapport. Appens BUILD_ID är `app-979312084e7c-84cf5cea`;
   schedulern är `source-ops-8a53beb80e43`.
   [Uppvärmda prov och samordnad faktaläsning/GC](releases/warm-facts-gc-20261101/ACTIVATED.md)
   är senaste appaktiveringen. Sex Pythonfiler från kod `b7c8d0506e23`;
@@ -161,10 +170,10 @@ git status --short
 .venv/Scripts/python.exe -X utf8 scripts/smako_ops.py status
 
 # Använd den granskade Git-bas som motsvarar faktiskt aktiva filer enligt senaste journalen.
-.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit e02a2ef7f0db --commit main --workdir .local/beta-release
+.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit 979312084e7c --commit main --workdir .local/beta-release
 ```
 
-`e02a2ef7f0db` är appen som aktiverades 2026-11-07 19:08 UTC. Appbildens egen
+`979312084e7c` är appen som aktiverades 2026-11-08 08:58 UTC. Appbildens egen
 grocery-kopia är äldre än Git; använd `--keep-app-grocery` om intervallet
 bara innehåller grocery-Python som redan levererats till schedulern. De äldre
 Coop-filerna i runtime (`price_universe_runtime.py`,
