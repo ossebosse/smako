@@ -451,6 +451,8 @@ STORE_SET_SEARCH_THRESHOLD = 20_000
 _NESTED_EXACT_CAPS = 3
 # Above cap three, enumerate only very small subset counts.
 LARGE_CAP_SEARCH_THRESHOLD = 1_000
+# Cap three: from about 23 supplying stores (2 047 subsets).
+CAP_THREE_SEARCH_THRESHOLD = 2_000
 
 
 class BasketOptimizer:
@@ -1695,18 +1697,23 @@ class BasketOptimizer:
                 increment_performance_counter("same_depth_store_limited_keys")
             return (best,) * requested_limit
 
-        if limit > _NESTED_EXACT_CAPS and self._use_store_set_search(len(store_ids), limit):
-            # Large caps: exact keys for caps 1..3 as before, and the exact
-            # best set for the requested cap from the store-set search. Menu
-            # search only runs frontiers for caps 1, 2, 3 and the requested
-            # cap (``MenuOptimizer._nested_store_limits``); caps in between
-            # repeat the requested cap's key, which never exceeds theirs.
+        if limit > 2 and self._use_store_set_search(len(store_ids), limit):
+            # Many stores: exact keys for the lower caps (1..2 for cap three,
+            # 1..3 above it), and the exact best set for the requested cap
+            # from the store-set search. Menu search only runs frontiers for
+            # caps 1, 2, 3 and the requested cap
+            # (``MenuOptimizer._nested_store_limits``); caps in between repeat
+            # the requested cap's key, which never exceeds theirs.
+            lower_cap = min(_NESTED_EXACT_CAPS, limit - 1)
             lower = self._same_depth_nested_store_limited_quote_keys(
-                quoted_requirements, stores, max_stores=_NESTED_EXACT_CAPS)
+                quoted_requirements, stores, max_stores=lower_cap)
+            # The best smaller set is itself a candidate, so it is a valid
+            # pruning incumbent: only strictly worse branches are cut.
             found = self._search_store_sets(
-                [(None, quotes, key) for quotes, key in quoted_requirements], store_ids, limit)
+                [(None, quotes, key) for quotes, key in quoted_requirements], store_ids, limit,
+                incumbent=lower[-1][:2] if lower and lower[-1] is not None else None)
             top = found[0][:3] if found is not None else None
-            return (*lower, *([top] * (limit - _NESTED_EXACT_CAPS))) + (top,) * (requested_limit - limit)
+            return (*lower, *([top] * (limit - lower_cap))) + (top,) * (requested_limit - limit)
         store_subsets = self._eligible_store_subsets(store_ids, limit)
         subset_vectors = tuple(
             self._quote_subset_vector(
@@ -2067,9 +2074,11 @@ class BasketOptimizer:
         subsets = sum(comb(store_count, n) for n in range(1, limit + 1))
         if limit > _NESTED_EXACT_CAPS:
             return subsets > min(threshold, LARGE_CAP_SEARCH_THRESHOLD)
+        if limit == _NESTED_EXACT_CAPS:
+            return subsets > min(threshold, CAP_THREE_SEARCH_THRESHOLD)
         return subsets > threshold
 
-    def _search_store_sets(self, quoted_ingredients, store_ids, limit):
+    def _search_store_sets(self, quoted_ingredients, store_ids, limit, *, incumbent=None):
         """Exact best store set without enumerating every subset.
 
         Same objective, winners and tie-breakers as the subset loop in
@@ -2145,10 +2154,13 @@ class BasketOptimizer:
 
         # Single stores, then a greedy set: a strong early incumbent lets the
         # exact search below prune almost everything.
-        for store_id in store_ids:
-            evaluate(winners_for((store_id,)), 1)
+        # A caller-supplied incumbent already serves that purpose; the search
+        # below still visits every set that could tie or beat it.
+        if incumbent is None:
+            for store_id in store_ids:
+                evaluate(winners_for((store_id,)), 1)
         chosen_stores: list[str] = []
-        while len(chosen_stores) < limit:
+        while incumbent is None and len(chosen_stores) < limit:
             current = winners_for(chosen_stores)
             def gain(store_id):
                 covered = saved = 0
@@ -2177,7 +2189,10 @@ class BasketOptimizer:
                               if store_id in rows and rows[store_id][4] == low) for store_id in store_ids}
         order = sorted(store_ids, key=lambda store_id: (-wins[store_id], position[store_id]))
         n = len(order)
-        lines = [[rows.get(store_id) for store_id in order] for rows in by_store]
+        # Each search row also carries its store's position in ``order``.
+        lines = [[None if (row := rows.get(store_id)) is None else (*row, j)
+                  for j, store_id in enumerate(order)] for rows in by_store]
+        columns = [[rows[j] for rows in lines] for j in range(n)]
         ranks = sorted({row[1] for rows in by_store for row in rows.values()}) or [verified]
         big = 10 ** 18
         # suffix[l][j]: (min rank, {r: min öre with rank <= r}) over order[j:].
@@ -2195,6 +2210,7 @@ class BasketOptimizer:
                 prices = {r: (cents if rank <= r and cents < value else value) for r, value in prices.items()}
                 table[j] = (rank if low is None or rank < low else low, prices)
             suffix.append(table)
+        suffix_at = [[table[j] for table in suffix] for j in range(n + 1)]
         top_rank = ranks[-1]
 
         def bound(winners, start, capacity):
@@ -2205,8 +2221,7 @@ class BasketOptimizer:
             ``capacity`` largest single-store savings."""
             rank_bound = verified
             total_bound = covered = uncovered = 0
-            for winner, table in zip(winners, suffix, strict=True):
-                low, prices = table[start]
+            for winner, (low, prices) in zip(winners, suffix_at[start], strict=True):
                 if winner is None:
                     if low is None:
                         return None
@@ -2220,12 +2235,16 @@ class BasketOptimizer:
                 if line_rank > rank_bound:
                     rank_bound = line_rank
                 total_bound += line_price
-            if capacity < n - start and covered:
+            if capacity == 0:
+                # No store can be added: every line keeps its current winner.
+                total_bound = max(total_bound, covered + uncovered)
+            elif capacity < n - start and covered and not beaten((rank_bound, total_bound)):
+                # Only tighten a bound that does not already prune; the
+                # tightened bound is never lower, so decisions are unchanged.
                 savings = []
                 for j in range(start, n):
                     saving = 0
-                    for winner, rows in zip(winners, lines, strict=True):
-                        row = rows[j]
+                    for winner, row in zip(winners, columns[j], strict=True):
                         if winner is not None and row is not None and row[1] <= winner[1] and row[4] < winner[4]:
                             saving += winner[4] - row[4]
                     if saving:
@@ -2238,8 +2257,13 @@ class BasketOptimizer:
 
         def beaten(lower):
             if best is None:
-                return False
-            rank, total = best[0][0], best[0][1]
+                if incumbent is None:
+                    return False
+                rank, total = incumbent
+            else:
+                rank, total = best[0][0], best[0][1]
+                if incumbent is not None and incumbent < (rank, total):
+                    rank, total = incumbent
             # Compare in öre; the incumbent total is already rounded to öre.
             return lower[0] > rank or (lower[0] == rank and lower[1] > int(total * 100))
 
@@ -2252,18 +2276,17 @@ class BasketOptimizer:
                 evaluate(winners, size)
             if size == limit:
                 return
+            need = size + 1
+            capacity = limit - need
             for j in range(start, n):
-                extended = []
-                for winner, rows in zip(winners, lines, strict=True):
-                    row = rows[j]
-                    extended.append(row if row is not None and (winner is None or row[0] < winner[0]) else winner)
+                extended = [row if row is not None and (winner is None or row[0] < winner[0]) else winner
+                            for winner, row in zip(winners, columns[j], strict=True)]
                 # A set with a store that wins no line has the winners of the
                 # set without it, visited on another branch; winners only
                 # improve as stores are added, so that store stays idle below.
-                used = {winner[3].store_id for winner in extended if winner is not None}
-                if len(used) != size + 1:
+                if len({winner[5] for winner in extended if winner is not None}) != need:
                     continue
-                lower = bound(extended, j + 1, limit - size - 1)
+                lower = bound(extended, j + 1, capacity)
                 if lower is None or beaten(lower):
                     continue
                 visit(extended, size + 1, j + 1)

@@ -89,6 +89,32 @@ def test_nested_cap_keys_match_enumeration_for_frontier_caps(seed):
     assert all(f is None or e is None or f <= e for f, e in zip(fast, exact, strict=True))
 
 
+@pytest.mark.parametrize("seed", range(24))
+@pytest.mark.parametrize("cap", [3, 4])
+def test_cap_three_keys_from_search_match_enumeration(seed, cap):
+    # Many stores at cap three use the store-set search seeded with the exact
+    # best two-store key; every frontier key must equal plain enumeration.
+    rows, required, shops = instance(400 + seed, 9 + seed % 5, 6 + seed % 3,
+                                     sparse=seed % 3 != 0, estimates=seed % 2 == 1)
+
+    def keys(threshold):
+        optimizer = BasketOptimizer(store_set_search_threshold=threshold)
+        with optimizer.quote_cache():
+            return optimizer.same_depth_nested_store_limited_keys(
+                required, rows, [store(s) for s in shops], max_stores=cap)
+
+    fast, exact = keys(0), keys(None)
+    assert len(fast) == len(exact) == cap
+    assert fast[:3] == exact[:3] and fast[-1] == exact[-1]
+
+
+def test_cap_three_uses_the_search_only_for_many_stores():
+    optimizer = BasketOptimizer()
+    assert not optimizer._use_store_set_search(22, 3)
+    assert optimizer._use_store_set_search(23, 3)
+    assert not optimizer._use_store_set_search(60, 2)
+
+
 def test_menu_frontiers_for_large_caps_are_one_two_three_and_the_cap():
     from app.services.menu_optimizer import MenuOptimizer
     shops = [store(f"s{i:02d}") for i in range(20)]
