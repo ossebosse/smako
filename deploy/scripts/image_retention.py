@@ -6,7 +6,8 @@ Smako images are removed automatically so releases and backups keep disk space.
 
 An image is kept when any of these holds:
 - a container uses it, running or stopped;
-- it is the recorded release base (label smako.release.base_image) of a kept image;
+- it is the recorded release base (label smako.release.base_image) of an
+  image a container uses, i.e. that release's rollback;
 - it was created within the last KEEP_DAYS days (candidates, recent rollbacks);
 - it is among the KEEP_NEWEST newest images of a repository that a container
   uses (smako-app, smako-scheduler: current release, rollback, candidates);
@@ -71,14 +72,13 @@ def plan(images, containers, *, now, protected=(), keep_days=KEEP_DAYS, keep_new
             continue
         for image in sorted(rows, key=created, reverse=True)[:keep_newest]:
             keep.setdefault(image["Id"], "newest_in_repository")
-    # Release bases of everything kept, to a fixed point.
+    # The immediate release base of a used image is its rollback. Not the
+    # whole chain: every release is built on the previous one.
     labels = {i["Id"]: ((i.get("Config") or {}).get("Labels") or {}) for i in images}
-    pending = list(keep)
-    while pending:
-        base = labels.get(pending.pop(), {}).get("smako.release.base_image")
+    for used in [i for i, reason in keep.items() if reason in ("container", "protected")]:
+        base = labels.get(used, {}).get("smako.release.base_image")
         if base and base not in keep:
             keep[base] = "release_base"
-            pending.append(base)
     remove = [i for i in images if i["Id"] not in keep]
     return keep, remove
 
