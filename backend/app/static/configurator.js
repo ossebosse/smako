@@ -1,8 +1,9 @@
 /* Mobile "build your plan" presentation of the existing "Mina val" form, in
-   three layouts the viewer can switch between: "bild" (a picture per step and
+   four layouts the viewer can switch between: "bild" (a picture per step and
    a sheet with a handle that is pulled up), "kompakt" (step tabs and a fixed
-   bottom bar) and "oversikt" (every step as a card saying what is chosen, one
-   open at a time, and a fixed create button). All share the steps and
+   bottom bar), "oversikt" (every step as a card saying what is chosen, one
+   open at a time, and a fixed create button) and "guide" (eight questions
+   with large buttons after the store step; choice-guide.js). All share the steps and
    controls, and only show, hide and mirror what personal.js and
    shopping-location.js already own; values, validation and submission stay
    with them. Desktop keeps the full form. No API calls.
@@ -35,6 +36,9 @@
   const summaryIndex=steps.length-1;
   let active=0,on=false,extraWasOpen=false,awaitingLocation=false,expanded=false;
   const LAYOUTS={bild:"Bild",kompakt:"Kompakt",oversikt:"Översikt"},LAYOUT_KEY="smako.configurator.layout";
+  // Frågor: the question guide fills in the same form (choice-guide.js).
+  const guide=window.SmakoChoiceGuide?.create({view,gate,form,nodes:()=>[...new Set(steps.flatMap(step=>step.nodes()).filter(Boolean))],stepNodes:index=>steps[index].nodes().filter(Boolean)});
+  if(guide)LAYOUTS.guide="Frågor";
   let layout="bild";try{if(LAYOUTS[localStorage.getItem(LAYOUT_KEY)])layout=localStorage.getItem(LAYOUT_KEY);}catch(_){}
 
   // Flat illustrations stand in for the car pictures; no image dependencies.
@@ -130,6 +134,7 @@
     closeMenu({focus:false});document.body.dataset.ui=layout;
     if(!on)return;
     for(const key of Object.keys(LAYOUTS))document.body.classList.toggle(`config-${key}`,layout===key);
+    if(layout==="guide")guide.activate();else guide?.deactivate();
     placeMenuButton();
     document.body.classList.remove("config-dragging");setExpanded(expanded);
     go(active,{focus:false});
@@ -160,6 +165,7 @@
 
   function go(index,{focus=true}={}){
     if(index<0||index>=steps.length)return;
+    if(layout==="guide"&&guide){active=index;guide.route(index,{summary:summaryIndex,focus});return;}
     if(locked(index)){hint.textContent="Ange postnummer och välj butiker först.";index=0;}else hint.textContent="";
     active=index;render();
     tabButtons[index].scrollIntoView({block:"nearest",inline:"center",behavior:"instant"});
@@ -205,7 +211,7 @@
   function enter(){
     if(on)return;on=true;extraWasOpen=extra?.open??false;if(extra)extra.open=true;
     document.body.classList.add("config-mode");document.body.prepend(top,hero);document.body.append(bar);
-    view.prepend(ovHead,sheetHead,intro,hint,cardsBefore);view.append(foot,cardsAfter);document.body.append(cta);
+    view.prepend(ovHead,sheetHead,intro,hint,cardsBefore);view.append(foot,cardsAfter);document.body.append(cta);guide?.mount();
     for(const set of tileSets)set.selectNode.closest("label").after(set.row);
     for(const {box,pill} of pills)box.after(pill);
     for(const node of movedItems()){const slot=document.createComment("config-item");node.before(slot);itemSlots.set(node,slot);itemsBox.append(node);}
@@ -217,7 +223,8 @@
   }
   function exit(){
     if(!on)return;on=false;if(extra)extra.open=extraWasOpen;
-    document.body.classList.remove("config-mode","config-bild","config-kompakt","config-oversikt","config-expanded","config-dragging");view.classList.remove("config-summary");
+    guide?.unmount();
+    document.body.classList.remove("config-mode","config-bild","config-kompakt","config-oversikt","config-guide","config-expanded","config-dragging");view.classList.remove("config-summary");
     for(const [node,slot] of itemSlots){slot.replaceWith(node);}itemSlots.clear();
     for(const n of [top,hero,bar,cta,ovHead,cardsBefore,cardsAfter,sheetHead,intro,hint,foot,itemsBox,...tileSets.map(s=>s.row),...pills.map(p=>p.pill)])n.remove();
     document.querySelectorAll(".config-off").forEach(n=>n.classList.remove("config-off"));

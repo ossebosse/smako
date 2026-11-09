@@ -20,6 +20,7 @@ FILES = (
     "shopping-location.js",
     "choice-controls.js",
     "configurator.js",
+    "choice-guide.js",
 )
 
 # Word stem -> what to write instead (also listed in docs/UI-LANGUAGE.md).
