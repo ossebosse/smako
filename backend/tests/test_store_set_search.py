@@ -108,6 +108,27 @@ def test_cap_three_keys_from_search_match_enumeration(seed, cap):
     assert fast[:3] == exact[:3] and fast[-1] == exact[-1]
 
 
+@pytest.mark.parametrize("seed", range(12))
+def test_reused_search_rows_give_the_same_keys_for_overlapping_menus(seed):
+    # One quote session prices many overlapping requirement sets. Search rows
+    # are reused per quote set; every key must still equal enumeration.
+    rows, required, shops = instance(700 + seed, 10 + seed % 4, 7,
+                                     sparse=seed % 2 == 0, estimates=seed % 3 == 0)
+    subsets = [required[:4], required[2:], required, required[1:6], required[:4]]
+
+    def keys(threshold):
+        optimizer = BasketOptimizer(store_set_search_threshold=threshold)
+        with optimizer.quote_cache():
+            result = [optimizer.same_depth_nested_store_limited_keys(
+                lines, rows, [store(s) for s in shops], max_stores=3) for lines in subsets]
+            reused = optimizer._quote_cache_context.get().search_rows
+            return result, len(reused)
+
+    (fast, reused), (exact, _) = keys(0), keys(None)
+    assert fast == exact
+    assert reused
+
+
 def test_cap_three_uses_the_search_only_for_many_stores():
     optimizer = BasketOptimizer()
     assert not optimizer._use_store_set_search(22, 3)

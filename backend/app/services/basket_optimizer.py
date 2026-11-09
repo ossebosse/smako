@@ -373,6 +373,9 @@ class _QuoteCacheSession:
         int,
         tuple[Sequence[Store], tuple[str, ...]],
     ] = field(default_factory=dict)
+    # Store-set search rows per quote set (unnamed lines only): each store's
+    # winning quote with its position in the authoritative quote order.
+    search_rows: dict[_QuoteSetKey, tuple[tuple, dict[str, tuple]]] = field(default_factory=dict)
     stats: QuoteCacheStats = field(default_factory=QuoteCacheStats)
     price_universe: PriceUniverse | None = None
     persistent_cache: PackageCostCache | None = None
@@ -2101,18 +2104,28 @@ class BasketOptimizer:
         position = {store_id: index for index, store_id in enumerate(store_ids)}
         by_store = []
         for ingredient, quotes, key in quoted_ingredients:
-            rows = {}
-            for store_id, quote in self._cheapest_quotes_by_store(quotes, key).items():
-                if store_id not in position:
-                    continue
-                named = quote if key is None or ingredient is None else _line_named(session, quote, ingredient)
-                price = Decimal(str(quote.total_price)) if not isinstance(quote.total_price, Decimal) else quote.total_price
-                # Whole öre rounded down: a sum of these never exceeds the real
-                # total, so integer bounds stay valid lower bounds.
-                cents = int((price * 100).to_integral_value(rounding=ROUND_FLOOR))
-                rows[store_id] = (self._quote_sort_key(quote), self.verification_policy.rank_for_quote(quote),
-                                  quote.total_price, named, cents)
-            by_store.append(rows)
+            # Rows compare only within one line, so the authoritative quote
+            # order is kept as each store's position in that line's sorted
+            # quotes: the same order, compared as integers.
+            reusable = session is not None and key is not None and ingredient is None
+            cached = session.search_rows.get(key) if reusable else None
+            if cached is not None and cached[0] is quotes:
+                line_rows = cached[1]
+            else:
+                ordered = sorted(self._cheapest_quotes_by_store(quotes, key).items(),
+                                 key=lambda item: self._quote_sort_key(item[1]))
+                line_rows = {}
+                for order_index, (store_id, quote) in enumerate(ordered):
+                    named = quote if key is None or ingredient is None else _line_named(session, quote, ingredient)
+                    price = Decimal(str(quote.total_price)) if not isinstance(quote.total_price, Decimal) else quote.total_price
+                    # Whole öre rounded down: a sum of these never exceeds the real
+                    # total, so integer bounds stay valid lower bounds.
+                    cents = int((price * 100).to_integral_value(rounding=ROUND_FLOOR))
+                    line_rows[store_id] = (order_index, self.verification_policy.rank_for_quote(quote),
+                                           quote.total_price, named, cents)
+                if reusable:
+                    session.search_rows[key] = (quotes, line_rows)
+            by_store.append({store_id: row for store_id, row in line_rows.items() if store_id in position})
         line_count = len(by_store)
 
         best = None  # (plan_key, chosen)
@@ -2255,17 +2268,23 @@ class BasketOptimizer:
                     total_bound = limited
             return rank_bound, total_bound
 
-        def beaten(lower):
+        def threshold():
+            """(rank, öre) of the incumbent, or None while there is none."""
             if best is None:
                 if incumbent is None:
-                    return False
+                    return None
                 rank, total = incumbent
             else:
                 rank, total = best[0][0], best[0][1]
                 if incumbent is not None and incumbent < (rank, total):
                     rank, total = incumbent
-            # Compare in öre; the incumbent total is already rounded to öre.
-            return lower[0] > rank or (lower[0] == rank and lower[1] > int(total * 100))
+            # The incumbent total is already rounded to öre.
+            return rank, int(total * 100)
+
+        def beaten(lower):
+            limit_key = threshold()
+            return limit_key is not None and (
+                lower[0] > limit_key[0] or (lower[0] == limit_key[0] and lower[1] > limit_key[1]))
 
         def visit(winners, size, start):
             nonlocal nodes
@@ -2278,6 +2297,35 @@ class BasketOptimizer:
                 return
             need = size + 1
             capacity = limit - need
+            if capacity == 0:
+                # Last store: the set is final, so its exact (max rank, öre)
+                # replaces the completion bound. An uncovered line makes it
+                # infeasible, which evaluate() would reject anyway.
+                limit_key = threshold()
+                for j in range(start, n):
+                    rank = verified
+                    cents = 0
+                    for winner, row in zip(winners, columns[j], strict=True):
+                        if row is not None and (winner is None or row[0] < winner[0]):
+                            winner = row
+                        elif winner is None:
+                            break
+                        cents += winner[4]
+                        if winner[1] > rank:  # noqa: PLR1730 -- measured hot loop
+                            rank = winner[1]
+                        # Rank and öre only grow line by line: once the rank
+                        # exceeds the incumbent's, or equals it with more öre,
+                        # the final set is beaten as well.
+                        if limit_key is not None and (
+                                rank > limit_key[0] or (rank == limit_key[0] and cents > limit_key[1])):
+                            break
+                    else:
+                        extended = [row if row is not None and (winner is None or row[0] < winner[0]) else winner
+                                    for winner, row in zip(winners, columns[j], strict=True)]
+                        if len({winner[5] for winner in extended}) == need:
+                            visit(extended, need, j + 1)
+                            limit_key = threshold()
+                return
             for j in range(start, n):
                 extended = [row if row is not None and (winner is None or row[0] < winner[0]) else winner
                             for winner, row in zip(winners, columns[j], strict=True)]
