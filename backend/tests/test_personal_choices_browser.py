@@ -1297,3 +1297,102 @@ def test_plan_and_shopping_list_are_simple_rows_sorted_by_aisle_with_ticks(choic
     rows.nth(1).get_by_role("button", name="Ångra överstrykning av Gul lök 1 kg").click()
     expect(page.locator(".shop-progress-text")).to_have_text(f"1 av {total} varor plockade")
     assert page.evaluate("document.documentElement.scrollWidth <= innerWidth") or page.context.browser.browser_type.name == "webkit"
+
+
+def test_question_guide_fills_in_mina_val_and_creates_the_plan(choices):
+    """Frågor: eight questions write the existing form; the request is the form's."""
+    page, url, captured = choices
+    page.set_viewport_size({"width": 390, "height": 844})
+    page.goto(url)
+    choose_layout(page, "Frågor")
+    expect(page.locator("body.config-guide")).to_have_count(1)
+    guide = page.locator(".guide")
+    expect(guide.locator(".guide-title")).to_have_text("Var vill du handla?")
+    for hidden in (".config-tabs", ".config-bar", ".config-cards", "#dinner-count-value", "#taste-choices"):
+        expect(page.locator(hidden).first).to_be_hidden()
+    nxt = page.locator(".guide-next")
+    nxt.click()
+    expect(guide.locator(".guide-hint")).to_contain_text("postnummer")
+    page.locator("#customer-postcode").fill("223 50")
+    page.locator("#check-postcode").click()
+    expect(page.locator("#location-status")).to_contain_text("Lund kommun")
+    nxt.click()
+    expect(guide.locator(".guide-progress")).to_have_text("Fråga 1 av 8")
+    expect(page.locator("#customer-postcode")).to_be_hidden()
+
+    def pick(name):
+        guide.locator(".guide-option", has_text=name).first.click()
+
+    pick("5 eller fler")
+    guide.get_by_role("button", name="Fler portioner").click()
+    expect(guide.locator(".guide-step-value")).to_have_text("6 portioner")
+    nxt.click()
+    guide.get_by_role("radiogroup", name="Middagar i veckan").get_by_role("radio", name="5").click()
+    pick("Lägg till frukost")
+    guide.get_by_role("radiogroup", name="Frukostar i veckan").get_by_role("radio", name="3").click()
+    nxt.click()
+    pick("Mest vegetariskt")
+    expect(guide.get_by_role("radio", name=re.compile("Mest vegetariskt"))).to_have_attribute("aria-checked", "true")
+    nxt.click()
+    pick("Jordnötter")
+    expect(guide.locator("#profile-text")).to_be_visible()
+    nxt.click()
+    for name in ("Italienskt", "Indiskt", "Thailändskt", "Kyckling"):
+        pick(name)
+    nxt.click()
+    pick("Vardagsmat")
+    nxt.click()
+    pick("Lagom")
+    nxt.click()
+    pick("Mycket protein")
+    pick("Ekologiskt kött")
+    expect(guide.get_by_role("button", name="Inget särskilt")).to_have_attribute("aria-pressed", "false")
+    nxt.click()
+    expect(guide.locator(".guide-title")).to_have_text("Din plan i korthet")
+    summary = guide.locator(".guide-summary")
+    expect(summary).to_contain_text("6 portioner per rätt")
+    expect(summary).to_contain_text("5 middagar, 3 frukostar")
+    expect(summary).to_contain_text("Mest vegetariskt")
+    expect(summary).to_contain_text("jordnötter (allergi)")
+    expect(summary).to_contain_text("Italienskt, Indiskt, Thailändskt, kyckling")
+    expect(summary).to_contain_text("Mycket protein, Ekologiskt kött, ägg och mejeri")
+    # Changing the number of dinners keeps "Mest vegetariskt" at half.
+    summary.get_by_role("button", name="Ändra måltider").click()
+    guide.get_by_role("radiogroup", name="Middagar i veckan").get_by_role("radio", name="7").click()
+    for _ in range(7):
+        nxt.click()
+    expect(summary).to_contain_text("Mest vegetariskt")
+    # Anpassa i detalj is the ordinary form with the answers filled in.
+    page.locator(".guide-detail-link").click()
+    expect(guide.locator(".guide-title")).to_have_text("Anpassa i detalj")
+    expect(page.locator("#dinner-count-value")).to_have_value("7")
+    expect(page.locator("#recipe-quick-time")).to_have_value("45")
+    expect(page.locator("#recipe-variety")).to_have_value("normal")
+    expect(page.locator("#organic-animals")).to_be_checked()
+    expect(page.locator("#choice-submit")).to_be_visible()
+    guide.locator(".guide-back").click()
+    expect(guide.locator(".guide-title")).to_have_text("Din plan i korthet")
+    expect(page.locator("#dinner-count-value")).to_be_hidden()
+    before = len(captured)
+    nxt.click()
+    expect(page.locator("#personal-status")).to_contain_text("Testet fångar")
+    assert len(captured) == before + 1
+    body = captured[-1]
+    PlanRequest.model_validate(body)
+    meals = {m["meal_type"]: m for m in body["personal"]["meals"]}
+    assert meals["dinner"]["count"] == 7 and meals["breakfast"]["count"] == 3 and meals["snack"]["count"] == 0
+    assert {m["servings"] for m in meals.values()} == {6}
+    assert {m["diet"] for m in meals.values()} == {"mixed"}
+    assert meals["dinner"]["distribution"] == {"vegetarian": 4}
+    assert meals["breakfast"]["distribution"] == {"vegetarian": 2}
+    assert meals["dinner"]["limits"]["min_protein_g"] == 30
+    assert meals["breakfast"]["limits"]["min_protein_g"] == 20
+    assert meals["dinner"]["limits"]["max_kcal"] is None
+    for meal in (meals["dinner"], meals["breakfast"]):
+        assert meal["recipe_choices"]["max_active_minutes"] == 45
+        assert meal["recipe_choices"]["max_ingredients"] == 12
+    assert body["personal"]["profile"]["allergies"] == ["jordnötter"]
+    assert body["personal"]["profile"]["likes"] == ["kyckling"]
+    assert body["personal"]["organic_animals"] is True
+    assert body["recipe_preferences"]["cuisines"] == ["italian", "indian", "thai"]
+    assert body["recipe_preferences"]["min_distinct_cuisines"] == 3

@@ -167,6 +167,8 @@
   }
 
   profileFields($('profile-fields'),"profile");
+  // The question guide (choice-guide.js) reads and changes the same two lists.
+  window.SmakoTaste={get:()=>profile(),set(value){putProfile(value);$('profile-fields').dispatchEvent(new Event("change",{bubbles:true}));}};
 
   const limitLabels = {min_weight_g:"Min tillagad portionsvikt (g)",max_weight_g:"Max tillagad portionsvikt (g)",min_protein_g:"Min protein (g)",max_protein_g:"Max protein (g)",min_carbs_g:"Min kolhydrater (g)",max_carbs_g:"Max kolhydrater (g)",min_fat_g:"Min fett (g)",max_fat_g:"Max fett (g)",max_kcal:"Max energi (kcal)"};
 
