@@ -1,9 +1,13 @@
-# 2026-11-08: Snabbare sökning vid tre butiker aktiverat
+# 2026-11-09: Mina val Frågor aktiverat
 
-Main `979312084e7c`. App **app-979312084e7c-84cf5cea**, scheduler orörd.
+Main `78c2649a2bf2`. App **app-78c2649a2bf2-083247bf**, scheduler orörd.
+Fjärde mobilvisningen av Mina val (åtta frågor). Daglig rensning av gamla
+Docker-images på servern (`smako-image-retention.timer`).
+[Aktiveringsjournal](releases/choice-guide-20261109/ACTIVATED.md).
+Föregående: 2026-11-08 snabbare sökning vid tre butiker,
+[journal](releases/cap3-store-search-20261108/ACTIVATED.md).
 Malmö 1 portion/3 butiker 64 s (avbrott) → 40 s; Lund 1/3 fungerar (medlemsbesparingsfixen).
 Kvar: Malmö 2 portioner/3 butiker och 4+ butiker hinner inte inom 60 s.
-[Aktiveringsjournal](releases/cap3-store-search-20261108/ACTIVATED.md).
 
 ---
 
@@ -122,7 +126,7 @@ på `main` inte ändrar en pågående release.
   `smako-app-1`, `smako-scheduler-1`, `smako-caddy-1`, data i `/srv/smako/data`
   och det gemensamma driftlåset. Detta flöde installerar inte en ny server.
 - Läs aktuell [HANDOFF.md](HANDOFF.md), [OPERATIONS.md](OPERATIONS.md) och
-  senaste aktiveringsrapport. Appens BUILD_ID är `app-979312084e7c-84cf5cea`;
+  senaste aktiveringsrapport. Appens BUILD_ID är `app-78c2649a2bf2-083247bf`;
   schedulern är `source-ops-8a53beb80e43`.
   [Uppvärmda prov och samordnad faktaläsning/GC](releases/warm-facts-gc-20261101/ACTIVATED.md)
   är senaste appaktiveringen. Sex Pythonfiler från kod `b7c8d0506e23`;
@@ -170,10 +174,10 @@ git status --short
 .venv/Scripts/python.exe -X utf8 scripts/smako_ops.py status
 
 # Använd den granskade Git-bas som motsvarar faktiskt aktiva filer enligt senaste journalen.
-.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit 979312084e7c --commit main --workdir .local/beta-release
+.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit 78c2649a2bf2 --commit main --workdir .local/beta-release
 ```
 
-`979312084e7c` är appen som aktiverades 2026-11-08 08:58 UTC. Appbildens egen
+`78c2649a2bf2` är appen som aktiverades 2026-11-09 18:04 UTC. Appbildens egen
 grocery-kopia är äldre än Git; använd `--keep-app-grocery` om intervallet
 bara innehåller grocery-Python som redan levererats till schedulern. De äldre
 Coop-filerna i runtime (`price_universe_runtime.py`,
