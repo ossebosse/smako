@@ -1,0 +1,10 @@
+[Unit]
+Description=Smako: remove old Docker images (deploy/scripts/image_retention.py)
+After=docker.service
+Requires=docker.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 /opt/smako/bin/image_retention.py --apply
+Nice=10
+IOSchedulingClass=idle

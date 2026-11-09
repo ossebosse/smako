@@ -1,0 +1,11 @@
+[Unit]
+Description=Daily Smako Docker image retention, outside the morning price collection
+
+[Timer]
+# 13:17 UTC: after the morning collection (about 05–08 UTC), before evening use.
+OnCalendar=*-*-* 13:17:00 UTC
+RandomizedDelaySec=10min
+Persistent=true
+
+[Install]
+WantedBy=timers.target

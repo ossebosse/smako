@@ -333,6 +333,38 @@ granskning. Återinför inte en root-ägd daterad katalog i den dagliga rotation
 
 Återställning startar ingen container och ändrar ingen produktionskonfiguration.
 
+## Daglig rensning av gamla Docker-images, 2026-11-09
+
+Ägarbeslut 2026-11-09: gamla Smako-images ska rensas automatiskt på servern.
+Bakgrund: aktiveringen av `app-78c2649a2bf2-083247bf` stoppades av kravet på
+8 GB ledigt (7,3 GB av 387 GB kvar). Docker hade 231 images, varav de flesta
+historiska engångsbyggen utan ägarmärke, som den befintliga retentionen
+medvetet inte rör.
+
+`deploy/scripts/image_retention.py` körs på värden som root, eftersom
+schedulern saknar Docker-åtkomst. Installation:
+
+```sh
+sudo install -m 0755 deploy/scripts/image_retention.py /opt/smako/bin/image_retention.py
+sudo install -m 0644 deploy/systemd/smako-image-retention.{service,timer} /etc/systemd/system/
+sudo systemctl daemon-reload && sudo systemctl enable --now smako-image-retention.timer
+```
+
+Körs dagligen 13:17 UTC (efter morgonens prisinsamling). Utan `--apply` är det
+en torrkörning. Kvitto: `/opt/smako/evidence/image-retention/latest.json`.
+
+En image behålls om en container (körande eller stoppad) använder den, om den
+är den närmaste release-basen (återgång) till en använd image, om den är yngre
+än 7 dagar, om den är bland de tre nyaste i ett repository som en container
+använder, om den har en tagg utanför `smako*` eller saknar tagg, eller om den
+står i `/opt/smako/image-retention-protect.txt` (id eller tagg per rad, för
+väntande arbete). Allt annat tas bort med `docker image rm <taggar>` utan
+`--force`, så Docker vägrar en image som just blivit använd. Containrar,
+volymer och otaggade lager rörs inte. Oanvänd byggcache hålls under 2 GB.
+
+Stoppade containrar (171 st. 2026-11-09, mest gamla engångskörningar) håller
+fortfarande sina images kvar. De rensas inte av denna policy.
+
 ## Historiska driftrekommendationer före retentionen 2026-10-20
 
 Backup- och releasebeteendet i denna äldre lista ersätts av policyn
