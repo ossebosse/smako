@@ -30,6 +30,7 @@ def test_keeps_used_recent_newest_bases_and_foreign_images():
         image("one-off", ["smako-ica-estimates-app:20261014"], "10-14"),
         image("one-off-2", ["smako-ui-option3:ff241807809b", "smako-retention-base:x"], "10-14"),
         image("caddy", ["caddy:2.10.2-alpine"], "09-01", digests=["caddy@sha256:abc"]),
+        image("built", ["smako-willys-picking:scheduler-98eadc2b114c"], "10-15", digests=["smako-willys-picking@sha256:def"]),
         image("mixed", ["smako-app:x", "other:y"], "09-01"),
         image("untagged", [], "09-01"),
         image("pinned", ["smako-hemkop-context:scheduler-c6607a095018"], "10-18"),
@@ -44,7 +45,7 @@ def test_keeps_used_recent_newest_bases_and_foreign_images():
     assert keep["untagged"] == "foreign_or_untagged"
     assert keep["pinned"] == "protected"
     # Repositories no container uses do not get the newest-three protection.
-    assert sorted(i["Id"] for i in remove) == ["older-app", "oldest-app", "one-off", "one-off-2"]
+    assert sorted(i["Id"] for i in remove) == ["built", "older-app", "oldest-app", "one-off", "one-off-2"]
 
 
 def test_newest_three_per_used_repository():

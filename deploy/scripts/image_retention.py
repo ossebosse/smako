@@ -10,7 +10,7 @@ An image is kept when any of these holds:
 - it was created within the last KEEP_DAYS days (candidates, recent rollbacks);
 - it is among the KEEP_NEWEST newest images of a repository that a container
   uses (smako-app, smako-scheduler: current release, rollback, candidates);
-- it has a tag outside the smako* repositories, a registry digest or no tag;
+- it has a tag outside the smako* repositories or no tag;
 - it is listed in /opt/smako/image-retention-protect.txt (id or tag per line).
 
 Everything else is removed with `docker image rm <tags>`, never --force, so
@@ -56,7 +56,9 @@ def plan(images, containers, *, now, protected=(), keep_days=KEEP_DAYS, keep_new
         tags = image.get("RepoTags") or []
         if image["Id"] in protected or any(t in protected for t in tags):
             keep.setdefault(image["Id"], "protected")
-        if not tags or image.get("RepoDigests") or not all(t.startswith("smako") for t in tags):
+        # Local builds also carry digests under the containerd image store,
+        # so a digest does not mark a pulled image; the repository name does.
+        if not tags or not all(t.startswith("smako") for t in tags):
             keep.setdefault(image["Id"], "foreign_or_untagged")
         if created(image) >= now - timedelta(days=keep_days):
             keep.setdefault(image["Id"], "recent")
