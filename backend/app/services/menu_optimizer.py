@@ -8,6 +8,7 @@ only used to order/prune candidates; they never determine the winning menu.
 
 from __future__ import annotations
 
+import heapq
 from collections import Counter, OrderedDict
 from collections.abc import Callable, Mapping, Sequence
 from dataclasses import dataclass, field
@@ -409,6 +410,8 @@ class _SharedEvaluationStore:
         frozenset[IngredientProfile], tuple[object, ...]
     ] = field(default_factory=dict)
     checkout_floors: dict[str, Decimal] = field(default_factory=dict)
+    # Per requirement items: relaxed (rank, total) over all stores, or None.
+    relaxed_bounds: dict[tuple[object, ...], tuple[int, Decimal] | None] = field(default_factory=dict)
 
 
 _PRIMARY_INGREDIENTS = frozenset(
@@ -524,6 +527,7 @@ class _EvaluationCache:
         self._recipe_profiles: dict[int, tuple[Recipe, IngredientProfile]] = {}
         self._lower_bounds = store.lower_bounds
         self._optimistic_bounds = store.optimistic_bounds
+        self._relaxed_bounds = store.relaxed_bounds
         self._canonical_requirement_keys = store.canonical_requirement_keys
         self._checkout_floors = store.checkout_floors
         if not self._checkout_floors:
@@ -696,6 +700,23 @@ class _EvaluationCache:
         )
         self._lower_bounds[key] = value
         return value
+
+    def ordering_floor(self, profiles: frozenset[IngredientProfile]) -> tuple[int, Decimal]:
+        """(rank, total) never above this state's ``optimistic_bound``.
+
+        The larger of the checkout floor (rank 0) and, where available, each
+        line's cheapest quote over all stores (``relaxed_requirement_key``).
+        """
+        floor = (0, self.lower_bound(profiles))
+        if not self.canonical_requirement_cache:
+            return floor
+        key = self.key_for_profiles(profiles)
+        relaxed = self._relaxed_bounds.get(key[1], False)
+        if relaxed is False:
+            purchasable = tuple(item for item in key[1] if not self._is_pantry(str(item[0])))
+            relaxed = self._relaxed_bounds[key[1]] = self.basket_optimizer.relaxed_requirement_key(
+                purchasable, self.candidates_by_name, self.stores)
+        return floor if relaxed is None or relaxed < floor else relaxed
 
     def optimistic_bound(
         self,
@@ -2063,62 +2084,106 @@ class MenuOptimizer:
         by_profile = {candidate.profile: candidate for candidate in candidates}
         for _depth in range(recipe_count):
             selected = [by_profile[profile] for profile in state.profiles]
-            pending: list[_PendingExpansion] = []
+            raw = []
             for ordinal, candidate in enumerate(candidates):
                 if candidate.profile in state.profiles:
                     continue
                 if not self._satisfies_diversity([*selected, candidate], constraints):
                     continue
-                profiles = state.profiles | {candidate.profile}
-                recipes = (*state.recipes, candidate.recipe)
-                optimistic = cache.optimistic_bound(recipes, profiles)
-                if optimistic is None:
-                    continue
-                pending.append(
-                    _PendingExpansion(
-                        ordinal=ordinal,
-                        recipes=recipes,
-                        profiles=profiles,
-                        optimistic_verification_rank=optimistic[0],
-                        optimistic_total=optimistic[1],
-                    )
-                )
-            pending.sort(
-                key=lambda row: (
-                    row.optimistic_verification_rank,
-                    row.optimistic_total,
-                    row.ordinal,
-                    tuple(sorted(row.profiles)),
-                )
-            )
-            best: _SearchState | None = None
-            for index, row in enumerate(pending):
-                if best is not None:
-                    best_rank = _evaluation_verification_rank(best.evaluation)
-                    best_total = money(best.evaluation.basket.total)
-                    if row.optimistic_verification_rank > best_rank or (
-                        row.optimistic_verification_rank == best_rank
-                        and row.optimistic_total > best_total
-                    ):
-                        rejected = len(pending) - index
-                        cache.stats.optimistic_bound_rejections += rejected
-                        break
-                evaluation = cache.evaluate(row.recipes, tuple(row.profiles))
-                if evaluation is None:
-                    continue
-                candidate_state = _SearchState(
-                    recipes=row.recipes,
-                    profiles=row.profiles,
-                    evaluation=evaluation,
-                )
-                if best is None or self._state_sort_key(
-                    candidate_state
-                ) < self._state_sort_key(best):
-                    best = candidate_state
+                raw.append((ordinal, (*state.recipes, candidate.recipe), state.profiles | {candidate.profile}))
+            best = self._greedy_best_expansion(cache, raw)
             if best is None:
                 return None
             state = best
         return state
+
+    def _greedy_best_expansion(self, cache, raw, *, lazy=True):
+        """Best evaluated expansion, visiting them in optimistic-key order.
+
+        Stops once the next key cannot beat the best evaluated state. With
+        ``lazy`` the keys are priced only as states reach the front of an
+        order by the admissible floor, which yields the same order (see
+        ``_drain_pending_frontier``); a key below its floor redoes this step
+        from fully sorted keys.
+        """
+        if lazy:
+            return self._greedy_best_lazily(cache, raw)
+        pending: list[_PendingExpansion] = []
+        for ordinal, recipes, profiles in raw:
+            optimistic = cache.optimistic_bound(recipes, profiles)
+            if optimistic is None:
+                continue
+            pending.append(
+                _PendingExpansion(
+                    ordinal=ordinal,
+                    recipes=recipes,
+                    profiles=profiles,
+                    optimistic_verification_rank=optimistic[0],
+                    optimistic_total=optimistic[1],
+                )
+            )
+        pending.sort(
+            key=lambda row: (
+                row.optimistic_verification_rank,
+                row.optimistic_total,
+                row.ordinal,
+                tuple(sorted(row.profiles)),
+            )
+        )
+        best: _SearchState | None = None
+        for index, row in enumerate(pending):
+            if best is not None:
+                best_rank = _evaluation_verification_rank(best.evaluation)
+                best_total = money(best.evaluation.basket.total)
+                if row.optimistic_verification_rank > best_rank or (
+                    row.optimistic_verification_rank == best_rank
+                    and row.optimistic_total > best_total
+                ):
+                    rejected = len(pending) - index
+                    cache.stats.optimistic_bound_rejections += rejected
+                    break
+            evaluation = cache.evaluate(row.recipes, tuple(row.profiles))
+            if evaluation is None:
+                continue
+            candidate_state = _SearchState(
+                recipes=row.recipes,
+                profiles=row.profiles,
+                evaluation=evaluation,
+            )
+            if best is None or self._state_sort_key(
+                candidate_state
+            ) < self._state_sort_key(best):
+                best = candidate_state
+        return best
+
+    def _greedy_best_lazily(self, cache, raw):
+        heap = [(*cache.ordering_floor(profiles), ordinal, tuple(sorted(profiles)), False, recipes, profiles)
+                for ordinal, recipes, profiles in raw]
+        heapq.heapify(heap)
+        best: _SearchState | None = None
+        while heap:
+            rank, total, ordinal, order, exact, recipes, profiles = heapq.heappop(heap)
+            if not exact:
+                optimistic = cache.optimistic_bound(recipes, profiles)
+                if optimistic is None:
+                    continue
+                if (optimistic[0], optimistic[1]) < (rank, total):
+                    return self._greedy_best_expansion(cache, raw, lazy=False)
+                heapq.heappush(heap, (optimistic[0], optimistic[1], ordinal, order, True, recipes, profiles))
+                continue
+            if best is not None:
+                best_rank = _evaluation_verification_rank(best.evaluation)
+                best_total = money(best.evaluation.basket.total)
+                if rank > best_rank or (rank == best_rank and total > best_total):
+                    cache.stats.optimistic_bound_rejections += 1 + len(heap)
+                    break
+            evaluation = cache.evaluate(recipes, tuple(profiles))
+            if evaluation is None:
+                continue
+            candidate_state = _SearchState(recipes=recipes, profiles=profiles, evaluation=evaluation)
+            if best is None or self._state_sort_key(candidate_state) < self._state_sort_key(best):
+                best = candidate_state
+        return best
 
     def optimize(
         self,
@@ -2418,6 +2483,83 @@ class MenuOptimizer:
             basket_audit=winner_evaluation.audit,
         )
 
+    def _drain_pending_frontier(self, cache, raw_pending, expanded, beam_width, mutable_stats, *, lazy=True):
+        """Evaluate pending states in exact optimistic-key order until the beam
+        is full and the next key cannot beat its worst state.
+
+        The exact same-depth key is needed only for states that reach the
+        front of that order. ``lazy`` orders by the admissible checkout floor
+        (rank 0, ``cache.lower_bound``), which never exceeds a state's key,
+        and prices a state's key only when it comes first: the popped keys
+        then come out in exactly the sorted order, with the same tie-breakers,
+        so the same states are evaluated and kept. A key below its floor
+        would break that order; the frontier then restarts from fully sorted
+        keys. Returns the number of feasible evaluated states.
+        """
+
+        def admit(rank, total, recipes, profiles):
+            if len(expanded) >= beam_width:
+                threshold = max(expanded.values(), key=self._state_sort_key)
+                threshold_rank = _evaluation_verification_rank(threshold.evaluation)
+                threshold_total = money(threshold.evaluation.basket.total)
+                if rank > threshold_rank or (rank == threshold_rank and total > threshold_total):
+                    return None
+            evaluation = cache.evaluate(recipes, tuple(profiles))
+            if evaluation is None:
+                return False
+            expanded[profiles] = _SearchState(recipes=recipes, profiles=profiles, evaluation=evaluation)
+            if len(expanded) > beam_width:
+                worst = max(expanded.values(), key=self._state_sort_key)
+                del expanded[worst.profiles]
+            return True
+
+        feasible = 0
+        if not lazy:
+            rows = []
+            for profiles, (ordinal, recipes, _profiles) in raw_pending.items():
+                optimistic = cache.optimistic_bound(recipes, profiles)
+                if optimistic is None:
+                    mutable_stats.incomplete_rejections += 1
+                    continue
+                rows.append((optimistic[0], optimistic[1], ordinal, tuple(sorted(profiles)), recipes, profiles))
+            rows.sort(key=lambda row: row[:4])
+            for index, (rank, total, _ordinal, _order, recipes, profiles) in enumerate(rows):
+                admitted = admit(rank, total, recipes, profiles)
+                if admitted is None:
+                    rejected = len(rows) - index
+                    mutable_stats.lower_bound_rejections += rejected
+                    mutable_stats.optimistic_bound_rejections += rejected
+                    break
+                feasible += admitted
+            return feasible
+        # (rank, total, ordinal, sorted profiles, exact?, recipes, profiles);
+        # ordinals are unique, so comparisons never reach the last fields.
+        heap = [(*cache.ordering_floor(profiles), ordinal, tuple(sorted(profiles)), False, recipes, profiles)
+                for profiles, (ordinal, recipes, _profiles) in raw_pending.items()]
+        heapq.heapify(heap)
+        while heap:
+            rank, total, ordinal, order, exact, recipes, profiles = heapq.heappop(heap)
+            if not exact:
+                optimistic = cache.optimistic_bound(recipes, profiles)
+                if optimistic is None:
+                    mutable_stats.incomplete_rejections += 1
+                    continue
+                if (optimistic[0], optimistic[1]) < (rank, total):
+                    # Not admissible here: redo this frontier from sorted keys.
+                    expanded.clear()
+                    return self._drain_pending_frontier(
+                        cache, raw_pending, expanded, beam_width, mutable_stats, lazy=False)
+                heapq.heappush(heap, (optimistic[0], optimistic[1], ordinal, order, True, recipes, profiles))
+                continue
+            admitted = admit(rank, total, recipes, profiles)
+            if admitted is None:
+                rejected = 1 + len(heap)
+                mutable_stats.lower_bound_rejections += rejected
+                mutable_stats.optimistic_bound_rejections += rejected
+                break
+            feasible += admitted
+        return feasible
+
     def _optimize_nested_store_caps(
         self,
         candidates: Sequence[Recipe],
@@ -2703,93 +2845,13 @@ class MenuOptimizer:
                                 evaluation=evaluation,
                             )
 
-            pending_by_cap: dict[
-                int, dict[frozenset[IngredientProfile], _PendingExpansion]
-            ] = {limit: {} for limit in active_caps}
-            if admissible_lower_bound_enabled:
-                caps_by_profiles: dict[
-                    frozenset[IngredientProfile], list[int]
-                ] = {}
-                for limit in active_caps:
-                    for profiles in raw_pending_by_cap[limit]:
-                        caps_by_profiles.setdefault(profiles, []).append(limit)
-
-                for profiles, needed_caps in caps_by_profiles.items():
-                    largest_needed = max(needed_caps)
-                    ordinal, recipes, _ = raw_pending_by_cap[largest_needed][profiles]
-                    # This one miss computes every cumulative cap key up to the
-                    # largest frontier that actually contains this state.
-                    largest_optimistic = caches[largest_needed].optimistic_bound(
-                        recipes,
-                        profiles,
-                    )
-                    for limit in needed_caps:
-                        ordinal, recipes, _ = raw_pending_by_cap[limit][profiles]
-                        optimistic = (
-                            largest_optimistic
-                            if limit == largest_needed
-                            else caches[limit].optimistic_bound(
-                                recipes,
-                                profiles,
-                            )
-                        )
-                        if optimistic is None:
-                            stats_by_cap[limit].incomplete_rejections += 1
-                            continue
-                        pending_by_cap[limit][profiles] = _PendingExpansion(
-                            ordinal=ordinal,
-                            recipes=recipes,
-                            profiles=profiles,
-                            optimistic_verification_rank=optimistic[0],
-                            optimistic_total=optimistic[1],
-                        )
-
             for limit in active_caps:
                 mutable_stats = stats_by_cap[limit]
                 expanded = expanded_by_cap[limit]
-                pending = pending_by_cap[limit]
                 exact_feasible_states = len(expanded)
-                if admissible_lower_bound_enabled and pending:
-                    ordered_pending = sorted(
-                        pending.values(),
-                        key=lambda row: (
-                            row.optimistic_verification_rank,
-                            row.optimistic_total,
-                            row.ordinal,
-                            tuple(sorted(row.profiles)),
-                        ),
-                    )
-                    for pending_index, row in enumerate(ordered_pending):
-                        if len(expanded) >= beam_width:
-                            threshold = max(
-                                expanded.values(), key=self._state_sort_key
-                            )
-                            threshold_rank = _evaluation_verification_rank(
-                                threshold.evaluation
-                            )
-                            threshold_total = money(threshold.evaluation.basket.total)
-                            if row.optimistic_verification_rank > threshold_rank or (
-                                row.optimistic_verification_rank == threshold_rank
-                                and row.optimistic_total > threshold_total
-                            ):
-                                rejected = len(ordered_pending) - pending_index
-                                mutable_stats.lower_bound_rejections += rejected
-                                mutable_stats.optimistic_bound_rejections += rejected
-                                break
-                        evaluation = caches[limit].evaluate(
-                            row.recipes, tuple(row.profiles)
-                        )
-                        if evaluation is None:
-                            continue
-                        exact_feasible_states += 1
-                        expanded[row.profiles] = _SearchState(
-                            recipes=row.recipes,
-                            profiles=row.profiles,
-                            evaluation=evaluation,
-                        )
-                        if len(expanded) > beam_width:
-                            worst = max(expanded.values(), key=self._state_sort_key)
-                            del expanded[worst.profiles]
+                if admissible_lower_bound_enabled and raw_pending_by_cap[limit]:
+                    exact_feasible_states += self._drain_pending_frontier(
+                        caches[limit], raw_pending_by_cap[limit], expanded, beam_width, mutable_stats)
 
                 if not expanded:
                     incumbent = incumbents[limit]
@@ -3059,7 +3121,10 @@ class MenuOptimizer:
             duplicate_before = mutable_stats.duplicate_state_rejections
             lower_bound_before = mutable_stats.lower_bound_rejections
             expanded: dict[frozenset[IngredientProfile], _SearchState] = {}
-            pending: dict[frozenset[IngredientProfile], _PendingExpansion] = {}
+            pending: dict[
+                frozenset[IngredientProfile],
+                tuple[int, tuple[Recipe, ...], frozenset[IngredientProfile]],
+            ] = {}
             expansion_ordinal = 0
             for state in beam:
                 selected = [candidate_by_profile[profile] for profile in state.profiles]
@@ -3088,17 +3153,8 @@ class MenuOptimizer:
 
                     recipes = (*state.recipes, candidate.recipe)
                     if admissible_lower_bound_enabled:
-                        optimistic = cache.optimistic_bound(recipes, profiles)
-                        if optimistic is None:
-                            mutable_stats.incomplete_rejections += 1
-                            continue
-                        pending[profiles] = _PendingExpansion(
-                            ordinal=expansion_ordinal,
-                            recipes=recipes,
-                            profiles=profiles,
-                            optimistic_verification_rank=optimistic[0],
-                            optimistic_total=optimistic[1],
-                        )
+                        # Keys are priced lazily in _drain_pending_frontier.
+                        pending[profiles] = (expansion_ordinal, recipes, profiles)
                         expansion_ordinal += 1
                         continue
 
@@ -3113,42 +3169,8 @@ class MenuOptimizer:
 
             exact_feasible_states = len(expanded)
             if admissible_lower_bound_enabled and pending:
-                ordered_pending = sorted(
-                    pending.values(),
-                    key=lambda row: (
-                        row.optimistic_verification_rank,
-                        row.optimistic_total,
-                        row.ordinal,
-                        tuple(sorted(row.profiles)),
-                    ),
-                )
-                for pending_index, row in enumerate(ordered_pending):
-                    if len(expanded) >= beam_width:
-                        threshold = max(expanded.values(), key=self._state_sort_key)
-                        threshold_rank = _evaluation_verification_rank(
-                            threshold.evaluation
-                        )
-                        threshold_total = money(threshold.evaluation.basket.total)
-                        if row.optimistic_verification_rank > threshold_rank or (
-                            row.optimistic_verification_rank == threshold_rank
-                            and row.optimistic_total > threshold_total
-                        ):
-                            rejected = len(ordered_pending) - pending_index
-                            mutable_stats.lower_bound_rejections += rejected
-                            mutable_stats.optimistic_bound_rejections += rejected
-                            break
-                    evaluation = cache.evaluate(row.recipes, tuple(row.profiles))
-                    if evaluation is None:
-                        continue
-                    exact_feasible_states += 1
-                    expanded[row.profiles] = _SearchState(
-                        recipes=row.recipes,
-                        profiles=row.profiles,
-                        evaluation=evaluation,
-                    )
-                    if len(expanded) > beam_width:
-                        worst = max(expanded.values(), key=self._state_sort_key)
-                        del expanded[worst.profiles]
+                exact_feasible_states += self._drain_pending_frontier(
+                    cache, pending, expanded, beam_width, mutable_stats)
 
             if not expanded:
                 if incumbent is not None:

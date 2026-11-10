@@ -405,6 +405,9 @@ class _QuoteCacheSession:
     # Store-set search rows per quote set (unnamed lines only): each store's
     # winning quote with its position in the authoritative quote order.
     search_rows: dict[_QuoteSetKey, tuple[tuple, dict[str, tuple]]] = field(default_factory=dict)
+    # Relaxed per-line floors: (quotes, allowed store IDs, (rank, price) | None).
+    line_floors: dict[_QuoteSetKey, tuple] = field(default_factory=dict)
+    store_id_sets: dict[int, tuple] = field(default_factory=dict)
     stats: QuoteCacheStats = field(default_factory=QuoteCacheStats)
     price_universe: PriceUniverse | None = None
     persistent_cache: PackageCostCache | None = None
@@ -1641,6 +1644,63 @@ class BasketOptimizer:
         if shared_key is not None:
             _REQUIREMENT_KEY_SCOPE.get()["keys"][shared_key] = result
         return result
+
+    def relaxed_requirement_key(self, requirements, candidates_by_name, stores):
+        """(rank, total) no greater than any same-depth key of these lines.
+
+        Each line pays at least the cheapest of its stores' winning quotes and
+        is ranked at least by the best such rank; a store set only restricts
+        that choice. Same quotes, resolution and stores as
+        ``same_depth_nested_store_limited_requirement_keys``. None outside a
+        quote session, where lines are priced jointly (coupled checkout) or a
+        line has no quote, so callers keep their weaker bound.
+        """
+        session = self._quote_cache_context.get()
+        if session is None or type(self.calculator) is not BasketCalculator:
+            return None
+        if _has_coupled_checkout(candidates_by_name, (str(r[0]) for r in requirements), session=session):
+            return None
+        cached_ids = session.store_id_sets.get(id(stores))
+        if cached_ids is None or cached_ids[0] is not stores:
+            cached_ids = session.store_id_sets[id(stores)] = (
+                stores, frozenset(str(_value(store, "store_id")) for store in stores))
+        allowed = cached_ids[1]
+        rank_bound = 0
+        total = Decimal(0)
+        for raw in requirements:
+            canonical = str(raw[0])
+            candidates = candidates_by_name.get(canonical)
+            if candidates is None:
+                target = canonicalize_ingredient_name(canonical)
+                candidates = next((rows for key, rows in candidates_by_name.items()
+                                   if canonicalize_ingredient_name(str(key)) == target), ())
+            if not isinstance(candidates, tuple):
+                return None
+            quantity = Decimal(str(raw[1])).normalize()
+            quote_set_key = (canonical, quantity, str(raw[2]), id(candidates))
+            cached = session.quote_sets.get(quote_set_key)
+            if cached is not None and cached.candidates is candidates:
+                quotes = cached.quotes
+            else:
+                ingredient = NormalizedIngredient.model_construct(
+                    canonical_name=canonical, required_quantity=float(quantity), unit=str(raw[2]),
+                    display_name=canonical, source_recipes=[])
+                quotes, quote_set_key = self._candidate_quotes_with_key(ingredient, candidates)
+                if quote_set_key is None:
+                    return None
+            low = session.line_floors.get(quote_set_key)
+            if low is None or low[0] is not quotes or low[1] is not allowed:
+                rows = [row for store_id, row in self._compact_quotes_by_store(quotes, quote_set_key).items()
+                        if store_id in allowed]
+                low = session.line_floors[quote_set_key] = (
+                    quotes, allowed,
+                    None if not rows else (min(row.verification_rank for row in rows),
+                                           min(row.total_price for row in rows)))
+            if low[2] is None:
+                return None
+            rank_bound = max(rank_bound, low[2][0])
+            total += low[2][1]
+        return rank_bound, money(total)
 
     def _shared_requirement_key(self, resolved, stores, max_stores):
         """Identity of a requirement-set key inside requirement_key_scope().
