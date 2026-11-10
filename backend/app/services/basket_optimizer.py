@@ -70,6 +70,16 @@ _VERIFICATION_RANK: dict[BasketVerificationStatus, int] = {
 
 _MAX_GROUP_COMBINATIONS = 200000
 
+try:  # Optional accelerator; every result is identical without it.
+    import numpy as _np
+
+    from app.services.store_set_keys import MISSING as MISSING_ORDER
+    from app.services.store_set_keys import cap_three_total, nested_keys_up_to_two
+    _HAS_NUMPY = True
+except ImportError:  # pragma: no cover - exercised where numpy is absent
+    _HAS_NUMPY = False
+    MISSING_ORDER = None
+
 # Exact same-depth requirement keys shared by every quote session of one plan
 # request (see requirement_key_scope). None outside such a request.
 _REQUIREMENT_KEY_SCOPE: ContextVar[dict | None] = ContextVar(
@@ -405,6 +415,10 @@ class _QuoteCacheSession:
     # Store-set search rows per quote set (unnamed lines only): each store's
     # winning quote with its position in the authoritative quote order.
     search_rows: dict[_QuoteSetKey, tuple[tuple, dict[str, tuple]]] = field(default_factory=dict)
+    # Whole-öre (position, rank, öre) lists per (quote set, store IDs), or
+    # None where a price is not a whole number of öre.
+    integer_rows: dict[tuple, tuple[tuple, Any]] = field(default_factory=dict)
+    integer_columns: dict[tuple, Any] = field(default_factory=dict)
     stats: QuoteCacheStats = field(default_factory=QuoteCacheStats)
     price_universe: PriceUniverse | None = None
     persistent_cache: PackageCostCache | None = None
@@ -1716,6 +1730,7 @@ class BasketOptimizer:
             return ()
 
         requested_limit = limit
+        all_store_ids = store_ids
         if quoted_requirements:
             # Match optimize(): a store with no qualified quote cannot change
             # any winning purchase. Keep the caller's nested-cap result shape,
@@ -1783,26 +1798,35 @@ class BasketOptimizer:
             # The best smaller set is itself a candidate, so it is a valid
             # pruning incumbent: only strictly worse branches are cut.
             smaller = lower[-1] if lower else None
-            found = self._search_store_sets(
-                [(None, quotes, key) for quotes, key in quoted_requirements], store_ids, limit,
-                incumbent=smaller, keys_only=True)
-            top = min((key for key in (found[0][:3] if found is not None else None, smaller)
-                       if key is not None), default=None)
+            top = (self._integer_cap_three_key(quoted_requirements, all_store_ids, store_ids, smaller, session)
+                   if limit == 3 else None)
+            if top is None:
+                found = self._search_store_sets(
+                    [(None, quotes, key) for quotes, key in quoted_requirements], store_ids, limit,
+                    incumbent=smaller, keys_only=True)
+                top = min((key for key in (found[0][:3] if found is not None else None, smaller)
+                           if key is not None), default=None)
             return (*lower, *([top] * (limit - lower_cap))) + (top,) * (requested_limit - limit)
-        store_subsets = self._eligible_store_subsets(store_ids, limit)
-        subset_vectors = tuple(
-            self._quote_subset_vector(
-                quotes,
-                quote_set_key,
-                store_ids,
-                store_subsets,
-                limit,
+        integer = self._integer_nested_keys(quoted_requirements, all_store_ids, store_ids, limit, session)
+        if integer is not None:
+            # Same keys as the subset enumeration below, summed in whole öre.
+            best_by_cap, infeasible_subsets = integer
+            store_subsets = range(sum(comb(len(store_ids), size) for size in range(1, limit + 1)))
+        else:
+            store_subsets = self._eligible_store_subsets(store_ids, limit)
+            subset_vectors = tuple(
+                self._quote_subset_vector(
+                    quotes,
+                    quote_set_key,
+                    store_ids,
+                    store_subsets,
+                    limit,
+                )
+                for quotes, quote_set_key in quoted_requirements
             )
-            for quotes, quote_set_key in quoted_requirements
-        )
-        best_by_cap, infeasible_subsets = self._grouped_subset_keys(
-            subset_vectors, store_subsets, limit, session
-        )
+            best_by_cap, infeasible_subsets = self._grouped_subset_keys(
+                subset_vectors, store_subsets, limit, session
+            )
         session = self._quote_cache_context.get()
         if session is not None:
             session.stats.optimistic_store_subset_evaluations += len(store_subsets)
@@ -2153,6 +2177,118 @@ class BasketOptimizer:
             return subsets > min(threshold, CAP_THREE_SEARCH_THRESHOLD)
         return subsets > threshold
 
+    def _line_search_rows(self, quotes, key, ingredient, session):
+        """Each store's winning quote of one line as a search row.
+
+        Rows compare only within one line, so the authoritative quote order
+        is kept as each store's position in that line's sorted quotes: the
+        same order, compared as integers. Row: (position, verification rank,
+        total price, quote named for the line, whole öre rounded down).
+        Unnamed rows are reused for the quote session.
+        """
+        reusable = session is not None and key is not None and ingredient is None
+        cached = session.search_rows.get(key) if reusable else None
+        if cached is not None and cached[0] is quotes:
+            return cached[1]
+        ordered = sorted(self._cheapest_quotes_by_store(quotes, key).items(),
+                         key=lambda item: self._quote_sort_key(item[1]))
+        line_rows = {}
+        for order_index, (store_id, quote) in enumerate(ordered):
+            named = quote if key is None or ingredient is None else _line_named(session, quote, ingredient)
+            price = Decimal(str(quote.total_price)) if not isinstance(quote.total_price, Decimal) else quote.total_price
+            # Whole öre rounded down: a sum of these never exceeds the real
+            # total, so integer bounds stay valid lower bounds.
+            cents = int((price * 100).to_integral_value(rounding=ROUND_FLOOR))
+            line_rows[store_id] = (order_index, self.verification_policy.rank_for_quote(quote),
+                                   quote.total_price, named, cents)
+        if reusable:
+            session.search_rows[key] = (quotes, line_rows)
+        return line_rows
+
+    def _integer_line_arrays(self, quotes, key, all_store_ids, session):
+        """(position, rank, öre) rows over ``all_store_ids`` for one line, or
+        None unless every quote is a whole number of öre (exponent -2)."""
+        cache_key = (key, all_store_ids)
+        cached = session.integer_rows.get(cache_key)
+        if cached is not None and cached[0] is quotes:
+            return cached[1]
+        rows = self._line_search_rows(quotes, key, None, session)
+        value = _np.zeros((3, len(all_store_ids)), dtype=_np.int64)
+        value[0] = MISSING_ORDER
+        index = {store_id: column for column, store_id in enumerate(all_store_ids)}
+        for store_id, row in rows.items():
+            column = index.get(store_id)
+            if column is None:
+                continue
+            parts = row[2].as_tuple() if isinstance(row[2], Decimal) else None
+            if parts is None or parts.sign or parts.exponent != -2 or len(parts.digits) > 22:
+                value = None
+                break
+            value[0, column] = row[0]
+            value[1, column] = row[1]
+            value[2, column] = row[4]
+        session.integer_rows[cache_key] = (quotes, value)
+        return value
+
+    def _integer_nested_keys(self, quoted_requirements, all_store_ids, store_ids, limit, session):
+        """Caps 1..limit (at most two) in whole öre with numpy, or None."""
+        if session is None or not quoted_requirements or limit > 2 or not _HAS_NUMPY:
+            return None
+        lines = []
+        for quotes, key in quoted_requirements:
+            if key is None:
+                return None
+            arrays = self._integer_line_arrays(quotes, key, all_store_ids, session)
+            if arrays is None:
+                return None
+            lines.append(arrays)
+        columns_key = (all_store_ids, store_ids)
+        columns = session.integer_columns.get(columns_key)
+        if columns is None:
+            index = {store_id: column for column, store_id in enumerate(all_store_ids)}
+            columns = session.integer_columns[columns_key] = _np.array(
+                [index[store_id] for store_id in store_ids], dtype=_np.intp)
+        stacked = _np.stack(lines)[:, :, columns]
+        result = nested_keys_up_to_two(stacked[:, 0], stacked[:, 1], stacked[:, 2], limit)
+        if result is None:
+            return None
+        keys, infeasible = result
+        return [None if key is None else (key[0], Decimal(key[1]).scaleb(-2), key[2]) for key in keys], infeasible
+
+    def _integer_cap_three_key(self, quoted_requirements, all_store_ids, store_ids, smaller, session):
+        """Exact cap-three key in whole öre with numpy, or None to search.
+
+        Only for one verification rank over every quote of these lines and
+        a known best key of at most two stores (``smaller``).
+        """
+        if session is None or smaller is None or not _HAS_NUMPY or not quoted_requirements:
+            return None
+        lines = []
+        for quotes, key in quoted_requirements:
+            if key is None:
+                return None
+            arrays = self._integer_line_arrays(quotes, key, all_store_ids, session)
+            if arrays is None:
+                return None
+            lines.append(arrays)
+        columns_key = (all_store_ids, store_ids)
+        columns = session.integer_columns.get(columns_key)
+        if columns is None:
+            index = {store_id: column for column, store_id in enumerate(all_store_ids)}
+            columns = session.integer_columns[columns_key] = _np.array(
+                [index[store_id] for store_id in store_ids], dtype=_np.intp)
+        stacked = _np.stack(lines)[:, :, columns]
+        order, rank = stacked[:, 0], stacked[:, 1]
+        present = order != MISSING_ORDER
+        ranks = rank[present]
+        if ranks.size == 0 or int(ranks.min()) != int(ranks.max()) or int(ranks[0]) != smaller[0]:
+            return None
+        smaller_total = int(smaller[1].scaleb(2))
+        found = cap_three_total(order, stacked[:, 2], smaller_total)
+        if found is None:
+            return smaller
+        return smaller[0], Decimal(found[0]).scaleb(-2), found[1]
+
     def _search_store_sets(self, quoted_ingredients, store_ids, limit, *, incumbent=None, keys_only=False):
         """Exact best store set without enumerating every subset.
 
@@ -2183,27 +2319,7 @@ class BasketOptimizer:
         position = {store_id: index for index, store_id in enumerate(store_ids)}
         by_store = []
         for ingredient, quotes, key in quoted_ingredients:
-            # Rows compare only within one line, so the authoritative quote
-            # order is kept as each store's position in that line's sorted
-            # quotes: the same order, compared as integers.
-            reusable = session is not None and key is not None and ingredient is None
-            cached = session.search_rows.get(key) if reusable else None
-            if cached is not None and cached[0] is quotes:
-                line_rows = cached[1]
-            else:
-                ordered = sorted(self._cheapest_quotes_by_store(quotes, key).items(),
-                                 key=lambda item: self._quote_sort_key(item[1]))
-                line_rows = {}
-                for order_index, (store_id, quote) in enumerate(ordered):
-                    named = quote if key is None or ingredient is None else _line_named(session, quote, ingredient)
-                    price = Decimal(str(quote.total_price)) if not isinstance(quote.total_price, Decimal) else quote.total_price
-                    # Whole öre rounded down: a sum of these never exceeds the real
-                    # total, so integer bounds stay valid lower bounds.
-                    cents = int((price * 100).to_integral_value(rounding=ROUND_FLOOR))
-                    line_rows[store_id] = (order_index, self.verification_policy.rank_for_quote(quote),
-                                           quote.total_price, named, cents)
-                if reusable:
-                    session.search_rows[key] = (quotes, line_rows)
+            line_rows = self._line_search_rows(quotes, key, ingredient, session)
             by_store.append({store_id: row for store_id, row in line_rows.items() if store_id in position})
         line_count = len(by_store)
 
