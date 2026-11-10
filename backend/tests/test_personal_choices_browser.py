@@ -1396,3 +1396,37 @@ def test_question_guide_fills_in_mina_val_and_creates_the_plan(choices):
     assert body["personal"]["organic_animals"] is True
     assert body["recipe_preferences"]["cuisines"] == ["italian", "indian", "thai"]
     assert body["recipe_preferences"]["min_distinct_cuisines"] == 3
+
+
+def test_plan_view_keeps_meal_progress_in_the_meal_card(choices, tmp_path):
+    from backend.tests.test_personal_booked_revisions import setup_plan
+
+    page, url, _captured = choices
+    _p, _plans, _private, saved, _stock = setup_plan(tmp_path)
+    envelope = saved.model_dump(mode="json")
+    private = {"revision": 3, "profile": {}, "events": {}, "ledger": [], "items": [], "reservations": {},
+               "account": {"message": "Privat syntetisk testgäst"}}
+    pending = []
+    page.route("**/api/personal/state", lambda route: route.fulfill(content_type="application/json", body=json.dumps(private)))
+    page.route("**/api/plans/" + saved.plan_id, lambda route: route.fulfill(content_type="application/json", body=json.dumps(envelope)))
+    page.route("**/api/personal/plans/*/change", lambda route: pending.append(route))
+    page.goto(url.split("#")[0] + "#plan=" + saved.plan_id)
+    card = page.locator(".plan-meal").first
+    expect(card).to_be_visible()
+    # Search caveats, the revision line and technical details are not shown.
+    expect(page.locator(".recipe-search-status")).to_have_count(0)
+    expect(page.locator(".recipe-plan-revision")).to_have_count(0)
+    expect(page.locator("#plan-content")).not_to_contain_text("Tekniska detaljer")
+    card.get_by_role("button", name="Ta bort").click()
+    status = card.locator(".plan-meal-status")
+    expect(status).to_have_text("Arbetar…")
+    expect(status).to_have_attribute("data-state", "working")
+    expect(page.locator("#personal-status")).to_have_text("")
+    for _ in range(50):
+        if pending:
+            break
+        page.wait_for_timeout(100)
+    pending[0].fulfill(status=409, content_type="application/json", body=json.dumps({"detail": "Testfel för måltiden."}))
+    expect(status).to_contain_text("Testfel för måltiden.")
+    expect(status).to_have_attribute("data-state", "error")
+    expect(page.locator("#personal-status")).to_have_text("")

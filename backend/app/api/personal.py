@@ -378,6 +378,10 @@ async def _change_plan_body(plan_id, payload, request, response):
                 raise HTTPException(422, "Ett strukturerat recept krävs.")
             slot.recipe = payload.recipe
         elif payload.action == "remove":
+            if slot.recipe is not None:
+                from app.services.personal_planner import removed_recipe_key
+                key = removed_recipe_key(slot.recipe)
+                slot.removed_recipes = [*(k for k in slot.removed_recipes if k != key), key][-20:]
             slot.recipe = None
         else:
             if payload.recipe_id:

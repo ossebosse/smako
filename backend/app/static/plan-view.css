@@ -23,6 +23,12 @@
 .personal-app .plan-meal>details>summary {display:inline-flex;align-items:center;min-height:40px;color:var(--sm-primary);}
 .plan-meal.is-empty h3 {color:var(--sm-muted);}
 .plan-meal-actions {margin-top:6px;}
+#plan-content .plan-meal>.plan-meal-status {display:flex;align-items:center;gap:10px;margin:10px 0 4px;padding:10px 12px;border-radius:10px;background:#fff2d6;color:#603d13;font-size:14px;line-height:1.35;}
+#plan-content .plan-meal>.plan-meal-status[hidden] {display:none;}
+.plan-meal-status[data-state=working]::before {content:"";flex:0 0 auto;width:14px;height:14px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:plan-meal-spin .9s linear infinite;}
+.plan-meal-status[data-state=error] {background:#fde8e4;color:#7a2416;}
+@keyframes plan-meal-spin {to {transform:rotate(360deg);}}
+@media (prefers-reduced-motion: reduce) {.plan-meal-status[data-state=working]::before {animation:none;}}
 .personal-app .plan-meal-actions button {flex:0 0 auto;width:auto;min-height:36px;margin:0;padding:6px 14px;border:1px solid var(--sm-border);border-radius:999px;background:#fff;color:var(--sm-ink);font:600 13px/1.2 system-ui,sans-serif;}
 .plan-about {margin-top:12px;font-size:14px;color:var(--sm-muted);}
 .plan-about>p {margin:6px 0;}

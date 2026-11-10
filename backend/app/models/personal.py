@@ -276,6 +276,10 @@ class MealSlot(PrivateModel):
     day: int = Field(ge=1, le=7)
     meal_type: MealType
     recipe: Recipe | None = None
+    # Recipes the owner removed from this meal, newest last: the design base
+    # ID for Smako recipes, otherwise the recipe ID. "Suggest a recipe" for
+    # this meal skips them. Omitted while empty, so older plans are unchanged.
+    removed_recipes: list[str] = Field(default_factory=list, max_length=20, exclude_if=lambda v: not v)
 
 
 class PersonalPlanning(PrivateModel):

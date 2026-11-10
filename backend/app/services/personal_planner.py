@@ -177,6 +177,16 @@ class _QualificationMemory:
 
 _QUALIFICATION_MEMORY = _QualificationMemory()
 
+def removed_recipe_key(recipe, identify=recipe_id):
+    """Key under which a removed recipe is skipped by later suggestions.
+
+    The design base ID for Smako recipes, so another variant of the same dish
+    is not suggested back either, otherwise the recipe ID.
+    """
+    design = getattr(recipe, "design", None)
+    return f"base:{design.base_id}" if design is not None and design.base_id else f"recipe:{identify(recipe)}"
+
+
 class PersonalPlanner:
     def __init__(
         self,
@@ -3736,12 +3746,15 @@ class PersonalPlanner:
                             fixed_slots=[s for s in slots if s.id != replace_slot])
                     else:
                         pools[slot.meal_type] = self._candidates(self.meals[slot.meal_type])
+                # A suggestion for this meal also skips recipes the owner removed from it.
+                removed = set(slot.removed_recipes) if slot.id == replace_slot else set()
                 choices = [
                     r
                     for r in pools[slot.meal_type]
                     if not slot.recipe or self._recipe_id(r) != self._recipe_id(slot.recipe)
                     if not (self.complete and slot.recipe and slot.recipe.design and r.design
                             and slot.recipe.design.base_id == r.design.base_id)
+                    if not removed or removed_recipe_key(r, self._recipe_id) not in removed
                 ]
                 if slot.id == replace_slot and not choices:
                     raise PolicyConflict(
