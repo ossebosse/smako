@@ -1,3 +1,13 @@
+# 2026-11-10: Snabbare menysökning aktiverat
+
+Main `82b9ce411660`. App **app-82b9ce411660-7332b1f6**, scheduler orörd.
+Exakt samma menyer, snabbare: Malmö 2 portioner/3 butiker 117 s (avbrott) → 38 s,
+2/4 270 → 46 s, Lund 2/3 22 → 15 s. Publikt prov Malmö 2/3: 39,8 s, VERIFIED.
+Backup `/srv/smako/backups/20261110T194041Z`.
+[Aktiveringsjournal](releases/planner-speed-20261110/ACTIVATED.md).
+
+---
+
 # 2026-11-09: Mina val Frågor aktiverat
 
 Main `78c2649a2bf2`. App **app-78c2649a2bf2-083247bf**, scheduler orörd.
@@ -126,7 +136,7 @@ på `main` inte ändrar en pågående release.
   `smako-app-1`, `smako-scheduler-1`, `smako-caddy-1`, data i `/srv/smako/data`
   och det gemensamma driftlåset. Detta flöde installerar inte en ny server.
 - Läs aktuell [HANDOFF.md](HANDOFF.md), [OPERATIONS.md](OPERATIONS.md) och
-  senaste aktiveringsrapport. Appens BUILD_ID är `app-78c2649a2bf2-083247bf`;
+  senaste aktiveringsrapport. Appens BUILD_ID är `app-82b9ce411660-7332b1f6`;
   schedulern är `source-ops-8a53beb80e43`.
   [Uppvärmda prov och samordnad faktaläsning/GC](releases/warm-facts-gc-20261101/ACTIVATED.md)
   är senaste appaktiveringen. Sex Pythonfiler från kod `b7c8d0506e23`;
@@ -174,10 +184,10 @@ git status --short
 .venv/Scripts/python.exe -X utf8 scripts/smako_ops.py status
 
 # Använd den granskade Git-bas som motsvarar faktiskt aktiva filer enligt senaste journalen.
-.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit 78c2649a2bf2 --commit main --workdir .local/beta-release
+.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit 82b9ce411660 --commit main --workdir .local/beta-release
 ```
 
-`78c2649a2bf2` är appen som aktiverades 2026-11-09 18:04 UTC. Appbildens egen
+`82b9ce411660` är appen som aktiverades 2026-11-10 19:49 UTC. Appbildens egen
 grocery-kopia är äldre än Git; använd `--keep-app-grocery` om intervallet
 bara innehåller grocery-Python som redan levererats till schedulern. De äldre
 Coop-filerna i runtime (`price_universe_runtime.py`,
