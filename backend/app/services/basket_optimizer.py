@@ -69,6 +69,31 @@ _VERIFICATION_RANK: dict[BasketVerificationStatus, int] = {
 
 
 _MAX_GROUP_COMBINATIONS = 200000
+
+# Exact same-depth requirement keys shared by every quote session of one plan
+# request (see requirement_key_scope). None outside such a request.
+_REQUIREMENT_KEY_SCOPE: ContextVar[dict | None] = ContextVar(
+    "basket_requirement_key_scope", default=None)
+
+
+@contextmanager
+def requirement_key_scope() -> Iterator[None]:
+    """Share same-depth requirement keys between one request's menu searches.
+
+    The balanced/variant search and the later conditioned "varied" search
+    run in separate quote sessions over the same price universe and the same
+    product candidates, and price thousands of identical requirement sets.
+    A key is reused only for the same optimizer, quote context (universe,
+    package cache, calculator version), store IDs, cap and, per line, the
+    same canonical quantity and unit over the very same candidate objects,
+    so it is the value the second search would compute. Worker threads
+    started with asyncio.to_thread inherit the scope.
+    """
+    token = _REQUIREMENT_KEY_SCOPE.set({})
+    try:
+        yield
+    finally:
+        _REQUIREMENT_KEY_SCOPE.reset(token)
 _MAX_PROMOTION_STRUCTURE_ROWS = 256
 _MAX_PROMOTION_STRUCTURE_CANDIDATES = 32768
 
@@ -142,6 +167,10 @@ def _has_coupled_checkout(candidates_by_name, required_names=None, *, session=No
             candidates = offer_only
         else:
             candidates = rows
+        if session is not None and isinstance(rows, tuple) and selected is not None and name not in selected:
+            # Grouped rows already returned above; an unselected line adds no
+            # capped identities, so its offer-only rows cannot change the answer.
+            continue
         for candidate in candidates:
             if candidate.promotion_groups:
                 return True
@@ -1554,13 +1583,11 @@ class BasketOptimizer:
                 [NormalizedIngredient(canonical_name=str(r[0]), required_quantity=float(r[1]), unit=str(r[2])) for r in requirements],
                 candidates_by_name, stores, max_stores=max_stores,
             )
-        quoted_requirements: list[tuple[tuple[BasketItemQuote, ...], _QuoteSetKey | None]] = []
+        resolved = []
         for raw in requirements:
             if len(raw) != 3:
                 raise ValueError("canonical requirement keys must have three fields")
             canonical = str(raw[0])
-            quantity = Decimal(str(raw[1])).normalize()
-            unit = str(raw[2])
             candidates = candidates_by_name.get(canonical)
             if candidates is None:
                 target = canonicalize_ingredient_name(canonical)
@@ -1572,7 +1599,14 @@ class BasketOptimizer:
                     ),
                     (),
                 )
-
+            resolved.append((canonical, Decimal(str(raw[1])).normalize(), str(raw[2]), candidates))
+        shared_key = self._shared_requirement_key(resolved, stores, max_stores)
+        if shared_key is not None:
+            shared = _REQUIREMENT_KEY_SCOPE.get()["keys"].get(shared_key)
+            if shared is not None:
+                return shared
+        quoted_requirements: list[tuple[tuple[BasketItemQuote, ...], _QuoteSetKey | None]] = []
+        for canonical, quantity, unit, candidates in resolved:
             session = self._quote_cache_context.get()
             cacheable = (
                 session is not None
@@ -1599,11 +1633,47 @@ class BasketOptimizer:
                 self._candidate_quotes_with_key(ingredient, candidates)
             )
 
-        return self._same_depth_nested_store_limited_quote_keys(
+        result = self._same_depth_nested_store_limited_quote_keys(
             quoted_requirements,
             stores,
             max_stores=max_stores,
         )
+        if shared_key is not None:
+            _REQUIREMENT_KEY_SCOPE.get()["keys"][shared_key] = result
+        return result
+
+    def _shared_requirement_key(self, resolved, stores, max_stores):
+        """Identity of a requirement-set key inside requirement_key_scope().
+
+        None outside a scope or quote session, or where a line's candidates
+        are not an immutable tuple. Every object named by identity is kept
+        alive by the scope, so an id is never reused within it.
+        """
+        scope = _REQUIREMENT_KEY_SCOPE.get()
+        session = self._quote_cache_context.get()
+        if scope is None or session is None or type(self.calculator) is not BasketCalculator:
+            return None
+        if not scope:
+            scope.update(keys={}, signatures={}, store_keys={}, anchors={})
+        signatures = scope["signatures"]
+        lines = []
+        for canonical, quantity, unit, candidates in resolved:
+            if not isinstance(candidates, tuple):
+                return None
+            cached = signatures.get(id(candidates))
+            if cached is None or cached[0] is not candidates:
+                cached = signatures[id(candidates)] = (candidates, tuple(map(id, candidates)))
+            lines.append((canonical, quantity, unit, cached[1]))
+        store_keys = scope["store_keys"]
+        cached_stores = store_keys.get(id(stores))
+        if cached_stores is None or cached_stores[0] is not stores:
+            cached_stores = store_keys[id(stores)] = (
+                stores, tuple(sorted({str(_value(store, "store_id")) for store in stores})))
+        anchors = scope["anchors"]
+        for anchor in (self, session.price_universe, session.persistent_cache):
+            anchors.setdefault(id(anchor), anchor)
+        return (id(self), id(session.price_universe), id(session.persistent_cache),
+                session.calculator_version, cached_stores[1], max_stores, tuple(lines))
 
     def _same_depth_nested_store_limited_quote_keys(
         self,
@@ -1712,10 +1782,12 @@ class BasketOptimizer:
                 quoted_requirements, stores, max_stores=lower_cap)
             # The best smaller set is itself a candidate, so it is a valid
             # pruning incumbent: only strictly worse branches are cut.
+            smaller = lower[-1] if lower else None
             found = self._search_store_sets(
                 [(None, quotes, key) for quotes, key in quoted_requirements], store_ids, limit,
-                incumbent=lower[-1][:2] if lower and lower[-1] is not None else None)
-            top = found[0][:3] if found is not None else None
+                incumbent=smaller, keys_only=True)
+            top = min((key for key in (found[0][:3] if found is not None else None, smaller)
+                       if key is not None), default=None)
             return (*lower, *([top] * (limit - lower_cap))) + (top,) * (requested_limit - limit)
         store_subsets = self._eligible_store_subsets(store_ids, limit)
         subset_vectors = tuple(
@@ -2081,7 +2153,7 @@ class BasketOptimizer:
             return subsets > min(threshold, CAP_THREE_SEARCH_THRESHOLD)
         return subsets > threshold
 
-    def _search_store_sets(self, quoted_ingredients, store_ids, limit, *, incumbent=None):
+    def _search_store_sets(self, quoted_ingredients, store_ids, limit, *, incumbent=None, keys_only=False):
         """Exact best store set without enumerating every subset.
 
         Same objective, winners and tie-breakers as the subset loop in
@@ -2094,6 +2166,13 @@ class BasketOptimizer:
         is kept. The visiting order only affects speed, never the winner,
         because candidates are compared by the full key. Coupled checkout
         never reaches this path.
+
+        With ``keys_only`` the caller needs only the leading
+        (max rank, total, stores used) of the best set and passes the exact
+        best smaller set's leading key as ``incumbent``. Sets that cannot get
+        below the better of it and the best found are then pruned on ties
+        too, so the returned set is not necessarily that minimum: the caller
+        takes the smaller of its key and the incumbent.
 
         Returns ``(plan_key, chosen_quotes, best_single_key)`` or ``None``.
         """
@@ -2208,9 +2287,52 @@ class BasketOptimizer:
         columns = [[rows[j] for rows in lines] for j in range(n)]
         ranks = sorted({row[1] for rows in by_store for row in rows.values()}) or [verified]
         big = 10 ** 18
+        if len(ranks) == 1:
+            # One verification rank (the usual case): every rank comparison
+            # below is an equality, so the bound reduces to öre alone.
+            only_rank = ranks[0] if line_count else verified
+            # suffix_low[j][l]: cheapest öre of line l over order[j:], or None.
+            suffix_low = [[None] * line_count for _ in range(n + 1)]
+            for line, rows in enumerate(lines):
+                low = None
+                for j in range(n - 1, -1, -1):
+                    row = rows[j]
+                    if row is not None and (low is None or row[4] < low):
+                        low = row[4]
+                    suffix_low[j][line] = low
+
+            def single_rank_bound(winners, start, capacity):
+                """``bound`` for one verification rank; identical values."""
+                total_bound = covered = uncovered = 0
+                for winner, low in zip(winners, suffix_low[start], strict=True):
+                    if winner is None:
+                        if low is None:
+                            return None
+                        uncovered += low
+                        total_bound += low
+                    else:
+                        cents = winner[4]
+                        covered += cents
+                        total_bound += cents if low is None or cents < low else low
+                if capacity == 0:
+                    total_bound = max(total_bound, covered + uncovered)
+                elif capacity < n - start and covered and not beaten((only_rank, total_bound)):
+                    savings = []
+                    for j in range(start, n):
+                        saving = 0
+                        for winner, row in zip(winners, columns[j], strict=True):
+                            if winner is not None and row is not None and row[4] < winner[4]:
+                                saving += winner[4] - row[4]
+                        if saving:
+                            savings.append(saving)
+                    savings.sort(reverse=True)
+                    limited = covered - sum(savings[:capacity]) + uncovered
+                    if limited > total_bound:  # noqa: PLR1730 -- measured hot loop
+                        total_bound = limited
+                return only_rank, total_bound
         # suffix[l][j]: (min rank, {r: min öre with rank <= r}) over order[j:].
         suffix = []
-        for rows in lines:
+        for rows in ([] if len(ranks) == 1 else lines):
             table = [None] * (n + 1)
             table[n] = (None, dict.fromkeys(ranks, big))
             for j in range(n - 1, -1, -1):
@@ -2268,8 +2390,26 @@ class BasketOptimizer:
                     total_bound = limited
             return rank_bound, total_bound
 
+        if len(ranks) == 1:
+            bound = single_rank_bound  # same values, öre only
+
+        memo = [False, None]  # (best it was computed for, value)
+
         def threshold():
-            """(rank, öre) of the incumbent, or None while there is none."""
+            """(rank, öre, stores or None) of the incumbent, or None."""
+            # Only ``best`` changes during a search; reuse the value until it does.
+            if memo[0] is best:
+                return memo[1]
+            memo[0] = best
+            memo[1] = value = incumbent_key()
+            return value
+
+        def incumbent_key():
+            if keys_only:
+                found = best[0][:3] if best is not None else None
+                leading = min((key for key in (found, incumbent) if key is not None), default=None)
+                # The incumbent total is already rounded to öre.
+                return None if leading is None else (leading[0], int(leading[1] * 100), leading[2])
             if best is None:
                 if incumbent is None:
                     return None
@@ -2279,12 +2419,20 @@ class BasketOptimizer:
                 if incumbent is not None and incumbent < (rank, total):
                     rank, total = incumbent
             # The incumbent total is already rounded to öre.
-            return rank, int(total * 100)
+            return rank, int(total * 100), None
 
-        def beaten(lower):
+        def beaten(lower, need=None):
+            """No set below can beat the incumbent. A completion of a set of
+            ``need`` stores uses at least ``need`` stores, so for keys_only a
+            tie in rank and öre with no fewer stores cannot beat it either."""
             limit_key = threshold()
-            return limit_key is not None and (
-                lower[0] > limit_key[0] or (lower[0] == limit_key[0] and lower[1] > limit_key[1]))
+            if limit_key is None:
+                return False
+            if lower[0] != limit_key[0]:
+                return lower[0] > limit_key[0]
+            if lower[1] != limit_key[1]:
+                return lower[1] > limit_key[1]
+            return limit_key[2] is not None and need is not None and need >= limit_key[2]
 
         def visit(winners, size, start):
             nonlocal nodes
@@ -2320,6 +2468,9 @@ class BasketOptimizer:
                                 rank > limit_key[0] or (rank == limit_key[0] and cents > limit_key[1])):
                             break
                     else:
+                        if (limit_key is not None and limit_key[2] is not None and rank == limit_key[0]
+                                and cents == limit_key[1] and need >= limit_key[2]):
+                            continue
                         extended = [row if row is not None and (winner is None or row[0] < winner[0]) else winner
                                     for winner, row in zip(winners, columns[j], strict=True)]
                         if len({winner[5] for winner in extended}) == need:
@@ -2335,7 +2486,7 @@ class BasketOptimizer:
                 if len({winner[5] for winner in extended if winner is not None}) != need:
                     continue
                 lower = bound(extended, j + 1, capacity)
-                if lower is None or beaten(lower):
+                if lower is None or beaten(lower, need):
                     continue
                 visit(extended, size + 1, j + 1)
 
@@ -2643,8 +2794,15 @@ class BasketOptimizer:
                         raise GroupPricingError("Promotion group lacks exact product/context/source evidence")
                     source_groups[key] = group
         choices = []
+        # Once the choices so far exceed the exact-search limit, the result is
+        # the base-price fallback below, which never reads ``choices``. Later
+        # lines then only need to show whether they have any choice; their
+        # group and offer-only candidates are still checked, since those can
+        # raise GroupPricingError, so every outcome stays the same.
+        combinations = 1
         for ingredient in ingredients:
             group_quotes, plain = [], {}
+            only_presence = combinations > _MAX_GROUP_COMBINATIONS
             for candidate in self._ingredient_candidates(ingredient, candidates_by_name):
                 if candidate.store_id not in source_stores:
                     continue
@@ -2653,6 +2811,8 @@ class BasketOptimizer:
                                and candidate.product_id in g.eligible_product_ids
                                and candidate.source_provenance
                                and g.source_snapshot_id == candidate.source_provenance.source_snapshot_id) if source_groups else ()
+                if only_presence and not groups and candidate.price is not None and (group_quotes or plain):
+                    continue
                 if groups:
                     candidate = candidate.model_copy(update={"promotion_groups": groups})
                 if groups and type(self.calculator) is BasketCalculator:
@@ -2676,6 +2836,7 @@ class BasketOptimizer:
                 ) < self._quote_sort_key(plain[candidate.store_id][0]):
                     plain[candidate.store_id] = (quote, candidate)
             choices.append([*group_quotes, *plain.values()])
+            combinations *= len(choices[-1])
         if any(not c for c in choices):
             if nested_keys:
                 return tuple(nested_winners)

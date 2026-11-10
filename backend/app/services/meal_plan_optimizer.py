@@ -49,7 +49,11 @@ from app.providers.federated import SourceResolutionDiagnostics
 from app.providers.mock import MockPriceProvider
 from app.services.basket_auditor import BasketAuditor
 from app.services.basket_calculator import money
-from app.services.basket_optimizer import BasketOptimizer, BasketVerificationPolicy
+from app.services.basket_optimizer import (
+    BasketOptimizer,
+    BasketVerificationPolicy,
+    requirement_key_scope,
+)
 from app.services.cheap_products import CheapProductsService
 from app.services.culinary_similarity import CulinaryMenuReport, CulinarySimilarity
 from app.services.diet_policy import filter_economic_pool, recipe_respects_diet
@@ -2888,7 +2892,9 @@ class MealPlanService:
             else self._build_with_provider
         )
         try:
-            return await builder(request, provider)
+            # Both menu searches of this request may share exact keys.
+            with requirement_key_scope():
+                return await builder(request, provider)
         except PriceProviderError:
             is_live = getattr(provider, "source_name", None) == "primat"
             if not (is_live and self.settings.allow_mock_fallback):
