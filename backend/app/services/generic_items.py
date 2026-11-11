@@ -22,7 +22,7 @@ from __future__ import annotations
 import json
 import re
 import unicodedata
-from collections import Counter, defaultdict
+from collections import Counter, OrderedDict, defaultdict
 from functools import lru_cache
 from pathlib import Path
 
@@ -37,10 +37,7 @@ _FLAVOUR_BEFORE = frozenset({"med", "smak", "smaksatt", "av", "och", "i", "a", "
 _LIST_AFTER = frozenset({"och", *_SEPARATORS})
 # Words that may stand before the goods without changing what it is.
 _LEADING = frozenset(
-    "ekologisk ekologiska ekologiskt eko krav svensk svenska svenskt farsk farska farskt fryst frysta "
-    "glutenfri glutenfritt laktosfri laktosfritt mini stor stora liten sma extra original klassisk "
-    "naturell vegansk kokt kokta torkad torkade hel hela mald malet fast mjolig rod roda gul gula gron "
-    "grona vit vita svart svarta ny nya sot sota fin fina grov grova mild lagrad".split()
+    ["ekologisk", "ekologiska", "ekologiskt", "eko", "krav", "svensk", "svenska", "svenskt", "farsk", "farska", "farskt", "fryst", "frysta", "glutenfri", "glutenfritt", "laktosfri", "laktosfritt", "mini", "stor", "stora", "liten", "sma", "extra", "original", "klassisk", "naturell", "vegansk", "kokt", "kokta", "torkad", "torkade", "hel", "hela", "mald", "malet", "fast", "mjolig", "rod", "roda", "gul", "gula", "gron", "grona", "vit", "vita", "svart", "svarta", "ny", "nya", "sot", "sota", "fin", "fina", "grov", "grova", "mild", "lagrad"]
 )
 _PACK = re.compile(r"^\d+(p|pack|st|g|kg|ml|cl|l|dl)?$|^(pack|st|klass|styck|kg|g|ml|l|eko|krav|ca)$")
 # Compounds that are the same goods as their last part. Other compounds are
@@ -61,7 +58,7 @@ _COMPOUNDS = {
     "potatis": {"matpotatis"},
 }
 # Cuts and forms of the same goods: lax is also laxfilé and laxbitar.
-_CUTS = frozenset("file fileer filer bitar portioner sida rygg ryggfile lar larfile brost brostfile vingar klubbor".split())
+_CUTS = frozenset(["file", "fileer", "filer", "bitar", "portioner", "sida", "rygg", "ryggfile", "lar", "larfile", "brost", "brostfile", "vingar", "klubbor"])
 _CURATED = {
     row["query"].casefold(): row
     for row in json.loads((Path(__file__).parents[1] / "data/shopping_generics.json").read_text(encoding="utf8"))
@@ -131,7 +128,7 @@ def word_forms(query: str) -> tuple[str, ...]:
         forms.add(head[:-2] + "e")
     for base in tuple(forms):
         forms.update(_COMPOUNDS.get(base, ()))
-        forms.update(base + cut for cut in ("file", "bitar"))
+        forms.update(base + cut for cut in _CUTS)
     return tuple(sorted(forms))
 
 
@@ -266,8 +263,20 @@ class GenericItemIndex:
         return sum(1 for w in words if not any(same_word(q, w) or _head_matches(q, w) for q in wanted))
 
 
+_INDEXES: OrderedDict[int, GenericItemIndex] = OrderedDict()
+
+
 def generic_item_index(prepared) -> GenericItemIndex:
-    return prepared.product_search_cache.get_or_compute("generic-item-index:" + VERSION, lambda: GenericItemIndex(prepared))
+    """One index per loaded price data, kept apart from the small search cache."""
+    products = prepared.universe.products
+    index = _INDEXES.get(id(products))
+    if index is None or index.products is not products:
+        index = _INDEXES[id(products)] = GenericItemIndex(prepared)
+        while len(_INDEXES) > 4:
+            _INDEXES.popitem(last=False)
+    else:
+        _INDEXES.move_to_end(id(products))
+    return index
 
 
 def generic_search_positions(prepared, query: str) -> frozenset[int]:
@@ -276,11 +285,22 @@ def generic_search_positions(prepared, query: str) -> frozenset[int]:
 
     positions = set(ingredient_search_positions(prepared, query, complete=False))
     words = _goods_words(query)
-    if words:
-        modifiers = " ".join(words[:-1])
-        for form in word_forms(query):
-            if form != words[-1]:
-                positions.update(ingredient_search_positions(prepared, f"{modifiers} {form}".strip(), complete=False))
+    if not words:
+        return frozenset(positions)
+    # Read the search index's own word lists directly: plural forms, listed
+    # compounds and cuts of the last word, narrowed by the other words.
+    index = prepared.product_search_index
+    keys = set()
+    for form in word_forms(query):
+        keys.update(index.postings.get(form, ()))
+    for word in words[:-1]:
+        narrowed = set()
+        for token in index.vocabulary:
+            if same_word(word, token):
+                narrowed.update(index.postings[token])
+        keys &= narrowed
+    for key in keys:
+        positions.update(index.groups[key])
     return frozenset(positions)
 
 

@@ -129,3 +129,27 @@ def test_word_forms_and_usual_amount():
     assert usual_amount(p, "pasta") == {"quantity": 500.0, "unit": "g"}
     assert usual_amount(p, "banan") == {"quantity": 500.0, "unit": "g"}
     assert usual_amount(p, "tvättmedel") is None
+
+
+def test_cuts_count_as_the_goods_and_equal_offers_keep_the_plain_name():
+    p = prepared(
+        product("Laxportioner skinnfri", 400, "g", 73.77, store="coop", category="Färsk & Fryst lax > Fryst lax"),
+        product("Kattmat Vuxen Lax", 400, "g", 20, store="coop", category="Torrfoder"),
+        product("Gravlaxsås", 200, "g", 15, store="coop", category="Färdig sås"),
+    )
+    assert bought(plan(p, {"query": "lax", "quantity": 400, "unit": "g"})) == ["Laxportioner skinnfri"]
+
+
+def test_own_items_are_bought_with_recipe_facts_loaded():
+    """With meals in the plan Smako loads product facts; a loose banana must still be buyable."""
+    p = prepared(
+        loose("Banan Klass 1", 180, 21.9, category="Frukt & Grönt > Frukt > Bananer", semantic_confidence="low"),
+        product("Bryggkaffe Mellanrost", 500, "g", 44.5, store="coop", category="Bryggkaffe", semantic_confidence="low"),
+    )
+    req = request(extras=[ExtraNeed(confirmed=True, query="banan", quantity=500, unit="g"),
+                          ExtraNeed(confirmed=True, query="kaffe", quantity=500, unit="g")])
+    req.purchase_planning_mode = "estimated"
+    from app.services.personal_policy import ProductFacts
+
+    facts = {("other", "row"): ProductFacts(source="test", source_product_id="row", source_snapshot_id="other")}
+    assert bought(run(p, req, facts=facts)) == ["Banan Klass 1", "Bryggkaffe Mellanrost"]

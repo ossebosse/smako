@@ -21,6 +21,11 @@ FILES = (
     "choice-controls.js",
     "configurator.js",
     "choice-guide.js",
+    "next/a.html",
+    "next/b.html",
+    "next/core.js",
+    "next/a.js",
+    "next/b.js",
 )
 
 # Word stem -> what to write instead (also listed in docs/UI-LANGUAGE.md).

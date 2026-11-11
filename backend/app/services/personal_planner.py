@@ -874,7 +874,9 @@ class PersonalPlanner:
                     # A stale source classification must not pre-empt the shared
                     # semantic matcher. Lexical fallback, however, cannot promote
                     # a low-confidence product into a meal ingredient.
-                    if self.facts and product.semantic_confidence not in {"high", "exact"}:
+                    # A generic shopping row is not a meal ingredient; its name
+                    # and the store's category were matched above.
+                    if self.facts and generic_items is None and product.semantic_confidence not in {"high", "exact"}:
                         note(i, "recipe_match", "stopped", "shared semantic matcher rejected; source confidence cannot support lexical fallback")
                         continue
                     tokens = set(search_text(name).split())

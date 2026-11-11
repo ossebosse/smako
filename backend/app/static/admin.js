@@ -107,6 +107,16 @@
   }
   $("cities").addEventListener("click", event => {const button=event.target.closest("button[data-city]");if(!button || button.dataset.city===city)return;city=button.dataset.city;data=null;$("search").value="";$("chain").value="";$("stores").replaceChildren(node("p","Laddar butiker…","empty"));$("metrics").replaceChildren();$("other-panel").hidden=true;$("runtime-note").hidden=true;$("city-title").textContent=`i ${city}`;$("visible-count").textContent="";$("updated").textContent=`Hämtar ${city}…`;document.querySelectorAll("[data-city]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.city===city)));refresh();});
   for(const id of ["search","chain","attention"]) $(id).addEventListener("input",renderStores);
+  // Which interface this browser opens. Kept in this browser only; next/choice.js reads it on /personal.
+  const interfaceNames={standard:"Nuvarande",a:"Alternativ A",b:"Alternativ B"};
+  function showInterface(){
+    let chosen="standard";try{const stored=localStorage.getItem("smako.ui");if(interfaceNames[stored])chosen=stored;}catch(_){$("interface-status").textContent="Webbläsaren sparar inte valet. Öppna /ui/a eller /ui/b direkt.";}
+    document.querySelectorAll("[data-interface]").forEach(b=>b.setAttribute("aria-checked",String(b.dataset.interface===chosen)));
+    $("interface-open").href=chosen==="standard"?"/personal?ui=standard":`/ui/${chosen}`;
+    $("interface-open").textContent=`Öppna Smako med ${interfaceNames[chosen]}`;
+  }
+  document.querySelectorAll("[data-interface]").forEach(b=>b.addEventListener("click",()=>{try{if(b.dataset.interface==="standard")localStorage.removeItem("smako.ui");else localStorage.setItem("smako.ui",b.dataset.interface);$("interface-status").textContent=`${interfaceNames[b.dataset.interface]} är valt i den här webbläsaren.`;}catch(_){}showInterface();}));
+  showInterface();
   $("refresh").addEventListener("click",refresh);
   setInterval(()=>{if(!busy && !document.hidden) refresh();},60000);
   refresh();

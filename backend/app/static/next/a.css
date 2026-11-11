@@ -1,0 +1,32 @@
+/* Alternativ A: an app with four tabs. Home offers the two ways in. */
+.ui-a{--page:#f6f4ee;--card:#fff;--ink:#16241f;--muted:#5d6b64;--line:#d9ddd3;--line-soft:#eceee6;--accent:#173e35;--accent-soft:#e4ede5;--accent-ink:#173e35;--on-accent:#fff;--focus:#e0a458;--warn:#c5523f;--warn-soft:#fbeae6;--radius:14px;
+  padding-bottom:calc(4.5rem + env(safe-area-inset-bottom))}
+.ui-a .top{position:sticky;top:0;z-index:20;display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:.7rem 1rem;background:var(--page);border-bottom:1px solid var(--line-soft)}
+.ui-a .brand{font-family:Georgia,"Times New Roman",serif;font-size:1.6rem;font-weight:700;color:var(--accent);text-decoration:none;letter-spacing:-.02em}
+.ui-a .place{border:1.5px solid var(--line);background:var(--card);border-radius:999px;padding:.35rem .9rem;font-size:.85rem;font-weight:600;min-height:2.4rem;cursor:pointer;max-width:60vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ui-a main{max-width:36rem;margin:0 auto;padding:1.25rem 1rem 6.5rem;display:grid;gap:1.25rem;outline:0}
+.ui-a .tabs{position:fixed;left:0;right:0;bottom:0;z-index:30;display:grid;grid-template-columns:repeat(4,1fr);background:var(--card);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom)}
+.ui-a .tabs a{display:grid;justify-items:center;gap:.1rem;padding:.55rem .25rem .6rem;font-size:.74rem;font-weight:600;color:var(--muted);text-decoration:none;position:relative}
+.ui-a .tab-icon{display:grid;height:1.4rem}
+.ui-a .tabs a[aria-current=page]{color:var(--accent)}
+.ui-a .tabs a[aria-current=page]::before{content:"";position:absolute;top:0;left:25%;right:25%;height:3px;border-radius:0 0 3px 3px;background:var(--accent)}
+.ui-a .tabs .badge{position:absolute;top:.3rem;left:calc(50% + .5rem);min-width:1.15rem;height:1.15rem;border-radius:999px;background:var(--warn);color:#fff;font-size:.68rem;display:grid;place-items:center;padding:0 .25rem}
+.ui-a .lead{color:var(--muted);margin-top:.4rem}
+.ui-a .ways{display:grid;gap:.9rem}
+.ui-a .way{display:grid;grid-template-columns:auto 1fr auto;gap:.9rem;align-items:center;padding:1.1rem;border-radius:18px;text-decoration:none;color:inherit;background:var(--card);border:1.5px solid var(--line)}
+.ui-a .way.main{background:var(--accent);border-color:var(--accent);color:#fff}
+.ui-a .way.main .way-note{color:#cfe0d6}
+.ui-a .way-icon{width:3rem;height:3rem;border-radius:12px;display:grid;place-items:center;font-size:1.25rem;font-weight:700;background:var(--accent-soft);color:var(--accent)}
+.ui-a .way.main .way-icon{background:rgb(255 255 255/.14);color:#fff}
+.ui-a .way-title{font-weight:700;font-size:1.1rem}
+.ui-a .way-note{font-size:.88rem;color:var(--muted)}
+.ui-a .way-go{font-size:1.4rem}
+.ui-a .panel{background:var(--card);border:1.5px solid var(--line);border-radius:var(--radius);padding:1rem;display:grid;gap:.8rem}
+.ui-a .more>summary{font-weight:650;cursor:pointer;padding:.2rem 0;color:var(--accent)}
+.ui-a .more[open]>summary{margin-bottom:1rem}
+.ui-a .sticky{position:fixed;left:0;right:0;bottom:calc(3.85rem + env(safe-area-inset-bottom));z-index:25;padding:.6rem 1rem;background:linear-gradient(to top,var(--page) 70%,transparent)}
+.ui-a .sticky>div{max-width:34rem;margin:0 auto;display:grid;gap:.4rem}
+.ui-a .total{display:flex;justify-content:space-between;align-items:baseline;gap:1rem}
+.ui-a .total strong{font-size:1.7rem;font-weight:650;letter-spacing:-.01em;white-space:nowrap}
+.ui-a .links{display:flex;flex-wrap:wrap;gap:.4rem 1.2rem;font-size:.9rem}
+@media (min-width:60rem){.ui-a main{padding-top:2rem}}
