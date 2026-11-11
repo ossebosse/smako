@@ -418,8 +418,12 @@
         generic.append(el("h3","Lägg till vara"));
         // The typed text first: with an amount it is added as read; a curated
         // item with the same name brings its usual amount; otherwise ask.
-        const same=parsed&&!parsed.error&&parsed.quantity==null?data.generics.find(g=>g.query.toLowerCase()===parsed.query.toLowerCase()):null;
-        const main=parsed?.quantity!=null?{query:parsed.query,quantity:parsed.quantity,unit:parsed.unit,properties:parsed.properties}:same;
+        // Without an amount: the curated item with this name (also in plural),
+        // else the package size most such goods are sold in.
+        const typedName=parsed&&!parsed.error?parsed.query.toLowerCase():null;
+        const same=typedName&&parsed.quantity==null?data.generics.find(g=>g.query.toLowerCase()===typedName||g.name.toLowerCase()===typedName):null;
+        const usual=typedName&&parsed.quantity==null&&data.usual?{query:parsed.query,quantity:data.usual.quantity,unit:data.usual.unit,properties:parsed.properties}:null;
+        const main=parsed?.quantity!=null?{query:parsed.query,quantity:parsed.quantity,unit:parsed.unit,properties:parsed.properties}:same||usual;
         if(main)generic.append(quickAddButton(main,true));
         else if(parsed?.error)generic.append(el("p",parsed.error,"small"));
         else if(parsed)generic.append(button(`Lägg till ”${parsed.query}” – välj mängd`,async()=>{closeShoppingSuggestions();extraDialog(null,false,{...parsed,quantity:1,unit:"g"});},true));

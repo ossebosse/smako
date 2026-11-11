@@ -687,6 +687,13 @@ class PersonalPlanner:
         requirement = NormalizedIngredient(
             canonical_name=canonical, required_quantity=quantity, unit=unit
         )
+        # A generic shopping-list row: no recipe and no chosen product. The name
+        # and the store's category must agree that the product is these goods.
+        generic_items = None
+        if (recipe is None and not product_key and not campaign_choice and not purchase_units
+                and _reviewed_source_key is None):
+            from app.services.generic_items import generic_item_index
+            generic_items = generic_item_index(self.prepared)
         if product_key:
             positions = self.index.groups.get(product_key, ())
         else:
@@ -727,6 +734,9 @@ class PersonalPlanner:
                     self.queries[key] = ingredient_search_positions(
                         self.prepared, name, complete=self.complete)
                 positions |= self.queries[key]
+            if generic_items is not None:
+                from app.services.generic_items import generic_search_positions
+                positions |= generic_search_positions(self.prepared, name)
         candidates = []
         conflicts = []
         weight_consent_missing = False
@@ -752,6 +762,9 @@ class PersonalPlanner:
                     note(i, "recipe_match", "stopped", "authored ingredient input form is incompatible with product")
                     continue
             note(i, "candidate_index", "passed", "retrieved by existing index/search for this ingredient")
+            if generic_items is not None and (why := generic_items.reason(name, i)):
+                note(i, "recipe_match", "stopped", "generic shopping item: " + why)
+                continue
             if product.store_id not in self.store_ids:
                 note(i, "store_freshness", "stopped", "store/context excluded by request view or explicit allowed stores")
                 continue
@@ -841,7 +854,7 @@ class PersonalPlanner:
                     if semantic_product is not product:
                         candidate = candidate.model_copy(update={"semantic_evidence": [*candidate.semantic_evidence,
                                 "exact variant-bound supplier food classification: " + self.declared_classes[i]]})
-                elif properties or canonical not in self.view.economic_pool.candidates_by_name:
+                elif generic_items is not None or properties or canonical not in self.view.economic_pool.candidates_by_name:
                     # For out-of-taxonomy generic goods all query terms must be
                     # present; the user confirms the resulting query properties.
                     from app.services.product_search import search_text
@@ -865,7 +878,9 @@ class PersonalPlanner:
                         note(i, "recipe_match", "stopped", "shared semantic matcher rejected; source confidence cannot support lexical fallback")
                         continue
                     tokens = set(search_text(name).split())
-                    if not tokens <= set(search_text(product.name).split()):
+                    # A generic row was already matched on name and category
+                    # above, including plural forms and listed compounds.
+                    if generic_items is None and not tokens <= set(search_text(product.name).split()):
                         note(i, "recipe_match", "stopped", "neither semantic match nor complete requested query")
                         continue
                     candidate = ProductCandidate.from_product(product, 1).model_copy(
@@ -894,6 +909,23 @@ class PersonalPlanner:
                 continue
             note(i, "price_contract", "passed", "request membership, date, source scope and purchase mode accepted")
             candidates.append((i, candidate))
+        if generic_items is not None and len(candidates) > 1:
+            # Same store, price, size and offers: keep the plainest names, so
+            # "coca cola" is not bought as a flavoured variant at the same price.
+            closest = {}
+            for i, candidate in candidates:
+                key = (candidate.store_id, candidate.effective_price, candidate.price, candidate.member_price,
+                       candidate.package_quantity, candidate.package_unit,
+                       tuple(sorted(repr((o.kind, o.price, o.price_basis_unit, o.required_packages, o.max_quantity,
+                                          o.eligibility, o.mechanism, o.membership_program, o.percent_discount,
+                                          o.valid_from, o.valid_to, o.deposit)) for o in candidate.offers)),
+                       repr(getattr(candidate, "promotion_groups", ())))
+                score = generic_items.closeness(name, i)
+                if key not in closest or score < closest[key][0]:
+                    closest[key] = (score, [(i, candidate)])
+                elif score == closest[key][0]:
+                    closest[key][1].append((i, candidate))
+            candidates = sorted((row for _score, rows in closest.values() for row in rows), key=lambda row: row[0])
         self._resolution_trace[cache_key] = observed
         if not candidates:
             failure = conflicts[0] if conflicts else PolicyConflict(

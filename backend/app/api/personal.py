@@ -125,7 +125,16 @@ def shopping_suggestions(request: Request, response: Response, q: str = "", post
     if prepared is None:
         return {"generics": generic, "products": [], "status": "no_area_data"}
     products = []
+    usual = None
     if len(q.strip()) >= 2:
+        # The package size most goods with this name are sold in, so a typed
+        # name without an amount can still be added with one tap.
+        from app.services.generic_items import usual_amount
+        typed, typed_amount, _unit = parse_quantity(q)
+        if typed_amount is None and typed.strip():
+            usual = usual_amount(prepared, typed)
+            if usual:
+                usual = {"query": typed.strip(), **usual}
         # The first curated generic is the closest meaning of a broad query.
         # Rank its existing exact matches first, then retain the original matches.
         # This changes suggestions only, never basket candidate eligibility.
@@ -145,7 +154,7 @@ def shopping_suggestions(request: Request, response: Response, q: str = "", post
                 stale_hours=settings.max_price_age_hours,
                 warning_hours=settings.price_age_warning_hours)["results"])
         products = price_free_products({"results": rows})
-    return {"generics": generic, "products": products, "status": "available",
+    return {"generics": generic, "products": products, "usual": usual, "status": "available",
             "identity_rule": "verified_gtin_and_package; otherwise separate source identity"}
 
 
