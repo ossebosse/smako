@@ -632,10 +632,15 @@ class PersonalPlanner:
                     self.product_trace.event(product, recipe, name, "preparation_source", "passed",
                         "issued preparation operand; qualified source input, shared purchase and measured output required")
             return candidates
+        # A generic own item (no recipe, no chosen product) is matched by name
+        # and category; a recipe ingredient of the same name is not.
+        generic_row = (recipe is None and not product_key and not campaign_choice
+                       and not purchase_units and _reviewed_source_key is None)
         cache_key = (
             name,
             unit,
             product_key,
+            "generic-item" if generic_row else None,
             tuple(properties),
             self._model_json(profile),
             organic_animals,
@@ -690,8 +695,7 @@ class PersonalPlanner:
         # A generic shopping-list row: no recipe and no chosen product. The name
         # and the store's category must agree that the product is these goods.
         generic_items = None
-        if (recipe is None and not product_key and not campaign_choice and not purchase_units
-                and _reviewed_source_key is None):
+        if generic_row:
             from app.services.generic_items import generic_item_index
             generic_items = generic_item_index(self.prepared)
         if product_key:
@@ -1435,6 +1439,13 @@ class PersonalPlanner:
         preparations = self._prepare_groups(groups, rows, allocations, available)
         groups = [g for g in groups if g["quantity"] > 1e-8]
         ingredients, candidate_map = [], {}
+        # Own generic items (owner decision 2026-11-11): the cheapest product
+        # wins even when its weight is estimated. Recipe ingredients keep the
+        # rule that an exact package goes before an estimate.
+        generic_extras = {extra.id for extra in self.spec.extras if extra.kind == "generic"
+                          and not extra.product_key and not extra.alternatives
+                          and not getattr(extra, "purchase_units", False)}
+        price_first = set()
         for n, group in enumerate(groups):
             key = f"{group['name']} [{n + 1}]"
             if _retained is not None:
@@ -1449,6 +1460,8 @@ class PersonalPlanner:
                 if row["demand_key"] in group["demand_keys"]:
                     row["purchase_key"] = key
             candidates = [group["candidates"][i] for i in group["positions"]]
+            if group["sources"] and all(source in generic_extras for source in group["sources"]):
+                price_first.add(key)
             lock = self.spec.product_locks.get(key)
             if lock:
                 candidates = [
@@ -1462,7 +1475,7 @@ class PersonalPlanner:
             # the exact ordered objects so the shared engine's immutable quote
             # set cache can reuse identical subproblems across weekly baskets.
             # Holding the tuple prevents ID reuse; nothing crosses requests.
-            sequence_key = tuple(id(candidate) for candidate in candidates)
+            sequence_key = (("price-first",) if key in price_first else ()) + tuple(id(candidate) for candidate in candidates)
             if sequence_key not in self.candidate_sequences:
                 remember_bounded(self.candidate_sequences, sequence_key, tuple(candidates), 4096)
             else:
@@ -1485,6 +1498,11 @@ class PersonalPlanner:
                     source_recipes=group["sources"],
                 )
             )
+        # The candidate tuples above differ for price-first lines, so the
+        # optimizer's per-request caches never mix the two rankings.
+        policy = self.optimizer.verification_policy
+        if policy.price_first_ingredients != frozenset(price_first):
+            self.optimizer.verification_policy = replace(policy, price_first_ingredients=frozenset(price_first))
         # Rule out an impossible singleton before any whole-basket search.
         # Full menus usually pass their initial basket; build their nutrient
         # search model lazily only when that verified baseline fails.

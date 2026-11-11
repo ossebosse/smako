@@ -198,6 +198,9 @@ class BasketVerificationPolicy:
     allow_unknown_sale_model: bool = False
     allow_legacy_low_without_evidence: bool = False
     enforce_audit_verification: bool = True
+    # Purchase lines where an estimated weight competes on price alone. The
+    # basket still reports the estimate; only the ordering changes.
+    price_first_ingredients: frozenset[str] = frozenset()
 
     @classmethod
     def legacy_compatible(cls) -> BasketVerificationPolicy:
@@ -280,7 +283,10 @@ class BasketVerificationPolicy:
         )
 
     def rank_for_quote(self, quote: BasketItemQuote) -> int:
-        return _VERIFICATION_RANK[self.status_for_quote(quote)]
+        status = self.status_for_quote(quote)
+        if status == BasketVerificationStatus.VERIFIED_WITH_ESTIMATES and quote.ingredient in self.price_first_ingredients:
+            status = BasketVerificationStatus.VERIFIED
+        return _VERIFICATION_RANK[status]
 
 
 @dataclass(slots=True)

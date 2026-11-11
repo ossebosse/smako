@@ -116,6 +116,25 @@
       properties: [], confirmed: true, use_pantry: false, food: !NONFOOD.test(product.name), generic: link.generic });
     await saveItems();
   }
+  // The same product under another identity in other chains. Offered, never added on its own.
+  const sameCache = new Map();
+  function sameElsewhere(row) {
+    const keys = row.alternatives?.length ? row.alternatives : row.product_key ? [row.product_key] : [];
+    if (!keys.length || keys.length >= 8) return Promise.resolve([]);
+    const cacheKey = keys.join(",");
+    if (!sameCache.has(cacheKey)) sameCache.set(cacheKey, api("/api/personal/same-product", { query: row.query.slice(0, 120), postal_code: saved.postcode || "22350", product_keys: keys, ...(row.generic ? { generic: row.generic } : {}) })
+      .then(data => data.products.slice(0, 8 - keys.length)).catch(() => []));
+    return sameCache.get(cacheKey);
+  }
+  async function includeSame(id, others) {
+    const row = S.items.find(r => r.id === id); if (!row || !others.length) return;
+    const keys = row.alternatives?.length ? row.alternatives : [row.product_key];
+    const names = row.alternative_names?.length ? row.alternative_names : [row.query];
+    const all = [...keys, ...others.map(o => o.product_key)];
+    const link = await api("/api/personal/product-generic", { query: row.query.slice(0, 120), postal_code: saved.postcode || "22350", product_keys: all, ...(row.generic ? { generic: row.generic } : {}) });
+    Object.assign(row, { kind: "one_of", product_key: null, alternatives: all, alternative_names: [...names, ...others.map(o => o.display_name)], properties: [], generic: link.generic });
+    await saveItems();
+  }
   async function removeItem(id) { S.items = S.items.filter(row => row.id !== id); await saveItems(); }
   const stepOf = row => row.purchase_units || row.unit === "st" ? 1 : row.quantity >= 2000 ? 1000 : row.quantity >= 1000 ? 500 : row.quantity > 250 ? 250 : 100;
   async function changeAmount(id, direction) {
@@ -290,6 +309,12 @@
         stepper.append(button("−", guard(() => changeAmount(row.id, -1)), "step", { "aria-label": `Mindre ${row.query}` }), el("span", row.purchase_units ? `${number(row.quantity)} förp.` : amount(row.quantity, row.unit), "step-value"),
           button("+", guard(() => changeAmount(row.id, 1)), "step", { "aria-label": `Mer ${row.query}` }));
         li.append(text, stepper, button("×", guard(() => removeItem(row.id)), "remove", { "aria-label": `Ta bort ${row.query}` }));
+        if (["exact", "one_of"].includes(row.kind)) {
+          const offer = el("div", null, "item-offer"); li.append(offer);
+          sameElsewhere(row).then(others => { if (!others.length || !li.isConnected) return;
+            const chains = [...new Set(others.flatMap(o => o.chains))];
+            offer.append(el("span", `Samma vara finns hos ${chains.join(" och ")} under ett annat namn.`), button("Ta med, välj billigaste", guard(() => includeSame(row.id, others)), "btn small")); });
+        }
         list.append(li);
       }
       if (!S.items.length) list.append(el("li", "Listan är tom. Skriv en vara ovan.", "empty"));

@@ -56,6 +56,8 @@ input[type=checkbox]{width:1.35rem;height:1.35rem;accent-color:var(--accent);fle
 .item-list{list-style:none;margin:0;padding:0;display:grid;gap:.5rem}
 .item{display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:.5rem;padding:.6rem .5rem .6rem .9rem;background:var(--card);border:1.5px solid var(--line);border-radius:var(--radius)}
 .item-text{display:grid;min-width:0}
+.item-offer{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;font-size:.85rem;color:var(--muted)}
+.item-offer:empty{display:none}
 .item-name{font-weight:650;overflow-wrap:anywhere}
 .item-kind{font-size:.8rem;color:var(--muted)}
 .remove{width:2.5rem;height:2.5rem;border:0;background:none;font-size:1.3rem;color:var(--muted);cursor:pointer;border-radius:50%}

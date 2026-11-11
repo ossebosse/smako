@@ -153,3 +153,71 @@ def test_own_items_are_bought_with_recipe_facts_loaded():
 
     facts = {("other", "row"): ProductFacts(source="test", source_product_id="row", source_snapshot_id="other")}
     assert bought(run(p, req, facts=facts)) == ["Banan Klass 1", "Bryggkaffe Mellanrost"]
+
+
+def test_own_item_takes_cheaper_loose_weight_but_recipe_keeps_exact_package():
+    """Owner decision 2026-11-11: the cheapest wins for own items, recipes keep exact packages first."""
+    from app.models.personal import MealSettings, MealSlot
+    from app.models.recipe import Recipe, RecipeIngredient
+
+    p = prepared(
+        loose("Äpple Röda Klass 1", 170, 14.9, category="Frukt & Grönt > Frukt > Äpplen"),
+        product("Äpple Royal Gala i påse", 1000, "g", 24.9, category="Frukt & Grönt > Frukt > Äpplen"),
+    )
+    own = plan(p, {"query": "äpple", "quantity": 500, "unit": "g"})
+    assert bought(own) == ["Äpple Röda Klass 1"]
+    assert own.optimized_basket.verification_status.value == "VERIFIED_WITH_ESTIMATES"
+    pie = Recipe(name="Äppelsnitt", servings=1, ingredients=[RecipeIngredient(name="äpple", quantity=500, unit="g")],
+                 instructions=["Skiva äpplena."])
+    req = request(slots=[MealSlot(id="dinner", day=1, meal_type="dinner", recipe=pie)],
+                  meals=[MealSettings(meal_type="dinner", count=1, servings=1)])
+    req.purchase_planning_mode = "estimated"
+    assert bought(run(p, req)) == ["Äpple Royal Gala i påse"]
+
+
+def test_same_product_in_other_chains_is_found_by_brand_words_and_package():
+    from app.services.generic_items import same_product_index
+
+    p = prepared(
+        product("Bryggkaffe Mörkrost Skånerost", 500, "g", 82.5, store="coop", brand="ZOÉGAS", category="Bryggkaffe"),
+        product("Skånerost Bryggkaffe Mörkrost", 500, "g", 81.9, store="willys", brand="Zoégas", category="Dryck > Kaffe"),
+        product("Zoégas Skånerost Bryggkaffe Mörkrost", 500, "g", 88, store="hemkop", brand="Zoégas", category="Skafferi"),
+        product("Skånerost Hela Bönor", 800, "g", 120, store="willys", brand="Zoégas", category="Dryck > Kaffe"),
+        product("Skånerost Bryggkaffe Mörkrost", 450, "g", 70, store="ica", brand="Zoégas", category="Kaffe"),
+        product("Bryggkaffe Mörkrost", 500, "g", 50, store="ica", brand="Gevalia", category="Kaffe"),
+    )
+    by_store = {row.store_id: key for key, rows in p.product_search_index.groups.items() for row in [p.universe.products[rows[0]]]
+                if "Bryggkaffe" in row.name and row.brand.casefold().startswith("zo")}
+    others = same_product_index(p).others([by_store["coop"]])
+    assert set(others) == {by_store["willys"], by_store["hemkop"]}  # not 450 g, not beans, not Gevalia
+
+
+def test_same_product_api_offers_other_chains(monkeypatch):
+    from app.main import app
+    from app.services import price_universe_runtime
+    from fastapi.testclient import TestClient
+
+    p = prepared(
+        product("Bryggkaffe Mörkrost Skånerost", 500, "g", 82.5, store="coop", brand="ZOÉGAS", category="Bryggkaffe"),
+        product("Skånerost Bryggkaffe Mörkrost", 500, "g", 81.9, store="willys", brand="Zoégas", category="Dryck > Kaffe > Bryggkaffe"),
+    )
+    monkeypatch.setattr(price_universe_runtime.GLOBAL_PREPARED_PRICE_UNIVERSES, "get_for_request", lambda *_a, **_k: p)
+    coop = next(k for k, rows in p.product_search_index.groups.items() if p.universe.products[rows[0]].store_id == "coop")
+    client = TestClient(app, headers={"Origin": "http://testserver"})
+    response = client.post("/api/personal/same-product", json={"query": "kaffe", "postal_code": "22350", "product_keys": [coop],
+                                                              "generic": {"query": "kaffe", "properties": []}})
+    assert response.status_code == 200, response.text
+    rows = response.json()["products"]
+    assert [row["chains"] for row in rows] == [["Willys"]] and "Skånerost" in rows[0]["display_name"]
+
+
+def test_same_product_skips_a_different_barcode():
+    from app.services.generic_items import same_product_index
+
+    p = prepared(
+        product("Vispgrädde 40%", 500, "ml", 30, store="coop", brand="Skånemejerier", gtin="7310867003285", category="Grädde"),
+        product("Vispgrädde 40%", 500, "ml", 31, store="ica", brand="Skånemejerier", gtin="7310867003339", category="Grädde"),
+        product("Vispgrädde 40%", 500, "ml", 29, store="hemkop", brand="Skånemejerier", category="Mejeri"),
+    )
+    keys = {p.universe.products[rows[0]].store_id: key for key, rows in p.product_search_index.groups.items()}
+    assert same_product_index(p).others([keys["coop"]]) == [keys["hemkop"]]

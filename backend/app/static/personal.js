@@ -370,9 +370,23 @@
   function renderExtras(){const out=$('extras-list');out.replaceChildren();for(const row of extras){const card=el("article",null,"personal-card");card.append(el("strong",row.purchase_units?`${row.query} · ${number(row.quantity)} köpförpackningar`:itemLabel(row)),el("p",`${row.kind==="campaign"?"Vara på kampanj":row.kind==="exact"?"Använd den här produkten":row.kind==="one_of"?"Smako väljer bland dina alternativ":"Smako väljer en produkt som matchar dina val"}${row.properties.length?` · ${row.properties.join(" · ")}`:""} · ${row.use_pantry?"Skafferi får användas":"Ska köpas utöver recepten"}`));card.append(button("Ta bort vara",async()=>{extras=extras.filter(e=>e.id!==row.id);await saveShopping();renderExtras();}));if(row.kind==="one_of")card.append(el("p",`Antingen ${row.alternative_names?.join(" eller ")||`${row.alternatives.length} valda produkter`}. Minst ${number(row.quantity)} ${row.unit} totalt av den valda produkten.`));
       if(row.kind!=="generic")card.append(el("p",row.generic?`Hör till: ${row.generic.query}${row.generic.properties?.length?` (${row.generic.properties.join(", ")})`:""}`:"Den här varan behöver läggas till igen för att kunna kopplas till fler produktalternativ.","small"));
       if(row.kind==="generic")card.append(button("Ändra vara",()=>extraDialog(null,false,row,row.id)));
+      if(["exact","one_of"].includes(row.kind))void sameProductOffer(row,card);
       if(["exact","one_of"].includes(row.kind))card.append(button("Lägg till ett antingen-eller-alternativ",async()=>{alternativeTarget=row.id;$('cancel-alternative').hidden=false;$('shopping-search-status').textContent=`Välj en annan exakt produkt för minst ${number(row.quantity)} ${row.unit}.`;$('shopping-query').focus();}));
       card.append(button("Ändra mängd",async()=>{const box=el("div"),amount=input("number",row.quantity,{min:row.purchase_units?"1":"0.001",max:"100000",step:row.purchase_units?"1":"any",required:true});box.append(field(`Minsta mängd (${row.purchase_units?"köpförpackningar":row.unit})`,amount),button("Spara mängd",async()=>{if(!amount.checkValidity())throw new Error("Ange en positiv mängd.");row.quantity=Number(amount.value);await saveShopping();renderExtras();$('personal-dialog').close();},true));openDialog(box);}));out.append(card);} updateChoiceSummary();}
 
+  // The same product under another identity in other chains: offered, never added on its own.
+  const sameProducts=new Map();
+  async function sameProductOffer(row,card){
+    const keys=row.alternatives?.length?row.alternatives:row.product_key?[row.product_key]:[];if(!keys.length||keys.length>=8)return;
+    const cacheKey=keys.join(",");
+    if(!sameProducts.has(cacheKey))sameProducts.set(cacheKey,api("/api/personal/same-product",{query:row.query.slice(0,120),postal_code:$('postal-code').value.trim()||"22350",product_keys:keys,...(row.generic?{generic:row.generic}:{})}).then(d=>d.products.slice(0,8-keys.length)).catch(()=>[]));
+    const others=await sameProducts.get(cacheKey);if(!others.length||!card.isConnected)return;
+    const chains=[...new Set(others.flatMap(o=>o.chains))];
+    card.append(el("p",`Samma vara finns hos ${chains.join(" och ")} under ett annat namn.`,"small"),button("Ta med dem och välj billigaste butiken",async()=>{
+      const names=row.alternative_names?.length?row.alternative_names:[row.query],all=[...keys,...others.map(o=>o.product_key)];
+      row.generic=(await productGeneric(all,row.generic||null,row.query)).generic;Object.assign(row,{kind:"one_of",product_key:null,alternatives:all,alternative_names:[...names,...others.map(o=>o.display_name)],properties:[]});
+      await saveShopping();renderExtras();}));
+  }
   $('calculate-extras').addEventListener("click",()=>void task(async()=>{await saveShopping();if(saved){await change("extras",{extras});}else{await accept(await api("/api/plans",requestPayload({standalone:true})));}show("shopping");}));
 
   async function saveShopping(){

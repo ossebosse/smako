@@ -323,3 +323,65 @@ def usual_amount(prepared, query: str) -> dict | None:
         return None
     (quantity, unit), _count = max(sizes.items(), key=lambda row: (row[1], -row[0][0]))
     return {"quantity": quantity, "unit": unit}
+
+
+# ---- The same product in other chains ---------------------------------------
+# Chains give the same product different article numbers and word orders
+# ("Bryggkaffe Mörkrost Skånerost" at Coop, "Skånerost Bryggkaffe Mörkrost" at
+# Willys). Names alone never attach a price; these matches are only offered to
+# the user, who confirms them as an either/or row.
+
+def _brand_key(brand: str | None) -> str:
+    return "".join(t for t in _tokens(brand or "") if t not in _SEPARATORS)
+
+
+def same_product_key(product) -> tuple | None:
+    """Brand, the set of name words and the package; None when that says too little."""
+    if not product.package_quantity or product.package_unit not in {"g", "ml", "st"}:
+        return None
+    brand = _brand_key(product.brand)
+    if not brand:
+        return None
+    brand_words = set(_words(product.brand or "")) | {brand}
+    words = frozenset(w for w in _words(product.name) if w not in brand_words)
+    if not words:
+        return None
+    return brand, words, round(float(product.package_quantity), 3), product.package_unit
+
+
+class SameProductIndex:
+    def __init__(self, prepared):
+        index = prepared.product_search_index
+        self.products = prepared.universe.products
+        self.by_key = defaultdict(set)
+        self.key_of, self.gtin_of = {}, {}
+        for search_key, positions in index.groups.items():
+            key = same_product_key(self.products[positions[0]])
+            if key is not None:
+                self.by_key[key].add(search_key)
+                self.key_of[search_key] = key
+                self.gtin_of[search_key] = self.products[positions[0]].gtin
+
+    def others(self, search_keys) -> list[str]:
+        found = set()
+        for search_key in search_keys:
+            key = self.key_of.get(search_key)
+            if key is not None:
+                found |= self.by_key[key]
+        # Two different barcodes are two products, however alike the names are.
+        chosen = {self.gtin_of.get(k) for k in search_keys} - {None}
+        return sorted(k for k in found - set(search_keys)
+                      if not (chosen and self.gtin_of.get(k) and self.gtin_of[k] not in chosen))
+
+
+_SAME: OrderedDict[int, SameProductIndex] = OrderedDict()
+
+
+def same_product_index(prepared) -> SameProductIndex:
+    products = prepared.universe.products
+    index = _SAME.get(id(products))
+    if index is None or index.products is not products:
+        index = _SAME[id(products)] = SameProductIndex(prepared)
+        while len(_SAME) > 4:
+            _SAME.popitem(last=False)
+    return index

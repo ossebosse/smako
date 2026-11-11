@@ -185,6 +185,37 @@ def product_generic(payload: ProductGenericQuery, request: Request, response: Re
             "name": generic["name"]}
 
 
+@router.post("/same-product")
+def same_product(payload: ProductGenericQuery, request: Request, response: Response):
+    """The same product sold under another identity in other chains, for the user to confirm."""
+    from app.services.generic_items import same_product_index
+    from app.services.product_search import _CHAIN_LABELS, ProductSearchRequest
+    from app.services.shopping_list import falls_under
+
+    context(request, response)
+    try:
+        search = ProductSearchRequest(query=payload.query, postal_code=payload.postal_code)
+    except ValueError as exc:
+        raise HTTPException(422, "Kontrollera varunamn och postnummer.") from exc
+    prepared = GLOBAL_PREPARED_PRICE_UNIVERSES.get_for_request(search.postal_code, {})
+    if prepared is None:
+        raise HTTPException(409, "Vi har inga varor för det här postnumret än.")
+    index = prepared.product_search_index
+    stores = {store.store_id: store for store in prepared.stores}
+    generic = payload.generic.model_dump() if payload.generic is not None else None
+    rows = []
+    for key in same_product_index(prepared).others(payload.product_keys)[:7]:
+        if generic is not None and not falls_under(prepared, [key], generic):
+            continue
+        product = prepared.universe.products[index.groups[key][0]]
+        chains = sorted({_CHAIN_LABELS.get(stores[p.store_id].chain, stores[p.store_id].chain)
+                         for p in (prepared.universe.products[i] for i in index.groups[key]) if p.store_id in stores})
+        brand = product.brand or ""
+        name = product.name if brand.casefold() in product.name.casefold() else f"{brand} {product.name}".strip()
+        rows.append({"product_key": key, "display_name": name[:200], "chains": chains})
+    return {"products": rows}
+
+
 @router.post("/interpret-extra")
 def extra_interpret(payload: TextInput, request: Request, response: Response):
     context(request, response)
