@@ -230,12 +230,38 @@ def filter_economic_pool(
     )
 
 
+# A meal type's own choice "meat": every dish is built on meat or poultry
+# (beef, pork, chicken, lamb, game, sausage ...). It only narrows which recipes
+# are chosen; it is not one of the plan-wide DietPreference values.
+MEAT_DISHES = "meat"
+# Animal by-products that make a dish non-vegetarian without making it a meat dish.
+_NOT_A_MEAT_PORTION = frozenset({"gelatin", "gelatinblad", "fjälster", "ister", "nötblod"})
+
+
+def is_meat_dish(recipe: Recipe) -> bool:
+    """True when the dish's main protein is meat or poultry, not fish or shellfish."""
+    from app.services.personal_policy import protein_category
+
+    if protein_category(recipe) not in {"meat", "chicken"}:
+        return False
+    for ingredient in recipe.ingredients:
+        canonical = canonicalize_ingredient_name(ingredient.canonical_name or ingredient.name)
+        if canonical in _NOT_A_MEAT_PORTION:
+            continue
+        if canonical in _MEAT or semantic_requirement(canonical).food_family in _MEAT_FAMILIES:
+            return True
+    return False
+
+
 def recipe_respects_diet(
     recipe: Recipe,
     *,
     preference: DietPreference | str,
     avoid_ingredients: Iterable[str] = (),
 ) -> bool:
+    if preference == MEAT_DISHES:
+        return is_meat_dish(recipe) and recipe_respects_diet(
+            recipe, preference=DietPreference.MIXED, avoid_ingredients=avoid_ingredients)
     preference = DietPreference(preference)
     avoid_ingredients = tuple(avoid_ingredients)
     return not any(
@@ -251,7 +277,9 @@ def recipe_respects_diet(
 
 
 __all__ = [
+    "MEAT_DISHES",
     "excluded_ingredients",
     "filter_economic_pool",
+    "is_meat_dish",
     "recipe_respects_diet",
 ]

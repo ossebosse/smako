@@ -33,6 +33,7 @@ from app.services.personal_policy import (
     PolicyConflict,
     interpret_profile,
     interpretation,
+    is_nonfood,
     pantry_checks,
 )
 from app.services.personal_store import PersonalConflict, PersonalStore, available_items
@@ -228,8 +229,20 @@ def extra_interpret(payload: TextInput, request: Request, response: Response):
         "query": query,
         **({"quantity": quantity, "unit": unit} if quantity is not None else {}),
         "properties": interpretation(query),
+        "food": not is_nonfood(query),
         "confirmed": False,
     }
+
+
+@router.get("/pantry-use")
+def pantry_use(request: Request, response: Response, name: str = ""):
+    """The form and unit recipes use for a name, proposed when a pantry row is added."""
+    context(request, response)
+    if not name.strip() or len(name) > 120:
+        raise HTTPException(422, "Skriv varans namn, högst 120 tecken.")
+    from app.services.pantry_usage import usual_recipe_use
+
+    return {**usual_recipe_use(name), "food": not is_nonfood(name)}
 
 
 @router.put("/pantry")

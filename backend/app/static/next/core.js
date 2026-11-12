@@ -151,11 +151,11 @@
     const generics = found.generics || [], typedName = interpreted.error ? null : interpreted.query.toLowerCase();
     const options = [], seen = new Set();
     const push = row => { const key = `${row.query.toLowerCase()}|${row.quantity}|${row.unit}`; if (!seen.has(key)) { seen.add(key); options.push(row); } };
-    if (typedName && interpreted.quantity != null) push({ query: interpreted.query, quantity: interpreted.quantity, unit: interpreted.unit, properties: interpreted.properties });
+    if (typedName && interpreted.quantity != null) push({ query: interpreted.query, quantity: interpreted.quantity, unit: interpreted.unit, properties: interpreted.properties, food: interpreted.food });
     else if (typedName) {
       const same = generics.find(g => g.query.toLowerCase() === typedName || g.name.toLowerCase() === typedName);
       if (same) push(same);
-      else if (found.usual) push({ query: interpreted.query, quantity: found.usual.quantity, unit: found.usual.unit, properties: interpreted.properties });
+      else if (found.usual) push({ query: interpreted.query, quantity: found.usual.quantity, unit: found.usual.unit, properties: interpreted.properties, food: interpreted.food });
     }
     generics.forEach(push);
     return { options, products: (found.products || []).filter(p => p.selectable), error: interpreted.error && !options.length ? interpreted.error : "", noArea: found.status === "no_area_data" };
@@ -178,6 +178,7 @@
         allow_nutrition_estimates: true, organic_percent: Number(s.organic) || 0, organic_animals: false, surplus_mode: s.surplus } };
   }
   const COOKING = { quick: { max_active_minutes: 30, max_ingredients: 8 }, everyday: { max_active_minutes: 45, max_ingredients: 12 }, free: {} };
+  // "Kött" applies to dinners; breakfasts and snacks keep every recipe to choose from.
   function mealRows() {
     const s = saved.settings, cap = limit("recipes", 21);
     const counts = { dinner: Math.min(s.dinners, cap), breakfast: s.breakfasts, snack: s.snacks };
@@ -185,7 +186,7 @@
     return ["dinner", "breakfast", "snack"].map(type => {
       const count = Math.max(0, Math.min(counts[type], left)); left -= count;
       const choices = count ? { min_ingredients: null, max_ingredients: null, max_active_minutes: null, max_total_minutes: null, max_waiting_minutes: null, ...(type === "dinner" ? COOKING[s.cooking] : {}) } : null;
-      return { meal_type: type, count, servings: Math.min(s.servings, limit("servings", 8)), diet: s.diet, profile: {}, distribution: {}, limits: {}, organic_animals: false, recipe_choices: choices, max_same_base_meals: null };
+      return { meal_type: type, count, servings: Math.min(s.servings, limit("servings", 8)), diet: s.diet === "meat" && type !== "dinner" ? "mixed" : s.diet, profile: {}, distribution: {}, limits: {}, organic_animals: false, recipe_choices: choices, max_same_base_meals: null };
     });
   }
   function keep(envelope) {
@@ -334,7 +335,7 @@
     return box;
   }
 
-  const DIETS = [["mixed", "Allt"], ["pescetarian", "Fisk och vegetariskt"], ["vegetarian", "Vegetariskt"], ["vegan", "Veganskt"]];
+  const DIETS = [["mixed", "Allt"], ["meat", "Kött", "Nöt, fläsk, kyckling med mera"], ["pescetarian", "Fisk och vegetariskt"], ["vegetarian", "Vegetariskt"], ["vegan", "Veganskt"]];
   const COOK = [["quick", "Snabbt", "Högst 30 min i köket"], ["everyday", "Vardag", "Högst 45 min"], ["free", "Spelar ingen roll", ""]];
   const ALLERGENS = ["jordnötter", "nötter", "mjölk", "ägg", "gluten", "fisk", "skaldjur", "soja", "sesam"];
   const CUISINES = [["italian", "Italienskt"], ["greek", "Grekiskt"], ["mexican", "Mexikanskt"], ["indian", "Indiskt"], ["thai", "Thailändskt"], ["swedish", "Svenskt"]];
@@ -484,5 +485,7 @@
   setInterval(() => { if (S.busy) emit(); }, 1000);
 
   window.SmakoNext = { el, button, money, number, amount, S, saved, persist, on, emit, start, lookup, placeText, postcodeBox, storePicker, itemsEditor, settings, settingsSummary, recipesView, storesView, busyView, errorView,
-    calculateList, createPlan, updateListInPlan, forgetPlan, planHasRecipes, itemsChanged, basket, totalText, guest, set };
+    calculateList, createPlan, updateListInPlan, forgetPlan, planHasRecipes, itemsChanged, basket, totalText, guest, set,
+    // Used by mine.js (account, pantry, registering what was bought).
+    api, change, keep, loadState, refreshState, suggestions, uuid, capital, stepOf, isNonfood: text => NONFOOD.test(text) };
 })();

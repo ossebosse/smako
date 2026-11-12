@@ -107,6 +107,8 @@ def personal_policy_request(request, dinner_count):
 
 
 _AUDIT_FAILURE = "Vi kunde inte kontrollera mängderna eller priserna i inköpslistan."
+_NOT_NONFOOD = ("{name} är sparad som en vara som inte är mat, men Smako känner inte igen den så. "
+                "Ta bort {name} ur inköpslistan och lägg till den igen.")
 
 
 def _lower_caps(max_stores):
@@ -234,6 +236,10 @@ class PersonalPlanner:
         self.spec.profile = merged_profile(
             self.spec.profile, TasteProfile(exclusions=request.avoid_ingredients)
         )
+        # Checked before any search, so the answer names the item and nothing else.
+        for extra in self.spec.extras:
+            if not extra.food and not is_nonfood(extra.query):
+                raise PolicyConflict(_NOT_NONFOOD.format(name=extra.query))
         self.plan_id = plan_id
         from app.services.personal_source_facts import load_retained_facts
 
@@ -1120,7 +1126,7 @@ class PersonalPlanner:
                 }
             )
             if not extra.food and not is_nonfood(extra.query):
-                raise PolicyConflict(f"{extra.query} kan inte undantas från matinköpets krav.")
+                raise PolicyConflict(_NOT_NONFOOD.format(name=extra.query))
         consumed = defaultdict(float)
         for booked in consumed_demands(self.state, self.plan_id):
             consumed[booked["demand_key"]] += booked["quantity"]

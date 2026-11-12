@@ -1,9 +1,10 @@
-/* Alternativ A: four tabs. Home shows the two ways to use Smako: write a
-   shopping list, or plan meals. Both end on the Handla tab, store by store. */
+/* Alternativ A: five tabs. Home shows the two ways to use Smako: write a
+   shopping list, or plan meals. Both end on the Handla tab, store by store.
+   The pantry has its own tab and the account is reached from the top. */
 (() => {
   "use strict";
   const N = window.SmakoNext, { el, button, S, saved } = N;
-  const main = document.getElementById("main"), busy = document.getElementById("busy"), placeButton = document.getElementById("place"), dialog = document.getElementById("place-dialog");
+  const main = document.getElementById("main"), busy = document.getElementById("busy"), placeButton = document.getElementById("place"), accountLink = document.getElementById("account"), dialog = document.getElementById("place-dialog");
   let disposers = [];
   // A part of the page that is rebuilt whenever something changes.
   const live = (node, build) => { const draw = () => node.replaceChildren(...[build()].flat().filter(Boolean)); draw(); disposers.push(N.on(draw)); return node; };
@@ -25,8 +26,9 @@
       const current = live(el("div"), () => { if (!S.plan) return null; const p = el("section", null, "panel"), b = N.basket(), recipes = S.plan.plan.personal.slots.filter(s => s.recipe).length;
         p.append(el("p", "Senast", "eyebrow"), el("h2", recipes ? `${recipes} recept och inköpslista` : "Din inköpslista"), el("p", `${N.totalText()} i ${b.store_count} ${b.store_count === 1 ? "butik" : "butiker"}`, "meta"));
         const row = el("div", null, "links"); if (recipes) row.append(link("Visa recepten", "#mat")); row.append(link("Öppna handlingslistan", "#handla")); p.append(row); return p; });
-      const foot = el("p", null, "hint"); foot.append(link("Skafferi, konto och sök varor finns i vanliga Smako", "/personal?ui=standard"));
-      return [head, ways, current, placePanel(), foot];
+      const mine = live(el("section", null, "panel"), () => { const row = el("div", null, "links"); row.append(link(`Skafferi: ${N.pantrySummary().toLowerCase()}`, "#skafferi"), link(N.signedIn() ? "Mitt konto" : "Logga in eller skapa konto", "#konto"));
+        return [el("h2", "Skafferi och konto"), el("p", N.signedIn() ? "Skafferiet och dina val sparas på kontot." : "Lägg in det du har hemma, så handlar du mindre. Med ett konto sparas det och du får fler recept.", "meta"), row]; });
+      return [head, ways, current, placePanel(), mine];
     },
     lista() {
       const head = el("div"); head.append(el("h1", "Inköpslista"), el("p", "Skriv varan som du brukar säga den. Vill du ha ett visst märke väljer du en bestämd vara.", "lead"));
@@ -59,8 +61,17 @@
       if (!S.plan) { const head = el("div"); head.append(el("h1", "Handla"), el("p", "Här hamnar din handlingslista, uppdelad per butik, när du har räknat ut en inköpslista eller skapat en matplan.", "lead")); const ways = el("div", null, "links"); ways.append(link("Skriv en inköpslista", "#lista"), link("Planera veckans mat", "#mat")); return [head, ways]; }
       const head = live(el("div"), () => { const b = N.basket(), box = el("div", null, "total"), text = el("div"); text.append(el("h1", "Handla"), el("p", `${b.store_count} ${b.store_count === 1 ? "butik" : "butiker"} · det billigaste vi hittade för hela listan`, "meta")); box.append(text, el("strong", N.totalText())); return box; });
       const changed = live(el("div"), () => N.itemsChanged() ? (() => { const p = el("section", null, "panel"); p.append(el("p", "Du har ändrat dina varor sedan listan räknades ut."), link("Räkna om i Inköpslista", "#lista")); return p; })() : null);
+      const after = live(el("div"), () => N.afterShopping({ onPantry: () => go("#skafferi") }));
       const tools = el("div", null, "links"); tools.append(button("Börja om med en tom lista", () => { if (confirm("Ta bort den här handlingslistan?")) { N.forgetPlan(); go("#hem"); } }, "btn quiet small"));
-      return [head, changed, live(el("div"), () => N.storesView()), tools];
+      return [head, changed, live(el("div"), () => N.storesView()), after, tools];
+    },
+    skafferi() {
+      const head = el("div"); head.append(el("h1", "Skafferi"), el("p", "Det du har hemma. Recepten använder det först, så du handlar mindre.", "lead"));
+      return [head, N.pantryView()];
+    },
+    konto() {
+      const head = el("div"); head.append(el("h1", "Konto"));
+      return [head, N.accountView({ onPantry: () => go("#skafferi") })];
     },
   };
 
@@ -74,6 +85,7 @@
   }
   function chrome() {
     placeButton.textContent = N.placeText();
+    accountLink.textContent = N.accountLabel();
     busy.replaceChildren(N.busyView());
     const tab = document.querySelector('.tabs a[data-tab="lista"]'); tab.querySelector(".badge")?.remove();
     if (S.items.length) tab.append(el("span", String(S.items.length), "badge", { "aria-label": `${S.items.length} varor` }));

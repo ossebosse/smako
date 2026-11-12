@@ -1,6 +1,7 @@
 /* Alternativ B: a guide with one question per screen and one button to go on.
    The first answer decides the route: only a shopping list, or meals and a
-   shopping list. "Fler val" opens everything else Smako can take into account. */
+   shopping list. "Fler val" opens everything else Smako can take into account. The pantry and
+   the account are opened from the first screen and from the finished list. */
 (() => {
   "use strict";
   const N = window.SmakoNext, { el, button, S, saved } = N;
@@ -29,8 +30,8 @@
         option("Planera mat och handla", "Svara på ett par frågor och få recept för veckan och en inköpslista för alltihop.", "Planera veckans mat ›", "mat"));
       const resume = live(el("div"), () => { if (!S.plan) return null; const box = el("div", null, "summary"), recipes = S.plan.plan.personal.slots.filter(s => s.recipe).length;
         box.append(el("p", "Senast", "eyebrow"), el("p", `${recipes ? `${recipes} recept och inköpslista` : "Din inköpslista"} · ${N.totalText()}`), button("Öppna igen", () => go(results()[0]), "text-link")); return box; });
-      const foot = el("p", null, "hint"); foot.append(el("a", "Skafferi, konto och sök varor finns i vanliga Smako", null, { href: "/personal?ui=standard" }));
-      return { nodes: [head("Vad vill du göra?", "Smako jämför priserna i butikerna nära dig."), options, resume, foot] };
+      const mine = live(el("div", null, "links"), () => [button(`Skafferi: ${N.pantrySummary().toLowerCase()}`, () => go("skafferi"), "text-link"), button(N.signedIn() ? "Mitt konto" : "Logga in eller skapa konto", () => go("konto"), "text-link")]);
+      return { nodes: [head("Vad vill du göra?", "Smako jämför priserna i butikerna nära dig."), options, resume, mine] };
     },
     plats() {
       const stores = live(el("div"), () => { if (!S.location) return null; const more = el("details"); more.append(el("summary", "Välj butiker själv", "text-link"), N.storePicker()); more.open = screens.plats.open === true; more.addEventListener("toggle", () => { screens.plats.open = more.open; }); return more; });
@@ -41,7 +42,8 @@
     },
     mat() {
       const basics = live(el("div", null, "settings"), () => { const all = N.settings("basic"); return [...all.children].filter(n => !n.classList.contains("counter") && !n.classList.contains("hint")); });
-      const allergy = live(el("div"), () => { const s = saved.settings, n = s.allergies.length + s.avoid.length; return el("p", n ? `Väljs bort: ${[...s.allergies, ...s.avoid].join(", ")}.` : "Inget är bortvalt.", "hint"); });
+      const allergy = live(el("div"), () => { const s = saved.settings, n = s.allergies.length + s.avoid.length, home = (S.state?.items || []).length;
+        return [el("p", n ? `Väljs bort: ${[...s.allergies, ...s.avoid].join(", ")}.` : "Inget är bortvalt.", "hint"), home && s.usePantry ? el("p", `Skafferiet: ${N.pantrySummary().toLowerCase()} används först.`, "hint") : null]; });
       return { nodes: [head("Vilken sorts mat?", "Smako väljer bland recepten som passar."), basics, allergy, button("Fler val: allergier, butiker, matkök och ekologiskt", openMore, "text-link")] };
     },
     varor() {
@@ -57,7 +59,13 @@
       if (!S.plan) return screens.start();
       const top = live(el("div", null, "summary"), () => { const b = N.basket(); return [el("p", "Det billigaste vi hittade för hela listan", "eyebrow"), el("p", N.totalText(), "sum"), el("p", `${b.store_count} ${b.store_count === 1 ? "butik" : "butiker"} · bocka av medan du handlar`, "meta")]; });
       const links = el("div", null, "links"); links.append(button("Ändra varor", () => go("varor"), "text-link"), button("Börja om", () => { if (confirm("Ta bort den här handlingslistan?")) { N.forgetPlan(); go("start"); } }, "text-link"));
-      return { result: true, nodes: [head("Handla"), top, live(el("div"), () => N.storesView()), links] };
+      return { result: true, nodes: [head("Handla"), top, live(el("div"), () => N.storesView()), live(el("div"), () => N.afterShopping({ onPantry: () => go("skafferi") })), links] };
+    },
+    skafferi() {
+      return { side: true, nodes: [head("Skafferi", "Det du har hemma. Recepten använder det först, så du handlar mindre."), N.pantryView()] };
+    },
+    konto() {
+      return { side: true, nodes: [head("Konto"), N.accountView({ onPantry: () => go("skafferi") })] };
     },
   };
 
@@ -65,13 +73,13 @@
     for (const off of disposers) off(); disposers = [];
     for (const node of main.querySelectorAll(".items")) node.dispose?.();
     let name = (location.hash || "#start").slice(1); if (!screens[name]) name = "start";
-    if (!["start", "recept", "handla"].includes(name) && !saved.flow) name = "start";
+    if (!["start", "recept", "handla", "skafferi", "konto"].includes(name) && !saved.flow) name = "start";
     const screen = screens[name](), steps = flow(), index = steps.indexOf(name), resultSteps = results(), resultIndex = resultSteps.indexOf(name);
     main.replaceChildren(live(el("div"), () => N.errorView()), ...screen.nodes.flat().filter(Boolean));
     back.hidden = name === "start";
     back.onclick = () => go(index > 0 ? steps[index - 1] : resultIndex > 0 ? resultSteps[resultIndex - 1] : screen.result ? "varor" : "start");
     stepLabel.textContent = index >= 0 ? `Steg ${index + 1} av ${steps.length}` : screen.result ? "Klart" : "";
-    bar.style.width = name === "start" ? "0" : index >= 0 ? `${Math.round(((index + 1) / (steps.length + 1)) * 100)}%` : "100%";
+    bar.style.width = name === "start" || screen.side ? "0" : index >= 0 ? `${Math.round(((index + 1) / (steps.length + 1)) * 100)}%` : "100%";
     next.replaceChildren();
     if (name !== "start" && (index >= 0 || screen.action)) {
       const box = live(el("div"), () => { const ready = screen.ready ? screen.ready() : true;

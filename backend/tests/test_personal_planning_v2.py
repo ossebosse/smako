@@ -710,3 +710,39 @@ def test_guest_migration_requires_verified_owner_and_is_atomic(tmp_path, monkeyp
         account.migrate_guest(payload.model_copy(update={"account_revision": 2}), req)
     assert private.read(guest)["items"][0]["name"] == "bröd"
     assert private.read("a" * 64)["items"][0]["name"] == "mjölk"
+
+
+def test_toothbrush_marked_as_not_food_is_bought_outside_the_food_rules():
+    p = prepared(product("mjölk", 1000, "ml", 20), product("Tandborste Medium", 1, "st", 15))
+    req = request(extras=[
+        ExtraNeed(query="mjölk", quantity=1, unit="ml", confirmed=True),
+        ExtraNeed(query="tandborste", quantity=1, unit="st", confirmed=True, food=False),
+    ])
+    assert run(p, req).optimized_basket.total == 35
+
+
+def test_food_marked_as_not_food_is_refused_by_name_before_any_search():
+    p = prepared(product("mjölk", 1000, "ml", 20))
+    req = request(extras=[ExtraNeed(query="mjölk", quantity=1, unit="ml", confirmed=True, food=False)])
+    with pytest.raises(PolicyConflict) as stopped:
+        run(p, req)
+    assert str(stopped.value).startswith("mjölk är sparad som en vara som inte är mat")
+    assert "Ingen komplett kombination" not in str(stopped.value)
+
+
+def test_own_item_nonfood_words():
+    """Every word the interfaces mark as not food is one the server accepts."""
+    import re
+    from pathlib import Path
+
+    from app.services.personal_policy import NONFOOD_WORDS, is_nonfood
+    from app.services.product_search import search_text
+
+    static = Path(__file__).resolve().parents[1] / "app" / "static"
+    for path in ("personal.js", "next/core.js"):
+        source = (static / path).read_text(encoding="utf-8")
+        stems = re.search(r"const NONFOOD\s*=\s*/\(([^)]+)\)/i", source)[1].split("|")
+        assert len(stems) >= 9
+        for stem in stems:
+            assert any(word.startswith(search_text(stem)) for word in NONFOOD_WORDS), (path, stem)
+    assert is_nonfood("Tandborste") and is_nonfood("Tandkräm Mint 75 ml") and not is_nonfood("Mjölk")

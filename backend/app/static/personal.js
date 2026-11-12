@@ -193,17 +193,18 @@
     box.id=`${type}-meals`;box.append(grid);mealCards[type]=box;$('meal-settings').append(box);
     const actions=el("div",null,"personal-actions meal-settings-actions");box.append(actions);
     const options=el("fieldset");mealExtras[type]=options;
-    const diet=select([["mixed","Blandat"],["pescetarian","Pescetariskt"],["vegetarian","Vegetariskt (ägg/mejeri tillåts)"],["vegan","Veganskt"]],"mixed");diet.id=`${type}-diet`;options.append(field("Kostval",diet));
+    const diet=select([["mixed","Blandat"],["meat","Kött (nöt, fläsk, kyckling med mera)"],["pescetarian","Pescetariskt"],["vegetarian","Vegetariskt (ägg/mejeri tillåts)"],["vegan","Veganskt"]],"mixed");diet.id=`${type}-diet`;options.append(field("Kostval",diet));
     const distribution=el("div",null,"personal-grid");
     for(const [key,title] of Object.entries(proteinNames))distribution.append(slider(`${type}-${key}`,`${title} – antal`,null,{optional:true,max:7}));
     const remaining=el("p");remaining.setAttribute("role","status");
-    options.append(el("p","Med Standard väljer Smako de rätter du inte har bestämt själv. Dina egna antal fördelas på måltiderna. Pescetariskt är vegetariskt plus fisk och skaldjur. Vegetariskt innehåller ägg och mejeri, veganskt inget från djur."),remaining,distribution);
+    options.append(el("p","Med Standard väljer Smako de rätter du inte har bestämt själv. Dina egna antal fördelas på måltiderna. Kött ger bara rätter med nöt, fläsk, lamm, kyckling eller annat kött. Pescetariskt är vegetariskt plus fisk och skaldjur. Vegetariskt innehåller ägg och mejeri, veganskt inget från djur."),remaining,distribution);
     const conflict=el("p",null,"choice-error");conflict.id=`${type}-conflict`;conflict.setAttribute("role","status");box.append(conflict);
     distributionSync[type]=()=>{
       const count=sliderValue(`${type}-count`),values=Object.fromEntries(Object.keys(proteinNames).map(k=>[k,sliderValue(`${type}-${k}`)]));
       const total=Object.values(values).reduce((sum,v)=>sum+(v??0),0);
       let message=total>count?`Du har fördelat ${total} rätter men har bara ${count} måltider. Öppna Fördelning och justera antalen.`:"";
-      if(diet.value==="pescetarian"&&(values.chicken>0||values.meat>0))message="Pescetariskt tillåter bara vegetariska rätter och fisk. Justera egna antal eller välj Standard.";
+      if(diet.value==="meat"&&(values.fish>0||values.vegetarian>0))message="Kött ger bara rätter med kött eller kyckling. Justera egna antal eller välj Standard.";
+      else if(diet.value==="pescetarian"&&(values.chicken>0||values.meat>0))message="Pescetariskt tillåter bara vegetariska rätter och fisk. Justera egna antal eller välj Standard.";
       else if(["vegetarian","vegan"].includes(diet.value)&&(Object.entries(values).some(([k,v])=>k!=="vegetarian"&&v>0)||(values.vegetarian!==null&&values.vegetarian!==count)))message="Kostvalet kräver vegetariska rätter till alla måltider. Justera egna antal eller välj Standard.";
       remaining.textContent=`${total} av ${count} måltider fördelade · ${Math.max(0,count-total)} kvar${message?` · ${message}`:""}`;
       conflict.textContent=message;return !message;
