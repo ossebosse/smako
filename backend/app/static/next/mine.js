@@ -147,7 +147,7 @@
     const guard = work => async () => { try { status.textContent = ""; await work(); } catch (error) { status.textContent = error.message; } };
     const done = text => { input.value = ""; close(); confirm.hidden = true; confirm.replaceChildren(); status.textContent = `${text} ligger i skafferiet.`; };
     // A typed item: propose the form and unit recipes use, and let the user confirm.
-    async function ask(row) {
+    async function ask(row, products = []) {
       close();
       const use = await api(`/api/personal/pantry-use?name=${encodeURIComponent(row.query)}`).catch(() => ({ form: null, unit: null, used_in_recipes: false, food: !N.isNonfood(row.query) }));
       let form = use.food ? use.form : null;
@@ -155,8 +155,16 @@
         confirm.replaceChildren(el("h3", `${capital(row.query)} · ${amount(row.quantity, row.unit)}`));
         if (use.food) {
           confirm.append(el("p", "Hur är varan? Recepten använder den bara om det stämmer.", "hint"), formChips(form, value => { form = value; draw(); }, "Hur är varan"));
+          // Many recipes ask for a particular kind (which rice, which cut). Only a chosen product can show that.
+          const [fits, uses] = (form && use.usable?.[form]) || [0, 0], narrow = uses > 0 && fits < uses / 2;
           if (use.unit && use.unit !== row.unit) confirm.append(el("p", `Recepten räknar ${row.query} i ${UNITS[use.unit]}. Skriv mängden så om recepten ska kunna använda varan.`, "hint"));
           else if (!use.used_in_recipes) confirm.append(el("p", "Inget recept använder den här varan just nu. Du kan lägga in den ändå.", "hint"));
+          else if (narrow) confirm.append(el("p", fits ? `Bara några recept kan använda ${row.query} när varan är skriven så här. De flesta behöver veta precis vilken sort det är.` : `Recepten behöver veta precis vilken sorts ${row.query} det är.`, "hint"));
+          if (narrow && products.length) {
+            const exact = el("div", null, "pantry-exact"); exact.append(el("p", "Välj den vara du har hemma, så kan recepten använda den:"));
+            for (const product of products.slice(0, 6)) { const b = button(null, guard(() => addProduct(product)), "result"); b.append(el("span", product.display_name || product.name, "result-name"), el("span", product.package, "result-note")); exact.append(b); }
+            confirm.append(exact);
+          } else if (narrow) confirm.append(el("p", "Sök på varans namn och märke och välj en bestämd vara, så kan recepten använda den.", "hint"));
         }
         const actions = el("div", null, "links");
         actions.append(button("Lägg i skafferiet", guard(async () => { await addToPantry({ name: row.query.slice(0, 120), quantity: row.quantity, unit: row.unit, food: use.food, ...(form ? { form } : {}) }); done(`${capital(row.query)} · ${amount(row.quantity, row.unit)}`); }), "btn primary", { disabled: use.food && !form }),
@@ -178,10 +186,10 @@
       try {
         const found = await N.suggestions(text, controller.signal); if (mine !== generation) return;
         results.replaceChildren(); results.hidden = false; first = null;
-        found.options.forEach((row, index) => { const b = button(null, guard(() => ask(row)), `result${index ? "" : " best"}`);
+        const products = found.products.filter(p => !p.purchase_units && !p.campaign_choice);
+        found.options.forEach((row, index) => { const b = button(null, guard(() => ask(row, products)), `result${index ? "" : " best"}`);
           b.append(el("span", `${capital(row.name || row.query)} · ${amount(row.quantity, row.unit)}`, "result-name"), el("span", "Lägg i skafferiet", "result-note")); results.append(b); if (!index) first = b; });
         if (!found.options.length) results.append(el("p", found.error || "Skriv också hur mycket du har, till exempel 500 g, 1 l eller 6 st.", "hint"));
-        const products = found.products.filter(p => !p.purchase_units && !p.campaign_choice);
         if (products.length) {
           const more = el("details", null, "exact"); more.append(el("summary", `Välj en bestämd vara (${products.length})`));
           for (const product of products.slice(0, 12)) { const b = button(null, guard(() => addProduct(product)), "result");

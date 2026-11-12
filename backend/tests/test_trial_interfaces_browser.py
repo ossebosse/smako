@@ -41,18 +41,18 @@ class Fake:
                 "shopping_initialized": True, "account": MEMBER if self.owner == "account" else GUEST, "pantry_checks": []}
 
     def plan(self, request, revision=1):
-        rice = next((i for i in self.state["items"] if i["name"] == "ris" and i.get("form") == "dry"), None)
+        home = next((i for i in self.state["items"] if i["name"] == "potatis" and i.get("form") == "raw_edible"), None)
         rows = [{"store_id": "s1", "product_id": "p-fars", "ingredient": "nötfärs", "product_name": "Nötfärs 12%", "packages_needed": 1, "package_quantity": 500, "package_unit": "g",
                  "total_price": 59.9, "unit": "g", "purchased_unit": "g", "required_quantity": 400, "purchased_usable_quantity": 500, "quantity_confidence": "exact", "food_family": "meat"},
                 {"store_id": "s1", "product_id": "p-lok", "ingredient": "gul lök", "product_name": "Gul lök lösvikt", "packages_needed": 1, "package_quantity": 1000, "package_unit": "g",
                  "total_price": 3.5, "unit": "g", "purchased_unit": "g", "required_quantity": 150, "purchased_usable_quantity": 180, "purchased_quantity": 180,
                  "quantity_confidence": "estimated", "sale_model": "sold_by_weight", "food_family": "allium"}]
-        recipe = {"name": "Köttfärssås med ris", "servings": 2, "instructions": ["Stek färsen.", "Koka riset."],
-                  "ingredients": [{"name": "nötfärs", "quantity": 400, "unit": "g"}, {"name": "gul lök", "quantity": 150, "unit": "g"}, {"name": "ris", "quantity": 200, "unit": "g"}]}
+        recipe = {"name": "Pannbiff med lök och potatis", "servings": 2, "instructions": ["Stek biffarna.", "Koka potatisen."],
+                  "ingredients": [{"name": "nötfärs", "quantity": 400, "unit": "g"}, {"name": "gul lök", "quantity": 150, "unit": "g"}, {"name": "potatis", "quantity": 600, "unit": "g"}]}
         return {"plan_id": "plan-1", "revision": revision, "request": request,
                 "plan": {"personal": {"slots": [{"id": "dinner-1", "day": 1, "meal_type": "dinner", "recipe": recipe}], "checks": {},
                                       "needs": [{"key": "nötfärs"}, {"key": "gul lök"}],
-                                      "allocations": [{"name": "ris", "quantity": 200, "unit": "g"}] if rice else []},
+                                      "allocations": [{"name": "potatis", "quantity": 600, "unit": "g"}] if home else []},
                          "optimized_basket": {"total": 63.4, "store_count": 1, "verification_status": "VERIFIED_WITH_ESTIMATES",
                                               "stores": [{"store_id": "s1", "store_name": "Testbutiken Lund", "subtotal": 63.4, "items": rows}]}}}
 
@@ -71,9 +71,13 @@ class Fake:
             factor, unit = {"kg": (1000, "g"), "g": (1, "g"), "st": (1, "st"), "l": (1000, "ml")}[match[3]]
             return 200, {"query": match[1], "quantity": int(match[2]) * factor, "unit": unit, "properties": [], "food": "tandborste" not in match[1], "confirmed": False}
         if path == "personal/shopping-suggestions":
-            return 200, {"generics": [], "products": [], "usual": None, "status": "available"}
+            rice = [{"product_key": "c" * 32, "name": "Basmatiris", "display_name": "Testmärket Basmatiris", "package": "1 kg", "package_quantity": 1000, "package_unit": "g",
+                     "selectable": True, "purchase_units": False, "campaign_choice": False, "matches": []}]
+            return 200, {"generics": [], "products": rice if query.get("q", "").startswith("ris") else [], "usual": None, "status": "available"}
         if path == "personal/pantry-use":
-            return 200, {"form": "dry", "unit": "g", "used_in_recipes": True, "food": True} if query.get("name") == "ris" else {"form": None, "unit": None, "used_in_recipes": False, "food": True}
+            known = {"potatis": {"form": "raw_edible", "unit": "g", "used_in_recipes": True, "food": True, "usable": {"raw_edible": [570, 570]}},
+                     "ris": {"form": "dry", "unit": "g", "used_in_recipes": True, "food": True, "usable": {"dry": [5, 619]}}}
+            return 200, known.get(query.get("name"), {"form": None, "unit": None, "used_in_recipes": False, "food": True, "usable": {}})
         if path in {"personal/pantry", "personal/shopping-list"}:
             if body["revision"] != s["revision"]:
                 return 409, {"detail": "Ändrat på annat håll."}
@@ -164,15 +168,15 @@ def open_screen(name, page, screen):
         page.get_by_role("button", name=re.compile("Skafferi" if screen == "skafferi" else "konto", re.IGNORECASE)).click()
 
 
-def add_rice(name, page):
+def add_potatoes(name, page):
     open_screen(name, page, "skafferi")
     expect(page.get_by_role("heading", name="Skafferi", level=1)).to_be_visible()
-    page.get_by_label("Lägg till i skafferiet").fill("ris 1 kg")
-    page.get_by_role("button", name=re.compile("Ris · 1 kg")).click()
-    # The form recipes use for rice is proposed and can be changed before saving.
-    expect(page.get_by_role("radio", name=re.compile("^Torr"))).to_have_attribute("aria-checked", "true")
+    page.get_by_label("Lägg till i skafferiet").fill("potatis 1 kg")
+    page.get_by_role("button", name=re.compile("Potatis · 1 kg")).click()
+    # The form recipes use for potatoes is proposed and can be changed before saving.
+    expect(page.get_by_role("radio", name=re.compile("^Rå eller färsk"))).to_have_attribute("aria-checked", "true")
     page.get_by_role("button", name="Lägg i skafferiet", exact=True).click()
-    expect(page.locator(".pantry .item-name")).to_have_text("Ris")
+    expect(page.locator(".pantry .item-name")).to_have_text("Potatis")
 
 
 def plan_meat_dinners(name, page):
@@ -202,16 +206,16 @@ def plan_meat_dinners(name, page):
 
 def test_pantry_meat_choice_and_registered_purchase(ui):
     name, page, fake, shot = ui
-    add_rice(name, page)
+    add_potatoes(name, page)
     shot("skafferi")
     saved = next(body for method, path, body in fake.calls if path == "personal/pantry")
-    assert [(i["name"], i["quantity"], i["unit"], i["form"], i["product_key"]) for i in saved["items"]] == [("ris", 1000, "g", "dry", None)]
+    assert [(i["name"], i["quantity"], i["unit"], i["form"], i["product_key"]) for i in saved["items"]] == [("potatis", 1000, "g", "raw_edible", None)]
 
     plan_meat_dinners(name, page)
     sent = next(body for method, path, body in fake.calls if path == "plans")
     assert [m["diet"] for m in sent["personal"]["meals"]] == ["meat", "mixed", "mixed"]
     assert sent["personal"]["use_pantry"] is True and sent["personal"]["pantry_revision"] == fake.states["guest"]["revision"]
-    expect(page.get_by_text("Från skafferiet, behöver inte köpas: ris 200 g.")).to_be_visible()
+    expect(page.get_by_text("Från skafferiet, behöver inte köpas: potatis 600 g.")).to_be_visible()
     shot("handla")
 
     page.get_by_role("button", name="Jag har handlat").click()
@@ -224,13 +228,26 @@ def test_pantry_meat_choice_and_registered_purchase(ui):
     bought = next(body for method, path, body in fake.calls if path.endswith("/change"))
     assert bought["action"] == "purchase" and bought["measured_purchase_quantities"] == {"s1|p-lok|gul lök": 210}
     page.get_by_role("button", name="Öppna skafferiet").click()
-    expect(page.locator(".pantry .item-name")).to_have_text(["Ris", "Nötfärs", "Gul lök"])
+    expect(page.locator(".pantry .item-name")).to_have_text(["Potatis", "Nötfärs", "Gul lök"])
     expect(page.locator(".pantry .item-kind").nth(1)).to_have_text("Bestämd vara")
+
+
+def test_rice_by_name_is_not_enough_so_a_chosen_product_is_offered(ui):
+    name, page, fake, shot = ui
+    open_screen(name, page, "skafferi")
+    page.get_by_label("Lägg till i skafferiet").fill("ris 1 kg")
+    page.get_by_role("button", name=re.compile("Ris · 1 kg")).click()
+    expect(page.get_by_text("Bara några recept kan använda ris när varan är skriven så här.")).to_be_visible()
+    shot("ris")
+    page.get_by_role("button", name=re.compile("Testmärket Basmatiris")).click()
+    expect(page.locator(".pantry .item-kind")).to_have_text("Bestämd vara")
+    saved = next(body for method, path, body in fake.calls if path == "personal/pantry")
+    assert [(i["product_key"], i["quantity"], i["unit"]) for i in saved["items"]] == [("c" * 32, 1000, "g")]
 
 
 def test_account_is_created_and_left_inside_the_interface(ui):
     name, page, fake, shot = ui
-    add_rice(name, page)
+    add_potatoes(name, page)
     open_screen(name, page, "konto")
     expect(page.get_by_role("heading", name="Logga in")).to_be_visible()
     shot("konto")

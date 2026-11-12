@@ -66,11 +66,21 @@ def test_part_of_the_need_at_home_means_the_rest_is_bought():
 
 @pytest.mark.parametrize("name, form, unit", [("ris", "dry", "g"), ("gul lök", "raw_edible", "g"), ("krossade tomater", "as_sold", "g")])
 def test_the_proposed_form_and_unit_are_the_ones_recipes_use(name, form, unit):
-    assert usual_recipe_use(name) == {"form": form, "unit": unit, "used_in_recipes": True}
+    use = usual_recipe_use(name)
+    assert (use["form"], use["unit"], use["used_in_recipes"]) == (form, unit, True)
+
+
+def test_usable_counts_follow_the_planners_rule_for_named_rows():
+    """Onion by name is enough for every recipe; chicken by name for none, since recipes ask for a cut."""
+    onion, chicken = usual_recipe_use("gul lök")["usable"]["raw_edible"], usual_recipe_use("kyckling")["usable"]["raw_edible"]
+    assert onion[0] == onion[1] > 100
+    assert chicken[0] == 0 and chicken[1] > 100
+    rice = usual_recipe_use("ris")["usable"]["dry"]
+    assert 0 < rice[0] < rice[1] / 2
 
 
 def test_unknown_name_gets_no_proposal():
-    assert usual_recipe_use("tandborste") == {"form": None, "unit": None, "used_in_recipes": False}
+    assert usual_recipe_use("tandborste") == {"form": None, "unit": None, "used_in_recipes": False, "usable": {}}
 
 
 def test_trial_interfaces_have_account_pantry_and_purchase_built_in():
@@ -103,7 +113,8 @@ def test_pantry_api_as_the_trial_interfaces_use_it(monkeypatch, tmp_path):
         assert (typed["query"], typed["quantity"], typed["unit"], typed["food"]) == ("ris", 1000, "g", True)
         assert first.post("/api/personal/interpret-extra", json={"text": "tandborste 1 st"}).json()["food"] is False
         use = first.get("/api/personal/pantry-use", params={"name": typed["query"]}).json()
-        assert use == {"form": "dry", "unit": "g", "used_in_recipes": True, "food": True}
+        assert (use["form"], use["unit"], use["used_in_recipes"], use["food"]) == ("dry", "g", True, True)
+        assert set(use["usable"]) == {"dry"}
         assert first.get("/api/personal/pantry-use", params={"name": " "}).status_code == 422
         row = {"id": "rice-1", "name": typed["query"], "quantity": typed["quantity"], "unit": typed["unit"],
                "product_key": None, "unusable": False, "food": True, "form": use["form"]}
