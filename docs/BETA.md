@@ -1,3 +1,18 @@
+# 2026-11-12: Egna varor, provgränssnitt och lösvikt i matplanen aktiverat
+
+Main `3e490544632a`. App **app-3e490544632a-749e98be**, scheduler orörd.
+Generiska egna varor köps som de varor de namnger, billigaste vinner även med
+lösvikt; samma vara i andra kedjor kan läggas till; två provgränssnitt väljs på
+/admin. Matplanen tar nu också lösvikt när den är billigare än en exakt
+förpackning (ägarbeslut 2026-11-12). Rättat: `/api/plan` kraschade på den nya
+frozenset-policyn i urvalscachen. 24 appfiler, importkontroll av kandidaten ok,
+retention före/efter complete, båda /ready svarar med nytt BUILD_ID.
+Bygge och aktivering kördes losskopplade på servern med samma workerkod som
+`beta_release.py` (laptopens skal tillåter högst 180 s per anrop).
+Aktiverad 2026-11-12 07:04 UTC.
+
+---
+
 # 2026-11-10: Snabbare menysökning aktiverat
 
 Main `82b9ce411660`. App **app-82b9ce411660-7332b1f6**, scheduler orörd.
@@ -136,7 +151,7 @@ på `main` inte ändrar en pågående release.
   `smako-app-1`, `smako-scheduler-1`, `smako-caddy-1`, data i `/srv/smako/data`
   och det gemensamma driftlåset. Detta flöde installerar inte en ny server.
 - Läs aktuell [HANDOFF.md](HANDOFF.md), [OPERATIONS.md](OPERATIONS.md) och
-  senaste aktiveringsrapport. Appens BUILD_ID är `app-82b9ce411660-7332b1f6`;
+  senaste aktiveringsrapport. Appens BUILD_ID är `app-3e490544632a-749e98be`;
   schedulern är `source-ops-8a53beb80e43`.
   [Uppvärmda prov och samordnad faktaläsning/GC](releases/warm-facts-gc-20261101/ACTIVATED.md)
   är senaste appaktiveringen. Sex Pythonfiler från kod `b7c8d0506e23`;
@@ -184,10 +199,10 @@ git status --short
 .venv/Scripts/python.exe -X utf8 scripts/smako_ops.py status
 
 # Använd den granskade Git-bas som motsvarar faktiskt aktiva filer enligt senaste journalen.
-.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit 82b9ce411660 --commit main --workdir .local/beta-release
+.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit 3e490544632a --commit main --workdir .local/beta-release
 ```
 
-`82b9ce411660` är appen som aktiverades 2026-11-10 19:49 UTC. Appbildens egen
+`3e490544632a` är appen som aktiverades 2026-11-12 07:04 UTC. Appbildens egen
 grocery-kopia är äldre än Git; använd `--keep-app-grocery` om intervallet
 bara innehåller grocery-Python som redan levererats till schedulern. De äldre
 Coop-filerna i runtime (`price_universe_runtime.py`,
