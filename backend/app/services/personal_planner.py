@@ -632,10 +632,15 @@ class PersonalPlanner:
                     self.product_trace.event(product, recipe, name, "preparation_source", "passed",
                         "issued preparation operand; qualified source input, shared purchase and measured output required")
             return candidates
+        # A generic own item (no recipe, no chosen product) is matched by name
+        # and category; a recipe ingredient of the same name is not.
+        generic_row = (recipe is None and not product_key and not campaign_choice
+                       and not purchase_units and _reviewed_source_key is None)
         cache_key = (
             name,
             unit,
             product_key,
+            "generic-item" if generic_row else None,
             tuple(properties),
             self._model_json(profile),
             organic_animals,
@@ -687,6 +692,12 @@ class PersonalPlanner:
         requirement = NormalizedIngredient(
             canonical_name=canonical, required_quantity=quantity, unit=unit
         )
+        # A generic shopping-list row: no recipe and no chosen product. The name
+        # and the store's category must agree that the product is these goods.
+        generic_items = None
+        if generic_row:
+            from app.services.generic_items import generic_item_index
+            generic_items = generic_item_index(self.prepared)
         if product_key:
             positions = self.index.groups.get(product_key, ())
         else:
@@ -727,6 +738,9 @@ class PersonalPlanner:
                     self.queries[key] = ingredient_search_positions(
                         self.prepared, name, complete=self.complete)
                 positions |= self.queries[key]
+            if generic_items is not None:
+                from app.services.generic_items import generic_search_positions
+                positions |= generic_search_positions(self.prepared, name)
         candidates = []
         conflicts = []
         weight_consent_missing = False
@@ -752,6 +766,9 @@ class PersonalPlanner:
                     note(i, "recipe_match", "stopped", "authored ingredient input form is incompatible with product")
                     continue
             note(i, "candidate_index", "passed", "retrieved by existing index/search for this ingredient")
+            if generic_items is not None and (why := generic_items.reason(name, i)):
+                note(i, "recipe_match", "stopped", "generic shopping item: " + why)
+                continue
             if product.store_id not in self.store_ids:
                 note(i, "store_freshness", "stopped", "store/context excluded by request view or explicit allowed stores")
                 continue
@@ -841,7 +858,7 @@ class PersonalPlanner:
                     if semantic_product is not product:
                         candidate = candidate.model_copy(update={"semantic_evidence": [*candidate.semantic_evidence,
                                 "exact variant-bound supplier food classification: " + self.declared_classes[i]]})
-                elif properties or canonical not in self.view.economic_pool.candidates_by_name:
+                elif generic_items is not None or properties or canonical not in self.view.economic_pool.candidates_by_name:
                     # For out-of-taxonomy generic goods all query terms must be
                     # present; the user confirms the resulting query properties.
                     from app.services.product_search import search_text
@@ -861,11 +878,15 @@ class PersonalPlanner:
                     # A stale source classification must not pre-empt the shared
                     # semantic matcher. Lexical fallback, however, cannot promote
                     # a low-confidence product into a meal ingredient.
-                    if self.facts and product.semantic_confidence not in {"high", "exact"}:
+                    # A generic shopping row is not a meal ingredient; its name
+                    # and the store's category were matched above.
+                    if self.facts and generic_items is None and product.semantic_confidence not in {"high", "exact"}:
                         note(i, "recipe_match", "stopped", "shared semantic matcher rejected; source confidence cannot support lexical fallback")
                         continue
                     tokens = set(search_text(name).split())
-                    if not tokens <= set(search_text(product.name).split()):
+                    # A generic row was already matched on name and category
+                    # above, including plural forms and listed compounds.
+                    if generic_items is None and not tokens <= set(search_text(product.name).split()):
                         note(i, "recipe_match", "stopped", "neither semantic match nor complete requested query")
                         continue
                     candidate = ProductCandidate.from_product(product, 1).model_copy(
@@ -894,6 +915,23 @@ class PersonalPlanner:
                 continue
             note(i, "price_contract", "passed", "request membership, date, source scope and purchase mode accepted")
             candidates.append((i, candidate))
+        if generic_items is not None and len(candidates) > 1:
+            # Same store, price, size and offers: keep the plainest names, so
+            # "coca cola" is not bought as a flavoured variant at the same price.
+            closest = {}
+            for i, candidate in candidates:
+                key = (candidate.store_id, candidate.effective_price, candidate.price, candidate.member_price,
+                       candidate.package_quantity, candidate.package_unit,
+                       tuple(sorted(repr((o.kind, o.price, o.price_basis_unit, o.required_packages, o.max_quantity,
+                                          o.eligibility, o.mechanism, o.membership_program, o.percent_discount,
+                                          o.valid_from, o.valid_to, o.deposit)) for o in candidate.offers)),
+                       repr(getattr(candidate, "promotion_groups", ())))
+                score = generic_items.closeness(name, i)
+                if key not in closest or score < closest[key][0]:
+                    closest[key] = (score, [(i, candidate)])
+                elif score == closest[key][0]:
+                    closest[key][1].append((i, candidate))
+            candidates = sorted((row for _score, rows in closest.values() for row in rows), key=lambda row: row[0])
         self._resolution_trace[cache_key] = observed
         if not candidates:
             failure = conflicts[0] if conflicts else PolicyConflict(
@@ -1401,6 +1439,10 @@ class PersonalPlanner:
         preparations = self._prepare_groups(groups, rows, allocations, available)
         groups = [g for g in groups if g["quantity"] > 1e-8]
         ingredients, candidate_map = [], {}
+        # Owner decisions 2026-11-11 (own items) and 2026-11-12 (recipe
+        # ingredients): the cheapest product wins even when its weight is
+        # estimated (loose weight). The basket still reports the estimate.
+        price_first = set()
         for n, group in enumerate(groups):
             key = f"{group['name']} [{n + 1}]"
             if _retained is not None:
@@ -1415,6 +1457,7 @@ class PersonalPlanner:
                 if row["demand_key"] in group["demand_keys"]:
                     row["purchase_key"] = key
             candidates = [group["candidates"][i] for i in group["positions"]]
+            price_first.add(key)
             lock = self.spec.product_locks.get(key)
             if lock:
                 candidates = [
@@ -1428,7 +1471,7 @@ class PersonalPlanner:
             # the exact ordered objects so the shared engine's immutable quote
             # set cache can reuse identical subproblems across weekly baskets.
             # Holding the tuple prevents ID reuse; nothing crosses requests.
-            sequence_key = tuple(id(candidate) for candidate in candidates)
+            sequence_key = (("price-first",) if key in price_first else ()) + tuple(id(candidate) for candidate in candidates)
             if sequence_key not in self.candidate_sequences:
                 remember_bounded(self.candidate_sequences, sequence_key, tuple(candidates), 4096)
             else:
@@ -1451,6 +1494,11 @@ class PersonalPlanner:
                     source_recipes=group["sources"],
                 )
             )
+        # The candidate tuples above differ for price-first lines, so the
+        # optimizer's per-request caches never mix the two rankings.
+        policy = self.optimizer.verification_policy
+        if policy.price_first_ingredients != frozenset(price_first):
+            self.optimizer.verification_policy = replace(policy, price_first_ingredients=frozenset(price_first))
         # Rule out an impossible singleton before any whole-basket search.
         # Full menus usually pass their initial basket; build their nutrient
         # search model lazily only when that verified baseline fails.
@@ -1604,6 +1652,7 @@ class PersonalPlanner:
         explicitly final-menu counterfactuals, not claims of exhaustive search.
         Every comparison uses whole checkout, store cap, nutrition and audit.
         """
+        from app.models.basket import BasketVerificationStatus
         from app.services.basket_optimizer import _VERIFICATION_RANK
 
         candidates, rows = result["trace_inputs"]
@@ -1637,8 +1686,14 @@ class PersonalPlanner:
                     strategic_extras_allowed=self.spec.surplus_mode == "allow_larger")
                 if not audit.passed:
                     raise PolicyConflict("Counterfactual checkout audit failed", stage="checkout_audit")
-                base_rank = _VERIFICATION_RANK[baseline.verification_status]
-                option_rank = _VERIFICATION_RANK[option.verification_status]
+                # Estimated weights compete on price (owner decision
+                # 2026-11-12), so they are not a quality difference here.
+                def rank(status):
+                    if status == BasketVerificationStatus.VERIFIED_WITH_ESTIMATES:
+                        status = BasketVerificationStatus.VERIFIED
+                    return _VERIFICATION_RANK[status]
+                base_rank = rank(baseline.verification_status)
+                option_rank = rank(option.verification_status)
                 verdict = ("quality_priority" if option_rank > base_rank else
                            "higher_whole_basket_cost" if option.total > baseline.total + .005 else
                            "equal_whole_basket_cost" if abs(option.total-baseline.total) <= .005 else

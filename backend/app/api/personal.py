@@ -125,7 +125,16 @@ def shopping_suggestions(request: Request, response: Response, q: str = "", post
     if prepared is None:
         return {"generics": generic, "products": [], "status": "no_area_data"}
     products = []
+    usual = None
     if len(q.strip()) >= 2:
+        # The package size most goods with this name are sold in, so a typed
+        # name without an amount can still be added with one tap.
+        from app.services.generic_items import usual_amount
+        typed, typed_amount, _unit = parse_quantity(q)
+        if typed_amount is None and typed.strip():
+            usual = usual_amount(prepared, typed)
+            if usual:
+                usual = {"query": typed.strip(), **usual}
         # The first curated generic is the closest meaning of a broad query.
         # Rank its existing exact matches first, then retain the original matches.
         # This changes suggestions only, never basket candidate eligibility.
@@ -145,7 +154,7 @@ def shopping_suggestions(request: Request, response: Response, q: str = "", post
                 stale_hours=settings.max_price_age_hours,
                 warning_hours=settings.price_age_warning_hours)["results"])
         products = price_free_products({"results": rows})
-    return {"generics": generic, "products": products, "status": "available",
+    return {"generics": generic, "products": products, "usual": usual, "status": "available",
             "identity_rule": "verified_gtin_and_package; otherwise separate source identity"}
 
 
@@ -174,6 +183,37 @@ def product_generic(payload: ProductGenericQuery, request: Request, response: Re
                                  "Sök med ett bredare varunamn eller lägg till en generisk vara.")
     return {"generic": {"query": generic["query"], "properties": generic["properties"]},
             "name": generic["name"]}
+
+
+@router.post("/same-product")
+def same_product(payload: ProductGenericQuery, request: Request, response: Response):
+    """The same product sold under another identity in other chains, for the user to confirm."""
+    from app.services.generic_items import same_product_index
+    from app.services.product_search import _CHAIN_LABELS, ProductSearchRequest
+    from app.services.shopping_list import falls_under
+
+    context(request, response)
+    try:
+        search = ProductSearchRequest(query=payload.query, postal_code=payload.postal_code)
+    except ValueError as exc:
+        raise HTTPException(422, "Kontrollera varunamn och postnummer.") from exc
+    prepared = GLOBAL_PREPARED_PRICE_UNIVERSES.get_for_request(search.postal_code, {})
+    if prepared is None:
+        raise HTTPException(409, "Vi har inga varor för det här postnumret än.")
+    index = prepared.product_search_index
+    stores = {store.store_id: store for store in prepared.stores}
+    generic = payload.generic.model_dump() if payload.generic is not None else None
+    rows = []
+    for key in same_product_index(prepared).others(payload.product_keys)[:7]:
+        if generic is not None and not falls_under(prepared, [key], generic):
+            continue
+        product = prepared.universe.products[index.groups[key][0]]
+        chains = sorted({_CHAIN_LABELS.get(stores[p.store_id].chain, stores[p.store_id].chain)
+                         for p in (prepared.universe.products[i] for i in index.groups[key]) if p.store_id in stores})
+        brand = product.brand or ""
+        name = product.name if brand.casefold() in product.name.casefold() else f"{brand} {product.name}".strip()
+        rows.append({"product_key": key, "display_name": name[:200], "chains": chains})
+    return {"products": rows}
 
 
 @router.post("/interpret-extra")

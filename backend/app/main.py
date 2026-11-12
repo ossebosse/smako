@@ -22,7 +22,7 @@ from app.services.price_universe_runtime import (
     PreparedPriceUniverseManager,
 )
 from app.services.pricing_projection_prewarm import precompute_pricing_semantics
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import FileResponse, JSONResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 
@@ -195,6 +195,15 @@ async def classic_planning_page() -> FileResponse:
 @app.get("/personal", include_in_schema=False)
 async def personal_planning_page() -> FileResponse:
     return FileResponse(STATIC_DIR / "personal.html", headers={"Cache-Control": "no-cache"})
+
+
+@app.get("/ui/{name}", include_in_schema=False)
+async def trial_interface_page(name: str) -> FileResponse:
+    """The two trial interfaces chosen from /admin. They use the same API as /personal."""
+
+    if name not in {"a", "b"}:
+        raise HTTPException(status_code=404)
+    return FileResponse(STATIC_DIR / "next" / f"{name}.html", headers={"Cache-Control": "no-cache"})
 
 
 @app.get("/manifest.webmanifest", include_in_schema=False)

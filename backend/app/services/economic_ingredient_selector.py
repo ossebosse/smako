@@ -359,7 +359,10 @@ class EconomicIngredientSelector:
                 "minimum_score": self.matcher.minimum_score,
                 "allow_medium_semantic": self.matcher.allow_medium_semantic,
             },
-            "verification_policy": asdict(self.verification_policy),
+            "verification_policy": {
+                **asdict(self.verification_policy),
+                "price_first_ingredients": sorted(self.verification_policy.price_first_ingredients),
+            },
             "max_candidates_per_store": self.max_candidates_per_store,
             "max_examples_per_ingredient": self.max_examples_per_ingredient,
             "max_ingredients_per_category": {

@@ -5,13 +5,24 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="robots" content="noindex,nofollow">
   <title>Drift & priser · Smako</title>
-  <link rel="stylesheet" href="/static/admin.css?v=store-status-20261013">
-  <script defer src="/static/admin.js?v=store-status-20261013"></script>
+  <link rel="stylesheet" href="/static/admin.css?v=interfaces-20261111">
+  <script defer src="/static/admin.js?v=interfaces-20261111"></script>
 </head>
 <body>
   <header><a class="brand" href="/">smako<span>DRIFT</span></a><span class="private">Administratör</span></header>
   <main>
     <div class="heading"><div><p class="eyebrow">INSAMLING & PRISTÄCKNING</p><h1>Hur mår våra butiker?</h1><p>Följ prisunderlaget, från senaste insamling till tillgängliga priser.</p></div><button id="refresh" type="button">↻ Uppdatera</button></div>
+    <section class="panel" id="interface-panel" aria-labelledby="interface-title">
+      <h2 id="interface-title">Gränssnitt</h2>
+      <p>Välj vilket gränssnitt den här webbläsaren får på beta.smako.nu. Valet gäller bara här och ändrar inget för andra.</p>
+      <div class="interface-choices" role="radiogroup" aria-label="Gränssnitt">
+        <button type="button" role="radio" data-interface="standard"><strong>Nuvarande</strong><span>Smako som det ser ut i dag.</span></button>
+        <button type="button" role="radio" data-interface="a"><strong>Alternativ A · Flikar</strong><span>Hem med två vägar in, och flikarna Inköpslista, Matplan och Handla.</span></button>
+        <button type="button" role="radio" data-interface="b"><strong>Alternativ B · Guide</strong><span>En fråga per skärm och en knapp för att gå vidare.</span></button>
+      </div>
+      <p id="interface-status" role="status"></p>
+      <p><a id="interface-open" href="/personal">Öppna Smako med det valda gränssnittet</a></p>
+    </section>
     <nav aria-label="Kommun" id="cities"><button type="button" data-city="Lund" aria-pressed="true">Lund</button><button type="button" data-city="Malmö" aria-pressed="false">Malmö</button><span>2 kommuner driftsatta</span></nav>
     <p id="updated" role="status">Hämtar driftstatus…</p>
     <p id="error" role="alert" hidden></p>
