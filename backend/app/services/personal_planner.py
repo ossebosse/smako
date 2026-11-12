@@ -1439,12 +1439,9 @@ class PersonalPlanner:
         preparations = self._prepare_groups(groups, rows, allocations, available)
         groups = [g for g in groups if g["quantity"] > 1e-8]
         ingredients, candidate_map = [], {}
-        # Own generic items (owner decision 2026-11-11): the cheapest product
-        # wins even when its weight is estimated. Recipe ingredients keep the
-        # rule that an exact package goes before an estimate.
-        generic_extras = {extra.id for extra in self.spec.extras if extra.kind == "generic"
-                          and not extra.product_key and not extra.alternatives
-                          and not getattr(extra, "purchase_units", False)}
+        # Owner decisions 2026-11-11 (own items) and 2026-11-12 (recipe
+        # ingredients): the cheapest product wins even when its weight is
+        # estimated (loose weight). The basket still reports the estimate.
         price_first = set()
         for n, group in enumerate(groups):
             key = f"{group['name']} [{n + 1}]"
@@ -1460,8 +1457,7 @@ class PersonalPlanner:
                 if row["demand_key"] in group["demand_keys"]:
                     row["purchase_key"] = key
             candidates = [group["candidates"][i] for i in group["positions"]]
-            if group["sources"] and all(source in generic_extras for source in group["sources"]):
-                price_first.add(key)
+            price_first.add(key)
             lock = self.spec.product_locks.get(key)
             if lock:
                 candidates = [
@@ -1656,6 +1652,7 @@ class PersonalPlanner:
         explicitly final-menu counterfactuals, not claims of exhaustive search.
         Every comparison uses whole checkout, store cap, nutrition and audit.
         """
+        from app.models.basket import BasketVerificationStatus
         from app.services.basket_optimizer import _VERIFICATION_RANK
 
         candidates, rows = result["trace_inputs"]
@@ -1689,8 +1686,14 @@ class PersonalPlanner:
                     strategic_extras_allowed=self.spec.surplus_mode == "allow_larger")
                 if not audit.passed:
                     raise PolicyConflict("Counterfactual checkout audit failed", stage="checkout_audit")
-                base_rank = _VERIFICATION_RANK[baseline.verification_status]
-                option_rank = _VERIFICATION_RANK[option.verification_status]
+                # Estimated weights compete on price (owner decision
+                # 2026-11-12), so they are not a quality difference here.
+                def rank(status):
+                    if status == BasketVerificationStatus.VERIFIED_WITH_ESTIMATES:
+                        status = BasketVerificationStatus.VERIFIED
+                    return _VERIFICATION_RANK[status]
+                base_rank = rank(baseline.verification_status)
+                option_rank = rank(option.verification_status)
                 verdict = ("quality_priority" if option_rank > base_rank else
                            "higher_whole_basket_cost" if option.total > baseline.total + .005 else
                            "equal_whole_basket_cost" if abs(option.total-baseline.total) <= .005 else

@@ -155,8 +155,8 @@ def test_own_items_are_bought_with_recipe_facts_loaded():
     assert bought(run(p, req, facts=facts)) == ["Banan Klass 1", "Bryggkaffe Mellanrost"]
 
 
-def test_own_item_takes_cheaper_loose_weight_but_recipe_keeps_exact_package():
-    """Owner decision 2026-11-11: the cheapest wins for own items, recipes keep exact packages first."""
+def test_own_item_and_recipe_take_cheaper_loose_weight():
+    """Owner decisions 2026-11-11/12: the cheapest wins for own items and recipe ingredients alike."""
     from app.models.personal import MealSettings, MealSlot
     from app.models.recipe import Recipe, RecipeIngredient
 
@@ -172,7 +172,27 @@ def test_own_item_takes_cheaper_loose_weight_but_recipe_keeps_exact_package():
     req = request(slots=[MealSlot(id="dinner", day=1, meal_type="dinner", recipe=pie)],
                   meals=[MealSettings(meal_type="dinner", count=1, servings=1)])
     req.purchase_planning_mode = "estimated"
-    assert bought(run(p, req)) == ["Äpple Royal Gala i påse"]
+    meal = run(p, req)
+    assert bought(meal) == ["Äpple Röda Klass 1"]
+    assert meal.optimized_basket.verification_status.value == "VERIFIED_WITH_ESTIMATES"
+
+
+def test_recipe_keeps_exact_package_when_it_is_cheaper():
+    from app.models.personal import MealSettings, MealSlot
+    from app.models.recipe import Recipe, RecipeIngredient
+
+    p = prepared(
+        loose("Äpple Röda Klass 1", 170, 59.9, category="Frukt & Grönt > Frukt > Äpplen"),
+        product("Äpple Royal Gala i påse", 1000, "g", 24.9, category="Frukt & Grönt > Frukt > Äpplen"),
+    )
+    pie = Recipe(name="Äppelsnitt", servings=1, ingredients=[RecipeIngredient(name="äpple", quantity=500, unit="g")],
+                 instructions=["Skiva äpplena."])
+    req = request(slots=[MealSlot(id="dinner", day=1, meal_type="dinner", recipe=pie)],
+                  meals=[MealSettings(meal_type="dinner", count=1, servings=1)])
+    req.purchase_planning_mode = "estimated"
+    meal = run(p, req)
+    assert bought(meal) == ["Äpple Royal Gala i påse"]
+    assert meal.optimized_basket.verification_status.value == "VERIFIED"
 
 
 def test_same_product_in_other_chains_is_found_by_brand_words_and_package():
