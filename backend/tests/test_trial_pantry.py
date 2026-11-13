@@ -118,6 +118,31 @@ def test_usable_counts_follow_the_planners_rule_for_named_rows():
     assert chickpeas[2] > chickpeas[1] / 2 and chickpeas[0] <= chickpeas[1] - chickpeas[2]
 
 
+def test_a_typed_row_is_checked_against_every_recipe_row_without_error():
+    """Exact-product requirements once crashed the plan for a typed row (olivolja, grädde, ...).
+
+    The planner calls the rule without a guard, so it must answer for every
+    current recipe row; a typed name never meets a reviewed exact-product link.
+    """
+    from app.services.complete_recipes import UNCOOKED_FORMS, pantry_form_compatible
+    from app.services.ingredient_normalizer import canonicalize_ingredient_name
+    from app.services.recipe_library import current_recipes
+
+    exact = 0
+    for recipe in current_recipes():
+        for ingredient in recipe.ingredients:
+            name = canonicalize_ingredient_name(ingredient.name)
+            form = recipe.preparation.input_forms.get(name)
+            requirements = tuple(getattr(ingredient, "product_requirements", None) or ())
+            row = {"name": name, "input_form": form, "product_requirements": requirements}
+            for item in ({"name": name, "unit": "g"}, {"name": name, "unit": "g", "form": form}):
+                accepted = pantry_form_compatible(item, row)
+                if any(r.startswith("pack:intake_all_") for r in requirements) and form in UNCOOKED_FORMS:
+                    exact += 1
+                    assert accepted is False
+    assert exact > 100
+
+
 def test_unknown_name_gets_no_proposal():
     assert usual_recipe_use("tandborste") == {"form": None, "unit": None, "used_in_recipes": False, "usable": [0, 0, 0]}
 

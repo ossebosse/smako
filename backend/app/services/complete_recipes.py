@@ -673,6 +673,12 @@ def pantry_form_compatible(item, row):
             return False
     if form != row.get("input_form"):
         return False
+    requirements = row.get("product_requirements", ()) or ()
+    if any(r.removeprefix("pack:").startswith("intake_all_") for r in requirements):
+        # A reviewed exact-product requirement is met only by a product whose
+        # identity (store, article, snapshot) was checked. A typed name has
+        # none, so only a chosen product can meet it (owner decision 2026-11-13).
+        return False
     from types import SimpleNamespace
     category = "frukt och grönsaker" if form == "raw_edible" else "kryddor" if form == "dry" else ""
     if not _whole_food_identity(row["name"], form, SimpleNamespace(name=item["name"], category=category), None):
