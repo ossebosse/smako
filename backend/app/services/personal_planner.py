@@ -107,6 +107,8 @@ def personal_policy_request(request, dinner_count):
 
 
 _AUDIT_FAILURE = "Vi kunde inte kontrollera mängderna eller priserna i inköpslistan."
+_NOT_NONFOOD = ("{name} är sparad som en vara som inte är mat, men Smako känner inte igen den så. "
+                "Ta bort {name} ur inköpslistan och lägg till den igen.")
 
 
 def _lower_caps(max_stores):
@@ -234,6 +236,10 @@ class PersonalPlanner:
         self.spec.profile = merged_profile(
             self.spec.profile, TasteProfile(exclusions=request.avoid_ingredients)
         )
+        # Checked before any search, so the answer names the item and nothing else.
+        for extra in self.spec.extras:
+            if not extra.food and not is_nonfood(extra.query):
+                raise PolicyConflict(_NOT_NONFOOD.format(name=extra.query))
         self.plan_id = plan_id
         from app.services.personal_source_facts import load_retained_facts
 
@@ -1120,7 +1126,7 @@ class PersonalPlanner:
                 }
             )
             if not extra.food and not is_nonfood(extra.query):
-                raise PolicyConflict(f"{extra.query} kan inte undantas från matinköpets krav.")
+                raise PolicyConflict(_NOT_NONFOOD.format(name=extra.query))
         consumed = defaultdict(float)
         for booked in consumed_demands(self.state, self.plan_id):
             consumed[booked["demand_key"]] += booked["quantity"]
@@ -1616,6 +1622,7 @@ class PersonalPlanner:
                     for offer in product.offers
                     if item.applied_offer is None or offer != item.applied_offer
                 ]
+        basket = self._mark_drained_package_weight(basket, rows)
         checks = self._check_final(slots, basket, groups, rows, allocations) if final else {}
         return {
             "trace_inputs": (candidate_map, rows),
@@ -1644,6 +1651,35 @@ class PersonalPlanner:
             if self.spec.surplus_mode == "allow_larger"
             else 0,
         }
+
+    def _mark_drained_package_weight(self, basket, rows):
+        """Flag lines where a drained need is met by a product's package weight."""
+        drained = {}
+        for row in rows:
+            if row.get("purchase_key") and row.get("input_form") in {"cooked_drained", "preserved_drained"}:
+                drained.setdefault(row["purchase_key"], []).append(row)
+        if not drained:
+            return basket
+        from app.services.complete_recipes import declared_drained
+
+        changed = False
+        stores = []
+        for store in basket.stores:
+            items = []
+            for item in store.items:
+                needs = drained.get(item.ingredient)
+                position = self.by_identity.get((item.store_id, item.product_id)) if needs else None
+                if position is not None:
+                    product = self.prepared.universe.products[position]
+                    fact = self.source_facts(product)
+                    flag = not all(declared_drained(r["name"], r["input_form"], tuple(r.get("product_requirements") or ()), product, fact)
+                                   for r in needs)
+                    if flag != item.drained_weight_from_package:
+                        item = item.model_copy(update={"drained_weight_from_package": flag})
+                        changed = True
+                items.append(item)
+            stores.append(store.model_copy(update={"items": items}) if changed else store)
+        return basket.model_copy(update={"stores": stores}) if changed else basket
 
     def _trace_final_alternatives(self, slots, result):
         """Compare bounded real alternatives, without changing the chosen plan.

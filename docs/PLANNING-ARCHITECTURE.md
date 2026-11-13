@@ -79,6 +79,28 @@ spärrfrasers namn-/kategoriscope beräknas vid inläsning, med identiska fulla
 klassningssvar; priser eller användarbeslut cachas inte av detta.
 Se [fortsättningsrapporten](reviews/coverage-continuation-20261027.md).
 
+## Förpackningsvikt när avrunnen vikt saknas (ägarbeslut 2026-11-13)
+
+Vill ett recept ha en vara avrunnen (`cooked_drained`, `preserved_drained`)
+och produkten anger ingen avrunnen vikt, räknar planeraren med förpackningens
+vikt och säger att vikten utan spad kan bli lägre. Det gäller överallt:
+matplanen, inköpslistan, "Jag har handlat" och skafferiets valda varor.
+
+- Deklarerad avrunnen vikt går först (`complete_recipes.declared_drained`):
+  ägargodkänd förpackningsidentitet, granskningsregistret, faktabevis med
+  `basis: drained`, eller källans egen brutto/avrunnet-vikt som normaliseringen
+  lagrar som användbar mängd med `DERIVED` (City Gross "400/240 g", Lidl).
+- Annars godtas förpackningsvikten bara för en fast förpackning i gram som
+  ligger i vätska (`package_weight_drained`): ingrediensförteckningen nämner
+  vatten, lake, olja, ättika eller vinäger, eller namn/hylla säger konserv,
+  "naturell", "i vatten" o.d. Torkade, smaksatta varor och varor i sås godtas
+  inte; torkade bönor väger mer kokta och vore fel åt andra hållet.
+- Receptets identitets- och kravkontroller körs före regeln och ändras inte.
+- Köpraden får `drained_weight_from_package`; gränssnitten visar notisen.
+  `GET /api/personal/pantry-product?name=…` svarar med `drained_from_package`.
+- Mätt mot den frysta Malmö-referensen: kikärtor, vita/svarta/kidneybönor,
+  kapris och tonfisk får 8–22 nya godkända butiksrader var (Willys, Hemköp).
+
 ## Statisk prioritet i den kompletta menysökningen
 
 Den befintliga kompletta V2-sökningen räknar singletonprioriteten en gång

@@ -1,12 +1,13 @@
-/* Alternativ A: an app with four tabs. Home offers the two ways in. */
+/* Alternativ A: an app with five tabs. Home offers the two ways in. */
 .ui-a{--page:#f6f4ee;--card:#fff;--ink:#16241f;--muted:#5d6b64;--line:#d9ddd3;--line-soft:#eceee6;--accent:#173e35;--accent-soft:#e4ede5;--accent-ink:#173e35;--on-accent:#fff;--focus:#e0a458;--warn:#c5523f;--warn-soft:#fbeae6;--radius:14px;
   padding-bottom:calc(4.5rem + env(safe-area-inset-bottom))}
 .ui-a .top{position:sticky;top:0;z-index:20;display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:.7rem 1rem;background:var(--page);border-bottom:1px solid var(--line-soft)}
 .ui-a .brand{font-family:Georgia,"Times New Roman",serif;font-size:1.6rem;font-weight:700;color:var(--accent);text-decoration:none;letter-spacing:-.02em}
-.ui-a .place{border:1.5px solid var(--line);background:var(--card);border-radius:999px;padding:.35rem .9rem;font-size:.85rem;font-weight:600;min-height:2.4rem;cursor:pointer;max-width:60vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ui-a .place{border:1.5px solid var(--line);background:var(--card);border-radius:999px;padding:.35rem .9rem;font-size:.85rem;font-weight:600;min-height:2.4rem;cursor:pointer;max-width:42vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:inherit;text-decoration:none;display:inline-flex;align-items:center}
+.ui-a .top-actions{display:flex;gap:.4rem;align-items:center;min-width:0}
 .ui-a main{max-width:36rem;margin:0 auto;padding:1.25rem 1rem 10rem;display:grid;gap:1.25rem;outline:0}
-.ui-a .tabs{position:fixed;left:0;right:0;bottom:0;z-index:30;display:grid;grid-template-columns:repeat(4,1fr);background:var(--card);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom)}
-.ui-a .tabs a{display:grid;justify-items:center;gap:.1rem;padding:.55rem .25rem .6rem;font-size:.74rem;font-weight:600;color:var(--muted);text-decoration:none;position:relative}
+.ui-a .tabs{position:fixed;left:0;right:0;bottom:0;z-index:30;display:grid;grid-template-columns:repeat(5,1fr);background:var(--card);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom)}
+.ui-a .tabs a{display:grid;justify-items:center;gap:.1rem;padding:.55rem .1rem .6rem;font-size:.7rem;font-weight:600;color:var(--muted);text-decoration:none;position:relative}
 .ui-a .tab-icon{display:grid;height:1.4rem}
 .ui-a .tabs a[aria-current=page]{color:var(--accent)}
 .ui-a .tabs a[aria-current=page]::before{content:"";position:absolute;top:0;left:25%;right:25%;height:3px;border-radius:0 0 3px 3px;background:var(--accent)}

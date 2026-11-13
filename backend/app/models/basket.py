@@ -110,6 +110,9 @@ class BasketItem(BaseModel):
     usable_unit: CanonicalUnit | None = None
     quantity_confidence: QuantityConfidence = QuantityConfidence.UNKNOWN
     variable_weight: bool = False
+    # Owner decision 2026-11-13: a recipe wants this food drained, the product
+    # declares no drained mass, so the package weight was used. Shown as a note.
+    drained_weight_from_package: bool = Field(default=False, exclude_if=lambda v: not v)
     packages_needed: int = Field(ge=1)
     purchased_quantity: float = Field(
         gt=0,

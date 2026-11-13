@@ -24,6 +24,7 @@ FILES = (
     "next/a.html",
     "next/b.html",
     "next/core.js",
+    "next/mine.js",
     "next/a.js",
     "next/b.js",
 )

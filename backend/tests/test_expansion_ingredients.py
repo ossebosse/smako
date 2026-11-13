@@ -65,8 +65,13 @@ def test_sardell_drained_mass_is_declared_not_gross_or_composition_percentage(mo
     p, f = source(row)
     recipe = SimpleNamespace(design=True, preparation=SimpleNamespace(input_forms={'sardeller':'preserved_drained'}),
         ingredients=[SimpleNamespace(name='sardeller', product_requirements=row['requirements'])])
+    # The reviewed link binds the projected quantity, so the unprojected row
+    # fails identity before any drained rule; it is not a declared drained mass.
+    from app.services.complete_recipes import declared_drained
     assert not product_form_compatible(recipe,'sardeller',p,f)
+    assert not declared_drained('sardeller','preserved_drained',tuple(row['requirements']),p,f)
     q = project_reviewed_quantity(p,f,required_unit='g')
+    assert declared_drained('sardeller','preserved_drained',tuple(row['requirements']),q,f)
     assert q.package_quantity == 80 and q.usable_quantity == 43
     assert q.price == p.price and q.source_provenance == p.source_provenance
     assert product_form_compatible(recipe,'sardeller',q,f)

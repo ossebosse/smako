@@ -145,26 +145,21 @@ def properties_match(product, properties):
     return True
 
 
+# Whole words (after search_text) that mark a household item as not being food.
+# /personal and the trial interfaces mark own items with the same words;
+# test_own_item_nonfood_words keeps the three lists in step.
+NONFOOD_WORDS = frozenset({
+    "servett", "servetter", "toalettpapper", "hushallspapper", "diskmedel", "tvattsvamp",
+    "diskborste", "diskborstar", "bakplatspapper", "avfallspasar", "avfallspase", "soppasar", "soppase",
+    "blojor", "byxblojor", "bloja", "byxbloja",
+    "tvattmedel", "skoljmedel", "tandkram", "tandborste", "tandborstar", "eltandborste",
+    "schampo", "shampoo", "tval", "handtval", "aluminiumfolie", "plastfolie", "folie",
+    "plastpasar", "plastpase", "fryspasar", "fryspase",
+})
+
+
 def is_nonfood(name):
-    return bool(
-        set(search_text(name).split())
-        & {
-            "servett",
-            "servetter",
-            "toalettpapper",
-            "hushallspapper",
-            "diskmedel",
-            "tvattsvamp",
-            "diskborste",
-            "bakplatspapper",
-            "avfallspasar",
-            "soppasar",
-            "blojor",
-            "byxblojor",
-            "bloja",
-            "byxbloja",
-        }
-    )
+    return bool(set(search_text(name).split()) & NONFOOD_WORDS)
 
 
 def _contains(term, names):

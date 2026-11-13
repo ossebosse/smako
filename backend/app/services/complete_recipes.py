@@ -273,17 +273,60 @@ def product_form_compatible(recipe, name, product, fact):
             if not ingredient_product(canonical, form, requirements, product, fact, reviewed_only=True):
                 return False
     if form in {"cooked_drained", "preserved_drained"}:
-        from app.services.intake_product_links import (
-            package_weight_product,
-            reviewed_drained_quantity,
-        )
-
-        if package_weight_product(canonical, form, requirements, product, fact):
-            return True
-        return reviewed_drained_quantity(canonical, form, requirements, product, fact) or bool(fact and any(e.get("basis") == "drained" and e.get("unit") == "g"
-                                and e.get("quantity") == product.usable_quantity and e.get("source")
-                                for e in fact.field_sources.get("usable_quantity", ())))
+        return declared_drained(canonical, form, requirements, product, fact) or package_weight_drained(product, fact)
     return True
+
+
+def declared_drained(canonical, form, requirements, product, fact):
+    """The product's usable quantity is a declared or owner-approved drained mass."""
+    from app.services.intake_product_links import (
+        package_weight_product,
+        reviewed_drained_quantity,
+    )
+
+    if package_weight_product(canonical, form, requirements, product, fact):
+        return True
+    # A source's own drained mass (City Gross "400/240 g", checked against the
+    # comparison price) is stored by normalization as the usable quantity with
+    # DERIVED confidence. Request projections from facts are bound to their
+    # proofs below and never use DERIVED for grams.
+    if (getattr(product, "sale_model", None) == "fixed_package" and product.purchase_terms is None
+            and product.package_unit == product.usable_unit == "g"
+            and product.usable_quantity and product.package_quantity
+            and 0 < product.usable_quantity < product.package_quantity
+            and str(getattr(product.quantity_confidence, "value", product.quantity_confidence)).lower() == "derived"):
+        return True
+    return reviewed_drained_quantity(canonical, form, requirements, product, fact) or bool(fact and any(e.get("basis") == "drained" and e.get("unit") == "g"
+                            and e.get("quantity") == product.usable_quantity and e.get("source")
+                            for e in fact.field_sources.get("usable_quantity", ())))
+
+
+# Owner decision 2026-11-13: when a preserved or cooked food has no declared
+# drained mass, plan with the package weight and tell the user that the drained
+# weight can be lower. Only a fixed package sold in grams, kept in liquid
+# (water, brine, oil) and not dried, flavoured or in a sauce qualifies; the
+# recipe's own identity and requirement checks above have already passed.
+_NOT_PLAIN_PRESERVE = re.compile(
+    r"tork|\btorr|mjöl|pulver|flingor|chips|snack|rostad|kanderad|choklad|fryst|frys|"
+    r"sås|salsa|soppa|gryta|röra|hummus|dipp|curry|chili con|bbq|tomat|pasta|nudlar|burgare|biff|falafel|bönpasta"
+)
+_IN_LIQUID = re.compile(r"\bvatten\b|\blake\b|saltlake|\bspad\b|\bolja\b|olivolja|rapsolja|solrosolja|ättika|vinäger")
+
+
+def package_weight_drained(product, fact):
+    if (getattr(product, "sale_model", None) != "fixed_package" or product.purchase_terms is not None
+            or product.package_unit != "g" or not product.package_quantity
+            or (product.usable_quantity not in (None, product.package_quantity))
+            or (product.usable_unit not in (None, "g"))):
+        return False
+    if _NOT_PLAIN_PRESERVE.search(product.name.casefold()):
+        return False
+    composition = " ".join(fact.ingredients).casefold().split("kan innehålla")[0] if fact and fact.ingredients else ""
+    category = (getattr(product, "category", None) or "").casefold()
+    if composition:
+        return bool(_IN_LIQUID.search(composition)) and not _NOT_PLAIN_PRESERVE.search(composition)
+    # Without a declaration the shelf or label must say it is preserved.
+    return bool(re.search(r"konserv", category) or re.search(r"i vatten|i lake|i olja|naturell|konserv|tetra|burk", product.name.casefold()))
 
 
 def _requirements_compatible(canonical, requirements, product, fact):
@@ -559,7 +602,7 @@ def _whole_food_identity(canonical, form, product, fact, requirements=()):
             allowed = corn | {"ingredienser", "ekologisk", "ekologiska", "ekologiskt", "råvara", "råvaror"}
             if not words.intersection(corn) or not words <= allowed:
                 return False
-        return simple(f"(?:{legumes[canonical]})", "kokta|avrunna|sweet corn|extra fina|söta|2-p|3-pack|utan tillsatt socker")
+        return simple(f"(?:{legumes[canonical]})", "kokta|avrunna|naturell|naturella|i vatten|sweet corn|extra fina|söta|2-p|3-pack|utan tillsatt socker")
     if canonical == "tortillas":
         return bool(re.fullmatch(r"(?:(?:street|corn|glutenfria|glutenfri) )*(?:tortilla|tortillas|vetetortilla|vetetortillas)(?: original| medium| large| small| fullkorn| vete| majs| soft| mini| wraps| glutenfri| glutenfria| ekologiska| eko)*", label))
     if canonical == "bröd":
@@ -648,9 +691,18 @@ def plain_bread_composition(composition):
                 and first_word and first_word[0] in flours | {"vatten"})
 
 
+# Owner decision 2026-11-13: what a user puts in the pantry is uncooked. A
+# generic row without a stated form therefore serves a recipe that wants the
+# food raw, dry or as sold, never one that wants it cooked or drained (the
+# weights differ). A form the user did state still has to match exactly.
+UNCOOKED_FORMS = frozenset({"raw_edible", "dry", "as_sold"})
+
+
 def pantry_form_compatible(item, row):
-    """Generic stock needs user-confirmed form; exact stock uses resolved keys."""
+    """Generic stock is uncooked unless its form says otherwise; exact stock uses resolved keys."""
     form = item.get("form")
+    if form is None and not item.get("nutrition_reference") and row.get("input_form") in UNCOOKED_FORMS:
+        form = row["input_form"]
     if form is None and item.get("nutrition_reference"):
         from app.services.nutrition_reference import MAPPINGS, validate_pantry_reference
         try:
@@ -663,6 +715,12 @@ def pantry_form_compatible(item, row):
         except (ValueError, KeyError):
             return False
     if form != row.get("input_form"):
+        return False
+    requirements = row.get("product_requirements", ()) or ()
+    if any(r.removeprefix("pack:").startswith("intake_all_") for r in requirements):
+        # A reviewed exact-product requirement is met only by a product whose
+        # identity (store, article, snapshot) was checked. A typed name has
+        # none, so only a chosen product can meet it (owner decision 2026-11-13).
         return False
     from types import SimpleNamespace
     category = "frukt och grönsaker" if form == "raw_edible" else "kryddor" if form == "dry" else ""

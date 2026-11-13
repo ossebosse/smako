@@ -95,5 +95,14 @@ input[type=checkbox]{width:1.35rem;height:1.35rem;accent-color:var(--accent);fle
 dialog{border:0;border-radius:calc(var(--radius) + 6px);padding:1.25rem;width:min(34rem,calc(100vw - 1.5rem));max-height:calc(100dvh - 2rem);background:var(--page);color:var(--ink)}
 dialog::backdrop{background:rgb(0 0 0/.45)}
 .dialog-head{display:flex;justify-content:space-between;align-items:center;gap:1rem;margin-bottom:1rem}
+.text-link{background:none;border:0;padding:.4rem 0;color:var(--accent);font-weight:650;text-decoration:underline;cursor:pointer;justify-self:start;text-align:left}
+.links{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem 1.2rem}
+.account,.auth,.after,.pantry-confirm{display:grid;gap:.9rem}
+.account input[readonly]{font-family:ui-monospace,Menlo,Consolas,monospace;letter-spacing:.04em}
+.pantry-confirm{padding:1rem;background:var(--card);border:1.5px solid var(--accent);border-radius:var(--radius)}
+.pantry-exact{display:grid;gap:.15rem;border-top:1px solid var(--line-soft);padding-top:.6rem}
+.after{padding:1rem;background:var(--card);border:1.5px solid var(--line);border-radius:var(--radius);justify-items:start}
+.field .hint{font-weight:400}
+.measure form{max-height:calc(100dvh - 5rem);overflow:auto}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
 @media (prefers-reduced-motion:reduce){.spinner{animation:none}}
