@@ -43,6 +43,14 @@ input[type=checkbox]{width:1.35rem;height:1.35rem;accent-color:var(--accent);fle
 .stepper.big .step-value{font-size:1.6rem;min-width:3.5rem}
 .counter{display:flex;justify-content:space-between;align-items:center;gap:1rem}
 .counter legend{float:left;margin:0}
+.nutrition-grid{display:grid;grid-template-columns:minmax(5.5rem,1fr) repeat(2,minmax(0,8.5rem));gap:.6rem .75rem;align-items:end;margin-top:.6rem}
+.nutrition-name{font-weight:600;padding-bottom:.75rem}
+.nutrition-field{display:grid;grid-template-columns:1fr auto;gap:.15rem .35rem;align-items:center;min-width:0}
+.nutrition-side{grid-column:1/-1;font-size:.8rem;color:var(--muted)}
+.nutrition-unit{font-size:.85rem;color:var(--muted)}
+.nutrition .btn{margin-top:.6rem}
+.hint.warn{color:var(--warn)}
+.hint.warn:empty{display:none}
 .items{display:grid;gap:.75rem}
 .item-search{position:relative}
 .item-results{position:absolute;z-index:5;left:0;right:0;top:calc(100% + .3rem);background:var(--card);border:1.5px solid var(--line);border-radius:var(--radius);box-shadow:0 12px 32px rgb(0 0 0/.14);max-height:60vh;overflow:auto;padding:.35rem}

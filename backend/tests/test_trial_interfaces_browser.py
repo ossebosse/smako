@@ -51,7 +51,8 @@ class Fake:
         recipe = {"name": "Pannbiff med lök och potatis", "servings": 2, "instructions": ["Stek biffarna.", "Koka potatisen."],
                   "ingredients": [{"name": "nötfärs", "quantity": 400, "unit": "g"}, {"name": "gul lök", "quantity": 150, "unit": "g"}, {"name": "potatis", "quantity": 600, "unit": "g"}]}
         return {"plan_id": "plan-1", "revision": revision, "request": request,
-                "plan": {"personal": {"slots": [{"id": "dinner-1", "day": 1, "meal_type": "dinner", "recipe": recipe}], "checks": {},
+                "plan": {"personal": {"slots": [{"id": "dinner-1", "day": 1, "meal_type": "dinner", "recipe": recipe}],
+                                      "checks": {"nutrition": [{"slot_id": "dinner-1", "status": "ESTIMATED", "values": {"kcal": 640.4, "protein_g": 38.2, "carbs_g": 52, "fat_g": 29.6}}]},
                                       "needs": [{"key": "nötfärs"}, {"key": "gul lök"}],
                                       "allocations": [{"name": "potatis", "quantity": 600, "unit": "g"}] if home else []},
                          "optimized_basket": {"total": 63.4, "store_count": 1, "verification_status": "VERIFIED_WITH_ESTIMATES",
@@ -237,6 +238,43 @@ def test_pantry_meat_choice_and_registered_purchase(ui):
     page.get_by_role("button", name="Öppna skafferiet").click()
     expect(page.locator(".pantry .item-name")).to_have_text(["Potatis", "Nötfärs", "Gul lök"])
     expect(page.locator(".pantry .item-kind").nth(1)).to_have_text("Bestämd vara")
+
+
+def test_nutrition_limits_per_portion_are_sent_for_dinners_and_shown_on_the_recipe(ui):
+    name, page, fake, shot = ui
+    if name == "a":
+        page.goto(re.sub(r"#.*|$", "#mat", page.url, count=1))
+    else:
+        page.get_by_role("button", name=re.compile("Planera mat och handla")).click()
+    page.get_by_label("Ditt postnummer").fill("22350")
+    page.get_by_role("button", name="Hitta butiker").click()
+    if name == "a":
+        page.get_by_text("Fler val: allergier, näring, butiker, matkök och ekologiskt").click()
+    else:
+        page.get_by_role("button", name="Nästa").click()
+        page.get_by_role("button", name="Nästa").click()
+        page.get_by_role("button", name=re.compile("^Fler val")).click()
+    page.get_by_label("Minst protein, g per portion").fill("30")
+    page.get_by_label("Högst energi, kcal per portion").fill("700")
+    page.get_by_label("Minst kolhydrater, g per portion").fill("80")
+    carbs = page.get_by_label("Högst kolhydrater, g per portion")
+    carbs.fill("50")
+    carbs.press("Tab")
+    expect(page.get_by_text("Kolhydrater: Minst kan inte vara mer än Högst.")).to_be_visible()
+    shot("naring")
+    carbs.fill("")
+    carbs.press("Tab")
+    expect(page.get_by_text("Kolhydrater: Minst kan inte vara mer än Högst.")).to_have_count(0)
+    # The fields keep what was typed; nothing was redrawn in between.
+    expect(page.get_by_label("Minst protein, g per portion")).to_have_value("30")
+    if name == "b":
+        page.get_by_role("button", name="Klar").click()
+        page.get_by_role("button", name="Nästa").click()
+    page.get_by_role("button", name="Skapa matplan").click()
+    expect(page.get_by_text("Per portion, uppskattat: 640 kcal · 38 g protein · 52 g kolhydrater · 30 g fett")).to_be_visible()
+    sent = next(body for method, path, body in fake.calls if path == "plans")
+    assert [m["limits"] for m in sent["personal"]["meals"]] == [{"min_protein_g": 30, "min_carbs_g": 80, "max_kcal": 700}, {}, {}]
+    shot("naring-recept")
 
 
 def test_rice_by_name_is_not_enough_so_a_chosen_product_is_offered(ui):

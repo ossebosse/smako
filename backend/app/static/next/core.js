@@ -22,7 +22,7 @@
   const KEY = "smako.next.v1";
   const saved = (() => { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch (_) { return {}; } })();
   const persist = () => { try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (_) { /* private mode: choices last for this visit */ } };
-  const DEFAULTS = { dinners: 3, servings: 2, breakfasts: 0, snacks: 0, diet: "mixed", cooking: "free", avoid: [], allergies: [], likes: [], cuisines: [], variety: "low", maxStores: 2, organic: 0, usePantry: true, surplus: "minimize", radius: 3 };
+  const DEFAULTS = { dinners: 3, servings: 2, breakfasts: 0, snacks: 0, diet: "mixed", cooking: "free", avoid: [], allergies: [], likes: [], cuisines: [], variety: "low", maxStores: 2, organic: 0, usePantry: true, surplus: "minimize", radius: 3, nutrition: {} };
   saved.settings = { ...DEFAULTS, ...(saved.settings || {}) };
 
   const S = { location: null, storeIds: saved.storeIds || [], state: null, items: [], plan: saved.plan || null, busy: null, error: "", notice: "" };
@@ -178,6 +178,20 @@
         allow_nutrition_estimates: true, organic_percent: Number(s.organic) || 0, organic_animals: false, surplus_mode: s.surplus } };
   }
   const COOKING = { quick: { max_active_minutes: 30, max_ingredients: 8 }, everyday: { max_active_minutes: 45, max_ingredients: 12 }, free: {} };
+  // Limits per portion, in the names the server uses. The trial interfaces apply them to dinners.
+  const NUTRIENTS = [["protein_g", "Protein", "g", 300, true], ["carbs_g", "Kolhydrater", "g", 500, true], ["fat_g", "Fett", "g", 300, true], ["kcal", "Energi", "kcal", 4000, false]];
+  function nutritionLimits() {
+    const out = {}, n = saved.settings.nutrition || {};
+    for (const [key, , , max, lower] of NUTRIENTS) for (const side of lower ? ["min", "max"] : ["max"]) {
+      const value = n[`${side}_${key}`]; if (Number.isFinite(value) && value >= 0) out[`${side}_${key}`] = Math.min(value, max);
+    }
+    return out;
+  }
+  function nutritionProblem() {
+    const n = nutritionLimits();
+    for (const [key, label] of NUTRIENTS) if (n[`min_${key}`] != null && n[`max_${key}`] != null && n[`min_${key}`] > n[`max_${key}`]) return `${label}: Minst kan inte vara mer än Högst.`;
+    return "";
+  }
   // "Kött" applies to dinners; breakfasts and snacks keep every recipe to choose from.
   function mealRows() {
     const s = saved.settings, cap = limit("recipes", 21);
@@ -186,7 +200,7 @@
     return ["dinner", "breakfast", "snack"].map(type => {
       const count = Math.max(0, Math.min(counts[type], left)); left -= count;
       const choices = count ? { min_ingredients: null, max_ingredients: null, max_active_minutes: null, max_total_minutes: null, max_waiting_minutes: null, ...(type === "dinner" ? COOKING[s.cooking] : {}) } : null;
-      return { meal_type: type, count, servings: Math.min(s.servings, limit("servings", 8)), diet: s.diet === "meat" && type !== "dinner" ? "mixed" : s.diet, profile: {}, distribution: {}, limits: {}, organic_animals: false, recipe_choices: choices, max_same_base_meals: null };
+      return { meal_type: type, count, servings: Math.min(s.servings, limit("servings", 8)), diet: s.diet === "meat" && type !== "dinner" ? "mixed" : s.diet, profile: {}, distribution: {}, limits: type === "dinner" && count ? nutritionLimits() : {}, organic_animals: false, recipe_choices: choices, max_same_base_meals: null };
     });
   }
   function keep(envelope) {
@@ -212,6 +226,7 @@
   const createPlan = () => run("Skapar din matplan", async () => {
     const meals = mealRows(), s = saved.settings;
     if (!meals.some(m => m.count)) throw new Error("Välj minst en måltid, eller räkna bara ut din inköpslista.");
+    if (nutritionProblem()) throw new Error(`Näring per portion: ${nutritionProblem()}`);
     await saveItems();
     const dinners = meals[0].count, varied = s.variety === "normal" && dinners >= 3;
     keep(await job("/api/plans", { ...baseRequest(meals),
@@ -338,6 +353,27 @@
   const DIETS = [["mixed", "Allt"], ["meat", "Kött", "Nöt, fläsk, kyckling med mera"], ["pescetarian", "Fisk och vegetariskt"], ["vegetarian", "Vegetariskt"], ["vegan", "Veganskt"]];
   const COOK = [["quick", "Snabbt", "Högst 30 min i köket"], ["everyday", "Vardag", "Högst 45 min"], ["free", "Spelar ingen roll", ""]];
   const ALLERGENS = ["jordnötter", "nötter", "mjölk", "ägg", "gluten", "fisk", "skaldjur", "soja", "sesam"];
+  // Typing does not redraw the page, so the next field keeps its place while the person fills in several.
+  function nutrition() {
+    const group = el("fieldset", null, "choice nutrition"), n = saved.settings.nutrition = saved.settings.nutrition || {}, problem = el("p", nutritionProblem(), "hint warn", { role: "status" });
+    group.append(el("legend", "Näring per portion"), el("p", "Gäller middagarna. Lämna tomt där du inte har någon gräns.", "hint"));
+    const grid = el("div", null, "nutrition-grid");
+    const field = (side, key, label, unit, max) => {
+      const name = `${side}_${key}`, text = side === "min" ? "Minst" : "Högst", wrap = el("label", null, "nutrition-field");
+      const input = el("input", null, null, { type: "number", inputmode: "numeric", min: "0", max: String(max), step: "1", placeholder: "–", "aria-label": `${text} ${label.toLowerCase()}, ${unit} per portion`, "data-limit": name });
+      if (n[name] != null) input.value = String(n[name]);
+      input.addEventListener("change", () => {
+        const value = input.value.trim() === "" ? null : Math.max(0, Math.min(max, Math.round(Number(input.value))));
+        if (value == null || !Number.isFinite(value)) { delete n[name]; input.value = ""; } else { n[name] = value; input.value = String(value); }
+        persist(); problem.textContent = nutritionProblem();
+      });
+      wrap.append(el("span", text, "nutrition-side"), input, el("span", unit, "nutrition-unit")); return wrap;
+    };
+    for (const [key, label, unit, max, lower] of NUTRIENTS) grid.append(el("span", label, "nutrition-name"), lower ? field("min", key, label, unit, max) : el("span"), field("max", key, label, unit, max));
+    group.append(grid, problem);
+    if (Object.keys(nutritionLimits()).length) group.append(button("Ta bort gränserna", () => set("nutrition", {}), "btn quiet small"));
+    return group;
+  }
   const CUISINES = [["italian", "Italienskt"], ["greek", "Grekiskt"], ["mexican", "Mexikanskt"], ["indian", "Indiskt"], ["thai", "Thailändskt"], ["swedish", "Svenskt"]];
   const set = (key, value) => { saved.settings[key] = value; persist(); emit(); };
   function choice(label, options, current, onPick, cls = "") {
@@ -371,7 +407,7 @@
       if (g) box.append(el("p", `Som gäst får du ${g.recipes} recept och ${g.servings} portioner per rätt. Med ett konto får du fler.`, "hint"));
       return box;
     }
-    box.append(tags("Allergier", "allergies", "Annan allergi", ALLERGENS), tags("Ät inte", "avoid", "Till exempel koriander", ["fläsk", "svamp", "oliver"]), tags("Gillar extra", "likes", "Till exempel kyckling"),
+    box.append(tags("Allergier", "allergies", "Annan allergi", ALLERGENS), tags("Ät inte", "avoid", "Till exempel koriander", ["fläsk", "svamp", "oliver"]), tags("Gillar extra", "likes", "Till exempel kyckling"), nutrition(),
       choice("Butiker att handla i", [[1, "1"], [2, "Högst 2"], [3, "Högst 3"], ["all", "Så många som lönar sig"]], s.maxStores, v => set("maxStores", v)),
       choice("Omväxling", [["low", "Billigast först"], ["normal", "Blanda matkök", "Minst 3 middagar"]], s.variety, v => set("variety", v)));
     const kitchens = el("fieldset", null, "choice"); kitchens.append(el("legend", "Matkök (inget valt betyder alla)"));
@@ -388,17 +424,26 @@
     const s = saved.settings, parts = [`${Math.min(s.dinners, limit("recipes", 7))} middagar`, `${Math.min(s.servings, limit("servings", 8))} portioner`, DIETS.find(d => d[0] === s.diet)[1].toLowerCase()];
     if (s.cooking !== "free") parts.push(COOK.find(c => c[0] === s.cooking)[1].toLowerCase());
     const avoid = [...s.allergies, ...s.avoid]; if (avoid.length) parts.push(`utan ${avoid.join(", ")}`);
+    if (Object.keys(nutritionLimits()).length) parts.push("egna näringsgränser");
     return parts.join(" · ");
   }
 
   const MEALS = { dinner: "Middag", breakfast: "Frukost", snack: "Mellanmål" };
   const FORMS = [[/\bas_sold\b/g, "som såld"], [/\braw_edible\b/g, "rå, rensad"], [/\bcooked_drained\b/g, "kokt och avrunnen"], [/\bdry\b/g, "torr"]];
+  function nutritionText(slotId) {
+    const row = (S.plan?.plan?.personal?.checks?.nutrition || []).find(n => n.slot_id === slotId), values = row?.values || {}, parts = [];
+    for (const [key, unit] of [["kcal", "kcal"], ["protein_g", "g protein"], ["carbs_g", "g kolhydrater"], ["fat_g", "g fett"]]) {
+      const value = values[key] ?? values[`${key}_per_serving`]; if (value != null && value !== "" && Number.isFinite(Number(value))) parts.push(`${number(Math.round(Number(value)))} ${unit}`);
+    }
+    return parts.length ? `Per portion${row.status === "ESTIMATED" ? ", uppskattat" : ""}: ${parts.join(" · ")}` : "";
+  }
   function recipeCard(slot, { actions = true } = {}) {
     const card = el("article", null, "recipe"), recipe = slot.recipe;
     card.append(el("p", `Dag ${slot.day} · ${MEALS[slot.meal_type] || "Måltid"}`, "eyebrow"), el("h3", recipe?.name || "Tom måltid"));
     if (!recipe) { if (actions) card.append(button("Föreslå ett recept", () => replaceRecipe(slot.id), "btn")); return card; }
     const minutes = recipe.design?.active_minutes ?? recipe.design?.time?.active_minutes;
     card.append(el("p", [`${recipe.servings} portioner`, `${recipe.ingredients.length} ingredienser`, minutes ? `${minutes} min` : null].filter(Boolean).join(" · "), "meta"));
+    const facts = nutritionText(slot.id); if (facts) card.append(el("p", facts, "meta nutrition-facts"));
     const more = el("details", null, "recipe-more"); more.append(el("summary", "Visa receptet"));
     const ingredients = el("ul", null, "ingredients"); for (const i of recipe.ingredients) ingredients.append(el("li", `${number(i.quantity)} ${i.unit} ${i.name}`));
     const steps = el("ol", null, "steps"); for (const step of recipe.instructions || []) steps.append(el("li", FORMS.reduce((text, [from, to]) => text.replace(from, to), step)));

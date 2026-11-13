@@ -44,7 +44,7 @@
       const basics = live(el("div", null, "settings"), () => { const all = N.settings("basic"); return [...all.children].filter(n => !n.classList.contains("counter") && !n.classList.contains("hint")); });
       const allergy = live(el("div"), () => { const s = saved.settings, n = s.allergies.length + s.avoid.length, home = (S.state?.items || []).length;
         return [el("p", n ? `Väljs bort: ${[...s.allergies, ...s.avoid].join(", ")}.` : "Inget är bortvalt.", "hint"), home && s.usePantry ? el("p", `Skafferiet: ${N.pantrySummary().toLowerCase()} används först.`, "hint") : null]; });
-      return { nodes: [head("Vilken sorts mat?", "Smako väljer bland recepten som passar."), basics, allergy, button("Fler val: allergier, butiker, matkök och ekologiskt", openMore, "text-link")] };
+      return { nodes: [head("Vilken sorts mat?", "Smako väljer bland recepten som passar."), basics, allergy, button("Fler val: allergier, näring, butiker, matkök och ekologiskt", openMore, "text-link")] };
     },
     varor() {
       const withMeals = saved.flow === "mat";
