@@ -41,7 +41,7 @@ class Fake:
                 "shopping_initialized": True, "account": MEMBER if self.owner == "account" else GUEST, "pantry_checks": []}
 
     def plan(self, request, revision=1):
-        home = next((i for i in self.state["items"] if i["name"] == "potatis" and i.get("form") == "raw_edible"), None)
+        home = next((i for i in self.state["items"] if i["name"] == "potatis"), None)
         rows = [{"store_id": "s1", "product_id": "p-fars", "ingredient": "nötfärs", "product_name": "Nötfärs 12%", "packages_needed": 1, "package_quantity": 500, "package_unit": "g",
                  "total_price": 59.9, "unit": "g", "purchased_unit": "g", "required_quantity": 400, "purchased_usable_quantity": 500, "quantity_confidence": "exact", "food_family": "meat"},
                 {"store_id": "s1", "product_id": "p-lok", "ingredient": "gul lök", "product_name": "Gul lök lösvikt", "packages_needed": 1, "package_quantity": 1000, "package_unit": "g",
@@ -75,9 +75,9 @@ class Fake:
                      "selectable": True, "purchase_units": False, "campaign_choice": False, "matches": []}]
             return 200, {"generics": [], "products": rice if query.get("q", "").startswith("ris") else [], "usual": None, "status": "available"}
         if path == "personal/pantry-use":
-            known = {"potatis": {"form": "raw_edible", "unit": "g", "used_in_recipes": True, "food": True, "usable": {"raw_edible": [570, 570]}},
-                     "ris": {"form": "dry", "unit": "g", "used_in_recipes": True, "food": True, "usable": {"dry": [5, 619]}}}
-            return 200, known.get(query.get("name"), {"form": None, "unit": None, "used_in_recipes": False, "food": True, "usable": {}})
+            known = {"potatis": {"form": "raw_edible", "unit": "g", "used_in_recipes": True, "food": True, "usable": [570, 570]},
+                     "ris": {"form": "dry", "unit": "g", "used_in_recipes": True, "food": True, "usable": [5, 619]}}
+            return 200, known.get(query.get("name"), {"form": None, "unit": None, "used_in_recipes": False, "food": True, "usable": [0, 0]})
         if path in {"personal/pantry", "personal/shopping-list"}:
             if body["revision"] != s["revision"]:
                 return 409, {"detail": "Ändrat på annat håll."}
@@ -172,11 +172,10 @@ def add_potatoes(name, page):
     open_screen(name, page, "skafferi")
     expect(page.get_by_role("heading", name="Skafferi", level=1)).to_be_visible()
     page.get_by_label("Lägg till i skafferiet").fill("potatis 1 kg")
+    # Saved at once as uncooked; nothing to answer first.
     page.get_by_role("button", name=re.compile("Potatis · 1 kg")).click()
-    # The form recipes use for potatoes is proposed and can be changed before saving.
-    expect(page.get_by_role("radio", name=re.compile("^Rå eller färsk"))).to_have_attribute("aria-checked", "true")
-    page.get_by_role("button", name="Lägg i skafferiet", exact=True).click()
     expect(page.locator(".pantry .item-name")).to_have_text("Potatis")
+    expect(page.locator(".pantry .item-kind")).to_have_text("Otillagad")
 
 
 def plan_meat_dinners(name, page):
@@ -209,7 +208,7 @@ def test_pantry_meat_choice_and_registered_purchase(ui):
     add_potatoes(name, page)
     shot("skafferi")
     saved = next(body for method, path, body in fake.calls if path == "personal/pantry")
-    assert [(i["name"], i["quantity"], i["unit"], i["form"], i["product_key"]) for i in saved["items"]] == [("potatis", 1000, "g", "raw_edible", None)]
+    assert [(i["name"], i["quantity"], i["unit"], i.get("form"), i["product_key"]) for i in saved["items"]] == [("potatis", 1000, "g", None, None)]
 
     plan_meat_dinners(name, page)
     sent = next(body for method, path, body in fake.calls if path == "plans")

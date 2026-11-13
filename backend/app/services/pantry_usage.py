@@ -1,9 +1,9 @@
-"""How the recipe library asks for an ingredient, as a suggestion for the pantry.
+"""How the recipe library asks for an ingredient, as advice for the pantry.
 
-A pantry row without a chosen product is only used by a recipe when its unit
-and form (raw, dry, as sold ...) are the ones the recipe asks for. This module
-reads the form and unit the current recipes most often use for a name, so an
-interface can propose them. The user confirms; nothing here states a fact
+Pantry goods are taken as uncooked (complete_recipes.pantry_form_compatible).
+This module reads which unit the current recipes use for a name, and in how
+many recipe uses a row typed with that name would be accepted, so an
+interface can say when a chosen product is needed. Nothing here states a fact
 about the goods at home, and nothing is matched or priced.
 """
 
@@ -34,30 +34,30 @@ def _usage(generation: int):
             {name: counts.most_common(1)[0][0] for name, counts in units.items()}, dict(rows))
 
 
-def _usable(typed: str, unit: str | None, rows) -> dict:
-    """Per form: in how many recipe uses a row typed like this is accepted, and of how many.
+def _usable(typed: str, unit: str | None, rows) -> list[int]:
+    """In how many recipe uses a row typed like this is accepted, and of how many.
 
-    Uses the planner's own rule (pantry_form_compatible). Many recipes ask for
-    a particular kind (which rice, which cut), and only a chosen product can
-    show that; such uses count as not accepted here, exactly as when planning.
+    Uses the planner's own rule (pantry_form_compatible) for an uncooked row.
+    Many recipes ask for a particular kind (which rice, which cut), and only a
+    chosen product can show that; such uses count as not accepted, exactly as
+    when planning. So do recipes that want the food cooked or drained.
     """
     from app.services.complete_recipes import pantry_form_compatible
 
-    result: dict[str, list[int]] = {}
+    fits = total = 0
     for (name, form, requirements), uses in rows.items():
         try:
-            accepted = pantry_form_compatible({"name": typed, "unit": unit, "form": form},
+            accepted = pantry_form_compatible({"name": typed, "unit": unit},
                                               {"name": name, "input_form": form, "product_requirements": requirements})
         except (AttributeError, KeyError, TypeError, ValueError):
             accepted = False
-        counts = result.setdefault(form, [0, 0])
-        counts[0] += uses if accepted else 0
-        counts[1] += uses
-    return result
+        fits += uses if accepted else 0
+        total += uses
+    return [fits, total]
 
 
 def usual_recipe_use(name: str) -> dict:
-    """The form and unit recipes most often use for this name; None when no recipe uses it."""
+    """The unit recipes most often use for this name, and how many uses an uncooked row covers."""
     from app.services.meal_library_content import manifest_entries
 
     forms, units, rows = _usage(len(manifest_entries()["current"]))

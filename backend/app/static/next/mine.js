@@ -105,11 +105,8 @@
   }
 
   // ---- Pantry --------------------------------------------------------------
-  // A row without a chosen product is used by a recipe only when it has the form the recipe asks for.
-  const FORMS = [["raw_edible", "Rå eller färsk", "Kött, fisk, grönsaker, frukt, ägg"], ["dry", "Torr", "Ris, pasta, mjöl, kryddor"], ["as_sold", "Som den säljs", "Mejeri, bröd, olja, burk med spad"],
-    ["cooked_drained", "Kokt och avrunnen", "Bönor, linser, räkor"], ["preserved_drained", "Avrunnen konserv", "Oliver, kapris, sill"]];
+  // Goods in the pantry count as uncooked; the server decides which recipes they fit.
   const UNITS = { g: "gram", ml: "milliliter", st: "styck" };
-  const formLabel = value => FORMS.find(f => f[0] === value)?.[1] || null;
   const clean = ({ available, reserved, ...rest }) => rest;
   const pantry = () => S.state?.items || [];
   async function savePantry(items) {
@@ -130,12 +127,6 @@
     await savePantry(next <= 0 ? items.filter(i => i.id !== id) : (item.quantity = next, items));
   }
   const removeFromPantry = id => savePantry(pantry().map(clean).filter(i => i.id !== id));
-  const setPantryForm = (id, form) => savePantry(pantry().map(clean).map(i => (i.id === id ? { ...i, form } : i)));
-  function formChips(current, onPick, label) {
-    const row = el("div", null, "chips", { role: "radiogroup", "aria-label": label });
-    for (const [value, text, note] of FORMS) { const b = button(null, () => onPick(value), "chip small", { role: "radio", "aria-checked": String(current === value) }); b.append(el("span", text), el("small", note)); row.append(b); }
-    return row;
-  }
 
   function pantryView() {
     const box = el("section", null, "items pantry"), search = el("div", null, "item-search");
@@ -146,19 +137,18 @@
     const close = () => { results.hidden = true; results.replaceChildren(); first = null; };
     const guard = work => async () => { try { status.textContent = ""; await work(); } catch (error) { status.textContent = error.message; } };
     const done = text => { input.value = ""; close(); confirm.hidden = true; confirm.replaceChildren(); status.textContent = `${text} ligger i skafferiet.`; };
-    // A typed item: propose the form and unit recipes use, and let the user confirm.
+    // A typed item is saved at once, unless recipes would not be able to use it as written.
     async function ask(row, products = []) {
       close();
-      const use = await api(`/api/personal/pantry-use?name=${encodeURIComponent(row.query)}`).catch(() => ({ form: null, unit: null, used_in_recipes: false, food: !N.isNonfood(row.query) }));
-      let form = use.food ? use.form : null;
+      const use = await api(`/api/personal/pantry-use?name=${encodeURIComponent(row.query)}`).catch(() => ({ unit: null, used_in_recipes: false, usable: [0, 0], food: !N.isNonfood(row.query) }));
+      const save = () => addToPantry({ name: row.query.slice(0, 120), quantity: row.quantity, unit: row.unit, food: use.food }).then(() => done(`${capital(row.query)} · ${amount(row.quantity, row.unit)}`));
+      // Many recipes ask for a particular kind (which rice, which cut). Only a chosen product can show that.
+      const [fits, uses] = use.usable || [0, 0], narrow = use.food && uses > 0 && fits < uses / 2, wrongUnit = use.food && use.unit && use.unit !== row.unit;
+      if (!narrow && !wrongUnit) { await save(); return; }
       const draw = () => {
         confirm.replaceChildren(el("h3", `${capital(row.query)} · ${amount(row.quantity, row.unit)}`));
-        if (use.food) {
-          confirm.append(el("p", "Hur är varan? Recepten använder den bara om det stämmer.", "hint"), formChips(form, value => { form = value; draw(); }, "Hur är varan"));
-          // Many recipes ask for a particular kind (which rice, which cut). Only a chosen product can show that.
-          const [fits, uses] = (form && use.usable?.[form]) || [0, 0], narrow = uses > 0 && fits < uses / 2;
+        {
           if (use.unit && use.unit !== row.unit) confirm.append(el("p", `Recepten räknar ${row.query} i ${UNITS[use.unit]}. Skriv mängden så om recepten ska kunna använda varan.`, "hint"));
-          else if (!use.used_in_recipes) confirm.append(el("p", "Inget recept använder den här varan just nu. Du kan lägga in den ändå.", "hint"));
           else if (narrow) confirm.append(el("p", fits ? `Bara några recept kan använda ${row.query} när varan är skriven så här. De flesta behöver veta precis vilken sort det är.` : `Recepten behöver veta precis vilken sorts ${row.query} det är.`, "hint"));
           if (narrow && products.length) {
             const exact = el("div", null, "pantry-exact"); exact.append(el("p", "Välj den vara du har hemma, så kan recepten använda den:"));
@@ -167,7 +157,7 @@
           } else if (narrow) confirm.append(el("p", "Sök på varans namn och märke och välj en bestämd vara, så kan recepten använda den.", "hint"));
         }
         const actions = el("div", null, "links");
-        actions.append(button("Lägg i skafferiet", guard(async () => { await addToPantry({ name: row.query.slice(0, 120), quantity: row.quantity, unit: row.unit, food: use.food, ...(form ? { form } : {}) }); done(`${capital(row.query)} · ${amount(row.quantity, row.unit)}`); }), "btn primary", { disabled: use.food && !form }),
+        actions.append(button(narrow ? "Lägg in den ändå" : "Lägg i skafferiet", guard(save), "btn primary"),
           button("Avbryt", () => { confirm.hidden = true; confirm.replaceChildren(); }, "btn quiet"));
         confirm.append(actions);
       };
@@ -209,14 +199,13 @@
         : strict.length && pantry().some(i => !i.product_key) ? `Du har valt bort ${strict.join(", ")}. Då använder recepten bara skafferivaror som är en bestämd vara, eftersom vi inte vet vad de andra innehåller.` : "";
       note.hidden = !note.textContent;
       for (const item of pantry()) {
-        const li = el("li", null, "item"), text = el("div", null, "item-text"), generic = !item.product_key && !item.prepared_origin;
-        const kind = item.unusable ? "Går inte att använda" : item.product_key ? "Bestämd vara" : formLabel(item.form) || (item.food ? "Välj hur varan är" : "Inte mat");
+        const li = el("li", null, "item"), text = el("div", null, "item-text");
+        const kind = item.unusable ? "Går inte att använda" : item.product_key ? "Bestämd vara" : item.food ? "Otillagad" : "Inte mat";
         text.append(el("span", capital(item.name), "item-name"), el("span", [kind, item.reserved > 0 ? `${amount(item.reserved, item.unit)} till planerade måltider` : null].filter(Boolean).join(" · "), "item-kind"));
         const stepper = el("div", null, "stepper");
         stepper.append(button("−", guard(() => changePantryAmount(item.id, -1)), "step", { "aria-label": `Mindre ${item.name}` }), el("span", amount(item.quantity, item.unit), "step-value"), button("+", guard(() => changePantryAmount(item.id, 1)), "step", { "aria-label": `Mer ${item.name}` }));
         li.append(text, stepper, button("×", guard(() => removeFromPantry(item.id)), "remove", { "aria-label": `Ta bort ${item.name}` }));
         const below = el("div", null, "item-offer"); li.append(below);
-        if (generic && item.food && !item.form && !item.unusable) below.append(el("span", "Hur är varan? Recepten använder den först när du har valt."), formChips(null, value => guard(() => setPantryForm(item.id, value))(), `Hur är ${item.name}`));
         for (const check of S.state.pantry_checks || []) if (check.item_id === item.id) below.append(el("span", check.message));
         list.append(li);
       }

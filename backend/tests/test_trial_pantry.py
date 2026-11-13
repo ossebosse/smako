@@ -1,8 +1,8 @@
 """The pantry the trial interfaces fill in is used by the meal planner.
 
 Synthetic products; the recipe comes from the library. A pantry row without a
-chosen product is used only when its form is the one the recipe asks for,
-which is why the interfaces ask for the form before saving the row.
+chosen product counts as uncooked (owner decision 2026-11-13), so it serves
+recipes that want the food raw, dry or as sold.
 """
 from pathlib import Path
 
@@ -52,8 +52,15 @@ def test_pantry_row_with_the_recipes_form_is_used_instead_of_bought():
     assert not any(wanted.name == name.split(" [")[0] for name in bought)
 
 
-def test_pantry_row_without_form_is_left_alone_and_everything_is_bought():
+def test_pantry_row_without_form_counts_as_uncooked_and_is_used():
     recipe, result = plan_with(lambda r: [{"name": home(r).name, "quantity": home(r).quantity, "unit": "g"}])
+    wanted = home(recipe)
+    assert [(a["name"], a["quantity"]) for a in result.personal.allocations] == [(wanted.name, wanted.quantity)]
+    assert result.optimized_basket.total == 10 * (len(recipe.ingredients) - 1)
+
+
+def test_pantry_row_stated_as_cooked_is_not_used_for_an_uncooked_need():
+    recipe, result = plan_with(lambda r: [{"name": home(r).name, "quantity": home(r).quantity, "unit": "g", "form": "cooked_drained"}])
     assert result.personal.allocations == []
     assert result.optimized_basket.total == 10 * len(recipe.ingredients)
 
@@ -64,23 +71,22 @@ def test_part_of_the_need_at_home_means_the_rest_is_bought():
     assert result.optimized_basket.total == 10 * len(recipe.ingredients)
 
 
-@pytest.mark.parametrize("name, form, unit", [("ris", "dry", "g"), ("gul lök", "raw_edible", "g"), ("krossade tomater", "as_sold", "g")])
-def test_the_proposed_form_and_unit_are_the_ones_recipes_use(name, form, unit):
+@pytest.mark.parametrize("name, unit", [("ris", "g"), ("gul lök", "g"), ("krossade tomater", "g")])
+def test_the_unit_is_the_one_recipes_use(name, unit):
     use = usual_recipe_use(name)
-    assert (use["form"], use["unit"], use["used_in_recipes"]) == (form, unit, True)
+    assert (use["unit"], use["used_in_recipes"]) == (unit, True)
 
 
 def test_usable_counts_follow_the_planners_rule_for_named_rows():
     """Onion by name is enough for every recipe; chicken by name for none, since recipes ask for a cut."""
-    onion, chicken = usual_recipe_use("gul lök")["usable"]["raw_edible"], usual_recipe_use("kyckling")["usable"]["raw_edible"]
+    onion, chicken, rice = (usual_recipe_use(n)["usable"] for n in ("gul lök", "kyckling", "ris"))
     assert onion[0] == onion[1] > 100
     assert chicken[0] == 0 and chicken[1] > 100
-    rice = usual_recipe_use("ris")["usable"]["dry"]
     assert 0 < rice[0] < rice[1] / 2
 
 
 def test_unknown_name_gets_no_proposal():
-    assert usual_recipe_use("tandborste") == {"form": None, "unit": None, "used_in_recipes": False, "usable": {}}
+    assert usual_recipe_use("tandborste") == {"form": None, "unit": None, "used_in_recipes": False, "usable": [0, 0]}
 
 
 def test_trial_interfaces_have_account_pantry_and_purchase_built_in():
@@ -113,15 +119,15 @@ def test_pantry_api_as_the_trial_interfaces_use_it(monkeypatch, tmp_path):
         assert (typed["query"], typed["quantity"], typed["unit"], typed["food"]) == ("ris", 1000, "g", True)
         assert first.post("/api/personal/interpret-extra", json={"text": "tandborste 1 st"}).json()["food"] is False
         use = first.get("/api/personal/pantry-use", params={"name": typed["query"]}).json()
-        assert (use["form"], use["unit"], use["used_in_recipes"], use["food"]) == ("dry", "g", True, True)
-        assert set(use["usable"]) == {"dry"}
+        assert (use["unit"], use["used_in_recipes"], use["food"]) == ("g", True, True)
+        assert len(use["usable"]) == 2
         assert first.get("/api/personal/pantry-use", params={"name": " "}).status_code == 422
         row = {"id": "rice-1", "name": typed["query"], "quantity": typed["quantity"], "unit": typed["unit"],
-               "product_key": None, "unusable": False, "food": True, "form": use["form"]}
+               "product_key": None, "unusable": False, "food": True}
         saved = first.put("/api/personal/pantry", json={"revision": 0, "items": [row]})
         assert saved.status_code == 200
         item = saved.json()["items"][0]
-        assert (item["name"], item["quantity"], item["form"], item["available"], item["reserved"]) == ("ris", 1000, "dry", 1000, 0)
+        assert (item["name"], item["quantity"], item.get("form"), item["available"], item["reserved"]) == ("ris", 1000, None, 1000, 0)
         # The stale revision the interface would send after a change elsewhere is refused, not merged.
         assert first.put("/api/personal/pantry", json={"revision": 0, "items": []}).status_code == 409
         assert second.get("/api/personal/state").json()["items"] == []

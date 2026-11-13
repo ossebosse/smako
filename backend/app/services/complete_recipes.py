@@ -648,9 +648,18 @@ def plain_bread_composition(composition):
                 and first_word and first_word[0] in flours | {"vatten"})
 
 
+# Owner decision 2026-11-13: what a user puts in the pantry is uncooked. A
+# generic row without a stated form therefore serves a recipe that wants the
+# food raw, dry or as sold, never one that wants it cooked or drained (the
+# weights differ). A form the user did state still has to match exactly.
+UNCOOKED_FORMS = frozenset({"raw_edible", "dry", "as_sold"})
+
+
 def pantry_form_compatible(item, row):
-    """Generic stock needs user-confirmed form; exact stock uses resolved keys."""
+    """Generic stock is uncooked unless its form says otherwise; exact stock uses resolved keys."""
     form = item.get("form")
+    if form is None and not item.get("nutrition_reference") and row.get("input_form") in UNCOOKED_FORMS:
+        form = row["input_form"]
     if form is None and item.get("nutrition_reference"):
         from app.services.nutrition_reference import MAPPINGS, validate_pantry_reference
         try:

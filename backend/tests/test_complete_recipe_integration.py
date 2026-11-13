@@ -333,9 +333,21 @@ def test_compound_chili_and_unknown_pantry_form_do_not_qualify():
     mixture = SimpleNamespace(ingredients=["Chilipeppar 84%, spiskummin, salt, oregano, vitlök."], ingredients_complete=True)
     assert not _whole_food_identity("chilipulver", "dry", product, mixture)
     row = {"name": "vitlök", "input_form": "raw_edible"}
-    assert not pantry_form_compatible({"name": "vitlök", "unit": "g"}, row)
+    # Owner decision 2026-11-13: pantry goods without a stated form are uncooked.
+    assert pantry_form_compatible({"name": "vitlök", "unit": "g"}, row)
+    assert not pantry_form_compatible({"name": "Torkad vitlök", "unit": "g"}, row)
     assert not pantry_form_compatible({"name": "Torkad vitlök", "unit": "g", "form": "raw_edible"}, row)
+    assert not pantry_form_compatible({"name": "vitlök", "unit": "g", "form": "dry"}, row)
     assert pantry_form_compatible({"name": "vitlök", "unit": "g", "form": "raw_edible"}, row)
+
+
+@pytest.mark.parametrize("name, form, used", [
+    ("ris", "dry", True), ("potatis", "raw_edible", True), ("krossade tomater", "as_sold", True),
+    ("kikärtor", "cooked_drained", False), ("oliver", "preserved_drained", False),
+])
+def test_pantry_goods_without_form_are_uncooked(name, form, used):
+    from app.services.complete_recipes import pantry_form_compatible
+    assert pantry_form_compatible({"name": name, "unit": "g"}, {"name": name, "input_form": form}) is used
 
 
 @pytest.mark.parametrize("name,form,requirement,good,bad", [
@@ -547,6 +559,7 @@ def test_identical_qualification_context_reuses_rows_and_gives_the_same_plan():
     from app.services.personal_planner import _QUALIFICATION_MEMORY, PersonalPlanner
     from app.services.personal_policy import ProductFacts
     from app.services.recipe_library import candidates
+
     from backend.tests.test_personal_planning_v2 import NOW, prepared, product, state
 
     prefs = RecipePreferences(mode="complete", cuisines=["greek"], adaptation="products")

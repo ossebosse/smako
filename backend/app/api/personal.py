@@ -236,7 +236,7 @@ def extra_interpret(payload: TextInput, request: Request, response: Response):
 
 @router.get("/pantry-use")
 def pantry_use(request: Request, response: Response, name: str = ""):
-    """The form and unit recipes use for a name, proposed when a pantry row is added."""
+    """Which unit recipes use for a name, and whether a row typed with it is enough for them."""
     context(request, response)
     if not name.strip() or len(name) > 120:
         raise HTTPException(422, "Skriv varans namn, högst 120 tecken.")
