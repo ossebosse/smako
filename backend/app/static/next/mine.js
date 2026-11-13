@@ -152,11 +152,11 @@
         {
           if (use.unit && use.unit !== row.unit) confirm.append(el("p", `Recepten räknar ${row.query} i ${UNITS[use.unit]}. Skriv mängden så om recepten ska kunna använda varan.`, "hint"));
           // Recipes that want it drained need the can's drained weight; others need the kind (which rice, which cut).
-          else if (narrow && drained >= uses / 2) confirm.append(el("p", `Recepten använder ${row.query} avrunnen, till exempel från burk. Välj varan du har, så räknar Smako med vikten utan spad.`, "hint"));
+          else if (narrow && drained >= uses / 2) confirm.append(el("p", `Recepten använder ${row.query} avrunnen, till exempel från burk. Välj varan du har. Smako räknar med vikten utan spad när förpackningen anger den, annars med förpackningens vikt.`, "hint"));
           else if (narrow) confirm.append(el("p", fits ? `Bara några recept kan använda ${row.query} när varan är skriven så här. De flesta behöver veta precis vilken sort det är.` : `Recepten behöver veta precis vilken sorts ${row.query} det är.`, "hint"));
           if (narrow && products.length) {
             const exact = el("div", null, "pantry-exact"); exact.append(el("p", "Välj den vara du har hemma, så kan recepten använda den:"));
-            for (const product of products.slice(0, 6)) { const b = button(null, guard(() => addProduct(product)), "result"); b.append(el("span", product.display_name || product.name, "result-name"), el("span", product.package, "result-note")); exact.append(b); }
+            for (const product of products.slice(0, 6)) { const b = button(null, guard(() => addProduct(product, row.query)), "result"); b.append(el("span", product.display_name || product.name, "result-name"), el("span", product.package, "result-note")); exact.append(b); }
             confirm.append(exact);
           } else if (narrow) confirm.append(el("p", "Sök på varans namn och märke och välj en bestämd vara, så kan recepten använda den.", "hint"));
         }
@@ -167,13 +167,14 @@
       };
       draw(); confirm.hidden = false;
     }
-    async function addProduct(product) {
+    async function addProduct(product, typed = "") {
       if (product.purchase_units || product.campaign_choice) throw new Error("Vi vet inte hur mycket förpackningen innehåller. Skriv varan med mängd i stället, till exempel 500 g.");
       const name = (product.display_name || product.name).slice(0, 120);
-      const facts = await api(`/api/personal/pantry-product?product_key=${product.product_key}&postal_code=${encodeURIComponent(N.saved.postcode || "22350")}`);
+      const facts = await api(`/api/personal/pantry-product?product_key=${product.product_key}&postal_code=${encodeURIComponent(N.saved.postcode || "22350")}&name=${encodeURIComponent(typed.slice(0, 120))}`);
       if (!facts.usable_quantity || !facts.usable_unit) throw new Error("Vi vet inte hur mycket förpackningen innehåller. Skriv varan med mängd i stället, till exempel 500 g.");
       await addToPantry({ name, quantity: facts.usable_quantity, unit: facts.usable_unit, product_key: product.product_key, food: facts.food });
-      done(facts.less_than_package ? `${name} · ${facts.estimated ? "ungefär " : ""}${amount(facts.usable_quantity, facts.usable_unit)} utan spad` : name);
+      done(facts.less_than_package ? `${name} · ${facts.estimated ? "ungefär " : ""}${amount(facts.usable_quantity, facts.usable_unit)} utan spad`
+        : facts.drained_from_package ? `${name} · förpackningen anger ingen vikt utan spad, så Smako räknar med ${amount(facts.usable_quantity, facts.usable_unit)}. Utan spad kan det bli mindre.` : name);
     }
     async function searchNow() {
       const text = input.value.trim(), mine = ++generation; controller?.abort();
@@ -188,7 +189,7 @@
         if (!found.options.length) results.append(el("p", found.error || "Skriv också hur mycket du har, till exempel 500 g, 1 l eller 6 st.", "hint"));
         if (products.length) {
           const more = el("details", null, "exact"); more.append(el("summary", `Välj en bestämd vara (${products.length})`));
-          for (const product of products.slice(0, 12)) { const b = button(null, guard(() => addProduct(product)), "result");
+          for (const product of products.slice(0, 12)) { const b = button(null, guard(() => addProduct(product, text)), "result");
             b.append(el("span", product.display_name || product.name, "result-name"), el("span", product.package, "result-note")); more.append(b); }
           results.append(more);
         }

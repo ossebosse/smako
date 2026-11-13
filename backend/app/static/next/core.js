@@ -456,13 +456,15 @@
           const text = el("span", null, "line-text"), wanted = String(row.ingredient || "").replace(/ \[\d+\]$/, "");
           const weighed = row.variable_weight || ["sold_by_weight", "variable_weight_package"].includes(row.sale_model);
           text.append(el("span", row.product_name, "line-name"), el("span", [weighed ? `ca ${amount(row.purchased_quantity ?? row.packages_needed * row.package_quantity, row.purchased_unit || row.package_unit)}` : `${row.packages_needed} st × ${amount(row.package_quantity, row.package_unit)}`,
-            wanted && wanted.toLowerCase() !== row.product_name.toLowerCase() ? `till ${wanted}` : null, row.offer_description || (row.membership_required ? "medlemspris" : null)].filter(Boolean).join(" · "), "line-note"));
+            wanted && wanted.toLowerCase() !== row.product_name.toLowerCase() ? `till ${wanted}` : null, row.offer_description || (row.membership_required ? "medlemspris" : null),
+            row.drained_weight_from_package ? "vikten är med spad" : null].filter(Boolean).join(" · "), "line-note"));
           line.append(check, text, el("span", money(row.total_price), "line-price")); section.append(line);
         }
       }
       box.append(section);
     }
     if (b.estimated) box.append(el("p", "Varor som säljs per vikt har ett uppskattat pris. Det du betalar beror på vad de väger.", "hint"));
+    if (b.stores.some(s => s.items.some(i => i.drained_weight_from_package))) box.append(el("p", "Där det står ”vikten är med spad” anger förpackningen ingen vikt utan spad. Smako räknar då med hela vikten, så när du häller av spadet kan det bli mindre än receptet behöver.", "hint"));
     box.append(el("p", "Priserna är de vi senast hämtade från butikerna. Hyllpriset kan ha ändrats.", "hint"));
     update();
     return box;

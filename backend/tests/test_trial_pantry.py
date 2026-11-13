@@ -27,22 +27,27 @@ def can(name, quantity):
             "usable_quantity": quantity, "usable_unit": "g", "category": "Konserver"}
 
 
-def plan_with(pantry, index=0):
+def plain_can(name, quantity):
+    """A can that gives only its package weight, kept in water."""
+    return {"name": f"Vita {name}" if name == "bönor" else name.capitalize(), "package_quantity": quantity, "category": "Konserver"}
+
+
+def plan_with(pantry, index=0, declared=True):
     prefs = RecipePreferences(mode="complete", cuisines=["greek"], adaptation="products")
     recipe = candidates(prefs, 2)[index]
     products = [product(i.name, max(100, i.quantity), i.unit, 10).model_copy(update={
         "category": "Kryddor" if i.form == "dry" else "Frukt & grönsaker" if i.form == "raw_edible" else "Mat",
         "name": "Grekisk Yoghurt Naturell 10%" if i.name == "yoghurt naturell" else i.name + " Malen" if i.name == "spiskummin" else i.name,
-        **(can(i.name, i.quantity) if i.form == "cooked_drained" else {}),
+        **((can(i.name, i.quantity) if declared else plain_can(i.name, i.quantity)) if i.form == "cooked_drained" else {}),
     }) for i in recipe.ingredients]
     request = PlanRequest(recipes=1, servings=2, max_stores=1, recipe_preferences=prefs,
         personal=PersonalPlanning(meals=[MealSettings(count=1, servings=2)], use_pantry=True,
             slots=[MealSlot(id="dinner-1", day=1, meal_type="dinner", recipe=recipe)]))
     facts = {(p.store_id, p.product_id): ProductFacts(source="synthetic_test_declaration", source_product_id=p.product_id,
-        source_snapshot_id="v2-frozen", ingredients=(p.name,), ingredients_complete=True,
+        source_snapshot_id="v2-frozen", ingredients=(p.name, *(("vatten", "salt") if p.category == "Konserver" else ())), ingredients_complete=True,
         # A can's drained weight, declared by the source.
         **({"field_sources": {"usable_quantity": ({"basis": "drained", "unit": "g", "quantity": p.usable_quantity, "source": "synthetic_label"},)}}
-           if p.usable_quantity else {})) for p in products}
+           if p.usable_quantity and p.usable_quantity < p.package_quantity else {})) for p in products}
     universe = prepared(*products)
     key = {universe.universe.products[positions[0]].name: k for k, positions in universe.product_search_index.groups.items()}
     items = [PantryItem(**row) for row in pantry(recipe, key)]
@@ -205,7 +210,8 @@ def test_pantry_product_reports_the_drained_weight_the_planner_uses(monkeypatch,
     personal.install_handlers(application)
     beans = product("bönor", 400, "g", 12).model_copy(update=can("bönor", 240))
     loose = product("Potatis", 1000, "g", 20)
-    universe = prepared(beans, loose)
+    plain = product("Garant Kikärter Naturella", 230, "g", 9)
+    universe = prepared(beans, loose, plain)
     monkeypatch.setattr(personal.GLOBAL_PREPARED_PRICE_UNIVERSES, "get_for_request", lambda *_: universe)
     monkeypatch.setattr("app.services.personal_source_facts.load_retained_facts", lambda _prepared: {})
     key = {universe.universe.products[positions[0]].name: k for k, positions in universe.product_search_index.groups.items()}
@@ -214,7 +220,52 @@ def test_pantry_product_reports_the_drained_weight_the_planner_uses(monkeypatch,
         assert (found["usable_quantity"], found["usable_unit"], found["package_quantity"], found["less_than_package"]) == (240, "g", 400, True)
         found = client.get("/api/personal/pantry-product", params={"product_key": key["Potatis"]}).json()
         assert (found["usable_quantity"], found["less_than_package"]) == (1000, False)
+        # No drained weight given: the package weight counts, and the interface says it can be lower.
+        found = client.get("/api/personal/pantry-product", params={"product_key": key["Garant Kikärter Naturella"], "name": "kikärtor"}).json()
+        assert (found["usable_quantity"], found["less_than_package"], found["drained_from_package"]) == (230, False, True)
+        assert client.get("/api/personal/pantry-product", params={"product_key": key["Vita bönor"], "name": "bönor"}).json()["drained_from_package"] is False
+        assert client.get("/api/personal/pantry-product", params={"product_key": key["Potatis"], "name": "potatis"}).json()["drained_from_package"] is False
         assert client.get("/api/personal/pantry-product", params={"product_key": "x"}).status_code == 422
         assert client.get("/api/personal/pantry-product", params={"product_key": "0" * 32}).status_code == 404
     factory.kw["bind"].dispose()
 
+
+
+def test_a_can_without_drained_weight_is_bought_at_package_weight_with_a_note():
+    """Owner decision 2026-11-13: no drained weight, use the package weight and say it can be lower."""
+    recipe, result = plan_with(lambda r, _key: [], index=3, declared=False)
+    need = drained(recipe)
+    rows = [row for store in result.optimized_basket.stores for row in store.items]
+    flagged = [row for row in rows if row.drained_weight_from_package]
+    assert [row.ingredient.split(" [")[0] for row in flagged] == [need.name]
+    assert flagged[0].package_quantity == need.quantity
+    assert "drained_weight_from_package" not in rows[0].model_dump() or rows[0].drained_weight_from_package
+    assert result.optimized_basket.total == 10 * len(recipe.ingredients)
+
+
+def test_a_can_with_declared_drained_weight_gets_no_note():
+    _recipe, result = plan_with(lambda r, _key: [], index=3)
+    assert not any(row.drained_weight_from_package for store in result.optimized_basket.stores for row in store.items)
+
+
+def test_package_weight_counts_only_for_plain_preserves():
+    from app.services.complete_recipes import declared_drained, package_weight_drained
+    from app.services.personal_policy import ProductFacts
+
+    def fact(*ingredients):
+        return ProductFacts(source="synthetic_test_declaration", source_product_id="x", source_snapshot_id="v2-frozen",
+                            ingredients=ingredients, ingredients_complete=bool(ingredients))
+    can_in_water = product("Garant Kikärter Naturella", 230, "g", 10).model_copy(update={"category": "Skafferi"})
+    assert package_weight_drained(can_in_water, fact("kikärtor", "vatten", "salt"))
+    # Named as plain in water: enough without a declaration.
+    assert package_weight_drained(can_in_water, None)
+    dried = product("Garant Eko Kikärtor", 500, "g", 10).model_copy(update={"category": "Skafferi > Torra baljväxter"})
+    assert not package_weight_drained(dried, fact("kikärtor"))
+    assert not package_weight_drained(dried, None)
+    assert not package_weight_drained(product("Vita Bönor i Tomatsås", 390, "g", 10), fact("vita bönor", "vatten", "tomatpuré"))
+    loose = product("Oliver", 100, "g", 10).model_copy(update={"sale_model": "sold_by_weight"})
+    assert not package_weight_drained(loose, fact("oliver", "vatten", "salt"))
+    # A source's own gross/drained mass (stored as DERIVED) is a declared drained mass.
+    gross = product("Kikärter", 400, "g", 10).model_copy(update={"usable_quantity": 240, "usable_unit": "g", "quantity_confidence": "derived"})
+    assert declared_drained("kikärtor", "cooked_drained", (), gross, None)
+    assert not declared_drained("kikärtor", "cooked_drained", (), gross.model_copy(update={"quantity_confidence": "exact"}), None)
