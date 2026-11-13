@@ -69,3 +69,20 @@ def usual_recipe_use(name: str) -> dict:
     canonical = canonicalize_ingredient_name(name)
     return {"form": forms.get(canonical), "unit": units.get(canonical), "used_in_recipes": canonical in units,
             "usable": _usable(name, units.get(canonical), rows.get(canonical, {}))}
+
+
+def drained_from_package(name: str, product, fact) -> bool:
+    """Recipes want this name drained and the product declares no drained mass.
+
+    The planner then counts the package weight (owner decision 2026-11-13),
+    and the interface says the drained weight can be lower.
+    """
+    from app.services.complete_recipes import declared_drained
+    from app.services.meal_library_content import manifest_entries
+
+    canonical = canonicalize_ingredient_name(name)
+    drained = [(n, form, requirements) for (n, form, requirements) in
+               _usage(len(manifest_entries()["current"]))[2].get(canonical, {}) if form in COOKED_OR_DRAINED]
+    return bool(drained) and not any(
+        declared_drained(canonicalize_ingredient_name(n), form, requirements, product, fact)
+        for n, form, requirements in drained)

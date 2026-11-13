@@ -246,7 +246,7 @@ def pantry_use(request: Request, response: Response, name: str = ""):
 
 
 @router.get("/pantry-product")
-def pantry_product(request: Request, response: Response, product_key: str = "", postal_code: str = "22350"):
+def pantry_product(request: Request, response: Response, product_key: str = "", postal_code: str = "22350", name: str = ""):
     """How much of a chosen product the recipes can use, as the planner counts it.
 
     The pantry keeps usable quantity, as a registered purchase does: a can of
@@ -264,6 +264,7 @@ def pantry_product(request: Request, response: Response, product_key: str = "", 
     if not positions:
         raise HTTPException(404, "Vi hittar inte varan längre. Sök på den igen.")
     from app.services.official_product_facts import project_usable_quantity
+    from app.services.pantry_usage import drained_from_package
     from app.services.personal_source_facts import load_retained_facts
 
     product = prepared.universe.products[positions[0]]
@@ -273,15 +274,20 @@ def pantry_product(request: Request, response: Response, product_key: str = "", 
                                         allow_estimates=True, required_unit=unit if unit in {"g", "ml", "st"} else None)
     quantity, unit = (projected.usable_quantity, projected.usable_unit) if projected.usable_quantity else (product.package_quantity, product.package_unit)
     confidence = str(getattr(projected.quantity_confidence, "value", projected.quantity_confidence) or "").lower()
+    less_than_package = bool(quantity and product.package_quantity and unit == product.package_unit and quantity < product.package_quantity)
     return {
         "name": product.name,
         "package_quantity": product.package_quantity,
         "package_unit": product.package_unit,
         "usable_quantity": quantity,
         "usable_unit": unit if unit in {"g", "ml", "st"} else None,
-        "less_than_package": bool(quantity and product.package_quantity and unit == product.package_unit and quantity < product.package_quantity),
+        "less_than_package": less_than_package,
         "estimated": confidence == "estimated",
         "food": not is_nonfood(product.name),
+        # Recipes want the food drained and the product gives no drained
+        # weight: the package weight counts, and the drained weight can be lower.
+        "drained_from_package": not less_than_package and bool(name.strip()) and len(name) <= 120
+        and drained_from_package(name, product, facts.get((product.store_id, product.product_id))),
     }
 
 

@@ -107,6 +107,11 @@
   The external delivery-source pilot was withdrawn; do not integrate or resume it.
   Culinary substitutions require explicit reviewed recipe versions, not false
   identity aliases. Preserve the exact scope of existing online contexts.
+- Owner decision 2026-11-13: when a recipe wants a food drained and the product
+  declares no drained mass, plan with the package weight and tell the user the
+  drained weight can be lower (`drained_weight_from_package`). Only plain
+  preserves in liquid qualify; see docs/PLANNING-ARCHITECTURE.md. This applies
+  everywhere (plan, shopping list, purchases, pantry).
 - PriceUniverse is shared and source-driven. Community evidence stays advisory,
   and `USER_SPECIFIC` offers must never enter the shared artifact.
 - Keep product identity and price scope exact. Fuzzy names may suggest manual

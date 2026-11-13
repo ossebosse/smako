@@ -1622,6 +1622,7 @@ class PersonalPlanner:
                     for offer in product.offers
                     if item.applied_offer is None or offer != item.applied_offer
                 ]
+        basket = self._mark_drained_package_weight(basket, rows)
         checks = self._check_final(slots, basket, groups, rows, allocations) if final else {}
         return {
             "trace_inputs": (candidate_map, rows),
@@ -1650,6 +1651,35 @@ class PersonalPlanner:
             if self.spec.surplus_mode == "allow_larger"
             else 0,
         }
+
+    def _mark_drained_package_weight(self, basket, rows):
+        """Flag lines where a drained need is met by a product's package weight."""
+        drained = {}
+        for row in rows:
+            if row.get("purchase_key") and row.get("input_form") in {"cooked_drained", "preserved_drained"}:
+                drained.setdefault(row["purchase_key"], []).append(row)
+        if not drained:
+            return basket
+        from app.services.complete_recipes import declared_drained
+
+        changed = False
+        stores = []
+        for store in basket.stores:
+            items = []
+            for item in store.items:
+                needs = drained.get(item.ingredient)
+                position = self.by_identity.get((item.store_id, item.product_id)) if needs else None
+                if position is not None:
+                    product = self.prepared.universe.products[position]
+                    fact = self.source_facts(product)
+                    flag = not all(declared_drained(r["name"], r["input_form"], tuple(r.get("product_requirements") or ()), product, fact)
+                                   for r in needs)
+                    if flag != item.drained_weight_from_package:
+                        item = item.model_copy(update={"drained_weight_from_package": flag})
+                        changed = True
+                items.append(item)
+            stores.append(store.model_copy(update={"items": items}) if changed else store)
+        return basket.model_copy(update={"stores": stores}) if changed else basket
 
     def _trace_final_alternatives(self, slots, result):
         """Compare bounded real alternatives, without changing the chosen plan.
