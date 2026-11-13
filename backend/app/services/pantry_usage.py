@@ -34,6 +34,9 @@ def _usage(generation: int):
             {name: counts.most_common(1)[0][0] for name, counts in units.items()}, dict(rows))
 
 
+COOKED_OR_DRAINED = frozenset({"cooked_drained", "preserved_drained"})
+
+
 def _usable(typed: str, unit: str | None, rows) -> list[int]:
     """In how many recipe uses a row typed like this is accepted, and of how many.
 
@@ -44,8 +47,9 @@ def _usable(typed: str, unit: str | None, rows) -> list[int]:
     """
     from app.services.complete_recipes import pantry_form_compatible
 
-    fits = total = 0
+    fits = total = drained = 0
     for (name, form, requirements), uses in rows.items():
+        drained += uses if form in COOKED_OR_DRAINED else 0
         try:
             accepted = pantry_form_compatible({"name": typed, "unit": unit},
                                               {"name": name, "input_form": form, "product_requirements": requirements})
@@ -53,7 +57,8 @@ def _usable(typed: str, unit: str | None, rows) -> list[int]:
             accepted = False
         fits += uses if accepted else 0
         total += uses
-    return [fits, total]
+    # [covered, all uses, uses that want the food cooked or drained]
+    return [fits, total, drained]
 
 
 def usual_recipe_use(name: str) -> dict:

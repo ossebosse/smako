@@ -105,7 +105,9 @@
   }
 
   // ---- Pantry --------------------------------------------------------------
-  // Goods in the pantry count as uncooked; the server decides which recipes they fit.
+  // Typed goods count as uncooked; the server decides which recipes they fit. A
+  // chosen product is kept as the amount recipes can use (a can as its drained
+  // weight), the way "Jag har handlat" keeps it.
   const UNITS = { g: "gram", ml: "milliliter", st: "styck" };
   const clean = ({ available, reserved, ...rest }) => rest;
   const pantry = () => S.state?.items || [];
@@ -143,12 +145,14 @@
       const use = await api(`/api/personal/pantry-use?name=${encodeURIComponent(row.query)}`).catch(() => ({ unit: null, used_in_recipes: false, usable: [0, 0], food: !N.isNonfood(row.query) }));
       const save = () => addToPantry({ name: row.query.slice(0, 120), quantity: row.quantity, unit: row.unit, food: use.food }).then(() => done(`${capital(row.query)} · ${amount(row.quantity, row.unit)}`));
       // Many recipes ask for a particular kind (which rice, which cut). Only a chosen product can show that.
-      const [fits, uses] = use.usable || [0, 0], narrow = use.food && uses > 0 && fits < uses / 2, wrongUnit = use.food && use.unit && use.unit !== row.unit;
+      const [fits, uses, drained = 0] = use.usable || [0, 0], narrow = use.food && uses > 0 && fits < uses / 2, wrongUnit = use.food && use.unit && use.unit !== row.unit;
       if (!narrow && !wrongUnit) { await save(); return; }
       const draw = () => {
         confirm.replaceChildren(el("h3", `${capital(row.query)} · ${amount(row.quantity, row.unit)}`));
         {
           if (use.unit && use.unit !== row.unit) confirm.append(el("p", `Recepten räknar ${row.query} i ${UNITS[use.unit]}. Skriv mängden så om recepten ska kunna använda varan.`, "hint"));
+          // Recipes that want it drained need the can's drained weight; others need the kind (which rice, which cut).
+          else if (narrow && drained >= uses / 2) confirm.append(el("p", `Recepten använder ${row.query} avrunnen, till exempel från burk. Välj varan du har, så räknar Smako med vikten utan spad.`, "hint"));
           else if (narrow) confirm.append(el("p", fits ? `Bara några recept kan använda ${row.query} när varan är skriven så här. De flesta behöver veta precis vilken sort det är.` : `Recepten behöver veta precis vilken sorts ${row.query} det är.`, "hint"));
           if (narrow && products.length) {
             const exact = el("div", null, "pantry-exact"); exact.append(el("p", "Välj den vara du har hemma, så kan recepten använda den:"));
@@ -166,8 +170,10 @@
     async function addProduct(product) {
       if (product.purchase_units || product.campaign_choice) throw new Error("Vi vet inte hur mycket förpackningen innehåller. Skriv varan med mängd i stället, till exempel 500 g.");
       const name = (product.display_name || product.name).slice(0, 120);
-      await addToPantry({ name, quantity: product.package_quantity, unit: product.package_unit, product_key: product.product_key, food: !N.isNonfood(product.name) });
-      done(name);
+      const facts = await api(`/api/personal/pantry-product?product_key=${product.product_key}&postal_code=${encodeURIComponent(N.saved.postcode || "22350")}`);
+      if (!facts.usable_quantity || !facts.usable_unit) throw new Error("Vi vet inte hur mycket förpackningen innehåller. Skriv varan med mängd i stället, till exempel 500 g.");
+      await addToPantry({ name, quantity: facts.usable_quantity, unit: facts.usable_unit, product_key: product.product_key, food: facts.food });
+      done(facts.less_than_package ? `${name} · ${facts.estimated ? "ungefär " : ""}${amount(facts.usable_quantity, facts.usable_unit)} utan spad` : name);
     }
     async function searchNow() {
       const text = input.value.trim(), mine = ++generation; controller?.abort();
@@ -200,7 +206,7 @@
       note.hidden = !note.textContent;
       for (const item of pantry()) {
         const li = el("li", null, "item"), text = el("div", null, "item-text");
-        const kind = item.unusable ? "Går inte att använda" : item.product_key ? "Bestämd vara" : item.food ? "Otillagad" : "Inte mat";
+        const kind = item.unusable ? "Går inte att använda" : item.product_key ? "Bestämd vara" : item.food ? null : "Inte mat";
         text.append(el("span", capital(item.name), "item-name"), el("span", [kind, item.reserved > 0 ? `${amount(item.reserved, item.unit)} till planerade måltider` : null].filter(Boolean).join(" · "), "item-kind"));
         const stepper = el("div", null, "stepper");
         stepper.append(button("−", guard(() => changePantryAmount(item.id, -1)), "step", { "aria-label": `Mindre ${item.name}` }), el("span", amount(item.quantity, item.unit), "step-value"), button("+", guard(() => changePantryAmount(item.id, 1)), "step", { "aria-label": `Mer ${item.name}` }));

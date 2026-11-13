@@ -21,20 +21,32 @@ from backend.tests.test_personal_planning_v2 import NOW, prepared, product, stat
 STATIC = Path(__file__).resolve().parents[1] / "app" / "static"
 
 
-def plan_with(pantry):
+def can(name, quantity):
+    """A can whose declared drained weight is 60 % of the package."""
+    return {"name": f"Vita {name}" if name == "bönor" else name.capitalize(), "package_quantity": round(quantity / 0.6),
+            "usable_quantity": quantity, "usable_unit": "g", "category": "Konserver"}
+
+
+def plan_with(pantry, index=0):
     prefs = RecipePreferences(mode="complete", cuisines=["greek"], adaptation="products")
-    recipe = candidates(prefs, 2)[0]
+    recipe = candidates(prefs, 2)[index]
     products = [product(i.name, max(100, i.quantity), i.unit, 10).model_copy(update={
         "category": "Kryddor" if i.form == "dry" else "Frukt & grönsaker" if i.form == "raw_edible" else "Mat",
         "name": "Grekisk Yoghurt Naturell 10%" if i.name == "yoghurt naturell" else i.name + " Malen" if i.name == "spiskummin" else i.name,
+        **(can(i.name, i.quantity) if i.form == "cooked_drained" else {}),
     }) for i in recipe.ingredients]
     request = PlanRequest(recipes=1, servings=2, max_stores=1, recipe_preferences=prefs,
         personal=PersonalPlanning(meals=[MealSettings(count=1, servings=2)], use_pantry=True,
             slots=[MealSlot(id="dinner-1", day=1, meal_type="dinner", recipe=recipe)]))
     facts = {(p.store_id, p.product_id): ProductFacts(source="synthetic_test_declaration", source_product_id=p.product_id,
-        source_snapshot_id="v2-frozen", ingredients=(p.name,), ingredients_complete=True) for p in products}
-    items = [PantryItem(**row) for row in pantry(recipe)]
-    result = PersonalPlanner(request, Settings(complete_recipes_enabled=True), prepared(*products), state(items), facts=facts, now=NOW).create()
+        source_snapshot_id="v2-frozen", ingredients=(p.name,), ingredients_complete=True,
+        # A can's drained weight, declared by the source.
+        **({"field_sources": {"usable_quantity": ({"basis": "drained", "unit": "g", "quantity": p.usable_quantity, "source": "synthetic_label"},)}}
+           if p.usable_quantity else {})) for p in products}
+    universe = prepared(*products)
+    key = {universe.universe.products[positions[0]].name: k for k, positions in universe.product_search_index.groups.items()}
+    items = [PantryItem(**row) for row in pantry(recipe, key)]
+    result = PersonalPlanner(request, Settings(complete_recipes_enabled=True), universe, state(items), facts=facts, now=NOW).create()
     return recipe, result
 
 
@@ -44,7 +56,7 @@ def home(recipe):
 
 
 def test_pantry_row_with_the_recipes_form_is_used_instead_of_bought():
-    recipe, result = plan_with(lambda r: [{"name": home(r).name, "quantity": home(r).quantity, "unit": "g", "form": home(r).form}])
+    recipe, result = plan_with(lambda r, _key: [{"name": home(r).name, "quantity": home(r).quantity, "unit": "g", "form": home(r).form}])
     wanted = home(recipe)
     assert [(a["name"], a["quantity"], a["unit"]) for a in result.personal.allocations] == [(wanted.name, wanted.quantity, "g")]
     assert result.optimized_basket.total == 10 * (len(recipe.ingredients) - 1)
@@ -53,20 +65,39 @@ def test_pantry_row_with_the_recipes_form_is_used_instead_of_bought():
 
 
 def test_pantry_row_without_form_counts_as_uncooked_and_is_used():
-    recipe, result = plan_with(lambda r: [{"name": home(r).name, "quantity": home(r).quantity, "unit": "g"}])
+    recipe, result = plan_with(lambda r, _key: [{"name": home(r).name, "quantity": home(r).quantity, "unit": "g"}])
     wanted = home(recipe)
     assert [(a["name"], a["quantity"]) for a in result.personal.allocations] == [(wanted.name, wanted.quantity)]
     assert result.optimized_basket.total == 10 * (len(recipe.ingredients) - 1)
 
 
 def test_pantry_row_stated_as_cooked_is_not_used_for_an_uncooked_need():
-    recipe, result = plan_with(lambda r: [{"name": home(r).name, "quantity": home(r).quantity, "unit": "g", "form": "cooked_drained"}])
+    recipe, result = plan_with(lambda r, _key: [{"name": home(r).name, "quantity": home(r).quantity, "unit": "g", "form": "cooked_drained"}])
+    assert result.personal.allocations == []
+    assert result.optimized_basket.total == 10 * len(recipe.ingredients)
+
+
+def drained(recipe):
+    return next(i for i in recipe.ingredients if i.form == "cooked_drained" and i.unit == "g")
+
+
+def test_a_chosen_can_kept_as_drained_weight_covers_a_drained_need():
+    """The pantry keeps a can as its drained weight, as a registered purchase does."""
+    recipe, result = plan_with(lambda r, key: [{"name": drained(r).name, "quantity": drained(r).quantity, "unit": "g",
+                                                "product_key": key[can(drained(r).name, 0)["name"]]}], index=3)
+    need = drained(recipe)
+    assert [(a["name"], a["quantity"]) for a in result.personal.allocations] == [(need.name, need.quantity)]
+    assert result.optimized_basket.total == 10 * (len(recipe.ingredients) - 1)
+
+
+def test_a_typed_name_alone_is_not_used_for_a_drained_need():
+    recipe, result = plan_with(lambda r, _key: [{"name": drained(r).name, "quantity": drained(r).quantity, "unit": "g"}], index=3)
     assert result.personal.allocations == []
     assert result.optimized_basket.total == 10 * len(recipe.ingredients)
 
 
 def test_part_of_the_need_at_home_means_the_rest_is_bought():
-    recipe, result = plan_with(lambda r: [{"name": home(r).name, "quantity": home(r).quantity / 2, "unit": "g", "form": home(r).form}])
+    recipe, result = plan_with(lambda r, _key: [{"name": home(r).name, "quantity": home(r).quantity / 2, "unit": "g", "form": home(r).form}])
     assert [a["quantity"] for a in result.personal.allocations] == [home(recipe).quantity / 2]
     assert result.optimized_basket.total == 10 * len(recipe.ingredients)
 
@@ -83,10 +114,12 @@ def test_usable_counts_follow_the_planners_rule_for_named_rows():
     assert onion[0] == onion[1] > 100
     assert chicken[0] == 0 and chicken[1] > 100
     assert 0 < rice[0] < rice[1] / 2
+    chickpeas = usual_recipe_use("kikärtor")["usable"]
+    assert chickpeas[2] > chickpeas[1] / 2 and chickpeas[0] <= chickpeas[1] - chickpeas[2]
 
 
 def test_unknown_name_gets_no_proposal():
-    assert usual_recipe_use("tandborste") == {"form": None, "unit": None, "used_in_recipes": False, "usable": [0, 0]}
+    assert usual_recipe_use("tandborste") == {"form": None, "unit": None, "used_in_recipes": False, "usable": [0, 0, 0]}
 
 
 def test_trial_interfaces_have_account_pantry_and_purchase_built_in():
@@ -120,7 +153,7 @@ def test_pantry_api_as_the_trial_interfaces_use_it(monkeypatch, tmp_path):
         assert first.post("/api/personal/interpret-extra", json={"text": "tandborste 1 st"}).json()["food"] is False
         use = first.get("/api/personal/pantry-use", params={"name": typed["query"]}).json()
         assert (use["unit"], use["used_in_recipes"], use["food"]) == ("g", True, True)
-        assert len(use["usable"]) == 2
+        assert len(use["usable"]) == 3
         assert first.get("/api/personal/pantry-use", params={"name": " "}).status_code == 422
         row = {"id": "rice-1", "name": typed["query"], "quantity": typed["quantity"], "unit": typed["unit"],
                "product_key": None, "unusable": False, "food": True}
@@ -132,3 +165,31 @@ def test_pantry_api_as_the_trial_interfaces_use_it(monkeypatch, tmp_path):
         assert first.put("/api/personal/pantry", json={"revision": 0, "items": []}).status_code == 409
         assert second.get("/api/personal/state").json()["items"] == []
     factory.kw["bind"].dispose()
+
+
+def test_pantry_product_reports_the_drained_weight_the_planner_uses(monkeypatch, tmp_path):
+    from app.api import account, personal, plan
+    from fastapi.testclient import TestClient
+
+    from backend.tests.test_privacy_erasure import _application
+
+    application, factory, settings = _application(tmp_path)
+    for module in (account, personal, plan):
+        monkeypatch.setattr(module, "get_settings", lambda: settings)
+    application.include_router(personal.router)
+    personal.install_handlers(application)
+    beans = product("bönor", 400, "g", 12).model_copy(update=can("bönor", 240))
+    loose = product("Potatis", 1000, "g", 20)
+    universe = prepared(beans, loose)
+    monkeypatch.setattr(personal.GLOBAL_PREPARED_PRICE_UNIVERSES, "get_for_request", lambda *_: universe)
+    monkeypatch.setattr("app.services.personal_source_facts.load_retained_facts", lambda _prepared: {})
+    key = {universe.universe.products[positions[0]].name: k for k, positions in universe.product_search_index.groups.items()}
+    with TestClient(application) as client:
+        found = client.get("/api/personal/pantry-product", params={"product_key": key["Vita bönor"]}).json()
+        assert (found["usable_quantity"], found["usable_unit"], found["package_quantity"], found["less_than_package"]) == (240, "g", 400, True)
+        found = client.get("/api/personal/pantry-product", params={"product_key": key["Potatis"]}).json()
+        assert (found["usable_quantity"], found["less_than_package"]) == (1000, False)
+        assert client.get("/api/personal/pantry-product", params={"product_key": "x"}).status_code == 422
+        assert client.get("/api/personal/pantry-product", params={"product_key": "0" * 32}).status_code == 404
+    factory.kw["bind"].dispose()
+

@@ -12,6 +12,7 @@ from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from threading import Thread
+from urllib.parse import parse_qs
 
 import pytest
 from playwright.sync_api import expect, sync_playwright
@@ -73,10 +74,17 @@ class Fake:
         if path == "personal/shopping-suggestions":
             rice = [{"product_key": "c" * 32, "name": "Basmatiris", "display_name": "Testmärket Basmatiris", "package": "1 kg", "package_quantity": 1000, "package_unit": "g",
                      "selectable": True, "purchase_units": False, "campaign_choice": False, "matches": []}]
-            return 200, {"generics": [], "products": rice if query.get("q", "").startswith("ris") else [], "usual": None, "status": "available"}
+            chickpeas = [{**rice[0], "product_key": "d" * 32, "name": "Kikärtor", "display_name": "Testmärket Kikärtor", "package": "380 g", "package_quantity": 380}]
+            found = rice if query.get("q", "").startswith("ris") else chickpeas if query.get("q", "").startswith("kik") else []
+            return 200, {"generics": [], "products": found, "usual": None, "status": "available"}
+        if path == "personal/pantry-product":
+            known = {"c" * 32: (1000, 1000, "Basmatiris"), "d" * 32: (230, 380, "Kikärtor")}[query["product_key"]]
+            return 200, {"name": known[2], "usable_quantity": known[0], "usable_unit": "g", "package_quantity": known[1], "package_unit": "g",
+                         "less_than_package": known[0] < known[1], "estimated": False, "food": True}
         if path == "personal/pantry-use":
             known = {"potatis": {"form": "raw_edible", "unit": "g", "used_in_recipes": True, "food": True, "usable": [570, 570]},
-                     "ris": {"form": "dry", "unit": "g", "used_in_recipes": True, "food": True, "usable": [5, 619]}}
+                     "ris": {"form": "dry", "unit": "g", "used_in_recipes": True, "food": True, "usable": [5, 619, 0]},
+                     "kikärtor": {"form": "cooked_drained", "unit": "g", "used_in_recipes": True, "food": True, "usable": [3, 300, 290]}}
             return 200, known.get(query.get("name"), {"form": None, "unit": None, "used_in_recipes": False, "food": True, "usable": [0, 0]})
         if path in {"personal/pantry", "personal/shopping-list"}:
             if body["revision"] != s["revision"]:
@@ -141,8 +149,8 @@ def ui(request):
         def api(route):
             url = route.request.url.split("/api/")[-1]
             path, _, raw = url.partition("?")
-            query = dict(part.split("=", 1) for part in raw.split("&") if "=" in part)
-            status, data = fake.answer(route.request.method, path, {k: v.replace("%20", " ") for k, v in query.items()}, route.request.post_data_json if route.request.post_data else None)
+            query = {k: v[0] for k, v in parse_qs(raw).items()}
+            status, data = fake.answer(route.request.method, path, query, route.request.post_data_json if route.request.post_data else None)
             route.fulfill(status=status, content_type="application/json", body=json.dumps(data))
 
         page.route("**/api/**", api)
@@ -175,7 +183,7 @@ def add_potatoes(name, page):
     # Saved at once as uncooked; nothing to answer first.
     page.get_by_role("button", name=re.compile("Potatis · 1 kg")).click()
     expect(page.locator(".pantry .item-name")).to_have_text("Potatis")
-    expect(page.locator(".pantry .item-kind")).to_have_text("Otillagad")
+    expect(page.locator(".pantry .item-kind")).to_have_text("")
 
 
 def plan_meat_dinners(name, page):
@@ -242,6 +250,19 @@ def test_rice_by_name_is_not_enough_so_a_chosen_product_is_offered(ui):
     expect(page.locator(".pantry .item-kind")).to_have_text("Bestämd vara")
     saved = next(body for method, path, body in fake.calls if path == "personal/pantry")
     assert [(i["product_key"], i["quantity"], i["unit"]) for i in saved["items"]] == [("c" * 32, 1000, "g")]
+
+
+def test_chickpeas_are_kept_as_the_drained_weight_of_the_chosen_can(ui):
+    name, page, fake, shot = ui
+    open_screen(name, page, "skafferi")
+    page.get_by_label("Lägg till i skafferiet").fill("kikärtor 400 g")
+    page.get_by_role("button", name=re.compile("Kikärtor · 400 g")).click()
+    expect(page.get_by_text("Recepten använder kikärtor avrunnen, till exempel från burk.")).to_be_visible()
+    page.get_by_role("button", name=re.compile("Testmärket Kikärtor")).click()
+    expect(page.get_by_text("Testmärket Kikärtor · 230 g utan spad ligger i skafferiet.")).to_be_visible()
+    shot("kikartor")
+    saved = next(body for method, path, body in fake.calls if path == "personal/pantry")
+    assert [(i["product_key"], i["quantity"], i["unit"]) for i in saved["items"]] == [("d" * 32, 230, "g")]
 
 
 def test_account_is_created_and_left_inside_the_interface(ui):
