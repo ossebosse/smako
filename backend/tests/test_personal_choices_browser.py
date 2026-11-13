@@ -1398,6 +1398,40 @@ def test_question_guide_fills_in_mina_val_and_creates_the_plan(choices):
     assert body["recipe_preferences"]["min_distinct_cuisines"] == 3
 
 
+def test_question_guide_meat_means_meat_dinners_and_ordinary_breakfasts(choices):
+    """Kött applies to dinners; breakfast stays Allt, as in the trial interfaces."""
+    page, url, captured = choices
+    page.set_viewport_size({"width": 390, "height": 844})
+    page.goto(url)
+    choose_layout(page, "Frågor")
+    guide, nxt = page.locator(".guide"), page.locator(".guide-next")
+    nxt.click()
+    page.locator("#customer-postcode").fill("223 50")
+    page.locator("#check-postcode").click()
+    expect(page.locator("#location-status")).to_contain_text("Lund kommun")
+    nxt.click()
+    nxt.click()
+    guide.locator(".guide-option", has_text="Lägg till frukost").first.click()
+    nxt.click()
+    guide.locator(".guide-option", has_text="Kött").first.click()
+    expect(guide.get_by_role("radio", name=re.compile("^Kött"))).to_have_attribute("aria-checked", "true")
+    expect(page.locator("#dinner-diet")).to_have_value("meat")
+    expect(page.locator("#breakfast-diet")).to_have_value("mixed")
+    for _ in range(6):
+        nxt.click()
+    summary = guide.locator(".guide-summary")
+    expect(summary).to_contain_text("Kött")
+    before = len(captured)
+    nxt.click()
+    expect(page.locator("#personal-status")).to_contain_text("Testet fångar")
+    assert len(captured) == before + 1
+    body = captured[-1]
+    PlanRequest.model_validate(body)
+    meals = {m["meal_type"]: m for m in body["personal"]["meals"]}
+    assert (meals["dinner"]["diet"], meals["breakfast"]["diet"]) == ("meat", "mixed")
+    assert not meals["dinner"].get("distribution")
+
+
 def test_plan_view_keeps_meal_progress_in_the_meal_card(choices, tmp_path):
     from backend.tests.test_personal_booked_revisions import setup_plan
 

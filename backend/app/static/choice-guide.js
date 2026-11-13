@@ -14,7 +14,8 @@
    - Lättare mat: at most 600 kcal per dinner, 450 per breakfast and 250 per
      snack (standard 900 per dinner).
    - Stora portioner: at least 450 g cooked weight per dinner portion.
-   - Mest vegetariskt: at least half of each meal type's dishes vegetarian. */
+   - Mest vegetariskt: at least half of each meal type's dishes vegetarian.
+   - Kött: dinners whose main protein is meat or poultry; other meals Allt. */
 (() => {
   "use strict";
   const $=id=>document.getElementById(id);
@@ -55,17 +56,22 @@
     const n=servingsAnswer();check(`enable-${type}`,on);
     if(on&&n!==null)write(`${type}-servings`,n);
   }
+  // Kött applies to dinners; breakfast and snacks stay Allt, as in /ui/a and /ui/b.
+  const dietFor=(answer,type)=>answer==="mostly"?"mixed":answer==="meat"?(type==="dinner"?"meat":"mixed"):answer;
   function dietAnswer(){
+    const dist=t=>Object.fromEntries(PROTEINS.map(p=>[p,read(`${t}-${p}`)]));
+    const noDistribution=MEALS.every(t=>PROTEINS.every(p=>dist(t)[p]===null));
+    if(noDistribution&&MEALS.every(t=>$(`${t}-diet`)?.value===dietFor("meat",t)))return "meat";
     const diets=new Set(MEALS.map(t=>$(`${t}-diet`)?.value));if(diets.size!==1)return null;
-    const diet=[...diets][0],dist=t=>Object.fromEntries(PROTEINS.map(p=>[p,read(`${t}-${p}`)]));
-    if(diet!=="mixed")return MEALS.every(t=>PROTEINS.every(p=>dist(t)[p]===null))?diet:null;
-    if(MEALS.every(t=>PROTEINS.every(p=>dist(t)[p]===null)))return "mixed";
+    const diet=[...diets][0];
+    if(diet!=="mixed")return noDistribution?diet:null;
+    if(noDistribution)return "mixed";
     const mostly=MEALS.every(t=>{const d=dist(t);return d.vegetarian===half(count(t))&&d.chicken===null&&d.fish===null&&d.meat===null;});
     return mostly?"mostly":null;
   }
   function applyDiet(answer){
     for(const t of MEALS){
-      choose(`${t}-diet`,answer==="mostly"?"mixed":answer);
+      choose(`${t}-diet`,dietFor(answer,t));
       for(const p of PROTEINS)write(`${t}-${p}`,answer==="mostly"&&p==="vegetarian"?half(count(t)):null);
       $(`${t}-diet`)?.dispatchEvent(new Event("change",{bubbles:true}));
     }
@@ -147,8 +153,8 @@
         if(enabled("snack"))list.push(`${count("snack")} mellanmål`);
         return list.join(", ");
       }},
-    {id:"diet",title:"Hur äter du?",lead:"Valet gäller alla måltider.",
-      options:[["mixed","Allt"],["mostly","Mest vegetariskt","Minst hälften av rätterna"],["pescetarian","Pescetariskt","Vegetariskt plus fisk och skaldjur"],["vegetarian","Vegetariskt","Ägg och mejeri ingår"],["vegan","Veganskt","Inget från djur"]],
+    {id:"diet",title:"Hur äter du?",lead:"Valet gäller alla måltider, utom Kött som gäller middagarna.",
+      options:[["mixed","Allt"],["meat","Kött","Kött eller fågel till middag"],["mostly","Mest vegetariskt","Minst hälften av rätterna"],["pescetarian","Pescetariskt","Vegetariskt plus fisk och skaldjur"],["vegetarian","Vegetariskt","Ägg och mejeri ingår"],["vegan","Veganskt","Inget från djur"]],
       body(){
         const now=dietAnswer(),parts=[group("Kostval",this.options.map(([v,label,sub])=>({label,sub,on:now===v,pick:()=>applyDiet(v)})))];
         if(now===null)parts.push(small("Du har egna kostval eller en egen fördelning. Välj ett alternativ för att ersätta dem."));
