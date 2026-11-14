@@ -66,21 +66,44 @@
   const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
   // Long calculations run as a job on the server; the page asks for the result every other second.
   async function job(url, body, title) {
-    S.busy = { title, text: "Skickar till Smako.", started: Date.now() }; emit();
+    S.busy = { title, text: "Skickar till Smako.", started: Date.now(), stage: "starting", percent: 0 }; emit();
     let response = await fetch(url, { method: "POST", cache: "no-store", credentials: "same-origin",
       headers: { "Content-Type": "application/json", Accept: "application/json", Prefer: "respond-async" }, body: JSON.stringify(body) });
     let data = await read(response), failures = 0;
     while (response.status === 202) {
       const p = data.progress;
       S.busy.text = (STAGES[data.stage] || "Smako räknar.") + (p && p.total > 0 && p.unit === "recipes" ? ` ${p.completed} av ${p.total} recept prövade.` : "");
+      track(data);
       emit();
       await delay(2000);
       try { response = await fetch(data.status_url, { cache: "no-store", credentials: "same-origin", headers: { Accept: "application/json" } }); data = { status_url: data.status_url, ...(await read(response)) }; failures = 0; }
       catch (error) { if (++failures > 8) throw new Error("Anslutningen bröts. Ladda om sidan för att se om beräkningen blev klar."); await delay(2000); }
     }
+    if (response.ok) { S.busy.percent = 100; S.busy.done = true; emit(); await delay(matchMedia("(prefers-reduced-motion: reduce)").matches ? 150 : 900); }
     S.busy = null;
     if (!response.ok) { const error = new Error(message(data, response.status)); error.status = response.status; error.data = data; throw error; }
     return data;
+  }
+  // Progress from 0 to 100 %, from the stage the server reports and the work it has counted.
+  // A stage without counted work moves with the time the planner has left, and stops short of
+  // the next stage, so the bar never claims more than has happened.
+  const SPANS = { queued: [0, 0], product_facts: [2, 12], library_preparation: [12, 25], candidate_qualification: [25, 50], week_search: [50, 92], final_audit: [92, 97], saving: [97, 99] };
+  function engineSeconds(b) { return b.engine ? b.engine.elapsed_seconds + (Date.now() - b.engineAt) / 1000 : null; }
+  function track(data) {
+    const b = S.busy; if (!b) return;
+    if (data.engine) { b.engine = data.engine; b.engineAt = Date.now(); }
+    if (data.stage && data.stage !== b.stage) { b.stage = data.stage; b.stageEngine = engineSeconds(b) ?? 0; }
+    b.progress = data.progress;
+  }
+  function percent(b) {
+    const [lo, hi] = SPANS[b.stage] || [0, 0], p = b.progress; let value = lo;
+    if (p && p.total > 0) value = lo + (hi - lo) * Math.min(1, p.completed / p.total);
+    else if (hi > lo && b.engine?.limit_seconds) {
+      const since = (engineSeconds(b) ?? 0) - (b.stageEngine ?? 0), left = Math.max(1, b.engine.limit_seconds - (b.stageEngine ?? 0));
+      value = lo + (hi - lo) * Math.min(0.9, since / left);
+    }
+    b.percent = Math.max(b.percent || 0, Math.min(99, Math.floor(value)));
+    return b.percent;
   }
 
   // ---- Place ---------------------------------------------------------------
@@ -100,7 +123,7 @@
     S.location = data; saved.postcode = postal; chooseStores(); clearError(); emit();
     return data;
   }
-  const placeText = () => S.location ? `${S.location.municipality_name || S.location.area_name} · ${S.storeIds.length} butiker` : "Välj postnummer";
+  const placeText = () => S.location ? `${S.location.municipality_name || S.location.area_name} · ${S.storeIds.length} ${S.storeIds.length === 1 ? "butik" : "butiker"}` : "Välj postnummer";
 
   // ---- Own items -----------------------------------------------------------
   const NONFOOD = /(servett|toalettpapper|hushållspapper|diskmedel|diskborste|bakplåtspapper|avfallspåsar|soppåsar|blöj|tvättmedel|sköljmedel|tandkräm|tandborste|schampo|tvål|folie|plastpåsar|batteri|tändstick|våtservett|bindor|tampong|deodorant|rakblad|disktablett|kattmat|hundmat|kattsand)/i;
@@ -564,6 +587,20 @@
   const pickedKey = () => `smako.next.picked.${S.plan?.plan_id}.${S.plan?.revision}`;
   const picked = () => { try { return new Set(JSON.parse(localStorage.getItem(pickedKey())) || []); } catch (_) { return new Set(); } };
   function basket() { const b = S.plan?.plan?.optimized_basket; return b ? { ...b, estimated: b.verification_status === "VERIFIED_WITH_ESTIMATES" } : null; }
+  // How much of what you pay goes into the recipes (as in /personal's "Inköp och förbrukning").
+  function usedView() {
+    const c = S.plan?.plan?.personal?.checks, b = basket();
+    const used = c?.new_purchase_used_cost ?? c?.used_ingredient_cost;
+    if (!b || used == null || !planHasRecipes() || !(b.total > 0)) return null;
+    const about = b.estimated || c.used_cost_basis?.quantity_status === "ESTIMATED", share = Math.max(0, Math.min(100, Math.round(100 * used / b.total)));
+    const box = el("section", null, "used"), bar = el("div", null, "used-bar", { role: "img", "aria-label": `${share} procent av inköpet går till recepten` });
+    const fill = el("span"); fill.style.width = `${share}%`; bar.append(fill);
+    const own = (S.plan.request?.personal?.extras || []).length;
+    box.append(el("p", `${about ? "Ca " : ""}${money(used)} av ${money(b.total)} går till recepten`, "used-sum"), bar,
+      el("p", own ? "Resten är dina egna varor, pant och det som blir över. Det som blir över läggs i skafferiet när du har handlat, så recepten kan använda det nästa gång."
+        : "Resten är pant och det som blir över. Det läggs i skafferiet när du har handlat, så recepten kan använda det nästa gång.", "hint"));
+    return box;
+  }
   const totalText = () => { const b = basket(); return b ? `${b.estimated ? "ca " : ""}${money(b.total)}` : ""; };
   function storesView({ open = true } = {}) {
     const box = el("div", null, "stores"), b = basket(), done = picked();
@@ -602,13 +639,49 @@
     update();
     return box;
   }
+  // The drawn bag from the ordinary interface: drawn on start, groceries drop in while Smako works,
+  // and a check when the plan is ready. It is built once, so the animation is not restarted every second.
+  const BAG = `<svg viewBox="0 0 120 96" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+    <g class="pp-item pp-item-1"><path d="M54 4l6 20 6-20z" fill="#f2a65a" stroke="#c46b2a" stroke-width="2" stroke-linejoin="round"/><path d="M57 4c0-5 3-6 3-6s3 1 3 6" fill="none" stroke="#4f7a45" stroke-width="2" stroke-linecap="round"/></g>
+    <g class="pp-item pp-item-2"><circle cx="60" cy="14" r="8" fill="#e35d4a" stroke="#a83a2b" stroke-width="2"/><path d="M60 6c0-3 2-5 4-5" fill="none" stroke="#4f7a45" stroke-width="2" stroke-linecap="round"/></g>
+    <g class="pp-item pp-item-3"><path d="M50 18c4-12 16-14 20-12-2 10-12 16-20 12z" fill="#9cc086" stroke="#4f7a45" stroke-width="2" stroke-linejoin="round"/><path d="M52 17c5-4 10-7 15-9" fill="none" stroke="#4f7a45" stroke-width="2" stroke-linecap="round"/></g>
+    <g class="pp-bag">
+      <path class="pp-draw pp-handle" pathLength="1" d="M47 42c0-17 26-17 26 0" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      <path class="pp-draw pp-bag-front" pathLength="1" d="M30 40h60l-6 48H36z" fill="var(--card)" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
+      <path class="pp-smile" d="M51 62c5 5 13 5 18 0" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      <circle class="pp-eye" cx="50" cy="54" r="2.4" fill="currentColor"/><circle class="pp-eye" cx="70" cy="54" r="2.4" fill="currentColor"/>
+    </g>
+    <path class="pp-check" pathLength="1" d="M47 64l9 9 18-20" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>`;
+  const clock = seconds => `${Math.floor(seconds / 60)}:${String(Math.floor(seconds % 60)).padStart(2, "0")}`;
+  let busyBox = null, busyFor = null;
   function busyView() {
-    const box = el("div", null, "busy", { role: "status", "aria-live": "polite" });
-    if (!S.busy) { box.hidden = true; return box; }
-    const seconds = Math.round((Date.now() - S.busy.started) / 1000);
-    box.append(el("div", null, "spinner"), el("h2", S.busy.title), el("p", S.busy.text), el("p", seconds > 8 ? `${seconds} sekunder. Det brukar ta upp till en minut.` : "Det brukar ta upp till en minut.", "hint"));
-    return box;
+    if (!S.busy) { busyFor = null; if (busyBox) busyBox.hidden = true; return busyBox || el("div", null, "busy", { hidden: true }); }
+    if (busyFor !== S.busy) {
+      // A new calculation: build the view again so the drawing starts over.
+      busyFor = S.busy;
+      busyBox = el("div", null, "busy");
+      const art = el("div", null, "busy-art"); art.innerHTML = BAG;
+      const bar = el("div", null, "busy-bar", { role: "progressbar", "aria-valuemin": "0", "aria-valuemax": "100", "aria-label": "Hur långt Smako har kommit" });
+      bar.append(el("span", null, "busy-fill"));
+      busyBox.append(art, el("h2", null, "busy-title"), el("p", null, "busy-text", { role: "status", "aria-live": "polite" }), bar,
+        el("p", null, "busy-percent"), el("p", null, "busy-clocks hint"));
+    }
+    const b = S.busy, value = b.done ? 100 : percent(b), engine = engineSeconds(b), waited = (Date.now() - b.started) / 1000;
+    busyBox.hidden = false; busyBox.dataset.state = b.done ? "done" : "running";
+    busyBox.querySelector(".busy-title").textContent = b.done ? "Klart!" : b.title;
+    const text = busyBox.querySelector(".busy-text"); if (text.textContent !== b.text) text.textContent = b.text;
+    const bar = busyBox.querySelector(".busy-bar"); bar.setAttribute("aria-valuenow", String(value));
+    busyBox.querySelector(".busy-fill").style.width = `${value}%`;
+    busyBox.querySelector(".busy-percent").textContent = `${value} %`;
+    const limit = b.engine?.limit_seconds;
+    busyBox.querySelector(".busy-clocks").textContent = engine == null
+      ? `${clock(waited)} sedan du tryckte. Smako har inte börjat räkna än.`
+      : `${clock(waited)} sedan du tryckte · Smako räknar ${clock(Math.min(engine, limit ?? engine))}${limit ? ` av högst ${clock(limit)}` : ""}`;
+    return busyBox;
   }
+  // Puts the busy view in its place without moving it, so the drawing keeps going.
+  function showBusy(container) { const view = busyView(); if (container.firstChild !== view) container.replaceChildren(view); }
   function errorView() { const box = el("div", null, "error", { role: "alert" }); if (!S.error) { box.hidden = true; return box; } box.append(el("p", S.error), button("Stäng", () => { S.error = ""; emit(); }, "btn small")); return box; }
 
   async function start() {
@@ -619,7 +692,7 @@
   }
   setInterval(() => { if (S.busy) emit(); }, 1000);
 
-  window.SmakoNext = { el, button, money, number, amount, S, saved, persist, on, emit, start, lookup, placeText, postcodeBox, storePicker, itemsEditor, settings, settingsSummary, recipesView, storesView, busyView, errorView,
+  window.SmakoNext = { el, button, money, number, amount, S, saved, persist, on, emit, start, lookup, placeText, postcodeBox, storePicker, itemsEditor, settings, settingsSummary, recipesView, storesView, usedView, busyView, showBusy, errorView,
     calculateList, createPlan, updateListInPlan, forgetPlan, planHasRecipes, itemsChanged, basket, totalText, guest, set,
     // Used by mine.js (account, pantry, registering what was bought).
     api, change, keep, loadState, refreshState, suggestions, uuid, capital, stepOf, isNonfood: text => NONFOOD.test(text) };
