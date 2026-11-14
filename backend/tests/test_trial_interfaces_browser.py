@@ -240,7 +240,7 @@ def test_pantry_meat_choice_and_registered_purchase(ui):
     expect(page.locator(".pantry .item-kind").nth(1)).to_have_text("Bestämd vara")
 
 
-def test_nutrition_limits_per_portion_are_sent_for_dinners_and_shown_on_the_recipe(ui):
+def test_each_meal_has_its_own_distribution_weight_and_nutrition_like_personal(ui):
     name, page, fake, shot = ui
     if name == "a":
         page.goto(re.sub(r"#.*|$", "#mat", page.url, count=1))
@@ -248,32 +248,55 @@ def test_nutrition_limits_per_portion_are_sent_for_dinners_and_shown_on_the_reci
         page.get_by_role("button", name=re.compile("Planera mat och handla")).click()
     page.get_by_label("Ditt postnummer").fill("22350")
     page.get_by_role("button", name="Hitta butiker").click()
-    if name == "a":
-        page.get_by_text("Fler val: allergier, näring, butiker, matkök och ekologiskt").click()
-    else:
+    if name == "b":
         page.get_by_role("button", name="Nästa").click()
-        page.get_by_role("button", name="Nästa").click()
-        page.get_by_role("button", name=re.compile("^Fler val")).click()
+    # Breakfasts appear only when added. A guest has three recipes, so one dinner makes room.
+    expect(page.get_by_role("group", name="Frukost")).to_have_count(0)
+    expect(page.get_by_role("button", name="Lägg till frukost")).to_be_disabled()
+    page.get_by_role("button", name="Färre middagar").click()
+    page.get_by_role("button", name="Lägg till frukost").click()
+    breakfast = page.get_by_role("group", name="Frukost")
+    expect(breakfast).to_be_visible()
+    expect(page.get_by_role("button", name="Lägg till frukost")).to_have_count(0)
+
+    page.get_by_role("button", name="Näringsvärden för middag: Standard").click()
     page.get_by_label("Minst protein, g per portion").fill("30")
     page.get_by_label("Högst energi, kcal per portion").fill("700")
     page.get_by_label("Minst kolhydrater, g per portion").fill("80")
     carbs = page.get_by_label("Högst kolhydrater, g per portion")
     carbs.fill("50")
     carbs.press("Tab")
-    expect(page.get_by_text("Kolhydrater: Minst kan inte vara mer än Högst.")).to_be_visible()
+    expect(page.get_by_text("Kolhydrater: Minst kan inte vara mer än Högst.").first).to_be_visible()
     shot("naring")
     carbs.fill("")
     carbs.press("Tab")
-    expect(page.get_by_text("Kolhydrater: Minst kan inte vara mer än Högst.")).to_have_count(0)
     # The fields keep what was typed; nothing was redrawn in between.
     expect(page.get_by_label("Minst protein, g per portion")).to_have_value("30")
+    page.get_by_role("button", name="Klar").click()
+    expect(page.get_by_role("button", name="Näringsvärden för middag: 3 egna val")).to_be_visible()
+
+    page.get_by_role("button", name="Portionsvikt för frukost: Standard").click()
+    page.get_by_label("Högst portionsvikt, g per portion").fill("350")
+    page.get_by_label("Högst portionsvikt, g per portion").press("Tab")
+    page.get_by_role("button", name="Klar").click()
+    page.get_by_role("button", name="Fördelning för middag: Standard").click()
+    page.get_by_label("Antal fisk och skaldjur").fill("1")
+    page.get_by_label("Antal fisk och skaldjur").press("Tab")
+    expect(page.get_by_text("1 av 2 måltider fördelade · 1 kvar")).to_be_visible()
+    page.get_by_role("button", name="Klar").click()
+    shot("maltider")
+
     if name == "b":
-        page.get_by_role("button", name="Klar").click()
+        page.get_by_role("button", name="Nästa").click()
         page.get_by_role("button", name="Nästa").click()
     page.get_by_role("button", name="Skapa matplan").click()
     expect(page.get_by_text("Per portion, uppskattat: 640 kcal · 38 g protein · 52 g kolhydrater · 30 g fett")).to_be_visible()
     sent = next(body for method, path, body in fake.calls if path == "plans")
-    assert [m["limits"] for m in sent["personal"]["meals"]] == [{"min_protein_g": 30, "min_carbs_g": 80, "max_kcal": 700}, {}, {}]
+    meals = sent["personal"]["meals"]
+    assert [(m["meal_type"], m["count"], m["servings"]) for m in meals] == [("dinner", 2, 2), ("breakfast", 1, 1), ("snack", 0, 1)]
+    assert meals[0]["limits"] == {"min_protein_g": 30, "min_carbs_g": 80, "max_kcal": 700} and meals[0]["distribution"] == {"fish": 1}
+    assert meals[1]["limits"] == {"max_weight_g": 350} and meals[1]["distribution"] == {}
+    assert meals[2]["limits"] == {}
     shot("naring-recept")
 
 

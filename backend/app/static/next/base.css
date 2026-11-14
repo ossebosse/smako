@@ -43,12 +43,26 @@ input[type=checkbox]{width:1.35rem;height:1.35rem;accent-color:var(--accent);fle
 .stepper.big .step-value{font-size:1.6rem;min-width:3.5rem}
 .counter{display:flex;justify-content:space-between;align-items:center;gap:1rem}
 .counter legend{float:left;margin:0}
-.nutrition-grid{display:grid;grid-template-columns:minmax(5.5rem,1fr) repeat(2,minmax(0,8.5rem));gap:.6rem .75rem;align-items:end;margin-top:.6rem}
-.nutrition-name{font-weight:600;padding-bottom:.75rem}
-.nutrition-field{display:grid;grid-template-columns:1fr auto;gap:.15rem .35rem;align-items:center;min-width:0}
-.nutrition-side{grid-column:1/-1;font-size:.8rem;color:var(--muted)}
-.nutrition-unit{font-size:.85rem;color:var(--muted)}
-.nutrition .btn{margin-top:.6rem}
+.meals{gap:1rem}
+.meal-card{border:1.5px solid var(--line);border-radius:calc(var(--radius) + 4px);background:var(--card);padding:.9rem 1rem 1rem;margin:0;min-width:0;display:grid;gap:1rem}
+.meal-card>legend{font-size:1.35rem;font-weight:700;padding:0 .4rem}
+.meal-parts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.5rem}
+.meal-part{display:grid;gap:.2rem;justify-items:center;padding:.65rem .3rem;border:1.5px solid var(--line);border-radius:var(--radius);background:var(--card);cursor:pointer;min-width:0;text-align:center}
+.meal-part strong{font-size:clamp(.7rem,3.2vw,.85rem);white-space:nowrap}
+.meal-part span{font-size:.85rem;color:var(--muted)}
+.meal-part:hover,.meal-part:focus-visible{border-color:var(--accent)}
+.add-meal{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding-bottom:.8rem;border-bottom:1px solid var(--line)}
+.meal-card .btn.quiet{justify-self:start}
+.limit-grid{display:grid;grid-template-columns:minmax(5.5rem,1fr) repeat(2,minmax(0,8.5rem));gap:.6rem .75rem;align-items:end;margin:.6rem 0}
+.limit-grid.one{grid-template-columns:minmax(7rem,1fr) minmax(0,8.5rem)}
+.limit-name{font-weight:600;padding-bottom:.75rem}
+.number-field{display:grid;grid-template-columns:1fr auto;gap:.15rem .35rem;align-items:center;min-width:0}
+.number-side{grid-column:1/-1;font-size:.8rem;color:var(--muted)}
+.number-unit{font-size:.85rem;color:var(--muted)}
+.number-field input{padding-inline:.6rem;-moz-appearance:textfield;appearance:textfield}
+.number-field input::-webkit-inner-spin-button,.number-field input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+.part-body{display:grid;gap:.4rem}
+.part-body .btn{justify-self:start}
 .hint.warn{color:var(--warn)}
 .hint.warn:empty{display:none}
 .items{display:grid;gap:.75rem}

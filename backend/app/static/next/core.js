@@ -22,8 +22,17 @@
   const KEY = "smako.next.v1";
   const saved = (() => { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch (_) { return {}; } })();
   const persist = () => { try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (_) { /* private mode: choices last for this visit */ } };
-  const DEFAULTS = { dinners: 3, servings: 2, breakfasts: 0, snacks: 0, diet: "mixed", cooking: "free", avoid: [], allergies: [], likes: [], cuisines: [], variety: "low", maxStores: 2, organic: 0, usePantry: true, surplus: "minimize", radius: 3, nutrition: {} };
+  const DEFAULTS = { diet: "mixed", cooking: "free", avoid: [], allergies: [], likes: [], cuisines: [], variety: "low", maxStores: 2, organic: 0, usePantry: true, surplus: "minimize", radius: 3 };
   saved.settings = { ...DEFAULTS, ...(saved.settings || {}) };
+  // Each meal type has its own count, portions, distribution and limits, as in /personal.
+  // Choices saved before that (one count per meal type, limits for dinners) carry over.
+  if (!saved.settings.meals) {
+    const o = saved.settings, blank = () => ({ distribution: {}, limits: {} });
+    o.meals = { dinner: { on: true, count: o.dinners ?? 3, servings: o.servings ?? 2, ...blank(), limits: { ...(o.nutrition || {}) } },
+      breakfast: { on: (o.breakfasts || 0) > 0, count: o.breakfasts || 3, servings: 1, ...blank() },
+      snack: { on: (o.snacks || 0) > 0, count: o.snacks || 3, servings: 1, ...blank() } };
+    for (const key of ["dinners", "servings", "breakfasts", "snacks", "nutrition"]) delete o[key];
+  }
 
   const S = { location: null, storeIds: saved.storeIds || [], state: null, items: [], plan: saved.plan || null, busy: null, error: "", notice: "" };
   const listeners = new Set();
@@ -178,29 +187,57 @@
         allow_nutrition_estimates: true, organic_percent: Number(s.organic) || 0, organic_animals: false, surplus_mode: s.surplus } };
   }
   const COOKING = { quick: { max_active_minutes: 30, max_ingredients: 8 }, everyday: { max_active_minutes: 45, max_ingredients: 12 }, free: {} };
-  // Limits per portion, in the names the server uses. The trial interfaces apply them to dinners.
+  // Limits per portion, in the names the server uses: [key, label, unit, largest allowed, has a lower limit].
   const NUTRIENTS = [["protein_g", "Protein", "g", 300, true], ["carbs_g", "Kolhydrater", "g", 500, true], ["fat_g", "Fett", "g", 300, true], ["kcal", "Energi", "kcal", 4000, false]];
-  function nutritionLimits() {
-    const out = {}, n = saved.settings.nutrition || {};
-    for (const [key, , , max, lower] of NUTRIENTS) for (const side of lower ? ["min", "max"] : ["max"]) {
+  const WEIGHT = [["weight_g", "Portionsvikt", "g", 3000, true]];
+  const PROTEINS = [["vegetarian", "Vegetariskt"], ["chicken", "Kyckling"], ["fish", "Fisk och skaldjur"], ["meat", "Övrigt kött"]];
+  const MEAL_TYPES = [["dinner", "Middag", "Antal middagar", "middagar"], ["breakfast", "Frukost", "Antal måltider", "frukostar"], ["snack", "Mellanmål", "Antal måltider", "mellanmål"]];
+  const meal = type => saved.settings.meals[type];
+  const mealLabel = type => MEAL_TYPES.find(m => m[0] === type)[1];
+  const mealDiet = type => saved.settings.diet === "meat" && type !== "dinner" ? "mixed" : saved.settings.diet;
+  function cleanLimits(type, rows = [...WEIGHT, ...NUTRIENTS]) {
+    const out = {}, n = meal(type).limits || {};
+    for (const [key, , , max, lower] of rows) for (const side of lower ? ["min", "max"] : ["max"]) {
       const value = n[`${side}_${key}`]; if (Number.isFinite(value) && value >= 0) out[`${side}_${key}`] = Math.min(value, max);
     }
     return out;
   }
-  function nutritionProblem() {
-    const n = nutritionLimits();
-    for (const [key, label] of NUTRIENTS) if (n[`min_${key}`] != null && n[`max_${key}`] != null && n[`min_${key}`] > n[`max_${key}`]) return `${label}: Minst kan inte vara mer än Högst.`;
+  function cleanDistribution(type) {
+    const out = {}, d = meal(type).distribution || {};
+    for (const [key] of PROTEINS) if (Number.isInteger(d[key]) && d[key] >= 0) out[key] = Math.min(d[key], 7);
+    return out;
+  }
+  function limitProblem(type, rows) {
+    const n = cleanLimits(type, rows);
+    for (const [key, label] of rows) if (n[`min_${key}`] != null && n[`max_${key}`] != null && n[`min_${key}`] > n[`max_${key}`]) return `${label}: Minst kan inte vara mer än Högst.`;
+    return "";
+  }
+  function distributionProblem(type) {
+    const d = cleanDistribution(type), count = meal(type).count, total = Object.values(d).reduce((a, b) => a + b, 0), diet = mealDiet(type);
+    if (total > count) return `Du har fördelat ${total} rätter men har bara ${count} måltider.`;
+    if (diet === "meat" && (d.fish > 0 || d.vegetarian > 0)) return "Kött ger bara rätter med kött eller kyckling. Ändra antalen eller lämna dem tomma.";
+    if (diet === "pescetarian" && (d.chicken > 0 || d.meat > 0)) return "Fisk och vegetariskt tillåter inte kyckling eller kött. Ändra antalen eller lämna dem tomma.";
+    if (["vegetarian", "vegan"].includes(diet) && (["chicken", "fish", "meat"].some(k => d[k] > 0) || (d.vegetarian != null && d.vegetarian !== count))) return "Ditt kostval kräver vegetariska rätter till alla måltider. Ändra antalen eller lämna dem tomma.";
+    return "";
+  }
+  const PARTS = { distribution: ["Fördelning", type => distributionProblem(type)], weight: ["Portionsvikt", type => limitProblem(type, WEIGHT)], nutrition: ["Näringsvärden", type => limitProblem(type, NUTRIENTS)] };
+  function mealProblem(type) {
+    for (const [title, check] of Object.values(PARTS)) { const problem = check(type); if (problem) return `${title}: ${problem}`; }
+    return "";
+  }
+  function mealsProblem() {
+    for (const [type, label] of MEAL_TYPES) if (meal(type).on && meal(type).count) { const problem = mealProblem(type); if (problem) return `${label}, ${problem.charAt(0).toLowerCase()}${problem.slice(1)}`; }
     return "";
   }
   // "Kött" applies to dinners; breakfasts and snacks keep every recipe to choose from.
   function mealRows() {
     const s = saved.settings, cap = limit("recipes", 21);
-    const counts = { dinner: Math.min(s.dinners, cap), breakfast: s.breakfasts, snack: s.snacks };
     let left = cap;
-    return ["dinner", "breakfast", "snack"].map(type => {
-      const count = Math.max(0, Math.min(counts[type], left)); left -= count;
+    return MEAL_TYPES.map(([type]) => {
+      const m = s.meals[type], count = Math.max(0, Math.min(m.on ? m.count : 0, 7, left)); left -= count;
       const choices = count ? { min_ingredients: null, max_ingredients: null, max_active_minutes: null, max_total_minutes: null, max_waiting_minutes: null, ...(type === "dinner" ? COOKING[s.cooking] : {}) } : null;
-      return { meal_type: type, count, servings: Math.min(s.servings, limit("servings", 8)), diet: s.diet === "meat" && type !== "dinner" ? "mixed" : s.diet, profile: {}, distribution: {}, limits: type === "dinner" && count ? nutritionLimits() : {}, organic_animals: false, recipe_choices: choices, max_same_base_meals: null };
+      return { meal_type: type, count, servings: Math.max(1, Math.min(m.servings, limit("servings", 8))), diet: mealDiet(type), profile: {},
+        distribution: count ? cleanDistribution(type) : {}, limits: count ? cleanLimits(type) : {}, organic_animals: false, recipe_choices: choices, max_same_base_meals: null };
     });
   }
   function keep(envelope) {
@@ -226,7 +263,7 @@
   const createPlan = () => run("Skapar din matplan", async () => {
     const meals = mealRows(), s = saved.settings;
     if (!meals.some(m => m.count)) throw new Error("Välj minst en måltid, eller räkna bara ut din inköpslista.");
-    if (nutritionProblem()) throw new Error(`Näring per portion: ${nutritionProblem()}`);
+    if (mealsProblem()) throw new Error(mealsProblem());
     await saveItems();
     const dinners = meals[0].count, varied = s.variety === "normal" && dinners >= 3;
     keep(await job("/api/plans", { ...baseRequest(meals),
@@ -353,26 +390,82 @@
   const DIETS = [["mixed", "Allt"], ["meat", "Kött", "Nöt, fläsk, kyckling med mera"], ["pescetarian", "Fisk och vegetariskt"], ["vegetarian", "Vegetariskt"], ["vegan", "Veganskt"]];
   const COOK = [["quick", "Snabbt", "Högst 30 min i köket"], ["everyday", "Vardag", "Högst 45 min"], ["free", "Spelar ingen roll", ""]];
   const ALLERGENS = ["jordnötter", "nötter", "mjölk", "ägg", "gluten", "fisk", "skaldjur", "soja", "sesam"];
-  // Typing does not redraw the page, so the next field keeps its place while the person fills in several.
-  function nutrition() {
-    const group = el("fieldset", null, "choice nutrition"), n = saved.settings.nutrition = saved.settings.nutrition || {}, problem = el("p", nutritionProblem(), "hint warn", { role: "status" });
-    group.append(el("legend", "Näring per portion"), el("p", "Gäller middagarna. Lämna tomt där du inte har någon gräns.", "hint"));
-    const grid = el("div", null, "nutrition-grid");
-    const field = (side, key, label, unit, max) => {
-      const name = `${side}_${key}`, text = side === "min" ? "Minst" : "Högst", wrap = el("label", null, "nutrition-field");
-      const input = el("input", null, null, { type: "number", inputmode: "numeric", min: "0", max: String(max), step: "1", placeholder: "–", "aria-label": `${text} ${label.toLowerCase()}, ${unit} per portion`, "data-limit": name });
-      if (n[name] != null) input.value = String(n[name]);
-      input.addEventListener("change", () => {
-        const value = input.value.trim() === "" ? null : Math.max(0, Math.min(max, Math.round(Number(input.value))));
-        if (value == null || !Number.isFinite(value)) { delete n[name]; input.value = ""; } else { n[name] = value; input.value = String(value); }
-        persist(); problem.textContent = nutritionProblem();
-      });
-      wrap.append(el("span", text, "nutrition-side"), input, el("span", unit, "nutrition-unit")); return wrap;
-    };
-    for (const [key, label, unit, max, lower] of NUTRIENTS) grid.append(el("span", label, "nutrition-name"), lower ? field("min", key, label, unit, max) : el("span"), field("max", key, label, unit, max));
-    group.append(grid, problem);
-    if (Object.keys(nutritionLimits()).length) group.append(button("Ta bort gränserna", () => set("nutrition", {}), "btn quiet small"));
-    return group;
+  // Number fields for limits and counts. Typing does not redraw the dialog, so the next field keeps its place.
+  function numberField(store, name, text, label, unit, max, onChange) {
+    const wrap = el("label", null, "number-field");
+    const input = el("input", null, null, { type: "number", inputmode: "numeric", min: "0", max: String(max), step: "1", placeholder: "–", "aria-label": `${text} ${label.toLowerCase()}${unit ? `, ${unit} per portion` : ""}`, "data-limit": name });
+    if (store[name] != null) input.value = String(store[name]);
+    input.addEventListener("change", () => {
+      const value = input.value.trim() === "" ? null : Math.max(0, Math.min(max, Math.round(Number(input.value))));
+      if (value == null || !Number.isFinite(value)) { delete store[name]; input.value = ""; } else { store[name] = value; input.value = String(value); }
+      persist(); onChange(); emit();
+    });
+    wrap.append(el("span", text, "number-side"), input, unit ? el("span", unit, "number-unit") : el("span")); return wrap;
+  }
+  function limitsGrid(type, rows, status) {
+    const grid = el("div", null, "limit-grid"), store = meal(type).limits = meal(type).limits || {};
+    for (const [key, label, unit, max, lower] of rows) grid.append(el("span", label, "limit-name"),
+      lower ? numberField(store, `min_${key}`, "Minst", label, unit, max, status) : el("span"), numberField(store, `max_${key}`, "Högst", label, unit, max, status));
+    return grid;
+  }
+  const ownChoices = n => `${n} ${n === 1 ? "eget val" : "egna val"}`;
+  function partSummary(type, kind) {
+    if (kind === "distribution") { const diet = mealDiet(type), n = Object.keys(cleanDistribution(type)).length; return n ? ownChoices(n) : diet !== "mixed" ? DIETS.find(d => d[0] === diet)[1] : "Standard"; }
+    const n = Object.keys(cleanLimits(type, kind === "weight" ? WEIGHT : NUTRIENTS)).length; return n ? `${n} egna val` : "Standard";
+  }
+  function openPart(type, kind) {
+    const [title, check] = PARTS[kind], label = mealLabel(type), m = meal(type);
+    const dialog = el("dialog", null, "part-dialog", { "aria-labelledby": "part-title" }), top = el("div", null, "dialog-head");
+    top.append(el("h2", `${label} · ${title}`, null, { id: "part-title" }), button("Klar", () => dialog.close(), "btn small primary"));
+    const status = el("p", "", "hint warn", { role: "status" }), counted = el("p", "", "hint");
+    const update = () => { status.textContent = check(type); if (kind === "distribution") { const total = Object.values(cleanDistribution(type)).reduce((a, b) => a + b, 0); counted.textContent = `${total} av ${m.count} måltider fördelade · ${Math.max(0, m.count - total)} kvar`; } };
+    const body = el("div", null, "part-body");
+    if (kind === "distribution") {
+      const store = m.distribution = m.distribution || {}, grid = el("div", null, "limit-grid one");
+      for (const [key, name] of PROTEINS) grid.append(el("span", name, "limit-name"), numberField(store, key, "Antal", name, "", 7, update));
+      body.append(el("p", "Bestäm hur många av måltiderna som ska vara av ett visst slag. Lämnar du ett fält tomt väljer Smako fritt. Ditt kostval under Vad äter ni gäller fortfarande.", "hint"), grid, counted);
+    } else if (kind === "weight") body.append(el("p", "Lägsta och högsta vikt per portion, färdig att äta. Recept där vikten inte går att uppskatta tas inte med när du har en gräns.", "hint"), limitsGrid(type, WEIGHT, update));
+    else body.append(el("p", "Egna gränser per portion. Lämna tomt där du inte har någon gräns.", "hint"), limitsGrid(type, NUTRIENTS, update));
+    body.append(status, button("Återställ till Standard", () => { if (kind === "distribution") m.distribution = {}; else for (const [key] of kind === "weight" ? WEIGHT : NUTRIENTS) { delete m.limits[`min_${key}`]; delete m.limits[`max_${key}`]; } persist(); emit(); dialog.close(); openPart(type, kind); }, "btn quiet small"));
+    update(); dialog.append(top, body); document.body.append(dialog);
+    dialog.addEventListener("close", () => { dialog.remove(); emit(); }, { once: true }); dialog.showModal();
+  }
+  function mealCounter(text, type, field, min, max, unit) {
+    const m = meal(type), value = Math.max(min, Math.min(m[field], max)), change = v => { m[field] = v; persist(); emit(); };
+    const group = el("fieldset", null, "choice counter"); group.append(el("legend", text));
+    const row = el("div", null, "stepper big");
+    row.append(button("−", () => change(Math.max(min, value - 1)), "step", { "aria-label": `Färre ${unit}`, disabled: value <= min }), el("span", `${value}`, "step-value"), button("+", () => change(Math.min(max, value + 1)), "step", { "aria-label": `Fler ${unit}`, disabled: value >= max }));
+    group.append(row); return group;
+  }
+  // One card per meal type in use, and a card to add breakfasts and snacks, the way /personal lays them out.
+  function mealCards() {
+    const ms = saved.settings.meals, cap = limit("recipes", 21), used = type => MEAL_TYPES.filter(([t]) => t !== type && ms[t].on).reduce((a, [t]) => a + ms[t].count, 0);
+    const box = el("div", null, "settings meals");
+    for (const [type, label, countText, unit] of MEAL_TYPES) {
+      const m = ms[type]; if (!m.on) continue;
+      const min = type === "dinner" ? 0 : 1, max = Math.max(min, Math.min(7, cap - used(type)));
+      const card = el("fieldset", null, "meal-card"); card.append(el("legend", label));
+      card.append(mealCounter(countText, type, "count", min, max, unit), mealCounter("Portioner per rätt", type, "servings", 1, limit("servings", 8), type === "dinner" ? "portioner" : `portioner ${unit}`));
+      const parts = el("div", null, "meal-parts");
+      for (const [kind, [title]] of Object.entries(PARTS)) { const b = button(null, () => openPart(type, kind), "meal-part", { "aria-label": `${title} för ${label.toLowerCase()}: ${partSummary(type, kind)}` }); b.append(el("strong", title), el("span", partSummary(type, kind))); parts.append(b); }
+      card.append(parts);
+      const problem = m.count ? mealProblem(type) : ""; if (problem) card.append(el("p", problem, "hint warn", { role: "status" }));
+      if (type !== "dinner") card.append(button(`Ta bort ${label.toLowerCase()}`, () => { m.on = false; persist(); emit(); }, "btn quiet small"));
+      box.append(card);
+    }
+    const missing = MEAL_TYPES.filter(([type]) => type !== "dinner" && !ms[type].on);
+    if (missing.length) {
+      const more = el("fieldset", null, "meal-card more-meals"); more.append(el("legend", "Fler måltider"));
+      for (const [type, label] of missing) {
+        const left = cap - used(type), row = el("div", null, "add-meal");
+        row.append(el("span", `Lägg till ${label.toLowerCase()}`), button("Lägg till", () => { const m = ms[type]; m.on = true; m.count = Math.max(1, Math.min(m.count || 3, 7, left)); persist(); emit(); }, "btn primary small", { "aria-label": `Lägg till ${label.toLowerCase()}`, disabled: left < 1 }));
+        more.append(row);
+      }
+      more.append(el("p", "Valda måltider visas ovanför, med egna inställningar.", "hint"));
+      box.append(more);
+    }
+    const g = guest(); if (g) box.append(el("p", `Som gäst får du ${g.recipes} recept och ${g.servings} portioner per rätt. Med ett konto får du fler.`, "hint"));
+    return box;
   }
   const CUISINES = [["italian", "Italienskt"], ["greek", "Grekiskt"], ["mexican", "Mexikanskt"], ["indian", "Indiskt"], ["thai", "Thailändskt"], ["swedish", "Svenskt"]];
   const set = (key, value) => { saved.settings[key] = value; persist(); emit(); };
@@ -380,12 +473,6 @@
     const group = el("fieldset", null, `choice ${cls}`); group.append(el("legend", label));
     const row = el("div", null, "chips", { role: "radiogroup" });
     for (const [value, text, note] of options) { const b = button(null, () => onPick(value), "chip", { role: "radio", "aria-checked": String(current === value) }); b.append(el("span", text)); if (note) b.append(el("small", note)); row.append(b); }
-    group.append(row); return group;
-  }
-  function counter(label, key, min, max, unit) {
-    const group = el("fieldset", null, "choice counter"); group.append(el("legend", label));
-    const row = el("div", null, "stepper big"), value = Math.min(saved.settings[key], max);
-    row.append(button("−", () => set(key, Math.max(min, value - 1)), "step", { "aria-label": `Färre ${unit}`, disabled: value <= min }), el("span", `${value}`, "step-value"), button("+", () => set(key, Math.min(max, value + 1)), "step", { "aria-label": `Fler ${unit}`, disabled: value >= max }));
     group.append(row); return group;
   }
   function tags(label, key, placeholder, suggestions = []) {
@@ -400,31 +487,30 @@
   }
   // Part "basic" is what most people need; "advanced" is everything else Smako can take into account.
   function settings(part) {
-    const s = saved.settings, box = el("div", null, `settings ${part}`), g = guest();
+    const s = saved.settings, box = el("div", null, `settings ${part}`);
+    if (part === "meals") return mealCards();
     if (part === "basic") {
-      box.append(counter("Middagar", "dinners", 0, limit("recipes", 7), "middagar"), counter("Portioner per rätt", "servings", 1, limit("servings", 8), "portioner"),
-        choice("Vad äter ni?", DIETS, s.diet, v => set("diet", v)), choice("Tid i köket", COOK, s.cooking, v => set("cooking", v)));
-      if (g) box.append(el("p", `Som gäst får du ${g.recipes} recept och ${g.servings} portioner per rätt. Med ett konto får du fler.`, "hint"));
+      box.append(choice("Vad äter ni?", DIETS, s.diet, v => set("diet", v)), choice("Tid i köket", COOK, s.cooking, v => set("cooking", v)));
       return box;
     }
-    box.append(tags("Allergier", "allergies", "Annan allergi", ALLERGENS), tags("Ät inte", "avoid", "Till exempel koriander", ["fläsk", "svamp", "oliver"]), tags("Gillar extra", "likes", "Till exempel kyckling"), nutrition(),
+    box.append(tags("Allergier", "allergies", "Annan allergi", ALLERGENS), tags("Ät inte", "avoid", "Till exempel koriander", ["fläsk", "svamp", "oliver"]), tags("Gillar extra", "likes", "Till exempel kyckling"),
       choice("Butiker att handla i", [[1, "1"], [2, "Högst 2"], [3, "Högst 3"], ["all", "Så många som lönar sig"]], s.maxStores, v => set("maxStores", v)),
       choice("Omväxling", [["low", "Billigast först"], ["normal", "Blanda matkök", "Minst 3 middagar"]], s.variety, v => set("variety", v)));
     const kitchens = el("fieldset", null, "choice"); kitchens.append(el("legend", "Matkök (inget valt betyder alla)"));
     const row = el("div", null, "chips");
     for (const [value, label] of CUISINES) row.append(button(label, () => set("cuisines", s.cuisines.includes(value) ? s.cuisines.filter(c => c !== value) : [...s.cuisines, value]), "chip", { "aria-pressed": String(s.cuisines.includes(value)) }));
     kitchens.append(row); box.append(kitchens,
-      counter("Frukostar", "breakfasts", 0, Math.max(0, limit("recipes", 7) - s.dinners), "frukostar"), counter("Mellanmål", "snacks", 0, Math.max(0, limit("recipes", 7) - s.dinners - s.breakfasts), "mellanmål"),
       choice("Ekologiskt, minst andel av kostnaden", [[0, "Inget krav"], [25, "25 %"], [50, "50 %"]], Number(s.organic), v => set("organic", v)),
       choice("Det som blir över", [["minimize", "Så lite som möjligt"], ["allow_larger", "Större köp går bra"]], s.surplus, v => set("surplus", v)),
       choice("Skafferiet", [[true, "Använd det jag har hemma"], [false, "Räkna utan"]], s.usePantry, v => set("usePantry", v)));
     return box;
   }
   function settingsSummary() {
-    const s = saved.settings, parts = [`${Math.min(s.dinners, limit("recipes", 7))} middagar`, `${Math.min(s.servings, limit("servings", 8))} portioner`, DIETS.find(d => d[0] === s.diet)[1].toLowerCase()];
+    const s = saved.settings, rows = mealRows().filter(m => m.count), parts = rows.map(m => `${m.count} ${MEAL_TYPES.find(t => t[0] === m.meal_type)[3]} × ${m.servings} portioner`);
+    parts.push(DIETS.find(d => d[0] === s.diet)[1].toLowerCase());
     if (s.cooking !== "free") parts.push(COOK.find(c => c[0] === s.cooking)[1].toLowerCase());
     const avoid = [...s.allergies, ...s.avoid]; if (avoid.length) parts.push(`utan ${avoid.join(", ")}`);
-    if (Object.keys(nutritionLimits()).length) parts.push("egna näringsgränser");
+    if (rows.some(m => Object.keys(m.limits).length || Object.keys(m.distribution).length)) parts.push("egna val per måltid");
     return parts.join(" · ");
   }
 
