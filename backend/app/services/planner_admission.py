@@ -124,8 +124,9 @@ class PlannerAdmissionController:
         cleanup_token = None
         try:
             from app.services.performance_trace import performance_span
-            # The planning time limit starts when the engine starts, not in the queue.
             from app.services.plan_jobs import pause_engine_clock, start_engine_clock
+
+            # The planning time limit starts when the engine starts, not in the queue.
             queued_from = perf_counter()
             pause_engine_clock()
             try:
