@@ -310,7 +310,7 @@ def test_each_meal_has_its_own_distribution_weight_and_nutrition_like_personal(u
     shot("naring-recept")
 
 
-def test_progress_runs_0_to_100_with_engine_time_and_the_recipe_share_is_shown(ui):
+def test_progress_runs_0_to_100_with_time_since_the_press_and_the_recipe_share_is_shown(ui):
     name, page, fake, shot = ui
     fake.job = [{"stage": "queued", "progress": None, "engine": None}]
     if name == "a":
@@ -324,12 +324,12 @@ def test_progress_runs_0_to_100_with_engine_time_and_the_recipe_share_is_shown(u
             page.get_by_role("button", name="Nästa").click()
     page.get_by_role("button", name="Skapa matplan").click()
     busy = page.locator(".busy")
-    expect(busy.get_by_text("Smako har inte börjat räkna än.", exact=False)).to_be_visible()
+    expect(busy.get_by_text(re.compile(r"^0:0\d sedan du tryckte$"))).to_be_visible()
     expect(busy.get_by_role("progressbar")).to_have_attribute("aria-valuenow", "0")
     # In the queue the planner's own clock has not started.
     fake.job[0] = {"stage": "candidate_qualification", "progress": {"completed": 5, "total": 10, "unit": "recipes"}, "engine": {"elapsed_seconds": 4, "limit_seconds": 58}}
     expect(busy.get_by_text("37 %")).to_be_visible(timeout=5000)
-    expect(busy.get_by_text(re.compile(r"Smako räknar 0:0\d av högst 0:58"))).to_be_visible()
+    expect(busy.get_by_text("Smako räknar", exact=False)).to_have_count(0)
     expect(busy.locator(".busy-art svg")).to_be_visible()
     shot("progress")
     fake.job.clear()

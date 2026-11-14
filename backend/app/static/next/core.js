@@ -667,17 +667,14 @@
       busyBox.append(art, el("h2", null, "busy-title"), el("p", null, "busy-text", { role: "status", "aria-live": "polite" }), bar,
         el("p", null, "busy-percent"), el("p", null, "busy-clocks hint"));
     }
-    const b = S.busy, value = b.done ? 100 : percent(b), engine = engineSeconds(b), waited = (Date.now() - b.started) / 1000;
+    const b = S.busy, value = b.done ? 100 : percent(b), waited = (Date.now() - b.started) / 1000;
     busyBox.hidden = false; busyBox.dataset.state = b.done ? "done" : "running";
     busyBox.querySelector(".busy-title").textContent = b.done ? "Klart!" : b.title;
     const text = busyBox.querySelector(".busy-text"); if (text.textContent !== b.text) text.textContent = b.text;
     const bar = busyBox.querySelector(".busy-bar"); bar.setAttribute("aria-valuenow", String(value));
     busyBox.querySelector(".busy-fill").style.width = `${value}%`;
     busyBox.querySelector(".busy-percent").textContent = `${value} %`;
-    const limit = b.engine?.limit_seconds;
-    busyBox.querySelector(".busy-clocks").textContent = engine == null
-      ? `${clock(waited)} sedan du tryckte. Smako har inte börjat räkna än.`
-      : `${clock(waited)} sedan du tryckte · Smako räknar ${clock(Math.min(engine, limit ?? engine))}${limit ? ` av högst ${clock(limit)}` : ""}`;
+    busyBox.querySelector(".busy-clocks").textContent = `${clock(waited)} sedan du tryckte`;
     return busyBox;
   }
   // Puts the busy view in its place without moving it, so the drawing keeps going.
