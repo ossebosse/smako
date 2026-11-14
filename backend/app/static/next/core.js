@@ -415,7 +415,7 @@
   const ownChoices = n => `${n} ${n === 1 ? "eget val" : "egna val"}`;
   function partSummary(type, kind) {
     if (kind === "distribution") { const diet = mealDiet(type), n = Object.keys(cleanDistribution(type)).length; return n ? ownChoices(n) : diet !== "mixed" ? DIETS.find(d => d[0] === diet)[1] : "Standard"; }
-    const n = Object.keys(cleanLimits(type, kind === "weight" ? WEIGHT : NUTRIENTS)).length; return n ? `${n} egna val` : "Standard";
+    const n = Object.keys(cleanLimits(type, kind === "weight" ? WEIGHT : NUTRIENTS)).length; return n ? ownChoices(n) : "Standard";
   }
   function openPart(type, kind) {
     const [title, check] = PARTS[kind], label = mealLabel(type), m = meal(type);
@@ -456,17 +456,15 @@
       const problem = m.count ? mealProblem(type) : ""; if (problem) card.append(el("p", problem, "hint warn", { role: "status" }));
       if (type !== "dinner") card.append(button(`Ta bort ${label.toLowerCase()}`, () => { m.on = false; persist(); emit(); }, "btn quiet small"));
       box.append(card);
-    }
-    const missing = MEAL_TYPES.filter(([type]) => type !== "dinner" && !ms[type].on);
-    if (missing.length) {
-      const more = el("fieldset", null, "meal-card more-meals"); more.append(el("legend", "Fler måltider"));
-      for (const [type, label] of missing) {
-        const left = cap - used(type), row = el("div", null, "add-meal");
-        row.append(el("span", `Lägg till ${label.toLowerCase()}`), button("Lägg till", () => { const m = ms[type]; m.on = true; m.count = Math.max(1, Math.min(m.count || 3, 7, left)); persist(); emit(); }, "btn primary small", { "aria-label": `Lägg till ${label.toLowerCase()}`, disabled: left < 1 }));
-        more.append(row);
+      // Breakfasts and snacks are added with small buttons right under the dinner card.
+      if (type === "dinner") {
+        const missing = MEAL_TYPES.filter(([t]) => t !== "dinner" && !ms[t].on), row = el("div", null, "add-meals");
+        for (const [t, name] of missing) {
+          const left = cap - used(t);
+          row.append(button(`+ ${name}`, () => { const n = ms[t]; n.on = true; n.count = Math.max(1, Math.min(n.count || 3, 7, left)); persist(); emit(); }, "btn quiet small", { "aria-label": `Lägg till ${name.toLowerCase()}`, disabled: left < 1 }));
+        }
+        if (missing.length) box.append(row);
       }
-      more.append(el("p", "Valda måltider visas ovanför, med egna inställningar.", "hint"));
-      box.append(more);
     }
     const g = guest(); if (g) box.append(el("p", `Som gäst får du ${g.recipes} recept och ${g.servings} portioner per rätt. Med ett konto får du fler.`, "hint"));
     return box;
