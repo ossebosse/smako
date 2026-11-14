@@ -166,7 +166,7 @@
   function go(index,{focus=true}={}){
     if(index<0||index>=steps.length)return;
     if(layout==="guide"&&guide){active=index;guide.route(index,{summary:summaryIndex,focus});return;}
-    if(locked(index)){hint.textContent="Ange postnummer och välj butiker först.";index=0;}else hint.textContent="";
+    if(locked(index)){hint.textContent="Ange postnummer, välj butiker och tryck Fortsätt till måltider först.";index=0;}else hint.textContent="";
     active=index;render();
     tabButtons[index].scrollIntoView({block:"nearest",inline:"center",behavior:"instant"});
     if(layout==="bild")view.scrollTop=0;

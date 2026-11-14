@@ -155,6 +155,9 @@ NONFOOD_WORDS = frozenset({
     "tvattmedel", "skoljmedel", "tandkram", "tandborste", "tandborstar", "eltandborste",
     "schampo", "shampoo", "tval", "handtval", "aluminiumfolie", "plastfolie", "folie",
     "plastpasar", "plastpase", "fryspasar", "fryspase",
+    "batteri", "batterier", "tandstickor", "vatservett", "vatservetter", "binda", "bindor",
+    "tampong", "tamponger", "deodorant", "rakblad", "disktablett", "disktabletter",
+    "kattmat", "hundmat", "kattsand",
 })
 
 

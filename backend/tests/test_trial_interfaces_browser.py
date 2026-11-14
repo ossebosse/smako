@@ -297,6 +297,7 @@ def test_each_meal_has_its_own_distribution_weight_and_nutrition_like_personal(u
     assert meals[0]["limits"] == {"min_protein_g": 30, "min_carbs_g": 80, "max_kcal": 700} and meals[0]["distribution"] == {"fish": 1}
     assert meals[1]["limits"] == {"max_weight_g": 350} and meals[1]["distribution"] == {}
     assert meals[2]["limits"] == {}
+    assert [m["max_same_base_meals"] for m in meals] == [2, 2, None]
     shot("naring-recept")
 
 

@@ -404,7 +404,7 @@
     intro.append(el("p",(design.cuisines||[]).map(c=>cuisines[c]||c).join(" · "),"recipe-cuisine-label"));
     const count=design.ingredient_count??ingredientCount(recipe);
     const timing=design.total_minutes!=null?`uppskattad total tid ${duration(design.total_minutes)} · aktiv ${duration(design.active_minutes)}${design.waiting_minutes?` · väntan ${duration(design.waiting_minutes)}`:""}`:`uppskattad tid ${duration(design.estimated_minutes)}`;
-    intro.append(el("p",`${recipe.servings} portioner · ${count} ingredienser · ${timing}`,"complete-recipe-facts"));
+    intro.append(el("p",`${recipe.servings} ${recipe.servings===1?"portion":"portioner"} · ${count} ${count===1?"ingrediens":"ingredienser"} · ${timing}`,"complete-recipe-facts"));
     const unmeasured=Boolean(design.unmeasured_processes?.length);
     if(unmeasured)intro.append(el("p","Mängderna gäller före tillagning, även det som senare hälls av, silas eller putsas bort. Vi vet inte vad en färdig portion väger.","recipe-method-note"));
     const demands=(personal?.remaining_demands||[]).filter(row=>row.source===slotId&&!['salt','peppar','svartpeppar','vitpeppar','vatten'].includes(row.name));
