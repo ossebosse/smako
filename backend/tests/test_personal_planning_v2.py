@@ -435,7 +435,7 @@ def test_free_text_canonical_spoof_cannot_bypass_exclusion():
         meals=[MealSettings(meal_type="breakfast", count=1)],
         profile=TasteProfile(exclusions=["jordnötter"]),
     )
-    with pytest.raises(PolicyConflict, match="uteslutning"):
+    with pytest.raises(PolicyConflict, match="valt bort"):
         run(p, req)
 
 

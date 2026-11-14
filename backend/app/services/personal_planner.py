@@ -1014,7 +1014,7 @@ class PersonalPlanner:
             + self.request.avoid_ingredients,
         ):
             raise PolicyConflict(
-                f"{recipe.name} strider mot kostval eller hård uteslutning.", stage="policy_taste"
+                f"{recipe.name} passar inte ditt kostval eller det du har valt bort.", stage="policy_taste"
             )
         for ingredient in self.service.normalizer.normalize_and_aggregate([recipe]):
             self.resolve(
@@ -2808,7 +2808,7 @@ class PersonalPlanner:
                     preference=meal.diet,
                     avoid_ingredients=profile.exclusions + profile.allergies,
                 ):
-                    raise PolicyConflict("Strider mot kostval eller hård uteslutning.")
+                    raise PolicyConflict("Passar inte ditt kostval eller det du har valt bort.")
                 stage = "preparation"
                 if self.spec.allow_nutrition_estimates and requested_nutrients(meal.limits):
                     calculation_basis(recipe, allow_estimates=True)
@@ -2919,18 +2919,36 @@ class PersonalPlanner:
                     raise PolicyConflict("Inget grundrecept uppfyller kombinationen av matkök, tid och ingrediensantal. Prova längre tillagningstid, ett bredare ingrediensintervall eller fler matkök. Dina krav har inte ändrats.", code="RECIPE_CHOICES_UNFULFILLED", stage="policy_taste")
                 first = local_conflicts[0] if local_conflicts else None
                 code = getattr(first, "code", "RECIPE_QUALIFICATION_BLOCKED")
-                reason = str(first) if first else "Recepten stämde inte med dina val. Orsaken visas för varje recept."
+                reason = str(first) if first else "Inget recept passade dina val."
                 if code == "DATA_BLOCKED":
-                    suggestion = "Vi saknar uppgifter om näring, allergener eller vikt för att kontrollera några av dina val. Orsaken visas för varje recept. Att sänka proteinmålet hjälper inte."
+                    reason, suggestion = self._data_blocked_text(first, meal), ""
                 elif code == "NUTRITION_TARGET_NOT_MET":
                     suggestion = "Pröva godkända receptvariationer eller ändra näringsmålet uttryckligen."
                 else:
-                    suggestion = "Kontrollera vilka kostval eller uteslutningar som anges i orsakerna, eller välj ett annat matkök."
-                raise PolicyConflict(reason + " " + suggestion + " Dina krav har inte ändrats.", code=code, stage=getattr(first, "stage", None))
+                    suggestion = "Ta bort något under Allergier eller Ät inte, eller välj ett annat kostval eller matkök."
+                raise PolicyConflict(" ".join(filter(None, (reason, suggestion, "Dina krav har inte ändrats."))), code=code, stage=getattr(first, "stage", None))
             if local_conflicts:
                 raise local_conflicts[0]
             raise PolicyConflict(f"Inga användbara recept för {meal.meal_type} med dina val.")
         return valid
+
+    def _data_blocked_text(self, first, meal):
+        """What to tell the person when Smako lacks the product data a choice needs (docs/UI-LANGUAGE.md)."""
+        stage, text = getattr(first, "stage", None), str(first or "")
+        if stage == "policy_taste":
+            profile = self._merged_profile(meal)
+            terms = list(dict.fromkeys([*profile.allergies, *profile.exclusions]))
+            avoided = ", ".join(terms) if terms else "det du har valt bort"
+            return (f"Vi har inte innehållsförteckningen för tillräckligt många varor för att säkert undvika {avoided}. "
+                    "Ta bort det under Allergier eller Ät inte, så kan Smako föreslå recept.")
+        if "färdig portion väger" in text:
+            return ("Vi vet inte än vad en färdig portion väger för recepten, så en gräns för portionsvikt går inte att använda. "
+                    "Ta bort gränsen för portionsvikt.")
+        if stage == "organic":
+            return ("Vi vet inte för tillräckligt många varor om de är ekologiska eller innehåller animalier. "
+                    "Ta bort kravet på ekologiska animalier.")
+        return ("Vi saknar näringsuppgifter för att kunna kontrollera dina näringsgränser. "
+                "Ta bort eller vidga gränserna under Näringsvärden.")
 
     def _quote_cache_args(self):
         if (not self.current_library_search or any(self.request.pricing_memberships.values())
@@ -3047,7 +3065,7 @@ class PersonalPlanner:
                         "beam_pruned": 0, "status": code, "search_report": getattr(exc, "search_report", None)})
                 else:
                     message = "Vi hittade ingen meny som uppfyller alla dina krav. Se vad som stoppade recepten nedan."
-            elif self.diagnostics.pools and not (self.complete and code == "RECIPE_CHOICES_CONFLICT"):
+            elif self.diagnostics.pools and code != "DATA_BLOCKED" and not (self.complete and code == "RECIPE_CHOICES_CONFLICT"):
                 message = (
                     "Ingen komplett kombination hittades. Flera kandidater har prövats; exemplet nedan förklarar inte hela veckoplanen. "
                     + message

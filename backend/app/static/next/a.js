@@ -88,7 +88,7 @@
     accountLink.textContent = N.accountLabel();
     busy.replaceChildren(N.busyView());
     const tab = document.querySelector('.tabs a[data-tab="lista"]'); tab.querySelector(".badge")?.remove();
-    if (S.items.length) tab.append(el("span", String(S.items.length), "badge", { "aria-label": `${S.items.length} varor` }));
+    if (S.items.length) tab.append(el("span", String(S.items.length), "badge", { "aria-label": `${S.items.length} ${S.items.length === 1 ? "vara" : "varor"}` }));
   }
   placeButton.addEventListener("click", () => {
     const head = el("div", null, "dialog-head"); head.append(el("h2", "Var handlar du?", null, { id: "place-title" }), button("Klar", () => dialog.close(), "btn small primary"));

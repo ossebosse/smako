@@ -16,6 +16,8 @@
   const number = v => new Intl.NumberFormat("sv-SE", { maximumFractionDigits: 2 }).format(v);
   const money = v => `${new Intl.NumberFormat("sv-SE", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(v)} kr`;
   const amount = (q, u) => u === "g" && q >= 1000 ? `${number(q / 1000)} kg` : u === "ml" && q >= 1000 ? `${number(q / 1000)} l` : `${number(q)} ${u}`;
+  // "1 vara", "2 varor".
+  const plural = (n, one, many) => `${number(n)} ${n === 1 ? one : many}`;
   const capital = s => s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
   const uuid = () => crypto.randomUUID ? crypto.randomUUID() : "10000000-1000-4000-8000-100000000000".replace(/[018]/g, c => (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16));
 
@@ -101,7 +103,7 @@
   const placeText = () => S.location ? `${S.location.municipality_name || S.location.area_name} · ${S.storeIds.length} butiker` : "Välj postnummer";
 
   // ---- Own items -----------------------------------------------------------
-  const NONFOOD = /(servett|toalettpapper|hushållspapper|diskmedel|diskborste|bakplåtspapper|avfallspåsar|soppåsar|blöj|tvättmedel|sköljmedel|tandkräm|tandborste|schampo|tvål|folie|plastpåsar)/i;
+  const NONFOOD = /(servett|toalettpapper|hushållspapper|diskmedel|diskborste|bakplåtspapper|avfallspåsar|soppåsar|blöj|tvättmedel|sköljmedel|tandkräm|tandborste|schampo|tvål|folie|plastpåsar|batteri|tändstick|våtservett|bindor|tampong|deodorant|rakblad|disktablett|kattmat|hundmat|kattsand)/i;
   async function loadState() { S.state = await api("/api/personal/state"); S.items = structuredClone(S.state.shopping_items || []); emit(); return S.state; }
   async function saveItems() {
     try { S.state = await api("/api/personal/shopping-list", { revision: S.state.revision, items: S.items }, "PUT"); }
@@ -192,6 +194,7 @@
   const WEIGHT = [["weight_g", "Portionsvikt", "g", 3000, true]];
   const PROTEINS = [["vegetarian", "Vegetariskt"], ["chicken", "Kyckling"], ["fish", "Fisk och skaldjur"], ["meat", "Övrigt kött"]];
   const MEAL_TYPES = [["dinner", "Middag", "Antal middagar", "middagar"], ["breakfast", "Frukost", "Antal måltider", "frukostar"], ["snack", "Mellanmål", "Antal måltider", "mellanmål"]];
+  const MEAL_ONE_MANY = { dinner: ["middag", "middagar"], breakfast: ["frukost", "frukostar"], snack: ["mellanmål", "mellanmål"] };
   const meal = type => saved.settings.meals[type];
   const mealLabel = type => MEAL_TYPES.find(m => m[0] === type)[1];
   const mealDiet = type => saved.settings.diet === "meat" && type !== "dinner" ? "mixed" : saved.settings.diet;
@@ -229,6 +232,7 @@
     for (const [type, label] of MEAL_TYPES) if (meal(type).on && meal(type).count) { const problem = mealProblem(type); if (problem) return `${label}, ${problem.charAt(0).toLowerCase()}${problem.slice(1)}`; }
     return "";
   }
+  // At most two of the same dish per meal type, so a week does not repeat one breakfast or dinner three times.
   // "Kött" applies to dinners; breakfasts and snacks keep every recipe to choose from.
   function mealRows() {
     const s = saved.settings, cap = limit("recipes", 21);
@@ -237,7 +241,7 @@
       const m = s.meals[type], count = Math.max(0, Math.min(m.on ? m.count : 0, 7, left)); left -= count;
       const choices = count ? { min_ingredients: null, max_ingredients: null, max_active_minutes: null, max_total_minutes: null, max_waiting_minutes: null, ...(type === "dinner" ? COOKING[s.cooking] : {}) } : null;
       return { meal_type: type, count, servings: Math.max(1, Math.min(m.servings, limit("servings", 8))), diet: mealDiet(type), profile: {},
-        distribution: count ? cleanDistribution(type) : {}, limits: count ? cleanLimits(type) : {}, organic_animals: false, recipe_choices: choices, max_same_base_meals: null };
+        distribution: count ? cleanDistribution(type) : {}, limits: count ? cleanLimits(type) : {}, organic_animals: false, recipe_choices: choices, max_same_base_meals: count ? 2 : null };
     });
   }
   function keep(envelope) {
@@ -506,7 +510,7 @@
     return box;
   }
   function settingsSummary() {
-    const s = saved.settings, rows = mealRows().filter(m => m.count), parts = rows.map(m => `${m.count} ${MEAL_TYPES.find(t => t[0] === m.meal_type)[3]} × ${m.servings} portioner`);
+    const s = saved.settings, rows = mealRows().filter(m => m.count), parts = rows.map(m => `${plural(m.count, ...MEAL_ONE_MANY[m.meal_type])} × ${plural(m.servings, "portion", "portioner")}`);
     parts.push(DIETS.find(d => d[0] === s.diet)[1].toLowerCase());
     if (s.cooking !== "free") parts.push(COOK.find(c => c[0] === s.cooking)[1].toLowerCase());
     const avoid = [...s.allergies, ...s.avoid]; if (avoid.length) parts.push(`utan ${avoid.join(", ")}`);
@@ -528,7 +532,7 @@
     card.append(el("p", `Dag ${slot.day} · ${MEALS[slot.meal_type] || "Måltid"}`, "eyebrow"), el("h3", recipe?.name || "Tom måltid"));
     if (!recipe) { if (actions) card.append(button("Föreslå ett recept", () => replaceRecipe(slot.id), "btn")); return card; }
     const minutes = recipe.design?.active_minutes ?? recipe.design?.time?.active_minutes;
-    card.append(el("p", [`${recipe.servings} portioner`, `${recipe.ingredients.length} ingredienser`, minutes ? `${minutes} min` : null].filter(Boolean).join(" · "), "meta"));
+    card.append(el("p", [plural(recipe.servings, "portion", "portioner"), plural(recipe.ingredients.length, "ingrediens", "ingredienser"), minutes ? `${minutes} min` : null].filter(Boolean).join(" · "), "meta"));
     const facts = nutritionText(slot.id); if (facts) card.append(el("p", facts, "meta nutrition-facts"));
     const more = el("details", null, "recipe-more"); more.append(el("summary", "Visa receptet"));
     const ingredients = el("ul", null, "ingredients"); for (const i of recipe.ingredients) ingredients.append(el("li", `${number(i.quantity)} ${i.unit} ${i.name}`));
@@ -568,12 +572,12 @@
     if (!b) return box;
     const names = new Map((S.location?.contexts || []).map(c => [c.context_id, c]));
     const count = b.stores.reduce((n, s) => n + s.items.length, 0), progress = el("p", null, "picked", { role: "status" });
-    const update = () => { progress.textContent = `${done.size} av ${count} varor plockade`; try { localStorage.setItem(pickedKey(), JSON.stringify([...done])); } catch (_) { /* kept for this visit */ } };
+    const update = () => { progress.textContent = `${done.size} av ${plural(count, "vara", "varor")} plockade`; try { localStorage.setItem(pickedKey(), JSON.stringify([...done])); } catch (_) { /* kept for this visit */ } };
     box.append(progress);
     for (const store of b.stores) {
       const section = el("details", null, "store"), context = names.get(store.store_id), head = el("summary");
       section.open = open;
-      const title = el("span", null, "store-title"); title.append(el("span", store.store_name, "store-name"), el("span", [context?.address, `${store.items.length} varor`].filter(Boolean).join(" · "), "store-note"));
+      const title = el("span", null, "store-title"); title.append(el("span", store.store_name, "store-name"), el("span", [context?.address, plural(store.items.length, "vara", "varor")].filter(Boolean).join(" · "), "store-note"));
       head.append(title, el("span", money(store.subtotal), "store-sum")); section.append(head);
       const groups = new Map(AISLES.map(([key]) => [key, []]));
       for (const row of store.items) groups.get(aisle(row)).push(row);

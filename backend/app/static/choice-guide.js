@@ -271,7 +271,7 @@
       if(focus){window.scrollTo({top:0,behavior:"instant"});title.focus({preventScroll:true});}
     }
     function go(index,{focus=true}={}){
-      if(index>0&&gate.disabled){hint.textContent="Ange postnummer och välj butiker först.";index=0;}else hint.textContent="";
+      if(index>0&&gate.disabled){hint.textContent="Ange postnummer, välj butiker och tryck Fortsätt till måltider först.";index=0;}else hint.textContent="";
       step=Math.max(0,Math.min(LAST,index));detail=false;render({focus});
     }
     function openDetail(target){
