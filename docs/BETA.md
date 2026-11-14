@@ -1,3 +1,17 @@
+# 2026-11-14: Måltidskort med fördelning, portionsvikt och näring i provgränssnitten aktiverat
+
+Main `09b7740076c1`. App **app-09b7740076c1-a3b5499c**, scheduler orörd.
+/ui/a och /ui/b har nu måltidskort som /personal: Middag med antal, portioner
+och knapparna Fördelning, Portionsvikt och Näringsvärden; frukost och mellanmål
+läggs till under Fler måltider och får egna kort. Receptkorten visar näring per
+portion. 5 appfiler (statiska), importkontroll av kandidaten ok, bas
+`ac78802c4281` (image `dc594821923f`), ny image `2432685ec7a8`. Aktiverad
+2026-11-14 07:53 UTC, säkerhetskopia `20261114T074502Z`; `/ready` ready för
+22350 och 21120 med nya BUILD_ID. Bygge och aktivering kördes fristående på
+servern (kod från `beta_release.py`, startad med `setsid nohup`), eftersom
+enhetens skal avbryter bakgrundsprocesser när anropet slutar. Första
+byggförsöket väntade på driftlåset under den dagliga insamlingen.
+
 # 2026-11-13: Konto, skafferi och köp i provgränssnitten, Kött och förpackningsvikt aktiverat
 
 Main `ac78802c4281`. App **app-ac78802c4281-02c83b8d**, scheduler orörd.
@@ -167,7 +181,7 @@ på `main` inte ändrar en pågående release.
   `smako-app-1`, `smako-scheduler-1`, `smako-caddy-1`, data i `/srv/smako/data`
   och det gemensamma driftlåset. Detta flöde installerar inte en ny server.
 - Läs aktuell [HANDOFF.md](HANDOFF.md), [OPERATIONS.md](OPERATIONS.md) och
-  senaste aktiveringsrapport. Appens BUILD_ID är `app-ac78802c4281-02c83b8d`;
+  senaste aktiveringsrapport. Appens BUILD_ID är `app-09b7740076c1-a3b5499c`;
   schedulern är `source-ops-8a53beb80e43`.
   [Uppvärmda prov och samordnad faktaläsning/GC](releases/warm-facts-gc-20261101/ACTIVATED.md)
   är senaste appaktiveringen. Sex Pythonfiler från kod `b7c8d0506e23`;
@@ -215,10 +229,10 @@ git status --short
 .venv/Scripts/python.exe -X utf8 scripts/smako_ops.py status
 
 # Använd den granskade Git-bas som motsvarar faktiskt aktiva filer enligt senaste journalen.
-.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit ac78802c4281 --commit main --workdir .local/beta-release
+.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit 09b7740076c1 --commit main --workdir .local/beta-release
 ```
 
-`ac78802c4281` är appen som aktiverades 2026-11-13 17:41 UTC. Appbildens egen
+`09b7740076c1` är appen som aktiverades 2026-11-14 07:53 UTC. Appbildens egen
 grocery-kopia är äldre än Git; använd `--keep-app-grocery` om intervallet
 bara innehåller grocery-Python som redan levererats till schedulern. De äldre
 Coop-filerna i runtime (`price_universe_runtime.py`,
