@@ -49,11 +49,11 @@
         return [head, links, live(el("div"), () => N.recipesView()), sticky(button("Till handlingslistan", () => go("#handla"), "btn primary cta"))];
       }
       const head = el("div"); head.append(el("h1", "Planera veckans mat"), el("p", "Välj hur mycket och vad ni äter. Smako föreslår recept som blir billiga att handla till just nu.", "lead"));
-      const basic = live(el("section", null, "panel"), () => N.settings("basic"));
+      const meals = live(el("div"), () => N.settings("meals")), basic = live(el("section", null, "panel"), () => N.settings("basic"));
       const more = el("details", null, "panel more"); more.append(el("summary", "Fler val: allergier, butiker, matkök och ekologiskt"), live(el("div"), () => N.settings("advanced")));
       const own = live(el("section", null, "panel"), () => [el("h2", "Egna varor"), el("p", S.items.length ? `${S.items.length} egna varor räknas ihop med recepten.` : "Behöver du något mer än maten? Lägg till det i inköpslistan, så räknas allt ihop.", "meta"), link(S.items.length ? "Ändra egna varor" : "Lägg till egna varor", "#lista")]);
       const cta = live(el("div"), () => [button("Skapa matplan", async () => { if (await N.createPlan()) { screens.mat.editing = false; go("#mat"); render(); } }, "btn primary cta", { disabled: !S.location }), S.location ? null : el("p", "Ange postnummer först.", "hint")]);
-      const nodes = [head, placePanel(), basic, more, own, sticky(cta)];
+      const nodes = [head, placePanel(), meals, basic, more, own, sticky(cta)];
       if (N.planHasRecipes()) nodes.splice(1, 0, button("‹ Tillbaka till recepten", () => { screens.mat.editing = false; render(); }, "btn quiet small"));
       return nodes;
     },

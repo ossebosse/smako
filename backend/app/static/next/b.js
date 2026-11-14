@@ -38,10 +38,10 @@
       return { nodes: [head("Var handlar du?", "Vi jämför butikerna inom några kilometer från ditt postnummer."), N.postcodeBox(), stores], ready: () => Boolean(S.location), hint: "Ange postnummer och tryck Hitta butiker." };
     },
     maltider() {
-      return { nodes: [head("Hur mycket mat?", "Middagar för veckan och hur många som äter."), live(el("div", null, "settings"), () => { const all = N.settings("basic"); return [...all.children].filter(n => n.classList.contains("counter") || n.classList.contains("hint")); })] };
+      return { nodes: [head("Hur mycket mat?", "Måltider för veckan och hur många som äter. Varje måltid har egna val för fördelning, portionsvikt och näring."), live(el("div"), () => N.settings("meals"))] };
     },
     mat() {
-      const basics = live(el("div", null, "settings"), () => { const all = N.settings("basic"); return [...all.children].filter(n => !n.classList.contains("counter") && !n.classList.contains("hint")); });
+      const basics = live(el("div"), () => N.settings("basic"));
       const allergy = live(el("div"), () => { const s = saved.settings, n = s.allergies.length + s.avoid.length, home = (S.state?.items || []).length;
         return [el("p", n ? `Väljs bort: ${[...s.allergies, ...s.avoid].join(", ")}.` : "Inget är bortvalt.", "hint"), home && s.usePantry ? el("p", `Skafferiet: ${N.pantrySummary().toLowerCase()} används först.`, "hint") : null]; });
       return { nodes: [head("Vilken sorts mat?", "Smako väljer bland recepten som passar."), basics, allergy, button("Fler val: allergier, butiker, matkök och ekologiskt", openMore, "text-link")] };

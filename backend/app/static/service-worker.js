@@ -2,7 +2,7 @@
 
 // Only the versioned, presentation-only shell is cached. Plan responses,
 // prices and every API request deliberately stay on the network.
-const SHELL_CACHE = "billigaste-veckomenyn-shell-v43";
+const SHELL_CACHE = "billigaste-veckomenyn-shell-v44";
 const SHELL_ASSETS = Object.freeze([
   "/static/styles.css",
   "/static/complete-recipes.css?v=complete-recipes-1",
