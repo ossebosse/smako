@@ -40,4 +40,4 @@ def test_trial_interfaces_offer_meat_for_dinners_only():
 
     core = (Path(__file__).resolve().parents[1] / "app" / "static" / "next" / "core.js").read_text(encoding="utf-8")
     assert '["meat", "Kött"' in core
-    assert 's.diet === "meat" && type !== "dinner" ? "mixed" : s.diet' in core
+    assert 'saved.settings.diet === "meat" && type !== "dinner" ? "mixed" : saved.settings.diet' in core and "diet: mealDiet(type)" in core
