@@ -155,13 +155,21 @@ lösningar från lägre butikstak och i den nedre gränsen
   när de nästan inte kostar något. Ett recept med något som inte gillas räknas
   15 kr dyrare. Tidigare räknades en gillad term högst en gång per vecka och
   bara som 2 kr, och bibliotekssökningen rangordnade efter enbart pris.
-  Provgränssnitten frågar sedan i bakgrunden, en plats i taget (högst tre),
-  efter det billigaste andra receptet för den gillade rätten
-  (`change` med `action: replace` och `preview_without_like`): samma byte som
-  "Byt recept", utan den gillade termen och utan det nuvarande receptet, och
-  inget sparas. Receptkortet visar "Du gillar kyckling · 27,55 kr dyrare än
-  billigaste alternativet" och knappen "Visa billigare recept"; popupen visar
-  receptet och byter med `recipe_id`. Byte av ett recept kräver inte gillningen
+  Provgränssnitten räknar sedan i bakgrunden ut vad gillningen kostar, en
+  gillning i taget (högst tre), och inget byts förrän personen väljer.
+  Finns den i **en** middag: det billigaste andra receptet för den platsen
+  (`change` med `action: replace` och `preview_without_like`, samma byte som
+  "Byt recept" utan den gillade termen och utan det nuvarande receptet, inte
+  sparat). Receptkortet visar "Du gillar kyckling · 27,55 kr dyrare än
+  billigaste alternativet" och "Visa billigare recept"; popupen byter med
+  `recipe_id`. Finns den i **flera** middagar, som kan dela förpackning och
+  därför bara blir billigare tillsammans: den billigaste nya veckan med samma
+  val utan gillningen (en vanlig planbegäran). En rad ovanför recepten visar
+  "Du gillar kyckling i 2 middagar · utan kyckling hade veckan kostat 23 kr
+  mindre" och "Visa veckan utan kyckling"; popupen visar veckans middagar och
+  "Byt till den här veckan" använder den redan beräknade planen. Ett byte av
+  flera platser i den befintliga veckan prövades men tog dubbelt så lång tid
+  som ett enkelt byte och skulle nå tidsgränsen. Byte av ett recept kräver inte gillningen
   igen. På frusen data (Lund, 3 middagar) ger "gillar kyckling" en kycklingrätt
   (176,96 kr i stället för 144,17 kr) och billigaste alternativet är
   falukorv (162,17 kr); förhandsvisningen tog 52 s lokalt.
