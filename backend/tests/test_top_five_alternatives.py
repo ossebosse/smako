@@ -103,8 +103,13 @@ def test_composition_and_source_conflicts_are_not_personal_approval(reviewed):
     assert not links.compatible(key, p, replace(fact, source_snapshot_id='unreviewed'))
     assert not links.compatible(key, p, replace(fact, conflicts=('quantity.unknown',)))
     assert links.compatible(key, p, replace(fact, conflicts=('supplier_nutrition_conflict',)))
-    with pytest.raises(PolicyConflict):
+    # Owner decision 2026-11-14: fresh produce is its own single ingredient for an allergy.
+    from app.services.personal_policy import single_ingredient_by_rule
+    if single_ingredient_by_rule(p):
         check_product(p, TasteProfile(allergies=['mjölk']), fact)
+    else:
+        with pytest.raises(PolicyConflict):
+            check_product(p, TasteProfile(allergies=['mjölk']), fact)
     assert not links.ingredient_product(row['name'], 'cooked_drained', row['requirements'], p, fact)
 
 

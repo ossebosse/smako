@@ -192,8 +192,11 @@ def test_reviewed_identity_does_not_supply_allergen_or_organic_facts(scallion):
     key, _row, _proof, p = scallion
     projected = project_usable_quantity(p, None, allow_estimates=True, required_unit='g')
     assert links.compatible(key, projected)
+    # Owner decision 2026-11-14: fresh produce needs no declaration for an allergy,
+    # but nothing about organic status follows from that.
+    check_product(projected, TasteProfile(allergies=['mjölk']), None)
     with pytest.raises(PolicyConflict):
-        check_product(projected, TasteProfile(allergies=['mjölk']), None)
+        check_product(projected.model_copy(update={'category': 'Skafferi'}), TasteProfile(allergies=['mjölk']), None)
     with pytest.raises(PolicyConflict):
         check_product(projected, TasteProfile(), None, organic_animals=True)
 

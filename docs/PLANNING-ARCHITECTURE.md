@@ -79,6 +79,29 @@ spärrfrasers namn-/kategoriscope beräknas vid inläsning, med identiska fulla
 klassningssvar; priser eller användarbeslut cachas inte av detta.
 Se [fortsättningsrapporten](reviews/coverage-continuation-20261027.md).
 
+## Ät inte och allergier utan fullständig deklaration (ägarbeslut 2026-11-14)
+
+Endast 351 av 71 169 produktfakta (frusen data 2026-10-23) hade fullständig
+ingrediensförteckning, så varje allergi och varje Ät inte gav ingen plan.
+
+- *Ät inte* kontrolleras mot receptets ingredienser och varans namn, även i
+  sammansatta ord (`mentions`: "lök" träffar rödlök och lökpulver, "fläsk"
+  fläskfilé; "glutenfri", "utan ägg" och ord där den andra delen är kortare än
+  tre bokstäver räknas inte), och mot deklarationen när den finns. Utan
+  fullständig deklaration godtas en vara som inte är sammansatt
+  (`is_composite`: sås, buljong, krydd- och smakblandningar, färdigmat, bröd,
+  godis med flera, på namn eller källkategori). Sammansatta varor kräver
+  fortfarande deklaration.
+- *Allergi* kräver fortfarande fullständig deklaration och kontrollerad
+  allergen. Undantaget är färsk frukt, grönt, svamp och örter
+  (`single_ingredient_by_rule`): de behöver ingen ingrediensförteckning enligt
+  EU 1169/2011 artikel 19 och är sin enda ingrediens. Torkat, inlagt, blandat
+  och allt vars namn pekar på en stor allergen (nötter, sesam, senap, soja,
+  selleri, lupin, vete) omfattas inte. Inga produktfakta skapas; regeln
+  tillämpas vid kontrollen.
+- Allergier begränsar därför fortfarande planerna kraftigt tills fler
+  deklarationer hämtas in, styrt av receptbibliotekets efterfrågan.
+
 ## Förpackningsvikt när avrunnen vikt saknas (ägarbeslut 2026-11-13)
 
 Vill ett recept ha en vara avrunnen (`cooked_drained`, `preserved_drained`)

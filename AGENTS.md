@@ -112,6 +112,11 @@
   drained weight can be lower (`drained_weight_from_package`). Only plain
   preserves in liquid qualify; see docs/PLANNING-ARCHITECTURE.md. This applies
   everywhere (plan, shopping list, purchases, pantry).
+- Owner decision 2026-11-14: Ät inte is checked on recipe ingredients and
+  product names (compounds included) and on declarations when present; only
+  composite products need a declaration. Allergies still need complete
+  declarations, except fresh produce as its own single ingredient. See
+  docs/PLANNING-ARCHITECTURE.md.
 - PriceUniverse is shared and source-driven. Community evidence stays advisory,
   and `USER_SPECIFIC` offers must never enter the shared artifact.
 - Keep product identity and price scope exact. Fuzzy names may suggest manual
