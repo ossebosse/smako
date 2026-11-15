@@ -57,7 +57,9 @@ class Fake:
                                       "checks": {"nutrition": [{"slot_id": "dinner-1", "status": "ESTIMATED", "values": {"kcal": 640.4, "protein_g": 38.2, "carbs_g": 52, "fat_g": 29.6}}],
                                                  "used_ingredient_cost": 42.1, "new_purchase_used_cost": 42.1, "used_cost_basis": {"quantity_status": "ESTIMATED"}},
                                       "needs": [{"key": "nötfärs"}, {"key": "gul lök"}],
-                                      "allocations": [{"name": "potatis", "quantity": 600, "unit": "g"}] if home else []},
+                                      "allocations": [{"name": "potatis", "quantity": 600, "unit": "g"}] if home else [],
+                                      "at_home": [{"name": n, "quantity": 5, "unit": "g", "sources": ["dinner-1"]}
+                                                  for n in (request or {}).get("personal", {}).get("staples_at_home", [])]},
                          "optimized_basket": {"total": 63.4, "store_count": 1, "verification_status": "VERIFIED_WITH_ESTIMATES",
                                               "stores": [{"store_id": "s1", "store_name": "Testbutiken Lund", "subtotal": 63.4, "items": rows}]}}}
 
@@ -429,3 +431,35 @@ def test_toothbrush_is_saved_as_not_food_the_way_the_server_sees_it(ui):
     expect(page.locator(".item-name").first).to_have_text("Tandborste")
     saved = next(body for method, path, body in fake.calls if path == "personal/shopping-list")
     assert [(i["query"], i["food"]) for i in saved["items"]] == [("tandborste", False)]
+
+
+def test_staples_at_home_are_asked_and_not_bought(ui):
+    name, page, fake, shot = ui
+    if name == "a":
+        page.goto(re.sub(r"#.*|$", "#mat", page.url, count=1))
+    else:
+        page.get_by_role("button", name=re.compile("Planera mat och handla")).click()
+    page.get_by_label("Ditt postnummer").fill("22350")
+    page.get_by_role("button", name="Hitta butiker").click()
+    if name == "b":
+        page.get_by_role("button", name="Nästa").click()
+        page.get_by_role("button", name="Nästa").click()
+    home = page.get_by_role("group", name="Har du hemma?")
+    home.get_by_role("button", name="Salt", exact=True).click()
+    home.get_by_role("button", name="Torkade kryddor").click()
+    expect(home.get_by_role("button", name="Salt", exact=True)).to_have_attribute("aria-pressed", "true")
+    shot("hemma")
+    if name == "b":
+        page.get_by_role("button", name="Nästa").click()
+    page.get_by_role("button", name="Skapa matplan").click()
+    expect(page.get_by_role("heading", name="Din matplan" if name == "a" else "Veckans recept", exact=True)).to_be_visible()
+    sent = next(body for method, path, body in fake.calls if path == "plans")
+    assert sent["personal"]["staples_at_home"] == ["salt", "oregano", "timjan", "spiskummin", "paprikapulver",
+                                                   "rökt paprikapulver", "kanel", "chiliflakes", "gurkmeja"]
+    # Three dinners: at most two with the same main protein.
+    assert sent["recipe_preferences"]["max_same_main_protein_dinners"] == 2
+    if name == "a":
+        page.goto(re.sub(r"#.*", "#handla", page.url))
+    else:
+        page.get_by_role("button", name="Visa handlingslistan").click()
+    expect(page.get_by_text(re.compile("Har du hemma, behöver inte köpas: salt, oregano"))).to_be_visible()

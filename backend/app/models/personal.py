@@ -11,6 +11,8 @@ from .recipe import Recipe
 
 MealType = Literal["dinner", "breakfast", "snack"]
 Protein = Literal["vegetarian", "chicken", "fish", "meat"]
+Staple = Literal["salt", "svartpeppar", "rapsolja", "olivolja", "strösocker", "vetemjöl", "oregano", "timjan",
+                 "spiskummin", "paprikapulver", "rökt paprikapulver", "kanel", "chiliflakes", "gurkmeja"]
 
 
 class PrivateModel(BaseModel):
@@ -298,6 +300,9 @@ class PersonalPlanning(PrivateModel):
     allow_nutrition_estimates: bool = False
     surplus_mode: Literal["minimize", "allow_larger"] = "minimize"
     product_locks: dict[str, str] = Field(default_factory=dict, max_length=80)
+    # Owner decision 2026-11-15: staples the person has at home are not bought
+    # (app/services/staples.py). Omitted while empty, so older requests are unchanged.
+    staples_at_home: list[Staple] = Field(default_factory=list, max_length=14, exclude_if=lambda v: not v)
 
     @model_validator(mode="after")
     def unique(self):
@@ -333,6 +338,7 @@ class PersonalResult(PrivateModel):
     consumed_demands: list[dict] = Field(default_factory=list)
     available_surplus: list[dict] = Field(default_factory=list)
     preparations: list[dict] = Field(default_factory=list, exclude_if=lambda v: not v)
+    at_home: list[dict] = Field(default_factory=list, exclude_if=lambda v: not v)
 
 
 class PantryWrite(PrivateModel):

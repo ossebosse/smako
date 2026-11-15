@@ -128,6 +128,55 @@ ingrediensförteckning, så varje allergi och varje Ät inte gav ingen plan.
   Det stoppar aldrig en plan och ändrar inget val. Antal portioner påverkar
   inte värdet per portion; portionsvikt är fortsatt ett filter.
 
+## Planer som känns rimliga (steg 4, ägarbeslut 2026-11-15)
+
+Menysökningen rangordnar nu veckor efter **betalt belopp + butikskostnad +
+smakkostnad** (`PersonalPlanner._week_purchase_key`, `score`). Samma värde
+används i biblioteksökningens kvarhållning och förfining, vid jämförelse med
+lösningar från lägre butikstak och i den nedre gränsen
+(`bounded_evaluate`). Priser, produkter och kontroller ändras inte.
+
+- **En extra butik måste spara minst 10 kr** (`EXTRA_STORE_MIN_SAVING`).
+  Varje butik utöver den första kostar 10 kr i rangordningen. För den valda
+  menyn jämför `_fewer_stores` dessutom den exakta billigaste korgen för varje
+  lägre butikstak och behåller den med lägst summa + 10 kr per extra butik;
+  lika betyder färre butiker. Verifieringsstatus får inte bli sämre. Med
+  ekologisk andel, näringsgränser eller "Större köp går bra" söker de stegen
+  egna butiksuppsättningar upp till taket; där gäller regeln bara i
+  rangordningen. Användarens butikstak är fortfarande ett tak.
+- **"Gillar" ger effekt** (`TASTE_WEIGHT_KR` = 15 kr). Varje recept som
+  nämner en gillad term (receptnamn eller ingrediens, även i sammansatta ord:
+  "kycklingfilé" nämner kyckling) får vara 15 kr dyrare per term; ett recept
+  med något som inte gillas räknas 15 kr dyrare. Tidigare räknades en gillad
+  term högst en gång per vecka och bara som 2 kr, och bibliotekssökningen
+  rangordnade efter enbart pris, så "Gillar" märktes inte. På frusen data
+  (Lund, 3 middagar) ger "gillar linser" två linsrätter för 10 kr mer;
+  "gillar kyckling" ändrar inget eftersom den billigaste kycklingveckan
+  kostar 39 kr mer.
+- **"Allt" betyder blandat** (`mixed_week_ok`). Med kostvalet Allt, två eller
+  fler middagar och ingen egen fördelning har minst en middag kött, kyckling,
+  fisk eller skaldjur och minst en är vegetarisk. Regeln gäller nya veckor,
+  inte byte av ett enskilt recept, och bara när de övriga valen lämnar recept
+  av båda slagen (annars vore den omöjlig). Delveckor godtas så länge de
+  återstående platserna kan uppfylla den. På frusen data blir veckan 144 kr
+  med falukorv i stället för tre tofu- och kikärtsrätter för 134 kr.
+- **Omväxling som standard i provgränssnitten.** Med tre eller fler middagar
+  skickar `/ui/a` och `/ui/b` `max_same_main_protein_dinners: 2`
+  (`recipe_week_variation`): högst två middagar med samma huvudprotein.
+- **"Har du hemma?"** (`personal.staples_at_home`, `app/services/staples.py`).
+  Personen kan bocka för salt, svartpeppar, rapsolja, olivolja, socker,
+  vetemjöl och torkade kryddor. En förbockad basvara köps inte till
+  recepten och redovisas i `personal.at_home`. Det är ett påstående från
+  personen, inte en skafferimängd: inget reserveras eller dras av, och raden
+  ingår inte i `remaining_demands`. Basvaran köps ändå när måltiden har
+  näringsgränser (värdena måste vara deklarerade), när raden har allergier
+  (deklaration krävs) och för egna varor eller låsta produkter. Den visade
+  näringen använder den granskade generiska referensen i samma enhet
+  (salt, vetemjöl, kanel, spiskummin, gurkmeja per gram); annars, som för
+  olja i milliliter, visas ingen näring för det receptet. Inget värde hittas
+  på. På frusen data blir veckan 87 kr i stället för 144 kr när alla
+  basvaror är förbockade.
+
 ## Förpackningsvikt när avrunnen vikt saknas (ägarbeslut 2026-11-13)
 
 Vill ett recept ha en vara avrunnen (`cooked_drained`, `preserved_drained`)

@@ -33,6 +33,7 @@ from app.models.recipe import Recipe
 from app.services.basket_auditor import BasketAuditor
 from app.services.basket_calculator import money
 from app.services.basket_optimizer import (
+    _VERIFICATION_RANK,
     BasketOptimizer,
     BasketVerificationPolicy,
     QuoteSelectionRejected,
@@ -48,6 +49,7 @@ INFORMATIONAL_NUTRIENTS = ("kcal", "protein_g", "carbs_g", "fat_g")
 
 _MACROS = frozenset(INFORMATIONAL_NUTRIENTS)
 from app.services.personal_policy import (
+    TASTE_WEIGHT_KR,
     PolicyConflict,
     check_product,
     distribution_ok,
@@ -55,6 +57,7 @@ from app.services.personal_policy import (
     is_nonfood,
     mentions,
     merged_profile,
+    mixed_week_ok,
     preference_score,
     properties_match,
     protein_category,
@@ -114,6 +117,16 @@ def personal_policy_request(request, dinner_count):
 _AUDIT_FAILURE = "Vi kunde inte kontrollera mängderna eller priserna i inköpslistan."
 _NOT_NONFOOD = ("{name} är sparad som en vara som inte är mat, men Smako känner inte igen den så. "
                 "Ta bort {name} ur inköpslistan och lägg till den igen.")
+
+
+# Owner decision 2026-11-15 (docs/PLANNING-ARCHITECTURE.md): every store
+# beyond the first must save at least this much on the same menu.
+EXTRA_STORE_MIN_SAVING = Decimal(10)
+
+
+def extra_store_cost(basket):
+    """The minimum saving each extra store must earn, as a ranking cost."""
+    return float(EXTRA_STORE_MIN_SAVING) * max(0, basket.store_count - 1)
 
 
 def _lower_caps(max_stores):
@@ -1330,10 +1343,15 @@ class PersonalPlanner:
         # Constrained explicit rows first: a compatible recipe can share their
         # packages, but two different exact variants never become interchangeable.
         rows.sort(key=lambda r: (not bool(r["product_key"] or r.get("alternatives")), not bool(r["properties"])))
+        at_home = []
         for row in rows:
             if row["quantity"] <= 0:
                 continue
             recipe = recipes_by_slot.get(row["source"])
+            if self._at_home(row, meals_by_slot.get(row["source"]), recipe):
+                row["at_home"] = True
+                at_home.append(row)
+                continue
             resolved = self.resolve_choices(
                 row["name"],
                 row["quantity"],
@@ -1562,6 +1580,8 @@ class PersonalPlanner:
                         basket = self.optimizer.optimize(
                             ingredients, candidate_map, self.view.stores, max_stores=self.request.max_stores
                         )
+                        if final and self._plain_store_choice(slots):
+                            basket = self._fewer_stores(basket, ingredients, candidate_map)
                     else:
                         basket = _retained.optimized_basket.model_copy(deep=True, update={"max_stores": self.request.max_stores})
                         if basket.store_count > self.request.max_stores:
@@ -1667,8 +1687,9 @@ class PersonalPlanner:
             "allocations": allocations,
             "remaining_demands": [
                 {k: v for k, v in r.items() if k not in {"profile", "organic_animals", "nutrients", "unallocated_quantity"}}
-                for r in rows
+                for r in rows if not r.get("at_home")
             ],
+            "at_home": self._at_home_summary(at_home),
             "available_surplus": [
                 {
                     "item_id": i["id"],
@@ -1780,6 +1801,65 @@ class PersonalPlanner:
             self.product_trace.comparisons.append(record)
         if len(alternatives) > 24:
             self.product_trace.comparisons.append({"kind": "comparison_limit", "not_compared": len(alternatives)-24})
+
+    def _at_home(self, row, meal, recipe):
+        """Owner decision 2026-11-15: a ticked staple is not bought (app/services/staples.py)."""
+        from app.services.staples import is_at_home
+
+        return (recipe is not None and meal is not None and not meal.limits.active
+                and is_at_home(row["name"], self.spec.staples_at_home)
+                and not row["profile"].allergies and not row["product_key"] and not row.get("alternatives")
+                and not row["properties"] and not row.get("preparation") and not row.get("purchase_units"))
+
+    @staticmethod
+    def _at_home_summary(rows):
+        summary = {}
+        for row in rows:
+            entry = summary.setdefault((row["name"], row["unit"]),
+                                       {"name": row["name"], "quantity": 0, "unit": row["unit"], "sources": []})
+            entry["quantity"] = round(entry["quantity"] + row["quantity"], 3)
+            if row["source"] not in entry["sources"]:
+                entry["sources"].append(row["source"])
+        return list(summary.values())
+
+    def _plain_store_choice(self, slots):
+        """Whether the ordinary checkout is the purchase (no organic, nutrition or larger packages).
+
+        Those steps search their own store sets up to the request's cap, so
+        the extra-store rule is then only a ranking cost (extra_store_cost).
+        """
+        return (not self.spec.organic_percent and self.spec.surplus_mode != "allow_larger"
+                and not any(self.meals[s.meal_type].limits.active for s in slots if s.recipe))
+
+    def _fewer_stores(self, basket, ingredients, candidates):
+        """Owner decision 2026-11-15: an extra store must save at least 10 kr.
+
+        Compare the exact cheapest checkout for every lower store cap and keep
+        the one with the lowest total plus EXTRA_STORE_MIN_SAVING per extra
+        store; a tie keeps fewer stores. Prices, products and the verification
+        status are never made worse; only the store set changes.
+        """
+        from app.services.performance_trace import increment_performance_counter
+
+        saving = basket.savings_vs_single_store
+        if basket.store_count < 2 or (basket.store_count == 2 and saving is not None
+                                      and saving >= float(EXTRA_STORE_MIN_SAVING)):
+            return basket  # The single-store checkout is already known to cost 10 kr more.
+        best, best_cost = basket, basket.total + extra_store_cost(basket)
+        for cap in range(basket.store_count - 1, 0, -1):
+            try:
+                option = self.optimizer.optimize(ingredients, candidates, self.view.stores, max_stores=cap)
+            except IncompleteBasketError:
+                break
+            if _VERIFICATION_RANK[option.verification_status] > _VERIFICATION_RANK[basket.verification_status]:
+                continue  # Never trade verified quantities for one store less.
+            cost = option.total + extra_store_cost(option)
+            if cost <= best_cost + 1e-9:
+                best, best_cost = option, cost
+        if best is basket:
+            return basket
+        increment_performance_counter("extra_store_rule_fewer_stores")
+        return best.model_copy(update={"max_stores": self.request.max_stores})
 
     def _larger_packages(self, basket, ingredients, candidates):
         """Opt-in strategic multibuy, quoted by the original package calculator.
@@ -2475,6 +2555,7 @@ class PersonalPlanner:
                         need["original_quantity"],
                         (selected.store_id, selected.product_id) if selected else None,
                         pantry,
+                        bool(need.get("at_home")),
                     )
                 )
             weight = (
@@ -2544,6 +2625,18 @@ class PersonalPlanner:
                             for need in (r for r in rows if r["source"] == slot.id):
                                 contributions = []
                                 pantry = [a for a in allocations if a["demand_key"] == need["demand_key"]]
+                                if need.get("at_home"):
+                                    # The person's own staple: a reviewed generic reference
+                                    # in the same unit, or no values for this recipe.
+                                    from app.services.staples import reference_identity
+                                    identity = reference_identity(need["name"], need["unit"])
+                                    if identity is None or not self.spec.allow_nutrition_estimates:
+                                        raise PolicyConflict(
+                                            f"{need['name']}: vi vet inte näringen i det du har hemma.",
+                                            code="DATA_BLOCKED",
+                                        )
+                                    pantry = [{"quantity": need["quantity"], "name": need["name"],
+                                               "demand_key": need["demand_key"], "nutrition_reference": identity}]
                                 for allocation in pantry:
                                     if (
                                         not allocation.get("product_key")
@@ -3093,7 +3186,7 @@ class PersonalPlanner:
                 result = self._create(replace_slot=replace_slot, balanced_reference=balanced_reference)
             retain_library_comparison()
             if incumbents:
-                winner = min([result, *incumbents], key=lambda p: self._week_purchase_key(p.optimized_basket, p.personal.preparations))
+                winner = min([result, *incumbents], key=lambda p: self._week_purchase_key(p.optimized_basket, p.personal.preparations, p.personal.slots))
                 if winner is not result:
                     result = self._retain_scope_incumbent(winner, incumbent_scopes[id(winner)])
                 result.personal.checks.setdefault("scope_comparison", {}).update({
@@ -3109,7 +3202,7 @@ class PersonalPlanner:
             if not any(scope.get("library") == "before_content_pack" for scope in incumbent_scopes.values()):
                 retain_library_comparison()
             if incumbents:
-                winner = min(incumbents, key=lambda p: self._week_purchase_key(p.optimized_basket, p.personal.preparations))
+                winner = min(incumbents, key=lambda p: self._week_purchase_key(p.optimized_basket, p.personal.preparations, p.personal.slots))
                 result = self._retain_scope_incumbent(winner, incumbent_scopes[id(winner)], error=exc)
                 result.personal.checks["scope_comparison"].update({
                     "retained_valid_incumbents": len(incumbents),
@@ -3229,9 +3322,18 @@ class PersonalPlanner:
             selected.append([s for s in group if not s.recipe or self._recipe_id(s.recipe) in by_meal[meal_type]])
         return selected
 
-    def _week_purchase_key(self, basket, preparations=()):
+    def _preference_cost(self, slots):
+        """Owner decision 2026-11-15: likes and dislikes as kronor per recipe."""
+        recipes = [s.recipe for s in slots if s.recipe]
+        tastes = preference_score(recipes, self.spec.profile)
+        tastes += sum(preference_score([s.recipe], self.meals[s.meal_type].profile) for s in slots if s.recipe)
+        return tastes * TASTE_WEIGHT_KR
+
+    def _week_purchase_key(self, basket, preparations=(), slots=()):
+        """Paid total plus the extra-store and taste costs (owner decisions 2026-11-15), then surplus."""
         from app.services.week_refinement import surplus_key
-        return (money(basket.total), surplus_key(basket, preparations=preparations) if self.spec.surplus_mode == "minimize" else ())
+        leading = basket.total + extra_store_cost(basket) + self._preference_cost(slots)
+        return (money(leading), surplus_key(basket, preparations=preparations) if self.spec.surplus_mode == "minimize" else ())
 
     @timed_stage("memory_reclamation")
     def _release_idle_memory(self, *, recent=False):
@@ -3436,7 +3538,7 @@ class PersonalPlanner:
 
             chosen, result, report = verified_search(search, audit=audit,
                 accepts=lambda chosen: accepts(chosen, final=True),
-                rank=lambda chosen, result: (self._week_purchase_key(result["basket"], result.get("preparations", ())),
+                rank=lambda chosen, result: (self._week_purchase_key(result["basket"], result.get("preparations", ()), chosen),
                                              search_kwargs["score"](chosen, result)), budget=budget,
                 previous=previous)
             incumbent = chosen, result
@@ -3486,7 +3588,7 @@ class PersonalPlanner:
             try:
                 chosen, result, report = verified_search(cached_tracks, audit=cached_audit,
                     accepts=lambda chosen: accepts(chosen, final=True),
-                    rank=lambda chosen, result: (self._week_purchase_key(result["basket"], result.get("preparations", ())),
+                    rank=lambda chosen, result: (self._week_purchase_key(result["basket"], result.get("preparations", ()), chosen),
                                                  search_kwargs["score"](chosen, result)),
                     budget=SearchBudget(IMPROVEMENT_EVALUATIONS, IMPROVEMENT_PROPOSALS), previous=prior)
             except (ValueError, IncompleteBasketError):
@@ -3550,7 +3652,7 @@ class PersonalPlanner:
 
         chosen, result, report = verified_search(tracks, audit=audit,
             accepts=lambda slots: accepts(slots, final=True),
-            rank=lambda slots, result: (self._week_purchase_key(result["basket"], result.get("preparations", ())),
+            rank=lambda slots, result: (self._week_purchase_key(result["basket"], result.get("preparations", ()), slots),
                                        search_kwargs["score"](slots, result)),
             previous=previous, budget=SearchBudget(1, 1))
         result["checks"]["reaudited_previous_menu"] = {**report, "qualification_rejections": rejections}
@@ -3718,7 +3820,7 @@ class PersonalPlanner:
 
         chosen, result, report = verified_search(tracks, audit=audit,
             accepts=lambda chosen: accepts(chosen, final=True),
-            rank=lambda chosen, value: (self._week_purchase_key(value["basket"], value.get("preparations", ())), score(chosen, value)),
+            rank=lambda chosen, value: (self._week_purchase_key(value["basket"], value.get("preparations", ()), chosen), score(chosen, value)),
             previous=((winner, evaluate(winner, final=False)),), budget=SearchBudget(1, 1))
         if (report["audit_rejected"] or report["constraint_rejected"]
                 or money(result["basket"].total) != money(prepared["certificate"]["total"])):
@@ -3986,6 +4088,18 @@ class PersonalPlanner:
                 )
             )
         draft = any(not group[0].recipe for group in options if len(group) == 1)
+        # Owner decision 2026-11-15: "Allt" means a mixed week of dinners. Only
+        # for a new week without an own distribution, and only when the other
+        # choices leave recipes of both kinds.
+        dinner_meal = self.meals.get("dinner")
+        mixed_count = None
+        if (generating and replace_slot is None and dinner_meal is not None and dinner_meal.diet == "mixed"
+                and not dinner_meal.distribution and dinner_count >= 2):
+            kinds = {self._protein_category(r) for r in dinner_pool}
+            if "vegetarian" in kinds and kinds - {"vegetarian"}:
+                mixed_count = dinner_count
+
+        preference_cost = self._preference_cost
 
         def accepts(chosen, *, final):
             # During a one-slot replacement every remaining slot is fixed.
@@ -4011,6 +4125,10 @@ class PersonalPlanner:
                 self.diagnostics.branch(len(chosen), "policy_taste")
                 return False
             dinners = [s.recipe for s in constraint_slots if s.meal_type == "dinner" and s.recipe]
+            if mixed_count is not None and not mixed_week_ok(
+                    dinners, mixed_count, partial=not constraint_final or draft, classify=self._protein_category):
+                self.diagnostics.branch(len(chosen), "policy_taste")
+                return False
             if self.complete:
                 from app.services.recipe_week_variation import accepts_week
                 if not accepts_week(dinners, self.request.recipe_preferences,
@@ -4032,15 +4150,10 @@ class PersonalPlanner:
             return accepted
 
         def score(chosen, result):
-            tastes = preference_score([s.recipe for s in chosen if s.recipe], self.spec.profile)
-            tastes += sum(
-                preference_score([s.recipe], self.meals[s.meal_type].profile)
-                for s in chosen
-                if s.recipe
-            )
+            basket = result["basket"]
             return (
-                result["basket"].total + tastes * 2,
-                result["basket"].total,
+                basket.total + preference_cost(chosen) + extra_store_cost(basket),
+                basket.total,
                 tuple(s.recipe.name if s.recipe else "" for s in chosen),
             )
 
@@ -4105,10 +4218,10 @@ class PersonalPlanner:
                 search_input = per_package_cohorts(options, generations,
                     first_generation=first, last_generation=self._generation)
             search = self.service.menu_optimizer.optimize_library_slots
-            library_kwargs["retention_score"] = lambda chosen, result: (result["basket"].total, score(chosen, result))
+            library_kwargs["retention_score"] = lambda chosen, result: (score(chosen, result)[0], score(chosen, result))
             from app.services.week_refinement import qualified_joint_proposals
             library_kwargs["refinement_score"] = lambda chosen, result: (
-                self._week_purchase_key(result["basket"], result.get("preparations", ())), score(chosen, result))
+                self._week_purchase_key(result["basket"], result.get("preparations", ()), chosen), score(chosen, result))
             library_kwargs["joint_proposals"] = lambda groups, anchor: qualified_joint_proposals(
                 groups, anchor, self.variant_search_evidence)
             def select_seed_options(groups, *, refinement=False):
@@ -4171,22 +4284,18 @@ class PersonalPlanner:
             def candidate_priority(slot):
                 evidence = self.variant_search_evidence.get((slot.meal_type, self._recipe_id(slot.recipe)))
                 paid = evidence.paid if evidence is not None else float('inf')
-                taste = preference_score([slot.recipe], self.spec.profile)
-                taste += preference_score([slot.recipe], self.meals[slot.meal_type].profile)
-                return paid+taste*2, paid, slot.recipe.name
+                return paid + preference_cost([slot]), paid, slot.recipe.name
 
             def candidate_packages(slot):
                 evidence = self.variant_search_evidence.get((slot.meal_type, self._recipe_id(slot.recipe)))
                 return evidence.packages if evidence is not None else frozenset()
 
             def bounded_evaluate(chosen, incumbent_rank):
-                # score()[0] is total + 2 * taste; the taste term needs no
-                # basket. A menu whose cheapest possible total already exceeds
-                # the incumbent's leading score cannot replace it.
-                tastes = preference_score([s.recipe for s in chosen if s.recipe], self.spec.profile)
-                tastes += sum(preference_score([s.recipe], self.meals[s.meal_type].profile)
-                              for s in chosen if s.recipe)
-                self._search_bound = incumbent_rank[0] - tastes * 2
+                # score()[0] is total + taste cost + extra-store cost. The taste
+                # cost needs no basket and the store cost is never negative, so a
+                # menu whose cheapest possible total already exceeds the
+                # incumbent's leading score minus its taste cost cannot replace it.
+                self._search_bound = incumbent_rank[0] - preference_cost(chosen)
                 try:
                     return evaluate(chosen, final=True)
                 finally:
@@ -4423,6 +4532,7 @@ class PersonalPlanner:
                 consumed_demands=consumed_demands(self.state, self.plan_id),
                 available_surplus=result["available_surplus"],
                 preparations=result["preparations"],
+                at_home=result.get("at_home", []),
             ),
         )
 

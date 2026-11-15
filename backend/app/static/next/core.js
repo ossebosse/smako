@@ -24,7 +24,7 @@
   const KEY = "smako.next.v1";
   const saved = (() => { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch (_) { return {}; } })();
   const persist = () => { try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (_) { /* private mode: choices last for this visit */ } };
-  const DEFAULTS = { diet: "mixed", cooking: "free", avoid: [], allergies: [], likes: [], cuisines: [], variety: "low", maxStores: 2, organic: 0, usePantry: true, surplus: "minimize", radius: 3 };
+  const DEFAULTS = { diet: "mixed", cooking: "free", avoid: [], allergies: [], likes: [], cuisines: [], variety: "low", maxStores: 2, organic: 0, usePantry: true, surplus: "minimize", radius: 3, staples: [] };
   saved.settings = { ...DEFAULTS, ...(saved.settings || {}) };
   // Each meal type has its own count, portions, distribution and limits, as in /personal.
   // Choices saved before that (one count per meal type, limits for dinners) carry over.
@@ -210,7 +210,7 @@
     const s = saved.settings;
     return { ...storeFields(), membership_price_policy: "all_advertised", purchase_planning_mode: "estimated", memberships: [], diversity_mode: "balanced", varied_budget_percent: 25, strategy: "optimized",
       recipes: meals.find(m => m.meal_type === "dinner")?.count || 0, servings: meals.find(m => m.meal_type === "dinner")?.servings || 1,
-      personal: { profile: { likes: s.likes, dislikes: [], exclusions: s.avoid, allergies: s.allergies }, meals, extras: S.items, pantry_revision: S.state.revision, use_pantry: s.usePantry,
+      personal: { profile: { likes: s.likes, dislikes: [], exclusions: s.avoid, allergies: s.allergies }, meals, extras: S.items, pantry_revision: S.state.revision, use_pantry: s.usePantry, staples_at_home: (s.staples || []).filter(v => STAPLE_NAMES.has(v)),
         allow_nutrition_estimates: true, organic_percent: Number(s.organic) || 0, organic_animals: false, surplus_mode: s.surplus } };
   }
   const COOKING = { quick: { max_active_minutes: 30, max_ingredients: 8 }, everyday: { max_active_minutes: 45, max_ingredients: 12 }, free: {} };
@@ -296,7 +296,7 @@
     await saveItems();
     const dinners = meals[0].count, varied = s.variety === "normal" && dinners >= 3;
     keep(await job("/api/plans", { ...baseRequest(meals),
-      recipe_preferences: { mode: "complete", cuisines: s.cuisines, cuisine_distribution: varied ? "minimum" : "free", min_distinct_cuisines: varied ? 3 : null, max_same_main_protein_dinners: varied ? 2 : null,
+      recipe_preferences: { mode: "complete", cuisines: s.cuisines, cuisine_distribution: varied ? "minimum" : "free", min_distinct_cuisines: varied ? 3 : null, max_same_main_protein_dinners: dinners >= 3 ? 2 : null,
         min_ingredients: 10, max_ingredients: 15, max_minutes: null, adaptation: "approved", min_protein_g: null, allow_fish: true },
       max_same_primary_ingredient_meals: 2, max_same_recipe_family: 2, max_same_carbohydrate_meals: 3, max_same_cooking_method_meals: null, max_same_dish_form_meals: null,
       max_pairwise_culinary_similarity: null, max_pairwise_recipe_similarity: 0.7 }, "Skapar din matplan"));
@@ -416,7 +416,7 @@
     return box;
   }
 
-  const DIETS = [["mixed", "Allt"], ["meat", "Kött", "Nöt, fläsk, kyckling med mera"], ["pescetarian", "Fisk och vegetariskt"], ["vegetarian", "Vegetariskt"], ["vegan", "Veganskt"]];
+  const DIETS = [["mixed", "Allt", "Blandat: kött, fisk och vegetariskt"], ["meat", "Kött", "Nöt, fläsk, kyckling med mera"], ["pescetarian", "Fisk och vegetariskt"], ["vegetarian", "Vegetariskt"], ["vegan", "Veganskt"]];
   const COOK = [["quick", "Snabbt", "Högst 30 min i köket"], ["everyday", "Vardag", "Högst 45 min"], ["free", "Spelar ingen roll", ""]];
   const ALLERGENS = ["jordnötter", "nötter", "mjölk", "ägg", "gluten", "fisk", "skaldjur", "soja", "sesam"];
   // Number fields for limits and counts. Typing does not redraw the dialog, so the next field keeps its place.
@@ -494,6 +494,25 @@
     const g = guest(); if (g) box.append(el("p", `Som gäst får du ${g.recipes} recept och ${g.servings} portioner per rätt. Med ett konto får du fler.`, "hint"));
     return box;
   }
+  // Owner decision 2026-11-15: staples the person has at home are not bought (app/services/staples.py).
+  const STAPLES = [["Salt", ["salt"]], ["Svartpeppar", ["svartpeppar"]], ["Rapsolja", ["rapsolja"]], ["Olivolja", ["olivolja"]], ["Socker", ["strösocker"]], ["Vetemjöl", ["vetemjöl"]],
+    ["Torkade kryddor", ["oregano", "timjan", "spiskummin", "paprikapulver", "rökt paprikapulver", "kanel", "chiliflakes", "gurkmeja"]]];
+  const STAPLE_NAMES = new Set(STAPLES.flatMap(([, names]) => names));
+  function staplesChoice() {
+    const have = new Set(saved.settings.staples || []), group = el("fieldset", null, "choice"); group.append(el("legend", "Har du hemma?"));
+    const row = el("div", null, "chips");
+    for (const [label, names] of STAPLES) {
+      const on = names.every(n => have.has(n));
+      row.append(button(label, () => set("staples", on ? [...have].filter(n => !names.includes(n)) : [...new Set([...have, ...names])]), "chip", { "aria-pressed": String(on) }));
+    }
+    group.append(row, el("p", "Det du väljer här köps inte till recepten. Har du satt näringsgränser eller allergier köps det ändå, så att vi kan kontrollera det.", "hint"));
+    return group;
+  }
+  function atHomeView() {
+    const rows = S.plan?.plan?.personal?.at_home || [];
+    if (!rows.length) return null;
+    return el("p", `Har du hemma, behöver inte köpas: ${rows.map(r => r.name).join(", ")}.`, "meta at-home");
+  }
   const CUISINES = [["italian", "Italienskt"], ["greek", "Grekiskt"], ["mexican", "Mexikanskt"], ["indian", "Indiskt"], ["thai", "Thailändskt"], ["swedish", "Svenskt"]];
   const set = (key, value) => { saved.settings[key] = value; persist(); emit(); };
   function choice(label, options, current, onPick, cls = "") {
@@ -517,7 +536,7 @@
     const s = saved.settings, box = el("div", null, `settings ${part}`);
     if (part === "meals") return mealCards();
     if (part === "basic") {
-      box.append(choice("Vad äter ni?", DIETS, s.diet, v => set("diet", v)), choice("Tid i köket", COOK, s.cooking, v => set("cooking", v)));
+      box.append(choice("Vad äter ni?", DIETS, s.diet, v => set("diet", v)), choice("Tid i köket", COOK, s.cooking, v => set("cooking", v)), staplesChoice());
       return box;
     }
     box.append(tags("Allergier", "allergies", "Annan allergi", ALLERGENS), tags("Ät inte", "avoid", "Till exempel koriander", ["fläsk", "svamp", "oliver"]), el("p", "Det du undviker tas bort ur recepten och ur varor som nämner det. Allergier kräver innehållsförteckning för allt utom färsk frukt och grönt, så de begränsar recepten mer.", "hint"), tags("Gillar extra", "likes", "Till exempel kyckling"),
@@ -691,7 +710,7 @@
   }
   setInterval(() => { if (S.busy) emit(); }, 1000);
 
-  window.SmakoNext = { el, button, money, number, amount, S, saved, persist, on, emit, start, lookup, placeText, postcodeBox, storePicker, itemsEditor, settings, settingsSummary, recipesView, storesView, areaCode, usedView, busyView, showBusy, errorView,
+  window.SmakoNext = { el, button, money, number, amount, S, saved, persist, on, emit, start, lookup, placeText, postcodeBox, storePicker, itemsEditor, settings, settingsSummary, recipesView, storesView, areaCode, usedView, atHomeView, busyView, showBusy, errorView,
     calculateList, createPlan, updateListInPlan, forgetPlan, planHasRecipes, itemsChanged, basket, totalText, guest, set,
     // Used by mine.js (account, pantry, registering what was bought).
     api, change, keep, loadState, refreshState, suggestions, uuid, capital, stepOf, isNonfood: text => NONFOOD.test(text) };
