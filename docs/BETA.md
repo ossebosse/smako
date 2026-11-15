@@ -1,3 +1,23 @@
+# 2026-11-15: Ät inte, tidsgräns från motorstart, förlopp 0–100 % och snabb näring aktiverat
+
+Main `1062559d7b3b` (PR #81, #82, #83). App **app-1062559d7b3b-80314879**,
+scheduler orörd. Ät inte kontrolleras på namn och deklaration (ägarbeslut
+2026-11-14); allergier kräver deklaration utom färsk frukt och grönt.
+Planerarens tidsgräns räknas från insläppet, inte från kön. Provgränssnitten
+visar påsen, 0–100 % och tiden sedan knapptrycket, och alternativ A visar hur
+mycket av inköpet som går till recepten. Sökning använder områdets postnummer.
+Delad näringsevidens, näringsuppvärmning (oberoende av den avstängda
+planuppvärmningen) och näring per portion även utan gränser. 18 appfiler,
+importkontroll ok, bas `c2de0d344288` (image `9560994abaee`), ny image
+`53145185976c`. Aktiverad 2026-11-15 cirka 07:45 UTC, säkerhetskopia
+`20261115T073313Z`; `/ready` ready för 22350 och 21120. Näringsuppvärmningen för
+Lund nådde sin 45 s-gräns (delvis uppvärmd).
+
+Prov på beta (testkonto, Lund, 3 middagar): koriander 51 s och lök+vitlök 37 s
+ger planer; glutenallergi ger klarspråksbeskedet; högst 700 kcal 52 s; minst
+25 g protein tog slut på tid första gången (65 s) och gick på 42 s därefter;
+protein+fett 46 s; 5 middagar × 4 portioner 51 s.
+
 # 2026-11-14: Småfixar efter betatest aktiverade
 
 Main `c2de0d344288`. App **app-c2de0d344288-55a9c6d4**, scheduler orörd.
@@ -196,7 +216,7 @@ på `main` inte ändrar en pågående release.
   `smako-app-1`, `smako-scheduler-1`, `smako-caddy-1`, data i `/srv/smako/data`
   och det gemensamma driftlåset. Detta flöde installerar inte en ny server.
 - Läs aktuell [HANDOFF.md](HANDOFF.md), [OPERATIONS.md](OPERATIONS.md) och
-  senaste aktiveringsrapport. Appens BUILD_ID är `app-c2de0d344288-55a9c6d4`;
+  senaste aktiveringsrapport. Appens BUILD_ID är `app-1062559d7b3b-80314879`;
   schedulern är `source-ops-8a53beb80e43`.
   [Uppvärmda prov och samordnad faktaläsning/GC](releases/warm-facts-gc-20261101/ACTIVATED.md)
   är senaste appaktiveringen. Sex Pythonfiler från kod `b7c8d0506e23`;
@@ -244,10 +264,10 @@ git status --short
 .venv/Scripts/python.exe -X utf8 scripts/smako_ops.py status
 
 # Använd den granskade Git-bas som motsvarar faktiskt aktiva filer enligt senaste journalen.
-.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit c2de0d344288 --commit main --workdir .local/beta-release
+.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit 1062559d7b3b --commit main --workdir .local/beta-release
 ```
 
-`c2de0d344288` är appen som aktiverades 2026-11-14 11:54 UTC. Appbildens egen
+`1062559d7b3b` är appen som aktiverades 2026-11-15 07:45 UTC. Appbildens egen
 grocery-kopia är äldre än Git; använd `--keep-app-grocery` om intervallet
 bara innehåller grocery-Python som redan levererats till schedulern. De äldre
 Coop-filerna i runtime (`price_universe_runtime.py`,
