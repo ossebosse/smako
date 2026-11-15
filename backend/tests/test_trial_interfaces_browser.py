@@ -30,6 +30,7 @@ class Fake:
         self.owner = "guest"
         self.states = {name: {"revision": 0, "items": [], "shopping_items": [], "ledger": []} for name in ("guest", "account")}
         self.calls = []
+        self.job = None  # Steps a plan job reports before its result, when a test sets them.
 
     @property
     def state(self):
@@ -52,7 +53,8 @@ class Fake:
                   "ingredients": [{"name": "nötfärs", "quantity": 400, "unit": "g"}, {"name": "gul lök", "quantity": 150, "unit": "g"}, {"name": "potatis", "quantity": 600, "unit": "g"}]}
         return {"plan_id": "plan-1", "revision": revision, "request": request,
                 "plan": {"personal": {"slots": [{"id": "dinner-1", "day": 1, "meal_type": "dinner", "recipe": recipe}],
-                                      "checks": {"nutrition": [{"slot_id": "dinner-1", "status": "ESTIMATED", "values": {"kcal": 640.4, "protein_g": 38.2, "carbs_g": 52, "fat_g": 29.6}}]},
+                                      "checks": {"nutrition": [{"slot_id": "dinner-1", "status": "ESTIMATED", "values": {"kcal": 640.4, "protein_g": 38.2, "carbs_g": 52, "fat_g": 29.6}}],
+                                                 "used_ingredient_cost": 42.1, "new_purchase_used_cost": 42.1, "used_cost_basis": {"quantity_status": "ESTIMATED"}},
                                       "needs": [{"key": "nötfärs"}, {"key": "gul lök"}],
                                       "allocations": [{"name": "potatis", "quantity": 600, "unit": "g"}] if home else []},
                          "optimized_basket": {"total": 63.4, "store_count": 1, "verification_status": "VERIFIED_WITH_ESTIMATES",
@@ -94,7 +96,14 @@ class Fake:
             s["revision"] += 1
             return 200, self.public()
         if path == "plans":
+            if self.job is not None:
+                self.job_request = body
+                return 202, {"status": "pending", "status_url": "/api/plan-jobs/j1", "stage": "queued", "progress": None, "engine": None}
             return 200, self.plan(body)
+        if path == "plan-jobs/j1":
+            if self.job:
+                return 202, {"status": "pending", "status_url": "/api/plan-jobs/j1", **self.job[0]}
+            return 201, self.plan(self.job_request)
         if path == "personal/plans/plan-1/change":
             if body["action"] == "purchase":
                 if "s1|p-lok|gul lök" not in body.get("measured_purchase_quantities", {}):
@@ -299,6 +308,38 @@ def test_each_meal_has_its_own_distribution_weight_and_nutrition_like_personal(u
     assert meals[2]["limits"] == {}
     assert [m["max_same_base_meals"] for m in meals] == [2, 2, None]
     shot("naring-recept")
+
+
+def test_progress_runs_0_to_100_with_time_since_the_press_and_the_recipe_share_is_shown(ui):
+    name, page, fake, shot = ui
+    fake.job = [{"stage": "queued", "progress": None, "engine": None}]
+    if name == "a":
+        page.goto(re.sub(r"#.*|$", "#mat", page.url, count=1))
+    else:
+        page.get_by_role("button", name=re.compile("Planera mat och handla")).click()
+    page.get_by_label("Ditt postnummer").fill("22350")
+    page.get_by_role("button", name="Hitta butiker").click()
+    if name == "b":
+        for _ in range(3):
+            page.get_by_role("button", name="Nästa").click()
+    page.get_by_role("button", name="Skapa matplan").click()
+    busy = page.locator(".busy")
+    expect(busy.get_by_text(re.compile(r"^0:0\d sedan du tryckte$"))).to_be_visible()
+    expect(busy.get_by_role("progressbar")).to_have_attribute("aria-valuenow", "0")
+    # In the queue the planner's own clock has not started.
+    fake.job[0] = {"stage": "candidate_qualification", "progress": {"completed": 5, "total": 10, "unit": "recipes"}, "engine": {"elapsed_seconds": 4, "limit_seconds": 58}}
+    expect(busy.get_by_text("37 %")).to_be_visible(timeout=5000)
+    expect(busy.get_by_text("Smako räknar", exact=False)).to_have_count(0)
+    expect(busy.locator(".busy-art svg")).to_be_visible()
+    shot("progress")
+    fake.job.clear()
+    expect(busy).to_be_hidden(timeout=8000)
+    if name == "a":
+        expect(page.get_by_text("Ca 42,10 kr av 63,40 kr går till recepten")).to_be_visible()
+        expect(page.get_by_role("img", name="66 procent av inköpet går till recepten")).to_be_visible()
+        page.get_by_role("button", name="Till handlingslistan").click()
+        expect(page.get_by_text("Ca 42,10 kr av 63,40 kr går till recepten")).to_be_visible()
+        shot("andel")
 
 
 def test_rice_by_name_is_not_enough_so_a_chosen_product_is_offered(ui):

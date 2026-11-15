@@ -89,7 +89,7 @@
     window.scrollTo(0, 0);
   }
   window.addEventListener("hashchange", render);
-  N.on(() => busy.replaceChildren(N.busyView()));
+  N.on(() => N.showBusy(busy));
   N.start().then(render);
   render();
 })();

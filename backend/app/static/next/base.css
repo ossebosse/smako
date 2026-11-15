@@ -111,8 +111,34 @@ input[type=checkbox]{width:1.35rem;height:1.35rem;accent-color:var(--accent);fle
 .store-picker{display:grid;gap:.75rem}
 .check{display:flex;gap:.7rem;align-items:center;padding:.5rem 0;font-size:.95rem}
 .busy{position:fixed;inset:0;z-index:50;background:color-mix(in srgb,var(--page) 94%,transparent);display:grid;place-content:center;justify-items:center;gap:.6rem;text-align:center;padding:2rem}
-.spinner{width:3rem;height:3rem;border-radius:50%;border:4px solid var(--line);border-top-color:var(--accent);animation:spin 1s linear infinite}
-@keyframes spin{to{transform:rotate(1turn)}}
+.busy[hidden]{display:none}
+.busy h2,.busy p{margin:0}
+.busy-art{width:7rem;color:var(--accent)}
+.busy-art svg{display:block;width:100%;height:auto;overflow:visible}
+.busy-bar{width:min(22rem,80vw);height:.65rem;border-radius:999px;background:var(--line-soft);overflow:hidden;margin-top:.4rem}
+.busy-fill{display:block;height:100%;width:0;border-radius:inherit;background:var(--accent);transition:width .6s ease}
+.busy-percent{font-weight:700;font-size:1.15rem;font-variant-numeric:tabular-nums}
+.busy-clocks{font-variant-numeric:tabular-nums}
+/* The bag (same drawing as /personal): drawn once, groceries drop in, a check when ready. */
+.busy .pp-draw{stroke-dasharray:1;stroke-dashoffset:1;animation:pp-draw .9s ease-out forwards}
+.busy .pp-handle{animation-delay:.35s}
+.busy :is(.pp-eye,.pp-smile){opacity:0;animation:pp-appear .3s ease-out .9s forwards}
+.busy .pp-item{opacity:0;transform-box:fill-box;transform-origin:center}
+.busy[data-state=running] .pp-item{animation:pp-drop 2.4s cubic-bezier(.45,0,.55,1) infinite}
+.busy[data-state=running] .pp-item-1{animation-delay:1s}
+.busy[data-state=running] .pp-item-2{animation-delay:1.8s}
+.busy[data-state=running] .pp-item-3{animation-delay:2.6s}
+.busy .pp-bag{transform-box:fill-box;transform-origin:50% 100%}
+.busy[data-state=running] .pp-bag{animation:pp-bounce .8s ease-in-out 1s infinite}
+.busy .pp-check{stroke-dasharray:1;stroke-dashoffset:1;opacity:0}
+.busy[data-state=done] .pp-bag-front{fill:var(--accent);transition:fill .25s ease}
+.busy[data-state=done] :is(.pp-eye,.pp-smile){display:none}
+.busy[data-state=done] .pp-check{opacity:1;animation:pp-draw .45s ease-out .15s forwards}
+@keyframes pp-draw{to{stroke-dashoffset:0}}
+@keyframes pp-appear{to{opacity:1}}
+@keyframes pp-drop{0%{opacity:0;transform:translateY(-26px) rotate(-25deg)}12%{opacity:1}55%{opacity:1;transform:translateY(30px) rotate(12deg)}56%,100%{opacity:0;transform:translateY(30px)}}
+@keyframes pp-bounce{0%,60%,100%{transform:none}70%{transform:translateY(2px) scale(1.03,.95)}82%{transform:translateY(-1px) scale(.99,1.02)}}
+@media(prefers-reduced-motion:reduce){.busy *{animation-duration:.01ms!important;animation-iteration-count:1!important;transition:none!important}.busy[data-state=running] .pp-item{display:none}}
 .error{background:var(--warn-soft);border:1.5px solid var(--warn);border-radius:var(--radius);padding:.8rem 1rem;display:grid;gap:.5rem;justify-items:start}
 dialog{border:0;border-radius:calc(var(--radius) + 6px);padding:1.25rem;width:min(34rem,calc(100vw - 1.5rem));max-height:calc(100dvh - 2rem);background:var(--page);color:var(--ink)}
 dialog::backdrop{background:rgb(0 0 0/.45)}
@@ -127,4 +153,8 @@ dialog::backdrop{background:rgb(0 0 0/.45)}
 .field .hint{font-weight:400}
 .measure form{max-height:calc(100dvh - 5rem);overflow:auto}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
-@media (prefers-reduced-motion:reduce){.spinner{animation:none}}
+.used{border:1.5px solid var(--line);border-radius:var(--radius);background:var(--card);padding:.8rem 1rem;display:grid;gap:.45rem}
+.used p{margin:0}
+.used-sum{font-weight:650}
+.used-bar{height:.6rem;border-radius:999px;background:var(--line-soft);overflow:hidden}
+.used-bar span{display:block;height:100%;background:var(--accent);border-radius:inherit}
