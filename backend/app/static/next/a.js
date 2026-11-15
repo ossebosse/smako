@@ -46,7 +46,7 @@
       if (N.planHasRecipes() && !screens.mat.editing) {
         const head = el("div"); head.append(el("h1", "Din matplan"), live(el("p", null, "lead"), () => document.createTextNode(`${N.totalText()} för recepten och dina egna varor.`)));
         const links = el("div", null, "links"); links.append(button("Ändra val och skapa en ny plan", () => { screens.mat.editing = true; render(); }, "btn small"));
-        return [head, links, live(el("div"), () => N.recipesView()), sticky(button("Till handlingslistan", () => go("#handla"), "btn primary cta"))];
+        return [head, live(el("div"), () => N.usedView()), links, live(el("div"), () => N.recipesView()), sticky(button("Till handlingslistan", () => go("#handla"), "btn primary cta"))];
       }
       const head = el("div"); head.append(el("h1", "Planera veckans mat"), el("p", "Välj hur mycket och vad ni äter. Smako föreslår recept som blir billiga att handla till just nu.", "lead"));
       const meals = live(el("div"), () => N.settings("meals")), basic = live(el("section", null, "panel"), () => N.settings("basic"));
@@ -63,7 +63,7 @@
       const changed = live(el("div"), () => N.itemsChanged() ? (() => { const p = el("section", null, "panel"); p.append(el("p", "Du har ändrat dina varor sedan listan räknades ut."), link("Räkna om i Inköpslista", "#lista")); return p; })() : null);
       const after = live(el("div"), () => N.afterShopping({ onPantry: () => go("#skafferi") }));
       const tools = el("div", null, "links"); tools.append(button("Börja om med en tom lista", () => { if (confirm("Ta bort den här handlingslistan?")) { N.forgetPlan(); go("#hem"); } }, "btn quiet small"));
-      return [head, changed, live(el("div"), () => N.storesView()), after, tools];
+      return [head, live(el("div"), () => N.usedView()), changed, live(el("div"), () => N.storesView()), after, tools];
     },
     skafferi() {
       const head = el("div"); head.append(el("h1", "Skafferi"), el("p", "Det du har hemma. Recepten använder det först, så du handlar mindre.", "lead"));
@@ -86,7 +86,7 @@
   function chrome() {
     placeButton.textContent = N.placeText();
     accountLink.textContent = N.accountLabel();
-    busy.replaceChildren(N.busyView());
+    N.showBusy(busy);
     const tab = document.querySelector('.tabs a[data-tab="lista"]'); tab.querySelector(".badge")?.remove();
     if (S.items.length) tab.append(el("span", String(S.items.length), "badge", { "aria-label": `${S.items.length} ${S.items.length === 1 ? "vara" : "varor"}` }));
   }

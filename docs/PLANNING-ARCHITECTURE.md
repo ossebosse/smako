@@ -79,6 +79,29 @@ spärrfrasers namn-/kategoriscope beräknas vid inläsning, med identiska fulla
 klassningssvar; priser eller användarbeslut cachas inte av detta.
 Se [fortsättningsrapporten](reviews/coverage-continuation-20261027.md).
 
+## Ät inte och allergier utan fullständig deklaration (ägarbeslut 2026-11-14)
+
+Endast 351 av 71 169 produktfakta (frusen data 2026-10-23) hade fullständig
+ingrediensförteckning, så varje allergi och varje Ät inte gav ingen plan.
+
+- *Ät inte* kontrolleras mot receptets ingredienser och varans namn, även i
+  sammansatta ord (`mentions`: "lök" träffar rödlök och lökpulver, "fläsk"
+  fläskfilé; "glutenfri", "utan ägg" och ord där den andra delen är kortare än
+  tre bokstäver räknas inte), och mot deklarationen när den finns. Utan
+  fullständig deklaration godtas en vara som inte är sammansatt
+  (`is_composite`: sås, buljong, krydd- och smakblandningar, färdigmat, bröd,
+  godis med flera, på namn eller källkategori). Sammansatta varor kräver
+  fortfarande deklaration.
+- *Allergi* kräver fortfarande fullständig deklaration och kontrollerad
+  allergen. Undantaget är färsk frukt, grönt, svamp och örter
+  (`single_ingredient_by_rule`): de behöver ingen ingrediensförteckning enligt
+  EU 1169/2011 artikel 19 och är sin enda ingrediens. Torkat, inlagt, blandat
+  och allt vars namn pekar på en stor allergen (nötter, sesam, senap, soja,
+  selleri, lupin, vete) omfattas inte. Inga produktfakta skapas; regeln
+  tillämpas vid kontrollen.
+- Allergier begränsar därför fortfarande planerna kraftigt tills fler
+  deklarationer hämtas in, styrt av receptbibliotekets efterfrågan.
+
 ## Näring som går snabbt och alltid syns (steg 3, 2026-11-15)
 
 - **Delad näringsevidens.** `PersonalPlanner.nutrition_evidence` läser per
@@ -303,8 +326,18 @@ och visas för användaren. Original-B behålls som negativt underlag. B2
 behåller dess 52 butiks-ID:n och övriga val men markerar bara den tidigare
 huvudråvarustandarden som känd standard. Det är ett nytt acceptansfall.
 
-Samma absoluta serverdeadline följer nya och personliga ändringsanrop genom
-kö, async-jobb, tråd, inre loopar och transaktion. Timeout före commit rullar
+**Ägarbeslut 2026-11-14: tidsgränsen räknas från att motorn börjar.** Tiden i
+planerarens kö (admission) räknas inte in i planerarens 60 s. När en begäran
+väntar på en ledig plats pausas dess timers (`pause_engine_clock`), och när den
+släpps in flyttas alla omslutande deadlines och asyncio-timers fram med kötiden
+(`start_engine_clock`). Arbetet efter insläppet, inklusive checkout, audit och
+sparning, har fortfarande sina 60 s. Jobbstatus visar `engine.elapsed_seconds`
+och `engine.limit_seconds` efter insläppet. Klientens klocka från knapptrycket
+visas separat och ändras inte. Mätningar av latens ska därför redovisa kötid och
+motortid var för sig.
+
+Samma serverdeadline (räknad från insläppet enligt ovan) följer nya och
+personliga ändringsanrop genom async-jobb, tråd, inre loopar och transaktion. Timeout före commit rullar
 tillbaka revision, reservationer och mutationskvitto. En full revision som
 redan committat kan identifieras i timeoutstatus och återläsas genom ägd GET
 eller identiskt återförsök utan dubbel revision. Ett sent färdigt resultat

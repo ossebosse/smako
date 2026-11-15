@@ -6,6 +6,7 @@ import json
 from dataclasses import replace
 from datetime import UTC, datetime
 from decimal import Decimal
+from time import monotonic
 from typing import Annotated
 
 from app.config import Settings, get_settings
@@ -693,11 +694,17 @@ def _plan_jobs(http_request: Request, settings: Settings) -> PlanJobs:
 
 def _pending_plan_job(job):
     stage, progress = job.status  # One atomic snapshot from the worker thread.
+    engine = job.engine
     return JSONResponse(status_code=202, content={
         "status": "pending", "status_url": f"/api/plan-jobs/{job.job_id}",
         "request_id": job.request_id,
         "stage": stage,
         "progress": progress,
+        # How long the planner has worked since it left the queue, and its limit.
+        "engine": None if engine is None else {
+            "elapsed_seconds": round(max(0.0, monotonic() - engine[0]), 1),
+            "limit_seconds": None if engine[1] is None else round(engine[1], 1),
+        },
     }, headers={"Cache-Control": "private, no-store", "Retry-After": "2",
                 "Preference-Applied": "respond-async"})
 
@@ -786,12 +793,15 @@ async def _with_current_deadline(settings, work, *, seconds=60):
         PlanningDeadlineExceeded,
         check_cancelled,
         planning_deadline,
+        register_deadline_timer,
         remaining_planning_seconds,
+        unregister_deadline_timer,
     )
     try:
         with planning_deadline(seconds):
             # Includes awaited admission, not only cooperative CPU-loop checks.
             timer = asyncio.timeout(remaining_planning_seconds())
+            register_deadline_timer(timer)  # Moved by the queue time credited at admission.
             try:
                 async with timer:
                     result = await work()
@@ -806,6 +816,8 @@ async def _with_current_deadline(settings, work, *, seconds=60):
             except Exception:
                 check_cancelled()  # E.g. a storage lock wait exhausted the remaining budget.
                 raise
+            finally:
+                unregister_deadline_timer(timer)
             check_cancelled()  # Includes mandatory checkout and persistence.
             return result
     except PlanningDeadlineExceeded as exc:

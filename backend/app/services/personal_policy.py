@@ -119,7 +119,7 @@ def interpret_profile(text):
     return {
         "profile": profile.model_dump(),
         "unresolved": unresolved,
-        "message": "Granska och redigera. Måste undvika är en hård uteslutning; ange allergi separat.",
+        "message": "Granska och redigera. Det du vill undvika tas bort ur recept och varor; ange allergi separat.",
     }
 
 
@@ -182,6 +182,77 @@ def _contains(term, names):
     return False
 
 
+# Compound words name what they are made of: "rödlök" is a lök, "fläskfilé" is
+# fläsk, "prästost" is an ost. A term matches a whole word, the end of a word or
+# the start of a word, except listed words that only look like a compound.
+_NOT_COMPOUNDS = {"ost": frozenset({"ostron"})}
+
+
+def mentions(term, text):
+    """Whether a name or declaration names the term, also inside a compound word."""
+    wanted = search_text(term)
+    if not wanted:
+        return False
+    if " " in wanted:
+        return f" {wanted} " in f" {search_text(text)} "
+    words = search_text(text).split()
+    for i, word in enumerate(words):
+        # "glutenfri", "laktosfritt" and "utan ägg" say the opposite.
+        if (i and words[i - 1] == "utan") or word.endswith(("fri", "fria", "fritt")):
+            continue
+        if word == wanted:
+            return True
+        # The other part of a compound is a word of its own, at least three letters ("pris" is not ris).
+        rest = len(word) - len(wanted)
+        if len(wanted) >= 3 and rest >= 3 and (word.endswith(wanted) or word.startswith(wanted)) and word not in _NOT_COMPOUNDS.get(wanted, ()):
+            return True
+    return False
+
+
+# Owner decision 2026-11-14 (docs/PLANNING-ARCHITECTURE.md). Words and source
+# categories that mark a composite product, where something the person avoids
+# can be hidden without showing in the name.
+_COMPOSITE_STEMS = (
+    "sas", "dressing", "buljong", "fond", "marinad", "krydd", "mix", "blandning", "fardig", "pizza",
+    "paj", "pirog", "soppa", "gryta", "wok", "pesto", "rora", "dipp", "pastej", "korv", "kottbull",
+    "biff", "burgare", "schnitzel", "nugget", "panerad", "chips", "snacks", "godis", "kaka", "kakor",
+    "kex", "brod", "bulle", "bullar", "glass", "choklad", "musli", "granola", "flingor", "smaksatt",
+    "nudlar", "pastasas", "curry", "salsa", "majonnas", "ketchup", "senap", "sylt", "mos", "fyllning",
+)
+_COMPOSITE_WORDS = frozenset({"dip", "bas", "kit"})
+_COMPOSITE_CATEGORIES = ("fardigmat", "godis", "snacks", "brod", "glass", "palagg", "sas", "dressing",
+                         "smaksattare", "delikatess", "barn", "kiosk")
+
+
+def is_composite(product):
+    words = search_text(f"{product.name} {getattr(product, 'canonical_name', '') or ''}").split()
+    if any(w in _COMPOSITE_WORDS or w.endswith("bas") and len(w) > 4 or any(stem in w for stem in _COMPOSITE_STEMS) for w in words):
+        return True
+    category = search_text(getattr(product, "category", "") or "")
+    return any(stem in category for stem in _COMPOSITE_CATEGORIES)
+
+
+# Fresh fruit, vegetables, mushrooms and herbs need no ingredient list under EU
+# 1169/2011 article 19: the product is its own single ingredient. Products whose
+# name points at one of the major allergens stay with the declaration rule.
+_PRODUCE_CATEGORIES = ("frukt gront", "frukt och gront", "frukt gront")
+_PRODUCE_NOT_SINGLE = (
+    "mix", "blandning", "rora", "juice", "smoothie", "torkad", "torkade", "inlagd", "inlagda", "marinerad",
+    "sas", "dressing", "soppa", "wok", "pesto", "chips", "snacks", "dipp", "kit", "fardig", "sallad mix",
+    "not", "mandel", "cashew", "pistage", "sesam", "senap", "soja", "edamame", "selleri", "lupin", "vete",
+    "fron", "karnor", "russin", "dadlar", "fikon", "aprikoser", "krutong",
+)
+
+
+def single_ingredient_by_rule(product):
+    """A fresh produce item that is its own and only ingredient."""
+    category = search_text(getattr(product, "category", "") or "")
+    if not any(category.startswith(c) for c in _PRODUCE_CATEGORIES):
+        return False
+    name = search_text(product.name)
+    return not any(stem in name for stem in _PRODUCE_NOT_SINGLE)
+
+
 def ingredient_composition(declarations):
     """A precautionary trace statement is distinct from ingredient occurrence."""
     return tuple(
@@ -196,7 +267,7 @@ def check_product(product, profile, facts=None, *, organic_animals=False):
     hard = profile.exclusions + profile.allergies
     # A positive conflict needs no claim about the completeness of other data.
     for term in hard:
-        if _contains(term, (product.name, product.canonical_name)) or (
+        if _contains(term, (product.name, product.canonical_name)) or mentions(term, product.name) or mentions(term, product.canonical_name) or (
             search_text(term) == "fisk" and getattr(product, "food_family", None) == "fish"
         ):
             raise PolicyConflict(f"{product.name} innehåller något du har valt bort: {term}.")
@@ -219,11 +290,18 @@ def check_product(product, profile, facts=None, *, organic_animals=False):
                 stage="policy_taste",
                 code="DATA_BLOCKED",
             )
-        if (
+        complete = not (
             facts is None
             or not facts.ingredients_complete
             or set(facts.conflicts) & {"ingredients", "identity_variant"}
-        ):
+        )
+        # Owner decision 2026-11-14: without a complete declaration, Ät inte
+        # is checked on the name, and only composite products need the
+        # declaration; an allergy accepts only fresh produce that is its own
+        # single ingredient. Everything else still fails closed.
+        if not complete and (single_ingredient_by_rule(product) or (not profile.allergies and not is_composite(product))):
+            hard = []
+        elif not complete:
             missing = (
                 "fullständig spårbar ingrediens-/allergeninformation"
                 if profile.allergies
@@ -234,10 +312,10 @@ def check_product(product, profile, facts=None, *, organic_animals=False):
                 stage="policy_taste",
                 code="DATA_BLOCKED",
             )
-        for term in profile.exclusions:
+        for term in (profile.exclusions if hard else ()):
             if _contains(term, ingredient_composition(facts.ingredients)):
                 raise PolicyConflict(f"{product.name} innehåller utesluten ingrediens: {term}.")
-        for term in profile.allergies:
+        for term in (profile.allergies if hard else ()):
             allergen = ALLERGENS[term]
             if allergen in facts.allergens_present or allergen in facts.allergens_trace:
                 raise PolicyConflict(f"{product.name}: innehåller eller kan innehålla spår av {allergen}.")

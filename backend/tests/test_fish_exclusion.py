@@ -42,8 +42,14 @@ def test_positive_species_in_compound_declaration_is_a_conflict():
 
 def test_unknown_ingredients_and_allergens_stay_blocked():
     product = SimpleNamespace(name="Naturell tofu", canonical_name="tofu", food_family="tofu")
+    # Owner decision 2026-11-14: Ät inte is checked on a plain product's name.
+    check_product(product, TasteProfile(exclusions=["fisk"]), evidence())
+    sauce = SimpleNamespace(name="Thaisås", canonical_name="thaisås", food_family=None)
     with pytest.raises(PolicyConflict) as error:
-        check_product(product, TasteProfile(exclusions=["fisk"]), evidence())
+        check_product(sauce, TasteProfile(exclusions=["fisk"]), evidence())
+    assert error.value.code == "DATA_BLOCKED"
+    with pytest.raises(PolicyConflict) as error:
+        check_product(product, TasteProfile(allergies=["fisk"]), evidence())
     assert error.value.code == "DATA_BLOCKED"
     with pytest.raises(PolicyConflict) as error:
         check_product(product, TasteProfile(allergies=["fisk"]), evidence(ingredients_complete=True))

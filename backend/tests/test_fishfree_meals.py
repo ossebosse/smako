@@ -64,14 +64,15 @@ def test_irrelevant_missing_facts_cannot_determine_ingredient_presence():
         organic=None,
     )
     check_product(product, TasteProfile(exclusions=["fisk"]), source)
-    with pytest.raises(PolicyConflict):
-        check_product(
-            product, TasteProfile(exclusions=["fisk"]), replace(source, ingredients_complete=False)
-        )
-    with pytest.raises(PolicyConflict):
-        check_product(
-            product, TasteProfile(exclusions=["fisk"]), replace(source, conflicts=("ingredients",))
-        )
+    # Owner decision 2026-11-14: Ät inte checks a plain product's name when its
+    # declaration is missing or disputed; a composite product still needs one.
+    check_product(product, TasteProfile(exclusions=["fisk"]), replace(source, ingredients_complete=False))
+    check_product(product, TasteProfile(exclusions=["fisk"]), replace(source, conflicts=("ingredients",)))
+    stock = SimpleNamespace(name="Grönsaksbuljong", canonical_name="grönsaksbuljong")
+    for changed in (replace(source, ingredients_complete=False), replace(source, conflicts=("ingredients",))):
+        with pytest.raises(PolicyConflict) as error:
+            check_product(stock, TasteProfile(exclusions=["fisk"]), changed)
+        assert error.value.code == "DATA_BLOCKED"
 
 
 def test_new_recipe_ground_requires_opt_in_and_exact_preparation():
