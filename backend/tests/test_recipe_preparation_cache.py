@@ -103,7 +103,11 @@ def test_changed_recipe_cannot_borrow_cached_validation_even_with_same_content_h
             assert verify.call_count == 3  # Failed validations are never stored.
 
 
-def test_planner_recipe_cache_preserves_each_product_source_unit_form_and_opt_in_check():
+def test_planner_recipe_cache_preserves_each_product_source_unit_form_and_opt_in_check(monkeypatch):
+    # This test changes the planner's facts in place to exercise its own
+    # per-request cache. Cross-request caches require immutable fact versions,
+    # so they are switched off here.
+    monkeypatch.setenv("SMAKO_PLANNER_SHARED_RESOLUTION", "0")
     recipe = recipe_preparation.adapt(original(), "panna")
     first = product("Tofu naturell Fast", 300, "g", 20, identity="first")
     second = product("Tofu naturell Fast", 500, "g", 25, identity="second")

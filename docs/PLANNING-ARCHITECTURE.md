@@ -102,6 +102,32 @@ ingrediensförteckning, så varje allergi och varje Ät inte gav ingen plan.
 - Allergier begränsar därför fortfarande planerna kraftigt tills fler
   deklarationer hämtas in, styrt av receptbibliotekets efterfrågan.
 
+## Näring som går snabbt och alltid syns (steg 3, 2026-11-15)
+
+- **Delad näringsevidens.** `PersonalPlanner.nutrition_evidence` läser per
+  100 g-evidens för en vara och receptingrediens. Den beräknas nu för alla fyra
+  makron (energi, protein, kolhydrater, fett) på en gång och delas mellan
+  förfrågningar i `planner_shared_cache.SHARED_NUTRITION`, med scope = exakt
+  förberett prisunivers (svag referens), `facts_version`, näringsreferensens
+  version och inställningar. En fråga om en del av makrona återanvänder
+  evidensen; en deklaration med bara några av de fyra behåller sin deklaration
+  för de fält den har. Saknas evidens för alla fyra saknas den också för en
+  del (alla evidenskällor bär alla fyra). Inga portionskontroller, korgar eller
+  priser delas. Gränsen är 400 000 poster (`SMAKO_SHARED_NUTRITION_ENTRIES`),
+  `SMAKO_PLANNER_SHARED_RESOLUTION=0` stänger av. På frusen data
+  2026-10-23 (Malmö): första näringsbegränsade planen 105 s lokalt, därefter
+  36–42 s för nya gränser (tidigare 77–94 s).
+- **Uppvärmning.** Vid start och efter varje aktiverat prisunivers schemalägger
+  appen `nutrition_prewarm` (oberoende av den vanliga planuppvärmningen, som är
+  avstängd på beta): en vanlig planförfrågan med gränser som alltid uppfylls
+  (protein/kolhydrater/fett ≥ 0, energi ≤ 4000 kcal) för middag, frukost och
+  mellanmål. Den körs bara när planeraren är ledig (`only_if_idle`), med 45 s
+  egen tidsgräns, och sparar ingen plan. `SMAKO_NUTRITION_PREWARM=0` stänger av.
+- **Näring alltid.** Den slutliga planen visar näring per portion även utan
+  gränser, när varje ingrediens har värden (alla fyra, annars de som går).
+  Det stoppar aldrig en plan och ändrar inget val. Antal portioner påverkar
+  inte värdet per portion; portionsvikt är fortsatt ett filter.
+
 ## Förpackningsvikt när avrunnen vikt saknas (ägarbeslut 2026-11-13)
 
 Vill ett recept ha en vara avrunnen (`cooked_drained`, `preserved_drained`)

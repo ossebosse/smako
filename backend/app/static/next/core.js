@@ -120,9 +120,11 @@
     if (!/^\d{5}$/.test(postal)) throw new Error("Ange ett postnummer med fem siffror.");
     const data = await api(`/api/shopping-location?postal_code=${encodeURIComponent(postal)}`);
     if (data.status !== "eligible" || !data.contexts?.length) throw new Error("Vi har inga butiker med priser nära det postnumret än. Just nu finns Smako i Lund och Malmö.");
-    S.location = data; saved.postcode = postal; chooseStores(); clearError(); emit();
+    S.location = data; saved.postcode = postal; saved.area = data.area_postal_code; chooseStores(); clearError(); emit();
     return data;
   }
+  // Products are prepared per area; a typed postcode is first resolved to its area (Lund, Malmö …).
+  const areaCode = () => S.location?.area_postal_code || saved.area || saved.postcode || "22350";
   const placeText = () => S.location ? `${S.location.municipality_name || S.location.area_name} · ${S.storeIds.length} ${S.storeIds.length === 1 ? "butik" : "butiker"}` : "Välj postnummer";
 
   // ---- Own items -----------------------------------------------------------
@@ -142,7 +144,7 @@
     clearError();
     const keys = product.matches?.length > 1 ? product.matches.map(m => m.product_key) : [product.product_key];
     if (keys.length > 8) throw new Error("Varan finns i för många varianter. Skriv mer av namnet.");
-    const link = await api("/api/personal/product-generic", { query: (typed || product.name || "vara").slice(0, 120), postal_code: saved.postcode || "22350", product_keys: keys });
+    const link = await api("/api/personal/product-generic", { query: (typed || product.name || "vara").slice(0, 120), postal_code: areaCode(), product_keys: keys });
     const packs = Boolean(product.purchase_units);
     S.items.push({ id: uuid(), kind: keys.length > 1 ? "one_of" : "exact", query: (product.display_name || product.name).slice(0, 120), quantity: packs ? 1 : product.package_quantity, unit: packs ? "st" : product.package_unit,
       ...(packs ? { purchase_units: true } : {}), product_key: keys.length > 1 ? null : keys[0],
@@ -156,7 +158,7 @@
     const keys = row.alternatives?.length ? row.alternatives : row.product_key ? [row.product_key] : [];
     if (!keys.length || keys.length >= 8) return Promise.resolve([]);
     const cacheKey = keys.join(",");
-    if (!sameCache.has(cacheKey)) sameCache.set(cacheKey, api("/api/personal/same-product", { query: row.query.slice(0, 120), postal_code: saved.postcode || "22350", product_keys: keys, ...(row.generic ? { generic: row.generic } : {}) })
+    if (!sameCache.has(cacheKey)) sameCache.set(cacheKey, api("/api/personal/same-product", { query: row.query.slice(0, 120), postal_code: areaCode(), product_keys: keys, ...(row.generic ? { generic: row.generic } : {}) })
       .then(data => data.products.slice(0, 8 - keys.length)).catch(() => []));
     return sameCache.get(cacheKey);
   }
@@ -165,7 +167,7 @@
     const keys = row.alternatives?.length ? row.alternatives : [row.product_key];
     const names = row.alternative_names?.length ? row.alternative_names : [row.query];
     const all = [...keys, ...others.map(o => o.product_key)];
-    const link = await api("/api/personal/product-generic", { query: row.query.slice(0, 120), postal_code: saved.postcode || "22350", product_keys: all, ...(row.generic ? { generic: row.generic } : {}) });
+    const link = await api("/api/personal/product-generic", { query: row.query.slice(0, 120), postal_code: areaCode(), product_keys: all, ...(row.generic ? { generic: row.generic } : {}) });
     Object.assign(row, { kind: "one_of", product_key: null, alternatives: all, alternative_names: [...names, ...others.map(o => o.display_name)], properties: [], generic: link.generic });
     await saveItems();
   }
@@ -180,7 +182,7 @@
   async function suggestions(text, signal) {
     const [interpreted, found] = await Promise.all([
       api("/api/personal/interpret-extra", { text }).catch(error => ({ error: error.message })),
-      fetch(`/api/personal/shopping-suggestions?q=${encodeURIComponent(text)}&postal_code=${encodeURIComponent(saved.postcode || "22350")}`, { cache: "no-store", credentials: "same-origin", signal }).then(read),
+      fetch(`/api/personal/shopping-suggestions?q=${encodeURIComponent(text)}&postal_code=${encodeURIComponent(areaCode())}`, { cache: "no-store", credentials: "same-origin", signal }).then(read),
     ]);
     const generics = found.generics || [], typedName = interpreted.error ? null : interpreted.query.toLowerCase();
     const options = [], seen = new Set();
@@ -689,7 +691,7 @@
   }
   setInterval(() => { if (S.busy) emit(); }, 1000);
 
-  window.SmakoNext = { el, button, money, number, amount, S, saved, persist, on, emit, start, lookup, placeText, postcodeBox, storePicker, itemsEditor, settings, settingsSummary, recipesView, storesView, usedView, busyView, showBusy, errorView,
+  window.SmakoNext = { el, button, money, number, amount, S, saved, persist, on, emit, start, lookup, placeText, postcodeBox, storePicker, itemsEditor, settings, settingsSummary, recipesView, storesView, areaCode, usedView, busyView, showBusy, errorView,
     calculateList, createPlan, updateListInPlan, forgetPlan, planHasRecipes, itemsChanged, basket, totalText, guest, set,
     // Used by mine.js (account, pantry, registering what was bought).
     api, change, keep, loadState, refreshState, suggestions, uuid, capital, stepOf, isNonfood: text => NONFOOD.test(text) };

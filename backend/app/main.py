@@ -117,6 +117,11 @@ async def lifespan(application: FastAPI) -> AsyncIterator[None]:
     # This fills only process-local caches against the artifact activated
     # above.  It is disabled by default, makes no provider request and its
     # per-profile failure boundary never swaps or invalidates the universe.
+    # Nutrition evidence for the planner's shared cache (step 3, 2026-11-15),
+    # only while the planner is idle; independent of the standard prewarm.
+    from app.services.nutrition_prewarm import schedule_nutrition_prewarm
+    for active in GLOBAL_PREPARED_PRICE_UNIVERSES.active_universes():
+        schedule_nutrition_prewarm(application, settings, active)
     if settings.price_universe_prewarm_enabled:
         from app.services.plan_prewarm import schedule_plan_prewarm
         for active in GLOBAL_PREPARED_PRICE_UNIVERSES.active_universes():
@@ -129,6 +134,8 @@ async def lifespan(application: FastAPI) -> AsyncIterator[None]:
         background = getattr(application.state, 'background_plan_prewarm', None)
         if background is not None:
             await background.close()
+        from app.services.nutrition_prewarm import close_nutrition_prewarm
+        await close_nutrition_prewarm(application)
         await application.state.plan_jobs.close()
         community_engine = getattr(application.state, "community_evidence_engine", None)
         if community_engine is not None:

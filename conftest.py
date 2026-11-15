@@ -103,6 +103,10 @@ def pytest_collection_modifyitems(config, items):
             item.add_marker(_pytest.mark.xfail(strict=True, reason="Känt fel på main före 2026-10-16; se docs/TESTING.md"))
 
 
+# The nutrition prewarm runs a whole planner request in the background after
+# startup; tests that want it turn it on themselves.
+os.environ.setdefault("SMAKO_NUTRITION_PREWARM", "0")
+
 # --- Process-local planner reuse ---------------------------------------------
 # Tests patch matchers, facts and price helpers on shared fixtures. Start every
 # test with an empty cross-request resolution cache so one test's patched result
@@ -114,10 +118,13 @@ def _empty_shared_planner_resolution():
     except ImportError:  # grocery_data-only test runs
         yield
         return
+    from app.services.planner_shared_cache import SHARED_NUTRITION
     SHARED_RESOLUTION.clear()
+    SHARED_NUTRITION.clear()
     _clear_qualification_memory()
     yield
     SHARED_RESOLUTION.clear()
+    SHARED_NUTRITION.clear()
     _clear_qualification_memory()
 
 
