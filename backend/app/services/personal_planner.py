@@ -49,6 +49,7 @@ INFORMATIONAL_NUTRIENTS = ("kcal", "protein_g", "carbs_g", "fat_g")
 
 _MACROS = frozenset(INFORMATIONAL_NUTRIENTS)
 from app.services.personal_policy import (
+    LIKE_MISSING_KR,
     TASTE_WEIGHT_KR,
     PolicyConflict,
     check_product,
@@ -61,6 +62,7 @@ from app.services.personal_policy import (
     preference_score,
     properties_match,
     protein_category,
+    recipe_names,
 )
 from app.services.personal_store import available_items, consumed_demands, demand_key
 from app.services.plan_jobs import PlanningDeadlineExceeded
@@ -3327,7 +3329,9 @@ class PersonalPlanner:
         recipes = [s.recipe for s in slots if s.recipe]
         tastes = preference_score(recipes, self.spec.profile)
         tastes += sum(preference_score([s.recipe], self.meals[s.meal_type].profile) for s in slots if s.recipe)
-        return tastes * TASTE_WEIGHT_KR
+        dinners = [s.recipe for s in slots if s.recipe and s.meal_type == "dinner"]
+        missing = sum(not any(recipe_names(t, r) for r in dinners) for t in getattr(self, "_required_likes", ()))
+        return tastes * TASTE_WEIGHT_KR + missing * LIKE_MISSING_KR
 
     def _week_purchase_key(self, basket, preparations=(), slots=()):
         """Paid total plus the extra-store and taste costs (owner decisions 2026-11-15), then surplus."""
@@ -4093,12 +4097,29 @@ class PersonalPlanner:
         # choices leave recipes of both kinds.
         dinner_meal = self.meals.get("dinner")
         mixed_count = None
-        if (generating and replace_slot is None and dinner_meal is not None and dinner_meal.diet == "mixed"
+        if ((generating or replace_slot is not None) and dinner_meal is not None and dinner_meal.diet == "mixed"
                 and not dinner_meal.distribution and dinner_count >= 2):
-            kinds = {self._protein_category(r) for r in dinner_pool}
-            if "vegetarian" in kinds and kinds - {"vegetarian"}:
+            if replace_slot is None:
+                kinds = {self._protein_category(r) for r in dinner_pool}
+                possible = "vegetarian" in kinds and bool(kinds - {"vegetarian"})
+            else:
+                # Replacing one dinner: keep the week mixed when that place can.
+                fixed = {self._protein_category(g[0].recipe) for g in options
+                         if len(g) == 1 and g[0].meal_type == "dinner" and g[0].recipe and g[0].id != replace_slot}
+                target = next((g for g in options if any(s.id == replace_slot for s in g)), [])
+                kinds = {self._protein_category(s.recipe) for s in target if s.meal_type == "dinner" and s.recipe}
+                need = {"vegetarian"} - fixed | ({"animal"} if not fixed - {"vegetarian"} else set())
+                possible = bool(target) and len(need) <= 1 and all(
+                    any((k == "vegetarian") == (n == "vegetarian") for k in kinds) for n in need)
+            if possible:
                 mixed_count = dinner_count
 
+        # Owner decision 2026-11-15: each like that a dinner allowed by the other
+        # choices names is in at least one dinner (LIKE_MISSING_KR, _preference_cost).
+        likes = list(dict.fromkeys([*self.spec.profile.likes, *(dinner_meal.profile.likes if dinner_meal else [])]))
+        new_week = generating and replace_slot is None
+        self._required_likes = tuple(t for t in likes if new_week and any(recipe_names(t, r) for r in dinner_pool))
+        self._unavailable_likes = tuple(t for t in likes if new_week and t not in self._required_likes)
         preference_cost = self._preference_cost
 
         def accepts(chosen, *, final):
@@ -4378,6 +4399,16 @@ class PersonalPlanner:
             "tie_break_enabled": self.spec.surplus_mode == "minimize",
             "description": "Kvarvarande andel av betald varukostnad, utan pant. Jämförs först vid samma inköpssumma; dras aldrig av från köpbeloppet. Mängder i olika enheter redovisas separat.",
         }
+        # Which dinners name each like. For a new week also which likes had no
+        # dinner that suits the other choices, or did not fit.
+        dinners = [s for s in chosen if s.meal_type == "dinner" and s.recipe]
+        liked = [{"term": term, "slot_ids": ids,
+                  "status": "included" if ids else "not_included" if term in self._required_likes else "not_available"}
+                 for term in likes
+                 for ids in [[s.id for s in dinners if recipe_names(term, s.recipe)]]
+                 if ids or term in self._required_likes or term in self._unavailable_likes]
+        if liked:
+            result["checks"]["likes"] = liked
         if self.complete:
             from app.services.recipe_week_variation import week_summary
             result["checks"]["week_distribution"] = week_summary(

@@ -424,10 +424,19 @@ def distribution_ok(slots, meals, *, partial=False, classify=protein_category):
 # with a liked ingredient may cost this much more per like, a disliked one
 # this much less. Counted per recipe, so two chicken dinners weigh twice.
 TASTE_WEIGHT_KR = 15
+# Owner decision 2026-11-15: every like is in at least one dinner when the
+# other choices allow it. A week without it ranks as this much dearer, so the
+# search always finds a plan; the plan marks how much the like costs.
+LIKE_MISSING_KR = 1000
 
 
 def _names_term(term, names):
     return _contains(term, names) or any(mentions(term, name) for name in names)
+
+
+def recipe_names(term, recipe):
+    """Whether the recipe's name or an ingredient names the term (compounds included)."""
+    return _names_term(term, [recipe.name, *(i.name for i in recipe.ingredients)])
 
 
 def preference_score(recipes, profile):
@@ -439,9 +448,8 @@ def preference_score(recipes, profile):
     """
     score = 0
     for recipe in recipes:
-        names = [recipe.name, *(i.name for i in recipe.ingredients)]
-        score += sum(_names_term(v, names) for v in profile.dislikes)
-        score -= sum(_names_term(v, names) for v in profile.likes)
+        score += sum(recipe_names(v, recipe) for v in profile.dislikes)
+        score -= sum(recipe_names(v, recipe) for v in profile.likes)
     return score
 
 

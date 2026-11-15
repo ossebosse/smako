@@ -55,7 +55,9 @@ class Fake:
         return {"plan_id": "plan-1", "revision": revision, "request": request,
                 "plan": {"personal": {"slots": [{"id": "dinner-1", "day": 1, "meal_type": "dinner", "recipe": recipe}],
                                       "checks": {"nutrition": [{"slot_id": "dinner-1", "status": "ESTIMATED", "values": {"kcal": 640.4, "protein_g": 38.2, "carbs_g": 52, "fat_g": 29.6}}],
-                                                 "used_ingredient_cost": 42.1, "new_purchase_used_cost": 42.1, "used_cost_basis": {"quantity_status": "ESTIMATED"}},
+                                                 "used_ingredient_cost": 42.1, "new_purchase_used_cost": 42.1, "used_cost_basis": {"quantity_status": "ESTIMATED"},
+                                                 "likes": [{"term": t, "slot_ids": ["dinner-1"] if t == "potatis" else [], "status": "included" if t == "potatis" else "not_available"}
+                                                           for t in (request or {}).get("personal", {}).get("profile", {}).get("likes", [])]},
                                       "needs": [{"key": "nötfärs"}, {"key": "gul lök"}],
                                       "allocations": [{"name": "potatis", "quantity": 600, "unit": "g"}] if home else [],
                                       "at_home": [{"name": n, "quantity": 5, "unit": "g", "sources": ["dinner-1"]}
@@ -108,6 +110,10 @@ class Fake:
             if self.job:
                 return 202, {"status": "pending", "status_url": "/api/plan-jobs/j1", **self.job[0]}
             return 201, self.plan(self.job_request)
+        if path == "personal/plans/plan-1/change" and body.get("preview_without_like"):
+            cheaper = {"name": "Linsgryta med ris", "servings": 2, "instructions": ["Koka linserna."], "ingredients": [{"name": "linser", "quantity": 200, "unit": "g"}]}
+            return 200, {"preview": {"slot_id": body["slot_id"], "like": body["preview_without_like"], "recipe_id": "lins:1:a", "recipe": cheaper,
+                                     "total": 41.4, "current_total": 63.4, "saving": 22.0}}
         if path == "personal/plans/plan-1/change":
             if body["action"] == "purchase":
                 if "s1|p-lok|gul lök" not in body.get("measured_purchase_quantities", {}):
@@ -445,16 +451,19 @@ def test_staples_at_home_are_asked_and_not_bought(ui):
         page.get_by_role("button", name="Nästa").click()
         page.get_by_role("button", name="Nästa").click()
     home = page.get_by_role("group", name="Har du hemma?")
-    home.get_by_role("button", name="Salt", exact=True).click()
-    home.get_by_role("button", name="Torkade kryddor").click()
+    # Salt, pepper and rapeseed oil are ticked from the start; olive oil is not.
     expect(home.get_by_role("button", name="Salt", exact=True)).to_have_attribute("aria-pressed", "true")
+    expect(home.get_by_role("button", name="Olivolja")).to_have_attribute("aria-pressed", "false")
+    home.get_by_role("button", name="Svartpeppar").click()
+    home.get_by_role("button", name="Torkade kryddor").click()
+    expect(home.get_by_role("button", name="Svartpeppar")).to_have_attribute("aria-pressed", "false")
     shot("hemma")
     if name == "b":
         page.get_by_role("button", name="Nästa").click()
     page.get_by_role("button", name="Skapa matplan").click()
     expect(page.get_by_role("heading", name="Din matplan" if name == "a" else "Veckans recept", exact=True)).to_be_visible()
     sent = next(body for method, path, body in fake.calls if path == "plans")
-    assert sent["personal"]["staples_at_home"] == ["salt", "oregano", "timjan", "spiskummin", "paprikapulver",
+    assert sent["personal"]["staples_at_home"] == ["salt", "rapsolja", "oregano", "timjan", "spiskummin", "paprikapulver",
                                                    "rökt paprikapulver", "kanel", "chiliflakes", "gurkmeja"]
     # Three dinners: at most two with the same main protein.
     assert sent["recipe_preferences"]["max_same_main_protein_dinners"] == 2
@@ -462,4 +471,37 @@ def test_staples_at_home_are_asked_and_not_bought(ui):
         page.goto(re.sub(r"#.*", "#handla", page.url))
     else:
         page.get_by_role("button", name="Visa handlingslistan").click()
-    expect(page.get_by_text(re.compile("Har du hemma, behöver inte köpas: salt, oregano"))).to_be_visible()
+    expect(page.get_by_text(re.compile("Har du hemma, behöver inte köpas: salt, rapsolja, oregano"))).to_be_visible()
+
+
+def test_a_liked_dinner_shows_its_cost_and_a_cheaper_recipe(ui):
+    name, page, fake, shot = ui
+    page.evaluate("""() => { const s = JSON.parse(localStorage.getItem("smako.next.v1") || "{}");
+        s.settings = { ...(s.settings || {}), likes: ["potatis", "oxfilé"] }; localStorage.setItem("smako.next.v1", JSON.stringify(s)); }""")
+    page.reload()
+    if name == "a":
+        page.goto(re.sub(r"#.*|$", "#mat", page.url, count=1))
+    else:
+        page.get_by_role("button", name=re.compile("Planera mat och handla")).click()
+    page.get_by_label("Ditt postnummer").fill("22350")
+    page.get_by_role("button", name="Hitta butiker").click()
+    if name == "b":
+        for _ in range(3):
+            page.get_by_role("button", name="Nästa").click()
+    # Salt, pepper and rapeseed oil are ticked from the start.
+    page.get_by_role("button", name="Skapa matplan").click()
+    expect(page.get_by_text("Du gillar potatis · 22,00 kr dyrare än billigaste alternativet")).to_be_visible()
+    expect(page.get_by_text("Vi hittade ingen middag med oxfilé som passar dina val.")).to_be_visible()
+    sent = next(body for method, path, body in fake.calls if path == "plans")
+    assert sent["personal"]["staples_at_home"] == ["salt", "svartpeppar", "rapsolja"]
+    preview = next(body for method, path, body in fake.calls if body and body.get("preview_without_like"))
+    assert preview["action"] == "replace" and preview["slot_id"] == "dinner-1" and preview["preview_without_like"] == "potatis"
+    page.get_by_role("button", name="Visa billigare recept").click()
+    dialog = page.get_by_role("dialog", name="Billigare recept")
+    expect(dialog.get_by_role("heading", name="Linsgryta med ris")).to_be_visible()
+    expect(dialog.get_by_text("Hela inköpet blir 22,00 kr billigare än med pannbiff med lök och potatis.")).to_be_visible()
+    shot("billigare")
+    dialog.get_by_role("button", name="Byt till det här").click()
+    expect(page.get_by_role("dialog", name="Billigare recept")).to_have_count(0)
+    switched = [body for method, path, body in fake.calls if path.endswith("/change") and body.get("recipe_id")]
+    assert switched and switched[-1]["recipe_id"] == "lins:1:a" and switched[-1]["action"] == "replace"

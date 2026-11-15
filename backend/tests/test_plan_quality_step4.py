@@ -1,11 +1,13 @@
 """Step 4: plans that feel reasonable (owner decisions 2026-11-15, docs/PLANNING-ARCHITECTURE.md)."""
 from typing import get_args
 
+import pytest
 from app.config import Settings
 from app.models import PlanRequest
 from app.models.personal import (
     MealSettings,
     MealSlot,
+    PersonalMutation,
     PersonalPlanning,
     PortionLimits,
     Staple,
@@ -13,8 +15,14 @@ from app.models.personal import (
 )
 from app.models.recipe import Recipe, RecipeIngredient
 from app.services.personal_planner import PersonalPlanner
-from app.services.personal_policy import TASTE_WEIGHT_KR, mixed_week_ok, preference_score
+from app.services.personal_policy import (
+    LIKE_MISSING_KR,
+    TASTE_WEIGHT_KR,
+    mixed_week_ok,
+    preference_score,
+)
 from app.services.staples import STAPLES, reference_identity
+from pydantic import ValidationError
 
 from backend.tests.test_personal_planning_v2 import NOW, prepared, product, request, run, state
 
@@ -111,3 +119,23 @@ def test_staple_vocabulary_matches_the_request_model_and_references():
     assert set(STAPLES) == set(get_args(Staple))
     assert reference_identity("salt", "g") == "slv:1975:ready"
     assert reference_identity("rapsolja", "ml") is None  # The reviewed reference is per gram.
+
+
+def test_a_week_without_a_required_like_ranks_as_much_dearer():
+    spec = PersonalPlanning(profile=TasteProfile(likes=["kyckling"]), meals=[MealSettings(count=2, servings=2)])
+    p = PersonalPlanner(PlanRequest(recipes=2, servings=2, personal=spec), Settings(),
+                        prepared(product("salt", 1000, "g", 8)), state(), facts={}, now=NOW)
+    p._required_likes = ("kyckling",)
+    chicken = MealSlot(id="a", day=1, meal_type="dinner", recipe=dish("Kycklinggryta", "kycklingfilé"))
+    lentils = MealSlot(id="b", day=2, meal_type="dinner", recipe=dish("Linssoppa", "linser"))
+    assert p._preference_cost([chicken, lentils]) == -TASTE_WEIGHT_KR
+    assert p._preference_cost([lentils]) == LIKE_MISSING_KR
+    assert LIKE_MISSING_KR >= 1000
+
+
+def test_the_cheaper_recipe_preview_is_only_for_replacing_one_dinner():
+    PersonalMutation(revision=1, pantry_revision=0, action="replace", slot_id="d", preview_without_like="kyckling")
+    for wrong in ({"action": "remove", "slot_id": "d"}, {"action": "replace"},
+                  {"action": "replace", "slot_id": "d", "recipe_id": "x:1:a"}):
+        with pytest.raises(ValidationError):
+            PersonalMutation(revision=1, pantry_revision=0, preview_without_like="kyckling", **wrong)

@@ -144,20 +144,32 @@ lösningar från lägre butikstak och i den nedre gränsen
   ekologisk andel, näringsgränser eller "Större köp går bra" söker de stegen
   egna butiksuppsättningar upp till taket; där gäller regeln bara i
   rangordningen. Användarens butikstak är fortfarande ett tak.
-- **"Gillar" ger effekt** (`TASTE_WEIGHT_KR` = 15 kr). Varje recept som
-  nämner en gillad term (receptnamn eller ingrediens, även i sammansatta ord:
-  "kycklingfilé" nämner kyckling) får vara 15 kr dyrare per term; ett recept
-  med något som inte gillas räknas 15 kr dyrare. Tidigare räknades en gillad
-  term högst en gång per vecka och bara som 2 kr, och bibliotekssökningen
-  rangordnade efter enbart pris, så "Gillar" märktes inte. På frusen data
-  (Lund, 3 middagar) ger "gillar linser" två linsrätter för 10 kr mer;
-  "gillar kyckling" ändrar inget eftersom den billigaste kycklingveckan
-  kostar 39 kr mer.
+- **"Gillar": minst en rätt, med pris och billigare alternativ.** Varje
+  gillad term (receptnamn eller ingrediens, även i sammansatta ord:
+  "kycklingfilé" nämner kyckling) som någon middag som passar de övriga valen
+  nämner finns i minst en middag i en ny vecka. En vecka utan den räknas som
+  `LIKE_MISSING_KR` = 1000 kr dyrare i rangordningen, så sökningen alltid hittar
+  en plan; går det inte står det i `checks.likes` (`not_included`), och saknas
+  sådana recept helt står `not_available`. Utöver det väger varje recept med
+  en gillad term 15 kr (`TASTE_WEIGHT_KR`), så fler gillade rätter kommer med
+  när de nästan inte kostar något. Ett recept med något som inte gillas räknas
+  15 kr dyrare. Tidigare räknades en gillad term högst en gång per vecka och
+  bara som 2 kr, och bibliotekssökningen rangordnade efter enbart pris.
+  Provgränssnitten frågar sedan i bakgrunden, en plats i taget (högst tre),
+  efter det billigaste andra receptet för den gillade rätten
+  (`change` med `action: replace` och `preview_without_like`): samma byte som
+  "Byt recept", utan den gillade termen och utan det nuvarande receptet, och
+  inget sparas. Receptkortet visar "Du gillar kyckling · 27,55 kr dyrare än
+  billigaste alternativet" och knappen "Visa billigare recept"; popupen visar
+  receptet och byter med `recipe_id`. Byte av ett recept kräver inte gillningen
+  igen. På frusen data (Lund, 3 middagar) ger "gillar kyckling" en kycklingrätt
+  (176,96 kr i stället för 144,17 kr) och billigaste alternativet är
+  falukorv (162,17 kr); förhandsvisningen tog 52 s lokalt.
 - **"Allt" betyder blandat** (`mixed_week_ok`). Med kostvalet Allt, två eller
   fler middagar och ingen egen fördelning har minst en middag kött, kyckling,
-  fisk eller skaldjur och minst en är vegetarisk. Regeln gäller nya veckor,
-  inte byte av ett enskilt recept, och bara när de övriga valen lämnar recept
-  av båda slagen (annars vore den omöjlig). Delveckor godtas så länge de
+  fisk eller skaldjur och minst en är vegetarisk. Regeln gäller nya veckor och
+  byte av ett recept, men bara när de övriga valen (vid byte: den platsens
+  recept) gör den möjlig. Delveckor godtas så länge de
   återstående platserna kan uppfylla den. På frusen data blir veckan 144 kr
   med falukorv i stället för tre tofu- och kikärtsrätter för 134 kr.
 - **Omväxling som standard i provgränssnitten.** Med tre eller fler middagar
@@ -165,7 +177,8 @@ lösningar från lägre butikstak och i den nedre gränsen
   (`recipe_week_variation`): högst två middagar med samma huvudprotein.
 - **"Har du hemma?"** (`personal.staples_at_home`, `app/services/staples.py`).
   Personen kan bocka för salt, svartpeppar, rapsolja, olivolja, socker,
-  vetemjöl och torkade kryddor. En förbockad basvara köps inte till
+  vetemjöl och torkade kryddor. Salt, svartpeppar och rapsolja är förbockade
+  från början (ägarbeslut 2026-11-15). En förbockad basvara köps inte till
   recepten och redovisas i `personal.at_home`. Det är ett påstående från
   personen, inte en skafferimängd: inget reserveras eller dras av, och raden
   ingår inte i `remaining_demands`. Basvaran köps ändå när måltiden har
