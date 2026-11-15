@@ -170,7 +170,7 @@
     async function addProduct(product, typed = "") {
       if (product.purchase_units || product.campaign_choice) throw new Error("Vi vet inte hur mycket förpackningen innehåller. Skriv varan med mängd i stället, till exempel 500 g.");
       const name = (product.display_name || product.name).slice(0, 120);
-      const facts = await api(`/api/personal/pantry-product?product_key=${product.product_key}&postal_code=${encodeURIComponent(N.saved.postcode || "22350")}&name=${encodeURIComponent(typed.slice(0, 120))}`);
+      const facts = await api(`/api/personal/pantry-product?product_key=${product.product_key}&postal_code=${encodeURIComponent(N.areaCode())}&name=${encodeURIComponent(typed.slice(0, 120))}`);
       if (!facts.usable_quantity || !facts.usable_unit) throw new Error("Vi vet inte hur mycket förpackningen innehåller. Skriv varan med mängd i stället, till exempel 500 g.");
       await addToPantry({ name, quantity: facts.usable_quantity, unit: facts.usable_unit, product_key: product.product_key, food: facts.food });
       done(facts.less_than_package ? `${name} · ${facts.estimated ? "ungefär " : ""}${amount(facts.usable_quantity, facts.usable_unit)} utan spad`

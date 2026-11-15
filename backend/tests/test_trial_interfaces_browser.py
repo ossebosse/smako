@@ -30,6 +30,7 @@ class Fake:
         self.owner = "guest"
         self.states = {name: {"revision": 0, "items": [], "shopping_items": [], "ledger": []} for name in ("guest", "account")}
         self.calls = []
+        self.queries = []
 
     @property
     def state(self):
@@ -60,11 +61,12 @@ class Fake:
 
     def answer(self, method, path, query, body):
         self.calls.append((method, path, body))
+        self.queries.append((path, query))
         s = self.state
         if path == "personal/state":
             return 200, self.public()
         if path == "shopping-location":
-            return 200, {"status": "eligible", "postal_code": "22350", "area_postal_code": "22350", "municipality_name": "Lund", "area_name": "Lund",
+            return 200, {"status": "eligible", "postal_code": query.get("postal_code", "22350"), "area_postal_code": "22350", "municipality_name": "Lund", "area_name": "Lund",
                          "contexts": [{"context_id": "s1", "display_name": "Testbutiken Lund", "address": "Storgatan 1", "distance_km": 1.2}]}
         if path == "personal/interpret-extra":
             match = re.fullmatch(r"(.+?)\s+(\d+)\s*(kg|g|st|l)", body["text"].strip())
@@ -299,6 +301,26 @@ def test_each_meal_has_its_own_distribution_weight_and_nutrition_like_personal(u
     assert meals[2]["limits"] == {}
     assert [m["max_same_base_meals"] for m in meals] == [2, 2, None]
     shot("naring-recept")
+
+
+def test_searches_use_the_area_of_a_typed_postcode(ui):
+    """A Lund postcode other than the area's own still finds Lund's products."""
+    name, page, fake, shot = ui
+    page.goto(re.sub(r"#.*|$", "#lista" if name == "a" else "", page.url, count=1))
+    if name == "b":
+        page.get_by_role("button", name=re.compile("Planera mat och handla")).click()
+    page.get_by_label("Ditt postnummer").fill("22362")
+    page.get_by_role("button", name="Hitta butiker").click()
+    expect(page.get_by_text("Lund", exact=False).first).to_be_visible()
+    if name == "b":
+        page.get_by_role("button", name="Nästa").click()
+        page.get_by_role("button", name="Nästa").click()
+        page.get_by_role("button", name="Nästa").click()
+    with page.expect_response(lambda r: "shopping-suggestions" in r.url) as searched:
+        page.locator(".items input:visible").first.fill("kikärtor")
+    assert "postal_code=22350" in searched.value.url
+    asked = [q for path, q in fake.queries if path == "personal/shopping-suggestions"]
+    assert asked and {q["postal_code"] for q in asked} == {"22350"}
 
 
 def test_rice_by_name_is_not_enough_so_a_chosen_product_is_offered(ui):
