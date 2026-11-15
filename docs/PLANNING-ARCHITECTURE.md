@@ -300,8 +300,18 @@ och visas för användaren. Original-B behålls som negativt underlag. B2
 behåller dess 52 butiks-ID:n och övriga val men markerar bara den tidigare
 huvudråvarustandarden som känd standard. Det är ett nytt acceptansfall.
 
-Samma absoluta serverdeadline följer nya och personliga ändringsanrop genom
-kö, async-jobb, tråd, inre loopar och transaktion. Timeout före commit rullar
+**Ägarbeslut 2026-11-14: tidsgränsen räknas från att motorn börjar.** Tiden i
+planerarens kö (admission) räknas inte in i planerarens 60 s. När en begäran
+väntar på en ledig plats pausas dess timers (`pause_engine_clock`), och när den
+släpps in flyttas alla omslutande deadlines och asyncio-timers fram med kötiden
+(`start_engine_clock`). Arbetet efter insläppet, inklusive checkout, audit och
+sparning, har fortfarande sina 60 s. Jobbstatus visar `engine.elapsed_seconds`
+och `engine.limit_seconds` efter insläppet. Klientens klocka från knapptrycket
+visas separat och ändras inte. Mätningar av latens ska därför redovisa kötid och
+motortid var för sig.
+
+Samma serverdeadline (räknad från insläppet enligt ovan) följer nya och
+personliga ändringsanrop genom async-jobb, tråd, inre loopar och transaktion. Timeout före commit rullar
 tillbaka revision, reservationer och mutationskvitto. En full revision som
 redan committat kan identifieras i timeoutstatus och återläsas genom ägd GET
 eller identiskt återförsök utan dubbel revision. Ett sent färdigt resultat

@@ -124,8 +124,16 @@ class PlannerAdmissionController:
         cleanup_token = None
         try:
             from app.services.performance_trace import performance_span
-            with performance_span("planner_queue_wait"):
-                await self._capacity.acquire()
+            from app.services.plan_jobs import pause_engine_clock, start_engine_clock
+
+            # The planning time limit starts when the engine starts, not in the queue.
+            queued_from = perf_counter()
+            pause_engine_clock()
+            try:
+                with performance_span("planner_queue_wait"):
+                    await self._capacity.acquire()
+            finally:
+                start_engine_clock(perf_counter() - queued_from)
             acquired = True
             async with self._state_lock:
                 self._queued -= 1

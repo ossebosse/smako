@@ -12,7 +12,7 @@ import traceback
 from collections.abc import Awaitable, Callable
 from contextlib import contextmanager
 from contextvars import ContextVar
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from threading import Event
 from time import monotonic
 from uuid import uuid4
@@ -39,14 +39,41 @@ def cancellable_work():
 _planning_deadline: ContextVar = ContextVar("planning_deadline", default=None)
 
 
+@dataclass
+class _DeadlineClock:
+    """Shared by the nested deadlines of one request.
+
+    Owner decision 2026-11-14: the planning time limit counts from when the
+    engine starts (admission), not from when the request arrived. Time spent
+    waiting in the admission queue is credited back to every enclosing
+    deadline and to the asyncio timers guarding them.
+    """
+    credit: float = 0.0
+    timers: list = field(default_factory=list)
+    paused: dict = field(default_factory=dict)
+
+
+_deadline_clock: ContextVar = ContextVar("deadline_clock", default=None)
+_engine_reporter: ContextVar = ContextVar("engine_reporter", default=None)
+
+
+def _credit() -> float:
+    clock = _deadline_clock.get()
+    return clock.credit if clock is not None else 0.0
+
+
 class PlanningDeadlineExceeded(RuntimeError):
     """Must escape pricing/beam ValueError retries before HTTP translation."""
 
 
 @contextmanager
 def planning_deadline(seconds):
+    clock_token = None
+    if _deadline_clock.get() is None:
+        clock_token = _deadline_clock.set(_DeadlineClock())
     previous = _planning_deadline.get()
-    limit = monotonic() + seconds if seconds is not None else previous
+    # Stored without the queue credit; check_cancelled adds it back.
+    limit = monotonic() - _credit() + seconds if seconds is not None else previous
     if previous is not None and limit is not None:
         limit = min(previous, limit)
     token = _planning_deadline.set(limit)
@@ -54,11 +81,67 @@ def planning_deadline(seconds):
         yield
     finally:
         _planning_deadline.reset(token)
+        if clock_token is not None:
+            _deadline_clock.reset(clock_token)
+
+
+def register_deadline_timer(timer):
+    """Let queue time credited later also move this asyncio timeout."""
+    clock = _deadline_clock.get()
+    if clock is not None:
+        clock.timers.append(timer)
+
+
+def unregister_deadline_timer(timer):
+    clock = _deadline_clock.get()
+    if clock is not None and timer in clock.timers:
+        clock.timers.remove(timer)
+
+
+def pause_engine_clock():
+    """Called when the request starts waiting for the planner: stop its timers."""
+    clock = _deadline_clock.get()
+    if clock is None:
+        return
+    for timer in clock.timers:
+        when = timer.when()
+        if when is None or timer.expired() or timer in clock.paused:
+            continue
+        try:
+            timer.reschedule(None)
+        except RuntimeError:
+            continue
+        clock.paused[timer] = when
+
+
+def start_engine_clock(queued_seconds: float):
+    """Called when the planner is admitted: the time limit starts now."""
+    clock = _deadline_clock.get()
+    if clock is not None and clock.paused and not (queued_seconds > 0 and _planning_deadline.get() is not None):
+        for timer, when in list(clock.paused.items()):
+            try:
+                timer.reschedule(when)
+            except RuntimeError:
+                pass
+        clock.paused.clear()
+    if clock is not None and queued_seconds > 0 and _planning_deadline.get() is not None:
+        clock.credit += queued_seconds
+        for timer in list(clock.timers):
+            when = clock.paused.pop(timer, None) or timer.when()
+            if when is None or timer.expired():
+                continue
+            try:
+                timer.reschedule(when + queued_seconds)
+            except RuntimeError:  # Already left; nothing to move.
+                pass
+    reporter = _engine_reporter.get()
+    if reporter:
+        reporter(remaining_planning_seconds())
 
 
 def check_cancelled():
     deadline = _planning_deadline.get()
-    if deadline is not None and monotonic() >= deadline:
+    if deadline is not None and monotonic() >= deadline + _credit():
         raise PlanningDeadlineExceeded("The complete planning deadline expired")
     stop = _work_cancellation.get()
     if stop is not None and stop.is_set():
@@ -67,7 +150,7 @@ def check_cancelled():
 
 def remaining_planning_seconds():
     deadline = _planning_deadline.get()
-    return None if deadline is None else max(0.0, deadline - monotonic())
+    return None if deadline is None else max(0.0, deadline + _credit() - monotonic())
 
 
 def report_stage(stage: str, *, completed=None, total=None, unit=None):
@@ -117,6 +200,8 @@ class PlanJob:
     task: asyncio.Task[SavedPlan]
     completed_at: float | None = None
     status: tuple[str, dict | None] = ("queued", None)
+    # (monotonic start, seconds the engine may use), set when admitted.
+    engine: tuple[float, float | None] | None = None
 
     @property
     def stage(self):
@@ -160,11 +245,13 @@ class PlanJobs:
             del self.jobs[oldest.job_id]
         async def run():
             token = _stage_reporter.set(lambda stage, progress: setattr(job, "status", (stage, progress)))
+            engine_token = _engine_reporter.set(lambda limit: setattr(job, "engine", (monotonic(), limit)))
             reference_token = job_reference.set({"job_id": job.job_id, "request_id": job.request_id})
             try:
                 return await work()
             finally:
                 job_reference.reset(reference_token)
+                _engine_reporter.reset(engine_token)
                 _stage_reporter.reset(token)
 
         job = PlanJob(uuid4().hex, owner, key, request_id, asyncio.create_task(run()))
