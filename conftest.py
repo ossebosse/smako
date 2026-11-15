@@ -114,10 +114,13 @@ def _empty_shared_planner_resolution():
     except ImportError:  # grocery_data-only test runs
         yield
         return
+    from app.services.planner_shared_cache import SHARED_NUTRITION
     SHARED_RESOLUTION.clear()
+    SHARED_NUTRITION.clear()
     _clear_qualification_memory()
     yield
     SHARED_RESOLUTION.clear()
+    SHARED_NUTRITION.clear()
     _clear_qualification_memory()
 
 

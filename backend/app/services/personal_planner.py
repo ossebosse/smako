@@ -43,6 +43,10 @@ from app.services.inter_plan_distance import compare_plans, required_changes
 from app.services.meal_plan_optimizer import MealPlanService, _consumer_price_context_coverage
 from app.services.performance_trace import performance_span
 from app.services.personal_nutrition import calculation_basis, requested_nutrients
+
+INFORMATIONAL_NUTRIENTS = ("kcal", "protein_g", "carbs_g", "fat_g")
+
+_MACROS = frozenset(INFORMATIONAL_NUTRIENTS)
 from app.services.personal_policy import (
     PolicyConflict,
     check_product,
@@ -425,13 +429,45 @@ class PersonalPlanner:
             self.request.purchase_planning_mode,
         )
         if key not in self.nutrition_cache:
-            result = self._nutrition_evidence(product, name, unit, requested, recipe)
+            result = self._shared_nutrition_evidence(key, product, name, unit, requested, recipe)
             if len(self.nutrition_cache) >= 32768:
                 self.nutrition_cache.popitem(last=False)
             self.nutrition_cache[key] = result
         else:
             self.nutrition_cache.move_to_end(key)
         return self.nutrition_cache[key]
+
+    def _shared_nutrition_evidence(self, key, product, name, unit, requested, recipe):
+        """Source evidence for all four macros, shared across requests (step 3, 2026-11-14).
+
+        A request for some of protein, carbohydrates, fat and energy reuses
+        evidence that covers all four; checks only read the fields they ask
+        for. A product declaring only some of the four keeps its declaration.
+        Anything else is computed exactly as before.
+        """
+        if not requested or not set(requested) <= _MACROS:
+            return self._nutrition_evidence(product, name, unit, requested, recipe)
+        from app.services.planner_shared_cache import SHARED_NUTRITION, nutrition_scope
+
+        if not hasattr(self, "_nutrition_scope"):
+            self._nutrition_scope = nutrition_scope(self)
+        scope = self._nutrition_scope
+        if scope is None:
+            return self._nutrition_evidence(product, name, unit, requested, recipe)
+        if set(requested) != _MACROS:
+            fact = self.source_facts(product)
+            declared = set(getattr(fact, "nutrition", None) or ())
+            if declared and set(requested) <= declared and not _MACROS <= declared:
+                return self._nutrition_evidence(product, name, unit, requested, recipe)
+        shared_key = (*key[:4], _MACROS, key[5:])
+        entry = SHARED_NUTRITION.get(scope, shared_key)
+        if entry is None:
+            entry = (self._nutrition_evidence(product, name, unit, set(_MACROS), recipe),)
+            SHARED_NUTRITION.put(scope, shared_key, entry)
+        # Every evidence source carries all four macros except a declaration
+        # with only some of them, which was handled above. So no evidence for
+        # all four means no evidence for a part of them either.
+        return entry[0]
 
     def _nutrition_evidence(self, product, name, unit, requested, recipe):
         from app.services.recipe_preparation import has_unmeasured_process
@@ -2379,7 +2415,9 @@ class PersonalPlanner:
                         else "NOT_REQUESTED",
                     }
                 )
-        nutrition = self._check_nutrition(slots, purchased, rows, allocations)
+        # Values per portion are also shown when no limit was set (D8 in the
+        # 2026-11-14 test report). Only the final plan is calculated this way.
+        nutrition = self._check_nutrition(slots, purchased, rows, allocations, informational=True)
         has_allergies = bool(
             self.spec.profile.allergies
             or any(m.count and m.profile.allergies for m in self.spec.meals)
@@ -2407,7 +2445,7 @@ class PersonalPlanner:
         }
 
     @timed_stage("nutrition")
-    def _check_nutrition(self, slots, selected_products, rows, allocations):
+    def _check_nutrition(self, slots, selected_products, rows, allocations, informational=False):
         """Reuse the same per-portion calculation, never an approximate price.
 
         The selected package contributes nutrition only for the exact edible
@@ -2450,6 +2488,7 @@ class PersonalPlanner:
                 slot.meal_type,
                 limits.model_dump_json(),
                 self.spec.allow_nutrition_estimates,
+                informational,
                 tuple(demand_values),
                 json.dumps(weight, sort_keys=True) if weight else None,
             )
@@ -2457,7 +2496,7 @@ class PersonalPlanner:
             if cached is None:
                 try:
                     value = self._check_nutrition_uncached(
-                        [slot], selected_products, needs, allocations
+                        [slot], selected_products, needs, allocations, informational=informational
                     )[0]
                     cached = (value, None)
                 except PolicyConflict as exc:
@@ -2473,7 +2512,7 @@ class PersonalPlanner:
             results.append({**value, "slot_id": slot.id})
         return results
 
-    def _check_nutrition_uncached(self, slots, selected_products, rows, allocations):
+    def _check_nutrition_uncached(self, slots, selected_products, rows, allocations, informational=False):
         nutrition = []
         for slot in slots:
             if not slot.recipe:
@@ -2489,207 +2528,230 @@ class PersonalPlanner:
                         f"{slot.recipe.name}: vi vet inte hur mycket som försvinner vid tillagningen, så näring och portionsvikt kan inte kontrolleras.",
                         code="DATA_BLOCKED", stage="preparation")
                 row.update(status="UNKNOWN", reason="Okänd förlust vid tillagning; näring och färdig portionsvikt är inte beräknade.")
-            if limits.active:
-                totals = defaultdict(float)
-                requested = requested_nutrients(limits)
-                if requested:
-                    row["calculation_basis"] = calculation_basis(
-                        slot.recipe, allow_estimates=self.spec.allow_nutrition_estimates
-                    )
-                    for need in (r for r in rows if r["source"] == slot.id):
-                        contributions = []
-                        pantry = [a for a in allocations if a["demand_key"] == need["demand_key"]]
-                        for allocation in pantry:
+            show = informational and not limits.active and self.spec.allow_nutrition_estimates and row["status"] == "NOT_REQUESTED"
+            if limits.active or show:
+                shown, shown_estimated = {}, False
+                attempts = [None] if limits.active else [INFORMATIONAL_NUTRIENTS, *((k,) for k in INFORMATIONAL_NUTRIENTS)]
+                for attempt in attempts:
+                    if not limits.active:
+                        row = {"slot_id": slot.id, "status": "NOT_REQUESTED", "values": {}, "sources": []}
+                    try:
+                        totals = defaultdict(float)
+                        requested = requested_nutrients(limits) if limits.active else set(attempt)
+                        if requested:
+                            row["calculation_basis"] = calculation_basis(
+                                slot.recipe, allow_estimates=self.spec.allow_nutrition_estimates
+                            )
+                            for need in (r for r in rows if r["source"] == slot.id):
+                                contributions = []
+                                pantry = [a for a in allocations if a["demand_key"] == need["demand_key"]]
+                                for allocation in pantry:
+                                    if (
+                                        not allocation.get("product_key")
+                                        and not allocation.get("prepared_origin")
+                                        and self.spec.allow_nutrition_estimates
+                                    ):
+                                        from app.services.nutrition_reference import (
+                                            assembly_evidence,
+                                            reference_evidence,
+                                            validate_pantry_reference,
+                                        )
+                                        from app.services.personal_nutrition import (
+                                            is_couscous_preparation,
+                                            is_reference_preparation,
+                                            reference_method,
+                                        )
+
+                                        identity = validate_pantry_reference(
+                                            allocation["name"],
+                                            need["unit"],
+                                            allocation.get("nutrition_reference"),
+                                        )
+                                        evidence = reference_evidence(
+                                            identity,
+                                            cooked=is_reference_preparation(slot.recipe),
+                                            method=reference_method(slot.recipe, need["name"]),
+                                        )
+                                        if is_couscous_preparation(slot.recipe):
+                                            evidence = assembly_evidence(identity)
+                                        from app.services.reviewed_warm_meals import (
+                                            evidence as warm_evidence,
+                                        )
+                                        from app.services.reviewed_warm_meals import (
+                                            preparation,
+                                        )
+
+                                        if preparation(slot.recipe):
+                                            evidence = warm_evidence(identity, slot.recipe)
+                                        if slot.recipe.preparation is not None:
+                                            from app.services.recipe_preparation import (
+                                                pantry_evidence,
+                                            )
+                                            evidence = pantry_evidence(slot.recipe, need["name"], identity)
+                                        contributions.append((allocation["quantity"], evidence, "pantry"))
+                                        continue
+                                    positions = self.index.groups.get(allocation.get("prepared_origin", {}).get("product_key") or allocation.get("product_key"), ())
+                                    evidence = [
+                                        self.nutrition_evidence(
+                                            self.prepared.universe.products[i],
+                                            need["name"],
+                                            need["unit"],
+                                            requested,
+                                            slot.recipe,
+                                        )
+                                        for i in positions
+                                    ]
+                                    evidence = [
+                                        f
+                                        for f in evidence
+                                        if f
+                                        and f.nutrition_unit == need["unit"]
+                                        and f.nutrition_basis
+                                        and f.nutrition_preparation == "as_sold"
+                                        and requested <= f.nutrition.keys()
+                                    ]
+                                    values = {
+                                        tuple((k, f.nutrition[k]) for k in sorted(requested))
+                                        for f in evidence
+                                    }
+                                    if len(values) != 1:
+                                        raise PolicyConflict(
+                                            f"{need['name']}: näringsvärdena för varan i skafferiet saknas eller motsäger varandra.",
+                                            code="DATA_BLOCKED",
+                                        )
+                                    contributions.append((allocation["quantity"], evidence[0], "pantry"))
+                                quantity = need["quantity"] - sum(a["quantity"] for a in pantry)
+                                if need["original_quantity"] > need["quantity"] + 1e-8:
+                                    raise PolicyConflict(
+                                        f"{need['name']}: redan förbrukade ingrediensers näringsgrund måste verifieras från den historiska revisionen.",
+                                        code="DATA_BLOCKED",
+                                    )
+                                if quantity > 1e-8:
+                                    selected = selected_products.get(need.get("purchase_key"))
+                                    fact = (
+                                        self.nutrition_evidence(
+                                            self.prepared.universe.products[
+                                                self.by_identity[(selected.store_id, selected.product_id)]
+                                            ],
+                                            need["name"],
+                                            need["unit"],
+                                            requested,
+                                            slot.recipe,
+                                        )
+                                        if selected
+                                        else None
+                                    )
+                                    if fact is None and not selected and need.get("preparation_sources"):
+                                        positions = self.index.groups.get(need["preparation_sources"][0], ())
+                                        fact = next((f for i in positions if (f := self.nutrition_evidence(
+                                            self.prepared.universe.products[i], need["name"], need["unit"], requested, slot.recipe))), None)
+                                    contributions.append((quantity, fact, "purchase"))
+                                for quantity, fact, origin in contributions:
+                                    if (
+                                        not fact
+                                        or fact.nutrition_unit != need["unit"]
+                                        or not fact.nutrition_basis
+                                        or fact.nutrition_preparation != "as_sold"
+                                        or not requested <= fact.nutrition.keys()
+                                    ):
+                                        raise PolicyConflict(
+                                            f"{need['name']}: valda näringsvärden med rätt enhet och grund saknas.",
+                                            code="DATA_BLOCKED",
+                                        )
+                                    if any(
+                                        not math.isfinite(fact.nutrition[k]) or fact.nutrition[k] < 0
+                                        for k in requested
+                                    ):
+                                        raise PolicyConflict(
+                                            f"{need['name']}: konfliktfyllda näringsvärden.",
+                                            code="DATA_BLOCKED",
+                                        )
+                                    for k in requested:
+                                        totals[k] += (
+                                            fact.nutrition[k] * quantity / 100 / slot.recipe.servings
+                                        )
+                                    row["sources"].append(
+                                        {
+                                            "source": fact.source,
+                                            "product_id": fact.source_product_id,
+                                            "unit": fact.nutrition_unit,
+                                            "basis": fact.nutrition_basis,
+                                            "quantity": quantity,
+                                            "used_edible_quantity": quantity,
+                                            "cooked_quantity_g": None,
+                                            "origin": origin,
+                                            "ingredient": need["name"],
+                                            "evidence_kind": getattr(
+                                                fact, "evidence_kind", "qualified_product_declaration"
+                                            ),
+                                            "field_sources": {
+                                                k: list(v)
+                                                for k, v in fact.field_sources.items()
+                                                if k.startswith("nutrition.")
+                                            },
+                                        }
+                                    )
+                        if limits.min_weight_g is not None or limits.max_weight_g is not None:
+                            weight = self.cooked_weights.get(self._recipe_id(slot.recipe))
+                            if weight is None and self.spec.allow_nutrition_estimates:
+                                from app.services.recipe_portion_weight import (
+                                    estimate_portion_weight,
+                                )
+
+                                selected_by_name = {}
+                                for need in (r for r in rows if r['source'] == slot.id):
+                                    product = selected_products.get(need.get('purchase_key'))
+                                    # A mixed pantry/purchase food cannot borrow the
+                                    # purchase's yield identity for the entire input.
+                                    if product and not any(a['demand_key'] == need['demand_key'] for a in allocations):
+                                        product = self.prepared.universe.products[
+                                            self.by_identity[(product.store_id, product.product_id)]]
+                                        selected_by_name[canonicalize_ingredient_name(need['name'])] = (product, self.source_facts(product))
+                                weight = estimate_portion_weight(slot.recipe, selected_by_name)
                             if (
-                                not allocation.get("product_key")
-                                and not allocation.get("prepared_origin")
-                                and self.spec.allow_nutrition_estimates
+                                not weight
+                                or not weight.get("source")
+                                or weight.get("servings") != slot.recipe.servings
+                                or not isinstance(weight.get("total_g"), (int, float))
+                                or not math.isfinite(weight["total_g"])
+                                or weight["total_g"] <= 0
                             ):
-                                from app.services.nutrition_reference import (
-                                    assembly_evidence,
-                                    reference_evidence,
-                                    validate_pantry_reference,
+                                raise PolicyConflict(
+                                    f"{slot.recipe.name}: vi vet inte vad en färdig portion väger, så receptet kan inte kontrolleras mot en viktgräns.",
+                                    code="DATA_BLOCKED",
+                                    stage="preparation",
                                 )
-                                from app.services.personal_nutrition import (
-                                    is_couscous_preparation,
-                                    is_reference_preparation,
-                                    reference_method,
-                                )
-
-                                identity = validate_pantry_reference(
-                                    allocation["name"],
-                                    need["unit"],
-                                    allocation.get("nutrition_reference"),
-                                )
-                                evidence = reference_evidence(
-                                    identity,
-                                    cooked=is_reference_preparation(slot.recipe),
-                                    method=reference_method(slot.recipe, need["name"]),
-                                )
-                                if is_couscous_preparation(slot.recipe):
-                                    evidence = assembly_evidence(identity)
-                                from app.services.reviewed_warm_meals import (
-                                    evidence as warm_evidence,
-                                )
-                                from app.services.reviewed_warm_meals import (
-                                    preparation,
-                                )
-
-                                if preparation(slot.recipe):
-                                    evidence = warm_evidence(identity, slot.recipe)
-                                if slot.recipe.preparation is not None:
-                                    from app.services.recipe_preparation import pantry_evidence
-                                    evidence = pantry_evidence(slot.recipe, need["name"], identity)
-                                contributions.append((allocation["quantity"], evidence, "pantry"))
+                            totals["weight_g"] = weight["total_g"] / slot.recipe.servings
+                            row["sources"].append(weight)
+                        for key, value in limits.model_dump().items():
+                            if value is None:
                                 continue
-                            positions = self.index.groups.get(allocation.get("prepared_origin", {}).get("product_key") or allocation.get("product_key"), ())
-                            evidence = [
-                                self.nutrition_evidence(
-                                    self.prepared.universe.products[i],
-                                    need["name"],
-                                    need["unit"],
-                                    requested,
-                                    slot.recipe,
-                                )
-                                for i in positions
-                            ]
-                            evidence = [
-                                f
-                                for f in evidence
-                                if f
-                                and f.nutrition_unit == need["unit"]
-                                and f.nutrition_basis
-                                and f.nutrition_preparation == "as_sold"
-                                and requested <= f.nutrition.keys()
-                            ]
-                            values = {
-                                tuple((k, f.nutrition[k]) for k in sorted(requested))
-                                for f in evidence
-                            }
-                            if len(values) != 1:
-                                raise PolicyConflict(
-                                    f"{need['name']}: näringsvärdena för varan i skafferiet saknas eller motsäger varandra.",
-                                    code="DATA_BLOCKED",
-                                )
-                            contributions.append((allocation["quantity"], evidence[0], "pantry"))
-                        quantity = need["quantity"] - sum(a["quantity"] for a in pantry)
-                        if need["original_quantity"] > need["quantity"] + 1e-8:
-                            raise PolicyConflict(
-                                f"{need['name']}: redan förbrukade ingrediensers näringsgrund måste verifieras från den historiska revisionen.",
-                                code="DATA_BLOCKED",
-                            )
-                        if quantity > 1e-8:
-                            selected = selected_products.get(need.get("purchase_key"))
-                            fact = (
-                                self.nutrition_evidence(
-                                    self.prepared.universe.products[
-                                        self.by_identity[(selected.store_id, selected.product_id)]
-                                    ],
-                                    need["name"],
-                                    need["unit"],
-                                    requested,
-                                    slot.recipe,
-                                )
-                                if selected
-                                else None
-                            )
-                            if fact is None and not selected and need.get("preparation_sources"):
-                                positions = self.index.groups.get(need["preparation_sources"][0], ())
-                                fact = next((f for i in positions if (f := self.nutrition_evidence(
-                                    self.prepared.universe.products[i], need["name"], need["unit"], requested, slot.recipe))), None)
-                            contributions.append((quantity, fact, "purchase"))
-                        for quantity, fact, origin in contributions:
-                            if (
-                                not fact
-                                or fact.nutrition_unit != need["unit"]
-                                or not fact.nutrition_basis
-                                or fact.nutrition_preparation != "as_sold"
-                                or not requested <= fact.nutrition.keys()
+                            metric = key.removeprefix("min_").removeprefix("max_")
+                            if (key.startswith("min_") and totals[metric] < value) or (
+                                key.startswith("max_") and totals[metric] > value
                             ):
                                 raise PolicyConflict(
-                                    f"{need['name']}: valda näringsvärden med rätt enhet och grund saknas.",
-                                    code="DATA_BLOCKED",
+                                    f"{slot.recipe.name}: {metric} {totals[metric]:.12g} per portion bryter mot {key} {value:g}.",
+                                    code="NUTRITION_TARGET_NOT_MET",
+                                    stage="nutrition",
                                 )
-                            if any(
-                                not math.isfinite(fact.nutrition[k]) or fact.nutrition[k] < 0
-                                for k in requested
-                            ):
-                                raise PolicyConflict(
-                                    f"{need['name']}: konfliktfyllda näringsvärden.",
-                                    code="DATA_BLOCKED",
-                                )
-                            for k in requested:
-                                totals[k] += (
-                                    fact.nutrition[k] * quantity / 100 / slot.recipe.servings
-                                )
-                            row["sources"].append(
-                                {
-                                    "source": fact.source,
-                                    "product_id": fact.source_product_id,
-                                    "unit": fact.nutrition_unit,
-                                    "basis": fact.nutrition_basis,
-                                    "quantity": quantity,
-                                    "used_edible_quantity": quantity,
-                                    "cooked_quantity_g": None,
-                                    "origin": origin,
-                                    "ingredient": need["name"],
-                                    "evidence_kind": getattr(
-                                        fact, "evidence_kind", "qualified_product_declaration"
-                                    ),
-                                    "field_sources": {
-                                        k: list(v)
-                                        for k, v in fact.field_sources.items()
-                                        if k.startswith("nutrition.")
-                                    },
-                                }
-                            )
-                if limits.min_weight_g is not None or limits.max_weight_g is not None:
-                    weight = self.cooked_weights.get(self._recipe_id(slot.recipe))
-                    if weight is None and self.spec.allow_nutrition_estimates:
-                        from app.services.recipe_portion_weight import estimate_portion_weight
-
-                        selected_by_name = {}
-                        for need in (r for r in rows if r['source'] == slot.id):
-                            product = selected_products.get(need.get('purchase_key'))
-                            # A mixed pantry/purchase food cannot borrow the
-                            # purchase's yield identity for the entire input.
-                            if product and not any(a['demand_key'] == need['demand_key'] for a in allocations):
-                                product = self.prepared.universe.products[
-                                    self.by_identity[(product.store_id, product.product_id)]]
-                                selected_by_name[canonicalize_ingredient_name(need['name'])] = (product, self.source_facts(product))
-                        weight = estimate_portion_weight(slot.recipe, selected_by_name)
-                    if (
-                        not weight
-                        or not weight.get("source")
-                        or weight.get("servings") != slot.recipe.servings
-                        or not isinstance(weight.get("total_g"), (int, float))
-                        or not math.isfinite(weight["total_g"])
-                        or weight["total_g"] <= 0
-                    ):
-                        raise PolicyConflict(
-                            f"{slot.recipe.name}: vi vet inte vad en färdig portion väger, så receptet kan inte kontrolleras mot en viktgräns.",
-                            code="DATA_BLOCKED",
-                            stage="preparation",
+                        estimated = any(
+                            s.get("evidence_kind") not in {None, "qualified_product_declaration"}
+                            for s in row["sources"]
                         )
-                    totals["weight_g"] = weight["total_g"] / slot.recipe.servings
-                    row["sources"].append(weight)
-                for key, value in limits.model_dump().items():
-                    if value is None:
-                        continue
-                    metric = key.removeprefix("min_").removeprefix("max_")
-                    if (key.startswith("min_") and totals[metric] < value) or (
-                        key.startswith("max_") and totals[metric] > value
-                    ):
-                        raise PolicyConflict(
-                            f"{slot.recipe.name}: {metric} {totals[metric]:.12g} per portion bryter mot {key} {value:g}.",
-                            code="NUTRITION_TARGET_NOT_MET",
-                            stage="nutrition",
-                        )
-                estimated = any(
-                    s.get("evidence_kind") not in {None, "qualified_product_declaration"}
-                    for s in row["sources"]
-                )
-                row.update(status="ESTIMATED" if estimated else "VERIFIED", values=dict(totals))
+                        row.update(status="ESTIMATED" if estimated else "VERIFIED", values=dict(totals))
+                        if not limits.active:
+                            shown.update(row["values"])
+                            shown_estimated = shown_estimated or estimated
+                            if len(attempt) == len(INFORMATIONAL_NUTRIENTS):
+                                break
+                    except Exception:
+                        if limits.active:
+                            raise
+            if show:
+                # Only what every ingredient has values for; all four when possible.
+                row = {"slot_id": slot.id, "status": ("ESTIMATED" if shown_estimated else "VERIFIED") if shown else "NOT_REQUESTED",
+                       "values": shown, "sources": []}
             nutrition.append(row)
         return nutrition
 

@@ -325,8 +325,33 @@ class BackgroundPlanPrewarm:
                         self.completed.popitem(last=False)
             except Exception as exc:  # noqa: BLE001 -- isolate optional warming; log only exception type.
                 logging.getLogger(__name__).warning('background_prewarm_failed scope=%s error_type=%s', scope, type(exc).__name__)
+            try:
+                status = await self._warm_nutrition(scope, prepared, scoped)
+                logging.getLogger('uvicorn.error').info('nutrition_prewarm scope=%s universe=%s status=%s', scope, version, status)
+            except Exception as exc:  # noqa: BLE001 -- optional, like the standard prewarm.
+                logging.getLogger(__name__).warning('nutrition_prewarm_failed scope=%s error_type=%s', scope, type(exc).__name__)
             finally:
                 self.running_key = None
+
+    async def _warm_nutrition(self, scope, prepared, settings, attempts=8):
+        """Shared nutrition evidence for the new universe, only while the planner is idle."""
+        from app.services.nutrition_prewarm import warm_nutrition
+        from app.services.planner_admission import PlannerAdmissionBusy
+
+        async def work():
+            if self.manager.get_active(scope) is not prepared or self.stopping:
+                return 'superseded'
+            return await asyncio.to_thread(warm_nutrition, settings, prepared)
+
+        for _ in range(attempts):
+            if self.stopping or self.manager.get_active(scope) is not prepared:
+                return 'superseded'
+            try:
+                return await self.application.state.planner_admission.run(
+                    f'prewarm-nutrition:{scope}:{prepared.universe.universe_id}', work, only_if_idle=True)
+            except PlannerAdmissionBusy:
+                await asyncio.sleep(self.delay)
+        return 'busy'
 
     async def close(self):
         self.stopping = True

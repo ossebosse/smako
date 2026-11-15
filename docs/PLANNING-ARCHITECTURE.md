@@ -79,6 +79,31 @@ spärrfrasers namn-/kategoriscope beräknas vid inläsning, med identiska fulla
 klassningssvar; priser eller användarbeslut cachas inte av detta.
 Se [fortsättningsrapporten](reviews/coverage-continuation-20261027.md).
 
+## Näring som går snabbt och alltid syns (steg 3, 2026-11-15)
+
+- **Delad näringsevidens.** `PersonalPlanner.nutrition_evidence` läser per
+  100 g-evidens för en vara och receptingrediens. Den beräknas nu för alla fyra
+  makron (energi, protein, kolhydrater, fett) på en gång och delas mellan
+  förfrågningar i `planner_shared_cache.SHARED_NUTRITION`, med scope = exakt
+  förberett prisunivers (svag referens), `facts_version`, näringsreferensens
+  version och inställningar. En fråga om en del av makrona återanvänder
+  evidensen; en deklaration med bara några av de fyra behåller sin deklaration
+  för de fält den har. Saknas evidens för alla fyra saknas den också för en
+  del (alla evidenskällor bär alla fyra). Inga portionskontroller, korgar eller
+  priser delas. Gränsen är 400 000 poster (`SMAKO_SHARED_NUTRITION_ENTRIES`),
+  `SMAKO_PLANNER_SHARED_RESOLUTION=0` stänger av. På frusen data
+  2026-10-23 (Malmö): första näringsbegränsade planen 105 s lokalt, därefter
+  36–42 s för nya gränser (tidigare 77–94 s).
+- **Uppvärmning.** Efter varje nytt prisunivers kör `BackgroundPlanPrewarm`
+  också `nutrition_prewarm.warm_nutrition`: en vanlig planförfrågan med
+  gränser som alltid uppfylls (protein/kolhydrater/fett ≥ 0, energi ≤ 4000
+  kcal) för middag, frukost och mellanmål, bara när planeraren är ledig och med
+  45 s egen tidsgräns. Den sparar ingen plan.
+- **Näring alltid.** Den slutliga planen visar näring per portion även utan
+  gränser, när varje ingrediens har värden (alla fyra, annars de som går).
+  Det stoppar aldrig en plan och ändrar inget val. Antal portioner påverkar
+  inte värdet per portion; portionsvikt är fortsatt ett filter.
+
 ## Förpackningsvikt när avrunnen vikt saknas (ägarbeslut 2026-11-13)
 
 Vill ett recept ha en vara avrunnen (`cooked_drained`, `preserved_drained`)

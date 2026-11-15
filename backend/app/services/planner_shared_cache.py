@@ -114,3 +114,20 @@ def planner_scope(planner):
         repr(planner.settings),
     )
     return SHARED_RESOLUTION.scope(key, planner.prepared)
+
+
+# Per-100 source nutrition evidence (PersonalPlanner.nutrition_evidence) for
+# all four macros. Pure in the product, its facts, the reference data and the
+# recipe input identity in the key; never a portion check or a basket. Larger
+# than the resolution cache because each request asks for many products.
+SHARED_NUTRITION = SharedResolution(scope_limit=SCOPE_LIMIT, entry_limit=int(os.getenv("SMAKO_SHARED_NUTRITION_ENTRIES", "400000")))
+
+
+def nutrition_scope(planner):
+    if not enabled() or planner.facts_version is None:
+        return None
+    key = (
+        "nutrition", id(planner.prepared), planner.prepared.universe.universe_id,
+        planner.facts_version, planner.reference_version, repr(planner.settings),
+    )
+    return SHARED_NUTRITION.scope(key, planner.prepared)

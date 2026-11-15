@@ -161,6 +161,12 @@ def reference_data():
 
 
 def reference_options():
+    return _reference_options(reference_data()["content_version"])
+
+
+@lru_cache(maxsize=2)
+def _reference_options(_version):
+    # Built once per reference version; it was rebuilt for every evidence lookup.
     data = reference_data()
     return [
         {
