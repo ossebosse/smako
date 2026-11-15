@@ -50,20 +50,23 @@ class Fake:
                 {"store_id": "s1", "product_id": "p-lok", "ingredient": "gul lök", "product_name": "Gul lök lösvikt", "packages_needed": 1, "package_quantity": 1000, "package_unit": "g",
                  "total_price": 3.5, "unit": "g", "purchased_unit": "g", "required_quantity": 150, "purchased_usable_quantity": 180, "purchased_quantity": 180,
                  "quantity_confidence": "estimated", "sale_model": "sold_by_weight", "food_family": "allium"}]
+        likes = (request or {}).get("personal", {}).get("profile", {}).get("likes", [])
+        total = 81.4 if "lök" in likes else 63.4  # The week with two onion dinners costs 18 kr more.
         recipe = {"name": "Pannbiff med lök och potatis", "servings": 2, "instructions": ["Stek biffarna.", "Koka potatisen."],
                   "ingredients": [{"name": "nötfärs", "quantity": 400, "unit": "g"}, {"name": "gul lök", "quantity": 150, "unit": "g"}, {"name": "potatis", "quantity": 600, "unit": "g"}]}
         return {"plan_id": "plan-1", "revision": revision, "request": request,
-                "plan": {"personal": {"slots": [{"id": "dinner-1", "day": 1, "meal_type": "dinner", "recipe": recipe}],
+                "plan": {"personal": {"slots": [{"id": "dinner-1", "day": 1, "meal_type": "dinner", "recipe": recipe}]
+                                      + ([{"id": "dinner-2", "day": 2, "meal_type": "dinner", "recipe": {**recipe, "name": "Lökpaj"}}] if "lök" in likes else []),
                                       "checks": {"nutrition": [{"slot_id": "dinner-1", "status": "ESTIMATED", "values": {"kcal": 640.4, "protein_g": 38.2, "carbs_g": 52, "fat_g": 29.6}}],
                                                  "used_ingredient_cost": 42.1, "new_purchase_used_cost": 42.1, "used_cost_basis": {"quantity_status": "ESTIMATED"},
-                                                 "likes": [{"term": t, "slot_ids": ["dinner-1"] if t == "potatis" else [], "status": "included" if t == "potatis" else "not_available"}
-                                                           for t in (request or {}).get("personal", {}).get("profile", {}).get("likes", [])]},
+                                                 "likes": [{"term": t, "slot_ids": {"potatis": ["dinner-1"], "lök": ["dinner-1", "dinner-2"]}.get(t, []),
+                                                            "status": "included" if t in ("potatis", "lök") else "not_available"} for t in likes]},
                                       "needs": [{"key": "nötfärs"}, {"key": "gul lök"}],
                                       "allocations": [{"name": "potatis", "quantity": 600, "unit": "g"}] if home else [],
                                       "at_home": [{"name": n, "quantity": 5, "unit": "g", "sources": ["dinner-1"]}
                                                   for n in (request or {}).get("personal", {}).get("staples_at_home", [])]},
-                         "optimized_basket": {"total": 63.4, "store_count": 1, "verification_status": "VERIFIED_WITH_ESTIMATES",
-                                              "stores": [{"store_id": "s1", "store_name": "Testbutiken Lund", "subtotal": 63.4, "items": rows}]}}}
+                         "optimized_basket": {"total": total, "store_count": 1, "verification_status": "VERIFIED_WITH_ESTIMATES",
+                                              "stores": [{"store_id": "s1", "store_name": "Testbutiken Lund", "subtotal": total, "items": rows}]}}}
 
     def answer(self, method, path, query, body):
         self.calls.append((method, path, body))
@@ -505,3 +508,38 @@ def test_a_liked_dinner_shows_its_cost_and_a_cheaper_recipe(ui):
     expect(page.get_by_role("dialog", name="Billigare recept")).to_have_count(0)
     switched = [body for method, path, body in fake.calls if path.endswith("/change") and body.get("recipe_id")]
     assert switched and switched[-1]["recipe_id"] == "lins:1:a" and switched[-1]["action"] == "replace"
+
+
+def test_a_like_in_several_dinners_is_priced_against_the_week_without_it(ui):
+    name, page, fake, shot = ui
+    page.evaluate("""() => { const s = JSON.parse(localStorage.getItem("smako.next.v1") || "{}");
+        s.settings = { ...(s.settings || {}), likes: ["lök"] }; localStorage.setItem("smako.next.v1", JSON.stringify(s)); }""")
+    page.reload()
+    if name == "a":
+        page.goto(re.sub(r"#.*|$", "#mat", page.url, count=1))
+    else:
+        page.get_by_role("button", name=re.compile("Planera mat och handla")).click()
+    page.get_by_label("Ditt postnummer").fill("22350")
+    page.get_by_role("button", name="Hitta butiker").click()
+    if name == "b":
+        for _ in range(3):
+            page.get_by_role("button", name="Nästa").click()
+    page.get_by_role("button", name="Skapa matplan").click()
+    expect(page.get_by_text("Du gillar lök i 2 middagar · utan lök hade veckan kostat 18,00 kr mindre")).to_be_visible()
+    # The cards name the like; the week line carries the price, since the dinners share packages.
+    expect(page.get_by_text("Du gillar lök", exact=True)).to_have_count(2)
+    plans = [body for method, path, body in fake.calls if path == "plans"]
+    assert plans[0]["personal"]["profile"]["likes"] == ["lök"] and plans[1]["personal"]["profile"]["likes"] == []
+    assert plans[1]["personal"]["staples_at_home"] == plans[0]["personal"]["staples_at_home"]
+    page.get_by_role("button", name="Visa veckan utan lök").click()
+    dialog = page.get_by_role("dialog", name="Veckan utan lök")
+    expect(dialog.get_by_text("Hela inköpet blir 18,00 kr billigare. Middagarna blir:")).to_be_visible()
+    expect(dialog.get_by_role("heading", name="Pannbiff med lök och potatis")).to_be_visible()
+    shot("vecka-utan")
+    calls = len(fake.calls)
+    dialog.get_by_role("button", name="Byt till den här veckan").click()
+    expect(page.get_by_role("dialog")).to_have_count(0)
+    # The week was already worked out: switching asks the server for nothing.
+    expect(page.get_by_text("Du gillar lök i 2 middagar", exact=False)).to_have_count(0)
+    expect(page.get_by_role("heading", name="Lökpaj")).to_have_count(0)
+    assert not [c for c in fake.calls[calls:] if c[1] in ("plans",) or c[1].endswith("/change")]
