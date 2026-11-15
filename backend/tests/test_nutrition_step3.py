@@ -85,3 +85,28 @@ def test_the_prewarm_request_asks_for_all_four_macros_without_restricting_anythi
         assert requested_nutrients(meal.limits) == {"kcal", "protein_g", "carbs_g", "fat_g"}
     assert all(v == 0 for k, v in WARM_LIMITS.items() if k.startswith("min_")) and WARM_LIMITS["max_kcal"] >= 4000
     assert warm.personal.use_pantry is False and warm.personal.allow_nutrition_estimates
+
+
+def test_nutrition_prewarm_runs_only_through_idle_admission(monkeypatch):
+    import asyncio
+    from types import SimpleNamespace
+
+    from app.services import nutrition_prewarm
+    from app.services.planner_admission import PlannerAdmissionController
+
+    monkeypatch.setenv("SMAKO_NUTRITION_PREWARM", "1")
+    universe = products()
+    ran = []
+    monkeypatch.setattr(nutrition_prewarm, "warm_nutrition", lambda settings, prepared: ran.append(prepared) or "complete")
+    manager = SimpleNamespace(get_active=lambda scope: universe)
+
+    async def scenario():
+        app = SimpleNamespace(state=SimpleNamespace(planner_admission=PlannerAdmissionController(max_concurrent=1, max_queued=2)))
+        assert nutrition_prewarm.schedule_nutrition_prewarm(app, Settings(), universe, manager, delay=0.01, attempts=3) == "scheduled"
+        (task,) = app.state.nutrition_prewarm_tasks
+        assert await task == "complete"
+        monkeypatch.setenv("SMAKO_NUTRITION_PREWARM", "0")
+        assert nutrition_prewarm.schedule_nutrition_prewarm(app, Settings(), universe, manager) == "disabled"
+
+    asyncio.run(scenario())
+    assert ran == [universe]

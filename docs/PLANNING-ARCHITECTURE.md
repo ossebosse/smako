@@ -94,11 +94,12 @@ Se [fortsättningsrapporten](reviews/coverage-continuation-20261027.md).
   `SMAKO_PLANNER_SHARED_RESOLUTION=0` stänger av. På frusen data
   2026-10-23 (Malmö): första näringsbegränsade planen 105 s lokalt, därefter
   36–42 s för nya gränser (tidigare 77–94 s).
-- **Uppvärmning.** Efter varje nytt prisunivers kör `BackgroundPlanPrewarm`
-  också `nutrition_prewarm.warm_nutrition`: en vanlig planförfrågan med
-  gränser som alltid uppfylls (protein/kolhydrater/fett ≥ 0, energi ≤ 4000
-  kcal) för middag, frukost och mellanmål, bara när planeraren är ledig och med
-  45 s egen tidsgräns. Den sparar ingen plan.
+- **Uppvärmning.** Vid start och efter varje aktiverat prisunivers schemalägger
+  appen `nutrition_prewarm` (oberoende av den vanliga planuppvärmningen, som är
+  avstängd på beta): en vanlig planförfrågan med gränser som alltid uppfylls
+  (protein/kolhydrater/fett ≥ 0, energi ≤ 4000 kcal) för middag, frukost och
+  mellanmål. Den körs bara när planeraren är ledig (`only_if_idle`), med 45 s
+  egen tidsgräns, och sparar ingen plan. `SMAKO_NUTRITION_PREWARM=0` stänger av.
 - **Näring alltid.** Den slutliga planen visar näring per portion även utan
   gränser, när varje ingrediens har värden (alla fyra, annars de som går).
   Det stoppar aldrig en plan och ändrar inget val. Antal portioner påverkar

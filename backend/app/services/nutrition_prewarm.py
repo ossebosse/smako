@@ -13,7 +13,10 @@ plan and writes nothing; a partial run still leaves useful evidence.
 """
 from __future__ import annotations
 
+import asyncio
+import contextlib
 import logging
+import os
 
 WARM_LIMITS = {"min_protein_g": 0, "min_carbs_g": 0, "min_fat_g": 0, "max_kcal": 4000}
 WARM_SECONDS = 45.0
@@ -49,3 +52,66 @@ def warm_nutrition(settings, prepared, *, seconds=WARM_SECONDS):
     except Exception as exc:  # noqa: BLE001 -- optional warming; the outcome is only logged.
         logging.getLogger(__name__).info("nutrition_prewarm_stopped error_type=%s", type(exc).__name__)
         return "stopped"
+
+
+def enabled() -> bool:
+    return os.getenv("SMAKO_NUTRITION_PREWARM", "1") != "0"
+
+
+async def _warm_when_idle(application, settings, prepared, manager, *, delay, attempts):
+    try:
+        return await _warm_attempts(application, settings, prepared, manager, delay=delay, attempts=attempts)
+    except asyncio.CancelledError:
+        raise
+    except Exception as exc:  # noqa: BLE001 -- optional; only the type is logged.
+        logging.getLogger(__name__).warning("nutrition_prewarm_failed error_type=%s", type(exc).__name__)
+        return "failed"
+
+
+async def _warm_attempts(application, settings, prepared, manager, *, delay, attempts):
+    from app.services.planner_admission import PlannerAdmissionBusy
+
+    scope = prepared.universe.key.scope_id
+
+    async def work():
+        if manager.get_active(scope) is not prepared:
+            return "superseded"
+        return await asyncio.to_thread(warm_nutrition, settings, prepared)
+
+    for _ in range(attempts):
+        await asyncio.sleep(delay)
+        if manager.get_active(scope) is not prepared:
+            return "superseded"
+        try:
+            status = await application.state.planner_admission.run(
+                f"prewarm-nutrition:{scope}:{prepared.universe.universe_id}", work, only_if_idle=True)
+        except PlannerAdmissionBusy:
+            continue
+        logging.getLogger("uvicorn.error").info("nutrition_prewarm scope=%s universe=%s status=%s",
+                                                scope, prepared.universe.universe_id, status)
+        return status
+    return "busy"
+
+
+def schedule_nutrition_prewarm(application, settings, prepared, manager=None, *, delay=20.0, attempts=30):
+    """Start warming in the background; independent of the standard plan prewarm setting."""
+    if not enabled():
+        return "disabled"
+    if manager is None:
+        from app.services.price_universe_runtime import GLOBAL_PREPARED_PRICE_UNIVERSES
+        manager = GLOBAL_PREPARED_PRICE_UNIVERSES
+    tasks = getattr(application.state, "nutrition_prewarm_tasks", None)
+    if tasks is None:
+        tasks = application.state.nutrition_prewarm_tasks = set()
+    task = asyncio.get_running_loop().create_task(
+        _warm_when_idle(application, settings, prepared, manager, delay=delay, attempts=attempts))
+    tasks.add(task)
+    task.add_done_callback(tasks.discard)
+    return "scheduled"
+
+
+async def close_nutrition_prewarm(application):
+    for task in list(getattr(application.state, "nutrition_prewarm_tasks", ())):
+        task.cancel()
+        with contextlib.suppress(asyncio.CancelledError, Exception):  # Shutting down optional work.
+            await task

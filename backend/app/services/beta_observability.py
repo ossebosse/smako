@@ -1160,6 +1160,11 @@ async def reload_active_price_universe(
         application.state.source_facts_prewarm = {"status": "failed", "error_type": type(exc).__name__}
         LOGGER.exception("optional source facts prewarm failed after valid universe activation")
     try:
+        from app.services.nutrition_prewarm import schedule_nutrition_prewarm
+        schedule_nutrition_prewarm(application, settings, candidate, manager=active_manager)
+    except Exception:  # Optional warming never rejects valid prices.
+        LOGGER.exception("optional nutrition prewarm could not be scheduled")
+    try:
         if settings.price_universe_prewarm_enabled and not custom_prewarm_runner:
             from app.services.plan_prewarm import schedule_plan_prewarm
             prewarm_status = schedule_plan_prewarm(application, settings, candidate, manager=active_manager)
