@@ -496,6 +496,16 @@ async def _change_plan_body(plan_id, payload, request, response):
                 slot.recipe = selected
             else:
                 replace_slot = slot.id
+                if payload.preview_without_like is not None:
+                    # Owner decision 2026-11-15: the cheapest other recipe for this
+                    # place without the like, and never the current recipe.
+                    term = payload.preview_without_like.casefold()
+                    for profile in (spec.profile, *(m.profile for m in spec.meals)):
+                        profile.likes = [like for like in profile.likes if like.casefold() != term]
+                    if slot.recipe is not None:
+                        from app.services.personal_planner import removed_recipe_key
+                        key = removed_recipe_key(slot.recipe)
+                        slot.removed_recipes = [*(k for k in slot.removed_recipes if k != key), key][-20:]
     elif payload.action == "restore_revision":
         if payload.restore_revision is None:
             raise HTTPException(422, "Välj en tidigare version av planen.")
@@ -569,6 +579,8 @@ async def _change_plan_body(plan_id, payload, request, response):
     )
     from app.services.plan_jobs import check_cancelled
     check_cancelled()
+    if payload.preview_without_like is not None:
+        return {"preview": _like_preview(saved, plan, payload)}
     saved = plans.append(
         plan_id=plan_id,
         request=plan_request,
@@ -579,6 +591,23 @@ async def _change_plan_body(plan_id, payload, request, response):
         mutation_key=mutation_key,
     )
     return {"saved": saved, "state": public_state(private.read(owner), request)}
+
+
+def _like_preview(saved, plan, payload):
+    """The cheapest other recipe for one place, and what the week then costs. Not saved."""
+    from app.services.complete_recipes import identity
+
+    slot = next((s for s in plan.personal.slots if s.id == payload.slot_id), None)
+    recipe = slot.recipe if slot is not None else None
+    if recipe is None:
+        raise PolicyConflict("Vi hittade inget annat recept som passar dina val.", code="RECIPE_CHOICES_CONFLICT")
+    return {
+        "plan_id": saved.plan_id, "revision": saved.revision, "slot_id": payload.slot_id,
+        "like": payload.preview_without_like, "recipe_id": identity(recipe),
+        "recipe": recipe.model_dump(mode="json"),
+        "total": plan.optimized_basket.total, "current_total": saved.plan.optimized_basket.total,
+        "saving": round(saved.plan.optimized_basket.total - plan.optimized_basket.total, 2),
+    }
 
 
 @router.get("/plans/{plan_id}/surplus-suggestions")

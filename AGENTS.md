@@ -117,6 +117,11 @@
   composite products need a declaration. Allergies still need complete
   declarations, except fresh produce as its own single ingredient. See
   docs/PLANNING-ARCHITECTURE.md.
+- Owner decision 2026-11-15: an extra store must save at least 10 kr; "Allt"
+  means a mixed week of dinners; every like is in at least one dinner when
+  possible, marked with its extra cost and a cheaper recipe to switch to;
+  staples ticked under "Har du hemma?" (salt, pepper, rapeseed oil by default)
+  are not bought. See docs/PLANNING-ARCHITECTURE.md (steg 4).
 - PriceUniverse is shared and source-driven. Community evidence stays advisory,
   and `USER_SPECIFIC` offers must never enter the shared artifact.
 - Keep product identity and price scope exact. Fuzzy names may suggest manual

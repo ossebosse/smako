@@ -420,8 +420,47 @@ def distribution_ok(slots, meals, *, partial=False, classify=protein_category):
     return True
 
 
+# Owner decision 2026-11-15 (docs/PLANNING-ARCHITECTURE.md): each recipe
+# with a liked ingredient may cost this much more per like, a disliked one
+# this much less. Counted per recipe, so two chicken dinners weigh twice.
+TASTE_WEIGHT_KR = 15
+# Owner decision 2026-11-15: every like is in at least one dinner when the
+# other choices allow it. A week without it ranks as this much dearer, so the
+# search always finds a plan; the plan marks how much the like costs.
+LIKE_MISSING_KR = 1000
+
+
+def _names_term(term, names):
+    return _contains(term, names) or any(mentions(term, name) for name in names)
+
+
+def recipe_names(term, recipe):
+    """Whether the recipe's name or an ingredient names the term (compounds included)."""
+    return _names_term(term, [recipe.name, *(i.name for i in recipe.ingredients)])
+
+
 def preference_score(recipes, profile):
-    names = [i.name for r in recipes for i in r.ingredients]
-    return sum(_contains(v, names) for v in profile.dislikes) - sum(
-        _contains(v, names) for v in profile.likes
-    )
+    """Dislikes minus likes, counted for every recipe that names the term.
+
+    The recipe name and every ingredient name count, compound words included
+    ("kycklingfilé" names kyckling). This only ranks menus; exclusions and
+    allergies are separate hard rules.
+    """
+    score = 0
+    for recipe in recipes:
+        score += sum(recipe_names(v, recipe) for v in profile.dislikes)
+        score -= sum(recipe_names(v, recipe) for v in profile.likes)
+    return score
+
+
+def mixed_week_ok(recipes, count, *, partial, classify=protein_category):
+    """Owner decision 2026-11-15: "Allt" means a mixed week of dinners.
+
+    With two or more dinners, at least one has meat, chicken, fish or
+    shellfish and at least one is vegetarian. A partial week passes while
+    the remaining places can still supply what is missing.
+    """
+    kinds = [classify(r) for r in recipes]
+    missing = (not any(k != "vegetarian" for k in kinds)) + ("vegetarian" not in kinds)
+    remaining = max(0, count - len(recipes)) if partial else 0
+    return missing <= remaining

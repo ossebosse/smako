@@ -11,6 +11,8 @@ from .recipe import Recipe
 
 MealType = Literal["dinner", "breakfast", "snack"]
 Protein = Literal["vegetarian", "chicken", "fish", "meat"]
+Staple = Literal["salt", "svartpeppar", "rapsolja", "olivolja", "strösocker", "vetemjöl", "oregano", "timjan",
+                 "spiskummin", "paprikapulver", "rökt paprikapulver", "kanel", "chiliflakes", "gurkmeja"]
 
 
 class PrivateModel(BaseModel):
@@ -298,6 +300,9 @@ class PersonalPlanning(PrivateModel):
     allow_nutrition_estimates: bool = False
     surplus_mode: Literal["minimize", "allow_larger"] = "minimize"
     product_locks: dict[str, str] = Field(default_factory=dict, max_length=80)
+    # Owner decision 2026-11-15: staples the person has at home are not bought
+    # (app/services/staples.py). Omitted while empty, so older requests are unchanged.
+    staples_at_home: list[Staple] = Field(default_factory=list, max_length=14, exclude_if=lambda v: not v)
 
     @model_validator(mode="after")
     def unique(self):
@@ -333,6 +338,7 @@ class PersonalResult(PrivateModel):
     consumed_demands: list[dict] = Field(default_factory=list)
     available_surplus: list[dict] = Field(default_factory=list)
     preparations: list[dict] = Field(default_factory=list, exclude_if=lambda v: not v)
+    at_home: list[dict] = Field(default_factory=list, exclude_if=lambda v: not v)
 
 
 class PantryWrite(PrivateModel):
@@ -381,6 +387,10 @@ class PersonalMutation(PrivateModel):
     preparation: IngredientPreparation | None = Field(default=None, exclude_if=lambda v: v is None)
     consume_fraction: float = Field(default=1, gt=0, le=1)
     operation_id: str | None = Field(default=None, pattern=r"^[a-zA-Z0-9-]{8,64}$")
+    # Owner decision 2026-11-15: preview the cheapest recipe for this slot
+    # without the given like. Nothing is saved.
+    preview_without_like: str | None = Field(default=None, min_length=1, max_length=40,
+                                             exclude_if=lambda v: v is None)
 
     @model_validator(mode="after")
     def partial_event_identity(self):
@@ -389,6 +399,8 @@ class PersonalMutation(PrivateModel):
             raise ValueError("Beredning kräver uppmätta insatser/utfall och ett unikt åtgärds-ID.")
         if self.purchase_planning_mode is not None and self.action not in {"extras", "recalculate"}:
             raise ValueError("Inköpsläge kan bara ändras vid uttrycklig omräkning eller uppdatering av inköpslistan.")
+        if self.preview_without_like is not None and (self.action != "replace" or not self.slot_id or self.recipe_id):
+            raise ValueError("Förhandsvisningen gäller bara byte av en måltid.")
         if self.allow_nutrition_estimates is not None and self.action not in {"extras", "recalculate"}:
             raise ValueError("Näringsläge kan bara ändras vid omräkning eller uppdatering av inköpslistan.")
         if any(not math.isfinite(q) or q <= 0 for q in self.measured_purchase_quantities.values()):

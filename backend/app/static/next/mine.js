@@ -269,6 +269,7 @@
     if (!S.plan || !S.state) { box.hidden = true; return box; }
     const used = pantryUsed();
     if (used.length) box.append(el("p", `Från skafferiet, behöver inte köpas: ${used.join(", ")}.`, "meta"));
+    const home = N.atHomeView(); if (home) box.append(home);
     box.append(el("h2", "När du har handlat"));
     if (!purchased()) {
       box.append(el("p", "Tryck här när varorna är hemma. De läggs i skafferiet, så räknar Smako med dem nästa gång.", "hint"),
