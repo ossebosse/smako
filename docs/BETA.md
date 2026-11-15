@@ -1,3 +1,26 @@
+# 2026-11-15: Steg 4 – blandat, extra butik ≥ 10 kr, Gillar och Har du hemma aktiverat
+
+Main `d611d09080e4` (PR #85). App **app-d611d09080e4-e17fc969**, scheduler
+orörd. Ägarbeslut 2026-11-15: en extra butik måste spara minst 10 kr; "Allt"
+betyder blandat (även vid byte av ett recept); varje "Gillar" finns i minst en
+middag och provgränssnitten visar vad den kostar och ett billigare recept
+(`preview_without_like`, inget sparas); "Har du hemma?" med salt, svartpeppar
+och rapsolja förbockade. 10 appfiler, importkontroll ok, bas `1062559d7b3b`
+(image `53145185976c`), ny image `f17d26119fa0`. Aktiverad 2026-11-15
+11:17:51 UTC, säkerhetskopia `20261115T110838Z`; lagringsretention efter
+aktivering complete; `/ready` 200 för 22350 och 21120.
+
+Prov på beta (Lund, 3 middagar × 2 portioner, salt och rapsolja hemma):
+Allt 51,8 s, 116,21 kr i 2 butiker (sparar 22,90 kr), två vegetariska och
+falukorv; gillar kyckling 51,0 s, två kycklingrätter, 139,50 kr i 1 butik;
+förhandsvisning av billigare recept 40,7 s per plats; gillar oxfilé och linser
+ger två linsrätter och beskedet att oxfilé saknas; alla basvaror hemma 96,87 kr;
+Malmö 81,6 s (fortfarande över målet); testkonto 5 middagar × 4 portioner
+51,6 s. /ui/a i mobilstorlek: förbockade basvaror, märkningen på receptkorten
+och raden "Har du hemma" i handlingslistan, inga sidfel eller API-fel. Med två
+kycklingrätter visar båda "kostar inget extra", eftersom ett byte av en av dem
+ensam inte gör inköpet billigare (de delar förpackning).
+
 # 2026-11-15: Ät inte, tidsgräns från motorstart, förlopp 0–100 % och snabb näring aktiverat
 
 Main `1062559d7b3b` (PR #81, #82, #83). App **app-1062559d7b3b-80314879**,
@@ -216,7 +239,7 @@ på `main` inte ändrar en pågående release.
   `smako-app-1`, `smako-scheduler-1`, `smako-caddy-1`, data i `/srv/smako/data`
   och det gemensamma driftlåset. Detta flöde installerar inte en ny server.
 - Läs aktuell [HANDOFF.md](HANDOFF.md), [OPERATIONS.md](OPERATIONS.md) och
-  senaste aktiveringsrapport. Appens BUILD_ID är `app-1062559d7b3b-80314879`;
+  senaste aktiveringsrapport. Appens BUILD_ID är `app-d611d09080e4-e17fc969`;
   schedulern är `source-ops-8a53beb80e43`.
   [Uppvärmda prov och samordnad faktaläsning/GC](releases/warm-facts-gc-20261101/ACTIVATED.md)
   är senaste appaktiveringen. Sex Pythonfiler från kod `b7c8d0506e23`;
@@ -264,10 +287,10 @@ git status --short
 .venv/Scripts/python.exe -X utf8 scripts/smako_ops.py status
 
 # Använd den granskade Git-bas som motsvarar faktiskt aktiva filer enligt senaste journalen.
-.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit 1062559d7b3b --commit main --workdir .local/beta-release
+.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit d611d09080e4 --commit main --workdir .local/beta-release
 ```
 
-`1062559d7b3b` är appen som aktiverades 2026-11-15 07:45 UTC. Appbildens egen
+`d611d09080e4` är appen som aktiverades 2026-11-15 11:17 UTC. Appbildens egen
 grocery-kopia är äldre än Git; använd `--keep-app-grocery` om intervallet
 bara innehåller grocery-Python som redan levererats till schedulern. De äldre
 Coop-filerna i runtime (`price_universe_runtime.py`,
