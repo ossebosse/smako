@@ -314,7 +314,7 @@ def test_each_meal_has_its_own_distribution_weight_and_nutrition_like_personal(u
 
 def test_searches_use_the_area_of_a_typed_postcode(ui):
     """A Lund postcode other than the area's own still finds Lund's products."""
-    name, page, fake, shot = ui
+    name, page, fake, _shot = ui
     page.goto(re.sub(r"#.*|$", "#lista" if name == "a" else "", page.url, count=1))
     if name == "b":
         page.get_by_role("button", name=re.compile("Planera mat och handla")).click()
