@@ -390,11 +390,15 @@ class ProductSearchIndex:
         return selected, exact, barcode
 
     @staticmethod
-    def _relevance(words, name, exact):
-        """0 exact name, 1 starts with the search, 2 whole words, 3 compound words, 4 other.
+    def _relevance(words, name, exact, category=""):
+        """0 exact name; 1–3 the category names the food, 4–6 it does not; 7 other.
 
-        A name where the searched word comes after "utan" ("Pasta utan ägg")
-        is last (8).
+        Within each half: starts with the search, whole words, compound words.
+
+        The shop's own category weighs in (step 7): a product whose category
+        names the searched food ("Mejeri > Ost", also "Hushållsost") ranks before
+        one that only mentions it ("Ost & Broccoli soppa" under Soppor). A name
+        where the searched word comes after "utan" ("Pasta utan ägg") is last (8).
         """
         if exact:
             return 0
@@ -404,12 +408,16 @@ class ProductSearchIndex:
             if i and names[i - 1] == "utan" and any(n in o for o in options):
                 return 8
         if len(names) >= len(words) and all(names[i] in o for i, o in enumerate(options)):
-            return 1
-        if all(any(n in o for n in names) for o in options):
-            return 2
-        if all(any(n in o or any(n.endswith(a) and len(n) - len(a) >= 3 for a in o) for n in names) for o in options):
-            return 3
-        return 4
+            level = 1
+        elif all(any(n in o for n in names) for o in options):
+            level = 2
+        elif all(any(n in o or any(n.endswith(a) and len(n) - len(a) >= 3 for a in o) for n in names) for o in options):
+            level = 3
+        else:
+            return 7
+        sections = search_text(category or "").split()
+        named = all(any(c in o for c in sections) for o in options)
+        return level + (0 if named else 3)
 
     def search(
         self,
@@ -682,7 +690,7 @@ class ProductSearchIndex:
             hidden = ((key in self.non_human_food and not pets)
                       or (search_text(product.category or "").split()[:1] == ["barn"] and not babies))
             row["_relevance"] = (9 if hidden else 0) + (
-                0 if barcode else self._relevance(words, product.name, key in exact))
+                0 if barcode else self._relevance(words, product.name, key in exact, product.category))
             if request.view == "campaigns" and not row["has_campaign"]:
                 continue
             if request.view == "multiple" and not (verified and len(prices) > 1):

@@ -50,7 +50,12 @@ def volume_evidence(product, name, fact):
             evidence = reference_evidence(2189)
     else:
         return None
-    if evidence.nutrition_preparation != 'as_sold':
+    return density_converted(evidence, canonical)
+
+
+def density_converted(evidence, canonical):
+    """Per-100 g evidence as per-100 ml with the reviewed density for this food."""
+    if evidence.nutrition_preparation != 'as_sold' or canonical not in density_data()['density']:
         return None
     row = density_data()['density'][canonical]
     if row['unit'] != 'g/ml' or not 0 < row['value'] < 2:

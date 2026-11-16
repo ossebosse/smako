@@ -300,10 +300,8 @@ def test_each_meal_has_its_own_distribution_weight_and_nutrition_like_personal(u
     page.get_by_role("button", name="Klar").click()
     expect(page.get_by_role("button", name="Näringsvärden för middag: 3 egna val")).to_be_visible()
 
-    page.get_by_role("button", name="Portionsvikt för frukost: Standard").click()
-    page.get_by_label("Högst portionsvikt, g per portion").fill("350")
-    page.get_by_label("Högst portionsvikt, g per portion").press("Tab")
-    page.get_by_role("button", name="Klar").click()
+    # Portion weight is hidden until recipes state their ready weight (step 7, C1).
+    expect(page.get_by_role("button", name=re.compile("^Portionsvikt"))).to_have_count(0)
     page.get_by_role("button", name="Fördelning för middag: Standard").click()
     page.get_by_label("Antal fisk och skaldjur").fill("1")
     page.get_by_label("Antal fisk och skaldjur").press("Tab")
@@ -320,7 +318,7 @@ def test_each_meal_has_its_own_distribution_weight_and_nutrition_like_personal(u
     meals = sent["personal"]["meals"]
     assert [(m["meal_type"], m["count"], m["servings"]) for m in meals] == [("dinner", 2, 2), ("breakfast", 1, 1), ("snack", 0, 1)]
     assert meals[0]["limits"] == {"min_protein_g": 30, "min_carbs_g": 80, "max_kcal": 700} and meals[0]["distribution"] == {"fish": 1}
-    assert meals[1]["limits"] == {"max_weight_g": 350} and meals[1]["distribution"] == {}
+    assert meals[1]["limits"] == {} and meals[1]["distribution"] == {}
     assert meals[2]["limits"] == {}
     assert [m["max_same_base_meals"] for m in meals] == [2, 2, None]
     shot("naring-recept")
