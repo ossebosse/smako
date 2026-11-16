@@ -236,7 +236,10 @@
   const meal = type => saved.settings.meals[type];
   const mealLabel = type => MEAL_TYPES.find(m => m[0] === type)[1];
   const mealDiet = type => saved.settings.diet === "meat" && type !== "dinner" ? "mixed" : saved.settings.diet;
-  function cleanLimits(type, rows = [...WEIGHT, ...NUTRIENTS]) {
+  // Step 7 (C1): portion weight is hidden until recipes state their ready weight;
+  // a limit no recipe can meet only gives "no plan". Saved weight limits are not sent.
+  const SHOW_WEIGHT = false;
+  function cleanLimits(type, rows = SHOW_WEIGHT ? [...WEIGHT, ...NUTRIENTS] : NUTRIENTS) {
     const out = {}, n = meal(type).limits || {};
     for (const [key, , , max, lower] of rows) for (const side of lower ? ["min", "max"] : ["max"]) {
       const value = n[`${side}_${key}`]; if (Number.isFinite(value) && value >= 0) out[`${side}_${key}`] = Math.min(value, max);
@@ -263,7 +266,7 @@
   }
   const PARTS = { distribution: ["Fördelning", type => distributionProblem(type)], weight: ["Portionsvikt", type => limitProblem(type, WEIGHT)], nutrition: ["Näringsvärden", type => limitProblem(type, NUTRIENTS)] };
   function mealProblem(type) {
-    for (const [title, check] of Object.values(PARTS)) { const problem = check(type); if (problem) return `${title}: ${problem}`; }
+    for (const [kind, [title, check]] of Object.entries(PARTS)) { if (kind === "weight" && !SHOW_WEIGHT) continue; const problem = check(type); if (problem) return `${title}: ${problem}`; }
     return "";
   }
   function mealsProblem() {
@@ -578,7 +581,7 @@
       const card = el("fieldset", null, "meal-card"); card.append(el("legend", label));
       card.append(mealCounter(countText, type, "count", min, max, unit), mealCounter("Portioner per rätt", type, "servings", 1, limit("servings", 8), type === "dinner" ? "portioner" : `portioner ${unit}`));
       const parts = el("div", null, "meal-parts");
-      for (const [kind, [title]] of Object.entries(PARTS)) { const b = button(null, () => openPart(type, kind), "meal-part", { "aria-label": `${title} för ${label.toLowerCase()}: ${partSummary(type, kind)}` }); b.append(el("strong", title), el("span", partSummary(type, kind))); parts.append(b); }
+      for (const [kind, [title]] of Object.entries(PARTS)) { if (kind === "weight" && !SHOW_WEIGHT) continue; const b = button(null, () => openPart(type, kind), "meal-part", { "aria-label": `${title} för ${label.toLowerCase()}: ${partSummary(type, kind)}` }); b.append(el("strong", title), el("span", partSummary(type, kind))); parts.append(b); }
       card.append(parts);
       const problem = m.count ? mealProblem(type) : ""; if (problem) card.append(el("p", problem, "hint warn", { role: "status" }));
       if (type !== "dinner") card.append(button(`Ta bort ${label.toLowerCase()}`, () => { m.on = false; persist(); emit(); }, "btn quiet small"));

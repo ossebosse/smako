@@ -70,3 +70,12 @@ def test_pantry_asks_for_egg_size_and_the_kind_of_broad_words():
     # Exact-product requirements still need a chosen product (owner decision 2026-11-13).
     assert usual_recipe_use("olivolja")["kinds"] == []
     assert usual_recipe_use("jasminris")["kinds"] == [] and usual_recipe_use("ris")["egg_grams"] is None
+
+
+def test_the_shops_category_ranks_the_food_above_dishes_that_mention_it():
+    index = prepared(
+        item("Ost & Broccoli Soppa", 5, category="Soppor"), item("Hushållsost 26%", 60, category="Mejeri > Ost"),
+        item("Ost Riven Mild", 30, category="Mejeri > Ost > Riven ost"),
+    ).product_search_index
+    result = index.search(ProductSearchRequest(query="ost"), now=NOW, stale_hours=10**6, warning_hours=10**6)
+    assert [r["name"] for r in result["results"]] == ["Ost Riven Mild", "Hushållsost 26%", "Ost & Broccoli Soppa"]

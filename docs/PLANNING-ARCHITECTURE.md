@@ -232,6 +232,23 @@ recept.
   (ägarbeslut 2026-11-13, till exempel olivolja) kräver fortfarande en vald
   vara.
 
+## Innehåll och data (steg 7, 2026-11-16)
+
+- **Portionsvikt dold i provgränssnitten** (C1) tills recepten anger färdig
+  vikt: en gräns som inget recept kan uppfylla gav bara "ingen plan". Sparade
+  viktgränser skickas inte. API:t och /personal är oförändrade.
+- **Butikens kategori i sökningen:** en vara vars kategori nämner det sökta
+  ("Mejeri > Ost") rangordnas före varor som bara nämner det i namnet ("Ost &
+  Broccoli soppa"). "ost" visar nu ostar först, även Hushållsost.
+- **Olja hemma ger näring:** rapsolja i milliliter använder samma granskade
+  väg som köpt olja: SLV-referensen per 100 g gånger DTU:s densitet 0,92 g/ml
+  (`staples.volume_evidence`, `recipe_volume_nutrition.density_converted`).
+  Andra oljor saknar granskad densitet och visar fortfarande ingen näring.
+- **Glutenfri spaghetti (D6) är inget fel:** receptet ber om pasta, och
+  glutenfri spaghetti är pasta. På frusen data kostar vanlig spaghetti 13,90 kr
+  och glutenfri 16,50 kr för 400 g hos Willys; den glutenfria väljs bara när de
+  valda butikerna saknar en billigare vanlig.
+
 ## Förpackningsvikt när avrunnen vikt saknas (ägarbeslut 2026-11-13)
 
 Vill ett recept ha en vara avrunnen (`cooked_drained`, `preserved_drained`)
