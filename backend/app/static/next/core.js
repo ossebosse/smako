@@ -110,7 +110,12 @@
   function chooseStores() {
     const contexts = S.location?.contexts || [];
     if (saved.storeMode === "specific" && saved.storeIds?.length) { const known = new Set(contexts.map(c => c.context_id)); S.storeIds = saved.storeIds.filter(id => known.has(id)); }
-    else if (saved.storeMode === "municipality") S.storeIds = contexts.map(c => c.context_id);
+    else if (saved.storeMode === "municipality") {
+      // A Stora Coop priced from Coop Online Syd stands in for the online shop
+      // when the whole municipality is chosen; the shop stays selectable by hand.
+      const covered = new Set(contexts.map(c => c.base_price_context_id).filter(Boolean));
+      S.storeIds = contexts.filter(c => !covered.has(c.context_id)).map(c => c.context_id);
+    }
     else S.storeIds = contexts.filter(c => c.distance_km != null && c.distance_km <= saved.settings.radius).map(c => c.context_id);
     if (!S.storeIds.length) S.storeIds = contexts.map(c => c.context_id);
     saved.storeIds = S.storeIds; persist();
@@ -387,6 +392,7 @@
       try { await lookup(input.value); show(); onDone?.(); } catch (error) { status.textContent = error.message; } finally { go.disabled = false; } });
     return box;
   }
+  let storeSearch = "";
   function storePicker() {
     const box = el("div", null, "store-picker");
     if (!S.location) { box.append(el("p", "Ange postnummer först.", "hint")); return box; }
@@ -400,15 +406,40 @@
       box.append(radius);
     }
     const list = el("div", null, "store-list");
+    const words = text => text.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    const filter = () => { const wanted = words(storeSearch).split(/\s+/).filter(Boolean); let shown = 0;
+      for (const label of list.children) { const hit = wanted.every(word => words(label.textContent).includes(word)); label.hidden = !hit; shown += hit; }
+      none.hidden = shown > 0; };
+    const none = el("p", "Ingen butik heter så. Prova ett annat ord.", "hint", { role: "status" });
+    if (S.location.contexts.length > 8) {
+      const field = el("label", "Sök butik", "field"), search = el("input", null, null, { type: "search", placeholder: "Till exempel Willys eller en gata", value: storeSearch, autocomplete: "off" });
+      search.addEventListener("input", () => { storeSearch = search.value; filter(); });
+      field.append(search); box.append(field);
+    }
     for (const context of S.location.contexts) {
-      const label = el("label", null, "check"), check = el("input", null, null, { type: "checkbox" });
+      const label = el("label", null, "check"), check = el("input", null, null, { type: "checkbox", "data-store": context.context_id });
       check.checked = S.storeIds.includes(context.context_id);
       check.addEventListener("change", () => { const ids = new Set(S.storeIds); if (check.checked) ids.add(context.context_id); else ids.delete(context.context_id);
-        if (!ids.size) { check.checked = true; return; } saved.storeMode = "specific"; saved.storeIds = [...ids]; chooseStores(); emit(); });
+        if (!ids.size) { check.checked = true; return; } saved.storeMode = "specific"; saved.storeIds = [...ids]; chooseStores();
+        // The picker is drawn again; keep the ticked store where the finger is.
+        const before = check.getBoundingClientRect().top; emit();
+        const again = [...document.querySelectorAll(".store-list input[data-store]")].find(node => node.dataset.store === context.context_id && node.isConnected);
+        if (!again) return;
+        // Innermost scrolling box first, then whatever still differs further out.
+        // Once more on the next frame: the browser may re-anchor the page itself.
+        const settle = () => { if (!again.isConnected) return;
+          for (let frame = again.parentElement; ; frame = frame.parentElement) {
+            const moved = again.getBoundingClientRect().top - before;
+            if (Math.abs(moved) < 1) break;
+            if (!frame) { window.scrollBy({ top: moved, behavior: "instant" }); break; }
+            if (frame.scrollHeight > frame.clientHeight + 1 && /auto|scroll/.test(getComputedStyle(frame).overflowY)) frame.scrollBy({ top: moved, behavior: "instant" });
+          } };
+        settle(); requestAnimationFrame(settle);
+        again.focus({ preventScroll: true }); });
       label.append(check, el("span", [context.display_name, context.address, context.distance_km == null ? null : `${number(Math.round(context.distance_km * 10) / 10)} km`].filter(Boolean).join(" · ")));
       list.append(label);
     }
-    box.append(list);
+    box.append(list, none); filter();
     return box;
   }
 

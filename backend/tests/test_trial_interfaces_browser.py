@@ -88,7 +88,8 @@ class Fake:
             return 200, self.public()
         if path == "shopping-location":
             return 200, {"status": "eligible", "postal_code": query.get("postal_code", "22350"), "area_postal_code": "22350", "municipality_name": "Lund", "area_name": "Lund",
-                         "contexts": [{"context_id": "s1", "display_name": "Testbutiken Lund", "address": "Storgatan 1", "distance_km": 1.2}]}
+                         "contexts": getattr(self, "contexts", None)
+                         or [{"context_id": "s1", "display_name": "Testbutiken Lund", "address": "Storgatan 1", "distance_km": 1.2}]}
         if path == "personal/interpret-extra":
             match = re.fullmatch(r"(.+?)\s+(\d+)\s*(kg|g|st|l)", body["text"].strip())
             if not match:
@@ -557,3 +558,41 @@ def test_rice_can_be_named_by_kind_and_eggs_counted_by_size(ui):
     expect(page.get_by_text("Ägg · 6 st M, ungefär 306 g ligger i skafferiet.")).to_be_visible()
     saved = [body for method, path, body in fake.calls if path == "personal/pantry"][-1]
     assert [(i["name"], i["quantity"], i["unit"]) for i in saved["items"]] == [("jasminris", 1000, "g"), ("ägg", 306, "g")]
+
+
+def test_store_list_stays_put_can_be_searched_and_hides_the_covered_online_shop(ui):
+    name, page, fake, shot = ui
+    fake.contexts = ([{"context_id": f"s{i}", "display_name": f"{'Willys' if i % 2 else 'Hemköp'} {i}", "address": f"Gatan {i}", "distance_km": i / 10}
+                      for i in range(1, 15)]
+                     + [{"context_id": "stora", "display_name": "Stora Coop Lund", "address": "Traktorvägen 2", "distance_km": 2.4,
+                         "base_price_context_id": "online"},
+                        {"context_id": "online", "display_name": "Coop Online Syd", "distance_km": None}])
+    if name == "a":
+        page.get_by_role("button", name="Välj postnummer").click()
+    else:
+        page.get_by_role("button", name=re.compile("Planera mat och handla")).click()
+    scope = page.get_by_role("dialog") if name == "a" else page
+    scope.get_by_label("Ditt postnummer").fill("22350")
+    scope.get_by_role("button", name="Hitta butiker").click()
+    if name == "b":
+        page.get_by_text("Välj butiker själv").click()
+    boxes = page.locator(".store-list input")
+    expect(boxes).to_have_count(16)
+    # The whole municipality: Stora Coop stands in for the online shop that prices it.
+    page.get_by_role("radio", name="Hela kommunen").click()
+    expect(page.locator('.store-list input[data-store="online"]')).not_to_be_checked()
+    expect(page.locator('.store-list input[data-store="stora"]')).to_be_checked()
+    target = page.locator('.store-list input[data-store="s13"]')
+    target.scroll_into_view_if_needed()
+    before = target.bounding_box()["y"]
+    target.evaluate("node => node.click()")  # No automatic scrolling by the test driver.
+    page.wait_for_timeout(200)
+    after = page.locator('.store-list input[data-store="s13"]')
+    expect(after).not_to_be_checked()
+    assert abs(after.bounding_box()["y"] - before) < 3  # The list did not jump back to the top.
+    page.get_by_label("Sök butik").fill("hemkop 12")
+    expect(page.locator(".store-list label:visible")).to_have_count(1)
+    expect(page.locator(".store-list label:visible")).to_contain_text("Hemköp 12")
+    shot("butikssok")
+    page.get_by_label("Sök butik").fill("finns inte")
+    expect(page.get_by_text("Ingen butik heter så. Prova ett annat ord.")).to_be_visible()
