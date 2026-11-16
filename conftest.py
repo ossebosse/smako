@@ -106,6 +106,8 @@ def pytest_collection_modifyitems(config, items):
 # The nutrition prewarm runs a whole planner request in the background after
 # startup; tests that want it turn it on themselves.
 os.environ.setdefault("SMAKO_NUTRITION_PREWARM", "0")
+# Tests reuse universe IDs between different synthetic universes.
+os.environ.setdefault("SMAKO_RETAINED_FACTS_TTL", "0")
 
 # --- Process-local planner reuse ---------------------------------------------
 # Tests patch matchers, facts and price helpers on shared fixtures. Start every
@@ -162,5 +164,6 @@ def _young_generation_planner_gc(request, monkeypatch):
         yield
         return
     monkeypatch.setattr(_planner_memory, "gc",
-                        _Namespace(collect=lambda generation=2: _gc.collect(0)))
+                        _Namespace(collect=lambda generation=2: _gc.collect(0),
+                                   freeze=lambda: None, unfreeze=lambda: None))
     yield

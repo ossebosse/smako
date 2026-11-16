@@ -10,8 +10,10 @@ from __future__ import annotations
 import hashlib
 import json
 import math
+import os
 import re
 import sqlite3
+import threading
 import unicodedata
 from collections import defaultdict
 from copy import deepcopy
@@ -19,6 +21,7 @@ from dataclasses import fields, is_dataclass, replace
 from functools import lru_cache
 from pathlib import Path
 from threading import Lock, RLock
+from time import monotonic
 
 from app.services.personal_policy import ProductFacts
 
@@ -976,6 +979,61 @@ def _project_facts(key, cacheable, hashes, source_rows, prepared, result):
                 _CACHE.pop(next(iter(_CACHE)))
             _CACHE[key] = projected
     return projected
+
+
+_RETAINED_CACHE: dict = {}
+_RETAINED_LOCK = threading.Lock()
+
+
+def _retained_ttl() -> float:
+    return float(os.environ.get("SMAKO_RETAINED_FACTS_TTL", "600"))
+
+
+def _source_fingerprint():
+    """Size and change time of every source load_retained_facts reads from disk."""
+    from app.services.axfood_product_details import configured_root
+    from sqlalchemy.engine import make_url
+
+    from grocery_data.app.config import GroceryDataSettings
+
+    settings = GroceryDataSettings.from_env()
+    url = make_url(settings.database_url)
+    paths = [url.database if url.get_backend_name() == "sqlite" else None, settings.raw_snapshot_root, configured_root()]
+    stamp = []
+    for path in paths:
+        try:
+            info = Path(path).stat() if path else None
+        except OSError:
+            info = None
+        stamp.append((str(path), info.st_mtime_ns, info.st_size) if info else (str(path), None, None))
+    return tuple(stamp)
+
+
+def cached_retained_facts(prepared):
+    """load_retained_facts, shared between requests for the same universe (step 6).
+
+    Loading and hashing the facts took 7–11 s per plan on beta. The result is
+    the same object for the same activated universe and unchanged sources, at
+    most SMAKO_RETAINED_FACTS_TTL seconds (default 600; 0 turns it off). The
+    planner never changes the facts it is given.
+    """
+    ttl = _retained_ttl()
+    if ttl <= 0:
+        return load_retained_facts(prepared)
+    key = (id(prepared), getattr(prepared.universe, "universe_id", None), _source_fingerprint())
+    now = monotonic()
+    with _RETAINED_LOCK:
+        hit = _RETAINED_CACHE.get(key)
+        if hit is not None and hit[0] > now:
+            return hit[1]
+    facts = load_retained_facts(prepared)
+    with _RETAINED_LOCK:
+        for old in [k for k, (expires, _) in _RETAINED_CACHE.items() if expires <= now]:
+            del _RETAINED_CACHE[old]
+        while len(_RETAINED_CACHE) >= 4:
+            del _RETAINED_CACHE[min(_RETAINED_CACHE, key=lambda k: _RETAINED_CACHE[k][0])]
+        _RETAINED_CACHE[key] = (now + ttl, facts)
+    return facts
 
 
 def load_retained_facts(prepared, *, database=None, raw_root=None):

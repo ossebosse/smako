@@ -79,3 +79,26 @@ def release_idle_memory(*, generation=2):
     increment_performance_counter("planner_allocator_trim_released", released is True)
     return {"collected": collected, "generation": generation, "allocator_supported": function is not None,
             "allocator_released": released}
+
+
+def reclaim_and_freeze():
+    """Full collection after a planning job, then freeze the survivors.
+
+    Runs once the job's result is out (planner_admission), so nobody waits for
+    it. Freezing moves the long-lived shared state (price universes, shared
+    caches) out of the collector's scans, so the next job's collections only
+    look at its own objects; a full collection with that state took about 7 s
+    per job on beta. Unfreezing first lets this collection reclaim anything
+    that became cyclic garbage since the last freeze, so nothing is kept for
+    longer than one job. Objects freed by reference counting are freed as
+    before, frozen or not.
+    """
+    gc.unfreeze()
+    collected = gc.collect()
+    function = _allocator_trim()
+    if function is not None:
+        function(0)
+    gc.freeze()
+    increment_performance_counter("planner_post_job_reclamations")
+    increment_performance_counter("planner_unreachable_objects_collected", collected)
+    return collected

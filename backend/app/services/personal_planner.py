@@ -261,7 +261,7 @@ class PersonalPlanner:
             if not extra.food and not is_nonfood(extra.query):
                 raise PolicyConflict(_NOT_NONFOOD.format(name=extra.query))
         self.plan_id = plan_id
-        from app.services.personal_source_facts import load_retained_facts
+        from app.services.personal_source_facts import FactsCollection, cached_retained_facts
 
         needs_facts = (
             self.complete
@@ -284,14 +284,16 @@ class PersonalPlanner:
         from app.services.plan_jobs import report_stage
         report_stage("product_facts")
         with performance_span("personal_product_facts"):
-            self.facts = (
-                load_retained_facts(prepared) if facts is None and needs_facts else facts
-            ) or {}
+            loaded = facts is None and needs_facts
+            self.facts = (cached_retained_facts(prepared) if loaded else facts) or {}
         self.timings["product_facts"] += perf_counter() - facts_started
         from app.services.personal_source_facts import facts_version
 
         with performance_span("personal_facts_identity"):
-            self.facts_version = (facts_version(self.facts)
+            # Facts loaded here are a FactsCollection hashed when it was built
+            # and never changed afterwards; given facts may have been changed.
+            self.facts_version = (self.facts.version if loaded and isinstance(self.facts, FactsCollection)
+                else facts_version(self.facts)
                 if getattr(settings, "library_search_policy", "legacy") in {"smako-verified-reference-v1", "smako-current-library-v2"}
                 else getattr(self.facts, "version", None) or facts_version(self.facts))
         self.reference_version = None
@@ -3329,13 +3331,87 @@ class PersonalPlanner:
                             classify=self._protein_category, limit=limit)
                     else:
                         kept = library_seed_cap(kept, evidence, limit=limit)
+                    if meal_type == "dinner":
+                        kept = self._seed_wanted(recipes, kept, evidence)
                 by_meal[meal_type] = {self._recipe_id(r) for r in kept}
             selected.append([s for s in group if not s.recipe or self._recipe_id(s.recipe) in by_meal[meal_type]])
         return selected
 
+    def _seed_wanted(self, recipes, kept, evidence, per_rule=4):
+        """Add to the dinner seed the cheapest recipes that the week's rules need.
+
+        Each required like and, for a mixed week, meat or fish and vegetarian
+        dishes: the four cheapest of each by single-recipe purchase. Without
+        them the seed holds only the cheapest dishes, and the search must find
+        a liked or mixed week late (owner decisions 2026-11-15). Only adds
+        options; the rules themselves are unchanged.
+        """
+        wanted = [] if getattr(self, "_ignore_likes", False) else [
+            lambda r, t=t: recipe_names(t, r) for t in getattr(self, "_required_likes", ())]
+        if getattr(self, "_mixed_week", False):
+            wanted += [lambda r: self._protein_category(r) == "vegetarian",
+                       lambda r: self._protein_category(r) != "vegetarian"]
+        if not wanted:
+            return kept
+        ids = {self._recipe_id(r) for r in kept}
+        by_cost = sorted(recipes, key=lambda r: (evidence[self._recipe_id(r)].paid if self._recipe_id(r) in evidence
+                                                 else float("inf"), self._recipe_id(r)))
+        extra = []
+        for rule in wanted:
+            for r in [r for r in by_cost if rule(r)][:per_rule]:
+                if self._recipe_id(r) not in ids:
+                    ids.add(self._recipe_id(r))
+                    extra.append(r)
+        return [*kept, *extra]
+
+    def _add_likes(self, chosen, result, options, evaluate, accepts, score, per_place=8):
+        """Put each missing like into the week by replacing one dinner.
+
+        For every dinner place, the eight cheapest liked recipes allowed there
+        (single-recipe purchase) are tried; the week with the lowest ranking
+        (paid + stores + tastes) that passes every rule is kept. A like that
+        no replacement can bring in stays missing and is reported so.
+        """
+        from app.services.performance_trace import increment_performance_counter
+
+        best = (list(chosen), result)
+        for term in self._required_likes:
+            week = best[0]
+            if any(s.meal_type == "dinner" and s.recipe and recipe_names(term, s.recipe) for s in week):
+                continue
+            tried = None
+            for index, place in enumerate(week):
+                if place.meal_type != "dinner":
+                    continue
+                liked = [s for group in options for s in group
+                         if s.id == place.id and s.recipe and recipe_names(term, s.recipe)]
+                liked.sort(key=lambda s: (getattr(self.variant_search_evidence.get(
+                    (s.meal_type, self._recipe_id(s.recipe))), "paid", float("inf")), self._recipe_id(s.recipe)))
+                for slot in liked[:per_place]:
+                    candidate = [*week[:index], slot, *week[index + 1:]]
+                    if not accepts(candidate, final=True):
+                        continue
+                    try:
+                        value = evaluate(candidate, final=True)
+                    except (ValueError, IncompleteBasketError, PolicyConflict):
+                        continue
+                    ranked = score(candidate, value)
+                    if tried is None or ranked < tried[0]:
+                        tried = (ranked, candidate, value)
+            if tried is not None:
+                best = (tried[1], tried[2])
+        increment_performance_counter("likes_added_by_replacement")
+        return best
+
     def _preference_cost(self, slots):
         """Owner decision 2026-11-15: likes and dislikes as kronor per recipe."""
         recipes = [s.recipe for s in slots if s.recipe]
+        if getattr(self, "_ignore_likes", False):
+            # The week as if nothing were liked: dislikes still count.
+            return TASTE_WEIGHT_KR * sum(
+                preference_score([r], profile.model_copy(update={"likes": []}))
+                for s in slots if s.recipe for r in [s.recipe]
+                for profile in (self.spec.profile, self.meals[s.meal_type].profile))
         tastes = preference_score(recipes, self.spec.profile)
         tastes += sum(preference_score([s.recipe], self.meals[s.meal_type].profile) for s in slots if s.recipe)
         dinners = [s.recipe for s in slots if s.recipe and s.meal_type == "dinner"]
@@ -4127,6 +4203,8 @@ class PersonalPlanner:
         # choices names is in at least one dinner (LIKE_MISSING_KR, _preference_cost).
         likes = list(dict.fromkeys([*self.spec.profile.likes, *(dinner_meal.profile.likes if dinner_meal else [])]))
         new_week = generating and replace_slot is None
+        self._mixed_week = mixed_count is not None
+        self._likes_free = None
         self._required_likes = tuple(t for t in likes if new_week and any(recipe_names(t, r) for r in dinner_pool))
         self._unavailable_likes = tuple(t for t in likes if new_week and t not in self._required_likes)
         preference_cost = self._preference_cost
@@ -4340,6 +4418,11 @@ class PersonalPlanner:
         # search is repeated with every complete menu audited, which is the
         # previous behaviour, so an unaudited menu can never be returned.
         self._defer_search_audit = True
+        # Owner decisions 2026-11-15/16: with required likes, search the week as
+        # if nothing were liked, then add each liked dish by the cheapest
+        # replacement of one dinner. The liked week costs about the same time
+        # as any week, and the week without the likes is known exactly.
+        self._ignore_likes = bool(self._required_likes)
         try:
             with performance_span("personal_week_search"):
                 capacity = (self.service.menu_optimizer.dish_form_capacity_conflict(
@@ -4377,6 +4460,10 @@ class PersonalPlanner:
                     chosen, result = search(search_input, **search_kwargs)
         finally:
             self._defer_search_audit = False
+            ignored, self._ignore_likes = self._ignore_likes, False
+        if ignored:
+            self._likes_free = (result["basket"].total, tuple((s.id, s.recipe) for s in chosen))
+            chosen, result = self._add_likes(chosen, result, options, evaluate, accepts, score)
         self.timings["week_search"] += perf_counter() - search_started
         # Recheck every final constraint even if the cache supplied a beam result.
         report_stage("final_audit")
@@ -4416,6 +4503,21 @@ class PersonalPlanner:
                  for term in likes
                  for ids in [[s.id for s in dinners if recipe_names(term, s.recipe)]]
                  if ids or term in self._required_likes or term in self._unavailable_likes]
+        for like in liked:
+            if like["status"] == "included" and self._likes_free is not None:
+                from app.services.complete_recipes import identity
+                total, week = self._likes_free
+                current = {s.id: s.recipe for s in chosen}
+                changed = [(slot_id, recipe) for slot_id, recipe in week if recipe is not None and (
+                    current.get(slot_id) is None or self._recipe_id(current[slot_id]) != self._recipe_id(recipe))]
+                saving = round(result["basket"].total - total, 2) if changed else 0.0
+                like["without"] = {
+                    "saving": max(0.0, saving), "total": total,
+                    "recipes": [{"slot_id": slot_id, "recipe_id": identity(recipe), "name": recipe.name,
+                                 "instead_of": current[slot_id].name if current.get(slot_id) else None,
+                                 "recipe": recipe.model_dump(mode="json")}
+                                for slot_id, recipe in changed] if saving > 0.5 else [],
+                }
         if liked:
             result["checks"]["likes"] = liked
         if self.complete:

@@ -391,6 +391,8 @@ class PersonalMutation(PrivateModel):
     # without the given like. Nothing is saved.
     preview_without_like: str | None = Field(default=None, min_length=1, max_length=40,
                                              exclude_if=lambda v: v is None)
+    # Several places at once (the week without a like, step 6): place -> recipe ID.
+    recipe_ids: dict[str, str] = Field(default_factory=dict, max_length=14, exclude_if=lambda v: not v)
 
     @model_validator(mode="after")
     def partial_event_identity(self):
@@ -399,6 +401,8 @@ class PersonalMutation(PrivateModel):
             raise ValueError("Beredning kräver uppmätta insatser/utfall och ett unikt åtgärds-ID.")
         if self.purchase_planning_mode is not None and self.action not in {"extras", "recalculate"}:
             raise ValueError("Inköpsläge kan bara ändras vid uttrycklig omräkning eller uppdatering av inköpslistan.")
+        if self.recipe_ids and (self.action != "replace" or self.slot_id or self.recipe_id or self.preview_without_like):
+            raise ValueError("Flera recept byts med en lista över måltider och recept.")
         if self.preview_without_like is not None and (self.action != "replace" or not self.slot_id or self.recipe_id):
             raise ValueError("Förhandsvisningen gäller bara byte av en måltid.")
         if self.allow_nutrition_estimates is not None and self.action not in {"extras", "recalculate"}:

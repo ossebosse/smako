@@ -155,21 +155,25 @@ lösningar från lägre butikstak och i den nedre gränsen
   när de nästan inte kostar något. Ett recept med något som inte gillas räknas
   15 kr dyrare. Tidigare räknades en gillad term högst en gång per vecka och
   bara som 2 kr, och bibliotekssökningen rangordnade efter enbart pris.
-  Provgränssnitten räknar sedan i bakgrunden ut vad gillningen kostar, en
-  gillning i taget (högst tre), och inget byts förrän personen väljer.
-  Finns den i **en** middag: det billigaste andra receptet för den platsen
-  (`change` med `action: replace` och `preview_without_like`, samma byte som
-  "Byt recept" utan den gillade termen och utan det nuvarande receptet, inte
-  sparat). Receptkortet visar "Du gillar kyckling · 27,55 kr dyrare än
-  billigaste alternativet" och "Visa billigare recept"; popupen byter med
-  `recipe_id`. Finns den i **flera** middagar, som kan dela förpackning och
-  därför bara blir billigare tillsammans: den billigaste nya veckan med samma
-  val utan gillningen (en vanlig planbegäran). En rad ovanför recepten visar
-  "Du gillar kyckling i 2 middagar · utan kyckling hade veckan kostat 23 kr
-  mindre" och "Visa veckan utan kyckling"; popupen visar veckans middagar och
-  "Byt till den här veckan" använder den redan beräknade planen. Ett byte av
-  flera platser i den befintliga veckan prövades men tog dubbelt så lång tid
-  som ett enkelt byte och skulle nå tidsgränsen. Byte av ett recept kräver inte gillningen
+  **Sökordning (2026-11-16):** med gillningar söker planeraren först veckan
+  som om inget vore gillat (ogillat räknas fortfarande), och lägger sedan in
+  varje gillning som saknas genom att byta en middag: för varje middagsplats
+  prövas de åtta billigaste gillade recepten (inköp för receptet ensamt) och
+  veckan med lägst rangordning som klarar alla regler behålls
+  (`_add_likes`). Startpoolen får dessutom de fyra billigaste recepten per
+  gillning och, för en blandad vecka, per slag (`_seed_wanted`). Gillningar
+  tar därmed ungefär lika lång tid som en vanlig vecka (lokalt 57 s mot 53 s,
+  tidigare 62–68 s), och veckan utan gillningarna är känd exakt utan en ny
+  planering: `checks.likes[].without` har vad den kostar, hur mycket mindre
+  det blir och vilka middagar som byts (med recepten). Den gillade veckan kan
+  bli några kronor dyrare än en full sökning med gillningen hade gett (frusen
+  data: kyckling 176,23 mot 172,26 kr). Provgränssnitten visar priset på
+  receptkortet ("Du gillar kyckling · 32,06 kr dyrare än billigaste
+  alternativet", "Visa billigare recept") när bara den gillade middagen byts,
+  annars en rad för veckan ("utan kyckling hade veckan kostat X kr mindre",
+  "Visa veckan utan kyckling"). Bytet sparar de redan prissatta recepten med
+  `change` (`action: replace`, `recipe_ids`) utan ny sökning. Förhandsvisningen
+  `preview_without_like` finns kvar i API:t men används inte av gränssnitten. Byte av ett recept kräver inte gillningen
   igen. På frusen data (Lund, 3 middagar) ger "gillar kyckling" en kycklingrätt
   (176,96 kr i stället för 144,17 kr) och billigaste alternativet är
   falukorv (162,17 kr); förhandsvisningen tog 52 s lokalt.
@@ -231,6 +235,40 @@ recept.
   tillsammans med listan över bestämda varor. Krav på exakt produkt
   (ägarbeslut 2026-11-13, till exempel olivolja) kräver fortfarande en vald
   vara.
+
+## Fart (steg 6, 2026-11-16)
+
+Mätt på beta 2026-11-16 (3 middagar, salt/peppar/rapsolja hemma): Lund 51 s
+(kö-steget 8 s, varufakta 11 s, kvalificering 15 s, veckosökning 16 s), Malmö
+81 s (34 butiker, alltså 90 s-gränsen: kö-steget 7 s, varufakta 15 s,
+kvalificering 15 s, veckosökning 40 s). Planerarens egna tider för Lund:
+varufakta 7,4 s och minnesrensning 7,0 s.
+
+- **Minnesrensningen efter jobbet** (`planner_memory.reclaim_and_freeze`):
+  den fulla skräpsamlingen före varje jobb (7–8 s i "kö") och före sökningen
+  (7 s) gick igenom alla långlivade delade cacher. Nu körs den fulla
+  samlingen efter att jobbets resultat är ute, innan nästa jobb släpps in, och
+  fryser det som överlever (`gc.freeze`), så att samlingarna under nästa jobb
+  bara går igenom jobbets egna objekt. Före jobbet samlas bara unga objekt.
+  Inget levande tillstånd släpps; cykliskt skräp bland frysta objekt samlas
+  efter nästa jobb.
+- **Varufakta delas mellan förfrågningar** (`cached_retained_facts`): samma
+  aktiverade prisunivers och oförändrade källfiler (databas, råfiler,
+  Axfood-detaljer: storlek och ändringstid) ger samma faktaobjekt i högst
+  `SMAKO_RETAINED_FACTS_TTL` sekunder (600, 0 stänger av). Versionen räknas
+  inte om när faktan laddades av planeraren själv och inte ändrats.
+- **Veckosökningen slutar när den inte hittar något billigare**
+  (`SMAKO_MENU_SEARCH_STALL_SECONDS`, 10 s; 0 som förut). Tidigare letade den
+  tills 12 s återstod av tidsgränsen. På frusen Malmödata kom alla sex
+  förbättringar inom 0,6 s och resten av en 90 s-gräns ändrade inget: 78 s
+  blev 52 s med samma vecka (153,00 kr). Planen redovisar
+  `improvement_search_seconds` och `stop_reason`
+  `no_improvement_for_stall_seconds`, och meddelandet säger att vi slutade leta
+  när vi en stund inte hittat något billigare. Globalt lägsta pris är som
+  förut inte bevisat.
+- **Näringsuppvärmningen** körs i upp till tre rundor om en runda når sin
+  gräns på 45 s; varje runda väntar på en ledig planerare.
+- **Gillningar** kostar ingen extra planering (se steg 4).
 
 ## Innehåll och data (steg 7, 2026-11-16)
 

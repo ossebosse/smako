@@ -74,6 +74,7 @@ class PlannerAdmissionController:
         self._rejected = 0
         self._peak_active = 0
         self._peak_queued = 0
+        self._cleanups: set[asyncio.Task[None]] = set()
 
     async def run(
         self,
@@ -140,12 +141,12 @@ class PlannerAdmissionController:
                 self._active += 1
                 self._peak_active = max(self._peak_active, self._active)
 
-            # Completed searches can leave cyclic garbage in Python's oldest
-            # generation even after their bounded caches go out of scope.
-            # Collect between admitted builds, before allocating another search.
-            # This neither evicts live facts nor changes candidates or budgets.
+            # The full collection of the previous job ran after its result was
+            # out, and froze the long-lived state (reclaim_and_freeze). Here
+            # only young objects remain, so this collection is short. It
+            # neither evicts live facts nor changes candidates or budgets.
             cleanup_started = perf_counter()
-            await asyncio.to_thread(gc.collect)
+            await asyncio.to_thread(gc.collect, 1)
             cleanup_token = memory_cleanup_seconds.set(perf_counter() - cleanup_started)
 
             try:
@@ -178,7 +179,22 @@ class PlannerAdmissionController:
                     self._queued -= 1
                 self._in_flight.pop(normalized_key, None)
             if acquired:
-                self._capacity.release()
+                # The result is already out; reclaim before the next job starts.
+                task = asyncio.get_running_loop().create_task(self._reclaim_then_release())
+                self._cleanups.add(task)
+                task.add_done_callback(self._cleanups.discard)
+
+    async def _reclaim_then_release(self) -> None:
+        from app.services.planner_memory import reclaim_and_freeze
+        try:
+            await asyncio.to_thread(reclaim_and_freeze)
+        finally:
+            self._capacity.release()
+
+    async def drain(self) -> None:
+        """Wait for post-job memory reclamation (tests and shutdown)."""
+        while self._cleanups:
+            await asyncio.gather(*list(self._cleanups), return_exceptions=True)
 
     async def stats(self) -> PlannerAdmissionStats:
         async with self._state_lock:

@@ -468,7 +468,24 @@ async def _change_plan_body(plan_id, payload, request, response):
     spec.slots = [s.model_copy(deep=True) for s in saved.plan.personal.slots]
     spec.pantry_revision = state["revision"]
     replace_slot = None
-    if payload.action in {"edit", "replace", "remove"}:
+    if payload.recipe_ids:
+        # Several chosen recipes at once, e.g. the week without a like that the
+        # plan already priced. No search: the basket is computed for them.
+        from app.services.complete_recipes import enabled, identity
+        from app.services.recipe_library import meal_candidates
+        if not enabled(saved.request):
+            raise HTTPException(422, "Recept-ID kräver genomarbetat receptläge.")
+        for slot_id, recipe_id in payload.recipe_ids.items():
+            slot = next((s for s in spec.slots if s.id == slot_id), None)
+            if slot is None:
+                raise HTTPException(422, "Måltiden finns inte längre.")
+            meal = next(m for m in spec.meals if m.meal_type == slot.meal_type)
+            selected = next((r for r in meal_candidates(meal, saved.request.recipe_preferences)
+                             if identity(r) == recipe_id), None)
+            if selected is None:
+                raise HTTPException(422, "Receptet uppfyller inte dina val. Välj ett annat alternativ.")
+            slot.recipe = selected
+    elif payload.action in {"edit", "replace", "remove"}:
         slot = next((s for s in spec.slots if s.id == payload.slot_id), None)
         if slot is None:
             raise HTTPException(422, "Måltiden finns inte längre.")

@@ -148,3 +148,23 @@ def test_oil_at_home_gets_nutrition_from_reviewed_reference_and_density():
     assert oil is not None and oil.nutrition_unit == "ml" and oil.evidence_kind == "food_specific_density_estimate"
     assert 800 < oil.nutrition["kcal"] < 840  # About 900 kcal per 100 g x 0.92 g/ml.
     assert volume_evidence("rapsolja", "g") is None and volume_evidence("olivolja", "ml") is None
+
+
+def test_the_week_without_likes_ranks_as_if_nothing_were_liked():
+    spec = PersonalPlanning(profile=TasteProfile(likes=["kyckling"], dislikes=["svamp"]),
+                            meals=[MealSettings(count=2, servings=2)])
+    p = PersonalPlanner(PlanRequest(recipes=2, servings=2, personal=spec), Settings(),
+                        prepared(product("salt", 1000, "g", 8)), state(), facts={}, now=NOW)
+    p._required_likes = ("kyckling",)
+    lentils = MealSlot(id="b", day=2, meal_type="dinner", recipe=dish("Linssoppa med svamp", "linser", "svamp"))
+    p._ignore_likes = True
+    assert p._preference_cost([lentils]) == TASTE_WEIGHT_KR  # The dislike still counts; no missing like.
+    p._ignore_likes = False
+    assert p._preference_cost([lentils]) == TASTE_WEIGHT_KR + LIKE_MISSING_KR
+
+
+def test_several_recipes_are_switched_in_one_change():
+    PersonalMutation(revision=1, pantry_revision=0, action="replace", recipe_ids={"d1": "a:1:x", "d2": "b:1:x"})
+    for wrong in ({"action": "remove"}, {"action": "replace", "slot_id": "d1"}, {"action": "replace", "recipe_id": "a:1:x"}):
+        with pytest.raises(ValidationError):
+            PersonalMutation(revision=1, pantry_revision=0, recipe_ids={"d1": "a:1:x"}, **wrong)

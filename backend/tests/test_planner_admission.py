@@ -291,9 +291,9 @@ async def test_unreachable_search_state_is_collected_before_next_build(monkeypat
     events = []
     collect = gc.collect
 
-    def measured_collect():
-        events.append('collect')
-        return collect()
+    def measured_collect(generation=2):
+        events.append(('collect', generation))
+        return collect(generation)
 
     monkeypatch.setattr(planner_admission.gc, 'collect', measured_collect)
     enabled = gc.isenabled()
@@ -315,12 +315,46 @@ async def test_unreachable_search_state_is_collected_before_next_build(monkeypat
 
         controller = PlannerAdmissionController(max_concurrent=1)
         assert await controller.run('new-request', build) == 'same valid result'
-        assert events == ['collect', 'build']
+        # Before the job only young objects are collected; the full collection
+        # ran after the previous job (reclaim_and_freeze).
+        assert events == [('collect', 1), 'build']
         assert planner_admission.memory_cleanup_seconds.get() == 0
         assert not consume_admission_cleanup()
     finally:
         if enabled:
             gc.enable()
+
+
+@pytest.mark.asyncio
+async def test_the_full_collection_runs_after_the_result_and_before_the_next_job(monkeypatch):
+    import gc
+
+    from app.services import planner_memory
+
+    events = []
+    original = planner_memory.reclaim_and_freeze
+
+    def measured():
+        events.append('reclaim')
+        return original()
+
+    monkeypatch.setattr(planner_memory, 'reclaim_and_freeze', measured)
+
+    async def job(name):
+        events.append(name)
+        return name
+
+    controller = PlannerAdmissionController(max_concurrent=1)
+    try:
+        assert await controller.run('first', lambda: job('first')) == 'first'
+        # The result is out before the collection has finished.
+        assert await controller.run('second', lambda: job('second')) == 'second'
+        await controller.drain()
+        assert events == ['first', 'reclaim', 'second', 'reclaim']
+        assert gc.get_freeze_count() > 0
+        assert (await controller.stats()).active == 0
+    finally:
+        gc.unfreeze()
 
 
 @pytest.mark.asyncio

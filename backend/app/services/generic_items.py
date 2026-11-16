@@ -154,6 +154,13 @@ def _name_role(query: str, name: str, brand: str | None) -> str | None:
     head = wanted[-1]
     hits = [i for i, t in enumerate(tokens) if _head_matches(head, t)]
     if not hits:
+        # "Röd Lök" is rödlök: the head word written as two words.
+        for i in range(len(tokens) - 1):
+            if _head_matches(head, tokens[i] + tokens[i + 1]):
+                tokens = [*tokens[:i], tokens[i] + tokens[i + 1], *tokens[i + 2:]]
+                hits = [i]
+                break
+    if not hits:
         return None
     modifiers = set(wanted[:-1])
     role = "flavour"

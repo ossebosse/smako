@@ -110,3 +110,28 @@ def test_nutrition_prewarm_runs_only_through_idle_admission(monkeypatch):
 
     asyncio.run(scenario())
     assert ran == [universe]
+
+
+def test_a_prewarm_round_that_reaches_its_deadline_continues_in_another_round(monkeypatch):
+    import asyncio
+    from types import SimpleNamespace
+
+    from app.services import nutrition_prewarm
+    from app.services.planner_admission import PlannerAdmissionController
+
+    monkeypatch.setenv("SMAKO_NUTRITION_PREWARM", "1")
+    universe = products()
+    outcomes = iter(["deadline", "deadline", "complete", "complete"])
+    rounds = []
+    monkeypatch.setattr(nutrition_prewarm, "warm_nutrition",
+                        lambda settings, prepared: rounds.append(1) or next(outcomes))
+    manager = SimpleNamespace(get_active=lambda scope: universe)
+
+    async def scenario():
+        app = SimpleNamespace(state=SimpleNamespace(planner_admission=PlannerAdmissionController(max_concurrent=1, max_queued=2)))
+        nutrition_prewarm.schedule_nutrition_prewarm(app, Settings(), universe, manager, delay=0.01, attempts=10)
+        (task,) = app.state.nutrition_prewarm_tasks
+        return await task
+
+    assert asyncio.run(scenario()) == "complete"
+    assert len(rounds) == 3  # Two rounds hit the deadline; the third finished. Never more than WARM_ROUNDS.
