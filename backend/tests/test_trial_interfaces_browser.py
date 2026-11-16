@@ -95,7 +95,10 @@ class Fake:
                          "less_than_package": known[0] < known[1], "estimated": False, "food": True}
         if path == "personal/pantry-use":
             known = {"potatis": {"form": "raw_edible", "unit": "g", "used_in_recipes": True, "food": True, "usable": [570, 570]},
-                     "ris": {"form": "dry", "unit": "g", "used_in_recipes": True, "food": True, "usable": [5, 619, 0]},
+                     "ris": {"form": "dry", "unit": "g", "used_in_recipes": True, "food": True, "usable": [5, 619, 0],
+                             "kinds": [{"name": "långkornigt ris", "usable": [619, 619]}, {"name": "jasminris", "usable": [619, 619]}]},
+                     "ägg": {"form": "raw_edible", "unit": "g", "used_in_recipes": True, "food": True, "usable": [691, 708, 2],
+                             "kinds": [], "egg_grams": {"S": 42.0, "M": 51.0, "L": 60.0}},
                      "kikärtor": {"form": "cooked_drained", "unit": "g", "used_in_recipes": True, "food": True, "usable": [3, 300, 290]}}
             return 200, known.get(query.get("name"), {"form": None, "unit": None, "used_in_recipes": False, "food": True, "usable": [0, 0]})
         if path in {"personal/pantry", "personal/shopping-list"}:
@@ -543,3 +546,21 @@ def test_a_like_in_several_dinners_is_priced_against_the_week_without_it(ui):
     expect(page.get_by_text("Du gillar lök i 2 middagar", exact=False)).to_have_count(0)
     expect(page.get_by_role("heading", name="Lökpaj")).to_have_count(0)
     assert not [c for c in fake.calls[calls:] if c[1] in ("plans",) or c[1].endswith("/change")]
+
+
+def test_rice_can_be_named_by_kind_and_eggs_counted_by_size(ui):
+    name, page, fake, shot = ui
+    open_screen(name, page, "skafferi")
+    page.get_by_label("Lägg till i skafferiet").fill("ris 1 kg")
+    page.get_by_role("button", name=re.compile("Ris · 1 kg")).click()
+    expect(page.get_by_text("Vilken sorts ris har du? Då kan recepten använda den.")).to_be_visible()
+    page.get_by_role("button", name="Jasminris").click()
+    expect(page.get_by_text("Jasminris · 1 kg ligger i skafferiet.")).to_be_visible()
+    page.get_by_label("Lägg till i skafferiet").fill("ägg 6 st")
+    page.get_by_role("button", name=re.compile("Ägg · 6 st")).click()
+    expect(page.get_by_text(re.compile("Hur stora är äggen?"))).to_be_visible()
+    shot("agg")
+    page.get_by_role("button", name="Medium (M)").click()
+    expect(page.get_by_text("Ägg · 6 st M, ungefär 306 g ligger i skafferiet.")).to_be_visible()
+    saved = [body for method, path, body in fake.calls if path == "personal/pantry"][-1]
+    assert [(i["name"], i["quantity"], i["unit"]) for i in saved["items"]] == [("jasminris", 1000, "g"), ("ägg", 306, "g")]

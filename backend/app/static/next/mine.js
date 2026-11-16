@@ -146,10 +146,25 @@
       const save = () => addToPantry({ name: row.query.slice(0, 120), quantity: row.quantity, unit: row.unit, food: use.food }).then(() => done(`${capital(row.query)} · ${amount(row.quantity, row.unit)}`));
       // Many recipes ask for a particular kind (which rice, which cut). Only a chosen product can show that.
       const [fits, uses, drained = 0] = use.usable || [0, 0], narrow = use.food && uses > 0 && fits < uses / 2, wrongUnit = use.food && use.unit && use.unit !== row.unit;
+      const eggs = use.egg_grams && row.unit === "st" && use.unit === "g";
       if (!narrow && !wrongUnit) { await save(); return; }
+      // Step 5: count eggs by size, and name the kind when the word is too broad for the recipes.
+      const saveAs = (name, quantity, unit, text) => guard(() => addToPantry({ name: name.slice(0, 120), quantity, unit, food: use.food }).then(() => done(text)));
       const draw = () => {
         confirm.replaceChildren(el("h3", `${capital(row.query)} · ${amount(row.quantity, row.unit)}`));
-        {
+        if (eggs) {
+          const sizes = el("div", null, "chips"), names = { S: "Small", M: "Medium", L: "Large" };
+          for (const [size, grams] of Object.entries(use.egg_grams)) {
+            const total = Math.round(row.quantity * grams);
+            sizes.append(button(`${names[size] || size} (${size})`, saveAs(row.query, total, "g", `${capital(row.query)} · ${amount(row.quantity, "st")} ${size}, ungefär ${amount(total, "g")}`), "chip"));
+          }
+          confirm.append(el("p", "Hur stora är äggen? Recepten räknar ägg i gram, så Smako räknar om med en vanlig vikt per ägg utan skal.", "hint"), sizes);
+        } else {
+          if (narrow && use.kinds?.length && !(use.unit && use.unit !== row.unit)) {
+            const kinds = el("div", null, "chips");
+            for (const kind of use.kinds) kinds.append(button(capital(kind.name), saveAs(kind.name, row.quantity, row.unit, `${capital(kind.name)} · ${amount(row.quantity, row.unit)}`), "chip"));
+            confirm.append(el("p", `Vilken sorts ${row.query} har du? Då kan recepten använda den.`, "hint"), kinds);
+          }
           if (use.unit && use.unit !== row.unit) confirm.append(el("p", `Recepten räknar ${row.query} i ${UNITS[use.unit]}. Skriv mängden så om recepten ska kunna använda varan.`, "hint"));
           // Recipes that want it drained need the can's drained weight; others need the kind (which rice, which cut).
           else if (narrow && drained >= uses / 2) confirm.append(el("p", `Recepten använder ${row.query} avrunnen, till exempel från burk. Välj varan du har. Smako räknar med vikten utan spad när förpackningen anger den, annars med förpackningens vikt.`, "hint"));
@@ -161,7 +176,7 @@
           } else if (narrow) confirm.append(el("p", "Sök på varans namn och märke och välj en bestämd vara, så kan recepten använda den.", "hint"));
         }
         const actions = el("div", null, "links");
-        actions.append(button(narrow ? "Lägg in den ändå" : "Lägg i skafferiet", guard(save), "btn primary"),
+        actions.append(button(narrow || eggs ? "Lägg in den ändå" : "Lägg i skafferiet", guard(save), "btn primary"),
           button("Avbryt", () => { confirm.hidden = true; confirm.replaceChildren(); }, "btn quiet"));
         confirm.append(actions);
       };

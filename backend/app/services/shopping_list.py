@@ -24,11 +24,18 @@ def parse_quantity(query):
     return name, amount, unit
 
 
-def generic_suggestions(query):
+def generic_suggestions(query, indexed_words=None):
+    """Curated generics whose name starts with or contains the typed text.
+
+    When the typed text is itself a word in the area's products ("mjöl"),
+    a generic must have it as a whole word: "mjöl" is not "Mjölk".
+    """
     name, amount, unit = parse_quantity(query)
     needle = search_text(name)
+    whole = bool(needle) and " " not in needle and indexed_words is not None and needle in indexed_words
     matches = [row for row in GENERICS if not needle or any(
-        needle in search_text(value) for value in [row["name"], row["query"], *row.get("aliases", [])])]
+        (needle in search_text(value).split()) if whole else (needle in search_text(value))
+        for value in [row["name"], row["query"], *row.get("aliases", [])])]
     result = []
     for row in matches[:12]:
         if unit and unit != row["unit"]:

@@ -61,14 +61,38 @@ def _usable(typed: str, unit: str | None, rows) -> list[int]:
     return [fits, total, drained]
 
 
+# Kinds a person can name for a broad word, when recipes need to know the kind
+# (step 5, 2026-11-15). Offered only when the kind itself is enough for the
+# recipes; exact-product requirements still need a chosen product.
+KINDS = {
+    "ris": ("långkornigt ris", "jasminris", "basmatiris"),
+    "gul lök": ("gul lök", "rödlök"),
+}
+
+
 def usual_recipe_use(name: str) -> dict:
-    """The unit recipes most often use for this name, and how many uses an uncooked row covers."""
+    """The unit recipes most often use for this name, and how many uses an uncooked row covers.
+
+    Also, for a broad name, the kinds that recipes can use as typed, and for
+    eggs the standard edible weight per egg by size, so eggs can be counted.
+    """
     from app.services.meal_library_content import manifest_entries
+    from app.services.official_product_facts import EGG_STANDARD_EDIBLE_G
 
     forms, units, rows = _usage(len(manifest_entries()["current"]))
     canonical = canonicalize_ingredient_name(name)
+    usable = _usable(name, units.get(canonical), rows.get(canonical, {}))
+    kinds = []
+    if usable[1] and usable[0] < usable[1] / 2:
+        for kind in dict.fromkeys([*KINDS.get(canonical, ()), *([canonical] if canonical != name.casefold().strip() else [])]):
+            own = canonicalize_ingredient_name(kind)
+            fits, uses, _ = _usable(kind, units.get(own), rows.get(own, {}))
+            if kind.casefold() != name.casefold().strip() and uses and fits >= uses / 2:
+                kinds.append({"name": kind, "usable": [fits, uses]})
+    eggs = ({size.upper(): grams for size, grams in EGG_STANDARD_EDIBLE_G.items() if size != "xl"}
+            if canonical == "ägg" and units.get(canonical) == "g" else None)
     return {"form": forms.get(canonical), "unit": units.get(canonical), "used_in_recipes": canonical in units,
-            "usable": _usable(name, units.get(canonical), rows.get(canonical, {}))}
+            "usable": usable, "kinds": kinds, "egg_grams": eggs}
 
 
 def drained_from_package(name: str, product, fact) -> bool:
