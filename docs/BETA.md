@@ -1,3 +1,18 @@
+# 2026-11-15: Gillar i flera middagar aktiverat
+
+Main `745bf535233b` (PR #87). App **app-745bf535233b-7a0d5db0**, scheduler
+orörd. Bara provgränssnitten ändras (core.js, a.html, b.html, `?v=20261115f`):
+en gillning i flera middagar prissätts mot den billigaste veckan utan den.
+Bas `d611d09080e4` (image `f17d26119fa0`), ny image `6f61eea792dd`,
+importkontroll ok. Aktiverad 2026-11-15 12:27:45 UTC, säkerhetskopia
+`20261115T121850Z`; lagringsretention complete; `/ready` 200 för 22350 och 21120.
+
+Prov 2026-11-16 i /ui/a (Lund, 3 middagar, gillar kyckling): första försöket
+tog slut på tid efter 56 s ("Vi hann inte hitta en fungerande lista"), andra
+gav två kycklingrätter på 56 s. Raden "Du gillar kyckling i 2 middagar · utan
+kyckling hade veckan kostat 23,90 kr mindre" kom efter 51 s till, och popupen
+visade veckan utan kyckling. Inga sidfel eller API-fel utöver tidsgränsen.
+
 # 2026-11-15: Steg 4 – blandat, extra butik ≥ 10 kr, Gillar och Har du hemma aktiverat
 
 Main `d611d09080e4` (PR #85). App **app-d611d09080e4-e17fc969**, scheduler
@@ -239,7 +254,7 @@ på `main` inte ändrar en pågående release.
   `smako-app-1`, `smako-scheduler-1`, `smako-caddy-1`, data i `/srv/smako/data`
   och det gemensamma driftlåset. Detta flöde installerar inte en ny server.
 - Läs aktuell [HANDOFF.md](HANDOFF.md), [OPERATIONS.md](OPERATIONS.md) och
-  senaste aktiveringsrapport. Appens BUILD_ID är `app-d611d09080e4-e17fc969`;
+  senaste aktiveringsrapport. Appens BUILD_ID är `app-745bf535233b-7a0d5db0`;
   schedulern är `source-ops-8a53beb80e43`.
   [Uppvärmda prov och samordnad faktaläsning/GC](releases/warm-facts-gc-20261101/ACTIVATED.md)
   är senaste appaktiveringen. Sex Pythonfiler från kod `b7c8d0506e23`;
@@ -287,10 +302,10 @@ git status --short
 .venv/Scripts/python.exe -X utf8 scripts/smako_ops.py status
 
 # Använd den granskade Git-bas som motsvarar faktiskt aktiva filer enligt senaste journalen.
-.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit d611d09080e4 --commit main --workdir .local/beta-release
+.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit 745bf535233b --commit main --workdir .local/beta-release
 ```
 
-`d611d09080e4` är appen som aktiverades 2026-11-15 11:17 UTC. Appbildens egen
+`745bf535233b` är appen som aktiverades 2026-11-15 12:27 UTC. Appbildens egen
 grocery-kopia är äldre än Git; använd `--keep-app-grocery` om intervallet
 bara innehåller grocery-Python som redan levererats till schedulern. De äldre
 Coop-filerna i runtime (`price_universe_runtime.py`,
