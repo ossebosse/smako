@@ -23,6 +23,17 @@ GUEST = {"status": "SIGN_IN_AVAILABLE", "membership": "guest", "message": "Du ä
 MEMBER = {**GUEST, "status": "SIGNED_IN", "membership": "member", "message": "Du är medlem."}
 
 
+
+LENTILS = {"name": "Linsgryta med ris", "servings": 2, "instructions": ["Koka linserna."], "ingredients": [{"name": "linser", "quantity": 200, "unit": "g"}]}
+# The cheapest week without each like, as the plan reports it (checks.likes[].without).
+WITHOUT = {
+    "potatis": {"saving": 22.0, "total": 41.4, "recipes": [
+        {"slot_id": "dinner-1", "recipe_id": "lins:1:a", "name": "Linsgryta med ris", "instead_of": "Pannbiff med lök och potatis", "recipe": LENTILS}]},
+    "lök": {"saving": 18.0, "total": 63.4, "recipes": [
+        {"slot_id": "dinner-1", "recipe_id": "lins:1:a", "name": "Linsgryta med ris", "instead_of": "Pannbiff med lök och potatis", "recipe": LENTILS},
+        {"slot_id": "dinner-2", "recipe_id": "bon:1:a", "name": "Bönsoppa", "instead_of": "Lökpaj", "recipe": {**LENTILS, "name": "Bönsoppa"}}]},
+}
+
 class Fake:
     """One browser's server side: a guest owner and an account owner, as the real API keeps them."""
 
@@ -60,7 +71,8 @@ class Fake:
                                       "checks": {"nutrition": [{"slot_id": "dinner-1", "status": "ESTIMATED", "values": {"kcal": 640.4, "protein_g": 38.2, "carbs_g": 52, "fat_g": 29.6}}],
                                                  "used_ingredient_cost": 42.1, "new_purchase_used_cost": 42.1, "used_cost_basis": {"quantity_status": "ESTIMATED"},
                                                  "likes": [{"term": t, "slot_ids": {"potatis": ["dinner-1"], "lök": ["dinner-1", "dinner-2"]}.get(t, []),
-                                                            "status": "included" if t in ("potatis", "lök") else "not_available"} for t in likes]},
+                                                            "status": "included" if t in ("potatis", "lök") else "not_available",
+                                                            **({"without": WITHOUT[t]} if t in WITHOUT else {})} for t in likes]},
                                       "needs": [{"key": "nötfärs"}, {"key": "gul lök"}],
                                       "allocations": [{"name": "potatis", "quantity": 600, "unit": "g"}] if home else [],
                                       "at_home": [{"name": n, "quantity": 5, "unit": "g", "sources": ["dinner-1"]}
@@ -113,10 +125,6 @@ class Fake:
             if self.job:
                 return 202, {"status": "pending", "status_url": "/api/plan-jobs/j1", **self.job[0]}
             return 201, self.plan(self.job_request)
-        if path == "personal/plans/plan-1/change" and body.get("preview_without_like"):
-            cheaper = {"name": "Linsgryta med ris", "servings": 2, "instructions": ["Koka linserna."], "ingredients": [{"name": "linser", "quantity": 200, "unit": "g"}]}
-            return 200, {"preview": {"slot_id": body["slot_id"], "like": body["preview_without_like"], "recipe_id": "lins:1:a", "recipe": cheaper,
-                                     "total": 41.4, "current_total": 63.4, "saving": 22.0}}
         if path == "personal/plans/plan-1/change":
             if body["action"] == "purchase":
                 if "s1|p-lok|gul lök" not in body.get("measured_purchase_quantities", {}):
@@ -477,11 +485,7 @@ def test_staples_at_home_are_asked_and_not_bought(ui):
     expect(page.get_by_text(re.compile("Har du hemma, behöver inte köpas: salt, rapsolja, oregano"))).to_be_visible()
 
 
-def test_a_liked_dinner_shows_its_cost_and_a_cheaper_recipe(ui):
-    name, page, fake, shot = ui
-    page.evaluate("""() => { const s = JSON.parse(localStorage.getItem("smako.next.v1") || "{}");
-        s.settings = { ...(s.settings || {}), likes: ["potatis", "oxfilé"] }; localStorage.setItem("smako.next.v1", JSON.stringify(s)); }""")
-    page.reload()
+def start_plan(name, page):
     if name == "a":
         page.goto(re.sub(r"#.*|$", "#mat", page.url, count=1))
     else:
@@ -491,55 +495,46 @@ def test_a_liked_dinner_shows_its_cost_and_a_cheaper_recipe(ui):
     if name == "b":
         for _ in range(3):
             page.get_by_role("button", name="Nästa").click()
-    # Salt, pepper and rapeseed oil are ticked from the start.
     page.get_by_role("button", name="Skapa matplan").click()
+
+
+def test_a_liked_dinner_shows_its_cost_and_a_cheaper_recipe(ui):
+    name, page, fake, shot = ui
+    page.evaluate("""() => { const s = JSON.parse(localStorage.getItem("smako.next.v1") || "{}");
+        s.settings = { ...(s.settings || {}), likes: ["potatis", "oxfilé"] }; localStorage.setItem("smako.next.v1", JSON.stringify(s)); }""")
+    page.reload()
+    start_plan(name, page)
     expect(page.get_by_text("Du gillar potatis · 22,00 kr dyrare än billigaste alternativet")).to_be_visible()
     expect(page.get_by_text("Vi hittade ingen middag med oxfilé som passar dina val.")).to_be_visible()
     sent = next(body for method, path, body in fake.calls if path == "plans")
     assert sent["personal"]["staples_at_home"] == ["salt", "svartpeppar", "rapsolja"]
-    preview = next(body for method, path, body in fake.calls if body and body.get("preview_without_like"))
-    assert preview["action"] == "replace" and preview["slot_id"] == "dinner-1" and preview["preview_without_like"] == "potatis"
+    # The plan already carries the price: no second search.
+    assert [path for method, path, body in fake.calls if path == "plans" or path.endswith("/change")] == ["plans"]
     page.get_by_role("button", name="Visa billigare recept").click()
     dialog = page.get_by_role("dialog", name="Billigare recept")
     expect(dialog.get_by_role("heading", name="Linsgryta med ris")).to_be_visible()
-    expect(dialog.get_by_text("Hela inköpet blir 22,00 kr billigare än med pannbiff med lök och potatis.")).to_be_visible()
+    expect(dialog.get_by_text("Hela inköpet blir 22,00 kr billigare.")).to_be_visible()
     shot("billigare")
     dialog.get_by_role("button", name="Byt till det här").click()
     expect(page.get_by_role("dialog", name="Billigare recept")).to_have_count(0)
-    switched = [body for method, path, body in fake.calls if path.endswith("/change") and body.get("recipe_id")]
-    assert switched and switched[-1]["recipe_id"] == "lins:1:a" and switched[-1]["action"] == "replace"
-
+    switched = [body for method, path, body in fake.calls if path.endswith("/change") and body.get("recipe_ids")]
+    assert switched and switched[-1]["recipe_ids"] == {"dinner-1": "lins:1:a"} and switched[-1]["action"] == "replace"
 
 def test_a_like_in_several_dinners_is_priced_against_the_week_without_it(ui):
     name, page, fake, shot = ui
     page.evaluate("""() => { const s = JSON.parse(localStorage.getItem("smako.next.v1") || "{}");
         s.settings = { ...(s.settings || {}), likes: ["lök"] }; localStorage.setItem("smako.next.v1", JSON.stringify(s)); }""")
     page.reload()
-    if name == "a":
-        page.goto(re.sub(r"#.*|$", "#mat", page.url, count=1))
-    else:
-        page.get_by_role("button", name=re.compile("Planera mat och handla")).click()
-    page.get_by_label("Ditt postnummer").fill("22350")
-    page.get_by_role("button", name="Hitta butiker").click()
-    if name == "b":
-        for _ in range(3):
-            page.get_by_role("button", name="Nästa").click()
-    page.get_by_role("button", name="Skapa matplan").click()
-    expect(page.get_by_text("Du gillar lök i 2 middagar · utan lök hade veckan kostat 18,00 kr mindre")).to_be_visible()
-    # The cards name the like; the week line carries the price, since the dinners share packages.
+    start_plan(name, page)
+    expect(page.get_by_text("Du gillar lök · utan lök hade veckan kostat 18,00 kr mindre")).to_be_visible()
+    # The cards name the like; the week line carries the price, since other dinners change too.
     expect(page.get_by_text("Du gillar lök", exact=True)).to_have_count(2)
-    plans = [body for method, path, body in fake.calls if path == "plans"]
-    assert plans[0]["personal"]["profile"]["likes"] == ["lök"] and plans[1]["personal"]["profile"]["likes"] == []
-    assert plans[1]["personal"]["staples_at_home"] == plans[0]["personal"]["staples_at_home"]
     page.get_by_role("button", name="Visa veckan utan lök").click()
     dialog = page.get_by_role("dialog", name="Veckan utan lök")
-    expect(dialog.get_by_text("Hela inköpet blir 18,00 kr billigare. Middagarna blir:")).to_be_visible()
-    expect(dialog.get_by_role("heading", name="Pannbiff med lök och potatis")).to_be_visible()
+    expect(dialog.get_by_role("heading", name="Bönsoppa")).to_be_visible()
+    expect(dialog.get_by_text("i stället för lökpaj · 2 portioner")).to_be_visible()
     shot("vecka-utan")
-    calls = len(fake.calls)
     dialog.get_by_role("button", name="Byt till den här veckan").click()
     expect(page.get_by_role("dialog")).to_have_count(0)
-    # The week was already worked out: switching asks the server for nothing.
-    expect(page.get_by_text("Du gillar lök i 2 middagar", exact=False)).to_have_count(0)
-    expect(page.get_by_role("heading", name="Lökpaj")).to_have_count(0)
-    assert not [c for c in fake.calls[calls:] if c[1] in ("plans",) or c[1].endswith("/change")]
+    switched = [body for method, path, body in fake.calls if path.endswith("/change") and body.get("recipe_ids")]
+    assert switched[-1]["recipe_ids"] == {"dinner-1": "lins:1:a", "dinner-2": "bon:1:a"}

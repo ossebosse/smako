@@ -155,21 +155,25 @@ lösningar från lägre butikstak och i den nedre gränsen
   när de nästan inte kostar något. Ett recept med något som inte gillas räknas
   15 kr dyrare. Tidigare räknades en gillad term högst en gång per vecka och
   bara som 2 kr, och bibliotekssökningen rangordnade efter enbart pris.
-  Provgränssnitten räknar sedan i bakgrunden ut vad gillningen kostar, en
-  gillning i taget (högst tre), och inget byts förrän personen väljer.
-  Finns den i **en** middag: det billigaste andra receptet för den platsen
-  (`change` med `action: replace` och `preview_without_like`, samma byte som
-  "Byt recept" utan den gillade termen och utan det nuvarande receptet, inte
-  sparat). Receptkortet visar "Du gillar kyckling · 27,55 kr dyrare än
-  billigaste alternativet" och "Visa billigare recept"; popupen byter med
-  `recipe_id`. Finns den i **flera** middagar, som kan dela förpackning och
-  därför bara blir billigare tillsammans: den billigaste nya veckan med samma
-  val utan gillningen (en vanlig planbegäran). En rad ovanför recepten visar
-  "Du gillar kyckling i 2 middagar · utan kyckling hade veckan kostat 23 kr
-  mindre" och "Visa veckan utan kyckling"; popupen visar veckans middagar och
-  "Byt till den här veckan" använder den redan beräknade planen. Ett byte av
-  flera platser i den befintliga veckan prövades men tog dubbelt så lång tid
-  som ett enkelt byte och skulle nå tidsgränsen. Byte av ett recept kräver inte gillningen
+  **Sökordning (2026-11-16):** med gillningar söker planeraren först veckan
+  som om inget vore gillat (ogillat räknas fortfarande), och lägger sedan in
+  varje gillning som saknas genom att byta en middag: för varje middagsplats
+  prövas de åtta billigaste gillade recepten (inköp för receptet ensamt) och
+  veckan med lägst rangordning som klarar alla regler behålls
+  (`_add_likes`). Startpoolen får dessutom de fyra billigaste recepten per
+  gillning och, för en blandad vecka, per slag (`_seed_wanted`). Gillningar
+  tar därmed ungefär lika lång tid som en vanlig vecka (lokalt 57 s mot 53 s,
+  tidigare 62–68 s), och veckan utan gillningarna är känd exakt utan en ny
+  planering: `checks.likes[].without` har vad den kostar, hur mycket mindre
+  det blir och vilka middagar som byts (med recepten). Den gillade veckan kan
+  bli några kronor dyrare än en full sökning med gillningen hade gett (frusen
+  data: kyckling 176,23 mot 172,26 kr). Provgränssnitten visar priset på
+  receptkortet ("Du gillar kyckling · 32,06 kr dyrare än billigaste
+  alternativet", "Visa billigare recept") när bara den gillade middagen byts,
+  annars en rad för veckan ("utan kyckling hade veckan kostat X kr mindre",
+  "Visa veckan utan kyckling"). Bytet sparar de redan prissatta recepten med
+  `change` (`action: replace`, `recipe_ids`) utan ny sökning. Förhandsvisningen
+  `preview_without_like` finns kvar i API:t men används inte av gränssnitten. Byte av ett recept kräver inte gillningen
   igen. På frusen data (Lund, 3 middagar) ger "gillar kyckling" en kycklingrätt
   (176,96 kr i stället för 144,17 kr) och billigaste alternativet är
   falukorv (162,17 kr); förhandsvisningen tog 52 s lokalt.

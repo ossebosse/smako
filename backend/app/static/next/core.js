@@ -84,19 +84,6 @@
     if (!response.ok) { const error = new Error(message(data, response.status)); error.status = response.status; error.data = data; throw error; }
     return data;
   }
-  // The same job without the busy view, for work that runs while the person reads the plan.
-  async function quietJob(url, body) {
-    let response = await fetch(url, { method: "POST", cache: "no-store", credentials: "same-origin",
-      headers: { "Content-Type": "application/json", Accept: "application/json", Prefer: "respond-async" }, body: JSON.stringify(body) });
-    let data = await read(response);
-    while (response.status === 202) {
-      await delay(2000);
-      response = await fetch(data.status_url, { cache: "no-store", credentials: "same-origin", headers: { Accept: "application/json" } });
-      data = { status_url: data.status_url, ...(await read(response)) };
-    }
-    if (!response.ok) throw new Error(message(data, response.status));
-    return data;
-  }
   // Progress from 0 to 100 %, from the stage the server reports and the work it has counted.
   // A stage without counted work moves with the time the planner has left, and stops short of
   // the next stage, so the bar never claims more than has happened.
@@ -291,89 +278,58 @@
     try { persist(); } catch (_) { saved.plan = null; }
     S.items = structuredClone(plan.request.personal.extras || []);
   }
-  // ---- Likes (owner decision 2026-11-15) -------------------------------------
-  // Every like is in at least one dinner. In the background Smako works out, one like at a
-  // time, what it costs: for a like in one dinner the cheapest other recipe for that place;
-  // for a like in several dinners (which may share packages) the cheapest week without it.
-  const planKey = () => S.plan ? `${S.plan.plan_id}.${S.plan.revision}` : null;
+  // ---- Likes (owner decisions 2026-11-15/16) ---------------------------------
+  // Every like is in at least one dinner. The plan itself carries the cheapest week
+  // without the likes (checks.likes[].without), so showing and switching needs no new search.
   const includedLikes = () => (S.plan?.plan?.personal?.checks?.likes || []).filter(l => l.status === "included" && l.slot_ids?.length);
   function likeOf(slotId) { return includedLikes().find(l => l.slot_ids.includes(slotId)); }
-  function weekWithout(term) {
-    const request = structuredClone(S.plan.request), drop = list => (list || []).filter(v => v.toLowerCase() !== term.toLowerCase());
-    request.personal.profile.likes = drop(request.personal.profile.likes);
-    for (const meal of request.personal.meals || []) if (meal.profile) meal.profile.likes = drop(meal.profile.likes);
-    request.personal.pantry_revision = S.state?.revision ?? request.personal.pantry_revision;
-    return request;
-  }
-  async function likePreviews() {
-    const key = planKey(), likes = includedLikes().slice(0, 3);
-    if (!key || !likes.length || S.likes?.key === key) return;
-    S.likes = { key, byTerm: Object.fromEntries(likes.map(l => [l.term, { ids: l.slot_ids, state: "loading" }])) };
-    emit();
-    for (const [term, row] of Object.entries(S.likes.byTerm)) {
-      if (planKey() !== key) return;
-      try {
-        if (row.ids.length === 1) {
-          const data = await quietJob(`/api/personal/plans/${encodeURIComponent(S.plan.plan_id)}/change`,
-            { revision: S.plan.revision, pantry_revision: S.state?.revision ?? 0, action: "replace", slot_id: row.ids[0], preview_without_like: term });
-          if (planKey() !== key) return;
-          Object.assign(row, { state: "done", ...data.preview });
-        } else {
-          const week = await quietJob("/api/plans", weekWithout(term));
-          if (planKey() !== key) return;
-          Object.assign(row, { state: "done", like: term, week, saving: Math.round(100 * (S.plan.plan.optimized_basket.total - week.plan.optimized_basket.total)) / 100 });
-        }
-      } catch (_) { if (planKey() !== key) return; row.state = "error"; }
-      emit();
-    }
-  }
-  const likeRow = term => S.likes?.key === planKey() ? S.likes.byTerm[term] : null;
-  const pending = row => !row || row.state === "loading" ? "räknar ut vad det kostar …" : null;
+  // One changed dinner, and it is the liked one: the price belongs on that recipe card.
+  const onCard = like => like.without?.recipes?.length === 1 && like.slot_ids.includes(like.without.recipes[0].slot_id);
   function likeLine(slot) {
     const like = likeOf(slot.id); if (!like) return null;
-    const row = likeRow(like.term), line = el("div", null, "like"), one = like.slot_ids.length === 1;
-    const cost = !one || row?.state === "error" ? null : row?.state === "done" ? (row.saving > 0.5 ? `${money(row.saving)} dyrare än billigaste alternativet` : "kostar inget extra") : pending(row);
+    const line = el("div", null, "like"), without = like.without;
+    const cost = !without ? null : without.saving <= 0.5 ? "kostar inget extra"
+      : onCard(like) && without.recipes[0].slot_id === slot.id ? `${money(without.saving)} dyrare än billigaste alternativet` : null;
     line.append(el("p", [`Du gillar ${like.term}`, cost].filter(Boolean).join(" · "), "like-text"));
-    if (one && row?.state === "done" && row.saving > 0.5) line.append(button("Visa billigare recept", () => cheaperDialog(slot, row), "btn small"));
+    if (cost && without.saving > 0.5) line.append(button("Visa billigare recept", () => withoutDialog(like), "btn small"));
     return line;
   }
-  // A like in several dinners: one line for the week, since dinners that share a package
-  // are only cheaper together.
+  // Otherwise one line for the week: the week without the like differs in other dinners too.
   function likeWeekLines() {
-    return includedLikes().filter(l => l.slot_ids.length > 1).map(like => {
-      const row = likeRow(like.term), line = el("div", null, "like like-week");
-      const cost = row?.state === "error" ? null : row?.state === "done" ? (row.saving > 0.5 ? `utan ${like.term} hade veckan kostat ${money(row.saving)} mindre` : "kostar inget extra") : pending(row);
-      line.append(el("p", [`Du gillar ${like.term} i ${plural(like.slot_ids.length, "middag", "middagar")}`, cost].filter(Boolean).join(" · "), "like-text"));
-      if (row?.state === "done" && row.saving > 0.5) line.append(button(`Visa veckan utan ${like.term}`, () => weekDialog(row), "btn small"));
+    return includedLikes().filter(l => l.without?.saving > 0.5 && !onCard(l)).map(like => {
+      const line = el("div", null, "like like-week");
+      line.append(el("p", `Du gillar ${like.term} · utan ${like.term} hade veckan kostat ${money(like.without.saving)} mindre`, "like-text"),
+        button(`Visa veckan utan ${like.term}`, () => withoutDialog(like), "btn small"));
       return line;
     });
   }
   function recipeDetails(recipe, open) {
-    const ingredients = el("ul", null, "ingredients"); for (const i of recipe.ingredients) ingredients.append(el("li", `${number(i.quantity)} ${i.unit} ${i.name}`));
+    const ingredients = el("ul", null, "ingredients"); for (const i of recipe.ingredients || []) ingredients.append(el("li", `${number(i.quantity)} ${i.unit} ${i.name}`));
     const steps = el("ol", null, "steps"); for (const step of recipe.instructions || []) steps.append(el("li", FORMS.reduce((text, [from, to]) => text.replace(from, to), step)));
     if (open) return [el("h4", "Ingredienser"), ingredients, el("h4", "Gör så här"), steps];
     const more = el("details", null, "recipe-more"); more.append(el("summary", "Visa receptet"), el("h4", "Ingredienser"), ingredients, el("h4", "Gör så här"), steps);
     return [more];
   }
-  function sheet(label, nodes, primary, onPrimary) {
+  function withoutDialog(like) {
+    const one = onCard(like), rows = like.without.recipes, label = one ? "Billigare recept" : `Veckan utan ${like.term}`;
     const dialog = el("dialog", null, "sheet cheaper"); dialog.setAttribute("aria-label", label);
+    dialog.append(el("p", label, "eyebrow"));
+    for (const row of rows) {
+      const recipe = row.recipe || { name: row.name }, minutes = recipe.design?.active_minutes ?? recipe.design?.time?.active_minutes;
+      dialog.append(el("h2", recipe.name), el("p", [row.instead_of ? `i stället för ${row.instead_of.toLowerCase()}` : null,
+        recipe.servings ? plural(recipe.servings, "portion", "portioner") : null, minutes ? `${minutes} min` : null].filter(Boolean).join(" · "), "meta"),
+        ...(row.recipe ? recipeDetails(row.recipe, one) : []));
+    }
+    dialog.append(el("p", `Hela inköpet blir ${money(like.without.saving)} billigare.`));
     const actions = el("div", null, "recipe-actions");
-    actions.append(button(primary, () => { dialog.close(); onPrimary(); }, "btn primary"), button("Behåll", () => dialog.close(), "btn quiet"));
-    dialog.append(el("p", label, "eyebrow"), ...nodes, actions);
+    actions.append(button(one ? "Byt till det här" : "Byt till den här veckan", () => {
+      dialog.close();
+      void change(one ? "Byter recept och räknar om inköpen" : "Byter recepten och räknar om inköpen", "replace",
+        { recipe_ids: Object.fromEntries(rows.map(r => [r.slot_id, r.recipe_id])) });
+    }, "btn primary"), button("Behåll", () => dialog.close(), "btn quiet"));
+    dialog.append(actions);
     dialog.addEventListener("close", () => dialog.remove());
     document.body.append(dialog); dialog.showModal();
-  }
-  function cheaperDialog(slot, row) {
-    const recipe = row.recipe, minutes = recipe.design?.active_minutes ?? recipe.design?.time?.active_minutes;
-    sheet("Billigare recept", [el("h2", recipe.name), el("p", [plural(recipe.servings, "portion", "portioner"), minutes ? `${minutes} min` : null].filter(Boolean).join(" · "), "meta"),
-      el("p", `Hela inköpet blir ${money(row.saving)} billigare än med ${slot.recipe.name.toLowerCase()}.`), ...recipeDetails(recipe, true)],
-      "Byt till det här", () => void change("Byter recept och räknar om inköpen", "replace", { slot_id: slot.id, recipe_id: row.recipe_id }));
-  }
-  function weekDialog(row) {
-    const slots = [...(row.week.plan.personal?.slots || [])].filter(s => s.recipe).sort((a, b) => a.day - b.day);
-    const nodes = [el("p", `Hela inköpet blir ${money(row.saving)} billigare. Middagarna blir:`)];
-    for (const slot of slots) nodes.push(el("h3", slot.recipe.name), el("p", `Dag ${slot.day} · ${MEALS[slot.meal_type] || "Måltid"} · ${plural(slot.recipe.servings, "portion", "portioner")}`, "meta"), ...recipeDetails(slot.recipe, false));
-    sheet(`Veckan utan ${row.like}`, nodes, "Byt till den här veckan", () => { keep(row.week); S.likes = null; emit(); });
   }
   function likeNotes() {
     const rows = (S.plan?.plan?.personal?.checks?.likes || []).filter(l => l.status !== "included");
@@ -383,7 +339,7 @@
   async function refreshState() { try { const mine = S.items; S.state = await api("/api/personal/state"); S.items = mine; } catch (_) { /* the next save reads it again */ } }
   async function run(title, work) {
     clearError();
-    try { await work(); await refreshState(); S.busy = null; emit(); void likePreviews(); return true; }
+    try { await work(); await refreshState(); S.busy = null; emit(); return true; }
     catch (error) { fail(error); return false; }
   }
   const calculateList = () => run("Letar upp de billigaste butikerna", async () => {
