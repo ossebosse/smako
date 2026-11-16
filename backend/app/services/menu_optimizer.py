@@ -9,6 +9,7 @@ only used to order/prune candidates; they never determine the winning menu.
 from __future__ import annotations
 
 import heapq
+import os
 from collections import Counter, OrderedDict
 from collections.abc import Callable, Mapping, Sequence
 from dataclasses import dataclass, field
@@ -913,6 +914,18 @@ class MenuBoundPruned(Exception):
     about the menu and it never becomes the search's last error.
     """
 
+
+def _stall_seconds() -> float:
+    """Seconds without a better week before the complete-menu search stops.
+
+    SMAKO_MENU_SEARCH_STALL_SECONDS, default 10; 0 keeps searching until the
+    planning deadline's finalisation reserve, as before.
+    """
+    try:
+        return max(0.0, float(os.environ.get("SMAKO_MENU_SEARCH_STALL_SECONDS", "10")))
+    except ValueError:
+        return 10.0
+
 class MenuOptimizer:
     """Find a cheap diverse recipe set with package and store aware beam search."""
 
@@ -1585,11 +1598,24 @@ class MenuOptimizer:
         class SearchWindowClosed(Exception):
             pass
 
+        class SearchStalled(Exception):
+            pass
+
+        stall = _stall_seconds()
+        trace['stall_seconds'] = stall
+        last_improvement = [None]
+
         def checkpoint():
             check_cancelled()
             remaining = remaining_planning_seconds()
             if remaining is not None and remaining <= 12:
                 raise SearchWindowClosed
+            # Step 6 (2026-11-16): stop when the best week has not improved for
+            # a while. On frozen Malmö data every improvement came in the first
+            # second and the rest of a 90 s window changed nothing.
+            if stall and last_improvement[0] is not None and perf_counter() - last_improvement[0] > stall:
+                trace['stop_reason'] = 'no_improvement_for_stall_seconds'
+                raise SearchStalled
 
         def propose(slots):
             nonlocal incumbent, last_error
@@ -1650,6 +1676,8 @@ class MenuOptimizer:
                     trace['first_valid_cost'] = str(result['basket'].total) if isinstance(result, dict) and 'basket' in result else str(rank)
                 incumbent = (rank, list(slots), result)
                 trace['improvements'] += 1
+                trace.setdefault('improvement_search_seconds', []).append(round(perf_counter()-started, 2))
+                last_improvement[0] = perf_counter()
                 if decision_observer:
                     decision_observer(slots, 'retained', result=result, depth=len(groups))
 
@@ -1743,6 +1771,8 @@ class MenuOptimizer:
         except SearchWindowClosed:
             soft_stopped = True
             trace['stop_reason'] = 'reserved_current_checkout_audit_save_time'
+        except SearchStalled:
+            soft_stopped = True
         trace['search_seconds'] = perf_counter()-started
         trace['anchors_deferred'] = trace.get('anchors_total', 0)-trace.get('anchors_considered', 0)
         trace['candidate_options_total'] = sum(map(len, groups))

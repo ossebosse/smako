@@ -177,6 +177,8 @@ def completed_search_outcome(diagnostics):
         message = "Vi hittade en meny som uppfyller dina val. Vi har inte testat alla kombinationer."
     if any(row.get('stop_reason') == 'reserved_current_checkout_audit_save_time' for row in complete_rows):
         message += " Vi slutade leta efter bättre alternativ för att hinna kontrollera och spara planen."
+    elif any(row.get('stop_reason') == 'no_improvement_for_stall_seconds' for row in complete_rows):
+        message += " Vi slutade leta när vi en stund inte hittat något billigare."
     return {
         "status": "VALID_SOLUTION", "global_optimum_proven": False,
         "label": "Lägsta hittade inköpskostnad inom dina val",
@@ -205,7 +207,8 @@ def completed_search_outcome(diagnostics):
                 'stop_reason', 'anchors_total', 'anchors_considered', 'anchors_deferred',
                 'candidate_options_total', 'candidate_options_considered', 'candidate_options_deferred',
                 'safely_excluded_options', 'max_full_evaluation_seconds', 'compact_seen_bytes',
-                'compact_seen_entries', 'full_results_retained_limit') if k in row} for row in complete_rows]}
+                'compact_seen_entries', 'full_results_retained_limit', 'improvement_search_seconds',
+                'search_seconds', 'stall_seconds') if k in row} for row in complete_rows]}
                if complete_rows else {}),
             "week_search_phases": [{k: row[k] for k in (
                 "search_track", "library_phase", "library_generation", "library_prefix_recipes",

@@ -261,7 +261,7 @@ class PersonalPlanner:
             if not extra.food and not is_nonfood(extra.query):
                 raise PolicyConflict(_NOT_NONFOOD.format(name=extra.query))
         self.plan_id = plan_id
-        from app.services.personal_source_facts import load_retained_facts
+        from app.services.personal_source_facts import FactsCollection, cached_retained_facts
 
         needs_facts = (
             self.complete
@@ -284,14 +284,16 @@ class PersonalPlanner:
         from app.services.plan_jobs import report_stage
         report_stage("product_facts")
         with performance_span("personal_product_facts"):
-            self.facts = (
-                load_retained_facts(prepared) if facts is None and needs_facts else facts
-            ) or {}
+            loaded = facts is None and needs_facts
+            self.facts = (cached_retained_facts(prepared) if loaded else facts) or {}
         self.timings["product_facts"] += perf_counter() - facts_started
         from app.services.personal_source_facts import facts_version
 
         with performance_span("personal_facts_identity"):
-            self.facts_version = (facts_version(self.facts)
+            # Facts loaded here are a FactsCollection hashed when it was built
+            # and never changed afterwards; given facts may have been changed.
+            self.facts_version = (self.facts.version if loaded and isinstance(self.facts, FactsCollection)
+                else facts_version(self.facts)
                 if getattr(settings, "library_search_policy", "legacy") in {"smako-verified-reference-v1", "smako-current-library-v2"}
                 else getattr(self.facts, "version", None) or facts_version(self.facts))
         self.reference_version = None

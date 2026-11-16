@@ -20,6 +20,10 @@ import os
 
 WARM_LIMITS = {"min_protein_g": 0, "min_carbs_g": 0, "min_fat_g": 0, "max_kcal": 4000}
 WARM_SECONDS = 45.0
+# Step 6 (2026-11-16): a round that reaches its deadline leaves its evidence in
+# the shared cache, so the next round continues from there. Each round waits
+# for an idle planner again, so people always go first.
+WARM_ROUNDS = 3
 
 
 def warm_request(prepared):
@@ -78,18 +82,21 @@ async def _warm_attempts(application, settings, prepared, manager, *, delay, att
             return "superseded"
         return await asyncio.to_thread(warm_nutrition, settings, prepared)
 
+    rounds = 0
     for _ in range(attempts):
         await asyncio.sleep(delay)
         if manager.get_active(scope) is not prepared:
             return "superseded"
         try:
             status = await application.state.planner_admission.run(
-                f"prewarm-nutrition:{scope}:{prepared.universe.universe_id}", work, only_if_idle=True)
+                f"prewarm-nutrition:{scope}:{prepared.universe.universe_id}:{rounds}", work, only_if_idle=True)
         except PlannerAdmissionBusy:
             continue
-        logging.getLogger("uvicorn.error").info("nutrition_prewarm scope=%s universe=%s status=%s",
-                                                scope, prepared.universe.universe_id, status)
-        return status
+        rounds += 1
+        logging.getLogger("uvicorn.error").info("nutrition_prewarm scope=%s universe=%s round=%s status=%s",
+                                                scope, prepared.universe.universe_id, rounds, status)
+        if status != "deadline" or rounds >= WARM_ROUNDS:
+            return status
     return "busy"
 
 

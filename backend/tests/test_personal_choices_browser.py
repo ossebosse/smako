@@ -54,6 +54,9 @@ def choices(request):
                                            "postal_code": "22350", "available": True}]}
             elif path == "price-contexts":
                 data = {"contexts": []}
+            elif path == "personal/interpret-extra":
+                text = (route.request.post_data_json or {}).get("text", "")
+                data = {"query": text, "properties": [], "food": True, "confirmed": False}
             elif path == "shopping-location":
                 data = {"status": "eligible", "postal_code": "22350", "area_postal_code": "22350",
                         "municipality_name": "Lund", "area_name": "Lund", "municipality_available": True,
