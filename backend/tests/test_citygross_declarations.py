@@ -129,3 +129,81 @@ def test_retained_citygross_catalogue_rows_reach_the_planner_facts(tmp_path):
     db.close()
     assert (base.store_id, "lasagne") not in _load_retained_catalog_facts(
         universe, database=database, raw_root=raw_root)
+
+
+def test_concentrate_sold_to_make_a_volume_has_no_as_sold_declaration():
+    raw = deepcopy(rows()["100058571_ST"])
+    raw["descriptiveSize"] = "200G/5L"
+    f = fact(raw)
+    assert not f.nutrition and "nutrition_preparation" in f.conflicts
+    raw["descriptiveSize"] = "380/230G"  # drained weight, not a reconstitution
+    assert fact(raw).nutrition
+
+
+def test_basis_must_be_the_sale_unit_and_dry_staples_must_look_dry():
+    from app.services.personal_source_facts import citygross_basis_checked
+
+    from backend.tests.test_personal_planning_v2 import product
+
+    pasta = fact(rows()["100058571_ST"])
+    sold_in_ml = product("lasagne", 500, "ml", 25)
+    checked = citygross_basis_checked(sold_in_ml, pasta)
+    assert not checked.nutrition and "nutrition_basis_unit" in checked.conflicts
+    assert "nutrition.kcal" not in checked.field_sources
+    dry_pasta = product("pasta", 500, "g", 25).model_copy(update={"canonical_food": "pasta"})
+    assert citygross_basis_checked(dry_pasta, pasta).nutrition["kcal"] == 359
+    cooked = deepcopy(rows()["100058571_ST"])
+    for info in cooked["foodAndBeverageExtension"]["nutrientInformations"]:
+        for row in info["nutrients"]:
+            if row["unitOfMeasure"] == "kilokalori":
+                row["value"] = round(row["value"] * 136 / 359)
+            if row["unitOfMeasure"] == "kilojoule":
+                row["value"] = round(row["value"] * 136 / 359)
+    rice = product("jasminris", 1000, "g", 40).model_copy(update={"canonical_food": "jasminris"})
+    checked = citygross_basis_checked(rice, fact(cooked))
+    assert not checked.nutrition and "nutrition_prepared_basis_suspected" in checked.conflicts
+    assert checked.ingredients  # The ingredient statement is unaffected.
+
+
+def test_municipal_citygross_source_reaches_the_planner_facts(tmp_path):
+    from app.models.provenance import SourceProvenance
+    from app.services.personal_source_facts import _load_retained_catalog_facts
+
+    from backend.tests.test_personal_planning_v2 import NOW, prepared, product
+
+    grocery = tmp_path / "grocery"
+    main = grocery / "grocery_data.sqlite"
+    grocery.mkdir()
+    with sqlite3.connect(main) as db:
+        db.executescript("CREATE TABLE products(id,chain,external_product_id,store_external_id,raw_reference,"
+                         "raw_snapshot_id,catalog_snapshot_id); CREATE TABLE raw_snapshots(id,payload_hash,"
+                         "payload_location,catalog_snapshot_id);")
+    db.close()
+    collection = grocery / "citygross-municipal/1280/attempts/a1/collection/3211"
+    page = collection / "raw/citygross/3211/v2-frozen/page.json"
+    page.parent.mkdir(parents=True)
+    content = json.dumps({"items": [rows()["100308301_ST"]]}).encode()
+    page.write_bytes(content)
+    with sqlite3.connect(collection / "own.sqlite") as db:
+        db.executescript("CREATE TABLE products(id,chain,external_product_id,store_external_id,raw_reference,"
+                         "raw_snapshot_id,catalog_snapshot_id); CREATE TABLE raw_snapshots(id,payload_hash,"
+                         "payload_location,catalog_snapshot_id);")
+        db.execute("INSERT INTO products VALUES (?,?,?,?,?,?,?)", ("korv", "citygross", "100308301_ST",
+                   "3211", "raw:raw-id#items[0]", "raw-id", "v2-frozen"))
+        db.execute("INSERT INTO raw_snapshots VALUES (?,?,?,?)", ("raw-id", hashlib.sha256(content).hexdigest(),
+                   "citygross/3211/v2-frozen/page.json", "v2-frozen"))
+    db.close()
+    state = {"approved": {"3211": [{"database": "1280/attempts/a1/collection/3211/own.sqlite",
+                                     "snapshots": ["v2-frozen"]}]}}
+    (grocery / "citygross-municipal/1280/source-state.json").write_text(json.dumps(state))
+    base = product("korv", 640, "g", 45)
+    universe = prepared(base.model_copy(update={"chain": "citygross", "source_provenance": SourceProvenance(
+        source_provider="own", source_channel="catalog", source_snapshot_id="v2-frozen",
+        source_observed_at=NOW, provider_store_id="3211")}))
+    facts = _load_retained_catalog_facts(universe, database=main, raw_root=tmp_path / "raw")
+    f = facts[(base.store_id, "korv")]
+    assert f.nutrition["kcal"] == 250 and f.animal is True
+    # A tampered page keeps its facts unknown.
+    page.write_bytes(content.replace(b"250", b"999"))
+    assert (base.store_id, "korv") not in _load_retained_catalog_facts(
+        universe, database=main, raw_root=tmp_path / "raw")

@@ -322,6 +322,48 @@ def _citygross_nutrition(raw):
     return unit, basis, amount, conflicts, limits, nutrition
 
 
+# "200G/5L", "180ML/4L", "8P/4L": a concentrate sold to make a volume. Its
+# single declaration may be for the made-up product; preparationState does not
+# say (bouillon rows carry 6 and 318 kcal/100, both state 0).
+_RECONSTITUTED = re.compile(r"/\s*\d+(?:[.,]\d+)?\s*(?:l|dl|cl|ml|liter)\b", re.IGNORECASE)
+# A dry staple declared below this share of its SLV dry reference is a cooked
+# basis printed as the only declaration (seen: jasmine rice 136 kcal/100 g).
+_DRY_REFERENCE_MIN_SHARE = 0.6
+
+
+def _drop_nutrition(fact, reason):
+    sources = {k: v for k, v in fact.field_sources.items()
+               if not k.startswith("nutrition") or k == "nutrition_limits"}
+    return replace(fact, nutrition={}, nutrition_unit=None, nutrition_basis=None, field_sources=sources,
+                   conflicts=tuple(dict.fromkeys((*fact.conflicts, reason))))
+
+
+@lru_cache(maxsize=1)
+def _dry_reference_kcal():
+    from app.services.nutrition_reference import MAPPINGS, macro_values, reference_data
+
+    foods = reference_data()["foods"]
+    return {name: macro_values(foods[str(identity)]["nutrients"])["kcal"]
+            for identity, (name, preparation) in MAPPINGS.items() if preparation == "dry"}
+
+
+def citygross_basis_checked(product, fact):
+    """City Gross declarations carry no reliable preparation state.
+
+    Keep one only when its basis is the product's own sale unit and, for a
+    dry staple with an SLV dry reference, it is plausibly the dry food.
+    """
+    if not fact.nutrition:
+        return fact
+    if product.package_unit in {"g", "ml"} and fact.nutrition_unit != product.package_unit:
+        return _drop_nutrition(fact, "nutrition_basis_unit")
+    reference = _dry_reference_kcal().get(product.canonical_food or "")
+    if (reference and "kcal" in fact.nutrition and fact.nutrition_unit == "g"
+            and fact.nutrition["kcal"] < _DRY_REFERENCE_MIN_SHARE * reference):
+        return _drop_nutrition(fact, "nutrition_prepared_basis_suspected")
+    return fact
+
+
 def _gs1_marking_codes(raw, chain):
     """Exact GS1 T3777 marking codes (Coop accreditedTags, City Gross markings)."""
     field = {"coop": "accreditedTags", "citygross": "markings"}.get(chain)
@@ -428,6 +470,9 @@ def project_raw_facts(raw, *, chain, product_id, snapshot_id, source_reference, 
         unit, basis, energy_quantity, gs1_conflicts, gs1_limits, nutrition = _citygross_nutrition(raw)
         conflicts.extend(gs1_conflicts)
         limits.extend(gs1_limits)
+        if nutrition and _RECONSTITUTED.search(str(raw.get("descriptiveSize") or "")):
+            unit, basis, nutrition = None, None, {}
+            conflicts.append("nutrition_preparation")
     if chain == "coop" and raw.get("nutrientInformation") and basis is None:
         conflicts.append("nutrition_basis")
     if chain == "coop":
@@ -889,6 +934,60 @@ def _catalog_source_id(product, stores):
     return match[1]
 
 
+def _citygross_source_rows(grocery_root, by_source_id, snapshots):
+    """Rows of the municipal City Gross sources the universe was built from.
+
+    Each approved store source is its own OWN database with its raw catalogue
+    pages beside it (``collection/<store>/own.sqlite`` and ``raw/``). The
+    municipality state names them; only those inside the City Gross root and
+    holding one of the universe's snapshots are read. Payload hashes are
+    checked like any other retained source.
+    """
+    root = (Path(grocery_root) / "citygross-municipal").resolve()
+    wanted = {p.source_provenance.source_snapshot_id for products in by_source_id.values()
+              for p in products if p.chain == "citygross"}
+    if not wanted or not root.is_dir():
+        return []
+    databases = set()
+    for state_path in sorted(root.glob("*/source-state.json")):
+        try:
+            state = json.loads(state_path.read_bytes())
+        except (OSError, ValueError):
+            continue
+        for group in ("approved", "partial_approved"):
+            for refs in (state.get(group) or {}).values():
+                for ref in refs if isinstance(refs, list) else ():
+                    if isinstance(ref, dict) and set(ref.get("snapshots") or ()) & wanted & snapshots:
+                        candidate = (root / str(ref.get("database"))).resolve()
+                        if candidate.is_relative_to(root) and candidate.name == "own.sqlite":
+                            databases.add(candidate)
+    rows_out = []
+    for database in sorted(databases):
+        raw_root = (database.parent / "raw").resolve()
+        try:
+            with sqlite3.connect(f"file:{database.as_posix()}?mode=ro", uri=True) as db:
+                db.row_factory = sqlite3.Row
+                for snapshot in sorted(wanted & snapshots):
+                    for row in db.execute(
+                        """SELECT p.id, p.chain, p.external_product_id,
+                        p.store_external_id, p.raw_reference, r.payload_hash, r.payload_location
+                        FROM products p JOIN raw_snapshots r ON r.id=p.raw_snapshot_id
+                        WHERE p.chain='citygross' AND p.catalog_snapshot_id=? AND r.catalog_snapshot_id=?
+                        ORDER BY r.payload_location, p.id""", (snapshot, snapshot)):
+                        path = (raw_root / row["payload_location"]).resolve()
+                        if not path.is_relative_to(raw_root):
+                            continue
+                        for product in by_source_id.get(row["id"], ()):
+                            if (product.chain == "citygross"
+                                    and product.source_provenance.source_snapshot_id == snapshot
+                                    and product.source_provenance.provider_store_id == row["store_external_id"]):
+                                rows_out.append((snapshot, row, product, path))
+            db.close()
+        except sqlite3.Error:
+            continue  # An unreadable optional source leaves its facts unknown.
+    return rows_out
+
+
 def _load_retained_catalog_facts(prepared, *, database=None, raw_root=None):
     from sqlalchemy.engine import make_url
 
@@ -950,6 +1049,7 @@ def _load_retained_catalog_facts(prepared, *, database=None, raw_root=None):
                             and product.chain == row["chain"]
                             and product.source_provenance.provider_store_id == row["store_external_id"]):
                         source_rows.append((snapshot, row, product, path))
+    source_rows.extend(_citygross_source_rows(Path(database).parent, by_source_id, snapshots))
 
     # A telemetry/profile write in this same SQLite database changes its
     # mtime, but cannot change these public source facts. Key the actual
@@ -1024,7 +1124,7 @@ def _project_facts(key, cacheable, hashes, source_rows, prepared, result):
                 identity = raw.get("id") if row["chain"] in {"coop", "citygross"} else raw.get("code")
                 if str(identity) != row["external_product_id"]:
                     continue
-                result[(product.store_id, product.product_id)] = project_raw_facts(
+                fact = project_raw_facts(
                     raw,
                     chain=row["chain"],
                     product_id=product.product_id,
@@ -1032,6 +1132,9 @@ def _project_facts(key, cacheable, hashes, source_rows, prepared, result):
                     source_reference=f"{row['chain']}:{row['raw_reference']}:{row['payload_hash']}",
                     observed_at=product.source_provenance.source_observed_at.isoformat(),
                 )
+                if row["chain"] == "citygross":
+                    fact = citygross_basis_checked(product, fact)
+                result[(product.store_id, product.product_id)] = fact
             except (OSError, ValueError, KeyError, IndexError, TypeError, AttributeError):
                 nonlocal_cacheable[0] = False
                 continue  # Missing or conflicting evidence remains unknown.
