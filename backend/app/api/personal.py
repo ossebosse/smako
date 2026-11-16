@@ -118,11 +118,11 @@ def shopping_suggestions(request: Request, response: Response, q: str = "", post
     if len(q) > 120:
         raise HTTPException(422, "Sökningen får vara högst 120 tecken.")
     try:
-        generic = generic_suggestions(q)
         search = ProductSearchRequest(query=q or "mjölk", postal_code=postal_code, limit=20)
+        prepared = GLOBAL_PREPARED_PRICE_UNIVERSES.get_for_request(search.postal_code, {})
+        generic = generic_suggestions(q, prepared.product_search_index.postings if prepared is not None else None)
     except ValueError as exc:
         raise HTTPException(422, "Kontrollera varunamn, mängd och postnummer.") from exc
-    prepared = GLOBAL_PREPARED_PRICE_UNIVERSES.get_for_request(search.postal_code, {})
     if prepared is None:
         return {"generics": generic, "products": [], "status": "no_area_data"}
     products = []

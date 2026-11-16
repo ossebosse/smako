@@ -202,6 +202,40 @@ lösningar från lägre butikstak och i den nedre gränsen
   på. På frusen data blir veckan 87 kr i stället för 144 kr när alla
   basvaror är förbockade.
 
+## Sökning och skafferi (steg 5, 2026-11-16)
+
+Varusökningen som människor ser (`ProductSearchIndex.search`, bl.a.
+inköpslistans och skafferiets förslag) hittar mer och visar det rimligaste
+först. `ProductSearchIndex.retrieve`, som recept- och korgförberedelsen
+använder, är oförändrad, så sökorden kan aldrig göra en vara giltig för ett
+recept.
+
+- **Stavningar, synonymer och sammansatta ord** (`app/services/search_words.py`):
+  sallat/sallad och ärter/ärtor även sist i sammansatta ord, en granskad
+  synonymlista (vindruvor → druvor, köttfärs → blandfärs/nötfärs/fläskfärs,
+  soppåsar → avfallspåse/sopsäck, frysta ↔ fryst) och ord som slutar på det
+  sökta ordet med minst tre bokstäver före ("sylt" hittar jordgubbssylt,
+  "mjöl" vetemjöl), utom granskade undantag (frukost är inte ost).
+- **Relevans före pris:** exakt namn, sedan namn som börjar med sökningen,
+  hela ord, sammansatta ord och sist övrigt; inom varje nivå som förut.
+  Ett namn där ordet kommer efter "utan" ("Pasta utan ägg") hamnar sist.
+- **Djur- och barnmat bara på begäran:** varor med `non_human_food` och
+  varor i kategorin Barn visas bara när sökningen nämner till exempel hund,
+  katt eller barnmat, eller när inget annat matchar. Sådana ord behöver inte
+  stå i varans namn ("kattmat lax").
+- **Färdiga förslag:** när det skrivna ordet självt är ett ord i områdets
+  varor ("mjöl") föreslås bara förslag där det är ett helt ord, så "mjöl"
+  ger inte Mjölk. Medan man skriver ("mjö") visas förslagen som förut.
+- **Ägg i styck** i skafferiet: recepten räknar ägg i gram, så "ägg 6 st"
+  frågar efter storlek och sparar antal × standardvikten utan skal
+  (`EGG_STANDARD_EDIBLE_G`: S 42, M 51, L 60 g), samma som för köpta ägg.
+- **Sort i stället för produkt:** när ett brett ord inte räcker för recepten
+  föreslår skafferiet sorter som räcker som de skrivs (`pantry_usage.KINDS`:
+  ris → långkornigt ris, jasminris, basmatiris; lök → gul lök, rödlök),
+  tillsammans med listan över bestämda varor. Krav på exakt produkt
+  (ägarbeslut 2026-11-13, till exempel olivolja) kräver fortfarande en vald
+  vara.
+
 ## Fart (steg 6, 2026-11-16)
 
 Mätt på beta 2026-11-16 (3 middagar, salt/peppar/rapsolja hemma): Lund 51 s
@@ -235,6 +269,23 @@ varufakta 7,4 s och minnesrensning 7,0 s.
 - **Näringsuppvärmningen** körs i upp till tre rundor om en runda når sin
   gräns på 45 s; varje runda väntar på en ledig planerare.
 - **Gillningar** kostar ingen extra planering (se steg 4).
+
+## Innehåll och data (steg 7, 2026-11-16)
+
+- **Portionsvikt dold i provgränssnitten** (C1) tills recepten anger färdig
+  vikt: en gräns som inget recept kan uppfylla gav bara "ingen plan". Sparade
+  viktgränser skickas inte. API:t och /personal är oförändrade.
+- **Butikens kategori i sökningen:** en vara vars kategori nämner det sökta
+  ("Mejeri > Ost") rangordnas före varor som bara nämner det i namnet ("Ost &
+  Broccoli soppa"). "ost" visar nu ostar först, även Hushållsost.
+- **Olja hemma ger näring:** rapsolja i milliliter använder samma granskade
+  väg som köpt olja: SLV-referensen per 100 g gånger DTU:s densitet 0,92 g/ml
+  (`staples.volume_evidence`, `recipe_volume_nutrition.density_converted`).
+  Andra oljor saknar granskad densitet och visar fortfarande ingen näring.
+- **Glutenfri spaghetti (D6) är inget fel:** receptet ber om pasta, och
+  glutenfri spaghetti är pasta. På frusen data kostar vanlig spaghetti 13,90 kr
+  och glutenfri 16,50 kr för 400 g hos Willys; den glutenfria väljs bara när de
+  valda butikerna saknar en billigare vanlig.
 
 ## Förpackningsvikt när avrunnen vikt saknas (ägarbeslut 2026-11-13)
 

@@ -2632,16 +2632,25 @@ class PersonalPlanner:
                                 if need.get("at_home"):
                                     # The person's own staple: a reviewed generic reference
                                     # in the same unit, or no values for this recipe.
-                                    from app.services.staples import reference_identity
+                                    from app.services.staples import (
+                                        reference_identity,
+                                        volume_evidence,
+                                    )
                                     identity = reference_identity(need["name"], need["unit"])
-                                    if identity is None or not self.spec.allow_nutrition_estimates:
+                                    volume = None if identity else volume_evidence(need["name"], need["unit"])
+                                    if (identity is None and volume is None) or not self.spec.allow_nutrition_estimates:
                                         raise PolicyConflict(
                                             f"{need['name']}: vi vet inte näringen i det du har hemma.",
                                             code="DATA_BLOCKED",
                                         )
                                     pantry = [{"quantity": need["quantity"], "name": need["name"],
-                                               "demand_key": need["demand_key"], "nutrition_reference": identity}]
+                                               "demand_key": need["demand_key"], "nutrition_reference": identity,
+                                               # Oil at home in ml: reviewed reference x reviewed density.
+                                               **({"evidence": volume} if volume is not None else {})}]
                                 for allocation in pantry:
+                                    if allocation.get("evidence") is not None:
+                                        contributions.append((allocation["quantity"], allocation["evidence"], "pantry"))
+                                        continue
                                     if (
                                         not allocation.get("product_key")
                                         and not allocation.get("prepared_origin")

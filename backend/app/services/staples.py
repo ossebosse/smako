@@ -39,3 +39,25 @@ def reference_identity(name, unit):
                 and canonicalize_ingredient_name(option["ingredient"]) == wanted):
             return option["id"]
     return None
+
+
+# A staple measured by volume with a reviewed per-gram reference and a
+# reviewed density (DTU). Only foods listed here; more need the same review.
+_VOLUME_REFERENCES = {"rapsolja": 2189}
+
+
+def volume_evidence(name, unit):
+    """Per-100 ml nutrition for the person's own oil, as for bought oil.
+
+    The SLV per-100 g reference times DTU's reviewed density
+    (recipe_volume_nutrition.density_converted). None for anything else.
+    """
+    if unit != "ml":
+        return None
+    canonical = canonicalize_ingredient_name(name)
+    if canonical not in _VOLUME_REFERENCES:
+        return None
+    from app.services.nutrition_reference import reference_evidence
+    from app.services.recipe_volume_nutrition import density_converted
+
+    return density_converted(reference_evidence(_VOLUME_REFERENCES[canonical]), canonical)

@@ -141,6 +141,15 @@ def test_the_cheaper_recipe_preview_is_only_for_replacing_one_dinner():
             PersonalMutation(revision=1, pantry_revision=0, preview_without_like="kyckling", **wrong)
 
 
+def test_oil_at_home_gets_nutrition_from_reviewed_reference_and_density():
+    from app.services.staples import volume_evidence
+
+    oil = volume_evidence("rapsolja", "ml")
+    assert oil is not None and oil.nutrition_unit == "ml" and oil.evidence_kind == "food_specific_density_estimate"
+    assert 800 < oil.nutrition["kcal"] < 840  # About 900 kcal per 100 g x 0.92 g/ml.
+    assert volume_evidence("rapsolja", "g") is None and volume_evidence("olivolja", "ml") is None
+
+
 def test_the_week_without_likes_ranks_as_if_nothing_were_liked():
     spec = PersonalPlanning(profile=TasteProfile(likes=["kyckling"], dislikes=["svamp"]),
                             meals=[MealSettings(count=2, servings=2)])

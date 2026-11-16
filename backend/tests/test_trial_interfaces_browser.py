@@ -107,7 +107,10 @@ class Fake:
                          "less_than_package": known[0] < known[1], "estimated": False, "food": True}
         if path == "personal/pantry-use":
             known = {"potatis": {"form": "raw_edible", "unit": "g", "used_in_recipes": True, "food": True, "usable": [570, 570]},
-                     "ris": {"form": "dry", "unit": "g", "used_in_recipes": True, "food": True, "usable": [5, 619, 0]},
+                     "ris": {"form": "dry", "unit": "g", "used_in_recipes": True, "food": True, "usable": [5, 619, 0],
+                             "kinds": [{"name": "långkornigt ris", "usable": [619, 619]}, {"name": "jasminris", "usable": [619, 619]}]},
+                     "ägg": {"form": "raw_edible", "unit": "g", "used_in_recipes": True, "food": True, "usable": [691, 708, 2],
+                             "kinds": [], "egg_grams": {"S": 42.0, "M": 51.0, "L": 60.0}},
                      "kikärtor": {"form": "cooked_drained", "unit": "g", "used_in_recipes": True, "food": True, "usable": [3, 300, 290]}}
             return 200, known.get(query.get("name"), {"form": None, "unit": None, "used_in_recipes": False, "food": True, "usable": [0, 0]})
         if path in {"personal/pantry", "personal/shopping-list"}:
@@ -305,10 +308,8 @@ def test_each_meal_has_its_own_distribution_weight_and_nutrition_like_personal(u
     page.get_by_role("button", name="Klar").click()
     expect(page.get_by_role("button", name="Näringsvärden för middag: 3 egna val")).to_be_visible()
 
-    page.get_by_role("button", name="Portionsvikt för frukost: Standard").click()
-    page.get_by_label("Högst portionsvikt, g per portion").fill("350")
-    page.get_by_label("Högst portionsvikt, g per portion").press("Tab")
-    page.get_by_role("button", name="Klar").click()
+    # Portion weight is hidden until recipes state their ready weight (step 7, C1).
+    expect(page.get_by_role("button", name=re.compile("^Portionsvikt"))).to_have_count(0)
     page.get_by_role("button", name="Fördelning för middag: Standard").click()
     page.get_by_label("Antal fisk och skaldjur").fill("1")
     page.get_by_label("Antal fisk och skaldjur").press("Tab")
@@ -325,7 +326,7 @@ def test_each_meal_has_its_own_distribution_weight_and_nutrition_like_personal(u
     meals = sent["personal"]["meals"]
     assert [(m["meal_type"], m["count"], m["servings"]) for m in meals] == [("dinner", 2, 2), ("breakfast", 1, 1), ("snack", 0, 1)]
     assert meals[0]["limits"] == {"min_protein_g": 30, "min_carbs_g": 80, "max_kcal": 700} and meals[0]["distribution"] == {"fish": 1}
-    assert meals[1]["limits"] == {"max_weight_g": 350} and meals[1]["distribution"] == {}
+    assert meals[1]["limits"] == {} and meals[1]["distribution"] == {}
     assert meals[2]["limits"] == {}
     assert [m["max_same_base_meals"] for m in meals] == [2, 2, None]
     shot("naring-recept")
@@ -538,3 +539,21 @@ def test_a_like_in_several_dinners_is_priced_against_the_week_without_it(ui):
     expect(page.get_by_role("dialog")).to_have_count(0)
     switched = [body for method, path, body in fake.calls if path.endswith("/change") and body.get("recipe_ids")]
     assert switched[-1]["recipe_ids"] == {"dinner-1": "lins:1:a", "dinner-2": "bon:1:a"}
+
+
+def test_rice_can_be_named_by_kind_and_eggs_counted_by_size(ui):
+    name, page, fake, shot = ui
+    open_screen(name, page, "skafferi")
+    page.get_by_label("Lägg till i skafferiet").fill("ris 1 kg")
+    page.get_by_role("button", name=re.compile("Ris · 1 kg")).click()
+    expect(page.get_by_text("Vilken sorts ris har du? Då kan recepten använda den.")).to_be_visible()
+    page.get_by_role("button", name="Jasminris").click()
+    expect(page.get_by_text("Jasminris · 1 kg ligger i skafferiet.")).to_be_visible()
+    page.get_by_label("Lägg till i skafferiet").fill("ägg 6 st")
+    page.get_by_role("button", name=re.compile("Ägg · 6 st")).click()
+    expect(page.get_by_text(re.compile("Hur stora är äggen?"))).to_be_visible()
+    shot("agg")
+    page.get_by_role("button", name="Medium (M)").click()
+    expect(page.get_by_text("Ägg · 6 st M, ungefär 306 g ligger i skafferiet.")).to_be_visible()
+    saved = [body for method, path, body in fake.calls if path == "personal/pantry"][-1]
+    assert [(i["name"], i["quantity"], i["unit"]) for i in saved["items"]] == [("jasminris", 1000, "g"), ("ägg", 306, "g")]
