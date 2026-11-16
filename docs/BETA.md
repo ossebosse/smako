@@ -1,3 +1,21 @@
+# 2026-11-16: Steg 5–7 och näringsdeklarationer aktiverat
+
+Main `b0190e160084` (PR #89, #92, #90, #91). App **app-b0190e160084-b72e8023**,
+scheduler orörd. Steg 5 (sökning, skafferi med äggstorlek och sorter), steg 6
+(minnesrensning efter jobbet, delade varufakta, veckosökningen slutar när den
+inte hittar billigare), gillar utan extra planering, steg 7 del 1 och City
+Gross-deklarationer (`FACTS_VERSION` v13). 23 appfiler, importkontroll ok. Bas
+`745bf535233b` (image `6f61eea792dd`), ny image `e9b120ae65db`. Aktiverad
+2026-11-16 21:02:28 UTC, säkerhetskopia `20261116T205317Z`; lagringsretention
+complete; `/ready` 200 för 22350 och 21120.
+
+Därefter, under samma driftlås, pekades appens `AXFOOD_PRODUCT_DETAIL_ROOT` om
+till release `f87b8df135a7…` (2 822 Willys- och 505 Hemköp-dokument, tidigare
+111 och 12) via `overrides/axfood-details-f87b8df135a7.json`; schedulern läser
+inte detaljerna och är orörd. Återgång: ta bort den override-filen ur
+compose-omslaget (kopia i `evidence/axfood-details-f87b8df135a7/`) och starta
+om appen. Se `docs/DECLARATIONS.md`.
+
 # 2026-11-15: Gillar i flera middagar aktiverat
 
 Main `745bf535233b` (PR #87). App **app-745bf535233b-7a0d5db0**, scheduler
@@ -254,7 +272,7 @@ på `main` inte ändrar en pågående release.
   `smako-app-1`, `smako-scheduler-1`, `smako-caddy-1`, data i `/srv/smako/data`
   och det gemensamma driftlåset. Detta flöde installerar inte en ny server.
 - Läs aktuell [HANDOFF.md](HANDOFF.md), [OPERATIONS.md](OPERATIONS.md) och
-  senaste aktiveringsrapport. Appens BUILD_ID är `app-745bf535233b-7a0d5db0`;
+  senaste aktiveringsrapport. Appens BUILD_ID är `app-b0190e160084-b72e8023`;
   schedulern är `source-ops-8a53beb80e43`.
   [Uppvärmda prov och samordnad faktaläsning/GC](releases/warm-facts-gc-20261101/ACTIVATED.md)
   är senaste appaktiveringen. Sex Pythonfiler från kod `b7c8d0506e23`;
@@ -302,10 +320,10 @@ git status --short
 .venv/Scripts/python.exe -X utf8 scripts/smako_ops.py status
 
 # Använd den granskade Git-bas som motsvarar faktiskt aktiva filer enligt senaste journalen.
-.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit 745bf535233b --commit main --workdir .local/beta-release
+.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit b0190e160084 --commit main --workdir .local/beta-release
 ```
 
-`745bf535233b` är appen som aktiverades 2026-11-15 12:27 UTC. Appbildens egen
+`b0190e160084` är appen som aktiverades 2026-11-16 21:02 UTC. Appbildens egen
 grocery-kopia är äldre än Git; använd `--keep-app-grocery` om intervallet
 bara innehåller grocery-Python som redan levererats till schedulern. De äldre
 Coop-filerna i runtime (`price_universe_runtime.py`,
