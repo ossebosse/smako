@@ -41,6 +41,16 @@ from grocery_data.app.services.manual_refresh_operations import (
 )
 
 
+def prioritized(todo: list[str], priority: list[str]) -> list[str]:
+    """Order only: wanted codes first, the rest of the exact queue after."""
+    rank: dict[str, int] = {}
+    for code in (c.strip() for c in priority):
+        if code:
+            rank.setdefault(code, len(rank))
+    # sorted() is stable: unlisted codes keep the queue's own order.
+    return sorted(todo, key=lambda code: rank.get(code, len(rank)))
+
+
 def _write(out: Path, code: str, raw) -> None:
     retain_response(out.parent, out.name, code, raw)
 
@@ -58,6 +68,9 @@ async def main() -> int:
     locks.add_argument("--operation-lock", type=Path, help="Exact existing local relay operation lease")
     p.add_argument("--price-universe-root", type=Path)
     p.add_argument("--limit", type=int, default=0, help="Bound this run; 0 processes the remaining exact list")
+    p.add_argument("--priority-codes", type=Path,
+                   help="Fetch these codes of the exact queue first (backend/scripts/axfood_detail_priority.py);"
+                        " the queue and its proof are unchanged")
     p.add_argument("--base-release", type=Path, help="Copy a verified previous release to NEW staging")
     p.add_argument("--publish", action="store_true", help="Publish verified staging after successful collection")
     p.add_argument("--publish-only", action="store_true", help="Validate and freeze staging without network")
@@ -166,6 +179,8 @@ async def collect(args, codes, staging, rate):
         return 2
     todo = [c for c in codes if states[c] not in {
         "verified", "permanent_missing", "permanent_error", "waiting_after_error", "revoked", "invalid_identity", "unsafe_path"}]
+    if getattr(args, "priority_codes", None) is not None:
+        todo = prioritized(todo, args.priority_codes.read_text(encoding="utf-8").splitlines())
     if args.limit:
         todo = todo[:args.limit]
     out = staging / args.chain

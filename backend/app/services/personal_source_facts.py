@@ -22,7 +22,7 @@ from threading import Lock, RLock
 
 from app.services.personal_policy import ProductFacts
 
-FACTS_VERSION = "retained-catalog-facts-v12-stora-coop-source-aliases"
+FACTS_VERSION = "retained-catalog-facts-v13-citygross-declarations"
 _CACHE = {}
 _LOCK = RLock()
 _KEY_LOCKS = {}
@@ -237,6 +237,98 @@ def _axfood_nutrition(raw):
     return unit, basis, amount, conflicts, limits, nutrition
 
 
+_CITYGROSS_NUTRIENTS = {
+    ("ener-", "kilokalori"): "kcal",
+    ("pro-", "gram"): "protein_g",
+    ("choavl", "gram"): "carbs_g",
+    ("fat", "gram"): "fat_g",
+}
+# City Gross serialises GS1 codes as integers. Retained rows show 0 on
+# ordinary point values and 1 on a "<0,5 g" sugar line; preparation state 0
+# is the as-sold declaration (dry pasta: 359 kcal/100 g). Anything else is
+# kept as an undeclared limit or rejected, never guessed.
+_CITYGROSS_POINT_PRECISION = 0
+_CITYGROSS_UNPREPARED = 0
+
+
+def _citygross_extension(raw):
+    extension = raw.get("foodAndBeverageExtension")
+    return extension if isinstance(extension, dict) else {}
+
+
+def _citygross_nutrition(raw):
+    """Per-100 g/ml values from one as-sold City Gross GS1 declaration.
+
+    Catalogue rows (``/api/v1/Loop54/products``) carry the supplier's GS1
+    nutrient information. A per-serving declaration often sits beside the
+    per-100 one; use the single as-sold 100 basis, else the single as-sold
+    measured basis. Anything else is ambiguous and stays unknown.
+    """
+    rows = _citygross_extension(raw).get("nutrientInformations")
+    # Non-food rows carry an empty placeholder (basis 0, nutrients null).
+    rows = [r for r in rows if isinstance(r, dict) and r.get("nutrients")] if isinstance(rows, list) else []
+    conflicts, limits, nutrition = [], [], {}
+    as_sold = [r for r in rows if r.get("preparationState") == _CITYGROSS_UNPREPARED
+               and not isinstance(r.get("preparationState"), bool)]
+    per_hundred = [r for r in as_sold if r.get("nutrientBasisQuantity") in (100, 100.0)]
+    chosen = per_hundred if len(per_hundred) == 1 else as_sold if len(as_sold) == 1 and not per_hundred else []
+    if len(chosen) != 1:
+        return None, None, None, ["nutrition_basis"] if rows else [], limits, nutrition
+    header = chosen[0]
+    unit = {"gram": "g", "milliliter": "ml", "millilitre": "ml"}.get(
+        str(header.get("nutrientBasisQuantityUnit") or "").casefold())
+    amount = header.get("nutrientBasisQuantity")
+    if (unit is None or isinstance(amount, bool) or not isinstance(amount, (int, float))
+            or not math.isfinite(amount) or amount <= 0):
+        return None, None, None, ["nutrition_basis"], limits, nutrition
+    values, energy_kj = defaultdict(list), []
+    for row in header.get("nutrients") or ():
+        if not isinstance(row, dict):
+            continue
+        kind = (str(row.get("typeCode") or "").casefold(), str(row.get("unitOfMeasure") or "").casefold())
+        key = _CITYGROSS_NUTRIENTS.get(kind)
+        if key is None and kind != ("ener-", "kilojoule"):
+            continue
+        value = row.get("value")
+        if isinstance(value, bool) or not isinstance(value, (int, float)):
+            conflicts.append(f"nutrition.{key or 'energy'}")
+            continue
+        precision = row.get("measurementPrecision")
+        if precision != _CITYGROSS_POINT_PRECISION or isinstance(precision, bool):
+            if key:
+                limits.append({"field": key, "amount": [value], "accuracy": precision,
+                               "basis_quantity": amount, "basis_unit": unit})
+            continue
+        if not math.isfinite(value) or value < 0:
+            conflicts.append(f"nutrition.{key or 'energy'}")
+        elif key:
+            values[key].append(value * 100 / amount)
+        else:
+            energy_kj.append(value * 100 / amount)
+    nutrition = {k: found[0] for k, found in values.items() if len(found) == 1 and f"nutrition.{k}" not in conflicts}
+    conflicts.extend(f"nutrition.{k}" for k, found in values.items() if len(found) != 1)
+    # Same integrity screen as Coop and Axfood: max(8 kJ, 8 %) on the
+    # declared basis, and no more than 1000 kcal per 100 g.
+    declared_kj = energy_kj[0] * amount / 100 if len(energy_kj) == 1 else None
+    declared_kcal_kj = nutrition["kcal"] * amount / 100 * 4.184 if "kcal" in nutrition else None
+    if "kcal" in nutrition and (
+        (declared_kj is not None and abs(declared_kj - declared_kcal_kj) > max(
+            8.0, 0.08 * max(declared_kj, declared_kcal_kj)))
+        or (unit == "g" and nutrition["kcal"] > 1000)
+    ):
+        nutrition.pop("kcal")
+        conflicts.extend(("nutrition.kcal", "nutrition.energy"))
+    basis = f"Produktdeklaration per {amount:g} {unit}; omräknad till 100 {unit}"
+    return unit, basis, amount, conflicts, limits, nutrition
+
+
+def _gs1_marking_codes(raw, chain):
+    """Exact GS1 T3777 marking codes (Coop accreditedTags, City Gross markings)."""
+    field = {"coop": "accreditedTags", "citygross": "markings"}.get(chain)
+    values = raw.get(field) if field else None
+    return {t.get("code") for t in values if isinstance(t, dict)} if isinstance(values, list) else set()
+
+
 def project_raw_facts(raw, *, chain, product_id, snapshot_id, source_reference, observed_at=None):
     """Known explicit retailer fields only; no name/brand/image inference."""
     if chain == "coop":
@@ -245,11 +337,14 @@ def project_raw_facts(raw, *, chain, product_id, snapshot_id, source_reference, 
         # Product-detail documents (/axfood/rest/p/{code}); catalogue rows
         # carry no ingredient field.
         ingredients = raw.get("ingredients")
+    elif chain == "citygross":
+        # The catalogue row itself carries the GS1 ingredient statement.
+        ingredients = _citygross_extension(raw).get("ingredientStatement")
     else:
         ingredients = None
     organic = None
-    if chain == "coop":
-        tags = {t.get("code") for t in raw.get("accreditedTags", []) if isinstance(t, dict)}
+    if chain in {"coop", "citygross"}:
+        tags = _gs1_marking_codes(raw, chain)
         if tags & {"EU_ORGANIC_FARMING", "KRAV_MARK"}:
             organic = True
     elif chain in {"hemkop", "willys"}:
@@ -329,6 +424,10 @@ def project_raw_facts(raw, *, chain, product_id, snapshot_id, source_reference, 
         unit, basis, energy_quantity, axfood_conflicts, axfood_limits, nutrition = _axfood_nutrition(raw)
         conflicts.extend(axfood_conflicts)
         limits.extend(axfood_limits)
+    elif chain == "citygross":
+        unit, basis, energy_quantity, gs1_conflicts, gs1_limits, nutrition = _citygross_nutrition(raw)
+        conflicts.extend(gs1_conflicts)
+        limits.extend(gs1_limits)
     if chain == "coop" and raw.get("nutrientInformation") and basis is None:
         conflicts.append("nutrition_basis")
     if chain == "coop":
@@ -336,7 +435,7 @@ def project_raw_facts(raw, *, chain, product_id, snapshot_id, source_reference, 
         if energy_evidence and energy_evidence["status"] == "conflict":
             nutrition.pop("kcal", None)
             conflicts.extend(("nutrition.kcal", "nutrition.energy"))
-    tags = {t.get("code") for t in raw.get("accreditedTags", []) if isinstance(t, dict)}
+    tags = _gs1_marking_codes(raw, chain)
     vegan = bool(
         tags & {"EUROPEAN_V_LABEL_VEGAN", "VEGAN_SOCIETY_VEGAN_LOGO", "100_PERCENT_VEGANSKT"}
     )
@@ -391,7 +490,7 @@ def project_raw_facts(raw, *, chain, product_id, snapshot_id, source_reference, 
         source=source_reference,
         source_product_id=product_id,
         source_snapshot_id=snapshot_id,
-        retailer_product_id=str(raw.get("id") if chain == "coop" else raw.get("code") or ""),
+        retailer_product_id=str(raw.get("id") if chain in {"coop", "citygross"} else raw.get("code") or ""),
         product_classification=tuple(classifications),
         ingredients_complete=False,
         ingredients=(ingredients,) if isinstance(ingredients, str) and ingredients.strip() else (),
@@ -554,7 +653,7 @@ def complete_identity_facts(prepared, original):
         products = [prepared.universe.products[i] for i in positions]
         if len(products) < 2 or any(not p.gtin or not p.package_quantity for p in products):
             continue
-        if any(p.chain not in {"coop", "hemkop", "willys", "ica"} for p in products):
+        if any(p.chain not in {"coop", "hemkop", "willys", "ica", "citygross"} for p in products):
             continue
         try:
             if len({normalize_gtin(p.gtin).normalized_gtin for p in products}) != 1:
@@ -807,7 +906,7 @@ def _load_retained_catalog_facts(prepared, *, database=None, raw_root=None):
     targets = [
         p
         for p in prepared.universe.products
-        if p.chain in {"coop", "hemkop", "willys"}
+        if p.chain in {"coop", "hemkop", "willys", "citygross"}
         and p.source_provenance
         and p.source_provenance.source_provider == "own"
     ]
@@ -922,7 +1021,7 @@ def _project_facts(key, cacheable, hashes, source_rows, prepared, result):
                     document = json.loads(data)
                     last_path = path
                 raw = raw_product(document, row["raw_reference"])
-                identity = raw.get("id") if row["chain"] == "coop" else raw.get("code")
+                identity = raw.get("id") if row["chain"] in {"coop", "citygross"} else raw.get("code")
                 if str(identity) != row["external_product_id"]:
                     continue
                 result[(product.store_id, product.product_id)] = project_raw_facts(
