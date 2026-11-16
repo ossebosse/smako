@@ -1192,17 +1192,22 @@ def _retained_ttl() -> float:
 
 
 def _source_fingerprint():
-    """Size and change time of every source load_retained_facts reads from disk."""
+    """Size and change time of the fact sources that can change under one universe.
+
+    The grocery database is deliberately not part of this: request metrics and
+    other telemetry are written to the same file all the time, which made the
+    cache miss on almost every plan (16 s of product facts on beta). The rows
+    the facts are read from belong to the promoted snapshots of the activated
+    universe, which is already part of the cache key, and the cache lives at
+    most SMAKO_RETAINED_FACTS_TTL seconds.
+    """
     from app.services.axfood_product_details import configured_root
-    from sqlalchemy.engine import make_url
 
     from grocery_data.app.config import GroceryDataSettings
 
     settings = GroceryDataSettings.from_env()
-    url = make_url(settings.database_url)
-    paths = [url.database if url.get_backend_name() == "sqlite" else None, settings.raw_snapshot_root, configured_root()]
     stamp = []
-    for path in paths:
+    for path in (settings.raw_snapshot_root, configured_root()):
         try:
             info = Path(path).stat() if path else None
         except OSError:
