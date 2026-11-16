@@ -128,3 +128,24 @@ async def test_base_rejects_existing_staging_before_writing_catalogue_proof(cli)
     assert list(staging.iterdir()) == [sentinel]
     assert sentinel.read_bytes() == b"unrelated run"
     assert cli.calls == []
+
+
+def test_priority_codes_only_reorder_the_exact_queue(cli):
+    queue = ["a1", "b2", "c3", "d4"]
+    assert cli.fetch.prioritized(queue, ["c3", "", "zz", "a1", "c3"]) == ["c3", "a1", "b2", "d4"]
+    assert cli.fetch.prioritized(queue, []) == queue
+
+
+@pytest.mark.asyncio
+async def test_priority_file_decides_what_a_bounded_run_fetches_first(cli, monkeypatch, tmp_path):
+    codes = ["100000001_ST", "100000002_ST", CODE]
+    proof = {**cli.proof, "codes_sha256": hashlib.sha256(("\n".join(codes) + "\n").encode()).hexdigest()}
+    monkeypatch.setattr("grocery_data.app.services.axfood_catalogue_queue.approved_catalogue_codes",
+                        lambda *args, **kwargs: (codes, proof))
+    priority = tmp_path / "priority-willys.txt"
+    priority.write_text(CODE + "\nnot-in-queue\n", encoding="utf-8")
+    cli.argv.extend(["--priority-codes", str(priority), "--limit", "1"])
+    await cli.fetch.main()
+    assert cli.calls == [CODE]
+    # The run's exact code list is still the approved queue, in its own order.
+    assert (cli.archive / "staging/next/codes-willys.txt").read_text() == "\n".join(codes) + "\n"
