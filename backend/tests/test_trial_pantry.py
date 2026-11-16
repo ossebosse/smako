@@ -149,7 +149,8 @@ def test_a_typed_row_is_checked_against_every_recipe_row_without_error():
 
 
 def test_unknown_name_gets_no_proposal():
-    assert usual_recipe_use("tandborste") == {"form": None, "unit": None, "used_in_recipes": False, "usable": [0, 0, 0]}
+    assert usual_recipe_use("tandborste") == {"form": None, "unit": None, "used_in_recipes": False, "usable": [0, 0, 0],
+                                              "kinds": [], "egg_grams": None}
 
 
 def test_trial_interfaces_have_account_pantry_and_purchase_built_in():

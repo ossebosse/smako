@@ -22,6 +22,13 @@ from app.models.product import ProductCandidate, QuantityConfidence, SaleModel
 from app.services.ingredient_normalizer import _search_text
 from app.services.price_universe_runtime import normalized_memberships
 from app.services.product_lookup import _package_description
+from app.services.search_words import (
+    NOT_COMPOUNDS,
+    alternatives,
+    asks_for_babies,
+    asks_for_pets,
+    is_audience_word,
+)
 from app.services.user_pricing import price_contracts_for_candidate
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 
@@ -330,6 +337,80 @@ class ProductSearchIndex:
             selected -= self.non_human_food
         return selected, exact, False
 
+    def _compound_heads(self, word: str, limit: int = 200) -> list[str]:
+        """Indexed words that end in the word, with at least three letters before it."""
+        reverse = getattr(self, "_reverse_vocabulary", None)
+        if reverse is None:
+            reverse = self._reverse_vocabulary = tuple(sorted(w[::-1] for w in self.vocabulary))
+        backwards = word[::-1]
+        start = bisect_left(reverse, backwards)
+        heads = []
+        for candidate in reverse[start : start + limit]:
+            if not candidate.startswith(backwards):
+                break
+            full = candidate[::-1]
+            if len(full) - len(word) >= 3 and full not in NOT_COMPOUNDS.get(word, ()):
+                heads.append(full)
+        return heads
+
+    def _people_retrieve(self, request: ProductSearchRequest):
+        """retrieve() plus other spellings, synonyms and compound words (step 5).
+
+        Only for the search people see. retrieve() itself, which recipe and
+        basket preparation use, is unchanged.
+        """
+        keys, exact, barcode = self.retrieve(request)
+        if barcode or request.product_key:
+            return keys, exact, barcode
+        matches = None
+        for word in sorted(set(search_text(request.query).split()), key=is_audience_word):
+            found = set()
+            for alternative in alternatives(word):
+                found.update(self.postings.get(alternative, ()))
+                if len(alternative) >= 3 and alternative.isalpha():
+                    for head in self._compound_heads(alternative):
+                        found.update(self.postings[head])
+            if not found and len(word) >= 3:
+                start = bisect_left(self.vocabulary, word)
+                for indexed in self.vocabulary[start : start + 32]:
+                    if not indexed.startswith(word):
+                        break
+                    found.update(self.postings[indexed])
+            if is_audience_word(word) and (matches is not None and not matches & found or not found):
+                continue  # "kattmat lax": the word says who it is for; the name need not have it.
+            matches = found if matches is None else matches & found
+        selected = set(keys) | (matches or set())
+        # The same exclusions as retrieve(): coffee additives are not coffee,
+        # and pet food is not human food for these generic words.
+        query = search_text(request.query)
+        if query == "kaffe":
+            selected -= self.coffee_related
+        if query in {"kaffe", "mjolk", "kycklingfile"}:
+            selected -= self.non_human_food
+        return selected, exact, barcode
+
+    @staticmethod
+    def _relevance(words, name, exact):
+        """0 exact name, 1 starts with the search, 2 whole words, 3 compound words, 4 other.
+
+        A name where the searched word comes after "utan" ("Pasta utan ägg")
+        is last (8).
+        """
+        if exact:
+            return 0
+        names = search_text(name).split()
+        options = [alternatives(w) for w in words]
+        for i, n in enumerate(names):
+            if i and names[i - 1] == "utan" and any(n in o for o in options):
+                return 8
+        if len(names) >= len(words) and all(names[i] in o for i, o in enumerate(options)):
+            return 1
+        if all(any(n in o for n in names) for o in options):
+            return 2
+        if all(any(n in o or any(n.endswith(a) and len(n) - len(a) >= 3 for a in o) for n in names) for o in options):
+            return 3
+        return 4
+
     def search(
         self,
         request: ProductSearchRequest,
@@ -533,7 +614,9 @@ class ProductSearchIndex:
         }
 
     def _results(self, request, usable, stale, states, target_date, user):
-        keys, exact, barcode = self.retrieve(request)
+        keys, exact, barcode = self._people_retrieve(request)
+        words = search_text(request.query).split()
+        pets, babies = asks_for_pets(words), asks_for_babies(words)
         results = []
         matching_chains = set()
         # Bounded by the immutable beta dataset; no raw-row scan. Only postings hits.
@@ -595,6 +678,11 @@ class ProductSearchIndex:
                 "display_price_unit": prices[0]["display_price_unit"],
                 "has_campaign": any(p["promotions"] for p in prices),
             }
+            # Pet and baby products only when the search asks for them (step 5).
+            hidden = ((key in self.non_human_food and not pets)
+                      or (search_text(product.category or "").split()[:1] == ["barn"] and not babies))
+            row["_relevance"] = (9 if hidden else 0) + (
+                0 if barcode else self._relevance(words, product.name, key in exact))
             if request.view == "campaigns" and not row["has_campaign"]:
                 continue
             if request.view == "multiple" and not (verified and len(prices) > 1):
@@ -609,9 +697,12 @@ class ProductSearchIndex:
                     continue
                 row["sort_unit_price"] = min(compatible)
             results.append(row)
+        # Hidden pet and baby products go only when anything else matched.
+        if any(r["_relevance"] < 9 for r in results):
+            results = [r for r in results if r["_relevance"] < 9]
         results.sort(
             key=lambda r: (
-                0 if request.view != "relevance" or r["product_key"] in exact else 1,
+                0 if request.view != "relevance" else r["_relevance"],
                 r.get("sort_unit_price", r["display_price"]) is None,
                 "" if request.view == "unit" else r["display_price_unit"] or "package",
                 r.get("sort_unit_price", r["display_price"]) or float("inf"),
@@ -619,6 +710,8 @@ class ProductSearchIndex:
                 r["product_key"],
             )
         )
+        for r in results:
+            del r["_relevance"]
         specific = len(results) == 1 and results[0]["identity_basis"] == "verified_gtin"
         page = results[request.offset : request.offset + request.limit]
         result_chains = {p["chain"] for row in results for p in row["prices"]}
