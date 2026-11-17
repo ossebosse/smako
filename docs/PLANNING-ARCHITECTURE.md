@@ -335,13 +335,16 @@ tillbaka resultatet. Föräldern fattar alla beslut.
 Mätt på servern på aktiverat Malmö-underlag (54 butiker), samma plan och samma
 pris (118,08 kr) i alla körningar, kalla delade cacher:
 
-- En plan, 0 mot 6 provare: 59–64 s → 55–57 s. Prövningen går från 37–39 till
-  27–28 s, men sökningen tar 5 s längre. Barnen börjar kalla och gör om
-  gemensamt arbete, och det som skickas tillbaka är kopior, inte förälderns
-  egna objekt. Att inte skicka tillbaka något gav 22 s i prövningen men 34 s i
-  sökningen.
-- Tre olika planer samtidigt i samma process: 152–229 s var. Med en process per
-  plan: 79–84 s var, med samma tre korgar (106,08, 134,82 och 158,35 kr).
+- **Tre olika planer samtidigt** (6 kärnor, 7 GB): i samma process 152–229 s
+  var. Med en process per plan 87–93 s var, med samma tre korgar (106,08,
+  134,82 och 158,35 kr) och högst 5,0 GB minne.
+- **En plan ensam**: 60 s → 55 s med tre provare (minnet räckte till tre).
+  Prövningen går fortare, men sökningen förlorar en del av vinsten. Barnen
+  börjar kalla och gör om gemensamt arbete, och det de skickar tillbaka är
+  kopior, inte förälderns egna objekt. Att inte skicka tillbaka något gav
+  22 s i prövningen men 34 s i sökningen. En snabbare ensam plan kräver att
+  prövningen delas upp på ett annat sätt, till exempel att gemensamma
+  ingredienser prissätts en gång före delningen.
 
 `deploy/compose.yaml` släpper nu in tre planer samtidigt
 (`PLANNER_MAX_CONCURRENT_REQUESTS=3`). Det gäller först när ägaren beslutar
