@@ -19,6 +19,24 @@ city = sys.argv[1]
 pointer = json.loads((root / "active" / f"city-{city}.json").read_bytes())
 prepared = PreparedPriceUniverseArtifact.from_file(root / pointer["artifact_file"]).restore()
 t = time.time(); facts = cached_retained_facts(prepared); print("facts", round(time.time()-t, 1), flush=True)
+import gc
+
+_gc = {"seconds": 0.0, "runs": 0, "started": 0.0}
+
+
+def _gc_watch(phase, info):
+    if phase == "start":
+        _gc["started"] = time.perf_counter()
+    else:
+        _gc["seconds"] += time.perf_counter() - _gc["started"]
+        _gc["runs"] += 1
+
+
+gc.callbacks.append(_gc_watch)
+if os.environ.get("MEASURE_GC_FREEZE"):
+    gc.collect()
+    gc.freeze()  # the loaded area and facts stay out of later collections
+print("gc objects", len(gc.get_objects()), "frozen", gc.get_freeze_count(), flush=True)
 # Settings() alone checks production URLs; the measurement needs only the planner.
 settings = dataclasses.replace(Settings(price_provider="mock"), complete_recipes_enabled=True,
                                library_search_policy="smako-current-library-v2")
@@ -31,6 +49,7 @@ def once(workers):
         prepared.package_cache.clear()
         SHARED_RESOLUTION.clear()
         SHARED_NUTRITION.clear()
+    _gc.update(seconds=0.0, runs=0)
     t = time.perf_counter()
     profile = None
     if os.environ.get("MEASURE_PROFILE"):
@@ -53,7 +72,8 @@ def once(workers):
         "qualification": round(tm.get("candidate_generation_and_qualification", 0), 1), "search": round(tm.get("week_search", 0), 1),
         "packages": round(tm.get("package_calculation", 0), 1), "recipes": [r.name for r in plan.recipes],
         "parallel": [pool.get("parallel_qualification") for pool in planner.diagnostics.pools],
-        "package_cache": str(prepared.package_cache.stats), "shared": SHARED_RESOLUTION.stats(),
+        "package_cache": str(prepared.package_cache.stats),
+        "gc_seconds": round(_gc["seconds"], 1), "gc_runs": _gc["runs"], "shared": SHARED_RESOLUTION.stats(),
         "nutrition": SHARED_NUTRITION.stats()}, ensure_ascii=False), flush=True)
 once(0)            # also warms the library once
 for w in [int(x) for x in os.environ.get("MEASURE_WORKERS", "0,6,0,6").split(",")]:
