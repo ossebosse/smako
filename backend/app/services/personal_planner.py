@@ -2977,11 +2977,13 @@ class PersonalPlanner:
             self.request = original
 
     @timed_stage("candidate_generation_and_qualification")
-    def _candidates(self, meal, *, qualified_results=None, fixed_slots=()):
+    def _candidates(self, meal, *, qualified_results=None, fixed_slots=(), _rows_only=None):
         from app.services.plan_jobs import check_cancelled, report_stage
         report_stage("candidate_qualification")
         with performance_span("personal_candidate_generation"):
-            if self.complete and (meal.meal_type == "dinner" or meal.recipe_choices is not None):
+            if _rows_only is not None:
+                candidates = list(_rows_only)  # a worker's slice (planner_processes)
+            elif self.complete and (meal.meal_type == "dinner" or meal.recipe_choices is not None):
                 from app.services.recipe_library import meal_candidates
                 candidates = meal_candidates(meal,self.request.recipe_preferences,
                                              include_supplement=self.include_content_pack, generation=self.library_generation)
@@ -3035,6 +3037,8 @@ class PersonalPlanner:
         stored_rows = stored.get("rows", {}) if isinstance(stored, dict) else {}
         if not isinstance(stored_rows, dict):
             stored_rows = {}
+        if memory_reuse and _rows_only is None:
+            stored_rows = self._qualify_in_processes(meal, candidates, stored_rows, fixed_slots)
         qualified_rows = {}
         qualification_hits = 0
         for completed, recipe in enumerate(candidates):
@@ -3158,6 +3162,8 @@ class PersonalPlanner:
                 self.diagnostics.reject(getattr(exc, "stage", None) or stage, recipe, str(exc))
                 if len(local_conflicts) < 10:
                     local_conflicts.append(exc)
+        if _rows_only is not None:
+            return qualified_rows
         if reuse:
             # Only the completed meal view is atomically published. Retain
             # unchanged earlier rows so append-only recipes qualify once.
@@ -3190,6 +3196,40 @@ class PersonalPlanner:
                 raise local_conflicts[0]
             raise PolicyConflict(f"Inga användbara recept för {meal.meal_type} med dina val.")
         return valid
+
+    def _qualify_in_processes(self, meal, candidates, stored_rows, fixed_slots):
+        """Qualify the not yet known recipes on several cores (planner_processes).
+
+        Each worker runs this same qualification on its slice and returns only
+        the rows; the serial loop then reads them as known rows, so the result
+        is the one a single core would give. A slice that fails is simply
+        qualified here afterwards.
+        """
+        from app.services.plan_jobs import remaining_planning_seconds
+        from app.services.planner_context import content_digest
+        from app.services.planner_processes import run_in_processes, worker_count
+
+        workers = worker_count()
+        if workers < 2:
+            return stored_rows
+        pending = [r for r in candidates if content_digest(r) not in stored_rows]
+        left = remaining_planning_seconds()
+        # Leave the search most of the request; qualification gets at most half.
+        timeout = 60.0 if left is None else max(0.0, left / 2)
+        if not pending or timeout <= 1:
+            return stored_rows
+        with performance_span("personal_parallel_qualification"):
+            def work(part):
+                # In a worker: no progress reports to the parent's job or loop.
+                from app.services import plan_jobs
+                plan_jobs._stage_reporter.set(None)
+                plan_jobs._engine_reporter.set(None)
+                return self._candidates(meal, fixed_slots=fixed_slots, _rows_only=part)
+
+            rows, missing = run_in_processes(pending, work, timeout=timeout, workers=workers)
+        self.diagnostics.pools[-1]["parallel_qualification"] = {
+            "workers": workers, "recipes": len(pending), "rows": len(rows), "slices_redone": len(missing)}
+        return {**stored_rows, **rows}
 
     def _data_blocked_text(self, first, meal):
         """What to tell the person when Smako lacks the product data a choice needs (docs/UI-LANGUAGE.md)."""
