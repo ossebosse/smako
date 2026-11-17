@@ -780,6 +780,9 @@ class CacheStats(BaseModel):
         return round(self.hits / total, 4) if total else 0.0
 
 
+_MISSING = object()
+
+
 class _ThreadSafeLru[Key, Value]:
     def __init__(self, *, max_entries: int, metric_prefix: str) -> None:
         if max_entries < 1:
@@ -809,6 +812,14 @@ class _ThreadSafeLru[Key, Value]:
         # turns (docs/PLANNING-ARCHITECTURE.md, "Flera kärnor"). A thread that
         # is already inside a factory never waits for another thread, so two
         # factories needing each other's keys cannot deadlock.
+        # A hit is a plain read without the lock (eviction is oldest first):
+        # a package plan hits this cache over a million times.
+        value = self._values.get(key, _MISSING)
+        if value is not _MISSING:
+            self._hits += 1
+            increment_performance_counter(f"{self.metric_prefix}_hits")
+            increment_performance_counter("cache_hits")
+            return value
         nested = getattr(self._computing, "depth", 0) > 0
         while True:
             with self._lock:
@@ -816,9 +827,7 @@ class _ThreadSafeLru[Key, Value]:
                     self._hits += 1
                     increment_performance_counter(f"{self.metric_prefix}_hits")
                     increment_performance_counter("cache_hits")
-                    value = self._values.pop(key)
-                    self._values[key] = value
-                    return value
+                    return self._values[key]
                 pending = None if nested else self._pending.get(key)
                 if pending is None:
                     mine = None if nested else self._pending.setdefault(key, Event())

@@ -23,8 +23,9 @@ import json
 import re
 import unicodedata
 from collections import Counter, OrderedDict, defaultdict
-from functools import lru_cache
 from pathlib import Path
+
+from app.services.pure_memo import pure_memo
 
 VERSION = "generic-items-v1"
 
@@ -80,13 +81,13 @@ def _curated(query: str) -> dict | None:
     return None
 
 
-@lru_cache(maxsize=65536)
+@pure_memo(65536)
 def _fold(value: str) -> str:
     text = unicodedata.normalize("NFKD", (value or "").casefold())
     return "".join(c for c in text if not unicodedata.combining(c))
 
 
-@lru_cache(maxsize=65536)
+@pure_memo(65536)
 def _tokens(value: str) -> tuple[str, ...]:
     return tuple(_TOKEN.findall(_fold(value).replace("-", " ")))
 
