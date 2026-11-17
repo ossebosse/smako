@@ -11,6 +11,7 @@ from app.services import personal_planner as pp
 from app.services.nutrition_prewarm import plain_request
 from app.services.personal_source_facts import cached_retained_facts
 from app.services.plan_jobs import planning_deadline
+from app.services.planner_memory import reclaim_and_freeze
 from app.services.planner_shared_cache import SHARED_NUTRITION, SHARED_RESOLUTION
 from app.services.price_universe_runtime import PreparedPriceUniverseArtifact
 
@@ -19,6 +20,7 @@ city = sys.argv[1]
 pointer = json.loads((root / "active" / f"city-{city}.json").read_bytes())
 prepared = PreparedPriceUniverseArtifact.from_file(root / pointer["artifact_file"]).restore()
 t = time.time(); facts = cached_retained_facts(prepared); print("facts", round(time.time()-t, 1), flush=True)
+reclaim_and_freeze()  # as the web app does after loading and after every job
 import gc
 
 _gc = {"seconds": 0.0, "runs": 0, "started": 0.0}
@@ -86,6 +88,7 @@ def once(workers):
         "package_cache": str(prepared.package_cache.stats),
         "gc_seconds": round(_gc["seconds"], 1), "gc_runs": _gc["runs"], "shared": SHARED_RESOLUTION.stats(),
         "nutrition": SHARED_NUTRITION.stats()}, ensure_ascii=False), flush=True)
+    reclaim_and_freeze()  # after every job, as planner_admission does
 once(0)            # also warms the library once
 for w in [int(x) for x in os.environ.get("MEASURE_WORKERS", "0,6,0,6").split(",")]:
     once(w)

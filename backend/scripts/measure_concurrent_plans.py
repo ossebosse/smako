@@ -22,6 +22,7 @@ from app.services import personal_planner as pp
 from app.services.nutrition_prewarm import plain_request
 from app.services.personal_source_facts import cached_retained_facts
 from app.services.plan_jobs import planning_deadline
+from app.services.planner_memory import reclaim_and_freeze
 from app.services.planner_processes import run_plan_in_process
 from app.services.planner_shared_cache import SHARED_NUTRITION, SHARED_RESOLUTION
 from app.services.price_universe_runtime import PreparedPriceUniverseArtifact
@@ -32,6 +33,7 @@ pointer = json.loads((root / "active" / f"city-{city}.json").read_bytes())
 prepared = PreparedPriceUniverseArtifact.from_file(root / pointer["artifact_file"]).restore()
 started = time.time()
 cached_retained_facts(prepared)
+reclaim_and_freeze()  # as the web app does after loading and after every job
 print("facts", round(time.time() - started, 1), flush=True)
 settings = dataclasses.replace(Settings(price_provider="mock"), complete_recipes_enabled=True,
                                library_search_policy="smako-current-library-v2")
@@ -84,6 +86,7 @@ def round_of(mode):
         thread.join()
     print(json.dumps({"plan_processes": mode, "people": people, "wall": round(time.perf_counter() - begun, 1),
                       "plans": results, "peak_gb": peak_memory()}), flush=True)
+    reclaim_and_freeze()
 
 
 for mode in os.environ.get("MEASURE_MODES", "0,1").split(","):

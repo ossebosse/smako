@@ -1005,6 +1005,12 @@ class PreparedPriceUniverseManager:
         release_idle_memory()
         with performance_span("price_universe_atomic_activation"):
             self.activate(prepared)
+        # Freeze the new universe out of later collections now, not only after
+        # the first job (planner_admission): the first plan after a start or a
+        # swap otherwise scans it again and again. The unfreeze inside lets a
+        # replaced universe be collected.
+        from app.services.planner_memory import reclaim_and_freeze
+        reclaim_and_freeze()
         increment_performance_counter("price_universe_serialized_loads")
         return prepared
 
