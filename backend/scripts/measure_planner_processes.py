@@ -27,6 +27,9 @@ def once(workers):
     os.environ["SMAKO_PLANNER_PROCESSES"] = str(workers)
     pp._QUALIFICATION_MEMORY.rows.clear()
     prepared.package_cache.clear()
+    from app.services.planner_shared_cache import SHARED_NUTRITION, SHARED_RESOLUTION
+    SHARED_RESOLUTION.clear()
+    SHARED_NUTRITION.clear()
     t = time.perf_counter()
     profile = None
     if os.environ.get("MEASURE_PROFILE"):
