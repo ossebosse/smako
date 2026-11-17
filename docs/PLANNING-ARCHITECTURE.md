@@ -351,6 +351,62 @@ pris (118,08 kr) i alla körningar, kalla delade cacher:
 att slå ihop och aktivera, och bara om serverns `.env` inte sätter ett eget
 värde.
 
+### Delat minne, GIL-fri Python och snabb inläsning (2026-11-17)
+
+Ägaren frågade om flera processer kan dela samma minne och godkände stora
+ombyggnader. Mätt på servern med Malmö (113 779 produkter):
+
+- **Var minnet finns:**
+
+  | Del | Minne | Objekt | Inläsning |
+  |---|---|---|---|
+  | Prisunderlaget | ca 960 MB | 1,3 miljoner | 62–76 s |
+  | Produktfakta | ca 290 MB | – | 70 s |
+  | Receptbiblioteket | ca 280 MB | – | – |
+  | En plans cacher | ca 250 MB | – | – |
+
+  Barnprocesserna i #97 delar redan det mesta av underlaget. Det de kopierar
+  (0,2–0,45 GB) är mest deras egna nya data.
+- **GIL-fri Python 3.14** (`planner_processes.free_threaded`): appen går på
+  den och alla planerartester går igenom. Där körs planer och provare som
+  trådar på kopior av planeraren (`_thread_copy`), med egen optimerare och
+  egen prissession per tråd.
+  - Utan egen optimerare rangordnade en tråds prisinställning andra trådars
+    varor, och recepten blev 17 kr dyrare.
+  - Tre planer samtidigt tog 105–113 s mot 87–93 s med processer. En ensam plan
+    i en egen tråd tog 58–59 s mot 61–63 s.
+  - Orsaken: ett objekt läses snabbt bara av den tråd som skapade det. Andra
+    trådar är ca 1,8 gånger långsammare, med sex trådar på samma data 3,3
+    gånger. Webbappens planer körs aldrig i den tråd som läste in underlaget.
+  - Ren räkning skalar däremot fullt ut.
+  - Läsning utan lås i heta cacher (`pure_memo`, träffar i
+    `_ThreadSafeLru`) ändrade inte detta, men är kvar eftersom svaren är
+    desamma.
+  - Slutsats: processerna i #97 gäller tills vidare.
+- **Underlag utanför Python-objekten:** planeraren går igenom alla produkter
+  på flera ställen i varje plan (`by_identity`, spårningen, fakta). Produkter
+  som skapas vid behov skulle därför alla skapas vid första planen, och
+  minnet bli detsamma.
+- **Prissättning på kolumner** byggs inte: prisberäkningen återanvänds redan
+  mellan planer och processer (`PackageCostCache` med innehållsnycklar och
+  prismallar per plan), och profilen saknar en enskild tung del.
+- **Binära ögonblicksbilder** (`price_universe_snapshot`) ger däremot stor
+  vinst vid start och aktivering.
+  - Det färdiga, validerade prisunderlaget sparas med index, och
+    produktfakta sparas för sig, i appens egen mapp
+    (`SMAKO_PREPARED_SNAPSHOT_ROOT`, `runtime/prepared_snapshots`).
+  - En bild hör till exakt en JSON-artefakt (SHA-256) respektive ett
+    produktdigest och en källfingeravtryck, och till exakt en kodversion (alla
+    kod- och datafiler under `backend/app` och `grocery_data/app`).
+  - Innehållets digest kontrolleras före läsning. Cacher och lås börjar tomma.
+  - Vid minsta skillnad läses JSON och källorna som förut, och en ny bild
+    skrivs.
+  - Malmö: prisunderlaget 76 → 5,8 s, produktfakta 70 → 1,5 s. Samma plan och
+    samma pris (118,08 kr).
+- **Skräpsamling:** den städar inte längre det inlästa underlaget vid varje
+  körning. Ett nyaktiverat underlag fryses direkt
+  (`reclaim_and_freeze`), inte först efter första jobbet.
+
 ## Innehåll och data (steg 7, 2026-11-16)
 
 - **Portionsvikt dold i provgränssnitten** (C1) tills recepten anger färdig
