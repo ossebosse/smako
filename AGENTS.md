@@ -122,6 +122,12 @@
   possible, marked with its extra cost and a cheaper recipe to switch to;
   staples ticked under "Har du hemma?" (salt, pepper, rapeseed oil by default)
   are not bought. See docs/PLANNING-ARCHITECTURE.md (steg 4).
+- Owner decisions 2026-11-17: Stora Coop has Coop Online Syd's range in Skåne.
+  Where a Stora Coop is priced from it, the name Coop Online Syd is never shown
+  and the online shop is never listed or chosen; a saved choice of it means
+  the city's Stora Coop. Allergy choices use the stores' own allergen data:
+  the store's ingredient declaration (allergens named in it, traces after "kan
+  innehålla") and City Gross's GS1 allergen list (`store_allergens.py`).
 - PriceUniverse is shared and source-driven. Community evidence stays advisory,
   and `USER_SPECIFIC` offers must never enter the shared artifact.
 - Keep product identity and price scope exact. Fuzzy names may suggest manual
