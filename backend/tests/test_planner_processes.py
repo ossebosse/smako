@@ -23,7 +23,8 @@ def test_slices_cover_everything_once_and_small_work_stays_here():
 def test_workers_return_the_same_answers():
     items = list(range(120))
     answers, missing = pp.run_in_processes(items, square_all, timeout=30, workers=4)
-    assert answers == {i: i * i for i in items} and missing == []
+    merged = {k: v for answer in answers for k, v in answer.items()}
+    assert len(answers) == 4 and merged == {i: i * i for i in items} and missing == []
 
 
 def test_a_failing_or_late_worker_leaves_its_slice_to_the_caller():
@@ -37,7 +38,7 @@ def test_a_failing_or_late_worker_leaves_its_slice_to_the_caller():
     started = time.monotonic()
     answers, missing = pp.run_in_processes(list(range(120)), work, timeout=3, workers=4)
     assert time.monotonic() - started < 10
-    assert missing == [0, 3] and set(answers) == set(range(30, 90))
+    assert missing == [0, 3] and {k for a in answers for k in a} == set(range(30, 90))
 
 
 def test_worker_count_follows_the_setting(monkeypatch):
@@ -54,23 +55,46 @@ def test_qualification_asks_workers_only_for_unknown_recipes_and_merges_their_ro
 
     from app.services.personal_planner import PersonalPlanner
     from app.services.planner_context import content_digest
+    from app.services.price_universe import PackageCostCache
 
     recipes = [{"recipe": i} for i in range(60)]
     known = {content_digest(recipes[0]): {"status": "passed", "evidence": None}}
     asked = []
 
+    cache = PackageCostCache(max_entries=1000)
+
     def candidates(meal, *, fixed_slots=(), _rows_only=None):
         asked.extend(r["recipe"] for r in _rows_only)
+        for r in _rows_only:  # a worker prices packages into its copy of the cache
+            cache._cache.get_or_compute(("quote", r["recipe"]), lambda r=r: r["recipe"] * 10)
         return {content_digest(r): {"status": "rejected", "reason": "x", "stage": "s", "code": "C"} for r in _rows_only}
 
-    planner = SimpleNamespace(_candidates=candidates, diagnostics=SimpleNamespace(pools=[{}]))
+    planner = SimpleNamespace(_candidates=candidates, diagnostics=SimpleNamespace(pools=[{}]),
+                              prepared=SimpleNamespace(package_cache=cache))
     monkeypatch.setenv("SMAKO_PLANNER_PROCESSES", "3")
     monkeypatch.setattr(pp, "_MIN_ITEMS_PER_WORKER", 10)
     rows = PersonalPlanner._qualify_in_processes(planner, None, recipes, known, ())
     assert len(rows) == 60 and rows[content_digest(recipes[0])]["status"] == "passed"
     assert planner.diagnostics.pools[-1]["parallel_qualification"] == {
-        "workers": 3, "recipes": 59, "rows": 59, "slices_redone": 0}
-    # The parent asked nothing itself: the workers did (their list is theirs).
+        "workers": 3, "recipes": 59, "rows": 59, "quotes": 59, "slices_redone": 0}
+    # The parent asked nothing itself: the workers did (their list is theirs),
+    # and the quotes they priced are now in the parent's cache.
     assert asked == []
+    assert cache.stats.entries == 59 and cache._cache.get_or_compute(("quote", 7), lambda: -1) == 70
     monkeypatch.setenv("SMAKO_PLANNER_PROCESSES", "0")
     assert PersonalPlanner._qualify_in_processes(planner, None, recipes, known, ()) is known
+
+
+def test_package_cache_journal_and_absorb_keep_existing_entries():
+    from app.services.price_universe import PackageCostCache
+
+    cache = PackageCostCache(max_entries=10)
+    cache._cache.get_or_compute("a", lambda: 1)
+    cache.start_journal()
+    cache._cache.get_or_compute("a", lambda: 99)  # a hit is not recorded
+    cache._cache.get_or_compute("b", lambda: 2)
+    assert cache.journal() == [("b", 2)]
+    other = PackageCostCache(max_entries=10)
+    other._cache.get_or_compute("b", lambda: 5)
+    assert other.absorb([("b", 2), ("c", 3)]) == 1
+    assert other._cache.get_or_compute("b", lambda: -1) == 5 and other.stats.entries == 2

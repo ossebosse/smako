@@ -46,17 +46,18 @@ def worker_count() -> int:
     return max(0, min(8, (os.cpu_count() or 1) - 1))
 
 
-def run_in_processes(items: Sequence, work: Callable[[Sequence], dict], *, timeout: float,
-                     workers: int | None = None) -> tuple[dict, list[int]]:
+def run_in_processes(items: Sequence, work: Callable[[Sequence], object], *, timeout: float,
+                     workers: int | None = None) -> tuple[list, list[int]]:
     """Run ``work`` over slices of ``items`` in forked children.
 
-    Returns the merged answers and the indexes of the slices that produced
-    nothing (to be done by the caller). ``work`` must return a picklable dict.
+    Returns the answers of the slices that finished (in slice order) and the
+    indexes of the slices that produced nothing (to be done by the caller).
+    ``work`` must return something picklable.
     """
     workers = worker_count() if workers is None else workers
     slices = _slices(len(items), workers)
     if len(slices) < 2:
-        return {}, list(range(len(slices)))
+        return [], list(range(len(slices)))
     children = {}
     missing = []
     for index, (start, stop) in enumerate(slices):
@@ -86,7 +87,7 @@ def run_in_processes(items: Sequence, work: Callable[[Sequence], dict], *, timeo
         os.close(write)
         children[read] = (pid, index, bytearray())
     deadline = time.monotonic() + max(0.0, timeout)
-    answers: dict = {}
+    answers: dict[int, object] = {}
     while children:
         left = deadline - time.monotonic()
         if left <= 0:
@@ -103,7 +104,7 @@ def run_in_processes(items: Sequence, work: Callable[[Sequence], dict], *, timeo
             _, status = os.waitpid(pid, 0)
             if status == 0:
                 try:
-                    answers.update(pickle.loads(bytes(buffer)))
+                    answers[index] = pickle.loads(bytes(buffer))
                     continue
                 except Exception:  # noqa: BLE001 - an unreadable answer is redone here
                     status = 1
@@ -116,7 +117,7 @@ def run_in_processes(items: Sequence, work: Callable[[Sequence], dict], *, timeo
             pass
         os.close(fd)
         missing.append(index)
-    return answers, sorted(missing)
+    return [answers[i] for i in sorted(answers)], sorted(missing)
 
 
 def slices_of(items: Sequence, workers: int) -> list[Sequence]:

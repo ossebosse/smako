@@ -3200,10 +3200,11 @@ class PersonalPlanner:
     def _qualify_in_processes(self, meal, candidates, stored_rows, fixed_slots):
         """Qualify the not yet known recipes on several cores (planner_processes).
 
-        Each worker runs this same qualification on its slice and returns only
-        the rows; the serial loop then reads them as known rows, so the result
-        is the one a single core would give. A slice that fails is simply
-        qualified here afterwards.
+        Each worker runs this same qualification on its slice and returns the
+        rows plus the package quotes it priced; the serial loop then reads the
+        rows as known rows, so the result is the one a single core would give,
+        and the week search reuses the quotes instead of pricing them again. A
+        slice that fails is simply qualified here afterwards.
         """
         from app.services.plan_jobs import remaining_planning_seconds
         from app.services.planner_context import content_digest
@@ -3224,11 +3225,19 @@ class PersonalPlanner:
                 from app.services import plan_jobs
                 plan_jobs._stage_reporter.set(None)
                 plan_jobs._engine_reporter.set(None)
-                return self._candidates(meal, fixed_slots=fixed_slots, _rows_only=part)
+                cache = self.prepared.package_cache
+                cache.start_journal()
+                rows = self._candidates(meal, fixed_slots=fixed_slots, _rows_only=part)
+                return rows, cache.journal()
 
-            rows, missing = run_in_processes(pending, work, timeout=timeout, workers=workers)
+            answers, missing = run_in_processes(pending, work, timeout=timeout, workers=workers)
+            rows, quotes = {}, 0
+            for part_rows, journal in answers:
+                rows.update(part_rows)
+                quotes += self.prepared.package_cache.absorb(journal)
         self.diagnostics.pools[-1]["parallel_qualification"] = {
-            "workers": workers, "recipes": len(pending), "rows": len(rows), "slices_redone": len(missing)}
+            "workers": workers, "recipes": len(pending), "rows": len(rows), "quotes": quotes,
+            "slices_redone": len(missing)}
         return {**stored_rows, **rows}
 
     def _data_blocked_text(self, first, meal):
