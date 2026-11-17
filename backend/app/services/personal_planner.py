@@ -3304,6 +3304,9 @@ class PersonalPlanner:
             if not here:
                 from app.services import plan_jobs
                 plan_jobs._stage_reporter.set(None)  # the request reports its own progress
+                # The request's quote session is plain dicts the request thread
+                # keeps using: this thread opens its own (in its own context).
+                self.optimizer._quote_cache_context.set(None)
             return self._candidates(meal, fixed_slots=fixed_slots, _rows_only=part)
         return work
 

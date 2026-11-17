@@ -389,3 +389,21 @@ def test_equal_keys_compute_once_and_different_keys_at_the_same_time():
     assert cache.get_or_compute("a", lambda: "x") == "a"
     # A factory that needs another key of the same cache computes it directly.
     assert cache.get_or_compute("outer", lambda: cache.get_or_compute("inner", lambda: 1) + 1) == 2
+
+
+def test_a_qualification_thread_does_not_share_the_request_quote_session(monkeypatch):
+    import contextvars
+    from types import SimpleNamespace
+
+    from app.services.personal_planner import PersonalPlanner
+
+    session = contextvars.ContextVar("quote_session", default=None)
+    session.set("the request's session")
+    seen = []
+    planner = SimpleNamespace(optimizer=SimpleNamespace(_quote_cache_context=session),
+                              _candidates=lambda meal, fixed_slots, _rows_only: seen.append(session.get()) or {})
+    thread_work = PersonalPlanner._qualify_slice(planner, None, ())
+    contextvars.copy_context().run(thread_work, [1])
+    PersonalPlanner._qualify_slice(planner, None, (), here=True)([1])
+    assert seen == [None, "the request's session"]
+    assert session.get() == "the request's session"
