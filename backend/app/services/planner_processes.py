@@ -423,6 +423,7 @@ def run_in_threads(items: Sequence, make_work: Callable[[], Callable[[Sequence],
             try:
                 answers[index] = future.result()
             except Exception:  # noqa: BLE001 - redone by the caller
+                logger.warning("qualification thread failed; its slice is redone", exc_info=True)
                 missing.append(index)
     return [answers[i] for i in sorted(answers)], sorted(missing)
 
