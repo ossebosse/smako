@@ -25,3 +25,13 @@ def test_week_only_choices_do_not_split_per_recipe_qualification():
     # With a distribution, the count bounds the categories and is kept.
     split = plain.model_copy(update={"distribution": {"vegetarian": 1}})
     assert _qualification_meal(split) != _qualification_meal(split.model_copy(update={"count": 5}))
+
+
+def test_content_filters_only_choose_candidates():
+    from app.models.personal import MealRecipeChoices
+
+    plain = MealSettings(meal_type="dinner", count=3, servings=2, recipe_choices=MealRecipeChoices())
+    filtered = plain.model_copy(update={"recipe_choices": MealRecipeChoices(min_ingredients=5, max_ingredients=9,
+                                                                            max_active_minutes=30)})
+    assert _qualification_meal(plain) == _qualification_meal(filtered)
+    assert _qualification_meal(plain) != _qualification_meal(plain.model_copy(update={"recipe_choices": None}))
