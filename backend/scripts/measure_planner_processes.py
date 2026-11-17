@@ -26,10 +26,11 @@ req = plain_request(prepared)
 state = {"id": "m", "revision": 0, "profile": None, "items": [], "reservations": {}, "events": {}}
 def once(workers):
     os.environ["SMAKO_PLANNER_PROCESSES"] = str(workers)
-    pp._QUALIFICATION_MEMORY.rows.clear()
-    prepared.package_cache.clear()
-    SHARED_RESOLUTION.clear()
-    SHARED_NUTRITION.clear()
+    if not os.environ.get("MEASURE_KEEP"):  # keep: a repeat of the same request
+        pp._QUALIFICATION_MEMORY.rows.clear()
+        prepared.package_cache.clear()
+        SHARED_RESOLUTION.clear()
+        SHARED_NUTRITION.clear()
     t = time.perf_counter()
     profile = None
     if os.environ.get("MEASURE_PROFILE"):
