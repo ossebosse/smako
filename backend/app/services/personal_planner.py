@@ -188,7 +188,12 @@ def _covered_within(candidate_groups, max_stores):
 
 _SEARCH_ONLY_REQUEST_FIELDS = ("recipes", "diversity_mode", "varied_budget_percent", "variation_intent")
 _SEARCH_ONLY_PREFERENCE_FIELDS = ("max_same_main_protein_dinners", "min_distinct_cuisines",
-                                  "cuisine_distribution")
+                                  "cuisine_distribution",
+                                  # Content filters choose which recipes are tried
+                                  # (meal_candidates); they never change how one
+                                  # recipe qualifies or what it costs alone.
+                                  "cuisines", "min_ingredients", "max_ingredients", "max_minutes",
+                                  "allow_fish")
 
 
 def _qualification_meal(meal):
@@ -197,6 +202,9 @@ def _qualification_meal(meal):
               "max_same_base_meals": None}
     if not meal.distribution:
         update["count"] = 1  # The count only bounds categories through a distribution.
+    if meal.recipe_choices is not None:
+        # Content filters only choose candidates (as recipe preferences above).
+        update["recipe_choices"] = type(meal.recipe_choices)()
     return meal.model_copy(update=update)
 
 
@@ -3140,7 +3148,9 @@ class PersonalPlanner:
                     if self._prior_recipe_ids is not None and identity(recipe) not in self._prior_recipe_ids:
                         self._expanded_cohort_qualified = True
             except (PolicyConflict, ValueError) as exc:
-                if reuse:
+                # A content-filter rejection belongs to these filters, which the
+                # shared rows do not hold; it is decided again each time.
+                if reuse and getattr(exc, "code", None) != "RECIPE_CHOICES_CONFLICT":
                     qualified_rows[issued_key] = {"status": "rejected", "reason": str(exc),
                         "stage": getattr(exc, "stage", None) or stage,
                         "code": getattr(exc, "code", "CONFLICT")}

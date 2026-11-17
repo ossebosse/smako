@@ -879,6 +879,9 @@ class PackageCostCacheKey:
     calculator_version: str
 
 
+_PACKAGE_CACHE_MAX = 250_000
+
+
 class PackageCostCache:
     """Cache exact package/promotion checkout quotes for normalized quantities."""
 
@@ -901,6 +904,13 @@ class PackageCostCache:
         calculator_version: str,
         factory: Callable[[], BasketItemQuote],
     ) -> BasketItemQuote:
+        # Sized to the area: a fixed 16 384 quotes held under a fifth of what
+        # one Malmö plan (54 stores) prices, so every plan priced most of them
+        # again. One entry per product keeps a whole area (about 0.8 kB each).
+        wanted = min(_PACKAGE_CACHE_MAX, max(self._cache.max_entries, len(universe.products)))
+        if wanted > self._cache.max_entries:
+            self._cache.max_entries = wanted
+            self._max_fingerprints = wanted
         quantity, unit = normalize_quantity(required_quantity, required_unit)
         key = PackageCostCacheKey(
             universe_id=universe.universe_id,
