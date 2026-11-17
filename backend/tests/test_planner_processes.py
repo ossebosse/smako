@@ -102,16 +102,39 @@ def test_qualification_asks_workers_only_for_unknown_recipes_and_merges_their_ro
 def test_slots_follow_cores_and_free_memory(monkeypatch):
     monkeypatch.setenv("SMAKO_PLANNER_PROCESSES", "6")
     monkeypatch.setattr(pp, "_available_bytes", lambda: 4 * 2**30)
-    monkeypatch.setattr(pp, "_child_bytes", lambda: 1 * 2**30)
-    assert pp.memory_slots() == 3  # 75 % of 4 GB for 1 GB children
-    first = pp.reserve_processes(5)
-    assert first == 3
-    assert pp.reserve_processes(5) == 3  # memory is measured anew, cores still free
-    assert pp.reserve_processes(5) == 0  # all six cores taken
-    pp.release_processes(6)
-    assert pp._slots_in_use == 0
-    monkeypatch.setattr(pp, "_child_bytes", lambda: None)
+    monkeypatch.setattr(pp, "_own_anon_bytes", lambda: 2 * 2**30)
+    monkeypatch.setattr(pp, "_observed_child_peak", 0)
+    assert pp.memory_slots() == 3  # 75 % of 4 GB; a child: half of 2 GB
+    assert pp.reserve_processes(5) == 3
+    # The three are counted as not yet grown: nothing more fits now.
+    assert pp.reserve_processes(5) == 0
+    pp.release_processes(3)
+    monkeypatch.setattr(pp, "_observed_child_peak", int(1.6 * 2**30))
+    assert pp.memory_slots() == 1  # a large child was seen: 2 GB each
+    monkeypatch.setattr(pp, "_own_anon_bytes", lambda: None)
     assert pp.reserve_processes(2) == 0  # unknown memory: no extra process
+    assert pp._slots_in_use == 0
+
+
+def test_a_running_child_is_measured(monkeypatch):
+    import signal as signals
+
+    monkeypatch.setattr(pp, "_observed_child_peak", 0)
+
+    pid = os.fork()
+    if pid == 0:
+        data = bytearray(32 * 2**20)  # a child that copies 32 MB
+        data[::4096] = b"x" * len(data[::4096])
+        time.sleep(30)
+        os._exit(0)
+    try:
+        time.sleep(0.5)
+        before = pp._observed_child_peak
+        pp.observe_child(pid)
+        assert pp._observed_child_peak >= max(before, 30 * 2**20)
+    finally:
+        os.kill(pid, signals.SIGKILL)
+        os.waitpid(pid, 0)
 
 
 # --- One plan per process (several people at once) ---------------------------

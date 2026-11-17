@@ -22,9 +22,10 @@ qualification worker, takes one slot from a single allocator in the app
 process. A slot needs a free core (``SMAKO_PLANNER_PROCESSES``, default every
 core but one, at most 8) AND room in memory now: CPython writes a reference
 count into every object a process reads, so a child copies whatever it
-touches, worst case as much as this process holds (Malmö: about 1.6 GB per
-child). Three plans with their own workers ran a 7 GB container out of memory
-before the allocator existed. Plans running at the same time share the cores.
+touches (Malmö: 0.2–0.45 GB per child of a 1.4 GB app process). The
+allocator expects the largest child seen so far (``observe_child``), at
+least half of this process's private memory. Three plans with their own
+workers ran a 7 GB container out of memory before the allocator existed. Plans running at the same time share the cores.
 Children are marked as the first processes to stop if memory still runs out,
 so the web app itself is never the one stopped.
 
@@ -124,8 +125,7 @@ def _available_bytes() -> int | None:
     return min(values) if values else None
 
 
-def _child_bytes() -> int | None:
-    """Worst case for one child: everything this process holds privately."""
+def _own_anon_bytes() -> int | None:
     try:
         with open("/proc/self/status") as status:
             for line in status:
@@ -136,14 +136,48 @@ def _child_bytes() -> int | None:
     return None
 
 
+# The most memory a child has copied so far (``observe_child``). Until one is
+# seen, half of this process's private memory: measured Malmö children copied
+# 0.2–0.45 GB of a 1.4 GB parent.
+_observed_child_peak = 0
+
+
+def observe_child(pid: int) -> None:
+    """Note how much memory a running child has copied (its private pages)."""
+    global _observed_child_peak
+    try:
+        with open(f"/proc/{pid}/smaps_rollup") as rollup:
+            for line in rollup:
+                if line.startswith("Private_Dirty:"):
+                    _observed_child_peak = max(_observed_child_peak, int(line.split()[1]) * 1024)
+                    return
+    except (OSError, ValueError):
+        pass
+
+
+def _child_bytes() -> int | None:
+    """Expected memory of one more child: the largest seen so far, with a margin."""
+    own = _own_anon_bytes()
+    if not own:
+        return None
+    return int(max(_observed_child_peak * 1.25, own / 2))
+
+
 def memory_slots() -> int:
-    """Children that fit in memory right now (unknown memory: none)."""
+    """More children that fit in memory now (unknown memory: none).
+
+    Running children are counted as if they had not copied anything yet, which
+    double-counts what they have: three plans starting at once must not each
+    see the same free memory.
+    """
     if os.environ.get("SMAKO_PLANNER_MEMORY_CHECK", "1") == "0":
         return 1 << 16
     available, child = _available_bytes(), _child_bytes()
     if not available or not child:
         return 0
-    return max(0, int(available * _MEMORY_HEADROOM // child))
+    with _running_lock:
+        running = _slots_in_use
+    return max(0, int(available * _MEMORY_HEADROOM // child) - running)
 
 
 def reserve_processes(wanted: int) -> int:
@@ -277,11 +311,16 @@ def run_in_processes(items: Sequence, work: Callable[[Sequence], object], *, tim
             answers[0] = work(items[slices[0][0]:slices[0][1]])
         except Exception:  # noqa: BLE001 - redone by the caller, as a child's slice would be
             missing.append(0)
+    sampled = 0.0
     while children:
         left = deadline - time.monotonic()
         if left <= 0:
             break
-        ready, _, _ = select.select(list(children), [], [], left)
+        if time.monotonic() - sampled >= 1:
+            sampled = time.monotonic()
+            for pid, _, _ in children.values():
+                observe_child(pid)
+        ready, _, _ = select.select(list(children), [], [], min(left, 1.0))
         for fd in ready:
             pid, index, buffer = children[fd]
             chunk = os.read(fd, 1 << 20)
@@ -441,7 +480,7 @@ def _run_plan_child(work, read, write, workers):  # pragma: no cover - runs in t
 
 
 def _await_plan_child(work, pid, read, plan_jobs):
-    buffer, final = bytearray(), None
+    buffer, final, sampled = bytearray(), None, 0.0
     stop = plan_jobs._work_cancellation.get()
     stage_reporter, engine_reporter = plan_jobs._stage_reporter.get(), plan_jobs._engine_reporter.get()
     try:
@@ -452,6 +491,9 @@ def _await_plan_child(work, pid, read, plan_jobs):
                 plan_jobs.check_cancelled()  # raises the cancellation
             ready, _, _ = select.select([read], [], [], 0.25)
             if not ready:
+                if time.monotonic() - sampled >= 1:
+                    sampled = time.monotonic()
+                    observe_child(pid)
                 continue
             chunk = os.read(read, 1 << 20)
             if not chunk:
