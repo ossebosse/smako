@@ -191,6 +191,15 @@ _SEARCH_ONLY_PREFERENCE_FIELDS = ("max_same_main_protein_dinners", "min_distinct
                                   "cuisine_distribution")
 
 
+def _qualification_meal(meal):
+    """A meal's choices that decide whether one recipe qualifies."""
+    update = {"profile": meal.profile.model_copy(update={"likes": [], "dislikes": []}),
+              "max_same_base_meals": None}
+    if not meal.distribution:
+        update["count"] = 1  # The count only bounds categories through a distribution.
+    return meal.model_copy(update=update)
+
+
 class _QualificationMemory:
     """Process-local, bounded LRU of qualification rows by exact context digest."""
 
@@ -2940,6 +2949,18 @@ class PersonalPlanner:
         if original.recipe_preferences is not None:
             update["recipe_preferences"] = original.recipe_preferences.model_copy(
                 update=defaults(original.recipe_preferences, _SEARCH_ONLY_PREFERENCE_FIELDS))
+        # Likes, dislikes and how many dinners only choose and score weeks;
+        # one recipe qualifies, and costs, the same without them. Kept out so a
+        # new combination of those choices reuses the same per-recipe work.
+        if original.personal is not None:
+            personal = original.personal
+            update["personal"] = personal.model_copy(update={
+                "profile": personal.profile.model_copy(update={"likes": [], "dislikes": []}),
+                "meals": [_qualification_meal(m) for m in personal.meals]})
+        # The stores actually compared, not how they were named: a whole-area
+        # choice, a saved online shop or a shop listed once are the same set.
+        if original.allowed_store_ids:
+            update["allowed_store_ids"] = tuple(sorted(self.store_ids))
         request = original.model_copy(update=update)
         self.request = request
         try:
@@ -2997,7 +3018,7 @@ class PersonalPlanner:
         memory_reuse = (self.complete and not reuse and isinstance(self, PersonalPlanner)
                         and getattr(self.settings, "planner_qualification_memory", True))
         if memory_reuse:
-            view_key = content_digest([self._qualification_context(), meal, fixed_slots])
+            view_key = content_digest([self._qualification_context(), _qualification_meal(meal), fixed_slots])
             stored = _QUALIFICATION_MEMORY.get(view_key)
             reuse = True
         else:

@@ -915,6 +915,20 @@ class MenuBoundPruned(Exception):
     """
 
 
+def _stall_evaluations() -> int:
+    """Weeks priced without a better one before the search may stop (with the seconds).
+
+    Time alone made the result depend on machine speed: on frozen Malmö data
+    a better five-dinner week came after 846 weeks without improvement, which
+    a slower pass reached after more than ten seconds and never saw.
+    SMAKO_MENU_SEARCH_STALL_EVALUATIONS, default 1000.
+    """
+    try:
+        return max(0, int(os.environ.get("SMAKO_MENU_SEARCH_STALL_EVALUATIONS", "1000")))
+    except ValueError:
+        return 1000
+
+
 def _stall_seconds() -> float:
     """Seconds without a better week before the complete-menu search stops.
 
@@ -1602,8 +1616,11 @@ class MenuOptimizer:
             pass
 
         stall = _stall_seconds()
+        stall_evaluations = _stall_evaluations()
         trace['stall_seconds'] = stall
+        trace['stall_evaluations'] = stall_evaluations
         last_improvement = [None]
+        last_improvement_evaluations = [0]
 
         def checkpoint():
             check_cancelled()
@@ -1613,7 +1630,8 @@ class MenuOptimizer:
             # Step 6 (2026-11-16): stop when the best week has not improved for
             # a while. On frozen Malmö data every improvement came in the first
             # second and the rest of a 90 s window changed nothing.
-            if stall and last_improvement[0] is not None and perf_counter() - last_improvement[0] > stall:
+            if (stall and last_improvement[0] is not None and perf_counter() - last_improvement[0] > stall
+                    and trace['evaluations_executed'] - last_improvement_evaluations[0] >= stall_evaluations):
                 trace['stop_reason'] = 'no_improvement_for_stall_seconds'
                 raise SearchStalled
 
@@ -1677,6 +1695,8 @@ class MenuOptimizer:
                 incumbent = (rank, list(slots), result)
                 trace['improvements'] += 1
                 trace.setdefault('improvement_search_seconds', []).append(round(perf_counter()-started, 2))
+                trace.setdefault('improvement_evaluations', []).append(trace['evaluations_executed'])
+                last_improvement_evaluations[0] = trace['evaluations_executed']
                 last_improvement[0] = perf_counter()
                 if decision_observer:
                     decision_observer(slots, 'retained', result=result, depth=len(groups))
