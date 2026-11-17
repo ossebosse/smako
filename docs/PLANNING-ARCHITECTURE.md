@@ -295,6 +295,59 @@ korg (283,62 kr). Första planen för helt nya butiker är fortfarande 40–75 s
 lokalt; sökningen (10–25 s) och prövningen av ett recept i taget i alla butiker
 (ca 9 s) är det som återstår.
 
+### Flera kärnor och flera användare samtidigt (2026-11-17)
+
+Ägaren: Smako ska dela upp arbetet på så många kärnor det går, bland annat så
+att flera användare kan räkna fram sina recept samtidigt. Planeraren är Python
+och kör en kärna åt gången, och appen släppte in en plan i taget
+(`PLANNER_MAX_CONCURRENT_REQUESTS=1`). Delningen sker med `os.fork`
+(`planner_processes.py`): ett barn startar som en exakt kopia av planeraren
+med inläst prisunderlag, fakta och varma cacher, gör sin del och skickar bara
+tillbaka resultatet. Föräldern fattar alla beslut.
+
+- **En plan per process** (`run_plan_in_process`, anropas från
+  `api/plan._run_personal_thread`). Barnet rapporterar sina steg genom ett rör,
+  så webbläsaren ser samma förlopp. Det skickar tillbaka planen eller felet och
+  det det lärt sig för senare planer: receptprövningens rader, förpacknings-
+  priser och produktupplösningar (`register_warm_cache`). En avbruten begäran
+  stoppar barnet direkt, och om barnet dör planerar föräldern själv.
+- **Receptprövningen på flera kärnor** (`_qualify_in_processes`). Okända recept
+  delas i skivor. Föräldern prövar en skiva själv och barnen de andra.
+  Raderna läses sedan som kända rader, så resultatet blir detsamma som på en
+  kärna.
+- **En gemensam budget** (`reserve_processes`). Varje extra process, en plans
+  egen eller en provare, tar en plats. Platsen kräver en ledig kärna
+  (`SMAKO_PLANNER_PROCESSES`, standard alla utom en, högst 8) och plats i
+  minnet just nu. CPython skriver referensräknare i varje objekt en process
+  läser, så ett barn kopierar det minne det rör vid. I Malmö var det 0,2–0,45 GB
+  per barn av en app på 1,4 GB. Utan budgeten fick tre samtidiga planer med var
+  sin uppsättning provare en container på 7 GB att ta slut på minne. Budgeten
+  räknar med det största barn som setts, med marginal, och med minst halva
+  appens privata minne. Barn som redan kör räknas som om de inte vuxit än.
+  Planer som kör samtidigt delar kärnorna.
+- **Skydd.** Varje barn fryser det ärvda ur sin skräpsamling (`gc.freeze`), så
+  att en skräpsamling inte kopierar allt. Barnet får också högre
+  `oom_score_adj`: tar minnet ändå slut stoppas ett barn, aldrig webbappen.
+  Låsen i de delade cacherna byts ut i barnet (`register_fork_safe`). Barn
+  skriver inga filer och avslutas med `os._exit`.
+  `SMAKO_PLAN_PROCESSES=0` stänger av en plan per process.
+
+Mätt på servern på aktiverat Malmö-underlag (54 butiker), samma plan och samma
+pris (118,08 kr) i alla körningar, kalla delade cacher:
+
+- En plan, 0 mot 6 provare: 59–64 s → 55–57 s. Prövningen går från 37–39 till
+  27–28 s, men sökningen tar 5 s längre. Barnen börjar kalla och gör om
+  gemensamt arbete, och det som skickas tillbaka är kopior, inte förälderns
+  egna objekt. Att inte skicka tillbaka något gav 22 s i prövningen men 34 s i
+  sökningen.
+- Tre olika planer samtidigt i samma process: 152–229 s var. Med en process per
+  plan: 79–84 s var, med samma tre korgar (106,08, 134,82 och 158,35 kr).
+
+`deploy/compose.yaml` släpper nu in tre planer samtidigt
+(`PLANNER_MAX_CONCURRENT_REQUESTS=3`). Det gäller först när ägaren beslutar
+att slå ihop och aktivera, och bara om serverns `.env` inte sätter ett eget
+värde.
+
 ## Innehåll och data (steg 7, 2026-11-16)
 
 - **Portionsvikt dold i provgränssnitten** (C1) tills recepten anger färdig
