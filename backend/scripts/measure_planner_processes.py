@@ -1,12 +1,17 @@
-import json, os, sys, time
+import json
+import os
+import sys
+import time
 from pathlib import Path
+
 sys.path[:0] = ["/srv/app/backend", "/srv/app"]
 from app.config import Settings
-from app.services.price_universe_runtime import PreparedPriceUniverseArtifact
-from app.services.personal_source_facts import cached_retained_facts
-from app.services.nutrition_prewarm import plain_request
 from app.services import personal_planner as pp
+from app.services.nutrition_prewarm import plain_request
+from app.services.personal_source_facts import cached_retained_facts
 from app.services.plan_jobs import planning_deadline
+from app.services.price_universe_runtime import PreparedPriceUniverseArtifact
+
 root = Path("/srv/app/var/price_universes")
 city = sys.argv[1]
 pointer = json.loads((root / "active" / f"city-{city}.json").read_bytes())

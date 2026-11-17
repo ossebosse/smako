@@ -79,7 +79,7 @@ def run_in_processes(items: Sequence, work: Callable[[Sequence], dict], *, timeo
                 with os.fdopen(write, "wb") as out:
                     out.write(answer)
                 status = 0
-            except BaseException:  # noqa: BLE001, S110 - the parent redoes this slice
+            except BaseException:  # noqa: BLE001 - the parent redoes this slice
                 status = 1
             finally:
                 os._exit(status)
