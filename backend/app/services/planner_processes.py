@@ -79,8 +79,8 @@ def run_in_processes(items: Sequence, work: Callable[[Sequence], dict], *, timeo
                 with os.fdopen(write, "wb") as out:
                     out.write(answer)
                 status = 0
-            except BaseException:  # noqa: BLE001 - the parent redoes this slice
-                pass
+            except BaseException:  # noqa: BLE001, S110 - the parent redoes this slice
+                status = 1
             finally:
                 os._exit(status)
         os.close(write)
@@ -105,8 +105,8 @@ def run_in_processes(items: Sequence, work: Callable[[Sequence], dict], *, timeo
                 try:
                     answers.update(pickle.loads(bytes(buffer)))
                     continue
-                except Exception:  # noqa: BLE001
-                    pass
+                except Exception:  # noqa: BLE001 - an unreadable answer is redone here
+                    status = 1
             missing.append(index)
     for fd, (pid, index, _) in children.items():  # late: stop and redo here
         try:

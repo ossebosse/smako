@@ -1,6 +1,7 @@
 """Planner work split over cores: same answer, and safe fallbacks."""
 import os
 import time
+from itertools import pairwise
 
 import pytest
 from app.services import planner_processes as pp
@@ -16,7 +17,7 @@ def test_slices_cover_everything_once_and_small_work_stays_here():
     assert pp._slices(10, 8) == [(0, 10)]
     bounds = pp._slices(100, 3)
     assert bounds[0][0] == 0 and bounds[-1][1] == 100 and len(bounds) == 3
-    assert all(a[1] == b[0] for a, b in zip(bounds, bounds[1:], strict=False))
+    assert all(a[1] == b[0] for a, b in pairwise(bounds))
 
 
 def test_workers_return_the_same_answers():
