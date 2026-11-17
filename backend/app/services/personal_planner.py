@@ -214,7 +214,29 @@ class _QualificationMemory:
     def __init__(self, limit=128):
         import threading
 
+        from app.services.planner_processes import register_fork_safe, register_warm_cache
+
         self.limit, self.rows, self.lock = limit, OrderedDict(), threading.Lock()
+        self._journal = None
+        register_fork_safe(self)
+        register_warm_cache(self)
+
+    def _after_fork(self):
+        import threading
+        self.lock = threading.Lock()
+
+    def start_journal(self):
+        with self.lock:
+            self._journal = []
+
+    def journal(self):
+        with self.lock:
+            return list(self._journal or ())
+
+    def absorb(self, entries):
+        """Rows a plan process qualified; kept as if this process had (planner_processes)."""
+        for key, value in entries:
+            self.put(key, value, _record=False)
 
     def get(self, key):
         with self.lock:
@@ -223,8 +245,10 @@ class _QualificationMemory:
                 self.rows.move_to_end(key)
             return value
 
-    def put(self, key, value):
+    def put(self, key, value, _record=True):
         with self.lock:
+            if _record and self._journal is not None:
+                self._journal.append((key, value))
             self.rows[key] = value
             self.rows.move_to_end(key)
             while len(self.rows) > self.limit:
@@ -2977,11 +3001,13 @@ class PersonalPlanner:
             self.request = original
 
     @timed_stage("candidate_generation_and_qualification")
-    def _candidates(self, meal, *, qualified_results=None, fixed_slots=()):
+    def _candidates(self, meal, *, qualified_results=None, fixed_slots=(), _rows_only=None):
         from app.services.plan_jobs import check_cancelled, report_stage
         report_stage("candidate_qualification")
         with performance_span("personal_candidate_generation"):
-            if self.complete and (meal.meal_type == "dinner" or meal.recipe_choices is not None):
+            if _rows_only is not None:
+                candidates = list(_rows_only)  # a worker's slice (planner_processes)
+            elif self.complete and (meal.meal_type == "dinner" or meal.recipe_choices is not None):
                 from app.services.recipe_library import meal_candidates
                 candidates = meal_candidates(meal,self.request.recipe_preferences,
                                              include_supplement=self.include_content_pack, generation=self.library_generation)
@@ -3035,6 +3061,8 @@ class PersonalPlanner:
         stored_rows = stored.get("rows", {}) if isinstance(stored, dict) else {}
         if not isinstance(stored_rows, dict):
             stored_rows = {}
+        if memory_reuse and _rows_only is None:
+            stored_rows = self._qualify_in_processes(meal, candidates, stored_rows, fixed_slots)
         qualified_rows = {}
         qualification_hits = 0
         for completed, recipe in enumerate(candidates):
@@ -3158,6 +3186,8 @@ class PersonalPlanner:
                 self.diagnostics.reject(getattr(exc, "stage", None) or stage, recipe, str(exc))
                 if len(local_conflicts) < 10:
                     local_conflicts.append(exc)
+        if _rows_only is not None:
+            return qualified_rows
         if reuse:
             # Only the completed meal view is atomically published. Retain
             # unchanged earlier rows so append-only recipes qualify once.
@@ -3190,6 +3220,67 @@ class PersonalPlanner:
                 raise local_conflicts[0]
             raise PolicyConflict(f"Inga användbara recept för {meal.meal_type} med dina val.")
         return valid
+
+    def _qualify_in_processes(self, meal, candidates, stored_rows, fixed_slots):
+        """Qualify the not yet known recipes on several cores (planner_processes).
+
+        Each worker runs this same qualification on its slice and returns the
+        rows plus what it computed into the shared caches (package quotes,
+        product resolutions, nutrition evidence); the serial loop then reads the
+        rows as known rows, so the result is the one a single core would give,
+        and the week search reuses them instead of computing them again. A
+        slice that fails is simply qualified here afterwards.
+        """
+        import os
+
+        from app.services.plan_jobs import remaining_planning_seconds
+        from app.services.planner_context import content_digest
+        from app.services.planner_processes import (
+            _MIN_ITEMS_PER_WORKER,
+            absorb_warm,
+            qualification_workers,
+            run_in_processes,
+            start_warm_journals,
+            warm_journals,
+        )
+
+        pending = [r for r in candidates if content_digest(r) not in stored_rows]
+        left = remaining_planning_seconds()
+        # Leave the search most of the request; qualification gets at most half.
+        timeout = 60.0 if left is None else max(0.0, left / 2)
+        if len(pending) < 2 * _MIN_ITEMS_PER_WORKER or timeout <= 1:
+            return stored_rows
+        with qualification_workers() as workers:
+            if workers < 1:
+                return stored_rows
+            with performance_span("personal_parallel_qualification"):
+                parent = os.getpid()
+
+                def work(part):
+                    if os.getpid() == parent:  # this process's own slice
+                        return self._candidates(meal, fixed_slots=fixed_slots, _rows_only=part), {}
+                    # In a worker: no progress reports to the parent's job or loop.
+                    from app.services import plan_jobs
+                    plan_jobs._stage_reporter.set(None)
+                    plan_jobs._engine_reporter.set(None)
+                    caches = start_warm_journals()
+                    rows = self._candidates(meal, fixed_slots=fixed_slots, _rows_only=part)
+                    return rows, warm_journals(caches)
+
+                # The shared caches' scopes for this request exist before the
+                # fork, so what the workers resolve can be kept here.
+                from app.services.planner_shared_cache import nutrition_scope, planner_scope
+                planner_scope(self)
+                nutrition_scope(self)
+                answers, missing = run_in_processes(pending, work, timeout=timeout, workers=workers, here=True)
+                rows, kept = {}, 0
+                for part_rows, warm in answers:
+                    rows.update(part_rows)
+                    kept += absorb_warm(warm)
+        self.diagnostics.pools[-1]["parallel_qualification"] = {
+            "workers": workers, "recipes": len(pending), "rows": len(rows), "kept_entries": kept,
+            "slices_redone": len(missing)}
+        return {**stored_rows, **rows}
 
     def _data_blocked_text(self, first, meal):
         """What to tell the person when Smako lacks the product data a choice needs (docs/UI-LANGUAGE.md)."""

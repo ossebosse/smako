@@ -108,6 +108,11 @@ def pytest_collection_modifyitems(config, items):
 os.environ.setdefault("SMAKO_NUTRITION_PREWARM", "0")
 # Tests reuse universe IDs between different synthetic universes.
 os.environ.setdefault("SMAKO_RETAINED_FACTS_TTL", "0")
+# Serial by default; tests of the worker processes turn them on themselves.
+os.environ.setdefault("SMAKO_PLANNER_PROCESSES", "0")
+# Plans in the test process, so tests can watch what the planner does; the
+# plan-process tests (and SMAKO_PLAN_PROCESSES=1 runs) turn them on.
+os.environ.setdefault("SMAKO_PLAN_PROCESSES", "0")
 
 # --- Process-local planner reuse ---------------------------------------------
 # Tests patch matchers, facts and price helpers on shared fixtures. Start every

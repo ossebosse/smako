@@ -25,6 +25,8 @@ def scenario(tmp_path, monkeypatch):
     monkeypatch.setattr(plan,'_run_admitted_plan',build)
     monkeypatch.setattr(personal.GLOBAL_PREPARED_PRICE_UNIVERSES,'get_for_request',lambda *a,**kw:p)
     clock=[0.0];calls=[]
+    # A fake clock and recorded calls inside the plan: it runs in this process.
+    monkeypatch.setenv('SMAKO_PLAN_PROCESSES','0')
     monkeypatch.setattr(plan_jobs,'monotonic',lambda:clock[0])
     class Planner:
         def __init__(self,r,s,p,private,**kwargs):self.args=r,s,p,private,kwargs
@@ -117,10 +119,12 @@ def test_legacy_has_no_new_deadline(scenario,monkeypatch):
 
 
 @pytest.mark.asyncio
-async def test_external_cancellation_joins_current_worker_without_deadline_error():
+async def test_external_cancellation_joins_current_worker_without_deadline_error(monkeypatch):
     import asyncio
     from threading import Event
     from types import SimpleNamespace
+
+    monkeypatch.setenv('SMAKO_PLAN_PROCESSES','0')  # watches the worker thread's events
 
     started=Event();finished=Event()
     def work():

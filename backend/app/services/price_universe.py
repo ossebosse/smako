@@ -791,6 +791,12 @@ class _ThreadSafeLru[Key, Value]:
         self._hits = 0
         self._misses = 0
         self._evictions = 0
+        self._journal: list[tuple[Key, Value]] | None = None
+        from app.services.planner_processes import register_fork_safe
+        register_fork_safe(self)
+
+    def _after_fork(self) -> None:
+        self._lock = RLock()
 
     def get_or_compute(self, key: Key, factory: Callable[[], Value]) -> Value:
         # Compute under the re-entrant lock.  Cache loaders in this module are
@@ -808,11 +814,35 @@ class _ThreadSafeLru[Key, Value]:
             increment_performance_counter(f"{self.metric_prefix}_misses")
             increment_performance_counter("cache_misses")
             value = factory()
-            self._values[key] = value
-            if len(self._values) > self.max_entries:
-                self._values.popitem(last=False)
-                self._evictions += 1
+            if self._journal is not None:
+                self._journal.append((key, value))
+            self._store(key, value)
             return value
+
+    def _store(self, key: Key, value: Value) -> None:
+        self._values[key] = value
+        if len(self._values) > self.max_entries:
+            self._values.popitem(last=False)
+            self._evictions += 1
+
+    def start_journal(self) -> None:
+        """Record every entry computed from now on (a planner worker process)."""
+        with self._lock:
+            self._journal = []
+
+    def journal(self) -> list[tuple[Key, Value]]:
+        with self._lock:
+            return list(self._journal or ())
+
+    def absorb(self, entries) -> int:
+        """Add entries another process computed; existing entries are kept."""
+        added = 0
+        with self._lock:
+            for key, value in entries:
+                if key not in self._values:
+                    self._store(key, value)
+                    added += 1
+        return added
 
     @property
     def stats(self) -> CacheStats:
@@ -893,6 +923,12 @@ class PackageCostCache:
         self._max_fingerprints = max_entries
         self._fingerprint_lock = RLock()
         self._candidate_digests: dict[int, tuple[ProductCandidate, str]] = {}
+        from app.services.planner_processes import register_fork_safe, register_warm_cache
+        register_fork_safe(self)
+        register_warm_cache(self)
+
+    def _after_fork(self) -> None:
+        self._fingerprint_lock = RLock()
 
     def get_or_compute(
         self,
@@ -924,6 +960,17 @@ class PackageCostCache:
     @property
     def stats(self) -> CacheStats:
         return self._cache.stats
+
+    def start_journal(self) -> None:
+        self._cache.start_journal()
+
+    def journal(self) -> list[tuple[PackageCostCacheKey, BasketItemQuote]]:
+        """The quotes computed since start_journal (sent back by a worker process)."""
+        return self._cache.journal()
+
+    def absorb(self, entries) -> int:
+        """Keep quotes a worker process computed, so the parent need not price them again."""
+        return self._cache.absorb(entries)
 
     def clear(self) -> None:
         self._cache.clear()

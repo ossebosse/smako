@@ -467,8 +467,9 @@ to pick up an update implicitly.
 
 The benchmark client deadline defaults to 65 seconds, just above Caddy's
 explicit 60-second cold-burst response SLA. It records an explicit SLA
-PASS/FAIL. The app admits one CPU-heavy plan build and at most four distinct
-waiters (`PLANNER_MAX_CONCURRENT_REQUESTS=1`,
+PASS/FAIL. The app admits three CPU-heavy plan builds, each in its own process
+when cores and memory allow (docs/PLANNING-ARCHITECTURE.md, "Flera kärnor"),
+and at most four distinct waiters (`PLANNER_MAX_CONCURRENT_REQUESTS=3`,
 `PLANNER_MAX_QUEUED_REQUESTS=4`); further requests receive a quick 503 with
 `Retry-After` instead of accumulating an unbounded queue.
 Optionally point it at the Uvicorn PID to sample CPU, RSS and peak RSS through

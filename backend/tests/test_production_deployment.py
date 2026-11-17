@@ -148,7 +148,7 @@ def test_production_compose_has_tls_readiness_and_durable_mounts() -> None:
     assert "log {" not in caddy
     assert "--no-access-log" in compose
     assert "--no-access-log" in dockerfile
-    assert "PLANNER_MAX_CONCURRENT_REQUESTS: ${PLANNER_MAX_CONCURRENT_REQUESTS:-1}" in compose
+    assert "PLANNER_MAX_CONCURRENT_REQUESTS: ${PLANNER_MAX_CONCURRENT_REQUESTS:-3}" in compose
     assert "PLANNER_MAX_QUEUED_REQUESTS: ${PLANNER_MAX_QUEUED_REQUESTS:-4}" in compose
     assert "x-json-logging: &json-logging" in compose
     assert 'max-size: "10m"' in compose
@@ -177,7 +177,7 @@ def test_production_environment_template_has_no_committed_secret() -> None:
     assert "SECRET_KEY=replace-with-at-least-32-random-bytes" in template
     assert "BETA_ADMIN_TOKEN=replace-with-a-different-32-byte-value" in template
     assert "PRIMAT_API_KEY=\n" in template
-    assert "PLANNER_MAX_CONCURRENT_REQUESTS=1" in template
+    assert "PLANNER_MAX_CONCURRENT_REQUESTS=3" in template
     assert "PLANNER_MAX_QUEUED_REQUESTS=4" in template
     assert "RUNTIME_ROOT=./runtime" in template
     assert "password" not in template.casefold()
