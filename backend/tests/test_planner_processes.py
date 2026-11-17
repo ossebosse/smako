@@ -232,8 +232,6 @@ def test_plans_running_at_once_share_the_cores(monkeypatch):
     monkeypatch.setenv("SMAKO_PLANNER_PROCESSES", "6")
     monkeypatch.setattr(pp, "_running_plans", 3)
     assert pp.worker_count() == 2
-    monkeypatch.setattr(pp, "_child_allotment", 1)  # in a plan's own process
-    assert pp.worker_count() == 1
 
 
 def test_a_plan_without_a_free_slot_runs_here(monkeypatch):
@@ -243,11 +241,31 @@ def test_a_plan_without_a_free_slot_runs_here(monkeypatch):
     assert pp._running_plans == 0 and pp._slots_in_use == 0
 
 
-def test_a_plan_process_gets_its_workers_from_the_parent(monkeypatch):
+def test_a_plan_process_asks_the_app_process_for_its_workers(monkeypatch):
     _plan_env(monkeypatch)
     monkeypatch.setenv("SMAKO_PLANNER_PROCESSES", "4")
-    assert pp.run_plan_in_process(lambda: (os.getpid(), pp.worker_count()))[1] == 3
+
+    def work():
+        with pp.qualification_workers() as granted:
+            during = granted
+        with pp.qualification_workers() as again:  # given back, so granted again
+            return during, again, os.getpid()
+
+    during, again, pid = pp.run_plan_in_process(work)
+    # Four cores: the plan's own process is one, so three workers.
+    assert (during, again) == (3, 3) and pid != os.getpid()
     assert pp._slots_in_use == 0
+
+
+def test_a_cpu_quota_limits_the_cores(monkeypatch):
+    import builtins
+    import io
+
+    real_open = builtins.open
+    monkeypatch.setattr(builtins, "open", lambda path, *a, **k: io.StringIO("250000 100000\n")
+                        if path == "/sys/fs/cgroup/cpu.max" else real_open(path, *a, **k))
+    monkeypatch.setattr(pp.os, "cpu_count", lambda: 8)
+    assert pp._cores() == 3
 
 
 def test_a_lock_held_in_another_thread_at_fork_is_free_in_the_plan_process(monkeypatch):

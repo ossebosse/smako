@@ -31,7 +31,9 @@ so the web app itself is never the one stopped.
 
 Several people at once (``run_plan_in_process``): each plan runs in its own
 forked process when a slot is free, so plans no longer take turns on one
-core. The child reports its stages through a pipe and sends back the plan (or
+core. A plan's own process takes one slot; when its qualification starts it
+asks the app process over a pipe for workers, granted with the plans and the
+memory of that moment. The child reports its stages through a pipe and sends back the plan (or
 its error) together with what it learned for later plans: the qualification
 rows, package quotes and product resolutions it computed
 (``register_warm_cache``). The parent stops a child when the request is
@@ -63,15 +65,16 @@ logger = logging.getLogger(__name__)
 _running_plans = 0
 _slots_in_use = 0
 _running_lock = threading.Lock()
-# In a plan's own process: the workers its parent reserved for it.
-_child_allotment: int | None = None
+# In a plan's own process: the pipes to ask the app process for workers.
+_parent_channel: tuple[int, int] | None = None
 
 
 def _child_after_fork() -> None:
     import gc
-    global _running_lock, _running_plans, _slots_in_use
+    global _running_lock, _running_plans, _slots_in_use, _parent_channel
     _running_lock = threading.Lock()  # another thread may have held it at the fork
     _running_plans = _slots_in_use = 0
+    _parent_channel = None
     # Everything inherited stays out of this child's garbage collection: a
     # collection writes to every object it visits and so copies its memory.
     gc.freeze()
@@ -96,7 +99,20 @@ def cpu_budget() -> int:
             return max(0, int(raw))
         except ValueError:
             return 0
-    return max(0, min(8, (os.cpu_count() or 1) - 1))
+    return max(0, min(8, _cores() - 1))
+
+
+def _cores() -> int:
+    """Cores this container may use: the machine's, or fewer under a CPU quota."""
+    cores = os.cpu_count() or 1
+    try:
+        with open("/sys/fs/cgroup/cpu.max") as limit:
+            quota, period = limit.read().split()[:2]
+        if quota != "max":
+            cores = min(cores, max(1, -(-int(quota) // int(period))))
+    except (OSError, ValueError):
+        pass
+    return cores
 
 
 def _read_int(path: str) -> int | None:
@@ -207,22 +223,42 @@ def _fair_share() -> int:
 
 def worker_count() -> int:
     """Worker processes one plan would ask for now (its share of the cores)."""
-    if _child_allotment is not None:
-        return _child_allotment
     return _fair_share()
 
 
 @contextmanager
 def qualification_workers() -> Iterator[int]:
-    """Workers this plan's qualification may fork now (slots held meanwhile)."""
-    if _child_allotment is not None:  # reserved by the parent for this plan
-        yield _child_allotment
+    """Workers this plan's qualification may fork now (slots held meanwhile).
+
+    In a plan's own process the app process decides, with the plans and the
+    memory of that moment; the plan's own process is already one of its cores.
+    """
+    if _parent_channel is not None:
+        granted = _ask_parent("reserve", 0)
+        try:
+            yield granted
+        finally:
+            _ask_parent("release", granted)
         return
     granted = reserve_processes(_fair_share())
     try:
         yield granted
     finally:
         release_processes(granted)
+
+
+def _ask_parent(kind: str, count: int) -> int:
+    write, reply = _parent_channel
+    _send(write, (kind, count))
+    if kind != "reserve":
+        return 0
+    data = b""
+    while len(data) < 4:
+        chunk = os.read(reply, 4 - len(data))
+        if not chunk:
+            return 0
+        data += chunk
+    return struct.unpack("!I", data)[0]
 
 
 def plan_processes_enabled() -> bool:
@@ -427,38 +463,44 @@ def run_plan_in_process(work: Callable[[], object]):
     global _running_plans
     with _running_lock:
         _running_plans += 1
-    slots = 0
+    slot = 0
     try:
         if plan_processes_enabled():
-            slots = reserve_processes(max(1, _fair_share()))
-        if not slots:
+            slot = reserve_processes(1)
+        if not slot:
             return work()
         read, write = os.pipe()
+        reply_read, reply_write = os.pipe()
         try:
             with warnings.catch_warnings():
                 warnings.simplefilter("ignore", DeprecationWarning)
                 pid = os.fork()
         except OSError:
-            os.close(read)
-            os.close(write)
+            for fd in (read, write, reply_read, reply_write):
+                os.close(fd)
             return work()
         if pid == 0:  # child
-            _run_plan_child(work, read, write, slots - 1)
+            _run_plan_child(work, read, write, reply_read, reply_write)
         os.close(write)
-        return _await_plan_child(work, pid, read, plan_jobs)
+        os.close(reply_read)
+        try:
+            return _await_plan_child(work, pid, read, reply_write, plan_jobs)
+        finally:
+            os.close(reply_write)
     finally:
-        release_processes(slots)
+        release_processes(slot)
         with _running_lock:
             _running_plans -= 1
 
 
-def _run_plan_child(work, read, write, workers):  # pragma: no cover - runs in the child
-    global _child_allotment
+def _run_plan_child(work, read, write, reply_read, reply_write):  # pragma: no cover - runs in the child
+    global _parent_channel
     status = 1
     try:
         os.close(read)
+        os.close(reply_write)
         _child_after_fork()
-        _child_allotment = workers
+        _parent_channel = (write, reply_read)
         from app.services import plan_jobs
         plan_jobs._stage_reporter.set(lambda stage, progress: _send(write, ("stage", stage, progress)))
         plan_jobs._engine_reporter.set(lambda limit: _send(write, ("engine", limit)))
@@ -479,8 +521,8 @@ def _run_plan_child(work, read, write, workers):  # pragma: no cover - runs in t
         os._exit(status)
 
 
-def _await_plan_child(work, pid, read, plan_jobs):
-    buffer, final, sampled = bytearray(), None, 0.0
+def _await_plan_child(work, pid, read, reply, plan_jobs):
+    buffer, final, sampled, held = bytearray(), None, 0.0, 0
     stop = plan_jobs._work_cancellation.get()
     stage_reporter, engine_reporter = plan_jobs._stage_reporter.get(), plan_jobs._engine_reporter.get()
     try:
@@ -504,9 +546,21 @@ def _await_plan_child(work, pid, read, plan_jobs):
                     stage_reporter(message[1], message[2])
                 elif message[0] == "engine" and engine_reporter:
                     engine_reporter(message[1])
+                elif message[0] == "reserve":
+                    # The plan's own process is one core already.
+                    granted = reserve_processes(max(0, _fair_share() - 1))
+                    held += granted
+                    try:
+                        os.write(reply, struct.pack("!I", granted))
+                    except OSError:
+                        pass
+                elif message[0] == "release":
+                    release_processes(min(held, message[1]))
+                    held -= min(held, message[1])
                 elif message[0] in {"result", "error", "lost"}:
                     final = message
     finally:
+        release_processes(held)
         os.close(read)
         if pid is not None:
             try:
