@@ -54,12 +54,12 @@ from app.services.personal_policy import (
     PolicyConflict,
     check_product,
     distribution_ok,
+    fish_dinners_needed,
+    fish_week_ok,
     interpretation,
     is_nonfood,
     mentions,
     merged_profile,
-    fish_dinners_needed,
-    fish_week_ok,
     mixed_week_ok,
     preference_score,
     properties_match,
@@ -4267,7 +4267,7 @@ class PersonalPlanner:
         fish_count = None
         if ((generating or replace_slot is not None) and dinner_meal is not None
                 and dinner_meal.diet == "pescetarian" and not dinner_meal.distribution):
-            fishy = lambda r: self._protein_category(r) in {"fish", "shellfish"}  # noqa: E731
+            fishy = lambda r: self._protein_category(r) in {"fish", "shellfish"}
             if replace_slot is None:
                 bases = {r.design.base_id if r.design else self._recipe_id(r) for r in dinner_pool if fishy(r)}
                 fish_needed = min(fish_dinners_needed(dinner_count), len(bases))

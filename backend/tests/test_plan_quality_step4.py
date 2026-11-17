@@ -63,8 +63,8 @@ def test_fish_and_vegetarian_has_fish_dinners():
     from app.services.personal_policy import fish_dinners_needed, fish_week_ok
 
     kinds = {"veg": "vegetarian", "lax": "fish", "räkor": "shellfish"}
-    classify = lambda r: kinds[r.name]  # noqa: E731
-    week = lambda *names: [dish(n, "x") for n in names]  # noqa: E731
+    classify = lambda r: kinds[r.name]
+    week = lambda *names: [dish(n, "x") for n in names]
     assert [fish_dinners_needed(n) for n in range(1, 8)] == [0, 1, 1, 2, 2, 2, 2]
     assert not fish_week_ok(week("veg", "veg"), 2, partial=False, classify=classify)
     assert fish_week_ok(week("veg", "lax", "veg"), 3, partial=False, classify=classify)
