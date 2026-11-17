@@ -1056,8 +1056,12 @@ async def available_price_contexts(postal_code: str = "22350",
         excluded_stale_context_ids=view.excluded_stale_context_ids)
     from app.services.municipal_runtime import distance_to_store
     stores = {store.store_id: store for store in view.stores}
+    # One row per shop: Hemköp's campaign context is chosen with its catalogue.
+    hidden = set().union(*prepared.store_companions().values()) if hasattr(prepared, "store_companions") else set()
     contexts = []
     for row in compared:
+        if row.context_id in hidden:
+            continue
         value = row.model_dump(mode="json")
         store = stores.get(row.context_id)
         distance, basis = distance_to_store(store, latitude, longitude) if store else (None, None)

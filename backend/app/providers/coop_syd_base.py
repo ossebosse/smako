@@ -38,7 +38,7 @@ def assigned_stores(inventory):
 
 class CoopSydBaseProvider(GroceryPriceProvider):
     source_name = "stora-coop-syd-base"
-    attribution_text = "Stora Coop med baspriser från Coop Online Syd"
+    attribution_text = "Stora Coop med Coops ordinarie priser i Skåne"
 
     def __init__(self, base, own, *, inventory):
         super().__init__(use_member_prices=False)
@@ -110,7 +110,7 @@ class CoopSydBaseProvider(GroceryPriceProvider):
                 self.stores[context] = target.model_copy(update={
                     "store_id": context, "coverage": "full_online_catalog",
                     "tier": "full_online_catalog", "price_semantics": "online_price",
-                    "price_label": "Baspris från Coop Online Syd",
+                    "price_label": "Ordinarie pris",
                     "confirmed_at": lineage.source_observed_at.isoformat(),
                     "source_provenance": provenance,
                 })

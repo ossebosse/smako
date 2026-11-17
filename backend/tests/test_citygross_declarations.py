@@ -31,8 +31,9 @@ def test_pasta_uses_the_as_sold_per_100_declaration_not_the_serving():
     assert f.ingredients == ("Ingredienser: DURUMVETE. Kan innehålla spår av SOJA, ÄGG och SENAP.",)
     assert f.retailer_product_id == "100058571_ST" and not f.conflicts
     assert f.field_sources["nutrition.kcal"][0]["source_product_id"] == "100058571_ST"
-    # The ingredient list is evidence, never an allergen-absence proof.
-    assert not f.ingredients_complete and not f.allergens_checked
+    # The store's declaration and its GS1 allergen list are the allergen information.
+    assert f.ingredients_complete and f.allergens_present == ("gluten", "vete")
+    assert f.allergens_trace == ("senap", "soja", "ägg") and "mjölk" in f.allergens_checked
 
 
 def test_sausage_reads_meat_marking_and_ingredients_as_animal():

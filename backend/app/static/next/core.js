@@ -724,7 +724,14 @@
     const count = b.stores.reduce((n, s) => n + s.items.length, 0), progress = el("p", null, "picked", { role: "status" });
     const update = () => { progress.textContent = `${done.size} av ${plural(count, "vara", "varor")} plockade`; try { localStorage.setItem(pickedKey(), JSON.stringify([...done])); } catch (_) { /* kept for this visit */ } };
     box.append(progress);
+    // One shop can be priced by two contexts (catalogue and its own campaigns).
+    const shops = [];
     for (const store of b.stores) {
+      const same = shops.find(shop => shop.store_name === store.store_name);
+      if (same) { same.items = [...same.items, ...store.items]; same.subtotal = Number(same.subtotal) + Number(store.subtotal); }
+      else shops.push({ ...store, items: [...store.items] });
+    }
+    for (const store of shops) {
       const section = el("details", null, "store"), context = names.get(store.store_id), head = el("summary");
       section.open = open;
       const title = el("span", null, "store-title"); title.append(el("span", store.store_name, "store-name"), el("span", [context?.address, plural(store.items.length, "vara", "varor")].filter(Boolean).join(" · "), "store-note"));

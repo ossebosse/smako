@@ -46,7 +46,7 @@ def test_explicit_ready_cereal_bread_qualifies_with_a_product_line_name():
     assert proof["product_id"] == "bread" and proof["snapshot_id"] == "snapshot"
     assert proof["raw_fields"]["listOfIngredients"] == FORMULA
     assert proof["raw_fields"]["navCategories"] == raw_bread()["navCategories"]
-    assert not f.ingredients_complete and not f.allergens_checked
+    assert f.ingredients_complete and "gluten" in f.allergens_present
     assert f.ingredients == (FORMULA,) and not f.nutrition
 
 
@@ -179,7 +179,7 @@ def test_evidence_is_copied_and_allergy_formula_remains_separate():
     raw["listOfIngredients"] += " Kan innehålla spår av SESAM."
     r, p, f = prepared(raw)
     assert product_form_compatible(r, "bröd", p, f)
-    assert "SESAM" in f.ingredients[0] and not f.ingredients_complete and not f.allergens_checked
+    assert "SESAM" in f.ingredients[0] and f.allergens_trace == ("sesam",)
     for profile in (TasteProfile(allergies=["sesam"]), TasteProfile(exclusions=["sirap"])):
         with pytest.raises(PolicyConflict):
             check_product(p, profile, f)

@@ -326,11 +326,20 @@ class PersonalPlanner:
         )
         self.store_ids = {s.store_id for s in self.view.stores}
         if request.allowed_store_ids:
-            missing = set(request.allowed_store_ids) - self.store_ids
+            # A saved choice of an online shop means the store that stands in for it.
+            selected = set(request.allowed_store_ids)
+            stand_ins = getattr(prepared, "online_stand_ins", dict)()
+            for online, ids in stand_ins.items():
+                if online in selected:
+                    selected = (selected - {online}) | (ids & self.store_ids)
+            for lead, others in getattr(prepared, "store_companions", dict)().items():
+                if lead in selected or selected & others:
+                    selected |= {lead} | (others & self.store_ids)
+            missing = selected - self.store_ids
             if missing:
                 raise PolicyConflict("Priserna för några valda butiker saknas eller är för gamla: " + ", ".join(sorted(missing)),
                                      code="DATA_BLOCKED", stage="store_cap")
-            self.store_ids &= set(request.allowed_store_ids)
+            self.store_ids &= selected
         self.index = prepared.product_search_index
         self._generic_verified = set()  # extras checked against their generic once per request
         self.product_keys = {i: k for k, positions in self.index.groups.items() for i in positions}

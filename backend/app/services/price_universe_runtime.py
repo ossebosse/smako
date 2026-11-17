@@ -464,6 +464,8 @@ class PreparedPriceUniverse:
     _base_context_ids: frozenset[str] = field(init=False, repr=False)
     _campaign_days: OrderedDict[date, frozenset[str]] = field(default_factory=OrderedDict, init=False, repr=False, compare=False)
     _campaign_days_lock: Any = field(default_factory=RLock, init=False, repr=False, compare=False)
+    _online_stand_ins: Any = field(default=None, init=False, repr=False, compare=False)
+    _store_companions: Any = field(default=None, init=False, repr=False, compare=False)
 
     def __post_init__(self) -> None:
         """Freeze per-context freshness once; health checks stay O(contexts)."""
@@ -629,6 +631,60 @@ class PreparedPriceUniverse:
         # reuse yesterday's discounted menu merely because contexts are equal.
         return identity + ":" + (now or datetime.now(UTC)).astimezone(STOCKHOLM).date().isoformat()
 
+    def online_stand_ins(self) -> dict[str, frozenset[str]]:
+        """Online shops whose whole range a physical store carries.
+
+        Owner decision 2026-11-17: Stora Coop has the same range as Coop
+        Online Syd in Skåne and is priced from it (``owner_assigned_base_price``).
+        Wherever such a store exists the online shop is never shown or chosen;
+        a selection of it means its stand-ins.
+        """
+        cached = self._online_stand_ins
+        if cached is not None:
+            return cached
+        online: dict[str, set[str]] = {}
+        for store in self.stores:
+            if str(store.price_context_type or "").casefold() == "online_fulfillment":
+                for key in {store.source_store_id,
+                            getattr(store.source_provenance, "provider_store_id", None)} - {None}:
+                    online.setdefault(key, set()).add(store.store_id)
+        stand_ins: dict[str, set[str]] = {}
+        for store in self.stores:
+            provenance = store.source_provenance
+            if provenance is None or provenance.source_role != "owner_assigned_base_price":
+                continue
+            matches = online.get(provenance.provider_store_id, set())
+            if len(matches) == 1:
+                stand_ins.setdefault(next(iter(matches)), set()).add(store.store_id)
+        result = {key: frozenset(value) for key, value in stand_ins.items()}
+        object.__setattr__(self, "_online_stand_ins", result)
+        return result
+
+    def store_companions(self) -> dict[str, frozenset[str]]:
+        """Price contexts of one shop shown as one store.
+
+        Hemköp publishes its catalogue (online store prices) and the shop's own
+        campaigns as two contexts with the same address. The one with most
+        products represents the shop; choosing it includes the others.
+        """
+        if self._store_companions is not None:
+            return self._store_companions
+        counts: dict[str, int] = {}
+        for product in self.universe.products:
+            counts[product.store_id] = counts.get(product.store_id, 0) + 1
+        groups: dict[tuple[str, str], list[Store]] = {}
+        for store in self.stores:
+            address = " ".join(str(store.address or "").casefold().split())
+            if address and str(store.price_context_type or "").casefold() != "online_fulfillment":
+                groups.setdefault((store.chain, address), []).append(store)
+        result = {}
+        for members in groups.values():
+            if len(members) > 1 and len({m.name.casefold() for m in members}) == 1:
+                lead = max(members, key=lambda m: (counts.get(m.store_id, 0), m.store_id))
+                result[lead.store_id] = frozenset(m.store_id for m in members) - {lead.store_id}
+        object.__setattr__(self, "_store_companions", result)
+        return result
+
     def request_view(
         self,
         *,
@@ -644,12 +700,20 @@ class PreparedPriceUniverse:
             stale_age_hours=stale_age_hours,
         )
         allowed = frozenset(usable)
+        # An online shop with a usable physical stand-in is replaced by it.
+        stand_ins = {online: ids & allowed for online, ids in self.online_stand_ins().items() if ids & allowed}
         if allowed_context_ids:
-            selected = frozenset(allowed_context_ids)
+            selected = set(allowed_context_ids)
+            for online in selected & stand_ins.keys():
+                selected |= stand_ins[online]
+            for lead, others in self.store_companions().items():
+                if lead in selected or selected & others:
+                    selected |= {lead} | (others & allowed)
             if selected - allowed:
                 raise ValueError("Valda inköpsställen saknas eller har för gamla priser i vald kommun.")
-            allowed = selected
-            usable = tuple(identity for identity in usable if identity in allowed)
+            allowed = frozenset(selected)
+        allowed -= stand_ins.keys()
+        usable = tuple(identity for identity in usable if identity in allowed)
         filtered_maps = {
             "candidates_by_name": self._filter_candidates(
                 self.economic_pool.candidates_by_name,

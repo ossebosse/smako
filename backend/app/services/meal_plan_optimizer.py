@@ -184,6 +184,10 @@ def _consumer_price_context_coverage(
             snapshot_ids[product.store_id].add(provenance.source_snapshot_id)
 
     def scope_label(store: Store) -> str:
+        provenance = store.source_provenance
+        if provenance is not None and provenance.source_role == "owner_assigned_base_price":
+            # Never name the online shop (owner decision 2026-11-17).
+            return "Ordinarie pris"
         if store.price_label:
             return store.price_label
         context_type = str(store.price_context_type or "").casefold()
