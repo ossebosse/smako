@@ -34,14 +34,16 @@ manager = PreparedPriceUniverseManager()
 started = time.perf_counter()
 prepared = manager.load_file_and_activate(root / pointer["artifact_file"])
 loaded = time.perf_counter() - started
+facts_started = time.perf_counter()
 cached_retained_facts(prepared)
+facts_seconds = time.perf_counter() - facts_started
 settings = dataclasses.replace(Settings(price_provider="mock"), complete_recipes_enabled=True,
                                library_search_policy="smako-current-library-v2")
 state = {"id": "m", "revision": 0, "profile": None, "items": [], "reservations": {}, "events": {}}
 began = time.perf_counter()
 with planning_deadline(240):
     plan = pp.PersonalPlanner(plain_request(prepared), settings, prepared, state).create()
-print(json.dumps({"load_seconds": round(loaded, 1), "snapshots": sorted(p.name[:20] for p in manager.loaded_snapshots),
+print(json.dumps({"load_seconds": round(loaded, 1), "facts_seconds": round(facts_seconds, 1), "snapshots": sorted(p.name[:20] for p in manager.loaded_snapshots),
                   "plan_seconds": round(time.perf_counter() - began, 1), "total": str(plan.optimized_basket.total),
                   "recipes": [r.name[:30] for r in plan.recipes], "private_mb": private_mb()}, ensure_ascii=False),
       flush=True)
