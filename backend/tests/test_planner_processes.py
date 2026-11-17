@@ -414,3 +414,19 @@ def test_a_qualification_thread_does_not_share_the_request_quote_session(monkeyp
     assert seen[0][0] is None and seen[0][1] == {} and seen[0][1] is not scope
     assert seen[1] == ("the request's session", scope)
     assert session.get() == "the request's session"
+
+
+def test_a_thread_copy_has_its_own_optimizer_settings():
+    from app.config import Settings
+    from app.services.personal_planner import PersonalPlanner
+
+    from backend.tests.test_personal_planning_v2 import NOW, prepared, product, request, state
+
+    planner = PersonalPlanner(request(), Settings(price_provider="mock"), prepared(product("mjölk", 1000, "ml", 10)),
+                              state(), now=NOW)
+    other = planner._thread_copy()
+    assert other.optimizer is not planner.optimizer
+    assert other.optimizer._store_subsets is planner.optimizer._store_subsets  # the pure memo is shared
+    other.optimizer.verification_policy = "changed in the thread"
+    assert planner.optimizer.verification_policy != "changed in the thread"
+    assert other.lookup_cache is not planner.lookup_cache and other.prepared is planner.prepared

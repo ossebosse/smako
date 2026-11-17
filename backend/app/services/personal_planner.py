@@ -3326,6 +3326,11 @@ class PersonalPlanner:
         from app.services.product_planning_trace import ProductPlanningTrace
 
         other = copy.copy(self)
+        # Each basket sets its price-first lines on the optimizer itself
+        # (verification_policy); a shared optimizer let one thread's lines rank
+        # another thread's products, and every copied recipe came out dearer.
+        # The copy shares the optimizer's pure store-subset memo.
+        other.optimizer = copy.copy(self.optimizer)
         for name in ("lookup_cache", "queries", "_resolution_trace", "_json_memo", "_merged_profile_memo",
                      "missing_extras"):
             setattr(other, name, {})
