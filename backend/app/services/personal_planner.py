@@ -3231,45 +3231,52 @@ class PersonalPlanner:
         and the week search reuses them instead of computing them again. A
         slice that fails is simply qualified here afterwards.
         """
+        import os
+
         from app.services.plan_jobs import remaining_planning_seconds
         from app.services.planner_context import content_digest
         from app.services.planner_processes import (
+            _MIN_ITEMS_PER_WORKER,
             absorb_warm,
+            qualification_workers,
             run_in_processes,
             start_warm_journals,
             warm_journals,
-            worker_count,
         )
 
-        workers = worker_count()
-        if workers < 2:
-            return stored_rows
         pending = [r for r in candidates if content_digest(r) not in stored_rows]
         left = remaining_planning_seconds()
         # Leave the search most of the request; qualification gets at most half.
         timeout = 60.0 if left is None else max(0.0, left / 2)
-        if not pending or timeout <= 1:
+        if len(pending) < 2 * _MIN_ITEMS_PER_WORKER or timeout <= 1:
             return stored_rows
-        with performance_span("personal_parallel_qualification"):
-            def work(part):
-                # In a worker: no progress reports to the parent's job or loop.
-                from app.services import plan_jobs
-                plan_jobs._stage_reporter.set(None)
-                plan_jobs._engine_reporter.set(None)
-                caches = start_warm_journals()
-                rows = self._candidates(meal, fixed_slots=fixed_slots, _rows_only=part)
-                return rows, warm_journals(caches)
+        with qualification_workers() as workers:
+            if workers < 1:
+                return stored_rows
+            with performance_span("personal_parallel_qualification"):
+                parent = os.getpid()
 
-            # The shared caches' scopes for this request exist before the fork,
-            # so what the workers resolve can be kept here.
-            from app.services.planner_shared_cache import nutrition_scope, planner_scope
-            planner_scope(self)
-            nutrition_scope(self)
-            answers, missing = run_in_processes(pending, work, timeout=timeout, workers=workers)
-            rows, kept = {}, 0
-            for part_rows, warm in answers:
-                rows.update(part_rows)
-                kept += absorb_warm(warm)
+                def work(part):
+                    if os.getpid() == parent:  # this process's own slice
+                        return self._candidates(meal, fixed_slots=fixed_slots, _rows_only=part), {}
+                    # In a worker: no progress reports to the parent's job or loop.
+                    from app.services import plan_jobs
+                    plan_jobs._stage_reporter.set(None)
+                    plan_jobs._engine_reporter.set(None)
+                    caches = start_warm_journals()
+                    rows = self._candidates(meal, fixed_slots=fixed_slots, _rows_only=part)
+                    return rows, warm_journals(caches)
+
+                # The shared caches' scopes for this request exist before the
+                # fork, so what the workers resolve can be kept here.
+                from app.services.planner_shared_cache import nutrition_scope, planner_scope
+                planner_scope(self)
+                nutrition_scope(self)
+                answers, missing = run_in_processes(pending, work, timeout=timeout, workers=workers, here=True)
+                rows, kept = {}, 0
+                for part_rows, warm in answers:
+                    rows.update(part_rows)
+                    kept += absorb_warm(warm)
         self.diagnostics.pools[-1]["parallel_qualification"] = {
             "workers": workers, "recipes": len(pending), "rows": len(rows), "kept_entries": kept,
             "slices_redone": len(missing)}

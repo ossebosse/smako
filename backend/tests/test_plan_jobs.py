@@ -298,6 +298,8 @@ async def test_a_cancelled_job_stops_its_plan_process_at_once(monkeypatch):
     if not hasattr(os, "fork"):
         pytest.skip("needs fork")
     monkeypatch.setenv("SMAKO_PLAN_PROCESSES", "1")
+    monkeypatch.setenv("SMAKO_PLANNER_PROCESSES", "1")
+    monkeypatch.setenv("SMAKO_PLANNER_MEMORY_CHECK", "0")
     jobs = PlanJobs(max_pending=1)
     job = jobs.start("owner", "key", "request", lambda: api._run_personal_thread(lambda: time.sleep(30)))
     await asyncio.sleep(.5)

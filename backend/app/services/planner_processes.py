@@ -17,16 +17,24 @@ Safety:
 - A child that waits on a lock another thread held at fork time is killed at
   the slice deadline; the parent then does the work itself.
 
-``SMAKO_PLANNER_PROCESSES``: worker processes per request. Default: every core
-but one, at most 8; ``0`` or ``1`` turns it off. Plans running at the same
-time share them: each gets its part of the cores.
+Budget (``reserve_processes``): every extra process, a plan's own or a
+qualification worker, takes one slot from a single allocator in the app
+process. A slot needs a free core (``SMAKO_PLANNER_PROCESSES``, default every
+core but one, at most 8) AND room in memory now: CPython writes a reference
+count into every object a process reads, so a child copies whatever it
+touches, worst case as much as this process holds (Malmö: about 1.6 GB per
+child). Three plans with their own workers ran a 7 GB container out of memory
+before the allocator existed. Plans running at the same time share the cores.
+Children are marked as the first processes to stop if memory still runs out,
+so the web app itself is never the one stopped.
 
 Several people at once (``run_plan_in_process``): each plan runs in its own
-forked process, so plans no longer take turns on one core. The child reports
-its stages through a pipe and sends back the plan (or its error) together with
-what it learned for later plans: the qualification rows and package quotes it
-computed (``register_warm_cache``). The parent stops a child when the request
-is cancelled, and plans in its own thread if a child dies.
+forked process when a slot is free, so plans no longer take turns on one
+core. The child reports its stages through a pipe and sends back the plan (or
+its error) together with what it learned for later plans: the qualification
+rows, package quotes and product resolutions it computed
+(``register_warm_cache``). The parent stops a child when the request is
+cancelled, and plans in its own thread if a child dies or no slot is free.
 ``SMAKO_PLAN_PROCESSES=0`` turns this off.
 """
 from __future__ import annotations
@@ -43,53 +51,144 @@ import threading
 import time
 import warnings
 import weakref
-from collections.abc import Callable, Sequence
+from collections.abc import Callable, Iterator, Sequence
+from contextlib import contextmanager
 
 _MIN_ITEMS_PER_WORKER = 24
+_MEMORY_HEADROOM = 0.75  # share of the memory available now that children may use
 logger = logging.getLogger(__name__)
 
-# Plans running in their own process right now (parent) / at this child's
-# start (child): the cores are shared between them.
+# Allocator state, in the app process: plans running now and slots in use.
 _running_plans = 0
+_slots_in_use = 0
 _running_lock = threading.Lock()
-_plan_share = 1
+# In a plan's own process: the workers its parent reserved for it.
+_child_allotment: int | None = None
 
 
 def _child_after_fork() -> None:
-    # Everything inherited stays out of this child's garbage collection: a
-    # collection writes to every object it visits and so copies its memory
-    # page, which made each child as large as the parent.
     import gc
-    global _running_lock
+    global _running_lock, _running_plans, _slots_in_use
     _running_lock = threading.Lock()  # another thread may have held it at the fork
+    _running_plans = _slots_in_use = 0
+    # Everything inherited stays out of this child's garbage collection: a
+    # collection writes to every object it visits and so copies its memory.
     gc.freeze()
+    try:  # if memory runs out after all, stop a child, never the web app
+        with open("/proc/self/oom_score_adj", "w") as adj:
+            adj.write("800")
+    except OSError:
+        pass
 
 
 def _fork_supported() -> bool:
     return hasattr(os, "fork") and sys.platform == "linux"
 
 
-def worker_count() -> int:
-    """Worker processes one plan may use now.
-
-    ``SMAKO_PLANNER_PROCESSES`` is the budget for the whole app (default:
-    every core but one, at most 8). Plans running at the same time share it,
-    so three plans at once never fork three full sets of workers: each worker
-    copies the memory it touches, and memory, not cores, ran out first.
-    """
+def cpu_budget() -> int:
+    """Extra processes the cores allow for the whole app."""
     if not _fork_supported():
         return 0
     raw = os.environ.get("SMAKO_PLANNER_PROCESSES")
     if raw is not None:
         try:
-            wanted = max(0, int(raw))
+            return max(0, int(raw))
         except ValueError:
             return 0
-    else:
-        wanted = max(0, min(8, (os.cpu_count() or 1) - 1))
+    return max(0, min(8, (os.cpu_count() or 1) - 1))
+
+
+def _read_int(path: str) -> int | None:
+    try:
+        with open(path) as handle:
+            text = handle.read().strip()
+    except OSError:
+        return None
+    return int(text) if text.isdigit() else None
+
+
+def _available_bytes() -> int | None:
+    """Memory that may still be used now: the container's limit and the machine's."""
+    values = []
+    limit, current = _read_int("/sys/fs/cgroup/memory.max"), _read_int("/sys/fs/cgroup/memory.current")
+    if limit is not None and current is not None:
+        values.append(limit - current)
+    try:
+        with open("/proc/meminfo") as info:
+            for line in info:
+                if line.startswith("MemAvailable:"):
+                    values.append(int(line.split()[1]) * 1024)
+                    break
+    except OSError:
+        pass
+    return min(values) if values else None
+
+
+def _child_bytes() -> int | None:
+    """Worst case for one child: everything this process holds privately."""
+    try:
+        with open("/proc/self/status") as status:
+            for line in status:
+                if line.startswith("RssAnon:"):
+                    return int(line.split()[1]) * 1024
+    except OSError:
+        pass
+    return None
+
+
+def memory_slots() -> int:
+    """Children that fit in memory right now (unknown memory: none)."""
+    if os.environ.get("SMAKO_PLANNER_MEMORY_CHECK", "1") == "0":
+        return 1 << 16
+    available, child = _available_bytes(), _child_bytes()
+    if not available or not child:
+        return 0
+    return max(0, int(available * _MEMORY_HEADROOM // child))
+
+
+def reserve_processes(wanted: int) -> int:
+    """Take up to ``wanted`` slots; returns how many were granted (maybe 0)."""
+    global _slots_in_use
+    if wanted <= 0:
+        return 0
+    memory = memory_slots()
     with _running_lock:
-        running = max(_plan_share, _running_plans)
-    return wanted // max(1, running)
+        granted = max(0, min(wanted, cpu_budget() - _slots_in_use, memory))
+        _slots_in_use += granted
+    return granted
+
+
+def release_processes(count: int) -> None:
+    global _slots_in_use
+    if count > 0:
+        with _running_lock:
+            _slots_in_use = max(0, _slots_in_use - count)
+
+
+def _fair_share() -> int:
+    with _running_lock:
+        running = max(1, _running_plans)
+    return cpu_budget() // running
+
+
+def worker_count() -> int:
+    """Worker processes one plan would ask for now (its share of the cores)."""
+    if _child_allotment is not None:
+        return _child_allotment
+    return _fair_share()
+
+
+@contextmanager
+def qualification_workers() -> Iterator[int]:
+    """Workers this plan's qualification may fork now (slots held meanwhile)."""
+    if _child_allotment is not None:  # reserved by the parent for this plan
+        yield _child_allotment
+        return
+    granted = reserve_processes(_fair_share())
+    try:
+        yield granted
+    finally:
+        release_processes(granted)
 
 
 def plan_processes_enabled() -> bool:
@@ -127,20 +226,24 @@ if hasattr(os, "register_at_fork"):
 
 
 def run_in_processes(items: Sequence, work: Callable[[Sequence], object], *, timeout: float,
-                     workers: int | None = None) -> tuple[list, list[int]]:
+                     workers: int | None = None, here: bool = False) -> tuple[list, list[int]]:
     """Run ``work`` over slices of ``items`` in forked children.
 
     Returns the answers of the slices that finished (in slice order) and the
     indexes of the slices that produced nothing (to be done by the caller).
-    ``work`` must return something picklable.
+    ``work`` must return something picklable. With ``here`` this process
+    does the first slice itself while the children do the rest, so ``workers``
+    children keep ``workers + 1`` cores busy.
     """
     workers = worker_count() if workers is None else workers
-    slices = _slices(len(items), workers)
+    slices = _slices(len(items), workers + (1 if here else 0))
     if len(slices) < 2:
         return [], list(range(len(slices)))
     children = {}
     missing = []
     for index, (start, stop) in enumerate(slices):
+        if here and index == 0:
+            continue
         read, write = os.pipe()
         try:
             with warnings.catch_warnings():
@@ -169,6 +272,11 @@ def run_in_processes(items: Sequence, work: Callable[[Sequence], object], *, tim
         children[read] = (pid, index, bytearray())
     deadline = time.monotonic() + max(0.0, timeout)
     answers: dict[int, object] = {}
+    if here:
+        try:
+            answers[0] = work(items[slices[0][0]:slices[0][1]])
+        except Exception:  # noqa: BLE001 - redone by the caller, as a child's slice would be
+            missing.append(0)
     while children:
         left = deadline - time.monotonic()
         if left <= 0:
@@ -272,16 +380,19 @@ def run_plan_in_process(work: Callable[[], object]):
 
     Called from the request's worker thread, whose context (deadline, stage
     reporters, cancellation) the child inherits. Returns ``work()``'s value or
-    raises its error, as running it here would.
+    raises its error, as running it here would. Without a free slot the plan
+    runs here, as before.
     """
     from app.services import plan_jobs
 
     global _running_plans
     with _running_lock:
         _running_plans += 1
-        share = _running_plans
+    slots = 0
     try:
-        if not plan_processes_enabled():
+        if plan_processes_enabled():
+            slots = reserve_processes(max(1, _fair_share()))
+        if not slots:
             return work()
         read, write = os.pipe()
         try:
@@ -293,21 +404,22 @@ def run_plan_in_process(work: Callable[[], object]):
             os.close(write)
             return work()
         if pid == 0:  # child
-            _run_plan_child(work, read, write, share)
+            _run_plan_child(work, read, write, slots - 1)
         os.close(write)
         return _await_plan_child(work, pid, read, plan_jobs)
     finally:
+        release_processes(slots)
         with _running_lock:
             _running_plans -= 1
 
 
-def _run_plan_child(work, read, write, share):  # pragma: no cover - runs in the child
-    global _plan_share, _running_plans
+def _run_plan_child(work, read, write, workers):  # pragma: no cover - runs in the child
+    global _child_allotment
     status = 1
     try:
         os.close(read)
         _child_after_fork()
-        _plan_share, _running_plans = share, 0
+        _child_allotment = workers
         from app.services import plan_jobs
         plan_jobs._stage_reporter.set(lambda stage, progress: _send(write, ("stage", stage, progress)))
         plan_jobs._engine_reporter.set(lambda limit: _send(write, ("engine", limit)))
