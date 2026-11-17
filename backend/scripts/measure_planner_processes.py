@@ -56,9 +56,20 @@ def once(workers):
         import cProfile
         profile = cProfile.Profile()
         profile.enable()
-    with planning_deadline(240):
-        planner = pp.PersonalPlanner(req, settings, prepared, state)
-        plan = planner.create()
+    def plan_once():
+        with planning_deadline(240):
+            made = pp.PersonalPlanner(req, settings, prepared, state)
+            return made, made.create()
+
+    if os.environ.get("MEASURE_IN_THREAD"):  # as the web app: not the thread that loaded the area
+        import threading
+        box = []
+        worker = threading.Thread(target=lambda: box.append(plan_once()))
+        worker.start()
+        worker.join()
+        planner, plan = box[0]
+    else:
+        planner, plan = plan_once()
     if profile is not None:
         import io
         import pstats
