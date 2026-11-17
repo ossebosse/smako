@@ -22,13 +22,13 @@ artifact = PreparedPriceUniverseArtifact.from_file(path)
 parsed = time.perf_counter()
 prepared = artifact.restore()
 restored = time.perf_counter()
-data = pickle.dumps(prepared, protocol=pickle.HIGHEST_PROTOCOL)
+data = pickle.dumps(artifact, protocol=pickle.HIGHEST_PROTOCOL)
 dumped = time.perf_counter()
 del prepared, artifact
 gc.collect()
 gc.disable()  # loading allocates millions of objects; collections only slow it
 loading = time.perf_counter()
-again = pickle.loads(data)
+again = pickle.loads(data).restore()
 loaded = time.perf_counter()
 gc.enable()
 print(json.dumps({
