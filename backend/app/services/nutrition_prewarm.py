@@ -103,7 +103,11 @@ async def _warm_attempts(application, settings, prepared, manager, *, delay, att
     async def work():
         if manager.get_active(scope) is not prepared:
             return "superseded"
-        return await asyncio.to_thread(warm_nutrition, settings, prepared)
+        # Lowest CPU priority and at most one worker (planner_processes), so
+        # people's plans always get the cores first.
+        from app.services.planner_processes import run_in_background_thread
+        return await asyncio.wrap_future(run_in_background_thread(
+            lambda: warm_nutrition(settings, prepared), name="smako-nutrition-prewarm"))
 
     rounds = 0
     for _ in range(attempts):

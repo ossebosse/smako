@@ -167,3 +167,30 @@ def test_only_one_heavy_preparation_runs_at_a_time():
     finally:
         release.set()
     assert second_entered.wait(5)
+
+
+def test_the_nutrition_warm_up_runs_in_a_low_priority_background_thread(monkeypatch):
+    import asyncio
+    import threading
+    from types import SimpleNamespace
+
+    from app.services import nutrition_prewarm, planner_processes
+
+    seen = {}
+
+    def warm(settings, prepared):
+        seen["thread"] = threading.current_thread().name
+        seen["background"] = planner_processes._background.get()
+        return "complete"
+
+    monkeypatch.setattr(nutrition_prewarm, "warm_nutrition", warm)
+
+    class Admission:
+        async def run(self, key, work, only_if_idle=False):
+            return await work()
+
+    prepared = SimpleNamespace(universe=SimpleNamespace(key=SimpleNamespace(scope_id="city:lund"), universe_id="u"))
+    manager = SimpleNamespace(get_active=lambda scope: prepared)
+    application = SimpleNamespace(state=SimpleNamespace(planner_admission=Admission()))
+    status = asyncio.run(nutrition_prewarm._warm_attempts(application, None, prepared, manager, delay=0, attempts=1))
+    assert status == "complete" and seen == {"thread": "smako-nutrition-prewarm", "background": True}
