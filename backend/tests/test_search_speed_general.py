@@ -35,3 +35,20 @@ def test_content_filters_only_choose_candidates():
                                                                             max_active_minutes=30)})
     assert _qualification_meal(plain) == _qualification_meal(filtered)
     assert _qualification_meal(plain) != _qualification_meal(plain.model_copy(update={"recipe_choices": None}))
+
+
+def test_shared_quote_cache_grows_to_the_area_but_not_without_bound(monkeypatch):
+    from types import SimpleNamespace
+
+    from app.services import price_universe as pu
+
+    cache = pu.PackageCostCache()
+    monkeypatch.setattr(cache, "_candidate_digest", lambda candidate: str(id(candidate)))
+    assert cache._cache.max_entries == 16384
+    area = SimpleNamespace(universe_id="u", products=range(98_000))
+    cache.get_or_compute(area, object(), required_quantity=1, required_unit="g", calculator_version="v",
+                         factory=lambda: "quote")
+    assert cache._cache.max_entries == 98_000
+    cache.get_or_compute(SimpleNamespace(universe_id="u", products=range(10**6)), object(), required_quantity=1,
+                         required_unit="g", calculator_version="v", factory=lambda: "quote")
+    assert cache._cache.max_entries == pu._PACKAGE_CACHE_MAX
