@@ -20,9 +20,12 @@ from __future__ import annotations
 import asyncio
 import hashlib
 import json
+import logging
+import pickle
 from collections import OrderedDict, defaultdict
 from collections.abc import Callable, Iterable, Mapping, Sequence
-from dataclasses import dataclass, field
+from dataclasses import MISSING, dataclass, field
+from dataclasses import fields as dataclass_fields
 from datetime import UTC, date, datetime, timedelta
 from pathlib import Path
 from threading import RLock
@@ -102,6 +105,9 @@ PRECOMPUTED_CANONICAL_REQUIREMENTS: tuple[NormalizedIngredient, ...] = (
     ),
     NormalizedIngredient(canonical_name="red_lentils", required_quantity=500, unit="g"),
 )
+
+
+logger = logging.getLogger(__name__)
 
 
 def normalized_memberships(
@@ -514,6 +520,27 @@ class PreparedPriceUniverse:
                 for store_id in sorted(store_ids)
             ),
         )
+
+    # A binary snapshot (price_universe_snapshot) holds the validated data and
+    # the finished indexes; caches and locks start empty on load, as after a
+    # JSON load, and register themselves with the planner processes again.
+    _SNAPSHOT_FIELDS = ("universe", "stores", "economic_pool", "source_name", "source_diagnostics",
+                        "oldest_observed_at", "product_search_index", "_context_oldest_observed_at",
+                        "_campaign_products", "_base_context_ids")
+
+    def __getstate__(self) -> dict[str, Any]:
+        return {name: getattr(self, name) for name in self._SNAPSHOT_FIELDS}
+
+    def __setstate__(self, state: dict[str, Any]) -> None:
+        for name in self._SNAPSHOT_FIELDS:
+            object.__setattr__(self, name, state[name])
+        for item in dataclass_fields(self):
+            if item.name in self._SNAPSHOT_FIELDS:
+                continue
+            if item.default_factory is not MISSING:
+                object.__setattr__(self, item.name, item.default_factory())
+            elif item.default is not MISSING:
+                object.__setattr__(self, item.name, item.default)
 
     def _active_campaign_contexts(self, on_date: date) -> frozenset[str]:
         """Pure existential campaign evidence for this immutable price artifact.
@@ -944,6 +971,7 @@ class PreparedPriceUniverseManager:
         self._lock = RLock()
         self._active: dict[str, PreparedPriceUniverse] = {}
         self._build_locks: dict[str, asyncio.Lock] = {}
+        self.loaded_snapshots: set[Path] = set()
 
     def get_active(self, scope_id: str) -> PreparedPriceUniverse | None:
         with self._lock:
@@ -1016,6 +1044,20 @@ class PreparedPriceUniverseManager:
 
     def load_file_and_activate(self, path: Path) -> PreparedPriceUniverse:
         resolved = path.resolve(strict=True)
+        snapshot = self._snapshot_for(resolved)
+        if snapshot is not None:
+            from app.services import price_universe_snapshot
+
+            with performance_span("load_price_universe_snapshot"):
+                prepared = price_universe_snapshot.read(snapshot[0], source_sha256=snapshot[1])
+            if prepared is not None:
+                self.loaded_snapshots.add(snapshot[0])
+                with performance_span("price_universe_atomic_activation"):
+                    self.activate(prepared)
+                from app.services.planner_memory import reclaim_and_freeze
+                reclaim_and_freeze()
+                increment_performance_counter("price_universe_snapshot_loads")
+                return prepared
 
         def read_artifact():
             with performance_span("price_universe_parse_and_validate"):
@@ -1024,7 +1066,33 @@ class PreparedPriceUniverseManager:
         # The parser frame and its complete JSON bytes end before indexes
         # are restored; only validated domain values cross that boundary.
         with performance_span("load_serialized_price_universe"):
-            return self._restore_and_activate(read_artifact())
+            prepared = self._restore_and_activate(read_artifact())
+        if snapshot is not None:
+            from app.services import price_universe_snapshot
+
+            try:
+                with performance_span("write_price_universe_snapshot"):
+                    price_universe_snapshot.write(prepared, snapshot[0], source_sha256=snapshot[1])
+                self.loaded_snapshots.add(snapshot[0])
+            except (OSError, pickle.PicklingError, TypeError, AttributeError) as exc:
+                # Only the next start's speed depends on it.
+                logger.warning("prepared_snapshot_not_written error_type=%s", type(exc).__name__)
+        return prepared
+
+    @staticmethod
+    def _snapshot_for(artifact: Path) -> tuple[Path, str] | None:
+        """Where this artifact's snapshot belongs (None: snapshots off)."""
+        from app.services import price_universe_snapshot
+
+        root = price_universe_snapshot.snapshot_root()
+        if root is None:
+            return None
+        stem = artifact.stem
+        if len(stem) == 64 and all(c in "0123456789abcdef" for c in stem):
+            source = stem  # content-addressed: the name is the verified SHA-256
+        else:
+            source = hashlib.sha256(artifact.read_bytes()).hexdigest()
+        return price_universe_snapshot.snapshot_path(root, source), source
 
     @staticmethod
     def write_artifact(prepared: PreparedPriceUniverse, path: Path) -> None:

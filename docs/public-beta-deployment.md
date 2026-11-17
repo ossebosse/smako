@@ -115,7 +115,7 @@ refresh:
 ```powershell
 $runtime = 'D:\codex-rc\billigaste-veckomenyn\runtime'
 $runtimeDirs = 'grocery','plans','price_universes/active',
-  'price_universes/artifacts','raw_snapshots','reports','backups'
+  'price_universes/artifacts','raw_snapshots','reports','backups','prepared_snapshots'
 $runtimeDirs | ForEach-Object {
   New-Item -ItemType Directory -Path (Join-Path $runtime $_) -Force | Out-Null
 }
@@ -245,6 +245,7 @@ python3.12 -m deploy.scripts.seed_runtime \
   --price-universe-root price_universes \
   --raw-snapshot-root raw_snapshots
 
+sudo mkdir -p deploy/runtime/prepared_snapshots  # binary price-universe snapshots (app writes)
 sudo chown -R 10001:10001 deploy/runtime
 sudo find deploy/runtime -type d -exec chmod 700 {} +
 sudo find deploy/runtime -type f -exec chmod 600 {} +
