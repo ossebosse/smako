@@ -222,6 +222,8 @@ def _warm_journals():
 
 def start_warm_journals():
     """In a child: record what the registered caches compute from now on."""
+    if os.environ.get("SMAKO_PLANNER_RETURN_CACHES", "1") == "0":
+        return {}
     caches = _warm_journals()
     for cache in caches.values():
         cache.start_journal()
