@@ -3,7 +3,6 @@ import os
 import time
 
 import pytest
-
 from app.services import planner_processes as pp
 
 pytestmark = pytest.mark.skipif(not hasattr(os, "fork"), reason="needs fork")
