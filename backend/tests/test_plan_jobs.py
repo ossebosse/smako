@@ -188,6 +188,8 @@ def test_owned_cancellation_stops_worker_before_the_next_unit_and_reports_real_p
     settings = Settings(price_provider="mock", plan_store_path=tmp_path / "cancel.sqlite")
     monkeypatch.setattr(api, "get_settings", lambda: settings)
     monkeypatch.setattr(main, "get_settings", lambda: settings)
+    # Watches the plan's own thread events: the plan runs in this process.
+    monkeypatch.setenv("SMAKO_PLAN_PROCESSES", "0")
     started, release, stopped = Event(), Event(), Event()
     calls = []
 
@@ -245,7 +247,7 @@ def test_progress_cannot_claim_unmeasured_or_invalid_work(completed,total,unit):
 
 
 @pytest.mark.asyncio
-async def test_retained_cancelled_job_releases_the_cooperative_worker_state():
+async def test_retained_cancelled_job_releases_the_cooperative_worker_state(monkeypatch):
     import gc
     import weakref
 
@@ -254,6 +256,7 @@ async def test_retained_cancelled_job_releases_the_cooperative_worker_state():
     class PlannerState:
         pass
 
+    monkeypatch.setenv("SMAKO_PLAN_PROCESSES", "0")  # inspects the plan's objects here
     references = []
     started, release = Event(), Event()
 
@@ -281,4 +284,27 @@ async def test_retained_cancelled_job_releases_the_cooperative_worker_state():
     assert all(reference() is None for reference in references)
     with pytest.raises(asyncio.CancelledError):
         await job.task
+    await jobs.close()
+
+
+@pytest.mark.asyncio
+async def test_a_cancelled_job_stops_its_plan_process_at_once(monkeypatch):
+    """With one process per plan, cancelling stops the plan immediately."""
+    import os
+    import time
+
+    from app.services.plan_jobs import PlanJobs
+
+    if not hasattr(os, "fork"):
+        pytest.skip("needs fork")
+    monkeypatch.setenv("SMAKO_PLAN_PROCESSES", "1")
+    jobs = PlanJobs(max_pending=1)
+    job = jobs.start("owner", "key", "request", lambda: api._run_personal_thread(lambda: time.sleep(30)))
+    await asyncio.sleep(.5)
+    started = time.monotonic()
+    job.task.cancel()
+    while not job.task.done():
+        await asyncio.sleep(.01)
+    assert time.monotonic() - started < 5
+    assert job.task.cancelled()
     await jobs.close()

@@ -3225,14 +3225,21 @@ class PersonalPlanner:
         """Qualify the not yet known recipes on several cores (planner_processes).
 
         Each worker runs this same qualification on its slice and returns the
-        rows plus the package quotes it priced; the serial loop then reads the
+        rows plus what it computed into the shared caches (package quotes,
+        product resolutions, nutrition evidence); the serial loop then reads the
         rows as known rows, so the result is the one a single core would give,
-        and the week search reuses the quotes instead of pricing them again. A
+        and the week search reuses them instead of computing them again. A
         slice that fails is simply qualified here afterwards.
         """
         from app.services.plan_jobs import remaining_planning_seconds
         from app.services.planner_context import content_digest
-        from app.services.planner_processes import run_in_processes, worker_count
+        from app.services.planner_processes import (
+            absorb_warm,
+            run_in_processes,
+            start_warm_journals,
+            warm_journals,
+            worker_count,
+        )
 
         workers = worker_count()
         if workers < 2:
@@ -3249,18 +3256,22 @@ class PersonalPlanner:
                 from app.services import plan_jobs
                 plan_jobs._stage_reporter.set(None)
                 plan_jobs._engine_reporter.set(None)
-                cache = self.prepared.package_cache
-                cache.start_journal()
+                caches = start_warm_journals()
                 rows = self._candidates(meal, fixed_slots=fixed_slots, _rows_only=part)
-                return rows, cache.journal()
+                return rows, warm_journals(caches)
 
+            # The shared caches' scopes for this request exist before the fork,
+            # so what the workers resolve can be kept here.
+            from app.services.planner_shared_cache import nutrition_scope, planner_scope
+            planner_scope(self)
+            nutrition_scope(self)
             answers, missing = run_in_processes(pending, work, timeout=timeout, workers=workers)
-            rows, quotes = {}, 0
-            for part_rows, journal in answers:
+            rows, kept = {}, 0
+            for part_rows, warm in answers:
                 rows.update(part_rows)
-                quotes += self.prepared.package_cache.absorb(journal)
+                kept += absorb_warm(warm)
         self.diagnostics.pools[-1]["parallel_qualification"] = {
-            "workers": workers, "recipes": len(pending), "rows": len(rows), "quotes": quotes,
+            "workers": workers, "recipes": len(pending), "rows": len(rows), "kept_entries": kept,
             "slices_redone": len(missing)}
         return {**stored_rows, **rows}
 

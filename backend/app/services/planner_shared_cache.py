@@ -38,9 +38,10 @@ def enabled() -> bool:
 
 
 class _Scope:
-    __slots__ = ("entries", "keep", "stats")
+    __slots__ = ("entries", "keep", "key", "stats")
 
-    def __init__(self, keep, expired):
+    def __init__(self, keep, expired, key=None):
+        self.key = key
         self.entries: OrderedDict = OrderedDict()
         self.keep = weakref.ref(keep, expired)
         self.stats = {"hits": 0, "misses": 0, "stores": 0, "evictions": 0}
@@ -51,6 +52,38 @@ class SharedResolution:
         self.scope_limit, self.entry_limit = scope_limit, entry_limit
         self._scopes: OrderedDict = OrderedDict()
         self._lock = threading.Lock()
+        self._journal = None
+        # Entries a planner process computes come back to this process.
+        from app.services.planner_processes import register_fork_safe, register_warm_cache
+        register_fork_safe(self)
+        register_warm_cache(self)
+
+    def _after_fork(self):
+        self._lock = threading.Lock()
+
+    def start_journal(self):
+        with self._lock:
+            self._journal = []
+
+    def journal(self):
+        with self._lock:
+            return list(self._journal or ())
+
+    def absorb(self, entries):
+        """Keep entries a planner process computed, in scopes this process has."""
+        added = 0
+        with self._lock:
+            by_key = {scope.key: scope for scope in self._scopes.values()}
+            for scope_key, key, entry in entries:
+                scope = by_key.get(scope_key)
+                if scope is None or key in scope.entries:
+                    continue
+                if len(scope.entries) >= self.entry_limit:
+                    scope.entries.popitem(last=False)
+                    scope.stats["evictions"] += 1
+                scope.entries[key] = entry
+                added += 1
+        return added
 
     def scope(self, key, keep):
         def expired(reference):
@@ -64,7 +97,7 @@ class SharedResolution:
             if scope is None or scope.keep() is not keep:
                 if len(self._scopes) >= self.scope_limit:
                     self._scopes.popitem(last=False)
-                scope = self._scopes[key] = _Scope(keep, expired)
+                scope = self._scopes[key] = _Scope(keep, expired, key)
             else:
                 self._scopes.move_to_end(key)
             return scope
@@ -86,6 +119,8 @@ class SharedResolution:
                 scope.stats["evictions"] += 1
             scope.entries[key] = entry
             scope.stats["stores"] += 1
+            if self._journal is not None and scope.key is not None:
+                self._journal.append((scope.key, key, entry))
 
     def clear(self):
         with self._lock:

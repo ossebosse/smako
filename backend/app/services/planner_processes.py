@@ -220,6 +220,31 @@ def _warm_journals():
     return {key: cache for key, cache in caches.items() if cache is not None}
 
 
+def start_warm_journals():
+    """In a child: record what the registered caches compute from now on."""
+    caches = _warm_journals()
+    for cache in caches.values():
+        cache.start_journal()
+    return caches
+
+
+def warm_journals(caches) -> dict:
+    return {key: cache.journal() for key, cache in caches.items()}
+
+
+def absorb_warm(warm) -> int:
+    """In the parent: keep what a child computed (registered caches only)."""
+    caches, added = _warm_journals(), 0
+    for key, entries in (warm or {}).items():
+        cache = caches.get(key)
+        if cache is not None and entries:
+            try:
+                added += cache.absorb(entries) or 0
+            except Exception:
+                logger.warning("plan_process could not keep warm entries", exc_info=True)
+    return added
+
+
 def run_plan_in_process(work: Callable[[], object]):
     """Run one whole plan (``work``) in its own process; see the module notes.
 
@@ -263,14 +288,12 @@ def _run_plan_child(work, read, write, share):  # pragma: no cover - runs in the
         from app.services import plan_jobs
         plan_jobs._stage_reporter.set(lambda stage, progress: _send(write, ("stage", stage, progress)))
         plan_jobs._engine_reporter.set(lambda limit: _send(write, ("engine", limit)))
-        caches = _warm_journals()
-        for cache in caches.values():
-            cache.start_journal()
+        caches = start_warm_journals()
         try:
             outcome = ("result", work())
         except BaseException as error:  # noqa: BLE001 - sent to the parent, raised there
             outcome = ("error", error)
-        warm = {key: cache.journal() for key, cache in caches.items()}
+        warm = warm_journals(caches)
         try:
             _send(write, (*outcome, warm))
         except Exception:  # noqa: BLE001 - e.g. an error that cannot be pickled
@@ -316,23 +339,12 @@ def _await_plan_child(work, pid, read, plan_jobs):
     if final is None or final[0] == "lost":
         logger.warning("plan_process lost=%s; planning in the request thread", "answer" if final else "child")
         if final is not None:
-            _absorb(final[2])
+            absorb_warm(final[2])
         return work()
-    _absorb(final[2])
+    absorb_warm(final[2])
     if final[0] == "error":
         raise final[1]
     return final[1]
-
-
-def _absorb(warm) -> None:
-    caches = _warm_journals()
-    for key, entries in (warm or {}).items():
-        cache = caches.get(key)
-        if cache is not None and entries:
-            try:
-                cache.absorb(entries)
-            except Exception:
-                logger.warning("plan_process could not keep warm entries", exc_info=True)
 
 
 def _stop(pid) -> None:

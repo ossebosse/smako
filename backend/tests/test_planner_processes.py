@@ -71,12 +71,15 @@ def test_qualification_asks_workers_only_for_unknown_recipes_and_merges_their_ro
 
     planner = SimpleNamespace(_candidates=candidates, diagnostics=SimpleNamespace(pools=[{}]),
                               prepared=SimpleNamespace(package_cache=cache))
+    from app.services import planner_shared_cache
+    monkeypatch.setattr(planner_shared_cache, "planner_scope", lambda planner: None)
+    monkeypatch.setattr(planner_shared_cache, "nutrition_scope", lambda planner: None)
     monkeypatch.setenv("SMAKO_PLANNER_PROCESSES", "3")
     monkeypatch.setattr(pp, "_MIN_ITEMS_PER_WORKER", 10)
     rows = PersonalPlanner._qualify_in_processes(planner, None, recipes, known, ())
     assert len(rows) == 60 and rows[content_digest(recipes[0])]["status"] == "passed"
     assert planner.diagnostics.pools[-1]["parallel_qualification"] == {
-        "workers": 3, "recipes": 59, "rows": 59, "quotes": 59, "slices_redone": 0}
+        "workers": 3, "recipes": 59, "rows": 59, "kept_entries": 59, "slices_redone": 0}
     # The parent asked nothing itself: the workers did (their list is theirs),
     # and the quotes they priced are now in the parent's cache.
     assert asked == []
@@ -217,3 +220,25 @@ def test_a_lock_held_in_another_thread_at_fork_is_free_in_the_plan_process(monke
     finally:
         release.set()
         thread.join()
+
+
+def test_shared_resolution_entries_from_a_plan_process_are_kept(monkeypatch):
+    from app.services.planner_shared_cache import SharedResolution
+
+    monkeypatch.setenv("SMAKO_PLAN_PROCESSES", "1")
+
+    class Prepared:
+        pass
+
+    prepared, shared = Prepared(), SharedResolution()
+    scope = shared.scope(("universe", 1), prepared)
+
+    def work():
+        shared.put(shared.scope(("universe", 1), prepared), "mjölk", ("ok", [1, 2], ()))
+        shared.put(shared.scope(("other", 2), prepared), "x", ("ok", [], ()))
+        return "done"
+
+    assert pp.run_plan_in_process(work) == "done"
+    assert shared.get(scope, "mjölk") == ("ok", [1, 2], ())
+    # A scope only the child had is not recreated here.
+    assert len(shared.stats()) == 1
