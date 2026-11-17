@@ -32,7 +32,11 @@ def generic_suggestions(query, indexed_words=None):
     """
     name, amount, unit = parse_quantity(query)
     needle = search_text(name)
-    whole = bool(needle) and " " not in needle and indexed_words is not None and needle in indexed_words
+    # A typed word that is a food of its own, or the end of compound names in
+    # the area ("vetemjöl"), is matched as a whole word.
+    whole = bool(needle) and " " not in needle and indexed_words is not None and (
+        needle in indexed_words
+        or (len(needle) >= 3 and any(len(word) - len(needle) >= 3 and word.endswith(needle) for word in indexed_words)))
     matches = [row for row in GENERICS if not needle or any(
         (needle in search_text(value).split()) if whole else (needle in search_text(value))
         for value in [row["name"], row["query"], *row.get("aliases", [])])]

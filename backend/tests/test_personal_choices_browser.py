@@ -38,6 +38,9 @@ def choices(request):
         browser = getattr(pw, request.param).launch()
         page = browser.new_page(viewport={"width": 1280, "height": 1000})
         page.on("pageerror", lambda error: errors.append(str(error)))
+        # Portionsvikt is hidden for people until recipes state their finished
+        # weight; these tests still exercise its controls.
+        page.add_init_script("window.SMAKO_SHOW_WEIGHT = true;")
 
         def api(route):
             path = route.request.url.split("/api/")[-1].split("?")[0]
@@ -261,6 +264,8 @@ def test_old_A_keeps_all_normalized_choices_without_new_variation_intent(choices
     page.goto(url);choose_location(page)
     posted=submit(page,captured)
     assert 'variation_intent' not in posted
+    # Staples under "Har du hemma?" are new and ticked by default.
+    assert posted['personal'].pop('staples_at_home') == ["salt", "svartpeppar", "rapsolja"]
     assert PlanRequest.model_validate(posted).model_dump(mode='json')==PlanRequest.model_validate(draft).model_dump(mode='json')
 
 
@@ -652,6 +657,8 @@ def test_request_parity_against_pre_change_frontend(choices, seed):
     assert PlanRequest.model_validate(before).personal.use_pantry is True
     assert after["personal"]["use_pantry"] is True
     before["personal"]["use_pantry"] = True
+    # New: staples ticked under "Har du hemma?" (salt, pepper, rapeseed oil by default).
+    assert after["personal"].pop("staples_at_home") == ["salt", "svartpeppar", "rapsolja"]
     assert before == after
 
 
@@ -1467,3 +1474,23 @@ def test_plan_view_keeps_meal_progress_in_the_meal_card(choices, tmp_path):
     expect(status).to_contain_text("Testfel för måltiden.")
     expect(status).to_have_attribute("data-state", "error")
     expect(page.locator("#personal-status")).to_have_text("")
+
+
+
+def test_portion_weight_is_hidden_and_never_sent_for_people(choices):
+    page, url, captured = choices
+    page.add_init_script("window.SMAKO_SHOW_WEIGHT = false;")
+    page.goto(url)
+    choose_location(page)
+    expect(page.locator("#dinner-weight-open")).to_be_hidden()
+    meal = submit(page, captured)["personal"]["meals"][0]
+    assert not any("weight" in key for key in meal.get("limits", {}))
+
+
+def test_staples_at_home_are_ticked_and_can_be_changed(choices):
+    page, url, captured = choices
+    page.goto(url)
+    choose_location(page)
+    assert submit(page, captured)["personal"]["staples_at_home"] == ["salt", "svartpeppar", "rapsolja"]
+    page.evaluate("""() => { for (const box of document.querySelectorAll('input[name="staple"]')) box.checked = box.value === "olivolja"; }""")
+    assert submit(page, captured)["personal"]["staples_at_home"] == ["olivolja"]

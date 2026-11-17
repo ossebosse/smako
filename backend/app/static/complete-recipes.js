@@ -453,7 +453,7 @@
     if(overlap.length){const plan=el("div",null,"recipe-parallel-plan");for(const text of overlap)plan.append(el("p",text));method.append(plan);}
     const instructions=presentation.instructions;
     instructions.forEach((instruction,index)=>{
-      const item=el("li");const step=design.steps?.[index];item.append(el("p",typeof instruction==="string"?instruction:instruction.text));
+      const item=el("li");const step=design.steps?.[index];item.append(el("p",plainStep(typeof instruction==="string"?instruction:instruction.text,recipe)));
       if(step?.duration_minutes!=null)item.append(el("span",`ca ${duration(step.duration_minutes)}`,"step-timing"));steps.append(item);
     });method.append(steps);out.append(method);return out;
   }
@@ -697,5 +697,14 @@
       }
     }finally{signal?.removeEventListener("abort",abort);if(reader===flow)reader=null;}
   }
-  window.SmakoRecipes=Object.freeze({readJson,userError,controls,renderRecipe,recipeFeedback,searchNotice,financials,membershipSummary,productDetails,diagnostics,ingredientCount,nutritionNumber,nutritionInformation,mealDescription,cookingPresentation,cuisines,jobRequest,pendingJob,forgetJob,cancelJob,clearPrivateDrafts,storage});
+  // Library steps say "saltet till huvudrätten" and "tillbehörets salt" so a
+  // food used twice is never mixed up. When the recipe has it once, say "salt".
+  function plainStep(text,recipe){
+    const names=(recipe?.ingredients||[]).map(i=>String(i.canonical_name||i.name||"").toLocaleLowerCase("sv"));
+    const once=word=>{const w=word.toLocaleLowerCase("sv");const stem=[/(erna|arna|orna)$/,/(en|et|an|na)$/,/n$/].reduce((v,r)=>v.length>4&&r.test(v)?v.replace(r,""):v,w);return stem.length>=3&&names.filter(n=>n.includes(stem)).length===1;};
+    return String(text)
+      .replace(/\btillbehörets ([a-zåäöé]+)/gi,(all,word)=>once(word)?word:all)
+      .replace(/\b([a-zåäöé]+) till huvudrätten\b/gi,(all,word)=>once(word)?word:all);
+  }
+  window.SmakoRecipes=Object.freeze({plainStep,readJson,userError,controls,renderRecipe,recipeFeedback,searchNotice,financials,membershipSummary,productDetails,diagnostics,ingredientCount,nutritionNumber,nutritionInformation,mealDescription,cookingPresentation,cuisines,jobRequest,pendingJob,forgetJob,cancelJob,clearPrivateDrafts,storage});
 })();

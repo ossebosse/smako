@@ -679,7 +679,9 @@ class PreparedPriceUniverse:
                 groups.setdefault((store.chain, address), []).append(store)
         result = {}
         for members in groups.values():
-            if len(members) > 1 and len({m.name.casefold() for m in members}) == 1:
+            # Same chain, name and address, priced as different kinds of context.
+            if (len(members) > 1 and len({m.name.casefold() for m in members}) == 1
+                    and len({str(m.price_context_type or "").casefold() for m in members}) == len(members)):
                 lead = max(members, key=lambda m: (counts.get(m.store_id, 0), m.store_id))
                 result[lead.store_id] = frozenset(m.store_id for m in members) - {lead.store_id}
         object.__setattr__(self, "_store_companions", result)

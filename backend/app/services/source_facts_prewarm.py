@@ -72,7 +72,9 @@ def schedule_source_facts_prewarm(settings, universes, *, loader=None, start=Tru
     if not targets:
         return report
     if loader is None:
-        from app.services.personal_source_facts import load_retained_facts as loader
+        # The planner reads cached_retained_facts; warming load_retained_facts
+        # directly left the first plan after a start to load facts again.
+        from app.services.personal_source_facts import cached_retained_facts as loader
     prepare_sources = getattr(settings, "library_search_policy", "legacy") == "smako-current-library-v2"
     if prepare_sources and preparer is None:
         from app.services.meal_prepared_artifacts import prepare_current_sources as preparer

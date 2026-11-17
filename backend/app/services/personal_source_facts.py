@@ -1199,7 +1199,9 @@ _RETAINED_LOCK = threading.Lock()
 
 
 def _retained_ttl() -> float:
-    return float(os.environ.get("SMAKO_RETAINED_FACTS_TTL", "600"))
+    # The key holds the universe and the source files, so a long life is safe;
+    # 10 minutes made the first plan after a quiet spell load facts again.
+    return float(os.environ.get("SMAKO_RETAINED_FACTS_TTL", "21600"))
 
 
 def _source_fingerprint():

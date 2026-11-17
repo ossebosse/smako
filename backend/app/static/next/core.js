@@ -313,7 +313,7 @@
   }
   function recipeDetails(recipe, open) {
     const ingredients = el("ul", null, "ingredients"); for (const i of recipe.ingredients || []) ingredients.append(el("li", `${number(i.quantity)} ${i.unit} ${i.name}`));
-    const steps = el("ol", null, "steps"); for (const step of recipe.instructions || []) steps.append(el("li", FORMS.reduce((text, [from, to]) => text.replace(from, to), step)));
+    const steps = el("ol", null, "steps"); for (const step of recipe.instructions || []) steps.append(el("li", FORMS.reduce((text, [from, to]) => text.replace(from, to), plainStep(step, recipe))));
     if (open) return [el("h4", "Ingredienser"), ingredients, el("h4", "Gör så här"), steps];
     const more = el("details", null, "recipe-more"); more.append(el("summary", "Visa receptet"), el("h4", "Ingredienser"), ingredients, el("h4", "Gör så här"), steps);
     return [more];
@@ -653,6 +653,15 @@
   }
 
   const MEALS = { dinner: "Middag", breakfast: "Frukost", snack: "Mellanmål" };
+  // Same rule as SmakoRecipes.plainStep: "saltet till huvudrätten" becomes "saltet" when the recipe has salt once.
+  function plainStep(text, recipe) {
+    const names = (recipe?.ingredients || []).map(i => String(i.canonical_name || i.name || "").toLocaleLowerCase("sv"));
+    const once = word => { const w = word.toLocaleLowerCase("sv");
+      const stem = [/(erna|arna|orna)$/, /(en|et|an|na)$/, /n$/].reduce((v, r) => v.length > 4 && r.test(v) ? v.replace(r, "") : v, w);
+      return stem.length >= 3 && names.filter(n => n.includes(stem)).length === 1; };
+    return String(text).replace(/\btillbehörets ([a-zåäöé]+)/gi, (all, word) => once(word) ? word : all)
+      .replace(/\b([a-zåäöé]+) till huvudrätten\b/gi, (all, word) => once(word) ? word : all);
+  }
   const FORMS = [[/\bas_sold\b/g, "som såld"], [/\braw_edible\b/g, "rå, rensad"], [/\bcooked_drained\b/g, "kokt och avrunnen"], [/\bdry\b/g, "torr"]];
   function nutritionText(slotId) {
     const row = (S.plan?.plan?.personal?.checks?.nutrition || []).find(n => n.slot_id === slotId), values = row?.values || {}, parts = [];
@@ -671,7 +680,7 @@
     if (actions) { const like = likeLine(slot); if (like) card.append(like); }
     const more = el("details", null, "recipe-more"); more.append(el("summary", "Visa receptet"));
     const ingredients = el("ul", null, "ingredients"); for (const i of recipe.ingredients) ingredients.append(el("li", `${number(i.quantity)} ${i.unit} ${i.name}`));
-    const steps = el("ol", null, "steps"); for (const step of recipe.instructions || []) steps.append(el("li", FORMS.reduce((text, [from, to]) => text.replace(from, to), step)));
+    const steps = el("ol", null, "steps"); for (const step of recipe.instructions || []) steps.append(el("li", FORMS.reduce((text, [from, to]) => text.replace(from, to), plainStep(step, recipe))));
     more.append(el("h4", "Ingredienser"), ingredients, el("h4", "Gör så här"), steps); card.append(more);
     if (actions) { const row = el("div", null, "recipe-actions"); row.append(button("Byt recept", () => replaceRecipe(slot.id), "btn"), button("Ta bort", () => removeRecipe(slot.id), "btn quiet")); card.append(row); }
     return card;
@@ -723,6 +732,8 @@
     const names = new Map((S.location?.contexts || []).map(c => [c.context_id, c]));
     const count = b.stores.reduce((n, s) => n + s.items.length, 0), progress = el("p", null, "picked", { role: "status" });
     const update = () => { progress.textContent = `${done.size} av ${plural(count, "vara", "varor")} plockade`; try { localStorage.setItem(pickedKey(), JSON.stringify([...done])); } catch (_) { /* kept for this visit */ } };
+    const missing = S.plan?.personal?.checks?.missing_extras || [];
+    if (missing.length) box.append(el("p", `Hittade ingen vara för ${missing.map(m => m.name).join(", ")}. Resten av listan är räknad. Prova ett annat ord för ${missing.length > 1 ? "dem" : "den"}.`, "notice", { role: "status" }));
     box.append(progress);
     // One shop can be priced by two contexts (catalogue and its own campaigns).
     const shops = [];
