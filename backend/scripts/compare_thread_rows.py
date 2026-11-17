@@ -63,9 +63,15 @@ for kind, keys in kinds.items():
         detail = {}
         for f in kind:
             x, y = ea.get(f), eb.get(f)
-            if isinstance(x, (list, tuple)) and isinstance(y, (list, tuple)):
-                sx, sy = {json.dumps(i, sort_keys=True) for i in x}, {json.dumps(i, sort_keys=True) for i in y}
+            if isinstance(x, (list, tuple, set, frozenset)) and isinstance(y, (list, tuple, set, frozenset)):
+                sx, sy = {json.dumps(i, sort_keys=True, default=str) for i in x}, {
+                    json.dumps(i, sort_keys=True, default=str) for i in y}
                 detail[f] = {"only_serial": sorted(sx - sy)[:4], "only_thread": sorted(sy - sx)[:4]}
             else:
                 detail[f] = [x, y]
-        print(json.dumps(detail, ensure_ascii=False)[:900], flush=True)
+        print(json.dumps(detail, ensure_ascii=False, default=str)[:900], flush=True)
+paid = [((serial.get(k) or {}).get("evidence") or {}).get("paid") for k in kinds.get(("packages", "paid"), [])]
+other = [((threaded.get(k) or {}).get("evidence") or {}).get("paid") for k in kinds.get(("packages", "paid"), [])]
+pairs = [(a, b) for a, b in zip(paid, other, strict=True) if a is not None and b is not None]
+print(json.dumps({"thread_dearer": sum(b > a for a, b in pairs), "thread_cheaper": sum(b < a for a, b in pairs),
+                  "mean_diff": round(sum(b - a for a, b in pairs) / max(1, len(pairs)), 2)}), flush=True)
