@@ -11,7 +11,6 @@ from __future__ import annotations
 
 import re
 from dataclasses import dataclass
-from functools import lru_cache
 from typing import Any
 
 from app.models.product import SemanticConfidence
@@ -20,6 +19,7 @@ from app.services.ingredient_normalizer import (
     _search_text,
     canonicalize_ingredient_name,
 )
+from app.services.pure_memo import pure_memo
 from pydantic import BaseModel, ConfigDict, Field
 
 
@@ -1408,7 +1408,7 @@ def _is_filled_dough_dish(text: str) -> bool:
             and not _contains_any(text, _FILLED_DOUGH_COMPONENT_WORDS))
 
 
-@lru_cache(maxsize=8192)
+@pure_memo(8192)
 def _classify_prepared_form(text: str) -> str | None:
     for product_form, markers in _NORMALIZED_PREPARED_FORM_MARKERS:
         if any(marker in text for marker in markers):
@@ -1708,7 +1708,7 @@ def _infer_chicken_role(text: str) -> tuple[str, str | None] | None:
     return "generic_meat", "meat"
 
 
-@lru_cache(maxsize=8192)
+@pure_memo(8192)
 def _infer_special_identity(
     text: str,
     category_text: str = "",

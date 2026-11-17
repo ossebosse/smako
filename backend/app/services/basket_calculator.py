@@ -27,6 +27,7 @@ from app.models.product import (
 from app.models.provenance import SourceProvenance
 from app.services.ingredient_normalizer import normalize_quantity
 from app.services.purchase_quantity_resolver import PurchaseQuantityResolver
+from app.services.pure_memo import pure_memo
 
 from grocery_data.app.domain.counted_offer_checkout import uses_counted_offer_checkout
 from grocery_data.app.domain.promotion_pricing import (
@@ -81,11 +82,11 @@ def _prepare_checkout_offers(offer_rows):
             cacheable = False
     key = tuple(map(id, offer_rows))
     if cacheable:
-        with _PREPARED_OFFERS_LOCK:
-            cached = _PREPARED_OFFERS.get(key)
-            if cached is not None and all(a is b for a, b in zip(cached[0], offer_rows, strict=True)):
-                _PREPARED_OFFERS.move_to_end(key)
-                return cached[1], True
+        # A plain read: with free-threaded Python every quote of every thread
+        # passed through this lock (docs/PLANNING-ARCHITECTURE.md).
+        cached = _PREPARED_OFFERS.get(key)
+        if cached is not None and all(a is b for a, b in zip(cached[0], offer_rows, strict=True)):
+            return cached[1], True
     normalized: list[CheckoutPromotion] = []
     for index, offer in enumerate(offer_rows):
         reference = offer.price_contract_id or f"basket-offer:{index:08d}"
@@ -131,7 +132,7 @@ def _prepare_checkout_offers(offer_rows):
     return prepared, cacheable
 
 
-@functools.lru_cache(maxsize=2048)
+@pure_memo(2048)
 def _prepared_checkout_resolution(package_count, base, regular, prepared, target_date, context_key):
     # The context is part of the cache key. Preserve even Decimal's sticky
     # flags on both misses and hits; trapped failures are never cached.

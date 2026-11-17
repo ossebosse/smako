@@ -7,10 +7,10 @@ import unicodedata
 from collections import OrderedDict
 from collections.abc import Iterable
 from decimal import Decimal
-from functools import lru_cache
 
 from app.models.ingredient import NormalizedIngredient
 from app.models.recipe import Recipe
+from app.services.pure_memo import pure_memo
 
 from grocery_data.app.domain.recipe import RECIPE_RELEVANT_INGREDIENTS
 
@@ -193,7 +193,7 @@ def _search_text(value: str) -> str:
     return _uncached_search_text(value)
 
 
-@lru_cache(maxsize=8192)
+@pure_memo(8192)
 def _cached_search_text(value: str) -> str:
     return _uncached_search_text(value)
 
@@ -328,7 +328,7 @@ def canonicalize_ingredient_name(name: str) -> str:
     return _canonicalize_name(name) if len(name) <= 4096 else _canonicalize_name.__wrapped__(name)
 
 
-@lru_cache(maxsize=4096)
+@pure_memo(4096)
 def _canonicalize_name(name: str) -> str:
     # The alias tables are constructed once at module import from versioned
     # source. No prices, product facts or private request state enter this pure

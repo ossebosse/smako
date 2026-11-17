@@ -86,6 +86,11 @@ def load_configured_price_universe(
                 manager.load_file_and_activate(extra)
         except (OSError, ValueError, RuntimeError) as exc:
             logging.getLogger(__name__).warning("municipal_load_failed city=%s error_type=%s", area["city"], type(exc).__name__)
+    # Snapshots of artifacts or code versions no longer loaded are dropped.
+    from app.services import price_universe_snapshot
+    root = price_universe_snapshot.snapshot_root()
+    if root is not None and root.is_dir() and manager.loaded_snapshots:
+        price_universe_snapshot.remove_others(root, set(manager.loaded_snapshots))
     return prepared
 
 

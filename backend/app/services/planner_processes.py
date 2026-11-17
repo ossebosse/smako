@@ -233,6 +233,9 @@ def qualification_workers() -> Iterator[int]:
     In a plan's own process the app process decides, with the plans and the
     memory of that moment; the plan's own process is already one of its cores.
     """
+    if free_threaded():  # threads share memory: only the cores count
+        yield _fair_share()
+        return
     if _parent_channel is not None:
         granted = _ask_parent("reserve", 0)
         try:
@@ -261,7 +264,14 @@ def _ask_parent(kind: str, count: int) -> int:
     return struct.unpack("!I", data)[0]
 
 
+def free_threaded() -> bool:
+    """Python without the GIL: threads run at the same time and share memory."""
+    return hasattr(sys, "_is_gil_enabled") and not sys._is_gil_enabled()
+
+
 def plan_processes_enabled() -> bool:
+    if free_threaded():
+        return False  # plans are threads already; nothing to copy
     return _fork_supported() and os.environ.get("SMAKO_PLAN_PROCESSES", "1") not in {"0", "false", ""}
 
 
@@ -381,6 +391,40 @@ def run_in_processes(items: Sequence, work: Callable[[Sequence], object], *, tim
             pass
         os.close(fd)
         missing.append(index)
+    return [answers[i] for i in sorted(answers)], sorted(missing)
+
+
+def run_in_threads(items: Sequence, make_work: Callable[[], Callable[[Sequence], object]], *,
+                   workers: int) -> tuple[list, list[int]]:
+    """Free-threaded counterpart of ``run_in_processes(here=True)``.
+
+    ``make_work()`` gives each slice its own work function (its own planner
+    copy); every thread runs in a copy of this thread's context, so deadline,
+    cancellation and cache sessions behave as here. Returns the answers in
+    slice order and the slices that failed.
+    """
+    import contextvars
+    from concurrent.futures import ThreadPoolExecutor
+
+    slices = _slices(len(items), workers + 1)
+    if len(slices) < 2:
+        return [], list(range(len(slices)))
+    tasks = [(index, make_work(), items[a:b]) for index, (a, b) in enumerate(slices)]
+    answers, missing = {}, []
+    with ThreadPoolExecutor(max_workers=len(slices) - 1, thread_name_prefix="smako-qualify") as pool:
+        futures = {index: pool.submit(contextvars.copy_context().run, work, part)
+                   for index, work, part in tasks[1:]}
+        index, work, part = tasks[0]
+        try:
+            answers[index] = work(part)
+        except Exception:  # noqa: BLE001 - redone by the caller
+            missing.append(index)
+        for index, future in futures.items():
+            try:
+                answers[index] = future.result()
+            except Exception:
+                logger.warning("qualification thread failed; its slice is redone", exc_info=True)
+                missing.append(index)
     return [answers[i] for i in sorted(answers)], sorted(missing)
 
 

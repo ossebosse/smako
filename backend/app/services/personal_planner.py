@@ -3238,8 +3238,10 @@ class PersonalPlanner:
         from app.services.planner_processes import (
             _MIN_ITEMS_PER_WORKER,
             absorb_warm,
+            free_threaded,
             qualification_workers,
             run_in_processes,
+            run_in_threads,
             start_warm_journals,
             warm_journals,
         )
@@ -3253,6 +3255,21 @@ class PersonalPlanner:
         with qualification_workers() as workers:
             if workers < 1:
                 return stored_rows
+            if free_threaded():
+                with performance_span("personal_parallel_qualification"):
+                    rows, missing = {}, []
+                    # This thread qualifies the first slice with this planner,
+                    # so its own memos are as warm as after a serial run.
+                    copies = iter([self._qualify_slice(meal, fixed_slots, here=True)])
+                    answers, missing = run_in_threads(
+                        pending, lambda: next(copies, None) or self._thread_copy()._qualify_slice(meal, fixed_slots),
+                        workers=workers)
+                    for part_rows in answers:
+                        rows.update(part_rows)
+                self.diagnostics.pools[-1]["parallel_qualification"] = {
+                    "workers": workers, "threads": True, "recipes": len(pending), "rows": len(rows),
+                    "slices_redone": len(missing)}
+                return {**stored_rows, **rows}
             with performance_span("personal_parallel_qualification"):
                 parent = os.getpid()
 
@@ -3281,6 +3298,52 @@ class PersonalPlanner:
             "workers": workers, "recipes": len(pending), "rows": len(rows), "kept_entries": kept,
             "slices_redone": len(missing)}
         return {**stored_rows, **rows}
+
+    def _qualify_slice(self, meal, fixed_slots, *, here=False):
+        def work(part):
+            if not here:
+                from app.services import plan_jobs
+                plan_jobs._stage_reporter.set(None)  # the request reports its own progress
+                # The request's quote session is plain dicts the request thread
+                # keeps using: this thread opens its own (in its own context).
+                self.optimizer._quote_cache_context.set(None)
+                # Likewise the request's requirement-key scope: it keeps the
+                # objects its keys name alive by id and is set up lazily.
+                from app.services import basket_optimizer
+                basket_optimizer._REQUIREMENT_KEY_SCOPE.set(
+                    {} if basket_optimizer._REQUIREMENT_KEY_SCOPE.get() is not None else None)
+            return self._candidates(meal, fixed_slots=fixed_slots, _rows_only=part)
+        return work
+
+    def _thread_copy(self):
+        """This planner for another thread: same request, data and shared caches,
+        its own request-local memos (they are plain dicts, not shared safely).
+
+        Only its qualification rows are used, as from a worker process."""
+        import copy
+
+        from app.services.planning_diagnostics import PlanningDiagnostics
+        from app.services.product_planning_trace import ProductPlanningTrace
+
+        other = copy.copy(self)
+        # Each basket sets its price-first lines on the optimizer itself
+        # (verification_policy); a shared optimizer let one thread's lines rank
+        # another thread's products, and every copied recipe came out dearer.
+        # The copy shares the optimizer's pure store-subset memo.
+        other.optimizer = copy.copy(self.optimizer)
+        for name in ("lookup_cache", "queries", "_resolution_trace", "_json_memo", "_merged_profile_memo",
+                     "missing_extras"):
+            setattr(other, name, {})
+        for name in ("lookup_failures", "nutrition_cache", "candidate_sequences", "ecological_results",
+                     "variant_search_evidence", "normalized_recipe_rows", "qualified_nutrition_candidates",
+                     "slot_nutrition_cache", "clean_recipe_cache", "_need_row_templates"):
+            setattr(other, name, OrderedDict())
+        other.recipe_computations = RecipeComputationCache()
+        other.diagnostics = PlanningDiagnostics()
+        other.diagnostics.pools.append({})
+        other.product_trace = ProductPlanningTrace.unrecorded(recipe_cache=other.recipe_computations)
+        other.diagnostics.product_trace = other.product_trace
+        return other
 
     def _data_blocked_text(self, first, meal):
         """What to tell the person when Smako lacks the product data a choice needs (docs/UI-LANGUAGE.md)."""

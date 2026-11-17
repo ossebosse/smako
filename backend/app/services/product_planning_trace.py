@@ -56,6 +56,18 @@ class ProductPlanningTrace:
                 "contexts": {}, "selected": False,
             }
 
+    @classmethod
+    def unrecorded(cls, *, recipe_cache=None):
+        """A trace that follows no product (a qualification thread's copy:
+        only its rows are used, as from a worker process)."""
+        trace = cls.__new__(cls)
+        trace.limit, trace.event_limit = 0, 0
+        trace.products, trace.recipe_needs, trace.search = {}, {}, {}
+        trace.omitted_products = trace.omitted_events = trace.context_count = 0
+        trace._pending_recipes, trace.comparisons = [], []
+        trace._recipe_values = recipe_cache if recipe_cache is not None else RecipeComputationCache()
+        return trace
+
     def identity(self, recipe):
         # Share the existing request-owned exact value snapshot with nutrition
         # diagnostics too. Mutable instructions/forms and copied recipes cannot

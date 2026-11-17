@@ -21,7 +21,7 @@ from collections.abc import Callable, Iterable, Mapping, Sequence
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from decimal import Decimal
-from threading import RLock
+from threading import Event, RLock, local
 from time import perf_counter
 from types import MappingProxyType
 
@@ -306,6 +306,17 @@ class PriceUniverseIndexes(BaseModel):
         self._availability_lookup = MappingProxyType(
             {entry.canonical: entry.context_mask for entry in self.store_availability}
         )
+
+    # A binary snapshot (price_universe_store) carries the entries; the
+    # read-only lookups are rebuilt from them, exactly as after validation.
+    def __getstate__(self) -> dict:
+        state = super().__getstate__()
+        state["__pydantic_private__"] = None
+        return state
+
+    def __setstate__(self, state: dict) -> None:
+        super().__setstate__(state)
+        self.model_post_init(None)
 
     @model_validator(mode="after")
     def validate_unique_keys(self) -> PriceUniverseIndexes:
@@ -780,6 +791,9 @@ class CacheStats(BaseModel):
         return round(self.hits / total, 4) if total else 0.0
 
 
+_MISSING = object()
+
+
 class _ThreadSafeLru[Key, Value]:
     def __init__(self, *, max_entries: int, metric_prefix: str) -> None:
         if max_entries < 1:
@@ -792,32 +806,68 @@ class _ThreadSafeLru[Key, Value]:
         self._misses = 0
         self._evictions = 0
         self._journal: list[tuple[Key, Value]] | None = None
+        self._pending: dict[Key, Event] = {}
+        self._computing = local()
         from app.services.planner_processes import register_fork_safe
         register_fork_safe(self)
 
     def _after_fork(self) -> None:
         self._lock = RLock()
+        self._pending = {}
 
     def get_or_compute(self, key: Key, factory: Callable[[], Value]) -> Value:
-        # Compute under the re-entrant lock.  Cache loaders in this module are
-        # CPU-local and bounded; serializing equal-key misses prevents a costly
-        # first-request stampede after an atomic universe swap.
-        with self._lock:
-            if key in self._values:
-                self._hits += 1
-                increment_performance_counter(f"{self.metric_prefix}_hits")
-                increment_performance_counter("cache_hits")
-                value = self._values.pop(key)
-                self._values[key] = value
-                return value
-            self._misses += 1
-            increment_performance_counter(f"{self.metric_prefix}_misses")
-            increment_performance_counter("cache_misses")
+        # Equal-key misses still compute once (no first-request stampede after
+        # a universe swap), but different keys compute at the same time: with
+        # free-threaded Python, plans and qualification threads run truly in
+        # parallel, and one lock around every computation made them take
+        # turns (docs/PLANNING-ARCHITECTURE.md, "Flera kärnor"). A thread that
+        # is already inside a factory never waits for another thread, so two
+        # factories needing each other's keys cannot deadlock.
+        # A hit is a plain read without the lock (eviction is oldest first):
+        # a package plan hits this cache over a million times.
+        value = self._values.get(key, _MISSING)
+        if value is not _MISSING:
+            self._hits += 1
+            increment_performance_counter(f"{self.metric_prefix}_hits")
+            increment_performance_counter("cache_hits")
+            return value
+        nested = getattr(self._computing, "depth", 0) > 0
+        while True:
+            with self._lock:
+                if key in self._values:
+                    self._hits += 1
+                    increment_performance_counter(f"{self.metric_prefix}_hits")
+                    increment_performance_counter("cache_hits")
+                    return self._values[key]
+                pending = None if nested else self._pending.get(key)
+                if pending is None:
+                    mine = None if nested else self._pending.setdefault(key, Event())
+                    self._misses += 1
+                    increment_performance_counter(f"{self.metric_prefix}_misses")
+                    increment_performance_counter("cache_misses")
+                    break
+            pending.wait()  # another thread computes this key; then read it
+            # (If its factory failed, the key is still missing: try again.)
+        self._computing.depth = getattr(self._computing, "depth", 0) + 1
+        try:
             value = factory()
+        except BaseException:
+            if mine is not None:
+                with self._lock:
+                    self._pending.pop(key, None)
+                mine.set()
+            raise
+        finally:
+            self._computing.depth -= 1
+        with self._lock:
             if self._journal is not None:
                 self._journal.append((key, value))
             self._store(key, value)
-            return value
+            if mine is not None:
+                self._pending.pop(key, None)
+        if mine is not None:
+            mine.set()
+        return value
 
     def _store(self, key: Key, value: Value) -> None:
         self._values[key] = value

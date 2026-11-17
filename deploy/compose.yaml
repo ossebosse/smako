@@ -132,6 +132,9 @@ services:
       SMAKO_OIDC_CLIENT_ID: ${SMAKO_OIDC_CLIENT_ID:-}
       SMAKO_OIDC_CLIENT_SECRET: ${SMAKO_OIDC_CLIENT_SECRET:-}
       GROCERY_RAW_SNAPSHOT_ROOT: /srv/app/var/raw_snapshots
+      # Binary snapshots of loaded price universes: a start loads them in
+      # seconds instead of parsing every JSON artifact (price_universe_snapshot).
+      SMAKO_PREPARED_SNAPSHOT_ROOT: /srv/app/var/prepared_snapshots
     depends_on:
       migrate:
         condition: service_completed_successfully
@@ -160,6 +163,7 @@ services:
       - ${RUNTIME_ROOT:-./runtime}/price_universes:/srv/app/var/price_universes:ro
       - ${RUNTIME_ROOT:-./runtime}/raw_snapshots:/srv/app/var/raw_snapshots:ro
       - ${RUNTIME_ROOT:-./runtime}/reports:/srv/app/var/reports
+      - ${RUNTIME_ROOT:-./runtime}/prepared_snapshots:/srv/app/var/prepared_snapshots
     read_only: true
     tmpfs:
       - /tmp:size=128m,mode=1777
