@@ -35,7 +35,10 @@ from types import MappingProxyType
 FORMAT = "smako-prepared-universe-snapshot-v1"
 _MAGIC = b"SMAKO-SNAPSHOT\n"
 logger = logging.getLogger(__name__)
-_SOURCES = ("backend/app/models", "backend/app/services", "grocery_data/app/domain")
+# Code and the data files read with it (reviewed facts, references): a
+# release that changes any of them writes new snapshots on its first start.
+_SOURCES = ("backend/app", "grocery_data/app")
+_SKIP = ("__pycache__", "/static/")
 _fingerprint: str | None = None
 
 
@@ -45,21 +48,25 @@ def snapshot_root() -> Path | None:
 
 
 def code_fingerprint() -> str:
-    """Digest of every source file whose classes a snapshot can hold."""
+    """Digest of the code and data files whose objects a snapshot can hold."""
     global _fingerprint
     if _fingerprint is None:
         root = Path(__file__).resolve().parents[3]
         digest = hashlib.sha256(FORMAT.encode())
         for folder in _SOURCES:
-            for path in sorted((root / folder).rglob("*.py")):
-                digest.update(path.relative_to(root).as_posix().encode())
+            for path in sorted((root / folder).rglob("*")):
+                name = path.relative_to(root).as_posix()
+                if not path.is_file() or any(part in f"/{name}" for part in _SKIP):
+                    continue
+                digest.update(name.encode())
                 digest.update(path.read_bytes())
         _fingerprint = digest.hexdigest()
     return _fingerprint
 
 
-def snapshot_path(root: Path, source_sha256: str) -> Path:
-    return root / f"{source_sha256}-{code_fingerprint()[:24]}.pickle"
+def snapshot_path(root: Path, source_sha256: str, *, kind: str = "universe") -> Path:
+    prefix = "" if kind == "universe" else f"{kind}-"
+    return root / f"{prefix}{source_sha256}-{code_fingerprint()[:24]}.pickle"
 
 
 def read_only(values: dict) -> MappingProxyType:
@@ -130,7 +137,14 @@ def read(path: Path, *, source_sha256: str):
 
 
 def remove_others(root: Path, keep: set[Path]) -> None:
-    """Drop snapshots of artifacts or code versions no longer loaded."""
+    """Drop universe snapshots of artifacts or code versions no longer loaded."""
     for path in root.glob("*.pickle"):
-        if path not in keep:
+        if path not in keep and len(path.name.split("-")[0]) == 64:
             path.unlink(missing_ok=True)
+
+
+def keep_newest(root: Path, kind: str, count: int = 8) -> None:
+    """Snapshots of one other kind: the newest few (cities × recent sources)."""
+    paths = sorted(root.glob(f"{kind}-*.pickle"), key=lambda p: p.stat().st_mtime, reverse=True)
+    for path in paths[count:]:
+        path.unlink(missing_ok=True)

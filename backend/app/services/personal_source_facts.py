@@ -1246,13 +1246,47 @@ def cached_retained_facts(prepared):
         hit = _RETAINED_CACHE.get(key)
         if hit is not None and hit[0] > now:
             return hit[1]
-    facts = load_retained_facts(prepared)
+    facts = _facts_from_snapshot_or_sources(prepared)
     with _RETAINED_LOCK:
         for old in [k for k, (expires, _) in _RETAINED_CACHE.items() if expires <= now]:
             del _RETAINED_CACHE[old]
         while len(_RETAINED_CACHE) >= 4:
             del _RETAINED_CACHE[min(_RETAINED_CACHE, key=lambda k: _RETAINED_CACHE[k][0])]
         _RETAINED_CACHE[key] = (now + ttl, facts)
+    return facts
+
+
+def _facts_from_snapshot_or_sources(prepared):
+    """The facts from their binary snapshot when one matches, else from the sources.
+
+    Loading them from the sources took 70 s for Malmö at every start. A
+    snapshot (price_universe_snapshot) belongs to the universe's products
+    digest, the source fingerprint above and the code version.
+    """
+    import hashlib
+    import json
+    import logging
+    import pickle
+
+    from app.services import price_universe_snapshot as snapshots
+
+    root = snapshots.snapshot_root()
+    digest = getattr(prepared.universe, "products_digest", None)
+    if root is None or not digest:
+        return load_retained_facts(prepared)
+    identity = hashlib.sha256(json.dumps([digest, repr(_source_fingerprint())]).encode()).hexdigest()
+    path = snapshots.snapshot_path(root, identity, kind="facts")
+    facts = snapshots.read(path, source_sha256=identity)
+    if facts is not None:
+        os.utime(path)  # newest first when old ones are dropped
+        return facts
+    facts = load_retained_facts(prepared)
+    try:
+        snapshots.write(facts, path, source_sha256=identity)
+        snapshots.keep_newest(root, "facts")
+    except (OSError, TypeError, AttributeError, pickle.PicklingError) as exc:
+        # Only the next start's speed depends on it.
+        logging.getLogger(__name__).warning("facts_snapshot_not_written error_type=%s", type(exc).__name__)
     return facts
 
 

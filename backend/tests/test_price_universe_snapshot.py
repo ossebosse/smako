@@ -77,3 +77,25 @@ async def test_without_a_snapshot_folder_nothing_is_written(tmp_path, monkeypatc
     manager = PreparedPriceUniverseManager()
     manager.load_file_and_activate(artifact)
     assert not manager.loaded_snapshots and not list(tmp_path.rglob("*.pickle"))
+
+
+def test_facts_come_from_their_snapshot_until_the_sources_change(tmp_path, monkeypatch):
+    from types import SimpleNamespace
+
+    from app.services import personal_source_facts as module
+
+    monkeypatch.setenv("SMAKO_PREPARED_SNAPSHOT_ROOT", str(tmp_path))
+    loads = []
+    monkeypatch.setattr(module, "load_retained_facts", lambda prepared: loads.append(1) or {"k": ("fact", 1)})
+    stamp = [("raw", 1, 2)]
+    monkeypatch.setattr(module, "_source_fingerprint", lambda: tuple(stamp))
+    prepared = SimpleNamespace(universe=SimpleNamespace(products_digest="a" * 64))
+
+    assert module._facts_from_snapshot_or_sources(prepared) == {"k": ("fact", 1)} and loads == [1]
+    assert module._facts_from_snapshot_or_sources(prepared) == {"k": ("fact", 1)} and loads == [1]
+    stamp[0] = ("raw", 2, 2)  # a source folder changed: loaded again
+    module._facts_from_snapshot_or_sources(prepared)
+    assert loads == [1, 1] and len(list(tmp_path.glob("facts-*.pickle"))) == 2
+    other = SimpleNamespace(universe=SimpleNamespace(products_digest="b" * 64))
+    module._facts_from_snapshot_or_sources(other)
+    assert loads == [1, 1, 1]
