@@ -59,6 +59,24 @@ def test_allt_means_a_mixed_week_of_dinners():
     assert not mixed_week_ok(week("veg"), 1, partial=True, classify=classify)
 
 
+def test_fish_and_vegetarian_has_fish_dinners():
+    from app.services.personal_policy import fish_dinners_needed, fish_week_ok
+
+    kinds = {"veg": "vegetarian", "lax": "fish", "räkor": "shellfish"}
+    classify = lambda r: kinds[r.name]  # noqa: E731
+    week = lambda *names: [dish(n, "x") for n in names]  # noqa: E731
+    assert [fish_dinners_needed(n) for n in range(1, 8)] == [0, 1, 1, 2, 2, 2, 2]
+    assert not fish_week_ok(week("veg", "veg"), 2, partial=False, classify=classify)
+    assert fish_week_ok(week("veg", "lax", "veg"), 3, partial=False, classify=classify)
+    assert not fish_week_ok(week("veg", "lax", "veg", "veg"), 4, partial=False, classify=classify)
+    assert fish_week_ok(week("räkor", "lax", "veg", "veg", "veg"), 5, partial=False, classify=classify)
+    # A partial week passes while the remaining places can still hold the fish.
+    assert fish_week_ok(week("veg", "veg"), 4, partial=True, classify=classify)
+    assert not fish_week_ok(week("veg", "veg", "veg"), 4, partial=True, classify=classify)
+    # Fewer fish dishes in the library than wanted: as many as there are.
+    assert fish_week_ok(week("lax", "veg", "veg", "veg"), 4, partial=False, classify=classify, needed=1)
+
+
 def test_an_extra_store_must_save_at_least_ten_kronor():
     def plan(ica_bread):
         p = prepared(product("mjölk", 1000, "ml", 15), product("bröd", 500, "g", 25),

@@ -128,6 +128,8 @@
   the city's Stora Coop. Allergy choices use the stores' own allergen data:
   the store's ingredient declaration (allergens named in it, traces after "kan
   innehålla") and City Gross's GS1 allergen list (`store_allergens.py`).
+  Fish and vegetarian dinners have at least one fish (or shellfish) dinner
+  with 2–3 dinners and two with 4 or more, as far as the library allows.
 - PriceUniverse is shared and source-driven. Community evidence stays advisory,
   and `USER_SPECIFIC` offers must never enter the shared artifact.
 - Keep product identity and price scope exact. Fuzzy names may suggest manual

@@ -453,6 +453,22 @@ def preference_score(recipes, profile):
     return score
 
 
+def fish_dinners_needed(count):
+    """Owner decision 2026-11-17: fish and vegetarian means fish on the table.
+
+    At least one fish dinner with two or three dinners, two with four or more.
+    Shellfish dishes count as fish dishes.
+    """
+    return 0 if count < 2 else 1 if count <= 3 else 2
+
+
+def fish_week_ok(recipes, count, *, partial, classify=protein_category, needed=None):
+    have = sum(classify(r) in {"fish", "shellfish"} for r in recipes)
+    need = fish_dinners_needed(count) if needed is None else needed
+    remaining = max(0, count - len(recipes)) if partial else 0
+    return have + remaining >= need
+
+
 def mixed_week_ok(recipes, count, *, partial, classify=protein_category):
     """Owner decision 2026-11-15: "Allt" means a mixed week of dinners.
 

@@ -58,6 +58,8 @@ from app.services.personal_policy import (
     is_nonfood,
     mentions,
     merged_profile,
+    fish_dinners_needed,
+    fish_week_ok,
     mixed_week_ok,
     preference_score,
     properties_match,
@@ -3410,6 +3412,8 @@ class PersonalPlanner:
         if getattr(self, "_mixed_week", False):
             wanted += [lambda r: self._protein_category(r) == "vegetarian",
                        lambda r: self._protein_category(r) != "vegetarian"]
+        if getattr(self, "_fish_week", False):
+            wanted.append(lambda r: self._protein_category(r) in {"fish", "shellfish"})
         if not wanted:
             return kept
         ids = {self._recipe_id(r) for r in kept}
@@ -4258,6 +4262,25 @@ class PersonalPlanner:
             if possible:
                 mixed_count = dinner_count
 
+        # Owner decision 2026-11-17: fish and vegetarian has fish dinners (one
+        # with 2–3 dinners, two with 4 or more), as many as the pool allows.
+        fish_count = None
+        if ((generating or replace_slot is not None) and dinner_meal is not None
+                and dinner_meal.diet == "pescetarian" and not dinner_meal.distribution):
+            fishy = lambda r: self._protein_category(r) in {"fish", "shellfish"}  # noqa: E731
+            if replace_slot is None:
+                bases = {r.design.base_id if r.design else self._recipe_id(r) for r in dinner_pool if fishy(r)}
+                fish_needed = min(fish_dinners_needed(dinner_count), len(bases))
+            else:
+                fixed = sum(fishy(g[0].recipe) for g in options
+                            if len(g) == 1 and g[0].meal_type == "dinner" and g[0].recipe and g[0].id != replace_slot)
+                target = next((g for g in options if any(s.id == replace_slot for s in g)), [])
+                can = any(s.meal_type == "dinner" and s.recipe and fishy(s.recipe) for s in target)
+                fish_needed = min(fish_dinners_needed(dinner_count), fixed + can)
+            if fish_needed:
+                fish_count = fish_needed
+        self._fish_week = fish_count is not None
+
         # Owner decision 2026-11-15: each like that a dinner allowed by the other
         # choices names is in at least one dinner (LIKE_MISSING_KR, _preference_cost).
         likes = list(dict.fromkeys([*self.spec.profile.likes, *(dinner_meal.profile.likes if dinner_meal else [])]))
@@ -4294,6 +4317,11 @@ class PersonalPlanner:
             dinners = [s.recipe for s in constraint_slots if s.meal_type == "dinner" and s.recipe]
             if mixed_count is not None and not mixed_week_ok(
                     dinners, mixed_count, partial=not constraint_final or draft, classify=self._protein_category):
+                self.diagnostics.branch(len(chosen), "policy_taste")
+                return False
+            if fish_count is not None and not fish_week_ok(
+                    dinners, dinner_count, partial=not constraint_final or draft,
+                    classify=self._protein_category, needed=fish_count):
                 self.diagnostics.branch(len(chosen), "policy_taste")
                 return False
             if self.complete:
