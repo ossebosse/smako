@@ -22,6 +22,7 @@ class ProductPlanningTrace:
         self.omitted_events = 0
         self.context_count = 0
         self.recipe_needs = {}
+        self._pending_recipes = []
         self.comparisons = []
         self.search = {}
         self._recipe_values = recipe_cache if recipe_cache is not None else RecipeComputationCache()
@@ -103,23 +104,31 @@ class ProductPlanningTrace:
             context["first_stop"] = event
 
     def recipe(self, recipe, stage=None, reason=None):
-        identity = self.identity(recipe)
+        # Recorded as is and described only when diagnostics are written: the
+        # description cost about 4 s per Malmö plan for some 2,300 recipes.
+        self._pending_recipes.append((recipe, stage, reason))
+
+    def _describe_recipes(self):
         from app.services.ingredient_normalizer import canonicalize_ingredient_name
-        names = sorted({canonicalize_ingredient_name(i.name) for i in recipe.ingredients})
-        self.recipe_needs[identity["id"]] = {**identity, "ingredients": names, "ingredient_amounts": [i.model_dump(mode="json") for i in recipe.ingredients],
-            "instructions": list(recipe.instructions), "stopped_at": stage, "reason": reason}
-        if stage:
-            # Distinguish a recipe rejected before product retrieval from a
-            # later meal rejection after this product was actually evaluated.
-            # Neither is automatically an economic product rejection.
-            for row in self.products.values():
-                relevant = set(row["indexes"].get("matched", [])) & set(names)
-                if relevant:
-                    evaluated = any(c["recipe"]["id"] == identity["id"] for c in row["contexts"].values())
-                    row.setdefault("recipe_outcomes" if evaluated else "unreached_recipes", {})[identity["id"]] = {
-                        "recipe": identity, "stage": stage, "reason": reason,
-                        "matched_ingredients": sorted(relevant), "product_evaluated": evaluated,
-                    }
+        pending, self._pending_recipes = self._pending_recipes, []
+        for recipe, stage, reason in pending:
+            identity = self.identity(recipe)
+            names = sorted({canonicalize_ingredient_name(i.name) for i in recipe.ingredients})
+            self.recipe_needs[identity["id"]] = {**identity, "ingredients": names,
+                "ingredient_amounts": [i.model_dump(mode="json") for i in recipe.ingredients],
+                "instructions": list(recipe.instructions), "stopped_at": stage, "reason": reason}
+            if stage:
+                # Distinguish a recipe rejected before product retrieval from a
+                # later meal rejection after this product was actually evaluated.
+                # Neither is automatically an economic product rejection.
+                for row in self.products.values():
+                    relevant = set(row["indexes"].get("matched", [])) & set(names)
+                    if relevant:
+                        evaluated = any(c["recipe"]["id"] == identity["id"] for c in row["contexts"].values())
+                        row.setdefault("recipe_outcomes" if evaluated else "unreached_recipes", {})[identity["id"]] = {
+                            "recipe": identity, "stage": stage, "reason": reason,
+                            "matched_ingredients": sorted(relevant), "product_evaluated": evaluated,
+                        }
 
     def finalize(self, basket):
         selected = {(i.store_id, i.product_id) for s in basket.stores for i in s.items}
@@ -127,6 +136,7 @@ class ProductPlanningTrace:
             row["selected"] = key in selected
 
     def snapshot(self):
+        self._describe_recipes()
         return {
             "version": "product-decision-path-v1", "product_limit": self.limit,
             "context_limit": self.event_limit, "omitted_products": self.omitted_products,

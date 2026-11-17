@@ -25,7 +25,7 @@ from time import monotonic
 
 from app.services.personal_policy import ProductFacts
 
-FACTS_VERSION = "retained-catalog-facts-v13-citygross-declarations"
+FACTS_VERSION = "retained-catalog-facts-v14-store-allergens"
 _CACHE = {}
 _LOCK = RLock()
 _KEY_LOCKS = {}
@@ -532,15 +532,26 @@ def project_raw_facts(raw, *, chain, product_id, snapshot_id, source_reference, 
         labels = raw.get("labels")
         if isinstance(labels, list) and "frozen" in labels:
             classifications["frozen"] = {"labels": deepcopy(labels)}
-    # A complete ingredient string is useful for positive conflicts; it is NOT
-    # an exhaustive proof of allergen absence or compound-product suitability.
+    # Owner decision 2026-11-17: the store's own declaration is the allergen
+    # information. Its ingredient list is complete for allergy and Ät inte checks.
+    from app.services.store_allergens import declared_allergens
+
+    structured = None
+    if chain == "citygross":
+        allergy = _citygross_extension(raw).get("allergenInformation")
+        structured = allergy.get("allergens") if isinstance(allergy, dict) else None
+    allergens = declared_allergens(ingredients, structured)
     fact = ProductFacts(
         source=source_reference,
         source_product_id=product_id,
         source_snapshot_id=snapshot_id,
         retailer_product_id=str(raw.get("id") if chain in {"coop", "citygross"} else raw.get("code") or ""),
         product_classification=tuple(classifications),
-        ingredients_complete=False,
+        ingredients_complete=allergens is not None,
+        ingredient_evidence_kind="store_declaration" if allergens is not None else None,
+        allergens_checked=allergens[0] if allergens else (),
+        allergens_present=allergens[1] if allergens else (),
+        allergens_trace=allergens[2] if allergens else (),
         ingredients=(ingredients,) if isinstance(ingredients, str) and ingredients.strip() else (),
         organic=organic,
         nutrition=nutrition,
@@ -1188,21 +1199,28 @@ _RETAINED_LOCK = threading.Lock()
 
 
 def _retained_ttl() -> float:
-    return float(os.environ.get("SMAKO_RETAINED_FACTS_TTL", "600"))
+    # The key holds the universe and the source files, so a long life is safe;
+    # 10 minutes made the first plan after a quiet spell load facts again.
+    return float(os.environ.get("SMAKO_RETAINED_FACTS_TTL", "21600"))
 
 
 def _source_fingerprint():
-    """Size and change time of every source load_retained_facts reads from disk."""
+    """Size and change time of the fact sources that can change under one universe.
+
+    The grocery database is deliberately not part of this: request metrics and
+    other telemetry are written to the same file all the time, which made the
+    cache miss on almost every plan (16 s of product facts on beta). The rows
+    the facts are read from belong to the promoted snapshots of the activated
+    universe, which is already part of the cache key, and the cache lives at
+    most SMAKO_RETAINED_FACTS_TTL seconds.
+    """
     from app.services.axfood_product_details import configured_root
-    from sqlalchemy.engine import make_url
 
     from grocery_data.app.config import GroceryDataSettings
 
     settings = GroceryDataSettings.from_env()
-    url = make_url(settings.database_url)
-    paths = [url.database if url.get_backend_name() == "sqlite" else None, settings.raw_snapshot_root, configured_root()]
     stamp = []
-    for path in paths:
+    for path in (settings.raw_snapshot_root, configured_root()):
         try:
             info = Path(path).stat() if path else None
         except OSError:

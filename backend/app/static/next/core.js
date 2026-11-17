@@ -110,7 +110,12 @@
   function chooseStores() {
     const contexts = S.location?.contexts || [];
     if (saved.storeMode === "specific" && saved.storeIds?.length) { const known = new Set(contexts.map(c => c.context_id)); S.storeIds = saved.storeIds.filter(id => known.has(id)); }
-    else if (saved.storeMode === "municipality") S.storeIds = contexts.map(c => c.context_id);
+    else if (saved.storeMode === "municipality") {
+      // A Stora Coop priced from Coop Online Syd stands in for the online shop
+      // when the whole municipality is chosen; the shop stays selectable by hand.
+      const covered = new Set(contexts.map(c => c.base_price_context_id).filter(Boolean));
+      S.storeIds = contexts.filter(c => !covered.has(c.context_id)).map(c => c.context_id);
+    }
     else S.storeIds = contexts.filter(c => c.distance_km != null && c.distance_km <= saved.settings.radius).map(c => c.context_id);
     if (!S.storeIds.length) S.storeIds = contexts.map(c => c.context_id);
     saved.storeIds = S.storeIds; persist();
@@ -308,7 +313,7 @@
   }
   function recipeDetails(recipe, open) {
     const ingredients = el("ul", null, "ingredients"); for (const i of recipe.ingredients || []) ingredients.append(el("li", `${number(i.quantity)} ${i.unit} ${i.name}`));
-    const steps = el("ol", null, "steps"); for (const step of recipe.instructions || []) steps.append(el("li", FORMS.reduce((text, [from, to]) => text.replace(from, to), step)));
+    const steps = el("ol", null, "steps"); for (const step of recipe.instructions || []) steps.append(el("li", FORMS.reduce((text, [from, to]) => text.replace(from, to), plainStep(step, recipe))));
     if (open) return [el("h4", "Ingredienser"), ingredients, el("h4", "Gör så här"), steps];
     const more = el("details", null, "recipe-more"); more.append(el("summary", "Visa receptet"), el("h4", "Ingredienser"), ingredients, el("h4", "Gör så här"), steps);
     return [more];
@@ -387,6 +392,7 @@
       try { await lookup(input.value); show(); onDone?.(); } catch (error) { status.textContent = error.message; } finally { go.disabled = false; } });
     return box;
   }
+  let storeSearch = "";
   function storePicker() {
     const box = el("div", null, "store-picker");
     if (!S.location) { box.append(el("p", "Ange postnummer först.", "hint")); return box; }
@@ -400,15 +406,40 @@
       box.append(radius);
     }
     const list = el("div", null, "store-list");
+    const words = text => text.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    const filter = () => { const wanted = words(storeSearch).split(/\s+/).filter(Boolean); let shown = 0;
+      for (const label of list.children) { const hit = wanted.every(word => words(label.textContent).includes(word)); label.hidden = !hit; shown += hit; }
+      none.hidden = shown > 0; };
+    const none = el("p", "Ingen butik heter så. Prova ett annat ord.", "hint", { role: "status" });
+    if (S.location.contexts.length > 8) {
+      const field = el("label", "Sök butik", "field"), search = el("input", null, null, { type: "search", placeholder: "Till exempel Willys eller en gata", value: storeSearch, autocomplete: "off" });
+      search.addEventListener("input", () => { storeSearch = search.value; filter(); });
+      field.append(search); box.append(field);
+    }
     for (const context of S.location.contexts) {
-      const label = el("label", null, "check"), check = el("input", null, null, { type: "checkbox" });
+      const label = el("label", null, "check"), check = el("input", null, null, { type: "checkbox", "data-store": context.context_id });
       check.checked = S.storeIds.includes(context.context_id);
       check.addEventListener("change", () => { const ids = new Set(S.storeIds); if (check.checked) ids.add(context.context_id); else ids.delete(context.context_id);
-        if (!ids.size) { check.checked = true; return; } saved.storeMode = "specific"; saved.storeIds = [...ids]; chooseStores(); emit(); });
+        if (!ids.size) { check.checked = true; return; } saved.storeMode = "specific"; saved.storeIds = [...ids]; chooseStores();
+        // The picker is drawn again; keep the ticked store where the finger is.
+        const before = check.getBoundingClientRect().top; emit();
+        const again = [...document.querySelectorAll(".store-list input[data-store]")].find(node => node.dataset.store === context.context_id && node.isConnected);
+        if (!again) return;
+        // Innermost scrolling box first, then whatever still differs further out.
+        // Once more on the next frame: the browser may re-anchor the page itself.
+        const settle = () => { if (!again.isConnected) return;
+          for (let frame = again.parentElement; ; frame = frame.parentElement) {
+            const moved = again.getBoundingClientRect().top - before;
+            if (Math.abs(moved) < 1) break;
+            if (!frame) { window.scrollBy({ top: moved, behavior: "instant" }); break; }
+            if (frame.scrollHeight > frame.clientHeight + 1 && /auto|scroll/.test(getComputedStyle(frame).overflowY)) frame.scrollBy({ top: moved, behavior: "instant" });
+          } };
+        settle(); requestAnimationFrame(settle);
+        again.focus({ preventScroll: true }); });
       label.append(check, el("span", [context.display_name, context.address, context.distance_km == null ? null : `${number(Math.round(context.distance_km * 10) / 10)} km`].filter(Boolean).join(" · ")));
       list.append(label);
     }
-    box.append(list);
+    box.append(list, none); filter();
     return box;
   }
 
@@ -622,6 +653,15 @@
   }
 
   const MEALS = { dinner: "Middag", breakfast: "Frukost", snack: "Mellanmål" };
+  // Same rule as SmakoRecipes.plainStep: "saltet till huvudrätten" becomes "saltet" when the recipe has salt once.
+  function plainStep(text, recipe) {
+    const names = (recipe?.ingredients || []).map(i => String(i.canonical_name || i.name || "").toLocaleLowerCase("sv"));
+    const once = word => { const w = word.toLocaleLowerCase("sv");
+      const stem = [/(erna|arna|orna)$/, /(en|et|an|na)$/, /n$/].reduce((v, r) => v.length > 4 && r.test(v) ? v.replace(r, "") : v, w);
+      return stem.length >= 3 && names.filter(n => n.includes(stem)).length === 1; };
+    return String(text).replace(/\btillbehörets ([a-zåäöé]+)/gi, (all, word) => once(word) ? word : all)
+      .replace(/\b([a-zåäöé]+) till huvudrätten\b/gi, (all, word) => once(word) ? word : all);
+  }
   const FORMS = [[/\bas_sold\b/g, "som såld"], [/\braw_edible\b/g, "rå, rensad"], [/\bcooked_drained\b/g, "kokt och avrunnen"], [/\bdry\b/g, "torr"]];
   function nutritionText(slotId) {
     const row = (S.plan?.plan?.personal?.checks?.nutrition || []).find(n => n.slot_id === slotId), values = row?.values || {}, parts = [];
@@ -640,7 +680,7 @@
     if (actions) { const like = likeLine(slot); if (like) card.append(like); }
     const more = el("details", null, "recipe-more"); more.append(el("summary", "Visa receptet"));
     const ingredients = el("ul", null, "ingredients"); for (const i of recipe.ingredients) ingredients.append(el("li", `${number(i.quantity)} ${i.unit} ${i.name}`));
-    const steps = el("ol", null, "steps"); for (const step of recipe.instructions || []) steps.append(el("li", FORMS.reduce((text, [from, to]) => text.replace(from, to), step)));
+    const steps = el("ol", null, "steps"); for (const step of recipe.instructions || []) steps.append(el("li", FORMS.reduce((text, [from, to]) => text.replace(from, to), plainStep(step, recipe))));
     more.append(el("h4", "Ingredienser"), ingredients, el("h4", "Gör så här"), steps); card.append(more);
     if (actions) { const row = el("div", null, "recipe-actions"); row.append(button("Byt recept", () => replaceRecipe(slot.id), "btn"), button("Ta bort", () => removeRecipe(slot.id), "btn quiet")); card.append(row); }
     return card;
@@ -692,8 +732,17 @@
     const names = new Map((S.location?.contexts || []).map(c => [c.context_id, c]));
     const count = b.stores.reduce((n, s) => n + s.items.length, 0), progress = el("p", null, "picked", { role: "status" });
     const update = () => { progress.textContent = `${done.size} av ${plural(count, "vara", "varor")} plockade`; try { localStorage.setItem(pickedKey(), JSON.stringify([...done])); } catch (_) { /* kept for this visit */ } };
+    const missing = S.plan?.personal?.checks?.missing_extras || [];
+    if (missing.length) box.append(el("p", `Hittade ingen vara för ${missing.map(m => m.name).join(", ")}. Resten av listan är räknad. Prova ett annat ord för ${missing.length > 1 ? "dem" : "den"}.`, "notice", { role: "status" }));
     box.append(progress);
+    // One shop can be priced by two contexts (catalogue and its own campaigns).
+    const shops = [];
     for (const store of b.stores) {
+      const same = shops.find(shop => shop.store_name === store.store_name);
+      if (same) { same.items = [...same.items, ...store.items]; same.subtotal = Number(same.subtotal) + Number(store.subtotal); }
+      else shops.push({ ...store, items: [...store.items] });
+    }
+    for (const store of shops) {
       const section = el("details", null, "store"), context = names.get(store.store_id), head = el("summary");
       section.open = open;
       const title = el("span", null, "store-title"); title.append(el("span", store.store_name, "store-name"), el("span", [context?.address, plural(store.items.length, "vara", "varor")].filter(Boolean).join(" · "), "store-note"));

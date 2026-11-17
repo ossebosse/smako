@@ -7,18 +7,18 @@
   <title>Smako · Min plan och skafferi</title>
   <script src="/static/next/choice.js?v=20261112"></script>
   <link rel="stylesheet" href="/static/styles.css?v=personal-v2-1" />
-  <link rel="stylesheet" href="/static/personal.css?v=generic-first-20261030" />
+  <link rel="stylesheet" href="/static/personal.css?v=20261117-search" />
   <link rel="stylesheet" href="/static/complete-recipes.css?v=complete-recipes-1" />
   <link rel="stylesheet" href="/static/choices.css?v=20261105-dinmat2" />
   <link rel="stylesheet" href="/static/configurator.css?v=20261109-guide" />
   <link rel="stylesheet" href="/static/plan-progress.css?v=progress-20261031b" />
   <link rel="stylesheet" href="/static/plan-view.css?v=planview-20261110" />
   <script src="/scanner-assets/physical-barcode-scanner.js" defer></script>
-  <script src="/static/complete-recipes.js?v=20261114-fixes" defer></script>
-  <script src="/static/shopping-location.js?v=20261105-stores" defer></script>
+  <script src="/static/complete-recipes.js?v=20261117-steps" defer></script>
+  <script src="/static/shopping-location.js?v=20261117-search" defer></script>
   <script src="/static/choice-controls.js?v=option3-1" defer></script>
   <script src="/static/plan-progress.js?v=20261102-language" defer></script>
-  <script src="/static/personal.js?v=20261116-fixes" defer></script>
+  <script src="/static/personal.js?v=20261117-fixes" defer></script>
   <script src="/static/product-search.js?v=20261103-errors" defer></script>
   <script src="/static/choice-guide.js?v=20261114-fixes" defer></script>
   <script src="/static/configurator.js?v=20261114-fixes" defer></script>
@@ -119,7 +119,7 @@
         </fieldset>
         <div id="complete-recipe-controls"></div>
         <fieldset id="organic-choices"><legend>Ekologiskt</legend><div id="organic-percent-control"></div><p>Välj hur stor del av matkostnaden som minst ska vara ekologisk. Andelen räknas på maten du köper, efter rabatt. Bara varor med ekologisk märkning räknas.</p><label class="check-label"><input type="checkbox" id="organic-animals"/> Kräv ekologiskt för alla animaliska produkter, även ägg och mejeri</label><p class="data-note">Vi kan sakna uppgifter om ekologisk märkning eller animaliska ingredienser för vissa produkter. Då kan vi inte bekräfta att de uppfyller ditt val.</p></fieldset>
-        <fieldset id="pantry-choices"><legend>Skafferi</legend><label class="check-label"><input type="checkbox" id="planning-use-pantry" checked/> Använd mitt bekräftade skafferi i planen</label><p>Avmarkera för att beräkna inköp utan att använda skafferiet. Valet sparas med planen.</p></fieldset>
+        <fieldset id="pantry-choices"><legend>Skafferi</legend><label class="check-label"><input type="checkbox" id="planning-use-pantry" checked/> Använd mitt bekräftade skafferi i planen</label><p>Avmarkera för att beräkna inköp utan att använda skafferiet. Valet sparas med planen.</p></fieldset><fieldset id="staple-choices"><legend>Har du hemma?</legend><p>Det du bockar i köps inte till recepten.</p><label class="check-label"><input type="checkbox" name="staple" value="salt" checked/> Salt</label><label class="check-label"><input type="checkbox" name="staple" value="svartpeppar" checked/> Svartpeppar</label><label class="check-label"><input type="checkbox" name="staple" value="rapsolja" checked/> Rapsolja</label><label class="check-label"><input type="checkbox" name="staple" value="olivolja"/> Olivolja</label><label class="check-label"><input type="checkbox" name="staple" value="strösocker"/> Socker</label><label class="check-label"><input type="checkbox" name="staple" value="vetemjöl"/> Vetemjöl</label></fieldset>
         <fieldset id="surplus-choices"><legend>Överskott</legend><label>Inköpsstrategi<select id="surplus-mode"><option value="minimize">Minimera överskott</option><option value="allow_larger">Tillåt större köp och föreslå användning av resten</option></select></label><p>Det kan bli mat över när du köper hela förpackningar. Om du tillåter större köp visar vi mängden och den extra kostnaden. Hur länge resterna håller är inte beräknat.</p></fieldset>
         </details>
         <button id="generate-plan" type="submit" class="primary-button">Skapa plan och inköpslista</button>
@@ -131,5 +131,5 @@
   </main>
   <footer class="personal-footer"><a href="/klassisk">Tidigare middagsplanering och feedback</a><a href="/static/privacy.html">Integritet och radera mina data</a><span id="personal-version"></span></footer>
   <dialog id="personal-dialog"><div id="dialog-body"></div><button type="button" id="dialog-close" class="secondary-button">Stäng</button></dialog>
-  <dialog id="location-stores-dialog" aria-labelledby="location-stores-title"><h2 id="location-stores-title">Välj specifika butiker</h2><p>Bocka i de butiker och nätbutiker du vill jämföra.</p><div id="location-store-list" class="store-picker-list"></div><p id="location-modal-status" role="status"></p><button id="location-stores-done" type="button" class="primary-button">Klart</button></dialog>
+  <dialog id="location-stores-dialog" aria-labelledby="location-stores-title"><h2 id="location-stores-title">Välj specifika butiker</h2><p>Bocka i de butiker och nätbutiker du vill jämföra.</p><label class="store-search">Sök butik<input id="location-store-search" type="search" autocomplete="off" placeholder="Till exempel Willys eller en gata"></label><div id="location-store-list" class="store-picker-list"></div><p id="location-store-none" role="status" hidden>Ingen butik heter så. Prova ett annat ord.</p><p id="location-modal-status" role="status"></p><button id="location-stores-done" type="button" class="primary-button">Klart</button></dialog>
 </body></html>

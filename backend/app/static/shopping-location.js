@@ -41,7 +41,12 @@
         box.addEventListener("change",()=>{selected=[...list.querySelectorAll("input:checked")].map(n=>n.value);mode.value="specific";updateSelection({automatic:false});});label.append(box,text);list.append(label);
       }
     }
-    function openStores(){if(!location)return;mode.value="specific";updateSelection({automatic:false});renderStores();dialog.showModal();}
+    const plain=text=>text.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
+    // A cached older page has no search field; the list then just shows every store.
+    const search=$('location-store-search'),none=$('location-store-none');
+    function filterStores(){if(!search)return;const wanted=plain(search.value).split(/\s+/).filter(Boolean);let shown=0;for(const label of $('location-store-list').children){const hit=wanted.every(word=>plain(label.textContent).includes(word));label.hidden=!hit;shown+=hit;}if(none)none.hidden=shown>0;}
+    search?.addEventListener("input",filterStores);
+    function openStores(){if(!location)return;mode.value="specific";updateSelection({automatic:false});renderStores();if(search)search.value="";filterStores();dialog.showModal();}
     async function lookup(){
       const postal=$('customer-postcode').value.replace(/\s/g,"");
       const requestEpoch=++epoch;hideMeals();location=null;$('location-store-settings').hidden=true;

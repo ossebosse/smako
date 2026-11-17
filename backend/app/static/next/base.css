@@ -109,6 +109,7 @@ input[type=checkbox]{width:1.35rem;height:1.35rem;accent-color:var(--accent);fle
 .line.is-picked .line-name,.line.is-picked .line-price{text-decoration:line-through;color:var(--muted)}
 .store-list{display:grid;gap:.1rem;max-height:45vh;overflow:auto;margin-top:.75rem}
 .store-picker{display:grid;gap:.75rem}
+.check[hidden]{display:none}
 .check{display:flex;gap:.7rem;align-items:center;padding:.5rem 0;font-size:.95rem}
 .busy{position:fixed;inset:0;z-index:50;background:color-mix(in srgb,var(--page) 94%,transparent);display:grid;place-content:center;justify-items:center;gap:.6rem;text-align:center;padding:2rem}
 .busy[hidden]{display:none}
@@ -164,3 +165,5 @@ dialog::backdrop{background:rgb(0 0 0/.45)}
 dialog.cheaper{overflow:auto}
 dialog.cheaper h2{margin:.1rem 0 .3rem}
 dialog.cheaper .recipe-actions{margin-top:1rem}
+
+.notice{margin:8px 0;padding:10px 12px;border-radius:10px;background:#fff4d6;color:#4a3b00}

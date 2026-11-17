@@ -270,6 +270,31 @@ varufakta 7,4 s och minnesrensning 7,0 s.
   gräns på 45 s; varje runda väntar på en ledig planerare.
 - **Gillningar** kostar ingen extra planering (se steg 4).
 
+
+### Fart för alla områden (2026-11-17)
+
+Ägaren: Malmö är för långsamt, och åtgärderna ska gälla Smako, inte en stad.
+Mätt på frysta Malmö-data (34 butiker), varm process:
+
+- Receptprövningen (ett recept i taget) sparas utan gillar, ogillar och antal
+  middagar (`_qualification_meal`, `_qualification_context`), och butikerna
+  räknas som den mängd som faktiskt jämförs. En ny kombination av sådana val
+  i samma butiker gör om 2 s i stället för 14–38 s. Förvärmningen kör en vanlig
+  middagsvecka i hela området, så den första sådana planen också slipper det.
+- Skalade recept hålls per recept och portioner (`recipe_library._scaled`),
+  och spårningen av recept beskrivs först när diagnostiken skrivs: 22 → 14 s
+  i receptprövningen även när inget annat är sparat.
+- Sökningen slutar inte bara efter 10 s utan förbättring utan också först
+  efter 1 000 prövade veckor (`SMAKO_MENU_SEARCH_STALL_EVALUATIONS`). Med
+  bara tiden berodde resultatet på datorns fart: fem middagar gav 309,90 kr i
+  stället för 283,62 kr när varje vecka tog lite längre.
+- Ekologisk andel prövas exakt bara på hela veckor; delveckor prissätts vanligt.
+
+Resultat, fem middagar efter en annan plan i samma butiker: 75 → 35 s med samma
+korg (283,62 kr). Första planen för helt nya butiker är fortfarande 40–75 s
+lokalt; sökningen (10–25 s) och prövningen av ett recept i taget i alla butiker
+(ca 9 s) är det som återstår.
+
 ## Innehåll och data (steg 7, 2026-11-16)
 
 - **Portionsvikt dold i provgränssnitten** (C1) tills recepten anger färdig

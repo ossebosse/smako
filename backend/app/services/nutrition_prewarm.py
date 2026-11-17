@@ -41,6 +41,28 @@ def warm_request(prepared):
     })
 
 
+def plain_request(prepared):
+    """The everyday choice: dinners for two in every store of the area.
+
+    Per-recipe qualification is kept without likes, dislikes or the number of
+    dinners (PersonalPlanner._qualification_context), so this fills it for any
+    plain dinner week in the whole area, as the owner's 2026-11-17 speed goal
+    asks of Smako as a whole rather than of one city.
+    """
+    from app.models import PlanRequest
+
+    stores = sorted(s.store_id for s in prepared.request_view().stores)
+    return PlanRequest.model_validate({
+        "postal_code": prepared.universe.key.postal_codes[0],
+        "recipes": 3, "servings": 2, "max_stores": min(2, len(stores)), "allowed_store_ids": stores,
+        "purchase_planning_mode": "estimated", "recipe_preferences": {"mode": "complete"},
+        "personal": {"allow_nutrition_estimates": True, "use_pantry": True,
+                     "staples_at_home": ["salt", "svartpeppar", "rapsolja"],
+                     "meals": [{"meal_type": "dinner", "count": 3, "servings": 2, "diet": "mixed",
+                                "recipe_choices": {"min_ingredients": 1, "max_ingredients": 40}}]},
+    })
+
+
 def warm_nutrition(settings, prepared, *, seconds=WARM_SECONDS):
     """Run in a worker thread. Returns a short status for logs."""
     from app.services.personal_planner import PersonalPlanner
@@ -48,8 +70,9 @@ def warm_nutrition(settings, prepared, *, seconds=WARM_SECONDS):
 
     state = {"id": "nutrition-prewarm", "revision": 0, "profile": None, "items": [], "reservations": {}, "events": {}}
     try:
-        with planning_deadline(seconds):
-            PersonalPlanner(warm_request(prepared), settings, prepared, state).create()
+        for request in (plain_request(prepared), warm_request(prepared)):
+            with planning_deadline(seconds):
+                PersonalPlanner(request, settings, prepared, state).create()
         return "complete"
     except PlanningDeadlineExceeded:
         return "deadline"

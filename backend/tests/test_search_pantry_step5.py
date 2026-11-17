@@ -57,6 +57,8 @@ def test_a_food_word_is_not_suggested_as_a_longer_generic():
     assert "Mjölk" in [g["name"] for g in generic_suggestions("mjö")]
     assert "Mjölk" not in [g["name"] for g in generic_suggestions("mjöl", INDEX.postings)]
     assert "Bryggkaffe" in [g["name"] for g in generic_suggestions("kaffe", {"kaffe"})]
+    # Lund has no product named just "Mjöl", only compounds such as Vetemjöl.
+    assert "Mjölk" not in [g["name"] for g in generic_suggestions("mjöl", {"vetemjol", "mjolk", "potatismjol"})]
 
 
 def test_pantry_asks_for_egg_size_and_the_kind_of_broad_words():

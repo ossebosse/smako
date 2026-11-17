@@ -50,7 +50,7 @@ def fact(raw, chain="coop", identity="mjölk"):
     )
 
 
-def test_declarations_map_without_certifying_allergen_absence_or_cooked_yield():
+def test_declarations_map_store_allergens_without_cooked_yield():
     f = fact(label())
     assert f.organic is True and f.nutrition == {
         "kcal": 45,
@@ -59,7 +59,8 @@ def test_declarations_map_without_certifying_allergen_absence_or_cooked_yield():
         "carbs_g": 4.8,
     }
     assert f.nutrition_unit == "ml" and "Produktdeklaration" in f.nutrition_basis
-    assert not f.ingredients_complete and not f.allergens_checked and f.animal is True
+    # Owner decision 2026-11-17: the store's declaration is the allergen information.
+    assert f.ingredients_complete and "mjölk" in f.allergens_checked and f.animal is True
     assert fact({"accreditedTags": [{"code": "EU_ECO_LABEL"}]}).organic is None
     assert fact({"labels": ["eu_ecological"], "nonEkoProduct": False}, "willys").organic is True
     assert fact({"labels": ["eu_ecological"], "nonEkoProduct": True}, "willys").organic is None
@@ -74,7 +75,7 @@ def test_explicit_frozen_source_form_is_independent_of_flattened_category_and_al
     evidence = f.field_sources["product_classification"][0]
     assert evidence["product_id"] == "corn" and evidence["snapshot_id"] == "v2-frozen"
     assert evidence["raw_fields"]["consumerInformationText"] == ["Fryst"]
-    assert not f.ingredients_complete and not f.allergens_checked
+    assert f.ingredients_complete and not f.allergens_present and not f.allergens_trace
     assert not fact({"maxStorageTemperature": "-18"}).product_classification
     assert not fact({"consumerInformationText": ["Frys ej"]}).product_classification
     assert fact({"labels": [], "nonEkoProduct": True}, "hemkop").organic is False
@@ -242,14 +243,14 @@ def test_retained_ingredient_text_blocks_positive_compound_conflict():
         run(p, req, facts={("coop", "bröd"): f})
 
 
-def test_vegan_claim_is_animal_evidence_but_never_allergy_absence():
+def test_vegan_claim_is_animal_evidence_and_the_declaration_names_the_trace():
     f = fact(
         label(
             accreditedTags=[{"code": "EUROPEAN_V_LABEL_VEGAN"}],
             listOfIngredients="Soja, vatten. Kan innehålla spår av MJÖLK.",
         )
     )
-    assert f.animal is False and not f.allergens_checked and not f.ingredients_complete
+    assert f.animal is False and f.allergens_present == ("soja",) and f.allergens_trace == ("mjölk",)
     conflicting = fact(label(accreditedTags=[{"code": "EUROPEAN_V_LABEL_VEGAN"}]))
     assert conflicting.animal is None and "animal" in conflicting.conflicts
 

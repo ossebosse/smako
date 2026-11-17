@@ -31,8 +31,9 @@ def test_pasta_uses_the_as_sold_per_100_declaration_not_the_serving():
     assert f.ingredients == ("Ingredienser: DURUMVETE. Kan innehålla spår av SOJA, ÄGG och SENAP.",)
     assert f.retailer_product_id == "100058571_ST" and not f.conflicts
     assert f.field_sources["nutrition.kcal"][0]["source_product_id"] == "100058571_ST"
-    # The ingredient list is evidence, never an allergen-absence proof.
-    assert not f.ingredients_complete and not f.allergens_checked
+    # The store's declaration and its GS1 allergen list are the allergen information.
+    assert f.ingredients_complete and f.allergens_present == ("gluten", "vete")
+    assert f.allergens_trace == ("senap", "soja", "ägg") and "mjölk" in f.allergens_checked
 
 
 def test_sausage_reads_meat_marking_and_ingredients_as_animal():
@@ -207,3 +208,25 @@ def test_municipal_citygross_source_reaches_the_planner_facts(tmp_path):
     page.write_bytes(content.replace(b"250", b"999"))
     assert (base.store_id, "korv") not in _load_retained_catalog_facts(
         universe, database=main, raw_root=tmp_path / "raw")
+
+
+def test_shared_facts_survive_telemetry_writes_to_the_grocery_database(tmp_path, monkeypatch):
+    import os
+
+    from app.services import personal_source_facts as source_facts
+
+    database = tmp_path / "grocery.sqlite"
+    database.write_bytes(b"one")
+    raw = tmp_path / "raw"
+    raw.mkdir()
+    monkeypatch.setenv("GROCERY_DATABASE_URL", f"sqlite:///{database.as_posix()}")
+    monkeypatch.setenv("GROCERY_RAW_SNAPSHOT_ROOT", str(raw))
+    monkeypatch.setenv("SMAKO_RETAINED_FACTS_TTL", "600")
+    monkeypatch.setattr(source_facts, "_RETAINED_CACHE", {})
+    loads = []
+    monkeypatch.setattr(source_facts, "load_retained_facts", lambda prepared: loads.append(1) or object())
+    universe = type("P", (), {"universe": type("U", (), {"universe_id": "u1"})()})()
+    first = source_facts.cached_retained_facts(universe)
+    database.write_bytes(b"a request metric was written")
+    os.utime(database, ns=(1, 1))
+    assert source_facts.cached_retained_facts(universe) is first and loads == [1]

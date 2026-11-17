@@ -54,6 +54,8 @@ from app.services.personal_policy import (
     PolicyConflict,
     check_product,
     distribution_ok,
+    fish_dinners_needed,
+    fish_week_ok,
     interpretation,
     is_nonfood,
     mentions,
@@ -131,6 +133,21 @@ def extra_store_cost(basket):
     return float(EXTRA_STORE_MIN_SAVING) * max(0, basket.store_count - 1)
 
 
+def _candidate_price_print(c):
+    """Every candidate field the basket price depends on, without JSON (step 7).
+
+    model_dump_json() per candidate made the organic cache key cost 40 of
+    85 seconds in an organic week search.
+    """
+    return (c.store_id, c.product_id, c.price, c.effective_price, c.member_price, c.sale_price,
+            c.piece_price, c.package_quantity, c.package_unit, c.sale_model,
+            tuple((o.kind, o.price, o.price_basis_unit, o.required_packages, o.max_quantity, o.eligibility,
+                   o.mechanism, o.membership_program, o.percent_discount, o.valid_from, o.valid_to,
+                   o.deposit) for o in c.offers),
+            repr(getattr(c, "promotion_groups", ())), repr(getattr(c, "purchase_terms", None)),
+            c.source_provenance.source_snapshot_id if c.source_provenance else None)
+
+
 def _lower_caps(max_stores):
     """Lower store caps compared next to the request: 1..min(cap-1, 3).
 
@@ -172,6 +189,15 @@ def _covered_within(candidate_groups, max_stores):
 _SEARCH_ONLY_REQUEST_FIELDS = ("recipes", "diversity_mode", "varied_budget_percent", "variation_intent")
 _SEARCH_ONLY_PREFERENCE_FIELDS = ("max_same_main_protein_dinners", "min_distinct_cuisines",
                                   "cuisine_distribution")
+
+
+def _qualification_meal(meal):
+    """A meal's choices that decide whether one recipe qualifies."""
+    update = {"profile": meal.profile.model_copy(update={"likes": [], "dislikes": []}),
+              "max_same_base_meals": None}
+    if not meal.distribution:
+        update["count"] = 1  # The count only bounds categories through a distribution.
+    return meal.model_copy(update=update)
 
 
 class _QualificationMemory:
@@ -261,6 +287,8 @@ class PersonalPlanner:
             if not extra.food and not is_nonfood(extra.query):
                 raise PolicyConflict(_NOT_NONFOOD.format(name=extra.query))
         self.plan_id = plan_id
+        self._extra_ids = frozenset(extra.id for extra in self.spec.extras)
+        self.missing_extras = {}
         from app.services.personal_source_facts import FactsCollection, cached_retained_facts
 
         needs_facts = (
@@ -326,11 +354,20 @@ class PersonalPlanner:
         )
         self.store_ids = {s.store_id for s in self.view.stores}
         if request.allowed_store_ids:
-            missing = set(request.allowed_store_ids) - self.store_ids
+            # A saved choice of an online shop means the store that stands in for it.
+            selected = set(request.allowed_store_ids)
+            stand_ins = getattr(prepared, "online_stand_ins", dict)()
+            for online, ids in stand_ins.items():
+                if online in selected:
+                    selected = (selected - {online}) | (ids & self.store_ids)
+            for lead, others in getattr(prepared, "store_companions", dict)().items():
+                if lead in selected or selected & others:
+                    selected |= {lead} | (others & self.store_ids)
+            missing = selected - self.store_ids
             if missing:
                 raise PolicyConflict("Priserna för några valda butiker saknas eller är för gamla: " + ", ".join(sorted(missing)),
                                      code="DATA_BLOCKED", stage="store_cap")
-            self.store_ids &= set(request.allowed_store_ids)
+            self.store_ids &= selected
         self.index = prepared.product_search_index
         self._generic_verified = set()  # extras checked against their generic once per request
         self.product_keys = {i: k for k, positions in self.index.groups.items() for i in positions}
@@ -1347,7 +1384,7 @@ class PersonalPlanner:
         # Constrained explicit rows first: a compatible recipe can share their
         # packages, but two different exact variants never become interchangeable.
         rows.sort(key=lambda r: (not bool(r["product_key"] or r.get("alternatives")), not bool(r["properties"])))
-        at_home = []
+        at_home, skipped = [], []
         for row in rows:
             if row["quantity"] <= 0:
                 continue
@@ -1356,20 +1393,30 @@ class PersonalPlanner:
                 row["at_home"] = True
                 at_home.append(row)
                 continue
-            resolved = self.resolve_choices(
-                row["name"],
-                row["quantity"],
-                row["unit"],
-                product_key=row["product_key"],
-                alternatives=row.get("alternatives", ()),
-                properties=row["properties"],
-                profile=row["profile"],
-                organic_animals=row["organic_animals"],
-                food=row["food"],
-                campaign_choice=row.get("campaign_choice", False),
-                purchase_units=row.get("purchase_units", False),
-                recipe=recipe,
-            )
+            try:
+                resolved = self.resolve_choices(
+                    row["name"],
+                    row["quantity"],
+                    row["unit"],
+                    product_key=row["product_key"],
+                    alternatives=row.get("alternatives", ()),
+                    properties=row["properties"],
+                    profile=row["profile"],
+                    organic_animals=row["organic_animals"],
+                    food=row["food"],
+                    campaign_choice=row.get("campaign_choice", False),
+                    purchase_units=row.get("purchase_units", False),
+                    recipe=recipe,
+                )
+            except PolicyConflict as exc:
+                # One own item nobody sells must not take the whole list with it:
+                # the rest is bought and the item is named as not found.
+                if row["source"] not in self._extra_ids or exc.code != "DATA_BLOCKED":
+                    raise
+                self.missing_extras[row["source"]] = {"id": row["source"], "name": row["name"],
+                    "quantity": row["original_quantity"], "unit": row["unit"], "reason": str(exc)}
+                skipped.append(exc)
+                continue
             meal = meals_by_slot.get(row["source"])
             requested = requested_nutrients(meal.limits) if meal else set()
             row["nutrients"] = sorted(requested)
@@ -1493,6 +1540,8 @@ class PersonalPlanner:
                         "candidates": dict(resolved),
                     }
                 )
+        if skipped and not groups and not at_home and not allocations:
+            raise skipped[0]  # Nothing else on the list: the item's own answer.
         if missing_nutrition:
             raise PolicyConflict(
                 f"{recipe.name if recipe else 'Korgen'}: näringsvärden saknas för {', '.join(sorted(missing_nutrition))} ({len(missing_nutrition)} av {len(nutrition_needs)} ingrediensbehov). Uppgifterna saknas eller motsäger varandra. Det betyder inte att receptet har för lite protein.",
@@ -1601,9 +1650,20 @@ class PersonalPlanner:
                 raise PolicyConflict("Tidigare inköp uppfyller inte målbegärans ekokrav.")
             if _retained is None and self.spec.surplus_mode == "allow_larger":
                 basket = self._larger_packages(basket, ingredients, candidate_map)
-            if _retained is None and self.spec.organic_percent:
+            # A partial week (final=False) only steers the beam: price it plainly,
+            # as a lower bound; every complete week gets the exact organic basket.
+            # This took 40 of 50 extra seconds in an organic Malmö search.
+            if _retained is None and self.spec.organic_percent and (final or not slots):
+                ceiling = None
+                if bound is not None and final:
+                    ceiling = Decimal(str(bound)) + Decimal("0.01")
+                    # An organic share can only make the basket dearer: a week
+                    # whose plain basket already loses to the best week is out.
+                    if basket.total > ceiling:
+                        from app.services.menu_optimizer import MenuBoundPruned
+                        raise MenuBoundPruned
                 try:
-                    basket = self._ecological_basket(ingredients, candidate_map, groups, basket)
+                    basket = self._ecological_basket(ingredients, candidate_map, groups, basket, ceiling=ceiling)
                 except PolicyConflict as exc:
                     exc.stage = "organic"
                     if final:
@@ -1683,6 +1743,9 @@ class PersonalPlanner:
                 ]
         basket = self._mark_drained_package_weight(basket, rows)
         checks = self._check_final(slots, basket, groups, rows, allocations) if final else {}
+        if final and skipped:
+            checks["missing_extras"] = [self.missing_extras[source] for source in dict.fromkeys(
+                row["source"] for row in rows if row["source"] in self.missing_extras)]
         return {
             "trace_inputs": (candidate_map, rows),
             "basket": basket,
@@ -2296,7 +2359,7 @@ class PersonalPlanner:
         return best
 
     @timed_stage("ecological_search")
-    def _ecological_basket(self, ingredients, candidates, groups, baseline):
+    def _ecological_basket(self, ingredients, candidates, groups, baseline, *, ceiling=None, subset_limit=256):
         from app.services.basket_calculator import BasketCalculator
         from app.services.performance_trace import increment_performance_counter
 
@@ -2315,11 +2378,11 @@ class PersonalPlanner:
         cache_key = None
         if type(self.optimizer) is BasketOptimizer and type(self.optimizer.calculator) is BasketCalculator:
             cache_key = (
-                self.spec.organic_percent, self.request.max_stores, self.optimizer.verification_policy,
+                self.spec.organic_percent, self.request.max_stores, self.optimizer.verification_policy, subset_limit,
                 tuple((s.store_id, s.name) for s in self.view.stores),
                 tuple((i.canonical_name, i.required_quantity, i.unit) for i in ingredients),
                 tuple((g["key"], g["food"]) for g in groups),
-                tuple((name, tuple((c.model_dump_json(),
+                tuple((name, tuple((_candidate_price_print(c),
                     bool((f := self.source_facts(self.prepared.universe.products[
                         self.by_identity[(c.store_id, c.product_id)]])) and f.organic is True))
                     for c in values)) for name, values in candidates.items()),
@@ -2367,9 +2430,9 @@ class PersonalPlanner:
         for size in range(1, len(eligible)):
             for subset in combinations(eligible, size):
                 subsets.append(subset)
-                if len(subsets) >= 256:
+                if len(subsets) >= subset_limit:
                     break
-            if len(subsets) >= 256:
+            if len(subsets) >= subset_limit:
                 break
         bounds = self.optimizer.restriction_cost_bounds(
             ingredients, candidates, organic_candidates,
@@ -2397,8 +2460,11 @@ class PersonalPlanner:
                 lower_of[index] = base_bound + sum((bounds[k][1] - bounds[k][0] for k in subset), Decimal(0))
             order.sort(key=lambda row: (lower_of[row[0]], row[0]))
         best_index = None
+        over_ceiling = False
 
         def cannot_win(cost, index):
+            if best is None:
+                return ceiling is not None and cost > ceiling
             best_total = money(best.total)
             return cost > best_total or (cost == best_total and index > best_index)
 
@@ -2407,8 +2473,9 @@ class PersonalPlanner:
             # An optimistic cost that cannot beat (or tie earlier than) the
             # best exact basket proves this subset cannot replace it. All line
             # quotes include package rounding and eligible single-line offers.
-            if best is not None and bounds is not None and cannot_win(lower_of[index], index):
+            if (best is not None or ceiling is not None) and bounds is not None and cannot_win(lower_of[index], index):
                 increment_performance_counter("ecological_subsets_pruned_cost")
+                over_ceiling |= best is None
                 continue
             narrowed = {
                 k: organic_candidates[k] if k in subset else v for k, v in candidates.items()
@@ -2438,6 +2505,9 @@ class PersonalPlanner:
                 increment_performance_counter("ecological_subsets_pruned_share")
             except IncompleteBasketError:
                 continue
+        if best is None and over_ceiling:
+            from app.services.menu_optimizer import MenuBoundPruned
+            raise MenuBoundPruned  # Every organic basket costs more than the best week.
         if best is None:
             raise PolicyConflict(
                 f"Ingen kombination hittades med minst {self.spec.organic_percent:g} % ekologiskt i de butiker du valt ({searched} kombinationer testade)."
@@ -2879,6 +2949,18 @@ class PersonalPlanner:
         if original.recipe_preferences is not None:
             update["recipe_preferences"] = original.recipe_preferences.model_copy(
                 update=defaults(original.recipe_preferences, _SEARCH_ONLY_PREFERENCE_FIELDS))
+        # Likes, dislikes and how many dinners only choose and score weeks;
+        # one recipe qualifies, and costs, the same without them. Kept out so a
+        # new combination of those choices reuses the same per-recipe work.
+        if original.personal is not None:
+            personal = original.personal
+            update["personal"] = personal.model_copy(update={
+                "profile": personal.profile.model_copy(update={"likes": [], "dislikes": []}),
+                "meals": [_qualification_meal(m) for m in personal.meals]})
+        # The stores actually compared, not how they were named: a whole-area
+        # choice, a saved online shop or a shop listed once are the same set.
+        if original.allowed_store_ids:
+            update["allowed_store_ids"] = tuple(sorted(self.store_ids))
         request = original.model_copy(update=update)
         self.request = request
         try:
@@ -2936,7 +3018,7 @@ class PersonalPlanner:
         memory_reuse = (self.complete and not reuse and isinstance(self, PersonalPlanner)
                         and getattr(self.settings, "planner_qualification_memory", True))
         if memory_reuse:
-            view_key = content_digest([self._qualification_context(), meal, fixed_slots])
+            view_key = content_digest([self._qualification_context(), _qualification_meal(meal), fixed_slots])
             stored = _QUALIFICATION_MEMORY.get(view_key)
             reuse = True
         else:
@@ -3233,10 +3315,10 @@ class PersonalPlanner:
                 else:
                     message = "Vi hittade ingen meny som uppfyller alla dina krav. Se vad som stoppade recepten nedan."
             elif self.diagnostics.pools and code != "DATA_BLOCKED" and not (self.complete and code == "RECIPE_CHOICES_CONFLICT"):
-                message = (
-                    "Ingen komplett kombination hittades. Flera kandidater har prövats; exemplet nedan förklarar inte hela veckoplanen. "
-                    + message
-                )
+                # Plain language (docs/UI-LANGUAGE.md): what happened, what to do.
+                message = ("Vi hittade ingen vecka där alla dina val går ihop. "
+                           f"Ett exempel på vad som stoppade: {message} "
+                           "Prova att ta bort ett val, till exempel en allergi eller en butik, eller välj fler butiker.")
             hint = self._campaign_only_scope_hint()
             if hint:
                 message = f"{message} {hint}"
@@ -3351,6 +3433,8 @@ class PersonalPlanner:
         if getattr(self, "_mixed_week", False):
             wanted += [lambda r: self._protein_category(r) == "vegetarian",
                        lambda r: self._protein_category(r) != "vegetarian"]
+        if getattr(self, "_fish_week", False):
+            wanted.append(lambda r: self._protein_category(r) in {"fish", "shellfish"})
         if not wanted:
             return kept
         ids = {self._recipe_id(r) for r in kept}
@@ -4199,6 +4283,25 @@ class PersonalPlanner:
             if possible:
                 mixed_count = dinner_count
 
+        # Owner decision 2026-11-17: fish and vegetarian has fish dinners (one
+        # with 2–3 dinners, two with 4 or more), as many as the pool allows.
+        fish_count = None
+        if ((generating or replace_slot is not None) and dinner_meal is not None
+                and dinner_meal.diet == "pescetarian" and not dinner_meal.distribution):
+            fishy = lambda r: self._protein_category(r) in {"fish", "shellfish"}
+            if replace_slot is None:
+                bases = {r.design.base_id if r.design else self._recipe_id(r) for r in dinner_pool if fishy(r)}
+                fish_needed = min(fish_dinners_needed(dinner_count), len(bases))
+            else:
+                fixed = sum(fishy(g[0].recipe) for g in options
+                            if len(g) == 1 and g[0].meal_type == "dinner" and g[0].recipe and g[0].id != replace_slot)
+                target = next((g for g in options if any(s.id == replace_slot for s in g)), [])
+                can = any(s.meal_type == "dinner" and s.recipe and fishy(s.recipe) for s in target)
+                fish_needed = min(fish_dinners_needed(dinner_count), fixed + can)
+            if fish_needed:
+                fish_count = fish_needed
+        self._fish_week = fish_count is not None
+
         # Owner decision 2026-11-15: each like that a dinner allowed by the other
         # choices names is in at least one dinner (LIKE_MISSING_KR, _preference_cost).
         likes = list(dict.fromkeys([*self.spec.profile.likes, *(dinner_meal.profile.likes if dinner_meal else [])]))
@@ -4235,6 +4338,11 @@ class PersonalPlanner:
             dinners = [s.recipe for s in constraint_slots if s.meal_type == "dinner" and s.recipe]
             if mixed_count is not None and not mixed_week_ok(
                     dinners, mixed_count, partial=not constraint_final or draft, classify=self._protein_category):
+                self.diagnostics.branch(len(chosen), "policy_taste")
+                return False
+            if fish_count is not None and not fish_week_ok(
+                    dinners, dinner_count, partial=not constraint_final or draft,
+                    classify=self._protein_category, needed=fish_count):
                 self.diagnostics.branch(len(chosen), "policy_taste")
                 return False
             if self.complete:

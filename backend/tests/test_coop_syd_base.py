@@ -105,7 +105,7 @@ async def test_one_physical_checkout_ordinary_source_and_unchanged_campaign(code
     stores = await provider.find_stores("22350" if city == "Lund" else "21120")
     assert len(stores) == len(expected) and len({s.store_id for s in stores}) == len(stores)
     for target in stores:
-        assert target.price_label == "Baspris från Coop Online Syd"
+        assert target.price_label == "Ordinarie pris"
         assert target.price_semantics == "online_price"
         assert target.price_context_type == "physical_store"
         rows = await provider.get_store_products(target.store_id)

@@ -228,7 +228,32 @@ def supports_servings(recipe: Recipe, servings: int) -> bool:
     return multiple is None or servings % multiple == 0
 
 
+_SCALED: dict = {}
+_SCALED_LIMIT = 40000
+
+
 def _scaled(recipe: Recipe, servings: int) -> Recipe:
+    """Scaled copy; the scaling itself is kept per library recipe and servings.
+
+    Scaling every recipe again for each plan took about 5 s per request.
+    Library recipes are long-lived; the entry keeps the source alive and is
+    checked by identity. Each call still gets its own lists to change.
+    """
+    key = (id(recipe), servings)
+    hit = _SCALED.get(key)
+    if hit is None or hit[0] is not recipe:
+        if len(_SCALED) >= _SCALED_LIMIT:
+            _SCALED.clear()
+        hit = (recipe, _scaled_uncached(recipe, servings))
+        _SCALED[key] = hit
+    scaled = hit[1]
+    preparation = scaled.preparation
+    return scaled.model_copy(update={"ingredients": list(scaled.ingredients),
+        "instructions": list(scaled.instructions), "preparation": preparation.model_copy(
+            update={"input_forms": dict(preparation.input_forms)}) if preparation else None})
+
+
+def _scaled_uncached(recipe: Recipe, servings: int) -> Recipe:
     if not supports_servings(recipe, servings):
         raise ValueError(f"Receptet tillagas i satser om {recipe.design.servings_multiple} portioner.")
     if servings == recipe.servings:
