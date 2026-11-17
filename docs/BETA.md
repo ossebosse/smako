@@ -1,3 +1,23 @@
+# 2026-11-17: Testrapportens fel, Stora Coop, butikernas allergener, fisk, fart
+
+Main `7c59f6290822` (PR #94). App **app-7c59f6290822-8fc198af**, scheduler
+orörd, Axfood-detaljer fortfarande `f87b8df135a7…`. 24 appfiler, importkontroll
+ok (`FACTS_VERSION` v14). Bas `b0190e160084` (image `e9b120ae65db`), ny image
+`ac59196cc756`. Aktiverad 2026-11-17 09:52:01 UTC, säkerhetskopia
+`20261117T094118Z`; lagringsretention complete; `/ready` 200 för 22350 och 21120.
+
+Förberedelsen krävde två lokala, granskade undantag i `beta_release.py` (inte
+incheckade): `providers/coop_syd_base.py` finns inte i appens image (används av
+schedulern; appen visar redan "Ordinarie pris" via `meal_plan_optimizer`), och
+appens `price_universe_runtime.py` saknade bara 8a53bebs parameter
+`source_strategy_version` med samma standardvärde, så Gits fil skickades.
+
+Mätt på betan efter aktivering (alla butiker i området, högst 2): Malmö 54
+butiker 3 middagar 94 s första gången, 33 s nästa gång och 45 s med andra
+gillar; gillar kyckling 98 s, eko 25 % 136 s, mjölkallergi 39 s. Lund 25
+butiker 3 middagar 43 s, fisk och vegetariskt 32 s (en fiskrätt). Coop Online
+Syd listas inte i någon av städerna.
+
 # 2026-11-16: Steg 5–7 och näringsdeklarationer aktiverat
 
 Main `b0190e160084` (PR #89, #92, #90, #91). App **app-b0190e160084-b72e8023**,
@@ -272,7 +292,7 @@ på `main` inte ändrar en pågående release.
   `smako-app-1`, `smako-scheduler-1`, `smako-caddy-1`, data i `/srv/smako/data`
   och det gemensamma driftlåset. Detta flöde installerar inte en ny server.
 - Läs aktuell [HANDOFF.md](HANDOFF.md), [OPERATIONS.md](OPERATIONS.md) och
-  senaste aktiveringsrapport. Appens BUILD_ID är `app-b0190e160084-b72e8023`;
+  senaste aktiveringsrapport. Appens BUILD_ID är `app-7c59f6290822-8fc198af`;
   schedulern är `source-ops-8a53beb80e43`.
   [Uppvärmda prov och samordnad faktaläsning/GC](releases/warm-facts-gc-20261101/ACTIVATED.md)
   är senaste appaktiveringen. Sex Pythonfiler från kod `b7c8d0506e23`;
@@ -320,10 +340,10 @@ git status --short
 .venv/Scripts/python.exe -X utf8 scripts/smako_ops.py status
 
 # Använd den granskade Git-bas som motsvarar faktiskt aktiva filer enligt senaste journalen.
-.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit b0190e160084 --commit main --workdir .local/beta-release
+.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit 7c59f6290822 --commit main --workdir .local/beta-release
 ```
 
-`b0190e160084` är appen som aktiverades 2026-11-16 21:02 UTC. Appbildens egen
+`7c59f6290822` är appen som aktiverades 2026-11-17 09:52 UTC. Appbildens egen
 grocery-kopia är äldre än Git; använd `--keep-app-grocery` om intervallet
 bara innehåller grocery-Python som redan levererats till schedulern. De äldre
 Coop-filerna i runtime (`price_universe_runtime.py`,
