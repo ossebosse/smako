@@ -82,6 +82,7 @@ def test_qualification_asks_workers_only_for_unknown_recipes_and_merges_their_ro
                               prepared=SimpleNamespace(package_cache=cache))
     monkeypatch.setattr(planner_shared_cache, "planner_scope", lambda planner: None)
     monkeypatch.setattr(planner_shared_cache, "nutrition_scope", lambda planner: None)
+    monkeypatch.setattr(pp, "free_threaded", lambda: False)
     monkeypatch.setenv("SMAKO_PLANNER_PROCESSES", "2")
     monkeypatch.setenv("SMAKO_PLANNER_MEMORY_CHECK", "0")
     monkeypatch.setattr(pp, "_MIN_ITEMS_PER_WORKER", 10)
@@ -140,6 +141,7 @@ def test_a_running_child_is_measured(monkeypatch):
 # --- One plan per process (several people at once) ---------------------------
 
 def _plan_env(monkeypatch):
+    monkeypatch.setattr(pp, "free_threaded", lambda: False)  # the process path, also without the GIL
     monkeypatch.setenv("SMAKO_PLAN_PROCESSES", "1")
     monkeypatch.setenv("SMAKO_PLANNER_PROCESSES", "2")
     monkeypatch.setenv("SMAKO_PLANNER_MEMORY_CHECK", "0")
@@ -320,3 +322,70 @@ def test_plans_in_this_process_are_counted_too(monkeypatch):
     monkeypatch.setattr(pp, "_running_plans", 1)  # another plan is running
     assert pp.run_plan_in_process(pp.worker_count) == 3
     assert pp._running_plans == 1
+
+
+def test_free_threaded_qualification_uses_planner_copies_in_threads(monkeypatch):
+    """Without the GIL: threads on planner copies, the first slice on the planner itself."""
+    import threading
+    from types import SimpleNamespace
+
+    from app.services.personal_planner import PersonalPlanner
+    from app.services.planner_context import content_digest
+
+    recipes = [{"recipe": i} for i in range(60)]
+    seen = {}
+
+    class Fake(SimpleNamespace):
+        def _qualify_slice(self, meal, fixed_slots, *, here=False):
+            def work(part):
+                seen.setdefault(self.name, set()).add(threading.get_ident())
+                return {content_digest(r): {"status": "rejected", "reason": self.name, "stage": "s", "code": "C"}
+                        for r in part}
+            return work
+
+        def _thread_copy(self):
+            return Fake(name="copy", diagnostics=self.diagnostics)
+
+    planner = Fake(name="self", diagnostics=SimpleNamespace(pools=[{}]))
+    monkeypatch.setattr(pp, "free_threaded", lambda: True)
+    monkeypatch.setenv("SMAKO_PLANNER_PROCESSES", "2")
+    monkeypatch.setattr(pp, "_MIN_ITEMS_PER_WORKER", 10)
+    rows = PersonalPlanner._qualify_in_processes(planner, None, recipes, {}, ())
+    assert len(rows) == 60
+    assert sum(r["reason"] == "self" for r in rows.values()) == 20  # a third on the planner itself
+    assert seen["self"] == {threading.get_ident()} and threading.get_ident() not in seen["copy"]
+    diagnostics = planner.diagnostics.pools[-1]["parallel_qualification"]
+    assert diagnostics["threads"] and diagnostics["workers"] == 2 and diagnostics["slices_redone"] == 0
+    assert not pp.plan_processes_enabled()  # plans are threads already
+
+
+def test_equal_keys_compute_once_and_different_keys_at_the_same_time():
+    import threading
+
+    from app.services.price_universe import _ThreadSafeLru
+
+    cache = _ThreadSafeLru(max_entries=100, metric_prefix="t")
+    inside, release, calls = threading.Barrier(2, timeout=5), threading.Event(), []
+
+    def slow(name):
+        def factory():
+            calls.append(name)
+            inside.wait()  # both different keys are computing at once
+            release.wait(5)
+            return name
+        return factory
+
+    threads = [threading.Thread(target=cache.get_or_compute, args=(k, slow(k))) for k in ("a", "b")]
+    same = threading.Thread(target=cache.get_or_compute, args=("a", slow("a-again")))
+    for thread in threads:
+        thread.start()
+    time.sleep(0.2)
+    same.start()  # waits for "a" instead of computing it again
+    time.sleep(0.2)
+    release.set()
+    for thread in [*threads, same]:
+        thread.join(5)
+    assert sorted(calls) == ["a", "b"]
+    assert cache.get_or_compute("a", lambda: "x") == "a"
+    # A factory that needs another key of the same cache computes it directly.
+    assert cache.get_or_compute("outer", lambda: cache.get_or_compute("inner", lambda: 1) + 1) == 2
