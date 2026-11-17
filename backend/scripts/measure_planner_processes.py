@@ -11,6 +11,7 @@ from app.services import personal_planner as pp
 from app.services.nutrition_prewarm import plain_request
 from app.services.personal_source_facts import cached_retained_facts
 from app.services.plan_jobs import planning_deadline
+from app.services.planner_shared_cache import SHARED_NUTRITION, SHARED_RESOLUTION
 from app.services.price_universe_runtime import PreparedPriceUniverseArtifact
 
 root = Path("/srv/app/var/price_universes")
@@ -27,7 +28,6 @@ def once(workers):
     os.environ["SMAKO_PLANNER_PROCESSES"] = str(workers)
     pp._QUALIFICATION_MEMORY.rows.clear()
     prepared.package_cache.clear()
-    from app.services.planner_shared_cache import SHARED_NUTRITION, SHARED_RESOLUTION
     SHARED_RESOLUTION.clear()
     SHARED_NUTRITION.clear()
     t = time.perf_counter()
@@ -37,7 +37,8 @@ def once(workers):
         profile = cProfile.Profile()
         profile.enable()
     with planning_deadline(240):
-        plan = pp.PersonalPlanner(req, settings, prepared, state).create()
+        planner = pp.PersonalPlanner(req, settings, prepared, state)
+        plan = planner.create()
     if profile is not None:
         import io
         import pstats
@@ -49,7 +50,10 @@ def once(workers):
     tm = ch.get("timings_seconds") or {}
     print(json.dumps({"workers": workers, "seconds": round(time.perf_counter()-t, 1), "total": str(plan.optimized_basket.total),
         "qualification": round(tm.get("candidate_generation_and_qualification", 0), 1), "search": round(tm.get("week_search", 0), 1),
-        "packages": round(tm.get("package_calculation", 0), 1), "recipes": [r.name for r in plan.recipes]}, ensure_ascii=False), flush=True)
+        "packages": round(tm.get("package_calculation", 0), 1), "recipes": [r.name for r in plan.recipes],
+        "parallel": [pool.get("parallel_qualification") for pool in planner.diagnostics.pools],
+        "package_cache": str(prepared.package_cache.stats), "shared": SHARED_RESOLUTION.stats(),
+        "nutrition": SHARED_NUTRITION.stats()}, ensure_ascii=False), flush=True)
 once(0)            # also warms the library once
 for w in [int(x) for x in os.environ.get("MEASURE_WORKERS", "0,6,0,6").split(",")]:
     once(w)
