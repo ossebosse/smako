@@ -3307,6 +3307,11 @@ class PersonalPlanner:
                 # The request's quote session is plain dicts the request thread
                 # keeps using: this thread opens its own (in its own context).
                 self.optimizer._quote_cache_context.set(None)
+                # Likewise the request's requirement-key scope: it keeps the
+                # objects its keys name alive by id and is set up lazily.
+                from app.services import basket_optimizer
+                basket_optimizer._REQUIREMENT_KEY_SCOPE.set(
+                    {} if basket_optimizer._REQUIREMENT_KEY_SCOPE.get() is not None else None)
             return self._candidates(meal, fixed_slots=fixed_slots, _rows_only=part)
         return work
 

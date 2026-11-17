@@ -395,15 +395,22 @@ def test_a_qualification_thread_does_not_share_the_request_quote_session(monkeyp
     import contextvars
     from types import SimpleNamespace
 
+    from app.services import basket_optimizer
     from app.services.personal_planner import PersonalPlanner
 
     session = contextvars.ContextVar("quote_session", default=None)
     session.set("the request's session")
+    scope = {"keys": {}}
+    monkeypatch.setattr(basket_optimizer, "_REQUIREMENT_KEY_SCOPE", contextvars.ContextVar("scope", default=None))
+    basket_optimizer._REQUIREMENT_KEY_SCOPE.set(scope)
     seen = []
-    planner = SimpleNamespace(optimizer=SimpleNamespace(_quote_cache_context=session),
-                              _candidates=lambda meal, fixed_slots, _rows_only: seen.append(session.get()) or {})
+    planner = SimpleNamespace(
+        optimizer=SimpleNamespace(_quote_cache_context=session),
+        _candidates=lambda meal, fixed_slots, _rows_only: seen.append(
+            (session.get(), basket_optimizer._REQUIREMENT_KEY_SCOPE.get())) or {})
     thread_work = PersonalPlanner._qualify_slice(planner, None, ())
     contextvars.copy_context().run(thread_work, [1])
     PersonalPlanner._qualify_slice(planner, None, (), here=True)([1])
-    assert seen == [None, "the request's session"]
+    assert seen[0][0] is None and seen[0][1] == {} and seen[0][1] is not scope
+    assert seen[1] == ("the request's session", scope)
     assert session.get() == "the request's session"
