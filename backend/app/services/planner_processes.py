@@ -55,11 +55,28 @@ _running_lock = threading.Lock()
 _plan_share = 1
 
 
+def _child_after_fork() -> None:
+    # Everything inherited stays out of this child's garbage collection: a
+    # collection writes to every object it visits and so copies its memory
+    # page, which made each child as large as the parent.
+    import gc
+    global _running_lock
+    _running_lock = threading.Lock()  # another thread may have held it at the fork
+    gc.freeze()
+
+
 def _fork_supported() -> bool:
     return hasattr(os, "fork") and sys.platform == "linux"
 
 
 def worker_count() -> int:
+    """Worker processes one plan may use now.
+
+    ``SMAKO_PLANNER_PROCESSES`` is the budget for the whole app (default:
+    every core but one, at most 8). Plans running at the same time share it,
+    so three plans at once never fork three full sets of workers: each worker
+    copies the memory it touches, and memory, not cores, ran out first.
+    """
     if not _fork_supported():
         return 0
     raw = os.environ.get("SMAKO_PLANNER_PROCESSES")
@@ -70,7 +87,9 @@ def worker_count() -> int:
             return 0
     else:
         wanted = max(0, min(8, (os.cpu_count() or 1) - 1))
-    return wanted // max(1, _plan_share)
+    with _running_lock:
+        running = max(_plan_share, _running_plans)
+    return wanted // max(1, running)
 
 
 def plan_processes_enabled() -> bool:
@@ -137,6 +156,7 @@ def run_in_processes(items: Sequence, work: Callable[[Sequence], object], *, tim
             status = 1
             try:
                 os.close(read)
+                _child_after_fork()
                 answer = pickle.dumps(work(items[start:stop]), protocol=pickle.HIGHEST_PROTOCOL)
                 with os.fdopen(write, "wb") as out:
                     out.write(answer)
@@ -256,14 +276,14 @@ def run_plan_in_process(work: Callable[[], object]):
     """
     from app.services import plan_jobs
 
-    if not plan_processes_enabled():
-        return work()
     global _running_plans
-    read, write = os.pipe()
     with _running_lock:
         _running_plans += 1
         share = _running_plans
     try:
+        if not plan_processes_enabled():
+            return work()
+        read, write = os.pipe()
         try:
             with warnings.catch_warnings():
                 warnings.simplefilter("ignore", DeprecationWarning)
@@ -282,11 +302,12 @@ def run_plan_in_process(work: Callable[[], object]):
 
 
 def _run_plan_child(work, read, write, share):  # pragma: no cover - runs in the child
-    global _plan_share
+    global _plan_share, _running_plans
     status = 1
     try:
         os.close(read)
-        _plan_share = share
+        _child_after_fork()
+        _plan_share, _running_plans = share, 0
         from app.services import plan_jobs
         plan_jobs._stage_reporter.set(lambda stage, progress: _send(write, ("stage", stage, progress)))
         plan_jobs._engine_reporter.set(lambda limit: _send(write, ("engine", limit)))

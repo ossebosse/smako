@@ -196,6 +196,16 @@ def test_plans_running_at_once_share_the_cores(monkeypatch):
     monkeypatch.setenv("SMAKO_PLANNER_PROCESSES", "6")
     monkeypatch.setattr(pp, "_plan_share", 3)
     assert pp.worker_count() == 2
+    monkeypatch.setattr(pp, "_plan_share", 1)
+    monkeypatch.setattr(pp, "_running_plans", 2)  # also when plans run in this process
+    assert pp.worker_count() == 3
+
+
+def test_plans_in_this_process_are_counted_too(monkeypatch):
+    monkeypatch.setenv("SMAKO_PLAN_PROCESSES", "0")
+    monkeypatch.setenv("SMAKO_PLANNER_PROCESSES", "6")
+    assert pp.run_plan_in_process(pp.worker_count) == 6
+    assert pp._running_plans == 0
 
 
 def test_a_lock_held_in_another_thread_at_fork_is_free_in_the_plan_process(monkeypatch):
