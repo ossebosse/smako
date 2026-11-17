@@ -307,6 +307,17 @@ class PriceUniverseIndexes(BaseModel):
             {entry.canonical: entry.context_mask for entry in self.store_availability}
         )
 
+    # A binary snapshot (price_universe_store) carries the entries; the
+    # read-only lookups are rebuilt from them, exactly as after validation.
+    def __getstate__(self) -> dict:
+        state = super().__getstate__()
+        state["__pydantic_private__"] = None
+        return state
+
+    def __setstate__(self, state: dict) -> None:
+        super().__setstate__(state)
+        self.model_post_init(None)
+
     @model_validator(mode="after")
     def validate_unique_keys(self) -> PriceUniverseIndexes:
         for field_name in (
