@@ -284,7 +284,11 @@ async def _run_personal_thread(work):
     from app.services.plan_jobs import cancellable_work
 
     with cancellable_work() as stop:
-        worker = asyncio.create_task(asyncio.to_thread(work))
+        from app.services.planner_processes import run_plan_in_process
+
+        # Each plan in its own process, so plans of different people run on
+        # different cores at the same time (planner_processes).
+        worker = asyncio.create_task(asyncio.to_thread(run_plan_in_process, work))
         cancelled = None
         while not worker.done():
             try:

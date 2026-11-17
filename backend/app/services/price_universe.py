@@ -792,6 +792,11 @@ class _ThreadSafeLru[Key, Value]:
         self._misses = 0
         self._evictions = 0
         self._journal: list[tuple[Key, Value]] | None = None
+        from app.services.planner_processes import register_fork_safe
+        register_fork_safe(self)
+
+    def _after_fork(self) -> None:
+        self._lock = RLock()
 
     def get_or_compute(self, key: Key, factory: Callable[[], Value]) -> Value:
         # Compute under the re-entrant lock.  Cache loaders in this module are
@@ -918,6 +923,12 @@ class PackageCostCache:
         self._max_fingerprints = max_entries
         self._fingerprint_lock = RLock()
         self._candidate_digests: dict[int, tuple[ProductCandidate, str]] = {}
+        from app.services.planner_processes import register_fork_safe, register_warm_cache
+        register_fork_safe(self)
+        register_warm_cache(self)
+
+    def _after_fork(self) -> None:
+        self._fingerprint_lock = RLock()
 
     def get_or_compute(
         self,

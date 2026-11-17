@@ -214,7 +214,29 @@ class _QualificationMemory:
     def __init__(self, limit=128):
         import threading
 
+        from app.services.planner_processes import register_fork_safe, register_warm_cache
+
         self.limit, self.rows, self.lock = limit, OrderedDict(), threading.Lock()
+        self._journal = None
+        register_fork_safe(self)
+        register_warm_cache(self)
+
+    def _after_fork(self):
+        import threading
+        self.lock = threading.Lock()
+
+    def start_journal(self):
+        with self.lock:
+            self._journal = []
+
+    def journal(self):
+        with self.lock:
+            return list(self._journal or ())
+
+    def absorb(self, entries):
+        """Rows a plan process qualified; kept as if this process had (planner_processes)."""
+        for key, value in entries:
+            self.put(key, value, _record=False)
 
     def get(self, key):
         with self.lock:
@@ -223,8 +245,10 @@ class _QualificationMemory:
                 self.rows.move_to_end(key)
             return value
 
-    def put(self, key, value):
+    def put(self, key, value, _record=True):
         with self.lock:
+            if _record and self._journal is not None:
+                self._journal.append((key, value))
             self.rows[key] = value
             self.rows.move_to_end(key)
             while len(self.rows) > self.limit:
