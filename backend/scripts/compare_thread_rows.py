@@ -50,8 +50,22 @@ thread_total, threaded = rows(workers)
 differ = [key for key in serial.keys() | threaded.keys() if serial.get(key) != threaded.get(key)]
 print(json.dumps({"serial_total": str(serial_total), "thread_total": str(thread_total),
                   "rows": [len(serial), len(threaded)], "differ": len(differ)}), flush=True)
-for key in differ[:15]:
+kinds = {}
+for key in differ:
     a, b = serial.get(key) or {}, threaded.get(key) or {}
-    print(json.dumps({"serial": [a.get("status"), a.get("code"), (a.get("reason") or "")[:160]],
-                      "thread": [b.get("status"), b.get("code"), (b.get("reason") or "")[:160]],
-                      "evidence_equal": a.get("evidence") == b.get("evidence")}, ensure_ascii=False), flush=True)
+    ea, eb = a.get("evidence") or {}, b.get("evidence") or {}
+    kind = tuple(sorted(f for f in set(ea) | set(eb) if ea.get(f) != eb.get(f))) or ("status",)
+    kinds.setdefault(kind, []).append(key)
+print(json.dumps({" ".join(k): len(v) for k, v in kinds.items()}), flush=True)
+for kind, keys in kinds.items():
+    for key in keys[:3]:
+        ea, eb = (serial.get(key) or {}).get("evidence") or {}, (threaded.get(key) or {}).get("evidence") or {}
+        detail = {}
+        for f in kind:
+            x, y = ea.get(f), eb.get(f)
+            if isinstance(x, (list, tuple)) and isinstance(y, (list, tuple)):
+                sx, sy = {json.dumps(i, sort_keys=True) for i in x}, {json.dumps(i, sort_keys=True) for i in y}
+                detail[f] = {"only_serial": sorted(sx - sy)[:4], "only_thread": sorted(sy - sx)[:4]}
+            else:
+                detail[f] = [x, y]
+        print(json.dumps(detail, ensure_ascii=False)[:900], flush=True)
