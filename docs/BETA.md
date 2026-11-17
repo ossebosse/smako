@@ -1,3 +1,44 @@
+# 2026-11-17 kväll: Två planer samtidigt, flera kärnor och snabb start aktiverat
+
+Main `a94018b1f7c3` (PR #95, #97, #98). App **app-a94018b1f7c3-301421b6**,
+image `03e2197ffe05`, bas `7c59f6290822` (image `ac59196cc756`). Scheduler
+orörd. Aktiverad 2026-11-17 21:08:03 UTC, säkerhetskopia `20261117T205907Z`.
+Lagringsretention complete före och efter. `/ready` 200 för 22350 och 21120.
+
+Förberedelsen krävde ett lokalt, granskat undantag i `beta_release.py` (inte
+incheckat): `deploy/compose.yaml` ändrades i intervallet. Serverns compose
+får samma inställningar genom en egen override i stället:
+`/opt/smako/overrides/multicore-snapshots-a94018b1f7c3.json` med
+`PLANNER_MAX_CONCURRENT_REQUESTS=2`, `SMAKO_PREPARED_SNAPSHOT_ROOT` och
+volymen `/srv/smako/data/prepared_snapshots` (10001:10001, 700).
+
+Overriden lades in under driftlåset med samma kontroller som en aktivering:
+lugn plantrafik, wrapperkopia, konfigkontroll, `/ready` för båda städerna,
+oförändrad image och miljö utöver de två variablerna. Underlag finns i
+`/opt/smako/evidence/multicore-snapshots-a94018b1f7c3/`. Två planer i stället
+för tre, eftersom tre nya Malmöplaner samtidigt tog 87–93 s mot gränsen 90 s.
+
+Importkontroll av kandidaten var ok. I kandidatbilden utan nätverk tog Lunds
+prisunderlag 38,6 s från JSON och 3,2 s från ögonblicksbild, fakta 37,2 s
+mot 0,9 s, med samma plan (114,18 kr).
+
+Mätt på betan:
+- **Start:** den första starten skrev ögonblicksbilderna (174 s). En omstart
+  efter det: appen startade på 27 s och svarade ready efter 56 s, inklusive
+  nedstängning.
+- **Tre nya Malmöplaner samtidigt:** alla lyckades. Två räknades sida vid sida
+  på ca 62 s, den tredje väntade på en ledig plats och var klar efter 101 s.
+- **Malmö, sedan uppvärmningen var klar:** 3 middagar 35 s, gillar kyckling
+  60 s, eko 25 % 49 s, mjölkallergi 70 s. Lund fisk och vegetariskt 47 s.
+- **Flöde A (Lund):** plan 40 s, byte av recept 24 s, handlingslista, köp
+  sparat i skafferiet. Inga sid- eller API-fel.
+
+Fel som hittades: medan uppvärmningen efter starten pågick (ca 10 minuter)
+hann de första planerna i Malmö (95,7 s) och Lund (67,9 s) inte bli klara.
+Uppvärmningen tog alla provare. Rättningen är PR #99 (lägsta CPU-prioritet och
+högst en provare för bakgrundsarbete). Den är inte aktiverad, eftersom PR:en
+väntar på ägarens godkännande.
+
 # 2026-11-17: Testrapportens fel, Stora Coop, butikernas allergener, fisk, fart
 
 Main `7c59f6290822` (PR #94). App **app-7c59f6290822-8fc198af**, scheduler
@@ -292,7 +333,7 @@ på `main` inte ändrar en pågående release.
   `smako-app-1`, `smako-scheduler-1`, `smako-caddy-1`, data i `/srv/smako/data`
   och det gemensamma driftlåset. Detta flöde installerar inte en ny server.
 - Läs aktuell [HANDOFF.md](HANDOFF.md), [OPERATIONS.md](OPERATIONS.md) och
-  senaste aktiveringsrapport. Appens BUILD_ID är `app-7c59f6290822-8fc198af`;
+  senaste aktiveringsrapport. Appens BUILD_ID är `app-a94018b1f7c3-301421b6`;
   schedulern är `source-ops-8a53beb80e43`.
   [Uppvärmda prov och samordnad faktaläsning/GC](releases/warm-facts-gc-20261101/ACTIVATED.md)
   är senaste appaktiveringen. Sex Pythonfiler från kod `b7c8d0506e23`;
@@ -340,10 +381,10 @@ git status --short
 .venv/Scripts/python.exe -X utf8 scripts/smako_ops.py status
 
 # Använd den granskade Git-bas som motsvarar faktiskt aktiva filer enligt senaste journalen.
-.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit 7c59f6290822 --commit main --workdir .local/beta-release
+.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit a94018b1f7c3 --commit main --workdir .local/beta-release
 ```
 
-`7c59f6290822` är appen som aktiverades 2026-11-17 09:52 UTC. Appbildens egen
+`a94018b1f7c3` är appen som aktiverades 2026-11-17 21:08 UTC. Appbildens egen
 grocery-kopia är äldre än Git; använd `--keep-app-grocery` om intervallet
 bara innehåller grocery-Python som redan levererats till schedulern. De äldre
 Coop-filerna i runtime (`price_universe_runtime.py`,
