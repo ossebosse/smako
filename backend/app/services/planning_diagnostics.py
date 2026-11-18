@@ -1,6 +1,12 @@
 """Request-local first-rejection counts and search branching, never general logs."""
 
 from collections import Counter
+from contextvars import ContextVar
+
+# "full" where the planner runs directly; "summary" for people's plans through
+# the web app (api/plan._run_personal_thread): the full product decision path
+# was 13 MB per Malmö plan that no page reads.
+DIAGNOSTIC_DETAIL: ContextVar[str] = ContextVar("smako_diagnostic_detail", default="full")
 
 STAGES = {
     "policy_taste": "Policy/smak",
@@ -40,7 +46,8 @@ class PlanningDiagnostics:
         raw = sum(p["raw"] for p in self.pools)
         return {
             "version": "candidate-and-branch-counts-v1",
-            "product_decisions": self.product_trace.snapshot() if hasattr(self, "product_trace") else None,
+            "product_decisions": self.product_trace.snapshot(DIAGNOSTIC_DETAIL.get())
+            if hasattr(self, "product_trace") else None,
             "raw_recipe_pool": raw,
             "pools": self.pools,
             "candidate_rejections": [

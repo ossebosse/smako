@@ -360,6 +360,24 @@ pris (118,08 kr) i alla körningar, kalla delade cacher:
   Väntan sker i kön, och tidsgränsen börjar först när motorn startar.
   Därefter räknas områdets planer sida vid sida. Andra områden påverkas inte.
 
+- **Ett barn räknas som det det kopierar** (`_child_bytes`, 2026-11-18).
+  Tidigare räknades ett barn som minst halva appens privata minne. Appen hade
+  vuxit till 5,8 GB med varma cachar, så varje barn räknades som 2,9 GB. Med
+  3,5 GB ledigt fick ingen plan en egen process och prövningen bara en
+  provare. Ett nytt näringskrav (protein minst 31–35 g, eller protein och
+  kcal) tog då 60–80 s i prövningen på en kärna, och sidans frågor om läget
+  kunde vänta över 60 s. Nu räknas ett barn som det största barn som har
+  setts, plus 25 %. Innan något barn har setts räknas det som högst 1 GB.
+
+- **Personers planer bär en sammanfattning av produktvägen**
+  (`DIAGNOSTIC_DETAIL`, 2026-11-18). Hela vägen (varje prövat recepts
+  ingredienser, mängder och instruktioner samt varje produkts sammanhang) var
+  13 MB av en Malmöplans 13,2 MB. Den byggdes (cirka 4 s), skickades mellan
+  processer, sparades och laddades ned med varje plan. Ingen sida läser den.
+  Motorn var klar efter 26 s, men svaret kom först efter 39 s. Webbappens
+  planer bär nu antal och receptsökningen. Hela vägen finns kvar där planeraren
+  körs direkt: driftens återskapande, tester och mätskript.
+
 `deploy/compose.yaml` släpper nu in tre planer samtidigt
 (`PLANNER_MAX_CONCURRENT_REQUESTS=3`). Det gäller först när ägaren beslutar
 att slå ihop och aktivera, och bara om serverns `.env` inte sätter ett eget

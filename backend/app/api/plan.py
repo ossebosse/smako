@@ -292,6 +292,18 @@ async def _run_personal_thread(work):
     calculation. Shield and join it before propagating cancellation so a
     disconnect/shutdown cannot admit uncontrolled overlapping workers.
     """
+    from app.services.planning_diagnostics import DIAGNOSTIC_DETAIL
+
+    # People's plans carry the summary of the product decision path; the worker
+    # thread (and a plan's own process) inherits this context.
+    detail = DIAGNOSTIC_DETAIL.set("summary")
+    try:
+        return await _run_personal_thread_in_context(work)
+    finally:
+        DIAGNOSTIC_DETAIL.reset(detail)
+
+
+async def _run_personal_thread_in_context(work):
     from app.services.plan_jobs import cancellable_work
 
     with cancellable_work() as stop:

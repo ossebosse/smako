@@ -112,6 +112,14 @@ def test_slots_follow_cores_and_free_memory(monkeypatch):
     pp.release_processes(3)
     monkeypatch.setattr(pp, "_observed_child_peak", int(1.6 * 2**30))
     assert pp.memory_slots() == 1  # a large child was seen: 2 GB each
+    # A large app process does not make its children large: an unseen child
+    # counts as at most 1 GB, a seen one as what it copied (2026-11-18).
+    monkeypatch.setattr(pp, "_own_anon_bytes", lambda: 6 * 2**30)
+    monkeypatch.setattr(pp, "_available_bytes", lambda: int(3.5 * 2**30))
+    monkeypatch.setattr(pp, "_observed_child_peak", 0)
+    assert pp.memory_slots() == 2
+    monkeypatch.setattr(pp, "_observed_child_peak", int(0.4 * 2**30))
+    assert pp.memory_slots() == 5
     monkeypatch.setattr(pp, "_own_anon_bytes", lambda: None)
     assert pp.reserve_processes(2) == 0  # unknown memory: no extra process
     assert pp._slots_in_use == 0
