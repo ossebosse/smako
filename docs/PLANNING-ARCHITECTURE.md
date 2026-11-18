@@ -356,6 +356,16 @@ pris (118,08 kr) i alla körningar, kalla delade cacher:
   bredvid fick ingen provare. Uppvärmningens Malmövarv slutade ändå vid sin
   tidsgräns.
 
+- **Näringsunderlag delas i stället för att kopieras per vara**
+  (`reference_evidence`, `wrap_evidence`, 2026-11-18). Mätt i en process på
+  betan: en Malmöplan med protein minst 29 g byggde 346 774 underlag och växte
+  med 3 GB under prövningen av 1 149 recept. Den största delen var två saker.
+  Den första var provenienssteget som varje näringsämne hos varje vara fick en
+  egen kopia av (ca 1,9 miljoner ordböcker). Den andra var Livsmedelsverkets
+  referensunderlag, som byggdes om vid varje anrop (ca 1 miljon objekt). Båda
+  är nu ett delat, oföränderligt objekt per steg och per livsmedel. Med mindre
+  minne per recept får en näringsplan fler provare.
+
 - **En kall plan i taget per område** (`PlannerAdmissionController`,
   `warmth_scope`, ägarbeslut 2026-11-18). Den första planen i ett område efter
   en start eller ett nytt prisunderlag räknar fram det som senare planer
