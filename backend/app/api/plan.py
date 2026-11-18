@@ -169,6 +169,17 @@ def _planner_admission(
     return configured
 
 
+def _warmth_scope(request: PlanRequest) -> str | None:
+    """The area's active price universe: one cold plan at a time per scope."""
+    try:
+        memberships = normalized_memberships(
+            request.pricing_memberships or None, use_member_prices=request.use_member_prices)
+        prepared = GLOBAL_PREPARED_PRICE_UNIVERSES.get_for_request(request.postal_code, memberships)
+    except Exception:  # noqa: BLE001 - without an area the plan is admitted as before
+        return None
+    return prepared.universe.universe_id if prepared is not None else None
+
+
 def _planner_admission_key(request: PlanRequest, settings: Settings) -> str:
     """Hash the full economic request and active immutable universe identity."""
 
@@ -314,7 +325,8 @@ async def _run_personal_work(
     owner = _plan_actor_hash(http_request, settings)
     key = hashlib.sha256(f"{key}:{owner}:{revision}:{operation}".encode()).hexdigest()
     try:
-        return await _planner_admission(http_request, settings).run(key, work)
+        return await _planner_admission(http_request, settings).run(
+            key, work, warmth_scope=_warmth_scope(request))
     except PlannerAdmissionOverloaded as exc:
         raise HTTPException(
             503,

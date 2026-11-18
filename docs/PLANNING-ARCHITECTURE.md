@@ -352,6 +352,14 @@ pris (118,08 kr) i alla körningar, kalla delade cacher:
   2026-11-17 tog den alla provare i tio minuter, och de första planerna (Malmö
   och Lund) hann inte bli klara bredvid den.
 
+- **En kall plan i taget per område** (`PlannerAdmissionController`,
+  `warmth_scope`, ägarbeslut 2026-11-18). Den första planen i ett område efter
+  en start eller ett nytt prisunderlag räknar fram det som senare planer
+  återanvänder. Tre sådana samtidigt hann inte bli klara på betan. Därför väntar
+  en plan i ett område som ännu saknar en färdig plan på områdets första plan.
+  Väntan sker i kön, och tidsgränsen börjar först när motorn startar.
+  Därefter räknas områdets planer sida vid sida. Andra områden påverkas inte.
+
 `deploy/compose.yaml` släpper nu in tre planer samtidigt
 (`PLANNER_MAX_CONCURRENT_REQUESTS=3`). Det gäller först när ägaren beslutar
 att slå ihop och aktivera, och bara om serverns `.env` inte sätter ett eget

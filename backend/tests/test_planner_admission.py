@@ -372,3 +372,71 @@ async def test_failed_admitted_job_cannot_lend_its_cleanup_to_a_later_job():
         return await asyncio.to_thread(consume_admission_cleanup)
     assert await controller.run("next", next_job)
     assert not consume_admission_cleanup()
+
+
+@pytest.mark.asyncio
+async def test_one_cold_plan_per_area_then_side_by_side():
+    controller = PlannerAdmissionController(max_concurrent=3, max_queued=6)
+    running, peak = {"malmö": 0, "lund": 0}, {"malmö": 0, "lund": 0}
+
+    def work(area, seconds=0.05):
+        async def factory():
+            running[area] += 1
+            peak[area] = max(peak[area], running[area])
+            await asyncio.sleep(seconds)
+            running[area] -= 1
+            return area
+        return factory
+
+    # Three new Malmö plans before Malmö has a finished one: the first runs
+    # alone, the other two together once it is done. A Lund plan meanwhile is
+    # not held back by Malmö.
+    results = await asyncio.gather(
+        *[controller.run(f"m{i}", work("malmö"), warmth_scope="u-malmö") for i in range(3)],
+        controller.run("l0", work("lund"), warmth_scope="u-lund"),
+    )
+    assert results == ["malmö", "malmö", "malmö", "lund"] and peak["malmö"] == 2
+    assert peak["lund"] == 1
+    await controller.drain()
+
+    # Malmö is warm now: plans run side by side.
+    peak["malmö"] = 0
+    await asyncio.gather(*[controller.run(f"w{i}", work("malmö"), warmth_scope="u-malmö") for i in range(3)])
+    assert peak["malmö"] == 3
+    await controller.drain()
+
+    # A new price universe for Malmö is cold again: two new plans one after the other.
+    peak["malmö"] = 0
+    await asyncio.gather(*[controller.run(f"n{i}", work("malmö"), warmth_scope="u-malmö-2") for i in range(2)])
+    assert peak["malmö"] == 1
+
+
+@pytest.mark.asyncio
+async def test_a_cold_plan_that_fails_still_warms_the_area_and_a_cancelled_wait_does_not():
+    controller = PlannerAdmissionController(max_concurrent=2, max_queued=4)
+
+    async def fails():
+        raise RuntimeError("deadline")
+
+    with pytest.raises(RuntimeError):
+        await controller.run("a", fails, warmth_scope="u")
+    assert "u" in controller._warm_scopes
+
+    blocker_started, release = asyncio.Event(), asyncio.Event()
+
+    async def blocker():
+        blocker_started.set()
+        await release.wait()
+        return "done"
+
+    first = asyncio.create_task(controller.run("b", blocker, warmth_scope="v"))
+    await blocker_started.wait()
+    waiting = asyncio.create_task(controller.run("c", blocker, warmth_scope="v"))
+    await asyncio.sleep(0.05)
+    waiting.cancel()
+    with pytest.raises(asyncio.CancelledError):
+        await waiting
+    assert "v" not in controller._warm_scopes
+    release.set()
+    assert await first == "done" and "v" in controller._warm_scopes
+    await controller.drain()
