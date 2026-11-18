@@ -375,7 +375,13 @@ async def test_failed_admitted_job_cannot_lend_its_cleanup_to_a_later_job():
 
 
 @pytest.mark.asyncio
-async def test_one_cold_plan_per_area_then_side_by_side():
+async def test_one_cold_plan_per_area_then_side_by_side(monkeypatch):
+    from app.services import planner_memory
+
+    # A slot comes back after the full collection that follows each plan. On
+    # a CI worker with a large heap that took longer than the plans here, so
+    # the two warm Malmö plans never overlapped (2026-11-18). Not under test.
+    monkeypatch.setattr(planner_memory, "reclaim_and_freeze", lambda: None)
     controller = PlannerAdmissionController(max_concurrent=3, max_queued=6)
     running, peak = {"malmö": 0, "lund": 0}, {"malmö": 0, "lund": 0}
 
