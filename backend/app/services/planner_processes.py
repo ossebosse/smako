@@ -22,9 +22,11 @@ qualification worker, takes one slot from a single allocator in the app
 process. A slot needs a free core (``SMAKO_PLANNER_PROCESSES``, default every
 core but one, at most 8) AND room in memory now: CPython writes a reference
 count into every object a process reads, so a child copies whatever it
-touches (Malmö: 0.2–0.45 GB per child of a 1.4 GB app process). The
-allocator expects the largest child seen so far (``observe_child``), at
-least half of this process's private memory. Three plans with their own
+touches. The allocator expects the largest child of the same kind seen so
+far (``observe_child``): a plan's own process copies up to 2.7 GB, a
+qualification worker 0.2–0.45 GB (Malmö, 2026-11-18). What a running plan
+has copied is already gone from the free memory; only what it may still
+copy is held back. Three plans with their own
 workers ran a 7 GB container out of memory before the allocator existed. Plans running at the same time share the cores.
 Children are marked as the first processes to stop if memory still runs out,
 so the web app itself is never the one stopped.
@@ -65,6 +67,11 @@ logger = logging.getLogger(__name__)
 # Allocator state, in the app process: plans running now and slots in use.
 _running_plans = 0
 _slots_in_use = 0
+# Memory promised to running children: workers by their estimate; a plan's
+# own process by what it may still copy (estimate minus what it has).
+_worker_slots = 0
+_worker_bytes = 0
+_plan_children: dict[object, list[int]] = {}
 _running_lock = threading.Lock()
 # In a plan's own process: the pipes to ask the app process for workers.
 _parent_channel: tuple[int, int] | None = None
@@ -72,9 +79,10 @@ _parent_channel: tuple[int, int] | None = None
 
 def _child_after_fork() -> None:
     import gc
-    global _running_lock, _running_plans, _slots_in_use, _parent_channel
+    global _running_lock, _running_plans, _slots_in_use, _parent_channel, _worker_slots, _worker_bytes
     _running_lock = threading.Lock()  # another thread may have held it at the fork
-    _running_plans = _slots_in_use = 0
+    _running_plans = _slots_in_use = _worker_slots = _worker_bytes = 0
+    _plan_children.clear()
     _parent_channel = None
     # Everything inherited stays out of this child's garbage collection: a
     # collection writes to every object it visits and so copies its memory.
@@ -153,77 +161,136 @@ def _own_anon_bytes() -> int | None:
     return None
 
 
-# The most memory a child has copied so far (``observe_child``). Until one is
-# seen, half of this process's private memory, at most _UNSEEN_CHILD_BYTES:
-# measured Malmö children copied 0.2–0.45 GB of a 1.4 GB parent.
-_observed_child_peak = 0
-_UNSEEN_CHILD_BYTES = 1 << 30
+# The most memory a child of each kind has copied so far (``observe_child``):
+# a plan's own process and a qualification worker differ tenfold. Measured on
+# the beta 2026-11-18: a Malmö plan's process copies up to 2.7 GB (it reads
+# the whole price universe and builds its caches), a worker 0.2–0.45 GB.
+# Until one is seen, half of this process's private memory, at most these.
+_observed_peak = {"plan": 0, "worker": 0}
+_UNSEEN_CHILD_BYTES = {"plan": 3 << 30, "worker": 1 << 30}
 
 
-def observe_child(pid: int) -> None:
-    """Note how much memory a running child has copied (its private pages)."""
-    global _observed_child_peak
+def _private_dirty(pid: int) -> int | None:
     try:
         with open(f"/proc/{pid}/smaps_rollup") as rollup:
             for line in rollup:
                 if line.startswith("Private_Dirty:"):
-                    _observed_child_peak = max(_observed_child_peak, int(line.split()[1]) * 1024)
-                    return
+                    return int(line.split()[1]) * 1024
     except (OSError, ValueError):
         pass
+    return None
 
 
-def _child_bytes() -> int | None:
-    """Expected memory of one more child: the largest seen so far, with a margin.
+def observe_child(pid: int, kind: str = "worker") -> int | None:
+    """Note how much memory a running child has copied (its private pages)."""
+    size = _private_dirty(pid)
+    if size is not None:
+        note_child_peak(kind, size)
+    return size
+
+
+def note_child_peak(kind: str, size: int) -> None:
+    """A child's copied memory, measured here or reported by a plan's process."""
+    if size and size > _observed_peak[kind]:
+        _observed_peak[kind] = size
+
+
+def _child_bytes(kind: str = "worker") -> int | None:
+    """Expected memory of one more child of ``kind``: the largest seen, +25 %.
 
     A child copies only what it changes, not its parent's size. The earlier
-    floor of half the parent's private memory grew with the warm caches: on
-    2026-11-18 a 5.8 GB app process made every child count as 2.9 GB, so with
-    3.5 GB free no plan got its own process or more than one qualification
-    worker, and a new nutrition requirement took 60–80 s on one core.
+    floor of half the parent's private memory grew with the warm caches, and
+    one peak for every child let a plan's 2.7 GB process stand for every
+    worker: on 2026-11-18 a new nutrition requirement got no worker at all
+    and took 60–80 s of qualification on one core.
     """
     own = _own_anon_bytes()
     if not own:
         return None
-    if _observed_child_peak:
-        return int(_observed_child_peak * 1.25)
-    return int(min(own / 2, _UNSEEN_CHILD_BYTES))
+    if _observed_peak[kind]:
+        return int(_observed_peak[kind] * 1.25)
+    return int(min(own / 2, _UNSEEN_CHILD_BYTES[kind]))
 
 
-def memory_slots() -> int:
-    """More children that fit in memory now (unknown memory: none).
+def _promised_bytes() -> int:
+    """Memory running children may still take: not counted in what is free now."""
+    with _running_lock:
+        plans = sum(max(0, estimate - copied) for estimate, copied in _plan_children.values())
+        return _worker_bytes + plans
 
-    Running children are counted as if they had not copied anything yet, which
-    double-counts what they have: three plans starting at once must not each
-    see the same free memory.
+
+def memory_slots(kind: str = "worker") -> int:
+    """More children of ``kind`` that fit in memory now (unknown memory: none).
+
+    What running plans have copied is already gone from the free memory; what
+    they may still copy, and every running worker's estimate, is held back,
+    so plans starting at once never each see the same free memory.
     """
     if os.environ.get("SMAKO_PLANNER_MEMORY_CHECK", "1") == "0":
         return 1 << 16
-    available, child = _available_bytes(), _child_bytes()
+    available, child = _available_bytes(), _child_bytes(kind)
     if not available or not child:
         return 0
-    with _running_lock:
-        running = _slots_in_use
-    return max(0, int(available * _MEMORY_HEADROOM // child) - running)
+    return max(0, int((available * _MEMORY_HEADROOM - _promised_bytes()) // child))
 
 
 def reserve_processes(wanted: int) -> int:
-    """Take up to ``wanted`` slots; returns how many were granted (maybe 0)."""
-    global _slots_in_use
+    """Take up to ``wanted`` worker slots; returns how many were granted (maybe 0)."""
+    global _slots_in_use, _worker_slots, _worker_bytes
     if wanted <= 0:
         return 0
-    memory = memory_slots()
+    memory = memory_slots("worker")
+    child = _child_bytes("worker") or 0
     with _running_lock:
         granted = max(0, min(wanted, cpu_budget() - _slots_in_use, memory))
         _slots_in_use += granted
+        _worker_slots += granted
+        _worker_bytes += granted * child
     return granted
 
 
 def release_processes(count: int) -> None:
-    global _slots_in_use
+    global _slots_in_use, _worker_slots, _worker_bytes
     if count > 0:
         with _running_lock:
+            count = min(count, _worker_slots)
+            if _worker_slots:
+                _worker_bytes -= _worker_bytes * count // _worker_slots
+            _worker_slots -= count
             _slots_in_use = max(0, _slots_in_use - count)
+            if not _worker_slots:
+                _worker_bytes = 0
+
+
+def reserve_plan_process() -> object | None:
+    """A slot for one plan's own process, or None (the plan runs here)."""
+    global _slots_in_use
+    memory = memory_slots("plan")
+    estimate = _child_bytes("plan") or 0
+    with _running_lock:
+        if min(cpu_budget() - _slots_in_use, memory) < 1:
+            return None
+        _slots_in_use += 1
+        token = object()
+        _plan_children[token] = [estimate, 0]
+        return token
+
+
+def observe_plan_process(token: object, pid: int) -> None:
+    size = observe_child(pid, "plan")
+    if size is not None:
+        with _running_lock:
+            if token in _plan_children:
+                _plan_children[token][1] = max(_plan_children[token][1], size)
+
+
+def release_plan_process(token: object | None) -> None:
+    global _slots_in_use
+    if token is None:
+        return
+    with _running_lock:
+        if _plan_children.pop(token, None) is not None:
+            _slots_in_use = max(0, _slots_in_use - 1)
 
 
 def _fair_share() -> int:
@@ -288,7 +355,8 @@ def qualification_workers() -> Iterator[int]:
         try:
             yield granted
         finally:
-            _ask_parent("release", granted)
+            # The workers' size, measured in this process, for the allocator.
+            _ask_parent("release", granted, _observed_peak["worker"])
         return
     granted = reserve_processes(min(_fair_share(), _BACKGROUND_WORKERS) if background else _fair_share())
     try:
@@ -297,9 +365,9 @@ def qualification_workers() -> Iterator[int]:
         release_processes(granted)
 
 
-def _ask_parent(kind: str, count: int) -> int:
+def _ask_parent(kind: str, count: int, *extra) -> int:
     write, reply = _parent_channel
-    _send(write, (kind, count))
+    _send(write, (kind, count, *extra))
     if kind != "reserve":
         return 0
     data = b""
@@ -554,11 +622,11 @@ def run_plan_in_process(work: Callable[[], object]):
     global _running_plans
     with _running_lock:
         _running_plans += 1
-    slot = 0
+    slot = None
     try:
         if plan_processes_enabled():
-            slot = reserve_processes(1)
-        if not slot:
+            slot = reserve_plan_process()
+        if slot is None:
             return work()
         read, write = os.pipe()
         reply_read, reply_write = os.pipe()
@@ -575,11 +643,11 @@ def run_plan_in_process(work: Callable[[], object]):
         os.close(write)
         os.close(reply_read)
         try:
-            return _await_plan_child(work, pid, read, reply_write, plan_jobs)
+            return _await_plan_child(work, pid, read, reply_write, plan_jobs, slot)
         finally:
             os.close(reply_write)
     finally:
-        release_processes(slot)
+        release_plan_process(slot)
         with _running_lock:
             _running_plans -= 1
 
@@ -612,7 +680,7 @@ def _run_plan_child(work, read, write, reply_read, reply_write):  # pragma: no c
         os._exit(status)
 
 
-def _await_plan_child(work, pid, read, reply, plan_jobs):
+def _await_plan_child(work, pid, read, reply, plan_jobs, slot=None):
     buffer, final, sampled, held = bytearray(), None, 0.0, 0
     stop = plan_jobs._work_cancellation.get()
     stage_reporter, engine_reporter = plan_jobs._stage_reporter.get(), plan_jobs._engine_reporter.get()
@@ -626,7 +694,7 @@ def _await_plan_child(work, pid, read, reply, plan_jobs):
             if not ready:
                 if time.monotonic() - sampled >= 1:
                     sampled = time.monotonic()
-                    observe_child(pid)
+                    observe_plan_process(slot, pid)
                 continue
             chunk = os.read(read, 1 << 20)
             if not chunk:
@@ -646,6 +714,8 @@ def _await_plan_child(work, pid, read, reply, plan_jobs):
                     except OSError:
                         pass
                 elif message[0] == "release":
+                    if len(message) > 2:
+                        note_child_peak("worker", message[2])
                     release_processes(min(held, message[1]))
                     held -= min(held, message[1])
                 elif message[0] in {"result", "error", "lost"}:

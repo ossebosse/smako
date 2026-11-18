@@ -104,31 +104,57 @@ def test_slots_follow_cores_and_free_memory(monkeypatch):
     monkeypatch.setenv("SMAKO_PLANNER_PROCESSES", "6")
     monkeypatch.setattr(pp, "_available_bytes", lambda: 4 * 2**30)
     monkeypatch.setattr(pp, "_own_anon_bytes", lambda: 2 * 2**30)
-    monkeypatch.setattr(pp, "_observed_child_peak", 0)
+    monkeypatch.setattr(pp, "_observed_peak", {"plan": 0, "worker": 0})
     assert pp.memory_slots() == 3  # 75 % of 4 GB; a child: half of 2 GB
     assert pp.reserve_processes(5) == 3
     # The three are counted as not yet grown: nothing more fits now.
     assert pp.reserve_processes(5) == 0
     pp.release_processes(3)
-    monkeypatch.setattr(pp, "_observed_child_peak", int(1.6 * 2**30))
-    assert pp.memory_slots() == 1  # a large child was seen: 2 GB each
-    # A large app process does not make its children large: an unseen child
+    assert pp._worker_bytes == 0
+    monkeypatch.setattr(pp, "_observed_peak", {"plan": 0, "worker": int(1.6 * 2**30)})
+    assert pp.memory_slots() == 1  # a large worker was seen: 2 GB each
+    # A large app process does not make its children large: an unseen worker
     # counts as at most 1 GB, a seen one as what it copied (2026-11-18).
     monkeypatch.setattr(pp, "_own_anon_bytes", lambda: 6 * 2**30)
     monkeypatch.setattr(pp, "_available_bytes", lambda: int(3.5 * 2**30))
-    monkeypatch.setattr(pp, "_observed_child_peak", 0)
+    monkeypatch.setattr(pp, "_observed_peak", {"plan": 0, "worker": 0})
     assert pp.memory_slots() == 2
-    monkeypatch.setattr(pp, "_observed_child_peak", int(0.4 * 2**30))
+    monkeypatch.setattr(pp, "_observed_peak", {"plan": int(2.7 * 2**30), "worker": int(0.4 * 2**30)})
     assert pp.memory_slots() == 5
     monkeypatch.setattr(pp, "_own_anon_bytes", lambda: None)
     assert pp.reserve_processes(2) == 0  # unknown memory: no extra process
     assert pp._slots_in_use == 0
 
 
+def test_a_plan_process_holds_back_only_what_it_may_still_copy(monkeypatch):
+    """A plan's 2.7 GB process no longer stands for every worker (2026-11-18)."""
+    monkeypatch.setenv("SMAKO_PLANNER_PROCESSES", "7")
+    monkeypatch.setattr(pp, "_available_bytes", lambda: 8 * 2**30)
+    monkeypatch.setattr(pp, "_own_anon_bytes", lambda: 4 * 2**30)
+    monkeypatch.setattr(pp, "_observed_peak", {"plan": int(2.4 * 2**30), "worker": int(0.4 * 2**30)})
+    slot = pp.reserve_plan_process()
+    assert slot is not None and pp._slots_in_use == 1
+    # Before it has copied anything its whole estimate (3 GB) is held back:
+    # 6 GB usable - 3 GB = 3 GB, 0.5 GB per worker.
+    assert pp.memory_slots() == 6
+    monkeypatch.setattr(pp, "_private_dirty", lambda pid: int(2.5 * 2**30))
+    monkeypatch.setattr(pp, "_available_bytes", lambda: int(5.5 * 2**30))
+    pp.observe_plan_process(slot, 123)
+    # It copied 2.5 GB, which left the free memory; 0.5 GB more may follow.
+    assert pp._observed_peak["plan"] == int(2.5 * 2**30)
+    assert pp.memory_slots() == 7
+    assert pp.reserve_processes(9) == 6  # the cores decide now
+    pp.release_processes(6)
+    pp.release_plan_process(slot)
+    assert pp._slots_in_use == 0 and not pp._plan_children
+    monkeypatch.setattr(pp, "_available_bytes", lambda: 2 * 2**30)
+    assert pp.reserve_plan_process() is None  # a plan's process does not fit
+
+
 def test_a_running_child_is_measured(monkeypatch):
     import signal as signals
 
-    monkeypatch.setattr(pp, "_observed_child_peak", 0)
+    monkeypatch.setattr(pp, "_observed_peak", {"plan": 0, "worker": 0})
 
     pid = os.fork()
     if pid == 0:
@@ -138,9 +164,8 @@ def test_a_running_child_is_measured(monkeypatch):
         os._exit(0)
     try:
         time.sleep(0.5)
-        before = pp._observed_child_peak
         pp.observe_child(pid)
-        assert pp._observed_child_peak >= max(before, 30 * 2**20)
+        assert pp._observed_peak["worker"] >= 30 * 2**20 and pp._observed_peak["plan"] == 0
     finally:
         os.kill(pid, signals.SIGKILL)
         os.waitpid(pid, 0)
