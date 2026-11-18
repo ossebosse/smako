@@ -196,6 +196,11 @@ _SEARCH_ONLY_PREFERENCE_FIELDS = ("max_same_main_protein_dinners", "min_distinct
                                   "allow_fish")
 
 
+def _ordinary_meal(meal):
+    """The same meal without nutrition or weight requirements."""
+    return meal.model_copy(update={"limits": type(meal.limits)()})
+
+
 def _qualification_meal(meal):
     """A meal's choices that decide whether one recipe qualifies."""
     update = {"profile": meal.profile.model_copy(update={"likes": [], "dislikes": []}),
@@ -2962,7 +2967,7 @@ class PersonalPlanner:
             nutrition.append(row)
         return nutrition
 
-    def _qualification_context(self):
+    def _qualification_context(self, *, ordinary=False):
         """Everything per-recipe qualification reads, minus search-only fields.
 
         Same digest as planner_context except that week-search choices
@@ -2988,7 +2993,7 @@ class PersonalPlanner:
             personal = original.personal
             update["personal"] = personal.model_copy(update={
                 "profile": personal.profile.model_copy(update={"likes": [], "dislikes": []}),
-                "meals": [_qualification_meal(m) for m in personal.meals]})
+                "meals": [_qualification_meal(_ordinary_meal(m) if ordinary else m) for m in personal.meals]})
         # The stores actually compared, not how they were named: a whole-area
         # choice, a saved online shop or a shop listed once are the same set.
         if original.allowed_store_ids:
@@ -3012,9 +3017,11 @@ class PersonalPlanner:
         content filters are decided each time, as in the rows themselves.
         """
         from app.services.planner_context import content_digest
-        ordinary = meal.model_copy(update={"limits": type(meal.limits)()})
-        base = _QUALIFICATION_MEMORY.get(
-            content_digest([self._qualification_context(), _qualification_meal(ordinary), fixed_slots]))
+        # Every meal's requirements are part of the context, so the ordinary
+        # rows are those of the same request with none (2026-11-18: looking
+        # them up under this request's own context never found them).
+        base = _QUALIFICATION_MEMORY.get(content_digest(
+            [self._qualification_context(ordinary=True), _qualification_meal(_ordinary_meal(meal)), fixed_slots]))
         rows = base.get("rows") if isinstance(base, dict) else None
         if not isinstance(rows, dict):
             return stored_rows

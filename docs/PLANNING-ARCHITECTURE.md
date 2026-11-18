@@ -381,14 +381,19 @@ pris (118,08 kr) i alla körningar, kalla delade cacher:
   0,6 GB för 460 Malmörecept, 1,5 GB för 1 148. Räknad efter den största
   provaren som hade setts såg två provare för stora ut. Planen fick då en
   provare, som fick hälften av recepten och blev stor igen. Nu räknas varje
-  provare efter det mesta minne per recept som har setts, för den del den får.
-  Planprocessen skickar det måttet till appen.
+  provare som en fast del (0,5 GB, det gaffeln rör direkt) plus det mesta
+  minne per recept som har setts (ca 0,9 MB), för den del den får.
+  Planprocessen skickar måttet till appen. Utan den fasta delen gav små delar
+  2,4 MB per recept, och nästa plan fick ingen provare (#104, rättat samma
+  dag).
 - **Ett näringskrav prövar inte om det som redan föll bort**
   (`_with_ordinary_rejections`). Ett krav lägger bara till kontroller. Varje
   ingrediens begränsas till varor med rätt deklaration. Alternativ söks bara
   från en korg som finns. Sedan kommer kontrollerna av näring och vikt. Ett
   recept som samma val utan krav underkände underkänns därför också med
-  kravet, av samma skäl. Ett nytt krav prövar alltså bara de recept som
+  kravet, av samma skäl. Raderna slås upp under samma begäran utan krav,
+  eftersom alla måltiders krav ingår i sammanhanget. Ett nytt krav prövar
+  alltså bara de recept som
   klarade sig utan krav (i Malmö ca 1 880 av 2 297). Recept som klarade sig
   prövas igen. Med kravet får varje ingrediens bara varor med rätt
   deklaration, så den billigaste korgen kan bli en annan.

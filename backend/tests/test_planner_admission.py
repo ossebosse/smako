@@ -379,7 +379,9 @@ async def test_one_cold_plan_per_area_then_side_by_side():
     controller = PlannerAdmissionController(max_concurrent=3, max_queued=6)
     running, peak = {"malmö": 0, "lund": 0}, {"malmö": 0, "lund": 0}
 
-    def work(area, seconds=0.05):
+    # Long enough to overlap even when each start's gc.collect(1) takes a
+    # while on a busy CI runner (failed with 0.05 s on 2026-11-18).
+    def work(area, seconds=0.5):
         async def factory():
             running[area] += 1
             peak[area] = max(peak[area], running[area])

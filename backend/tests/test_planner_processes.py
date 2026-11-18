@@ -154,25 +154,26 @@ def test_a_plan_process_holds_back_only_what_it_may_still_copy(monkeypatch):
 
 
 def test_workers_are_sized_by_the_recipes_they_get(monkeypatch):
-    """1.3 MB per recipe: two workers of 1,148 recipes looked like one (2026-11-18)."""
+    """A fixed 0.5 GB plus ~0.9 MB per recipe, measured on the beta (2026-11-18)."""
     monkeypatch.setenv("SMAKO_PLANNER_PROCESSES", "7")
-    monkeypatch.setattr(pp, "_available_bytes", lambda: int(7.4 * 2**30))
+    monkeypatch.setattr(pp, "_available_bytes", lambda: int(8.4 * 2**30))
     monkeypatch.setattr(pp, "_own_anon_bytes", lambda: 4 * 2**30)
     monkeypatch.setattr(pp, "_observed_peak", {"plan": 0, "worker": 0})
     monkeypatch.setattr(pp, "_observed_per_item", 0.0)
     pp.note_child_peak("worker", int(1.5 * 2**30), 1148)
+    pp.note_child_peak("worker", int(0.75 * 2**30), 329)  # the same rate
     pp.note_child_peak("worker", 2**30, 24)  # a small slice says little per recipe
-    assert pp._observed_per_item == int(1.5 * 2**30) / 1148
-    # Sized as one 1.9 GB worker each, two would fit in 5.5 GB; sized by
-    # slice, six workers of 328 recipes each (0.5 GB) fit.
+    assert pp._observed_per_item == 2**30 / 1148
+    # Sized as one 1.9 GB worker each, three would fit in 6.3 GB; sized by
+    # slice, six workers of 329 recipes (about 1 GB each with the margin) fit.
     assert pp.reserve_processes(6, items=2297) == 6
     held = pp._worker_bytes
-    assert 6 * 0.5 * 2**30 < held < 6 * 0.6 * 2**30
+    assert 6 * 0.95 * 2**30 < held < 6 * 1.05 * 2**30
     pp.release_processes(6)
     assert pp._worker_bytes == 0 and pp._slots_in_use == 0
-    pp.note_per_item(3 * 2**20)  # a plan's process saw larger workers
-    assert pp._observed_per_item == 3 * 2**20
-    # 3 MB per recipe: all workers together would copy 8.6 GB x k/(k+1).
+    pp.note_per_item(4 * 2**20)  # a plan's process saw larger workers
+    assert pp._observed_per_item == 4 * 2**20
+    # k workers: k x (0.5 GB + 4 MB x 2297/(k+1)) x 1.25 within 6.3 GB.
     assert pp.reserve_processes(6, items=2297) == 1
     pp.release_processes(1)
     assert pp._slots_in_use == 0

@@ -169,13 +169,16 @@ def _own_anon_bytes() -> int | None:
 _observed_peak = {"plan": 0, "worker": 0}
 _UNSEEN_CHILD_BYTES = {"plan": 3 << 30, "worker": 1 << 30}
 # A qualification worker's copy grows with the recipes it qualifies (it fills
-# its own caches): 0.6 GB for 460 Malmö recipes, 1.5 GB for 1,148. Sizing a
-# worker by the largest one seen made one worker look too big for two, so a
-# plan kept getting one worker with half the recipes each time. Workers are
-# sized by the most memory per recipe seen, for the slice they will get.
+# its own caches) on top of a fixed part (what the fork touches at once):
+# about 0.5 GB at the start, 0.75 GB for 329 Malmö recipes, 1.5 GB for 1,148,
+# so about 0.9 MB per recipe. Sizing a worker by the largest one seen made one
+# worker look too big for two, so a plan kept getting one worker with half
+# the recipes each time; sizing by memory per recipe without the fixed part
+# (2.4 MB from 329-recipe slices) left the next plan none. Workers are sized
+# as the fixed part plus the most memory per recipe seen, for their slice.
 _observed_per_item = 0.0
 _PER_ITEM_MIN_SLICE = 100  # smaller slices are mostly fixed cost
-_WORKER_FLOOR_BYTES = 128 << 20
+_WORKER_FIXED_BYTES = 512 << 20
 
 
 def _private_dirty(pid: int) -> int | None:
@@ -203,7 +206,7 @@ def note_child_peak(kind: str, size: int, items: int = 0) -> None:
     if size and size > _observed_peak[kind]:
         _observed_peak[kind] = size
     if kind == "worker" and size and items >= _PER_ITEM_MIN_SLICE:
-        _observed_per_item = max(_observed_per_item, size / items)
+        _observed_per_item = max(_observed_per_item, max(0, size - _WORKER_FIXED_BYTES) / items)
 
 
 def note_per_item(per_item: float) -> None:
@@ -219,7 +222,7 @@ def _worker_bytes_for(items: int, workers: int) -> int | None:
     if not _observed_per_item or not items:
         return _child_bytes("worker")
     share = -(-items // (workers + 1))
-    return int(max(_WORKER_FLOOR_BYTES, _observed_per_item * share) * 1.25)
+    return int((_WORKER_FIXED_BYTES + _observed_per_item * share) * 1.25)
 
 
 def _child_bytes(kind: str = "worker") -> int | None:
