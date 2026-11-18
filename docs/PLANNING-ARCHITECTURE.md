@@ -368,6 +368,14 @@ pris (118,08 kr) i alla körningar, kalla delade cacher:
   kcal) tog då 60–80 s i prövningen på en kärna, och sidans frågor om läget
   kunde vänta över 60 s. Nu räknas ett barn som det största barn som har
   setts, plus 25 %. Innan något barn har setts räknas det som högst 1 GB.
+- **Planprocesser och provare räknas var för sig** (samma dag, efter
+  aktiveringen av #101). En Malmöplans egen process kopierade upp till 2,7 GB
+  (den läser hela prisunderlaget och bygger sina cachar), en provare 0,2–0,45
+  GB. Med en gemensam största storlek räknades varje provare som 3,4 GB, och
+  planen fick ingen provare alls. Nu har varje sort sin egen största storlek.
+  Planprocessen skickar provarnas storlek till appen när den lämnar tillbaka
+  dem. Det en plan redan har kopierat är redan borta ur det lediga minnet, så
+  bara det den kan kopiera till hålls undan.
 
 - **Personers planer bär en sammanfattning av produktvägen**
   (`DIAGNOSTIC_DETAIL`, 2026-11-18). Hela vägen (varje prövat recepts
