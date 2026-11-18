@@ -1717,11 +1717,18 @@ class MenuOptimizer:
             pool = speculation["pool"]
             if pool is None:
                 return
+            began = perf_counter()
+            try:
+                submit_predicted(pool)
+            finally:
+                pool.stats["predict_seconds"] = round(pool.stats.get("predict_seconds", 0) + perf_counter() - began, 3)
+
+        def submit_predicted(pool):
             pool.collect()
             if not pool.can_take():
                 return
             bound = incumbent[0] if incumbent is not None and bounded_evaluate is not None else None
-            for menu in predicted(4 * len(pool.children) + 8):
+            for menu in predicted(2 * pool.DEPTH * len(pool.children) + 8):
                 if not pool.can_take():
                     break
                 key = menu_key(menu)
@@ -1744,8 +1751,11 @@ class MenuOptimizer:
             if pool is None:
                 return None
             key = menu_key(slots)
+            began = perf_counter()
             answer = pool.take(key, timeout=30.0) if pool.knows(key) else None
+            pool.stats["wait_seconds"] = round(pool.stats.get("wait_seconds", 0) + perf_counter() - began, 3)
             if answer is None:
+                pool.stats["priced_here"] = pool.stats.get("priced_here", 0) + 1
                 return None
             if answer[0] == "error":
                 return ("error", answer[1], None)

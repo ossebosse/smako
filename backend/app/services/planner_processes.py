@@ -871,6 +871,7 @@ class SpeculativeWorkers:
     """
 
     KEEP_ANSWERS = 256
+    DEPTH = 2
 
     def __init__(self, work: Callable, workers: int, errors: tuple = (ValueError,)):
         self.work, self.errors, self.children, self.idle = work, errors, [], []
@@ -883,7 +884,9 @@ class SpeculativeWorkers:
             if child is None:
                 break
             self.children.append(child)
-            self.idle.append(index)
+        # Two menus queued per worker: one priced while the next waits, so a
+        # worker never idles while the search reads its answer.
+        self.idle = [index for _ in range(self.DEPTH) for index in range(len(self.children))]
         self.stats["workers"] = len(self.children)
 
     def _fork(self, index):
@@ -984,8 +987,7 @@ class SpeculativeWorkers:
                 except OSError:
                     pass
                 child[name] = None
-        if index in self.idle:
-            self.idle.remove(index)
+        self.idle = [i for i in self.idle if i != index]
 
     def take(self, key, timeout: float):
         """The answer for ``key``: waits while a worker has it, else None."""
