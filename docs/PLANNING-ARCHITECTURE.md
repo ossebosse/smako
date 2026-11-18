@@ -376,6 +376,22 @@ pris (118,08 kr) i alla körningar, kalla delade cacher:
   Planprocessen skickar provarnas storlek till appen när den lämnar tillbaka
   dem. Det en plan redan har kopierat är redan borta ur det lediga minnet, så
   bara det den kan kopiera till hålls undan.
+- **Provare räknas efter sina recept** (2026-11-18, efter #102). En provares
+  kopia växer med de recept den prövar, eftersom den fyller sina egna cachar.
+  0,6 GB för 460 Malmörecept, 1,5 GB för 1 148. Räknad efter den största
+  provaren som hade setts såg två provare för stora ut. Planen fick då en
+  provare, som fick hälften av recepten och blev stor igen. Nu räknas varje
+  provare efter det mesta minne per recept som har setts, för den del den får.
+  Planprocessen skickar det måttet till appen.
+- **Ett näringskrav prövar inte om det som redan föll bort**
+  (`_with_ordinary_rejections`). Ett krav lägger bara till kontroller. Varje
+  ingrediens begränsas till varor med rätt deklaration. Alternativ söks bara
+  från en korg som finns. Sedan kommer kontrollerna av näring och vikt. Ett
+  recept som samma val utan krav underkände underkänns därför också med
+  kravet, av samma skäl. Ett nytt krav prövar alltså bara de recept som
+  klarade sig utan krav (i Malmö ca 1 880 av 2 297). Recept som klarade sig
+  prövas igen. Med kravet får varje ingrediens bara varor med rätt
+  deklaration, så den billigaste korgen kan bli en annan.
 
 - **Personers planer bär en sammanfattning av produktvägen**
   (`DIAGNOSTIC_DETAIL`, 2026-11-18). Hela vägen (varje prövat recepts

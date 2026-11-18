@@ -3000,6 +3000,31 @@ class PersonalPlanner:
         finally:
             self.request = original
 
+    def _with_ordinary_rejections(self, meal, fixed_slots, stored_rows):
+        """A recipe the same choices without nutrition requirements rejected.
+
+        A requirement only adds checks: it narrows each ingredient to products
+        with the needed declaration, searches alternatives only from a basket
+        that exists, and adds the nutrition and weight checks. So a recipe
+        rejected without requirements is rejected with them, for the same
+        reason, and is not qualified again. A new requirement then qualifies
+        only the recipes that passed (about 1,880 of 2,297 in Malmö). The
+        content filters are decided each time, as in the rows themselves.
+        """
+        from app.services.planner_context import content_digest
+        ordinary = meal.model_copy(update={"limits": type(meal.limits)()})
+        base = _QUALIFICATION_MEMORY.get(
+            content_digest([self._qualification_context(), _qualification_meal(ordinary), fixed_slots]))
+        rows = base.get("rows") if isinstance(base, dict) else None
+        if not isinstance(rows, dict):
+            return stored_rows
+        reused = {key: row for key, row in rows.items()
+                  if key not in stored_rows and isinstance(row, dict) and row.get("status") == "rejected"
+                  and row.get("code") != "RECIPE_CHOICES_CONFLICT"}
+        if reused:
+            self.diagnostics.pools[-1]["ordinary_rejections_reused"] = len(reused)
+        return {**stored_rows, **reused} if reused else stored_rows
+
     @timed_stage("candidate_generation_and_qualification")
     def _candidates(self, meal, *, qualified_results=None, fixed_slots=(), _rows_only=None):
         from app.services.plan_jobs import check_cancelled, report_stage
@@ -3061,6 +3086,8 @@ class PersonalPlanner:
         stored_rows = stored.get("rows", {}) if isinstance(stored, dict) else {}
         if not isinstance(stored_rows, dict):
             stored_rows = {}
+        if memory_reuse and meal.limits.active:
+            stored_rows = self._with_ordinary_rejections(meal, fixed_slots, stored_rows)
         if memory_reuse and _rows_only is None:
             stored_rows = self._qualify_in_processes(meal, candidates, stored_rows, fixed_slots)
         qualified_rows = {}
@@ -3252,7 +3279,7 @@ class PersonalPlanner:
         timeout = 60.0 if left is None else max(0.0, left / 2)
         if len(pending) < 2 * _MIN_ITEMS_PER_WORKER or timeout <= 1:
             return stored_rows
-        with qualification_workers() as workers:
+        with qualification_workers(len(pending)) as workers:
             if workers < 1:
                 return stored_rows
             if free_threaded():

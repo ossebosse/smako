@@ -168,6 +168,14 @@ def _own_anon_bytes() -> int | None:
 # Until one is seen, half of this process's private memory, at most these.
 _observed_peak = {"plan": 0, "worker": 0}
 _UNSEEN_CHILD_BYTES = {"plan": 3 << 30, "worker": 1 << 30}
+# A qualification worker's copy grows with the recipes it qualifies (it fills
+# its own caches): 0.6 GB for 460 Malmö recipes, 1.5 GB for 1,148. Sizing a
+# worker by the largest one seen made one worker look too big for two, so a
+# plan kept getting one worker with half the recipes each time. Workers are
+# sized by the most memory per recipe seen, for the slice they will get.
+_observed_per_item = 0.0
+_PER_ITEM_MIN_SLICE = 100  # smaller slices are mostly fixed cost
+_WORKER_FLOOR_BYTES = 128 << 20
 
 
 def _private_dirty(pid: int) -> int | None:
@@ -189,10 +197,29 @@ def observe_child(pid: int, kind: str = "worker") -> int | None:
     return size
 
 
-def note_child_peak(kind: str, size: int) -> None:
+def note_child_peak(kind: str, size: int, items: int = 0) -> None:
     """A child's copied memory, measured here or reported by a plan's process."""
+    global _observed_per_item
     if size and size > _observed_peak[kind]:
         _observed_peak[kind] = size
+    if kind == "worker" and size and items >= _PER_ITEM_MIN_SLICE:
+        _observed_per_item = max(_observed_per_item, size / items)
+
+
+def note_per_item(per_item: float) -> None:
+    """Memory per recipe that a plan's process measured for its workers."""
+    global _observed_per_item
+    if per_item and per_item > _observed_per_item:
+        _observed_per_item = float(per_item)
+
+
+def _worker_bytes_for(items: int, workers: int) -> int | None:
+    """One of ``workers`` workers' expected memory when ``items`` are shared
+    with this process (which does a slice itself)."""
+    if not _observed_per_item or not items:
+        return _child_bytes("worker")
+    share = -(-items // (workers + 1))
+    return int(max(_WORKER_FLOOR_BYTES, _observed_per_item * share) * 1.25)
 
 
 def _child_bytes(kind: str = "worker") -> int | None:
@@ -234,15 +261,33 @@ def memory_slots(kind: str = "worker") -> int:
     return max(0, int((available * _MEMORY_HEADROOM - _promised_bytes()) // child))
 
 
-def reserve_processes(wanted: int) -> int:
-    """Take up to ``wanted`` worker slots; returns how many were granted (maybe 0)."""
+def reserve_processes(wanted: int, items: int = 0) -> int:
+    """Take up to ``wanted`` worker slots; returns how many were granted (maybe 0).
+
+    With ``items`` (the recipes to share) each worker is sized by its slice:
+    more workers each take fewer recipes and so copy less.
+    """
     global _slots_in_use, _worker_slots, _worker_bytes
     if wanted <= 0:
         return 0
-    memory = memory_slots("worker")
-    child = _child_bytes("worker") or 0
+    unlimited = os.environ.get("SMAKO_PLANNER_MEMORY_CHECK", "1") == "0"
+    available = _available_bytes()
     with _running_lock:
-        granted = max(0, min(wanted, cpu_budget() - _slots_in_use, memory))
+        cores = min(wanted, cpu_budget() - _slots_in_use)
+    if unlimited:
+        granted, child = max(0, cores), 0
+    elif not available or not _own_anon_bytes():
+        granted, child = 0, 0
+    else:
+        budget = available * _MEMORY_HEADROOM - _promised_bytes()
+        granted, child = 0, 0
+        for count in range(max(0, cores), 0, -1):
+            each = _worker_bytes_for(items, count) if items else _child_bytes("worker")
+            if each and count * each <= budget:
+                granted, child = count, each
+                break
+    with _running_lock:
+        granted = max(0, min(granted, cpu_budget() - _slots_in_use))
         _slots_in_use += granted
         _worker_slots += granted
         _worker_bytes += granted * child
@@ -340,7 +385,7 @@ def run_in_background_thread(work: Callable[[], object], name: str = "smako-back
 
 
 @contextmanager
-def qualification_workers() -> Iterator[int]:
+def qualification_workers(items: int = 0) -> Iterator[int]:
     """Workers this plan's qualification may fork now (slots held meanwhile).
 
     In a plan's own process the app process decides, with the plans and the
@@ -351,14 +396,14 @@ def qualification_workers() -> Iterator[int]:
         yield min(_fair_share(), _BACKGROUND_WORKERS) if background else _fair_share()
         return
     if _parent_channel is not None:
-        granted = _ask_parent("reserve", 0)
+        granted = _ask_parent("reserve", items)
         try:
             yield granted
         finally:
             # The workers' size, measured in this process, for the allocator.
-            _ask_parent("release", granted, _observed_peak["worker"])
+            _ask_parent("release", granted, _observed_peak["worker"], _observed_per_item)
         return
-    granted = reserve_processes(min(_fair_share(), _BACKGROUND_WORKERS) if background else _fair_share())
+    granted = reserve_processes(min(_fair_share(), _BACKGROUND_WORKERS) if background else _fair_share(), items)
     try:
         yield granted
     finally:
@@ -479,8 +524,10 @@ def run_in_processes(items: Sequence, work: Callable[[Sequence], object], *, tim
             break
         if time.monotonic() - sampled >= 1:
             sampled = time.monotonic()
-            for pid, _, _ in children.values():
-                observe_child(pid)
+            for pid, index, _ in children.values():
+                size = observe_child(pid)
+                if size is not None:
+                    note_child_peak("worker", size, slices[index][1] - slices[index][0])
         ready, _, _ = select.select(list(children), [], [], min(left, 1.0))
         for fd in ready:
             pid, index, buffer = children[fd]
@@ -707,7 +754,7 @@ def _await_plan_child(work, pid, read, reply, plan_jobs, slot=None):
                     engine_reporter(message[1])
                 elif message[0] == "reserve":
                     # The plan's own process is one core already.
-                    granted = reserve_processes(max(0, _fair_share() - 1))
+                    granted = reserve_processes(max(0, _fair_share() - 1), message[1])
                     held += granted
                     try:
                         os.write(reply, struct.pack("!I", granted))
@@ -716,6 +763,8 @@ def _await_plan_child(work, pid, read, reply, plan_jobs, slot=None):
                 elif message[0] == "release":
                     if len(message) > 2:
                         note_child_peak("worker", message[2])
+                    if len(message) > 3:
+                        note_per_item(message[3])
                     release_processes(min(held, message[1]))
                     held -= min(held, message[1])
                 elif message[0] in {"result", "error", "lost"}:
