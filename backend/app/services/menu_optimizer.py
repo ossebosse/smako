@@ -1631,6 +1631,20 @@ class MenuOptimizer:
         slot_index = {id(slot): (g, i) for g, group in enumerate(groups) for i, slot in enumerate(group)}
         cursor = {"anchor": None, "exchange_rank": 0, "exchange_revision": 0}
 
+        # Pricing time since the best week last changed. Alone, this search
+        # waits wall-clock seconds, which is its pricing time. With workers it
+        # counts the pricing done (each used answer's own time plus what it
+        # priced itself), so it stops after the same work as alone and the
+        # cores shorten the wait instead of lengthening the search. Measured on
+        # the beta 2026-11-18: wall-clock waiting kept a parallel search 10 s
+        # past its last improvement and saved only 5 of 19 s.
+        work_since_improvement = [0.0]
+
+        def waited():
+            if speculation["pool"] is None:
+                return perf_counter() - last_improvement[0]
+            return work_since_improvement[0]
+
         def menu_key(slots):
             return tuple(slot_index[id(s)] for s in slots)
 
@@ -1640,12 +1654,13 @@ class MenuOptimizer:
         def worker_price(payload):
             key, bound = payload
             slots = slots_for(key)
+            began = perf_counter()
             if bound is not None and bounded_evaluate is not None:
                 try:
-                    return ("priced", bounded_evaluate(slots, bound))
+                    return ("priced", bounded_evaluate(slots, bound), perf_counter() - began)
                 except MenuBoundPruned:
-                    return ("pruned", None)
-            return ("priced", evaluate(slots, final=True))
+                    return ("pruned", None, perf_counter() - began)
+            return ("priced", evaluate(slots, final=True), perf_counter() - began)
 
         def first_completion(anchor):
             """The first menu completions() yields for this anchor, without its counters."""
@@ -1733,9 +1748,9 @@ class MenuOptimizer:
             if answer is None:
                 return None
             if answer[0] == "error":
-                return ("error", answer[1])
-            kind, value = answer[1]
-            return ("pruned", None) if kind == "pruned" else ("priced", value)
+                return ("error", answer[1], None)
+            kind, value, seconds = answer[1]
+            return ("pruned", None, seconds) if kind == "pruned" else ("priced", value, seconds)
 
         def checkpoint():
             check_cancelled()
@@ -1745,7 +1760,7 @@ class MenuOptimizer:
             # Step 6 (2026-11-16): stop when the best week has not improved for
             # a while. On frozen Malmö data every improvement came in the first
             # second and the rest of a 90 s window changed nothing.
-            if (stall and last_improvement[0] is not None and perf_counter() - last_improvement[0] > stall
+            if (stall and last_improvement[0] is not None and waited() > stall
                     and trace['evaluations_executed'] - last_improvement_evaluations[0] >= stall_evaluations):
                 trace['stop_reason'] = 'no_improvement_for_stall_seconds'
                 raise SearchStalled
@@ -1809,6 +1824,8 @@ class MenuOptimizer:
             finally:
                 trace['max_full_evaluation_seconds'] = max(trace.get('max_full_evaluation_seconds',0),
                     perf_counter()-evaluation_started)
+                work_since_improvement[0] += (answer[2] if answer is not None and answer[2] is not None
+                                              else perf_counter() - evaluation_started)
             trace['priced'] += 1
             trace['full_candidates'] += 1
             if decision_observer:
@@ -1826,6 +1843,7 @@ class MenuOptimizer:
                 trace.setdefault('improvement_evaluations', []).append(trace['evaluations_executed'])
                 last_improvement_evaluations[0] = trace['evaluations_executed']
                 last_improvement[0] = perf_counter()
+                work_since_improvement[0] = 0.0
                 if decision_observer:
                     decision_observer(slots, 'retained', result=result, depth=len(groups))
 

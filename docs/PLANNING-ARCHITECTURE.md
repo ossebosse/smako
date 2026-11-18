@@ -378,7 +378,12 @@ pris (118,08 kr) i alla körningar, kalla delade cacher:
   beskärs mot ett äldre tak beskärs också mot det nuvarande. En meny som det
   nuvarande taket skulle ha beskurit kan inte slå den bästa veckan. Därför hittar
   sökningen samma veckor i samma ordning, med samma antal prövade menyer, bara
-  fortare. En felaktig förutsägelse kostar bara provarens tid. Provarna tas ur
+  fortare. En felaktig förutsägelse kostar bara provarens tid. Stoppregeln
+  "10 s utan bättre vecka" räknar med provare den prissättning som har gjorts,
+  inte väggklockan. Det är varje använt svars egen tid plus det sökningen
+  prisade själv. Sökningen stannar alltså efter lika mycket arbete som ensam.
+  Med väggklockan sökte den 10 s efter sin sista förbättring, och då sparades
+  bara 5 av 19 s (mätt på betan). Provarna tas ur
   samma kärnor och minne som prövningens. Av med
   `SMAKO_PARALLEL_WEEK_SEARCH=0`.
 - **Sidan ser en färdig plan direkt.** Den frågade varannan sekund och såg
