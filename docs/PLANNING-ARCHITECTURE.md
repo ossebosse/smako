@@ -395,6 +395,12 @@ pris (118,08 kr) i alla körningar, kalla delade cacher:
   Marginalen på provarna är 10 %, eftersom båda delarna redan är uppmätta
   maxvärden. Varje reservering loggas som `planner_workers` (antal och MB,
   inget om personen).
+- **En plan räknar sig själv som en provare när den ber om provare** (samma
+  dag, efter #106). Planprocessen prövar själv en del av recepten och växer
+  då ungefär som en provare. Sin stora tillväxt får den senare, i veckosökningen,
+  när provarna redan är borta. Att hålla undan den tillväxten mot planens egna
+  provare gav en blandad näringsplan i Malmö en provare. Dess del tog mer än
+  halva tiden och gjordes sedan om i planen, så planen hann inte bli klar.
 - **Ett näringskrav prövar inte om det som redan föll bort**
   (`_with_ordinary_rejections`). Ett krav lägger bara till kontroller. Varje
   ingrediens begränsas till varor med rätt deklaration. Alternativ söks bara

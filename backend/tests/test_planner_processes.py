@@ -184,6 +184,25 @@ def test_workers_are_sized_by_the_recipes_they_get(monkeypatch):
     assert pp._observed_per_item == 2**20 and pp._observed_peak["worker"] == int(0.8 * 2**30)
 
 
+def test_a_plan_asking_for_workers_counts_itself_as_one(monkeypatch):
+    """Its later growth is not held back against its own workers (2026-11-18)."""
+    monkeypatch.setenv("SMAKO_PLANNER_PROCESSES", "7")
+    monkeypatch.setattr(pp, "_available_bytes", lambda: 8 * 2**30)
+    monkeypatch.setattr(pp, "_own_anon_bytes", lambda: 4 * 2**30)
+    monkeypatch.setattr(pp, "_observed_peak", {"plan": int(2.4 * 2**30), "worker": 2**30})
+    monkeypatch.setattr(pp, "_observed_per_item", float(2**20))
+    slot = pp.reserve_plan_process()
+    # 6 GB usable. Another plan's request: its 3 GB is held back, so 3 GB for
+    # workers of (0.5 GB + 1 MB x share) x 1.1.
+    assert pp.reserve_processes(6, items=1876) == 2
+    pp.release_processes(2)
+    # Its own request: it counts as one more worker instead.
+    assert pp.reserve_processes(6, items=1876, plan=slot) == 6
+    pp.release_processes(6)
+    pp.release_plan_process(slot)
+    assert pp._slots_in_use == 0
+
+
 def test_a_running_child_is_measured(monkeypatch):
     import signal as signals
 
