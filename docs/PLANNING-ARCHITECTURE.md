@@ -383,7 +383,9 @@ pris (118,08 kr) i alla körningar, kalla delade cacher:
   inte väggklockan. Det är varje använt svars egen tid plus det sökningen
   prisade själv. Sökningen stannar alltså efter lika mycket arbete som ensam.
   Med väggklockan sökte den 10 s efter sin sista förbättring, och då sparades
-  bara 5 av 19 s (mätt på betan). Provarna tas ur
+  bara 5 av 19 s (mätt på betan). Medan sökningen väntar på svaret för sin
+  nuvarande meny ger den lediga provare nya menyer. Utan det stod provarna
+  stilla i 23 av 34 s i en Malmöplan på betan. Provarna tas ur
   samma kärnor och minne som prövningens. Av med
   `SMAKO_PARALLEL_WEEK_SEARCH=0`.
 - **Sidan ser en färdig plan direkt.** Den frågade varannan sekund och såg
