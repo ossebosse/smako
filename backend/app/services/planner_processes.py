@@ -386,11 +386,15 @@ def worker_count() -> int:
 
 
 # Background work (the warm-up after a start): runs at the lowest CPU priority
-# and gets at most one worker, so people's plans always come first. After the
+# and gets no worker, so people's plans always come first. After the
 # 2026-11-17 activation the warm-up took every worker for ten minutes after a
-# start, and the first plans of real people ran out of time beside it.
+# start, and the first plans of real people ran out of time beside it. With
+# one worker (2026-11-18) that worker qualified 1,149 recipes for all four
+# nutrients: 2.6 GB held back and 1.7 MB per recipe in the estimates, so a
+# person's protein plan beside it got no worker and ran out of time. The
+# warm-up's Malmö rounds ended at their deadline either way.
 _background = contextvars.ContextVar("smako_background_work", default=False)
-_BACKGROUND_WORKERS = 1
+_BACKGROUND_WORKERS = 0
 _BACKGROUND_NICE = 19
 
 

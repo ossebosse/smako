@@ -348,9 +348,13 @@ pris (118,08 kr) i alla körningar, kalla delade cacher:
 
 - **Bakgrundsarbete går sist** (`run_in_background_thread`). Uppvärmningen
   efter en start körs i en egen tråd med lägsta CPU-prioritet, och dess
-  provare ärver den. Den får högst en provare. Direkt efter aktiveringen
+  provare ärver den. Den får ingen provare. Direkt efter aktiveringen
   2026-11-17 tog den alla provare i tio minuter, och de första planerna (Malmö
-  och Lund) hann inte bli klara bredvid den.
+  och Lund) hann inte bli klara bredvid den. Med en provare (2026-11-18)
+  prövade provaren 1 149 recept för alla fyra näringsämnen. Det höll undan
+  2,6 GB och gav 1,7 MB per recept i uppskattningarna, så en proteinplan
+  bredvid fick ingen provare. Uppvärmningens Malmövarv slutade ändå vid sin
+  tidsgräns.
 
 - **En kall plan i taget per område** (`PlannerAdmissionController`,
   `warmth_scope`, ägarbeslut 2026-11-18). Den första planen i ett område efter
