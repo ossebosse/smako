@@ -386,6 +386,15 @@ pris (118,08 kr) i alla körningar, kalla delade cacher:
   Planprocessen skickar måttet till appen. Utan den fasta delen gav små delar
   2,4 MB per recept, och nästa plan fick ingen provare (#104, rättat samma
   dag).
+- **Uppskattningarna följer de senaste barnen** (samma dag, efter #105). Den
+  första planen efter en start fyller alla cachar från början och kopierade
+  mycket mer per recept än senare planer. Med största värdet någonsin fick
+  varje senare näringsplan en provare (mätt: 1 876 recept på två kärnor,
+  50 s). Nu gäller största värdet bland de åtta senast avslutade barnen av
+  varje sort. Ett barn som räknar höjer fortfarande uppskattningen direkt.
+  Marginalen på provarna är 10 %, eftersom båda delarna redan är uppmätta
+  maxvärden. Varje reservering loggas som `planner_workers` (antal och MB,
+  inget om personen).
 - **Ett näringskrav prövar inte om det som redan föll bort**
   (`_with_ordinary_rejections`). Ett krav lägger bara till kontroller. Varje
   ingrediens begränsas till varor med rätt deklaration. Alternativ söks bara
