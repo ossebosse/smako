@@ -1,3 +1,32 @@
+# 2026-11-18 morgon: Uppvärmning med lägsta prioritet, tre planer samtidigt
+
+Main `daa6a40bd821` (PR #99). App **app-daa6a40bd821-c51d81c5**, image
+`dee5a1076ec1`, bas `a94018b1f7c3` (image `03e2197ffe05`). Två ändrade filer:
+`nutrition_prewarm.py` och `planner_processes.py`. Inga lokala undantag.
+Bygget väntade på den dagliga prisuppdateringen (driftlåset, klar 06:04 UTC),
+som själv skrev nya ögonblicksbilder för de nya prisunderlagen. Aktiverad
+06:24:17 UTC, säkerhetskopia `20261118T061150Z`, lagringsretention complete
+före och efter.
+
+Efter aktiveringen satte ägaren `PLANNER_MAX_CONCURRENT_REQUESTS=3` i
+`multicore-snapshots-a94018b1f7c3.json`, med driftlås, lugn plantrafik, kopia
+i `/opt/smako/evidence/concurrency-3-*` och automatisk återställning. Omstart
+till ready: 52–53 s (ögonblicksbilder).
+
+Mätt på betan (Malmö, 54 butiker, nya kombinationer per gäst):
+- **Direkt efter omstarten, allt kallt och uppvärmning igång:** tre samtidiga
+  (lax, bönor, svamp) hann alla inte bli klara (95–170 s, "Vi hann inte...").
+- **Några minuter senare, fyra samtidiga** (nötfärs, pasta, tofu, ris): alla
+  klara. Tofu efter 83 s, pasta och ris efter ca 105 s, nötfärs efter 147 s
+  (fick vänta).
+- **Därefter tre samtidiga** (kyckling, potatis, lax): alla klara efter 62, 91
+  och 125 s.
+- Uppvärmningen startar bara när planeraren är ledig, men upptar sedan en av
+  platserna i ca 2 minuter per varv.
+
+Kvarstående risk: tre helt nya Malmöplaner samtidigt direkt efter en omstart
+eller ett byte av prisunderlag hinner inte bli klara inom 90 s.
+
 # 2026-11-17 kväll: Två planer samtidigt, flera kärnor och snabb start aktiverat
 
 Main `a94018b1f7c3` (PR #95, #97, #98). App **app-a94018b1f7c3-301421b6**,
@@ -333,7 +362,7 @@ på `main` inte ändrar en pågående release.
   `smako-app-1`, `smako-scheduler-1`, `smako-caddy-1`, data i `/srv/smako/data`
   och det gemensamma driftlåset. Detta flöde installerar inte en ny server.
 - Läs aktuell [HANDOFF.md](HANDOFF.md), [OPERATIONS.md](OPERATIONS.md) och
-  senaste aktiveringsrapport. Appens BUILD_ID är `app-a94018b1f7c3-301421b6`;
+  senaste aktiveringsrapport. Appens BUILD_ID är `app-daa6a40bd821-c51d81c5`;
   schedulern är `source-ops-8a53beb80e43`.
   [Uppvärmda prov och samordnad faktaläsning/GC](releases/warm-facts-gc-20261101/ACTIVATED.md)
   är senaste appaktiveringen. Sex Pythonfiler från kod `b7c8d0506e23`;
@@ -381,10 +410,10 @@ git status --short
 .venv/Scripts/python.exe -X utf8 scripts/smako_ops.py status
 
 # Använd den granskade Git-bas som motsvarar faktiskt aktiva filer enligt senaste journalen.
-.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit a94018b1f7c3 --commit main --workdir .local/beta-release
+.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit daa6a40bd821 --commit main --workdir .local/beta-release
 ```
 
-`a94018b1f7c3` är appen som aktiverades 2026-11-17 21:08 UTC. Appbildens egen
+`daa6a40bd821` är appen som aktiverades 2026-11-18 06:24 UTC. Appbildens egen
 grocery-kopia är äldre än Git; använd `--keep-app-grocery` om intervallet
 bara innehåller grocery-Python som redan levererats till schedulern. De äldre
 Coop-filerna i runtime (`price_universe_runtime.py`,
