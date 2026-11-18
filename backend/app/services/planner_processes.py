@@ -42,6 +42,7 @@ cancelled, and plans in its own thread if a child dies or no slot is free.
 """
 from __future__ import annotations
 
+import contextvars
 import itertools
 import logging
 import os
@@ -226,6 +227,41 @@ def worker_count() -> int:
     return _fair_share()
 
 
+# Background work (the warm-up after a start): runs at the lowest CPU priority
+# and gets at most one worker, so people's plans always come first. After the
+# 2026-11-17 activation the warm-up took every worker for ten minutes after a
+# start, and the first plans of real people ran out of time beside it.
+_background = contextvars.ContextVar("smako_background_work", default=False)
+_BACKGROUND_WORKERS = 1
+_BACKGROUND_NICE = 19
+
+
+def run_in_background_thread(work: Callable[[], object], name: str = "smako-background"):
+    """Run ``work`` in its own low-priority thread; returns a concurrent Future.
+
+    The thread's priority cannot be raised again without privileges, so the
+    work never runs on a shared pool thread. Its worker processes inherit the
+    priority.
+    """
+    from concurrent.futures import Future
+
+    future: Future = Future()
+
+    def target():
+        try:
+            os.setpriority(os.PRIO_PROCESS, threading.get_native_id(), _BACKGROUND_NICE)
+        except (AttributeError, OSError):
+            pass
+        _background.set(True)
+        try:
+            future.set_result(work())
+        except BaseException as error:  # noqa: BLE001 - handed to the caller
+            future.set_exception(error)
+
+    threading.Thread(target=target, name=name, daemon=True).start()
+    return future
+
+
 @contextmanager
 def qualification_workers() -> Iterator[int]:
     """Workers this plan's qualification may fork now (slots held meanwhile).
@@ -233,8 +269,9 @@ def qualification_workers() -> Iterator[int]:
     In a plan's own process the app process decides, with the plans and the
     memory of that moment; the plan's own process is already one of its cores.
     """
+    background = _background.get()
     if free_threaded():  # threads share memory: only the cores count
-        yield _fair_share()
+        yield min(_fair_share(), _BACKGROUND_WORKERS) if background else _fair_share()
         return
     if _parent_channel is not None:
         granted = _ask_parent("reserve", 0)
@@ -243,7 +280,7 @@ def qualification_workers() -> Iterator[int]:
         finally:
             _ask_parent("release", granted)
         return
-    granted = reserve_processes(_fair_share())
+    granted = reserve_processes(min(_fair_share(), _BACKGROUND_WORKERS) if background else _fair_share())
     try:
         yield granted
     finally:
