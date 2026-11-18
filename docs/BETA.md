@@ -1,3 +1,25 @@
+# 2026-11-18 förmiddag: En kall plan i taget och mindre svar aktiverat
+
+Main `9231a8932602` (PR #101). App **app-9231a8932602-0dd3c601**, image
+`22852f06c84c`, bas `daa6a40bd821` (image `dee5a1076ec1`). Fem ändrade filer:
+`plan.py`, `planner_admission.py`, `planner_processes.py`,
+`planning_diagnostics.py` och `product_planning_trace.py`. Inga lokala
+undantag. Aktiverad 07:47:53 UTC, säkerhetskopia `20261118T073800Z`.
+Lagringsretention complete. `/ready` ready för 22350 och 21120.
+
+Mätt på betan (Malmö, 54 butiker, gäst):
+- **Svaret:** 15,4 MB → 0,37 MB. Tiden mellan motorns slut och svaret
+  minskade från 11–15 s till 7–8 s.
+- **Vanliga planer:** blandat 44 s (motorn 36 s) två gånger, vegetariskt 46 s.
+- **Näringskrav:** högst 600 kcal och protein minst 30–34 g hann inte bli
+  klara (96–101 s). Planens egen process kopierade upp till 2,7 GB, och
+  allokeraren räknade då varje provare lika stort. Planen fick ingen provare.
+  Rättning i PR #102 (inte ihopslagen).
+
+Före aktiveringen hade appen vuxit till 5,8 GB, och samma fel hade räknat
+varje barn som 2,9 GB. Planerna gick då i appens egen process, och sidans
+frågor om läget kunde vänta över 60 s.
+
 # 2026-11-18 morgon: Uppvärmning med lägsta prioritet, tre planer samtidigt
 
 Main `daa6a40bd821` (PR #99). App **app-daa6a40bd821-c51d81c5**, image
