@@ -115,6 +115,29 @@ class ProductPlanningTrace:
         if outcome == "stopped" and context["first_stop"] is None:
             context["first_stop"] = event
 
+    def _summary(self):
+        """What a person's plan carries: the per-recipe search and counts.
+
+        The full path (every evaluated recipe's ingredients, amounts and
+        instructions, and every product's contexts) was 13 MB per Malmö plan:
+        built, sent between processes, stored and downloaded with every plan
+        while no page reads it, about 12 s per plan. It stays available where
+        the planner runs directly (ops reproduction, tests, probes).
+        """
+        stopped = {}
+        for _, stage, _ in self._pending_recipes:
+            stopped[stage or "passed"] = stopped.get(stage or "passed", 0) + 1
+        return {
+            "version": "product-decision-path-v1", "detail": "summary", "product_limit": self.limit,
+            "context_limit": self.event_limit, "omitted_products": self.omitted_products,
+            "omitted_context_events": self.omitted_events,
+            "followed_products": len(self.products), "evaluated_recipes": len(self._pending_recipes) + len(
+                self.recipe_needs), "recipes_by_stop": stopped,
+            "recipe_search": list(self.search.values()), "whole_basket_comparisons": self.comparisons,
+            "interpretation": "Summary of the product decision path; the full path is produced where the planner "
+                              "runs directly (ops reproduction, tests).",
+        }
+
     def recipe(self, recipe, stage=None, reason=None):
         # Recorded as is and described only when diagnostics are written: the
         # description cost about 4 s per Malmö plan for some 2,300 recipes.
@@ -147,7 +170,9 @@ class ProductPlanningTrace:
         for key, row in self.products.items():
             row["selected"] = key in selected
 
-    def snapshot(self):
+    def snapshot(self, detail="full"):
+        if detail == "summary":
+            return self._summary()
         self._describe_recipes()
         return {
             "version": "product-decision-path-v1", "product_limit": self.limit,

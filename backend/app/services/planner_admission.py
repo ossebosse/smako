@@ -75,6 +75,13 @@ class PlannerAdmissionController:
         self._peak_active = 0
         self._peak_queued = 0
         self._cleanups: set[asyncio.Task[None]] = set()
+        # One cold plan per area (owner decision 2026-11-18): the first plan in
+        # an area after a start or a new price universe computes what later
+        # plans reuse. Three of them at once ran out of time on the beta, so a
+        # plan in an area not yet warm waits (without losing planning time)
+        # until the area's first plan is done.
+        self._warm_scopes: set[str] = set()
+        self._cold_locks: dict[str, asyncio.Lock] = {}
 
     async def run(
         self,
@@ -82,8 +89,13 @@ class PlannerAdmissionController:
         factory: Callable[[], Awaitable[Result]],
         *,
         only_if_idle: bool = False,
+        warmth_scope: str | None = None,
     ) -> Result:
-        """Run one request, coalescing an identical in-flight computation."""
+        """Run one request, coalescing an identical in-flight computation.
+
+        ``warmth_scope`` names the area and price universe: while it has no
+        finished plan, only one of its plans computes at a time.
+        """
 
         normalized_key = key.strip()
         if not normalized_key:
@@ -123,6 +135,7 @@ class PlannerAdmissionController:
 
         acquired = False
         cleanup_token = None
+        cold_lock: asyncio.Lock | None = None
         try:
             from app.services.performance_trace import performance_span
             from app.services.plan_jobs import pause_engine_clock, start_engine_clock
@@ -132,6 +145,13 @@ class PlannerAdmissionController:
             pause_engine_clock()
             try:
                 with performance_span("planner_queue_wait"):
+                    if warmth_scope and warmth_scope not in self._warm_scopes:
+                        lock = self._cold_locks.setdefault(warmth_scope, asyncio.Lock())
+                        await lock.acquire()
+                        if warmth_scope in self._warm_scopes:
+                            lock.release()  # warmed while this one waited
+                        else:
+                            cold_lock = lock
                     await self._capacity.acquire()
             finally:
                 start_engine_clock(perf_counter() - queued_from)
@@ -172,6 +192,13 @@ class PlannerAdmissionController:
         finally:
             if cleanup_token is not None:
                 memory_cleanup_seconds.reset(cleanup_token)
+            if cold_lock is not None:
+                if acquired:
+                    # Finished or stopped, the area's shared caches now hold
+                    # what this plan computed; later plans run side by side.
+                    self._warm_scopes.add(warmth_scope)
+                    self._cold_locks.pop(warmth_scope, None)
+                cold_lock.release()
             async with self._state_lock:
                 if acquired:
                     self._active -= 1

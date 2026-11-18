@@ -154,9 +154,10 @@ def _own_anon_bytes() -> int | None:
 
 
 # The most memory a child has copied so far (``observe_child``). Until one is
-# seen, half of this process's private memory: measured Malmö children copied
-# 0.2–0.45 GB of a 1.4 GB parent.
+# seen, half of this process's private memory, at most _UNSEEN_CHILD_BYTES:
+# measured Malmö children copied 0.2–0.45 GB of a 1.4 GB parent.
 _observed_child_peak = 0
+_UNSEEN_CHILD_BYTES = 1 << 30
 
 
 def observe_child(pid: int) -> None:
@@ -173,11 +174,20 @@ def observe_child(pid: int) -> None:
 
 
 def _child_bytes() -> int | None:
-    """Expected memory of one more child: the largest seen so far, with a margin."""
+    """Expected memory of one more child: the largest seen so far, with a margin.
+
+    A child copies only what it changes, not its parent's size. The earlier
+    floor of half the parent's private memory grew with the warm caches: on
+    2026-11-18 a 5.8 GB app process made every child count as 2.9 GB, so with
+    3.5 GB free no plan got its own process or more than one qualification
+    worker, and a new nutrition requirement took 60–80 s on one core.
+    """
     own = _own_anon_bytes()
     if not own:
         return None
-    return int(max(_observed_child_peak * 1.25, own / 2))
+    if _observed_child_peak:
+        return int(_observed_child_peak * 1.25)
+    return int(min(own / 2, _UNSEEN_CHILD_BYTES))
 
 
 def memory_slots() -> int:
