@@ -12,6 +12,7 @@ import hashlib
 import json
 import re
 from dataclasses import replace
+from functools import lru_cache
 
 from app.models.recipe import Recipe, RecipeIngredient, RecipePreparation
 from app.services.ingredient_normalizer import canonicalize_ingredient_name as canonical
@@ -412,6 +413,24 @@ def input_evidence(recipe, product, name, unit, qualified, fact, *, recipe_cache
     return wrap_evidence(recipe, name, evidence)
 
 
+@lru_cache(maxsize=4096)
+def _design_step(version, family, form, input_kind, unit):
+    """The provenance step every wrapped input carries, one shared object per
+    distinct step. Each nutrient of each product used to get its own copy:
+    about two million dictionaries in one Malmö nutrition plan (2026-11-18).
+    Read only, like the frozen evidence that holds it."""
+    return {
+        "kind": "recipe_design_input_estimate",
+        "version": version,
+        "family": family,
+        "input_form": form,
+        "input_evidence_kind": input_kind,
+        "operation": f"source_per_100_{unit} * used_edible_{unit} / 100 / servings",
+        "cooked_quantity_g": None,
+        "retention_factor": None,
+    }
+
+
 def wrap_evidence(recipe, name, evidence):
     """One provenance-preserving input calculation for bought and pantry food."""
     from app.services.nutrition_reference import NutritionEvidence
@@ -420,22 +439,10 @@ def wrap_evidence(recipe, name, evidence):
         return None
     form = recipe.preparation.input_forms[canonical(name)]
     unit = evidence.nutrition_unit
+    step = _design_step(recipe.preparation.version, recipe.preparation.family, form,
+                        getattr(evidence, "evidence_kind", "qualified_product_declaration"), unit)
     fields = {
-        k: tuple(v)
-        + (
-            {
-                "kind": "recipe_design_input_estimate",
-                "version": recipe.preparation.version,
-                "family": recipe.preparation.family,
-                "input_form": form,
-                "input_evidence_kind": getattr(
-                    evidence, "evidence_kind", "qualified_product_declaration"
-                ),
-                "operation": f"source_per_100_{unit} * used_edible_{unit} / 100 / servings",
-                "cooked_quantity_g": None,
-                "retention_factor": None,
-            },
-        )
+        k: tuple(v) + (step,)
         for k, v in evidence.field_sources.items()
         if k.startswith("nutrition.")
     }

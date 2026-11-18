@@ -228,6 +228,27 @@ class NutritionEvidence:
 
 
 def reference_evidence(identity, *, cooked=False, declaration=None, method="boil"):
+    """Livsmedelsverket evidence for one food, as is or prepared.
+
+    Without a declaration the result depends only on its arguments and the
+    reference data, and is frozen: one object per food is shared. A Malmö
+    nutrition plan built about a million of these (2026-11-18), the largest
+    part of what each planning process held.
+    """
+    if declaration is None:
+        try:
+            return _plain_reference_evidence(identity, cooked, method)
+        except TypeError:  # an unhashable identity: computed as before
+            pass
+    return _reference_evidence(identity, cooked=cooked, declaration=declaration, method=method)
+
+
+@lru_cache(maxsize=4096)
+def _plain_reference_evidence(identity, cooked, method):
+    return _reference_evidence(identity, cooked=cooked, declaration=None, method=method)
+
+
+def _reference_evidence(identity, *, cooked=False, declaration=None, method="boil"):
     data = reference_data()
     entry = data["foods"][str(identity)]
     raw_values = macro_values(entry["nutrients"])
