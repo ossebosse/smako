@@ -262,10 +262,11 @@ def _child_bytes(kind: str = "worker") -> int | None:
     return int(min(own / 2, _UNSEEN_CHILD_BYTES[kind]))
 
 
-def _promised_bytes() -> int:
+def _promised_bytes(exclude: object | None = None) -> int:
     """Memory running children may still take: not counted in what is free now."""
     with _running_lock:
-        plans = sum(max(0, estimate - copied) for estimate, copied in _plan_children.values())
+        plans = sum(max(0, estimate - copied) for token, (estimate, copied) in _plan_children.items()
+                    if token is not exclude)
         return _worker_bytes + plans
 
 
@@ -284,11 +285,16 @@ def memory_slots(kind: str = "worker") -> int:
     return max(0, int((available * _MEMORY_HEADROOM - _promised_bytes()) // child))
 
 
-def reserve_processes(wanted: int, items: int = 0) -> int:
+def reserve_processes(wanted: int, items: int = 0, plan: object | None = None) -> int:
     """Take up to ``wanted`` worker slots; returns how many were granted (maybe 0).
 
     With ``items`` (the recipes to share) each worker is sized by its slice:
-    more workers each take fewer recipes and so copy less.
+    more workers each take fewer recipes and so copy less. For a plan's own
+    process (``plan``), that process qualifies one slice itself: it counts as
+    one more worker instead of its whole expected growth, which comes later,
+    in the week search, after the workers are gone. Holding back that growth
+    as well left a Malmö nutrition plan one worker (2026-11-18), whose slice
+    then ran past half the time and was redone in the plan.
     """
     global _slots_in_use, _worker_slots, _worker_bytes
     if wanted <= 0:
@@ -302,11 +308,11 @@ def reserve_processes(wanted: int, items: int = 0) -> int:
     elif not available or not _own_anon_bytes():
         granted, child = 0, 0
     else:
-        budget = available * _MEMORY_HEADROOM - _promised_bytes()
+        budget = available * _MEMORY_HEADROOM - _promised_bytes(exclude=plan)
         granted, child = 0, 0
         for count in range(max(0, cores), 0, -1):
             each = _worker_bytes_for(items, count) if items else _child_bytes("worker")
-            if each and count * each <= budget:
+            if each and (count + (plan is not None)) * each <= budget:
                 granted, child = count, each
                 break
     with _running_lock:
@@ -315,9 +321,9 @@ def reserve_processes(wanted: int, items: int = 0) -> int:
         _worker_slots += granted
         _worker_bytes += granted * child
     if items and not unlimited:
-        logger.info("planner_workers wanted=%d cores=%d granted=%d items=%d each_mb=%d available_mb=%d "
+        logging.getLogger("uvicorn.error").info("planner_workers wanted=%d cores=%d granted=%d items=%d each_mb=%d available_mb=%d "
                     "promised_mb=%d per_recipe_kb=%d", wanted, cores, granted, items, child >> 20,
-                    (available or 0) >> 20, _promised_bytes() >> 20, int(_observed_per_item) >> 10)
+                    (available or 0) >> 20, _promised_bytes(exclude=plan) >> 20, int(_observed_per_item) >> 10)
     return granted
 
 
@@ -803,7 +809,7 @@ def _await_plan_child(work, pid, read, reply, plan_jobs, slot=None):
                     engine_reporter(message[1])
                 elif message[0] == "reserve":
                     # The plan's own process is one core already.
-                    granted = reserve_processes(max(0, _fair_share() - 1), message[1])
+                    granted = reserve_processes(max(0, _fair_share() - 1), message[1], plan=slot)
                     held += granted
                     try:
                         os.write(reply, struct.pack("!I", granted))
