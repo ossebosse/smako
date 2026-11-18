@@ -4717,6 +4717,12 @@ class PersonalPlanner:
 
             search_kwargs.update(complete_first=True, candidate_priority=candidate_priority,
                                  candidate_packages=candidate_packages)
+            from os import environ
+            if environ.get("SMAKO_PARALLEL_WEEK_SEARCH", "1") != "0":
+                # Workers price the menus the search is about to propose
+                # (2026-11-18); the search and its choices are unchanged.
+                from app.services.planner_processes import speculative_workers
+                search_kwargs["evaluation_workers"] = speculative_workers
             if getattr(self.settings, "menu_lower_bound_pruning", True):
                 search_kwargs["bounded_evaluate"] = bounded_evaluate
         # Complete menus compared during the search are not audited; only the

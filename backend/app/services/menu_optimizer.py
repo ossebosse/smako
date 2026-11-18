@@ -1381,7 +1381,8 @@ class MenuOptimizer:
     def optimize_slots(self, candidates_by_slot, *, evaluate, accepts, score, beam_width=12,
                        search_trace=None, state_identity=None, fallback_beam_width=None, decision_observer=None,
                        initial_evaluations=None, _attempt_offset=0, complete_first=False,
-                       candidate_priority=None, candidate_packages=None, bounded_evaluate=None):
+                       candidate_priority=None, candidate_packages=None, bounded_evaluate=None,
+                       evaluation_workers=None):
         """Try the ordinary beam, then one explicitly bounded safe retry.
 
         A retry requires actual exhaustion AND earlier removal of different
@@ -1398,7 +1399,7 @@ class MenuOptimizer:
                 accepts=accepts, score=score, search_trace=search_trace,
                 state_identity=state_identity, decision_observer=decision_observer,
                 candidate_priority=candidate_priority, candidate_packages=candidate_packages,
-                bounded_evaluate=bounded_evaluate)
+                bounded_evaluate=bounded_evaluate, evaluation_workers=evaluation_workers)
         trace = search_trace if search_trace is not None else []
         start = len(trace)
         exhausted = {}
@@ -1556,7 +1557,7 @@ class MenuOptimizer:
 
     def _optimize_complete_slots(self, groups, *, evaluate, accepts, score, search_trace,
                                  state_identity, decision_observer, candidate_priority,
-                                 candidate_packages, bounded_evaluate=None):
+                                 candidate_packages, bounded_evaluate=None, evaluation_workers=None):
         """Propose whole menus, then price them through the caller's exact checkout.
 
         Only the incumbent and current evaluation retain full baskets. Singleton
@@ -1621,6 +1622,145 @@ class MenuOptimizer:
         trace['stall_evaluations'] = stall_evaluations
         last_improvement = [None]
         last_improvement_evaluations = [0]
+        # Parallel pricing (2026-11-18): workers price the menus this search is
+        # about to propose, predicted from the current best week; see
+        # planner_processes.SpeculativeWorkers. The search below is unchanged
+        # and takes a worker's answer only for exactly the menu it is at, so it
+        # finds the same weeks in the same order, only sooner.
+        speculation = {"pool": None, "context": None, "first": {}}
+        slot_index = {id(slot): (g, i) for g, group in enumerate(groups) for i, slot in enumerate(group)}
+        cursor = {"anchor": None, "exchange_rank": 0, "exchange_revision": 0}
+
+        # Pricing time since the best week last changed. Alone, this search
+        # waits wall-clock seconds, which is its pricing time. With workers it
+        # counts the pricing done (each used answer's own time plus what it
+        # priced itself), so it stops after the same work as alone and the
+        # cores shorten the wait instead of lengthening the search. Measured on
+        # the beta 2026-11-18: wall-clock waiting kept a parallel search 10 s
+        # past its last improvement and saved only 5 of 19 s.
+        work_since_improvement = [0.0]
+
+        def waited():
+            if speculation["pool"] is None:
+                return perf_counter() - last_improvement[0]
+            return work_since_improvement[0]
+
+        def menu_key(slots):
+            return tuple(slot_index[id(s)] for s in slots)
+
+        def slots_for(key):
+            return [groups[g][i] for g, i in key]
+
+        def worker_price(payload):
+            key, bound = payload
+            slots = slots_for(key)
+            began = perf_counter()
+            if bound is not None and bounded_evaluate is not None:
+                try:
+                    return ("priced", bounded_evaluate(slots, bound), perf_counter() - began)
+                except MenuBoundPruned:
+                    return ("pruned", None, perf_counter() - began)
+            return ("priced", evaluate(slots, final=True), perf_counter() - began)
+
+        def first_completion(anchor):
+            """The first menu completions() yields for this anchor, without its counters."""
+            if id(anchor) in speculation["first"]:
+                return speculation["first"][id(anchor)]
+            affinity = package_sets[id(anchor)]
+            scores = {values: -len(affinity & values) for values in distinct_packages}
+            orders = [[anchor], *[sorted(group, key=lambda slot: scores[package_sets[id(slot)]])
+                                  for group in ordered[1:]]]
+            nodes = 0
+
+            def visit(chosen):
+                nonlocal nodes
+                if len(chosen) == len(groups):
+                    return chosen
+                for slot in orders[len(chosen)]:
+                    if nodes >= 4096:
+                        return None
+                    nodes += 1
+                    slots = [*chosen, slot]
+                    if accepts(slots, final=len(slots) == len(groups)):
+                        found = visit(slots)
+                        if found is not None:
+                            return found
+                return None
+            found = visit([])
+            speculation["first"][id(anchor)] = found
+            return found
+
+        def predicted(limit):
+            """Menus this search would propose next if the best week stays."""
+            if incumbent is None or cursor["anchor"] is None:
+                return
+            rank = 0 if cursor["exchange_revision"] != trace['improvements'] else cursor["exchange_rank"]
+            produced = 0
+            for position in range(cursor["anchor"], len(cursor["anchors"])):
+                menus = []
+                first = first_completion(cursor["anchors"][position])
+                if first is not None:  # already proposed for the current anchor: skipped as seen
+                    menus.append(first)
+                for r in (rank, rank + 1):
+                    for index, group in enumerate(ordered):
+                        if r < len(group):
+                            menu = list(incumbent[1]); menu[index] = group[r]
+                            menus.append(menu)
+                rank += 2
+                for menu in menus:
+                    yield menu
+                    produced += 1
+                if produced >= limit:
+                    return
+
+        def prefetch():
+            pool = speculation["pool"]
+            if pool is None:
+                return
+            began = perf_counter()
+            try:
+                submit_predicted(pool)
+            finally:
+                pool.stats["predict_seconds"] = round(pool.stats.get("predict_seconds", 0) + perf_counter() - began, 3)
+
+        def submit_predicted(pool):
+            pool.collect()
+            if not pool.can_take():
+                return
+            bound = incumbent[0] if incumbent is not None and bounded_evaluate is not None else None
+            for menu in predicted(2 * pool.DEPTH * len(pool.children) + 8):
+                if not pool.can_take():
+                    break
+                key = menu_key(menu)
+                identity = (state_identity(menu) if state_identity is not None else
+                            tuple((s.id, ids.get(s.recipe, recipe_id) if s.recipe else None) for s in menu))
+                if pool.knows(key) or identity in seen or not accepts(menu, final=True):
+                    continue
+                pool.submit(key, (key, bound))
+
+        def start_workers():
+            if evaluation_workers is None or speculation["context"] is not None:
+                return
+            speculation["context"] = evaluation_workers(worker_price, (IncompleteBasketError, ValueError))
+            speculation["pool"] = speculation["context"].__enter__()
+            if speculation["pool"] is not None:
+                trace['parallel_pricing'] = speculation["pool"].stats
+
+        def worker_answer(slots):
+            pool = speculation["pool"]
+            if pool is None:
+                return None
+            key = menu_key(slots)
+            began = perf_counter()
+            answer = pool.take(key, timeout=30.0) if pool.knows(key) else None
+            pool.stats["wait_seconds"] = round(pool.stats.get("wait_seconds", 0) + perf_counter() - began, 3)
+            if answer is None:
+                pool.stats["priced_here"] = pool.stats.get("priced_here", 0) + 1
+                return None
+            if answer[0] == "error":
+                return ("error", answer[1], None)
+            kind, value, seconds = answer[1]
+            return ("pruned", None, seconds) if kind == "pruned" else ("priced", value, seconds)
 
         def checkpoint():
             check_cancelled()
@@ -1630,7 +1770,7 @@ class MenuOptimizer:
             # Step 6 (2026-11-16): stop when the best week has not improved for
             # a while. On frozen Malmö data every improvement came in the first
             # second and the rest of a 90 s window changed nothing.
-            if (stall and last_improvement[0] is not None and perf_counter() - last_improvement[0] > stall
+            if (stall and last_improvement[0] is not None and waited() > stall
                     and trace['evaluations_executed'] - last_improvement_evaluations[0] >= stall_evaluations):
                 trace['stop_reason'] = 'no_improvement_for_stall_seconds'
                 raise SearchStalled
@@ -1653,12 +1793,25 @@ class MenuOptimizer:
                 return
             trace['evaluations_executed'] += 1
             evaluation_started = perf_counter()
+            prefetch()
+            answer = worker_answer(slots)
             try:
+                if answer is not None and answer[0] == "error":
+                    raise answer[1]
+                if answer is not None and answer[0] == "pruned":
+                    # Pruned against an earlier, looser bound: pruned against
+                    # the current one too.
+                    raise MenuBoundPruned
                 remaining = remaining_planning_seconds()
                 # Existing cooperative checks also stop INSIDE an expensive
                 # improvement, while the outer request keeps its finalization time.
                 with planning_deadline(None if remaining is None else max(0, remaining-12)):
-                    if bounded_evaluate is not None and incumbent is not None:
+                    if answer is not None:
+                        # Priced by a worker, perhaps against an earlier bound. A
+                        # menu the current bound would prune ranks no better than
+                        # the best week, so it changes nothing below either.
+                        result = answer[1]
+                    elif bounded_evaluate is not None and incumbent is not None:
                         # The caller proves, before its whole-basket checkout,
                         # that this menu cannot rank below the incumbent.
                         result = bounded_evaluate(slots, incumbent[0])
@@ -1681,6 +1834,8 @@ class MenuOptimizer:
             finally:
                 trace['max_full_evaluation_seconds'] = max(trace.get('max_full_evaluation_seconds',0),
                     perf_counter()-evaluation_started)
+                work_since_improvement[0] += (answer[2] if answer is not None and answer[2] is not None
+                                              else perf_counter() - evaluation_started)
             trace['priced'] += 1
             trace['full_candidates'] += 1
             if decision_observer:
@@ -1698,6 +1853,7 @@ class MenuOptimizer:
                 trace.setdefault('improvement_evaluations', []).append(trace['evaluations_executed'])
                 last_improvement_evaluations[0] = trace['evaluations_executed']
                 last_improvement[0] = perf_counter()
+                work_since_improvement[0] = 0.0
                 if decision_observer:
                     decision_observer(slots, 'retained', result=result, depth=len(groups))
 
@@ -1752,8 +1908,12 @@ class MenuOptimizer:
                 exchange_rank = 0
                 exchange_revision = 0
                 trace['exchange_restarts'] = 0
-                for anchor in anchors:
+                cursor["anchors"] = anchors
+                for position, anchor in enumerate(anchors):
                     checkpoint()
+                    cursor["anchor"] = position
+                    if incumbent is not None:
+                        start_workers()
                     trace['anchors_considered'] += 1
                     affinity = package_sets[id(anchor)]
                     # Days often share the same qualified products. Compute
@@ -1777,6 +1937,8 @@ class MenuOptimizer:
                         exchange_rank = 0
                         trace['exchange_restarts'] += 1
                     exchange_revision = trace['improvements']
+                    cursor.update(exchange_rank=exchange_rank, exchange_revision=exchange_revision)
+                    start_workers()
                     # Two ranks per anchor give the current complete basket a
                     # useful neighbourhood even when qualification leaves a
                     # short search window. This is proposal ordering only: all
@@ -1788,11 +1950,15 @@ class MenuOptimizer:
                                 considered[index].add(id(group[rank]))
                                 propose(menu)
                     exchange_rank += 2
+                    cursor.update(anchor=position + 1, exchange_rank=exchange_rank)
         except SearchWindowClosed:
             soft_stopped = True
             trace['stop_reason'] = 'reserved_current_checkout_audit_save_time'
         except SearchStalled:
             soft_stopped = True
+        finally:
+            if speculation["context"] is not None:
+                speculation["context"].__exit__(None, None, None)
         trace['search_seconds'] = perf_counter()-started
         trace['anchors_deferred'] = trace.get('anchors_total', 0)-trace.get('anchors_considered', 0)
         trace['candidate_options_total'] = sum(map(len, groups))

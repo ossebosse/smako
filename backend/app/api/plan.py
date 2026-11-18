@@ -756,9 +756,19 @@ async def cancel_plan_job(job_id: str, http_request: Request):
 
 
 @router.get("/plan-jobs/{job_id}", response_model=SavedPlan, status_code=201)
-async def poll_plan_job(job_id: str, http_request: Request):
+async def poll_plan_job(job_id: str, http_request: Request, wait: float = 0.0):
+    """The job's state; with ``wait`` (at most 2 s) it answers as soon as the
+    job is done, or with its current stage after that time.
+
+    The page asked every other second and so saw a finished plan on average
+    one second late (2026-11-18). Asking with ``wait=2`` right after each
+    answer keeps the same number of requests and shows the plan at once.
+    """
     settings = get_settings()
     job = _plan_jobs(http_request, settings).get(job_id, _plan_actor_hash(http_request, settings))
+    if job is not None and not job.task.done() and wait > 0:
+        # asyncio.wait never cancels the job; a cancelled poll leaves it running.
+        await asyncio.wait({job.task}, timeout=min(float(wait), 2.0))
     if job is None or job.task.cancelled():
         raise HTTPException(404, "Beräkningen tog för lång tid och har avbrutits. Skapa menyn igen.",
                             headers={"X-Error-Code": "planner_job_expired", "Cache-Control": "private, no-store"})

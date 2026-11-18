@@ -851,3 +851,196 @@ def _stop(pid) -> None:
         os.waitpid(pid, 0)
     except OSError:
         pass
+
+
+class SpeculativeWorkers:
+    """Forked workers that evaluate items before the caller asks for them.
+
+    The week search proposes menus one at a time and decides after each one.
+    Which menus come next is predictable as long as the best week does not
+    change, so workers forked from the searching process price the predicted
+    ones meanwhile. The search itself is unchanged: it takes a worker's answer
+    when one exists for exactly the menu it is at, and otherwise prices the
+    menu itself, as before. A wrong prediction only costs a worker's time.
+
+    ``work(payload)`` runs in a worker and returns something picklable. Each
+    answer is ``("ok", value)`` or ``("error", exception)``; a worker that
+    cannot answer sends ``("failed", None)`` and the caller computes itself.
+    Workers inherit the searching process's state at the fork, so they must
+    only read it; they never write files, logs or shared caches.
+    """
+
+    KEEP_ANSWERS = 256
+    DEPTH = 2
+
+    def __init__(self, work: Callable, workers: int, errors: tuple = (ValueError,)):
+        self.work, self.errors, self.children, self.idle = work, errors, [], []
+        self.in_flight: dict = {}   # key -> child index
+        self.done: dict = {}        # key -> answer, until taken
+        self.buffers: dict[int, bytearray] = {}
+        self.stats = {"workers": 0, "submitted": 0, "used": 0, "failed": 0}
+        for index in range(max(0, workers)):
+            child = self._fork(index)
+            if child is None:
+                break
+            self.children.append(child)
+        # Two menus queued per worker: one priced while the next waits, so a
+        # worker never idles while the search reads its answer.
+        self.idle = [index for _ in range(self.DEPTH) for index in range(len(self.children))]
+        self.stats["workers"] = len(self.children)
+
+    def _fork(self, index):
+        child_in, to_child = os.pipe()     # (read end, write end)
+        from_child, child_out = os.pipe()
+        try:
+            with warnings.catch_warnings():
+                warnings.simplefilter("ignore", DeprecationWarning)
+                pid = os.fork()
+        except OSError:
+            for fd in (to_child, child_in, child_out, from_child):
+                os.close(fd)
+            return None
+        if pid == 0:  # pragma: no cover - runs in the worker
+            status = 1
+            try:
+                os.close(to_child)
+                os.close(from_child)
+                _child_after_fork()
+                from app.services import plan_jobs
+                plan_jobs._stage_reporter.set(None)
+                plan_jobs._engine_reporter.set(None)
+                buffer = bytearray()
+                while True:
+                    chunk = os.read(child_in, 1 << 20)
+                    if not chunk:
+                        break
+                    buffer.extend(chunk)
+                    for key, payload in _frames(buffer):
+                        try:
+                            answer = ("ok", self.work(payload))
+                        except self.errors as error:  # what the caller would raise itself
+                            answer = ("error", error.with_traceback(None))
+                        except BaseException:  # noqa: BLE001 - the caller computes itself
+                            answer = ("failed", None)
+                        try:
+                            _send(child_out, (key, answer))
+                        except Exception:  # noqa: BLE001 - e.g. an unpicklable answer
+                            _send(child_out, (key, ("failed", None)))
+                status = 0
+            except BaseException:  # noqa: BLE001, S110 - the caller computes itself
+                pass
+            finally:
+                os._exit(status)
+        os.close(child_in)
+        os.close(child_out)
+        self.buffers[from_child] = bytearray()
+        return {"pid": pid, "to": to_child, "from": from_child}
+
+    def can_take(self) -> bool:
+        return bool(self.idle)
+
+    def knows(self, key) -> bool:
+        return key in self.in_flight or key in self.done
+
+    def submit(self, key, payload) -> bool:
+        if not self.idle or self.knows(key):
+            return False
+        index = self.idle.pop()
+        try:
+            _send(self.children[index]["to"], (key, payload))
+        except OSError:
+            return False
+        self.in_flight[key] = index
+        self.stats["submitted"] += 1
+        return True
+
+    def collect(self, timeout: float = 0.0) -> None:
+        """Read the answers that are ready (waiting at most ``timeout`` seconds)."""
+        live = {c["from"]: i for i, c in enumerate(self.children) if c["from"] is not None}
+        if not live or not self.in_flight:
+            return
+        ready, _, _ = select.select(list(live), [], [], timeout)
+        for fd in ready:
+            chunk = os.read(fd, 1 << 20)
+            if not chunk:  # the worker is gone: what it had is computed by the caller
+                index = live[fd]
+                self._drop(index)
+                continue
+            buffer = self.buffers[fd]
+            buffer.extend(chunk)
+            for key, answer in _frames(buffer):
+                index = self.in_flight.pop(key, None)
+                if index is not None:
+                    self.idle.append(index)
+                self.done[key] = answer
+                while len(self.done) > self.KEEP_ANSWERS:  # predictions the search left behind
+                    del self.done[next(iter(self.done))]
+
+    def _drop(self, index):
+        child = self.children[index]
+        for key in [k for k, i in self.in_flight.items() if i == index]:
+            del self.in_flight[key]
+        for name in ("to", "from"):
+            if child[name] is not None:
+                try:
+                    os.close(child[name])
+                except OSError:
+                    pass
+                child[name] = None
+        self.idle = [i for i in self.idle if i != index]
+
+    def take(self, key, timeout: float):
+        """The answer for ``key``: waits while a worker has it, else None."""
+        deadline = time.monotonic() + timeout
+        while key in self.in_flight and time.monotonic() < deadline:
+            self.collect(min(0.25, max(0.0, deadline - time.monotonic())))
+        answer = self.done.pop(key, None)
+        if answer is None or answer[0] == "failed":
+            if answer is not None:
+                self.stats["failed"] += 1
+            return None
+        self.stats["used"] += 1
+        return answer
+
+    def forget(self, keep) -> None:
+        """Drop finished answers the caller no longer expects (bounded memory)."""
+        for key in [k for k in self.done if k not in keep]:
+            del self.done[key]
+
+    def close(self) -> None:
+        for index, child in enumerate(self.children):
+            if child["to"] is not None:
+                try:
+                    os.close(child["to"])
+                except OSError:
+                    pass
+                child["to"] = None
+        for child in self.children:
+            try:
+                os.kill(child["pid"], signal.SIGKILL)
+                os.waitpid(child["pid"], 0)
+            except OSError:
+                pass
+            if child["from"] is not None:
+                try:
+                    os.close(child["from"])
+                except OSError:
+                    pass
+                child["from"] = None
+
+
+@contextmanager
+def speculative_workers(work: Callable, errors: tuple = (ValueError,)) -> Iterator[SpeculativeWorkers | None]:
+    """Workers for ``work`` from this plan's share of the cores and memory, or None."""
+    if not _fork_supported() or free_threaded():
+        yield None
+        return
+    with qualification_workers() as granted:
+        if granted < 1:
+            yield None
+            return
+        pool = SpeculativeWorkers(work, granted, errors)
+        try:
+            yield pool if pool.children else None
+        finally:
+            pool.close()
