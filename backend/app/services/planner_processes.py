@@ -989,11 +989,18 @@ class SpeculativeWorkers:
                 child[name] = None
         self.idle = [i for i in self.idle if i != index]
 
-    def take(self, key, timeout: float):
-        """The answer for ``key``: waits while a worker has it, else None."""
+    def take(self, key, timeout: float, refill: Callable | None = None):
+        """The answer for ``key``: waits while a worker has it, else None.
+
+        ``refill`` hands idle workers more work while this waits. Without it,
+        workers that finished sat idle until the one answer the caller needed
+        arrived (2026-11-18: 23 of 34 s waiting in a Malmö week search).
+        """
         deadline = time.monotonic() + timeout
         while key in self.in_flight and time.monotonic() < deadline:
-            self.collect(min(0.25, max(0.0, deadline - time.monotonic())))
+            self.collect(min(0.05, max(0.0, deadline - time.monotonic())))
+            if refill is not None and self.idle and key in self.in_flight:
+                refill()
         answer = self.done.pop(key, None)
         if answer is None or answer[0] == "failed":
             if answer is not None:

@@ -1752,7 +1752,7 @@ class MenuOptimizer:
                 return None
             key = menu_key(slots)
             began = perf_counter()
-            answer = pool.take(key, timeout=30.0) if pool.knows(key) else None
+            answer = pool.take(key, timeout=30.0, refill=lambda: submit_predicted(pool)) if pool.knows(key) else None
             pool.stats["wait_seconds"] = round(pool.stats.get("wait_seconds", 0) + perf_counter() - began, 3)
             if answer is None:
                 pool.stats["priced_here"] = pool.stats.get("priced_here", 0) + 1
