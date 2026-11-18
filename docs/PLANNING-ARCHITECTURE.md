@@ -366,6 +366,26 @@ pris (118,08 kr) i alla körningar, kalla delade cacher:
   är nu ett delat, oföränderligt objekt per steg och per livsmedel. Med mindre
   minne per recept får en näringsplan fler provare.
 
+- **Veckosökningen prisar på flera kärnor** (`SpeculativeWorkers`,
+  `evaluation_workers`, ägarbeslut 2026-11-18). Mätt efter uppvärmningen: en
+  vanlig Malmöplan tog 43 s, varav 30 s veckosökning på en kärna. Sökningen
+  föreslår en meny i taget och beslutar efter varje. Så länge den bästa veckan
+  står kvar vet man vilka menyer som kommer härnäst (nästa ankares första
+  meny, sedan utbytena mot den bästa veckan). Provare som gaffeln skapar ur
+  den sökande processen prisar dem under tiden, mot det tak som gällde när de
+  skickades. Sökningen själv är oförändrad. Den tar en provares svar bara för
+  exakt den meny den står vid och prisar annars själv som förut. Ett svar som
+  beskärs mot ett äldre tak beskärs också mot det nuvarande. En meny som det
+  nuvarande taket skulle ha beskurit kan inte slå den bästa veckan. Därför hittar
+  sökningen samma veckor i samma ordning, med samma antal prövade menyer, bara
+  fortare. En felaktig förutsägelse kostar bara provarens tid. Provarna tas ur
+  samma kärnor och minne som prövningens. Av med
+  `SMAKO_PARALLEL_WEEK_SEARCH=0`.
+- **Sidan ser en färdig plan direkt.** Den frågade varannan sekund och såg
+  därför en färdig plan i snitt en sekund sent. Nu frågar den igen direkt med
+  `?wait=2`, och servern håller frågan tills planen är klar eller i högst två
+  sekunder. Det blir lika många frågor som förut.
+
 - **En kall plan i taget per område** (`PlannerAdmissionController`,
   `warmth_scope`, ägarbeslut 2026-11-18). Den första planen i ett område efter
   en start eller ett nytt prisunderlag räknar fram det som senare planer

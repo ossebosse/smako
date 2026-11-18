@@ -313,3 +313,40 @@ async def test_a_cancelled_job_stops_its_plan_process_at_once(monkeypatch):
     assert time.monotonic() - started < 5
     assert job.task.cancelled()
     await jobs.close()
+
+
+def test_a_poll_with_wait_answers_as_soon_as_the_plan_is_done(monkeypatch, tmp_path):
+    """The page asks with wait=2 and sees a finished plan at once (2026-11-18)."""
+    import time
+
+    from app import main
+
+    settings = Settings(price_provider='mock', plan_store_path=tmp_path/'plans.sqlite3')
+    monkeypatch.setattr(api, 'get_settings', lambda: settings)
+    monkeypatch.setattr(main, 'get_settings', lambda: settings)
+    release, started = Event(), Event()
+
+    async def slow(request, *_):
+        started.set()
+        await asyncio.to_thread(release.wait, 5)
+        raise HTTPException(503, 'unavailable', headers={'X-Error-Code': 'price_universe_unusable'})
+
+    monkeypatch.setattr(api, '_run_admitted_plan', slow)
+    try:
+        with TestClient(app) as client:
+            response = client.post('/api/plans', headers={'Prefer': 'respond-async'}, json={
+                'recipes': 3, 'servings': 2, 'max_stores': 3, 'purchase_planning_mode': 'exact'})
+            assert started.wait(2)
+            url = response.json()['status_url']
+            begun = time.monotonic()
+            assert client.get(url + '?wait=0.3').status_code == 202  # not done: answers after the wait
+            assert 0.25 <= time.monotonic() - begun < 1.5
+            from threading import Timer
+            Timer(0.3, release.set).start()
+            begun = time.monotonic()
+            final = client.get(url + '?wait=2')
+            assert final.status_code == 503 and time.monotonic() - begun < 1.5
+            begun = time.monotonic()
+            assert client.get(url + '?wait=2').status_code == 503 and time.monotonic() - begun < 0.5
+    finally:
+        release.set()

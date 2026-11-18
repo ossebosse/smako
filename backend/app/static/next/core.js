@@ -64,7 +64,8 @@
   const STAGES = { queued: "Väntar på en ledig plats.", product_facts: "Kontrollerar varor, priser och erbjudanden.", candidate_qualification: "Kontrollerar att varorna passar recepten.",
     week_search: "Sätter ihop måltiderna och jämför vad inköpen kostar.", final_audit: "Kontrollerar hela inköpslistan en sista gång.", saving: "Sparar.", library_preparation: "Förbereder recepten för dina val." };
   const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
-  // Long calculations run as a job on the server; the page asks for the result every other second.
+  // Long calculations run as a job on the server. The page asks again right after each answer and
+  // the server holds the question up to two seconds, so a finished plan shows at once.
   async function job(url, body, title) {
     S.busy = { title, text: "Skickar till Smako.", started: Date.now(), stage: "starting", percent: 0 }; emit();
     let response = await fetch(url, { method: "POST", cache: "no-store", credentials: "same-origin",
@@ -75,9 +76,11 @@
       S.busy.text = (STAGES[data.stage] || "Smako räknar.") + (p && p.total > 0 && p.unit === "recipes" ? ` ${p.completed} av ${p.total} recept prövade.` : "");
       track(data);
       emit();
-      await delay(2000);
-      try { response = await fetch(data.status_url, { cache: "no-store", credentials: "same-origin", headers: { Accept: "application/json" } }); data = { status_url: data.status_url, ...(await read(response)) }; failures = 0; }
+      const asked = Date.now();
+      try { response = await fetch(data.status_url + "?wait=2", { cache: "no-store", credentials: "same-origin", headers: { Accept: "application/json" } }); data = { status_url: data.status_url, ...(await read(response)) }; failures = 0; }
       catch (error) { if (++failures > 8) throw new Error("Anslutningen bröts. Ladda om sidan för att se om beräkningen blev klar."); await delay(2000); }
+      // A server without the wait answers at once: keep asking every other second.
+      if (response.status === 202 && Date.now() - asked < 1500) await delay(2000 - (Date.now() - asked));
     }
     if (response.ok) { S.busy.percent = 100; S.busy.done = true; emit(); await delay(matchMedia("(prefers-reduced-motion: reduce)").matches ? 150 : 900); }
     S.busy = null;
