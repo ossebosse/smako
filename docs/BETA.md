@@ -1,3 +1,29 @@
+# 2026-11-18 förmiddag: Planprocesser och provare räknas var för sig
+
+Main `b3ea01c0b335` (PR #102). App **app-b3ea01c0b335-6ddfbc33**, image
+`15649d04bc59`, bas `9231a8932602` (image `22852f06c84c`). En ändrad fil:
+`planner_processes.py`. Inga lokala undantag. Aktiverad 09:46:33 UTC,
+säkerhetskopia `20261118T093719Z`. Lagringsretention complete. `/ready` ready
+för 22350 och 21120.
+
+Under en plan syntes nu fyra provare om ca 0,6 GB vardera, mot ingen förut.
+Mätt på betan (Malmö, 54 butiker, gäst, i tur och ordning efter omstarten):
+
+| Plan | Resultat | Tid (motor) |
+|---|---|---|
+| Blandat, första planen efter omstarten | hann inte | 95 s |
+| Blandat, igen | klar | 50 s (44 s) |
+| Vegetariskt | klar | 42 s (35 s) |
+| Högst 600 kcal, första gången | hann inte | 96 s |
+| Protein minst 30 g | klar | 78 s (67 s) |
+| Protein minst 34 g | klar | 77 s (69 s) |
+| Protein 30 g och högst 700 kcal | hann inte | 96 s |
+| Högst 600 kcal, igen | klar | 53 s (36 s) |
+
+Kvar: ett nytt kcal-tak behöver mer tid än gränsen i prövningen första
+gången. Prövningen sparas, så ett nytt försök blir klart. Den första planen
+direkt efter en omstart hinner inte heller, medan uppvärmningen pågår.
+
 # 2026-11-18 förmiddag: En kall plan i taget och mindre svar aktiverat
 
 Main `9231a8932602` (PR #101). App **app-9231a8932602-0dd3c601**, image
@@ -14,7 +40,7 @@ Mätt på betan (Malmö, 54 butiker, gäst):
 - **Näringskrav:** högst 600 kcal och protein minst 30–34 g hann inte bli
   klara (96–101 s). Planens egen process kopierade upp till 2,7 GB, och
   allokeraren räknade då varje provare lika stort. Planen fick ingen provare.
-  Rättning i PR #102 (inte ihopslagen).
+  Rättning i PR #102, aktiverad samma förmiddag (se nedan).
 
 Före aktiveringen hade appen vuxit till 5,8 GB, och samma fel hade räknat
 varje barn som 2,9 GB. Planerna gick då i appens egen process, och sidans
