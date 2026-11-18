@@ -165,18 +165,23 @@ def test_workers_are_sized_by_the_recipes_they_get(monkeypatch):
     pp.note_child_peak("worker", 2**30, 24)  # a small slice says little per recipe
     assert pp._observed_per_item == 2**30 / 1148
     # Sized as one 1.9 GB worker each, three would fit in 6.3 GB; sized by
-    # slice, six workers of 329 recipes (about 1 GB each with the margin) fit.
+    # slice, six workers of 329 recipes (0.87 GB each with the margin) fit.
     assert pp.reserve_processes(6, items=2297) == 6
     held = pp._worker_bytes
-    assert 6 * 0.95 * 2**30 < held < 6 * 1.05 * 2**30
+    assert 6 * 0.8 * 2**30 < held < 6 * 0.9 * 2**30
     pp.release_processes(6)
     assert pp._worker_bytes == 0 and pp._slots_in_use == 0
-    pp.note_per_item(4 * 2**20)  # a plan's process saw larger workers
+    monkeypatch.setattr(pp, "_recent", {k: type(v)(maxlen=3) for k, v in pp._recent.items()})
+    pp.settle_child("worker", 2**30, 4 * 2**20)  # a plan's process saw larger workers
     assert pp._observed_per_item == 4 * 2**20
-    # k workers: k x (0.5 GB + 4 MB x 2297/(k+1)) x 1.25 within 6.3 GB.
+    # k workers: k x (0.5 GB + 4 MB x 2297/(k+1)) x 1.1 within 6.3 GB.
     assert pp.reserve_processes(6, items=2297) == 1
     pp.release_processes(1)
     assert pp._slots_in_use == 0
+    # Only recent workers count: a cold start's large ones age out.
+    for _ in range(3):
+        pp.settle_child("worker", int(0.8 * 2**30), 2**20)
+    assert pp._observed_per_item == 2**20 and pp._observed_peak["worker"] == int(0.8 * 2**30)
 
 
 def test_a_running_child_is_measured(monkeypatch):

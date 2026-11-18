@@ -57,6 +57,7 @@ import threading
 import time
 import warnings
 import weakref
+from collections import deque
 from collections.abc import Callable, Iterator, Sequence
 from contextlib import contextmanager
 
@@ -83,6 +84,7 @@ def _child_after_fork() -> None:
     _running_lock = threading.Lock()  # another thread may have held it at the fork
     _running_plans = _slots_in_use = _worker_slots = _worker_bytes = 0
     _plan_children.clear()
+    _last_run.update(worker=0, per_item=0.0)
     _parent_channel = None
     # Everything inherited stays out of this child's garbage collection: a
     # collection writes to every object it visits and so copies its memory.
@@ -179,6 +181,15 @@ _UNSEEN_CHILD_BYTES = {"plan": 3 << 30, "worker": 1 << 30}
 _observed_per_item = 0.0
 _PER_ITEM_MIN_SLICE = 100  # smaller slices are mostly fixed cost
 _WORKER_FIXED_BYTES = 512 << 20
+# The estimates follow the last few finished children, not the largest ever:
+# the first plan after a start fills every cache from nothing and copied far
+# more per recipe than later ones, and a maximum kept forever left every later
+# plan one worker (2026-11-18). A running child still raises them at once.
+_RECENT_CHILDREN = 8
+_recent = {"plan": deque(maxlen=_RECENT_CHILDREN), "worker": deque(maxlen=_RECENT_CHILDREN),
+           "per_item": deque(maxlen=_RECENT_CHILDREN)}
+# In a plan's own process: its latest workers, reported to the app process.
+_last_run = {"worker": 0, "per_item": 0.0}
 
 
 def _private_dirty(pid: int) -> int | None:
@@ -205,15 +216,23 @@ def note_child_peak(kind: str, size: int, items: int = 0) -> None:
     global _observed_per_item
     if size and size > _observed_peak[kind]:
         _observed_peak[kind] = size
-    if kind == "worker" and size and items >= _PER_ITEM_MIN_SLICE:
-        _observed_per_item = max(_observed_per_item, max(0, size - _WORKER_FIXED_BYTES) / items)
+    if kind == "worker" and size and _per_item(size, items):
+        _observed_per_item = max(_observed_per_item, _per_item(size, items))
 
 
-def note_per_item(per_item: float) -> None:
-    """Memory per recipe that a plan's process measured for its workers."""
+def settle_child(kind: str, size: int, per_item: float = 0.0) -> None:
+    """A finished child's largest copy: the estimates become the recent maximum."""
     global _observed_per_item
-    if per_item and per_item > _observed_per_item:
-        _observed_per_item = float(per_item)
+    if size:
+        _recent[kind].append(size)
+        _observed_peak[kind] = max(_recent[kind])
+    if kind == "worker" and per_item:
+        _recent["per_item"].append(float(per_item))
+        _observed_per_item = max(_recent["per_item"])
+
+
+def _per_item(size: int, items: int) -> float:
+    return max(0, size - _WORKER_FIXED_BYTES) / items if items >= _PER_ITEM_MIN_SLICE else 0.0
 
 
 def _worker_bytes_for(items: int, workers: int) -> int | None:
@@ -222,7 +241,8 @@ def _worker_bytes_for(items: int, workers: int) -> int | None:
     if not _observed_per_item or not items:
         return _child_bytes("worker")
     share = -(-items // (workers + 1))
-    return int((_WORKER_FIXED_BYTES + _observed_per_item * share) * 1.25)
+    # 10 % margin: both parts are measured maxima of recent workers.
+    return int((_WORKER_FIXED_BYTES + _observed_per_item * share) * 1.1)
 
 
 def _child_bytes(kind: str = "worker") -> int | None:
@@ -294,6 +314,10 @@ def reserve_processes(wanted: int, items: int = 0) -> int:
         _slots_in_use += granted
         _worker_slots += granted
         _worker_bytes += granted * child
+    if items and not unlimited:
+        logger.info("planner_workers wanted=%d cores=%d granted=%d items=%d each_mb=%d available_mb=%d "
+                    "promised_mb=%d per_recipe_kb=%d", wanted, cores, granted, items, child >> 20,
+                    (available or 0) >> 20, _promised_bytes() >> 20, int(_observed_per_item) >> 10)
     return granted
 
 
@@ -337,8 +361,11 @@ def release_plan_process(token: object | None) -> None:
     if token is None:
         return
     with _running_lock:
-        if _plan_children.pop(token, None) is not None:
+        held = _plan_children.pop(token, None)
+        if held is not None:
             _slots_in_use = max(0, _slots_in_use - 1)
+    if held is not None and held[1]:
+        settle_child("plan", held[1])
 
 
 def _fair_share() -> int:
@@ -404,7 +431,7 @@ def qualification_workers(items: int = 0) -> Iterator[int]:
             yield granted
         finally:
             # The workers' size, measured in this process, for the allocator.
-            _ask_parent("release", granted, _observed_peak["worker"], _observed_per_item)
+            _ask_parent("release", granted, _last_run["worker"], _last_run["per_item"])
         return
     granted = reserve_processes(min(_fair_share(), _BACKGROUND_WORKERS) if background else _fair_share(), items)
     try:
@@ -520,6 +547,25 @@ def run_in_processes(items: Sequence, work: Callable[[Sequence], object], *, tim
             answers[0] = work(items[slices[0][0]:slices[0][1]])
         except Exception:  # noqa: BLE001 - redone by the caller, as a child's slice would be
             missing.append(0)
+    largest: dict[int, int] = {}
+    try:
+        _wait_for_children(children, slices, deadline, answers, missing, largest)
+    finally:
+        _settle_workers(largest, slices)
+    return [answers[i] for i in sorted(answers)], sorted(missing)
+
+
+def _settle_workers(largest: dict[int, int], slices) -> None:
+    peak, per_item = 0, 0.0
+    for index, size in largest.items():
+        items = slices[index][1] - slices[index][0]
+        settle_child("worker", size, _per_item(size, items))
+        peak, per_item = max(peak, size), max(per_item, _per_item(size, items))
+    if largest:
+        _last_run.update(worker=peak, per_item=per_item)
+
+
+def _wait_for_children(children, slices, deadline, answers, missing, largest) -> None:
     sampled = 0.0
     while children:
         left = deadline - time.monotonic()
@@ -530,6 +576,7 @@ def run_in_processes(items: Sequence, work: Callable[[Sequence], object], *, tim
             for pid, index, _ in children.values():
                 size = observe_child(pid)
                 if size is not None:
+                    largest[index] = max(largest.get(index, 0), size)
                     note_child_peak("worker", size, slices[index][1] - slices[index][0])
         ready, _, _ = select.select(list(children), [], [], min(left, 1.0))
         for fd in ready:
@@ -556,7 +603,6 @@ def run_in_processes(items: Sequence, work: Callable[[Sequence], object], *, tim
             pass
         os.close(fd)
         missing.append(index)
-    return [answers[i] for i in sorted(answers)], sorted(missing)
 
 
 def run_in_threads(items: Sequence, make_work: Callable[[], Callable[[Sequence], object]], *,
@@ -764,10 +810,8 @@ def _await_plan_child(work, pid, read, reply, plan_jobs, slot=None):
                     except OSError:
                         pass
                 elif message[0] == "release":
-                    if len(message) > 2:
-                        note_child_peak("worker", message[2])
-                    if len(message) > 3:
-                        note_per_item(message[3])
+                    if len(message) > 3 and message[2]:
+                        settle_child("worker", message[2], message[3])
                     release_processes(min(held, message[1]))
                     held -= min(held, message[1])
                 elif message[0] in {"result", "error", "lost"}:
