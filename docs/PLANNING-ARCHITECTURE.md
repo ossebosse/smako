@@ -346,6 +346,12 @@ pris (118,08 kr) i alla körningar, kalla delade cacher:
   prövningen delas upp på ett annat sätt, till exempel att gemensamma
   ingredienser prissätts en gång före delningen.
 
+- **Bakgrundsarbete går sist** (`run_in_background_thread`). Uppvärmningen
+  efter en start körs i en egen tråd med lägsta CPU-prioritet, och dess
+  provare ärver den. Den får högst en provare. Direkt efter aktiveringen
+  2026-11-17 tog den alla provare i tio minuter, och de första planerna (Malmö
+  och Lund) hann inte bli klara bredvid den.
+
 `deploy/compose.yaml` släpper nu in tre planer samtidigt
 (`PLANNER_MAX_CONCURRENT_REQUESTS=3`). Det gäller först när ägaren beslutar
 att slå ihop och aktivera, och bara om serverns `.env` inte sätter ett eget

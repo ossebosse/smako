@@ -430,3 +430,29 @@ def test_a_thread_copy_has_its_own_optimizer_settings():
     other.optimizer.verification_policy = "changed in the thread"
     assert planner.optimizer.verification_policy != "changed in the thread"
     assert other.lookup_cache is not planner.lookup_cache and other.prepared is planner.prepared
+
+
+def test_background_work_runs_at_low_priority_with_at_most_one_worker(monkeypatch):
+    monkeypatch.setenv("SMAKO_PLANNER_PROCESSES", "6")
+    monkeypatch.setenv("SMAKO_PLANNER_MEMORY_CHECK", "0")
+    monkeypatch.setattr(pp, "free_threaded", lambda: False)
+
+    def work():
+        import threading as threads
+        with pp.qualification_workers() as granted:
+            return granted, os.getpriority(os.PRIO_PROCESS, threads.get_native_id())
+
+    granted, nice = pp.run_in_background_thread(work).result(timeout=10)
+    assert granted == 1 and nice == pp._BACKGROUND_NICE
+    with pp.qualification_workers() as granted:  # people's plans: the full share
+        assert granted == 6
+    assert os.getpriority(os.PRIO_PROCESS, 0) < pp._BACKGROUND_NICE  # this thread is untouched
+    assert pp._slots_in_use == 0
+
+
+def test_background_errors_reach_the_caller():
+    def work():
+        raise ValueError("stopped")
+
+    with pytest.raises(ValueError, match="stopped"):
+        pp.run_in_background_thread(work).result(timeout=10)
