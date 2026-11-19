@@ -397,9 +397,9 @@ _background = contextvars.ContextVar("smako_background_work", default=False)
 # It used to run at the lowest CPU priority (nice 19). A thread in the app
 # process shares Python's interpreter lock with the thread that answers every
 # request: with all cores busy with a plan, the starved thread kept the lock
-# for long stretches and the app stopped answering for over a minute after
-# the 2026-11-19 activations (a new plan request timed out; the first plan ran
-# out of time). It keeps the ordinary priority and yields instead.
+# for long stretches and every request waited (measured in isolation: 7 ms
+# steps became 74 ms on average, up to 289 ms). It keeps the ordinary priority
+# and yields instead.
 _BACKGROUND_WORKERS = 0
 
 
