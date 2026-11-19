@@ -517,22 +517,40 @@ def test_a_thread_copy_has_its_own_optimizer_settings():
     assert other.lookup_cache is not planner.lookup_cache and other.prepared is planner.prepared
 
 
-def test_background_work_runs_at_low_priority_without_workers(monkeypatch):
+def test_background_work_keeps_priority_gets_no_workers_and_can_be_stopped(monkeypatch):
+    import asyncio
+    import threading
+
+    from app.services.plan_jobs import check_cancelled
+
     monkeypatch.setenv("SMAKO_PLANNER_PROCESSES", "6")
     monkeypatch.setenv("SMAKO_PLANNER_MEMORY_CHECK", "0")
     monkeypatch.setattr(pp, "free_threaded", lambda: False)
+    before = os.getpriority(os.PRIO_PROCESS, 0)
 
     def work():
-        import threading as threads
         with pp.qualification_workers() as granted:
-            return granted, os.getpriority(os.PRIO_PROCESS, threads.get_native_id())
+            return granted, os.getpriority(os.PRIO_PROCESS, threading.get_native_id())
 
     granted, nice = pp.run_in_background_thread(work).result(timeout=10)
-    assert granted == 0 and nice == pp._BACKGROUND_NICE
+    # A starved low-priority thread would hold the app's interpreter lock.
+    assert granted == 0 and nice == before
     with pp.qualification_workers() as granted:  # people's plans: the full share
         assert granted == 6
-    assert os.getpriority(os.PRIO_PROCESS, 0) < pp._BACKGROUND_NICE  # this thread is untouched
     assert pp._slots_in_use == 0
+
+    stop, started = threading.Event(), threading.Event()
+
+    def long_work():
+        started.set()
+        while True:
+            check_cancelled()
+
+    future = pp.run_in_background_thread(long_work, stop=stop)
+    assert started.wait(10)
+    stop.set()
+    with pytest.raises(asyncio.CancelledError):
+        future.result(timeout=10)
 
 
 def test_background_errors_reach_the_caller():

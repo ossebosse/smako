@@ -8,8 +8,9 @@ trivially satisfied limits for all four macros (protein, carbohydrates, fat
 >= 0 and energy <= 4000 kcal per portion) for each meal type, so the first
 person who sets a limit finds the evidence ready.
 
-It only runs when the planner is idle, stops at its own deadline, keeps no
-plan and writes nothing; a partial run still leaves useful evidence.
+It only starts when the planner is idle, stops at its own deadline or as soon
+as a person's plan is admitted, keeps no plan and writes nothing; a partial
+run still leaves useful evidence.
 """
 from __future__ import annotations
 
@@ -17,6 +18,7 @@ import asyncio
 import contextlib
 import logging
 import os
+import threading
 
 WARM_LIMITS = {"min_protein_g": 0, "min_carbs_g": 0, "min_fat_g": 0, "max_kcal": 4000}
 WARM_SECONDS = 45.0
@@ -24,6 +26,7 @@ WARM_SECONDS = 45.0
 # the shared cache, so the next round continues from there. Each round waits
 # for an idle planner again, so people always go first.
 WARM_ROUNDS = 3
+_YIELD_POLL_SECONDS = 0.25
 
 
 def warm_request(prepared):
@@ -76,6 +79,8 @@ def warm_nutrition(settings, prepared, *, seconds=WARM_SECONDS):
         return "complete"
     except PlanningDeadlineExceeded:
         return "deadline"
+    except asyncio.CancelledError:
+        return "yielded"  # A person's plan was admitted; this round starts again later.
     except Exception as exc:  # noqa: BLE001 -- optional warming; the outcome is only logged.
         logging.getLogger(__name__).info("nutrition_prewarm_stopped error_type=%s", type(exc).__name__)
         return "stopped"
@@ -100,25 +105,36 @@ async def _warm_attempts(application, settings, prepared, manager, *, delay, att
 
     scope = prepared.universe.key.scope_id
 
-    async def work():
+    admission = application.state.planner_admission
+
+    async def work(key):
         if manager.get_active(scope) is not prepared:
             return "superseded"
-        # Lowest CPU priority and at most one worker (planner_processes), so
-        # people's plans always get the cores first.
+        # No worker processes (planner_processes), and the round stops as soon
+        # as a person's plan is admitted, so people's plans get the cores.
         from app.services.planner_processes import run_in_background_thread
-        return await asyncio.wrap_future(run_in_background_thread(
-            lambda: warm_nutrition(settings, prepared), name="smako-nutrition-prewarm"))
+        stop = threading.Event()
+        future = asyncio.wrap_future(run_in_background_thread(
+            lambda: warm_nutrition(settings, prepared), name="smako-nutrition-prewarm", stop=stop))
+        others = getattr(admission, "others_in_flight", None)
+        while not future.done():
+            await asyncio.wait({future}, timeout=_YIELD_POLL_SECONDS)
+            if others is not None and others(key):
+                stop.set()
+        return future.result()
 
     rounds = 0
     for _ in range(attempts):
         await asyncio.sleep(delay)
         if manager.get_active(scope) is not prepared:
             return "superseded"
+        key = f"prewarm-nutrition:{scope}:{prepared.universe.universe_id}:{rounds}"
         try:
-            status = await application.state.planner_admission.run(
-                f"prewarm-nutrition:{scope}:{prepared.universe.universe_id}:{rounds}", work, only_if_idle=True)
+            status = await admission.run(key, lambda key=key: work(key), only_if_idle=True)
         except PlannerAdmissionBusy:
             continue
+        if status == "yielded":
+            continue  # Not a round: try again when the planner is idle.
         rounds += 1
         logging.getLogger("uvicorn.error").info("nutrition_prewarm scope=%s universe=%s round=%s status=%s",
                                                 scope, prepared.universe.universe_id, rounds, status)
