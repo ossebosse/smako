@@ -57,6 +57,8 @@ def test_chunks_go_to_whoever_is_free():
     for answer in answers:
         by_pid.setdefault(answer["pid"], []).extend(answer["items"])
     assert parent in by_pid and len(by_pid) >= 3
+    # Workers kept getting chunks while this process worked on its own.
+    assert sum(len(items) for pid, items in by_pid.items() if pid != parent) > 120
     # The others took the remaining chunks meanwhile: done in about the slow chunk's time.
     assert time.monotonic() - started < 4
 

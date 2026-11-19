@@ -582,7 +582,9 @@ def run_in_chunks(items: Sequence, work: Callable[[Sequence], object], *, timeou
     chunks = [(start, min(len(items), start + size)) for start in range(0, len(items), size)]
     if workers < 1 or len(chunks) < 2:
         return [], len(chunks)
-    pool = SpeculativeWorkers(lambda chunk: work(items[chunk[0]:chunk[1]]), workers, errors=(), depth=1)
+    # Two chunks queued per worker: one runs while the next waits, so a worker
+    # does not idle while this process works on a chunk of its own.
+    pool = SpeculativeWorkers(lambda chunk: work(items[chunk[0]:chunk[1]]), workers, errors=(), depth=2)
     answers, failed, assigned, done_items, largest = [], 0, {}, {}, {}
     finished = reported = 0
     queue = list(range(len(chunks)))
@@ -590,6 +592,7 @@ def run_in_chunks(items: Sequence, work: Callable[[Sequence], object], *, timeou
     sampled = 0.0
     try:
         while (queue or pool.in_flight) and time.monotonic() < deadline:
+            pool.collect()  # frees the workers that finished, before handing out more
             while queue and pool.can_take():
                 index = queue.pop(0)
                 if not pool.submit(index, chunks[index]):
