@@ -241,9 +241,12 @@
     }
     return out;
   }
+  // Only the kinds the diet allows can be counted; a number saved under another diet is ignored.
+  const DIET_PROTEINS = { mixed: ["vegetarian", "chicken", "fish", "meat"], meat: ["chicken", "meat"], pescetarian: ["vegetarian", "fish"], vegetarian: [], vegan: [] };
+  const proteinsFor = type => PROTEINS.filter(([key]) => (DIET_PROTEINS[mealDiet(type)] || DIET_PROTEINS.mixed).includes(key));
   function cleanDistribution(type) {
     const out = {}, d = meal(type).distribution || {};
-    for (const [key] of PROTEINS) if (Number.isInteger(d[key]) && d[key] >= 0) out[key] = Math.min(d[key], 7);
+    for (const [key] of proteinsFor(type)) if (Number.isInteger(d[key]) && d[key] >= 0) out[key] = Math.min(d[key], 7);
     return out;
   }
   function limitProblem(type, rows) {
@@ -252,11 +255,8 @@
     return "";
   }
   function distributionProblem(type) {
-    const d = cleanDistribution(type), count = meal(type).count, total = Object.values(d).reduce((a, b) => a + b, 0), diet = mealDiet(type);
+    const d = cleanDistribution(type), count = meal(type).count, total = Object.values(d).reduce((a, b) => a + b, 0);
     if (total > count) return `Du har fördelat ${total} rätter men har bara ${count} måltider.`;
-    if (diet === "meat" && (d.fish > 0 || d.vegetarian > 0)) return "Kött ger bara rätter med kött eller kyckling. Ändra antalen eller lämna dem tomma.";
-    if (diet === "pescetarian" && (d.chicken > 0 || d.meat > 0)) return "Fisk och vegetariskt tillåter inte kyckling eller kött. Ändra antalen eller lämna dem tomma.";
-    if (["vegetarian", "vegan"].includes(diet) && (["chicken", "fish", "meat"].some(k => d[k] > 0) || (d.vegetarian != null && d.vegetarian !== count))) return "Ditt kostval kräver vegetariska rätter till alla måltider. Ändra antalen eller lämna dem tomma.";
     return "";
   }
   const PARTS = { distribution: ["Fördelning", type => distributionProblem(type)], weight: ["Portionsvikt", type => limitProblem(type, WEIGHT)], nutrition: ["Näringsvärden", type => limitProblem(type, NUTRIENTS)] };
@@ -546,8 +546,10 @@
     const body = el("div", null, "part-body");
     if (kind === "distribution") {
       const store = m.distribution = m.distribution || {}, grid = el("div", null, "limit-grid one");
-      for (const [key, name] of PROTEINS) grid.append(el("span", name, "limit-name"), numberField(store, key, "Antal", name, "", 7, update));
-      body.append(el("p", "Bestäm hur många av måltiderna som ska vara av ett visst slag. Lämnar du ett fält tomt väljer Smako fritt. Ditt kostval under Vad äter ni gäller fortfarande.", "hint"), grid, counted);
+      const kinds = proteinsFor(type);
+      for (const [key, name] of kinds) grid.append(el("span", name, "limit-name"), numberField(store, key, "Antal", name, "", 7, update));
+      if (kinds.length) body.append(el("p", "Bestäm hur många av måltiderna som ska vara av ett visst slag. Lämnar du ett fält tomt väljer Smako fritt. Här visas bara det som ditt kostval under Vad äter ni tillåter.", "hint"), grid, counted);
+      else body.append(el("p", "Med ditt kostval är alla måltider vegetariska, så det finns inget att fördela.", "hint"));
     } else if (kind === "weight") body.append(el("p", "Lägsta och högsta vikt per portion, färdig att äta. Recept där vikten inte går att uppskatta tas inte med när du har en gräns.", "hint"), limitsGrid(type, WEIGHT, update));
     else body.append(el("p", "Egna gränser per portion. Lämna tomt där du inte har någon gräns.", "hint"), limitsGrid(type, NUTRIENTS, update));
     body.append(status, button("Återställ till Standard", () => { if (kind === "distribution") m.distribution = {}; else for (const [key] of kind === "weight" ? WEIGHT : NUTRIENTS) { delete m.limits[`min_${key}`]; delete m.limits[`max_${key}`]; } persist(); emit(); dialog.close(); openPart(type, kind); }, "btn quiet small"));

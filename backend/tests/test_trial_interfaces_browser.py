@@ -596,3 +596,31 @@ def test_store_list_stays_put_can_be_searched_and_hides_the_covered_online_shop(
     shot("butikssok")
     page.get_by_label("Sök butik").fill("finns inte")
     expect(page.get_by_text("Ingen butik heter så. Prova ett annat ord.")).to_be_visible()
+
+
+def test_meat_distribution_shows_only_meat_kinds_and_drops_old_counts(ui):
+    """Owner report 2026-11-19: Kött with 1 vegetarian and 1 fish left from Allt blocked the plan."""
+    name, page, fake, shot = ui
+    if name != "a":
+        return
+    page.goto(re.sub(r"#.*|$", "#mat", page.url, count=1))
+    page.get_by_label("Ditt postnummer").fill("22350")
+    page.get_by_role("button", name="Hitta butiker").click()
+    page.get_by_role("button", name="Fördelning för middag: Standard").click()
+    for label in ("Antal vegetariskt", "Antal fisk och skaldjur"):
+        page.get_by_label(label).fill("1")
+        page.get_by_label(label).press("Tab")
+    page.get_by_role("button", name="Klar").click()
+    page.get_by_role("radio", name=re.compile("^Kött")).click()
+    page.get_by_role("button", name=re.compile("^Fördelning för middag")).click()
+    expect(page.get_by_label("Antal vegetariskt")).to_have_count(0)
+    expect(page.get_by_label("Antal fisk och skaldjur")).to_have_count(0)
+    page.get_by_label("Antal kyckling").fill("1")
+    page.get_by_label("Antal kyckling").press("Tab")
+    expect(page.get_by_text("1 av 3 måltider fördelade · 2 kvar")).to_be_visible()
+    page.get_by_role("button", name="Klar").click()
+    shot("kott-fordelning")
+    page.get_by_role("button", name="Skapa matplan").click()
+    expect(page.get_by_role("heading", name="Din matplan", exact=True)).to_be_visible()
+    sent = next(body for method, path, body in fake.calls if path == "plans")
+    assert sent["personal"]["meals"][0]["diet"] == "meat" and sent["personal"]["meals"][0]["distribution"] == {"chicken": 1}

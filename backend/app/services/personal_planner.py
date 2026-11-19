@@ -59,6 +59,7 @@ from app.services.personal_policy import (
     interpretation,
     is_nonfood,
     mentions,
+    mentions_avoided,
     merged_profile,
     mixed_week_ok,
     preference_score,
@@ -1176,7 +1177,7 @@ class PersonalPlanner:
         profile = self._merged_profile(meal)
         avoided = profile.exclusions + profile.allergies + self.request.avoid_ingredients
         if not recipe_respects_diet(recipe, preference=meal.diet, avoid_ingredients=avoided) or any(
-            mentions(term, item.name) or mentions(term, item.canonical_name or "")
+            mentions_avoided(term, item.name) or mentions_avoided(term, item.canonical_name or "")
             for term in avoided for item in recipe.ingredients
         ):
             raise PolicyConflict(
