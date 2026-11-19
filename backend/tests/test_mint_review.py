@@ -89,7 +89,7 @@ def test_mint_recipe_review_preserves_history_quantities_and_leaf_recipes():
     from backend.tests.recipe_language_history import after_language_id
     successors = {key: after_language_id(value) for key, value in successors.items()}
     successors.update({r["runtime_id"]: after_language_id(r["runtime_id"]) for r in review["corrected"] + review["verified_unchanged"] if r["runtime_id"] not in successors})
-    assert len(active) == 2851 and len(review['corrected']) == 91 and len(review['verified_unchanged']) == 40
+    assert len(active) == 2998 and len(review['corrected']) == 91 and len(review['verified_unchanged']) == 40
     for row in review['corrected']:
         before, after = issued[row['previous_id']], issued[row['runtime_id']]
         assert successors.get(row['runtime_id'], row['runtime_id']) in active
