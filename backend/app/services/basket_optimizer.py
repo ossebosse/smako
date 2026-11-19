@@ -2326,7 +2326,7 @@ class BasketOptimizer:
         chosen_stores: list[str] = []
         while incumbent is None and len(chosen_stores) < limit:
             current = winners_for(chosen_stores)
-            def gain(store_id):
+            def gain(store_id, current=current):
                 covered = saved = 0
                 for winner, rows in zip(current, by_store, strict=True):
                     row = rows.get(store_id)
@@ -2437,10 +2437,9 @@ class BasketOptimizer:
                 else:
                     line_rank = winner[1] if low is None or winner[1] < low else low
                     reachable = prices[winner[1]]
-                    line_price = winner[4] if winner[4] < reachable else reachable
+                    line_price = min(reachable, winner[4])
                     covered += winner[4]
-                if line_rank > rank_bound:
-                    rank_bound = line_rank
+                rank_bound = max(rank_bound, line_rank)
                 total_bound += line_price
             if capacity == 0:
                 # No store can be added: every line keeps its current winner.
@@ -2458,8 +2457,7 @@ class BasketOptimizer:
                         savings.append(saving)
                 savings.sort(reverse=True)
                 limited = covered - sum(savings[:capacity]) + uncovered
-                if limited > total_bound:
-                    total_bound = limited
+                total_bound = max(total_bound, limited)
             return rank_bound, total_bound
 
         if len(ranks) == 1:
