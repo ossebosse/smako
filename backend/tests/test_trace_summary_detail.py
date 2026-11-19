@@ -32,7 +32,7 @@ def test_web_plans_run_with_the_summary(monkeypatch):
 
     seen = []
 
-    async def fake(work):
+    async def fake(work, warm=None):
         seen.append(planning_diagnostics.DIAGNOSTIC_DETAIL.get())
         return await asyncio.to_thread(lambda: planning_diagnostics.DIAGNOSTIC_DETAIL.get())
 
