@@ -1169,6 +1169,14 @@ def _warm_main(jobs_read, jobs_write, results_read, results_write, reply_read, r
                     _send(results_write, (*outcome, {}))
                 except Exception:  # noqa: BLE001 - e.g. an error that cannot be pickled
                     _send(results_write, ("lost", None, {}))
+                del outcome
+                # Once the answer is out: collect this plan's garbage and freeze
+                # what stays (its caches), so the next plan's collections look
+                # only at its own objects (2.2 s per plan otherwise, measured).
+                # Never unfreeze: that would copy the app's whole memory here.
+                import gc
+                gc.collect()
+                gc.freeze()
         status = 0
     except BaseException:  # noqa: BLE001 - the app plans in a new process
         import traceback
