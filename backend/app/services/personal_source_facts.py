@@ -1278,7 +1278,10 @@ def _facts_from_snapshot_or_sources(prepared):
     path = snapshots.snapshot_path(root, identity, kind="facts")
     facts = snapshots.read(path, source_sha256=identity)
     if facts is not None:
-        os.utime(path)  # newest first when old ones are dropped
+        try:
+            os.utime(path)  # newest first when old ones are dropped
+        except OSError:  # a read-only copy (a measurement container) still reads it
+            pass
         return facts
     facts = load_retained_facts(prepared)
     try:

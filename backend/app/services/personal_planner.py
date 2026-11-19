@@ -10,6 +10,7 @@ import hashlib
 import json
 import math
 from collections import Counter, OrderedDict, defaultdict
+from contextlib import contextmanager
 from dataclasses import replace
 from datetime import UTC, datetime
 from decimal import Decimal
@@ -1431,20 +1432,7 @@ class PersonalPlanner:
                 at_home.append(row)
                 continue
             try:
-                resolved = self.resolve_choices(
-                    row["name"],
-                    row["quantity"],
-                    row["unit"],
-                    product_key=row["product_key"],
-                    alternatives=row.get("alternatives", ()),
-                    properties=row["properties"],
-                    profile=row["profile"],
-                    organic_animals=row["organic_animals"],
-                    food=row["food"],
-                    campaign_choice=row.get("campaign_choice", False),
-                    purchase_units=row.get("purchase_units", False),
-                    recipe=recipe,
-                )
+                resolved = self._resolve_row(row, recipe)
             except PolicyConflict as exc:
                 # One own item nobody sells must not take the whole list with it:
                 # the rest is bought and the item is named as not found.
@@ -1905,6 +1893,92 @@ class PersonalPlanner:
             self.product_trace.comparisons.append(record)
         if len(alternatives) > 24:
             self.product_trace.comparisons.append({"kind": "comparison_limit", "not_compared": len(alternatives)-24})
+
+    def _resolve_row(self, row, recipe):
+        return self.resolve_choices(
+            row["name"],
+            row["quantity"],
+            row["unit"],
+            product_key=row["product_key"],
+            alternatives=row.get("alternatives", ()),
+            properties=row["properties"],
+            profile=row["profile"],
+            organic_animals=row["organic_animals"],
+            food=row["food"],
+            campaign_choice=row.get("campaign_choice", False),
+            purchase_units=row.get("purchase_units", False),
+            recipe=recipe,
+        )
+
+    @contextmanager
+    def _search_workers(self, groups, work, errors):
+        """Workers for the week search, after the products are found once here.
+
+        Each worker found the products for every ingredient it met again:
+        profiled on the beta's data (2026-11-19), 85 of a worker's 129 s were in
+        ``resolve``, so four workers did four times the search's own product
+        lookups and the parallel search was no faster than one core. The
+        lookups for every candidate recipe are now done before the fork, in
+        chunks on this plan's cores (their results come back through the
+        shared resolution cache), and every worker starts with them.
+        """
+        from app.services.planner_processes import speculative_workers
+        warmup = self._warm_resolution(groups)
+        with speculative_workers(work, errors) as pool:
+            if pool is not None and warmup:
+                pool.stats["warmup"] = warmup
+            yield pool
+
+    def _warm_resolution(self, groups):
+        import os
+
+        from app.services.plan_jobs import remaining_planning_seconds
+        from app.services.planner_processes import (
+            absorb_warm,
+            qualification_workers,
+            run_in_chunks,
+            start_warm_journals,
+            warm_journals,
+        )
+        from app.services.planner_shared_cache import planner_scope
+
+        slots = list({id(slot.recipe): slot for group in groups for slot in group if slot.recipe}.values())
+        if not slots or planner_scope(self) is None:
+            return None
+        parent = os.getpid()
+
+        def warm(part):
+            child = os.getpid() != parent
+            if child:
+                from app.services import plan_jobs
+                plan_jobs._stage_reporter.set(None)
+                plan_jobs._engine_reporter.set(None)
+                caches = start_warm_journals()
+            for slot in part:
+                meal = self.meals[slot.meal_type]
+                try:
+                    rows = self._need_rows([slot])
+                except (PolicyConflict, ValueError):
+                    continue
+                for row in rows:
+                    if row["quantity"] <= 0 or self._at_home(row, meal, slot.recipe):
+                        continue
+                    try:
+                        self._resolve_row(row, slot.recipe)
+                    except (PolicyConflict, ValueError):
+                        pass  # the search meets the same rejection itself
+            return warm_journals(caches) if child else {}
+
+        left = remaining_planning_seconds()
+        started = perf_counter()
+        with qualification_workers(len(slots)) as workers:
+            if workers < 1:
+                return None
+            answers, _ = run_in_chunks(slots, warm, timeout=10.0 if left is None else max(1.0, left / 6),
+                                       workers=workers)
+            kept = sum(absorb_warm(journal) for journal in answers if journal)
+        return {"recipes": len(slots), "workers": workers, "kept_entries": kept,
+                "seconds": round(perf_counter() - started, 2)}
 
     def _at_home(self, row, meal, recipe):
         """Owner decision 2026-11-15: a ticked staple is not bought (app/services/staples.py)."""
@@ -3267,14 +3341,14 @@ class PersonalPlanner:
         """
         import os
 
-        from app.services.plan_jobs import remaining_planning_seconds
+        from app.services.plan_jobs import remaining_planning_seconds, report_stage
         from app.services.planner_context import content_digest
         from app.services.planner_processes import (
             _MIN_ITEMS_PER_WORKER,
             absorb_warm,
             free_threaded,
             qualification_workers,
-            run_in_processes,
+            run_in_chunks,
             run_in_threads,
             start_warm_journals,
             warm_journals,
@@ -3308,8 +3382,16 @@ class PersonalPlanner:
                 parent = os.getpid()
 
                 def work(part):
-                    if os.getpid() == parent:  # this process's own slice
-                        return self._candidates(meal, fixed_slots=fixed_slots, _rows_only=part), {}
+                    if os.getpid() == parent:  # this process's own chunks
+                        from app.services import plan_jobs
+                        quiet = plan_jobs._stage_reporter.set(None)  # progress comes from run_in_chunks
+                        pools = len(self.diagnostics.pools)
+                        try:
+                            rows = self._candidates(meal, fixed_slots=fixed_slots, _rows_only=part)
+                        finally:
+                            plan_jobs._stage_reporter.reset(quiet)
+                            del self.diagnostics.pools[pools:]  # one entry for the meal, not one per chunk
+                        return rows, {}
                     # In a worker: no progress reports to the parent's job or loop.
                     from app.services import plan_jobs
                     plan_jobs._stage_reporter.set(None)
@@ -3323,14 +3405,18 @@ class PersonalPlanner:
                 from app.services.planner_shared_cache import nutrition_scope, planner_scope
                 planner_scope(self)
                 nutrition_scope(self)
-                answers, missing = run_in_processes(pending, work, timeout=timeout, workers=workers, here=True)
+                known = len(candidates) - len(pending)
+                answers, missing = run_in_chunks(
+                    pending, work, timeout=timeout, workers=workers,
+                    progress=lambda done: report_stage("candidate_qualification", completed=known + done,
+                                                       total=len(candidates), unit="recipes"))
                 rows, kept = {}, 0
                 for part_rows, warm in answers:
                     rows.update(part_rows)
                     kept += absorb_warm(warm)
         self.diagnostics.pools[-1]["parallel_qualification"] = {
             "workers": workers, "recipes": len(pending), "rows": len(rows), "kept_entries": kept,
-            "slices_redone": len(missing)}
+            "slices_redone": missing}
         return {**stored_rows, **rows}
 
     def _qualify_slice(self, meal, fixed_slots, *, here=False):
@@ -4721,8 +4807,8 @@ class PersonalPlanner:
             if environ.get("SMAKO_PARALLEL_WEEK_SEARCH", "1") != "0":
                 # Workers price the menus the search is about to propose
                 # (2026-11-18); the search and its choices are unchanged.
-                from app.services.planner_processes import speculative_workers
-                search_kwargs["evaluation_workers"] = speculative_workers
+                search_kwargs["evaluation_workers"] = (
+                    lambda work, errors: self._search_workers(options, work, errors))
             if getattr(self.settings, "menu_lower_bound_pruning", True):
                 search_kwargs["bounded_evaluate"] = bounded_evaluate
         # Complete menus compared during the search are not audited; only the

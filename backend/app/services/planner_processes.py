@@ -565,6 +565,77 @@ def run_in_processes(items: Sequence, work: Callable[[Sequence], object], *, tim
     return [answers[i] for i in sorted(answers)], sorted(missing)
 
 
+def run_in_chunks(items: Sequence, work: Callable[[Sequence], object], *, timeout: float,
+                  workers: int, progress: Callable[[int], None] | None = None) -> tuple[list, int]:
+    """Run ``work`` over small chunks of ``items``: ``workers`` forked children
+    and this process take the next chunk as soon as they are free.
+
+    Fixed equal slices left one process working alone at the end: in a Malmö
+    nutrition plan (2026-11-18) the plan's own slice ran 13 s after its four
+    workers had finished, because recipes differ widely in cost. Returns the
+    answers that arrived and the number of chunks nobody finished (the caller
+    does those recipes itself). ``work`` must return something picklable; it
+    runs in this process too. ``progress`` hears how many items are done.
+    """
+    participants = workers + 1
+    size = max(_MIN_ITEMS_PER_WORKER // 2, -(-len(items) // (participants * 4)))
+    chunks = [(start, min(len(items), start + size)) for start in range(0, len(items), size)]
+    if workers < 1 or len(chunks) < 2:
+        return [], len(chunks)
+    pool = SpeculativeWorkers(lambda chunk: work(items[chunk[0]:chunk[1]]), workers, errors=(), depth=1)
+    answers, failed, assigned, done_items, largest = [], 0, {}, {}, {}
+    finished = reported = 0
+    queue = list(range(len(chunks)))
+    deadline = time.monotonic() + max(0.0, timeout)
+    sampled = 0.0
+    try:
+        while (queue or pool.in_flight) and time.monotonic() < deadline:
+            while queue and pool.can_take():
+                index = queue.pop(0)
+                if not pool.submit(index, chunks[index]):
+                    queue.insert(0, index)
+                    break
+                assigned[index] = pool.in_flight[index]
+            if queue:  # this process takes the last chunk in line
+                index = queue.pop()
+                try:
+                    answers.append(work(items[chunks[index][0]:chunks[index][1]]))
+                    finished += chunks[index][1] - chunks[index][0]
+                except Exception:  # noqa: BLE001 - the caller does these recipes
+                    failed += 1
+            else:
+                pool.collect(min(0.2, max(0.0, deadline - time.monotonic())))
+            for index in [k for k in pool.done]:
+                answer = pool.done.pop(index)
+                child = assigned.get(index)
+                if answer[0] == "ok":
+                    answers.append(answer[1])
+                    done_items[child] = done_items.get(child, 0) + chunks[index][1] - chunks[index][0]
+                    finished += chunks[index][1] - chunks[index][0]
+                else:
+                    failed += 1
+            if progress is not None and finished != reported:
+                reported = finished
+                progress(finished)
+            if time.monotonic() - sampled >= 1:
+                sampled = time.monotonic()
+                for child, info in enumerate(pool.children):
+                    size_now = observe_child(info["pid"])
+                    if size_now is not None:
+                        largest[child] = max(largest.get(child, 0), size_now)
+        if not pool.children:  # nothing forked: the caller does everything
+            return answers, len(queue) + failed
+        return answers, failed + len(queue) + len(pool.in_flight)
+    finally:
+        pool.close()
+        peak, per_item = 0, 0.0
+        for child, size_now in largest.items():
+            settle_child("worker", size_now, _per_item(size_now, done_items.get(child, 0)))
+            peak, per_item = max(peak, size_now), max(per_item, _per_item(size_now, done_items.get(child, 0)))
+        if largest:
+            _last_run.update(worker=peak, per_item=per_item)
+
+
 def _settle_workers(largest: dict[int, int], slices) -> None:
     peak, per_item = 0, 0.0
     for index, size in largest.items():
@@ -873,7 +944,8 @@ class SpeculativeWorkers:
     KEEP_ANSWERS = 256
     DEPTH = 2
 
-    def __init__(self, work: Callable, workers: int, errors: tuple = (ValueError,)):
+    def __init__(self, work: Callable, workers: int, errors: tuple = (ValueError,), depth: int | None = None):
+        self.DEPTH = depth or self.DEPTH
         self.work, self.errors, self.children, self.idle = work, errors, [], []
         self.in_flight: dict = {}   # key -> child index
         self.done: dict = {}        # key -> answer, until taken

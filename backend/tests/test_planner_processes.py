@@ -41,6 +41,32 @@ def test_a_failing_or_late_worker_leaves_its_slice_to_the_caller():
     assert missing == [0, 3] and {k for a in answers for k in a} == set(range(30, 90))
 
 
+def test_chunks_go_to_whoever_is_free():
+    """A slow chunk does not hold the rest back (2026-11-18: 13 s alone at the end)."""
+    parent = os.getpid()
+
+    def work(part):
+        if 0 in part:
+            time.sleep(1.0)  # one expensive chunk
+        return {"pid": os.getpid(), "items": list(part)}
+
+    started = time.monotonic()
+    answers, missing = pp.run_in_chunks(list(range(240)), work, timeout=30, workers=3)
+    assert missing == 0 and sorted(i for a in answers for i in a["items"]) == list(range(240))
+    by_pid = {}
+    for answer in answers:
+        by_pid.setdefault(answer["pid"], []).extend(answer["items"])
+    assert parent in by_pid and len(by_pid) >= 3
+    # The others took the remaining chunks meanwhile: done in about the slow chunk's time.
+    assert time.monotonic() - started < 4
+
+
+def test_a_failing_chunk_is_left_to_the_caller():
+    answers, missing = pp.run_in_chunks(list(range(120)), lambda part: 1 // (0 if 5 in part else 1),
+                                        timeout=10, workers=2)
+    assert missing == 1 and len(answers) == 9  # ten chunks of 12
+
+
 def test_cpu_budget_follows_the_setting(monkeypatch):
     monkeypatch.setenv("SMAKO_PLANNER_PROCESSES", "3")
     assert pp.cpu_budget() == 3
@@ -91,10 +117,10 @@ def test_qualification_asks_workers_only_for_unknown_recipes_and_merges_their_ro
     diagnostics = planner.diagnostics.pools[-1]["parallel_qualification"]
     assert diagnostics["workers"] == 2 and diagnostics["recipes"] == 59 and diagnostics["rows"] == 59
     assert diagnostics["slices_redone"] == 0
-    # This process did one slice (a third), two workers the rest; their quotes
-    # are now in this process's cache too.
-    assert len(asked) == 20 and set(asked) <= set(range(1, 21))
-    assert diagnostics["kept_entries"] == 39 and cache.stats.entries == 59
+    # Chunks went to whoever was free: this process and two workers shared the
+    # 59 recipes, and the workers' quotes are now in this process's cache too.
+    assert len(set(asked)) == len(asked) and set(asked) <= set(range(1, 60))
+    assert diagnostics["kept_entries"] + len(asked) == 59 and cache.stats.entries == 59
     assert pp._slots_in_use == 0  # the slots were given back
     monkeypatch.setenv("SMAKO_PLANNER_PROCESSES", "0")
     assert PersonalPlanner._qualify_in_processes(planner, None, recipes, known, ()) is known
