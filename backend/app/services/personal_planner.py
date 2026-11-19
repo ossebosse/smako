@@ -546,9 +546,8 @@ class PersonalPlanner:
             return ("prepared_input", identity, method)
         return ("legacy", self.recipe_computations.key(recipe))
 
-    def nutrition_evidence(self, product, name, unit, requested, recipe, *, recipe_key=False):
-        if recipe_key is False:
-            recipe_key = self._nutrition_recipe_key(recipe, name, requested)
+    def nutrition_evidence(self, product, name, unit, requested, recipe):
+        recipe_key = self._nutrition_recipe_key(recipe, name, requested)
         if recipe_key is None:
             return None
         key = (
@@ -1521,7 +1520,6 @@ class PersonalPlanner:
                                 row["unit"],
                                 requested,
                                 recipe,
-                                recipe_key=recipe_key,
                             )
                         )
                         and fact.nutrition_unit == row["unit"]
