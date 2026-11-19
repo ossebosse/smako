@@ -85,3 +85,22 @@ def test_store_winners_with_offer_packages_match_full_quote_set():
                     NormalizedIngredient(canonical_name="vara", required_quantity=warm, unit="g"), candidates)
             winners, _key = optimizer._store_best_quotes_with_key(ingredient, candidates)
         assert sorted(winners, key=lambda q: q.store_id) == expected
+
+
+def test_lower_bound_stops_early_only_above_the_limit():
+    from decimal import Decimal
+
+    candidates = offer_candidates()
+    by_name = {f"vara {n}": tuple(c.model_copy(update={"canonical_name": f"vara {n}"}) for c in candidates)
+               for n in range(5)}
+    ingredients = [NormalizedIngredient(canonical_name=name, required_quantity=900 + 300 * n, unit="g")
+                   for n, name in enumerate(by_name)]
+    optimizer = BasketOptimizer()
+    with optimizer.quote_cache():
+        full = optimizer.lower_bound(ingredients, by_name)
+        assert full is not None
+        for limit in (Decimal(0), full / 3, full - Decimal("0.01"), full, full + 1):
+            early = optimizer.lower_bound(ingredients, by_name, stop_above=limit)
+            # Same pruning decision as the full bound, never a larger value.
+            assert (early > limit) == (full > limit)
+            assert early <= full

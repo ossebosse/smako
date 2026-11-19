@@ -2570,6 +2570,8 @@ class BasketOptimizer:
         self,
         ingredients: Sequence[NormalizedIngredient],
         candidates_by_name: Mapping[str, Sequence[ProductCandidate]],
+        *,
+        stop_above: Decimal | None = None,
     ) -> Decimal | None:
         """Exact lower bound on ``optimize``'s total for these requirements.
 
@@ -2578,6 +2580,10 @@ class BasketOptimizer:
         raise it. Returns None (no bound) where lines are priced jointly
         (coupled campaigns), outside a quote session, or when a line has no
         quote, so that ``optimize`` reports the real outcome.
+
+        With ``stop_above``, stop once the lines priced so far already cost
+        more: every line costs at least zero, so the whole bound would too.
+        The remaining lines are then not priced at all.
         """
         session = self._quote_cache_context.get()
         if (session is None or type(self) is not BasketOptimizer
@@ -2592,6 +2598,8 @@ class BasketOptimizer:
             if not quotes:
                 return None
             total += min(money(quote.total_price) for quote in quotes)
+            if stop_above is not None and money(total) > stop_above:
+                return money(total)
         return money(total)
 
     def optimize(
