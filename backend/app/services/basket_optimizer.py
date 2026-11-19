@@ -1006,8 +1006,11 @@ class BasketOptimizer:
                 and type(self.calculator.resolver) is PurchaseQuantityResolver
                 and candidate.sale_model == SaleModel.FIXED_PACKAGE and not candidate.variable_weight
                 and candidate.quantity_confidence == QuantityConfidence.EXACT
+                # Offers stay on this path: a fixed package's checkout (offer
+                # choice, multibuy, caps) depends only on the package count,
+                # which is part of the template key.
                 and not (candidate.purchase_terms or candidate.purchase_units
-                         or candidate.offers or candidate.promotion_groups)):
+                         or candidate.promotion_groups)):
             required, unit = normalize_quantity(ingredient.required_quantity, ingredient.unit)
             shape = session.fixed_package_shapes.get(id(candidate))
             if shape is not None and shape[0] is candidate:
@@ -1149,8 +1152,11 @@ class BasketOptimizer:
                 and type(calculator.resolver) is PurchaseQuantityResolver
                 and candidate.sale_model == SaleModel.FIXED_PACKAGE and not candidate.variable_weight
                 and candidate.quantity_confidence == QuantityConfidence.EXACT
+                # Offers stay on this path: a fixed package's checkout (offer
+                # choice, multibuy, caps) depends only on the package count,
+                # which is part of the template key.
                 and not (candidate.purchase_terms or candidate.purchase_units
-                         or candidate.offers or candidate.promotion_groups))
+                         or candidate.promotion_groups))
 
     def _store_best_quotes_with_key(
         self,

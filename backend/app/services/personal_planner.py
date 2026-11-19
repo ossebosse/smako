@@ -296,6 +296,13 @@ def removed_recipe_key(recipe, identify=recipe_id):
     return f"base:{design.base_id}" if design is not None and design.base_id else f"recipe:{identify(recipe)}"
 
 
+# One entry per (product list, exact recipe, line, unit, nutrients). A week
+# search over the whole library visits far more recipe lines than 4096; a
+# smaller bound evicted and requalified the same lines over and over. Each
+# entry holds references to existing product rows only.
+_QUALIFIED_NUTRITION_ENTRIES = 65536
+
+
 class PersonalPlanner:
     def __init__(
         self,
@@ -1512,7 +1519,7 @@ class PersonalPlanner:
                         )
                     ]
                     remember_bounded(self.qualified_nutrition_candidates, qualification_key,
-                                     (resolved, verified), 4096)
+                                     (resolved, verified), _QUALIFIED_NUTRITION_ENTRIES)
                 verified_ids = {i for i, _ in verified}
                 for i, _ in resolved:
                     product = self.prepared.universe.products[i]
