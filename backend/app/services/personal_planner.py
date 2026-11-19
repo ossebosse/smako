@@ -196,6 +196,30 @@ _SEARCH_ONLY_PREFERENCE_FIELDS = ("max_same_main_protein_dinners", "min_distinct
                                   "allow_fish")
 
 
+_RECIPE_DIGESTS: dict = {}
+
+
+def _recipe_digest(recipe):
+    """content_digest of a library recipe, once per recipe object.
+
+    Every plan digested all 2,297 Malmö candidates twice (about 1 s per plan,
+    measured 2026-11-19). Library recipes are shared, read-only models, so the
+    digest is kept with the object; anything else is digested every time.
+    """
+    from app.services.planner_context import content_digest
+
+    if not hasattr(recipe, "model_dump"):
+        return content_digest(recipe)
+    known = _RECIPE_DIGESTS.get(id(recipe))
+    if known is not None and known[0] is recipe:
+        return known[1]
+    digest = content_digest(recipe)
+    if len(_RECIPE_DIGESTS) >= 16384:
+        _RECIPE_DIGESTS.clear()
+    _RECIPE_DIGESTS[id(recipe)] = (recipe, digest)
+    return digest
+
+
 def _ordinary_meal(meal):
     """The same meal without nutrition or weight requirements."""
     return meal.model_copy(update={"limits": type(meal.limits)()})
@@ -3103,7 +3127,7 @@ class PersonalPlanner:
             check_cancelled()
             if completed % 25 == 0:
                 report_stage("candidate_qualification", completed=completed, total=len(candidates), unit="recipes")
-            issued_key = content_digest(recipe) if reuse else None
+            issued_key = _recipe_digest(recipe) if reuse else None
             cached = stored_rows.get(issued_key)
             # The recipe registry supplies exact canonical, scaled values. A
             # noncanonical input cannot bypass clean_recipe using a cache hit.
@@ -3268,7 +3292,6 @@ class PersonalPlanner:
         import os
 
         from app.services.plan_jobs import remaining_planning_seconds
-        from app.services.planner_context import content_digest
         from app.services.planner_processes import (
             _MIN_ITEMS_PER_WORKER,
             absorb_warm,
@@ -3280,7 +3303,7 @@ class PersonalPlanner:
             warm_journals,
         )
 
-        pending = [r for r in candidates if content_digest(r) not in stored_rows]
+        pending = [r for r in candidates if _recipe_digest(r) not in stored_rows]
         left = remaining_planning_seconds()
         # Leave the search most of the request; qualification gets at most half.
         timeout = 60.0 if left is None else max(0.0, left / 2)

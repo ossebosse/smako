@@ -1051,3 +1051,260 @@ def speculative_workers(work: Callable, errors: tuple = (ValueError,)) -> Iterat
             yield pool if pool.children else None
         finally:
             pool.close()
+
+
+# --- Warm plan processes (owner decision 2026-11-19) -------------------------
+#
+# A plan in a freshly forked process was about half as fast as the same plan
+# in a process that had planned before: measured on the beta's Malmö data, the
+# week search took 36 s in a new plan process and 18 s in a warm one. A new
+# process copies every page of the app's memory it touches (copy-on-write) and
+# starts with empty caches of its own. Warm plan processes are forked once and
+# kept: each plans one request at a time, keeps its copied pages and caches,
+# and takes the next plan. They are retired when the price universe they hold
+# is no longer the active one, after many plans, or when they grow too large;
+# a plan that finds none free runs in a new process as before.
+
+class WarmStale(Exception):
+    """The warm process holds another price universe than the request needs."""
+
+
+_WARM_RUNNERS: dict[str, Callable] = {}
+_warm_lock = threading.Lock()
+_warm_idle: list[dict] = []
+_warm_all: list[dict] = []
+
+
+def register_warm_runner(name: str, runner: Callable) -> None:
+    """``runner(payload)`` runs one plan in a warm process; it must be a
+    module-level function, as the process was forked with it already loaded."""
+    _WARM_RUNNERS[name] = runner
+
+
+def _warm_settings():
+    workers = int(os.environ.get("SMAKO_WARM_PLAN_PROCESSES", "2") or 0)
+    plans = int(os.environ.get("SMAKO_WARM_PLANS_PER_PROCESS", "40") or 40)
+    limit = int(os.environ.get("SMAKO_WARM_PROCESS_LIMIT_MB", "4096") or 4096) << 20
+    return workers, plans, limit
+
+
+def _warm_retire(worker: dict) -> None:
+    with _warm_lock:
+        if worker in _warm_all:
+            _warm_all.remove(worker)
+        if worker in _warm_idle:
+            _warm_idle.remove(worker)
+    for name in ("jobs", "results", "reply"):
+        if worker.get(name) is not None:
+            try:
+                os.close(worker[name])
+            except OSError:
+                pass
+            worker[name] = None
+    _stop(worker["pid"])
+
+
+def retire_warm_processes() -> None:
+    """Stop every idle warm process (for example after a new price universe)."""
+    with _warm_lock:
+        idle = list(_warm_idle)
+    for worker in idle:
+        _warm_retire(worker)
+
+
+def _warm_take():
+    workers, _, _ = _warm_settings()
+    with _warm_lock:
+        if _warm_idle:
+            return _warm_idle.pop()
+        if len(_warm_all) >= workers:
+            return None
+        placeholder = {"pid": None}
+        _warm_all.append(placeholder)
+    worker = _warm_fork()
+    with _warm_lock:
+        _warm_all.remove(placeholder)
+        if worker is not None:
+            _warm_all.append(worker)
+    return worker
+
+
+def _warm_fork():
+    jobs_read, jobs_write = os.pipe()
+    results_read, results_write = os.pipe()
+    reply_read, reply_write = os.pipe()
+    try:
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore", DeprecationWarning)
+            pid = os.fork()
+    except OSError:
+        for fd in (jobs_read, jobs_write, results_read, results_write, reply_read, reply_write):
+            os.close(fd)
+        return None
+    if pid == 0:  # pragma: no cover - the warm process
+        _warm_main(jobs_read, jobs_write, results_read, results_write, reply_read, reply_write)
+    for fd in (jobs_read, results_write, reply_read):
+        os.close(fd)
+    return {"pid": pid, "jobs": jobs_write, "results": results_read, "reply": reply_write,
+            "plans": 0, "buffer": bytearray()}
+
+
+def _warm_main(jobs_read, jobs_write, results_read, results_write, reply_read, reply_write):  # pragma: no cover
+    global _parent_channel
+    status = 1
+    try:
+        for fd in (jobs_write, results_read, reply_write):
+            os.close(fd)
+        _child_after_fork()
+        buffer = bytearray()
+        while True:
+            chunk = os.read(jobs_read, 1 << 20)
+            if not chunk:
+                break
+            buffer.extend(chunk)
+            for name, payload, context in _frames(buffer):
+                _parent_channel = (results_write, reply_read)
+                outcome = contextvars.Context().run(_warm_job, name, payload, context, results_write)
+                try:
+                    _send(results_write, (*outcome, {}))
+                except Exception:  # noqa: BLE001 - e.g. an error that cannot be pickled
+                    _send(results_write, ("lost", None, {}))
+                del outcome
+                # Once the answer is out: collect this plan's garbage and freeze
+                # what stays (its caches), so the next plan's collections look
+                # only at its own objects (2.2 s per plan otherwise, measured).
+                # Never unfreeze: that would copy the app's whole memory here.
+                import gc
+                gc.collect()
+                gc.freeze()
+        status = 0
+    except BaseException:  # noqa: BLE001 - the app plans in a new process
+        import traceback
+        traceback.print_exc()
+    finally:
+        os._exit(status)
+
+
+def _warm_job(name, payload, context, write):  # pragma: no cover - runs in the warm process
+    from app.services import plan_jobs
+    from app.services.planning_diagnostics import DIAGNOSTIC_DETAIL
+
+    _last_run.update(worker=0, per_item=0.0)
+    DIAGNOSTIC_DETAIL.set(context.get("detail", "full"))
+    plan_jobs.job_reference.set(context.get("job_reference"))
+    if context.get("deadline") is not None:
+        plan_jobs._deadline_clock.set(plan_jobs._DeadlineClock(credit=context.get("credit", 0.0)))
+        plan_jobs._planning_deadline.set(context["deadline"])
+    plan_jobs._stage_reporter.set(lambda stage, progress: _send(write, ("stage", stage, progress)))
+    plan_jobs._engine_reporter.set(lambda limit: _send(write, ("engine", limit)))
+    try:
+        return ("result", _WARM_RUNNERS[name](payload))
+    except WarmStale:
+        return ("stale", None)
+    except BaseException as error:  # noqa: BLE001 - sent to the app, raised there
+        return ("error", error)
+
+
+def run_plan_warm(name: str, payload, fallback: Callable[[], object]):
+    """Run a registered plan in a warm process; otherwise as run_plan_in_process."""
+    from app.services import plan_jobs
+    from app.services.planning_diagnostics import DIAGNOSTIC_DETAIL
+
+    if name not in _WARM_RUNNERS or not plan_processes_enabled() or _warm_settings()[0] < 1:
+        return run_plan_in_process(fallback)
+    global _running_plans
+    with _running_lock:
+        _running_plans += 1
+    slot, worker, keep = None, None, False
+    try:
+        slot = reserve_plan_process()
+        if slot is None:
+            return fallback()
+        worker = _warm_take()
+        if worker is None:
+            release_plan_process(slot)
+            slot = None
+            with _running_lock:
+                _running_plans -= 1
+            try:
+                return run_plan_in_process(fallback)
+            finally:
+                with _running_lock:
+                    _running_plans += 1
+        deadline = plan_jobs._planning_deadline.get()
+        context = {"detail": DIAGNOSTIC_DETAIL.get(), "job_reference": plan_jobs.job_reference.get(),
+                   "deadline": deadline, "credit": plan_jobs._credit()}
+        try:
+            _send(worker["jobs"], (name, payload, context))
+        except OSError:
+            _warm_retire(worker)
+            worker = None
+            return fallback()
+        final, keep = _await_warm(worker, plan_jobs, slot)
+        worker["plans"] += 1
+        if final is None or final[0] in {"lost", "stale"}:
+            if final is not None and final[0] == "stale":
+                logger.info("warm_plan_process stale; retiring idle warm processes")
+                retire_warm_processes()
+            keep = keep and final is not None and final[0] != "stale"
+            return fallback()
+        if final[0] == "error":
+            raise final[1]
+        return final[1]
+    finally:
+        if worker is not None:
+            _, plans, limit = _warm_settings()
+            size = _private_dirty(worker["pid"]) if keep else None
+            if keep and worker["plans"] < plans and size is not None and size < limit:
+                with _warm_lock:
+                    _warm_idle.append(worker)
+            else:
+                _warm_retire(worker)
+        release_plan_process(slot)
+        with _running_lock:
+            _running_plans -= 1
+
+
+def _await_warm(worker, plan_jobs, slot):
+    """Relay one plan's messages; returns (final message or None, keep the process)."""
+    stop = plan_jobs._work_cancellation.get()
+    stage_reporter, engine_reporter = plan_jobs._stage_reporter.get(), plan_jobs._engine_reporter.get()
+    read, reply, buffer = worker["results"], worker["reply"], worker["buffer"]
+    held, sampled = 0, 0.0
+    try:
+        while True:
+            if stop is not None and stop.is_set():
+                _warm_retire(worker)  # its plan is half done: never reuse it
+                plan_jobs.check_cancelled()
+                return None, False
+            ready, _, _ = select.select([read], [], [], 0.25)
+            if not ready:
+                if time.monotonic() - sampled >= 1:
+                    sampled = time.monotonic()
+                    observe_plan_process(slot, worker["pid"])
+                continue
+            chunk = os.read(read, 1 << 20)
+            if not chunk:
+                return None, False
+            buffer.extend(chunk)
+            for message in _frames(buffer):
+                if message[0] == "stage" and stage_reporter:
+                    stage_reporter(message[1], message[2])
+                elif message[0] == "engine" and engine_reporter:
+                    engine_reporter(message[1])
+                elif message[0] == "reserve":
+                    granted = reserve_processes(max(0, _fair_share() - 1), message[1], plan=slot)
+                    held += granted
+                    try:
+                        os.write(reply, struct.pack("!I", granted))
+                    except OSError:
+                        pass
+                elif message[0] == "release":
+                    if len(message) > 3 and message[2]:
+                        settle_child("worker", message[2], message[3])
+                    release_processes(min(held, message[1]))
+                    held -= min(held, message[1])
+                elif message[0] in {"result", "error", "lost", "stale"}:
+                    return message, True
+    finally:
+        release_processes(held)

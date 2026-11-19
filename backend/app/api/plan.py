@@ -257,6 +257,11 @@ async def _run_admitted_plan(
         # Isolate admission/coalescing even when two owners choose equal fields.
         # Catalog/fact initialization belongs inside the admitted worker too:
         # it must neither block the event loop nor precede a long queue wait.
+        # A plan without owned artifacts can run in a warm plan process
+        # (planner_processes.run_plan_warm), which plans from these inputs.
+        warm = (("personal_create", (request, settings, request.postal_code,
+                                     prepared.universe.universe_id, state))
+                if artifacts is None else None)
         return await _run_personal_work(
             request,
             http_request,
@@ -264,7 +269,8 @@ async def _run_admitted_plan(
             state["revision"],
             lambda: _run_personal_thread(
                 lambda: PersonalPlanner(request, settings, prepared, state,
-                    artifacts=artifacts).create()
+                    artifacts=artifacts).create(),
+                warm=warm,
             ),
         )
     controller = _planner_admission(http_request, settings)
@@ -285,7 +291,28 @@ async def _run_admitted_plan(
         ) from exc
 
 
-async def _run_personal_thread(work):
+def _warm_personal_create(payload):
+    """A personal plan in a warm plan process (run_plan_warm)."""
+    from app.services.personal_planner import PersonalPlanner
+    from app.services.planner_processes import WarmStale
+
+    request, settings, postal_code, universe_id, state = payload
+    prepared = GLOBAL_PREPARED_PRICE_UNIVERSES.get_for_request(postal_code, {})
+    if prepared is None or prepared.universe.universe_id != universe_id:
+        raise WarmStale(universe_id)
+    return PersonalPlanner(request, settings, prepared, state).create()
+
+
+def _register_warm_runners():
+    from app.services.planner_processes import register_warm_runner
+
+    register_warm_runner("personal_create", _warm_personal_create)
+
+
+_register_warm_runners()
+
+
+async def _run_personal_thread(work, warm=None):
     """Request cooperative stop, retaining admission until the worker exits.
 
     Cancelling asyncio.to_thread only abandons its await, not the running
@@ -298,20 +325,23 @@ async def _run_personal_thread(work):
     # thread (and a plan's own process) inherits this context.
     detail = DIAGNOSTIC_DETAIL.set("summary")
     try:
-        return await _run_personal_thread_in_context(work)
+        return await _run_personal_thread_in_context(work, warm)
     finally:
         DIAGNOSTIC_DETAIL.reset(detail)
 
 
-async def _run_personal_thread_in_context(work):
+async def _run_personal_thread_in_context(work, warm=None):
     from app.services.plan_jobs import cancellable_work
 
     with cancellable_work() as stop:
-        from app.services.planner_processes import run_plan_in_process
+        from app.services.planner_processes import run_plan_in_process, run_plan_warm
 
         # Each plan in its own process, so plans of different people run on
-        # different cores at the same time (planner_processes).
-        worker = asyncio.create_task(asyncio.to_thread(run_plan_in_process, work))
+        # different cores at the same time (planner_processes); a warm one
+        # when the plan allows it.
+        worker = asyncio.create_task(
+            asyncio.to_thread(run_plan_warm, *warm, work) if warm is not None
+            else asyncio.to_thread(run_plan_in_process, work))
         cancelled = None
         while not worker.done():
             try:
