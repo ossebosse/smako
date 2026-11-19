@@ -1006,8 +1006,11 @@ class BasketOptimizer:
                 and type(self.calculator.resolver) is PurchaseQuantityResolver
                 and candidate.sale_model == SaleModel.FIXED_PACKAGE and not candidate.variable_weight
                 and candidate.quantity_confidence == QuantityConfidence.EXACT
+                # Offers stay on this path: a fixed package's checkout (offer
+                # choice, multibuy, caps) depends only on the package count,
+                # which is part of the template key.
                 and not (candidate.purchase_terms or candidate.purchase_units
-                         or candidate.offers or candidate.promotion_groups)):
+                         or candidate.promotion_groups)):
             required, unit = normalize_quantity(ingredient.required_quantity, ingredient.unit)
             shape = session.fixed_package_shapes.get(id(candidate))
             if shape is not None and shape[0] is candidate:
@@ -1149,8 +1152,11 @@ class BasketOptimizer:
                 and type(calculator.resolver) is PurchaseQuantityResolver
                 and candidate.sale_model == SaleModel.FIXED_PACKAGE and not candidate.variable_weight
                 and candidate.quantity_confidence == QuantityConfidence.EXACT
+                # Offers stay on this path: a fixed package's checkout (offer
+                # choice, multibuy, caps) depends only on the package count,
+                # which is part of the template key.
                 and not (candidate.purchase_terms or candidate.purchase_units
-                         or candidate.offers or candidate.promotion_groups))
+                         or candidate.promotion_groups))
 
     def _store_best_quotes_with_key(
         self,
@@ -2320,7 +2326,7 @@ class BasketOptimizer:
         chosen_stores: list[str] = []
         while incumbent is None and len(chosen_stores) < limit:
             current = winners_for(chosen_stores)
-            def gain(store_id):
+            def gain(store_id, current=current):
                 covered = saved = 0
                 for winner, rows in zip(current, by_store, strict=True):
                     row = rows.get(store_id)
@@ -2431,10 +2437,9 @@ class BasketOptimizer:
                 else:
                     line_rank = winner[1] if low is None or winner[1] < low else low
                     reachable = prices[winner[1]]
-                    line_price = winner[4] if winner[4] < reachable else reachable
+                    line_price = min(reachable, winner[4])
                     covered += winner[4]
-                if line_rank > rank_bound:
-                    rank_bound = line_rank
+                rank_bound = max(rank_bound, line_rank)
                 total_bound += line_price
             if capacity == 0:
                 # No store can be added: every line keeps its current winner.
@@ -2452,8 +2457,7 @@ class BasketOptimizer:
                         savings.append(saving)
                 savings.sort(reverse=True)
                 limited = covered - sum(savings[:capacity]) + uncovered
-                if limited > total_bound:
-                    total_bound = limited
+                total_bound = max(total_bound, limited)
             return rank_bound, total_bound
 
         if len(ranks) == 1:
@@ -2566,6 +2570,8 @@ class BasketOptimizer:
         self,
         ingredients: Sequence[NormalizedIngredient],
         candidates_by_name: Mapping[str, Sequence[ProductCandidate]],
+        *,
+        stop_above: Decimal | None = None,
     ) -> Decimal | None:
         """Exact lower bound on ``optimize``'s total for these requirements.
 
@@ -2574,6 +2580,10 @@ class BasketOptimizer:
         raise it. Returns None (no bound) where lines are priced jointly
         (coupled campaigns), outside a quote session, or when a line has no
         quote, so that ``optimize`` reports the real outcome.
+
+        With ``stop_above``, stop once the lines priced so far already cost
+        more: every line costs at least zero, so the whole bound would too.
+        The remaining lines are then not priced at all.
         """
         session = self._quote_cache_context.get()
         if (session is None or type(self) is not BasketOptimizer
@@ -2588,6 +2598,8 @@ class BasketOptimizer:
             if not quotes:
                 return None
             total += min(money(quote.total_price) for quote in quotes)
+            if stop_above is not None and money(total) > stop_above:
+                return money(total)
         return money(total)
 
     def optimize(

@@ -264,12 +264,17 @@ def input_evidence_identity(recipe, name, recipe_cache):
     each exact recipe (including mutable instructions/forms) validates first.
     Keep this identity aligned with input_evidence and wrap_evidence below.
     """
+    from app.services.intake_product_links import gross_purchase_input
+
     if not recipe_cache.get(recipe, validate):
         return None
     if has_unmeasured_process(recipe):
         return None
+    # input_evidence refuses a gross bone/pod/shell pack of this recipe line,
+    # so two recipes differing only there must not share evidence.
     return (recipe.preparation.version, recipe.preparation.family,
-            recipe.preparation.input_forms.get(canonical(name)))
+            recipe.preparation.input_forms.get(canonical(name)),
+            gross_purchase_input(recipe, canonical(name)))
 
 
 def input_evidence(recipe, product, name, unit, qualified, fact, *, recipe_cache: RecipeComputationCache | None = None):

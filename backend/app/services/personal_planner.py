@@ -296,6 +296,13 @@ def removed_recipe_key(recipe, identify=recipe_id):
     return f"base:{design.base_id}" if design is not None and design.base_id else f"recipe:{identify(recipe)}"
 
 
+# One entry per (product list, exact recipe, line, unit, nutrients). A week
+# search over the whole library visits far more recipe lines than 4096; a
+# smaller bound evicted and requalified the same lines over and over. Each
+# entry holds references to existing product rows only.
+_QUALIFIED_NUTRITION_ENTRIES = 65536
+
+
 class PersonalPlanner:
     def __init__(
         self,
@@ -515,7 +522,13 @@ class PersonalPlanner:
             entry = self._merged_profile_memo[id(meal)] = (meal, merged_profile(self.spec.profile, meal.profile))
         return entry[1]
 
-    def nutrition_evidence(self, product, name, unit, requested, recipe):
+    def _nutrition_recipe_key(self, recipe, name, requested):
+        """The part of a recipe that nutrition evidence for one line depends on.
+
+        None means no product has evidence for this line. Prepared recipes
+        share evidence by validated input identity (form, preparation, gross
+        pack, method); legacy evidence can depend on the entire recipe.
+        """
         from app.services.ingredient_preparations import method_for
         method = method_for(recipe, name)
         if recipe is not None and recipe.preparation is not None:
@@ -530,10 +543,13 @@ class PersonalPlanner:
             identity = input_evidence_identity(recipe, name, self.recipe_computations)
             if identity is None:
                 return None
-            recipe_key = ("prepared_input", identity, method)
-        else:
-            # Legacy evidence methods can depend on the entire recipe.
-            recipe_key = ("legacy", self.recipe_computations.key(recipe))
+            return ("prepared_input", identity, method)
+        return ("legacy", self.recipe_computations.key(recipe))
+
+    def nutrition_evidence(self, product, name, unit, requested, recipe):
+        recipe_key = self._nutrition_recipe_key(recipe, name, requested)
+        if recipe_key is None:
+            return None
         key = (
             product.store_id,
             product.product_id,
@@ -1483,7 +1499,11 @@ class PersonalPlanner:
             row["nutrients"] = sorted(requested)
             if requested:
                 nutrition_needs.add(row["name"])
-                qualification_key = (id(resolved), self.recipe_computations.key(recipe), row["name"],
+                # Every product's evidence depends on the recipe only through
+                # this key (the same key nutrition_evidence caches by), so
+                # recipes sharing it share the qualified product list.
+                recipe_key = self._nutrition_recipe_key(recipe, row["name"], requested)
+                qualification_key = (id(resolved), recipe_key, row["name"],
                                      row["unit"], frozenset(requested))
                 cached_qualification = self.qualified_nutrition_candidates.get(qualification_key)
                 if cached_qualification is not None and cached_qualification[0] is resolved:
@@ -1512,7 +1532,7 @@ class PersonalPlanner:
                         )
                     ]
                     remember_bounded(self.qualified_nutrition_candidates, qualification_key,
-                                     (resolved, verified), 4096)
+                                     (resolved, verified), _QUALIFIED_NUTRITION_ENTRIES)
                 verified_ids = {i for i, _ in verified}
                 for i, _ in resolved:
                     product = self.prepared.universe.products[i]
@@ -1684,9 +1704,10 @@ class PersonalPlanner:
                 package_started = perf_counter()
                 bound = getattr(self, "_search_bound", None)
                 if bound is not None and _retained is None and final:
-                    lower = self.optimizer.lower_bound(ingredients, candidate_map)
                     # One öre of slack: the bound is a float score, the total money.
-                    if lower is not None and lower > Decimal(str(bound)) + Decimal("0.01"):
+                    limit = Decimal(str(bound)) + Decimal("0.01")
+                    lower = self.optimizer.lower_bound(ingredients, candidate_map, stop_above=limit)
+                    if lower is not None and lower > limit:
                         from app.services.menu_optimizer import MenuBoundPruned
                         raise MenuBoundPruned
                 with performance_span("personal_package_calculation"):
