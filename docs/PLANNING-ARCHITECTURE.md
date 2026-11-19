@@ -347,14 +347,16 @@ pris (118,08 kr) i alla körningar, kalla delade cacher:
   ingredienser prissätts en gång före delningen.
 
 - **Bakgrundsarbete går sist** (`run_in_background_thread`). Uppvärmningen
-  efter en start körs i en egen tråd med lägsta CPU-prioritet, och dess
-  provare ärver den. Den får ingen provare. Direkt efter aktiveringen
-  2026-11-17 tog den alla provare i tio minuter, och de första planerna (Malmö
-  och Lund) hann inte bli klara bredvid den. Med en provare (2026-11-18)
-  prövade provaren 1 149 recept för alla fyra näringsämnen. Det höll undan
-  2,6 GB och gav 1,7 MB per recept i uppskattningarna, så en proteinplan
-  bredvid fick ingen provare. Uppvärmningens Malmövarv slutade ändå vid sin
-  tidsgräns.
+  efter en start får ingen provare. Direkt efter aktiveringen 2026-11-17 tog
+  den alla provare i tio minuter, och de första planerna (Malmö och Lund)
+  hann inte bli klara bredvid den. Med en provare (2026-11-18) prövade
+  provaren 1 149 recept för alla fyra näringsämnen. Det höll undan 2,6 GB och
+  gav 1,7 MB per recept i uppskattningarna, så en proteinplan bredvid fick
+  ingen provare. Uppvärmningens Malmövarv slutade ändå vid sin tidsgräns.
+  Tråden gick dessutom med lägsta CPU-prioritet (nice 19) fram till #113. Det
+  gav ett eget fel, se "Varför uppvärmningen inte längre har lägsta prioritet"
+  nedan. Nu har tråden vanlig prioritet och stannar i stället så fort en
+  persons plan släpps in.
 
 - **Näringsunderlag delas i stället för att kopieras per vara**
   (`reference_evidence`, `wrap_evidence`, 2026-11-18). Mätt i en process på
@@ -523,6 +525,214 @@ ombyggnader. Mätt på servern med Malmö (113 779 produkter):
 - **Skräpsamling:** den städar inte längre det inlästa underlaget vid varje
   körning. Ett nyaktiverat underlag fryses direkt
   (`reclaim_and_freeze`), inte först efter första jobbet.
+
+### Så går en plan till (läget 2026-11-19)
+
+En översikt över hela vägen, med de delar som finns beskrivna i detalj ovan
+och nedan.
+
+1. **Sidan skickar planen** (`POST /api/plans` med `Prefer: respond-async`).
+   Appen kontrollerar valen, läser skafferiets version och lägger planen som
+   ett jobb (`PlanJobs`). Svaret kommer direkt (202) med en adress att fråga.
+   Sidan frågar med `?wait=2`, och servern håller frågan tills planen är klar
+   eller i högst två sekunder.
+2. **Kön** (`PlannerAdmissionController`). Högst
+   `PLANNER_MAX_CONCURRENT_REQUESTS` planer räknas samtidigt (3) och högst
+   `PLANNER_MAX_QUEUED_REQUESTS` väntar (4 i `compose.yaml`, 10 på betan
+   sedan 2026-11-19). Exakt samma plan räknas en gång. Den första planen i ett
+   område efter en start räknas ensam (`warmth_scope`). Tidsgränsen börjar
+   först när motorn startar.
+3. **En varm planprocess** (`run_plan_warm`, #111). Planen körs i en process
+   som har gafflats ur appen tidigare och hålls kvar mellan planer. Finns
+   ingen ledig gafflas en ny varm process, upp till två. Är båda upptagna får
+   planen en egen nygafflad process som förut (`run_plan_in_process`). Räcker
+   inte minnet till en process körs planen i appens egen process. Se nästa
+   avsnitt.
+4. **Receptprövningen** (`PersonalPlanner._candidates`). Varje recept prövas
+   för sig mot butikerna: finns varor som täcker varje ingrediens, klarar de
+   allergier, Ät inte, ekokrav och näringskrav? Raderna sparas utan gillar,
+   ogillar och antal middagar, så nästa plan i samma butiker återanvänder dem.
+   Okända recept delas på provare (`_qualify_in_processes`).
+5. **Veckosökningen** (`MenuOptimizer._optimize_complete_slots`). Den
+   föreslår hela veckor, billigaste först, och prisar varje vecka som en hel
+   korg.
+   - Först en snabb undre gräns (`BasketOptimizer.lower_bound`: varje rads
+     billigaste vara i någon butik). Kan veckan inte slå den bästa hittills
+     hoppas den över (`MenuBoundPruned`).
+   - Annars hela korgen (`optimize`): butiksval upp till taket, kampanjer och
+     förpackningar.
+   - Provare prisar de veckor som säkert kommer härnäst
+     (`SpeculativeWorkers`).
+   - Sökningen slutar när den både har gått 10 s utan en bättre vecka och har
+     prövat 1 000 veckor utan förbättring. Med provare räknas sekunderna som
+     prissättningsarbete, annars som väggklocka.
+6. **Avslut.** Den valda veckan kontrolleras fullt (näring, allergier,
+   mängder), och planen sparas och skickas tillbaka till appen.
+
+Efter en start eller ett nytt prisunderlag värmer appen upp: en vanlig
+middagsvecka och en vecka med näringskrav per område
+(`nutrition_prewarm`). Det fyller de delade cacherna så att de första
+personerna slipper göra det.
+
+### Varma planprocesser (#111, 2026-11-19)
+
+En plan som körs i en nygafflad process tog dubbelt så lång tid som samma plan
+i en process som redan hade kört en plan. En vanlig Malmöplan tog 68 s ny och
+35 s varm, med samma vecka (143,62 kr). Orsaken är två saker:
+- **Kopior:** varje sida minne som en ny process rör vid kopieras först.
+  CPython skriver referensräknare i varje objekt den läser.
+- **Kalla cacher:** varje cache i processen börjar tom.
+
+I sökningens provare var `resolve` 85 av 129 s.
+
+Nu (`run_plan_warm`, `_warm_main`):
+- **Antal:** upp till `SMAKO_WARM_PLAN_PROCESSES` (2) planprocesser gafflas
+  en gång och tar plan efter plan.
+- **Byte:** en process byts efter `SMAKO_WARM_PLANS_PER_PROCESS` (40) planer,
+  eller när dess eget minne går över `SMAKO_WARM_PROCESS_LIMIT_MB` (4 096).
+- **Nytt prisunderlag:** när det byts svarar processen `WarmStale`. Alla
+  lediga varma processer tas då bort, och planen körs som förut.
+- **Efter varje plan** körs `gc.collect(); gc.freeze()`, så att nästa plans
+  skräpsamling inte går igenom det som redan finns.
+- **Oförändrat:** kön, minnesbudgeten, stegen till sidan och avbrott fungerar
+  som förut.
+- **Varje recept** får sitt innehållsdigest beräknat en gång per process
+  (`_recipe_digest`), inte två gånger per plan.
+
+En varm process tar 1,2–1,6 GB. Mätt på servern (Malmö, samma resultat
+143,62 kr i alla körningar):
+
+| Fall | Tid |
+|---|---|
+| Ny process | 65–68 s |
+| Varm, sökning med provare | 18–21 s |
+| Varm, sökning ensam | 25,5 s |
+| Protein 26 g, varm, ensam | 49 s |
+| Protein 25 g, varm, med provare | 32 s |
+
+Provarna i veckosökningen hjälper alltså också i en varm process, och de är
+kvar.
+
+### Billigare prissättning och näringskontroll (#112, 2026-11-19)
+
+Profil av en varm vanlig Malmöplan (en kärna, profilerad 45 s):
+- **Veckosökningen** tog 35 s, och nästan allt var prissättning.
+- **`lower_bound`** tog 21 s av dem. Den räknar ut varje butiks bästa vara
+  för varje rad (`_store_best_quotes_with_key`, 20 000 anrop).
+- **Fullständiga priser:** 68 000 priser måste räknas fram från början,
+  47 000 av dem på den fullständiga vägen.
+
+I en proteinplan (80 s) tog näringskontrollen 30 s: `nutrition_evidence`
+anropades 544 000 gånger.
+
+Fyra exakta ändringar:
+
+- **Varor med erbjudanden använder samma pris per antal förpackningar.** Ett
+  pris för en vara i fast förpackning beror bara på antalet förpackningar,
+  också när varan har erbjudanden (flerköp, medlemspris, begränsade
+  kampanjer). Antalet är redan en del av nyckeln. Tidigare räknades sådana
+  varor fullt för varje ny mängd. Varor med köpvillkor, okänd mängd eller
+  kopplade kampanjgrupper går fortfarande den fullständiga vägen.
+- **Den undre gränsen slutar i förtid** (`lower_bound(..., stop_above=)`).
+  Den slutar prissätta rader när summan hittills redan är över taket. Varje
+  rad kostar minst 0 kr, så beslutet blir detsamma som med hela summan.
+  Veckosökningen i en vanlig plan gick från 20 till 15 s.
+- **Näringskontrollen delas mellan recept.** Varje rads godkända varor
+  sparas under samma nyckel som näringsunderlaget redan använde: form,
+  beredning, metod och om förpackningen vägs med ben, skal eller balja. Två
+  recept med samma ingrediens i samma form kontrolleras alltså en gång. Det
+  halverar antalet rader (7 000 → 3 600), men sparar lite tid, eftersom varje
+  rad ändå prövar ungefär 100 varor.
+- **Rättelse: hela förpackningar med ben, skal eller balja ingår i nyckeln.**
+  `input_evidence` ger inget underlag för en sådan förpackning, men nyckeln
+  för delat underlag tog inte med den. Två recept med samma ingrediens och
+  form, där bara det ena bad om en sådan förpackning, kunde alltså ha delat
+  underlag. I dagens bibliotek (2 851 recept) finns inget sådant par, så
+  inget resultat ändras. Ett test kontrollerar det för varje rad i
+  biblioteket.
+
+Mätt på servern med samma process och samma fall, före och efter. Varje fall
+gav samma pris, samma varor och samma sökväg (antal prövade veckor och
+förbättringar):
+
+| Fall | Före | Efter |
+|---|---|---|
+| Vanlig | 27,4 s | 23,6 s |
+| Protein ≥ 30 g | 50,2 s | 46,6 s |
+| ≤ 600 kcal | 46,4 s | 41,4 s |
+| Gillar kyckling | 40,7 s | 36,6 s |
+| Protein ≥ 35 g | 39,1 s | 36,1 s |
+
+Undantaget var den första planen i en ny process, som prövade 1 204 veckor i
+stället för 1 180 och hittade samma vecka. Stoppregeln räknar delvis tid, så
+snabbare prissättning kan ge fler prövade veckor. Det kan bara behålla eller
+förbättra den valda veckan.
+
+På betan efter aktiveringen var tiderna för näringsplaner 4–5 s kortare än
+med #111, och övriga planer ungefär oförändrade.
+
+### Varför uppvärmningen inte längre har lägsta prioritet (#113, 2026-11-19)
+
+Efter båda aktiveringarna 2026-11-19 svarade appen inte på över en minut
+under de första cirka tio minuterna:
+- **#111:** en ny plan fick inget svar inom 60 s.
+- **#112:** den första planen hann inte bli klar, och nästa fick inget svar.
+
+Uppvärmningen kör hela planer i en tråd i appens egen process. Den tråden
+delar Pythons tolklås (GIL) med tråden som svarar på alla anrop. Med lägsta
+CPU-prioritet (nice 19) och alla kärnor upptagna av en persons plan körde
+kärnan nästan aldrig tråden, ibland medan den höll låset. Då väntade alla
+anrop. Prioritetsinversion, mätt för sig med alla kärnor upptagna: ett steg
+på 1 ms i huvudtråden tog i snitt 6,9 ms (högst 14 ms) bredvid en vanlig
+tråd, men 73,5 ms (högst 289 ms) bredvid en tråd med nice 19.
+
+Nu har tråden vanlig prioritet. Uppvärmningen frågar kön var fjärdedels
+sekund (`others_in_flight`) och stannar så fort något annat släpps in eller
+väntar. En stoppad runda räknas inte och prövas igen när planeraren är ledig.
+
+### Prövat som inte hjälpte eller inte är exakt
+
+Det här har prövats och lagts åt sidan, så att det inte prövas igen i onödan:
+
+- **Hela planer i en tråd i stället för en process** (GIL-fri Python 3.14,
+  2026-11-17). Tre planer samtidigt tog 105–113 s mot 87–93 s med processer.
+  En tråd läser objekt som en annan tråd har skapat ungefär 1,8 gånger
+  långsammare (se ovan).
+- **Barn som inte skickar tillbaka sina cacher**: 22 s i receptprövningen
+  men 34 s i sökningen (se "Flera kärnor och flera användare samtidigt").
+- **Stoppregel på väggklocka med provare**: sparade bara 5 av 19 s. Nu räknas
+  prissättningsarbete.
+- **Uppvärmning med alla provare eller med en provare**: tog minnet och
+  kärnorna från de första personerna (se "Bakgrundsarbete går sist").
+- **Uppvärmning med lägsta prioritet**: prioritetsinversion (#113, ovan).
+- **Minnesbudget med en gemensam största storlek för alla barn, eller med
+  halva appens minne per barn**: gav planer utan provare (se ovan).
+- **Värma upp produktupplösningen före gaffeln, och dela prövningen i
+  skivor per provare** (gren `search-workers-groundwork`, 2026-11-18). Det
+  var försök att ta bort den kalla starten i sökningens provare. De lades
+  ner när varma planprocesser (#111) gav mer: 68 → 35 s per plan i stället
+  för en del av provarnas tid.
+- **Större cache för näringsgodkända rader ensamt** (4 096 → 65 536,
+  #112). Cachen fylldes bara till cirka 7 000 rader, och de flesta
+  anropen var första gången. Det sparade 0–1 s. Den större gränsen är kvar.
+  Det som tog tid var att varje rad prövar alla sina varor.
+- **Billigare men grövre undre prisgräns.** En gräns räknad på pris per
+  kilo eller per förpackning är inte säker:
+  - Erbjudanden gör priset icke-monotont i antal förpackningar ("4 för
+    100 kr" med ordinarie 40 kr gör 4 förpackningar billigare än 3).
+  - Verifieringens rangordning väljer inte alltid den billigaste varan i en
+    butik.
+
+  En grövre gräns beskär också färre veckor och ändrar sökvägen. Bara det
+  exakta förtida stoppet är infört.
+- **Prissättning på kolumner** och **underlag utanför Python-objekten**:
+  inte byggt, se "Delat minne, GIL-fri Python och snabb inläsning".
+
+Kvar att titta på: i näringsplaner går det mesta av tiden nu till
+receptprövningen före veckosökningen. I en profilerad proteinplan var det
+46 av 80 s, och veckosökningen 28 s. Det finns ingen mätning ännu av hur mycket varma planprocesser som
+gafflades under uppvärmningen missar av de cacher uppvärmningen fyller
+senare.
 
 ## Innehåll och data (steg 7, 2026-11-16)
 
