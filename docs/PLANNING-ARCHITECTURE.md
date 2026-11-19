@@ -673,18 +673,28 @@ med #111, och övriga planer ungefär oförändrade.
 
 ### Varför uppvärmningen inte längre har lägsta prioritet (#113, 2026-11-19)
 
-Efter båda aktiveringarna 2026-11-19 svarade appen inte på över en minut
-under de första cirka tio minuterna:
-- **#111:** en ny plan fick inget svar inom 60 s.
-- **#112:** den första planen hann inte bli klar, och nästa fick inget svar.
-
 Uppvärmningen kör hela planer i en tråd i appens egen process. Den tråden
 delar Pythons tolklås (GIL) med tråden som svarar på alla anrop. Med lägsta
-CPU-prioritet (nice 19) och alla kärnor upptagna av en persons plan körde
-kärnan nästan aldrig tråden, ibland medan den höll låset. Då väntade alla
-anrop. Prioritetsinversion, mätt för sig med alla kärnor upptagna: ett steg
-på 1 ms i huvudtråden tog i snitt 6,9 ms (högst 14 ms) bredvid en vanlig
-tråd, men 73,5 ms (högst 289 ms) bredvid en tråd med nice 19.
+CPU-prioritet (nice 19) och alla kärnor upptagna av en persons plan kör
+kärnan nästan aldrig tråden, ibland medan den håller låset. Då väntar andra
+anrop på den. Prioritetsinversionen mättes för sig med alla kärnor upptagna:
+ett steg på 1 ms i huvudtråden tog i snitt 6,9 ms (högst 14 ms) bredvid en
+vanlig tråd, men 73,5 ms (högst 289 ms) bredvid en tråd med nice 19.
+
+Efter aktiveringen av #112 hann den första planen under uppvärmningen inte
+bli klar (90 s). Efter #113 blev den första planen under uppvärmningen klar på
+55 s. Appens enkla hälsokontroll svarade då inom 6,5 s hela tiden.
+
+Rättelse samma kväll: att "nästa plan inte fick något svar inom 60 s" efter
+#111, #112 och #113 kom från testklienten, inte från servern. Den skickade
+allt genom molnmiljöns utgående proxy och återanvände en anslutning som just
+hade hämtat en stor färdig plan. Det visar tre saker:
+- Begäran syns inte i appens egen logg.
+- Alla 74 skapade planer den dagen svarade inom 0,93 s på servern, utan
+  serverfel.
+- Med en ny anslutning per begäran klarade samma körning alla 17 fall.
+
+Inversionen ovan är verklig. Men den förklarade inte de hängande begärandena.
 
 Nu har tråden vanlig prioritet. Uppvärmningen frågar kön var fjärdedels
 sekund (`others_in_flight`) och stannar så fort något annat släpps in eller
