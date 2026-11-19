@@ -83,6 +83,10 @@ class PlannerAdmissionController:
         self._warm_scopes: set[str] = set()
         self._cold_locks: dict[str, asyncio.Lock] = {}
 
+    def others_in_flight(self, key: str) -> bool:
+        """Whether any job other than ``key`` is admitted or waiting."""
+        return any(other != key.strip() for other in self._in_flight)
+
     async def run(
         self,
         key: str,

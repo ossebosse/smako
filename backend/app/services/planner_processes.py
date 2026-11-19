@@ -385,8 +385,8 @@ def worker_count() -> int:
     return _fair_share()
 
 
-# Background work (the warm-up after a start): runs at the lowest CPU priority
-# and gets no worker, so people's plans always come first. After the
+# Background work (the warm-up after a start) gets no worker and stops as
+# soon as a person's plan is admitted, so people's plans always come first. After the
 # 2026-11-17 activation the warm-up took every worker for ten minutes after a
 # start, and the first plans of real people ran out of time beside it. With
 # one worker (2026-11-18) that worker qualified 1,149 recipes for all four
@@ -394,27 +394,32 @@ def worker_count() -> int:
 # person's protein plan beside it got no worker and ran out of time. The
 # warm-up's Malmö rounds ended at their deadline either way.
 _background = contextvars.ContextVar("smako_background_work", default=False)
+# It used to run at the lowest CPU priority (nice 19). A thread in the app
+# process shares Python's interpreter lock with the thread that answers every
+# request: with all cores busy with a plan, the starved thread kept the lock
+# for long stretches and the app stopped answering for over a minute after
+# the 2026-11-19 activations (a new plan request timed out; the first plan ran
+# out of time). It keeps the ordinary priority and yields instead.
 _BACKGROUND_WORKERS = 0
-_BACKGROUND_NICE = 19
 
 
-def run_in_background_thread(work: Callable[[], object], name: str = "smako-background"):
-    """Run ``work`` in its own low-priority thread; returns a concurrent Future.
+def run_in_background_thread(work: Callable[[], object], name: str = "smako-background", *,
+                             stop: threading.Event | None = None):
+    """Run ``work`` in its own thread; returns a concurrent Future.
 
-    The thread's priority cannot be raised again without privileges, so the
-    work never runs on a shared pool thread. Its worker processes inherit the
-    priority.
+    Setting ``stop`` makes the work's next ``check_cancelled`` raise
+    ``asyncio.CancelledError`` in that thread, which the Future then carries.
     """
     from concurrent.futures import Future
+
+    from app.services import plan_jobs
 
     future: Future = Future()
 
     def target():
-        try:
-            os.setpriority(os.PRIO_PROCESS, threading.get_native_id(), _BACKGROUND_NICE)
-        except (AttributeError, OSError):
-            pass
         _background.set(True)
+        if stop is not None:
+            plan_jobs._work_cancellation.set(stop)
         try:
             future.set_result(work())
         except BaseException as error:  # noqa: BLE001 - handed to the caller

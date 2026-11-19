@@ -135,3 +135,55 @@ def test_a_prewarm_round_that_reaches_its_deadline_continues_in_another_round(mo
 
     assert asyncio.run(scenario()) == "complete"
     assert len(rounds) == 3  # Two rounds hit the deadline; the third finished. Never more than WARM_ROUNDS.
+
+
+def test_the_warm_up_yields_to_a_persons_plan_and_tries_again(monkeypatch):
+    import asyncio
+    import threading
+    from types import SimpleNamespace
+
+    from app.services import nutrition_prewarm
+    from app.services.plan_jobs import check_cancelled
+    from app.services.planner_admission import PlannerAdmissionController
+
+    monkeypatch.setenv("SMAKO_NUTRITION_PREWARM", "1")
+    monkeypatch.setattr(nutrition_prewarm, "_YIELD_POLL_SECONDS", 0.01)
+    universe = products()
+    started, calls = threading.Event(), []
+
+    def warm(settings, prepared):
+        calls.append(1)
+        if len(calls) == 1:
+            started.set()
+            while True:  # Until stopped, like a long planner round.
+                check_cancelled()
+        return "complete"
+
+    monkeypatch.setattr(nutrition_prewarm, "warm_nutrition",
+                        lambda settings, prepared: _yielding(warm, settings, prepared))
+    manager = SimpleNamespace(get_active=lambda scope: universe)
+
+    async def scenario():
+        admission = PlannerAdmissionController(max_concurrent=2, max_queued=2)
+        app = SimpleNamespace(state=SimpleNamespace(planner_admission=admission))
+        nutrition_prewarm.schedule_nutrition_prewarm(app, Settings(), universe, manager, delay=0.01, attempts=10)
+        (task,) = app.state.nutrition_prewarm_tasks
+        await asyncio.to_thread(started.wait, 10)
+
+        async def person():
+            await asyncio.sleep(0.05)
+            return "plan"
+
+        assert await admission.run("a person's plan", person) == "plan"
+        return await asyncio.wait_for(task, 10)
+
+    assert asyncio.run(scenario()) == "complete"
+    assert len(calls) == 2  # The stopped round was not counted and ran again.
+
+
+def _yielding(warm, settings, prepared):
+    import asyncio
+    try:
+        return warm(settings, prepared)
+    except asyncio.CancelledError:
+        return "yielded"
