@@ -224,6 +224,29 @@ def first_declaration(evidence, fact):
     return not (quantity.get("declared_ingredients") or quantity.get("label_source"))
 
 
+REREVIEW_PATH = Path(__file__).parents[1] / "data/ingredients/composition-rereviews-20261120.json"
+
+
+@lru_cache(maxsize=1)
+def composition_rereviews():
+    """Reviewed pin -> current declarations re-reviewed as the same food.
+
+    Each accepted declaration is stored with its full text and checked here
+    against its hash, so a changed text needs a new review."""
+    if not REREVIEW_PATH.exists():
+        return {}
+    result = {}
+    for item in json.loads(REREVIEW_PATH.read_text(encoding="utf-8"))["rereviews"]:
+        for accepted in item["accepted"]:
+            value = {"ingredients": accepted["ingredients"], "ingredients_complete": accepted["ingredients_complete"],
+                     "ingredient_evidence_kind": accepted["ingredient_evidence_kind"]}
+            digest = hashlib.sha256(json.dumps(value, ensure_ascii=False, sort_keys=True).encode()).hexdigest()
+            if digest != accepted["composition_sha256"] or not accepted.get("review"):
+                raise ValueError(f"composition re-review {accepted['composition_sha256']} does not match its text")
+            result.setdefault(item["pin"], set()).add(digest)
+    return {pin: frozenset(values) for pin, values in result.items()}
+
+
 def composition_signature(fact):
     """Reviewed composition, independent of a catalogue's price generation.
 
@@ -235,16 +258,23 @@ def composition_signature(fact):
     return hashlib.sha256(json.dumps(value, ensure_ascii=False, sort_keys=True).encode()).hexdigest()
 
 
-def same_label(evidence, product, other_chain=False):
-    """The reviewed label. Another chain of the same article family or GTIN
-    writes its own casing and category tree (owner report 2026-11-20): there
-    name and brand are compared without case or marks, the package exactly,
-    and the category is the chain's own. A renamed product still needs review."""
-    if not other_chain:
+def same_label(evidence, product, global_identity=False):
+    """The reviewed label. A product identified by GTIN or article code keeps
+    its identity when a chain re-cases the brand ("GALBANI" -> "Galbani") or
+    moves it in its own category tree, and Willys, Hemköp and City Gross each
+    write their own (owner report 2026-11-20). Name and brand are compared
+    without case or marks, the package exactly. A renamed product still needs
+    review; a source-scoped link (no GTIN or article) stays exact."""
+    if not global_identity:
         return not any(getattr(product, field, None) != evidence.get(field)
                        for field in ("name", "brand", "category", "package_quantity", "package_unit", "sale_model"))
     same_brand = _search_text(getattr(product, "brand", None) or "") == _search_text(evidence.get("brand") or "")
     same_name = _search_text(product.name) == _search_text(evidence["name"])
+    # A fresh-produce yield belongs to the produce shelf; there the category
+    # is part of the identity (a product moved to dairy is another food).
+    if evidence.get("identity_basis") == "whole_fresh_produce" and getattr(product, "category", None) != evidence.get("category"):
+        if _chain(product.store_id) == _chain(evidence["store_id"]) or not re.search(r"frukt|grönt|grönsak", (getattr(product, "category", None) or "").casefold()):
+            return False
     return (same_brand and same_name
             and all(getattr(product, field, None) == evidence.get(field)
                     for field in ("package_quantity", "package_unit", "sale_model")))
@@ -283,7 +313,7 @@ def _review_identity(evidence, product, fact):
             # Willys and Hemköp rows carry no GTIN; a City Gross review may.
             or ((evidence.get("gtin") or None) != (getattr(product, "gtin", None) or None)
                 and not (other_chain and evidence.get("gtin") and not getattr(product, "gtin", None)))
-            or not same_label(evidence, product, other_chain)):
+            or not same_label(evidence, product, global_identity)):
         return False
     if fact is not None:
         from app.services.complete_recipes import identity_conflicts
@@ -297,7 +327,8 @@ def _review_identity(evidence, product, fact):
         return bool(fact and fact.source_product_id == product.product_id
                     and fact.source_snapshot_id == provenance.source_snapshot_id
                     and (composition_signature(fact) == evidence["composition_sha256"]
-                         or first_declaration(evidence, fact)))
+                         or first_declaration(evidence, fact)
+                         or composition_signature(fact) in composition_rereviews().get(evidence["composition_sha256"], ())))
     return (evidence.get("identity_basis") == "whole_fresh_produce"
             and not (fact and fact.ingredients))
 
@@ -523,7 +554,9 @@ def ingredient_product(canonical, form, requirements, product, fact=None, *, rev
 
 @lru_cache(maxsize=1)
 def reference_version():
-    return hashlib.sha256(json.dumps(entries(), ensure_ascii=False, sort_keys=True).encode()).hexdigest()
+    rereviews = {pin: sorted(values) for pin, values in composition_rereviews().items()}
+    return hashlib.sha256(json.dumps([entries(), rereviews] if rereviews else entries(),
+                                     ensure_ascii=False, sort_keys=True).encode()).hexdigest()
 
 
 def search_positions(prepared, facts=None):
