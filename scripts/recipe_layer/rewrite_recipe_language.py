@@ -305,7 +305,8 @@ def checked_transition(review, *, check_scaling=False, report=REPORT,
         assert successor.instructions == expected["instructions"]
         assert [c.model_dump(mode="json") for c in successor.design.components] == expected["design"]["components"]
         assert [s.model_dump(mode="json") for s in successor.design.steps] == expected["design"]["steps"]
-        assert successor.design.batch_scaling.model_dump(mode="json") == expected["design"]["batch_scaling"]
+        scaling = successor.design.batch_scaling
+        assert (scaling.model_dump(mode="json") if scaling else None) == expected["design"].get("batch_scaling")
         assert [list(pair) for pair in merged] == row["merged_wait_steps"]
         pair_check(original, successor, check_scaling=check_scaling)
     return review

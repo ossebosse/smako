@@ -1,5 +1,7 @@
 """Owner decision 2026-11-19: Claude-authored dinners on cheap ingredients with few dishes."""
+import json
 from collections import Counter
+from pathlib import Path
 
 from app.services import intake_product_links as links
 from app.services.meal_library_content import manifest_entries
@@ -8,9 +10,13 @@ from app.services.recipe_library import current_recipes, ingredient_count
 PACK = "smako-cheap-bases-20261119"
 
 
+REVIEW = Path(__file__).resolve().parents[2] / "docs/reviews/cheap-bases-20261119/library-transition.json"
+BASES = {row["runtime_id"].split(":")[0] for row in json.loads(REVIEW.read_bytes())["added"]}
+
+
 def _pack():
-    return [r for r in current_recipes(len(manifest_entries()["current"]))
-            if r.design.content_source and r.design.content_source.pack_id == PACK]
+    # By base: the 2026-11-20 name review issued successors in other packs.
+    return [r for r in current_recipes(len(manifest_entries()["current"])) if r.design.base_id in BASES]
 
 
 def test_pack_has_three_variants_per_base_across_six_cuisines():
