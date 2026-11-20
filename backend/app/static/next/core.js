@@ -687,7 +687,8 @@
     for (const [key, unit] of [["kcal", "kcal"], ["protein_g", "g protein"], ["carbs_g", "g kolhydrater"], ["fat_g", "g fett"]]) {
       const value = values[key] ?? values[`${key}_per_serving`]; if (value != null && value !== "" && Number.isFinite(Number(value))) parts.push(`${number(Math.round(Number(value)))} ${unit}`);
     }
-    return parts.length ? `Per portion${row.status === "ESTIMATED" ? ", uppskattat" : ""}: ${parts.join(" · ")}` : "";
+    const left = (row?.left_out || []).join(", ");
+    return parts.length ? `Per portion${row.status === "ESTIMATED" ? ", uppskattat" : ""}: ${parts.join(" · ")}${left ? ` (utan en nypa ${left})` : ""}` : "";
   }
   function recipeCard(slot, { actions = true } = {}) {
     const card = el("article", null, "recipe"), recipe = slot.recipe;

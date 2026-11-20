@@ -375,25 +375,30 @@ def product_reference(product, name, facts):
         # Ingredient form is independent of having a complete declaration.
         # Ready dishes, spice jars and oil mixtures do not establish raw input.
         category = (product.category or "").casefold()
-        if re.search(r"krydd|pulver|tork|granulat|salt|peppar|kroket|puré|pure|sallad|gratäng|stekt|kokt|rostad|olja|smör|pinsa|bearnaise|vitost", text + " " + category):
+        processed = r"krydd|pulver|tork|granulat|salt|peppar|kroket|puré|pure|sallad|gratäng|stekt|kokt|rostad|olja|smör|pinsa|bearnaise|vitost"
+        # A vegetable aisle named "Grönsaker & kryddor" says nothing about the product.
+        if re.search(processed, text) or (re.search(processed, category) and "grönsak" not in category):
             return None
         words = set(re.findall(r"[a-zåäö]+", composition))
-        food_words = {canonical, "ingredienser", "ekologisk", "ekologiska"}
+        # A cutting word in the list ("Hackad vitlök") is still only that food.
+        food_words = {canonical, "ingredienser", "ekologisk", "ekologiska", "hackad", "krossad", "finhackad", "skalad"}
         if composition and not words <= food_words:
             return None
         source_text = " ".join(o.description or "" for o in product.offers)
         fresh = (any(t in category for t in ("frukt", "grönsak", "potatis", "lök"))
                  or bool(re.search(r"\bKlass\s+1\b", source_text, re.IGNORECASE)))
         if canonical == "potatis":
-            if fresh and re.fullmatch(r"(?:ekologisk |svensk )?(?:färskpotatis|delikatesspotatis|mandelpotatis|minipotatis|potatis)(?: (?:fast|mjölig|tvättad|eko|ekologisk|ekologiska|klass 1|sverige|svensk|i påse|[\d,.]+\s*(?:g|kg)))*", text):
+            if fresh and re.fullmatch(r"(?:ekologisk |svensk )?(?:färskpotatis|delikatesspotatis|mandelpotatis|minipotatis|potatis)(?: (?:fast|mjölig|tvättad|eko|ekologisk|ekologiska|klass 1|klass 2|sverige|svensk|i påse|[\d,.]+\s*(?:g|kg)))*", text):
                 return 4457
             return None
-        if fresh and re.fullmatch(r"(?:ekologisk |färsk )?vitlök(?: (?:hackad|krossad|finhackad|skalad|eko|ekologisk|klass 1|i kapsel|[\d,.]+\s*g))*", text):
+        if fresh and re.fullmatch(r"(?:ekologisk |färsk )?vitlök(?: (?:hackad|krossad|finhackad|skalad|fryst|eko|ekologisk|klass 1|i kapsel|[\d,.]+\s*g))*", text):
             return 371
         return None
     if canonical == 'ägg' and re.match(r'^(?:ägg|skåneägg|bruna ägg)\b', text):
         words = set(re.findall(r'[a-zåäö]+', composition))
-        return 1225 if words and words <= {'ingredienser', 'krav', 'ekologiska', 'ägg'} else None
+        # Owner decision 2026-11-20 (nutrition gaps): a plain egg pack without a
+        # published ingredient list is still egg.
+        return 1225 if words <= {'ingredienser', 'krav', 'ekologiska', 'ägg'} else None
     if canonical == "rödlök":
         # A distinct plain fresh food, never yellow onion or a pickled/flavoured
         # product. The existing SLV record was retained but never mapped here.
@@ -425,7 +430,8 @@ def product_reference(product, name, facts):
             if (canonical in names or name.strip().casefold() == product.name.strip().casefold()) and re.fullmatch(pattern, plain):
                 if identity in {371, 7193, 7194, 339, 2269}:
                     source_text = ' '.join(o.description or '' for o in product.offers)
-                    if not ('färsk' in plain or re.search(r'\bKlass\s+1\b', source_text, re.IGNORECASE)):
+                    produce_aisle = identity in {371, 2269} and (product.category or '').casefold().startswith('frukt & grönt')
+                    if not ('färsk' in plain or produce_aisle or re.search(r'\bKlass\s+1\b', source_text, re.IGNORECASE)):
                         return None  # A bare herb name does not prove fresh leaf versus dried spice.
                 return identity
     if canonical == "linser":

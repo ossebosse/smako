@@ -315,3 +315,34 @@ def test_estimated_purchase_replay_history_and_consumption_are_immutable(tmp_pat
     assert private.inventory_action(owner, new, "consume", stock["revision"]) == consumed
     assert consumed["ledger"][0] == history[0]
     assert sum(i["quantity"] for i in consumed["items"]) == 1480  # 3000 bought minus 600+320+600.
+
+
+def test_owner_2026_11_20_reference_gaps_for_plain_produce_and_eggs():
+    from types import SimpleNamespace
+
+    from app.services.nutrition_reference import product_reference
+
+    def product(name, category):
+        return SimpleNamespace(name=name, category=category, offers=[])
+
+    assert product_reference(product("Potatis Fast Klass 2", "Frukt & Grönt > Potatis & rotsaker > Potatis"), "potatis", None) == 4457
+    assert product_reference(product("Vitlök Hackad Fryst", "Fryst > Grönsaker & kryddor > Grönsaker"), "vitlök", None) == 371
+    hackad = SimpleNamespace(conflicts=(), ingredients=("INGREDIENSER Hackad vitlök.",))
+    assert product_reference(product("Vitlök Hackad Fryst", "Fryst > Grönsaker & kryddor > Grönsaker"), "vitlök", hackad) == 371
+    mixed = SimpleNamespace(conflicts=(), ingredients=("Vitlök, rapsolja, salt.",))
+    assert product_reference(product("Vitlök Hackad Fryst", "Fryst > Grönsaker & kryddor > Grönsaker"), "vitlök", mixed) is None
+    assert product_reference(product("Ägg 6pack Frigående Inomhus Medium/large", "Mejeri, ost & ägg > Ägg"), "ägg", None) == 1225
+    assert product_reference(product("Ingefära", "Frukt & Grönt > Kryddor & smaksättare > Smaksättare"), "ingefära", None) == 2269
+    # Processed or dried forms stay without a generic raw reference.
+    assert product_reference(product("Vitlökspulver", "Skafferi > Kryddor"), "vitlök", None) is None
+    assert product_reference(product("Ingefära Malen", "Skafferi > Kryddor"), "ingefära", None) is None
+    assert product_reference(product("Potatisgratäng", "Fryst > Grönsaker"), "potatis", None) is None
+
+
+def test_a_pinch_of_dried_spice_is_left_out_of_shown_values_only():
+    from app.services.staples import negligible_spice
+
+    assert negligible_spice("svartpeppar", 1, "g") and negligible_spice("oregano", 2, "g")
+    assert not negligible_spice("svartpeppar", 2.5, "g")
+    assert not negligible_spice("svartpeppar", 1, "ml")
+    assert not negligible_spice("salt", 1, "g") and not negligible_spice("vitlök", 1, "g")

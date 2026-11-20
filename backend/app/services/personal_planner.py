@@ -18,6 +18,7 @@ from itertools import combinations
 from time import perf_counter
 from zoneinfo import ZoneInfo
 
+from app.services.staples import negligible_spice
 from app.errors import IncompleteBasketError
 from app.models import (
     DiversityMode,
@@ -2767,7 +2768,7 @@ class PersonalPlanner:
                 row.update(status="UNKNOWN", reason="Okänd förlust vid tillagning; näring och färdig portionsvikt är inte beräknade.")
             show = informational and not limits.active and self.spec.allow_nutrition_estimates and row["status"] == "NOT_REQUESTED"
             if limits.active or show:
-                shown, shown_estimated = {}, False
+                shown, shown_estimated, negligible = {}, False, set()
                 attempts = [None] if limits.active else [INFORMATIONAL_NUTRIENTS, *((k,) for k in INFORMATIONAL_NUTRIENTS)]
                 for attempt in attempts:
                     if not limits.active:
@@ -2780,6 +2781,11 @@ class PersonalPlanner:
                                 slot.recipe, allow_estimates=self.spec.allow_nutrition_estimates
                             )
                             for need in (r for r in rows if r["source"] == slot.id):
+                                if not limits.active and negligible_spice(need["name"], need["quantity"], need["unit"]):
+                                    # Owner decision 2026-11-20: shown values leave out a pinch of
+                                    # dried spice; limits still need every ingredient's values.
+                                    negligible.add(need["name"])
+                                    continue
                                 contributions = []
                                 pantry = [a for a in allocations if a["demand_key"] == need["demand_key"]]
                                 if need.get("at_home"):
@@ -3009,7 +3015,8 @@ class PersonalPlanner:
             if show:
                 # Only what every ingredient has values for; all four when possible.
                 row = {"slot_id": slot.id, "status": ("ESTIMATED" if shown_estimated else "VERIFIED") if shown else "NOT_REQUESTED",
-                       "values": shown, "sources": []}
+                       "values": shown, "sources": [],
+                       **({"left_out": sorted(negligible)} if shown and negligible else {})}
             nutrition.append(row)
         return nutrition
 
