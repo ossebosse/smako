@@ -436,6 +436,30 @@ def test_account_is_created_and_left_inside_the_interface(ui):
     assert "finns i vanliga Smako" not in page.content()
 
 
+
+def test_a_signed_in_member_can_choose_more_dinners_and_portions_than_a_guest(ui):
+    """The account status carries guest_limits for members too; they must not cap a member."""
+    name, page, fake, _shot = ui
+    if name == "b":
+        pytest.skip("Alternativ A is the default interface; B shares the same limits code")
+    fake.owner = "account"
+    page.goto(re.sub(r"#.*|$", "#mat", page.url, count=1))
+    page.reload()
+    page.get_by_label("Ditt postnummer").fill("22350")
+    page.get_by_role("button", name="Hitta butiker").click()
+    for _ in range(3):
+        page.get_by_role("button", name="Fler middagar").click()
+    for _ in range(2):
+        page.get_by_role("button", name="Fler portioner").click()
+    dinner = page.get_by_role("group", name="Middag")
+    expect(dinner.get_by_role("group", name="Antal middagar")).to_contain_text("6")
+    expect(dinner.get_by_role("group", name="Portioner per rätt")).to_contain_text("4")
+    expect(page.get_by_text("Som gäst får du")).to_have_count(0)
+    page.get_by_role("button", name="Skapa matplan").click()
+    expect(page.get_by_role("heading", name="Din matplan", exact=True)).to_be_visible()
+    dinner_request = next(body for method, path, body in fake.calls if path == "plans")["personal"]["meals"][0]
+    assert (dinner_request["count"], dinner_request["servings"]) == (6, 4)
+
 def test_toothbrush_is_saved_as_not_food_the_way_the_server_sees_it(ui):
     name, page, fake, _shot = ui
     if name == "a":

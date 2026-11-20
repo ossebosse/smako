@@ -206,7 +206,8 @@
   }
 
   // ---- Plans ---------------------------------------------------------------
-  const guest = () => S.state?.account?.guest_limits || null;
+  // The account status always carries guest_limits; they apply only while the owner is a guest.
+  const guest = () => S.state?.account?.membership === "guest" ? S.state.account.guest_limits || null : null;
   const limit = (key, fallback) => guest()?.[key] ?? fallback;
   function storeFields() {
     if (!S.location || !S.storeIds.length) throw new Error("Ange ditt postnummer först, så vet vi vilka butiker som gäller.");
