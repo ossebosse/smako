@@ -29,7 +29,7 @@ def site():
     server = ThreadingHTTPServer(("127.0.0.1", 0), partial(Handler, directory=str(STATIC)))
     thread = Thread(target=server.serve_forever, daemon=True)
     thread.start()
-    yield f"http://127.0.0.1:{server.server_port}/personal.html"
+    yield f"http://127.0.0.1:{server.server_port}/personal.html?ui=standard"
     server.shutdown()
     server.server_close()
     thread.join()

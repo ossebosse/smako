@@ -24,7 +24,7 @@
   const KEY = "smako.next.v1";
   const saved = (() => { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch (_) { return {}; } })();
   const persist = () => { try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (_) { /* private mode: choices last for this visit */ } };
-  const DEFAULTS = { diet: "mixed", cooking: "free", avoid: [], allergies: [], likes: [], cuisines: [], variety: "low", maxStores: 2, organic: 0, usePantry: true, surplus: "minimize", radius: 3, staples: ["salt", "svartpeppar", "rapsolja"] };
+  const DEFAULTS = { diet: "mixed", cooking: "free", ingredients: "any", avoid: [], allergies: [], likes: [], cuisines: [], variety: "low", maxStores: 2, organic: 0, usePantry: true, surplus: "minimize", radius: 3, staples: ["salt", "svartpeppar", "rapsolja"] };
   saved.settings = { ...DEFAULTS, ...(saved.settings || {}) };
   // Each meal type has its own count, portions, distribution and limits, as in /personal.
   // Choices saved before that (one count per meal type, limits for dinners) carry over.
@@ -221,7 +221,16 @@
       personal: { profile: { likes: s.likes, dislikes: [], exclusions: s.avoid, allergies: s.allergies }, meals, extras: S.items, pantry_revision: S.state.revision, use_pantry: s.usePantry, staples_at_home: (s.staples || []).filter(v => STAPLE_NAMES.has(v)),
         allow_nutrition_estimates: true, organic_percent: Number(s.organic) || 0, organic_animals: false, surplus_mode: s.surplus } };
   }
-  const COOKING = { quick: { max_active_minutes: 30, max_ingredients: 8 }, everyday: { max_active_minutes: 45, max_ingredients: 12 }, free: {} };
+  const COOKING = { quick: { max_active_minutes: 30, max_ingredients: 8 }, everyday: { max_active_minutes: 45, max_ingredients: 12 }, more: { min_ingredients: 13 }, free: {} };
+  // Owner decision 2026-11-20: the number of ingredients can be chosen under "Fler val".
+  // A choice there replaces the ingredient bounds of "Tid i köket"; its time limit stays.
+  const INGREDIENT_LIMITS = { few: { max_ingredients: 8 }, normal: { min_ingredients: 9, max_ingredients: 12 }, many: { min_ingredients: 13 } };
+  function dinnerChoices(s) {
+    const cooking = COOKING[s.cooking] || {}, chosen = INGREDIENT_LIMITS[s.ingredients];
+    if (!chosen) return cooking;
+    const { min_ingredients, max_ingredients, ...time } = cooking;
+    return { ...time, ...chosen };
+  }
   // Limits per portion, in the names the server uses: [key, label, unit, largest allowed, has a lower limit].
   const NUTRIENTS = [["protein_g", "Protein", "g", 300, true], ["carbs_g", "Kolhydrater", "g", 500, true], ["fat_g", "Fett", "g", 300, true], ["kcal", "Energi", "kcal", 4000, false]];
   const WEIGHT = [["weight_g", "Portionsvikt", "g", 3000, true]];
@@ -275,7 +284,7 @@
     let left = cap;
     return MEAL_TYPES.map(([type]) => {
       const m = s.meals[type], count = Math.max(0, Math.min(m.on ? m.count : 0, 7, left)); left -= count;
-      const choices = count ? { min_ingredients: null, max_ingredients: null, max_active_minutes: null, max_total_minutes: null, max_waiting_minutes: null, ...(type === "dinner" ? COOKING[s.cooking] : {}) } : null;
+      const choices = count ? { min_ingredients: null, max_ingredients: null, max_active_minutes: null, max_total_minutes: null, max_waiting_minutes: null, ...(type === "dinner" ? dinnerChoices(s) : {}) } : null;
       return { meal_type: type, count, servings: Math.max(1, Math.min(m.servings, limit("servings", 8))), diet: mealDiet(type), profile: {},
         distribution: count ? cleanDistribution(type) : {}, limits: count ? cleanLimits(type) : {}, organic_animals: false, recipe_choices: choices, max_same_base_meals: count ? 2 : null };
     });
@@ -512,7 +521,8 @@
   }
 
   const DIETS = [["mixed", "Allt", "Blandat: kött, fisk och vegetariskt"], ["meat", "Kött", "Nöt, fläsk, kyckling med mera"], ["pescetarian", "Fisk och vegetariskt"], ["vegetarian", "Vegetariskt"], ["vegan", "Veganskt"]];
-  const COOK = [["quick", "Snabbt", "Högst 30 min i köket"], ["everyday", "Vardag", "Högst 45 min"], ["free", "Spelar ingen roll", ""]];
+  const COOK = [["quick", "Snabbt", "Högst 30 min i köket"], ["everyday", "Vardag", "Högst 45 min"], ["more", "Gärna mer", "Fler ingredienser, ingen tidsgräns"], ["free", "Spelar ingen roll", ""]];
+  const INGREDIENTS = [["any", "Spelar ingen roll"], ["few", "Få", "Högst 8"], ["normal", "Lagom", "9–12"], ["many", "Många", "13 eller fler"]];
   const ALLERGENS = ["jordnötter", "nötter", "mjölk", "ägg", "gluten", "fisk", "skaldjur", "soja", "sesam"];
   // Number fields for limits and counts. Typing does not redraw the dialog, so the next field keeps its place.
   function numberField(store, name, text, label, unit, max, onChange) {
@@ -636,7 +646,9 @@
       box.append(choice("Vad äter ni?", DIETS, s.diet, v => set("diet", v)), choice("Tid i köket", COOK, s.cooking, v => set("cooking", v)), staplesChoice());
       return box;
     }
-    box.append(tags("Allergier", "allergies", "Annan allergi", ALLERGENS), tags("Ät inte", "avoid", "Till exempel koriander", ["fläsk", "svamp", "oliver"]), el("p", "Det du undviker tas bort ur recepten och ur varor som nämner det. Allergier kräver innehållsförteckning för allt utom färsk frukt och grönt, så de begränsar recepten mer.", "hint"), tags("Gillar extra", "likes", "Till exempel kyckling"),
+    box.append(choice("Antal ingredienser i middagarna", INGREDIENTS, s.ingredients, v => set("ingredients", v)),
+      el("p", s.ingredients === "any" ? "Salt, peppar och vatten räknas inte. Tid i köket kan också begränsa antalet." : "Gäller i stället för antalet som Tid i köket väljer. Tidsgränsen gäller fortfarande.", "hint"),
+      tags("Allergier", "allergies", "Annan allergi", ALLERGENS), tags("Ät inte", "avoid", "Till exempel koriander", ["fläsk", "svamp", "oliver"]), el("p", "Det du undviker tas bort ur recepten och ur varor som nämner det. Allergier kräver innehållsförteckning för allt utom färsk frukt och grönt, så de begränsar recepten mer.", "hint"), tags("Gillar extra", "likes", "Till exempel kyckling"),
       choice("Butiker att handla i", [[1, "1"], [2, "Högst 2"], [3, "Högst 3"], ["all", "Så många som lönar sig"]], s.maxStores, v => set("maxStores", v)),
       choice("Omväxling", [["low", "Billigast först"], ["normal", "Blanda matkök", "Minst 3 middagar"]], s.variety, v => set("variety", v)));
     const kitchens = el("fieldset", null, "choice"); kitchens.append(el("legend", "Matkök (inget valt betyder alla)"));
@@ -651,7 +663,8 @@
   function settingsSummary() {
     const s = saved.settings, rows = mealRows().filter(m => m.count), parts = rows.map(m => `${plural(m.count, ...MEAL_ONE_MANY[m.meal_type])} × ${plural(m.servings, "portion", "portioner")}`);
     parts.push(DIETS.find(d => d[0] === s.diet)[1].toLowerCase());
-    if (s.cooking !== "free") parts.push(COOK.find(c => c[0] === s.cooking)[1].toLowerCase());
+    const cook = COOK.find(c => c[0] === s.cooking); if (cook && s.cooking !== "free") parts.push(cook[1].toLowerCase());
+    const many = INGREDIENTS.find(i => i[0] === s.ingredients); if (many && s.ingredients !== "any") parts.push(`${many[1].toLowerCase()} ingredienser`);
     const avoid = [...s.allergies, ...s.avoid]; if (avoid.length) parts.push(`utan ${avoid.join(", ")}`);
     if (rows.some(m => Object.keys(m.limits).length || Object.keys(m.distribution).length)) parts.push("egna val per måltid");
     return parts.join(" · ");

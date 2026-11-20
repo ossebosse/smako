@@ -268,6 +268,8 @@ def test_browser_guest_registration_pantry_migration_and_sign_in(membership, bro
             page.route("**/scanner-assets/**", lambda route: route.fulfill(body=""))
             page.route("**/api/recipe-library", lambda route: route.fulfill(json={"enabled": False}))
             page.route("**/api/municipalities", lambda route: route.fulfill(json={"municipalities": []}))
+            # Alternativ A is the default (2026-11-20); this test covers the classic page chosen in /admin.
+            page.add_init_script('localStorage.setItem("smako.ui", "standard")')
             page.goto(base + "/personal#pantry")
             page.get_by_role("button", name="Lägg till manuellt").click()
             dialog = page.locator("#personal-dialog")
