@@ -61,6 +61,10 @@ class Fake:
                 {"store_id": "s1", "product_id": "p-lok", "ingredient": "gul lök", "product_name": "Gul lök lösvikt", "packages_needed": 1, "package_quantity": 1000, "package_unit": "g",
                  "total_price": 3.5, "unit": "g", "purchased_unit": "g", "required_quantity": 150, "purchased_usable_quantity": 180, "purchased_quantity": 180,
                  "quantity_confidence": "estimated", "sale_model": "sold_by_weight", "food_family": "allium"}]
+        if getattr(self, "offers", False):
+            rows[0].update(price_mechanism="sale_price", eligibility="member", membership_required=True, offer_description="2 för 100 kr",
+                           regular_total_price=69.9, applied_offer={"valid_to": "2026-11-22"})
+            rows[1].update(price_mechanism="regular")
         likes = (request or {}).get("personal", {}).get("profile", {}).get("likes", [])
         total = 81.4 if "lök" in likes else 63.4  # The week with two onion dinners costs 18 kr more.
         recipe = {"name": "Pannbiff med lök och potatis", "servings": 2, "instructions": ["Stek biffarna.", "Koka potatisen."],
@@ -459,6 +463,18 @@ def test_a_signed_in_member_can_choose_more_dinners_and_portions_than_a_guest(ui
     expect(page.get_by_role("heading", name="Din matplan", exact=True)).to_be_visible()
     dinner_request = next(body for method, path, body in fake.calls if path == "plans")["personal"]["meals"][0]
     assert (dinner_request["count"], dinner_request["servings"]) == (6, 4)
+
+
+def test_the_shopping_list_marks_goods_on_offer(ui):
+    """Owner request 2026-11-20: show which goods are on offer."""
+    name, page, fake, shot = ui
+    fake.offers = True
+    add_potatoes(name, page)
+    plan_meat_dinners(name, page)
+    expect(page.get_by_text("1 vara på kampanj, du sparar minst 10,00 kr.")).to_be_visible()
+    expect(page.locator(".line-offer")).to_have_text("Medlemspris, 2 för 100 kr, t.o.m. 22/11, ord. 69,90 kr")
+    expect(page.locator(".line.is-offer .line-name")).to_have_text("Nötfärs 12%")
+    shot("kampanj")
 
 def test_toothbrush_is_saved_as_not_food_the_way_the_server_sees_it(ui):
     name, page, fake, _shot = ui

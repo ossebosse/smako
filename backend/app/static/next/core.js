@@ -744,6 +744,17 @@
         : "Resten är pant och det som blir över. Det läggs i skafferiet när du har handlat, så recepten kan använda det nästa gång.", "hint"));
     return box;
   }
+  // Owner request 2026-11-20: show which goods are on offer. The plan carries the applied
+  // offer (mechanism, member or public, last day); the ordinary price is shown only when known.
+  const onOffer = row => Boolean(row.price_mechanism && row.price_mechanism !== "regular");
+  const offerSaving = row => onOffer(row) && row.regular_total_price > row.total_price ? row.regular_total_price - row.total_price : 0;
+  function offerNote(row) {
+    if (!onOffer(row)) return row.membership_required ? "medlemspris" : null;
+    const end = row.applied_offer?.valid_to, day = end ? new Date(`${end}T12:00:00`) : null;
+    const until = day && !Number.isNaN(day.getTime()) ? `t.o.m. ${day.getDate()}/${day.getMonth() + 1}` : null;
+    const saving = offerSaving(row);
+    return [row.membership_required ? "Medlemspris" : "Kampanj", row.offer_description, until, saving ? `ord. ${money(row.regular_total_price)}` : null].filter(Boolean).join(", ");
+  }
   const totalText = () => { const b = basket(); return b ? `${b.estimated ? "ca " : ""}${money(b.total)}` : ""; };
   function storesView({ open = true } = {}) {
     const box = el("div", null, "stores"), b = basket(), done = picked();
@@ -754,6 +765,8 @@
     const missing = S.plan?.personal?.checks?.missing_extras || [];
     if (missing.length) box.append(el("p", `Hittade ingen vara för ${missing.map(m => m.name).join(", ")}. Resten av listan är räknad. Prova ett annat ord för ${missing.length > 1 ? "dem" : "den"}.`, "notice", { role: "status" }));
     box.append(progress);
+    const offers = b.stores.flatMap(s => s.items).filter(onOffer), saved = offers.reduce((n, row) => n + offerSaving(row), 0);
+    if (offers.length) box.append(el("p", `${plural(offers.length, "vara", "varor")} på kampanj${saved >= 1 ? `, du sparar minst ${money(saved)}` : ""}. De är märkta Kampanj eller Medlemspris i listan.`, "offer-summary"));
     // One shop can be priced by two contexts (catalogue and its own campaigns).
     const shops = [];
     for (const store of b.stores) {
@@ -778,8 +791,9 @@
           const text = el("span", null, "line-text"), wanted = String(row.ingredient || "").replace(/ \[\d+\]$/, "");
           const weighed = row.variable_weight || ["sold_by_weight", "variable_weight_package"].includes(row.sale_model);
           text.append(el("span", row.product_name, "line-name"), el("span", [weighed ? `ca ${amount(row.purchased_quantity ?? row.packages_needed * row.package_quantity, row.purchased_unit || row.package_unit)}` : `${row.packages_needed} st × ${amount(row.package_quantity, row.package_unit)}`,
-            wanted && wanted.toLowerCase() !== row.product_name.toLowerCase() ? `till ${wanted}` : null, row.offer_description || (row.membership_required ? "medlemspris" : null),
+            wanted && wanted.toLowerCase() !== row.product_name.toLowerCase() ? `till ${wanted}` : null, onOffer(row) ? null : row.offer_description || offerNote(row),
             row.drained_weight_from_package ? "vikten är med spad" : null].filter(Boolean).join(" · "), "line-note"));
+          if (onOffer(row)) { line.classList.add("is-offer"); text.append(el("span", offerNote(row), "line-offer")); }
           line.append(check, text, el("span", money(row.total_price), "line-price")); section.append(line);
         }
       }
