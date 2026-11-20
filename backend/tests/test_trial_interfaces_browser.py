@@ -596,3 +596,91 @@ def test_store_list_stays_put_can_be_searched_and_hides_the_covered_online_shop(
     shot("butikssok")
     page.get_by_label("Sök butik").fill("finns inte")
     expect(page.get_by_text("Ingen butik heter så. Prova ett annat ord.")).to_be_visible()
+
+
+def test_meat_distribution_shows_only_meat_kinds_and_drops_old_counts(ui):
+    """Owner report 2026-11-19: Kött with 1 vegetarian and 1 fish left from Allt blocked the plan."""
+    name, page, fake, shot = ui
+    if name != "a":
+        return
+    page.goto(re.sub(r"#.*|$", "#mat", page.url, count=1))
+    page.get_by_label("Ditt postnummer").fill("22350")
+    page.get_by_role("button", name="Hitta butiker").click()
+    page.get_by_role("button", name="Fördelning för middag: Standard").click()
+    for label in ("Antal vegetariskt", "Antal fisk och skaldjur"):
+        page.get_by_label(label).fill("1")
+        page.get_by_label(label).press("Tab")
+    page.get_by_role("button", name="Klar").click()
+    page.get_by_role("radio", name=re.compile("^Kött")).click()
+    page.get_by_role("button", name=re.compile("^Fördelning för middag")).click()
+    expect(page.get_by_label("Antal vegetariskt")).to_have_count(0)
+    expect(page.get_by_label("Antal fisk och skaldjur")).to_have_count(0)
+    page.get_by_label("Antal kyckling").fill("1")
+    page.get_by_label("Antal kyckling").press("Tab")
+    expect(page.get_by_text("1 av 3 måltider fördelade · 2 kvar")).to_be_visible()
+    page.get_by_role("button", name="Klar").click()
+    shot("kott-fordelning")
+    page.get_by_role("button", name="Skapa matplan").click()
+    expect(page.get_by_role("heading", name="Din matplan", exact=True)).to_be_visible()
+    sent = next(body for method, path, body in fake.calls if path == "plans")
+    assert sent["personal"]["meals"][0]["diet"] == "meat" and sent["personal"]["meals"][0]["distribution"] == {"chicken": 1}
+
+
+def test_number_of_ingredients_is_chosen_under_more_choices_and_keeps_the_time_limit(ui):
+    """Owner decision 2026-11-20: "Fler val" chooses how many ingredients; "Tid i köket" can ask for more."""
+    name, page, fake, shot = ui
+    if name == "b":
+        pytest.skip("Alternativ A is the default interface; B shares the same settings code")
+    page.goto(re.sub(r"#.*|$", "#mat", page.url, count=1))
+    page.get_by_label("Ditt postnummer").fill("22350")
+    page.get_by_role("button", name="Hitta butiker").click()
+    expect(page.get_by_role("radio", name=re.compile("^Gärna mer"))).to_be_visible()
+    page.get_by_role("radio", name=re.compile("^Snabbt")).click()
+    page.locator("summary", has_text="Fler val: ingredienser").click()
+    page.get_by_role("radio", name=re.compile("^Många")).click()
+    expect(page.get_by_text("Gäller i stället för antalet som Tid i köket väljer.")).to_be_visible()
+    shot("ingredienser")
+    page.get_by_role("button", name="Skapa matplan").click()
+    expect(page.get_by_role("heading", name="Din matplan", exact=True)).to_be_visible()
+    dinner = next(body for method, path, body in fake.calls if path == "plans")["personal"]["meals"][0]["recipe_choices"]
+    assert (dinner["max_active_minutes"], dinner["min_ingredients"], dinner["max_ingredients"]) == (30, 13, None)
+
+
+def test_more_in_the_kitchen_asks_for_more_ingredients_without_a_time_limit(ui):
+    name, page, fake, shot = ui
+    if name == "b":
+        pytest.skip("Alternativ A is the default interface; B shares the same settings code")
+    page.goto(re.sub(r"#.*|$", "#mat", page.url, count=1))
+    page.get_by_label("Ditt postnummer").fill("22350")
+    page.get_by_role("button", name="Hitta butiker").click()
+    page.get_by_role("radio", name=re.compile("^Gärna mer")).click()
+    page.get_by_role("button", name="Skapa matplan").click()
+    expect(page.get_by_role("heading", name="Din matplan", exact=True)).to_be_visible()
+    dinner = next(body for method, path, body in fake.calls if path == "plans")["personal"]["meals"][0]["recipe_choices"]
+    assert (dinner["max_active_minutes"], dinner["min_ingredients"], dinner["max_ingredients"]) == (None, 13, None)
+
+
+def test_personal_opens_alternative_a_unless_admin_chose_classic():
+    class Handler(SimpleHTTPRequestHandler):
+        def log_message(self, *_):
+            pass
+
+        def do_GET(self):
+            self.path = re.sub(r"^/ui/([ab]).*", r"/next/\1.html", self.path).replace("/static/", "/")
+            return super().do_GET()
+
+    server = ThreadingHTTPServer(("127.0.0.1", 0), partial(Handler, directory=str(STATIC)))
+    Thread(target=server.serve_forever, daemon=True).start()
+    base = f"http://127.0.0.1:{server.server_port}"
+    with sync_playwright() as pw:
+        browser = pw.chromium.launch()
+        page = browser.new_page()
+        page.route("**/api/**", lambda route: route.fulfill(status=503, content_type="application/json", body="{}"))
+        page.goto(f"{base}/personal.html")
+        page.wait_for_url(f"{base}/ui/a")
+        page.evaluate('localStorage.setItem("smako.ui", "standard")')
+        page.goto(f"{base}/personal.html")
+        page.wait_for_timeout(300)
+        assert page.url == f"{base}/personal.html"
+        browser.close()
+    server.shutdown()

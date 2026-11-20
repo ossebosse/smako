@@ -41,3 +41,38 @@ def test_trial_interfaces_offer_meat_for_dinners_only():
     core = (Path(__file__).resolve().parents[1] / "app" / "static" / "next" / "core.js").read_text(encoding="utf-8")
     assert '["meat", "Kött"' in core
     assert 'saved.settings.diet === "meat" && type !== "dinner" ? "mixed" : saved.settings.diet' in core and "diet: mealDiet(type)" in core
+
+
+# Owner report 2026-11-19: Kött with "Ät inte fläsk" gave a recipe with blodpudding.
+@pytest.mark.parametrize("name", ["blodpudding", "bacon", "falukorv", "lufttorkad skinka", "blandfärs", "fläskfärs"])
+def test_avoiding_pork_also_avoids_foods_made_of_pork(name):
+    from app.services.personal_policy import mentions_avoided
+
+    assert mentions_avoided("fläsk", name)
+
+
+@pytest.mark.parametrize("name", ["nötfärs", "kycklingfilé", "korvbröd", "grissini", "pistagenötter"])
+def test_avoiding_pork_keeps_what_is_not_pork(name):
+    from app.services.personal_policy import mentions_avoided
+
+    assert not mentions_avoided("fläsk", name)
+
+
+def test_avoided_pork_product_is_stopped_on_its_name():
+    from types import SimpleNamespace
+
+    from app.models.personal import TasteProfile
+    from app.services.personal_policy import PolicyConflict, check_product
+
+    product = SimpleNamespace(name="Blodpudding Skivad 500g", canonical_name="blodpudding", category="Kött", food_family=None)
+    with pytest.raises(PolicyConflict, match="fläsk"):
+        check_product(product, TasteProfile(exclusions=["fläsk"]), None)
+
+
+def test_distribution_only_offers_what_the_diet_allows():
+    from pathlib import Path
+
+    core = (Path(__file__).resolve().parents[1] / "app" / "static" / "next" / "core.js").read_text(encoding="utf-8")
+    assert 'meat: ["chicken", "meat"], pescetarian: ["vegetarian", "fish"]' in core
+    assert "for (const [key, name] of kinds)" in core
+    assert "Kött ger bara rätter med kött eller kyckling" not in core

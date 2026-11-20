@@ -12,7 +12,7 @@ from collections import Counter
 from dataclasses import dataclass, field
 
 from app.models.personal import TasteProfile
-from app.services.diet_policy import ingredient_is_excluded, recipe_respects_diet
+from app.services.diet_policy import implied_by_exclusion, names_food, ingredient_is_excluded, recipe_respects_diet
 from app.services.ingredient_normalizer import canonicalize_ingredient_name
 from app.services.product_search import search_text
 from app.services.recipe_profile import primary_ingredient
@@ -188,6 +188,12 @@ def _contains(term, names):
 _NOT_COMPOUNDS = {"ost": frozenset({"ostron"})}
 
 
+def mentions_avoided(term, text):
+    """Like mentions, but an avoided term also covers foods made of it (blodpudding for fläsk)."""
+    first, *foods = implied_by_exclusion(term)
+    return mentions(term, text) or any(names_food(food, search_text(text)) or names_food(food, str(text)) for food in foods)
+
+
 def mentions(term, text):
     """Whether a name or declaration names the term, also inside a compound word."""
     wanted = search_text(term)
@@ -267,7 +273,7 @@ def check_product(product, profile, facts=None, *, organic_animals=False):
     hard = profile.exclusions + profile.allergies
     # A positive conflict needs no claim about the completeness of other data.
     for term in hard:
-        if _contains(term, (product.name, product.canonical_name)) or mentions(term, product.name) or mentions(term, product.canonical_name) or (
+        if _contains(term, (product.name, product.canonical_name)) or mentions_avoided(term, product.name) or mentions_avoided(term, product.canonical_name) or (
             search_text(term) == "fisk" and getattr(product, "food_family", None) == "fish"
         ):
             raise PolicyConflict(f"{product.name} innehåller något du har valt bort: {term}.")
@@ -279,7 +285,7 @@ def check_product(product, profile, facts=None, *, organic_animals=False):
                     if term in profile.allergies
                     else ingredient_composition(facts.ingredients)
                 )
-                if _contains(term, names):
+                if _contains(term, names) or (term in profile.exclusions and any(mentions_avoided(term, n) for n in names)):
                     raise PolicyConflict(
                         f"{product.name}: produktdeklarationen anger {term}, som du har valt bort."
                     )
@@ -313,7 +319,8 @@ def check_product(product, profile, facts=None, *, organic_animals=False):
                 code="DATA_BLOCKED",
             )
         for term in (profile.exclusions if hard else ()):
-            if _contains(term, ingredient_composition(facts.ingredients)):
+            composition = ingredient_composition(facts.ingredients)
+            if _contains(term, composition) or any(mentions_avoided(term, n) for n in composition):
                 raise PolicyConflict(f"{product.name} innehåller utesluten ingrediens: {term}.")
         for term in (profile.allergies if hard else ()):
             allergen = ALLERGENS[term]

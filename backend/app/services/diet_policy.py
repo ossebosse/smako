@@ -87,6 +87,47 @@ POULTRY_INGREDIENTS = frozenset({"kyckling", "hel kyckling", "kalkon"})
 _REVIEWED_MEAT_COMPONENTS = {"färsk chorizokorv": frozenset({"fläskkött", "nötkött"}),
                              "färsk salsicciakorv": frozenset({"fläskkött"}),
                              "benfri lammstek": frozenset({"lamm", "lammkött"})}
+# Owner report 2026-11-19: "Ät inte fläsk" with Kött gave a recipe with
+# blodpudding. Some foods are made of an animal without naming it. A term the
+# person avoids also avoids these foods (whole word, start or end of a word).
+# Fails closed: sausage and blandfärs are avoided even when some brands use
+# other meat. Only narrows; it never aliases product identity.
+_PORK = ("fläsk", "gris", "griskött", "svin", "svinkött", "fläskkött")
+_PORK_FOODS = ("blodpudding", "blodkorv", "bacon", "skinka", "korv", "isterband", "ister",
+               "guanciale", "pancetta", "prosciutto", "salami", "chorizo", "chorizokorv", "salsiccia",
+               "salsicciakorv", "kassler", "sidfläsk", "blandfärs", "pepperoni", "leverpastej", "pastej",
+               "fjälster", "svål", "grisblod", "svinblod", "grisfett", "svinfett", "lardo", "sylta",
+               "pressylta", "kotlett", "karré", "revbensspjäll", "spjäll", "julskinka", "serranoskinka",
+               "parmaskinka", "fläskkarré", "fläsklägg", "fläsklever", "fläskfilé")
+_BEEF = ("nöt", "nötkött", "oxe", "oxkött")
+_BEEF_FOODS = ("oxfilé", "högrev", "entrecôte", "entrecote", "blandfärs", "corned beef", "kalv", "kalvkött",
+               "kalvfärs", "oxbringa", "bringa", "rostbiff", "fransyska", "innanlår", "nötstek", "oxsvans",
+               "oxtunga", "ungnöt", "nötblod", "biff", "bresaola", "pastrami")
+IMPLIED_BY_EXCLUSION = {
+    **{term: _PORK_FOODS for term in _PORK},
+    **{term: _BEEF_FOODS for term in _BEEF},
+    "lamm": ("får", "fårkött", "lammfärs", "lammstek", "lammkotlett"),
+    "kyckling": ("höns", "hönsfilé", "kycklingkorv"),
+}
+
+
+def implied_by_exclusion(term: str) -> tuple[str, ...]:
+    """The term itself and the foods made of it that do not name it."""
+    key = " ".join(str(term).casefold().split())
+    return (key, *IMPLIED_BY_EXCLUSION.get(key, ()))
+
+
+def names_food(food: str, text: str) -> bool:
+    """A whole word, or the end of a compound ("falukorv" is a korv, "korvbröd" is bread)."""
+    words = " ".join(str(text).casefold().split())
+    if " " in food:
+        return f" {food} " in f" {words} "
+    for word in words.split():
+        if word == food or (len(food) >= 4 and len(word) - len(food) >= 3 and word.endswith(food)):
+            return True
+    return False
+
+
 # Pescetarian keeps fish and seafood, including fish-based flavourings.
 _SEAFOOD = (FINFISH_INGREDIENTS | FISH_FLAVOURINGS | SHELLFISH_INGREDIENTS
             | frozenset({"räkpasta", "torkade räkor"}))
@@ -156,7 +197,8 @@ def ingredient_is_excluded(name: str, exclusions: Iterable[str]) -> bool:
     canonical = canonicalize_ingredient_name(name)
     exclusions = tuple(exclusions)
     excluded = {canonicalize_ingredient_name(v) for v in exclusions if str(v).strip()}
-    return canonical in excluded or bool(_REVIEWED_MEAT_COMPONENTS.get(canonical, frozenset()) & excluded) or (
+    return canonical in excluded or bool(_REVIEWED_MEAT_COMPONENTS.get(canonical, frozenset()) & excluded) or any(
+        names_food(food, canonical) for term in excluded for food in IMPLIED_BY_EXCLUSION.get(term, ())) or (
         any(v.casefold().strip() == "fisk" for v in exclusions)
         and (canonical in FINFISH_INGREDIENTS | FISH_FLAVOURINGS
              or semantic_requirement(canonical).food_family == "fish")
@@ -277,7 +319,10 @@ def recipe_respects_diet(
 
 
 __all__ = [
+    "IMPLIED_BY_EXCLUSION",
     "MEAT_DISHES",
+    "implied_by_exclusion",
+    "names_food",
     "excluded_ingredients",
     "filter_economic_pool",
     "is_meat_dish",

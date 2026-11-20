@@ -42,3 +42,11 @@ def test_trial_interfaces_send_the_requests_personal_sends():
     for needed in ('purchase_planning_mode: "estimated"', 'membership_price_policy: "all_advertised"', "allowed_store_ids", "pantry_revision",
                    '"/api/personal/shopping-list"', '"/api/plans"', "respond-async", 'store_cap: "all_selected"'):
         assert needed in core, needed
+
+
+def test_alternative_a_is_the_default_and_admin_can_choose_another():
+    """Owner decision 2026-11-20: Alternativ A (flikar) is Smako's default interface."""
+    choice = (STATIC / "next" / "choice.js").read_text(encoding="utf-8")
+    assert 'stored || "a"' in choice
+    admin = (STATIC / "admin.js").read_text(encoding="utf-8")
+    assert 'let chosen="a"' in admin and 'b.dataset.interface==="a")localStorage.removeItem("smako.ui")' in admin
