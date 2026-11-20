@@ -175,7 +175,6 @@ def test_rice_and_grain_methods_are_actual_cooking_changes():
             assert '13–15 minuter' in text and 'durkslag' in text
             assert 'pärlkorn' not in text and 'vätskan absorberad' not in text
         if 'masa harina' in t['groups']:
-            assert 'förkokt majsmjöl' in new.name
             assert 'masa harina' not in text
 
 

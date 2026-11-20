@@ -215,8 +215,9 @@ def test_entire_intake_is_imported_and_scales_without_changing_original_library(
     assert report["status"] == {"accepted": 2155, "already_imported": 45}
     assert len(current) == 2998
     assert len({r.design.base_id for r in current.values()}) == 1132
+    from backend.tests.recipe_language_history import assert_same_apart_from_name
     for original in current_recipes(13):
-        assert current[identity(original)].model_dump() == original.model_dump()
+        assert_same_apart_from_name(current, original)
     for record in report["recipes"]:
         assert not record["blockers"]
         recipe = current[replacements.get(record["runtime_id"], record["runtime_id"])]

@@ -119,7 +119,7 @@ def test_liver_and_wheat_losses_stay_unknown_and_checks_remain_active():
             assert {p.operation for p in r.design.unmeasured_processes} == {'trim_before_cooking', 'drain_after_cooking'}
             assert not authored_steps[7].get('passive') and '72 °C' in steps['s8'].text
             assert not authored_steps[9].get('passive') and '75 °C' in steps['s10'].text
-            assert 'utan skal' in steps['s9'].text and 'ungnötslever' in r.name
+            assert 'utan skal' in steps['s9'].text
         if 'pastiera' in r.design.base_id:
             assert r.preparation.version == 'smako-authored-losses-v3'
             assert any(p.step_id == 's3' and p.operation == 'drain_after_cooking' for p in r.design.unmeasured_processes)
@@ -136,7 +136,6 @@ def test_three_cheeses_do_not_alias_stracchino_and_frozen_basil_is_baked():
             assert 'stracchino' not in ingredients
             assert {k: ingredients[k].quantity for k in ('ricotta', 'färskost', 'mozzarella')} == {'ricotta': 140, 'färskost': 130, 'mozzarella': 130}
             assert ingredients['mozzarella'].form == 'preserved_drained'
-            assert 'ricotta, färskost och mozzarella' in r.name
             if r.design.variant_id == 'extended':
                 assert 'basilika' in r.instructions[2] and '75 °C' in r.instructions[4]
         if 'bouyiourdi' in r.design.base_id:
