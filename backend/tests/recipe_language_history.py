@@ -16,7 +16,9 @@ def language_successors():
     followup = json.loads((ROOT.parents[3] / "docs/reviews/recipe-language-followup-20261102/library-transition.json").read_bytes())
     # Later reviewed successors (ingredients Malmö no longer sells) keep the same chain.
     malmo = json.loads((ROOT.parents[3] / "docs/reviews/malmo-unavailable-20261107/recipe-review.json").read_bytes())
-    return {r["previous_id"]: r for review in (language_review(), followup, malmo) for r in review["corrected"]}
+    # The dinner-name review (2026-11-20) only renames; steps and amounts stay identical.
+    names = json.loads((ROOT.parents[3] / "docs/reviews/recipe-names-20261120/library-transition.json").read_bytes())
+    return {r["previous_id"]: r for review in (language_review(), followup, malmo, names) for r in review["corrected"]}
 
 
 def after_language_id(recipe_id):
@@ -31,8 +33,14 @@ def _malmo_previous():
     return {r["runtime_id"]: r["previous_id"] for r in review["corrected"]}
 
 
+def before_name_id(recipe_id):
+    """The version just before the dinner-name review (2026-11-20)."""
+    return {v: k for k, v in _renamed().items()}.get(recipe_id, recipe_id)
+
+
 def before_malmo_id(recipe_id):
     """The version just before an ingredient Malmö no longer sells was replaced."""
+    recipe_id = before_name_id(recipe_id)
     return _malmo_previous().get(recipe_id, recipe_id)
 
 
@@ -66,3 +74,26 @@ def assert_current_language_version(recipe_id, content_sha256):
         recipe_id, content_sha256 = successor["runtime_id"], successor["content_sha256"]
         assert _issued()[recipe_id].design.content_sha256 == content_sha256
     assert active[recipe_id].design.content_sha256 == content_sha256
+
+
+@lru_cache(maxsize=1)
+def _renamed():
+    review = json.loads((ROOT.parents[3] / "docs/reviews/recipe-names-20261120/library-transition.json").read_bytes())
+    return {r["previous_id"]: r["runtime_id"] for r in review["corrected"]}
+
+
+def assert_same_apart_from_name(current, original):
+    """A recipe untouched except by the dinner-name review (2026-11-20)."""
+    rid = identity(original)
+    if rid not in _renamed():
+        assert current[rid].model_dump() == original.model_dump()
+        return
+    renamed = current[_renamed()[rid]].model_dump()
+    before = original.model_dump()
+    for dump in (renamed, before):
+        dump.pop("name")
+        for key in ("version", "content_sha256", "content_source", "review", "provenance"):
+            dump["design"].pop(key, None)
+        if dump.get("preparation"):
+            dump["preparation"].pop("parent_sha256", None)
+    assert renamed == before

@@ -61,7 +61,7 @@ def test_oven_pastor_has_ground_ancho_ready_tortillas_and_no_raw_salsa_or_lost_p
         assert not {'achiotepasta', 'guajillochili', 'masa harina'} & names.keys()
         assert names['anchochili'].quantity == 25 and names['majstortillas'].quantity == 400
         assert names['fläskkarré'].quantity == 750 and names['ananas'].quantity == 350
-        assert 'utan achiote' in recipe.name and recipe.design.waiting_minutes >= 360
+        assert recipe.design.waiting_minutes >= 360
         assert not recipe.design.unmeasured_processes
         doubled = _scaled(recipe, 8)
         validate_recipe_design(doubled)
@@ -103,7 +103,7 @@ def test_pibil_paprika_adaptation_keeps_saucy_braise_and_variant_sides():
     assert len(recipes) == 3
     for recipe in recipes:
         names = {i.canonical_name: i for i in recipe.ingredients}
-        assert 'achiotepasta' not in names and 'paprikaversion' in recipe.name
+        assert 'achiotepasta' not in names
         assert names['paprikapulver'].quantity == 12 and names['paprikapulver'].form == 'dry'
         assert names['fläskkarré'].quantity == 850 and names['majstortillas'].quantity == 320
         assert not recipe.design.unmeasured_processes
@@ -140,7 +140,7 @@ def test_vada_standard_keeps_extra_spices_and_one_total_oil_purchase():
     recipe = next(r for r in current_recipes()
                   if r.design.base_id == 'smako-indian-vada-pav' and r.design.variant_id == 'standard')
     names = {i.canonical_name: i for i in recipe.ingredients}
-    assert 'curryblad' not in names and 'utan curryblad' in recipe.name
+    assert 'curryblad' not in names
     assert names['senapsfrön'].quantity == 2 and names['ingefära'].quantity == 18
     assert names['rapsolja'].quantity == 220
     for portions in (2, 8):
@@ -233,7 +233,7 @@ def test_spinach_muthiya_keep_liquid_and_use_roasted_peanuts_and_portion_counts(
         names = {i.canonical_name: i for i in recipe.ingredients}
         assert names['spenat'].quantity == 80 and names['spenat'].form == 'as_sold'
         assert names['rostade jordnötter'].quantity == 70
-        assert 'bockhornsklöverblad' not in names and 'spenat-muthiya' in recipe.name
+        assert 'bockhornsklöverblad' not in names
         text = ' '.join(recipe.instructions)
         assert 'tre muthiya per portion' in text and 'Ingen olja eller vätska hälls bort' in text
         assert not recipe.design.unmeasured_processes
@@ -383,7 +383,6 @@ def test_curry_leaf_free_chicken_keeps_variant_differences_and_cold_thaw_and_oil
         names = {i.canonical_name: i for i in recipe.ingredients}
         assert 'curryblad' not in names and 'kashmirichilipulver' not in names
         assert names['paprikapulver'].quantity == 3 and names['cayennepeppar'].quantity == .3
-        assert 'utan curryblad' in recipe.name
         operations = {p.operation for p in recipe.design.unmeasured_processes}
         assert operations == {'drain_before_cooking', 'deep_fry_and_drain'}
         doubled = _scaled(recipe, 8)
@@ -422,7 +421,6 @@ def test_nogada_peppers_are_weighed_after_coring_before_roasting_and_extra_filli
     for recipe in recipes:
         names = {i.canonical_name: i for i in recipe.ingredients}
         assert 'poblano' not in names and names['paprika'].quantity == 700
-        assert 'Paprika en nogada' in recipe.name
         assert any(p.operation == 'peel_after_cooking' and p.ingredient_keys == ('paprika|raw_edible',)
                    for p in recipe.design.unmeasured_processes)
         doubled = _scaled(recipe, 8)
@@ -445,7 +443,7 @@ def test_one_pot_pasta_uses_short_shape_and_keeps_starch_water_and_hot_herbs():
         validate_recipe_design(doubled)
         text = ' '.join(doubled.instructions)
         assert '2000 ml vatten' in text and '400 ml vatten' in text
-        assert 'Behåll all grytsås' in text and 'utan rökt ost' in recipe.name
+        assert 'Behåll all grytsås' in text
         if recipe.design.variant_id != 'simple':
             assert 'minst tre minuter före koktidens slut' in text
             assert 'basilikan' not in next(s.text for s in recipe.design.steps if 'Ta av grytan' in s.text)
@@ -569,7 +567,6 @@ def test_cheese_alternatives_preserve_unknown_losses_and_scale_actual_water():
         assert recipe.preparation.version == 'smako-authored-losses-v3'
         operations = {p.operation for p in recipe.design.unmeasured_processes}
         assert 'trim_before_cooking' in operations
-        assert 'pecorino' in recipe.name.lower()
         doubled = _scaled(recipe, recipe.servings * 2)
         validate_recipe_design(doubled)
         text = ' '.join(doubled.instructions)

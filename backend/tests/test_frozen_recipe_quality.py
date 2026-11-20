@@ -99,14 +99,18 @@ def test_all_amended_versions_keep_history_and_original_library_and_source_bytes
     malmo = json.loads((ROOT.parents[3] / "docs/reviews/malmo-unavailable-20261107/recipe-review.json").read_bytes())
     latest = {r["previous_id"]: r["runtime_id"] for r in malmo["corrected"]}
     successors = {k: latest.get(v, v) for k, v in successors.items()} | latest
+    names = json.loads((ROOT.parents[3] / "docs/reviews/recipe-names-20261120/library-transition.json").read_bytes())
+    latest = {r["previous_id"]: r["runtime_id"] for r in names["corrected"]}
+    successors = {k: latest.get(v, v) for k, v in successors.items()} | latest
     assert report["affected_variants"] == 337
     assert len(current) == 2998
     for row in report["recipes"]:
         assert row["previous_id"] in issued and row["previous_id"] in manifest["revocations"]
         assert row["previous_id"] not in current and successors.get(row["runtime_id"], row["runtime_id"]) in current
         assert issued[row["runtime_id"]].design.content_sha256 == row["content_sha256"]
+    from backend.tests.recipe_language_history import assert_same_apart_from_name
     for original in current_recipes(13):
-        assert current[identity(original)].model_dump() == original.model_dump()
+        assert_same_apart_from_name(current, original)
 
 
 def test_retired_automatic_adapter_cannot_reintroduce_heat_word_bug(monkeypatch):
