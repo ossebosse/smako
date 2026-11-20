@@ -1,3 +1,18 @@
+# 2026-11-20 sen kväll: Riktiga rättnamn, fler näringsvärden, kampanjer i listan
+
+Main `434cad1f7e70` (merge av `campaign-marks`, `dinner-names` och
+`nutrition-gaps`). App **app-434cad1f7e70-4f6f4fb5**, image `70f21b986fd9`, bas
+`94f39e9de168` (image `014781c7375d`). Ändrat: tio nya receptpaket och
+bibliotekmanifest (911 middagsnamn i 1999 varianter, steg och mängder
+oförändrade; 59 namn i kärnbiblioteket väntar på ny biblioteksversion),
+`nutrition_reference.py`, `personal_planner.py`, `staples.py` (torkade kryddor
+på högst 2 g räknas som noll och visas vid näringsvärdet) och `next/a.html`,
+`next/b.html`, `next/base.css`, `next/core.js` (kampanjvaror märks i
+inköpslistan). Importprov i nätverkslös container godkänt. Aktiverad 22:07 UTC;
+befintligt tillstånd och prismanifest bevarade, lagringsretention körd efteråt.
+`/ready` Lund och Malmö: ready (prisunderlaget `degraded` av äldre basprisrader
+som behålls tills de ersätts, som före aktiveringen).
+
 # 2026-11-20 kväll: Medlemmar får fler middagar och portioner
 
 Main `94f39e9de168`. App **app-94f39e9de168-622d7ec3**, image `014781c7375d`,
@@ -437,10 +452,10 @@ git status --short
 .venv/Scripts/python.exe -X utf8 scripts/smako_ops.py status
 
 # Använd den granskade Git-bas som motsvarar faktiskt aktiva filer enligt senaste journalen.
-.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit 94f39e9de168 --commit main --workdir .local/beta-release
+.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit 434cad1f7e70 --commit main --workdir .local/beta-release
 ```
 
-`94f39e9de168` är appen som aktiverades 2026-11-20 17:57 UTC. Appbildens egen
+`434cad1f7e70` är appen som aktiverades 2026-11-20 22:07 UTC. Appbildens egen
 grocery-kopia är äldre än Git; använd `--keep-app-grocery` om intervallet
 bara innehåller grocery-Python som redan levererats till schedulern. De äldre
 Coop-filerna i runtime (`price_universe_runtime.py`,
