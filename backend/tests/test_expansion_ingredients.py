@@ -16,6 +16,7 @@ from app.services.intake_product_links import (
     project_reviewed_quantity,
 )
 from app.services.personal_policy import ProductFacts
+from app.services.intake_product_links import UNDECLARED_COMPOSITION
 from app.services.recipe_authoring import library_vocabulary
 
 from backend.tests.test_personal_planning_v2 import product
@@ -51,7 +52,8 @@ def test_reviewed_inputs_reject_changed_food_package_context_or_composition(row)
                    {'usable_unit':'st'}, {'usable_quantity':p.usable_quantity+1}):
         assert not compatible(key, p.model_copy(update=update), f), update
     changed = replace(f, ingredients=('Ändrad sammansättning',), ingredients_complete=True)
-    assert not compatible(key, p, changed)
+    # A first declaration keeps a link reviewed without one (2026-11-20).
+    assert compatible(key, p, changed) == undeclared(row)
     assert not compatible(key, p, replace(f, source_snapshot_id='unbound'))
     assert not ingredient_product('unreviewed input', row['form'], row['requirements'], p, f)
 
@@ -147,3 +149,10 @@ def test_spaghetti_shape_requirement_does_not_admit_arbitrary_pasta_shapes():
                  'Gammaldags Idealmakaroner Soppa']:
         assert not _whole_food_identity('pasta', 'dry', product(name, 500, 'g', 20), None,
                                         ['pack:stewing_macaroni'])
+
+
+def undeclared(row):
+    proof = row['reviewed_links'][0]
+    quantity = proof.get('quantity') or {}
+    return (proof.get('composition_sha256') == UNDECLARED_COMPOSITION
+            and not (quantity.get('declared_ingredients') or quantity.get('label_source')))

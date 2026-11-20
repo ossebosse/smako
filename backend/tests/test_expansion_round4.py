@@ -6,7 +6,7 @@ from dataclasses import replace
 from pathlib import Path
 
 import pytest
-from app.services.intake_product_links import compatible, ingredient_product
+from app.services.intake_product_links import UNDECLARED_COMPOSITION, compatible, ingredient_product
 from app.services.meal_library_content import ROOT, identity, validate_pack_bytes
 from app.services.recipe_authoring import library_vocabulary
 from app.services.recipe_library import _scaled, current_recipes, validate_recipe_design
@@ -47,7 +47,7 @@ def test_reviewed_sources_reject_other_foods_units_packages_and_changed_evidence
                    {'package_quantity': p.package_quantity + 1}, {'usable_quantity': p.usable_quantity + 1},
                    {'usable_unit': 'ml' if row['unit'] == 'g' else 'g'}, {'brand': 'Other'}):
         assert not compatible(key, p.model_copy(update=change), f)
-    assert not compatible(key, p, replace(f, ingredients=('Ändrat innehåll',), ingredients_complete=True))
+    assert compatible(key, p, replace(f, ingredients=('Ändrat innehåll',), ingredients_complete=True)) == undeclared(row)
     assert not compatible(key, p, replace(f, source_snapshot_id='unbound'))
     assert not ingredient_product('other food', row['form'], row['requirements'], p, f)
 
@@ -183,3 +183,10 @@ def test_additive_history_and_queue_preserve_every_previously_accepted_recipe(mo
     pending = {r['source_id'] for r in rows.values() if r['status'] != 'imported_reviewed_version'}
     assert len(pending) == 167 and {r['source_id'] for r in screen['variants']} == pending
     assert all(not r['recipe_approved'] and not r['basket_checked'] for r in screen['variants'])
+
+
+def undeclared(row):
+    proof = row['reviewed_links'][0]
+    quantity = proof.get('quantity') or {}
+    return (proof.get('composition_sha256') == UNDECLARED_COMPOSITION
+            and not (quantity.get('declared_ingredients') or quantity.get('label_source')))

@@ -126,6 +126,19 @@ def _chain(store_id):
     return parts[1] if len(parts) > 2 and parts[0] == "context" else None
 
 
+# Willys, Hemköp and City Gross publish the same article codes ("101083881_ST")
+# for the same product. Owner report 2026-11-20: reviews made at City Gross or
+# Hemköp Malmö left Lund (no City Gross) without products. One article code
+# therefore identifies the product in all three chains; name, brand and
+# package are still compared, the chains' own category trees are not.
+ARTICLE_FAMILIES = {"willys": "axfood", "hemkop": "axfood", "citygross": "axfood"}
+
+
+def _article_family(store_id):
+    chain = _chain(store_id)
+    return ARTICLE_FAMILIES.get(chain, chain)
+
+
 def _articles(product, fact):
     """Retailer article ids of this exact product: its own provenance (unless
     that id is a flyer advertisement, not an article) and facts bound to this
@@ -147,7 +160,7 @@ def _articles(product, fact):
 
 def same_chain_article(evidence, product, fact):
     return bool(evidence.get("retailer_product_id") and _chain(product.store_id)
-                and _chain(product.store_id) == _chain(evidence["store_id"])
+                and _article_family(product.store_id) == _article_family(evidence["store_id"])
                 and evidence["retailer_product_id"] in _articles(product, fact))
 
 
@@ -192,6 +205,25 @@ def compatible(key, product, fact=None):
                for evidence in row["evidence"])
 
 
+# Composition of a link reviewed while the store published no ingredient list.
+UNDECLARED_COMPOSITION = "b0e7b46e22f689bdb85a2ce14897b8ee7a968b529bac95ac593aa149c2979b9e"
+
+
+def first_declaration(evidence, fact):
+    """Owner report 2026-11-20: since declarations are collected with the
+    products (2026-11-16), links reviewed without a declaration stopped
+    matching, so olive oil, fish sauce and 38 more inputs had no product in
+    Lund or Malmö. The review approved identity, form and quantity only. A
+    declaration that appears later on the same article, name, brand, category
+    and package is not changed content; allergy and exclusion gates still read
+    it. A link reviewed against a declaration still needs that declaration."""
+    if evidence.get("composition_sha256") != UNDECLARED_COMPOSITION or not fact.ingredients:
+        return False
+    # A link whose quantity review read a declaration knows the food's content.
+    quantity = evidence.get("quantity") or {}
+    return not (quantity.get("declared_ingredients") or quantity.get("label_source"))
+
+
 def composition_signature(fact):
     """Reviewed composition, independent of a catalogue's price generation.
 
@@ -201,6 +233,21 @@ def composition_signature(fact):
     value = {name: getattr(fact, name, None) for name in (
         "ingredients", "ingredients_complete", "ingredient_evidence_kind")}
     return hashlib.sha256(json.dumps(value, ensure_ascii=False, sort_keys=True).encode()).hexdigest()
+
+
+def same_label(evidence, product, other_chain=False):
+    """The reviewed label. Another chain of the same article family or GTIN
+    writes its own casing and category tree (owner report 2026-11-20): there
+    name and brand are compared without case or marks, the package exactly,
+    and the category is the chain's own. A renamed product still needs review."""
+    if not other_chain:
+        return not any(getattr(product, field, None) != evidence.get(field)
+                       for field in ("name", "brand", "category", "package_quantity", "package_unit", "sale_model"))
+    same_brand = _search_text(getattr(product, "brand", None) or "") == _search_text(evidence.get("brand") or "")
+    same_name = _search_text(product.name) == _search_text(evidence["name"])
+    return (same_brand and same_name
+            and all(getattr(product, field, None) == evidence.get(field)
+                    for field in ("package_quantity", "package_unit", "sale_model")))
 
 
 def _review_identity(evidence, product, fact):
@@ -222,16 +269,21 @@ def _review_identity(evidence, product, fact):
         global_identity = False
     same_store = evidence["store_id"] == product.store_id
     same_chain = _chain(evidence["store_id"]) is not None and _chain(evidence["store_id"]) == _chain(product.store_id)
-    store_fields = ('source_provider', 'source_channel', 'source_role', 'chain', 'price_context', 'retailer_id_namespace')
+    other_chain = (global_identity and not same_chain and _chain(product.store_id) is not None
+                   and (evidence.get("gtin") or _article_family(evidence["store_id"]) == _article_family(product.store_id)))
+    store_fields = ('source_provider', 'source_channel', 'source_role')
+    if not other_chain:
+        store_fields += ('chain', 'price_context', 'retailer_id_namespace')
     if not global_identity or same_store:
         store_fields += ('provider_store_id',)
     if (not provenance or not evidence.get("review") or not evidence.get("source_sha256")
-            or not (same_store or (global_identity and same_chain))
+            or not (same_store or (global_identity and (same_chain or other_chain)))
             or not identified
             or any(getattr(provenance, field, None) != original.get(field) for field in store_fields)
-            or evidence.get("gtin") != getattr(product, "gtin", None)
-            or any(getattr(product, field, None) != evidence.get(field)
-                   for field in ("name", "brand", "category", "package_quantity", "package_unit", "sale_model"))):
+            # Willys and Hemköp rows carry no GTIN; a City Gross review may.
+            or ((evidence.get("gtin") or None) != (getattr(product, "gtin", None) or None)
+                and not (other_chain and evidence.get("gtin") and not getattr(product, "gtin", None)))
+            or not same_label(evidence, product, other_chain)):
         return False
     if fact is not None:
         from app.services.complete_recipes import identity_conflicts
@@ -244,7 +296,8 @@ def _review_identity(evidence, product, fact):
     if evidence.get("composition_sha256"):
         return bool(fact and fact.source_product_id == product.product_id
                     and fact.source_snapshot_id == provenance.source_snapshot_id
-                    and composition_signature(fact) == evidence["composition_sha256"])
+                    and (composition_signature(fact) == evidence["composition_sha256"]
+                         or first_declaration(evidence, fact)))
     return (evidence.get("identity_basis") == "whole_fresh_produce"
             and not (fact and fact.ingredients))
 

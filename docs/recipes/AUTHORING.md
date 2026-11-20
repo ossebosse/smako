@@ -106,6 +106,27 @@ författarkommandots granskningsdatum är kördagens datum. Källoriginalen
 under `incoming` ska aldrig skrivas över.
 
 
+## Varje ingrediens måste gå att köpa (ägarbeslut 2026-11-20)
+
+Ett nytt recept importeras inte förrän varje ingrediens har minst en köpbar vara
+i både Lund och Malmö med dagens priser och varufakta. Byt aldrig tyst ut en
+ingrediens för att den är blockerad. Gör i stället så här:
+
+1. **Leta upp varan och se varför den är blockerad.** Kör kvalificeringen på
+   servern mot de aktiva prisunderlagen (se nedan). Finns varan i butikerna men
+   stoppas, rätta orsaken: saknad eller inaktuell granskad länk, ändrat namn eller
+   märke, ny innehållsförteckning, kedjebunden artikel.
+2. **Hittas varan inte**, nämn den för ägaren innan receptet importeras.
+3. **Är det klarlagt att varan inte säljs i de stora svenska kedjorna**, föreslå
+   en ersättningsingrediens för ägaren.
+
+Kvalificeringen körs i en tillfällig container från appens image, med appens
+miljö, skrivskyddade datamappar och kandidatbiblioteket monterat, så att den
+körande appen inte påverkas:
+`scripts/recipe_layer/qualify_candidate_library.py` (ett recept per vecka,
+uppskattat inköpsläge, högst 2 butiker). Varje stoppat recept anger den
+ingrediens som saknar köpbar vara.
+
 ## Språk som går att laga efter
 
 - Skriv ett kort namn på rätten, helst högst 80 tecken. Beskriv en faktisk
