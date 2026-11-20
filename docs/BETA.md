@@ -1,3 +1,30 @@
+# 2026-11-20 kväll: Medlemmar får fler middagar och portioner
+
+Main `94f39e9de168`. App **app-94f39e9de168-622d7ec3**, image `014781c7375d`,
+bas `02c9da2819f9` (image `2b9db89e5670`). Tre ändrade filer: `next/core.js`,
+`next/a.html`, `next/b.html`. De nya gränssnitten använde gästgränserna (3
+middagar, 2 portioner) även för inloggade medlemmar. Aktiverad 17:57:34 UTC,
+lagringsretention complete före och efter. `/ready` Lund och Malmö: ready
+(prisunderlaget `degraded` av äldre basprisrader som behålls tills de ersätts,
+som före aktiveringen).
+
+# 2026-11-20 eftermiddag: Alternativ A som standard, 49 billiga grundrätter
+
+Main `02c9da2819f9` (merge av `ui-a-default`, `variation-and-diet-fixes` och
+`cheap-base-recipes-resolved`). App **app-02c9da2819f9-dcc1560d**, image
+`2b9db89e5670`, bas `343946e59054`. 17 ändrade filer: receptpaket och
+bibliotekmanifest, granskningsregister (`composition-rereviews-20261120.json`,
+`recipe-shapes-20261026.json`), `intake_product_links.py`, `diet_policy.py`,
+`personal_policy.py`, `personal_planner.py` och de statiska filerna för
+Alternativ A/B, admin och `/personal`. Aktiverad 14:27:26 UTC. Prov: /personal
+öppnar /ui/a; Lund, 3 middagar, "Många ingredienser" gav tre recept med 14
+ingredienser, 278,11 kr, cirka 20 s.
+
+Bygge och aktivering kördes med arbetarkoden från `beta_release.py` startad med
+nohup på servern, eftersom klientens skal stoppar långa processer. Kvittona
+skrevs till arbetsmappen efteråt. Ett första bygge (`app-02c9da2819f9-6b766034`)
+avbröts på klientsidan efter bildbygget och användes inte.
+
 # 2026-11-18 morgon: Uppvärmning med lägsta prioritet, tre planer samtidigt
 
 Main `daa6a40bd821` (PR #99). App **app-daa6a40bd821-c51d81c5**, image
@@ -410,10 +437,10 @@ git status --short
 .venv/Scripts/python.exe -X utf8 scripts/smako_ops.py status
 
 # Använd den granskade Git-bas som motsvarar faktiskt aktiva filer enligt senaste journalen.
-.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit daa6a40bd821 --commit main --workdir .local/beta-release
+.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit 94f39e9de168 --commit main --workdir .local/beta-release
 ```
 
-`daa6a40bd821` är appen som aktiverades 2026-11-18 06:24 UTC. Appbildens egen
+`94f39e9de168` är appen som aktiverades 2026-11-20 17:57 UTC. Appbildens egen
 grocery-kopia är äldre än Git; använd `--keep-app-grocery` om intervallet
 bara innehåller grocery-Python som redan levererats till schedulern. De äldre
 Coop-filerna i runtime (`price_universe_runtime.py`,
