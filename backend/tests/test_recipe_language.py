@@ -28,8 +28,8 @@ def review():
 def test_full_transition_preserves_issued_history_and_all_current_identities(review):
     language.checked_transition(review)
     active = current_recipes()
-    assert len(active) == 2851
-    assert len({r.design.base_id for r in active}) == 1083
+    assert len(active) == 2998
+    assert len({r.design.base_id for r in active}) == 1132
     for recipe in active:
         assert language.WAIT not in recipe.instructions
         assert not any(language.PREFIX in text or "Finhacka fasta bitar" in text for text in recipe.instructions)

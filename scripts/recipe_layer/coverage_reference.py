@@ -27,6 +27,7 @@ ROUND4_REVIEW = Path('docs/reviews/recipe-unblock-round4-20261102/library-transi
 LANGUAGE_REVIEW = Path('docs/reviews/recipe-language-20261102/library-transition.json')
 LANGUAGE_FOLLOWUP_REVIEW = Path('docs/reviews/recipe-language-followup-20261102/library-transition.json')
 MALMO_REVIEW = Path('docs/reviews/malmo-unavailable-20261107/recipe-review.json')
+CHEAP_BASES_REVIEW = Path('docs/reviews/cheap-bases-20261119/library-transition.json')
 
 
 def checked_successor_bytes(review):
@@ -137,7 +138,7 @@ def reviewed_recipe_transition(scope, compared_scope, variants):
     before = [r['current_id'] for r in variants]
     if digest(before) != scope['recipe_ids_sha256'] or len(set(before)) != len(before):
         raise ValueError('Changed coverage comparison scope: unreviewed recipe transition')
-    paths = (MINT_REVIEW, EGG_REVIEW, MINT_LEAF_REVIEW, CORN_REVIEW, TOP_FIVE_REVIEW, EXPANSION_REVIEW, ROUND2_REVIEW, ROUND3_REVIEW, ROUND4_REVIEW, LANGUAGE_REVIEW, LANGUAGE_FOLLOWUP_REVIEW, MALMO_REVIEW)
+    paths = (MINT_REVIEW, EGG_REVIEW, MINT_LEAF_REVIEW, CORN_REVIEW, TOP_FIVE_REVIEW, EXPANSION_REVIEW, ROUND2_REVIEW, ROUND3_REVIEW, ROUND4_REVIEW, LANGUAGE_REVIEW, LANGUAGE_FOLLOWUP_REVIEW, MALMO_REVIEW, CHEAP_BASES_REVIEW)
     reviews = [(path, json.loads(path.read_bytes())) for path in paths if path.exists()]
     pending = [(scope['manifest_sha256'], before)]
     visited = set()
@@ -153,7 +154,7 @@ def reviewed_recipe_transition(scope, compared_scope, variants):
         for path, review in reviews:
             if manifest != review['before_manifest_file_sha256']:
                 continue
-            if path in {EXPANSION_REVIEW, ROUND2_REVIEW, ROUND3_REVIEW, ROUND4_REVIEW}:
+            if path in {EXPANSION_REVIEW, ROUND2_REVIEW, ROUND3_REVIEW, ROUND4_REVIEW, CHEAP_BASES_REVIEW}:
                 checked_additive_transition(review)
             if path == LANGUAGE_REVIEW:
                 from rewrite_recipe_language import checked_transition

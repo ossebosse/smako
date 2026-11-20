@@ -85,7 +85,11 @@ def test_price_update_reuses_stable_article_but_rebinds_current_facts(scallion):
     assert checkout.packages_needed == 2 and checkout.total_price == 60
     assert project_usable_quantity(fresh, old, allow_estimates=True, required_unit='g') is fresh
     changed = replace(facts, ingredients=('Salladslök, salt',))
-    assert project_usable_quantity(fresh, changed, allow_estimates=True, required_unit='g') is fresh
+    # A first declaration keeps a link reviewed without one (2026-11-20).
+    assert project_usable_quantity(fresh, changed, allow_estimates=True, required_unit='g').usable_quantity == 96
+    proof['composition_sha256'] = links.composition_signature(changed)
+    other = replace(changed, ingredients=('Salladslök, socker',))
+    assert project_usable_quantity(fresh, other, allow_estimates=True, required_unit='g') is fresh
     wrong_context = fresh.model_copy(update={'store_id': 'other-context'})
     assert project_usable_quantity(wrong_context, facts, allow_estimates=True, required_unit='g') is wrong_context
 
