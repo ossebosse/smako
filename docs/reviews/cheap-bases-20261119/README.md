@@ -8,8 +8,15 @@
 - Korv stroganoff behölls trots att fläskstroganoff finns: en egen klassiker med falukorv. Grekiska lahanodolmades behölls trots svenska kåldolmar: äggcitronsåsen och smaksättningen skiljer. Mexikansk gul ärtsoppa (tomat, spiskummin, tortillastrimlor) behölls bredvid den svenska. Granska gärna dessa tre.
 
 ## Köpbarhet
-Betans plandiagnostik 2026-11-19 (Lund 25 butiker, Malmö 54 butiker) visar att olivolja, mozzarella, rimmat fläsk, majstortillas, fisksås, mynta, balsamvinäger, majsgryn och risottoris inte går att köpa i minst ett av områdena. De ersattes: rapsolja, ost, tortillas, ljus soja, persilja, rödvinsvinäger; rimmat fläsk togs bort. `test_cheap_bases_20261119.py` håller listan.
-Recepten är inte kvalificerade mot betans varor ännu. Författarverktygets kvalificering kräver import i den körande appen, och den äldre prisartefakten saknar de flesta råvaruindex. Kontroll sker efter aktivering med vanliga planer och den dagliga kontrollen av recept som saknar köpbara varor.
+Ägarbeslut 2026-11-20: varje ingrediens ska gå att köpa; ingenting byts ut. Betans plandiagnostik 2026-11-19 visade att olivolja, fisksås, majstortillas, balsamvinäger, mozzarella, mynta, citrongräs och rimmat fläsk saknade köpbar vara i Lund eller Malmö. Recepten har sina ursprungliga ingredienser och orsakerna är åtgärdade:
+
+- Olivolja, fisksås, majstortillas, balsamvinäger m.fl.: granskade länkar utan ingrediensförteckning slutade matcha när butikerna började publicera förteckningar (2026-11-16). En första förteckning på samma artikel godtas; artikelkoder gäller i hela Axfood (Willys, Hemköp, City Gross); stora/små bokstäver i namn och varumärke och butikens egen kategori bryter inte en GTIN- eller artikelidentitet.
+- Rimmat fläsk (Scan Stekfläsk Rimmat Skivat, 101278378_ST): Hemköp har formulerat om förteckningen och Willys publicerar ingen. Den nya texten är granskad och bunden till sin hash i `backend/app/data/ingredients/composition-rereviews-20261120.json`.
+- Mynta: bibliotekets standard för `mynta|raw_edible` har ingen granskad vara. Recepten pekar på den granskade identiteten för ansad mynta i 25-g förpackning (`intake_all_shape_trimmed_mint`); Axfood publicerar nu varumärket Garant, så de nya etiketterna är granskade som nya länkar.
+- Citrongräs: köps som hela stjälkar (`intake_all_shape_top5_whole_lemongrass`, 50 g), där receptet använder den mjuka inre delen.
+- Mozzarella: gnocchin gratineras med riven mozzarella som säljs utan lag (`mozzarella|as_sold`), vilket är vad steget beskriver.
+
+`test_cheap_bases_20261119.py` kräver att varje ingrediens pekar på en identitet med granskad vara och att de ursprungliga ingredienserna finns kvar. Kvalificering 2026-11-20 mot de aktiva prisuniversumen (Lund 237f7741…, Malmö 5ca3e8e2…), en vecka per recept, med `scripts/recipe_layer/qualify_candidate_library.py`: standard 49/49 och utökad 49/49 i både Lund och Malmö.
 
 ## Grundrätter (standardvariantens namn och huvudråvara)
 
