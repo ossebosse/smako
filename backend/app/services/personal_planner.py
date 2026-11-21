@@ -471,6 +471,7 @@ class PersonalPlanner:
         self.candidate_sequences = OrderedDict()
         self.ecological_results = OrderedDict()
         self.variant_search_evidence = OrderedDict()
+        self._avoid, self._avoided_count, self._variation_kr = frozenset(), 0, 0.0
         self.normalized_recipe_rows = OrderedDict()
         self.qualified_nutrition_candidates = OrderedDict()
         self.slot_nutrition_cache = OrderedDict()
@@ -3528,7 +3529,7 @@ class PersonalPlanner:
                 "purchase_planning_mode": self.request.purchase_planning_mode, "library": "before_content_pack"}
         try:
             with self.optimizer.quote_cache(**self._quote_cache_args()):
-                result = self._create(replace_slot=replace_slot, balanced_reference=balanced_reference)
+                result = self._create_avoiding(replace_slot=replace_slot, balanced_reference=balanced_reference)
             retain_library_comparison()
             if incumbents:
                 winner = min([result, *incumbents], key=lambda p: self._week_purchase_key(p.optimized_basket, p.personal.preparations, p.personal.slots))
@@ -3739,6 +3740,18 @@ class PersonalPlanner:
 
     def _preference_cost(self, slots):
         """Owner decision 2026-11-15: likes and dislikes as kronor per recipe."""
+        return self._taste_cost(slots) + self._variation_cost(slots)
+
+    def _variation_cost(self, slots):
+        """Owner decision 2026-11-21: a seeded random preference among dinners (plan_variation.py)."""
+        seed, kronor = self.spec.variation_seed, getattr(self, "_variation_kr", 0.0)
+        if seed is None or not kronor:
+            return 0.0
+        from app.services.plan_variation import jitter
+        return kronor * sum(jitter(seed, s.recipe.design.base_id) for s in slots
+                            if s.recipe and s.meal_type == "dinner" and s.recipe.design)
+
+    def _taste_cost(self, slots):
         recipes = [s.recipe for s in slots if s.recipe]
         if getattr(self, "_ignore_likes", False):
             # The week as if nothing were liked: dislikes still count.
@@ -4388,6 +4401,33 @@ class PersonalPlanner:
                     )
                     break
 
+    def _create_avoiding(self, *, replace_slot=None, balanced_reference=None):
+        """Owner decision 2026-11-21: avoid recent plans' dinners; when no week fits,
+        allow the oldest plans' dinners again first (the list is newest first)."""
+        avoid = list(self.spec.avoid_recipes)
+        levels = [avoid, avoid[:len(avoid) // 2], []] if avoid and replace_slot is None else [avoid]
+        levels = [level for i, level in enumerate(levels) if i == 0 or level != levels[i - 1]]
+        for i, level in enumerate(levels):
+            self._avoid, self._avoided_count = frozenset(level), 0
+            try:
+                result = self._create(replace_slot=replace_slot, balanced_reference=balanced_reference)
+            except PlanningDeadlineExceeded:
+                raise
+            except (ValueError, IncompleteBasketError):
+                if i == len(levels) - 1:
+                    raise
+                continue
+            if self.complete and (self.spec.variation_seed is not None or avoid):
+                result.personal.checks["plan_variation"] = {
+                    "random_preference": self.spec.variation_seed is not None,
+                    "max_percent": 10 if self.spec.variation_seed is not None else 0,
+                    "per_dinner_kronor": round(getattr(self, "_variation_kr", 0.0), 2),
+                    "avoided_dinners": len(level), "requested_avoided_dinners": len(avoid),
+                    "description": "Slumpad liten preferens bland middagarna (högst cirka 10 % dyrare vecka) "
+                                   "och middagar från dina senaste planer undviks enligt dina inställningar.",
+                }
+            return result
+
     def _create(self, *, replace_slot=None, balanced_reference=None, _skip_prepared_menu=False):
         slots = self.spec.slots
         if slots is None:
@@ -4451,6 +4491,14 @@ class PersonalPlanner:
                             and slot.recipe.design.base_id == r.design.base_id)
                     if not removed or removed_recipe_key(r, self._recipe_id) not in removed
                 ]
+                # Owner decision 2026-11-21: dinners of the member's recent plans
+                # are avoided; "Byt rätt" allows them again only when nothing else fits.
+                avoid = self._avoid if slot.meal_type == "dinner" else frozenset()
+                if avoid:
+                    fresh = [r for r in choices if not (r.design and r.design.base_id in avoid)]
+                    if fresh or slot.id != replace_slot:
+                        self._avoided_count += len(choices) - len(fresh)
+                        choices = fresh
                 if slot.id == replace_slot and not choices:
                     raise PolicyConflict(
                         "Det finns ingen annan rätt som passar dina val. Din plan är oförändrad. "
@@ -4473,6 +4521,10 @@ class PersonalPlanner:
             if s.meal_type == "dinner" and (generating or s.recipe or s.id == replace_slot)
         )
         policy_request = personal_policy_request(self.request, dinner_count)
+        if self.spec.variation_seed is not None:
+            from app.services.plan_variation import per_dinner_kronor
+            self._variation_kr = per_dinner_kronor(
+                e.paid for (meal_type, _), e in self.variant_search_evidence.items() if meal_type == "dinner")
         policy = self.service._diversity_policy_for(policy_request, self.request.diversity_mode)
         if self.complete:
             from app.services.complete_recipes import diversity_policy

@@ -192,6 +192,13 @@ class PersonalStore:
             state["items"] = [i.model_dump() for i in items]
             return write_state(connection, owner, state, revision)
 
+    def update_variation(self, owner, revision, variation):
+        with self.plans._connect() as connection:
+            connection.execute("BEGIN IMMEDIATE")
+            state = read_state(connection, owner)
+            state["variation"] = variation.model_dump()
+            return write_state(connection, owner, state, revision)
+
     def update_profile(self, owner, revision, profile: TasteProfile):
         with self.plans._connect() as connection:
             connection.execute("BEGIN IMMEDIATE")

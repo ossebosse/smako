@@ -38,6 +38,36 @@
     await N.loadState();
   }
 
+  // Owner decision 2026-11-21: how much new plans vary, a member setting.
+  function settingsView() {
+    const now = S.state?.variation || { avoid_recent_plans: 2, random_variation: true };
+    const box = el("section", null, "settings");
+    const status = el("p", null, "hint", { role: "status" });
+    const plans = el("select", null, null, { name: "avoid_recent_plans" });
+    for (const [value, text] of [[0, "Nej, rätterna får komma igen"], [1, "Från min senaste plan"], [2, "Från mina 2 senaste planer"],
+      [3, "Från mina 3 senaste planer"], [5, "Från mina 5 senaste planer"], [10, "Från mina 10 senaste planer"]]) {
+      plans.append(el("option", text, null, { value: String(value), ...(now.avoid_recent_plans === value ? { selected: true } : {}) }));
+    }
+    const random = el("input", null, null, { type: "checkbox", name: "random_variation", ...(now.random_variation ? { checked: true } : {}) });
+    const plansField = el("label", "Undvik rätter jag redan fått", "field"), randomField = el("label", null, "check");
+    plansField.append(plans);
+    randomField.append(random, document.createTextNode(" Variera lite: välj ibland en annan vecka som kostar högst cirka 10 % mer"));
+    async function save() {
+      status.textContent = "Sparar.";
+      const variation = { avoid_recent_plans: Number(plans.value), random_variation: random.checked };
+      try { S.state = await api("/api/personal/variation", { revision: S.state.revision, variation }, "PUT"); status.textContent = "Sparat. Gäller nästa plan du skapar."; }
+      catch (error) {
+        if (error.status === 409) { await N.refreshState(); try { S.state = await api("/api/personal/variation", { revision: S.state.revision, variation }, "PUT"); status.textContent = "Sparat. Gäller nästa plan du skapar."; return; } catch (again) { status.textContent = again.message; return; } }
+        status.textContent = error.message;
+      }
+    }
+    plans.addEventListener("change", save); random.addEventListener("change", save);
+    box.append(el("h2", "Inställningar"),
+      el("p", "Nya planer och ”Byt rätt” undviker middagar från dina senaste planer. Finns det ingen vecka som passar dina val tillåts de äldsta rätterna igen först.", "hint"),
+      plansField, randomField, status);
+    return box;
+  }
+
   function accountView({ onPantry } = {}) {
     const box = el("section", null, "account");
     const act = (status, work) => async () => { status.textContent = "Arbetar."; try { await work(); draw(); emit(); } catch (error) { status.textContent = error.message; } };
@@ -65,6 +95,7 @@
         box.append(el("h2", "Du är inloggad"), el("p", "Skafferiet, inköpslistan och dina val sparas på kontot. Du får fler recept och portioner än som gäst."));
         if (auth.note) box.append(el("p", auth.note, "hint"));
         if (onPantry) box.append(button(pantry ? `Öppna skafferiet (${pantry} ${pantry === 1 ? "vara" : "varor"})` : "Öppna skafferiet", onPantry, "btn primary cta"));
+        box.append(settingsView());
         box.append(button("Logga ut", act(status, signOut), "btn"), status);
         return;
       }

@@ -723,12 +723,16 @@ def _prepare_complete_request(request, http_request, settings):
     if not enabled(request):
         return request
     from app.services.personal_store import PersonalStore
-    state = PersonalStore(_store(http_request)).read(_plan_actor_hash(http_request, settings))
+    owner = _plan_actor_hash(http_request, settings)
+    state = PersonalStore(_store(http_request)).read(owner)
     prepared = prepare_request(request, settings, pantry_revision=state["revision"])
     # The public form may now describe several meal types. Bind its implicit
     # pantry revision exactly as the existing public dinner translation does.
     prepared.personal.pantry_revision = state["revision"]
-    return prepared
+    from app.api.account import verified_owner
+    from app.services.plan_variation import apply_variation
+    return apply_variation(prepared, store=_store(http_request), owner=owner, state=state,
+                           member=bool(verified_owner(http_request)))
 
 
 def _job_request_key(request, http_request, settings):

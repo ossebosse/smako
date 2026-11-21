@@ -25,6 +25,7 @@ from app.models.personal import (
     PersonalPlanning,
     ProductGenericQuery,
     ProfileWrite,
+    VariationWrite,
     ShoppingWrite,
     TasteProfile,
 )
@@ -73,6 +74,7 @@ def context(request, response):
 
 def public_state(state, request=None, profile=None):
     from app.api.account import status
+    from app.services.plan_variation import variation_settings
 
     return {
         "revision": state["revision"],
@@ -85,6 +87,7 @@ def public_state(state, request=None, profile=None):
         "shopping_common": state.get("shopping_common", []),
         "shopping_initialized": "shopping_items" in state,
         "account": status(request),
+        "variation": variation_settings(state).model_dump(),
         "pantry_checks": pantry_checks(
             state["items"], profile or TasteProfile.model_validate(state["profile"] or {})
         ),
@@ -338,6 +341,17 @@ def profile_update(payload: ProfileWrite, request: Request, response: Response):
     return public_state(
         PersonalStore(plans).update_profile(owner, payload.revision, payload.profile), request
     )
+
+
+@router.put("/variation")
+def variation_update(payload: VariationWrite, request: Request, response: Response):
+    """A member's settings for how much new plans vary (owner decision 2026-11-21)."""
+    from app.api.account import verified_owner
+
+    _settings, plans, owner = context(request, response)
+    if not verified_owner(request):
+        raise HTTPException(403, "Logga in för att ändra inställningarna.")
+    return public_state(PersonalStore(plans).update_variation(owner, payload.revision, payload.variation), request)
 
 
 @router.post("/plans/{plan_id}/change")

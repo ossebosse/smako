@@ -303,6 +303,13 @@ class PersonalPlanning(PrivateModel):
     # Owner decision 2026-11-15: staples the person has at home are not bought
     # (app/services/staples.py). Omitted while empty, so older requests are unchanged.
     staples_at_home: list[Staple] = Field(default_factory=list, max_length=14, exclude_if=lambda v: not v)
+    # Owner decision 2026-11-21 (app/services/plan_variation.py): a seed for a
+    # small random preference among dinners (weeks cost at most about 10 % more)
+    # and the dinners of the member's most recent plans, newest first, which a
+    # new week and "Byt rätt" avoid. Set by the server when a plan is created and
+    # kept with the plan, so changes to it stay consistent. Omitted while unset.
+    variation_seed: int | None = Field(default=None, ge=0, lt=2**32, exclude_if=lambda v: v is None)
+    avoid_recipes: list[str] = Field(default_factory=list, max_length=210, exclude_if=lambda v: not v)
 
     @model_validator(mode="after")
     def unique(self):
@@ -345,6 +352,17 @@ class PantryWrite(PrivateModel):
     revision: int = Field(ge=0)
     items: list[PantryItem] = Field(max_length=200)
     profile: TasteProfile | None = None
+
+
+class VariationSettings(PrivateModel):
+    """A member's choices for how much new plans vary (owner decision 2026-11-21)."""
+    avoid_recent_plans: int = Field(default=2, ge=0, le=10)
+    random_variation: bool = True
+
+
+class VariationWrite(PrivateModel):
+    revision: int = Field(ge=0)
+    variation: VariationSettings
 
 
 class ProfileWrite(PrivateModel):
