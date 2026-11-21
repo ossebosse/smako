@@ -83,3 +83,38 @@ def test_pure_lemon_juice_with_a_contradictory_table_uses_fresh_lemon_juice():
     concentrate = facts("Citronjuice från koncentrat, vatten", {"kcal": 20}, conflicts=("x",))
     assert volume_evidence(bottle, "citronjuice", concentrate) is None
     assert volume_evidence(product("Citrondryck", "Skafferi", 200.0, "ml"), "citronjuice", contradictory) is None
+
+
+def test_plain_produce_and_tomato_paste_references():
+    produce = "Frukt & Grönt > Potatis & rotsaker > Rotsaker"
+    assert product_reference(product("Kålrot Hel Sverige Klass 1", produce), "kålrot", None) == 288
+    assert product_reference(product("Kålrotsstrimlor", produce), "kålrot", None) is None
+    assert product_reference(product("Gurka", "Gurka"), "gurka", None) == 339
+    assert product_reference(product("Saltgurka", "Gurka"), "gurka", None) is None
+    parsley = facts("INGREDIENSER Hackad persilja.", {"kcal": 41, "carbs_g": 3.3, "protein_g": 4.1})
+    assert product_reference(product("Persilja Finhackad Fryst", "Fryst"), "persilja", parsley) == 352
+    assert product_reference(product("Persilja Torkad", "Kryddor"), "persilja", facts("Persilja")) is None
+    paste = facts("INGREDIENSER: Tomatpuré.Till 100 g tomatpuré har 520 g tomater använts.", {"kcal": 94})
+    assert product_reference(product("Tomatpuré", "Skafferi"), "tomatpuré", paste) == 410
+    assert product_reference(product("Tomatpuré", "Skafferi"), "tomatpuré",
+                             facts("Tomatkoncentrat, socker, salt, basilika")) is None
+
+
+def test_an_incomplete_table_for_a_plain_food_uses_its_generic_reference():
+    recipe = recipe_with("persilja", "raw_edible")
+    parsley = facts("INGREDIENSER Hackad persilja.", {"kcal": 41, "carbs_g": 3.3, "protein_g": 4.1})
+    evidence = input_evidence(recipe, product("Persilja Finhackad Fryst", "Fryst", 50.0), "persilja", "g", False, parsley)
+    assert evidence is not None and evidence.nutrition == reference_evidence(352).nutrition
+
+
+def test_contradictory_lemon_juice_table_reaches_the_fresh_juice_reference_in_a_recipe():
+    recipe = recipe_with("citronjuice", "as_sold")
+    contradictory = facts("Ingredienser: Citronjuice 99,9%, eterisk olja (från citronskal), "
+                          "antioxidationsmedel: kaliumdiSULFIT",
+                          {"kcal": 28, "fat_g": 0.1, "carbs_g": 2.0, "protein_g": 0.3}, unit="ml",
+                          conflicts=("supplier_nutrition_conflict",))
+    evidence = input_evidence(recipe, product("Citronjuice", "Skafferi", 200.0, "ml"), "citronjuice", "ml",
+                              False, contradictory)
+    assert evidence is not None and evidence.nutrition_unit == "ml"
+    other = facts("Vatten, salt", {"kcal": 1, "fat_g": 0, "carbs_g": 0, "protein_g": 0}, conflicts=("x",))
+    assert input_evidence(recipe_with("gurka", "raw_edible"), product("Gurka", "Gurka"), "gurka", "g", False, other) is None

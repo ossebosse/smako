@@ -62,6 +62,8 @@ MAPPINGS = {
     95: ("hårdost 17 %", "ready"),
     96: ("hårdost 28 %", "ready"),
     645: ("citronjuice färskpressad", "ready"),
+    288: ("kålrot", "raw"),
+    410: ("tomatpuré", "ready"),
     123: ("mjölk 3 %", "ready"),
     1975: ("salt", "ready"),
     1162: ("kalkonbröstfilé", "raw"),
@@ -409,6 +411,29 @@ def product_reference(product, name, facts):
         # A distinct plain fresh food, never yellow onion or a pickled/flavoured
         # product. The existing SLV record was retained but never mapped here.
         return 4947 if re.fullmatch(r"(?:rödlök|röd lök|lök röd)(?: eko| ekologisk| ekologiska| klass 1| i påse)*", text.strip()) and not composition else None
+    if canonical == "kålrot" and not composition:
+        # Owner request 2026-11-21: a whole fresh swede (raw edible reference).
+        fresh = (product.category or "").casefold().startswith("frukt & grönt") or "klass 1" in text
+        return 288 if fresh and re.fullmatch(r"(?:ekologisk )?kålrot(?: (?:hel|sverige|svensk|klass 1|eko|ekologisk))*",
+                                             re.sub(r"\s+", " ", text).strip()) else None
+    if canonical == "persilja" and composition:
+        # Frozen chopped parsley is parsley leaf; dried parsley stays unmapped.
+        words = set(re.findall(r"[a-zåäö]+", composition))
+        if (re.fullmatch(r"(?:persilja (?:fin)?hackad|(?:fin)?hackad persilja) fryst", re.sub(r"\s+", " ", text).strip())
+                and words <= {"ingredienser", "hackad", "finhackad", "persilja", "bladpersilja", "ekologisk"}):
+            return 352
+        return None
+    if canonical == "tomatpuré":
+        # Plain tomato paste; seasoned, sweetened or flavoured paste stays unmapped.
+        listed = re.split(r"till 100 g|\(motsvarande", composition)[0]
+        listed = re.sub(r"brix[^,.]*|torrsubstans[^,.]*|°bx\s*\d+|\d+(?:[,.]\d+)?\s*%", " ", listed)
+        words = set(re.findall(r"[a-zåäöé]+", listed))
+        allowed = {"ingredienser", "tomatpuré", "tomater", "tomat", "tomatkoncentrat", "salt", "dubbelkoncentrerad",
+                   "krav", "ekologiska", "ekologisk", "odlade", "i", "eu", "italien", "min"}
+        if re.fullmatch(r"tomatpuré(?: (?:eko|ekologisk|dubbelkoncentrerad|tub))*", re.sub(r"\s+", " ", text).strip()) \
+                and (not composition or (words and words <= allowed)):
+            return 410
+        return None
     if canonical in {"ost", "hushållsost", "hårdost"}:
         # Owner request 2026-11-21: plain household cheese without its own
         # declaration uses Livsmedelsverket's hard cheese at the stated fat.
@@ -456,7 +481,7 @@ def product_reference(product, name, facts):
         )
         for identity, names, pattern in rules:
             if (canonical in names or name.strip().casefold() == product.name.strip().casefold()) and re.fullmatch(pattern, plain):
-                if identity in {371, 7193, 7194, 339, 2269}:
+                if identity in {371, 7193, 7194, 2269}:
                     source_text = ' '.join(o.description or '' for o in product.offers)
                     produce_aisle = identity in {371, 2269} and (product.category or '').casefold().startswith('frukt & grönt')
                     if not ('färsk' in plain or produce_aisle or re.search(r'\bKlass\s+1\b', source_text, re.IGNORECASE)):

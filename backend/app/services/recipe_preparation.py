@@ -295,7 +295,11 @@ def input_evidence(recipe, product, name, unit, qualified, fact, *, recipe_cache
     if has_unmeasured_process(recipe):
         return None
     form = recipe.preparation.input_forms.get(canonical(name))
-    if not form or unit not in {"g", "ml"} or (fact and fact.conflicts):
+    if not form or unit not in {"g", "ml"}:
+        return None
+    if fact and fact.conflicts and not (canonical(name) == "citronjuice" and unit == "ml" and form == "as_sold"):
+        # A contradictory lemon-juice table falls back to the generic
+        # fresh-juice reference in volume_evidence; nothing else does.
         return None
     text = product.name.casefold()
     composition = " ".join(fact.ingredients).casefold() if fact else ""
@@ -336,11 +340,9 @@ def input_evidence(recipe, product, name, unit, qualified, fact, *, recipe_cache
         # The existing usable_quantity drives whole-package purchase planning.
         # It must explicitly refer to source-proven drained contents. A small
         # package number, a bean name or a generic reference is not that proof.
-        proven = (
+        drained_mass = bool(
             fact
-            and fact.nutrition_preparation in {"cooked_drained", "preserved_drained", "drained", "draining_unspecified"}
             and unit == "g"
-            and fact.nutrition_unit == "g"
             and any(
                 e.get("basis") == "drained"
                 and e.get("unit") == "g"
@@ -348,6 +350,11 @@ def input_evidence(recipe, product, name, unit, qualified, fact, *, recipe_cache
                 and e.get("source")
                 for e in fact.field_sources.get("usable_quantity", ())
             )
+        )
+        proven = (
+            drained_mass
+            and fact.nutrition_preparation in {"cooked_drained", "preserved_drained", "drained", "draining_unspecified"}
+            and fact.nutrition_unit == "g"
         )
         if not proven:
             from app.services.complete_recipes import package_weight_drained
@@ -357,7 +364,7 @@ def input_evidence(recipe, product, name, unit, qualified, fact, *, recipe_cache
             # Its own table may describe the contents with liquid, so nutrition
             # for the recipe's drained grams comes only from the generic drained
             # reference below, never from the supplier's table.
-            if not (form == "cooked_drained" and unit == "g" and package_weight_drained(product, fact)):
+            if not (form == "cooked_drained" and unit == "g" and (drained_mass or package_weight_drained(product, fact))):
                 return None
             generic_drained, qualified = True, False
         else:
@@ -375,10 +382,17 @@ def input_evidence(recipe, product, name, unit, qualified, fact, *, recipe_cache
         canonical(name) == 'oliver' and form == 'preserved_drained' and unit == 'g'
         and product_reference(product, name, fact) == 402
     )
+    # Owner request 2026-11-21: an incomplete supplier table (a macro missing)
+    # for a plainly identified food uses the generic reference for that food.
+    partial_reference = bool(
+        evidence is None and fact and fact.nutrition and form in {"raw_edible", "as_sold"}
+        and not {"kcal", "protein_g", "fat_g", "carbs_g"} <= fact.nutrition.keys()
+        and product_reference(product, name, fact) is not None
+    )
     if evidence is None:
         if unit != "g" or (fact and fact.nutrition and not (
             form == "cooked_drained" and fact.nutrition_preparation == "draining_unspecified"
-        ) and not generic_drained and not plain_salt_reference and not drained_olive_reference):
+        ) and not generic_drained and not partial_reference and not plain_salt_reference and not drained_olive_reference):
             return None
         if form == "cooked_drained":
             # Origin, organic certification and percentages are not ingredients.
