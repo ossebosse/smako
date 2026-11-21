@@ -1,3 +1,19 @@
+# 2026-11-21 kväll: Variation i planerna, 100 nya middagar, blockerande ingredienser
+
+Main `370df63cd371` (fast-forward av `plan-variation`, merge av
+`more-dinners-20261121`). App **app-370df63cd371-98dbcac1**, bas
+`0e556758891a` (image `a6c7279f5134`). Ändrat: `plan_variation.py` (nytt),
+`personal_planner.py`, `personal_store.py`, `api/personal.py`, `api/plan.py`,
+`models/personal.py`, `intake_product_links.py`, `complete_recipes.py`, ett nytt
+receptpaket och bibliotekmanifest (`smako-variation-bases-20261121`, 100
+grundrätter, 300 varianter), samt `next/mine.js`, `next/a.html`, `next/b.html`.
+Ägarbeslut 2026-11-21: nya planer väljer ibland en vecka inom cirka 10 % av den
+billigaste; medlemmar undviker rätter från sina senaste planer (inställning,
+standard 2 planer). 28 ingredienser fick granskade etikettregler; ägaren har
+noterat förslagen för de som inte finns i butik. Importprov i nätverkslös
+container godkänt. Aktiverad 22:45 UTC; befintligt tillstånd och prismanifest
+bevarade, lagringsretention körd efteråt. `/ready` Lund och Malmö: ready.
+
 # 2026-11-21: Kärnbibliotekets namn, fler näringsvärden
 
 Main `0e556758891a` (branch `core-names-and-nutrition`, fast-forward). App
@@ -469,10 +485,10 @@ git status --short
 .venv/Scripts/python.exe -X utf8 scripts/smako_ops.py status
 
 # Använd den granskade Git-bas som motsvarar faktiskt aktiva filer enligt senaste journalen.
-.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit 0e556758891a --commit main --workdir .local/beta-release
+.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit 370df63cd371 --commit main --workdir .local/beta-release
 ```
 
-`0e556758891a` är appen som aktiverades 2026-11-21 08:57 UTC. Appbildens egen
+`370df63cd371` är appen som aktiverades 2026-11-21 22:45 UTC. Appbildens egen
 grocery-kopia är äldre än Git; använd `--keep-app-grocery` om intervallet
 bara innehåller grocery-Python som redan levererats till schedulern. De äldre
 Coop-filerna i runtime (`price_universe_runtime.py`,
