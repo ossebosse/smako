@@ -22,8 +22,6 @@ def density_data():
 
 
 def volume_evidence(product, name, fact):
-    if fact and fact.conflicts:
-        return None
     canonical = canonicalize_ingredient_name(name)
     label = ' '.join(product.name.casefold().split())
     composition = ' '.join(fact.ingredients).casefold() if fact else ''
@@ -33,10 +31,19 @@ def volume_evidence(product, name, fact):
         # Fresh-juice density is only a proxy for essentially pure pressed juice.
         # Never apply it to concentrate, sweetened drinks or diluted mixtures.
         if (not re.fullmatch(r'citronjuice(?: eko| ekologisk)*', label)
-                or 'koncentrat' in composition or not plain_juice_composition(canonical, composition)
-                or not fact or fact.nutrition_unit != 'g' or not MACROS <= fact.nutrition.keys()):
+                or 'koncentrat' in composition or not plain_juice_composition(canonical, composition)):
             return None
-        evidence = fact
+        if fact and not fact.conflicts and fact.nutrition_unit == 'g' and MACROS <= fact.nutrition.keys():
+            evidence = fact
+        elif fact and (fact.conflicts or not fact.nutrition):
+            # Owner request 2026-11-21: a pure lemon juice whose own table is
+            # missing or contradictory uses Livsmedelsverket's fresh lemon juice
+            # (generic reference, never relabelled as the product's table).
+            evidence = reference_evidence(645)
+        else:
+            return None
+    elif fact and fact.conflicts:
+        return None
     elif canonical == 'rapsolja':
         if not re.fullmatch(r'rapsolja(?: kallpressad| eko| ekologisk| d-vitaminberikad)*', label):
             return None

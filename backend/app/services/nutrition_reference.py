@@ -56,6 +56,12 @@ MAPPINGS = {
     7266: ("kokosmjölk 18 %", "ready"),
     7139: ("crème fraiche 13 %", "ready"),
     97: ("hårdost 31 %", "ready"),
+    # slv-20261121.json: hard cheese by stated fat and fresh lemon juice.
+    78: ("hårdost 23 %", "ready"),
+    79: ("hårdost 26 %", "ready"),
+    95: ("hårdost 17 %", "ready"),
+    96: ("hårdost 28 %", "ready"),
+    645: ("citronjuice färskpressad", "ready"),
     123: ("mjölk 3 %", "ready"),
     1975: ("salt", "ready"),
     1162: ("kalkonbröstfilé", "raw"),
@@ -138,7 +144,7 @@ def macro_values(rows):
 def reference_data():
     raw = PATH.read_bytes()
     data = json.loads(raw)
-    for path in (SUPPLEMENT_PATH, PATH.with_name('slv-20260925.json'), PATH.with_name('slv-20260926.json'), PATH.with_name('slv-20261002.json'), PATH.with_name('slv-20261002-celery.json'), PATH.with_name('slv-20261002-beetroot.json'), PATH.with_name('slv-20261002-sweetpotato.json'), PATH.with_name('slv-20261002-peppers.json'), PATH.with_name('slv-20261003-black-olives.json'), *((APPLE_SUPPLEMENT_PATH,) if APPLE_SUPPLEMENT_PATH.exists() else ())):
+    for path in (SUPPLEMENT_PATH, PATH.with_name('slv-20260925.json'), PATH.with_name('slv-20260926.json'), PATH.with_name('slv-20261002.json'), PATH.with_name('slv-20261002-celery.json'), PATH.with_name('slv-20261002-beetroot.json'), PATH.with_name('slv-20261002-sweetpotato.json'), PATH.with_name('slv-20261002-peppers.json'), PATH.with_name('slv-20261003-black-olives.json'), PATH.with_name('slv-20261121.json'), *((APPLE_SUPPLEMENT_PATH,) if APPLE_SUPPLEMENT_PATH.exists() else ())):
         supplement = json.loads(path.read_bytes())
         if data['foods'].keys() & supplement['foods'].keys():
             raise ValueError('SLV supplement must not silently replace retained references')
@@ -403,6 +409,28 @@ def product_reference(product, name, facts):
         # A distinct plain fresh food, never yellow onion or a pickled/flavoured
         # product. The existing SLV record was retained but never mapped here.
         return 4947 if re.fullmatch(r"(?:rödlök|röd lök|lök röd)(?: eko| ekologisk| ekologiska| klass 1| i påse)*", text.strip()) and not composition else None
+    if canonical in {"ost", "hushållsost", "hårdost"}:
+        # Owner request 2026-11-21: plain household cheese without its own
+        # declaration uses Livsmedelsverket's hard cheese at the stated fat.
+        # Without a stated fat, the common 26 % household cheese (estimate).
+        match = re.fullmatch(r"hushållsost(?: (?:mild|mellanlagrad|götene|göten|skivad|bit|ca))*"
+                             r"(?: (\d+)\s*%)?(?: (?:mild|skivad|ca|bit))*", re.sub(r"\s+", " ", text).strip())
+        words = set(re.findall(r"[a-zåäö]+", composition))
+        if not match or (composition and not words & {"mjölk", "komjölk"}):
+            return None
+        fat = int(match[1]) if match[1] else 26
+        return {17: 95, 23: 78, 26: 79, 27: 79, 28: 96, 31: 97}.get(fat)
+    if canonical == "blandfärs":
+        # Plain fresh beef and pork mince; the Swedish standard blend is
+        # half beef, half pork (SLV 2499). Other stated blends stay unmapped.
+        plain = re.sub(r"\s+", " ", text).strip()
+        if not re.fullmatch(r"blandfärs(?: färsk)?(?: (?:50/50|50 ?% nöt 50 ?% fläsk))?(?: \d+\s*%)?"
+                            r"(?: (?:ca|krav|sverige|svensk|eko|ekologisk))*", plain):
+            return None
+        words = set(re.findall(r"[a-zåäö]+", composition))
+        if composition and not ({"nötkött"} <= words and words & {"fläskkött", "griskött"}):
+            return None
+        return 2499
     # Edition/retailer-independent identities of plain foods. These are generic
     # measured edible-input references, never product declarations or density
     # estimates. Unknown mint species, oil blends, seasoning and cooked forms

@@ -331,11 +331,12 @@ def input_evidence(recipe, product, name, unit, qualified, fact, *, recipe_cache
         # Reuse the established fresh/juice/puree/canned identity boundary even
         # when all requested nutrient fields happen to be available.
         return None
+    generic_drained = False
     if form in {"cooked_drained", "preserved_drained"}:
         # The existing usable_quantity drives whole-package purchase planning.
         # It must explicitly refer to source-proven drained contents. A small
         # package number, a bean name or a generic reference is not that proof.
-        if not (
+        proven = (
             fact
             and fact.nutrition_preparation in {"cooked_drained", "preserved_drained", "drained", "draining_unspecified"}
             and unit == "g"
@@ -347,9 +348,20 @@ def input_evidence(recipe, product, name, unit, qualified, fact, *, recipe_cache
                 and e.get("source")
                 for e in fact.field_sources.get("usable_quantity", ())
             )
-        ):
-            return None
-        qualified = bool(fact.nutrition and fact.nutrition_basis and fact.nutrition_preparation in {"cooked_drained", "preserved_drained", "drained"})
+        )
+        if not proven:
+            from app.services.complete_recipes import package_weight_drained
+
+            # Owner decisions 2026-11-13 and 2026-11-21: a plain preserve without a
+            # declared drained mass is bought by package weight (with a notice).
+            # Its own table may describe the contents with liquid, so nutrition
+            # for the recipe's drained grams comes only from the generic drained
+            # reference below, never from the supplier's table.
+            if not (form == "cooked_drained" and unit == "g" and package_weight_drained(product, fact)):
+                return None
+            generic_drained, qualified = True, False
+        else:
+            qualified = bool(fact.nutrition and fact.nutrition_basis and fact.nutrition_preparation in {"cooked_drained", "preserved_drained", "drained"})
     evidence = fact if qualified else None
     if evidence is None and unit == 'ml' and form == 'as_sold':
         from app.services.recipe_volume_nutrition import volume_evidence
@@ -366,11 +378,15 @@ def input_evidence(recipe, product, name, unit, qualified, fact, *, recipe_cache
     if evidence is None:
         if unit != "g" or (fact and fact.nutrition and not (
             form == "cooked_drained" and fact.nutrition_preparation == "draining_unspecified"
-        ) and not plain_salt_reference and not drained_olive_reference):
+        ) and not generic_drained and not plain_salt_reference and not drained_olive_reference):
             return None
         if form == "cooked_drained":
-            words = set(re.findall(r"[a-zåäö0-9]+", composition))
-            common = {'ingredienser', 'ekologiska', 'kokta', 'vatten', 'salt',
+            # Origin, organic certification and percentages are not ingredients.
+            listed = re.sub(r"\([^()]*\)", " ", composition)
+            listed = re.split(r"\*+\s*krav|krav-ekologisk|\*\s*ekologisk ingrediens", listed)[0]
+            listed = re.sub(r"\d+(?:[,.]\d+)?\s*%", " ", listed)
+            words = set(re.findall(r"[a-zåäö0-9]+", listed))
+            common = {'ingredienser', 'ekologiska', 'ekologisk', 'kokta', 'vatten', 'salt',
                       'antioxidationsmedel', 'e300', 'askorbinsyra'}
             rules = {'kikärtor': (3815, {'kikärtor', 'kikärter'}),
                      'kidneybönor': (3816, {'kidneybönor'}),
