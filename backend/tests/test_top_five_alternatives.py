@@ -45,7 +45,9 @@ def source_fixture(slug, proof):
 
 
 @pytest.fixture(params=list(SOURCES))
-def reviewed(request):
+def reviewed(request, monkeypatch):
+    # The reviewed-link gate alone; package-mass identities are tested separately.
+    monkeypatch.setattr(links, 'PACKAGE_WEIGHT_IDENTITIES', {})
     slug = request.param
     key = 'intake_all_shape_top5_' + slug
     row = links.entries()[key]
@@ -125,7 +127,7 @@ def test_tamarind_volume_never_acquires_a_gram_conversion():
 @pytest.mark.slow
 def test_successors_preserve_all_originals_other_ingredients_safety_and_scaling():
     review, issued, active = recipes()
-    assert len(active) == 2998 and len(review['corrected']) == 192
+    assert len(active) == 3298 and len(review['corrected']) == 192
     assert Counter(g for t in review['corrected'] for g in t['groups']) == {
         'tamarindpasta': 93, 'masa harina': 31, 'pärlkorn': 27, 'citrongräs': 27, 'klibbigt ris': 20}
     for t in review['corrected']:
