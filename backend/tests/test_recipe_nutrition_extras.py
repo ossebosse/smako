@@ -61,7 +61,9 @@ def test_lemon_density_changes_only_nutrition_and_preserves_declared_values():
     assert evidence.nutrition['protein_g'] == pytest.approx(.3 * 1.038)
     assert evidence.nutrition_unit == 'ml' and fact.nutrition_unit == 'g'
     assert product.usable_quantity == 200 and product.usable_unit == 'ml'
-    assert volume_evidence(product, 'citronjuice', replace(fact, conflicts=('conflicting_basis',))) is None
+    # Owner request 2026-11-21: a contradictory table falls back to SLV fresh lemon juice.
+    fallback = volume_evidence(product, 'citronjuice', replace(fact, conflicts=('conflicting_basis',)))
+    assert fallback.source_product_id == 'slv:645' and fallback.nutrition_unit == 'ml'
     assert volume_evidence(product, 'citronjuice', replace(fact, nutrition={'protein_g': .3})) is None
     assert volume_evidence(product.model_copy(update={'name': 'Citronjuice från koncentrat'}), 'citronjuice', fact) is None
 
