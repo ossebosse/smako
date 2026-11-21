@@ -99,9 +99,10 @@ def test_all_amended_versions_keep_history_and_original_library_and_source_bytes
     malmo = json.loads((ROOT.parents[3] / "docs/reviews/malmo-unavailable-20261107/recipe-review.json").read_bytes())
     latest = {r["previous_id"]: r["runtime_id"] for r in malmo["corrected"]}
     successors = {k: latest.get(v, v) for k, v in successors.items()} | latest
-    names = json.loads((ROOT.parents[3] / "docs/reviews/recipe-names-20261120/library-transition.json").read_bytes())
-    latest = {r["previous_id"]: r["runtime_id"] for r in names["corrected"]}
-    successors = {k: latest.get(v, v) for k, v in successors.items()} | latest
+    for file in ("recipe-names-20261120", "recipe-names-core-20261121"):
+        names = json.loads((ROOT.parents[3] / f"docs/reviews/{file}/library-transition.json").read_bytes())
+        latest = {r["previous_id"]: r["runtime_id"] for r in names["corrected"]}
+        successors = {k: latest.get(v, v) for k, v in successors.items()} | latest
     assert report["affected_variants"] == 337
     assert len(current) == 2998
     for row in report["recipes"]:

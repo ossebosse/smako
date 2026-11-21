@@ -126,6 +126,19 @@ def _structural_check(recipe: Recipe) -> None:
         raise ValueError("Beredningsmetoden är inte bunden till receptets exakta innehåll.")
 
 
+def _core_generation(design):
+    """Core-library generation ("1.3", "1.4") of an issued version.
+
+    The original core library has no pack timing (no active minutes). Its
+    name-only successors (e.g. 1.3.1, 2026-11-21) keep the generation's scaling.
+    """
+    if design.version in {"1.3.0", "1.4.0"}:
+        return design.version[:3]
+    if design.active_minutes is None and design.content_source is None:
+        return design.version.rsplit(".", 1)[0]
+    return None
+
+
 def current_recipes(generation=None):
     from app.services.meal_library_content import load_entries, manifest_entries
     manifest = manifest_entries()
@@ -319,7 +332,7 @@ def _scaled_uncached(recipe: Recipe, servings: int) -> Recipe:
         heat = next((index for index, step in enumerate(steps)
                      if index > 0 and step.duration_minutes >= 10
                      and (recipe.servings == 2 or re.search(r"grädda|stek|baka|sjud|koka", step.text.casefold()))
-                     and not (result.design.version in {"1.3.0", "1.4.0"}
+                     and not (_core_generation(result.design) in {"1.3", "1.4"}
                               and step.id in {"rice", "prebake"})), 0)
         if result.design.batch_scaling is not None:
             heat = next(index for index, step in enumerate(steps)

@@ -29,6 +29,7 @@ LANGUAGE_FOLLOWUP_REVIEW = Path('docs/reviews/recipe-language-followup-20261102/
 MALMO_REVIEW = Path('docs/reviews/malmo-unavailable-20261107/recipe-review.json')
 CHEAP_BASES_REVIEW = Path('docs/reviews/cheap-bases-20261119/library-transition.json')
 NAMES_REVIEW = Path('docs/reviews/recipe-names-20261120/library-transition.json')
+CORE_NAMES_REVIEW = Path('docs/reviews/recipe-names-core-20261121/library-transition.json')
 
 
 def checked_successor_bytes(review):
@@ -139,7 +140,7 @@ def reviewed_recipe_transition(scope, compared_scope, variants):
     before = [r['current_id'] for r in variants]
     if digest(before) != scope['recipe_ids_sha256'] or len(set(before)) != len(before):
         raise ValueError('Changed coverage comparison scope: unreviewed recipe transition')
-    paths = (MINT_REVIEW, EGG_REVIEW, MINT_LEAF_REVIEW, CORN_REVIEW, TOP_FIVE_REVIEW, EXPANSION_REVIEW, ROUND2_REVIEW, ROUND3_REVIEW, ROUND4_REVIEW, LANGUAGE_REVIEW, LANGUAGE_FOLLOWUP_REVIEW, MALMO_REVIEW, CHEAP_BASES_REVIEW, NAMES_REVIEW)
+    paths = (MINT_REVIEW, EGG_REVIEW, MINT_LEAF_REVIEW, CORN_REVIEW, TOP_FIVE_REVIEW, EXPANSION_REVIEW, ROUND2_REVIEW, ROUND3_REVIEW, ROUND4_REVIEW, LANGUAGE_REVIEW, LANGUAGE_FOLLOWUP_REVIEW, MALMO_REVIEW, CHEAP_BASES_REVIEW, NAMES_REVIEW, CORE_NAMES_REVIEW)
     reviews = [(path, json.loads(path.read_bytes())) for path in paths if path.exists()]
     pending = [(scope['manifest_sha256'], before)]
     visited = set()
@@ -168,13 +169,16 @@ def reviewed_recipe_transition(scope, compared_scope, variants):
             if path == NAMES_REVIEW:
                 from rename_dinners_20261120 import checked_transition as names_transition
                 names_transition(review)
+            if path == CORE_NAMES_REVIEW:
+                from rename_core_dinners_20261121 import checked_transition as core_names_transition
+                core_names_transition(review)
             replacements = {r['previous_id']: r['runtime_id'] for r in review['corrected']}
             after = [replacements.get(r, r) for r in ids]
             # Language review covers the whole library. Its complete immutable
             # transition is checked above; the original 2,200-ID scope stays fixed.
             # The Malmö review also replaced one variant outside the imported
             # scope; its exact successor bytes are checked above.
-            if (path not in {LANGUAGE_REVIEW, LANGUAGE_FOLLOWUP_REVIEW, MALMO_REVIEW, NAMES_REVIEW} and not set(replacements) <= set(ids)) or len(set(after)) != len(after):
+            if (path not in {LANGUAGE_REVIEW, LANGUAGE_FOLLOWUP_REVIEW, MALMO_REVIEW, NAMES_REVIEW, CORE_NAMES_REVIEW} and not set(replacements) <= set(ids)) or len(set(after)) != len(after):
                 raise ValueError('Changed coverage comparison scope: unreviewed recipe transition')
             pending.append((review['after_manifest_file_sha256'], after))
     raise ValueError('Changed coverage comparison scope: unreviewed manifest transition')
@@ -237,7 +241,8 @@ def imported_recipes():
                       ('recipe-language-20261102/library-transition.json', 'corrected'),
                       ('recipe-language-followup-20261102/library-transition.json', 'corrected'),
                       ('malmo-unavailable-20261107/recipe-review.json', 'corrected'),
-                      ('recipe-names-20261120/library-transition.json', 'corrected')]:
+                      ('recipe-names-20261120/library-transition.json', 'corrected'),
+                      ('recipe-names-core-20261121/library-transition.json', 'corrected')]:
         for row in json.loads((Path('docs/reviews') / file).read_bytes())[key]:
             replacements[row['previous_id']] = row['runtime_id']
     active = {identity(r): r for r in current_recipes()}

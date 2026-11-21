@@ -18,7 +18,8 @@ def language_successors():
     malmo = json.loads((ROOT.parents[3] / "docs/reviews/malmo-unavailable-20261107/recipe-review.json").read_bytes())
     # The dinner-name review (2026-11-20) only renames; steps and amounts stay identical.
     names = json.loads((ROOT.parents[3] / "docs/reviews/recipe-names-20261120/library-transition.json").read_bytes())
-    return {r["previous_id"]: r for review in (language_review(), followup, malmo, names) for r in review["corrected"]}
+    core = json.loads((ROOT.parents[3] / "docs/reviews/recipe-names-core-20261121/library-transition.json").read_bytes())
+    return {r["previous_id"]: r for review in (language_review(), followup, malmo, names, core) for r in review["corrected"]}
 
 
 def after_language_id(recipe_id):
@@ -78,8 +79,8 @@ def assert_current_language_version(recipe_id, content_sha256):
 
 @lru_cache(maxsize=1)
 def _renamed():
-    review = json.loads((ROOT.parents[3] / "docs/reviews/recipe-names-20261120/library-transition.json").read_bytes())
-    return {r["previous_id"]: r["runtime_id"] for r in review["corrected"]}
+    return {r["previous_id"]: r["runtime_id"] for file in ("recipe-names-20261120", "recipe-names-core-20261121")
+            for r in json.loads((ROOT.parents[3] / f"docs/reviews/{file}/library-transition.json").read_bytes())["corrected"]}
 
 
 def assert_same_apart_from_name(current, original):
