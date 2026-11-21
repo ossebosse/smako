@@ -198,10 +198,20 @@ def test_egg_carton_mass_is_not_edible_mass_or_piece_conversion():
         update={"ingredients": [RecipeIngredient(name="ägg", quantity=2, unit="st")]}
     )
     recipe = adapt(old, "panna")
+    # Owner decision 2026-11-21: a plain shell-egg carton uses the documented
+    # 88 % edible fraction as an estimate; a carton of anything else does not.
+    assert input_evidence(
+        recipe,
+        SimpleNamespace(name="Ägg 12-pack M/L", usable_quantity=636),
+        "ägg",
+        "g",
+        True,
+        fact(),
+    )
     assert (
         input_evidence(
             recipe,
-            SimpleNamespace(name="Ägg 12-pack M/L", usable_quantity=636),
+            SimpleNamespace(name="Äggpasta 12-pack", usable_quantity=636),
             "ägg",
             "g",
             True,

@@ -69,6 +69,7 @@ MAPPINGS = {
     150: ("mellanmjölk 1,5 %", "ready"),
     1965: ("ättiksprit 12 %", "ready"),
     1967: ("äppelcidervinäger 7 %", "ready"),
+    991: ("rimmat sidfläsk/stekfläsk", "raw"),
     123: ("mjölk 3 %", "ready"),
     1975: ("salt", "ready"),
     1162: ("kalkonbröstfilé", "raw"),
@@ -416,6 +417,10 @@ def product_reference(product, name, facts):
         # A distinct plain fresh food, never yellow onion or a pickled/flavoured
         # product. The existing SLV record was retained but never mapped here.
         return 4947 if re.fullmatch(r"(?:rödlök|röd lök|lök röd)(?: eko| ekologisk| ekologiska| klass 1| i påse)*", text.strip()) and not composition else None
+    if canonical == "rimmat fläsk" and not composition:
+        # Owner request 2026-11-21: plain lightly salted pork belly slices.
+        return 991 if re.fullmatch(r"(?:(?:stekfläsk|sidfläsk) rimmat|rimmat (?:stekfläsk|sidfläsk))"
+                                   r"(?: (?:skivat|skivor|bit|svensk|sverige))*", re.sub(r"\s+", " ", text).strip()) else None
     if canonical == "kålrot" and not composition:
         # Owner request 2026-11-21: a whole fresh swede (raw edible reference).
         fresh = (product.category or "").casefold().startswith("frukt & grönt") or "klass 1" in text

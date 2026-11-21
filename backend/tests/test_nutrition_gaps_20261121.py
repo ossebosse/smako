@@ -169,3 +169,16 @@ def test_plain_shell_eggs_use_the_edible_fraction_estimate():
     assert evidence is not None and evidence.nutrition == reference_evidence(1225).nutrition
     eggs.name = "Äggröra Färdig"
     assert input_evidence(recipe, eggs, "ägg", "g", False, None) is None
+
+
+def test_standard_milk_by_volume():
+    milk = product("Mjölk 3%", "Mejeri", 1000.0, "ml")
+    evidence = volume_evidence(milk, "mjölk", facts("Pastöriserad mjölk", None))
+    assert evidence.source_product_id == "slv:123" and evidence.nutrition_unit == "ml"
+    assert volume_evidence(product("Mjölk 1,5%", "Mejeri", 1000.0, "ml"), "mjölk", facts("")) is None
+
+
+def test_plain_salted_pork_belly_slices():
+    meat = "Kött, chark & fågel"
+    assert product_reference(product("Stekfläsk Rimmat Skivat", meat), "rimmat fläsk", None) == 991
+    assert product_reference(product("Stekfläsk Rökt Rimmat", meat), "rimmat fläsk", None) is None

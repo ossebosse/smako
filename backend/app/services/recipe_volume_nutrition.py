@@ -24,9 +24,9 @@ _LIQUIDS = {
     'grädde': (r'vispgrädde(?: 40 ?%)?(?: (?:eko|ekologisk|svensk))*',
                {'ingredienser', 'högpastöriserad', 'pastöriserad', 'grädde', 'krav', 'ekologisk', 'råvara',
                 'ursprung', 'sverige'}, {'': 1715}),
-    'mjölk': (r'(lätt|mellan)mjölk(?: (?:eko|ekologisk|svensk|\d+(?:[,.]\d+)? ?%))*',
+    'mjölk': (r'(lätt|mellan|standard)?mjölk(?: (?:eko|ekologisk|svensk|(\d+(?:[,.]\d+)?) ?%))*',
               {'ingredienser', 'lågpastöriserad', 'högpastöriserad', 'pastöriserad', 'mjölk', 'sverige', 'vitamin',
-               'd', 'ekologisk', 'krav'}, {'lätt': 151, 'mellan': 150}),
+               'd', 'ekologisk', 'krav'}, {'lätt': 151, 'mellan': 150, 'standard': 123}),
     'sojasås': (r'(?:japansk )?sojasås(?: (?:eko|ekologisk|japansk|kikkoman|naturligt bryggd))*',
                 {'ingredienser', 'vatten', 'sojabönor', 'vete', 'salt', 'ekologiska', 'ekologiskt', 'ekologisk'},
                 {'': 909}),
@@ -71,8 +71,14 @@ def _plain_liquid(canonical, label, composition, fact):
         return fact
     if fact and fact.nutrition and not fact.conflicts and MACROS <= fact.nutrition.keys():
         return None  # A complete table on another basis is the caller's to use.
-    key = match.group(1) if match.groups() else ''
-    identity = references.get(key or '')
+    key = (match.group(1) if match.groups() else '') or ''
+    if canonical == 'mjölk':
+        # Plain "Mjölk 3%" is standard milk; other unnamed fat levels stay unmapped.
+        fat = (match.group(2) or '').replace(',', '.')
+        key = key or ({'3': 'standard', '3.0': 'standard', '': 'standard'}.get(fat, ''))
+        if fat and key != 'standard' and {'lätt': '0.5', 'mellan': '1.5'}.get(key) not in {fat, None}:
+            return None
+    identity = references.get(key)
     return reference_evidence(identity) if identity else None
 
 
