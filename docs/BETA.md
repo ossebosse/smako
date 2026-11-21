@@ -1,3 +1,20 @@
+# 2026-11-21: Kärnbibliotekets namn, fler näringsvärden
+
+Main `0e556758891a` (branch `core-names-and-nutrition`, fast-forward). App
+**app-0e556758891a-1ef84515**, bas `434cad1f7e70` (image `70f21b986fd9`).
+Ändrat: ett nytt receptpaket och bibliotekmanifest (95 kärnvarianter med
+riktiga namn, steg och mängder oförändrade), `recipe_library.py`
+(kärngenerationens skalning följer släktledet), `nutrition_reference.py`,
+`recipe_preparation.py`, `recipe_volume_nutrition.py`, `nordic_nutrition.py`,
+`staples.py`, nya referensdata `slv-20261121.json` och
+`matvaretabellen-20261121.json`, samt `next/core.js`, `next/a.html`,
+`next/b.html`. Ägarbeslut 2026-11-21: torkade kryddor och färsk mynta räknas
+aldrig i visade näringsvärden; vätskor i ml använder Matvaretabellens vikt per
+dl; ägg 88 % ätbar andel; butternut från Matvaretabellen. Importprov i
+nätverkslös container godkänt. Aktiverad 08:57 UTC; befintligt tillstånd och
+prismanifest bevarade, lagringsretention körd efteråt. `/ready` Lund och
+Malmö: ready.
+
 # 2026-11-20 sen kväll: Riktiga rättnamn, fler näringsvärden, kampanjer i listan
 
 Main `434cad1f7e70` (merge av `campaign-marks`, `dinner-names` och
@@ -452,10 +469,10 @@ git status --short
 .venv/Scripts/python.exe -X utf8 scripts/smako_ops.py status
 
 # Använd den granskade Git-bas som motsvarar faktiskt aktiva filer enligt senaste journalen.
-.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit 434cad1f7e70 --commit main --workdir .local/beta-release
+.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit 0e556758891a --commit main --workdir .local/beta-release
 ```
 
-`434cad1f7e70` är appen som aktiverades 2026-11-20 22:07 UTC. Appbildens egen
+`0e556758891a` är appen som aktiverades 2026-11-21 08:57 UTC. Appbildens egen
 grocery-kopia är äldre än Git; använd `--keep-app-grocery` om intervallet
 bara innehåller grocery-Python som redan levererats till schedulern. De äldre
 Coop-filerna i runtime (`price_universe_runtime.py`,
