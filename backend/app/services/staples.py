@@ -77,5 +77,11 @@ DRIED_SPICES = frozenset({
 })
 
 
+# Owner decision 2026-11-21: fresh mint is left out too; there is no reviewed
+# reference for an unnamed mint species.
+LEFT_OUT_HERBS = frozenset({"mynta"})
+
+
 def negligible_spice(name, quantity, unit):
-    return unit == "g" and quantity > 0 and canonicalize_ingredient_name(name) in DRIED_SPICES
+    return (unit == "g" and quantity > 0
+            and canonicalize_ingredient_name(name) in DRIED_SPICES | LEFT_OUT_HERBS)

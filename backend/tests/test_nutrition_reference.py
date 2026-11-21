@@ -348,3 +348,4 @@ def test_dried_spice_is_left_out_of_shown_values_only():
     assert negligible_spice("svartpeppar", 2.5, "g") and negligible_spice("garam masala", 6, "g")
     assert not negligible_spice("svartpeppar", 1, "ml")
     assert not negligible_spice("salt", 1, "g") and not negligible_spice("vitlök", 1, "g")
+    assert negligible_spice("mynta", 10, "g")  # Owner 2026-11-21: no reviewed mint reference.
