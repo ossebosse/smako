@@ -280,14 +280,18 @@ def product_form_compatible(recipe, name, product, fact):
     return True
 
 
-def declared_drained(canonical, form, requirements, product, fact):
-    """The product's usable quantity is a declared or owner-approved drained mass."""
+def declared_drained(canonical, form, requirements, product, fact, *, package_weight=True):
+    """The product's usable quantity is a declared or owner-approved drained mass.
+
+    ``package_weight=False`` asks whether the mass is really declared: an
+    owner-approved package-mass identity still gets the shopping-list notice
+    that the drained weight can be lower (owner decision 2026-11-13)."""
     from app.services.intake_product_links import (
         package_weight_product,
         reviewed_drained_quantity,
     )
 
-    if package_weight_product(canonical, form, requirements, product, fact):
+    if package_weight and package_weight_product(canonical, form, requirements, product, fact):
         return True
     # A source's own drained mass (City Gross "400/240 g", checked against the
     # comparison price) is stored by normalization as the usable quantity with

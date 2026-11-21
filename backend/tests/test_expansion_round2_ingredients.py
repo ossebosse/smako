@@ -52,7 +52,10 @@ def test_dried_lime_leaf_binding_is_separate_from_fresh_leaf_quantity():
 
 
 @pytest.mark.parametrize('row', ROWS, ids=lambda row: row['name'])
-def test_source_bound_whole_products_reject_changed_food_or_quantity(row):
+def test_source_bound_whole_products_reject_changed_food_or_quantity(row, monkeypatch):
+    # The reviewed-link gate alone; package-mass identities are tested separately.
+    import app.services.intake_product_links as links
+    monkeypatch.setattr(links, 'PACKAGE_WEIGHT_IDENTITIES', {})
     p, f = source(row)
     p = project_reviewed_quantity(p, f, allow_estimates=True, required_unit=row['unit'])
     key = row['requirements'][0].removeprefix('pack:')

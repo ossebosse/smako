@@ -1879,7 +1879,8 @@ class PersonalPlanner:
                 if position is not None:
                     product = self.prepared.universe.products[position]
                     fact = self.source_facts(product)
-                    flag = not all(declared_drained(r["name"], r["input_form"], tuple(r.get("product_requirements") or ()), product, fact)
+                    flag = not all(declared_drained(r["name"], r["input_form"], tuple(r.get("product_requirements") or ()), product, fact,
+                                                   package_weight=False)
                                    for r in needs)
                     if flag != item.drained_weight_from_package:
                         item = item.model_copy(update={"drained_weight_from_package": flag})

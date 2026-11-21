@@ -98,15 +98,145 @@ PACKAGE_WEIGHT_IDENTITIES = {
         r"(?:ädelost(?: danablu| special)?|danablu|gräddädel)(?: (?:eko|ekologisk|classic|halvmåne|extra creamy|grädd|\d+(?:[,.]\d+)? ?%))*",
         r"ost|blåmögel", r"mjukost|päron|smält|bredbar",
         r"smältsalt|vatten|hårdost|päron"),
+    # Owner request 2026-11-21 ("lös alla blockerande ingredienser"): inputs
+    # that had no reviewed product left in Lund or Malmö. Each pattern was
+    # checked against every keyword-matching product in both cities; drained
+    # forms are planned by package mass under the 2026-11-13 decision.
+    # Fresh mozzarella in brine; the package mass includes the brine.
+    ("mozzarella", "preserved_drained"): (
+        r"(?:mini ?)?mozzarella(?: (?:di bufala|bufala|boll|bollar|kula|kulor|minibollar|mini|italiensk|classic|light|laktosfri|eko|ekologisk|fresh|fior di latte|\d+(?:[,.]\d+)? ?%|\d+-pack))*",
+        r"ost|mozzarella", r"riven|pizza|sticks|paj|gnocchi|burrata|skivad|skivor|panerad|tomat|pesto|sallad",
+        r"\b(?:kryddor|örter|vitlök|olja|basilika|tomat|chili)\b"),
+    # Halloumi as sold (block).
+    ("halloumi", "as_sold"): (
+        r"halloumi(?: (?:ost|grillost|original|light|lätt|eko|ekologisk|block|\d+(?:[,.]\d+)? ?%))*",
+        r"ost|halloumi", r"fries|strips|chili|krydd|panerad|wrap|burgare|smaksatt|tärnad",
+        r"\b(?:chili|kryddor|vitlök)\b"),
+    # Coarse maize grits / polenta; dry mass.
+    ("majsgryn", "dry"): (
+        r"(?:glutenfri )?(?:polenta(?: majsgryn| eko| ekologisk| grovmalen)*|majsgryn(?: eko| ekologisk| polenta)*|majsmjöl polenta grovmalen)",
+        r"gryn|skafferi|mjöl|polenta|majs", r"snabb|färdig|instant|kaka|kakor|chips|flingor", r"\b(?:salt|socker|olja|vatten)\b"),
+    ("polenta", "dry"): (
+        r"(?:glutenfri )?(?:polenta(?: majsgryn| eko| ekologisk| grovmalen| finmalen)*|majsgryn(?: eko| ekologisk| polenta)*|majsmjöl polenta (?:grovmalen|finmalen))",
+        r"gryn|skafferi|mjöl|polenta|majs", r"snabb|färdig|instant|kaka|kakor|chips|flingor", r"\b(?:salt|socker|olja|vatten)\b"),
+    # Cooked peeled prawns, frozen or in brine; the mass may include glaze or brine.
+    ("räkor", "cooked_drained"): (
+        r"(?:sallads)?räkor(?: (?:handskalade|skalade|i lake|kokta|kokta & skalade|vannamei|vannamei kokta & skalade|msc|s|m|l|xl|\d+/\d+))*",
+        r"räk|skaldjur|fisk", r"panerad|smaksatt|ramslök|med skal|rå|scampi|sallad med|röra|chili|vitlök|tempura|nudlar|paj",
+        r"\b(?:socker|olja|kryddor|ramslök|vitlök|chili)\b|panering|vetemjöl"),
+    # Artichoke hearts in brine (not oil-marinated).
+    ("kronärtskocka", "preserved_drained"): (
+        r"kronärtskocks-?hjärtan(?: (?:i lag|hela|halvor|kvartar|eko|ekologiska))*",
+        r"konserv|grönsak|skafferi|kronärtskock", r"olja|marinerad|grillad|kräm|tapenade", r"\bolja\b|örter|vitlök"),
+    # Japonica sushi rice, dry.
+    ("sushiris", "dry"): (
+        r"(?:sushi ?ris|sushi rice)(?: (?:eko|ekologiskt|japanskt|\d+-pack))*",
+        r"ris|skafferi|asien|sushi", r"vinäger|kit|färdig|kokt|krisp", r"\b(?:salt|socker|vinäger|olja)\b"),
+    # Sauerkraut; the mass includes its brine.
+    ("surkål", "preserved_drained"): (
+        r"(?:wein)?surkål(?: (?:klassisk|original|mild|eko|ekologisk|på burk|i burk))*",
+        r"konserv|grönsak|surkål|inlagt|skafferi", r"rödkål|kimchi|vin|kryddad|bacon", r"\b(?:socker|olja|bacon|vin)\b"),
+    # Whole sardines in oil or water; the mass includes the oil.
+    ("sardiner", "preserved_drained"): (
+        r"sardiner(?: (?:i )?(?:olja|olivolja|solrosolja|vatten|vegetabilisk olja|eko|msc|\d+-pack))*",
+        r"fisk|konserv|sardin|skafferi", r"tomat|chili|citron|pastej|krydd|vitlök",
+        r"tomat|chili|citron|vitlök|kryddor"),
+    # Grape leaves in brine.
+    ("vinblad", "preserved_drained"): (
+        r"(?:handplockade )?vinblad(?: (?:i lag|i saltlag|handplockade|eko|ekologiska))*",
+        r"konserv|grönsak|vinblad|skafferi|världens", r"fyllda|dolma|ris", r"\bris\b|\bolja\b"),
+    # Sheet gelatine by mass.
+    ("gelatinblad", "as_sold"): (
+        r"gelatin ?blad(?: (?:\d+-pack|\d+ st))?",
+        r"bak|gelatin|skafferi|övrigt", r"pulver|vegansk|agar", r"agar|pektin"),
+    # Plain black tea leaves sold by mass.
+    ("svart te", "dry"): (
+        r"svart te(?: (?:yellow label|english breakfast|ceylon|assam|eko|ekologiskt|lösvikt|\d+-pack))*",
+        r"\bte\b", r"earl|grey|smak|chai|vanilj|citron|lemon|peach|mango|caramel|bär|jordgubb|mix|lady",
+        r"arom|bergamott|skal|frukt|karamell|socker"),
+    # Canned water chestnuts; mass includes the water.
+    ("vattenkastanjer", "preserved_drained"): (
+        r"(?:water chestnut slices )?vattenkastanj(?:er)?(?: (?:skivade|hela|i bitar))*",
+        r"konserv|grönsak|skafferi|asien|vattenkastanj", r"sås|wok|mix", r"\b(?:socker|olja)\b"),
+    # Shelled cooked mussels in water or frozen meat; not smoked or oiled.
+    ("musslor", "cooked_drained"): (
+        r"(?:blå)?musslor(?: (?:i vatten|i lag|utan skal|kokta|chilenska|msc))*",
+        r"skaldjur|fisk|konserv|havsdelikatess|musslor", r"rökt|olja|sås|grädde|creme|crème|vongole|kammussl|mandel",
+        r"^(?!.*(?:utan skal|vatten)).*|rökt|olja"),
+    # Fresh mung bean sprouts (in Sweden sold as böngroddar).
+    ("böngroddar", "raw_edible"): (
+        r"(?:mungböns|bön)groddar(?: (?:ekologisk|ekologiska|eko|färska))*",
+        r"frukt|grönt|grodd|sallad", r"konserv|lag|brine|alfalfa|ärt|rödbet|vete|mix|sallad med", r"vatten|salt|syra"),
+    ("böngroddar", "as_sold"): (
+        r"(?:mungböns|bön)groddar(?: (?:ekologisk|ekologiska|eko|färska))*",
+        r"frukt|grönt|grodd|sallad", r"konserv|lag|brine|alfalfa|ärt|rödbet|vete|mix|sallad med", r"vatten|salt|syra"),
+    ("groddade mungbönor", "as_sold"): (
+        r"(?:mungböns|bön)groddar(?: (?:ekologisk|ekologiska|eko|färska))*",
+        r"frukt|grönt|grodd|sallad", r"konserv|lag|brine|alfalfa|ärt|rödbet|vete|mix|sallad med", r"vatten|salt|syra"),
+    # Tomatillo salsa verde.
+    ("salsa verde av tomatillo", "as_sold"): (
+        r"(?:salsa verde|tomatillo salsa)(?: (?:mild|medium|het|hot))*",
+        r"sås|salsa|skafferi|mexik|tillbehör", r"pesto|ört|persilja", r"persilja|kapris|ansjovis"),
+    # Dry-cured ham, sliced.
+    ("lufttorkad skinka", "as_sold"): (
+        r"(?:luftt?torkad skinka )?(?:prosciutto(?: crudo| di parma)?|jam[oó]n serrano(?: gts)?|serranoskinka|lufttorkad skinka)(?: (?:skivad|skivor|eko|\d+ mån))*",
+        r"lufttork|chark|delikatess|pålägg|luftorkat|kött", r"pizza|melon|mix|tryffel|pancetta|ost", r"\b(?:socker|kryddor|ost)\b|vatten"),
+    # Canned cooked green lentils; the mass includes the water.
+    ("gröna linser", "cooked_drained"): (
+        r"(?:gröna linser|linser gröna)(?: (?:eko|ekologiska|ekologisk|kokta|i vatten))*",
+        r"linser|bönor|konserv|skafferi", r"torkad|curry|indian|cannellini|soppa|gryta|sallad",
+        r"^(?!.*vatten).*|socker|olja|tomat|kryddor"),
+    # Raw peeled prawns (frozen).
+    ("råa räkor", "raw_edible"): (
+        r"(?:scampi vannameiräka|vannamei ?räkor råa|råa (?:vannamei ?)?räkor|scampi)(?: (?:skalade|frysta|msc|asc|\d+/\d+))*",
+        r"räk|skaldjur|fisk", r"panerad|kokt|marinerad|vitlök|chili|smaksatt|tempura", r"^(?!.*rå).*|vitlök|chili|olja|kryddor"),
+    # Silken tofu.
+    ("silkestofu", "as_sold"): (
+        r"(?:tofu silkesmjuk|silkestofu|silken tofu|silkesmjuk tofu)(?: (?:eko|ekologisk|naturell))*",
+        r"tofu|vegetar|asien|skafferi", r"rökt|marinerad|friterad|chili|örter", r"sojasås|kryddor|chili|olja"),
+    # Puff pastry made without dairy or egg.
+    ("vegansk smördeg", "as_sold"): (
+        r"(?:glutenfri )?smördeg(?: (?:vegansk|glutenfri|laktosfri|fryst|plattor|rektangulär|rulle|kyld))*",
+        r"paj|bak|smördeg|fryst|färdigmat|deg|julbord", r"stänger|twist|krustad|vol-au|bakverk",
+        r"smör|mjölk|grädde|ägg|vassle|laktos(?!fri)"),
+    # Matjes herring; mass includes the brine.
+    ("matjessill", "preserved_drained"): (
+        r"(?:bohus|mästar)?matjes(?:s?ill|filé|fileér|filéer)?(?: (?:hel|hela|i bitar|bitar|klassisk|mästar))*",
+        r"sill|fisk", r"sås|tomat|röra|senap|löksill", r"tomat|senap|gräddfil|majonnäs"),
+    # Plain roasted nori sheets.
+    ("nori", "as_sold"): (
+        r"(?:sjögräs )?(?:sushi nori|yaki nori(?: sushi)?|nori)(?: (?:roasted seeweed|roasted seaweed|ark|\d+-pack|sushi))*",
+        r"tillbehör|skafferi|asien|sushi|nori", r"snacks|chips|krydd|wasabi|teriyaki|chili", r"\b(?:salt|olja|socker)\b|kryddor"),
+    # Clarified butter.
+    ("ghee", "as_sold"): (
+        r"(?:klarnat smör )?ghee(?: (?:eko|ekologisk|nötig|skirat smör|klarnat smör))*",
+        r"matfett|smör|ghee|skafferi|matolja", r"vegansk|växtbaser", r"olja|kryddor|vegetabil"),
+    # Cured pork cheek (not pancetta or bacon).
+    ("guanciale", "as_sold"): (
+        r"guanciale(?: (?:stagionato|dolce|tärnad|skivad|i bit|bit))*",
+        r"chark|delikatess|bacon|stekfläsk|kött", r"pancetta|bacon|pasta|sås", r"\b(?:kryddor|peppar|chili|vitlök)\b"),
+    # Salt-brined dill cucumbers; mass includes brine.
+    ("saltgurka", "preserved_drained"): (
+        r"saltgurk(?:a|or)(?: (?:hel|hela|skivad|skivade|eko|ekologisk))*",
+        r"gurka|inlagd|konserv|pickles|skafferi", r"chips|majonnäs|smörgås|relish", r"\bsötningsmedel\b"),
 }
+
+
+# Dry goods, plain foods and cured mixtures are matched by the same label,
+# shelf, composition and exact-package gates as definition-only rows.
+PACKAGE_WEIGHT_KINDS = {"definition_only", "dairy", "dry", "plain", "mixture"}
+
+
+def _package_label(product):
+    return " ".join(re.sub(r"\b\d+(?:[,.]\d+)?\s*(?:kg|g)\b", "", product.name.casefold()).split())
 
 
 def package_weight_alternative(row, product, fact=None):
     entry = PACKAGE_WEIGHT_IDENTITIES.get((row["name"], row["form"]))
-    if entry is None or row["kind"] not in {"definition_only", "dairy"} or row["unit"] != "g":
+    if entry is None or row["kind"] not in PACKAGE_WEIGHT_KINDS or row["unit"] != "g":
         return False
     pattern, shelf, excluded, composition_excluded = entry
-    label = " ".join(re.sub(r"\b\d+(?:[,.]\d+)?\s*(?:kg|g)\b", "", product.name.casefold()).split())
+    label = _package_label(product)
     category = (getattr(product, "category", None) or "").casefold()
     if re.search(excluded, label) or re.search(excluded, category) or not re.search(shelf, category + " " + label):
         return False
@@ -115,6 +245,12 @@ def package_weight_alternative(row, product, fact=None):
     composition = " ".join(fact.ingredients).casefold().split("kan innehålla")[0] if fact else ""
     if re.search(composition_excluded, composition):
         return False
+    if fact is not None:
+        from app.services.complete_recipes import identity_conflicts
+        from app.services.official_product_facts import _mass_blocking
+
+        if _mass_blocking(fact.conflicts) or identity_conflicts(fact):
+            return False
     return (getattr(product, "sale_model", None) == "fixed_package" and product.purchase_terms is None
             and product.package_unit == product.usable_unit == "g"
             and product.usable_quantity == product.package_quantity and product.usable_quantity > 0
@@ -589,10 +725,16 @@ def search_positions(prepared, facts=None):
                     key = (evidence["store_id"], evidence["product_id"], evidence["source_provenance"]["source_snapshot_id"])
                     scoped.setdefault(key, set()).add(row["name"])
         positions = {}
+        # Package-mass identities are found by their reviewed label pattern:
+        # a retailer may index "Glutenfri Polenta Eko" under polenta, not
+        # majsgryn. Retrieval only; package_weight_alternative still decides.
+        labelled = [(name, re.compile(entry[0])) for (name, _form), entry in PACKAGE_WEIGHT_IDENTITIES.items()]
         for n, product in enumerate(prepared.universe.products):
             provenance = product.source_provenance
             key = (product.store_id, product.product_id, provenance.source_snapshot_id if provenance else None)
             names = gtins.get(getattr(product, "gtin", None), set()) | scoped.get(key, set())
+            label = _package_label(product)
+            names = names | {name for name, pattern in labelled if pattern.fullmatch(label)}
             if articles:
                 fact = facts.get((product.store_id, product.product_id)) if facts is not None else None
                 for article in _articles(product, fact):

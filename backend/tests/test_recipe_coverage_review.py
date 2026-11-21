@@ -344,6 +344,8 @@ def test_reviewed_drained_cheese_keeps_form_and_composition_gates(monkeypatch):
     proof['composition_sha256'] = links.composition_signature(fact)
     row['reviewed_links'] = [proof]
     monkeypatch.setattr(links, 'entries', lambda: {key: row})
+    # The reviewed-link gate alone; package-mass identities are tested separately.
+    monkeypatch.setattr(links, 'PACKAGE_WEIGHT_IDENTITIES', {})
     assert links.compatible(key, p, fact)
     assert not links.compatible(key, p, replace(fact, ingredients=('Mjölk, pesto',)))
     assert not links.compatible(key, p.model_copy(update={'gtin': 'wrong'}), fact)

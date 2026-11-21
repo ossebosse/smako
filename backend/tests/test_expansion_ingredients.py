@@ -39,7 +39,10 @@ def source(row):
 
 
 @pytest.mark.parametrize('row', ROWS, ids=lambda row: row['name'])
-def test_reviewed_inputs_reject_changed_food_package_context_or_composition(row):
+def test_reviewed_inputs_reject_changed_food_package_context_or_composition(row, monkeypatch):
+    # The reviewed-link gate alone; package-mass identities are tested separately.
+    import app.services.intake_product_links as links
+    monkeypatch.setattr(links, 'PACKAGE_WEIGHT_IDENTITIES', {})
     p, f = source(row)
     p = project_reviewed_quantity(p, f, allow_estimates=True, required_unit=row['unit'])
     key = row['requirements'][0].removeprefix('pack:')

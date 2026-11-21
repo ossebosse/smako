@@ -45,7 +45,9 @@ def source_fixture(slug, proof):
 
 
 @pytest.fixture(params=list(SOURCES))
-def reviewed(request):
+def reviewed(request, monkeypatch):
+    # The reviewed-link gate alone; package-mass identities are tested separately.
+    monkeypatch.setattr(links, 'PACKAGE_WEIGHT_IDENTITIES', {})
     slug = request.param
     key = 'intake_all_shape_top5_' + slug
     row = links.entries()[key]
