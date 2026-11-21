@@ -63,21 +63,19 @@ def volume_evidence(name, unit):
     return density_converted(reference_evidence(_VOLUME_REFERENCES[canonical]), canonical)
 
 
-# Owner decision 2026-11-20: informational nutrition leaves out a pinch of dried
-# spice (at most 2 g in the whole recipe), which Livsmedelsverket often has no
-# values for; black pepper at 2 g is about 5 kcal. The plan names what was left
-# out. Nutrition limits still require values for every ingredient.
+# Owner decisions 2026-11-20/21: informational nutrition never counts dried
+# spices (any amount), which Livsmedelsverket often has no values for; a
+# teaspoon of spice is a few kcal. The plan names what was left out.
+# Nutrition limits still require values for every ingredient.
 DRIED_SPICES = frozenset({
     # Canonical names in the recipe library, dried spices and herbs only.
     "svartpeppar", "vitpeppar", "kryddpeppar", "cayennepeppar", "chiliflakes", "paprikapulver",
     "rökt paprikapulver", "spiskummin", "kummin", "oregano", "timjan", "rosmarin", "mejram", "salvia",
     "kanel", "kardemumma", "muskot", "nejlika", "kryddnejlika", "gurkmeja", "malen ingefära",
     "malen koriander", "garam masala", "lagerblad", "fänkålsfrön", "senapsfrön", "saffran", "enbär",
-    "vaniljpulver", "torkade makrutlimeblad",
+    "vaniljpulver", "torkade makrutlimeblad", "anchochili", "femkryddor",
 })
-NEGLIGIBLE_SPICE_GRAMS = 2.0
 
 
 def negligible_spice(name, quantity, unit):
-    return (unit == "g" and 0 < quantity <= NEGLIGIBLE_SPICE_GRAMS
-            and canonicalize_ingredient_name(name) in DRIED_SPICES)
+    return unit == "g" and quantity > 0 and canonicalize_ingredient_name(name) in DRIED_SPICES

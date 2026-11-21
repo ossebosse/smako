@@ -64,6 +64,11 @@ MAPPINGS = {
     645: ("citronjuice färskpressad", "ready"),
     288: ("kålrot", "raw"),
     410: ("tomatpuré", "ready"),
+    1715: ("vispgrädde 40 %", "ready"),
+    151: ("lättmjölk 0,5 %", "ready"),
+    150: ("mellanmjölk 1,5 %", "ready"),
+    1965: ("ättiksprit 12 %", "ready"),
+    1967: ("äppelcidervinäger 7 %", "ready"),
     123: ("mjölk 3 %", "ready"),
     1975: ("salt", "ready"),
     1162: ("kalkonbröstfilé", "raw"),
@@ -158,7 +163,7 @@ def reference_data():
         macro_values(entry["nutrients"])
     mapping = json.dumps([MAPPINGS, COOKED, FRIED, MACROS], sort_keys=True).encode()
     data["assembly_review"] = json.loads(ASSEMBLY_PATH.read_bytes())
-    for filename in ('nordic-20261015.json', 'dtu-density-20261015.json'):
+    for filename in ('nordic-20261015.json', 'dtu-density-20261015.json', 'matvaretabellen-20261121.json'):
         data[filename] = json.loads(PATH.with_name(filename).read_bytes())
     from app.services.reviewed_warm_meals import SOURCES, TEMPLATES, VERSION
 

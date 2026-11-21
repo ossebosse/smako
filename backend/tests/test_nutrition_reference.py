@@ -49,7 +49,7 @@ def products():
 def test_all_reviewed_references_have_sourced_units_and_not_product_identities():
     with patch("socket.socket.connect", side_effect=AssertionError("offline")):
         data = reference_data()
-        assert len(MAPPINGS) == 79  # Includes separately reviewed apple with skin and slv-20261121.
+        assert len(MAPPINGS) == 84  # Includes separately reviewed apple with skin and slv-20261121.
         for identity in MAPPINGS:
             f = reference_evidence(identity)
             assert set(f.nutrition) == {"kcal", "protein_g", "fat_g", "carbs_g"}
@@ -226,7 +226,7 @@ def test_reference_version_is_independent_of_json_line_endings(tmp_path, monkeyp
     (tmp_path / "slv-20261002-peppers.json").write_bytes(module.PATH.with_name("slv-20261002-peppers.json").read_bytes())
     (tmp_path / "slv-20261003-black-olives.json").write_bytes(module.PATH.with_name("slv-20261003-black-olives.json").read_bytes())
     (tmp_path / "slv-20261121.json").write_bytes(module.PATH.with_name("slv-20261121.json").read_bytes())
-    for filename in ('nordic-20261015.json', 'dtu-density-20261015.json'):
+    for filename in ('nordic-20261015.json', 'dtu-density-20261015.json', 'matvaretabellen-20261121.json'):
         (tmp_path / filename).write_bytes(module.PATH.with_name(filename).read_bytes())
     monkeypatch.setattr(module, "PATH", path)
     reference_data.cache_clear()
@@ -340,10 +340,11 @@ def test_owner_2026_11_20_reference_gaps_for_plain_produce_and_eggs():
     assert product_reference(product("Potatisgratäng", "Fryst > Grönsaker"), "potatis", None) is None
 
 
-def test_a_pinch_of_dried_spice_is_left_out_of_shown_values_only():
+def test_dried_spice_is_left_out_of_shown_values_only():
     from app.services.staples import negligible_spice
 
     assert negligible_spice("svartpeppar", 1, "g") and negligible_spice("oregano", 2, "g")
-    assert not negligible_spice("svartpeppar", 2.5, "g")
+    # Owner 2026-11-21: dried spices are never counted, whatever the amount.
+    assert negligible_spice("svartpeppar", 2.5, "g") and negligible_spice("garam masala", 6, "g")
     assert not negligible_spice("svartpeppar", 1, "ml")
     assert not negligible_spice("salt", 1, "g") and not negligible_spice("vitlök", 1, "g")

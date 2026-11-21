@@ -118,3 +118,54 @@ def test_contradictory_lemon_juice_table_reaches_the_fresh_juice_reference_in_a_
     assert evidence is not None and evidence.nutrition_unit == "ml"
     other = facts("Vatten, salt", {"kcal": 1, "fat_g": 0, "carbs_g": 0, "protein_g": 0}, conflicts=("x",))
     assert input_evidence(recipe_with("gurka", "raw_edible"), product("Gurka", "Gurka"), "gurka", "g", False, other) is None
+
+
+@pytest.mark.parametrize("canonical,label,composition,table,expected", [
+    ("grädde", "Vispgrädde 40%", "INGREDIENSER Högpastöriserad GRÄDDE.",
+     {"fat_g": 40.0, "kcal": 375.0, "carbs_g": 2.9, "protein_g": 2.2}, 375.0),
+    ("grädde", "Vispgrädde 40%", "", None, 374),          # SLV 1715 × 1.00
+    ("mjölk", "Lättmjölk", "INGREDIENSER: Högpastöriserad MJÖLK (Sverige), vitamin D.", None, 39),
+    ("sojasås", "Sojasås", "Vatten, SOJABÖNOR, VETE, salt.", None, None),
+    ("ättiksprit 12 procent", "Ättiksprit 12%", "", None, 49),
+    ("olivolja", "Olivolja Extra virgin", "100% Italienska oliver",
+     {"kcal": 828.0, "protein_g": 0.0, "fat_g": 92.0, "carbs_g": 0.0}, 828 * 0.9),
+])
+def test_plain_liquids_by_volume_use_a_food_specific_density(canonical, label, composition, table, expected):
+    bottle = product(label, "Skafferi", 500.0, "ml")
+    conflicts = ("nutrition.kcal",) if canonical == "mjölk" else ()
+    f = facts(composition, table, conflicts=conflicts)
+    evidence = volume_evidence(bottle, canonical, f)
+    if expected is None:
+        # A plain soy sauce without its own table: SLV 909 × 1.15 g/ml.
+        assert evidence.nutrition["kcal"] == pytest.approx(reference_evidence(909).nutrition["kcal"] * 1.15)
+    else:
+        assert evidence.nutrition["kcal"] == pytest.approx(expected)
+    assert evidence.nutrition_unit == "ml"
+
+
+def test_flavoured_liquids_get_no_density():
+    assert volume_evidence(product("Olivolja Tryffel", "Skafferi", 250.0, "ml"), "olivolja", facts("")) is None
+    assert volume_evidence(product("Sojasås Söt", "Skafferi", 250.0, "ml"), "sojasås", facts("")) is None
+    assert volume_evidence(product("Sojasås", "Skafferi", 200.0, "ml"), "sojasås",
+                           facts("jodsalt 16%, japansk SOJAsås 8%, vinäger 4%, socker 3%")) is None
+
+
+def test_butternut_uses_the_nordic_raw_butternut_reference():
+    from app.services.nordic_nutrition import plain_food_evidence
+
+    squash = product("Pumpa Butternut", "Frukt & grönt", 1000.0)
+    evidence = plain_food_evidence(squash, "pumpa", None)
+    assert evidence.nutrition == {"kcal": 44, "protein_g": 0.8, "fat_g": 0.2, "carbs_g": 8.2}
+    assert plain_food_evidence(product("Pumpa Hokkaido", "Frukt & grönt"), "pumpa", None) is None
+    recipe = recipe_with("pumpa", "raw_edible")
+    assert input_evidence(recipe, squash, "pumpa", "g", False, None).nutrition["kcal"] == 44
+
+
+def test_plain_shell_eggs_use_the_edible_fraction_estimate():
+    recipe = recipe_with("ägg", "raw_edible")
+    eggs = SimpleNamespace(name="Ägg 6pack Frigående Inomhus Medium/large", category="Mejeri, ost & ägg > Ägg",
+                           offers=[], brand=None, usable_quantity=6, usable_unit="st", quantity_confidence="exact")
+    evidence = input_evidence(recipe, eggs, "ägg", "g", False, None)
+    assert evidence is not None and evidence.nutrition == reference_evidence(1225).nutrition
+    eggs.name = "Äggröra Färdig"
+    assert input_evidence(recipe, eggs, "ägg", "g", False, None) is None

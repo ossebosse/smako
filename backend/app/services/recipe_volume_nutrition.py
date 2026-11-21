@@ -13,12 +13,67 @@ from app.services.ingredient_normalizer import canonicalize_ingredient_name
 from app.services.nutrition_reference import NutritionEvidence, reference_evidence
 
 PATH = Path(__file__).parents[1] / 'data/nutrition/dtu-density-20261015.json'
+NORDIC_PATH = PATH.with_name('matvaretabellen-20261121.json')
 MACROS = {'kcal', 'protein_g', 'fat_g', 'carbs_g'}
+
+# Owner request 2026-11-21: plain liquids sold by volume whose table is per
+# 100 g (or missing/contradictory) use a food-specific density. A complete,
+# consistent per-gram product table is converted; otherwise the generic SLV
+# food is used. Flavoured, sweetened or mixed products stay unmapped.
+_LIQUIDS = {
+    'grädde': (r'vispgrädde(?: 40 ?%)?(?: (?:eko|ekologisk|svensk))*',
+               {'ingredienser', 'högpastöriserad', 'pastöriserad', 'grädde', 'krav', 'ekologisk', 'råvara',
+                'ursprung', 'sverige'}, {'': 1715}),
+    'mjölk': (r'(lätt|mellan)mjölk(?: (?:eko|ekologisk|svensk|\d+(?:[,.]\d+)? ?%))*',
+              {'ingredienser', 'lågpastöriserad', 'högpastöriserad', 'pastöriserad', 'mjölk', 'sverige', 'vitamin',
+               'd', 'ekologisk', 'krav'}, {'lätt': 151, 'mellan': 150}),
+    'sojasås': (r'(?:japansk )?sojasås(?: (?:eko|ekologisk|japansk|kikkoman|naturligt bryggd))*',
+                {'ingredienser', 'vatten', 'sojabönor', 'vete', 'salt', 'ekologiska', 'ekologiskt', 'ekologisk'},
+                {'': 909}),
+    'ättiksprit 12 procent': (r'ättiksprit 12 ?%', {'ingredienser', 'vatten', 'ättiksyra', 'ättiksprit'}, {'': 1965}),
+    'äppelcidervinäger': (r'äppelcider ?vinäger(?: (?:eko|ekologisk|ofiltrerad|naturell))*',
+                          {'ingredienser', 'äppelcidervinäger', 'äppelcider', 'vinäger', 'ekologisk', 'ofiltrerad',
+                           'surhetsgrad', 'syrahalt', 'ättiksyra'}, {'': 1967}),
+    'olivolja': (r'(?:ekologisk |eko )?olivolja(?: (?:extra virgin|extra vergine|extra jungfru|jungfru|virgin|classico|'
+                 r'eko|ekologisk|italiensk|spansk|grekisk|kalamata|arbequina|florens|tradición|unfiltered|'
+                 r'koroneiki|picual))*',
+                 {'ingredienser', 'olivolja', 'extra', 'jungfruolivolja', 'jungfru', 'jungfruolja', 'vergine', 'virgin',
+                  'ekologisk', 'ursprung', 'spanien', 'italien', 'grekland', 'eu', 'kallextraherad', 'kallpressad',
+                  'av', 'oliver', 'italienska', 'krav'}, {'': 4659}),
+}
+
+VOLUME_FALLBACK = frozenset({'citronjuice', *_LIQUIDS})
 
 
 @lru_cache(maxsize=1)
 def density_data():
     return json.loads(PATH.read_bytes())
+
+
+@lru_cache(maxsize=1)
+def nordic_density_data():
+    return json.loads(NORDIC_PATH.read_bytes())
+
+
+def _plain_liquid(canonical, label, composition, fact):
+    """Generic or product per-100 g evidence for a plain liquid, else None."""
+    pattern, allowed, references = _LIQUIDS[canonical]
+    match = re.fullmatch(pattern, label)
+    if not match:
+        return None
+    listed = re.sub(r'\([^()]*\)', ' ', composition.split('kan innehålla')[0])
+    listed = re.split(r'\*+\s*krav|krav-ekologisk|\*\s*ekologisk ingrediens', listed)[0]
+    words = set(re.findall(r'[a-zåäö]+', listed))
+    if composition and not words <= allowed:
+        return None
+    if (fact and not fact.conflicts and fact.nutrition_unit == 'g' and fact.nutrition_preparation == 'as_sold'
+            and MACROS <= fact.nutrition.keys()):
+        return fact
+    if fact and fact.nutrition and not fact.conflicts and MACROS <= fact.nutrition.keys():
+        return None  # A complete table on another basis is the caller's to use.
+    key = match.group(1) if match.groups() else ''
+    identity = references.get(key or '')
+    return reference_evidence(identity) if identity else None
 
 
 def volume_evidence(product, name, fact):
@@ -42,6 +97,10 @@ def volume_evidence(product, name, fact):
             evidence = reference_evidence(645)
         else:
             return None
+    elif canonical in _LIQUIDS:
+        evidence = _plain_liquid(canonical, label, composition, fact)
+        if evidence is None:
+            return None
     elif fact and fact.conflicts:
         return None
     elif canonical == 'rapsolja':
@@ -62,14 +121,21 @@ def volume_evidence(product, name, fact):
 
 def density_converted(evidence, canonical):
     """Per-100 g evidence as per-100 ml with the reviewed density for this food."""
-    if evidence.nutrition_preparation != 'as_sold' or canonical not in density_data()['density']:
+    if evidence.nutrition_preparation != 'as_sold':
         return None
-    row = density_data()['density'][canonical]
+    if canonical in density_data()['density']:
+        data, label = density_data(), 'DTU'
+        row, source, acquisition = data['density'][canonical], data['source'], data['density'][canonical]['acquisition']
+    elif canonical in nordic_density_data()['density']:
+        data, label = nordic_density_data(), 'Matvaretabellen (vikt per dl)'
+        row, source, acquisition = data['density'][canonical], data['attribution'], data['acquisition']
+    else:
+        return None
     if row['unit'] != 'g/ml' or not 0 < row['value'] < 2:
         raise ValueError('Invalid reviewed density')
     transformation = {
-        'kind': 'food_specific_density_estimate', 'source': density_data()['source'],
-        'source_url': row['source_url'], 'acquisition': row['acquisition'],
+        'kind': 'food_specific_density_estimate', 'source': source,
+        'source_url': row['source_url'], 'acquisition': acquisition,
         'food_id': row['food_id'], 'description': row['description'],
         'density_g_per_ml': row['value'], 'original_nutrition': dict(evidence.nutrition),
         'operation': 'source_per_100_g * reference_density_g_per_ml',
@@ -81,5 +147,5 @@ def density_converted(evidence, canonical):
             field_sources=evidence.field_sources)
     return replace(evidence, nutrition={k: v * row['value'] for k, v in evidence.nutrition.items()},
         nutrition_unit='ml', evidence_kind='food_specific_density_estimate',
-        nutrition_basis=evidence.nutrition_basis + '; uppskattat per 100 ml med livsmedelsspecifik referensdensitet från DTU.',
+        nutrition_basis=evidence.nutrition_basis + f'; uppskattat per 100 ml med livsmedelsspecifik referensdensitet från {label}.',
         field_sources={k: (*v, transformation) for k, v in evidence.field_sources.items() if k.startswith('nutrition.')})

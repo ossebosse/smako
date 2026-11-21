@@ -16,6 +16,11 @@ def data():
     return json.loads(PATH.read_bytes())
 
 
+@lru_cache(maxsize=1)
+def matvaretabellen_2026_11_21():
+    return json.loads(PATH.with_name('matvaretabellen-20261121.json').read_bytes())
+
+
 def plain_food_evidence(product, name, fact):
     if fact and (fact.conflicts or fact.nutrition):
         return None  # Partial/contradictory declarations remain visible.
@@ -23,6 +28,21 @@ def plain_food_evidence(product, name, fact):
     label = ' '.join(product.name.casefold().split())
     category = (getattr(product, 'category', None) or '').casefold()
     composition = ' '.join(fact.ingredients).casefold() if fact else ''
+    if canonical in {'pumpa', 'butternutpumpa'}:
+        # Owner request 2026-11-21: Livsmedelsverket has only Cucurbita maxima;
+        # a whole fresh butternut uses Matvaretabellen's raw butternut.
+        if composition or not re.fullmatch(r'(?:pumpa butternut|butternutpumpa|butternut(?: squash| pumpa)?)'
+                                           r'(?: (?:eko|ekologisk|klass 1|sverige|spanien|portugal))*', label):
+            return None
+        source = matvaretabellen_2026_11_21()
+        row = source['foods']['butternutpumpa']
+        proof = {'kind': 'generic_reference', 'food_id': row['food_id'], 'description': row['description'],
+                 'source_url': row['source_url'], 'acquisition': source['acquisition'],
+                 'original_values': row['original_values'], 'source': source['attribution']}
+        return NutritionEvidence(source=source['attribution'], source_product_id=row['food_id'],
+            nutrition=dict(row['nutrition']),
+            nutrition_basis=row['description'] + '; generiskt referensvärde per 100 g, inte produktdeklaration.',
+            field_sources={f'nutrition.{k}': (proof,) for k in row['nutrition']}, ingredient='butternutpumpa')
     patterns = {
         'oregano': r'oregano(?: torkad| burk| påse| ekologisk| eko)*',
         'paprikapulver': r'paprikapulver(?: malen| mild| milt| söt| burk| påse| ekologisk| eko)*',

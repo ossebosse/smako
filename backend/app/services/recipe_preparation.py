@@ -297,9 +297,11 @@ def input_evidence(recipe, product, name, unit, qualified, fact, *, recipe_cache
     form = recipe.preparation.input_forms.get(canonical(name))
     if not form or unit not in {"g", "ml"}:
         return None
-    if fact and fact.conflicts and not (canonical(name) == "citronjuice" and unit == "ml" and form == "as_sold"):
-        # A contradictory lemon-juice table falls back to the generic
-        # fresh-juice reference in volume_evidence; nothing else does.
+    from app.services.recipe_volume_nutrition import VOLUME_FALLBACK
+
+    if fact and fact.conflicts and not (canonical(name) in VOLUME_FALLBACK and unit == "ml" and form == "as_sold"):
+        # A contradictory table of a plain liquid falls back to its generic
+        # reference in volume_evidence; nothing else does.
         return None
     text = product.name.casefold()
     composition = " ".join(fact.ingredients).casefold() if fact else ""
@@ -321,7 +323,14 @@ def input_evidence(recipe, product, name, unit, qualified, fact, *, recipe_cache
             )
         )
         if not liquid_whole and not edible_mass:
-            return None
+            from app.services.official_product_facts import is_plain_shell_egg
+
+            # Owner decision 2026-11-21: plain shell eggs use the documented
+            # edible fraction (edible-yield-references.json, 88 %) as an
+            # estimate; nutrition is per 100 g edible egg either way.
+            if not is_plain_shell_egg(product.name, getattr(product, "brand", None),
+                                      fact.ingredients if fact else ()):
+                return None
     if form == "dry" and (re.search(r"kokt|färdig|konserv|avrun", text) or "vatten" in composition):
         return None
     if form == "raw_edible" and re.search(r"kokt|grillad|stekt|panerad|rökt|gravad|gravlax|rimmad", text):
