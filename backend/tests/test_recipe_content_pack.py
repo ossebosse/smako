@@ -5,6 +5,7 @@ from pathlib import Path
 from types import SimpleNamespace
 
 import pytest
+from app.services.meal_library_content import identity
 from app.models.recipe import Recipe
 from app.models.recipe_preferences import RecipePreferences
 from app.services.content_pack_requirements import compatible
@@ -26,8 +27,10 @@ def test_deterministic_import_preserves_every_amount_and_own_instruction():
     # The importer reproduces the issued expansion pack; later reviewed
     # versions of some of its dishes may be current, so read the history.
     from app.services.recipe_library import _registered_history
+    renamed = {r["runtime_id"] for r in json.loads((ROOT / "docs/reviews/recipe-names-core-20261121/library-transition.json").read_bytes())["corrected"]}
     issued = [r for r in _registered_history() if r.design.content_source
-              and r.design.content_source.pack_id == "smako-recipe-expansion-content-20261004-v1"]
+              and r.design.content_source.pack_id == "smako-recipe-expansion-content-20261004-v1"
+              and identity(r) not in renamed]
     priority = max(r.design.content_source.priority for r in issued)
     assert importer["build"](priority)["recipes"] == [r.model_dump(mode="json") for r in issued]
     source = json.loads(importer["SOURCE"].read_text(encoding="utf8"))
@@ -55,11 +58,13 @@ def test_old_104_recipes_unchanged_and_registered():
     history = [r.model_dump(mode="json") for r in _registered_history()]
     assert all(Recipe.model_validate(r).model_dump(mode="json") in history for r in old)
     current = {(r.design.base_id, r.design.variant_id): r for r in _registered()}
+    # The 2026-11-21 name review issues name-only successors of core dinners.
+    renamed = {r["runtime_id"] for r in json.loads((ROOT / "docs/reviews/recipe-names-core-20261121/library-transition.json").read_bytes())["corrected"]}
     for r in map(Recipe.model_validate, old):
         newest = current[(r.design.base_id, r.design.variant_id)]
         assert newest.model_dump(mode="json") == r.model_dump(mode="json") or (
             tuple(map(int, newest.design.version.split("."))) > tuple(map(int, r.design.version.split(".")))
-            and newest.design.content_source is not None)
+            and (newest.design.content_source is not None or identity(newest) in renamed))
     assert len(old) == 104
 
 

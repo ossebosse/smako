@@ -56,7 +56,9 @@ def test_changed_nested_recipe_values_cannot_reuse_old_computation(change):
     elif change == "instructions":
         recipe.instructions.append("En uttryckligt ändrad instruktion.")
     elif change == "form":
-        recipe.preparation.input_forms[next(iter(recipe.preparation.input_forms))] = "as_sold"
+        forms = recipe.preparation.input_forms
+        first_name = next(iter(forms))
+        forms[first_name] = "raw_edible" if forms[first_name] == "as_sold" else "as_sold"
     elif change == "form_order":
         forms = recipe.preparation.input_forms
         ordered = tuple(reversed(tuple(forms.items())))

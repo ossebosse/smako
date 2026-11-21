@@ -162,7 +162,8 @@ def test_prior_issued_versions_remain_valid_but_new_candidates_use_current_conte
     archived = Recipe.model_validate(previous)
     assert archived.design.version == "1.0.0"
     assert library.validate_recipe_design(archived)
-    assert {r.design.version for r in prior_candidates(complete())} == {"1.1.0", "1.3.0", "1.4.0"}
+    # Name-only successors (2026-11-21) keep their core generation.
+    assert {r.design.version.rsplit(".", 1)[0] for r in prior_candidates(complete())} == {"1.1", "1.3", "1.4"}
 
 
 def test_original_96_recipe_objects_are_unchanged_and_archived():
