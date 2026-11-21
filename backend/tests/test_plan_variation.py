@@ -89,7 +89,7 @@ def test_existing_plan_slots_and_requests_without_dinners_are_unchanged():
 
 
 def test_random_preference_is_bounded_and_stable():
-    assert V.per_dinner_kronor([40, 50, 60, float("inf"), None]) == pytest.approx(5.0)
+    assert V.per_dinner_kronor([40, 50, 60, float("inf"), None]) == pytest.approx(2.5)
     assert V.per_dinner_kronor([]) == 0.0
     recipes = [r for r in current_recipes() if r.design][:3]
     slots = [SimpleNamespace(meal_type="dinner", recipe=r) for r in recipes]

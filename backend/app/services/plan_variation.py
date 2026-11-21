@@ -32,10 +32,16 @@ def jitter(seed: int, base_id: str) -> float:
     return int.from_bytes(digest[:4], "big") / 2**32
 
 
+# A dinner bought alone pays whole packages; in a week dinners share them. On
+# beta (Lund, 2026-11-21) the cheap dinners' median lone purchase was 74 kr and
+# their share of the chosen weeks 39-44 kr, so a dinner's share is about half.
+WEEK_SHARE = 0.5
+
+
 def per_dinner_kronor(paid_values) -> float:
-    """The largest extra cost per dinner: VARIATION_PERCENT of a typical cheap dinner."""
+    """The largest extra cost per dinner: VARIATION_PERCENT of a typical cheap dinner's week share."""
     paid = sorted(v for v in paid_values if v and v != float("inf"))[:10]
-    return VARIATION_PERCENT / 100 * median(paid) if paid else 0.0
+    return VARIATION_PERCENT / 100 * WEEK_SHARE * median(paid) if paid else 0.0
 
 
 def recent_dinners(store, owner, plans: int) -> list[list[str]]:
