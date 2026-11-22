@@ -1,3 +1,18 @@
+# 2026-11-22 morgon: Kostandelar och matkök i veckan
+
+Main `78eb7f6d0442` (fast-forward av `diet-shares-20261122`). App
+**app-78eb7f6d0442-6b93e73a**, bas `370df63cd371`. Ändrat:
+`personal_policy.py`, `personal_planner.py`, `next/core.js`, `next/a.html`,
+`next/b.html`. Ägarbeslut 2026-11-22: "Allt" har kött eller kyckling i minst
+1 av 1–3, 2 av 4–5, 3 av 6–7 middagar, en vegetarisk vid 2+ och minst en
+fiskrätt vid 4–7; "Fisk och vegetariskt" har fisk enligt samma tabell; ett
+köttslag i högst hälften av kötträtterna; ett matkök i högst hälften av
+middagarna (avrundat uppåt) om man inte valt ett enda kök; allt så långt
+övriga val tillåter. "Torkade kryddor" borttaget ur "Har du hemma?".
+Importprov i nätverkslös container godkänt. Aktiverad 08:07 UTC; befintligt
+tillstånd och prismanifest bevarade, lagringsretention körd efteråt.
+`/ready` Lund och Malmö: ready.
+
 # 2026-11-21 kväll: Variation i planerna, 100 nya middagar, blockerande ingredienser
 
 Main `370df63cd371` (fast-forward av `plan-variation`, merge av
@@ -485,10 +500,10 @@ git status --short
 .venv/Scripts/python.exe -X utf8 scripts/smako_ops.py status
 
 # Använd den granskade Git-bas som motsvarar faktiskt aktiva filer enligt senaste journalen.
-.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit 370df63cd371 --commit main --workdir .local/beta-release
+.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit 78eb7f6d0442 --commit main --workdir .local/beta-release
 ```
 
-`370df63cd371` är appen som aktiverades 2026-11-21 22:45 UTC. Appbildens egen
+`78eb7f6d0442` är appen som aktiverades 2026-11-22 08:07 UTC. Appbildens egen
 grocery-kopia är äldre än Git; använd `--keep-app-grocery` om intervallet
 bara innehåller grocery-Python som redan levererats till schedulern. De äldre
 Coop-filerna i runtime (`price_universe_runtime.py`,
