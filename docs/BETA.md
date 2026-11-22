@@ -1,3 +1,17 @@
+# 2026-11-22 kväll: Kvitton jämförs med alla Smako-priser
+
+Main `9ba01ad64d7c` (fast-forward av `receipt-matching-20261122`). App
+**app-9ba01ad64d7c-314931cd**, bas `ff812c8a875f`. Ändrat:
+`member_rewards.py`, `api/member.py`. Ägarens andra Hemköp-kvitto gav tre
+"andra priser" som var Smakos egna: klubbpris (Minutfilé, Jordnötssmör) och
+en mindre förpackning (Småbladsmix). Kvitton jämförs nu med ordinarie,
+kampanj-, medlems- och klubbpris samt "2 för"-erbjudanden per förpackning;
+radens första ord (varan) måste matcha, gram matchar aldrig ml, EKO föredrar
+ekologiska varor, kassar och pant räknas inte. Underlaget saknade bara "2 för
+28" på Lätt Crème Fraiche Bearnaise. Importprov i nätverkslös container
+godkänt. Aktiverad 16:48 UTC; befintligt tillstånd och prismanifest
+bevarade, lagringsretention körd efteråt. `/ready` Lund och Malmö: ready.
+
 # 2026-11-22 eftermiddag: Kvittopoäng för alla varor
 
 Main `ff812c8a875f` (fast-forward av `receipt-points-any-item`). App
@@ -562,10 +576,10 @@ git status --short
 .venv/Scripts/python.exe -X utf8 scripts/smako_ops.py status
 
 # Använd den granskade Git-bas som motsvarar faktiskt aktiva filer enligt senaste journalen.
-.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit ff812c8a875f --commit main --workdir .local/beta-release
+.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit 9ba01ad64d7c --commit main --workdir .local/beta-release
 ```
 
-`ff812c8a875f` är appen som aktiverades 2026-11-22 14:10 UTC. Appbildens egen
+`9ba01ad64d7c` är appen som aktiverades 2026-11-22 16:48 UTC. Appbildens egen
 grocery-kopia är äldre än Git; använd `--keep-app-grocery` om intervallet
 bara innehåller grocery-Python som redan levererats till schedulern. De äldre
 Coop-filerna i runtime (`price_universe_runtime.py`,
