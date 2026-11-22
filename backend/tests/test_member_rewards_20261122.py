@@ -250,3 +250,52 @@ def test_club_prices_multibuys_and_sizes_are_smakos_prices_too():
 def test_carrier_bags_and_deposits_are_not_items():
     parsed = rewards.parse_receipt("HEMKÖP KARHÖGSTORG\nMJÖLK 3% 1L   17,95\nPAPPERSKASSE   4,00\nPANT   2,00\nTotalt 23,95")
     assert [l["description"] for l in parsed["lines"]] == ["MJÖLK 3% 1L"]
+
+
+# Owner's third Hemköp receipt (2026-11-22) and Smako's products in the store.
+THIRD_STORE = rewards.StoreProducts([
+    _product("Tomatketchup", "Heinz", 28.34, "570 g"), _product("Tomatketchup", "Heinz", 34.97, "1000 g"),
+    _product("Tomatketchup -50%", "Heinz", 37.41, "960 g"),
+    _product("Baby Dry 5 11-17+kg Byxblöjor", "Pampers", 119.0, "37 st", [{"price": 89.95, "description": "Klubbpris"}]),
+    _product("Päronsplitt Flerpack Glass", "Gb Glace", 51.05, "10 st"),
+    _product("Päron Kl 1", None, 34.95, "1 kg"),
+    _product("Bakpotatis Klass 1", None, 12.25, "375 g", [{"price": 10.0, "description": "MixMatchPricePromotion"}]),
+    _product("Potatissallad", "Garant", 24.95, "500 g"),
+    _product("Potatis Fast Eko Klass 2", "Garant", 17.95, "900 g"),
+    _product("Ägg 18p Frigående Utomhus Medium/large", "Garant", 61.57, "18 st"),
+])
+THIRD_TEXT = """HEMKÖP KARHÖGSTORG
+2026-11-22
+HEINZ KETCHUP 700G        37,80
+PÄRONSPLIT                 7,80
+4 st x 1,95
+ÄGG 18P UTE               61,57
+1,015kg x 24,45kr/kg      24,82
+POTATIS FAST EKO          24,82
+POTATIS BAK               61,25
+5 st x 12,25
+5 för 50                 -11,25
+BABYDRY S6 13-19+KG      238,00
+2 st x 119,00
+Klubbpris                -58,10
+PAPPERSKASSE               4,00
+Totalt                   429,52"""
+
+
+def test_quantity_lines_go_to_the_item_whose_price_they_explain():
+    lines = {l["description"]: l for l in rewards.parse_receipt(THIRD_TEXT)["lines"]}
+    assert lines["ÄGG 18P UTE"]["price"] == 61.57 and "quantity" not in lines["ÄGG 18P UTE"]
+    assert (lines["POTATIS FAST EKO"]["quantity"], lines["POTATIS FAST EKO"]["unit"]) == (1.015, "kg")
+    assert lines["POTATIS BAK"]["price"] == 50.0 and lines["POTATIS BAK"]["quantity"] == 5
+    assert lines["PÄRONSPLIT"]["quantity"] == 4 and "PAPPERSKASSE" not in lines
+
+
+def test_the_third_receipt_scores_by_what_smako_really_lacks():
+    parsed = rewards.parse_receipt(THIRD_TEXT)
+    result = rewards.evaluate(parsed, {}, PlanningRules(), KNOWN, store_products=lambda _: THIRD_STORE)
+    by = {l["description"]: l for l in result["lines"]}
+    assert by["HEINZ KETCHUP 700G"]["missing_in_smako"]  # Smako has 570 g, 960 g and 1 kg
+    assert by["BABYDRY S6 13-19+KG"]["missing_in_smako"]  # Smako has size 5 only
+    assert by["POTATIS BAK"]["smako_product"] == "Bakpotatis Klass 1" and by["POTATIS BAK"]["points"] == 0  # 5 för 50
+    assert by["PÄRONSPLIT"]["smako_product"] != "Päron Kl 1" and by["PÄRONSPLIT"]["points"] == 0  # single vs 10-pack
+    assert by["ÄGG 18P UTE"]["points"] == 0 and not by["ÄGG 18P UTE"]["price_differs"]

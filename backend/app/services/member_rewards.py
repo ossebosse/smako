@@ -169,19 +169,41 @@ def parse_receipt(text):
             except ValueError:
                 continue
     lines, ended = [], False
+    pending = None  # a quantity line whose item has not been read yet
+    letters = re.compile(r"[A-Za-zÅÄÖåäö]{3}")
+
+    def explains(qty, row):
+        # "1,015 kg x 24,45 = 24,82" belongs to the item that cost 24,82.
+        # "TONFISK 14,50 / 2 st x 14,50 = 29,00" belongs to the item priced 14,50.
+        return abs(qty["total"] - row["price"]) <= 0.05 or abs(qty["unit_price"] - row["price"]) <= 0.05
+
     for line in raw:
         folded = fold(line)
         if re.match(r"^(?:totalt?|summa|att betala)\b", folded):
             ended = True
         if ended:
             continue
+        quantity = _QTY.search(line)
         price = _PRICE.search(line)
+        if quantity and price and price.start() < quantity.end():
+            price = None  # "5 st x 12,25": the unit price is not a line price
+        if quantity and not letters.search(_QTY.sub("", line[:price.start()] if price else line)):
+            # A quantity line ("0,532 kg x 29,90  15,91"). Receipts print it under
+            # or over its item and OCR can change the order: it belongs to the
+            # neighbouring item whose price it explains.
+            qty = {"quantity": _number(quantity.group(1)), "unit": quantity.group(2).lower(),
+                   "unit_price": _number(quantity.group(3))}
+            qty["total"] = _number(price.group(1)) if price else round(qty["quantity"] * qty["unit_price"], 2)
+            if lines and (explains(qty, lines[-1]) or "quantity" not in lines[-1] and lines[-1].get("unpriced")):
+                lines[-1].update({k: v for k, v in qty.items() if k != "total"}, price=qty["total"])
+                lines[-1].pop("unpriced", None)
+            else:
+                pending = qty
+            continue
         if not price:
-            # "2 st x 12,90" on its own line belongs to the line above.
             continue
         value = _number(price.group(1))
         description = line[:price.start()].strip(" .:*-\t")
-        quantity = _QTY.search(line)
         if _SKIP.search(line) or not re.search(r"[A-Za-zÅÄÖåäö]{2}", description) and not quantity:
             continue
         if (value < 0 or _DISCOUNT.search(description)) and lines:
@@ -190,15 +212,13 @@ def parse_receipt(text):
             continue
         if value <= 0 or value > 5000:
             continue
-        if quantity and lines and not re.search(r"[A-Za-zÅÄÖåäö]{3}", _QTY.sub("", description)):
-            # A quantity line under its product: "0,532 kg x 29,90".
-            lines[-1].update(quantity=_number(quantity.group(1)), unit=quantity.group(2).lower(),
-                             unit_price=_number(quantity.group(3)), price=value)
-            continue
         row = {"description": _QTY.sub("", description).strip()[:120] or description[:120], "price": value}
         if quantity:
             row.update(quantity=_number(quantity.group(1)), unit=quantity.group(2).lower(),
                        unit_price=_number(quantity.group(3)))
+        elif pending and explains(pending, row):
+            row.update({k: v for k, v in pending.items() if k != "total"})
+        pending = None
         lines.append(row)
     lines = [l for l in lines if l["price"] > 0][:80]
     if not lines:
@@ -219,6 +239,8 @@ def _tokens(text):
 
 _SIZE = re.compile(r"(\d+(?:[,.]\d+)?)\s*(kg|g|ml|cl|l|p|st|%)(?![a-zåäö])", re.IGNORECASE)
 # Receipt shorthand for the words product names use.
+# Inflection endings: "TOMATER" is tomat, "BABYDRY" is not baby.
+_ENDINGS = frozenset({"", "a", "e", "n", "r", "s", "t", "ar", "er", "or", "na", "en", "et", "ad", "ade", "arna", "erna"})
 _RECEIPT_WORDS = {"ute": "utomhus", "inne": "inomhus", "eko": "ekologisk", "nat": "naturell", "krossad": "krossade"}
 _CONFLICTS = (({"ute", "utomhus"}, {"inomhus", "inne"}), ({"laktosfri", "laktosfritt"}, None), ({"fryst", "frysta"}, None))
 
@@ -243,10 +265,22 @@ def _similarity(receipt, product, product_sizes=None, brand=""):
     product's, and opposite words (ute/inomhus) rule a product out.
     """
     words = [_RECEIPT_WORDS.get(w, w) for w in _tokens(_SIZE.sub(" ", receipt)) if not w.isdigit()]
-    names = _tokens(_SIZE.sub(" ", product))
+    names = _tokens(_SIZE.sub(" ", f"{product} {brand or ''}"))  # "HEINZ KETCHUP": the brand counts
+    names += [a + b for a, b in zip(names, names[1:])]  # "BABYDRY" = Baby Dry
     if not words or not names:
         return 0.0
-    found = lambda w: any(n.startswith(w) or (len(n) >= 5 and w.startswith(n)) for n in names)
+    # A receipt word starts a product word ("NAT" naturell, "POTATIS" potatisar),
+    # differs from it by an ending ("TOMATER" tomat), or ends a compound when the
+    # receipt names the rest ("POTATIS BAK" bakpotatis). "PÄRONSPLIT" is not päron.
+    def found(w):
+        for n in names:
+            if n.startswith(w) and (len(w) <= 4 or len(n) - len(w) <= 4):
+                return True
+            if len(n) >= 4 and w.startswith(n) and w[len(n):] in _ENDINGS:
+                return True
+            if len(w) >= 4 and n.endswith(w) and (len(w) >= 6 or any(n.startswith(o) for o in words if o != w and len(o) >= 3)):
+                return True
+        return False
     if not any(len(w) >= 3 and w not in _STOP and found(w) for w in words):
         return 0.0
     for left, right in _CONFLICTS:
@@ -274,10 +308,17 @@ def _similarity(receipt, product, product_sizes=None, brand=""):
             if {"g", "ml"} & {kind} and {"g", "ml"} & set(have):
                 return 0.0
             score -= 0.1
+    # Numbered sizes ("BABYDRY S6", "13-19 KG") and ranges must agree.
+    for pattern in (r"\bs(?:tr(?:lk)?)?\s?(\d{1,2})\b", r"\b(\d{1,3}\s?-\s?\d{1,3})\b"):
+        mine = re.search(pattern, receipt.casefold())
+        theirs = re.findall(r"\b(\d{1,3}(?:\s?-\s?\d{1,3})?)\b", product.casefold())
+        if mine and theirs and re.sub(r"\s", "", mine.group(1)) not in {re.sub(r"\s", "", t) for t in theirs}:
+            return 0.0
     if "ekologisk" in words and not re.search(r"\beko|ekologisk|krav", fold(f"{product} {brand or ''}")):
         score -= 0.2
     # A product with many words the receipt does not name is a weaker match.
-    extra = [n for n in names if n not in _STOP and len(n) >= 4 and not any(n.startswith(w) or w.startswith(n) for w in words)]
+    own = set(_tokens(_SIZE.sub(" ", product)))  # the brand never counts against a product
+    extra = [n for n in names if n in own and n not in _STOP and len(n) >= 4 and not any(n.startswith(w) or w.startswith(n) for w in words)]
     return max(0.0, score - 0.05 * len(extra))
 
 
@@ -321,7 +362,9 @@ class StoreProducts:
         for i, product in enumerate(self.products):
             for token in set(_tokens(f"{product.get('brand') or ''} {product['name']}")):
                 if len(token) >= 3 and token not in _STOP:
-                    self.index.setdefault(token[:4], []).append(i)
+                    # Word starts and ends: "BAK" finds Bakpotatis, "KETCHUP" Tomatketchup.
+                    for key in {token[:3], "~" + token[-4:]}:
+                        self.index.setdefault(key, []).append(i)
 
     def find(self, line):
         """(product, confidence); see _find. Among equally good products the one
@@ -335,7 +378,7 @@ class StoreProducts:
             if hit:
                 return hit, "exact"
         candidates = {i for w in _tokens(_SIZE.sub(" ", line["description"])) if len(w) >= 3 and w not in _STOP
-                      for i in self.index.get(w[:4], ())}
+                      for key in (w[:3], "~" + w[-4:]) for i in self.index.get(key, ())}
         scored = sorted(((_similarity(line["description"], self.products[i]["name"], self.products[i].get("sizes"),
                                       self.products[i].get("brand")), i)
                          for i in candidates), reverse=True)
@@ -432,7 +475,10 @@ def evaluate(parsed, response, rules, known_stores, *, store_text=None, store_pr
             else:
                 out["smako_product"] = product["name"]
                 compared = _price_differs(line, product)
-                if compared:
+                if compared and compared[0] and not 1 / 3 <= _paid(line) / compared[1] <= 3:
+                    # 1,95 against 51,05: a single piece and a multipack, not another price.
+                    out["unsure"] = True
+                elif compared:
                     out["price_differs"], out["planned_price"] = compared
         out["points"] = (rules.receipt_missing_points if out["missing_in_smako"]
                          else rules.receipt_price_points if out["price_differs"] else 0)
