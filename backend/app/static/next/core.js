@@ -603,8 +603,9 @@
     return box;
   }
   // Owner decision 2026-11-15: staples the person has at home are not bought (app/services/staples.py).
-  const STAPLES = [["Salt", ["salt"]], ["Svartpeppar", ["svartpeppar"]], ["Rapsolja", ["rapsolja"]], ["Olivolja", ["olivolja"]], ["Socker", ["strösocker"]], ["Vetemjöl", ["vetemjöl"]],
-    ["Torkade kryddor", ["oregano", "timjan", "spiskummin", "paprikapulver", "rökt paprikapulver", "kanel", "chiliflakes", "gurkmeja"]]];
+  // Owner 2026-11-22: no "Torkade kryddor" choice; there are hundreds of spices, so one choice for eight is not logical.
+  // Spices one has can go in the pantry. Earlier saved spice choices are not sent (STAPLE_NAMES).
+  const STAPLES = [["Salt", ["salt"]], ["Svartpeppar", ["svartpeppar"]], ["Rapsolja", ["rapsolja"]], ["Olivolja", ["olivolja"]], ["Socker", ["strösocker"]], ["Vetemjöl", ["vetemjöl"]]];
   const STAPLE_NAMES = new Set(STAPLES.flatMap(([, names]) => names));
   function staplesChoice() {
     const have = new Set(saved.settings.staples || []), group = el("fieldset", null, "choice"); group.append(el("legend", "Har du hemma?"));

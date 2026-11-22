@@ -55,8 +55,13 @@ from app.services.personal_policy import (
     PolicyConflict,
     check_product,
     distribution_ok,
+    MEAT_CATEGORIES,
+    animal_dinners_needed,
     fish_dinners_needed,
     fish_week_ok,
+    meat_kind,
+    meat_kind_cap,
+    meat_kinds_ok,
     interpretation,
     is_nonfood,
     mentions,
@@ -3684,7 +3689,11 @@ class PersonalPlanner:
             lambda r, t=t: recipe_names(t, r) for t in getattr(self, "_required_likes", ())]
         if getattr(self, "_mixed_week", False):
             wanted += [lambda r: self._protein_category(r) == "vegetarian",
-                       lambda r: self._protein_category(r) != "vegetarian"]
+                       lambda r: self._protein_category(r) in MEAT_CATEGORIES]
+        if getattr(self, "_meat_kind_cap", None) is not None:
+            for kind in ("fågel", "fläsk", "nöt", "blandfärs", "lamm", "annat"):
+                wanted.append(lambda r, k=kind: (self._protein_category(r) in MEAT_CATEGORIES
+                                                 and meat_kind(r, self._protein_category) == k))
         if getattr(self, "_fish_week", False):
             wanted.append(lambda r: self._protein_category(r) in {"fish", "shellfish"})
         if not wanted:
@@ -4569,22 +4578,47 @@ class PersonalPlanner:
         # choices leave recipes of both kinds.
         dinner_meal = self.meals.get("dinner")
         mixed_count = None
+        meat_needed = 0
+        vegetarian_needed = 0
+        kind_cap = None
+        meaty = lambda r: self._protein_category(r) in MEAT_CATEGORIES
+        base_of = lambda r: r.design.base_id if r.design else self._recipe_id(r)
         if ((generating or replace_slot is not None) and dinner_meal is not None and dinner_meal.diet == "mixed"
-                and not dinner_meal.distribution and dinner_count >= 2):
+                and not dinner_meal.distribution and dinner_count >= 1):
+            # Owner decision 2026-11-22: meat or chicken in about half of the
+            # dinners (animal_dinners_needed), as far as the pool allows, and a
+            # vegetarian dinner with two or more.
             if replace_slot is None:
-                kinds = {self._protein_category(r) for r in dinner_pool}
-                possible = "vegetarian" in kinds and bool(kinds - {"vegetarian"})
+                meat_needed = min(animal_dinners_needed(dinner_count), len({base_of(r) for r in dinner_pool if meaty(r)}),
+                                  dinner_count - (1 if dinner_count >= 2 else 0))
+                vegetarian_needed = int(dinner_count >= 2 and any(
+                    self._protein_category(r) == "vegetarian" for r in dinner_pool))
             else:
-                # Replacing one dinner: keep the week mixed when that place can.
-                fixed = {self._protein_category(g[0].recipe) for g in options
-                         if len(g) == 1 and g[0].meal_type == "dinner" and g[0].recipe and g[0].id != replace_slot}
+                fixed = [g[0].recipe for g in options
+                         if len(g) == 1 and g[0].meal_type == "dinner" and g[0].recipe and g[0].id != replace_slot]
                 target = next((g for g in options if any(s.id == replace_slot for s in g)), [])
-                kinds = {self._protein_category(s.recipe) for s in target if s.meal_type == "dinner" and s.recipe}
-                need = {"vegetarian"} - fixed | ({"animal"} if not fixed - {"vegetarian"} else set())
-                possible = bool(target) and len(need) <= 1 and all(
-                    any((k == "vegetarian") == (n == "vegetarian") for k in kinds) for n in need)
-            if possible:
+                target = [s.recipe for s in target if s.meal_type == "dinner" and s.recipe]
+                have_meat = sum(meaty(r) for r in fixed)
+                have_veg = sum(self._protein_category(r) == "vegetarian" for r in fixed)
+                meat_needed = min(animal_dinners_needed(dinner_count), have_meat + any(meaty(r) for r in target))
+                vegetarian_needed = min(int(dinner_count >= 2), have_veg + any(
+                    self._protein_category(r) == "vegetarian" for r in target))
+                if meat_needed > have_meat and vegetarian_needed > have_veg:
+                    vegetarian_needed = have_veg
+            if meat_needed or vegetarian_needed:
                 mixed_count = dinner_count
+        # Owner report 2026-11-22: "Kött" gave only pork. One kind of meat in at
+        # most half of the meat dinners (rounded up), when the pool has enough
+        # of other kinds. New weeks only; a replacement keeps the week's counts.
+        if generating and replace_slot is None and dinner_meal is not None and not dinner_meal.distribution:
+            meat_places = dinner_count if dinner_meal.diet == "meat" else meat_needed
+            if meat_places >= 2:
+                cap = meat_kind_cap(meat_places)
+                bases_by_kind = Counter(meat_kind(r, self._protein_category)
+                                        for r in {base_of(r): r for r in dinner_pool if meaty(r)}.values())
+                if len(bases_by_kind) >= 2 and sum(min(n, cap) for n in bases_by_kind.values()) >= meat_places:
+                    kind_cap = cap
+        self._meat_kind_cap = kind_cap
 
         # Owner decision 2026-11-17: fish and vegetarian has fish dinners (one
         # with 2–3 dinners, two with 4 or more), as many as the pool allows.
@@ -4640,7 +4674,11 @@ class PersonalPlanner:
                 return False
             dinners = [s.recipe for s in constraint_slots if s.meal_type == "dinner" and s.recipe]
             if mixed_count is not None and not mixed_week_ok(
-                    dinners, mixed_count, partial=not constraint_final or draft, classify=self._protein_category):
+                    dinners, mixed_count, partial=not constraint_final or draft, classify=self._protein_category,
+                    meat_needed=meat_needed, vegetarian_needed=vegetarian_needed):
+                self.diagnostics.branch(len(chosen), "policy_taste")
+                return False
+            if kind_cap is not None and not meat_kinds_ok(dinners, cap=kind_cap, classify=self._protein_category):
                 self.diagnostics.branch(len(chosen), "policy_taste")
                 return False
             if fish_count is not None and not fish_week_ok(

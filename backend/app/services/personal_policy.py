@@ -383,6 +383,12 @@ def protein_category(recipe):
     if main in SHELLFISH_INGREDIENTS:
         return "shellfish"
     if not recipe_respects_diet(recipe, preference="vegetarian"):
+        if recipe_respects_diet(recipe, preference="pescetarian"):
+            # Anchovies or fish sauce without meat (puttanesca): a fish dinner,
+            # not a meat dinner (owner report 2026-11-22).
+            if not any(n in FINFISH_INGREDIENTS for n in names) and any(n in SHELLFISH_INGREDIENTS for n in names):
+                return "shellfish"
+            return "fish"
         if any(n in POULTRY_INGREDIENTS for n in names):
             return "chicken"
         if any(n in FINFISH_INGREDIENTS for n in names):
@@ -460,13 +466,22 @@ def preference_score(recipes, profile):
     return score
 
 
-def fish_dinners_needed(count):
-    """Owner decision 2026-11-17: fish and vegetarian means fish on the table.
+def animal_dinners_needed(count):
+    """Owner decision 2026-11-22: about half of the dinners, never none.
 
-    At least one fish dinner with two or three dinners, two with four or more.
+    1–3 dinners at least one, 4–5 at least two, 6–7 at least three: half,
+    rounded down, and at least one. Used for the meat dinners of "Allt" and
+    the fish dinners of "Fisk och vegetariskt".
+    """
+    return 0 if count < 1 else max(1, count // 2)
+
+
+def fish_dinners_needed(count):
+    """Fish dinners for fish and vegetarian (owner decisions 2026-11-17/22).
+
     Shellfish dishes count as fish dishes.
     """
-    return 0 if count < 2 else 1 if count <= 3 else 2
+    return animal_dinners_needed(count)
 
 
 def fish_week_ok(recipes, count, *, partial, classify=protein_category, needed=None):
@@ -476,14 +491,55 @@ def fish_week_ok(recipes, count, *, partial, classify=protein_category, needed=N
     return have + remaining >= need
 
 
-def mixed_week_ok(recipes, count, *, partial, classify=protein_category):
-    """Owner decision 2026-11-15: "Allt" means a mixed week of dinners.
+MEAT_CATEGORIES = frozenset({"meat", "chicken"})
 
-    With two or more dinners, at least one has meat, chicken, fish or
-    shellfish and at least one is vegetarian. A partial week passes while
-    the remaining places can still supply what is missing.
+
+def meat_kind(recipe, classify=protein_category):
+    """Which animal a meat dinner is made of: fågel, fläsk, nöt, blandfärs, lamm or annat.
+
+    Owner report 2026-11-22: "Kött" gave only pork. The main ingredient
+    decides; foods made of an animal without naming it count as that animal
+    (blodpudding, korv and skinka are fläsk), as for exclusions.
+    """
+    if classify(recipe) == "chicken":
+        return "fågel"
+    names = [primary_ingredient(recipe) or "", *(canonicalize_ingredient_name(i.name) for i in recipe.ingredients)]
+    for name in names:
+        if not name:
+            continue
+        if names_food("blandfärs", name):
+            return "blandfärs"
+        if any(mentions(food, name) for food in implied_by_exclusion("kyckling")):
+            return "fågel"
+        for kind in ("fläsk", "nöt", "lamm"):
+            if any(mentions(food, name) for food in implied_by_exclusion(kind)):
+                return kind
+    return "annat"
+
+
+def meat_kind_cap(count):
+    """At most half of the meat dinners (rounded up) of one kind of meat."""
+    return -(-count // 2)
+
+
+def mixed_week_ok(recipes, count, *, partial, classify=protein_category, meat_needed=1, vegetarian_needed=None):
+    """Owner decisions 2026-11-15 and 2026-11-22: "Allt" means a mixed week of dinners.
+
+    At least ``meat_needed`` dinners with meat or chicken (animal_dinners_needed:
+    one with 1–3 dinners, two with 4–5, three with 6–7, as far as the other
+    choices allow) and, with two or more dinners, at least one vegetarian.
+    Fish is welcome but does not count as a meat dinner. A partial week passes
+    while the remaining places can still supply what is missing.
     """
     kinds = [classify(r) for r in recipes]
-    missing = (not any(k != "vegetarian" for k in kinds)) + ("vegetarian" not in kinds)
+    veg_need = (1 if count >= 2 else 0) if vegetarian_needed is None else vegetarian_needed
+    missing = (max(0, meat_needed - sum(k in MEAT_CATEGORIES for k in kinds))
+               + max(0, veg_need - kinds.count("vegetarian")))
     remaining = max(0, count - len(recipes)) if partial else 0
     return missing <= remaining
+
+
+def meat_kinds_ok(recipes, *, cap, classify=protein_category):
+    """No kind of meat in more than ``cap`` of the week's meat dinners."""
+    kinds = Counter(meat_kind(r, classify) for r in recipes if classify(r) in MEAT_CATEGORIES)
+    return cap is None or all(n <= cap for n in kinds.values())

@@ -46,30 +46,61 @@ def test_likes_count_for_every_recipe_and_inside_compound_words():
 
 
 def test_allt_means_a_mixed_week_of_dinners():
+    """Owner decisions 2026-11-15 and 2026-11-22: meat or chicken in about half of the dinners."""
+    from app.services.personal_policy import animal_dinners_needed
+
     kinds = {"veg": "vegetarian", "kyckling": "chicken", "lax": "fish", "korv": "meat"}
     classify = lambda r: kinds[r.name]
     week = lambda *names: [dish(n, "x") for n in names]
-    assert not mixed_week_ok(week("veg", "veg", "veg"), 3, partial=False, classify=classify)
-    assert not mixed_week_ok(week("korv", "kyckling"), 2, partial=False, classify=classify)
-    assert mixed_week_ok(week("veg", "korv", "veg"), 3, partial=False, classify=classify)
-    assert mixed_week_ok(week("lax", "veg"), 2, partial=False, classify=classify)
+    assert [animal_dinners_needed(n) for n in range(1, 8)] == [1, 1, 1, 2, 2, 3, 3]
+    ok = lambda names, n, partial=False: mixed_week_ok(week(*names), n, partial=partial, classify=classify,
+                                                       meat_needed=animal_dinners_needed(n))
+    assert not ok(["veg", "veg", "veg"], 3)
+    assert not ok(["korv", "kyckling"], 2)
+    assert ok(["veg", "korv", "veg"], 3)
+    # Fish is welcome but is not a meat dinner.
+    assert not ok(["lax", "veg"], 2)
+    assert not ok(["korv", "lax", "veg", "veg", "veg"], 5)
+    assert ok(["korv", "kyckling", "lax", "veg", "veg"], 5)
+    assert not ok(["korv", "kyckling", "veg", "veg", "veg", "veg", "lax"], 7)
+    assert ok(["korv", "kyckling", "korv", "veg", "veg", "veg", "lax"], 7)
+    assert ok(["korv"], 1) and not ok(["veg"], 1)
     # A partial week passes while the remaining places can still mix it.
-    assert mixed_week_ok(week("veg", "veg"), 3, partial=True, classify=classify)
-    assert mixed_week_ok(week("veg", "veg", "veg"), 4, partial=True, classify=classify)
-    assert not mixed_week_ok(week("veg"), 1, partial=True, classify=classify)
+    assert ok(["veg", "veg"], 3, partial=True)
+    assert not ok(["veg", "veg", "veg"], 4, partial=True)
+    assert ok(["veg", "veg"], 4, partial=True)
+
+
+def test_kott_is_not_only_pork():
+    """Owner report 2026-11-22: "Kött" gave only pork."""
+    from app.services.personal_policy import meat_kind, meat_kind_cap, meat_kinds_ok
+
+    meats = {"Fläskgryta": "fläskkött", "Korvstroganoff": "falukorv", "Kycklinggryta": "kyckling",
+             "Köttbullar": "nötfärs", "Lammfärsbiffar": "lammfärs", "Lasagne": "blandfärs", "Leverbiff": "kycklinglever"}
+    classify = lambda r: "chicken" if meats[r.name] == "kyckling" else "meat"
+    kinds = {name: meat_kind(dish(name, meat), classify) for name, meat in meats.items()}
+    assert kinds == {"Fläskgryta": "fläsk", "Korvstroganoff": "fläsk", "Kycklinggryta": "fågel", "Köttbullar": "nöt",
+                     "Lammfärsbiffar": "lamm", "Lasagne": "blandfärs", "Leverbiff": "fågel"}
+    assert [meat_kind_cap(n) for n in range(2, 8)] == [1, 2, 2, 3, 3, 4]
+    week = lambda *names: [dish(n, meats[n]) for n in names]
+    assert not meat_kinds_ok(week("Fläskgryta", "Korvstroganoff"), cap=1, classify=classify)
+    assert meat_kinds_ok(week("Fläskgryta", "Köttbullar", "Korvstroganoff"), cap=2, classify=classify)
+    assert not meat_kinds_ok(week("Fläskgryta", "Korvstroganoff", "Fläskgryta"), cap=2, classify=classify)
 
 
 def test_fish_and_vegetarian_has_fish_dinners():
+    """Owner decisions 2026-11-17 and 2026-11-22: about half of the dinners are fish."""
     from app.services.personal_policy import fish_dinners_needed, fish_week_ok
 
     kinds = {"veg": "vegetarian", "lax": "fish", "räkor": "shellfish"}
     classify = lambda r: kinds[r.name]
     week = lambda *names: [dish(n, "x") for n in names]
-    assert [fish_dinners_needed(n) for n in range(1, 8)] == [0, 1, 1, 2, 2, 2, 2]
+    assert [fish_dinners_needed(n) for n in range(1, 8)] == [1, 1, 1, 2, 2, 3, 3]
     assert not fish_week_ok(week("veg", "veg"), 2, partial=False, classify=classify)
     assert fish_week_ok(week("veg", "lax", "veg"), 3, partial=False, classify=classify)
     assert not fish_week_ok(week("veg", "lax", "veg", "veg"), 4, partial=False, classify=classify)
     assert fish_week_ok(week("räkor", "lax", "veg", "veg", "veg"), 5, partial=False, classify=classify)
+    assert not fish_week_ok(week("räkor", "lax", "veg", "veg", "veg", "veg"), 6, partial=False, classify=classify)
     # A partial week passes while the remaining places can still hold the fish.
     assert fish_week_ok(week("veg", "veg"), 4, partial=True, classify=classify)
     assert not fish_week_ok(week("veg", "veg", "veg"), 4, partial=True, classify=classify)

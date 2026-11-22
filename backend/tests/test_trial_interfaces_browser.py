@@ -508,7 +508,8 @@ def test_staples_at_home_are_asked_and_not_bought(ui):
     expect(home.get_by_role("button", name="Salt", exact=True)).to_have_attribute("aria-pressed", "true")
     expect(home.get_by_role("button", name="Olivolja")).to_have_attribute("aria-pressed", "false")
     home.get_by_role("button", name="Svartpeppar").click()
-    home.get_by_role("button", name="Torkade kryddor").click()
+    # Owner 2026-11-22: "torkade kryddor" is not one thing (there are hundreds); no such choice.
+    expect(home.get_by_role("button", name="Torkade kryddor")).to_have_count(0)
     expect(home.get_by_role("button", name="Svartpeppar")).to_have_attribute("aria-pressed", "false")
     shot("hemma")
     if name == "b":
@@ -516,15 +517,14 @@ def test_staples_at_home_are_asked_and_not_bought(ui):
     page.get_by_role("button", name="Skapa matplan").click()
     expect(page.get_by_role("heading", name="Din matplan" if name == "a" else "Veckans recept", exact=True)).to_be_visible()
     sent = next(body for method, path, body in fake.calls if path == "plans")
-    assert sent["personal"]["staples_at_home"] == ["salt", "rapsolja", "oregano", "timjan", "spiskummin", "paprikapulver",
-                                                   "rökt paprikapulver", "kanel", "chiliflakes", "gurkmeja"]
+    assert sent["personal"]["staples_at_home"] == ["salt", "rapsolja"]
     # Three dinners: at most two with the same main protein.
     assert sent["recipe_preferences"]["max_same_main_protein_dinners"] == 2
     if name == "a":
         page.goto(re.sub(r"#.*", "#handla", page.url))
     else:
         page.get_by_role("button", name="Visa handlingslistan").click()
-    expect(page.get_by_text(re.compile("Har du hemma, behöver inte köpas: salt, rapsolja, oregano"))).to_be_visible()
+    expect(page.get_by_text(re.compile("Har du hemma, behöver inte köpas: salt, rapsolja\\."))).to_be_visible()
 
 
 def start_plan(name, page):
