@@ -1,6 +1,6 @@
 # Fler Primat-sökningar för ICA (scheduler)
 
-Aktiverad 2026-11-22 21:22 UTC. Ägarbeslut samma kväll: gratisnivån hos
+Aktiverad 2026-11-22 21:07 UTC. Ägarbeslut samma kväll: gratisnivån hos
 Primat, bredare ICA-täckning ("Gunnesbo över två nätter"; se avvikelse nedan).
 
 ## Orsak

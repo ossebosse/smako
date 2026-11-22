@@ -5,7 +5,7 @@ Main `7ec9a6767a22`. Scheduler **source-ops-7ec9a6767a22**
 Primat-uppdatering gör 48 + 100 receptsökningar (149 anrop per stad, 1,1 s
 mellanrum) inom gratisnivån, för ICA Gunnesbo, Västra Hamnen och Caroli.
 Liveprov: 13 av 15 saknade ingredienser i ägarens plan fick pris med
-förpackning. Aktiverad 21:22 UTC; config före/efter skiljer bara i image och
+förpackning. Aktiverad 21:07 UTC; config före/efter skiljer bara i image och
 BUILD_ID. [Aktiveringsjournal](releases/ica-primat-recipe-queries-20261122/ACTIVATED.md).
 
 ---
