@@ -1,3 +1,20 @@
+# 2026-11-22 förmiddag: Fliken Matplanering på adminsidan
+
+Main `3f82b06919d8` (fast-forward av `planning-rules-admin`). App
+**app-3f82b06919d8-e8abbbe9**, bas `78eb7f6d0442`. Ändrat: `planning_rules.py`
+(nytt), `personal_policy.py`, `personal_planner.py`, `plan_variation.py`,
+`api/beta_ops.py`, `admin.html`, `admin.css`, `admin-rules.js` (nytt).
+Ägarbegäran 2026-11-22: alla regler för matplaneringen går att finjustera
+under /admin, fliken "Matplanering": kostfördelningen för 1–7 middagar (Allt:
+kött, fisk, vegetariskt; Fisk och vegetariskt: fisk), högsta andel av ett
+köttslag och ett matkök, minsta besparing för en butik till, vikterna för
+gillar/ogillar och saknad gillad råvara, slumpvariationen och standarden för
+"undvik rätter från senaste planer". Reglerna sparas i
+`/srv/app/var/plans/planning-rules.json` och gäller nya planer; saknas filen
+gäller standardvärdena (ägarbesluten hittills). Importprov i nätverkslös
+container godkänt. Aktiverad 08:45 UTC; befintligt tillstånd och prismanifest
+bevarade, lagringsretention körd efteråt. `/ready` Lund och Malmö: ready.
+
 # 2026-11-22 morgon: Kostandelar och matkök i veckan
 
 Main `78eb7f6d0442` (fast-forward av `diet-shares-20261122`). App
@@ -500,10 +517,10 @@ git status --short
 .venv/Scripts/python.exe -X utf8 scripts/smako_ops.py status
 
 # Använd den granskade Git-bas som motsvarar faktiskt aktiva filer enligt senaste journalen.
-.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit 78eb7f6d0442 --commit main --workdir .local/beta-release
+.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit 3f82b06919d8 --commit main --workdir .local/beta-release
 ```
 
-`78eb7f6d0442` är appen som aktiverades 2026-11-22 08:07 UTC. Appbildens egen
+`3f82b06919d8` är appen som aktiverades 2026-11-22 08:45 UTC. Appbildens egen
 grocery-kopia är äldre än Git; använd `--keep-app-grocery` om intervallet
 bara innehåller grocery-Python som redan levererats till schedulern. De äldre
 Coop-filerna i runtime (`price_universe_runtime.py`,
