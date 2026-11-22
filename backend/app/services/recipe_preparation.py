@@ -514,6 +514,7 @@ def pantry_evidence(recipe, name, identity):
     compatible = {
         "dry": {"dry"},
         "cooked_drained": {"drained"},
+        "preserved_drained": {"preserved_drained", "drained"},
         "raw_edible": {"raw", "raw_skinless_breast", "raw_cod", "raw_farmed"},
         "as_sold": {"ready", "canned_with_liquid", "frozen"},
     }

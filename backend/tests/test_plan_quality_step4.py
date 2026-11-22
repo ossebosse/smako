@@ -205,7 +205,9 @@ def test_oil_at_home_gets_nutrition_from_reviewed_reference_and_density():
     oil = volume_evidence("rapsolja", "ml")
     assert oil is not None and oil.nutrition_unit == "ml" and oil.evidence_kind == "food_specific_density_estimate"
     assert 800 < oil.nutrition["kcal"] < 840  # About 900 kcal per 100 g x 0.92 g/ml.
-    assert volume_evidence("rapsolja", "g") is None and volume_evidence("olivolja", "ml") is None
+    assert volume_evidence("rapsolja", "g") is None and volume_evidence("smör", "ml") is None
+    # Owner report 2026-11-22: olive oil at home too (SLV 4659, Matvaretabellen density).
+    assert volume_evidence("olivolja", "ml") is not None
 
 
 def test_the_week_without_likes_ranks_as_if_nothing_were_liked():

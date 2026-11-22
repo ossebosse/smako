@@ -138,6 +138,11 @@ _NOT_NONFOOD = ("{name} är sparad som en vara som inte är mat, men Smako känn
 EXTRA_STORE_MIN_SAVING = Decimal(10)
 
 
+def _usable_evidence(fact, unit, requested):
+    return bool(fact and fact.nutrition_unit == unit and fact.nutrition_basis
+                and fact.nutrition_preparation == "as_sold" and requested <= fact.nutrition.keys())
+
+
 def extra_store_saving(rules=None) -> float:
     """EXTRA_STORE_MIN_SAVING, or the admin's value (planning_rules)."""
     if rules is None:
@@ -2938,6 +2943,14 @@ class PersonalPlanner:
                                         positions = self.index.groups.get(need["preparation_sources"][0], ())
                                         fact = next((f for i in positions if (f := self.nutrition_evidence(
                                             self.prepared.universe.products[i], need["name"], need["unit"], requested, slot.recipe))), None)
+                                    if not limits.active and not _usable_evidence(fact, need["unit"], requested):
+                                        # Owner report 2026-11-22: shown values use the generic
+                                        # reference for an input whose product has no usable table.
+                                        from app.services.nutrition_fallback import fallback_evidence
+                                        label = (self.prepared.universe.products[
+                                            self.by_identity[(selected.store_id, selected.product_id)]].name
+                                            if selected else need["name"])
+                                        fact = fallback_evidence(slot.recipe, need["name"], label) or fact
                                     contributions.append((quantity, fact, "purchase"))
                                 for quantity, fact, origin in contributions:
                                     if (

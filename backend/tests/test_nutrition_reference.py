@@ -49,7 +49,7 @@ def products():
 def test_all_reviewed_references_have_sourced_units_and_not_product_identities():
     with patch("socket.socket.connect", side_effect=AssertionError("offline")):
         data = reference_data()
-        assert len(MAPPINGS) == 85  # Includes separately reviewed apple with skin and slv-20261121.
+        assert len(MAPPINGS) == 94  # Includes separately reviewed apple with skin, slv-20261121 and slv-20261122.
         for identity in MAPPINGS:
             f = reference_evidence(identity)
             assert set(f.nutrition) == {"kcal", "protein_g", "fat_g", "carbs_g"}
@@ -226,6 +226,7 @@ def test_reference_version_is_independent_of_json_line_endings(tmp_path, monkeyp
     (tmp_path / "slv-20261002-peppers.json").write_bytes(module.PATH.with_name("slv-20261002-peppers.json").read_bytes())
     (tmp_path / "slv-20261003-black-olives.json").write_bytes(module.PATH.with_name("slv-20261003-black-olives.json").read_bytes())
     (tmp_path / "slv-20261121.json").write_bytes(module.PATH.with_name("slv-20261121.json").read_bytes())
+    (tmp_path / "slv-20261122.json").write_bytes(module.PATH.with_name("slv-20261122.json").read_bytes())
     for filename in ('nordic-20261015.json', 'dtu-density-20261015.json', 'matvaretabellen-20261121.json'):
         (tmp_path / filename).write_bytes(module.PATH.with_name(filename).read_bytes())
     monkeypatch.setattr(module, "PATH", path)

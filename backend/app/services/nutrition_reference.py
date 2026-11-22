@@ -109,6 +109,18 @@ MAPPINGS = {
     381: ("paprika gul", "raw"),
     392: ("paprika", "raw"),
     402: ("oliver", "drained"),
+    # slv-20261122.json (owner report 2026-11-22: 4 of 5 dinners lacked
+    # nutrition): generic references for common recipe inputs whose bought
+    # products often publish no usable table (nutrition_fallback.py).
+    5067: ("lammkött", "raw"),
+    1278: ("tonfisk i vatten", "drained"),
+    1275: ("tonfisk i olja", "drained"),
+    1271: ("sardiner i olja", "preserved_drained"),
+    1272: ("sardiner i tomatsås", "preserved_drained"),
+    2255: ("mozzarella", "preserved_drained"),
+    103: ("parmesan", "ready"),
+    1981: ("bakpulver", "dry"),
+    4937: ("körsbärstomater", "raw"),
 }
 # Optional data availability is explicit for isolated same-facts comparisons.
 # Deployed reference files are immutable and included in content_version below.
@@ -152,7 +164,7 @@ def macro_values(rows):
 def reference_data():
     raw = PATH.read_bytes()
     data = json.loads(raw)
-    for path in (SUPPLEMENT_PATH, PATH.with_name('slv-20260925.json'), PATH.with_name('slv-20260926.json'), PATH.with_name('slv-20261002.json'), PATH.with_name('slv-20261002-celery.json'), PATH.with_name('slv-20261002-beetroot.json'), PATH.with_name('slv-20261002-sweetpotato.json'), PATH.with_name('slv-20261002-peppers.json'), PATH.with_name('slv-20261003-black-olives.json'), PATH.with_name('slv-20261121.json'), *((APPLE_SUPPLEMENT_PATH,) if APPLE_SUPPLEMENT_PATH.exists() else ())):
+    for path in (SUPPLEMENT_PATH, PATH.with_name('slv-20260925.json'), PATH.with_name('slv-20260926.json'), PATH.with_name('slv-20261002.json'), PATH.with_name('slv-20261002-celery.json'), PATH.with_name('slv-20261002-beetroot.json'), PATH.with_name('slv-20261002-sweetpotato.json'), PATH.with_name('slv-20261002-peppers.json'), PATH.with_name('slv-20261003-black-olives.json'), PATH.with_name('slv-20261121.json'), PATH.with_name('slv-20261122.json'), *((APPLE_SUPPLEMENT_PATH,) if APPLE_SUPPLEMENT_PATH.exists() else ())):
         supplement = json.loads(path.read_bytes())
         if data['foods'].keys() & supplement['foods'].keys():
             raise ValueError('SLV supplement must not silently replace retained references')
@@ -199,6 +211,7 @@ def _reference_options(_version):
                 "raw_farmed": "rå odlad lax",
                 "raw_cod": "rå torsk",
                 "frozen": "fryst som såld, före eventuell tillagning",
+                "preserved_drained": "avrunnen ur lag, olja eller sås",
             }[state],
         }
         for n, (name, state) in MAPPINGS.items()

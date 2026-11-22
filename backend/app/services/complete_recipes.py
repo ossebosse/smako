@@ -717,6 +717,7 @@ def pantry_form_compatible(item, row):
             reference_form = MAPPINGS[identity][1]
             form = ("raw_edible" if reference_form.startswith("raw") else
                     "cooked_drained" if reference_form == "drained" else
+                    "preserved_drained" if reference_form == "preserved_drained" else
                     "dry" if reference_form == "dry" else
                     "as_sold" if reference_form in {"ready", "canned_with_liquid", "frozen"} else None)
         except (ValueError, KeyError):

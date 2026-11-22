@@ -43,7 +43,7 @@ def reference_identity(name, unit):
 
 # A staple measured by volume with a reviewed per-gram reference and a
 # reviewed density (DTU). Only foods listed here; more need the same review.
-_VOLUME_REFERENCES = {"rapsolja": 2189}
+_VOLUME_REFERENCES = {"rapsolja": 2189, "olivolja": 4659}  # olivolja: owner report 2026-11-22
 
 
 def volume_evidence(name, unit):
@@ -78,8 +78,10 @@ DRIED_SPICES = frozenset({
 
 
 # Owner decision 2026-11-21: fresh mint is left out too; there is no reviewed
-# reference for an unnamed mint species.
-LEFT_OUT_HERBS = frozenset({"mynta"})
+# reference for an unnamed mint species. Owner report 2026-11-22: spring onion
+# and capers have no Livsmedelsverket food either; a recipe's amount is a few
+# kcal per portion, so they are left out and named like the spices.
+LEFT_OUT_HERBS = frozenset({"mynta", "salladslök", "kapris"})
 
 
 def negligible_spice(name, quantity, unit):
