@@ -23,10 +23,11 @@
     ["member_avoid_recent_plans", "Undvik rätter från senaste", "planer", "Standard för inloggade som inte valt själva.", 0, 10],
   ];
   const POINTS = [
-    ["receipt_points", "Ett godkänt kvitto ger", "poäng", "När minst så många varor från handlingslistan som anges nedan finns på kvittot.", 0, 1000],
-    ["receipt_price_points", "Annat pris än Smakos ger", "poäng per vara", "För en vara från listan som kostade något annat i samma butik än Smako räknade med.", 0, 1000],
-    ["receipt_missing_points", "Butik utan priser i Smako ger", "poäng per vara", "För en vara från listan köpt i en butik som Smako saknar priser för, till exempel en liten butik utan näthandel.", 0, 1000],
-    ["receipt_min_list_items", "Minst varor från listan", "varor", "Färre än så ger inga poäng.", 1, 50],
+    ["receipt_points", "Ett godkänt kvitto ger", "poäng", "När minst så många varor som anges nedan går att läsa på kvittot.", 0, 1000],
+    ["receipt_price_points", "Annat pris än Smakos ger", "poäng per vara", "För en vara som Smako har i butiken men till ett annat pris.", 0, 1000],
+    ["receipt_missing_points", "Vara eller butik utan Smako-pris ger", "poäng per vara", "För en vara som Smako inte har i butiken, eller varje vara från en butik som Smako saknar priser för, till exempel en liten butik utan näthandel.", 0, 1000],
+    ["receipt_min_list_items", "Minst varor på kvittot", "varor", "Färre lästa varor ger inga poäng. Varorna behöver inte finnas på handlingslistan.", 1, 50],
+    ["receipt_max_points", "Högst poäng per kvitto", "poäng", "Taket för ett kvitto.", 0, 10000],
     ["receipt_max_per_week", "Högst kvitton per vecka", "kvitton", "Per medlem, de senaste sju dagarna.", 1, 50],
   ];
   let saved = null, defaults = null, loaded = false;

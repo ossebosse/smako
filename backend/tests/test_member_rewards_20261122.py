@@ -59,31 +59,51 @@ def test_the_receipt_text_becomes_lines():
     assert sweets["price"] == 14.9  # the discount below it
 
 
-def test_a_store_missing_from_smako_gives_extra_points():
-    rules = PlanningRules()
-    result = rewards.evaluate(rewards.parse_receipt(OCR_TEXT), basket(), rules, known_stores=[])
+KNOWN = [{"store_id": "context:hemkop:1", "name": "Hemköp Lund Karhögstorg", "chain": "hemkop"},
+         {"store_id": "context:hemkop:2", "name": "Hemköp Lund Karhögstorg", "chain": "hemkop"},
+         {"store_id": "context:willys:1", "name": "Willys Lund", "chain": "willys"}]
+CATALOGUE = rewards.StoreProducts([
+    {"name": "Kvarg Naturell 0,2% 900g", "brand": "Arla", "price": 31.95},
+    {"name": "Ägg 18p Frigående Utomhus", "brand": "Garant", "price": 59.95},
+    {"name": "Ägg 18p Frigående Inomhus", "brand": "Garant", "price": 49.95},
+    {"name": "Kesella kvarg naturell", "brand": "Arla", "price": 12.95, "sizes": {"g": 500}},
+    {"name": "Minutkyckling", "brand": "Kronfågel", "price": 69.95},
+    {"name": "Bakpulver Eko", "brand": "Garant Eko", "price": 12.0, "gtin": "7340011400000"},
+    {"name": "Ägg 6p Frigående Large Eko", "brand": "Garant Eko", "price": 29.95},
+])
+# Owner's receipt 2026-11-22 (Hemköp Karhögstorg), as the phone read it.
+HEMKOP = {"store_text": "HEMKÖP KARHÖGSTORG", "purchased_on": None, "lines": [
+    {"description": "KVARG 900G NAT 0,2%", "price": 31.95}, {"description": "ÄGG 18P UTE", "price": 61.57},
+    {"description": "MINUTFILÉ", "price": 69.95}, {"description": "BAKPULVER EKO", "price": 12.0},
+    {"description": "VISPGRÄDDE 40%", "price": 10.98}, {"description": "SMÅBLADSMIX EKO", "price": 20.95}]}
+
+
+def test_items_need_not_be_on_the_list_and_score_by_smako_prices():
+    """Owner decision 2026-11-22: missing in Smako +5, another price +2, same price 0."""
+    result = rewards.evaluate(HEMKOP, basket(), PlanningRules(), KNOWN, store_products=lambda _: CATALOGUE)
+    assert result["store_known"] and result["store"] == "Hemköp Lund Karhögstorg" and result["qualifies"]
+    by = {l["description"]: l for l in result["lines"]}
+    assert by["KVARG 900G NAT 0,2%"]["smako_product"].startswith("Kvarg") and by["KVARG 900G NAT 0,2%"]["points"] == 0
+    assert by["ÄGG 18P UTE"]["price_differs"] and by["ÄGG 18P UTE"]["points"] == 2
+    assert by["BAKPULVER EKO"]["smako_product"] == "Bakpulver Eko"  # never the eggs because of "eko"
+    for name in ("MINUTFILÉ", "VISPGRÄDDE 40%", "SMÅBLADSMIX EKO"):
+        assert by[name]["missing_in_smako"] and by[name]["points"] == 5
+    assert result["points"] == 10 + 2 + 3 * 5
+
+
+def test_a_store_missing_from_smako_gives_extra_points_for_every_item():
+    result = rewards.evaluate(rewards.parse_receipt(OCR_TEXT), basket(), PlanningRules(), KNOWN)
     assert not result["store_known"] and result["qualifies"]
-    matched = [l for l in result["lines"] if l["item"]]
-    assert {l["item"] for l in matched} >= {"Bröd Varsågod Skivad", "Fast potatis i påse", "Tonfisk i vatten", "Gul lök"}
-    assert all(l["missing_in_smako"] and l["points"] == 5 for l in matched)
-    assert not next(l for l in result["lines"] if l["description"] == "Lösgodis")["item"]
-    assert result["points"] == 10 + 5 * len(matched)
+    assert all(l["missing_in_smako"] and l["points"] == 5 for l in result["lines"])
+    assert result["points"] == min(100, 10 + 5 * len(result["lines"]))
+    assert {l["item"] for l in result["lines"] if l["item"]} >= {"Bröd Varsågod Skivad", "Tonfisk i vatten"}
 
 
-def test_a_price_that_differs_at_the_planned_store_gives_two_points():
-    text = OCR_TEXT.replace("ICA Nära Klostergården", "WILLYS LUND")
-    result = rewards.evaluate(rewards.parse_receipt(text), basket(), PlanningRules(), known_stores=[])
-    assert result["store_known"] and result["store"] == "Willys Lund"
-    by_item = {l["item"]: l for l in result["lines"] if l["item"]}
-    assert by_item["Bröd Varsågod Skivad"]["price_differs"] and by_item["Bröd Varsågod Skivad"]["points"] == 2
-    assert not by_item["Fast potatis i påse"]["price_differs"] and by_item["Fast potatis i påse"]["points"] == 0
-    assert by_item["Tonfisk i vatten"]["points"] == 0  # 2 x 14,50 as planned per package
-    assert result["points"] == 10 + 2 * sum(l["price_differs"] for l in by_item.values())
-
-
-def test_too_few_list_items_give_no_points():
+def test_points_have_a_ceiling_and_too_few_lines_give_none():
+    rules = PlanningRules(receipt_max_points=20)
+    assert rewards.evaluate(rewards.parse_receipt(OCR_TEXT), basket(), rules, [])["points"] == 20
     parsed = {"store_text": "Pressbyrån", "lines": [{"description": "Kaffe", "price": 30.0}], "purchased_on": None}
-    result = rewards.evaluate(parsed, basket(), PlanningRules(), known_stores=[])
+    result = rewards.evaluate(parsed, basket(), PlanningRules(), [])
     assert not result["qualifies"] and result["points"] == 0
 
 

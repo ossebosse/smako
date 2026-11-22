@@ -123,7 +123,26 @@ def _evaluate(request, owner, payload):
         raise rewards.RewardError("Fota kvittot eller välj en PDF.")
     prepared = GLOBAL_PREPARED_PRICE_UNIVERSES.get_for_request(response_json.get("postal_code") or "22350", {})
     known = [{"store_id": s.store_id, "name": s.name, "chain": s.chain} for s in (prepared.stores if prepared else ())]
-    return parsed, rewards.evaluate(parsed, response_json, load(), known, store_text=payload.store_text)
+    products = (lambda store_id: _store_products(prepared, store_id)) if prepared else None
+    return parsed, rewards.evaluate(parsed, response_json, load(), known, store_text=payload.store_text,
+                                    store_products=products)
+
+
+_CATALOGUES: dict = {}
+
+
+def _store_products(prepared, store_ids):
+    """Smako's products in one store (all its price contexts), kept for the loaded price universe."""
+    key = (prepared.universe.universe_id, store_ids)
+    if key not in _CATALOGUES:
+        if len(_CATALOGUES) > 8:
+            _CATALOGUES.clear()
+        _CATALOGUES[key] = rewards.StoreProducts(
+            {"name": p.name, "brand": p.brand, "price": p.price, "effective_price": p.effective_price,
+             "member_price": p.member_price, "gtin": p.gtin,
+             "sizes": rewards.sizes(f"{p.package_quantity:g} {p.package_unit}") if p.package_quantity and p.package_unit else {}}
+            for p in prepared.universe.products if p.store_id in store_ids)
+    return _CATALOGUES[key]
 
 
 @router.post("/receipts/preview")

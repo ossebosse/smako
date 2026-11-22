@@ -12,13 +12,14 @@ proposed in the member's own plans (owner choice 2026-11-22).
 
 A receipt is read on the member's phone (photo, OCR in the browser) or from a
 PDF (text extracted here); only the confirmed text lines are kept, never the
-picture. Points (planning_rules, admin tab "Matplanering"):
-  * receipt_points for a receipt with at least receipt_min_list_items lines
-    that match the plan's shopping list,
-  * receipt_price_points per matched line whose price differs from the
-    price Smako planned at that store,
-  * receipt_missing_points per matched line bought where Smako has no
-    prices (a store missing from Smako's price data).
+picture. Points (planning_rules, admin tab "Matplanering"; owner decision 2026-11-22:
+the items need not be on the shopping list):
+  * receipt_points for a receipt with at least receipt_min_list_items lines,
+  * receipt_price_points per line whose product Smako has at that store at
+    another price,
+  * receipt_missing_points per line Smako has no product for at that store,
+    or every line of a store without Smako prices,
+  at most receipt_max_points per receipt.
 """
 
 from __future__ import annotations
@@ -206,19 +207,65 @@ def parse_receipt(text):
             "lines": lines, "header": header[:200]}
 
 
+_STOP = {"eko", "ekologisk", "ekologiska", "krav", "svensk", "svenska", "sverige", "st", "g", "kg", "ml", "cl", "l", "p",
+         "pack", "förp", "ca", "nat", "och", "med", "i", "av", "fryst", "färsk", "garant", "ica", "coop", "eldorado",
+         "xtra", "änglamark", "hemköp", "willys", "large", "medium", "small", "ute", "inne"}
+
+
 def _tokens(text):
     return [t for t in fold(re.sub(r"\[\d+\]", " ", text)).split() if len(t) >= 2 and not t.isdigit()]
 
 
-def _similarity(receipt, product):
-    """Share of the receipt line's words found as a word start in the product name."""
-    words, names = _tokens(receipt), _tokens(product)
+_SIZE = re.compile(r"(\d+(?:[,.]\d+)?)\s*(kg|g|ml|cl|l|p|st|%)(?![a-zåäö])", re.IGNORECASE)
+# Receipt shorthand for the words product names use.
+_RECEIPT_WORDS = {"ute": "utomhus", "inne": "inomhus", "eko": "ekologisk", "nat": "naturell", "krossad": "krossade"}
+_CONFLICTS = (({"ute", "utomhus"}, {"inomhus", "inne"}), ({"laktosfri", "laktosfritt"}, None), ({"fryst", "frysta"}, None))
+
+
+def sizes(text):
+    """{kind: value} for sizes named in a text: weight in g, volume in ml, pieces, percent."""
+    found = {}
+    for number, unit in _SIZE.findall(str(text or "")):
+        value, unit = float(number.replace(",", ".")), unit.casefold()
+        kind, value = {"kg": ("g", value * 1000), "g": ("g", value), "l": ("ml", value * 1000), "cl": ("ml", value * 10),
+                       "ml": ("ml", value), "p": ("st", value), "st": ("st", value), "%": ("%", value)}[unit]
+        found.setdefault(kind, value)
+    return found
+
+
+def _similarity(receipt, product, product_sizes=None):
+    """How well a receipt line names a product, 0..1.
+
+    Each receipt word must start a product word (receipts abbreviate:
+    "NAT" for naturell). Generic words (eko, svensk...) never make a match on
+    their own. A size on the receipt (900G, 18P, 40%) must agree with the
+    product's, and opposite words (ute/inomhus) rule a product out.
+    """
+    words = [_RECEIPT_WORDS.get(w, w) for w in _tokens(_SIZE.sub(" ", receipt)) if not w.isdigit()]
+    names = _tokens(_SIZE.sub(" ", product))
     if not words or not names:
         return 0.0
-    hits = sum(any(n.startswith(w) or (len(w) >= 4 and w.startswith(n[:4]) and len(n) >= 4) for n in names) for w in words)
-    if not any(len(w) >= 3 and any(n.startswith(w) for n in names) for w in words):
+    found = lambda w: any(n.startswith(w) or (len(n) >= 5 and w.startswith(n)) for n in names)
+    if not any(len(w) >= 3 and w not in _STOP and found(w) for w in words):
         return 0.0
-    return hits / len(words)
+    for left, right in _CONFLICTS:
+        has_left = bool(left & set(words)) , bool(left & set(names))
+        if right is None:
+            if has_left[0] != has_left[1]:
+                return 0.0
+        elif (left & set(words) and right & set(names)) or (right & set(words) and left & set(names)):
+            return 0.0
+    content = [w for w in words if w not in _STOP] or words  # generic words neither help nor hurt
+    score = sum(found(w) for w in content) / len(content)
+    wanted, have = sizes(receipt), {**sizes(product), **(product_sizes or {})}
+    for kind, value in wanted.items():
+        if kind in have and abs(have[kind] - value) > max(0.01, 0.02 * value):
+            return 0.0
+        if kind not in have:
+            score -= 0.1
+    # A product with many words the receipt does not name is a weaker match.
+    extra = [n for n in names if n not in _STOP and len(n) >= 4 and not any(n.startswith(w) or w.startswith(n) for w in words)]
+    return max(0.0, score - 0.05 * len(extra))
 
 
 def plan_items(response):
@@ -228,11 +275,7 @@ def plan_items(response):
         for item in store.get("items") or []:
             rows.append({"key": f"{store.get('store_id')}|{item.get('product_id')}",
                          "product": item.get("product_name") or "", "ingredient": re.sub(r"\s*\[\d+\]$", "", item.get("ingredient") or ""),
-                         "store_id": store.get("store_id"), "store_name": store.get("store_name") or "",
-                         "chain": (item.get("chain") or "").casefold(), "gtin": item.get("gtin"),
-                         "unit_price": item.get("unit_price"), "packages": item.get("packages_needed") or 1,
-                         "total_price": item.get("total_price"), "comparison_price": item.get("comparison_price"),
-                         "comparison_unit": item.get("comparison_unit"), "sale_model": item.get("sale_model")})
+                         "store_id": store.get("store_id"), "store_name": store.get("store_name") or "", "gtin": item.get("gtin")})
     return rows
 
 
@@ -241,78 +284,111 @@ def _chain_of(name):
     return next((chain for chain, pattern in CHAINS if re.search(pattern, folded)), None)
 
 
-def find_store(store_text, chain, plan_rows, known_stores):
-    """The plan store or Smako store the receipt is from: (store_id, name, known)."""
-    words = set(_tokens(store_text)) - {"ica", "coop", "willys", "hemköp", "hemkop", "lidl", "city", "gross", "ab", "butik"}
-    def score(name):
-        names = set(_tokens(name))
-        return len(words & names) + (1 if chain and _chain_of(name) == chain else 0)
-    plan_stores = {(r["store_id"], r["store_name"]) for r in plan_rows}
-    candidates = sorted(((score(n), sid, n) for sid, n in plan_stores), reverse=True)
-    if candidates and candidates[0][0] >= 1 and (not chain or _chain_of(candidates[0][2]) == chain):
-        # One plan store of the chain, or the one whose name the receipt names.
-        same_chain = [c for c in candidates if not chain or _chain_of(c[2]) == chain]
-        if len(same_chain) == 1 or candidates[0][0] >= 2:
-            return candidates[0][1], candidates[0][2], True
-    others = sorted(((score(s["name"]), s["store_id"], s["name"]) for s in known_stores
-                     if not chain or _chain_of(s["name"]) == chain or s.get("chain", "").casefold() == chain), reverse=True)
-    if others and others[0][0] >= 2:
-        return others[0][1], others[0][2], True
+def find_store(store_text, chain, known_stores):
+    """The Smako store the receipt is from: (store_id, name, known)."""
+    words = set(_tokens(store_text)) - {"ica", "coop", "willys", "hemköp", "hemkop", "lidl", "city", "gross", "ab", "butik",
+                                         "nära", "kvantum", "maxi", "supermarket", "stora"}
+    # One store can have several price contexts (store prices, online prices):
+    # all contexts with the best name count as that store.
+    names = {}
+    for s in known_stores:
+        if not chain or _chain_of(s["name"]) == chain or (s.get("chain") or "").casefold() == chain:
+            names.setdefault(s["name"], []).append(s["store_id"])
+    scored = sorted(((len(words & set(_tokens(name))), name) for name in names), reverse=True)
+    if scored and scored[0][0] >= 1 and (len(scored) == 1 or scored[0][0] > scored[1][0]):
+        return tuple(names[scored[0][1]]), scored[0][1], True
     return None, store_text, False
 
 
-def _differs(line, row):
-    paid, planned = line["price"], row.get("total_price")
-    if line.get("unit") == "kg" and line.get("unit_price") and row.get("comparison_unit") == "kg" and row.get("comparison_price"):
-        paid, planned = line["unit_price"], row["comparison_price"]
-    elif line.get("quantity") and line.get("unit") == "st" and line.get("unit_price") and row.get("unit_price"):
-        paid, planned = line["unit_price"], row["unit_price"]
-    elif row.get("unit_price") and row.get("packages", 1) > 1 and abs(paid - row["unit_price"]) < abs(paid - (planned or 0)):
-        planned = row["unit_price"]
-    if planned is None:
-        return None
-    return abs(paid - planned) >= max(1.0, 0.03 * planned), round(planned, 2)
+class StoreProducts:
+    """Smako's products in one store, looked up by receipt line (word index)."""
+
+    def __init__(self, products):
+        self.products, self.index = list(products), {}
+        for i, product in enumerate(self.products):
+            for token in set(_tokens(f"{product.get('brand') or ''} {product['name']}")):
+                if len(token) >= 3 and token not in _STOP:
+                    self.index.setdefault(token[:4], []).append(i)
+
+    def find(self, line):
+        """(product, confidence): "exact" (barcode), "sure", "unsure" or None."""
+        if line.get("gtin"):
+            hit = next((p for p in self.products if p.get("gtin") == line["gtin"]), None)
+            if hit:
+                return hit, "exact"
+        candidates = {i for w in _tokens(_SIZE.sub(" ", line["description"])) if len(w) >= 3 and w not in _STOP
+                      for i in self.index.get(w[:4], ())}
+        scored = sorted(((_similarity(line["description"], self.products[i]["name"], self.products[i].get("sizes")), i)
+                         for i in candidates), reverse=True)
+        if not scored or scored[0][0] < 0.5:
+            return None, None
+        best = self.products[scored[0][1]]
+        sure = scored[0][0] >= 0.75 and (len(scored) == 1 or scored[0][0] - scored[1][0] >= 0.1
+                                         or self.products[scored[1][1]]["name"] == best["name"])
+        return best, "sure" if sure else "unsure"
 
 
-def evaluate(parsed, response, rules, known_stores, *, store_text=None):
-    """Matched lines and the points the receipt gives."""
+def _price_differs(line, product):
+    """Whether the paid price matches none of the product's known prices."""
+    prices = [v for v in (product.get("price"), product.get("effective_price"), product.get("member_price")) if v]
+    if not prices or line.get("unit") in {"kg", "g"}:
+        return None  # weighed goods are compared per kg elsewhere; unknown stays unknown
+    paid = line.get("unit_price") if line.get("quantity") and line.get("unit") == "st" and line.get("unit_price") else line["price"]
+    closest = min(prices, key=lambda v: abs(v - paid))
+    return abs(paid - closest) >= max(0.5, 0.01 * closest), round(closest, 2)
+
+
+def evaluate(parsed, response, rules, known_stores, *, store_text=None, store_products=None):
+    """Owner decision 2026-11-22 (second): any bought item counts, on the list or not.
+
+    Each readable line of a receipt from a store without Smako prices, and each
+    line Smako has no product for in a known store, gives receipt_missing_points;
+    a line whose product Smako knows at another price gives receipt_price_points.
+    The plan's shopping list is shown for reference only.
+    """
     rows = plan_items(response)
     store_text = (store_text or parsed["store_text"])[:120]
     chain = _chain_of(store_text) or parsed.get("chain")
-    store_id, store_name, known = find_store(store_text, chain, rows, known_stores)
+    store_id, store_name, known = find_store(store_text, chain, known_stores)
+    catalogue = store_products(store_id) if known and store_products else None
     used, lines = set(), []
     for line in parsed["lines"][:80]:
+        out = {**line, "item": None, "smako_product": None, "planned_price": None, "price_differs": False,
+               "missing_in_smako": False, "unsure": False, "points": 0}
         best = None
         for row in rows:
             if row["key"] in used:
                 continue
-            if line.get("gtin") and row.get("gtin") and line["gtin"] == row["gtin"]:
-                best = (2.0, row)
-                break
-            s = max(_similarity(line["description"], row["product"]), _similarity(line["description"], row["ingredient"]) * 0.9)
-            if s >= 0.5 and (best is None or s > best[0]):
+            s = 2.0 if line.get("gtin") and line.get("gtin") == row.get("gtin") else max(
+                _similarity(line["description"], row["product"]), _similarity(line["description"], row["ingredient"]) * 0.9)
+            if s >= 0.6 and (best is None or s > best[0]):
                 best = (s, row)
-        out = {**line, "item": None, "planned_price": None, "price_differs": False, "missing_in_smako": False, "points": 0}
         if best:
-            row = best[1]
-            used.add(row["key"])
-            out["item"] = row["product"] or row["ingredient"]
-            if not known:
+            used.add(best[1]["key"])
+            out["item"] = best[1]["product"] or best[1]["ingredient"]
+        if not known:
+            out["missing_in_smako"] = True
+        elif catalogue is not None:
+            product, confidence = catalogue.find(line)
+            if product is None:
                 out["missing_in_smako"] = True
-                out["points"] = rules.receipt_missing_points
-            elif row["store_id"] == store_id:
-                compared = _differs(line, row)
+            elif confidence == "unsure":
+                # Not sure which product it is: no points until the barcode says.
+                out["smako_product"], out["unsure"] = product["name"], True
+            else:
+                out["smako_product"] = product["name"]
+                compared = _price_differs(line, product)
                 if compared:
                     out["price_differs"], out["planned_price"] = compared
-                    out["points"] = rules.receipt_price_points if out["price_differs"] else 0
+        out["points"] = (rules.receipt_missing_points if out["missing_in_smako"]
+                         else rules.receipt_price_points if out["price_differs"] else 0)
         lines.append(out)
-    matched = sum(1 for l in lines if l["item"])
-    qualifies = matched >= rules.receipt_min_list_items
-    points = (rules.receipt_points + sum(l["points"] for l in lines)) if qualifies else 0
+    qualifies = len(lines) >= rules.receipt_min_list_items
+    points = min(rules.receipt_max_points, rules.receipt_points + sum(l["points"] for l in lines)) if qualifies else 0
     return {"store_text": store_text, "store": store_name if known else None, "store_known": known,
-            "purchased_on": parsed.get("purchased_on"), "lines": lines, "matched": matched,
-            "list_items": len(rows), "qualifies": qualifies, "points": points,
-            "needed": rules.receipt_min_list_items}
+            "purchased_on": parsed.get("purchased_on"), "lines": lines, "matched": sum(1 for l in lines if l["item"]),
+            "list_items": len(rows), "qualifies": qualifies, "points": points, "needed": rules.receipt_min_list_items,
+            "max_points": rules.receipt_max_points}
 
 
 def fingerprint(store_text, purchased_on, lines):
@@ -333,7 +409,7 @@ def load_plan(store, owner, plan_id):
 def save_receipt(store, owner, plan_id, result, rules):
     """Keep the confirmed lines and give the points once per receipt."""
     if not result["qualifies"]:
-        raise RewardError(f"Kvittot ger poäng när minst {result['needed']} varor från handlingslistan finns på det.")
+        raise RewardError(f"Kvittot ger poäng när minst {result['needed']} varor går att läsa på det.")
     since = (datetime.now(UTC) - timedelta(days=7)).isoformat()
     key = fingerprint(result["store_text"], result["purchased_on"], result["lines"])
     receipt_id = secrets.token_hex(12)
@@ -344,7 +420,7 @@ def save_receipt(store, owner, plan_id, result, rules):
             raise RewardError(f"Du kan få poäng för högst {rules.receipt_max_per_week} kvitton per vecka.")
         if db.execute("SELECT 1 FROM member_receipts WHERE fingerprint=?", (key,)).fetchone():
             raise RewardError("Det här kvittot har redan gett poäng.")
-        lines = [{k: l.get(k) for k in ("description", "price", "quantity", "unit", "unit_price", "gtin", "item",
+        lines = [{k: l.get(k) for k in ("description", "price", "quantity", "unit", "unit_price", "gtin", "item", "smako_product",
                                          "planned_price", "price_differs", "missing_in_smako", "points")} for l in result["lines"]]
         db.execute("INSERT INTO member_receipts VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                    (receipt_id, owner, _now(), plan_id, result["store_text"], int(result["store_known"]),

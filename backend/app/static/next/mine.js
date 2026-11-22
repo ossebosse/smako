@@ -152,7 +152,7 @@
       box.replaceChildren(el("h2", "Dina poäng"));
       if (!points.data) { box.append(el("p", points.loading ? "Hämtar poängen." : "Poängen kunde inte hämtas just nu.", "hint")); return; }
       box.append(el("strong", number(points.data.balance), "balance"),
-        el("p", "Du får poäng när du skannar kvittot efter att ha handlat efter handlingslistan, och extra poäng när priset skiljer sig från Smakos eller när varan köptes i en butik som Smako saknar priser för.", "hint"));
+        el("p", "Du får poäng när du skannar kvittot, och extra poäng för varje vara som har ett annat pris än i Smako eller som saknas i Smako.", "hint"));
       if (S.plan) box.append(button("Skanna kvitto", () => receiptDialog(fill), "btn primary"));
       if (points.data.history.length) { const list = el("ul"); for (const h of points.data.history) list.append(el("li", `${when(h.created_at)}: ${h.points > 0 ? "+" : ""}${h.points} · ${h.reason}`)); box.append(el("h4", "Senaste"), list); }
     }
@@ -216,18 +216,20 @@
         if (line.removed) return;
         const row = el("div", null, `receipt-line${line.item ? " matched" : ""}`), price = el("input", null, null, { type: "number", step: "0.01", min: "0.01", value: String(line.price), "aria-label": `Pris för ${line.description}` });
         price.addEventListener("change", () => { line.price = Number(price.value); void again(); });
-        const tags = [line.item ? `Från listan: ${line.item}` : "Inte på handlingslistan", line.price_differs ? `annat pris än Smakos ${N.money(line.planned_price)}` : null,
-          line.missing_in_smako ? "butiken saknas i Smakos priser" : null, line.points ? `+${line.points} poäng` : null, line.gtin ? `streckkod ${line.gtin}` : null].filter(Boolean).join(" · ");
+        const tags = [line.unsure ? `Osäker: är det ${line.smako_product}? Skanna streckkoden.` : line.price_differs ? `Smako: ${N.money(line.planned_price)} för ${line.smako_product}` : line.smako_product ? `Samma pris som i Smako` : null,
+          line.missing_in_smako ? (result.store_known ? "Finns inte i Smako" : "Butiken saknas i Smako") : null,
+          line.item ? `på handlingslistan` : null, line.points ? `+${line.points} poäng` : null, line.gtin ? `streckkod ${line.gtin}` : null].filter(Boolean).join(" · ");
         const tools = el("div", null, "links");
         tools.append(button("Ta bort raden", () => { line.removed = true; void again(); }, "text-link"));
-        if (!line.item) tools.append(button("Skanna varans streckkod", () => {
+        if ((line.missing_in_smako || line.unsure) && result.store_known && !line.gtin) tools.append(button("Skanna varans streckkod", () => {
           const video = el("video", null, null, { playsinline: "", muted: "" }); row.append(video);
           void busy("Håll varans streckkod framför kameran.", async () => { line.gtin = await scanBarcode(video, status); video.remove(); await again(); });
         }, "text-link"));
         row.append(el("strong", line.description), price, el("span", tags, "tags"), tools); list.append(row);
       });
-      const summary = result.qualifies ? `${result.matched} av ${result.list_items} varor från handlingslistan. Kvittot ger ${result.points} poäng.`
-        : `${result.matched} varor från handlingslistan hittades. Det behövs minst ${result.needed} för poäng. Rätta raderna eller skanna varornas streckkoder.`;
+      const differs = result.lines.filter(l => !l.removed && l.price_differs).length, missing = result.lines.filter(l => !l.removed && l.missing_in_smako).length;
+      const summary = result.qualifies ? `Kvittot ger ${result.points} poäng${differs || missing ? `: ${[differs ? `${differs} ${differs === 1 ? "vara" : "varor"} med annat pris än Smakos` : null, missing ? `${missing} ${missing === 1 ? "vara" : "varor"} som saknas i Smako` : null].filter(Boolean).join(" och ")}` : ""}.${result.points >= result.max_points ? " Det är högsta poängen för ett kvitto." : ""}`
+        : `Vi kunde bara läsa ${result.lines.length} varor. Det behövs minst ${result.needed} för poäng. Fota kvittot igen.`;
       body.replaceChildren(field, el("p", result.store_known ? `Butiken finns i Smako: ${result.store}.` : "Smako har inga priser för den här butiken. Varorna från listan ger extra poäng.", "hint"),
         list, el("p", summary), button(`Ta ${result.points} poäng`, () => busy("Sparar …", async () => {
           const done = await api("/api/member/receipts", { plan_id: planId, store_text: store, purchased_on: day, lines: lines() });
@@ -434,7 +436,7 @@
       if (consumed()) box.append(el("p", "Det som gick åt till maten är borttaget ur skafferiet.", "hint"));
       else box.append(el("p", "När maten är lagad tar Smako bort det som gick åt ur skafferiet.", "hint"), button("Maten är lagad", () => void N.change("Uppdaterar skafferiet", "consume", {}), "btn"));
     }
-    if (signedIn()) box.append(el("p", "Skanna kvittot så får du poäng, och extra poäng för priser som skiljer sig från Smakos.", "hint"), button("Skanna kvitto och få poäng", () => receiptDialog(), "btn"));
+    if (signedIn()) box.append(el("p", "Skanna kvittot så får du poäng, och extra poäng för varor med andra priser än i Smako eller som saknas i Smako.", "hint"), button("Skanna kvitto och få poäng", () => receiptDialog(), "btn"));
     if (onPantry) box.append(button("Öppna skafferiet", onPantry, "text-link"));
     return box;
   }
