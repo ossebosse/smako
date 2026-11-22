@@ -3692,6 +3692,10 @@ class PersonalPlanner:
             wanted += [lambda r: self._protein_category(r) == "vegetarian",
                        lambda r: self._protein_category(r) in MEAT_CATEGORIES,
                        lambda r: self._protein_category(r) in {"fish", "shellfish"}]
+        if getattr(self, "_cuisine_cap", None) is not None:
+            from app.services.recipe_week_variation import cuisine as cuisine_of
+            for value in ("swedish", "greek", "italian", "mexican", "indian", "thai"):
+                wanted.append(lambda r, v=value: cuisine_of(r) == v)
         if getattr(self, "_meat_kind_cap", None) is not None:
             for kind in ("fågel", "fläsk", "nöt", "blandfärs", "lamm", "annat"):
                 wanted.append(lambda r, k=kind: (self._protein_category(r) in MEAT_CATEGORIES
@@ -4633,6 +4637,28 @@ class PersonalPlanner:
                 if len(bases_by_kind) >= 2 and sum(min(n, cap) for n in bases_by_kind.values()) >= meat_places:
                     kind_cap = cap
         self._meat_kind_cap = kind_cap
+        # Owner decision 2026-11-22: one cuisine in at most half of the dinners
+        # (rounded up), also with "Billigast först", unless the person chose a
+        # single cuisine; as far as the pool allows.
+        from app.services.recipe_week_variation import cuisine as cuisine_of
+        cuisine_cap = None
+        chosen_cuisines = list(getattr(self.request.recipe_preferences, "cuisines", None) or [])
+        if (self.complete and (generating or replace_slot is not None) and dinner_meal is not None
+                and dinner_count >= 2 and len(chosen_cuisines) != 1):
+            cap = meat_kind_cap(dinner_count)
+            if replace_slot is None:
+                by_cuisine = Counter(cuisine_of(r) for r in {base_of(r): r for r in dinner_pool}.values() if cuisine_of(r))
+                if sum(min(n, cap) for n in by_cuisine.values()) >= dinner_count:
+                    cuisine_cap = cap
+            else:
+                fixed = Counter(cuisine_of(g[0].recipe) for g in options
+                                if len(g) == 1 and g[0].meal_type == "dinner" and g[0].recipe
+                                and g[0].id != replace_slot and cuisine_of(g[0].recipe))
+                target = next((g for g in options if any(s.id == replace_slot for s in g)), [])
+                if all(n <= cap for n in fixed.values()) and any(
+                        s.meal_type == "dinner" and s.recipe and fixed[cuisine_of(s.recipe)] < cap for s in target):
+                    cuisine_cap = cap
+        self._cuisine_cap = cuisine_cap
 
         # Owner decision 2026-11-17: fish and vegetarian has fish dinners (one
         # with 2–3 dinners, two with 4 or more), as many as the pool allows.
@@ -4694,6 +4720,10 @@ class PersonalPlanner:
                 return False
             if kind_cap is not None and not meat_kinds_ok(dinners, cap=kind_cap, classify=self._protein_category):
                 self.diagnostics.branch(len(chosen), "policy_taste")
+                return False
+            if cuisine_cap is not None and max(
+                    Counter(cuisine_of(r) for r in dinners if cuisine_of(r)).values(), default=0) > cuisine_cap:
+                self.diagnostics.branch(len(chosen), "variation")
                 return False
             if fish_count is not None and not fish_week_ok(
                     dinners, dinner_count, partial=not constraint_final or draft,
