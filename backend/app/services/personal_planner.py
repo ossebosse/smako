@@ -3138,6 +3138,10 @@ class PersonalPlanner:
                 from app.services.recipe_library import meal_candidates
                 candidates = meal_candidates(meal,self.request.recipe_preferences,
                                              include_supplement=self.include_content_pack, generation=self.library_generation)
+                if getattr(self.spec, "disliked_recipes", None):
+                    # Owner decision 2026-11-22: a dish the member disliked is never proposed.
+                    disliked = frozenset(self.spec.disliked_recipes)
+                    candidates = [c for c in candidates if not (c.design and c.design.base_id in disliked)]
             else:
                 generator = self.service.candidate_generator or DeterministicRecipeCandidateGenerator()
                 candidates = generator.generate_for_meal_type(
@@ -3813,6 +3817,10 @@ class PersonalPlanner:
         tastes += sum(preference_score([s.recipe], self.meals[s.meal_type].profile) for s in slots if s.recipe)
         dinners = [s.recipe for s in slots if s.recipe and s.meal_type == "dinner"]
         missing = sum(not any(recipe_names(t, r) for r in dinners) for t in getattr(self, "_required_likes", ()))
+        if getattr(self.spec, "liked_recipes", None):
+            # Owner decision 2026-11-22: a dish the member liked weighs like a liked ingredient.
+            liked = frozenset(self.spec.liked_recipes)
+            tastes -= sum(1 for r in dinners if r.design and r.design.base_id in liked)
         return tastes * self.rules.like_weight_kr + missing * self.rules.like_missing_kr
 
     def _week_purchase_key(self, basket, preparations=(), slots=()):
@@ -4470,7 +4478,7 @@ class PersonalPlanner:
             if self.complete and (self.spec.variation_seed is not None or avoid):
                 result.personal.checks["plan_variation"] = {
                     "random_preference": self.spec.variation_seed is not None,
-                    "max_percent": 10 if self.spec.variation_seed is not None else 0,
+                    "max_percent": self.rules.variation_percent if self.spec.variation_seed is not None else 0,
                     "per_dinner_kronor": round(getattr(self, "_variation_kr", 0.0), 2),
                     "avoided_dinners": len(level), "requested_avoided_dinners": len(avoid),
                     "description": "Slumpad liten preferens bland middagarna (högst cirka 10 % dyrare vecka) "

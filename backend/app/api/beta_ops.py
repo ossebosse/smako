@@ -821,6 +821,15 @@ def admin_planning_rules(request: Request, response: Response) -> dict[str, Any]
     return planning_rules.document(_settings(request))
 
 
+@router.get("/api/admin/receipts", dependencies=[AdminAuth])
+def admin_receipts(request: Request, response: Response) -> dict[str, Any]:
+    """Members' newest confirmed receipt lines, without who sent them (owner request 2026-11-22)."""
+    from app.services.member_rewards import recent_receipts
+
+    response.headers["Cache-Control"] = "no-store"
+    return {"receipts": recent_receipts(_plan_store(request, _settings(request)), 30)}
+
+
 @router.put("/api/admin/planning-rules", dependencies=[AdminAuth])
 def admin_save_planning_rules(request: Request, response: Response, body: dict[str, Any]) -> dict[str, Any]:
     """Save the rules; they apply to plans made from now on. ``{"reset": true}`` restores the defaults."""

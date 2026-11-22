@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="robots" content="noindex,nofollow">
   <title>Admin · Smako</title>
-  <link rel="stylesheet" href="/static/admin.css?v=rules-20261122">
-  <script defer src="/static/admin.js?v=rules-20261122"></script>
-  <script defer src="/static/admin-rules.js?v=rules-20261122"></script>
+  <link rel="stylesheet" href="/static/admin.css?v=rules-20261122b">
+  <script defer src="/static/admin.js?v=rules-20261122b"></script>
+  <script defer src="/static/admin-rules.js?v=rules-20261122b"></script>
 </head>
 <body>
   <header><a class="brand" href="/">smako<span>DRIFT</span></a><span class="private">Administratör</span></header>
@@ -41,6 +41,16 @@
         <section class="panel">
           <h2>Variation mellan veckor</h2>
           <div class="rules-grid" id="rules-variation"></div>
+        </section>
+        <section class="panel">
+          <h2>Poäng för kvitton</h2>
+          <p>Medlemmar får poäng när de skannar kvittot efter att ha handlat efter handlingslistan.</p>
+          <div class="rules-grid" id="rules-points"></div>
+        </section>
+        <section class="panel">
+          <h2>Senaste kvitton</h2>
+          <p>Raderna medlemmarna har godkänt, utan vem som skickade dem. Priser från butiker som saknas i Smako och priser som skiljer sig är markerade.</p>
+          <div id="rules-receipts"><p class="sub">Hämtar kvitton…</p></div>
         </section>
         <div class="rules-actions">
           <button type="submit" class="primary-button" id="rules-save">Spara regler</button>

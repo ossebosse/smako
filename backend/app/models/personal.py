@@ -310,6 +310,11 @@ class PersonalPlanning(PrivateModel):
     # kept with the plan, so changes to it stay consistent. Omitted while unset.
     variation_seed: int | None = Field(default=None, ge=0, lt=2**32, exclude_if=lambda v: v is None)
     avoid_recipes: list[str] = Field(default_factory=list, max_length=210, exclude_if=lambda v: not v)
+    # Owner decision 2026-11-22 (member_rewards.py): dishes the member liked are
+    # preferred and dishes the member disliked are never proposed. Set by the
+    # server from the member's ratings when a plan is created; omitted while empty.
+    liked_recipes: list[str] = Field(default_factory=list, max_length=1000, exclude_if=lambda v: not v)
+    disliked_recipes: list[str] = Field(default_factory=list, max_length=1000, exclude_if=lambda v: not v)
 
     @model_validator(mode="after")
     def unique(self):

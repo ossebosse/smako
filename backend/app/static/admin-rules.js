@@ -22,6 +22,13 @@
     ["variation_percent", "Slumpvariation", "% av en middags kostnad", "Hur mycket dyrare en vecka får bli för att nya planer ska skilja sig åt. 0 stänger av.", 0, 50],
     ["member_avoid_recent_plans", "Undvik rätter från senaste", "planer", "Standard för inloggade som inte valt själva.", 0, 10],
   ];
+  const POINTS = [
+    ["receipt_points", "Ett godkänt kvitto ger", "poäng", "När minst så många varor från handlingslistan som anges nedan finns på kvittot.", 0, 1000],
+    ["receipt_price_points", "Annat pris än Smakos ger", "poäng per vara", "För en vara från listan som kostade något annat i samma butik än Smako räknade med.", 0, 1000],
+    ["receipt_missing_points", "Butik utan priser i Smako ger", "poäng per vara", "För en vara från listan köpt i en butik som Smako saknar priser för, till exempel en liten butik utan näthandel.", 0, 1000],
+    ["receipt_min_list_items", "Minst varor från listan", "varor", "Färre än så ger inga poäng.", 1, 50],
+    ["receipt_max_per_week", "Högst kvitton per vecka", "kvitton", "Per medlem, de senaste sju dagarna.", 1, 50],
+  ];
   let saved = null, defaults = null, loaded = false;
 
   function input(name, value, min, max, extra) {
@@ -57,6 +64,7 @@
     grid("rules-shares", SHARES, doc.rules);
     grid("rules-weights", WEIGHTS, doc.rules);
     grid("rules-variation", VARIATION, doc.rules);
+    grid("rules-points", POINTS, doc.rules);
     $("rules-updated").textContent = doc.updated_at
       ? `Senast sparade ${new Intl.DateTimeFormat("sv-SE", {dateStyle: "short", timeStyle: "short", timeZone: "Europe/Stockholm"}).format(new Date(doc.updated_at))}`
       : "Standardreglerna gäller.";
@@ -80,7 +88,23 @@
     if (!response.ok) throw new Error(response.status === 401 ? "Admininloggningen behöver förnyas. Ladda om sidan." : (payload.detail || "Reglerna kunde inte sparas."));
     return payload;
   }
+  async function receipts() {
+    try {
+      const response = await fetch("/api/admin/receipts", {credentials: "same-origin", cache: "no-store"});
+      const data = await response.json();
+      const box = $("rules-receipts");
+      if (!data.receipts?.length) {box.replaceChildren(node("p", "Inga kvitton än.", "sub")); return;}
+      box.replaceChildren(...data.receipts.map(r => {
+        const d = node("details", null, "store"), s = node("summary");
+        s.append(node("strong", `${r.store_text}${r.store_known ? "" : " · saknas i Smako"}`), node("span", ` ${r.purchased_on || r.created_at.slice(0, 10)} · ${r.points} poäng · ${r.lines.length} rader`, "sub"));
+        const list = node("ul");
+        for (const l of r.lines) list.append(node("li", `${l.description}: ${l.price} kr${l.item ? ` → ${l.item}` : ""}${l.price_differs ? ` (Smako: ${l.planned_price} kr)` : ""}${l.missing_in_smako ? " · butik utan priser" : ""}${l.gtin ? ` · ${l.gtin}` : ""}`));
+        d.append(s, list); return d;
+      }));
+    } catch (_) {$("rules-receipts").replaceChildren(node("p", "Kvittona kunde inte hämtas.", "sub"));}
+  }
   async function load() {
+    void receipts();
     try {show(await call("GET")); loaded = true;}
     catch (error) {$("rules-status").textContent = ""; $("rules-error").textContent = error.message; $("rules-error").hidden = false;}
   }

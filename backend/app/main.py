@@ -162,6 +162,8 @@ app.add_middleware(BetaRequestMiddleware, settings_factory=get_settings)
 app.include_router(plan_router)
 app.include_router(product_search_router)
 app.include_router(personal_router)
+from app.api.member import router as member_router  # noqa: E402
+app.include_router(member_router)
 install_handlers(app)
 install_account(app)
 app.include_router(beta_ops_router)

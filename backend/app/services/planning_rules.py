@@ -46,6 +46,12 @@ class PlanningRules(BaseModel):
     # Variation of new plans.
     variation_percent: int = Field(default=10, ge=0, le=50)
     member_avoid_recent_plans: int = Field(default=2, ge=0, le=10)
+    # Points for receipts (owner decision 2026-11-22, member_rewards.py).
+    receipt_points: int = Field(default=10, ge=0, le=1000)
+    receipt_price_points: int = Field(default=2, ge=0, le=1000)
+    receipt_missing_points: int = Field(default=5, ge=0, le=1000)
+    receipt_min_list_items: int = Field(default=3, ge=1, le=50)
+    receipt_max_per_week: int = Field(default=5, ge=1, le=50)
 
     @model_validator(mode="after")
     def _counts_fit(self):

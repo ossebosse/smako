@@ -105,6 +105,14 @@ def apply_variation(request, *, store, owner, state, member: bool):
                     seen.add(base)
                     ordered.append(base)
         updates["avoid_recipes"] = ordered[:210]
+    if member and not personal.liked_recipes and not personal.disliked_recipes:
+        from app.services.member_rewards import member_choices
+
+        liked, disliked = member_choices(store, owner)
+        if liked:
+            updates["liked_recipes"] = liked
+        if disliked:
+            updates["disliked_recipes"] = disliked
     if not updates:
         return request
     return request.model_copy(update={"personal": personal.model_copy(update=updates)})

@@ -16,6 +16,7 @@ from uuid import uuid4
 
 from app.models import PlanRequest, PlanResponse, SavedPlan
 from app.services.member_accounts import SCHEMA as MEMBER_SCHEMA
+from app.services.member_rewards import SCHEMA as REWARDS_SCHEMA
 from app.services.personal_store import SCHEMA as PERSONAL_SCHEMA
 from app.services.personal_store import PersonalConflict, read_state, reserve_plan, write_state
 from app.services.planner_artifacts import SCHEMA as PLANNER_ARTIFACT_SCHEMA
@@ -83,6 +84,7 @@ class PlanStore:
             connection.executescript(_SCHEMA)
             connection.executescript(PERSONAL_SCHEMA)
             connection.executescript(MEMBER_SCHEMA)
+            connection.executescript(REWARDS_SCHEMA)
             connection.executescript(PLANNER_ARTIFACT_SCHEMA)
             existing = {
                 row["name"]
@@ -430,6 +432,9 @@ class PlanStore:
             connection.execute(
                 "DELETE FROM planner_owned_artifacts WHERE owner_actor_hash = ?", (owner_actor_hash,)
             )
+            # Owner request 2026-11-22: ratings, receipts and points go with the rest.
+            for table in ("member_recipe_ratings", "member_receipts", "member_points"):
+                connection.execute(f"DELETE FROM {table} WHERE owner = ?", (owner_actor_hash,))
         return result
 
     def aggregate_metrics(self) -> list[dict[str, object]]:

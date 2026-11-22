@@ -95,6 +95,7 @@
         box.append(el("h2", "Du är inloggad"), el("p", "Skafferiet, inköpslistan och dina val sparas på kontot. Du får fler recept och portioner än som gäst."));
         if (auth.note) box.append(el("p", auth.note, "hint"));
         if (onPantry) box.append(button(pantry ? `Öppna skafferiet (${pantry} ${pantry === 1 ? "vara" : "varor"})` : "Öppna skafferiet", onPantry, "btn primary cta"));
+        box.append(pointsView());
         box.append(settingsView());
         box.append(button("Logga ut", act(status, signOut), "btn"), status);
         return;
@@ -133,6 +134,111 @@
     }
     draw();
     return box;
+  }
+
+  // ---- Points for receipts (owner request 2026-11-22) -----------------------
+  // A receipt is read here: a photo with text recognition in the browser (the
+  // picture never leaves the phone) or a PDF whose text the server extracts.
+  // The member checks the lines; Smako matches them to the shopping list.
+  const points = { data: null, loading: false };
+  async function loadPoints() {
+    if (points.loading || !signedIn()) return; points.loading = true;
+    try { points.data = await api("/api/member/points"); } catch (_) { points.data = null; } finally { points.loading = false; emit(); }
+  }
+  const when = value => new Intl.DateTimeFormat("sv-SE", { dateStyle: "short", timeZone: "Europe/Stockholm" }).format(new Date(value));
+  function pointsView() {
+    const box = el("section", null, "panel points");
+    function fill() {
+      box.replaceChildren(el("h2", "Dina poäng"));
+      if (!points.data) { box.append(el("p", points.loading ? "Hämtar poängen." : "Poängen kunde inte hämtas just nu.", "hint")); return; }
+      box.append(el("strong", number(points.data.balance), "balance"),
+        el("p", "Du får poäng när du skannar kvittot efter att ha handlat efter handlingslistan, och extra poäng när priset skiljer sig från Smakos eller när varan köptes i en butik som Smako saknar priser för.", "hint"));
+      if (S.plan) box.append(button("Skanna kvitto", () => receiptDialog(fill), "btn primary"));
+      if (points.data.history.length) { const list = el("ul"); for (const h of points.data.history) list.append(el("li", `${when(h.created_at)}: ${h.points > 0 ? "+" : ""}${h.points} · ${h.reason}`)); box.append(el("h4", "Senaste"), list); }
+    }
+    fill();
+    if (!points.loading) void loadPoints().then(fill);
+    return box;
+  }
+  const loadScript = src => new Promise((resolve, reject) => { if ([...document.scripts].some(x => x.src.endsWith(src))) return resolve(); const tag = document.createElement("script"); tag.src = src; tag.onload = resolve; tag.onerror = () => reject(new Error("Det gick inte att ladda läsaren. Kontrollera nätet och försök igen.")); document.head.append(tag); });
+  const OCR = "/static/vendor/tesseract/";
+  async function photoText(file, status) {
+    await loadScript(`${OCR}tesseract.min.js`);
+    const bitmap = await createImageBitmap(file), scale = Math.min(1, 2200 / Math.max(bitmap.width, bitmap.height));
+    const canvas = document.createElement("canvas"); canvas.width = Math.round(bitmap.width * scale); canvas.height = Math.round(bitmap.height * scale);
+    const ctx = canvas.getContext("2d"); ctx.filter = "grayscale(1) contrast(1.4)"; ctx.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+    const worker = await window.Tesseract.createWorker("swe", 1, { workerPath: `${OCR}worker.min.js`, corePath: OCR, langPath: OCR, gzip: true,
+      logger: m => { if (m.status === "recognizing text") status.textContent = `Läser kvittot … ${Math.round(m.progress * 100)} %`; } });
+    try { await worker.setParameters({ preserve_interword_spaces: "1" }); return (await worker.recognize(canvas)).data.text; } finally { await worker.terminate(); }
+  }
+  async function pdfText(file) {
+    const response = await fetch("/api/member/receipts/pdf-text", { method: "POST", credentials: "same-origin", headers: { "Content-Type": "application/pdf", Accept: "application/json" }, body: file });
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) throw new Error(typeof data.detail === "string" ? data.detail : "PDF:en gick inte att läsa.");
+    return data.text;
+  }
+  let scanner = null;
+  async function scanBarcode(video, status) {
+    await loadScript("/scanner-assets/physical-barcode-scanner.js");
+    return new Promise((resolve, reject) => {
+      window.GroceryBarcodeScanner.createBarcodeScanner({ videoElement: video, onResult: result => { scanner?.stop?.(); scanner = null; resolve(result.normalized_gtin); },
+        onError: (error, detail = {}) => { status.textContent = detail.recoverable ? "Håll hela streckkoden i bild." : "Kameran kunde inte läsa koden."; } })
+        .then(s => { scanner = s; return s.start(); }).catch(() => reject(new Error("Kameran kunde inte startas. Tillåt kameran och försök igen.")));
+    });
+  }
+  function receiptDialog(onPoints) {
+    const dialog = el("dialog", null, "receipt-dialog"), body = el("div"), status = el("p", null, "hint", { role: "status" });
+    const head = el("div", null, "dialog-head"); head.append(el("h2", "Skanna kvitto"), button("Stäng", () => dialog.close(), "btn small"));
+    dialog.append(head, body, status); document.body.append(dialog);
+    dialog.addEventListener("close", () => { scanner?.stop?.(); scanner = null; dialog.remove(); });
+    let result = null, store = "", day = null;
+    const planId = S.plan?.plan_id;
+    const busy = async (text, work) => { status.textContent = text; try { await work(); } catch (error) { status.textContent = error.message; } };
+    function choose() {
+      const photo = el("input", null, null, { type: "file", accept: "image/*", capture: "environment", hidden: true });
+      const pdf = el("input", null, null, { type: "file", accept: "application/pdf", hidden: true });
+      photo.addEventListener("change", () => photo.files[0] && busy("Läser kvittot i telefonen …", async () => preview({ text: await photoText(photo.files[0], status) })));
+      pdf.addEventListener("change", () => pdf.files[0] && busy("Läser PDF:en …", async () => preview({ text: await pdfText(pdf.files[0]) })));
+      body.replaceChildren(el("p", "Fota hela kvittot rakt uppifrån i bra ljus, eller välj ett digitalt kvitto som PDF. Bilden lämnar inte telefonen; Smako sparar bara raderna du godkänner."),
+        photo, pdf, button("Fota kvittot", () => photo.click(), "btn primary cta"), button("Välj PDF-kvitto", () => pdf.click(), "btn"));
+    }
+    async function preview(input) {
+      result = await api("/api/member/receipts/preview", { plan_id: planId, ...input });
+      store = result.store_text; day = result.purchased_on; status.textContent = ""; draw();
+    }
+    const lines = () => result.lines.filter(l => !l.removed).map(({ description, price, quantity, unit, unit_price, gtin }) => ({ description, price, quantity, unit, unit_price, gtin }));
+    const again = () => busy("Räknar om …", () => preview({ store_text: store, purchased_on: day, lines: lines() }));
+    function draw() {
+      const storeInput = el("input", null, null, { value: store, maxlength: "120", "aria-label": "Butik" }); storeInput.addEventListener("change", () => { store = storeInput.value; void again(); });
+      const field = el("label", "Butik", "field"); field.append(storeInput);
+      const list = el("div", null, "receipt-lines");
+      result.lines.forEach((line, index) => {
+        if (line.removed) return;
+        const row = el("div", null, `receipt-line${line.item ? " matched" : ""}`), price = el("input", null, null, { type: "number", step: "0.01", min: "0.01", value: String(line.price), "aria-label": `Pris för ${line.description}` });
+        price.addEventListener("change", () => { line.price = Number(price.value); void again(); });
+        const tags = [line.item ? `Från listan: ${line.item}` : "Inte på handlingslistan", line.price_differs ? `annat pris än Smakos ${N.money(line.planned_price)}` : null,
+          line.missing_in_smako ? "butiken saknas i Smakos priser" : null, line.points ? `+${line.points} poäng` : null, line.gtin ? `streckkod ${line.gtin}` : null].filter(Boolean).join(" · ");
+        const tools = el("div", null, "links");
+        tools.append(button("Ta bort raden", () => { line.removed = true; void again(); }, "text-link"));
+        if (!line.item) tools.append(button("Skanna varans streckkod", () => {
+          const video = el("video", null, null, { playsinline: "", muted: "" }); row.append(video);
+          void busy("Håll varans streckkod framför kameran.", async () => { line.gtin = await scanBarcode(video, status); video.remove(); await again(); });
+        }, "text-link"));
+        row.append(el("strong", line.description), price, el("span", tags, "tags"), tools); list.append(row);
+      });
+      const summary = result.qualifies ? `${result.matched} av ${result.list_items} varor från handlingslistan. Kvittot ger ${result.points} poäng.`
+        : `${result.matched} varor från handlingslistan hittades. Det behövs minst ${result.needed} för poäng. Rätta raderna eller skanna varornas streckkoder.`;
+      body.replaceChildren(field, el("p", result.store_known ? `Butiken finns i Smako: ${result.store}.` : "Smako har inga priser för den här butiken. Varorna från listan ger extra poäng.", "hint"),
+        list, el("p", summary), button(`Ta ${result.points} poäng`, () => busy("Sparar …", async () => {
+          const done = await api("/api/member/receipts", { plan_id: planId, store_text: store, purchased_on: day, lines: lines() });
+          points.data = { balance: done.balance, history: done.history };
+          body.replaceChildren(el("h3", `+${done.points} poäng`), el("p", `Du har nu ${number(done.balance)} poäng. Tack för att du hjälper Smako med priserna!`), button("Klar", () => dialog.close(), "btn primary"));
+          status.textContent = ""; onPoints?.(); emit();
+        }), "btn primary cta", { disabled: !result.qualifies }), button("Börja om", () => { result = null; choose(); }, "btn quiet"));
+    }
+    if (!planId) { body.append(el("p", "Skapa en handlingslista först.")); }
+    else choose();
+    dialog.showModal();
   }
 
   // ---- Pantry --------------------------------------------------------------
@@ -320,6 +426,7 @@
     if (!purchased()) {
       box.append(el("p", "Tryck här när varorna är hemma. De läggs i skafferiet, så räknar Smako med dem nästa gång.", "hint"),
         button("Jag har handlat", () => { const rows = toMeasure(); if (rows.length) measureDialog(rows); else void register(); }, "btn primary"));
+      if (signedIn()) box.append(button("Skanna kvitto och få poäng", () => receiptDialog(), "btn"));
       return box;
     }
     box.append(el("p", "Inköpet ligger i skafferiet."));
@@ -327,9 +434,10 @@
       if (consumed()) box.append(el("p", "Det som gick åt till maten är borttaget ur skafferiet.", "hint"));
       else box.append(el("p", "När maten är lagad tar Smako bort det som gick åt ur skafferiet.", "hint"), button("Maten är lagad", () => void N.change("Uppdaterar skafferiet", "consume", {}), "btn"));
     }
+    if (signedIn()) box.append(el("p", "Skanna kvittot så får du poäng, och extra poäng för priser som skiljer sig från Smakos.", "hint"), button("Skanna kvitto och få poäng", () => receiptDialog(), "btn"));
     if (onPantry) box.append(button("Öppna skafferiet", onPantry, "text-link"));
     return box;
   }
 
-  Object.assign(N, { signedIn, accountLabel, accountView, pantryView, pantrySummary, pantryUsed, afterShopping });
+  Object.assign(N, { signedIn, accountLabel, accountView, pantryView, pantrySummary, pantryUsed, afterShopping, receiptDialog, pointsView });
 })();

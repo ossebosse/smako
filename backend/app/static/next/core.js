@@ -691,6 +691,30 @@
     const left = (row?.left_out || []).join(", ");
     return parts.length ? `Per portion${row.status === "ESTIMATED" ? ", uppskattat" : ""}: ${parts.join(" · ")}${left ? ` (ej medräknat: ${left})` : ""}` : "";
   }
+  // Owner request 2026-11-22: members like and dislike dishes; everyone sees the counts.
+  const ratings = {}, asked = new Set();
+  async function loadRatings(ids) {
+    const wanted = ids.filter(id => id && !asked.has(id)); if (!wanted.length) return;
+    wanted.forEach(id => asked.add(id));
+    try { const data = await api(`/api/member/recipe-ratings?ids=${encodeURIComponent(wanted.join(","))}`); Object.assign(ratings, data.ratings || {}); emit(); }
+    catch (_) { wanted.forEach(id => asked.delete(id)); }
+  }
+  async function rateRecipe(id, value, status) {
+    const now = ratings[id]?.mine === value ? 0 : value;
+    try { const data = await api(`/api/member/recipe-ratings/${encodeURIComponent(id)}`, { value: now }, "PUT"); Object.assign(ratings, data.ratings || {}); emit(); }
+    catch (error) { status.textContent = error.message; status.hidden = false; }
+  }
+  function ratingRow(recipe) {
+    const id = recipe.design?.base_id; if (!id) return null;
+    const r = ratings[id] || { likes: 0, dislikes: 0, mine: 0 }, member = S.state?.account?.status === "SIGNED_IN";
+    const row = el("div", null, "rating"), status = el("p", null, "hint", { role: "status" }); status.hidden = true;
+    const vote = (value, icon, count, label) => button(`${icon} ${number(count)}`, () => member ? void rateRecipe(id, value, status) : (status.textContent = "Logga in som medlem för att gilla och ogilla recept.", status.hidden = false),
+      `btn small rate${r.mine === value ? " chosen" : ""}`, { "aria-pressed": String(r.mine === value), "aria-label": `${label}: ${count}` });
+    row.append(vote(1, "👍", r.likes, "Gillar"), vote(-1, "👎", r.dislikes, "Gillar inte"));
+    if (r.mine === -1) row.append(el("span", "Föreslås inte igen för dig.", "hint"));
+    else if (r.mine === 1) row.append(el("span", "Föreslås oftare för dig.", "hint"));
+    const box = el("div"); box.append(row, status); return box;
+  }
   function recipeCard(slot, { actions = true } = {}) {
     const card = el("article", null, "recipe"), recipe = slot.recipe;
     card.append(el("p", `Dag ${slot.day} · ${MEALS[slot.meal_type] || "Måltid"}`, "eyebrow"), el("h3", recipe?.name || "Tom måltid"));
@@ -698,6 +722,7 @@
     const minutes = recipe.design?.active_minutes ?? recipe.design?.time?.active_minutes;
     card.append(el("p", [plural(recipe.servings, "portion", "portioner"), plural(recipe.ingredients.length, "ingrediens", "ingredienser"), minutes ? `${minutes} min` : null].filter(Boolean).join(" · "), "meta"));
     const facts = nutritionText(slot.id); if (facts) card.append(el("p", facts, "meta nutrition-facts"));
+    const rated = ratingRow(recipe); if (rated) card.append(rated);
     if (actions) { const like = likeLine(slot); if (like) card.append(like); }
     const more = el("details", null, "recipe-more"); more.append(el("summary", "Visa receptet"));
     const ingredients = el("ul", null, "ingredients"); for (const i of recipe.ingredients) ingredients.append(el("li", `${number(i.quantity)} ${i.unit} ${i.name}`));
@@ -709,6 +734,7 @@
   function recipesView(options) {
     const box = el("div", null, "recipes"), slots = [...(S.plan?.plan?.personal?.slots || [])].sort((a, b) => a.day - b.day || Object.keys(MEALS).indexOf(a.meal_type) - Object.keys(MEALS).indexOf(b.meal_type));
     box.append(...likeNotes(), ...likeWeekLines());
+    void loadRatings(slots.map(slot => slot.recipe?.design?.base_id));
     for (const slot of slots) box.append(recipeCard(slot, options));
     if (!slots.length) box.append(el("p", "Planen har inga recept. Den innehåller bara dina egna varor.", "hint"));
     return box;
