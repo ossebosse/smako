@@ -1,3 +1,34 @@
+# 2026-11-22 middag: Näring för alla middagar, gilla recept och poäng för kvitton
+
+Main `a6eac85e678a` (fast-forward av `nutrition-fallback-20261122` och
+`member-points-20261122`). App **app-a6eac85e678a-0c8e22c0**, bas
+`3f82b06919d8`.
+
+Näring (ägarrapport 2026-11-22, 4 av 5 middagar utan näringsvärden): en vara
+utan användbar tabell får Livsmedelsverkets allmänna värde för samma livsmedel
+i receptets form, bara för visade värden (`nutrition_fallback.py`); nya
+SLV-referenser i `slv-20261122.json` (lammkött, tonfisk, sardiner, mozzarella,
+parmesan, bakpulver, körsbärstomat); olivolja hemma räknas med; salladslök och
+kapris räknas inte med och visas med namn.
+
+Medlemskap (ägarbeslut 2026-11-22): medlemmar gillar/ogillar rätter, alla ser
+antalet; gillade rätter föreslås oftare och ogillade aldrig för medlemmen.
+Poäng för kvitton (foto läst i telefonen med tesseract.js, eller PDF): 10 per
+kvitto med minst 3 varor från listan, +2 per vara med annat pris än Smakos,
++5 per vara köpt där Smako saknar priser; värdena och senaste kvitton på
+admin-fliken Matplanering. Nya tabeller i plans-databasen
+(`member_recipe_ratings`, `member_receipts`, `member_points`).
+
+Caddy (ägarens ja 2026-11-22): `script-src` fick `'wasm-unsafe-eval'` i
+`/opt/smako/overrides/Caddyfile.geolocation-1fc4b6c` (kopia före ändringen:
+`...-1fc4b6c.before-wasm-20261122`); Caddy omstartad 11:38 UTC eftersom
+admin-API:t är avstängt. `deploy/Caddyfile` i repot ändras vid nästa
+fullständiga release.
+
+Importprov i nätverkslös container godkänt. Aktiverad 11:43 UTC;
+befintligt tillstånd och prismanifest bevarade, lagringsretention körd
+efteråt. `/ready` Lund och Malmö: ready.
+
 # 2026-11-22 förmiddag: Fliken Matplanering på adminsidan
 
 Main `3f82b06919d8` (fast-forward av `planning-rules-admin`). App
@@ -517,10 +548,10 @@ git status --short
 .venv/Scripts/python.exe -X utf8 scripts/smako_ops.py status
 
 # Använd den granskade Git-bas som motsvarar faktiskt aktiva filer enligt senaste journalen.
-.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit 3f82b06919d8 --commit main --workdir .local/beta-release
+.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit a6eac85e678a --commit main --workdir .local/beta-release
 ```
 
-`3f82b06919d8` är appen som aktiverades 2026-11-22 08:45 UTC. Appbildens egen
+`a6eac85e678a` är appen som aktiverades 2026-11-22 11:43 UTC. Appbildens egen
 grocery-kopia är äldre än Git; använd `--keep-app-grocery` om intervallet
 bara innehåller grocery-Python som redan levererats till schedulern. De äldre
 Coop-filerna i runtime (`price_universe_runtime.py`,
