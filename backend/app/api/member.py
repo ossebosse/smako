@@ -139,7 +139,7 @@ def _store_products(prepared, store_ids):
             _CATALOGUES.clear()
         _CATALOGUES[key] = rewards.StoreProducts(
             {"name": p.name, "brand": p.brand, "price": p.price, "effective_price": p.effective_price,
-             "member_price": p.member_price, "gtin": p.gtin,
+             "member_price": p.member_price, "gtin": p.gtin, "offer_prices": rewards.offer_prices(p.offers),
              "sizes": rewards.sizes(f"{p.package_quantity:g} {p.package_unit}") if p.package_quantity and p.package_unit else {}}
             for p in prepared.universe.products if p.store_id in store_ids)
     return _CATALOGUES[key]

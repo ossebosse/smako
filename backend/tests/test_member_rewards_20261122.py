@@ -197,3 +197,56 @@ def test_the_member_choices_reach_a_new_plan(app):
     assert bound.personal.liked_recipes == ["liked-dish"] and bound.personal.disliked_recipes == ["disliked-dish"]
     guest = apply_variation(request, store=app.state.plan_store, owner=owner, state={}, member=False)
     assert not guest.personal.disliked_recipes
+
+
+# Owner's second Hemköp receipt (2026-11-17), as saved, and Smako's products
+# in the store on 2026-11-22. All three "other prices" were Smako's own club
+# prices or a second size; the comparison, not the data, was wrong.
+def _product(name, brand, price, size, offers=()):
+    return {"name": name, "brand": brand, "price": price, "effective_price": price, "member_price": None,
+            "sizes": rewards.sizes(size), "offer_prices": rewards.offer_prices(list(offers))}
+
+
+HEMKOP_STORE = rewards.StoreProducts([
+    _product("Minutfilé", "Kronfågel", 89.0, "600 g", [{"price": 69.95, "description": "Klubbpris"}]),
+    _product("Jordnötssmör Creamy Ekologiskt", "Garant Eko", 36.86, "350 g", [{"price": 28.0, "description": "Klubbpris"}]),
+    _product("Småbladsmix Ruccola Röd/grön Klass 1", "Garant Eko", 31.95, "175 g"),
+    _product("Småbladsmix Ruccola Röd/grön Klass 1", "Garant Eko", 20.95, "65 g"),
+    _product("Ryggfilé Alaska Pollock", "Royal Foods", 64.3, "300 g", [{"price": 39.95, "description": "Klubbpris"}]),
+    _product("Barista Havredryck 3%", "Garant", 18.45, "1000 ml", [{"price": 32.0, "description": "2 för"}]),
+    _product("Bearnaise Lätt Crème Fraiche 10%", "Arla Köket", 18.82, "200 ml"),
+    _product("Björnbär Hallon Lättdryck", "Bob", 8.99, "200 ml", [{"price": 28.0, "description": "4 för"}]),
+    _product("Gurka med Dill", "Krakus", 31.18, "450 g"),
+    _product("Gurka Eko Klass 1", None, 20.95, "300 g"),
+    _product("Grönkål Eko", "Garant Eko", 25.0, "200 g"),
+    _product("Zucchini Klass 1", None, 13.95, "1 st"),
+    _product("Rice Papper 22 Cm", "Exotic", 20.0, "100 g"),
+])
+SECOND = {"store_text": "HEMKÖP KARHÖGSTORG", "purchased_on": "2026-11-17", "lines": [
+    {"description": "MINUTFILÉ", "price": 69.95},
+    {"description": "RYGGFILE ALASK POLL", "price": 119.85, "quantity": 3.0, "unit": "st", "unit_price": 64.3},
+    {"description": "HAVREDRYCK BARISTA", "price": 32.0, "quantity": 2.0, "unit": "st", "unit_price": 18.45},
+    {"description": "LÄTT CREM FR BEA 10%", "price": 28.0, "quantity": 2.0, "unit": "st", "unit_price": 18.82},
+    {"description": "BJÖRNBÄR 125G", "price": 10.0, "quantity": 2.0, "unit": "st", "unit_price": 5.0},
+    {"description": "GURKA EKO ST", "price": 20.95},
+    {"description": "ZUCCHINI GRÖN", "price": 8.35, "quantity": 0.226, "unit": "kg", "unit_price": 36.95},
+    {"description": "JORDNÖTSSMÖR CRE EKO", "price": 28.0},
+    {"description": "SMÅBLADSMIX EKO", "price": 20.95}]}
+
+
+def test_club_prices_multibuys_and_sizes_are_smakos_prices_too():
+    result = rewards.evaluate(SECOND, {}, PlanningRules(), KNOWN, store_products=lambda _: HEMKOP_STORE)
+    by = {l["description"]: l for l in result["lines"]}
+    for name in ("MINUTFILÉ", "JORDNÖTSSMÖR CRE EKO", "SMÅBLADSMIX EKO", "RYGGFILE ALASK POLL", "HAVREDRYCK BARISTA"):
+        assert by[name]["smako_product"] and not by[name]["price_differs"] and by[name]["points"] == 0, name
+    assert by["GURKA EKO ST"]["smako_product"] == "Gurka Eko Klass 1" and by["GURKA EKO ST"]["points"] == 0
+    # "2 för 28" that Smako does not know: a real other price.
+    assert by["LÄTT CREM FR BEA 10%"]["price_differs"] and by["LÄTT CREM FR BEA 10%"]["planned_price"] == 18.82
+    # Fresh blackberries are not the drink; zucchini is not kale.
+    assert by["BJÖRNBÄR 125G"]["missing_in_smako"] and by["BJÖRNBÄR 125G"]["points"] == 5
+    assert by["ZUCCHINI GRÖN"]["smako_product"] == "Zucchini Klass 1" and not by["ZUCCHINI GRÖN"]["missing_in_smako"]
+
+
+def test_carrier_bags_and_deposits_are_not_items():
+    parsed = rewards.parse_receipt("HEMKÖP KARHÖGSTORG\nMJÖLK 3% 1L   17,95\nPAPPERSKASSE   4,00\nPANT   2,00\nTotalt 23,95")
+    assert [l["description"] for l in parsed["lines"]] == ["MJÖLK 3% 1L"]

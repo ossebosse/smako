@@ -126,7 +126,7 @@ def member_choices(store, owner):
 # ---------------------------------------------------------------- receipts
 
 _PRICE = re.compile(r"(-?\d{1,5}[,.]\d{2})\s*(?:kr|sek|[a-z*]{0,2})?\s*$", re.IGNORECASE)
-_SKIP = re.compile(r"\b(?:total|totalt|summa|att betala|moms|netto|brutto|kort|kontant|växel|betal|bank|visa|"
+_SKIP = re.compile(r"\b(?:papperskasse|bärkasse|plastkasse|kasse|pant|total|totalt|summa|att betala|moms|netto|brutto|kort|kontant|växel|betal|bank|visa|"
                    r"mastercard|swish|kvitto|org\.?\s*nr|tel|öppet|tack|spara|bonus|poäng|avrundning|"
                    r"erhållen|varav|exkl|inkl)\b", re.IGNORECASE)
 _DISCOUNT = re.compile(r"\b(?:rabatt|rab|erbjudande|kampanj|pant retur|medlemspris|mängdrabatt|\d+\s*för)\b", re.IGNORECASE)
@@ -213,7 +213,8 @@ _STOP = {"eko", "ekologisk", "ekologiska", "krav", "svensk", "svenska", "sverige
 
 
 def _tokens(text):
-    return [t for t in fold(re.sub(r"\[\d+\]", " ", text)).split() if len(t) >= 2 and not t.isdigit()]
+    folded = fold(re.sub(r"\[\d+\]", " ", text)).translate(str.maketrans("éèêü", "eeeu"))  # RYGGFILE = Ryggfilé
+    return [t for t in folded.split() if len(t) >= 2 and not t.isdigit()]
 
 
 _SIZE = re.compile(r"(\d+(?:[,.]\d+)?)\s*(kg|g|ml|cl|l|p|st|%)(?![a-zåäö])", re.IGNORECASE)
@@ -233,7 +234,7 @@ def sizes(text):
     return found
 
 
-def _similarity(receipt, product, product_sizes=None):
+def _similarity(receipt, product, product_sizes=None, brand=""):
     """How well a receipt line names a product, 0..1.
 
     Each receipt word must start a product word (receipts abbreviate:
@@ -256,13 +257,25 @@ def _similarity(receipt, product, product_sizes=None):
         elif (left & set(words) and right & set(names)) or (right & set(words) and left & set(names)):
             return 0.0
     content = [w for w in words if w not in _STOP] or words  # generic words neither help nor hurt
-    score = sum(found(w) for w in content) / len(content)
+    # Receipts start with the food ("GURKA EKO ST", "ZUCCHINI GRÖN"): the first
+    # word must match, so a describing word ("grön") cannot carry a match.
+    if not found(content[0]) and len(content) > 1 and not found(content[1]):
+        return 0.0
+    if not found(content[0]) and len(content[0]) >= 4:
+        return 0.0
+    # The first word names the food and weighs double; the others describe it.
+    score = (2 * found(content[0]) + sum(found(w) for w in content[1:])) / (len(content) + 1)
     wanted, have = sizes(receipt), {**sizes(product), **(product_sizes or {})}
     for kind, value in wanted.items():
         if kind in have and abs(have[kind] - value) > max(0.01, 0.02 * value):
             return 0.0
         if kind not in have:
+            # 125 g of berries is not a 200 ml drink.
+            if {"g", "ml"} & {kind} and {"g", "ml"} & set(have):
+                return 0.0
             score -= 0.1
+    if "ekologisk" in words and not re.search(r"\beko|ekologisk|krav", fold(f"{product} {brand or ''}")):
+        score -= 0.2
     # A product with many words the receipt does not name is a weaker match.
     extra = [n for n in names if n not in _STOP and len(n) >= 4 and not any(n.startswith(w) or w.startswith(n) for w in words)]
     return max(0.0, score - 0.05 * len(extra))
@@ -311,6 +324,11 @@ class StoreProducts:
                     self.index.setdefault(token[:4], []).append(i)
 
     def find(self, line):
+        """(product, confidence); see _find. Among equally good products the one
+        whose price is the paid price wins (same name in two sizes)."""
+        return self._find(line)
+
+    def _find(self, line):
         """(product, confidence): "exact" (barcode), "sure", "unsure" or None."""
         if line.get("gtin"):
             hit = next((p for p in self.products if p.get("gtin") == line["gtin"]), None)
@@ -318,22 +336,58 @@ class StoreProducts:
                 return hit, "exact"
         candidates = {i for w in _tokens(_SIZE.sub(" ", line["description"])) if len(w) >= 3 and w not in _STOP
                       for i in self.index.get(w[:4], ())}
-        scored = sorted(((_similarity(line["description"], self.products[i]["name"], self.products[i].get("sizes")), i)
+        scored = sorted(((_similarity(line["description"], self.products[i]["name"], self.products[i].get("sizes"),
+                                      self.products[i].get("brand")), i)
                          for i in candidates), reverse=True)
         if not scored or scored[0][0] < 0.5:
             return None, None
-        best = self.products[scored[0][1]]
-        sure = scored[0][0] >= 0.75 and (len(scored) == 1 or scored[0][0] - scored[1][0] >= 0.1
-                                         or self.products[scored[1][1]]["name"] == best["name"])
+        top = [i for score, i in scored if score >= scored[0][0] - 0.05]
+        paid = _paid(line)
+        priced = [i for i in top if (d := _price_differs(line, self.products[i])) is not None and not d[0]]
+        if priced:
+            return self.products[priced[0]], "sure" if scored[0][0] >= 0.75 else "unsure"
+        best = self.products[top[0]]
+        sure = scored[0][0] >= 0.75 and all(self.products[i]["name"] == best["name"] for i in top)
+        if sure and len(top) > 1:
+            # Same name in several sizes: compare with the closest price.
+            best = min((self.products[i] for i in top), key=lambda p: min((abs(v - paid) for v in _prices(p)), default=1e9))
         return best, "sure" if sure else "unsure"
+
+
+def _prices(product):
+    """Every price Smako knows for one package: ordinary, campaign, member and
+    club prices, and a multi-buy offer ("2 för 32") per package."""
+    return [v for v in (product.get("price"), product.get("effective_price"), product.get("member_price"),
+                        *product.get("offer_prices", ())) if v]
+
+
+def _paid(line):
+    """What one package cost: a quantity line after its discount ("2 st", "2 för 28")."""
+    if line.get("quantity") and line.get("unit") == "st" and line["quantity"] >= 1:
+        return round(line["price"] / line["quantity"], 2)
+    return line["price"]
+
+
+def offer_prices(offers):
+    """Per-package prices of a product's offers (not per-kg offers)."""
+    result = []
+    for offer in offers or ():
+        price = offer.get("price") if isinstance(offer, dict) else getattr(offer, "price", None)
+        description = (offer.get("description") if isinstance(offer, dict) else getattr(offer, "description", "")) or ""
+        basis = offer.get("price_basis_unit") if isinstance(offer, dict) else getattr(offer, "price_basis_unit", None)
+        if not price or basis == "kg":
+            continue
+        many = re.search(r"(\d+)\s*för", description)
+        result.append(round(price / int(many.group(1)), 2) if many and int(many.group(1)) > 1 else price)
+    return result
 
 
 def _price_differs(line, product):
     """Whether the paid price matches none of the product's known prices."""
-    prices = [v for v in (product.get("price"), product.get("effective_price"), product.get("member_price")) if v]
+    prices = _prices(product)
     if not prices or line.get("unit") in {"kg", "g"}:
         return None  # weighed goods are compared per kg elsewhere; unknown stays unknown
-    paid = line.get("unit_price") if line.get("quantity") and line.get("unit") == "st" and line.get("unit_price") else line["price"]
+    paid = _paid(line)
     closest = min(prices, key=lambda v: abs(v - paid))
     return abs(paid - closest) >= max(0.5, 0.01 * closest), round(closest, 2)
 
