@@ -1,3 +1,17 @@
+# 2026-11-22 kväll: Kvitton med vägda varor
+
+Main `d3bad43b756e` (fast-forward av `receipt-matching-2-20261122`). App
+**app-d3bad43b756e-ccf6ce69**, bas `9ba01ad64d7c`. Ändrat:
+`member_rewards.py`, `api/member.py`. Ägarens tredje Hemköp-kvitto (PDF):
+vägda varors namnrad saknar pris och följs av viktraden; namnet väntar nu på
+sin viktrad, och en vikt-/antalsrad går till den vara vars pris den
+förklarar. Vägda varor jämförs med Smakos kilopris. Sammansatta ord,
+varumärke och numrerade storlekar (S6, 13-19 kg) tolkas bättre. Kvittotexten
+(utan kort-, medlems- och terminalnummer) är testdata. Importprov i
+nätverkslös container godkänt. Aktiverad 19:24 UTC; befintligt tillstånd och
+prismanifest bevarade, lagringsretention körd efteråt. `/ready` Lund och
+Malmö: ready.
+
 # 2026-11-22 kväll: Kvitton jämförs med alla Smako-priser
 
 Main `9ba01ad64d7c` (fast-forward av `receipt-matching-20261122`). App
@@ -576,10 +590,10 @@ git status --short
 .venv/Scripts/python.exe -X utf8 scripts/smako_ops.py status
 
 # Använd den granskade Git-bas som motsvarar faktiskt aktiva filer enligt senaste journalen.
-.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit 9ba01ad64d7c --commit main --workdir .local/beta-release
+.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit d3bad43b756e --commit main --workdir .local/beta-release
 ```
 
-`9ba01ad64d7c` är appen som aktiverades 2026-11-22 16:48 UTC. Appbildens egen
+`d3bad43b756e` är appen som aktiverades 2026-11-22 19:24 UTC. Appbildens egen
 grocery-kopia är äldre än Git; använd `--keep-app-grocery` om intervallet
 bara innehåller grocery-Python som redan levererats till schedulern. De äldre
 Coop-filerna i runtime (`price_universe_runtime.py`,
