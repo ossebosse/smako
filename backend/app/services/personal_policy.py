@@ -517,24 +517,32 @@ def meat_kind(recipe, classify=protein_category):
     return "annat"
 
 
+def mixed_fish_needed(count):
+    """Owner decision 2026-11-22: "Allt" with 4–7 dinners has at least one fish dinner."""
+    return 1 if count >= 4 else 0
+
+
 def meat_kind_cap(count):
     """At most half of the meat dinners (rounded up) of one kind of meat."""
     return -(-count // 2)
 
 
-def mixed_week_ok(recipes, count, *, partial, classify=protein_category, meat_needed=1, vegetarian_needed=None):
+def mixed_week_ok(recipes, count, *, partial, classify=protein_category, meat_needed=1, vegetarian_needed=None,
+                  fish_needed=0):
     """Owner decisions 2026-11-15 and 2026-11-22: "Allt" means a mixed week of dinners.
 
     At least ``meat_needed`` dinners with meat or chicken (animal_dinners_needed:
     one with 1–3 dinners, two with 4–5, three with 6–7, as far as the other
     choices allow) and, with two or more dinners, at least one vegetarian.
-    Fish is welcome but does not count as a meat dinner. A partial week passes
-    while the remaining places can still supply what is missing.
+    Fish does not count as a meat dinner; with four or more dinners at least
+    ``fish_needed`` are fish or shellfish (mixed_fish_needed). A partial week
+    passes while the remaining places can still supply what is missing.
     """
     kinds = [classify(r) for r in recipes]
     veg_need = (1 if count >= 2 else 0) if vegetarian_needed is None else vegetarian_needed
     missing = (max(0, meat_needed - sum(k in MEAT_CATEGORIES for k in kinds))
-               + max(0, veg_need - kinds.count("vegetarian")))
+               + max(0, veg_need - kinds.count("vegetarian"))
+               + max(0, fish_needed - sum(k in {"fish", "shellfish"} for k in kinds)))
     remaining = max(0, count - len(recipes)) if partial else 0
     return missing <= remaining
 

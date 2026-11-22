@@ -53,8 +53,12 @@ def test_allt_means_a_mixed_week_of_dinners():
     classify = lambda r: kinds[r.name]
     week = lambda *names: [dish(n, "x") for n in names]
     assert [animal_dinners_needed(n) for n in range(1, 8)] == [1, 1, 1, 2, 2, 3, 3]
+    from app.services.personal_policy import mixed_fish_needed
+
+    assert [mixed_fish_needed(n) for n in range(1, 8)] == [0, 0, 0, 1, 1, 1, 1]
     ok = lambda names, n, partial=False: mixed_week_ok(week(*names), n, partial=partial, classify=classify,
-                                                       meat_needed=animal_dinners_needed(n))
+                                                       meat_needed=animal_dinners_needed(n),
+                                                       fish_needed=mixed_fish_needed(n))
     assert not ok(["veg", "veg", "veg"], 3)
     assert not ok(["korv", "kyckling"], 2)
     assert ok(["veg", "korv", "veg"], 3)
@@ -62,13 +66,18 @@ def test_allt_means_a_mixed_week_of_dinners():
     assert not ok(["lax", "veg"], 2)
     assert not ok(["korv", "lax", "veg", "veg", "veg"], 5)
     assert ok(["korv", "kyckling", "lax", "veg", "veg"], 5)
+    # Owner 2026-11-22: 4–7 dinners have at least one fish dinner.
+    assert not ok(["korv", "kyckling", "veg", "veg"], 4)
+    assert ok(["korv", "kyckling", "lax", "veg"], 4)
+    assert not ok(["korv", "kyckling", "korv", "veg", "veg", "veg", "veg"], 7)
     assert not ok(["korv", "kyckling", "veg", "veg", "veg", "veg", "lax"], 7)
     assert ok(["korv", "kyckling", "korv", "veg", "veg", "veg", "lax"], 7)
     assert ok(["korv"], 1) and not ok(["veg"], 1)
     # A partial week passes while the remaining places can still mix it.
     assert ok(["veg", "veg"], 3, partial=True)
     assert not ok(["veg", "veg", "veg"], 4, partial=True)
-    assert ok(["veg", "veg"], 4, partial=True)
+    assert not ok(["veg", "veg"], 4, partial=True)
+    assert ok(["veg", "korv"], 4, partial=True)
 
 
 def test_kott_is_not_only_pork():
