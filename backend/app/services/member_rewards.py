@@ -201,11 +201,18 @@ def parse_receipt(text):
                 pending = qty
             continue
         if not price:
+            # A weighed item's name stands alone; its weight line follows.
+            if letters.search(line) and not _SKIP.search(line) and not _DATE.search(line):
+                if lines and lines[-1].get("unpriced"):
+                    lines.pop()
+                lines.append({"description": line.strip(" .:*-\t")[:120], "price": 0.0, "unpriced": True})
             continue
         value = _number(price.group(1))
         description = line[:price.start()].strip(" .:*-\t")
         if _SKIP.search(line) or not re.search(r"[A-Za-zÅÄÖåäö]{2}", description) and not quantity:
             continue
+        if lines and lines[-1].get("unpriced") and not quantity:
+            lines.pop()  # a header or note line, not an item waiting for its weight
         if (value < 0 or _DISCOUNT.search(description)) and lines:
             lines[-1]["price"] = round(lines[-1]["price"] - abs(value), 2)
             lines[-1]["discount"] = True
@@ -220,7 +227,7 @@ def parse_receipt(text):
             row.update({k: v for k, v in pending.items() if k != "total"})
         pending = None
         lines.append(row)
-    lines = [l for l in lines if l["price"] > 0][:80]
+    lines = [{k: v for k, v in l.items() if k != "unpriced"} for l in lines if l["price"] > 0][:80]
     if not lines:
         raise RewardError("Vi kunde inte läsa några varor på kvittot. Fota hela kvittot rakt uppifrån.")
     return {"store_text": store_text, "chain": chain, "purchased_on": purchased_on.isoformat() if purchased_on else None,
@@ -425,12 +432,30 @@ def offer_prices(offers):
     return result
 
 
+def kg_prices(product):
+    """Kilo prices of a product Smako has sold by weight (ordinary and kilo offers)."""
+    sale = str(getattr(product, "sale_model", "") or "")
+    if not sale.endswith(("sold_by_weight", "variable_weight_package")):
+        return []
+    prices = [product.comparison_price] if product.comparison_price and product.comparison_unit == "kg" else []
+    prices += [o.price for o in product.offers or () if o.price and getattr(o, "price_basis_unit", None) == "kg"]
+    return prices
+
+
 def _price_differs(line, product):
-    """Whether the paid price matches none of the product's known prices."""
-    prices = _prices(product)
-    if not prices or line.get("unit") in {"kg", "g"}:
-        return None  # weighed goods are compared per kg elsewhere; unknown stays unknown
-    paid = _paid(line)
+    """Whether the paid price matches none of the product's known prices.
+
+    Weighed goods ("0,485kg*43,95kr/kg") compare their kilo price with a
+    product Smako has sold by weight; a packed bag is another product.
+    """
+    if line.get("unit") in {"kg", "g"}:
+        prices, paid = product.get("kg_prices") or [], line.get("unit_price")
+        if not prices or not paid:
+            return None
+    else:
+        prices, paid = _prices(product), _paid(line)
+    if not prices:
+        return None
     closest = min(prices, key=lambda v: abs(v - paid))
     return abs(paid - closest) >= max(0.5, 0.01 * closest), round(closest, 2)
 

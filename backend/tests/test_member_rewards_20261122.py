@@ -299,3 +299,26 @@ def test_the_third_receipt_scores_by_what_smako_really_lacks():
     assert by["POTATIS BAK"]["smako_product"] == "Bakpotatis Klass 1" and by["POTATIS BAK"]["points"] == 0  # 5 för 50
     assert by["PÄRONSPLIT"]["smako_product"] != "Päron Kl 1" and by["PÄRONSPLIT"]["points"] == 0  # single vs 10-pack
     assert by["ÄGG 18P UTE"]["points"] == 0 and not by["ÄGG 18P UTE"]["price_differs"]
+
+
+def test_the_owners_pdf_receipt():
+    """Owner's Hemköp receipt 2026-11-22 as PDF text (card and member numbers removed)."""
+    from pathlib import Path
+    from types import SimpleNamespace
+
+    text = (Path(__file__).parent / "fixtures" / "hemkop-kvitto-20261122.txt").read_text(encoding="utf-8")
+    parsed = rewards.parse_receipt(text)
+    lines = {l["description"]: l for l in parsed["lines"]}
+    assert parsed["purchased_on"] == "2026-11-22" and len(lines) == 15 and "PAPPERSKASSE" not in " ".join(lines)
+    assert lines["ULTRA CARE TVÄTTMED"]["price"] == 39.95 and lines["LJUS SIRAP 750G"]["price"] == 18.0
+    assert (lines["ÄPPLE PINK LADY"]["quantity"], lines["ÄPPLE PINK LADY"]["unit_price"]) == (0.485, 43.95)
+    assert lines["BANANER EKO"]["price"] == 24.82 and lines["ÄGG 18P UTE"]["price"] == 61.57
+    assert lines["POTATIS BAK"]["price"] == 50.0 and lines["BABYDRY S6 13-19+KG"]["price"] == 179.9
+    weighed = SimpleNamespace(sale_model="variable_weight_package", comparison_price=43.95, comparison_unit="kg", offers=())
+    assert rewards.kg_prices(weighed) == [43.95]
+    store = rewards.StoreProducts([{**_product("Äpple Pink Lady Klass 1", None, 43.95, ""), "kg_prices": [43.95]},
+                                   {**_product("Banan Eko Klass 1", None, 24.45, ""), "kg_prices": [24.45]}])
+    result = rewards.evaluate({**parsed, "lines": [lines["ÄPPLE PINK LADY"], lines["BANANER EKO"]]}, {}, PlanningRules(),
+                              KNOWN, store_products=lambda _: store)
+    assert [(l["smako_product"], l["price_differs"]) for l in result["lines"]] == [
+        ("Äpple Pink Lady Klass 1", False), ("Banan Eko Klass 1", False)]
