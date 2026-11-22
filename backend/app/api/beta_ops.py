@@ -812,6 +812,35 @@ def admin_page() -> FileResponse:
     )
 
 
+@router.get("/api/admin/planning-rules", dependencies=[AdminAuth])
+def admin_planning_rules(request: Request, response: Response) -> dict[str, Any]:
+    """The meal-planning rules an admin can fine-tune (owner request 2026-11-22)."""
+    from app.services import planning_rules
+
+    response.headers["Cache-Control"] = "no-store"
+    return planning_rules.document(_settings(request))
+
+
+@router.put("/api/admin/planning-rules", dependencies=[AdminAuth])
+def admin_save_planning_rules(request: Request, response: Response, body: dict[str, Any]) -> dict[str, Any]:
+    """Save the rules; they apply to plans made from now on. ``{"reset": true}`` restores the defaults."""
+    from app.services import planning_rules
+
+    settings = _settings(request)
+    _require_same_origin(request, settings)
+    response.headers["Cache-Control"] = "no-store"
+    if body.get("reset") is True:
+        rules = planning_rules.PlanningRules()
+    else:
+        try:
+            rules = planning_rules.PlanningRules.model_validate(body.get("rules"))
+        except ValidationError as exc:
+            messages = [str(e.get("ctx", {}).get("error") or e.get("msg")) for e in exc.errors()]
+            raise HTTPException(status_code=422, detail="; ".join(messages)[:500]) from exc
+    planning_rules.save(settings, rules)
+    return planning_rules.document(settings)
+
+
 @router.post(
     "/api/admin/reload-price-universe",
     dependencies=[AdminMutationAuth],

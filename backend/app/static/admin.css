@@ -8,3 +8,19 @@
 .interface-choices button{display:grid;gap:.2rem;text-align:left;padding:.9rem 1rem;border:2px solid #d5dcd4;border-radius:12px;background:#fff;cursor:pointer;font:inherit;color:inherit}
 .interface-choices button span{font-size:.88rem;opacity:.75}
 .interface-choices button[aria-checked="true"]{border-color:#173e35;background:#e7efe8}
+
+.tabs{display:flex;gap:8px;margin:0 0 28px;border-bottom:1px solid var(--line)}
+.tabs button{border:0;border-bottom:3px solid transparent;border-radius:0;background:none;padding:10px 4px;margin-right:18px;color:var(--muted)}
+.tabs button[aria-selected=true]{color:var(--ink);border-bottom-color:var(--ink)}
+.rules-table-wrap{overflow-x:auto}.rules-table{border-collapse:collapse;width:100%;min-width:560px;margin-top:12px;font-size:13px}
+.rules-table th,.rules-table td{padding:8px 6px;border-top:1px solid var(--line);text-align:center}
+.rules-table th[scope=row]{text-align:left;font-weight:650;min-width:190px}.rules-table th[scope=row] small{display:block;font-weight:400;color:var(--muted)}
+.rules-table input{width:52px;padding:7px 4px;text-align:center;border:1px solid #cbd6cd;border-radius:7px;font-size:14px}
+.rules-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:14px}
+.rules-grid label{display:block;padding:14px;background:#f4f6f1;border-radius:9px}
+.rules-grid label>span{display:block;margin:8px 0 6px;font-weight:650}.rules-grid input{display:inline-block;margin-right:6px;width:110px;padding:8px 10px;border:1px solid #cbd6cd;border-radius:7px;font-size:15px}
+.rules-grid small{display:block;font-weight:400;color:var(--muted);font-size:12px}
+.rules-table input.changed,.rules-grid input.changed{border-color:#bd8a29;background:#fff8e6}
+.rules-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center;position:sticky;bottom:0;background:var(--cream);padding:14px 0}
+.rules-actions span{font-size:12px;color:var(--muted)}.primary-button{background:var(--ink);color:#fff}
+.rules-error{background:#f9e6e7;color:var(--red);border:1px solid #e8bfc4;padding:14px 18px;border-radius:9px}

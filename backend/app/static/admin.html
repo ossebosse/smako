@@ -4,13 +4,53 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="robots" content="noindex,nofollow">
-  <title>Drift & priser · Smako</title>
-  <link rel="stylesheet" href="/static/admin.css?v=interfaces-20261120">
-  <script defer src="/static/admin.js?v=interfaces-20261120"></script>
+  <title>Admin · Smako</title>
+  <link rel="stylesheet" href="/static/admin.css?v=rules-20261122">
+  <script defer src="/static/admin.js?v=rules-20261122"></script>
+  <script defer src="/static/admin-rules.js?v=rules-20261122"></script>
 </head>
 <body>
   <header><a class="brand" href="/">smako<span>DRIFT</span></a><span class="private">Administratör</span></header>
   <main>
+    <div class="tabs" role="tablist" aria-label="Adminsidor">
+      <button type="button" role="tab" id="tab-ops" aria-controls="page-ops" aria-selected="true">Drift & priser</button>
+      <button type="button" role="tab" id="tab-rules" aria-controls="page-rules" aria-selected="false">Matplanering</button>
+    </div>
+    <section id="page-rules" role="tabpanel" aria-labelledby="tab-rules" hidden>
+      <div class="heading"><div><p class="eyebrow">REGLER FÖR MATPLANERNA</p><h1>Finjustera matplaneringen</h1><p>Ändringarna gäller matplaner som skapas efter att du sparat. Sparade planer ändras inte.</p></div></div>
+      <p id="rules-status" role="status">Hämtar reglerna…</p>
+      <p id="rules-error" class="rules-error" role="alert" hidden></p>
+      <form id="rules-form" hidden>
+        <section class="panel">
+          <h2>Kostfördelning</h2>
+          <p>Minsta antal middagar av varje slag, för 1–7 middagar i veckan. Fler än 7 middagar räknas om med samma andel som för 7. Planen följer reglerna så långt receptens och de andra valen tillåter.</p>
+          <div class="rules-table-wrap"><table class="rules-table">
+            <thead><tr><th scope="col">Middagar per vecka</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th></tr></thead>
+            <tbody id="rules-tables"></tbody>
+          </table></div>
+        </section>
+        <section class="panel">
+          <h2>Variation inom veckan</h2>
+          <div class="rules-grid" id="rules-shares"></div>
+        </section>
+        <section class="panel">
+          <h2>Pris och smak</h2>
+          <p>Hur mycket olika saker får kosta när planerna rangordnas, i kronor.</p>
+          <div class="rules-grid" id="rules-weights"></div>
+        </section>
+        <section class="panel">
+          <h2>Variation mellan veckor</h2>
+          <div class="rules-grid" id="rules-variation"></div>
+        </section>
+        <div class="rules-actions">
+          <button type="submit" class="primary-button" id="rules-save">Spara regler</button>
+          <button type="button" id="rules-undo">Ångra ändringar</button>
+          <button type="button" id="rules-reset">Återställ standard</button>
+          <span id="rules-updated"></span>
+        </div>
+      </form>
+    </section>
+    <section id="page-ops" role="tabpanel" aria-labelledby="tab-ops">
     <div class="heading"><div><p class="eyebrow">INSAMLING & PRISTÄCKNING</p><h1>Hur mår våra butiker?</h1><p>Följ prisunderlaget, från senaste insamling till tillgängliga priser.</p></div><button id="refresh" type="button">↻ Uppdatera</button></div>
     <section class="panel" id="interface-panel" aria-labelledby="interface-title">
       <h2 id="interface-title">Gränssnitt</h2>
@@ -37,6 +77,7 @@
     <section class="panel"><h2>Gemensam drift</h2><p>Insamlingens schema och applikationens status gäller den konfigurerade driften.</p><div id="operations" class="operation-grid"></div><details><summary>Teknisk driftöversikt</summary><pre id="technical">Laddar…</pre></details></section>
     <footer><p id="policy"></p><p>Prisantal avser produktpriser per prisunderlag, inte unika varor eller lagerbesked. Delade online- och regionala underlag räknas en gång i totalsumman. Okänd insamlingsstatus betyder att ett verifierat körningsresultat saknas.</p></footer>
     <noscript>Aktivera JavaScript för att visa dashboarden. Driftdata finns även på /api/admin/stores.</noscript>
+    </section>
   </main>
 </body>
 </html>

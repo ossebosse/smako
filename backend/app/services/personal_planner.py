@@ -61,6 +61,8 @@ from app.services.personal_policy import (
     fish_week_ok,
     meat_kind,
     meat_kind_cap,
+    mixed_vegetarian_needed,
+    cuisine_cap as planning_cuisine_cap,
     meat_kinds_ok,
     mixed_fish_needed,
     interpretation,
@@ -136,9 +138,18 @@ _NOT_NONFOOD = ("{name} är sparad som en vara som inte är mat, men Smako känn
 EXTRA_STORE_MIN_SAVING = Decimal(10)
 
 
-def extra_store_cost(basket):
+def extra_store_saving(rules=None) -> float:
+    """EXTRA_STORE_MIN_SAVING, or the admin's value (planning_rules)."""
+    if rules is None:
+        from app.services.planning_rules import load
+
+        rules = load()
+    return float(rules.extra_store_min_saving_kr)
+
+
+def extra_store_cost(basket, rules=None):
     """The minimum saving each extra store must earn, as a ranking cost."""
-    return float(EXTRA_STORE_MIN_SAVING) * max(0, basket.store_count - 1)
+    return extra_store_saving(rules) * max(0, basket.store_count - 1)
 
 
 def _candidate_price_print(c):
@@ -312,6 +323,16 @@ _QUALIFIED_NUTRITION_ENTRIES = 65536
 
 
 class PersonalPlanner:
+    @property
+    def rules(self):
+        """The admin's planning rules (planning_rules), read once per planner."""
+        rules = self.__dict__.get("_planning_rules")
+        if rules is None:
+            from app.services.planning_rules import load
+
+            rules = self.__dict__["_planning_rules"] = load()
+        return rules
+
     def __init__(
         self,
         request,
@@ -2002,9 +2023,9 @@ class PersonalPlanner:
 
         saving = basket.savings_vs_single_store
         if basket.store_count < 2 or (basket.store_count == 2 and saving is not None
-                                      and saving >= float(EXTRA_STORE_MIN_SAVING)):
+                                      and saving >= extra_store_saving(self.rules)):
             return basket  # The single-store checkout is already known to cost 10 kr more.
-        best, best_cost = basket, basket.total + extra_store_cost(basket)
+        best, best_cost = basket, basket.total + extra_store_cost(basket, self.rules)
         for cap in range(basket.store_count - 1, 0, -1):
             try:
                 option = self.optimizer.optimize(ingredients, candidates, self.view.stores, max_stores=cap)
@@ -2012,7 +2033,7 @@ class PersonalPlanner:
                 break
             if _VERIFICATION_RANK[option.verification_status] > _VERIFICATION_RANK[basket.verification_status]:
                 continue  # Never trade verified quantities for one store less.
-            cost = option.total + extra_store_cost(option)
+            cost = option.total + extra_store_cost(option, self.rules)
             if cost <= best_cost + 1e-9:
                 best, best_cost = option, cost
         if best is basket:
@@ -3771,7 +3792,7 @@ class PersonalPlanner:
         recipes = [s.recipe for s in slots if s.recipe]
         if getattr(self, "_ignore_likes", False):
             # The week as if nothing were liked: dislikes still count.
-            return TASTE_WEIGHT_KR * sum(
+            return self.rules.like_weight_kr * sum(
                 preference_score([r], profile.model_copy(update={"likes": []}))
                 for s in slots if s.recipe for r in [s.recipe]
                 for profile in (self.spec.profile, self.meals[s.meal_type].profile))
@@ -3779,12 +3800,12 @@ class PersonalPlanner:
         tastes += sum(preference_score([s.recipe], self.meals[s.meal_type].profile) for s in slots if s.recipe)
         dinners = [s.recipe for s in slots if s.recipe and s.meal_type == "dinner"]
         missing = sum(not any(recipe_names(t, r) for r in dinners) for t in getattr(self, "_required_likes", ()))
-        return tastes * TASTE_WEIGHT_KR + missing * LIKE_MISSING_KR
+        return tastes * self.rules.like_weight_kr + missing * self.rules.like_missing_kr
 
     def _week_purchase_key(self, basket, preparations=(), slots=()):
         """Paid total plus the extra-store and taste costs (owner decisions 2026-11-15), then surplus."""
         from app.services.week_refinement import surplus_key
-        leading = basket.total + extra_store_cost(basket) + self._preference_cost(slots)
+        leading = basket.total + extra_store_cost(basket, self.rules) + self._preference_cost(slots)
         return (money(leading), surplus_key(basket, preparations=preparations) if self.spec.surplus_mode == "minimize" else ())
 
     @timed_stage("memory_reclamation")
@@ -4539,8 +4560,8 @@ class PersonalPlanner:
         policy_request = personal_policy_request(self.request, dinner_count)
         if self.spec.variation_seed is not None:
             from app.services.plan_variation import per_dinner_kronor
-            self._variation_kr = per_dinner_kronor(
-                e.paid for (meal_type, _), e in self.variant_search_evidence.items() if meal_type == "dinner")
+            self._variation_kr = per_dinner_kronor(percent=self.rules.variation_percent, paid_values=(
+                e.paid for (meal_type, _), e in self.variant_search_evidence.items() if meal_type == "dinner"))
         policy = self.service._diversity_policy_for(policy_request, self.request.diversity_mode)
         if self.complete:
             from app.services.complete_recipes import diversity_policy
@@ -4597,11 +4618,13 @@ class PersonalPlanner:
             # dinners (animal_dinners_needed), as far as the pool allows, and a
             # vegetarian dinner with two or more.
             if replace_slot is None:
-                meat_needed = min(animal_dinners_needed(dinner_count), len({base_of(r) for r in dinner_pool if meaty(r)}),
-                                  dinner_count - (1 if dinner_count >= 2 else 0))
-                vegetarian_needed = int(dinner_count >= 2 and any(
-                    self._protein_category(r) == "vegetarian" for r in dinner_pool))
-                mixed_fish = min(mixed_fish_needed(dinner_count), int(any(fishy_dinner(r) for r in dinner_pool)),
+                veg_bases = len({base_of(r) for r in dinner_pool if self._protein_category(r) == "vegetarian"})
+                vegetarian_needed = min(mixed_vegetarian_needed(dinner_count, self.rules), veg_bases)
+                meat_needed = min(animal_dinners_needed(dinner_count, self.rules),
+                                  len({base_of(r) for r in dinner_pool if meaty(r)}),
+                                  dinner_count - vegetarian_needed)
+                fish_bases = len({base_of(r) for r in dinner_pool if fishy_dinner(r)})
+                mixed_fish = min(mixed_fish_needed(dinner_count, self.rules), fish_bases,
                                  max(0, dinner_count - meat_needed - vegetarian_needed))
             else:
                 fixed = [g[0].recipe for g in options
@@ -4610,11 +4633,11 @@ class PersonalPlanner:
                 target = [s.recipe for s in target if s.meal_type == "dinner" and s.recipe]
                 have_meat = sum(meaty(r) for r in fixed)
                 have_veg = sum(self._protein_category(r) == "vegetarian" for r in fixed)
-                meat_needed = min(animal_dinners_needed(dinner_count), have_meat + any(meaty(r) for r in target))
-                vegetarian_needed = min(int(dinner_count >= 2), have_veg + any(
+                meat_needed = min(animal_dinners_needed(dinner_count, self.rules), have_meat + any(meaty(r) for r in target))
+                vegetarian_needed = min(mixed_vegetarian_needed(dinner_count, self.rules), have_veg + any(
                     self._protein_category(r) == "vegetarian" for r in target))
                 have_fish = sum(fishy_dinner(r) for r in fixed)
-                mixed_fish = min(mixed_fish_needed(dinner_count), have_fish + any(fishy_dinner(r) for r in target))
+                mixed_fish = min(mixed_fish_needed(dinner_count, self.rules), have_fish + any(fishy_dinner(r) for r in target))
                 # One replaced place can supply at most one missing kind.
                 lacking = [k for k, need, have in (("meat", meat_needed, have_meat), ("veg", vegetarian_needed, have_veg),
                                                    ("fish", mixed_fish, have_fish)) if need > have]
@@ -4631,10 +4654,10 @@ class PersonalPlanner:
         if generating and replace_slot is None and dinner_meal is not None and not dinner_meal.distribution:
             meat_places = dinner_count if dinner_meal.diet == "meat" else meat_needed
             if meat_places >= 2:
-                cap = meat_kind_cap(meat_places)
+                cap = meat_kind_cap(meat_places, self.rules)
                 bases_by_kind = Counter(meat_kind(r, self._protein_category)
                                         for r in {base_of(r): r for r in dinner_pool if meaty(r)}.values())
-                if len(bases_by_kind) >= 2 and sum(min(n, cap) for n in bases_by_kind.values()) >= meat_places:
+                if cap is not None and len(bases_by_kind) >= 2 and sum(min(n, cap) for n in bases_by_kind.values()) >= meat_places:
                     kind_cap = cap
         self._meat_kind_cap = kind_cap
         # Owner decision 2026-11-22: one cuisine in at most half of the dinners
@@ -4645,8 +4668,10 @@ class PersonalPlanner:
         chosen_cuisines = list(getattr(self.request.recipe_preferences, "cuisines", None) or [])
         if (self.complete and (generating or replace_slot is not None) and dinner_meal is not None
                 and dinner_count >= 2 and len(chosen_cuisines) != 1):
-            cap = meat_kind_cap(dinner_count)
-            if replace_slot is None:
+            cap = planning_cuisine_cap(dinner_count, self.rules)
+            if cap is None:
+                pass
+            elif replace_slot is None:
                 by_cuisine = Counter(cuisine_of(r) for r in {base_of(r): r for r in dinner_pool}.values() if cuisine_of(r))
                 if sum(min(n, cap) for n in by_cuisine.values()) >= dinner_count:
                     cuisine_cap = cap
@@ -4668,13 +4693,13 @@ class PersonalPlanner:
             fishy = lambda r: self._protein_category(r) in {"fish", "shellfish"}
             if replace_slot is None:
                 bases = {r.design.base_id if r.design else self._recipe_id(r) for r in dinner_pool if fishy(r)}
-                fish_needed = min(fish_dinners_needed(dinner_count), len(bases))
+                fish_needed = min(fish_dinners_needed(dinner_count, self.rules), len(bases))
             else:
                 fixed = sum(fishy(g[0].recipe) for g in options
                             if len(g) == 1 and g[0].meal_type == "dinner" and g[0].recipe and g[0].id != replace_slot)
                 target = next((g for g in options if any(s.id == replace_slot for s in g)), [])
                 can = any(s.meal_type == "dinner" and s.recipe and fishy(s.recipe) for s in target)
-                fish_needed = min(fish_dinners_needed(dinner_count), fixed + can)
+                fish_needed = min(fish_dinners_needed(dinner_count, self.rules), fixed + can)
             if fish_needed:
                 fish_count = fish_needed
         self._fish_week = fish_count is not None
@@ -4753,7 +4778,7 @@ class PersonalPlanner:
         def score(chosen, result):
             basket = result["basket"]
             return (
-                basket.total + preference_cost(chosen) + extra_store_cost(basket),
+                basket.total + preference_cost(chosen) + extra_store_cost(basket, self.rules),
                 basket.total,
                 tuple(s.recipe.name if s.recipe else "" for s in chosen),
             )

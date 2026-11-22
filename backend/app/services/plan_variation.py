@@ -23,7 +23,13 @@ SCAN_PLANS = 40
 
 
 def variation_settings(state) -> VariationSettings:
-    return VariationSettings.model_validate(state.get("variation") or {})
+    stored = dict(state.get("variation") or {})
+    if "avoid_recent_plans" not in stored:
+        # A member who has not chosen gets the admin's default (planning_rules).
+        from app.services.planning_rules import load
+
+        stored["avoid_recent_plans"] = load().member_avoid_recent_plans
+    return VariationSettings.model_validate(stored)
 
 
 def jitter(seed: int, base_id: str) -> float:
@@ -38,10 +44,14 @@ def jitter(seed: int, base_id: str) -> float:
 WEEK_SHARE = 0.5
 
 
-def per_dinner_kronor(paid_values) -> float:
-    """The largest extra cost per dinner: VARIATION_PERCENT of a typical cheap dinner's week share."""
+def per_dinner_kronor(paid_values, percent=None) -> float:
+    """The largest extra cost per dinner: VARIATION_PERCENT (or the admin's value) of a typical cheap dinner's week share."""
+    if percent is None:
+        from app.services.planning_rules import load
+
+        percent = load().variation_percent
     paid = sorted(v for v in paid_values if v and v != float("inf"))[:10]
-    return VARIATION_PERCENT / 100 * WEEK_SHARE * median(paid) if paid else 0.0
+    return percent / 100 * WEEK_SHARE * median(paid) if paid else 0.0
 
 
 def recent_dinners(store, owner, plans: int) -> list[list[str]]:

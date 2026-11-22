@@ -436,11 +436,11 @@ def distribution_ok(slots, meals, *, partial=False, classify=protein_category):
 # Owner decision 2026-11-15 (docs/PLANNING-ARCHITECTURE.md): each recipe
 # with a liked ingredient may cost this much more per like, a disliked one
 # this much less. Counted per recipe, so two chicken dinners weigh twice.
-TASTE_WEIGHT_KR = 15
+TASTE_WEIGHT_KR = 15  # default; the planner reads PlanningRules.like_weight_kr
 # Owner decision 2026-11-15: every like is in at least one dinner when the
 # other choices allow it. A week without it ranks as this much dearer, so the
 # search always finds a plan; the plan marks how much the like costs.
-LIKE_MISSING_KR = 1000
+LIKE_MISSING_KR = 1000  # default; the planner reads PlanningRules.like_missing_kr
 
 
 def _names_term(term, names):
@@ -466,22 +466,38 @@ def preference_score(recipes, profile):
     return score
 
 
-def animal_dinners_needed(count):
+def _rules():
+    from app.services.planning_rules import load
+
+    return load()
+
+
+def animal_dinners_needed(count, rules=None):
     """Owner decision 2026-11-22: about half of the dinners, never none.
 
-    1–3 dinners at least one, 4–5 at least two, 6–7 at least three: half,
-    rounded down, and at least one. Used for the meat dinners of "Allt" and
-    the fish dinners of "Fisk och vegetariskt".
+    1–3 dinners at least one, 4–5 at least two, 6–7 at least three (the
+    admin page's "Matplanering" can change the table).
     """
-    return 0 if count < 1 else max(1, count // 2)
+    from app.services.planning_rules import table_value
+
+    return table_value((rules or _rules()).mixed_meat_min, count)
 
 
-def fish_dinners_needed(count):
+def mixed_vegetarian_needed(count, rules=None):
+    """"Allt" with two or more dinners has a vegetarian dinner (owner decision 2026-11-15)."""
+    from app.services.planning_rules import table_value
+
+    return table_value((rules or _rules()).mixed_vegetarian_min, count)
+
+
+def fish_dinners_needed(count, rules=None):
     """Fish dinners for fish and vegetarian (owner decisions 2026-11-17/22).
 
     Shellfish dishes count as fish dishes.
     """
-    return animal_dinners_needed(count)
+    from app.services.planning_rules import table_value
+
+    return table_value((rules or _rules()).pescetarian_fish_min, count)
 
 
 def fish_week_ok(recipes, count, *, partial, classify=protein_category, needed=None):
@@ -517,14 +533,25 @@ def meat_kind(recipe, classify=protein_category):
     return "annat"
 
 
-def mixed_fish_needed(count):
+def mixed_fish_needed(count, rules=None):
     """Owner decision 2026-11-22: "Allt" with 4–7 dinners has at least one fish dinner."""
-    return 1 if count >= 4 else 0
+    from app.services.planning_rules import table_value
+
+    return table_value((rules or _rules()).mixed_fish_min, count)
 
 
-def meat_kind_cap(count):
-    """At most half of the meat dinners (rounded up) of one kind of meat."""
-    return -(-count // 2)
+def meat_kind_cap(count, rules=None):
+    """At most half of the meat dinners (rounded up) of one kind of meat; None when off."""
+    from app.services.planning_rules import share_cap
+
+    return share_cap((rules or _rules()).meat_kind_max_percent, count)
+
+
+def cuisine_cap(count, rules=None):
+    """One cuisine in at most half of the dinners (rounded up); None when off."""
+    from app.services.planning_rules import share_cap
+
+    return share_cap((rules or _rules()).cuisine_max_percent, count)
 
 
 def mixed_week_ok(recipes, count, *, partial, classify=protein_category, meat_needed=1, vegetarian_needed=None,
