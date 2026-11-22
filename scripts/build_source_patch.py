@@ -65,6 +65,11 @@ SOURCE_DASHBOARD_FILES = frozenset({
     'backend/app/services/store_collection_history.py',
     'backend/app/services/store_operations.py', 'backend/app/static/admin.js',
 })
+PRIMAT_REFRESH_FILES = frozenset({
+    'backend/app/providers/primat.py',
+    'backend/app/services/primat_recipe_queries.py',
+    'backend/app/services/production_primat_refresh.py',
+})
 COOP_APP_BASE_REFS = {
     'grocery_data/app/connectors/coop/online_catalog_parser.py': '50d1a87bf513640fbb1e07256c6c037f304e8252',
     'grocery_data/app/connectors/coop/schema_review.py': 'b235e51ec39ea2367e157e5ddf2da750de1afcdc',
@@ -90,7 +95,7 @@ def coop_app_backport(path, base, after):
 
 
 def selected_paths(changed, *, axfood_reader_only=False, include_source_dashboard=False,
-                   coop_syd_base=False, coop_syd_facts=False):
+                   coop_syd_base=False, coop_syd_facts=False, primat_refresh=False):
     if coop_syd_facts:
         return [x for x in changed if x == 'backend/app/services/personal_source_facts.py']
     if axfood_reader_only:
@@ -102,6 +107,7 @@ def selected_paths(changed, *, axfood_reader_only=False, include_source_dashboar
                      'backend/app/providers/coop_municipality_offers.py',
                      'grocery_data/scripts/collect_coop_municipality.py')
             or (include_source_dashboard and x in SOURCE_DASHBOARD_FILES)
+            or (primat_refresh and x in PRIMAT_REFRESH_FILES)
             or (coop_syd_base and x in {'backend/app/providers/coop_syd_base.py',
                                        'backend/app/services/price_universe_runtime.py',
                                        'backend/app/services/production_price_universe_build.py'})]
@@ -126,6 +132,8 @@ def main():
                    help='Include the reviewed Stora Coop provider/build/version dependencies')
     p.add_argument('--coop-syd-facts', action='store_true',
                    help='Package only the exact retained-facts reader for the serving app')
+    p.add_argument('--primat-refresh', action='store_true',
+                   help='Include the nightly Primat refresh provider, query list and collector')
     args = p.parse_args()
     for name in ('base_commit', 'parent_commit', 'commit'):
         setattr(args, name, git('rev-parse', '--verify', getattr(args, name)+'^{commit}').decode().strip())
@@ -136,7 +144,8 @@ def main():
     changed = git('diff', '--name-only', args.parent_commit, args.commit).decode().splitlines()
     selected = selected_paths(changed, axfood_reader_only=args.axfood_reader_only,
                               include_source_dashboard=args.include_source_dashboard,
-                              coop_syd_base=args.coop_syd_base, coop_syd_facts=args.coop_syd_facts)
+                              coop_syd_base=args.coop_syd_base, coop_syd_facts=args.coop_syd_facts,
+                              primat_refresh=args.primat_refresh)
     if not selected:
         raise ValueError('empty source patch')
     runtime = json.loads(args.base_files.read_bytes()) if args.base_files else None
