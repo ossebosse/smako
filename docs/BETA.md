@@ -1,3 +1,17 @@
+# 2026-11-22 eftermiddag: Kvittopoäng för alla varor
+
+Main `ff812c8a875f` (fast-forward av `receipt-points-any-item`). App
+**app-ff812c8a875f-f7b35815**, bas `a6eac85e678a`. Ändrat:
+`member_rewards.py`, `api/member.py`, `planning_rules.py`, `admin-rules.js`,
+`admin.html`, `next/mine.js`, `next/a.html`, `next/b.html`. Ägarbeslut
+2026-11-22: varorna behöver inte finnas på handlingslistan; +5 per vara som
+Smako saknar i butiken (eller varje vara i en butik utan Smako-priser), +2 per
+vara med annat pris än Smakos, 10 per kvitto med minst 3 lästa varor, högst
+100 poäng per kvitto. Osäkra matchningar ger inga poäng förrän streckkoden är
+skannad. Importprov i nätverkslös container godkänt. Aktiverad 14:10 UTC;
+befintligt tillstånd och prismanifest bevarade, lagringsretention körd
+efteråt. `/ready` Lund och Malmö: ready.
+
 # 2026-11-22 middag: Näring för alla middagar, gilla recept och poäng för kvitton
 
 Main `a6eac85e678a` (fast-forward av `nutrition-fallback-20261122` och
@@ -548,10 +562,10 @@ git status --short
 .venv/Scripts/python.exe -X utf8 scripts/smako_ops.py status
 
 # Använd den granskade Git-bas som motsvarar faktiskt aktiva filer enligt senaste journalen.
-.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit a6eac85e678a --commit main --workdir .local/beta-release
+.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit ff812c8a875f --commit main --workdir .local/beta-release
 ```
 
-`a6eac85e678a` är appen som aktiverades 2026-11-22 11:43 UTC. Appbildens egen
+`ff812c8a875f` är appen som aktiverades 2026-11-22 14:10 UTC. Appbildens egen
 grocery-kopia är äldre än Git; använd `--keep-app-grocery` om intervallet
 bara innehåller grocery-Python som redan levererats till schedulern. De äldre
 Coop-filerna i runtime (`price_universe_runtime.py`,
