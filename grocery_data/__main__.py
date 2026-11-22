@@ -1597,7 +1597,7 @@ def _daily_refresh_dry_run(args: argparse.Namespace) -> dict[str, object]:
                 if refresh_external and selected_external
                 else "not_selected"
             ),
-            "maximum_requests_per_city": 49,
+            "maximum_requests_per_city": _primat_requests_per_city(),
             "cities": list(postal_codes),
             "city_plans": external_city_plans,
         },
@@ -1788,6 +1788,12 @@ def _safe_scope_slug(value: str) -> str:
     if not slug:
         raise ValueError("refresh scope cannot be represented as a filename")
     return slug
+
+
+def _primat_requests_per_city() -> int:
+    from app.services.production_primat_refresh import production_query_items
+
+    return 1 + len(production_query_items())
 
 
 async def _collect_production_primat_cache(

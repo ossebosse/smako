@@ -31,8 +31,11 @@ redan verifierad baskontext även innan den ingår i det aktiva prisunderlaget.
 Endast kommuner med exakt verifierade, fullständiga Primat-kontexter lämnar
 OWN-only för det avgränsade bygget. Samma identiteter återkontrolleras mot
 aktuell butiksupplösning innan produkter godkänns. Det befintliga kontraktet
-är 49 anrop per kommun: en butiksupplösning och 48 ingredienssökningar, inte en
-ny fullständig produktkatalog. Butiker med enbart erbjudandekontext räknas inte
+är 149 anrop per kommun: en butiksupplösning, de 48 ingredienssökningarna
+(100 rader var) och 100 sökningar på receptbibliotekets vanligaste övriga
+ingredienser (50 rader var, ägarbeslut 2026-11-22), inte en ny fullständig
+produktkatalog. Sökningarna går med 1,1 s mellanrum (Primats gratisnivå: 60
+anrop/min, 200 rader/anrop, 20 000 rader/dygn). Butiker med enbart erbjudandekontext räknas inte
 som baspriskällor. Inga nya butikskopplingar eller källfakta fabriceras.
 
 Primats verifierade register läses med SQLite `mode=ro` och `query_only`.

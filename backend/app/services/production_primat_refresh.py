@@ -9,6 +9,7 @@ never returned or written.
 
 from __future__ import annotations
 
+import asyncio
 import hashlib
 import json
 from collections import Counter
@@ -18,11 +19,14 @@ from pathlib import Path
 from typing import Any
 
 from app.services.primat_frozen_cache_collect import (
+    CanonicalIngredientQuery,
+    _query_key,
     build_frozen_external_cache,
     canonical_ingredient_query_surface,
     load_eligible_primat_contexts,
     revalidate_primat_contexts,
 )
+from app.services.primat_recipe_queries import RECIPE_QUERIES
 from app.services.primat_phase_c_export import FrozenExternalCacheBundle, write_closed_json
 from scripts.benchmark_lund_phase_c import _BoundedPrimatProvider
 
@@ -30,8 +34,31 @@ from grocery_data.app.domain import Chain
 from grocery_data.app.domain.source_strategy import SourceProvider, source_strategy_for
 from grocery_data.app.services.refresh_diagnostics import source_failure_diagnostic
 
-_EXPECTED_REQUESTS = 49
 _MAX_CONTEXTS_PER_PRODUCT_REQUEST = 15
+# Owner request 2026-11-22: ICA's prices for more of the recipe ingredients.
+# Primat's free plan: 60 calls a minute, 200 rows a call, 20 000 rows a day.
+# The 48 benchmark searches keep 100 rows; the recipe searches ask for 50.
+_BENCHMARK_LIMIT = 100
+_RECIPE_LIMIT = 50
+_SECONDS_BETWEEN_SEARCHES = 1.1
+
+
+def production_query_items() -> tuple[tuple[CanonicalIngredientQuery, int], ...]:
+    """The nightly searches with their row limits: the 48, then the recipe queries."""
+
+    base = canonical_ingredient_query_surface().items
+    used = {_query_key(item.query) for item in base}
+    items = [(item, _BENCHMARK_LIMIT) for item in base]
+    for query in RECIPE_QUERIES:
+        key = _query_key(query)
+        if key and key not in used:
+            used.add(key)
+            items.append((CanonicalIngredientQuery(canonical=f"recipe:{query}", query=query), _RECIPE_LIMIT))
+    return tuple(items)
+
+
+def _expected_requests() -> int:
+    return 1 + len(production_query_items())
 
 
 def _normalized_postal_code(value: str) -> str:
@@ -80,25 +107,27 @@ def _safe_transport_report(report: object) -> dict[str, Any]:
 
     if not isinstance(report, dict):
         raise TypeError("bounded Primat transport did not expose counters")
+    expected = _expected_requests()
+    searches = expected - 1
     requests = int(report.get("requests", -1))
     denied = int(report.get("denied_requests", -1))
     concurrency = int(report.get("max_concurrency", -1))
     endpoints = report.get("endpoints")
     statuses = report.get("statuses")
     if (
-        requests != _EXPECTED_REQUESTS
+        requests != expected
         or denied != 0
         or concurrency != 1
-        or endpoints != {"/products": 48, "/stores/resolve": 1}
-        or statuses != {"200": _EXPECTED_REQUESTS}
+        or endpoints != {"/products": searches, "/stores/resolve": 1}
+        or statuses != {"200": expected}
     ):
-        raise RuntimeError("bounded 49-request Primat transport contract failed")
+        raise RuntimeError(f"bounded {expected}-request Primat transport contract failed")
     return {
         "mode": "bounded_primat_live",
-        "request_limit": _EXPECTED_REQUESTS,
+        "request_limit": expected,
         "requests": requests,
-        "endpoints": {"/products": 48, "/stores/resolve": 1},
-        "statuses": {"200": _EXPECTED_REQUESTS},
+        "endpoints": {"/products": searches, "/stores/resolve": 1},
+        "statuses": {"200": expected},
         "denied_requests": denied,
         "max_concurrency": concurrency,
     }
@@ -132,7 +161,7 @@ def plan_city_primat_refresh(
             }
             for context in eligible
         ],
-        "provider_requests_planned": _EXPECTED_REQUESTS if eligible else 0,
+        "provider_requests_planned": _expected_requests() if eligible else 0,
         "provider_requests_per_context": 0,
         "credentials_included": False,
     }
@@ -216,7 +245,8 @@ async def collect_city_primat_cache(
     """Refresh one city's verified Primat-primary contexts into a closed cache.
 
     The operation spends one store-resolution request and one sequential
-    product request for each of the shared 48 canonical queries.  An existing
+    product request for each of the shared 48 canonical queries and the
+    recipe-ingredient queries (``production_query_items``).  An existing
     output is replaced only after exact identity revalidation, complete
     collection and closed-schema validation have all succeeded.
     """
@@ -252,12 +282,13 @@ async def collect_city_primat_cache(
         raise ValueError("verified Primat context scope exceeds one bounded product request")
 
     surface = canonical_ingredient_query_surface()
+    searches = production_query_items()
     exact_contexts = frozenset(
         (context.chain.value, context.provider_context_id) for context in eligible
     )
     provider = _BoundedPrimatProvider.load(
         exact_contexts=exact_contexts,
-        max_requests=_EXPECTED_REQUESTS,
+        max_requests=1 + len(searches),
         context_bootstrap=False,
     )
     stage = "store_resolution"
@@ -291,18 +322,20 @@ async def collect_city_primat_cache(
             raise ValueError("current Primat resolution revalidated no exact contexts")
         native_store_ids = sorted(context.store.store_id for context in contexts)
         if failed_contexts and lkg_cache is None:
-            # No complete replacement can be built. Do not spend 48 product
+            # No complete replacement can be built. Do not spend the product
             # requests only to misattribute this identity/coverage failure to
             # the last product query at closed-cache validation.
             raise ValueError("failed Primat contexts require a fresh per-context LKG")
 
         collected = []
         zero_result_queries = 0
-        for item in surface.items:
+        for index, (item, limit) in enumerate(searches):
             stage = "product_fetch_and_parse"
             query = item.query
+            if index:
+                await asyncio.sleep(_SECONDS_BETWEEN_SEARCHES)  # Primat: 60 calls a minute
             requests_before = int(provider.transport_report.get("requests", -1))
-            rows = await provider.search_products(item.query, native_store_ids)
+            rows = await provider.search_products(item.query, native_store_ids, limit=limit)
             requests_after = int(provider.transport_report.get("requests", -1))
             if requests_after != requests_before + 1:
                 raise RuntimeError("canonical ingredient did not spend exactly one request")
@@ -347,7 +380,8 @@ async def collect_city_primat_cache(
             "schema_version": surface.schema_version,
             "sha256": surface.sha256,
             "canonical_ingredients": len(surface.items),
-            "queries": len(surface.items),
+            "recipe_queries": len(searches) - len(surface.items),
+            "queries": len(searches),
             "zero_result_queries": zero_result_queries,
         },
         "contexts": [

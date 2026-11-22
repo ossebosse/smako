@@ -1616,9 +1616,11 @@ class PrimatPriceProvider(GroceryPriceProvider):
             return None
         return self.apply_price_policy([product])[0]
 
-    async def search_products(self, query: str, store_ids: list[str]) -> list[Product]:
+    async def search_products(self, query: str, store_ids: list[str], limit: int = 100) -> list[Product]:
         if not query.strip() or not store_ids:
             return []
+        if not 1 <= limit <= 200:
+            raise ValueError("Primat search limit must be between 1 and 200")
         unique_store_ids = list(dict.fromkeys(store_ids))
         cache_key = (_search_text(query), tuple(sorted(unique_store_ids)))
         cached = self._product_search_cache.get(cache_key)
@@ -1630,7 +1632,7 @@ class PrimatPriceProvider(GroceryPriceProvider):
             payload = await self._request(
                 "GET",
                 "/products",
-                params={"q": query.strip(), "stores": ",".join(store_batch), "limit": 100},
+                params={"q": query.strip(), "stores": ",".join(store_batch), "limit": limit},
             )
             for row in payload.get("data") or []:
                 if not isinstance(row, dict):

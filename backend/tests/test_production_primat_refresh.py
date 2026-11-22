@@ -196,6 +196,11 @@ def _product(store: Store) -> Product:
     )
 
 
+
+@pytest.fixture(autouse=True)
+def _no_pacing(monkeypatch):
+    monkeypatch.setattr("app.services.production_primat_refresh._SECONDS_BETWEEN_SEARCHES", 0)
+
 class _FakeProvider:
     def __init__(self, resolution: PrimatStoreResolution) -> None:
         self.resolution = resolution
@@ -205,12 +210,13 @@ class _FakeProvider:
         self.max_active_searches = 0
         self.requested_store_ids: list[tuple[str, ...]] = []
         self.closed = False
+        self.limits: list[int] = []
 
     @property
     def transport_report(self) -> dict[str, Any]:
         return {
             "mode": "bounded_primat_live",
-            "request_limit": 49,
+            "request_limit": 149,
             "requests": self.requests,
             "endpoints": dict(sorted(self.endpoints.items())),
             "statuses": {"200": self.requests} if self.requests else {},
@@ -227,8 +233,9 @@ class _FakeProvider:
         self.endpoints["/stores/resolve"] += 1
         return self.resolution
 
-    async def search_products(self, query: str, store_ids: list[str]) -> list[Product]:
+    async def search_products(self, query: str, store_ids: list[str], limit: int = 100) -> list[Product]:
         assert query
+        self.limits.append(limit)
         self.active_searches += 1
         self.max_active_searches = max(self.max_active_searches, self.active_searches)
         await asyncio.sleep(0)
@@ -251,7 +258,7 @@ def test_dry_plan_lists_only_verified_primat_primary_contexts_without_network(
     plan = plan_city_primat_refresh(database, "Lund", 48)
 
     assert plan["status"] == "planned"
-    assert plan["provider_requests_planned"] == 49
+    assert plan["provider_requests_planned"] == 149  # 48 benchmark + 100 recipe searches
     assert plan["credentials_included"] is False
     assert [row["context_id"] for row in plan["contexts"]] == ["primat:ica:1088004"]
 
@@ -301,7 +308,8 @@ async def test_refresh_uses_stale_identity_seed_revalidates_and_replaces_atomica
     after_refresh = datetime.now(tz=UTC)
 
     assert report["status"] == "PASS"
-    assert report["transport"]["requests"] == 49
+    assert report["transport"]["requests"] == 149
+    assert report["surface"]["recipe_queries"] == 100 and report["surface"]["queries"] == 148
     assert len(report["contexts"]) == 1
     context_report = report["contexts"][0]
     assert context_report == {
@@ -322,7 +330,8 @@ async def test_refresh_uses_stale_identity_seed_revalidates_and_replaces_atomica
         <= (context_report["identity_seed_age_hours"])
         <= (after_refresh - observed_at).total_seconds() / 3600
     )
-    assert len(provider.requested_store_ids) == 48
+    assert len(provider.requested_store_ids) == 148
+    assert provider.limits == [100] * 48 + [50] * 100  # Primat's free plan: rows a day
     assert set(provider.requested_store_ids) == {("ica:1088004",)}
     assert provider.max_active_searches == 1
     assert provider.closed is True
@@ -510,7 +519,7 @@ async def test_product_parse_failure_retains_stage_context_and_closes_provider(
     database = _database(tmp_path / "registry.sqlite")
     provider = _FakeProvider(_resolution())
 
-    async def failing(query, stores):
+    async def failing(query, stores, limit=100):
         raise ValueError("invalid product field") from TypeError("private underlying " + str(database))
 
     provider.search_products = failing
