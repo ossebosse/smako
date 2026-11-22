@@ -1,3 +1,15 @@
+# 2026-11-22 kväll: Fler Primat-sökningar för ICA (scheduler)
+
+Main `7ec9a6767a22`. Scheduler **source-ops-7ec9a6767a22**
+(`sha256:192cf3ae7f4a…`), app orörd (`app-d3bad43b756e-ccf6ce69`). Nattens
+Primat-uppdatering gör 48 + 100 receptsökningar (149 anrop per stad, 1,1 s
+mellanrum) inom gratisnivån, för ICA Gunnesbo, Västra Hamnen och Caroli.
+Liveprov: 13 av 15 saknade ingredienser i ägarens plan fick pris med
+förpackning. Aktiverad 21:22 UTC; config före/efter skiljer bara i image och
+BUILD_ID. [Aktiveringsjournal](releases/ica-primat-recipe-queries-20261122/ACTIVATED.md).
+
+---
+
 # 2026-11-22 kväll: Kvitton med vägda varor
 
 Main `d3bad43b756e` (fast-forward av `receipt-matching-2-20261122`). App
@@ -543,7 +555,7 @@ på `main` inte ändrar en pågående release.
   och det gemensamma driftlåset. Detta flöde installerar inte en ny server.
 - Läs aktuell [HANDOFF.md](HANDOFF.md), [OPERATIONS.md](OPERATIONS.md) och
   senaste aktiveringsrapport. Appens BUILD_ID är `app-daa6a40bd821-c51d81c5`;
-  schedulern är `source-ops-8a53beb80e43`.
+  schedulern är `source-ops-7ec9a6767a22`.
   [Uppvärmda prov och samordnad faktaläsning/GC](releases/warm-facts-gc-20261101/ACTIVATED.md)
   är senaste appaktiveringen. Sex Pythonfiler från kod `b7c8d0506e23`;
   verifierade varma jämförelser och minnesmaxima. Se journalens publika prov.
