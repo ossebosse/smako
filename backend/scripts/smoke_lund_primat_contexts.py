@@ -71,14 +71,16 @@ def _sha256(path: Path) -> str:
 
 
 def _verified_context_ids(database: Path, *, city: str) -> frozenset[str]:
-    """Read strong persisted mappings through immutable/query-only SQLite."""
+    """Read strong persisted mappings through read-only, query-only SQLite.
+
+    Not ``immutable=1``: a live database keeps freshly committed mappings in
+    its WAL, which an immutable connection would not see.
+    """
 
     resolved = database.resolve(strict=True)
-    connection = sqlite3.connect(
-        f"file:{resolved.as_posix()}?mode=ro&immutable=1",
-        uri=True,
-    )
+    connection = sqlite3.connect(f"file:{resolved.as_posix()}?mode=ro", uri=True)
     try:
+        connection.execute("PRAGMA query_only = ON")
         tables = {
             str(row[0])
             for row in connection.execute(

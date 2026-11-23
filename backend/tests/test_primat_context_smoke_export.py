@@ -295,3 +295,32 @@ async def test_smoke_script_requires_opt_in_before_provider_construction(
         await run_smoke(args)
     assert constructed is False
     assert not args.output.exists()
+
+
+def test_smoke_sees_mappings_still_in_the_live_wal(tmp_path) -> None:
+    import sqlite3
+
+    from scripts.smoke_lund_primat_contexts import _verified_context_ids
+
+    database = tmp_path / "live.sqlite"
+    writer = sqlite3.connect(database)
+    writer.execute("PRAGMA journal_mode=WAL")
+    writer.execute("PRAGMA wal_autocheckpoint=0")
+    writer.executescript(
+        """
+        CREATE TABLE physical_stores(id TEXT, city TEXT, is_active INT);
+        CREATE TABLE provider_store_identity_mappings(physical_store_id TEXT,
+            provider_context_id TEXT, provider TEXT, status TEXT, is_active INT);
+        CREATE TABLE store_context_links(physical_store_id TEXT, grocery_context_id TEXT,
+            source_provider TEXT, is_active INT);
+        INSERT INTO physical_stores VALUES('physical:ica:1', 'Malmö', 1);
+        INSERT INTO provider_store_identity_mappings
+            VALUES('physical:ica:1', 'primat:ica:1', 'primat', 'verified', 1);
+        INSERT INTO store_context_links VALUES('physical:ica:1', 'primat:ica:1', 'primat', 1);
+        """
+    )
+    writer.commit()  # committed, but left in the WAL (no checkpoint)
+    try:
+        assert _verified_context_ids(database, city="Malmö") == frozenset({"primat:ica:1"})
+    finally:
+        writer.close()
