@@ -1,3 +1,14 @@
+# 2026-11-23: Hela ICA-katalogen från Primat, 14 dygns prisålder
+
+Main `ca08017`. Scheduler **source-ops-ca08017afde0** (`sha256:7dd64e6dccd3…`),
+app samma bild med override `price-age-14d-20261123.json`. Dagligt katalogjobb
+07:37 för alla fem ICA-butiker med full katalog hos Primat (gratisnivån, en
+runda ≈ 10–14 dygn); ICA-priser tas ur katalogen när rundan är klar.
+`MAX_PRICE_AGE_HOURS=336`, `PRICE_AGE_WARNING_HOURS=240` för alla kedjor.
+Första steget 9 851 rader. [Aktiveringsjournal](releases/ica-full-catalog-20261123/ACTIVATED.md).
+
+---
+
 # 2026-11-22 kväll: Fler Primat-sökningar för ICA (scheduler)
 
 Main `7ec9a6767a22`. Scheduler **source-ops-7ec9a6767a22**
@@ -555,7 +566,7 @@ på `main` inte ändrar en pågående release.
   och det gemensamma driftlåset. Detta flöde installerar inte en ny server.
 - Läs aktuell [HANDOFF.md](HANDOFF.md), [OPERATIONS.md](OPERATIONS.md) och
   senaste aktiveringsrapport. Appens BUILD_ID är `app-daa6a40bd821-c51d81c5`;
-  schedulern är `source-ops-7ec9a6767a22`.
+  schedulern är `source-ops-ca08017afde0`.
   [Uppvärmda prov och samordnad faktaläsning/GC](releases/warm-facts-gc-20261101/ACTIVATED.md)
   är senaste appaktiveringen. Sex Pythonfiler från kod `b7c8d0506e23`;
   verifierade varma jämförelser och minnesmaxima. Se journalens publika prov.
