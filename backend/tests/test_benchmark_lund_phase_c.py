@@ -1269,3 +1269,30 @@ def test_file_state_is_stable_for_an_untouched_database(tmp_path: Path) -> None:
 
     assert before == after
     assert json.dumps(before, sort_keys=True)
+
+
+@pytest.mark.asyncio
+async def test_bounded_primat_search_passes_the_requested_limit(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    seen: list[int] = []
+
+    async def fake_search(
+        _provider: PrimatPriceProvider,
+        query: str,
+        store_ids: list[str],
+        limit: int = 100,
+    ) -> list[Store]:
+        seen.append(limit)
+        return []
+
+    monkeypatch.setenv("PRIMAT_API_KEY", "fixture-key")
+    monkeypatch.setenv("PRIMAT_BASE_URL", "https://primat.nu/api/v3")
+    monkeypatch.setattr(PrimatPriceProvider, "search_products", fake_search)
+    provider = _BoundedPrimatProvider.load(exact_contexts=frozenset(), max_requests=4)
+    try:
+        assert await provider.search_products("dill", ["ica:100"], limit=50) == []
+        assert await provider.search_products("dill", ["ica:100"]) == []
+    finally:
+        await provider.aclose()
+    assert seen == [50, 100]

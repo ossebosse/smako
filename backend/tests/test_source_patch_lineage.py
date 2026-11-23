@@ -56,6 +56,7 @@ def test_primat_refresh_release_includes_only_its_explicit_backend_files():
     paths = ['grocery_data/__main__.py', 'backend/app/providers/primat.py',
              'backend/app/services/primat_recipe_queries.py',
              'backend/app/services/production_primat_refresh.py',
+             'backend/scripts/benchmark_lund_phase_c.py',
              'backend/app/services/meal_plan_optimizer.py']
     assert module.selected_paths(paths) == paths[:1]
-    assert module.selected_paths(paths, primat_refresh=True) == paths[:4]
+    assert module.selected_paths(paths, primat_refresh=True) == paths[:5]

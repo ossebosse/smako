@@ -1623,12 +1623,13 @@ class _BoundedPrimatProvider:
                 self,
                 query: str,
                 store_ids: list[str],
+                limit: int = 100,
             ) -> list[Any]:
                 if context_bootstrap:
                     raise PriceProviderError(
                         "Primat context bootstrap permits store resolution only"
                     )
-                return await super().search_products(query, store_ids)
+                return await super().search_products(query, store_ids, limit=limit)
 
             async def get_store_products(self, store_id: str) -> list[Any]:
                 if context_bootstrap:
