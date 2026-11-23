@@ -1,3 +1,13 @@
+# 2026-11-23 kväll: Prisåldern för Primat-butiker; Mobilia och Maxi Malmö
+
+Main `17302fa`. Scheduler **source-ops-17302fa4f4ff**. Clemenstorgets två
+månader gamla Primat-priser lämnas ute (orsak till `degraded`); Mobilia och
+Maxi Malmö verifierade och korgkvalificerade (kontextprov 46/54 prissatta).
+Primat-uppdatering Lund + Malmö schemalagd 2026-11-24 01:10 efter kvotåterställning.
+[Aktiveringsjournal](releases/primat-age-and-malmo-20261123/ACTIVATED.md).
+
+---
+
 # 2026-11-23: Hela ICA-katalogen från Primat, 14 dygns prisålder
 
 Main `ca08017`. Scheduler **source-ops-ca08017afde0** (`sha256:7dd64e6dccd3…`),
@@ -566,7 +576,7 @@ på `main` inte ändrar en pågående release.
   och det gemensamma driftlåset. Detta flöde installerar inte en ny server.
 - Läs aktuell [HANDOFF.md](HANDOFF.md), [OPERATIONS.md](OPERATIONS.md) och
   senaste aktiveringsrapport. Appens BUILD_ID är `app-daa6a40bd821-c51d81c5`;
-  schedulern är `source-ops-ca08017afde0`.
+  schedulern är `source-ops-17302fa4f4ff`.
   [Uppvärmda prov och samordnad faktaläsning/GC](releases/warm-facts-gc-20261101/ACTIVATED.md)
   är senaste appaktiveringen. Sex Pythonfiler från kod `b7c8d0506e23`;
   verifierade varma jämförelser och minnesmaxima. Se journalens publika prov.
