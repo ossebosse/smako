@@ -271,9 +271,14 @@ def test_readonly_loader_excludes_offers_and_probable_but_retains_old_links(
     finally:
         connection.close()
 
-    retained = load_eligible_primat_contexts(database, now=NOW)
+    # Older than the price-age limit: no longer eligible for prices ...
+    assert load_eligible_primat_contexts(database, now=NOW) == ()
+    retained = load_eligible_primat_contexts(database, now=NOW, max_age_hours=336)
     assert [row.provider_context_id for row in retained] == ["primat:ica:1088004"]
     assert retained[0].data_age_hours == 49
+    # ... but still revalidated by the live refresh, so it can come back.
+    seeded = load_eligible_primat_contexts(database, now=NOW, allow_stale_identity_seed=True)
+    assert [row.provider_context_id for row in seeded] == ["primat:ica:1088004"]
 
 
 def test_loader_observes_committed_live_wal_without_checkpoint(tmp_path: Path) -> None:

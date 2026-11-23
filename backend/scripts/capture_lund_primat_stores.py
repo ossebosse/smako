@@ -26,7 +26,7 @@ from scripts.benchmark_lund_phase_c import _BoundedPrimatProvider, _file_state
 
 def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        description="One-request, sanitized Primat store discovery for Lund."
+        description="One-request, sanitized Primat store discovery for one city."
     )
     parser.add_argument(
         "--allow-bounded-primat-store-discovery",
@@ -35,6 +35,13 @@ def _parser() -> argparse.ArgumentParser:
     )
     parser.add_argument("--city", default="Lund")
     parser.add_argument("--postal-code", default="22350")
+    parser.add_argument(
+        "--latitude",
+        type=float,
+        help="resolve by coordinates instead (Primat resolves every postcode in a "
+        "city to its centre); give together with --longitude",
+    )
+    parser.add_argument("--longitude", type=float)
     parser.add_argument(
         "--database",
         type=Path,
@@ -56,11 +63,19 @@ def _sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
+async def _resolve(provider: Any, args: argparse.Namespace) -> Any:
+    latitude = getattr(args, "latitude", None)
+    longitude = getattr(args, "longitude", None)
+    if latitude is not None or longitude is not None:
+        return await provider.resolve_store_candidates(latitude=latitude, longitude=longitude)
+    return await provider.resolve_store_candidates(args.postal_code)
+
+
 async def _run(args: argparse.Namespace) -> dict[str, Any]:
     if not args.allow_bounded_primat_store_discovery:
         raise PermissionError("explicit bounded Primat store-discovery opt-in is required")
-    if args.city.casefold().strip() != "lund":
-        raise ValueError("this bounded milestone capture is restricted to Lund")
+    if not args.city.strip():
+        raise ValueError("a city is required")
     output = args.output.resolve()
     if output.exists():
         raise FileExistsError("Primat store discovery refuses to overwrite an existing file")
@@ -72,7 +87,7 @@ async def _run(args: argparse.Namespace) -> dict[str, Any]:
     database_before = _file_state(database) if database is not None else None
     provider = _BoundedPrimatProvider.load(max_requests=1, context_bootstrap=True)
     try:
-        resolution = await provider.resolve_store_candidates(args.postal_code)
+        resolution = await _resolve(provider, args)
         transport = provider.transport_report
         if (
             transport.get("requests") != 1
@@ -83,8 +98,8 @@ async def _run(args: argparse.Namespace) -> dict[str, Any]:
         ):
             raise RuntimeError("bounded Primat store transport contract failed")
         bundle = primat_store_discovery_bundle(resolution)
-        if bundle.city.casefold().strip() != "lund":
-            raise ValueError("Primat response locality does not prove Lund scope")
+        if bundle.city.casefold().strip() != args.city.casefold().strip():
+            raise ValueError("Primat response locality does not prove the requested city")
         written = write_closed_json(output, bundle)
     finally:
         await provider.aclose()

@@ -328,19 +328,48 @@ class PrimatPriceProvider(GroceryPriceProvider):
         except (TypeError, ValueError):
             return None
 
-    async def resolve_store_candidates(self, postal_code: str) -> PrimatStoreResolution:
+    async def resolve_store_candidates(
+        self,
+        postal_code: str | None = None,
+        *,
+        latitude: float | None = None,
+        longitude: float | None = None,
+    ) -> PrimatStoreResolution:
         """Return every public customer context from one bounded resolve call.
 
         `find_stores` retains the consumer-facing default-selection behavior.
         This supplemental method exists for bounded identity discovery and does
         not silently convert unselected contexts into optimizer stores.
+
+        Primat resolves every postcode in a city to the same central point, so
+        stores farther out are reached by coordinates instead.  Such a
+        resolution reports the postcode Primat gives the place.
         """
 
-        digits = "".join(character for character in postal_code if character.isdigit())
-        if len(digits) != 5:
-            raise ValueError("postal_code must contain exactly five digits")
-        payload = await self._request("GET", "/stores/resolve", params={"postcode": digits})
+        if (latitude is None) != (longitude is None):
+            raise ValueError("latitude and longitude must be given together")
+        if latitude is not None:
+            if postal_code is not None:
+                raise ValueError("resolve by postcode or by coordinates, not both")
+            lat, lon = float(latitude), float(longitude)  # type: ignore[arg-type]
+            if not (-90 <= lat <= 90 and -180 <= lon <= 180):
+                raise ValueError("coordinates are out of range")
+            params = {"lat": f"{lat:.6f}", "lon": f"{lon:.6f}"}
+            digits = None
+        else:
+            digits = "".join(character for character in postal_code or "" if character.isdigit())
+            if len(digits) != 5:
+                raise ValueError("postal_code must contain exactly five digits")
+            params = {"postcode": digits}
+        payload = await self._request("GET", "/stores/resolve", params=params)
         place = payload.get("place") or {}
+        if digits is None:
+            place_digits = "".join(
+                character for character in str(
+                    (place.get("postal_code") if isinstance(place, dict) else "") or ""
+                ) if character.isdigit()
+            )
+            digits = place_digits if len(place_digits) == 5 else "00000"
         rows = payload.get("stores") or []
         if not isinstance(place, dict) or not isinstance(rows, list):
             raise PriceProviderError("Primat returnerade ett oväntat butikssvarsformat")

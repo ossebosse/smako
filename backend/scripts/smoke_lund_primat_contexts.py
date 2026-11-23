@@ -39,6 +39,13 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--city", default="Lund")
     parser.add_argument("--postal-code", default="22350")
     parser.add_argument(
+        "--latitude",
+        type=float,
+        help="resolve by coordinates instead (Primat resolves every postcode in a "
+        "city to its centre); give together with --longitude",
+    )
+    parser.add_argument("--longitude", type=float)
+    parser.add_argument(
         "--database",
         type=Path,
         required=True,
@@ -109,11 +116,19 @@ def _verified_context_ids(database: Path, *, city: str) -> frozenset[str]:
         connection.close()
 
 
+async def _resolve(provider: Any, args: argparse.Namespace) -> Any:
+    latitude = getattr(args, "latitude", None)
+    longitude = getattr(args, "longitude", None)
+    if latitude is not None or longitude is not None:
+        return await provider.resolve_store_candidates(latitude=latitude, longitude=longitude)
+    return await provider.resolve_store_candidates(args.postal_code)
+
+
 async def _run(args: argparse.Namespace) -> dict[str, Any]:
     if not args.allow_bounded_primat_context_smoke:
         raise PermissionError("explicit bounded Primat context-smoke opt-in is required")
-    if args.city.casefold().strip() != "lund":
-        raise ValueError("this bounded milestone smoke is restricted to Lund")
+    if not args.city.strip():
+        raise ValueError("a city is required")
     output = args.output.resolve()
     if output.exists():
         raise FileExistsError("Primat context smoke refuses to overwrite an existing file")
@@ -135,7 +150,7 @@ async def _run(args: argparse.Namespace) -> dict[str, Any]:
 
     provider = _BoundedPrimatProvider.load(max_requests=2, context_bootstrap=False)
     try:
-        resolution = await provider.resolve_store_candidates(args.postal_code)
+        resolution = await _resolve(provider, args)
         current = primat_store_discovery_bundle(resolution)
         current_by_context = {row.provider_context_id: row for row in current.items}
         if requested - current_by_context.keys():

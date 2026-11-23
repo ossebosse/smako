@@ -242,10 +242,11 @@ def load_eligible_primat_contexts(
 ) -> tuple[EligiblePrimatContext, ...]:
     """Read active, strong, full links through read-only SQLite.
 
-    Qualified catalog observations remain usable as they age. Before a live
-    collection, callers must still revalidate the exact provider identity.
-    The legacy allow_stale_identity_seed argument remains API-compatible;
-    source ages are retained for operational diagnostics.
+    A context whose last verified catalog observation is older than
+    ``max_age_hours`` is not eligible for prices (owner decision 2026-11-23:
+    one price-age limit, 14 days in production). Before a live collection,
+    callers pass ``allow_stale_identity_seed=True`` so such a context is still
+    revalidated and returns as soon as the provider lists it in full again.
     """
 
     if not chains:
@@ -319,6 +320,8 @@ def load_eligible_primat_contexts(
                 str((evaluated_at - observed_at).total_seconds() / 3600)
             )
             if age_hours < 0:
+                continue
+            if not allow_stale_identity_seed and age_hours > Decimal(str(max_age_hours)):
                 continue
             contexts.append(
                 EligiblePrimatContext(

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import asyncio
+import dataclasses
 import json
 from collections import Counter
 from datetime import UTC, datetime, timedelta
@@ -269,7 +270,7 @@ async def test_refresh_uses_stale_identity_seed_revalidates_and_replaces_atomica
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     database = _database(tmp_path / "registry.sqlite")
-    # Older qualified observations remain available until a validated replacement.
+    # Older than the price-age limit: not eligible for prices until revalidated.
     retained = (
         load_eligible_primat_contexts(
             database,
@@ -278,7 +279,7 @@ async def test_refresh_uses_stale_identity_seed_revalidates_and_replaces_atomica
             chains=frozenset({Chain.ICA}),
         )
     )
-    assert [row.provider_context_id for row in retained] == ["primat:ica:1088004"]
+    assert retained == ()
     # The explicit refresh seam may use it solely as an identity seed.
     seeded = load_eligible_primat_contexts(
         database,
@@ -609,3 +610,138 @@ async def test_unfinished_catalog_keeps_the_searches(tmp_path, monkeypatch) -> N
     )
     assert report["surface"]["source"] == "searches"
     assert report["transport"]["requests"] == 149
+
+
+@pytest.mark.asyncio
+async def test_last_known_prices_older_than_the_limit_are_left_out(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    database = _database(tmp_path / "registry.sqlite")
+    eligible = load_eligible_primat_contexts(
+        database,
+        city="Lund",
+        now=NOW,
+        chains=frozenset({Chain.ICA, Chain.COOP}),
+        allow_stale_identity_seed=True,
+    )
+    monkeypatch.setattr(
+        "app.services.production_primat_refresh._primat_primary_contexts",
+        lambda *_args, **_kwargs: eligible,
+    )
+    provider = _FakeProvider(_resolution(drift_ica=True))
+    monkeypatch.setattr(
+        "app.services.production_primat_refresh._BoundedPrimatProvider.load",
+        lambda **_kwargs: provider,
+    )
+    old_ica = _store("ica", "1088004", name="ICA Maxi Gunnesbo")
+    old_at = datetime.now(tz=UTC) - timedelta(days=20)
+    old_ica = old_ica.model_copy(update={"source_provenance": old_ica.source_provenance.model_copy(
+        update={"source_observed_at": old_at})})
+    old_product = _product(old_ica)
+    lkg = FrozenExternalCacheBundle(
+        postal_code="22350", captured_at=old_at, stores=(old_ica,), products=(old_product,),
+    )
+    lkg_path = tmp_path / "primat-lkg.json"
+    lkg_path.write_text(lkg.model_dump_json(), encoding="utf-8")
+    output = tmp_path / "refreshed.json"
+
+    report = await collect_city_primat_cache(database, "Lund", "22350", output, 336.0, lkg_path)
+
+    assert report["status"] == "PASS"
+    assert report["context_lkg_used"] == 0 and report["context_lkg_expired"] == 1
+    assert {row["status"] for row in report["contexts"] if "status" in row} == {"lkg_expired"}
+    payload = FrozenExternalCacheBundle.model_validate_json(output.read_bytes())
+    assert {store.store_id for store in payload.stores} == {"coop:730400"}
+
+
+class _SplitResolveProvider(_FakeProvider):
+    """Primat's postcode lookup misses the Coop store; a lookup near it finds it."""
+
+    def __init__(self, resolution: PrimatStoreResolution) -> None:
+        super().__init__(resolution)
+        self.coordinate_lookups: list[tuple[float, float]] = []
+
+    async def resolve_store_candidates(self, postal_code=None, *, latitude=None, longitude=None):
+        self.requests += 1
+        self.endpoints["/stores/resolve"] += 1
+        wanted = "ica" if latitude is None else "coop"
+        if latitude is not None:
+            self.coordinate_lookups.append((latitude, longitude))
+        stores = tuple(store for store in self.resolution.stores if store.chain == wanted)
+        return dataclasses.replace(
+            self.resolution,
+            stores=stores,
+            raw_rows=len(stores),
+            selected_context_ids=frozenset(store.store_id for store in stores),
+        )
+
+
+@pytest.mark.asyncio
+async def test_a_verified_store_outside_the_postcode_lookup_is_found_by_coordinates(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    import sqlite3
+
+    database = _database(tmp_path / "registry.sqlite")
+    with sqlite3.connect(database) as connection:
+        connection.execute(
+            "UPDATE physical_stores SET latitude=55.58, longitude=13.0 "
+            "WHERE id='physical:coop:730400'"
+        )
+    eligible = load_eligible_primat_contexts(
+        database, city="Lund", now=NOW, chains=frozenset({Chain.ICA, Chain.COOP}),
+        allow_stale_identity_seed=True,
+    )
+    monkeypatch.setattr(
+        "app.services.production_primat_refresh._primat_primary_contexts",
+        lambda *_args, **_kwargs: eligible,
+    )
+    provider = _SplitResolveProvider(_resolution())
+    monkeypatch.setattr(
+        "app.services.production_primat_refresh._BoundedPrimatProvider.load",
+        lambda **_kwargs: provider,
+    )
+    report = await collect_city_primat_cache(
+        database, "Lund", "22350", tmp_path / "out.json", 48.0
+    )
+    assert report["status"] == "PASS"
+    assert provider.coordinate_lookups == [(55.58, 13.0)]
+    assert report["transport"]["endpoints"]["/stores/resolve"] == 2
+    assert report["context_failures"] == 0
+    payload = FrozenExternalCacheBundle.model_validate_json((tmp_path / "out.json").read_bytes())
+    assert {store.store_id for store in payload.stores} == {"ica:1088004", "coop:730400"}
+
+
+@pytest.mark.asyncio
+async def test_price_build_leaves_out_a_cached_store_past_the_age_limit(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    from app.services.production_price_universe_build import _load_external_cache
+
+    database = _database(tmp_path / "registry.sqlite")  # ICA link 72 h old
+    provider = _FakeProvider(_resolution())
+    monkeypatch.setattr(
+        "app.services.production_primat_refresh._BoundedPrimatProvider.load",
+        lambda **_kwargs: provider,
+    )
+    cache = tmp_path / "cache.json"
+    await collect_city_primat_cache(database, "Lund", "22350", cache, 48.0)
+    import sqlite3
+
+    with sqlite3.connect(database) as connection:  # links as activation leaves them
+        connection.execute("UPDATE store_context_links SET snapshot_id=?", (SNAPSHOT,))
+
+    # Within a 14-day limit the 72 h old ICA store is used ...
+    _loaded, chains = _load_external_cache(
+        cache, database=database, city="Lund", postal_code="22350", max_age_hours=336.0, now=NOW,
+    )
+    assert chains == frozenset({Chain.ICA})
+    # ... past a 48 h limit it is left out instead of failing on scope.
+    with pytest.raises(ValueError, match="only expired contexts"):
+        _load_external_cache(
+            cache, database=database, city="Lund", postal_code="22350", max_age_hours=48.0,
+            now=NOW,
+        )

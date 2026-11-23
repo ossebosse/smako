@@ -10,9 +10,11 @@ never returned or written.
 from __future__ import annotations
 
 import asyncio
+import dataclasses
 import hashlib
 import json
 import os
+import sqlite3
 from collections import Counter
 from datetime import UTC, datetime, timedelta
 from math import isfinite
@@ -48,6 +50,82 @@ _MAX_CONTEXTS_PER_PRODUCT_REQUEST = 15
 _BENCHMARK_LIMIT = 100
 _RECIPE_LIMIT = 50
 _SECONDS_BETWEEN_SEARCHES = 1.1
+# Primat resolves every postcode in a city to its centre; verified stores
+# farther out are reached by up to this many lookups near their coordinates.
+_MAX_EXTRA_RESOLVES = 3
+
+
+def _store_coordinates(database: Path, physical_ids: list[str]) -> dict[str, tuple[float, float]]:
+    """Registry coordinates of physical stores, read-only."""
+
+    if not physical_ids:
+        return {}
+    connection = sqlite3.connect(f"file:{database.as_posix()}?mode=ro", uri=True)
+    try:
+        connection.execute("PRAGMA query_only = ON")
+        marks = ",".join("?" for _ in physical_ids)
+        rows = connection.execute(
+            f"SELECT id, latitude, longitude FROM physical_stores WHERE id IN ({marks})",
+            physical_ids,
+        ).fetchall()
+    finally:
+        connection.close()
+    return {
+        str(row[0]): (float(row[1]), float(row[2]))
+        for row in rows
+        if row[1] is not None and row[2] is not None
+    }
+
+
+def _native_id(store: Any) -> str:
+    return str(store.store_id).split(":", 1)[-1]
+
+
+async def _resolve_city_scope(
+    provider: Any,
+    database: Path,
+    postal_code: str,
+    eligible: tuple[Any, ...],
+) -> tuple[Any, int]:
+    """One postcode lookup, plus lookups near verified stores it missed.
+
+    All lookups come from the same provider observation, so stores share one
+    snapshot id and time; the combined resolution keeps the postcode's place.
+    """
+
+    resolution = await provider.resolve_store_candidates(postal_code)
+    seen = {_native_id(store) for store in resolution.stores}
+    missing = [row for row in eligible if row.provider_store_id not in seen]
+    coordinates = _store_coordinates(database, [row.physical_store_id for row in missing])
+    extra = 0
+    stores = list(resolution.stores)
+    selected = set(resolution.selected_context_ids)
+    raw_rows = resolution.raw_rows
+    for row in missing:
+        if row.provider_store_id in seen or extra >= _MAX_EXTRA_RESOLVES:
+            continue
+        point = coordinates.get(row.physical_store_id)
+        if point is None:
+            continue
+        await asyncio.sleep(_SECONDS_BETWEEN_SEARCHES)
+        nearby = await provider.resolve_store_candidates(latitude=point[0], longitude=point[1])
+        extra += 1
+        if (nearby.place_city or "").casefold() != (resolution.place_city or "").casefold():
+            continue
+        raw_rows += nearby.raw_rows
+        selected |= set(nearby.selected_context_ids)
+        for store in nearby.stores:
+            if _native_id(store) not in seen and store.store_id not in {s.store_id for s in stores}:
+                stores.append(store)
+                seen.add(_native_id(store))
+    if not extra:
+        return resolution, 0
+    return dataclasses.replace(
+        resolution,
+        stores=tuple(stores),
+        selected_context_ids=frozenset(selected),
+        raw_rows=raw_rows,
+    ), extra
 
 
 def _ready_catalog(store_ids: list[str]) -> CatalogStore | None:
@@ -135,7 +213,9 @@ def _primat_primary_contexts(database: Path, *, city: str, max_age_hours: float)
     )
 
 
-def _safe_transport_report(report: object, *, searches: int | None = None) -> dict[str, Any]:
+def _safe_transport_report(
+    report: object, *, searches: int | None = None, resolves: int = 1
+) -> dict[str, Any]:
     """Copy only the fixed, credential-free bounded-transport counters.
 
     ``searches`` is the number of product searches made: all of them, or none
@@ -146,8 +226,8 @@ def _safe_transport_report(report: object, *, searches: int | None = None) -> di
         raise TypeError("bounded Primat transport did not expose counters")
     if searches is None:
         searches = _expected_requests() - 1
-    expected = 1 + searches
-    expected_endpoints = {"/stores/resolve": 1}
+    expected = resolves + searches
+    expected_endpoints = {"/stores/resolve": resolves}
     if searches:
         expected_endpoints["/products"] = searches
     requests = int(report.get("requests", -1))
@@ -221,8 +301,14 @@ def _merge_context_lkg(
     lkg_cache: Path,
     failed_contexts: tuple[Any, ...],
     max_age_hours: float,
+    expired: list[Any] | None = None,
 ) -> FrozenExternalCacheBundle:
-    """Merge only failed exact contexts from a fresh closed city cache."""
+    """Merge only failed exact contexts from a fresh closed city cache.
+
+    A failed context whose last known prices are older than ``max_age_hours``
+    is left out (and appended to ``expired``): its prices may no longer be
+    used, and the price-universe build stops expecting it for the same reason.
+    """
 
     try:
         lkg = FrozenExternalCacheBundle.model_validate_json(
@@ -238,12 +324,24 @@ def _merge_context_lkg(
     if {_store_context_key(store) for store in selected_stores} != required:
         raise ValueError("Primat context LKG does not cover every failed exact context")
     now = datetime.now(tz=UTC)
+    usable_stores = []
     for store in selected_stores:
         provenance = store.source_provenance
         assert provenance is not None
         age = (now - provenance.source_observed_at.astimezone(UTC)).total_seconds() / 3600
         if age < 0:
             raise ValueError("Primat context LKG observation is in the future")
+        if age > max_age_hours:
+            if expired is not None:
+                expired.extend(
+                    context for context in failed_contexts
+                    if (context.chain.value, context.provider_store_id) == _store_context_key(store)
+                )
+            continue
+        usable_stores.append(store)
+    selected_stores = tuple(usable_stores)
+    if not selected_stores:
+        return refreshed
 
     selected_store_ids = {store.store_id for store in selected_stores}
     selected_products = tuple(
@@ -329,7 +427,7 @@ async def collect_city_primat_cache(
     )
     provider = _BoundedPrimatProvider.load(
         exact_contexts=exact_contexts,
-        max_requests=1 + len(searches),
+        max_requests=1 + _MAX_EXTRA_RESOLVES + len(searches),
         context_bootstrap=False,
     )
     stage = "store_resolution"
@@ -337,7 +435,9 @@ async def collect_city_primat_cache(
     native_store_ids = []
     context_diagnostics = []
     try:
-        resolution = await provider.resolve_store_candidates(normalized_postal)
+        resolution, extra_resolves = await _resolve_city_scope(
+            provider, resolved_database, normalized_postal, eligible
+        )
         stage = "exact_context_revalidation"
         contexts = []
         failed_contexts = []
@@ -359,6 +459,7 @@ async def collect_city_primat_cache(
             contexts.append(current)
         contexts = tuple(contexts)
         failed_contexts = tuple(failed_contexts)
+        expired_contexts: list[Any] = []
         if not contexts:
             raise ValueError("current Primat resolution revalidated no exact contexts")
         native_store_ids = sorted(context.store.store_id for context in contexts)
@@ -410,7 +511,9 @@ async def collect_city_primat_cache(
             collected.extend(rows)
             zero_result_queries += not rows
 
-        transport = _safe_transport_report(provider.transport_report, searches=len(searches))
+        transport = _safe_transport_report(
+            provider.transport_report, searches=len(searches), resolves=1 + extra_resolves
+        )
         stage = "closed_product_validation"
         bundle = build_frozen_external_cache(
             resolution,
@@ -427,6 +530,7 @@ async def collect_city_primat_cache(
                 lkg_cache=lkg_cache,
                 failed_contexts=failed_contexts,
                 max_age_hours=max_age_hours,
+                expired=expired_contexts,
             )
     except Exception as exc:
         exc.refresh_diagnostic = {
@@ -479,12 +583,13 @@ async def collect_city_primat_cache(
                 "coverage": context.coverage.value,
                 "mapping_confidence": context.confidence.value,
                 "identity_seed_age_hours": float(context.data_age_hours),
-                "status": "lkg_retained",
+                "status": "lkg_expired" if context in expired_contexts else "lkg_retained",
             }
             for context in failed_contexts
         ],
         "context_failures": len(failed_contexts),
-        "context_lkg_used": len(failed_contexts),
+        "context_lkg_used": len(failed_contexts) - len(expired_contexts),
+        "context_lkg_expired": len(expired_contexts),
         "output": {
             "file": resolved_output.name,
             "bytes": int(written["bytes"]),

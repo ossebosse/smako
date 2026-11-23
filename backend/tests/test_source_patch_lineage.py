@@ -59,6 +59,9 @@ def test_primat_refresh_release_includes_only_its_explicit_backend_files():
              'backend/scripts/benchmark_lund_phase_c.py',
              'backend/app/services/primat_ica_catalog.py',
              'backend/app/services/primat_frozen_cache_collect.py',
+             'backend/app/services/production_price_universe_build.py',
+             'backend/scripts/capture_lund_primat_stores.py',
+             'backend/scripts/smoke_lund_primat_contexts.py',
              'backend/app/services/meal_plan_optimizer.py']
     assert module.selected_paths(paths) == paths[:1]
-    assert module.selected_paths(paths, primat_refresh=True) == paths[:7]
+    assert module.selected_paths(paths, primat_refresh=True) == paths[:10]

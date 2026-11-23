@@ -436,7 +436,25 @@ def _load_external_cache(
         ).basket_primary.provider
         is SourceProvider.PRIMAT
     )
+    # A context whose last verified observation is past the price-age limit
+    # is no longer eligible; its cached rows are left out rather than failing
+    # the build (owner decision 2026-11-23: one 14-day price-age limit).
+    expired = tuple(
+        row
+        for row in load_eligible_primat_contexts(
+            database,
+            city=city,
+            max_age_hours=max_age_hours,
+            now=now,
+            chains=configured_primat_chains,
+            allow_stale_identity_seed=True,
+        )
+        if row.provider_context_id not in {item.provider_context_id for item in eligible}
+        and source_strategy_for(row.chain, context_id=row.provider_context_id)
+        .basket_primary.provider is SourceProvider.PRIMAT
+    )
     matched_context_ids: set[str] = set()
+    expired_store_ids: set[str] = set()
     for store in bundle.stores:
         chain = store_chains[store.store_id]
         matches = [
@@ -445,6 +463,13 @@ def _load_external_cache(
             if row.chain is chain
             and _context_matches(store, row.provider_context_id, row.provider_store_id)
         ]
+        if not matches and any(
+            row.chain is chain
+            and _context_matches(store, row.provider_context_id, row.provider_store_id)
+            for row in expired
+        ):
+            expired_store_ids.add(store.store_id)
+            continue
         if len(matches) != 1:
             raise ValueError("external cache store lacks one exact fresh persisted context link")
         match = matches[0]
@@ -457,6 +482,19 @@ def _load_external_cache(
     if matched_context_ids != eligible_context_ids:
         raise ValueError("external cache does not equal the complete eligible context scope")
 
+    if expired_store_ids:
+        bundle = bundle.model_copy(update={
+            "stores": tuple(s for s in bundle.stores if s.store_id not in expired_store_ids),
+            "products": tuple(
+                p for p in bundle.products if p.store_id not in expired_store_ids
+            ),
+        })
+        if not bundle.stores or not bundle.products:
+            raise ValueError("external cache holds only expired contexts")
+        store_ids -= expired_store_ids
+        for store_id in expired_store_ids:
+            store_chains.pop(store_id, None)
+            store_snapshots.pop(store_id, None)
     chains = frozenset(store_chains.values())
 
     product_keys: set[tuple[str, str]] = set()
