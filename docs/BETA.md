@@ -1,3 +1,12 @@
+# 2026-11-23 kväll: Primat-varor klassas som insamlade varor
+
+Main `25cbf48`. Scheduler **source-ops-25cbf488ca83**. Primat-varor får samma
+livsmedelsklassning som Smakos egna källor; ca en tredjedel av ICA-varorna blir
+användbara i recept. Effekt efter Primat-uppdateringen 2026-11-24 01:10.
+[Aktiveringsjournal](releases/primat-classify-20261123/ACTIVATED.md).
+
+---
+
 # 2026-11-23 kväll: Prisåldern för Primat-butiker; Mobilia och Maxi Malmö
 
 Main `17302fa`. Scheduler **source-ops-17302fa4f4ff**. Clemenstorgets två
@@ -576,7 +585,7 @@ på `main` inte ändrar en pågående release.
   och det gemensamma driftlåset. Detta flöde installerar inte en ny server.
 - Läs aktuell [HANDOFF.md](HANDOFF.md), [OPERATIONS.md](OPERATIONS.md) och
   senaste aktiveringsrapport. Appens BUILD_ID är `app-daa6a40bd821-c51d81c5`;
-  schedulern är `source-ops-17302fa4f4ff`.
+  schedulern är `source-ops-25cbf488ca83`.
   [Uppvärmda prov och samordnad faktaläsning/GC](releases/warm-facts-gc-20261101/ACTIVATED.md)
   är senaste appaktiveringen. Sex Pythonfiler från kod `b7c8d0506e23`;
   verifierade varma jämförelser och minnesmaxima. Se journalens publika prov.
