@@ -27,6 +27,7 @@ from app.errors import (
 )
 from app.models import OfferKind, OfferMetadata, Product, SourceProvenance, Store
 from app.models.product import QuantityConfidence, SaleModel
+from app.services.collected_semantics import collected_semantics
 from app.services.ingredient_normalizer import _search_text, canonicalize_ingredient_name
 
 from grocery_data.app.domain.identifiers import InvalidGtinError, normalize_gtin
@@ -1643,6 +1644,17 @@ class PrimatPriceProvider(GroceryPriceProvider):
             )
         except (TypeError, ValueError):
             return None
+        # Classify like Smako's own collection, so the recipe matcher accepts
+        # Primat products on the same terms as collected ones.
+        semantics = collected_semantics(
+            name, [part for part in str(row.get("category") or "").split(" > ")]
+        )
+        product = product.model_copy(update={
+            **semantics,
+            "source_provenance": provenance.model_copy(update={
+                "semantic_confidence": str(semantics["semantic_confidence"])
+            }),
+        })
         return self.apply_price_policy([product])[0]
 
     async def search_products(self, query: str, store_ids: list[str], limit: int = 100) -> list[Product]:

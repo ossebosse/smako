@@ -36,3 +36,13 @@ def test_household_and_pet_items_are_not_food():
         assert is_nonfood(name), name
     for name in ("Mjölk", "Tonfisk i vatten", "Kycklingfilé"):
         assert not is_nonfood(name), name
+
+
+def test_no_buyable_product_points_at_stores_not_nutrition():
+    p = planner()
+    text = p._data_blocked_text(PolicyConflict(
+        "Vi hittar ingen vara att köpa för nötfärs, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        code="DATA_BLOCKED"), p.spec.meals[0])
+    assert text == ("Vi hittar inte varor till recepten i de valda butikerna (till exempel nötfärs, g). "
+                    "Välj fler butiker.")
+    assert "näring" not in text.casefold()

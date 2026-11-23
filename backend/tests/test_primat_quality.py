@@ -171,3 +171,28 @@ def test_gtin_package_identity_and_shared_search_pricing(provider):
 
 def test_entire_user_specific_row_is_excluded(provider):
     assert provider._parse_product(row() | {"eligibility": "USER_SPECIFIC"}) is None
+
+
+def test_primat_products_are_classified_like_collected_ones(provider):
+    oil = provider._parse_product(row() | {
+        "name": "Rapsolja", "brand": None, "amount": 1000, "unit": "ml", "package": "1 l",
+        "category": "Skafferi > Kryddor & smaksättare > Olja > Matolja", "prices": {"regular": 33.86},
+    })
+    assert oil.canonical_food == "cooking_oil"
+    assert oil.semantic_confidence == "high"
+    assert oil.source_provenance.semantic_confidence == "high"
+    chicken = provider._parse_product(row() | {
+        "name": "Kycklingfilé Fryst", "brand": None, "amount": 1000, "unit": "g", "package": "1 kg",
+        "category": "Kött, Chark & Fågel > Fågel", "prices": {"regular": 99.0},
+    })
+    assert (chicken.canonical_food, chicken.product_role) == ("chicken", "generic_meat")
+    pet = provider._parse_product(row() | {
+        "name": "Kattmat mousse tonfisk", "brand": None, "amount": 85, "unit": "g", "package": "85 g",
+        "category": "Djur > Katt", "prices": {"regular": 7.9},
+    })
+    assert pet.semantic_confidence == "rejected"
+    snack = provider._parse_product(row() | {
+        "name": "Chips Dill", "brand": None, "amount": 90, "unit": "g", "package": "90 g",
+        "category": "Glass, Godis & Snacks > Chips", "prices": {"regular": 14.31},
+    })
+    assert snack.semantic_confidence == "low" and snack.canonical_food is None

@@ -75,6 +75,7 @@ PRIMAT_REFRESH_FILES = frozenset({
     'backend/app/services/production_price_universe_build.py',
     'backend/scripts/capture_lund_primat_stores.py',
     'backend/scripts/smoke_lund_primat_contexts.py',
+    'backend/app/services/collected_semantics.py',
 })
 COOP_APP_BASE_REFS = {
     'grocery_data/app/connectors/coop/online_catalog_parser.py': '50d1a87bf513640fbb1e07256c6c037f304e8252',

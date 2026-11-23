@@ -841,6 +841,24 @@ def _canonical_food(source: SourceProduct) -> tuple[str | None, Confidence]:
     return None, Confidence.UNKNOWN
 
 
+class _NamedProduct:
+    __slots__ = ("name", "category_path")
+
+    def __init__(self, name: str, category_path: tuple[str, ...]) -> None:
+        self.name = name
+        self.category_path = category_path
+
+
+def food_identity(name: str, category_path: tuple[str, ...] = ()) -> tuple[str | None, Confidence]:
+    """The recipe food identity Smako's collection assigns from name and category.
+
+    The same rules classify every source, so products that reach Smako by
+    another route (Primat) can be classified exactly like collected ones.
+    """
+
+    return _canonical_food(_NamedProduct(name, tuple(category_path)))  # type: ignore[arg-type]
+
+
 def _price_unit(value: str | None) -> str | None:
     normalized = (value or "").casefold().strip().replace(" ", "")
     return {

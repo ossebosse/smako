@@ -3492,6 +3492,13 @@ class PersonalPlanner:
         if stage == "organic":
             return ("Vi vet inte för tillräckligt många varor om de är ekologiska eller innehåller animalier. "
                     "Ta bort kravet på ekologiska animalier.")
+        if stage == "product_qualification" or text.startswith("Vi hittar ingen vara att köpa för"):
+            # No recipe found its ingredients in the chosen stores; this is not
+            # a nutrition problem, so do not send the person to Näringsvärden.
+            example = text.split(". ")[0].removeprefix("Vi hittar ingen vara att köpa för ").strip()
+            detail = f" (till exempel {example})" if example and example != text else ""
+            return ("Vi hittar inte varor till recepten i de valda butikerna" + detail + ". "
+                    "Välj fler butiker.")
         return ("Vi saknar näringsuppgifter för att kunna kontrollera dina näringsgränser. "
                 "Ta bort eller vidga gränserna under Näringsvärden.")
 
