@@ -659,3 +659,51 @@ def test_mapping_cli_replays_offline_and_persists_strong_mapping(
             assert rows[0].status == ProviderStoreMappingStatus.VERIFIED.value
     finally:
         check.dispose()
+
+
+def test_remapping_keeps_a_smoke_proven_basket_link(storage) -> None:  # type: ignore[no-untyped-def]
+    smoke_at = NOW + timedelta(minutes=10)
+    with session_scope(storage) as session:
+        physical = PhysicalStoreRepository(session).upsert(
+            _physical(Chain.COOP, "3813", "Coop Mårtenstorget", "Mårtenstorget 11", "22351",
+                      aliases=("106430",))
+        )
+        bundle = _bundle(_candidate(Chain.COOP, "coop:106430", "106430", "Provider label"))
+        service = ProviderStoreIdentityMappingService(session)
+        service.reconcile(bundle, city="Lund", persist=True)
+        ProviderContextSmokeActivationService(session).activate(
+            _smoke_bundle(context_id="primat:coop:106430", provider_store_id="106430",
+                          chain=Chain.COOP, observed_at=smoke_at),
+            city="Lund", persist=True,
+        )
+        service.reconcile(bundle, city="Lund", persist=True)  # a later discovery
+        after = StoreContextLinkRepository(session).list_for_physical_store(physical.id)[0]
+
+    assert after.basket_eligible is True
+    assert after.snapshot_id == "primat-smoke-snapshot"
+    assert after.observed_at == smoke_at
+
+
+def test_verified_store_outside_a_later_discovery_is_left_alone(storage) -> None:  # type: ignore[no-untyped-def]
+    with session_scope(storage) as session:
+        first = PhysicalStoreRepository(session).upsert(
+            _physical(Chain.COOP, "3813", "Coop Mårtenstorget", "Mårtenstorget 11", "22351",
+                      aliases=("106430",))
+        )
+        PhysicalStoreRepository(session).upsert(
+            _physical(Chain.COOP, "3814", "Coop Annan", "Annangatan 1", "22352",
+                      aliases=("106431",))
+        )
+        service = ProviderStoreIdentityMappingService(session)
+        service.reconcile(
+            _bundle(_candidate(Chain.COOP, "coop:106430", "106430", "Provider label")),
+            city="Lund", persist=True,
+        )
+        # Another part of the city: only the second store is in this lookup.
+        service.reconcile(
+            _bundle(_candidate(Chain.COOP, "coop:106431", "106431", "Other label")),
+            city="Lund", persist=True,
+        )
+        links = StoreContextLinkRepository(session).list_for_physical_store(first.id)
+
+    assert len(links) == 1

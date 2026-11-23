@@ -736,10 +736,35 @@ class ProviderStoreIdentityMappingService:
             )
             if persist:
                 mappings.upsert(mapping)
-                if mapping.status == ProviderStoreMappingStatus.VERIFIED:
+                # A retained verified mapping whose store is outside this
+                # discovery (another part of the city) has nothing to link.
+                if (
+                    mapping.status == ProviderStoreMappingStatus.VERIFIED
+                    and match.candidate is not None
+                ):
                     candidate = match.candidate
-                    assert candidate is not None
-                    links.upsert(self._context_link(store, candidate, mapping))
+                    link = self._context_link(store, candidate, mapping)
+                    current = links.get(
+                        store.id,
+                        source_provider=SourceProvider.PRIMAT.value,
+                        grocery_context_id=candidate.provider_context_id,
+                    )
+                    if (
+                        current is not None
+                        and current.is_active
+                        and current.basket_eligible
+                        and not current.offers_only
+                        and is_complete_catalog_coverage(candidate.coverage)
+                    ):
+                        # Unchanged identity, still a full catalog: keep the
+                        # smoke-proven basket link and its price lineage.
+                        link = link.model_copy(update={
+                            "basket_eligible": True,
+                            "evidence": current.evidence,
+                            "snapshot_id": current.snapshot_id,
+                            "observed_at": current.observed_at,
+                        })
+                    links.upsert(link)
                     linked = True
             decisions.append(
                 ProviderStoreMappingDecision(
