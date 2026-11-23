@@ -59,12 +59,16 @@ FOOD_CATEGORIES = frozenset(
 
 
 def default_catalog_path() -> Path:
-    """``PRIMAT_ICA_CATALOG_DB`` or ``<data root>/primat-ica-catalog/catalog.sqlite``."""
+    """``PRIMAT_ICA_CATALOG_DB`` or ``<price universes>/primat-ica-catalog/catalog.sqlite``.
+
+    The price-universe root is a persistent mount in the scheduler; storage
+    maintenance there removes only unreferenced ``artifacts/`` blobs.
+    """
 
     configured = os.getenv("PRIMAT_ICA_CATALOG_DB", "").strip()
     if configured:
         return Path(configured)
-    return Path(os.environ["PRICE_UNIVERSE_CACHE_ROOT"]).parent / "primat-ica-catalog" / "catalog.sqlite"
+    return Path(os.environ["PRICE_UNIVERSE_CACHE_ROOT"]) / "primat-ica-catalog" / "catalog.sqlite"
 
 
 def is_food_category(category: str | None) -> bool:

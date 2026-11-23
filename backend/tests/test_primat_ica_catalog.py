@@ -249,3 +249,11 @@ def test_catalog_is_ready_only_after_a_full_round_with_package_details(tmp_path)
     _step(store, FakePrimat(catalog), max_rows=19000)
     assert catalog_ready(store, store_ids=["ica:1088004"], min_products=3)
     assert not catalog_ready(store, store_ids=["ica:1088004"], min_products=4)
+
+
+def test_catalog_lives_in_the_persistent_price_universe_root(monkeypatch, tmp_path):
+    from app.services.primat_ica_catalog import default_catalog_path
+
+    monkeypatch.delenv("PRIMAT_ICA_CATALOG_DB", raising=False)
+    monkeypatch.setenv("PRICE_UNIVERSE_CACHE_ROOT", str(tmp_path / "price_universes"))
+    assert default_catalog_path() == tmp_path / "price_universes" / "primat-ica-catalog" / "catalog.sqlite"

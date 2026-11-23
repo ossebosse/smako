@@ -48,7 +48,7 @@ nästa del av hela katalogen (`/prices` med sparad markör), inom
 `min(PRIMAT_ICA_CATALOG_MAX_ROWS, kvar idag − PRIMAT_ICA_CATALOG_RESERVE_ROWS)`.
 En hel runda tar ungefär en vecka; när den är klar tas varor bort som butiken
 inte längre har. Raderna sparas med hämtningstid i
-`<datarot>/primat-ica-catalog/catalog.sqlite`; status i
+`<PRICE_UNIVERSE_CACHE_ROOT>/primat-ica-catalog/catalog.sqlite`; status i
 `reports/operations/primat-ica-catalog.json`. Jobbet rör inte grocery-databasen,
 prisunderlagen eller planeraren.
 
