@@ -52,6 +52,18 @@ inte längre har. Raderna sparas med hämtningstid i
 `reports/operations/primat-ica-catalog.json`. Jobbet rör inte grocery-databasen,
 prisunderlagen eller planeraren.
 
+Med `PRIMAT_ICA_CATALOG_SOURCE=true` hämtar nattens Primat-steg ICA-varorna ur
+den sparade katalogen i stället för de 148 sökningarna, när en hel runda är
+klar och varje butik har minst `PRIMAT_ICA_CATALOG_MIN_PRODUCTS` (1 000)
+matvaror med förpackning. Då görs bara butiksupplösningen (1 anrop). Varje vara
+behåller sin egen hämtningstid och får vara högst prisåldersgränsen gammal;
+erbjudanden som senaste dagliga erbjudandepasset inte längre visade tas bort.
+
+Prisåldersgräns (ägarbeslut 2026-11-23): en inställning för alla kedjor,
+`MAX_PRICE_AGE_HOURS` (kodens standard 48 h; produktion 336 h = 14 dygn), och
+`PRICE_AGE_WARNING_HOURS` för när ett pris räknas som åldrande. Kampanjers
+giltighetsdatum påverkas inte.
+
 Primats verifierade register läses med SQLite `mode=ro` och `query_only`.
 En levande databas får ha sparade ändringar i WAL; `immutable=1` används
 inte här eftersom det kan dölja både nya kopplingar och återkallade godkännanden.

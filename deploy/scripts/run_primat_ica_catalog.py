@@ -18,7 +18,12 @@ from typing import Any
 
 import httpx
 
-from app.services.primat_ica_catalog import CatalogStore, QuotaExhausted, run_catalog_step
+from app.services.primat_ica_catalog import (
+    CatalogStore,
+    QuotaExhausted,
+    default_catalog_path,
+    run_catalog_step,
+)
 from grocery_data.app.services.durable_files import atomic_write_bytes
 
 _ALLOWED = {("GET", "/me"), ("GET", "/stores"), ("GET", "/prices"), ("POST", "/batch")}
@@ -29,8 +34,7 @@ def _root() -> Path:
 
 
 def catalog_path() -> Path:
-    configured = os.getenv("PRIMAT_ICA_CATALOG_DB", "").strip()
-    return Path(configured) if configured else _root() / "primat-ica-catalog" / "catalog.sqlite"
+    return default_catalog_path()
 
 
 def _cities() -> list[str]:

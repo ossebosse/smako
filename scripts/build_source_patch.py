@@ -71,6 +71,7 @@ PRIMAT_REFRESH_FILES = frozenset({
     'backend/app/services/production_primat_refresh.py',
     'backend/scripts/benchmark_lund_phase_c.py',
     'backend/app/services/primat_ica_catalog.py',
+    'backend/app/services/primat_frozen_cache_collect.py',
 })
 COOP_APP_BASE_REFS = {
     'grocery_data/app/connectors/coop/online_catalog_parser.py': '50d1a87bf513640fbb1e07256c6c037f304e8252',

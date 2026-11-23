@@ -538,3 +538,74 @@ async def test_product_parse_failure_retains_stage_context_and_closes_provider(
     assert "private underlying input" not in json.dumps(diagnostic)
     assert output.read_text() == "previous"
     assert provider.closed
+
+
+@pytest.mark.asyncio
+async def test_finished_full_catalog_replaces_the_searches(tmp_path, monkeypatch) -> None:
+    from app.services.primat_ica_catalog import CatalogStore
+
+    database = _database(tmp_path / "registry.sqlite")
+    resolution = _resolution()
+    stores = {store.store_id: store for store in resolution.stores}
+    now = datetime.now(tz=UTC)
+    catalog = CatalogStore(tmp_path / "catalog.sqlite")
+    recent, expired = now - timedelta(days=3), now - timedelta(days=20)
+    for number, fetched_at in ((1, recent), (2, expired)):
+        catalog.upsert_rows([{"chain": "ica", "store_id": "1088004", "product_id": f"p{number}",
+                              "name": f"Vara {number}", "category": "Mejeri & Ost > Mjölk",
+                              "price": 14.9}], fetched_at)
+        catalog.save_meta("ica", f"p{number}", {"amount": 1, "unit": "l"}, fetched_at)
+    catalog.put("round_completed_at", recent.isoformat())
+    catalog.commit()
+    catalog.close()
+    monkeypatch.setenv("PRIMAT_ICA_CATALOG_SOURCE", "true")
+    monkeypatch.setenv("PRIMAT_ICA_CATALOG_DB", str(tmp_path / "catalog.sqlite"))
+    monkeypatch.setenv("PRIMAT_ICA_CATALOG_MIN_PRODUCTS", "1")
+
+    provider = _FakeProvider(resolution)
+    parsed: list[dict[str, Any]] = []
+
+    def parse(row: dict[str, Any]) -> Product:
+        parsed.append(row)
+        store = stores[f"ica:{row['store_id']}"]
+        return _product(store).model_copy(update={"product_id": row["product_id"]})
+
+    provider._parse_product = parse  # type: ignore[attr-defined]
+    monkeypatch.setattr(
+        "app.services.production_primat_refresh._BoundedPrimatProvider.load",
+        lambda **_kwargs: provider,
+    )
+    output = tmp_path / "active-primat-cache.json"
+    report = await collect_city_primat_cache(database, "Lund", "22350", output, 336.0)
+
+    assert report["status"] == "PASS"
+    assert report["surface"]["source"] == "catalog"
+    assert report["surface"]["catalog_products"] == 1
+    assert report["transport"]["requests"] == 1
+    assert report["transport"]["endpoints"] == {"/stores/resolve": 1}
+    assert provider.requested_store_ids == []
+    assert [row["product_id"] for row in parsed] == ["p1"]  # p2 is past 14 days
+    payload = json.loads(output.read_text(encoding="utf-8"))
+    [product] = payload["products"]
+    observed = datetime.fromisoformat(product["source_provenance"]["source_observed_at"])
+    assert observed == recent
+
+
+@pytest.mark.asyncio
+async def test_unfinished_catalog_keeps_the_searches(tmp_path, monkeypatch) -> None:
+    from app.services.primat_ica_catalog import CatalogStore
+
+    database = _database(tmp_path / "registry.sqlite")
+    CatalogStore(tmp_path / "catalog.sqlite").close()
+    monkeypatch.setenv("PRIMAT_ICA_CATALOG_SOURCE", "true")
+    monkeypatch.setenv("PRIMAT_ICA_CATALOG_DB", str(tmp_path / "catalog.sqlite"))
+    provider = _FakeProvider(_resolution())
+    monkeypatch.setattr(
+        "app.services.production_primat_refresh._BoundedPrimatProvider.load",
+        lambda **_kwargs: provider,
+    )
+    report = await collect_city_primat_cache(
+        database, "Lund", "22350", tmp_path / "out.json", 48.0
+    )
+    assert report["surface"]["source"] == "searches"
+    assert report["transport"]["requests"] == 149

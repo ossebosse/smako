@@ -25,6 +25,7 @@ from __future__ import annotations
 
 import asyncio
 import json
+import os
 import sqlite3
 from collections.abc import Awaitable, Callable, Iterable, Sequence
 from dataclasses import dataclass, field
@@ -55,6 +56,15 @@ FOOD_CATEGORIES = frozenset(
         "Butikens egna varor",
     }
 )
+
+
+def default_catalog_path() -> Path:
+    """``PRIMAT_ICA_CATALOG_DB`` or ``<data root>/primat-ica-catalog/catalog.sqlite``."""
+
+    configured = os.getenv("PRIMAT_ICA_CATALOG_DB", "").strip()
+    if configured:
+        return Path(configured)
+    return Path(os.environ["PRICE_UNIVERSE_CACHE_ROOT"]).parent / "primat-ica-catalog" / "catalog.sqlite"
 
 
 def is_food_category(category: str | None) -> bool:
@@ -309,6 +319,8 @@ async def run_catalog_step(
         today = started.date().isoformat()
         if offers and store.get("offers_day") != today:
             cursor = store.get("offers_cursor")
+            if cursor is None:
+                store.put("offers_pass_started_at", now().isoformat())
             while remaining() >= page_rows:
                 params: dict[str, Any] = {"stores": native, "limit": page_rows, "offers": 1}
                 if cursor:
@@ -321,6 +333,9 @@ async def run_catalog_step(
                 store.put("offers_cursor", cursor)
                 if cursor is None:
                     store.put("offers_day", today)
+                    # Rows with an offer that this pass did not return have
+                    # lost it; catalog_products drops such stale offers.
+                    store.put("offers_pass_completed_from", store.get("offers_pass_started_at"))
                 store.commit()
                 if cursor is None:
                     break
@@ -415,14 +430,39 @@ def catalog_products(
         f"ORDER BY r.store_id, r.product_id",
         (*store_ids, not_before.isoformat()),
     )
+    offers_from = store.get("offers_pass_completed_from")
     merged: list[tuple[dict[str, Any], datetime]] = []
     for row_json, fetched_at, product_json in query:
         row = json.loads(row_json)
         if not is_food_category(row.get("category")):
             continue
+        if row.get("offer_price") is not None and offers_from and fetched_at < offers_from:
+            # The latest complete offer pass no longer listed this campaign.
+            for key in _OFFER_FIELDS:
+                row[key] = None
         meta = json.loads(product_json)
         merged.append((merge_row(row, meta), datetime.fromisoformat(fetched_at)))
     return merged
+
+
+_OFFER_FIELDS = ("offer_price", "offer_label", "offer_valid_until")
+
+
+def catalog_ready(store: CatalogStore, *, store_ids: Sequence[str], min_products: int) -> bool:
+    """True once a full round has finished and every store has usable food rows."""
+
+    if store.get("round_completed_at") is None:
+        return False
+    for store_id in store_ids:
+        count = store.db.execute(
+            "SELECT count(*) FROM rows r JOIN meta m ON m.chain = "
+            "substr(r.store_id, 1, instr(r.store_id, ':') - 1) AND m.product_id = r.product_id "
+            "WHERE r.store_id = ? AND m.product_json IS NOT NULL",
+            (store_id,),
+        ).fetchone()[0]
+        if count < min_products:
+            return False
+    return True
 
 
 def merge_row(row: dict[str, Any], meta: dict[str, Any]) -> dict[str, Any]:
@@ -452,6 +492,8 @@ __all__ = [
     "QuotaExhausted",
     "StepReport",
     "catalog_products",
+    "catalog_ready",
+    "default_catalog_path",
     "is_food_category",
     "merge_row",
     "run_catalog_step",

@@ -14,7 +14,7 @@ import json
 import sqlite3
 from collections.abc import Sequence
 from dataclasses import dataclass
-from datetime import UTC, datetime
+from datetime import UTC, datetime, timedelta
 from decimal import Decimal
 from math import isfinite
 from pathlib import Path
@@ -434,11 +434,25 @@ def _normalized_store(
     )
 
 
+def _observed_in_scope(
+    observed_at: datetime,
+    resolution: PrimatStoreResolution,
+    catalog_window_hours: float | None,
+) -> bool:
+    if catalog_window_hours is None:
+        return observed_at == resolution.observed_at
+    # Catalog rows keep their own fetch time; it may be at most the price-age
+    # window older than the store revalidation that attaches them.
+    oldest = resolution.observed_at - timedelta(hours=catalog_window_hours)
+    return oldest <= observed_at <= resolution.observed_at
+
+
 def _normalized_product(
     product: Product,
     *,
     context: RevalidatedPrimatContext,
     resolution: PrimatStoreResolution,
+    catalog_window_hours: float | None = None,
 ) -> Product:
     persisted = context.eligible
     provenance = product.source_provenance
@@ -450,7 +464,9 @@ def _normalized_product(
         or provenance.source_provider != "primat"
         or provenance.source_channel != "catalog"
         or provenance.source_snapshot_id != resolution.source_snapshot_id
-        or provenance.source_observed_at != resolution.observed_at
+        or not _observed_in_scope(
+            provenance.source_observed_at, resolution, catalog_window_hours
+        )
         or provenance.store_id != product.store_id
         or provenance.provider_store_id != persisted.provider_store_id
     ):
@@ -476,8 +492,14 @@ def build_frozen_external_cache(
     resolution: PrimatStoreResolution,
     contexts: Sequence[RevalidatedPrimatContext],
     products: Sequence[Product],
+    *,
+    catalog_window_hours: float | None = None,
 ) -> FrozenExternalCacheBundle:
-    """Deduplicate an exact request scope and emit the existing closed schema."""
+    """Deduplicate an exact request scope and emit the existing closed schema.
+
+    With ``catalog_window_hours`` the products come from the stored full
+    catalog and keep their own fetch times within that window.
+    """
 
     if not contexts:
         raise ValueError("frozen external cache requires at least one context")
@@ -490,7 +512,12 @@ def build_frozen_external_cache(
         context = by_native_store.get(product.store_id)
         if context is None:
             raise ValueError("Primat cache product falls outside the eligible context scope")
-        row = _normalized_product(product, context=context, resolution=resolution)
+        row = _normalized_product(
+            product,
+            context=context,
+            resolution=resolution,
+            catalog_window_hours=catalog_window_hours,
+        )
         key = (row.store_id, row.product_id)
         payload = json.dumps(
             row.model_dump(mode="json"),

@@ -12,8 +12,9 @@ from __future__ import annotations
 import asyncio
 import hashlib
 import json
+import os
 from collections import Counter
-from datetime import UTC, datetime
+from datetime import UTC, datetime, timedelta
 from math import isfinite
 from pathlib import Path
 from typing import Any
@@ -25,6 +26,12 @@ from app.services.primat_frozen_cache_collect import (
     canonical_ingredient_query_surface,
     load_eligible_primat_contexts,
     revalidate_primat_contexts,
+)
+from app.services.primat_ica_catalog import (
+    CatalogStore,
+    catalog_products,
+    catalog_ready,
+    default_catalog_path,
 )
 from app.services.primat_recipe_queries import RECIPE_QUERIES
 from app.services.primat_phase_c_export import FrozenExternalCacheBundle, write_closed_json
@@ -41,6 +48,32 @@ _MAX_CONTEXTS_PER_PRODUCT_REQUEST = 15
 _BENCHMARK_LIMIT = 100
 _RECIPE_LIMIT = 50
 _SECONDS_BETWEEN_SEARCHES = 1.1
+
+
+def _ready_catalog(store_ids: list[str]) -> CatalogStore | None:
+    """The stored full ICA catalog, when enabled and complete for these stores.
+
+    ``PRIMAT_ICA_CATALOG_SOURCE=true`` turns it on.  Until a full round has
+    finished with at least ``PRIMAT_ICA_CATALOG_MIN_PRODUCTS`` usable food rows
+    per store, the nightly searches are used as before.
+    """
+
+    if os.getenv("PRIMAT_ICA_CATALOG_SOURCE", "false").casefold() != "true":
+        return None
+    if not store_ids or any(not store_id.startswith("ica:") for store_id in store_ids):
+        return None
+    try:
+        path = default_catalog_path()
+    except KeyError:
+        return None
+    if not path.is_file():
+        return None
+    store = CatalogStore(path)
+    minimum = int(os.getenv("PRIMAT_ICA_CATALOG_MIN_PRODUCTS", "1000"))
+    if catalog_ready(store, store_ids=store_ids, min_products=minimum):
+        return store
+    store.close()
+    return None
 
 
 def production_query_items() -> tuple[tuple[CanonicalIngredientQuery, int], ...]:
@@ -102,13 +135,21 @@ def _primat_primary_contexts(database: Path, *, city: str, max_age_hours: float)
     )
 
 
-def _safe_transport_report(report: object) -> dict[str, Any]:
-    """Copy only the fixed, credential-free bounded-transport counters."""
+def _safe_transport_report(report: object, *, searches: int | None = None) -> dict[str, Any]:
+    """Copy only the fixed, credential-free bounded-transport counters.
+
+    ``searches`` is the number of product searches made: all of them, or none
+    when the stored full catalog supplied the products.
+    """
 
     if not isinstance(report, dict):
         raise TypeError("bounded Primat transport did not expose counters")
-    expected = _expected_requests()
-    searches = expected - 1
+    if searches is None:
+        searches = _expected_requests() - 1
+    expected = 1 + searches
+    expected_endpoints = {"/stores/resolve": 1}
+    if searches:
+        expected_endpoints["/products"] = searches
     requests = int(report.get("requests", -1))
     denied = int(report.get("denied_requests", -1))
     concurrency = int(report.get("max_concurrency", -1))
@@ -118,7 +159,7 @@ def _safe_transport_report(report: object) -> dict[str, Any]:
         requests != expected
         or denied != 0
         or concurrency != 1
-        or endpoints != {"/products": searches, "/stores/resolve": 1}
+        or endpoints != expected_endpoints
         or statuses != {"200": expected}
     ):
         raise RuntimeError(f"bounded {expected}-request Primat transport contract failed")
@@ -126,7 +167,7 @@ def _safe_transport_report(report: object) -> dict[str, Any]:
         "mode": "bounded_primat_live",
         "request_limit": expected,
         "requests": requests,
-        "endpoints": {"/products": searches, "/stores/resolve": 1},
+        "endpoints": expected_endpoints,
         "statuses": {"200": expected},
         "denied_requests": denied,
         "max_concurrency": concurrency,
@@ -329,6 +370,33 @@ async def collect_city_primat_cache(
 
         collected = []
         zero_result_queries = 0
+        catalog_rows = catalog_skipped = 0
+        catalog = _ready_catalog(native_store_ids)
+        source_mode = "catalog" if catalog is not None else "searches"
+        if catalog is not None:
+            stage = "catalog_products"
+            oldest = resolution.observed_at - timedelta(hours=max_age_hours)
+            try:
+                for row, fetched_at in catalog_products(
+                    catalog, store_ids=native_store_ids, not_before=oldest
+                ):
+                    try:
+                        product = provider._parse_product(row)
+                    except (TypeError, ValueError):
+                        product = None
+                    if product is None or product.source_provenance is None:
+                        catalog_skipped += 1
+                        continue
+                    observed = min(fetched_at, resolution.observed_at)
+                    collected.append(product.model_copy(update={
+                        "source_provenance": product.source_provenance.model_copy(
+                            update={"source_observed_at": observed}
+                        )
+                    }))
+                    catalog_rows += 1
+            finally:
+                catalog.close()
+            searches = []
         for index, (item, limit) in enumerate(searches):
             stage = "product_fetch_and_parse"
             query = item.query
@@ -342,9 +410,14 @@ async def collect_city_primat_cache(
             collected.extend(rows)
             zero_result_queries += not rows
 
-        transport = _safe_transport_report(provider.transport_report)
+        transport = _safe_transport_report(provider.transport_report, searches=len(searches))
         stage = "closed_product_validation"
-        bundle = build_frozen_external_cache(resolution, contexts, collected)
+        bundle = build_frozen_external_cache(
+            resolution,
+            contexts,
+            collected,
+            catalog_window_hours=max_age_hours if source_mode == "catalog" else None,
+        )
         if failed_contexts:
             if lkg_cache is None:
                 raise ValueError("failed Primat contexts require a fresh per-context LKG")
@@ -380,9 +453,12 @@ async def collect_city_primat_cache(
             "schema_version": surface.schema_version,
             "sha256": surface.sha256,
             "canonical_ingredients": len(surface.items),
-            "recipe_queries": len(searches) - len(surface.items),
+            "recipe_queries": max(0, len(searches) - len(surface.items)),
             "queries": len(searches),
             "zero_result_queries": zero_result_queries,
+            "source": source_mode,
+            "catalog_products": catalog_rows,
+            "catalog_rows_skipped": catalog_skipped,
         },
         "contexts": [
             {

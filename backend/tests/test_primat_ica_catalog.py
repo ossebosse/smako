@@ -213,3 +213,39 @@ def test_job_does_nothing_when_disabled(monkeypatch, value, capsys):
     monkeypatch.setenv("PRIMAT_ICA_CATALOG_ENABLED", value)
     assert job.main() == 0
     assert "disabled" in capsys.readouterr().out
+
+
+def test_an_offer_missing_from_the_latest_offer_pass_is_dropped(tmp_path, monkeypatch):
+    import app.services.primat_ica_catalog as module
+
+    store = CatalogStore(tmp_path / "c.sqlite")
+    day = [datetime(2026, 11, 24, 6, tzinfo=UTC)]
+    clock = lambda: day[0]  # noqa: E731
+    on_offer = [_row("1088004", 1, offer=8.0), _row("1088004", 2, offer=5.0)]
+    asyncio.run(run_catalog_step(store, FakePrimat(on_offer), cities=["Lund"], max_rows=19000,
+                                 sleep=_no_sleep, now=clock))
+    asyncio.run(run_catalog_step(store, FakePrimat(on_offer), cities=["Lund"], max_rows=19000,
+                                 sleep=_no_sleep, now=clock))  # package details
+    day[0] = datetime(2026, 11, 25, 6, tzinfo=UTC)
+    still = [_row("1088004", 1, offer=8.0), _row("1088004", 2)]
+    fake = FakePrimat(still)
+    fake.catalog = still
+    # Next day: only the offers pass runs (no budget left for the catalog).
+    asyncio.run(run_catalog_step(store, fake, cities=["Lund"], max_rows=200, reserve_rows=0,
+                                 sleep=_no_sleep, now=clock))
+    merged = {row["product_id"]: row for row, _at in catalog_products(
+        store, store_ids=["ica:1088004"], not_before=datetime(2026, 11, 1, tzinfo=UTC))}
+    assert merged["p1"]["offer_price"] == 8.0
+    assert merged["p2"]["offer_price"] is None
+
+
+def test_catalog_is_ready_only_after_a_full_round_with_package_details(tmp_path):
+    from app.services.primat_ica_catalog import catalog_ready
+
+    store = CatalogStore(tmp_path / "c.sqlite")
+    assert not catalog_ready(store, store_ids=["ica:1088004"], min_products=1)
+    catalog = [_row("1088004", i) for i in range(3)]
+    _step(store, FakePrimat(catalog), max_rows=19000)
+    _step(store, FakePrimat(catalog), max_rows=19000)
+    assert catalog_ready(store, store_ids=["ica:1088004"], min_products=3)
+    assert not catalog_ready(store, store_ids=["ica:1088004"], min_products=4)
