@@ -75,6 +75,9 @@ def _validate_display_schedule(
 def scheduled_jobs() -> tuple[tuple[str, str], ...]:
     """Backups remain scheduled even when source collection is blocked."""
     jobs = [("DAILY_BACKUP_CRON", "backup_sqlite.py")]
+    # Owner decision 2026-11-23: full ICA catalogs from Primat, a slice a day.
+    if os.getenv("PRIMAT_ICA_CATALOG_ENABLED", "false").casefold() == "true":
+        jobs.append(("PRIMAT_ICA_CATALOG_CRON", "run_primat_ica_catalog.py"))
     if os.getenv("DEMAND_REFRESH_ENABLED", "false").casefold() == "true":
         return tuple(jobs + [("DEMAND_REFRESH_CRON", "run_daily_refresh.py")])
     for setting, schedule, script in (
@@ -139,7 +142,9 @@ def main() -> None:
     )
     schedules = {"DAILY_REFRESH_CRON": refresh, "COOP_RETRY_CRON": coop_retry,
                  "DAILY_BACKUP_CRON": backup,
-                 "DEMAND_REFRESH_CRON": _schedule("DEMAND_REFRESH_CRON", "*/15 * * * *")}
+                 "DEMAND_REFRESH_CRON": _schedule("DEMAND_REFRESH_CRON", "*/15 * * * *"),
+                 # After the 03:17 collection, so its searches get their rows first.
+                 "PRIMAT_ICA_CATALOG_CRON": _schedule("PRIMAT_ICA_CATALOG_CRON", "37 07 * * *")}
     cron_file.write_text(
         "SHELL=/bin/sh\n"
         "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin\n"

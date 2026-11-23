@@ -38,6 +38,20 @@ produktkatalog. Sökningarna går med 1,1 s mellanrum (Primats gratisnivå: 60
 anrop/min, 200 rader/anrop, 20 000 rader/dygn). Butiker med enbart erbjudandekontext räknas inte
 som baspriskällor. Inga nya butikskopplingar eller källfakta fabriceras.
 
+Hela ICA-katalogen (ägarbeslut 2026-11-23): med `PRIMAT_ICA_CATALOG_ENABLED=true`
+kör schedulern `deploy/scripts/run_primat_ica_catalog.py` dagligen kl. 07:37
+(`PRIMAT_ICA_CATALOG_CRON`), efter nattens insamling. Jobbet läser kvoten
+(`/me`) och butikerna (`/stores`, räknas inte mot kvoten) och tar alla
+ICA-butiker med `tier=full` i Smakos kommuner. Därefter: dagens erbjudanden
+(`/prices?offers=1`), förpackningsstorlek en gång per matvara (`/batch`) och
+nästa del av hela katalogen (`/prices` med sparad markör), inom
+`min(PRIMAT_ICA_CATALOG_MAX_ROWS, kvar idag − PRIMAT_ICA_CATALOG_RESERVE_ROWS)`.
+En hel runda tar ungefär en vecka; när den är klar tas varor bort som butiken
+inte längre har. Raderna sparas med hämtningstid i
+`<datarot>/primat-ica-catalog/catalog.sqlite`; status i
+`reports/operations/primat-ica-catalog.json`. Jobbet rör inte grocery-databasen,
+prisunderlagen eller planeraren.
+
 Primats verifierade register läses med SQLite `mode=ro` och `query_only`.
 En levande databas får ha sparade ändringar i WAL; `immutable=1` används
 inte här eftersom det kan dölja både nya kopplingar och återkallade godkännanden.
