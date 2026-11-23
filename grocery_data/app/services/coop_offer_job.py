@@ -10,6 +10,7 @@ import json
 import os
 import sqlite3
 from datetime import UTC, datetime, timedelta
+from grocery_data.app.services.freshness import price_max_age
 from pathlib import Path
 from uuid import uuid4
 
@@ -90,7 +91,7 @@ def _source_plan(*, environment=None, now=None):
     from grocery_data.app.services.campaign_refresh_policy import STOCKHOLM
     day = now.astimezone(STOCKHOLM).date().isoformat()
     applicability = {identity: [{"sha256": r["sha256"], "snapshots": r["snapshots"],
-        "fresh": now < datetime.fromisoformat(r["observed_at"]) + timedelta(hours=48),
+        "fresh": now < datetime.fromisoformat(r["observed_at"]) + price_max_age(),
         "windows": [(w.get("valid_from"), w.get("valid_to"),
                      bool(w.get("valid_to") and (not w.get("valid_from") or w["valid_from"] <= day) and day <= w["valid_to"]))
                     for w in r.get("windows", [])]} for r in values] for identity, values in refs.items()}

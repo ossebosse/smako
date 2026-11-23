@@ -2,6 +2,7 @@
 import hashlib
 import json
 from datetime import UTC, datetime, timedelta
+from grocery_data.app.services.freshness import price_max_age
 
 from grocery_data.app.services.area_membership import approved_municipal_stores
 from grocery_data.app.services.campaign_refresh_policy import campaign_schedule
@@ -38,7 +39,7 @@ def update_selection(inventory, outcomes=None, *, previous=None, now=None):
             # checked before their unchanged 36 h warning / 48 h hard stop.
             if row.get("last_success"):
                 observed=datetime.fromisoformat(row["last_success"])
-                row["price_hard_stop_at"]=(observed+timedelta(hours=48)).isoformat()
+                row["price_hard_stop_at"]=(observed+price_max_age()).isoformat()
                 deadline=max(now,observed+timedelta(hours=35))
                 if not failed and deadline<datetime.fromisoformat(row["next_fetch_at"]):
                     row.update(next_fetch_at=deadline.isoformat(),reason="coop_35h_source_check_before_48h_stop")

@@ -1,11 +1,44 @@
 from __future__ import annotations
 
+import os
 from datetime import UTC, datetime, timedelta
 from enum import StrEnum
 from math import isfinite
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
+
+
+def price_max_age_hours() -> float:
+    """Hours after which a price may no longer be used (``MAX_PRICE_AGE_HOURS``).
+
+    One setting for every chain.  The code default stays 48 h; production sets
+    336 h (14 days, owner decision 2026-11-23) because full ICA catalogs are
+    fetched over about a week.
+    """
+
+    try:
+        value = float(os.getenv("MAX_PRICE_AGE_HOURS", "48"))
+    except ValueError:
+        value = 48.0
+    return value if isfinite(value) and value > 0 else 48.0
+
+
+def price_warning_age_hours() -> float:
+    """Hours after which a price counts as aging (``PRICE_AGE_WARNING_HOURS``)."""
+
+    limit = price_max_age_hours()
+    try:
+        value = float(os.getenv("PRICE_AGE_WARNING_HOURS", "36"))
+    except ValueError:
+        value = 36.0
+    if not isfinite(value) or not 0 < value < limit:
+        value = limit * 0.75
+    return value
+
+
+def price_max_age() -> timedelta:
+    return timedelta(hours=price_max_age_hours())
 
 
 class FreshnessState(StrEnum):
@@ -20,8 +53,8 @@ class FreshnessState(StrEnum):
 class FreshnessPolicy(BaseModel):
     model_config = ConfigDict(frozen=True, extra="forbid")
 
-    warning_age_hours: float = Field(default=36.0, gt=0)
-    stale_age_hours: float = Field(default=48.0, gt=0)
+    warning_age_hours: float = Field(default_factory=price_warning_age_hours, gt=0)
+    stale_age_hours: float = Field(default_factory=price_max_age_hours, gt=0)
 
     @model_validator(mode="after")
     def warning_precedes_stale(self) -> FreshnessPolicy:

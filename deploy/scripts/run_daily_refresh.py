@@ -18,6 +18,8 @@ import urllib.parse
 import urllib.request
 from collections.abc import Callable
 from datetime import UTC, datetime
+
+from grocery_data.app.services.freshness import price_max_age, price_max_age_hours
 from pathlib import Path
 from time import monotonic
 from typing import Any
@@ -236,7 +238,7 @@ def _restore_restart_lkg(
         )
         old = ActivePreparedUniverseManifest.model_validate_json(previous)
         observed = old.oldest_base_observed_at or old.oldest_observed_at
-        if (datetime.now(UTC) - observed).total_seconds() >= 48 * 3600:
+        if (datetime.now(UTC) - observed).total_seconds() >= price_max_age().total_seconds():
             return {"status": "not_restored", "reason": "previous_base_prices_expired",
                     "candidate_artifact_retained": True}
     store.restore_active_manifest(
@@ -540,7 +542,7 @@ def demand_refresh_plan(*, now: datetime, environment=None) -> dict:
     primat_enabled = env.get('ICA_PRIMAT_BASE_ENABLED', 'false').casefold() == 'true'
     if primat_enabled:
         from app.services.production_primat_refresh import plan_city_primat_refresh
-        primat_enabled = bool(plan_city_primat_refresh(database, city, 48)['contexts'])
+        primat_enabled = bool(plan_city_primat_refresh(database, city, price_max_age_hours())['contexts'])
     if primat_enabled or any(s['source_provenance']['source_provider'] == 'primat' for s in state['base_scope']):
         from grocery_data.app.services.closed_provider_cache_store import (
             ClosedProviderCacheArtifactStore,
@@ -582,7 +584,7 @@ def demand_refresh_plan(*, now: datetime, environment=None) -> dict:
             due = max(due, datetime.fromisoformat(retry['retry_at']))
         source.update(next_fetch_at=due.isoformat(), reason='local_relay_35h_deadline' if relay_source else 'base_35h_deadline_or_campaign_coalescing',
                       observed_at=observed.isoformat() if observed else None,
-                      hard_stop_at=(observed + timedelta(hours=48)).isoformat() if observed else None)
+                      hard_stop_at=(observed + price_max_age()).isoformat() if observed else None)
         if twice_weekly(env):
             source['reason'] = 'mon_thu_collection'
         if due <= now:

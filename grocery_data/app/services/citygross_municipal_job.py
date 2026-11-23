@@ -11,6 +11,7 @@ import os
 import sqlite3
 import sys
 from datetime import UTC, datetime, timedelta
+from grocery_data.app.services.freshness import price_max_age
 from pathlib import Path
 from uuid import uuid4
 
@@ -89,7 +90,7 @@ def update_selection(inventory, outcomes=None, *, previous=None, now=None):
             row.update(**schedule, status=result["status"], failed_attempts=count,
                        last_success=observed, last_attempt=now.isoformat())
             if observed:
-                row["price_hard_stop_at"] = (datetime.fromisoformat(observed) + timedelta(hours=48)).isoformat()
+                row["price_hard_stop_at"] = (datetime.fromisoformat(observed) + price_max_age()).isoformat()
         elif identity in old and old[identity].get("source_signature") == signature:
             row.update({k: v for k, v in old[identity].items()
                         if k not in {"selected", "due", "municipality_status"}})
@@ -112,7 +113,7 @@ def source_plan(*, environment=None, now=None):
                 if r["selected"] and config["enabled"]]
         day = now.astimezone(STOCKHOLM).date().isoformat()
         refs = {r["store_id"]: [{"sha256": ref["sha256"], "snapshots": ref["snapshots"],
-            "fresh": now < datetime.fromisoformat(ref["observed_at"]) + timedelta(hours=48),
+            "fresh": now < datetime.fromisoformat(ref["observed_at"]) + price_max_age(),
             "windows": [(w.get("valid_from"), w.get("valid_to"),
                          (not w.get("valid_from") or w["valid_from"] <= day)
                          and bool(w.get("valid_to") and day <= w["valid_to"]))
@@ -226,7 +227,7 @@ async def run_source_job(*, environment=None, now=None):
                         partial_references[identity] = [ref]
                         full_lkg = [r for r in state.get("approved", {}).get(identity, [])
                             if r.get("coverage", "full_online_catalog") == "full_online_catalog"
-                            and now < datetime.fromisoformat(r["observed_at"]) + timedelta(hours=48)]
+                            and now < datetime.fromisoformat(r["observed_at"]) + price_max_age()]
                         if identity not in changed and full_lkg:
                             row["status"] = "partial_offers_retained_full_lkg"
                         else:
@@ -270,7 +271,7 @@ def source_inputs(*, city, environment=None, now=None):
             if identity not in verified:
                 continue
             full_usable = any(r.get("coverage", "full_online_catalog") == "full_online_catalog"
-                              and now < datetime.fromisoformat(r["observed_at"]) + timedelta(hours=48)
+                              and now < datetime.fromisoformat(r["observed_at"]) + price_max_age()
                               for r in refs)
             if not full_usable and state.get("partial_approved", {}).get(identity):
                 refs = state["partial_approved"][identity]

@@ -15,6 +15,7 @@ import urllib.parse
 import urllib.request
 from contextlib import ExitStack
 from datetime import UTC, datetime, timedelta
+from grocery_data.app.services.freshness import price_max_age, price_max_age_hours, price_warning_age_hours
 from pathlib import Path
 
 from sqlalchemy.engine import make_url
@@ -359,8 +360,8 @@ def status(environment=None, *, now=None):
                 loaded = row['id'] in loaded_ids
                 published = row['id'] in manifest.get('snapshot_ids', [])
                 entry.update(snapshot_id=row['id'], observed_at=row['observed'], age_hours=round(age, 3),
-                             freshness='STALE' if age >= 48 else 'AGING' if age >= 36 else 'FRESH',
-                             remaining_hours=round(48-age, 3), qualified=True,
+                             freshness='STALE' if age >= price_max_age_hours() else 'AGING' if age >= price_warning_age_hours() else 'FRESH',
+                             remaining_hours=round(price_max_age_hours()-age, 3), qualified=True,
                              base_prices_usable=age >= -1,
                              base_price_policy='retain-until-replaced',
                              published=published, loaded=loaded, receipt='unknown_until_relay_read',
@@ -378,7 +379,7 @@ def status(environment=None, *, now=None):
                 retry_times = [now] + [datetime.fromisoformat(t) for t in (retry, state.get('retry_at')) if t]
                 # Conservative warning estimate, not a runtime guarantee or a
                 # new freshness deadline. Based on current 65-minute recovery.
-                entry['freshness_risk'] = max(retry_times) + timedelta(minutes=75) >= datetime.fromisoformat(row['observed']) + timedelta(hours=48)
+                entry['freshness_risk'] = max(retry_times) + timedelta(minutes=75) >= datetime.fromisoformat(row['observed']) + price_max_age()
                 entry['publication_overdue'] = not loaded and (now - datetime.fromisoformat(row['promoted_at'])).total_seconds() > 4500
             else:
                 entry.update(stage='unknown', qualified=False)

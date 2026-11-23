@@ -7,6 +7,7 @@ import asyncio
 import json
 import subprocess
 from datetime import UTC, datetime, timedelta
+from grocery_data.app.services.freshness import price_max_age
 from pathlib import Path
 from time import monotonic, sleep
 from types import SimpleNamespace
@@ -325,7 +326,7 @@ def run_municipalities(workspace, transport, *, scopes=None, run_scope=run, budg
             stamp = datetime.fromisoformat(observed) if observed else None
             items.append({"municipality_code": code,
                 "work_due": base_fetch_due(stamp, now=now) <= now if twice_weekly() else not stamp or now >= stamp + timedelta(hours=35),
-                "deadline": (stamp + timedelta(hours=48)).isoformat() if stamp else None})
+                "deadline": (stamp + price_max_age()).isoformat() if stamp else None})
         ordered = order_work(items, state, now=now)
         save_state(journal, state)
         for item in ordered:

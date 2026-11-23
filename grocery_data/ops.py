@@ -6,6 +6,7 @@ import asyncio
 import json
 import os
 from datetime import UTC, datetime
+from grocery_data.app.services.freshness import price_max_age
 from types import SimpleNamespace
 
 from grocery_data.app.services.operations_diagnostics import (
@@ -81,7 +82,7 @@ def repair(args):
                 raise ValueError('same_parser_cannot_repair_schema')
             proof = reproduce(database, os.environ['GROCERY_RAW_SNAPSHOT_ROOT'], incident['snapshot_id'])
             oldest = min(datetime.fromisoformat(r['fetched_at']) for r in proof['raw_references'])
-            if (datetime.now(UTC) - oldest).total_seconds() >= 48*3600:
+            if (datetime.now(UTC) - oldest).total_seconds() >= price_max_age().total_seconds():
                 raise ValueError('retained_source_expired')
         elif args.action == 'retry':
             if current['code'] not in ('SOURCE_COMMERCIAL_CONFLICT', 'SOURCE_TRANSPORT_FAILED', 'SOURCE_RATE_LIMITED', 'SOURCE_INCOMPLETE'):

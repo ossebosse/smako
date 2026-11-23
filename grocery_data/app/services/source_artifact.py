@@ -8,6 +8,7 @@ import re
 import zipfile
 from collections import defaultdict
 from datetime import UTC, datetime, timedelta
+from grocery_data.app.services.freshness import price_max_age
 from hashlib import sha256
 from io import BytesIO
 from pathlib import Path
@@ -343,7 +344,7 @@ def verify_source_artifact(path: Path, *, now: datetime | None = None) -> Verifi
     )
     if not documents or not start <= oldest <= newest <= finish <= now + timedelta(minutes=5):
         raise SourceArtifactError("invalid source observation interval")
-    if now - oldest >= timedelta(hours=48):
+    if now - oldest >= price_max_age():
         raise SourceArtifactError("source artifact is stale; import cannot refresh its age")
     if oldest != min(_aware(d.fetched_at) for d in documents) or newest != max(
         _aware(d.fetched_at) for d in documents
