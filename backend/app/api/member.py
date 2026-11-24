@@ -124,8 +124,10 @@ def _evaluate(request, owner, payload):
     prepared = GLOBAL_PREPARED_PRICE_UNIVERSES.get_for_request(response_json.get("postal_code") or "22350", {})
     known = [{"store_id": s.store_id, "name": s.name, "chain": s.chain} for s in (prepared.stores if prepared else ())]
     products = (lambda store_id: _store_products(prepared, store_id)) if prepared else None
-    return parsed, rewards.evaluate(parsed, response_json, load(), known, store_text=payload.store_text,
-                                    store_products=products)
+    rules = load()
+    return parsed, rewards.evaluate(parsed, response_json, rules, known, store_text=payload.store_text,
+                                    store_products=products,
+                                    learned_items=lambda name: rewards.learned_items(store, name, rules))
 
 
 _CATALOGUES: dict = {}
@@ -168,3 +170,20 @@ def claim(payload: ReceiptRequest, request: Request, response: Response) -> dict
         return {**rewards.save_receipt(_store(request), owner, payload.plan_id, result, load()), "result": result}
     except rewards.RewardError as exc:
         _fail(exc)
+
+
+@router.get("/store-items")
+def store_items(request: Request, response: Response, plan_id: str = Query(min_length=1, max_length=80)):
+    """Items the plan's stores carry according to members' receipts (owner decision 2026-11-24).
+
+    Temporary items are marked; they are local offers that usually end within days.
+    """
+    from app.services.planning_rules import load
+
+    owner = _member(request, response)
+    try:
+        plan = rewards.load_plan(_store(request), owner, plan_id)
+    except rewards.RewardError as exc:
+        _fail(exc)
+    ids = [s.get("store_id") for s in ((plan.get("optimized_basket") or {}).get("stores") or []) if s.get("store_id")]
+    return {"items": rewards.planner_items(_store(request), load(), ids)}

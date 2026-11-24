@@ -830,6 +830,30 @@ def admin_receipts(request: Request, response: Response) -> dict[str, Any]:
     return {"receipts": recent_receipts(_plan_store(request, _settings(request)), 30)}
 
 
+@router.get("/api/admin/store-items", dependencies=[AdminAuth])
+def admin_store_items(request: Request, response: Response) -> dict[str, Any]:
+    """Items members' receipts added to Smako's store lists (owner decision 2026-11-24)."""
+    from app.services import planning_rules
+    from app.services.member_rewards import store_items
+
+    response.headers["Cache-Control"] = "no-store"
+    settings = _settings(request)
+    return {"items": store_items(_plan_store(request, settings), planning_rules.load(settings), include_hidden=True)}
+
+
+@router.delete("/api/admin/store-items/{item_id}", dependencies=[AdminAuth])
+def admin_remove_store_item(item_id: str, request: Request, response: Response) -> dict[str, Any]:
+    """Forget an item learned from receipts, for example a misread barcode."""
+    from app.services.member_rewards import remove_store_item
+
+    settings = _settings(request)
+    _require_same_origin(request, settings)
+    response.headers["Cache-Control"] = "no-store"
+    if not remove_store_item(_plan_store(request, settings), item_id):
+        raise HTTPException(404, "Varan finns inte längre.")
+    return {"removed": item_id}
+
+
 @router.put("/api/admin/planning-rules", dependencies=[AdminAuth])
 def admin_save_planning_rules(request: Request, response: Response, body: dict[str, Any]) -> dict[str, Any]:
     """Save the rules; they apply to plans made from now on. ``{"reset": true}`` restores the defaults."""

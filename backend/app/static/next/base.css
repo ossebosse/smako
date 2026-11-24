@@ -175,3 +175,32 @@ dialog.cheaper .recipe-actions{margin-top:1rem}
 .receipt-lines{display:grid;gap:.5rem;margin:.5rem 0}.receipt-line{display:grid;grid-template-columns:1fr auto;gap:.2rem .6rem;padding:.6rem;border:1.5px solid var(--line);border-radius:10px}
 .receipt-line .tags{grid-column:1/-1;font-size:.85rem;color:var(--muted,#63736b)}.receipt-line.matched{border-color:#7fb08f}.receipt-line input{width:6rem}
 dialog.receipt-dialog{overflow:auto}.receipt-dialog video{width:100%;border-radius:8px}
+/* The receipt mouse (owner request 2026-11-24): out of Smako's hole, sniff, carry the item home. */
+.mouse-stage{grid-column:1/-1;position:relative;height:3.6rem;overflow:hidden;border-radius:8px;background:color-mix(in srgb,var(--accent) 7%,transparent)}
+.mouse-hole{position:absolute;left:.4rem;bottom:.2rem;width:3.2rem;height:1rem;border-radius:50%;background:#2d2a27;box-shadow:inset 0 3px 4px #000}
+.mouse-hole::after{content:"Smako";position:absolute;left:0;right:0;top:-1.05rem;text-align:center;font-size:.62rem;font-weight:700;letter-spacing:.04em;color:var(--accent)}
+.mouse-item{position:absolute;right:.5rem;bottom:.45rem;max-width:45%;padding:.1rem .45rem;border-radius:6px;background:var(--card);border:1.5px solid var(--line);font-size:.75rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mouse{position:absolute;left:.5rem;bottom:.55rem;width:3.4rem;transform-origin:50% 100%;opacity:0}
+.mouse svg{display:block;width:100%}
+.mouse-stage.go .mouse{animation:mouse-trip 2.4s ease-in-out forwards}
+.mouse-stage.go .mouse .nose{transform-box:fill-box;transform-origin:left center;animation:mouse-sniff .16s ease-in-out .95s 5 alternate}
+.mouse-stage.go .mouse .tail{transform-box:fill-box;transform-origin:right center;animation:mouse-tail .3s ease-in-out infinite alternate}
+.mouse-stage.go .mouse-item{animation:mouse-carry 2.4s ease-in-out forwards}
+@keyframes mouse-trip{
+  0%{opacity:0;transform:translate(0,1.3rem) scale(.55)}
+  12%{opacity:1;transform:translate(0,0) scale(1)}
+  38%{transform:translate(var(--run),0) scale(1)}
+  41%{transform:translate(var(--run),-.15rem) scale(1)}
+  44%{transform:translate(var(--run),0) scale(1)}
+  66%{transform:translate(var(--run),0) scale(-1,1)}
+  70%{transform:translate(var(--run),-.3rem) scale(-1,1)}
+  88%{opacity:1;transform:translate(0,0) scale(-1,1)}
+  100%{opacity:0;transform:translate(0,1.4rem) scale(-.45,.45)}}
+@keyframes mouse-carry{
+  0%,66%{transform:none;opacity:1}
+  70%{transform:translate(0,-.5rem) rotate(-6deg)}
+  88%{transform:translate(var(--carry),-.35rem) rotate(-4deg) scale(.85);opacity:1}
+  100%{transform:translate(var(--carry),1.4rem) scale(.3);opacity:0}}
+@keyframes mouse-sniff{to{transform:translate(1.5px,-1px) scale(1.15)}}
+@keyframes mouse-tail{to{transform:rotate(14deg)}}
+.mouse-done{grid-column:1/-1;font-size:.85rem;font-weight:600;color:var(--accent)}

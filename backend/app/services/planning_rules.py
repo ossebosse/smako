@@ -53,6 +53,11 @@ class PlanningRules(BaseModel):
     receipt_min_list_items: int = Field(default=3, ge=1, le=50)
     receipt_max_per_week: int = Field(default=5, ge=1, le=50)
     receipt_max_points: int = Field(default=100, ge=0, le=10_000)
+    # Items learned from receipts (owner decisions 2026-11-24, member_rewards.py).
+    receipt_item_temporary_days: int = Field(default=4, ge=1, le=60)
+    receipt_item_persist_days: int = Field(default=7, ge=1, le=120)
+    receipt_item_persist_points: int = Field(default=3, ge=0, le=1000)
+    receipt_item_forget_days: int = Field(default=60, ge=7, le=730)
 
     @model_validator(mode="after")
     def _counts_fit(self):

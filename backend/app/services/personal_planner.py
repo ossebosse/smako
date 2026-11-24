@@ -978,7 +978,12 @@ class PersonalPlanner:
             if generic_items is not None and (why := generic_items.reason(name, i)):
                 note(i, "recipe_match", "stopped", "generic shopping item: " + why)
                 continue
-            if product.store_id not in self.store_ids:
+            # Owner decision 2026-11-24: receipts show that a chosen store sells this barcode too.
+            from app.services import receipt_prices
+            receipt_stores = receipt_prices.store_copies(
+                ProductCandidate.from_product(product, 1), self.store_ids, self.prepared.stores, self.pricing_date
+            ) if product.gtin and receipt_prices.has_items() else []
+            if product.store_id not in self.store_ids and not receipt_stores:
                 note(i, "store_freshness", "stopped", "store/context excluded by request view or explicit allowed stores")
                 continue
             weight_terms = product.purchase_terms and product.purchase_terms.usage == 'estimated'
@@ -1123,7 +1128,20 @@ class PersonalPlanner:
                 # day supplies no price. Other verified products still qualify.
                 continue
             note(i, "price_contract", "passed", "request membership, date, source scope and purchase mode accepted")
-            candidates.append((i, candidate))
+            if candidate.store_id in self.store_ids:
+                candidates.append((i, candidate))
+            for copy in (receipt_prices.store_copies(candidate, self.store_ids, self.prepared.stores, self.pricing_date)
+                         if receipt_stores else ()):
+                try:
+                    copy = price_candidate_for_context(copy, self.user, on_date=self.pricing_date,
+                        planning_mode=self.request.purchase_planning_mode)
+                except ValueError as exc:
+                    note(i, "price_contract", "stopped", f"receipt copy for {copy.store_id}: {exc}")
+                    continue
+                # Checks on the copy read the product it was copied from (same barcode, same declaration).
+                self.by_identity.setdefault((copy.store_id, copy.product_id), i)
+                note(i, "receipt_item", "passed", f"sold in {copy.store_id} according to members' receipts")
+                candidates.append((i, copy))
         if generic_items is not None and len(candidates) > 1:
             # Same store, price, size and offers: keep the plainest names, so
             # "coca cola" is not bought as a flavoured variant at the same price.

@@ -433,7 +433,7 @@ class PlanStore:
                 "DELETE FROM planner_owned_artifacts WHERE owner_actor_hash = ?", (owner_actor_hash,)
             )
             # Owner request 2026-11-22: ratings, receipts and points go with the rest.
-            for table in ("member_recipe_ratings", "member_receipts", "member_points"):
+            for table in ("member_recipe_ratings", "member_receipts", "member_points", "member_store_item_sightings"):
                 connection.execute(f"DELETE FROM {table} WHERE owner = ?", (owner_actor_hash,))
         return result
 
