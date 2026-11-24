@@ -1,3 +1,12 @@
+# 2026-11-24 morgon: Coop Online Syd hämtas igen
+
+Main `0292f98`. Scheduler **source-ops-0292f98cfcaf**. En Coop-vara med
+säljenhet "0" kastade hela Coop-katalogen sedan 5/11; rättat, nattens
+sparade hämtning ompersad och promoverad (11 456 varor).
+[Aktiveringsjournal](releases/coop-placeholder-unit-20261124/ACTIVATED.md).
+
+---
+
 # 2026-11-23 kväll: Primat-varor klassas som insamlade varor
 
 Main `25cbf48`. Scheduler **source-ops-25cbf488ca83**. Primat-varor får samma
@@ -585,7 +594,7 @@ på `main` inte ändrar en pågående release.
   och det gemensamma driftlåset. Detta flöde installerar inte en ny server.
 - Läs aktuell [HANDOFF.md](HANDOFF.md), [OPERATIONS.md](OPERATIONS.md) och
   senaste aktiveringsrapport. Appens BUILD_ID är `app-daa6a40bd821-c51d81c5`;
-  schedulern är `source-ops-25cbf488ca83`.
+  schedulern är `source-ops-0292f98cfcaf`.
   [Uppvärmda prov och samordnad faktaläsning/GC](releases/warm-facts-gc-20261101/ACTIVATED.md)
   är senaste appaktiveringen. Sex Pythonfiler från kod `b7c8d0506e23`;
   verifierade varma jämförelser och minnesmaxima. Se journalens publika prov.
