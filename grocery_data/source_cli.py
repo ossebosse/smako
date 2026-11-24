@@ -31,6 +31,7 @@ from grocery_data.app.services.source_artifact import (
     verify_source_artifact,
 )
 from grocery_data.app.storage import create_database_engine, create_schema, create_session_factory
+from grocery_data.app.storage.database import enable_sqlite_transactions
 from grocery_data.relay_config import RelayTransport
 
 
@@ -66,11 +67,14 @@ async def collect(args):
                 raise SourceArtifactError("local candidate WAL setup failed")
             if db.execute("PRAGMA synchronous").fetchone()[0] != 2:
                 raise SourceArtifactError("durable FULL synchronization is required")
-        engine = create_database_engine("sqlite+pysqlite:///" + database.as_posix())
+        engine = enable_sqlite_transactions(
+            create_database_engine("sqlite+pysqlite:///" + database.as_posix())
+        )
         create_schema(engine)
         factory = create_session_factory(engine)
         raw = FilesystemRawSnapshotStore(run / "raw")
-        client = WillysClient(requests_per_second=1)
+        # Willys accepts size=100 (verified live); ~29% fewer requests than 30.
+        client = WillysClient(requests_per_second=1, page_size=100)
         count = 0
         request_budget = 1500
         statuses = Counter()

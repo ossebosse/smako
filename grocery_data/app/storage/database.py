@@ -70,6 +70,26 @@ def create_database_engine(
     return engine
 
 
+def enable_sqlite_transactions(engine: Engine) -> Engine:
+    """Make SQLite honour SQLAlchemy's outer transaction.
+
+    pysqlite does not emit BEGIN before SAVEPOINT, so ``begin_nested()`` outside
+    an explicit transaction committed (and fsynced) every savepoint on its own.
+    On Windows that cost ~0.1 s per product row. With an explicit BEGIN the
+    session_scope is one durable transaction again; FULL synchronous is kept.
+    """
+
+    @event.listens_for(engine, "connect")
+    def _driver_autocommit(dbapi_connection: Any, _: Any) -> None:
+        dbapi_connection.isolation_level = None
+
+    @event.listens_for(engine, "begin")
+    def _explicit_begin(connection: Any) -> None:
+        connection.exec_driver_sql("BEGIN")
+
+    return engine
+
+
 def create_session_factory(engine: Engine) -> SessionFactory:
     return sessionmaker(bind=engine, autoflush=False, expire_on_commit=False)
 
