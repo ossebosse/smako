@@ -3846,7 +3846,10 @@ class PersonalPlanner:
             # Owner decision 2026-11-22: a dish the member liked weighs like a liked ingredient.
             liked = frozenset(self.spec.liked_recipes)
             tastes -= sum(1 for r in dinners if r.design and r.design.base_id in liked)
-        return tastes * self.rules.like_weight_kr + missing * self.rules.like_missing_kr
+        # Owner decision 2026-11-24: prefer the scaled recipe closest to the authored one.
+        scaled = sum(s.recipe.design.scale_steps or 0 for s in slots if s.recipe and s.recipe.design)
+        return (tastes * self.rules.like_weight_kr + missing * self.rules.like_missing_kr
+                + scaled * getattr(self.rules, "scaled_step_kr", 0))
 
     def _week_purchase_key(self, basket, preparations=(), slots=()):
         """Paid total plus the extra-store and taste costs (owner decisions 2026-11-15), then surplus."""

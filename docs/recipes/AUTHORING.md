@@ -75,6 +75,13 @@ den mängder på stegen som når gränserna och ligger närmast receptets mängd
 priset avgör bara mellan lika nära alternativ. Äldre recept har ingen
 skalning (minst = mest = mängden) och görs om i omgångar som nya versioner.
 
+`author` sätter `design.scaling: "reviewed_ranges"` när receptet har intervall.
+Bara sådana recept skalas; äldre flexibla familjer har intervall med en annan
+betydelse och skalas inte. När biblioteket läses får receptet upp till fyra
+skalade syskon (`<variant>-m125s100` osv., `scalable_recipes.py`): mer
+huvudråvara och/eller tillbehöret på sitt minsta. De förbereds och prövas som
+vanliga recept.
+
 ## Det verktyget standardiserar
 
 - **Identitet och köpkrav:** enhet och produktkrav tas från det befintliga

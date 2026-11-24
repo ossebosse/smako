@@ -102,6 +102,18 @@ ingrediensförteckning, så varje allergi och varje Ät inte gav ingen plan.
 - Allergier begränsar därför fortfarande planerna kraftigt tills fler
   deklarationer hämtas in, styrt av receptbibliotekets efterfrågan.
 
+## Skalade recept för näringsgränser (ägarbeslut 2026-11-24)
+
+- Recept med `design.scaling: "reviewed_ranges"` får vid inläsning upp till
+  fyra skalade syskon med egen identitet (`scalable_recipes.py`):
+  huvudråvara ×1,25 eller ×1,5 och/eller tillbehöret på granskat minimum, på
+  receptets steg. Stegtexterna är granskade för hela intervallet och ändras
+  inte. Syskonen förbereds, indexeras och prövas som vanliga recept.
+- `meal_candidates` tar bara med syskonen för en måltid med näringsgränser
+  (protein, kolhydrater, fett, energi). Utan gränser är planen oförändrad.
+- Veckans rangordning lägger på `scaled_step_kr` (2 kr) per steg från
+  receptets mängd, så det närmaste receptet som klarar gränserna vinner.
+
 ## Näring som går snabbt och alltid syns (steg 3, 2026-11-15)
 
 - **Delad näringsevidens.** `PersonalPlanner.nutrition_evidence` läser per

@@ -160,6 +160,7 @@ def test_reviewed_ranges_become_the_library_quantity_grid():
     oil = lines["rapsolja"]
     assert oil["quantity_min"] == oil["quantity_max"] == oil["quantity"]  # other roles stay fixed
     assert report[0]["scalable"] == ["kyckling|raw_edible", "potatis|raw_edible"] and report[0]["warnings"] == []
+    assert pack["recipes"][0]["design"]["scaling"] == "reviewed_ranges"
 
 
 @pytest.mark.parametrize("name, change, message", [

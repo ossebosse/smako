@@ -156,7 +156,9 @@ def current_recipes(generation=None):
         version = tuple(map(int, recipe.design.version.split(".")))
         if previous is None or version > tuple(map(int, previous.design.version.split("."))):
             current[key] = recipe
-    return tuple(current.values())
+    # Owner decision 2026-11-24: scaled siblings of recipes with reviewed ranges.
+    from app.services.scalable_recipes import with_scaled_versions
+    return tuple(with_scaled_versions(current.values()))
 
 
 def reset_library_caches():
@@ -181,6 +183,10 @@ def current_recipe_generations(generation=None):
             key = identity(recipe)
             if key in current:
                 result.setdefault(key, number)
+            from app.services.scalable_recipes import scaled_versions
+            for sibling in scaled_versions(recipe):
+                if identity(sibling) in current:
+                    result.setdefault(identity(sibling), number)
     return result
 
 
@@ -210,6 +216,8 @@ def _registered_history() -> tuple[Recipe, ...]:
     from app.services.meal_library_content import load_entries, manifest_entries
     result = list(load_entries(manifest_entries()["current"]))
     result.extend(load_entries(manifest_entries()["history"]))
+    from app.services.scalable_recipes import with_scaled_versions
+    result = with_scaled_versions(result)
     from app.services.meal_prepared_artifacts import prepare_content
     prepare_content(result)
     return tuple(result)
@@ -499,8 +507,13 @@ def prepared_recipe_lookup(servings):
     return _prepared_recipe_lookup(library_version(), servings)
 
 
-def candidates(preferences: RecipePreferences, servings: int = 2, *, include_supplement: bool = True) -> list[Recipe]:
-    """Return complete allowed candidates; nutrition targets are qualified downstream."""
+def candidates(preferences: RecipePreferences, servings: int = 2, *, include_supplement: bool = True,
+               include_scaled: bool = False) -> list[Recipe]:
+    """Return complete allowed candidates; nutrition targets are qualified downstream.
+
+    Scaled siblings (scalable_recipes.py) only come with ``include_scaled``: a
+    meal with nutrition limits.
+    """
     from app.services.diet_policy import recipe_contains_fish
 
     if preferences.mode != "complete":
@@ -515,7 +528,8 @@ def candidates(preferences: RecipePreferences, servings: int = 2, *, include_sup
             and preferences.min_ingredients <= r.design.ingredient_count <= preferences.max_ingredients
             and (preferences.max_minutes is None or r.design.estimated_minutes <= preferences.max_minutes)
             and (preferences.allow_fish or not recipe_contains_fish(r))
-            and (preferences.adaptation == "approved" or r.design.variant_id == "base")]
+            and (include_scaled or not r.design.scaled_from)
+            and (preferences.adaptation == "approved" or (r.design.scaled_from or r.design.variant_id) == "base")]
 
 
 def matches_meal(recipe, meal, preferences):
@@ -526,7 +540,7 @@ def matches_meal(recipe, meal, preferences):
     d, choices = recipe.design, meal.recipe_choices
     if not d or meal.meal_type not in d.meal_types:
         return False
-    if preferences.adaptation == "products" and d.variant_id != "base":
+    if preferences.adaptation == "products" and (d.scaled_from or d.variant_id) != "base":
         return False
     if choices is None:
         if meal.meal_type == "dinner":
@@ -550,8 +564,11 @@ def matches_meal(recipe, meal, preferences):
 
 
 def meal_candidates(meal, preferences, *, include_supplement=True, generation=None):
+    from app.services.scalable_recipes import nutrition_limited
+    scaled_allowed = nutrition_limited(meal)
     if meal.meal_type == "dinner" and meal.recipe_choices is None and generation is None:
-        return candidates(preferences, meal.servings, include_supplement=include_supplement)
+        return candidates(preferences, meal.servings, include_supplement=include_supplement,
+                          include_scaled=scaled_allowed)
     result = []
     # Filter unscaled metadata by meal type first. Irrelevant categories never
     # trigger quantity scaling, product matching or basket construction.
@@ -559,6 +576,8 @@ def meal_candidates(meal, preferences, *, include_supplement=True, generation=No
         if meal.meal_type not in recipe.design.meal_types or not supports_servings(recipe, meal.servings):
             continue
         if not include_supplement and recipe.design.content_source is not None:
+            continue
+        if recipe.design.scaled_from and not scaled_allowed:
             continue
         scaled = _scaled(recipe,meal.servings)
         if matches_meal(scaled,meal,preferences):

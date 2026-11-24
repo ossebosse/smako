@@ -124,6 +124,12 @@ class RecipeDesign(BaseModel):
         default=None, min_length=1, exclude_if=lambda v: v is None)
     servings_multiple: int | None = Field(default=None, ge=1, le=12, exclude_if=lambda v: v is None)
     batch_scaling: RecipeBatchScaling | None = Field(default=None, exclude_if=lambda v: v is None)
+    # Owner decision 2026-11-24 (scalable_recipes.py): a scaled sibling names the
+    # reviewed variant it was scaled from and how many grid steps away it is.
+    # Only ranges reviewed for scaling count; older flexible families use ranges otherwise.
+    scaling: Literal["reviewed_ranges"] | None = Field(default=None, exclude_if=lambda v: v is None)
+    scaled_from: str | None = Field(default=None, pattern=r"^[a-z0-9-]+$", exclude_if=lambda v: v is None)
+    scale_steps: int | None = Field(default=None, ge=1, le=1000, exclude_if=lambda v: v is None)
 
 
 class RecipePreparation(BaseModel):

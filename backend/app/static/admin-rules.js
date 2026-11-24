@@ -17,6 +17,7 @@
     ["extra_store_min_saving_kr", "En butik till måste spara minst", "kr", "Annars handlar planen i färre butiker.", 0, 200],
     ["like_weight_kr", "Gillar och ogillar väger", "kr per rätt", "En rätt med något personen gillar får kosta så här mycket mer, och en med något den ogillar så här mycket mindre.", 0, 200],
     ["like_missing_kr", "En gillad råvara som saknas kostar", "kr", "Gör att varje gillad råvara kommer med när det går. 0 stänger av regeln.", 0, 100000],
+    ["scaled_step_kr", "Anpassad mängd kostar", "kr per steg", "När en måltid har näringsgränser kan Smako ta mer av huvudråvaran eller mindre tillbehör i recept med granskade intervall. Varje steg från receptets mängd kostar så här mycket, så den närmaste mängden vinner.", 0, 200],
   ];
   const VARIATION = [
     ["variation_percent", "Slumpvariation", "% av en middags kostnad", "Hur mycket dyrare en vecka får bli för att nya planer ska skilja sig åt. 0 stänger av.", 0, 50],

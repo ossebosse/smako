@@ -43,6 +43,9 @@ class PlanningRules(BaseModel):
     extra_store_min_saving_kr: int = Field(default=10, ge=0, le=200)
     like_weight_kr: int = Field(default=15, ge=0, le=200)
     like_missing_kr: int = Field(default=1000, ge=0, le=100_000)
+    # Owner decision 2026-11-24: a scaled recipe costs this much per grid step away
+    # from the authored amounts, so the closest one that meets the limits wins.
+    scaled_step_kr: int = Field(default=2, ge=0, le=200)
     # Variation of new plans.
     variation_percent: int = Field(default=10, ge=0, le=50)
     member_avoid_recent_plans: int = Field(default=2, ge=0, le=10)
