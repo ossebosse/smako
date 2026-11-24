@@ -1,3 +1,14 @@
+# 2026-11-24 kväll: Varor och butikspriser från kvitton
+
+Main `bff1442`, releasegren `release/receipt-items-20261124`. App
+**app-1032ff8a39be-31d9e0ed**, bas `d3bad43b756e`. Skannade kvittovaror och
+butikspriser används i planeringen direkt (tillfälliga tills två medlemmar
+bekräftat); streckkod krävs för poäng på osäkra/saknade rader; musen.
+Appens 14-dygnsprisålder ligger nu i `/opt/smako/compose`.
+[Aktiveringsjournal](releases/receipt-store-items-20261124/ACTIVATED.md).
+
+---
+
 # 2026-11-24: Willys-reläet turas om mellan Lund och Malmö
 
 Main `5aaad70`. Malmö Willys har inte levererats sedan 2026-11-05: reläet på
@@ -664,10 +675,10 @@ git status --short
 .venv/Scripts/python.exe -X utf8 scripts/smako_ops.py status
 
 # Använd den granskade Git-bas som motsvarar faktiskt aktiva filer enligt senaste journalen.
-.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit d3bad43b756e --commit main --workdir .local/beta-release
+.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit 1032ff8a39be --commit main --workdir .local/beta-release
 ```
 
-`d3bad43b756e` är appen som aktiverades 2026-11-22 19:24 UTC. Appbildens egen
+`1032ff8a39be` (grenen `release/receipt-items-20261124`, `d3bad43b756e` + kvittovaror) är appen som aktiverades 2026-11-24 16:35 UTC. Appbildens egen
 grocery-kopia är äldre än Git; använd `--keep-app-grocery` om intervallet
 bara innehåller grocery-Python som redan levererats till schedulern. De äldre
 Coop-filerna i runtime (`price_universe_runtime.py`,

@@ -1,3 +1,13 @@
+# 2026-11-24: Varor och butikspriser från kvitton
+
+Aktiverat i beta (app `app-1032ff8a39be-31d9e0ed`), se
+[journalen](releases/receipt-store-items-20261124/ACTIVATED.md). Nästa
+appsläpp från main använder `--from-commit 1032ff8a39be`. Kvar: okända
+streckkoder i morgonens prisbygge; ett helt planprov där en butikskopia går
+genom kassan; schedulerns overrides saknas i `/opt/smako/compose`.
+
+---
+
 # 2026-11-02: Användartexter utan systemspråk (/personal)
 
 Ägaren bad om att göra synliga texter mindre AI-lika. Branch
