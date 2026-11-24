@@ -654,6 +654,12 @@ class PreparedPriceUniverse:
             stale_age_hours=stale_age_hours,
         )
         identity = self._freshness_cache_identity(usable, stale)
+        # Prices and items learned from receipts (receipt_prices.py) change plans at once.
+        from app.services.receipt_prices import version as receipt_version
+
+        learned = receipt_version()
+        if learned:
+            identity += f":receipts-{learned}"
         # Catalog products also carry promotions. A new retail day must never
         # reuse yesterday's discounted menu merely because contexts are equal.
         return identity + ":" + (now or datetime.now(UTC)).astimezone(STOCKHOLM).date().isoformat()

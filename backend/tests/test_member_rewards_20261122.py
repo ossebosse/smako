@@ -87,21 +87,37 @@ def test_items_need_not_be_on_the_list_and_score_by_smako_prices():
     assert by["ÄGG 18P UTE"]["price_differs"] and by["ÄGG 18P UTE"]["points"] == 2
     assert by["BAKPULVER EKO"]["smako_product"] == "Bakpulver Eko"  # never the eggs because of "eko"
     for name in ("MINUTFILÉ", "VISPGRÄDDE 40%", "SMÅBLADSMIX EKO"):
-        assert by[name]["missing_in_smako"] and by[name]["points"] == 5
+        # Owner decision 2026-11-24: a missing item counts once its barcode is scanned.
+        assert by[name]["missing_in_smako"] and by[name]["needs_barcode"] and by[name]["points"] == 0
+    assert result["points"] == 10 + 2
+    scanned = {**HEMKOP, "lines": [{**l, "gtin": f"735000000000{i}"} if l["description"] in ("MINUTFILÉ", "VISPGRÄDDE 40%",
+                                                                                           "SMÅBLADSMIX EKO") else l
+                                   for i, l in enumerate(HEMKOP["lines"])]}
+    result = rewards.evaluate(scanned, basket(), PlanningRules(), KNOWN, store_products=lambda _: CATALOGUE)
+    by = {l["description"]: l for l in result["lines"]}
+    for name in ("MINUTFILÉ", "VISPGRÄDDE 40%", "SMÅBLADSMIX EKO"):
+        assert by[name]["missing_in_smako"] and by[name]["new_item"] and by[name]["points"] == 5
     assert result["points"] == 10 + 2 + 3 * 5
 
 
-def test_a_store_missing_from_smako_gives_extra_points_for_every_item():
+def test_a_store_missing_from_smako_gives_extra_points_for_every_scanned_item():
     result = rewards.evaluate(rewards.parse_receipt(OCR_TEXT), basket(), PlanningRules(), KNOWN)
     assert not result["store_known"] and result["qualifies"]
-    assert all(l["missing_in_smako"] and l["points"] == 5 for l in result["lines"])
+    assert all(l["missing_in_smako"] and l["needs_barcode"] and l["points"] == 0 for l in result["lines"])
+    assert result["points"] == 10
+    parsed = rewards.parse_receipt(OCR_TEXT)
+    parsed["lines"] = [{**l, "gtin": f"7350000000{i:03d}"} for i, l in enumerate(parsed["lines"])]
+    result = rewards.evaluate(parsed, basket(), PlanningRules(), KNOWN)
+    assert all(l["points"] == 5 and not l["new_item"] for l in result["lines"])  # no Smako store to add them to
     assert result["points"] == min(100, 10 + 5 * len(result["lines"]))
     assert {l["item"] for l in result["lines"] if l["item"]} >= {"Bröd Varsågod Skivad", "Tonfisk i vatten"}
 
 
 def test_points_have_a_ceiling_and_too_few_lines_give_none():
     rules = PlanningRules(receipt_max_points=20)
-    assert rewards.evaluate(rewards.parse_receipt(OCR_TEXT), basket(), rules, [])["points"] == 20
+    scanned = rewards.parse_receipt(OCR_TEXT)
+    scanned["lines"] = [{**l, "gtin": f"7350000000{i:03d}"} for i, l in enumerate(scanned["lines"])]
+    assert rewards.evaluate(scanned, basket(), rules, [])["points"] == 20
     parsed = {"store_text": "Pressbyrån", "lines": [{"description": "Kaffe", "price": 30.0}], "purchased_on": None}
     result = rewards.evaluate(parsed, basket(), PlanningRules(), [])
     assert not result["qualifies"] and result["points"] == 0
@@ -171,7 +187,7 @@ def test_a_receipt_gives_points_once(app):
     client = browser(app, "c@example.test")
     own_plan(app, client)
     preview = client.post("/api/member/receipts/preview", json={"plan_id": "plan-1", "text": OCR_TEXT}).json()
-    assert preview["qualifies"] and preview["points"] > 10
+    assert preview["qualifies"] and preview["points"] == 10 and preview["needs_barcode"]
     lines = [{k: l[k] for k in ("description", "price") } for l in preview["lines"]]
     body = {"plan_id": "plan-1", "store_text": preview["store_text"], "purchased_on": preview["purchased_on"], "lines": lines}
     done = client.post("/api/member/receipts", json=body)
@@ -243,7 +259,7 @@ def test_club_prices_multibuys_and_sizes_are_smakos_prices_too():
     # "2 för 28" that Smako does not know: a real other price.
     assert by["LÄTT CREM FR BEA 10%"]["price_differs"] and by["LÄTT CREM FR BEA 10%"]["planned_price"] == 18.82
     # Fresh blackberries are not the drink; zucchini is not kale.
-    assert by["BJÖRNBÄR 125G"]["missing_in_smako"] and by["BJÖRNBÄR 125G"]["points"] == 5
+    assert by["BJÖRNBÄR 125G"]["missing_in_smako"] and by["BJÖRNBÄR 125G"]["needs_barcode"]
     assert by["ZUCCHINI GRÖN"]["smako_product"] == "Zucchini Klass 1" and not by["ZUCCHINI GRÖN"]["missing_in_smako"]
 
 

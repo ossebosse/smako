@@ -20,6 +20,24 @@ the items need not be on the shopping list):
   * receipt_missing_points per line Smako has no product for at that store,
     or every line of a store without Smako prices,
   at most receipt_max_points per receipt.
+
+Owner decisions 2026-11-24 (items Smako learns from receipts):
+  * A line Smako marks unsure or missing gives points only after the member
+    scans its barcode. The barcode is the item's identity.
+  * A scanned item the store's Smako list lacks is accepted into that store's
+    list as a temporary item (a short local offer) for
+    receipt_item_temporary_days after it was last bought.
+  * It becomes a persistent item when two different members have bought it
+    at least receipt_item_persist_days apart; that receipt gets
+    receipt_item_persist_points extra. Items not bought for
+    receipt_item_forget_days are forgotten, and an item Smako's own price
+    collection finds for the store is Smako's product again.
+  * Owner correction 2026-11-24: a local discount is often on a product Smako
+    already has, at another price than the online one. A scanned line whose
+    barcode is Smako's product at another price teaches Smako the store's
+    price the same way: temporary first, the store's own price once two
+    members have paid it at least receipt_item_persist_days apart.
+  * The planner may use these items and prices, marked as temporary when they are.
 """
 
 from __future__ import annotations
@@ -30,6 +48,7 @@ import re
 import secrets
 import unicodedata
 from datetime import UTC, date, datetime, timedelta
+from zoneinfo import ZoneInfo
 
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS member_recipe_ratings (
@@ -62,6 +81,37 @@ CREATE TABLE IF NOT EXISTS member_points (
     receipt_id TEXT
 );
 CREATE INDEX IF NOT EXISTS ix_member_points_owner ON member_points(owner, created_at);
+CREATE TABLE IF NOT EXISTS member_store_items (
+    id TEXT PRIMARY KEY,
+    store_key TEXT NOT NULL,
+    store_ids TEXT NOT NULL,
+    chain TEXT,
+    gtin TEXT NOT NULL,
+    kind TEXT NOT NULL DEFAULT 'new' CHECK (kind IN ('new', 'price')),
+    name TEXT NOT NULL,
+    smako_product TEXT,
+    smako_price REAL,
+    price REAL NOT NULL,
+    unit TEXT,
+    unit_price REAL,
+    first_seen TEXT NOT NULL,
+    last_seen TEXT NOT NULL,
+    persistent_since TEXT,
+    UNIQUE (store_key, gtin)
+);
+CREATE TABLE IF NOT EXISTS member_store_item_sightings (
+    item_id TEXT NOT NULL,
+    receipt_id TEXT NOT NULL,
+    owner TEXT NOT NULL,
+    seen_on TEXT NOT NULL,
+    price REAL NOT NULL,
+    PRIMARY KEY (item_id, receipt_id)
+);
+CREATE INDEX IF NOT EXISTS ix_member_store_item_sightings_owner ON member_store_item_sightings(owner);
+CREATE TABLE IF NOT EXISTS member_store_items_version (
+    id INTEGER PRIMARY KEY CHECK (id = 1),
+    version INTEGER NOT NULL
+);
 """
 
 BASE_ID = re.compile(r"^[A-Za-z0-9][A-Za-z0-9:._-]{0,159}$")
@@ -460,7 +510,7 @@ def _price_differs(line, product):
     return abs(paid - closest) >= max(0.5, 0.01 * closest), round(closest, 2)
 
 
-def evaluate(parsed, response, rules, known_stores, *, store_text=None, store_products=None):
+def evaluate(parsed, response, rules, known_stores, *, store_text=None, store_products=None, learned_items=None):
     """Owner decision 2026-11-22 (second): any bought item counts, on the list or not.
 
     Each readable line of a receipt from a store without Smako prices, and each
@@ -474,9 +524,12 @@ def evaluate(parsed, response, rules, known_stores, *, store_text=None, store_pr
     store_id, store_name, known = find_store(store_text, chain, known_stores)
     catalogue = store_products(store_id) if known and store_products else None
     used, lines = set(), []
+    memory = learned_items(store_name) if known and learned_items else {}
     for line in parsed["lines"][:80]:
         out = {**line, "item": None, "smako_product": None, "planned_price": None, "price_differs": False,
-               "missing_in_smako": False, "unsure": False, "points": 0}
+               "missing_in_smako": False, "unsure": False, "points": 0,
+               "needs_barcode": False, "new_item": False, "local_price": False, "learned_item": None,
+               "learned_state": None}
         best = None
         for row in rows:
             if row["key"] in used:
@@ -488,13 +541,22 @@ def evaluate(parsed, response, rules, known_stores, *, store_text=None, store_pr
         if best:
             used.add(best[1]["key"])
             out["item"] = best[1]["product"] or best[1]["ingredient"]
+        gtin = line.get("gtin")
         if not known:
             out["missing_in_smako"] = True
         elif catalogue is not None:
             product, confidence = catalogue.find(line)
+            if gtin and confidence != "exact" and product is not None and (product.get("gtin") or confidence != "sure"):
+                # The barcode names another product than the receipt text suggested.
+                product, confidence = None, None
             if product is None:
                 out["missing_in_smako"] = True
-            elif confidence == "unsure":
+                learned = memory.get(gtin) if gtin else None
+                if learned and learned["state"] != "gone" and learned["kind"] == "new":
+                    out["learned_item"], out["learned_state"] = learned["name"], learned["state"]
+                elif gtin:
+                    out["new_item"] = True
+            elif confidence == "unsure" and not gtin:
                 # Not sure which product it is: no points until the barcode says.
                 out["smako_product"], out["unsure"] = product["name"], True
             else:
@@ -505,12 +567,27 @@ def evaluate(parsed, response, rules, known_stores, *, store_text=None, store_pr
                     out["unsure"] = True
                 elif compared:
                     out["price_differs"], out["planned_price"] = compared
-        out["points"] = (rules.receipt_missing_points if out["missing_in_smako"]
+                if out["price_differs"] and confidence == "exact":
+                    # Owner correction 2026-11-24: the store's own price for a product Smako has.
+                    learned = memory.get(gtin)
+                    if (learned and learned["state"] != "gone" and learned["kind"] == "price"
+                            and same_price(learned["price"], _paid(line))):
+                        out["learned_item"], out["learned_state"] = learned["name"], learned["state"]
+                    else:
+                        out["local_price"] = True
+        # Owner decision 2026-11-24: unsure and missing lines count once the barcode is scanned.
+        out["needs_barcode"] = (out["missing_in_smako"] or out["unsure"]) and not gtin
+        out["points"] = (0 if out["needs_barcode"] or out["learned_item"]
+                         else rules.receipt_missing_points if out["missing_in_smako"]
                          else rules.receipt_price_points if out["price_differs"] else 0)
         lines.append(out)
     qualifies = len(lines) >= rules.receipt_min_list_items
     points = min(rules.receipt_max_points, rules.receipt_points + sum(l["points"] for l in lines)) if qualifies else 0
     return {"store_text": store_text, "store": store_name if known else None, "store_known": known,
+            "store_ids": list(store_id or ()), "chain": chain,
+            "new_items": sum(1 for l in lines if l["new_item"]),
+            "local_prices": sum(1 for l in lines if l["local_price"]),
+            "needs_barcode": sum(1 for l in lines if l["needs_barcode"]),
             "purchased_on": parsed.get("purchased_on"), "lines": lines, "matched": sum(1 for l in lines if l["item"]),
             "list_items": len(rows), "qualifies": qualifies, "points": points, "needed": rules.receipt_min_list_items,
             "max_points": rules.receipt_max_points}
@@ -546,16 +623,180 @@ def save_receipt(store, owner, plan_id, result, rules):
         if db.execute("SELECT 1 FROM member_receipts WHERE fingerprint=?", (key,)).fetchone():
             raise RewardError("Det här kvittot har redan gett poäng.")
         lines = [{k: l.get(k) for k in ("description", "price", "quantity", "unit", "unit_price", "gtin", "item", "smako_product",
-                                         "planned_price", "price_differs", "missing_in_smako", "points")} for l in result["lines"]]
+                                         "planned_price", "price_differs", "missing_in_smako", "new_item", "local_price", "learned_item",
+                                         "points")} for l in result["lines"]]
         db.execute("INSERT INTO member_receipts VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                    (receipt_id, owner, _now(), plan_id, result["store_text"], int(result["store_known"]),
                     result["purchased_on"], key, json.dumps(lines, ensure_ascii=False), result["points"]))
         differs = sum(l["price_differs"] for l in lines)
-        missing = sum(l["missing_in_smako"] for l in lines)
+        missing = sum(l["missing_in_smako"] and bool(l["points"]) for l in lines)
         parts = ["Kvitto"] + ([f"{differs} andra priser"] if differs else []) + ([f"{missing} varor utanför Smako"] if missing else [])
         db.execute("INSERT INTO member_points (owner, created_at, points, reason, receipt_id) VALUES (?, ?, ?, ?, ?)",
                    (owner, _now(), result["points"], f"{', '.join(parts)} · {result['store_text'][:60]}", receipt_id))
-    return {"receipt_id": receipt_id, "points": result["points"], **points_summary(store, owner)}
+        added, prices, persistent = _learn_items(db, owner, receipt_id, result, rules)
+        bonus = len(persistent) * rules.receipt_item_persist_points
+        if bonus:
+            names = ", ".join(persistent[:3])
+            db.execute("INSERT INTO member_points (owner, created_at, points, reason, receipt_id) VALUES (?, ?, ?, ?, ?)",
+                       (owner, _now(), bonus, f"Bekräftade varor i Smako: {names}", receipt_id))
+    return {"receipt_id": receipt_id, "points": result["points"] + bonus, "bonus_points": bonus,
+            "new_items": added, "new_prices": prices, "persistent_items": persistent, **points_summary(store, owner)}
+
+
+# ---------------------------------------------------------------- items learned from receipts
+
+def _today():
+    return datetime.now(ZoneInfo("Europe/Stockholm")).date().isoformat()
+
+
+def same_price(a, b):
+    return abs(a - b) < max(0.5, 0.01 * a)
+
+
+def _days(a, b):
+    return (date.fromisoformat(b) - date.fromisoformat(a)).days
+
+
+def item_state(row, today, rules):
+    """temporary, dormant (hidden but remembered), persistent or gone."""
+    since = _days(row["last_seen"], today)
+    if since > rules.receipt_item_forget_days:
+        return "gone"
+    if row["persistent_since"]:
+        return "persistent"
+    return "temporary" if since <= rules.receipt_item_temporary_days else "dormant"
+
+
+def _learn_items(db, owner, receipt_id, result, rules):
+    """Record scanned items and store prices the store's Smako list lacks (owner decisions 2026-11-24).
+
+    Returns (new items added, store prices added, items or prices that became persistent here).
+    """
+    if not result.get("store_known"):
+        return [], [], []
+    store_key, ids = result["store"], json.dumps(sorted(result.get("store_ids") or ()))
+    seen_on = result.get("purchased_on") or _today()
+    added, prices, persistent = [], [], []
+    for line in result["lines"]:
+        if line.get("missing_in_smako") and line.get("gtin"):
+            kind, name = "new", line["description"][:120]
+        elif line.get("local_price") or (line.get("learned_item") and line.get("price_differs") and line.get("gtin")):
+            kind, name = "price", (line.get("smako_product") or line["description"])[:120]
+        else:
+            continue
+        paid = _paid(line)
+        row = db.execute("SELECT * FROM member_store_items WHERE store_key=? AND gtin=?", (store_key, line["gtin"])).fetchone()
+        if row is not None and (item_state(row, seen_on, rules) == "gone" or row["kind"] != kind):
+            db.execute("DELETE FROM member_store_item_sightings WHERE item_id=?", (row["id"],))
+            db.execute("DELETE FROM member_store_items WHERE id=?", (row["id"],))
+            row = None
+        if row is None:
+            item_id = secrets.token_hex(12)
+            db.execute("""INSERT INTO member_store_items (id, store_key, store_ids, chain, gtin, kind, name, smako_product,
+                          smako_price, price, unit, unit_price, first_seen, last_seen)
+                          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+                       (item_id, store_key, ids, result.get("chain"), line["gtin"], kind, name, line.get("smako_product"),
+                        line.get("planned_price"), paid, line.get("unit"), line.get("unit_price"), seen_on, seen_on))
+            (added if kind == "new" else prices).append(name)
+        else:
+            item_id = row["id"]
+            if seen_on >= row["last_seen"]:
+                if kind == "price" and not same_price(row["price"], paid):
+                    # Another price: a new temporary price, confirmed afresh.
+                    db.execute("UPDATE member_store_items SET persistent_since=NULL WHERE id=?", (item_id,))
+                    prices.append(name)
+                db.execute("""UPDATE member_store_items SET last_seen=?, price=?, unit=?, unit_price=?, store_ids=?,
+                              smako_price=COALESCE(?, smako_price) WHERE id=?""",
+                           (seen_on, paid, line.get("unit"), line.get("unit_price"), ids, line.get("planned_price"), item_id))
+        db.execute("INSERT OR IGNORE INTO member_store_item_sightings VALUES (?, ?, ?, ?, ?)",
+                   (item_id, receipt_id, owner, seen_on, paid))
+        current = db.execute("SELECT persistent_since FROM member_store_items WHERE id=?", (item_id,)).fetchone()
+        if row is not None and not current["persistent_since"]:
+            # Two different members, at least receipt_item_persist_days apart (and the same price, for a price).
+            tolerance = max(0.5, 0.01 * paid) if kind == "price" else 1e9
+            other = db.execute("""SELECT 1 FROM member_store_item_sightings WHERE item_id=? AND owner<>?
+                                  AND ABS(julianday(seen_on) - julianday(?)) >= ? AND ABS(price - ?) < ? LIMIT 1""",
+                               (item_id, owner, seen_on, rules.receipt_item_persist_days, paid, tolerance)).fetchone()
+            if other:
+                db.execute("UPDATE member_store_items SET persistent_since=? WHERE id=?", (seen_on, item_id))
+                persistent.append(name)
+    if added or prices or persistent or any(
+            l.get("gtin") and (l.get("missing_in_smako") or l.get("local_price") or l.get("learned_item"))
+            for l in result["lines"]):
+        _bump(db)
+    return added, prices, persistent
+
+
+def _bump(db):
+    """Tell every planner process that receipts changed what Smako knows (receipt_prices.py)."""
+    db.execute("""INSERT INTO member_store_items_version (id, version) VALUES (1, 1)
+                  ON CONFLICT(id) DO UPDATE SET version = version + 1""")
+
+
+def learned_items(store, store_key, rules, today=None):
+    """The store's items learned from receipts, by barcode, with their state today."""
+    today = today or _today()
+    with store._connect() as db:
+        rows = db.execute("SELECT * FROM member_store_items WHERE store_key=?", (store_key,)).fetchall()
+    return {r["gtin"]: _item(r, today, rules) for r in rows}
+
+
+def _item(row, today, rules):
+    state = item_state(row, today, rules)
+    item = {"id": row["id"], "store": row["store_key"], "store_ids": json.loads(row["store_ids"]), "chain": row["chain"],
+            "gtin": row["gtin"], "kind": row["kind"], "name": row["name"], "smako_product": row["smako_product"],
+            "smako_price": row["smako_price"], "price": row["price"], "unit": row["unit"],
+            "unit_price": row["unit_price"], "first_seen": row["first_seen"], "last_seen": row["last_seen"],
+            "state": state, "temporary": state != "persistent"}
+    seen = _short(row["last_seen"])
+    if state == "temporary":
+        item["days_left"] = max(0, rules.receipt_item_temporary_days - _days(row["last_seen"], today))
+        item["note"] = (f"Tillfälligt pris i butiken, sett på kvitto {seen}. Brukar bara gälla några dagar."
+                        if row["kind"] == "price" else
+                        f"Tillfälligt erbjudande, sett på kvitto {seen}. Brukar försvinna inom några dagar.")
+    elif state == "persistent":
+        item["note"] = (f"Butikens pris enligt kvitton, senast {seen}." if row["kind"] == "price"
+                        else f"Finns i butiken enligt kvitton, senast {seen}.")
+    return item
+
+
+def _short(day):
+    d = date.fromisoformat(day)
+    return f"{d.day}/{d.month}"
+
+
+def store_items(store, rules, *, include_hidden=False, today=None):
+    """Items the stores carry according to receipts: what the planner and lists may show.
+
+    Temporary and persistent items are shown; dormant and gone only to the admin.
+    """
+    today = today or _today()
+    with store._connect() as db:
+        rows = db.execute("""SELECT i.*, COUNT(DISTINCT s.owner) AS members, COUNT(s.receipt_id) AS receipts
+                             FROM member_store_items i LEFT JOIN member_store_item_sightings s ON s.item_id = i.id
+                             GROUP BY i.id ORDER BY i.last_seen DESC, i.name""").fetchall()
+    items = []
+    for row in rows:
+        item = {**_item(row, today, rules), "members": row["members"], "receipts": row["receipts"]}
+        if include_hidden or item["state"] in ("temporary", "persistent"):
+            items.append(item)
+    return items
+
+
+def planner_items(store, rules, store_ids, today=None):
+    """Learned items in the given Smako store contexts, for the planner (owner decision 2026-11-24)."""
+    wanted = set(store_ids)
+    return [i for i in store_items(store, rules, today=today) if wanted & set(i["store_ids"])]
+
+
+def remove_store_item(store, item_id):
+    """Admin: forget an item learned from receipts."""
+    with store._connect() as db:
+        db.execute("DELETE FROM member_store_item_sightings WHERE item_id=?", (item_id,))
+        removed = db.execute("DELETE FROM member_store_items WHERE id=?", (item_id,)).rowcount > 0
+        if removed:
+            _bump(db)
+        return removed
 
 
 def points_summary(store, owner):

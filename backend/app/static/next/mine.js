@@ -152,7 +152,7 @@
       box.replaceChildren(el("h2", "Dina poäng"));
       if (!points.data) { box.append(el("p", points.loading ? "Hämtar poängen." : "Poängen kunde inte hämtas just nu.", "hint")); return; }
       box.append(el("strong", number(points.data.balance), "balance"),
-        el("p", "Du får poäng när du skannar kvittot, och extra poäng för varje vara som har ett annat pris än i Smako eller som saknas i Smako.", "hint"));
+        el("p", "Du får poäng när du skannar kvittot, och extra poäng för varje vara som har ett annat pris än i Smako. Saknas en vara i Smako skannar du streckkoden, så får du poäng och Smako lär sig varan.", "hint"));
       if (S.plan) box.append(button("Skanna kvitto", () => receiptDialog(fill), "btn primary"));
       if (points.data.history.length) { const list = el("ul"); for (const h of points.data.history) list.append(el("li", `${when(h.created_at)}: ${h.points > 0 ? "+" : ""}${h.points} · ${h.reason}`)); box.append(el("h4", "Senaste"), list); }
     }
@@ -186,6 +186,20 @@
         .then(s => { scanner = s; return s.start(); }).catch(() => reject(new Error("Kameran kunde inte startas. Tillåt kameran och försök igen.")));
     });
   }
+  // A small mouse comes out of Smako's hole, sniffs the accepted item and pulls
+  // it down into Smako (owner request 2026-11-24). Reduced motion: a short note.
+  const MOUSE = '<svg viewBox="0 0 64 36" aria-hidden="true"><path class="tail" d="M12 25c-6 1-9-3-11-7" fill="none" stroke="#c9a3a0" stroke-width="2" stroke-linecap="round"/><ellipse cx="28" cy="24" rx="17" ry="10" fill="#a39a92"/><circle cx="45" cy="19" r="9" fill="#b3aaa2"/><circle cx="42" cy="10" r="5.5" fill="#b3aaa2"/><circle cx="42" cy="10" r="3.2" fill="#efc2c0"/><circle cx="48" cy="17" r="1.5" fill="#2b2522"/><g class="nose"><circle cx="54" cy="21" r="2.2" fill="#e58f97"/><path d="M53 22l9-2M53 23l9 2M52 24l8 4" stroke="#6f6660" stroke-width=".8" stroke-linecap="round"/></g><path d="M20 33v2M34 33v2" stroke="#8d847d" stroke-width="2" stroke-linecap="round"/></svg>';
+  function mouseGrab(row, name) {
+    const done = () => row.querySelector(".mouse-done") || row.append(el("span", "Smako tog med varan ✓", "mouse-done"));
+    if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return done();
+    const stage = el("div", null, "mouse-stage", { "aria-hidden": "true" }), hole = el("span", null, "mouse-hole");
+    const mouse = el("span", null, "mouse"), item = el("span", name, "mouse-item");
+    mouse.innerHTML = MOUSE; stage.append(hole, item, mouse); row.append(stage);
+    const width = stage.clientWidth, run = Math.max(40, width - item.offsetWidth - mouse.offsetWidth - 24);
+    stage.style.setProperty("--run", `${run}px`); stage.style.setProperty("--carry", `${-(width - item.offsetWidth - 28)}px`);
+    stage.classList.add("go");
+    mouse.addEventListener("animationend", event => { if (event.animationName === "mouse-trip") { stage.remove(); done(); } });
+  }
   function receiptDialog(onPoints) {
     const dialog = el("dialog", null, "receipt-dialog"), body = el("div"), status = el("p", null, "hint", { role: "status" });
     const head = el("div", null, "dialog-head"); head.append(el("h2", "Skanna kvitto"), button("Stäng", () => dialog.close(), "btn small"));
@@ -214,27 +228,41 @@
       const list = el("div", null, "receipt-lines");
       result.lines.forEach((line, index) => {
         if (line.removed) return;
-        const row = el("div", null, `receipt-line${line.item ? " matched" : ""}`), price = el("input", null, null, { type: "number", step: "0.01", min: "0.01", value: String(line.price), "aria-label": `Pris för ${line.description}` });
+        const row = el("div", null, `receipt-line${line.item ? " matched" : ""}`, { "data-line": String(index) }), price = el("input", null, null, { type: "number", step: "0.01", min: "0.01", value: String(line.price), "aria-label": `Pris för ${line.description}` });
         price.addEventListener("change", () => { line.price = Number(price.value); void again(); });
-        const tags = [line.unsure ? `Osäker: är det ${line.smako_product}? Skanna streckkoden.` : line.price_differs ? `Smako: ${N.money(line.planned_price)} för ${line.smako_product}` : line.smako_product ? `Samma pris som i Smako` : null,
-          line.missing_in_smako ? (result.store_known ? "Finns inte i Smako" : "Butiken saknas i Smako") : null,
+        const tags = [line.unsure ? `Osäker: är det ${line.smako_product}? Skanna streckkoden för poäng.` : line.price_differs ? `Smako: ${N.money(line.planned_price)} för ${line.smako_product}` : line.smako_product ? `Samma pris som i Smako` : null,
+          line.missing_in_smako ? (line.learned_item ? "Finns redan i Smako tack vare ett kvitto" : line.new_item ? "Ny vara i Smako" : result.store_known ? "Finns inte i Smako" : "Butiken saknas i Smako") : null,
+          line.needs_barcode && line.missing_in_smako ? "Skanna streckkoden för poäng" : null,
+          line.local_price ? "Smako lär sig butikens pris" : line.learned_item && line.price_differs ? "Smako känner redan till priset tack vare ett kvitto" : null,
           line.item ? `på handlingslistan` : null, line.points ? `+${line.points} poäng` : null, line.gtin ? `streckkod ${line.gtin}` : null].filter(Boolean).join(" · ");
         const tools = el("div", null, "links");
         tools.append(button("Ta bort raden", () => { line.removed = true; void again(); }, "text-link"));
-        if ((line.missing_in_smako || line.unsure) && result.store_known && !line.gtin) tools.append(button("Skanna varans streckkod", () => {
+        // A price Smako does not know: the barcode lets Smako learn the store's price (owner correction 2026-11-24).
+        const teach = line.price_differs && !line.gtin;
+        if (line.needs_barcode || teach) tools.append(button(teach ? "Skanna streckkoden så lär sig Smako priset" : "Skanna varans streckkod", () => {
           const video = el("video", null, null, { playsinline: "", muted: "" }); row.append(video);
-          void busy("Håll varans streckkod framför kameran.", async () => { line.gtin = await scanBarcode(video, status); video.remove(); await again(); });
+          void busy("Håll varans streckkod framför kameran.", async () => {
+            const gtin = await scanBarcode(video, status); line.gtin = gtin; video.remove(); await again();
+            // Owner request 2026-11-24: a mouse fetches every item Smako accepts.
+            const accepted = result.lines.findIndex(l => !l.removed && l.gtin === gtin && (l.new_item || l.local_price));
+            const target = accepted >= 0 && list.querySelector(`[data-line="${accepted}"]`);
+            if (target) mouseGrab(target, result.lines[accepted].description);
+          });
         }, "text-link"));
         row.append(el("strong", line.description), price, el("span", tags, "tags"), tools); list.append(row);
       });
-      const differs = result.lines.filter(l => !l.removed && l.price_differs).length, missing = result.lines.filter(l => !l.removed && l.missing_in_smako).length;
-      const summary = result.qualifies ? `Kvittot ger ${result.points} poäng${differs || missing ? `: ${[differs ? `${differs} ${differs === 1 ? "vara" : "varor"} med annat pris än Smakos` : null, missing ? `${missing} ${missing === 1 ? "vara" : "varor"} som saknas i Smako` : null].filter(Boolean).join(" och ")}` : ""}.${result.points >= result.max_points ? " Det är högsta poängen för ett kvitto." : ""}`
+      const differs = result.lines.filter(l => !l.removed && l.price_differs).length, missing = result.lines.filter(l => !l.removed && l.missing_in_smako && l.points).length;
+      const scan = result.needs_barcode ? ` Skanna streckkoden på ${result.needs_barcode === 1 ? "varan" : `de ${result.needs_barcode} varorna`} som Smako saknar eller är osäker på, så får du poäng för ${result.needs_barcode === 1 ? "den" : "dem"} också.` : "";
+      const summary = result.qualifies ? `Kvittot ger ${result.points} poäng${differs || missing ? `: ${[differs ? `${differs} ${differs === 1 ? "vara" : "varor"} med annat pris än Smakos` : null, missing ? `${missing} ${missing === 1 ? "vara" : "varor"} som saknas i Smako` : null].filter(Boolean).join(" och ")}` : ""}.${result.points >= result.max_points ? " Det är högsta poängen för ett kvitto." : ""}${scan}`
         : `Vi kunde bara läsa ${result.lines.length} varor. Det behövs minst ${result.needed} för poäng. Fota kvittot igen.`;
-      body.replaceChildren(field, el("p", result.store_known ? `Butiken finns i Smako: ${result.store}.` : "Smako har inga priser för den här butiken. Varorna från listan ger extra poäng.", "hint"),
+      body.replaceChildren(field, el("p", result.store_known ? `Butiken finns i Smako: ${result.store}.` : "Smako har inga priser för den här butiken. Skanna streckkoden på varorna så ger de extra poäng.", "hint"),
         list, el("p", summary), button(`Ta ${result.points} poäng`, () => busy("Sparar …", async () => {
           const done = await api("/api/member/receipts", { plan_id: planId, store_text: store, purchased_on: day, lines: lines() });
           points.data = { balance: done.balance, history: done.history };
-          body.replaceChildren(el("h3", `+${done.points} poäng`), el("p", `Du har nu ${number(done.balance)} poäng. Tack för att du hjälper Smako med priserna!`), button("Klar", () => dialog.close(), "btn primary"));
+          const learnt = [done.new_items?.length ? `${done.new_items.length === 1 ? "En ny vara" : `${done.new_items.length} nya varor`} finns nu i Smako för ${result.store}.` : null,
+            done.new_prices?.length ? `Smako vet nu butikens pris på ${done.new_prices.join(", ")}.` : null,
+            done.bonus_points ? `Du bekräftade att ${done.persistent_items.join(", ")} finns kvar i butiken: +${done.bonus_points} poäng.` : null].filter(Boolean).join(" ");
+          body.replaceChildren(el("h3", `+${done.points} poäng`), el("p", `Du har nu ${number(done.balance)} poäng. Tack för att du hjälper Smako med priserna!`), ...(learnt ? [el("p", learnt)] : []), button("Klar", () => dialog.close(), "btn primary"));
           status.textContent = ""; onPoints?.(); emit();
         }), "btn primary cta", { disabled: !result.qualifies }), button("Börja om", () => { result = null; choose(); }, "btn quiet"));
     }

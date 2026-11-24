@@ -498,6 +498,10 @@ def price_candidate_for_context(
 ) -> ProductCandidate:
     """Return one request-local candidate; the input artifact row is untouched."""
 
+    # Owner decision 2026-11-24: a store price members' receipts taught Smako.
+    from app.services.receipt_prices import apply_store_price
+
+    candidate = apply_store_price(candidate, on_date or current_pricing_date())
     terms = candidate.purchase_terms
     source_quantity_confidence = candidate.quantity_confidence
     estimated_deposit = any(o.deposit and o.deposit.confidence == 'estimated' for o in candidate.offers)

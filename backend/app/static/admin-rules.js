@@ -29,6 +29,10 @@
     ["receipt_min_list_items", "Minst varor på kvittot", "varor", "Färre lästa varor ger inga poäng. Varorna behöver inte finnas på handlingslistan.", 1, 50],
     ["receipt_max_points", "Högst poäng per kvitto", "poäng", "Taket för ett kvitto.", 0, 10000],
     ["receipt_max_per_week", "Högst kvitton per vecka", "kvitton", "Per medlem, de senaste sju dagarna.", 1, 50],
+    ["receipt_item_temporary_days", "Ny vara visas i", "dagar", "En skannad vara som butikens lista saknade visas som tillfällig så länge efter att den senast köptes.", 1, 60],
+    ["receipt_item_persist_days", "Fast vara kräver", "dagar emellan", "Två olika medlemmar ska ha köpt varan med minst så många dagar emellan.", 1, 120],
+    ["receipt_item_persist_points", "Bekräftad fast vara ger", "poäng", "Till kvittot som gör varan fast.", 0, 1000],
+    ["receipt_item_forget_days", "Glöm vara efter", "dagar", "En vara som ingen köpt på så länge tas bort.", 7, 730],
   ];
   let saved = null, defaults = null, loaded = false;
 
@@ -104,8 +108,31 @@
       }));
     } catch (_) {$("rules-receipts").replaceChildren(node("p", "Kvittona kunde inte hämtas.", "sub"));}
   }
+  const STATES = {temporary: "tillfällig", persistent: "fast", dormant: "dold, väntar på nytt kvitto", gone: "glömd"};
+  async function storeItems() {
+    const box = $("rules-store-items");
+    try {
+      const response = await fetch("/api/admin/store-items", {credentials: "same-origin", cache: "no-store"});
+      const data = await response.json();
+      if (!data.items?.length) {box.replaceChildren(node("p", "Inga varor från kvitton än.", "sub")); return;}
+      const list = node("ul");
+      for (const i of data.items) {
+        const row = node("li", `${i.store}: ${i.name} · ${i.price} kr${i.kind === "price" ? ` (Smako ${i.smako_price} kr)` : " · ny vara"} · ${STATES[i.state] || i.state} · ${i.members} ${i.members === 1 ? "medlem" : "medlemmar"} · senast ${i.last_seen} · ${i.gtin} `);
+        const remove = node("button", "Ta bort");
+        remove.type = "button";
+        remove.addEventListener("click", async () => {
+          remove.disabled = true;
+          const done = await fetch(`/api/admin/store-items/${encodeURIComponent(i.id)}`, {method: "DELETE", credentials: "same-origin"});
+          if (done.ok) row.remove(); else {remove.disabled = false; remove.textContent = "Gick inte, försök igen";}
+        });
+        row.append(remove); list.append(row);
+      }
+      box.replaceChildren(list);
+    } catch (_) {box.replaceChildren(node("p", "Varorna kunde inte hämtas.", "sub"));}
+  }
   async function load() {
     void receipts();
+    void storeItems();
     try {show(await call("GET")); loaded = true;}
     catch (error) {$("rules-status").textContent = ""; $("rules-error").textContent = error.message; $("rules-error").hidden = false;}
   }

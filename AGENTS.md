@@ -130,8 +130,13 @@
   innehålla") and City Gross's GS1 allergen list (`store_allergens.py`).
   Fish and vegetarian dinners have at least one fish (or shellfish) dinner
   with 2–3 dinners and two with 4 or more, as far as the library allows.
-- PriceUniverse is shared and source-driven. Community evidence stays advisory,
-  and `USER_SPECIFIC` offers must never enter the shared artifact.
+- PriceUniverse is shared and source-driven, and `USER_SPECIFIC` offers must
+  never enter the shared artifact. Owner decision 2026-11-24: items and store
+  prices learned from members' receipts (`member_rewards.py`) may be planned.
+  They need a scanned barcode, are marked temporary until two members confirm
+  them at least a week apart, and a receipt item whose contents Smako cannot
+  know never enters a plan with allergy choices. Other community reports
+  stay advisory.
 - Keep product identity and price scope exact. Fuzzy names may suggest manual
   review but must never attach authoritative prices automatically.
 - `own:coop:730400` is Coop Online Syd: `ONLINE_FULFILLMENT` with
