@@ -310,6 +310,7 @@ def run_municipalities(workspace, transport, *, scopes=None, run_scope=run, budg
     outcomes = []
     with RefreshRunLock(workspace / "municipal-relay.lock"):
         from grocery_data.app.services.municipal_scheduling import (
+            mark_squeezed,
             order_work,
             read_state,
             record_attempt,
@@ -337,7 +338,10 @@ def run_municipalities(workspace, transport, *, scopes=None, run_scope=run, budg
                 continue
             if remaining < ACTIVATION_TIMEOUT_SECONDS + 600:
                 outcomes.append({**item, "exit_code": 2, "status": "deferred", "reason": "run_window"})
+                mark_squeezed(state, code, True)
+                save_state(journal, state)
                 continue
+            ran_first = not any(row.get("status") != "not_due" for row in outcomes)
             scope_root = workspace / ("municipality-" + code)
             scope_root.mkdir(parents=True, exist_ok=True)
             if scope_root.is_symlink() or not scope_root.resolve().is_relative_to(workspace):
@@ -353,6 +357,9 @@ def run_municipalities(workspace, transport, *, scopes=None, run_scope=run, budg
                 capacity_check=lambda root=scope_root: receiver_capacity(transport, root))
             outcomes.append({"municipality_code": code, "exit_code": result})
             record_attempt(state, code, started=attempt, seconds=monotonic() - began, result=result)
+            # Collection deferred for time (2) after a peer used the window:
+            # the scope was starved, not served, so it goes first next run.
+            mark_squeezed(state, code, result == 2 and not ran_first)
             save_state(journal, state)
         atomic_write_bytes(workspace / "municipal-relay-status.json", json.dumps({
             "checked_at": datetime.now(UTC).isoformat(), "municipalities": outcomes}).encode())

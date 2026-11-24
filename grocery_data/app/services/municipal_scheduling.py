@@ -33,8 +33,12 @@ def order_work(items, state, *, now):
         # A served failing scope gets a new waiting time; never an older priority
         # than a peer that has waited a full day without service.
         deadline = max(deadline, datetime.fromisoformat(job.get("last_attempt_at", "1970-01-01T00:00:00+00:00")))
-        return (not item.get("work_due", True), min(deadline - timedelta(seconds=seconds),
-                waiting + timedelta(hours=24)), job.get("last_attempt_at", ""))
+        # A scope that ran out of time because a peer ran first goes first
+        # next run (owner incident 2026-11-24: Malmö Willys starved behind
+        # Lund for three weeks). The flag is cleared when it gets a turn.
+        return (not item.get("work_due", True), not job.get("squeezed", False),
+                min(deadline - timedelta(seconds=seconds), waiting + timedelta(hours=24)),
+                job.get("last_attempt_at", ""))
 
     return sorted(items, key=priority)
 
@@ -44,6 +48,15 @@ def estimate_seconds(job, default=1800):
     if isinstance(measured, (int, float)) and math.isfinite(measured) and measured > 0:
         return max(60, measured * 1.25)
     return default
+
+
+def mark_squeezed(state, code, squeezed):
+    """Record whether a scope lost its time window to a peer this run."""
+    job = state.setdefault("jobs", {}).setdefault(code, {})
+    if squeezed:
+        job["squeezed"] = True
+    else:
+        job.pop("squeezed", None)
 
 
 def record_attempt(state, code, *, started, seconds, result):
