@@ -67,6 +67,7 @@ _PACKAGE_UNITS: dict[str, tuple[Decimal, str]] = {
     "styck": (Decimal(1), "st"),
     "st": (Decimal(1), "st"),
 }
+_PLACEHOLDER_SALE_UNITS = frozenset({"", "0"})
 _SALE_UNITS = {
     "styck": "st",
     "piece": "st",
@@ -491,12 +492,23 @@ class CoopOnlineCatalogParser:
         package_quantity, package_unit = _package(row)
         source_sale_unit = str(row.get("salesUnit") or "").strip().casefold()
         sale_unit = _SALE_UNITS.get(source_sale_unit)
-        if sale_unit is None:
-            raise CoopSchemaError("Coop online product has unknown salesUnit")
         package_text = " ".join(str(row.get("packageSizeInformation") or "").split()) or None
         approximate_weight = "ungefärlig vikt" in (
             f"{row.get('packageSizeUnit') or ''} {package_text or ''}"
         ).casefold()
+        if (
+            sale_unit is None
+            and source_sale_unit in _PLACEHOLDER_SALE_UNITS
+            and package_quantity is not None
+            and not approximate_weight
+        ):
+            # Coop occasionally publishes "0" (or nothing) as the sales unit
+            # (2026-11: one household-paper pack). A fixed package with a known
+            # size is sold per piece; without this one row discarded the whole
+            # catalogue every night.
+            sale_unit = "st"
+        if sale_unit is None:
+            raise CoopSchemaError("Coop online product has unknown salesUnit")
         average_weight_kg = (
             package_quantity / 1000
             if approximate_weight and package_quantity is not None and package_unit == "g"

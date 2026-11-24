@@ -803,3 +803,28 @@ def test_energy_label_and_badge_order_do_not_change_any_parsed_product_field():
     parser = CoopOnlineCatalogParser()
     kwargs = {"store": _store(), "reference": "raw:presentation-review", "fetched_at": OBSERVED_AT}
     assert parser.parse_product(before, **kwargs) == parser.parse_product(after, **kwargs)
+
+
+def test_placeholder_sales_unit_on_a_fixed_package_is_sold_per_piece() -> None:
+    # Coop published salesUnit "0" for one household-paper pack in Nov 2026;
+    # the whole catalogue was discarded every night because of it.
+    row = _milk() | {"salesUnit": "0"}
+    product = CoopOnlineCatalogParser().parse_product(
+        row,
+        store=_store(),
+        reference="raw:test#results.items[0]",
+        fetched_at=datetime(2026, 11, 23, 3, tzinfo=UTC),
+    )
+    assert product.sale_unit == "st"
+
+
+def test_unknown_real_sales_unit_still_fails_closed() -> None:
+    from grocery_data.app.connectors.coop.models import CoopSchemaError
+
+    with pytest.raises(CoopSchemaError, match="unknown salesUnit"):
+        CoopOnlineCatalogParser().parse_product(
+            _milk() | {"salesUnit": "Meter"},
+            store=_store(),
+            reference="raw:test#results.items[0]",
+            fetched_at=datetime(2026, 11, 23, 3, tzinfo=UTC),
+        )
