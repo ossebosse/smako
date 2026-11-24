@@ -238,6 +238,10 @@ Leverera instruktion och aktuella bilagor tillsammans, gärna som ZIP.
   hitta på runtimehashar, godkännanden, produktfakta, priser eller näringsvärden.
 - Kandidatgranskning före full författning, ett litet pilotpaket som ingår i
   totalen, därefter kompletta numrerade paket och kumulativ bokföring.
+- Ägarbeslut 2026-11-24: nya recept anger `range` (och vid behov `step`)
+  för huvudråvara, tillbehör och grönsaker enligt
+  [AUTHORING.md](AUTHORING.md#skalbara-mängder-ägarbeslut-2026-11-24), och
+  stegtexterna stämmer för hela intervallet.
 - Varje variant har egna mängder och steg. Ingrediensantal räknas på unika
   kanoniska namn/former, med salt/peppar/vatten undantagna enligt befintlig
   räknare. `variant_id` och `level` är skilda dimensioner.

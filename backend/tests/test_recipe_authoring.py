@@ -21,6 +21,16 @@ def _source():
     return json.loads(EXAMPLE.read_text(encoding="utf-8"))
 
 
+def _fixed_source():
+    """The example without scalable ranges, for rules that are not about scaling."""
+    source = _source()
+    for component in source["recipes"][0]["components"]:
+        for item in component["ingredients"]:
+            item.pop("range", None)
+            item.pop("step", None)
+    return source
+
+
 def test_example_is_standardized_into_a_valid_pack():
     pack, report = standardize(_source(), VOCABULARY, reviewed_at="2026-10-17")
     checked = validate_pack_bytes(json.dumps(pack).encode())
@@ -77,7 +87,7 @@ def test_conflicting_product_requirements_for_one_purchase_line_are_rejected():
 
 
 def test_process_water_in_ml_scales_and_dl_is_rejected():
-    source = _source()
+    source = _fixed_source()
     source["recipes"][0]["steps"][0]["text"] += " Häll 200 ml vatten i plåten."
     pack, _ = standardize(source, VOCABULARY, reviewed_at="2026-10-17")
     assert pack["recipes"][0]["design"]["steps"][0]["scalable_amounts"] == [["200 ml", 200.0]] or \
@@ -102,7 +112,7 @@ def test_several_process_amounts_scale_once_and_decimals_are_one_amount():
 
 
 def test_author_registers_each_amount_once_with_decimals():
-    source = _source()
+    source = _fixed_source()
     source["recipes"][0]["steps"][0]["text"] += " Häll 100 ml vatten och 125,5 ml dricksvatten i plåten."
     pack, _ = standardize(source, VOCABULARY, reviewed_at="2026-10-17")
     assert [tuple(a) for a in pack["recipes"][0]["design"]["steps"][0]["scalable_amounts"]] == \
@@ -133,3 +143,49 @@ def test_issued_water_steps_scale_as_before():
                 for _token, quantity in step.scalable_amounts:
                     assert f"{quantity * servings / recipe.servings:g} ml".replace(".", ",") in text
     assert checked_steps >= 11
+
+
+# Owner decision 2026-11-24: new recipes carry reviewed ranges the planner may scale within.
+def _item(source, name):
+    return next(i for c in source["recipes"][0]["components"] for i in c["ingredients"] if i["name"] == name)
+
+
+def test_reviewed_ranges_become_the_library_quantity_grid():
+    pack, report = standardize(_source(), VOCABULARY, reviewed_at="2026-11-24")
+    assert validate_pack_bytes(json.dumps(pack).encode())["rejections"] == []
+    lines = {i["name"]: i for i in pack["recipes"][0]["ingredients"]}
+    assert (lines["kyckling"]["quantity"], lines["kyckling"]["quantity_min"], lines["kyckling"]["quantity_max"],
+            lines["kyckling"]["quantity_step"]) == (300, 240, 420, 20)
+    assert (lines["potatis"]["quantity_min"], lines["potatis"]["quantity_max"], lines["potatis"]["quantity_step"]) == (350, 600, 50)
+    oil = lines["rapsolja"]
+    assert oil["quantity_min"] == oil["quantity_max"] == oil["quantity"]  # other roles stay fixed
+    assert report[0]["scalable"] == ["kyckling|raw_edible", "potatis|raw_edible"] and report[0]["warnings"] == []
+
+
+@pytest.mark.parametrize("name, change, message", [
+    ("rapsolja", {"range": [10, 20]}, "bara huvudråvara"),
+    ("kyckling", {"range": [100, 420]}, "halva och dubbla"),
+    ("kyckling", {"range": [320, 420]}, "omsluta"),
+    ("kyckling", {"range": [240, 420], "step": 25}, "jämnt"),
+    ("kyckling", {"step": 20}, "step utan range"),
+])
+def test_unsafe_ranges_are_rejected(name, change, message):
+    source = _source()
+    item = _item(source, name)
+    item.pop("range", None); item.pop("step", None); item.update(change)
+    with pytest.raises(ValueError, match=message):
+        standardize(source, VOCABULARY, reviewed_at="2026-11-24")
+
+
+def test_a_scaled_ingredient_cannot_be_cooked_in_a_fixed_water_amount():
+    source = _source()
+    source["recipes"][0]["steps"][1]["text"] = "Koka potatisen i 800 ml vatten cirka 20 minuter."
+    with pytest.raises(ValueError, match="vatten för en skalbar"):
+        standardize(source, VOCABULARY, reviewed_at="2026-11-24")
+
+
+def test_a_dinner_without_a_scalable_main_ingredient_is_flagged():
+    source = _source()
+    source = _fixed_source()
+    _, report = standardize(source, VOCABULARY, reviewed_at="2026-11-24")
+    assert any("Skalbar mängd" in w for w in report[0]["warnings"]) and report[0]["scalable"] == []

@@ -50,6 +50,31 @@ Detta avrundar inte inköp eller tillåter automatiskt rester från en större s
 Gamla receptversioner omtolkas inte: ändrad process kräver ny innehållsgranskad
 version med eget innehållshash. Funktionen ersätter inte provlagning.
 
+## Skalbara mängder (ägarbeslut 2026-11-24)
+
+Nya recept anger ett granskat intervall för de råvaror som rimligen kan bli
+mer eller mindre, så att Smako kan nå en måltids näringsgränser (protein,
+kolhydrater, fett, energi) utan att rätten slutar vara densamma:
+
+- `range: [minst, mest]` och valfritt `step` på ingrediensen, i samma enhet
+  och för samma antal portioner som `quantity`. Standardsteg 10 g/ml eller
+  1 st. Intervallet måste omsluta `quantity`, ligga mellan halva och dubbla
+  mängden, och steget måste gå jämnt upp och träffa `quantity`.
+- Bara rollerna `primary` (huvudråvara), `side` (tillbehör) och `vegetable`
+  får skalas. Sås, smaksättning och stekfett står kvar.
+- Granskningen godkänner hela intervallet: varje mängd på steget räknas som
+  granskad. Skriv stegen så att de stämmer för hela intervallet, till exempel
+  "stek kycklingen" i stället för "stek 300 g kyckling".
+- En skalbar råvara får inte kokas i en fast vattenmängd ("N ml vatten" i ett
+  steg som använder den); då stoppas receptet. Recept med omätta
+  processförluster kan inte ha intervall.
+- En middag utan skalbar huvudråvara får en varning.
+
+Utan näringsgränser använder planeraren alltid `quantity`. Med gränser väljer
+den mängder på stegen som når gränserna och ligger närmast receptets mängder;
+priset avgör bara mellan lika nära alternativ. Äldre recept har ingen
+skalning (minst = mest = mängden) och görs om i omgångar som nya versioner.
+
 ## Det verktyget standardiserar
 
 - **Identitet och köpkrav:** enhet och produktkrav tas från det befintliga
