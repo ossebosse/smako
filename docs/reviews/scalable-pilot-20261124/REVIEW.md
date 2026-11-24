@@ -40,3 +40,22 @@ alla: mindre mängd ändrar inga steg.
   gram innan de kan skalas.
 - Provlagning av ytterlägena i minst ett par rätter innan intervallen
   betraktas som provade.
+
+## Ägarbeslut och helt planprov (2026-11-24)
+
+Ägaren: AI-granskningen räcker; rätterna provlagas inte, små fel godtas.
+
+Helt planprov på dagens Lund-prisdata (58 685 varor) i en engångscontainer på
+servern (4,5 GB, 2 kärnor, utan nätverk, produktionsdata skrivskyddad, egen
+plandatabas): bilden `app-1032ff8a39be-31d9e0ed` med skalningskoden från
+`feature/scalable-recipes` ovanpå och pilotpaketet importerat (23 versioner,
+0 avvisningar). Biblioteket fick 3 355 recept varav 57 skalade syskon.
+Resultat i `backend/app/data/recipes/incoming/scalable-pilot-20261124/e2e-lund-20261124.jsonl`.
+
+- Pilotens rätter, en middag, inga gränser: originalrecept, inga syskon (50 s kall).
+- Protein minst 34,9 / 39,9 g: tofupastan med 360 g tofu (`base-m120s100`).
+- Protein minst 46,9 g: tofupastan med 440 g tofu (`base-m147s100`), 51,8 g.
+- Protein minst 91,9 g: `NUTRITION_TARGET_NOT_MET` med intervallet 27,7–40,9 g.
+- Hela biblioteket, tre middagar utan gränser: 38,5 s, inga syskon.
+- Hela biblioteket, tre middagar, protein minst 35 g: 47,2 s; gränsen nåddes
+  med originalrecept.
