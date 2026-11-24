@@ -12,6 +12,15 @@ går först 2026-11-26 03:17 (kopia `municipal-schedule.before-20261124.json`).
 
 ---
 
+# 2026-11-24: alla förfallna Hemköp-butiker hämtas varje natt
+
+Main `00e68d1`. Scheduler **source-ops-00e68d1aa835**. Hemköp Malmö fick bara
+en katalog per insamlingsnatt, så Elinegård passerade 14-dagarsgränsen. Nu
+hämtas alla förfallna butiker.
+[Aktiveringsjournal](releases/hemkop-malmo-all-due-20261124/ACTIVATED.md).
+
+---
+
 # 2026-11-24 morgon: Coop Online Syd hämtas igen
 
 Main `0292f98`. Scheduler **source-ops-0292f98cfcaf**. En Coop-vara med
@@ -608,7 +617,7 @@ på `main` inte ändrar en pågående release.
   och det gemensamma driftlåset. Detta flöde installerar inte en ny server.
 - Läs aktuell [HANDOFF.md](HANDOFF.md), [OPERATIONS.md](OPERATIONS.md) och
   senaste aktiveringsrapport. Appens BUILD_ID är `app-daa6a40bd821-c51d81c5`;
-  schedulern är `source-ops-0292f98cfcaf`.
+  schedulern är `source-ops-00e68d1aa835`.
   [Uppvärmda prov och samordnad faktaläsning/GC](releases/warm-facts-gc-20261101/ACTIVATED.md)
   är senaste appaktiveringen. Sex Pythonfiler från kod `b7c8d0506e23`;
   verifierade varma jämförelser och minnesmaxima. Se journalens publika prov.
