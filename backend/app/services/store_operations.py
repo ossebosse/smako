@@ -39,8 +39,14 @@ def _describe_context(context):
     if not context["available_prices"]:
         reasons.append("Inga priser tillgängliga.")
     if not context["campaign_only"] and context["freshness"] in {"aging", "stale"}:
-        reasons.append("Priserna är mer än 36 timmar gamla." if
-                       context["freshness"] == "aging" else "Priserna är mer än 48 timmar gamla. Vi använder de senaste ordinarie priserna tills nya finns.")
+        warning = round(context.get("warning_age_hours") or 0)
+        limit = round(context.get("stale_age_hours") or 0)
+        reasons.append((f"Priserna är mer än {warning // 24} dagar gamla." if
+                        context["freshness"] == "aging" else
+                        f"Priserna är mer än {limit // 24} dagar gamla. Vi använder de senaste "
+                        "ordinarie priserna tills nya finns.") if warning and limit else
+                       ("Priserna börjar bli gamla." if context["freshness"] == "aging" else
+                        "Priserna är för gamla. Vi använder de senaste ordinarie priserna tills nya finns."))
     price_status = ("campaign" if context["campaign_valid"] else
                     "expired" if context["campaign_only"] and not context["available_prices"] else
                     context["freshness"] if context["available_prices"] or context["freshness"] == "stale"
@@ -238,6 +244,8 @@ def municipal_store_status(
             "available_base_prices": available - len(available_campaigns),
             "next_campaign_end": min(campaign_ends) if campaign_ends else None,
             "collection": collection,
+            "warning_age_hours": policy.warning_age_hours,
+            "stale_age_hours": policy.stale_age_hours,
         }
         _describe_context(result)
         context_cache[key] = result

@@ -758,11 +758,13 @@ def _run_demand_locked(lock, *, started_at):
         # gates every exact context before publication.
         overrides['OWN_SOURCES_ONLY'] = 'false'
     if os.getenv('MUNICIPAL_REFRESH_SCOPE') and 'hemkop' in plan['due_sources']:
-        # Completed stores are already separately promoted. Bound a turn to the
-        # oldest due store so the next municipality gets the shared worker too.
+        # Completed stores are already separately promoted. A turn takes every
+        # due store, oldest first: with one store per turn, Malmö's four stores
+        # were each refreshed only every ~14 days and fell past the price cap
+        # (Elinegård, 2026-11-24). Collection nights have room for all of them.
         source = plan['sources']['hemkop']
         selected = sorted(source['due_store_ids'], key=lambda identity:
-            (source['contexts'][identity].get('observed_at') or '', identity))[:1]
+            (source['contexts'][identity].get('observed_at') or '', identity))
         source['due_store_ids'] = selected
         overrides['MUNICIPAL_HEMKOP_DUE_STORE_IDS'] = ','.join(selected)
     previous = {key: os.environ.get(key) for key in overrides}
