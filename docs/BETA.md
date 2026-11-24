@@ -1,3 +1,17 @@
+# 2026-11-24: Willys-reläet turas om mellan Lund och Malmö
+
+Main `5aaad70`. Malmö Willys har inte levererats sedan 2026-11-05: reläet på
+ägarens dator körde alltid Lund först (≈1 h), Malmö hann bara 2 av 3 butiker
+(`insufficient_collection_window` 12/11, 19/11), och full serverdisk stoppade
+9/11 och 23/11 (även Lund). En kommun som får vänta på tid går nu först nästa
+körning. Relärelease `5aaad700832f` (sha256 `914c56ce…`) och adminskript ligger i
+`D:\Projects\Smako\.local\relay-fair-window-20261124`; ägaren kör skriptet
+(installerar bredvid `2b65533af00d`, pekar om uppgiften, sparar före/efter-XML).
+`scopes/municipal-schedule.json`: Malmö (`1280`) markerad `squeezed` så att den
+går först 2026-11-26 03:17 (kopia `municipal-schedule.before-20261124.json`).
+
+---
+
 # 2026-11-24 morgon: Coop Online Syd hämtas igen
 
 Main `0292f98`. Scheduler **source-ops-0292f98cfcaf**. En Coop-vara med
