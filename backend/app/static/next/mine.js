@@ -177,14 +177,41 @@
     if (!response.ok) throw new Error(typeof data.detail === "string" ? data.detail : "PDF:en gick inte att läsa.");
     return data.text;
   }
-  let scanner = null;
+  // createBarcodeScanner returns the scanner itself, not a promise (fix 2026-11-25:
+  // the old `.then` on it threw, so no scan ever started). A camera that cannot
+  // start or read now ends the wait with an error, and the row offers typing the
+  // digits instead.
+  let scanner = null, cancelScan = null;
+  const cameraMessage = error => error?.name === "NotAllowedError"
+    ? "Kameran är inte tillåten för sidan. Tillåt kameran i webbläsarens inställningar, eller skriv streckkoden."
+    : "Kameran kunde inte läsa streckkoden. Skriv siffrorna under streckkoden i stället.";
   async function scanBarcode(video, status) {
     await loadScript("/scanner-assets/physical-barcode-scanner.js");
+    if (!window.GroceryBarcodeScanner || !navigator.mediaDevices?.getUserMedia) throw new Error("Kameran går inte att använda här. Skriv siffrorna under streckkoden.");
     return new Promise((resolve, reject) => {
-      window.GroceryBarcodeScanner.createBarcodeScanner({ videoElement: video, onResult: result => { scanner?.stop?.(); scanner = null; resolve(result.normalized_gtin); },
-        onError: (error, detail = {}) => { status.textContent = detail.recoverable ? "Håll hela streckkoden i bild." : "Kameran kunde inte läsa koden."; } })
-        .then(s => { scanner = s; return s.start(); }).catch(() => reject(new Error("Kameran kunde inte startas. Tillåt kameran och försök igen.")));
+      let done = false;
+      const finish = (settle, value) => { if (done) return; done = true; cancelScan = null; scanner?.stop?.(); scanner = null; settle(value); };
+      cancelScan = () => finish(reject, Object.assign(new Error("Skanningen avbröts."), { cancelled: true }));
+      const current = window.GroceryBarcodeScanner.createBarcodeScanner({ mode: "product", videoElement: video,
+        onResult: result => finish(resolve, result.normalized_gtin || result.raw_value),
+        onError: (error, detail = {}) => {
+          if (detail.recoverable) { status.textContent = "Håll hela streckkoden i bild."; return; }
+          finish(reject, new Error(cameraMessage(error)));
+        } });
+      scanner = current;
+      current.start().then(() => { if (!done) status.textContent = "Håll varans streckkod framför kameran."; })
+        .catch(error => finish(reject, new Error(cameraMessage(error))));
     });
+  }
+  function typeBarcode(row, status, onGtin) {
+    if (row.querySelector(".gtin-entry")) return;
+    const box = el("div", null, "gtin-entry"), input = el("input", null, null, { inputmode: "numeric", autocomplete: "off", maxlength: "14", placeholder: "Siffrorna under streckkoden", "aria-label": "Streckkod" });
+    const use = () => {
+      try { const gtin = window.GroceryBarcodeScanner.normalizeGtin(input.value).normalized_gtin; box.remove(); onGtin(gtin); }
+      catch (error) { status.textContent = error?.message || "Det är inte en giltig streckkod. Kontrollera siffrorna."; }
+    };
+    input.addEventListener("keydown", event => { if (event.key === "Enter") use(); });
+    box.append(input, button("Använd", use, "btn small")); row.append(box); input.focus();
   }
   // A small mouse comes out of Smako's hole, sniffs the accepted item and pulls
   // it down into Smako (owner request 2026-11-24). Reduced motion: a short note.
@@ -204,7 +231,7 @@
     const dialog = el("dialog", null, "receipt-dialog"), body = el("div"), status = el("p", null, "hint", { role: "status" });
     const head = el("div", null, "dialog-head"); head.append(el("h2", "Skanna kvitto"), button("Stäng", () => dialog.close(), "btn small"));
     dialog.append(head, body, status); document.body.append(dialog);
-    dialog.addEventListener("close", () => { scanner?.stop?.(); scanner = null; dialog.remove(); });
+    dialog.addEventListener("close", () => { cancelScan?.(); scanner?.stop?.(); scanner = null; dialog.remove(); });
     let result = null, store = "", day = null;
     const planId = S.plan?.plan_id;
     const busy = async (text, work) => { status.textContent = text; try { await work(); } catch (error) { status.textContent = error.message; } };
@@ -240,13 +267,28 @@
         // A price Smako does not know: the barcode lets Smako learn the store's price (owner correction 2026-11-24).
         const teach = line.price_differs && !line.gtin;
         if (line.needs_barcode || teach) tools.append(button(teach ? "Skanna streckkoden så lär sig Smako priset" : "Skanna varans streckkod", () => {
-          const video = el("video", null, null, { playsinline: "", muted: "" }); row.append(video);
-          void busy("Håll varans streckkod framför kameran.", async () => {
-            const gtin = await scanBarcode(video, status); line.gtin = gtin; video.remove(); await again();
+          if (row.querySelector("video")) return;
+          const accept = async gtin => {
+            line.gtin = gtin; await again();
             // Owner request 2026-11-24: a mouse fetches every item Smako accepts.
             const accepted = result.lines.findIndex(l => !l.removed && l.gtin === gtin && (l.new_item || l.local_price));
             const target = accepted >= 0 && list.querySelector(`[data-line="${accepted}"]`);
             if (target) mouseGrab(target, result.lines[accepted].description);
+          };
+          const video = el("video", null, null, { playsinline: "", muted: "", autoplay: "" });
+          const cancel = button("Avbryt skanningen", () => cancelScan?.(), "text-link");
+          row.append(video, cancel);
+          void busy("Startar kameran …", async () => {
+            let gtin = null;
+            try { gtin = await scanBarcode(video, status); }
+            catch (error) {
+              video.remove(); cancel.remove();
+              if (error.cancelled) { status.textContent = ""; return; }
+              status.textContent = error.message;
+              typeBarcode(row, status, typed => void busy("Räknar om …", () => accept(typed)));
+              return;
+            }
+            video.remove(); cancel.remove(); await accept(gtin);
           });
         }, "text-link"));
         row.append(el("strong", line.description), price, el("span", tags, "tags"), tools); list.append(row);
