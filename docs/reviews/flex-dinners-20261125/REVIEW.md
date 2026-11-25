@@ -54,3 +54,17 @@ Library: 3 298 recipes before, 8 012 after (4 714 scaled versions).
 | Protein 40 g + 700 kcal, 3 | 28.8 s | 63.8 s | 324.40 → 324.40 kr |
 
 Peak memory: 1 783 MB → 2 068 MB (+285 MB). Plans without limits pick no scaled versions.
+
+### After "only the needed scaled version" (commit a8b2def)
+
+| Plan | Without flex | All versions | Needed version only |
+|---|---|---|---|
+| No limits, 3 | 90.8 s | 104.8 s | 95.1 s |
+| No limits, 5 | 73.5 s | 79.6 s | 77.6 s |
+| Protein 35 g, 3 | 38.8 s | 68.4 s | 44.7 s |
+| Protein 45 g, 3 | 26.6 s | 56.5 s | 37.3 s |
+| Protein 45 g, 5 | 29.9 s (636.50 kr) | 81.0 s (517.82 kr) | 37.1 s (523.82 kr) |
+| Vegetarian protein 35 g, 3 | 20.3 s | 39.7 s | 28.1 s |
+| Protein 40 g + 700 kcal, 3 | 28.8 s | 63.8 s | 43.0 s |
+
+Peak memory 2 018 MB. The 45 g / 5 plan now picks beef paprika at 120 % (closest that reaches) instead of 127 %.
