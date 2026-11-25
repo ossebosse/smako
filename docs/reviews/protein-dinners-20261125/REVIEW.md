@@ -230,3 +230,22 @@ Samma skript med dagens bibliotek och med de 145 rätterna monterade
 Toppminne 2 020 → 2 091 MB. Med dagens priser och 2 butiker valde planeraren
 samma rätter i alla testveckor: de nya rätterna är kvalificerade alternativ
 (byte av rätt, variation, undvikna senaste rätter) men var inte billigast här.
+
+## Varför de nya rätterna inte valdes (utredning 2026-11-25)
+
+Plan: Lund, 5 middagar × 4 portioner, minst 45 g protein, 2 butiker, basvaror
+hemma (salt, peppar, olja, mjöl, socker).
+
+- **De flesta kommer aldrig med.** Med exakt inköpsläge (standard) klarade
+  19 av 145 nya rätter kvalificeringen. Stopp: hela köttstycken (nötkött,
+  fläskkött, fläskkarré, lammkött) är viktvaror som kräver ”uppskattad vikt”;
+  sallad, salladslök, mynta och rädisa i gram hittar ingen köpbar vara.
+  Med uppskattat läge 22 av 145: viktvarorna saknar näringsvärden, så proteinet
+  kan inte styrkas. Köpbarhetskontrollen före import kördes utan näringsmål och
+  i uppskattat läge och fångade inte detta.
+- **De som kommer med är dyrare.** Median per rätt (4 portioner, hela
+  förpackningar) 383–397 kr mot 309–333 kr för befintliga. De billigaste
+  befintliga bygger på billigt protein (kycklinglever, fryst kycklinginnerfilé,
+  rimmat fläsk med bruna bönor, linser och tofu) och få ingredienser. De nya
+  har dyrare protein (lax 180–200 kr, färs 91–119 kr för 750 g, lårfilé
+  100 kr) och fler tillbehör som köps som hela förpackningar.

@@ -1,3 +1,12 @@
+# 2026-11-25 kväll: streckkodsskanning efter kvitto fungerar
+
+Main `ba42a3f`, releasegren `release/receipt-barcode-20261125`. App
+**app-10a3567c2499-130792a7**, bas `868cb9b93f81`. Kvittodialogens skanning
+föll alltid (`.then` på läsaren); nu skannar den, och kan kameran inte läsa går
+siffrorna att skriva in. [Aktiveringsjournal](releases/receipt-barcode-20261125/ACTIVATED.md).
+
+---
+
 # 2026-11-25 kväll: 145 nya middagar med kött, fisk och kyckling
 
 Main `e9c6af1`, releasegren `release/protein-dinners-20261125`. App
