@@ -102,7 +102,7 @@ def matches_preferences(recipe, preferences):
     from app.services.diet_policy import recipe_contains_fish
     if not preferences.allow_fish and recipe_contains_fish(recipe):
         return False
-    return not (preferences.adaptation == "products" and d.variant_id != "base")
+    return not (preferences.adaptation == "products" and (d.scaled_from or d.variant_id) != "base")
 
 
 def validate_content_capacity(preferences, meal, profile, candidates):

@@ -3146,12 +3146,15 @@ class PersonalPlanner:
         return {**stored_rows, **reused} if reused else stored_rows
 
     @timed_stage("candidate_generation_and_qualification")
-    def _candidates(self, meal, *, qualified_results=None, fixed_slots=(), _rows_only=None):
+    def _candidates(self, meal, *, qualified_results=None, fixed_slots=(), _rows_only=None,
+                    _given=None, _scaled_round=False):
         from app.services.plan_jobs import check_cancelled, report_stage
         report_stage("candidate_qualification")
         with performance_span("personal_candidate_generation"):
             if _rows_only is not None:
                 candidates = list(_rows_only)  # a worker's slice (planner_processes)
+            elif _given is not None:
+                candidates = list(_given)  # one round of _with_needed_scaled
             elif self.complete and (meal.meal_type == "dinner" or meal.recipe_choices is not None):
                 from app.services.recipe_library import meal_candidates
                 candidates = meal_candidates(meal,self.request.recipe_preferences,
@@ -3160,6 +3163,8 @@ class PersonalPlanner:
                     # Owner decision 2026-11-22: a dish the member disliked is never proposed.
                     disliked = frozenset(self.spec.disliked_recipes)
                     candidates = [c for c in candidates if not (c.design and c.design.base_id in disliked)]
+                if any(c.design and c.design.scaled_from for c in candidates):
+                    return self._with_needed_scaled(meal, candidates, qualified_results, fixed_slots)
             else:
                 generator = self.service.candidate_generator or DeterministicRecipeCandidateGenerator()
                 candidates = generator.generate_for_meal_type(
@@ -3180,7 +3185,7 @@ class PersonalPlanner:
         valid = []
         local_conflicts = []
         self.diagnostics.pools.append({"meal_type": meal.meal_type, "raw": len(candidates)})
-        if self.complete and meal.meal_type == "dinner" and self.spec.slots is None:
+        if self.complete and meal.meal_type == "dinner" and self.spec.slots is None and not _scaled_round:
             from app.services.complete_recipes import validate_content_capacity
             validate_content_capacity(self.request.recipe_preferences, meal,
                                       merged_profile(self.spec.profile, meal.profile), candidates)
@@ -3327,6 +3332,9 @@ class PersonalPlanner:
                     if self._prior_recipe_ids is not None and identity(recipe) not in self._prior_recipe_ids:
                         self._expanded_cohort_qualified = True
             except (PolicyConflict, ValueError) as exc:
+                if recipe.design:  # read by _with_needed_scaled
+                    self.__dict__.setdefault("_qualification_codes", {})[
+                        (recipe.design.base_id, recipe.design.variant_id)] = getattr(exc, "code", None)
                 # A content-filter rejection belongs to these filters, which the
                 # shared rows do not hold; it is decided again each time.
                 if reuse and getattr(exc, "code", None) != "RECIPE_CHOICES_CONFLICT":
@@ -3353,6 +3361,8 @@ class PersonalPlanner:
             from app.services.recipe_library import prepared_recipe_lookup
             prepared_recipe_lookup(meal.servings)
         report_stage("candidate_qualification", completed=len(candidates), total=len(candidates), unit="recipes")
+        if not valid and _scaled_round:
+            return []
         if not valid:
             if self.complete:
                 if not candidates:
@@ -3370,6 +3380,64 @@ class PersonalPlanner:
             if local_conflicts:
                 raise local_conflicts[0]
             raise PolicyConflict(f"Inga användbara recept för {meal.meal_type} med dina val.")
+        return valid
+
+    def _with_needed_scaled(self, meal, candidates, qualified_results, fixed_slots):
+        """Qualify a scaled version only where its dish needs one (owner decision 2026-11-25).
+
+        The dishes as written are qualified first. A dish that qualifies, or
+        fails for a reason other than its nutrition (products, diet, data), gets
+        no scaled version: scaling changes amounts, not products. A dish that
+        misses only the nutrition target tries its scaled versions closest
+        first, one round at a time on all cores, and keeps the first that
+        qualifies. A version that only lowers amounts cannot help a minimum, and
+        one that only raises them cannot help a maximum, so those are skipped.
+        """
+        from app.services.scalable_recipes import scale_direction
+
+        self._qualification_codes = {}
+        key = lambda r: (r.design.base_id, r.design.scaled_from or r.design.variant_id)
+        written = [c for c in candidates if not (c.design and c.design.scaled_from)]
+        parents = {key(r): r for r in written if r.design}
+        queues = defaultdict(list)
+        for r in candidates:
+            if r.design and r.design.scaled_from:
+                queues[key(r)].append(r)
+        try:
+            valid = self._candidates(meal, qualified_results=qualified_results,
+                                     fixed_slots=fixed_slots, _given=written)
+            failure = None
+        except PolicyConflict as exc:
+            valid, failure = [], exc
+        passed = {key(r) for r in valid if r.design}
+        limits = meal.limits
+        wants_more = any(getattr(limits, f) is not None for f in ("min_protein_g", "min_carbs_g", "min_fat_g"))
+        wants_less = any(getattr(limits, f) is not None for f in ("max_protein_g", "max_carbs_g", "max_fat_g", "max_kcal"))
+        for k in list(queues):
+            parent = parents.get(k)
+            if (parent is None or k in passed
+                    or self._qualification_codes.get(k) != "NUTRITION_TARGET_NOT_MET"):
+                del queues[k]
+                continue
+            useful = []
+            for s in sorted(queues[k], key=lambda r: (r.design.scale_steps, r.design.variant_id)):
+                up, down = scale_direction(parent, s)
+                if (wants_more and up) or (wants_less and down):
+                    useful.append(s)
+            queues[k] = useful
+        rounds = 0
+        while any(queues.values()):
+            rounds += 1
+            batch = [q.pop(0) for q in queues.values() if q]
+            found = self._candidates(meal, qualified_results=qualified_results, fixed_slots=fixed_slots,
+                                     _given=batch, _scaled_round=True)
+            valid.extend(found)
+            for r in found:
+                queues.pop(key(r), None)
+        self.diagnostics.pools.append({"meal_type": meal.meal_type, "raw": 0, "scaled_rounds": rounds,
+                                       "scaled_qualified": sum(1 for r in valid if r.design and r.design.scaled_from)})
+        if not valid and failure is not None:
+            raise failure
         return valid
 
     def _qualify_in_processes(self, meal, candidates, stored_rows, fixed_slots):
@@ -3839,7 +3907,10 @@ class PersonalPlanner:
             # Owner decision 2026-11-22: a dish the member liked weighs like a liked ingredient.
             liked = frozenset(self.spec.liked_recipes)
             tastes -= sum(1 for r in dinners if r.design and r.design.base_id in liked)
-        return tastes * self.rules.like_weight_kr + missing * self.rules.like_missing_kr
+        # Owner decision 2026-11-24: prefer the scaled recipe closest to the authored one.
+        scaled = sum(s.recipe.design.scale_steps or 0 for s in slots if s.recipe and s.recipe.design)
+        return (tastes * self.rules.like_weight_kr + missing * self.rules.like_missing_kr
+                + scaled * getattr(self.rules, "scaled_step_kr", 0))
 
     def _week_purchase_key(self, basket, preparations=(), slots=()):
         """Paid total plus the extra-store and taste costs (owner decisions 2026-11-15), then surplus."""

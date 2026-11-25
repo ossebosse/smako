@@ -57,7 +57,8 @@ def test_every_ingredient_field_changes_exact_key_without_rounding(field):
     updates = {"name": ingredient.name + " ändrad", "quantity": ingredient.quantity + 1e-10,
         "unit": "kg", "canonical_name": "ändrad", "form": "as_sold", "component": "annan",
         "required": not ingredient.required, "role": "cooking", "quantity_min": .125,
-        "quantity_max": 99999, "quantity_step": .125, "product_requirements": ("annan",)}
+        "quantity_max": 99999, "quantity_step": .125, "product_requirements": ("annan",),
+        "scales_with": "annan|raw_edible"}
     assert set(updates) == set(RecipeIngredient.model_fields)
     assert updates[field] != getattr(ingredient, field)
     recipe.ingredients[0] = ingredient.model_copy(update={field: updates[field]})
@@ -91,7 +92,9 @@ def test_every_frozen_design_field_changes_key_even_with_reused_content_sha(fiel
             ingredient_keys=(f'{recipe.ingredients[0].canonical_name}|{recipe.ingredients[0].form}',),
             operation='drain_after_cooking', description='Reviewed test process loss.'),),
         "batch_scaling": RecipeBatchScaling(step_id=design.steps[0].id, duration_minutes=(
-            design.batch_scaling.duration_minutes + 1 if design.batch_scaling else 17))}
+            design.batch_scaling.duration_minutes + 1 if design.batch_scaling else 17)),
+        # Scalable recipes (owner decision 2026-11-24).
+        "scaling": "reviewed_ranges", "scaled_from": "changed", "scale_steps": 3}
     assert set(updates) == set(RecipeDesign.model_fields)
     assert updates[field] != getattr(design, field)
     changed = recipe.model_copy(update={"design": design.model_copy(update={field: updates[field]})})

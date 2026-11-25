@@ -17,7 +17,12 @@ eligible for planning:
 * process water written as "N ml vatten" scales with portions
   (``scalable_amounts``); water in dl/l is rejected,
 * readiness warnings: default selection range (10-15 counted ingredients for
-  dinners), food-safety temperatures in the text, unused or unknown ingredients.
+  dinners), food-safety temperatures in the text, unused or unknown ingredients,
+* scalable amounts (owner decision 2026-11-24): a main, side or vegetable
+  ingredient may carry a reviewed ``range`` (and ``step``) for the recipe's
+  servings. The planner may then choose an amount on that grid to meet a
+  meal's nutrition limits; without limits the authored amount is used. Every
+  amount in the range counts as reviewed. Other roles stay fixed.
 
 The result still passes the ordinary ``validate`` -> ``import`` -> ``qualify``
 path; this module never approves content or purchases.
@@ -37,6 +42,10 @@ MEAT = {"kyckling", "nötfärs", "fläskfärs", "blandfärs", "fläskkött", "ka
 FISH = FINFISH_INGREDIENTS | FISH_FLAVOURINGS
 REVIEWED_VOCABULARY = Path(__file__).parents[1] / "data/ingredients/authoring-20261025.json"
 AUTHORING_REQUIREMENTS = {"aggnudlar": ("pack:egg_noodles",)}
+# Owner decision 2026-11-24: which ingredients the planner may scale, and how far.
+SCALABLE_ROLES = {"primary", "side", "vegetable"}
+SCALE_LIMITS = (0.5, 2.0)  # range within half and double the authored amount
+DEFAULT_STEP = {"g": 10.0, "ml": 10.0, "st": 1.0}
 SAFETY = {
     "kyckling": ("74 °C",), "kalkon": ("74 °C",),
     "nötfärs": ("72 °C", "genomstekt"), "fläskfärs": ("72 °C", "genomstekt"),
@@ -165,11 +174,20 @@ def standardize(source, vocabulary, *, reviewed_at):
                 if not reviewed_requirements <= set(requirements):
                     raise ValueError(f"{where}: {key} får inte tappa granskade produktkrav")
                 quantity = float(item["quantity"])
+                scale = _scale_range(item, quantity, unit, where, key)
+                if "follows" in item and item["role"] not in {"flavour", "cooking", "sauce"}:
+                    raise ValueError(f"{where}: {key} med rollen {item['role']} kan inte följa huvudråvaran")
                 amounts.append({"ingredient_key": key, "name": item.get("label", canonical),
                                 "note": item.get("note", ""), "quantity": quantity, "unit": unit})
+                seen_before = key in lines
                 line = lines.setdefault(key, {"name": canonical, "canonical_name": canonical,
                     "quantity": 0.0, "unit": unit, "form": item["form"], "component": component["id"],
                     "required": True, "role": item["role"], "product_requirements": requirements})
+                if scale or (seen_before and line.get("_range")):
+                    if seen_before:
+                        raise ValueError(f"{where}: {key} har en skalbar mängd och finns i flera komponenter; "
+                                         "ange intervallet i en komponent")
+                    line["_range"] = scale
                 if line["unit"] != unit:
                     raise ValueError(f"{where}: {key} anges i både {line['unit']} och {unit}")
                 if sorted(line["product_requirements"]) != sorted(requirements):
@@ -180,10 +198,41 @@ def standardize(source, vocabulary, *, reviewed_at):
                                      "ange samma krav eller dela upp till olika former")
                 line["quantity"] += quantity
             components.append({"id": component["id"], "name": component["name"], "amounts": amounts})
+        # Owner decision 2026-11-25: seasonings that follow a scalable main ingredient.
+        by_name = {canonicalize_ingredient_name(i["name"]): (c["id"], i) for c in row["components"] for i in c["ingredients"]}
+        for component in row["components"]:
+            for item in component["ingredients"]:
+                if "follows" not in item:
+                    continue
+                target = by_name.get(canonicalize_ingredient_name(item["follows"]))
+                main_key = target and f"{canonicalize_ingredient_name(target[1]['name'])}|{target[1]['form']}"
+                if not target or target[0] != component["id"] or not lines[main_key].get("_range"):
+                    raise ValueError(f"{where}: {item['name']} följer {item['follows']!r}, som måste vara en skalbar "
+                                     "huvudråvara i samma komponent")
+                key = f"{canonicalize_ingredient_name(item['name'])}|{item['form']}"
+                low, high, _ = lines[main_key]["_range"]
+                main_q = float(target[1]["quantity"])
+                share = float(item["quantity"])
+                line = lines[key]
+                line["scales_with"] = main_key
+                line["_follow"] = (share * (low / main_q - 1), share * (high / main_q - 1))
         ingredients = []
         for line in lines.values():
             q = round(line["quantity"], 4)
-            line.update(quantity=q, quantity_min=q, quantity_max=q, quantity_step=q)
+            follow = line.pop("_follow", None)
+            if follow:
+                from app.services.scalable_recipes import follower_amount
+                lo, hi = follower_amount(q + follow[0]), follower_amount(q + follow[1])
+                line.update(quantity=q, quantity_min=min(lo, q), quantity_max=max(hi, q), quantity_step=0.5)
+                if not line["product_requirements"]:
+                    line.pop("product_requirements")
+                ingredients.append(line)
+                continue
+            scale = line.pop("_range", None)
+            if scale:
+                line.update(quantity=q, quantity_min=scale[0], quantity_max=scale[1], quantity_step=scale[2])
+            else:
+                line.update(quantity=q, quantity_min=q, quantity_max=q, quantity_step=q)
             if not line["product_requirements"]:
                 line.pop("product_requirements")
             ingredients.append(line)
@@ -210,6 +259,21 @@ def standardize(source, vocabulary, *, reviewed_at):
                 # carries the amount and scales with the portion count.
                 row_step["scalable_amounts"] = water
             steps.append(row_step)
+        scalable = sorted(k for k, line in lines.items() if line["quantity_min"] < line["quantity_max"]
+                          and not line.get("scales_with"))
+        # Owner decision 2026-11-25: only a dry ingredient absorbs its cooking water;
+        # meat, fish, tofu or canned beans may simmer in a fixed amount.
+        absorbing = {k for k in scalable if lines[k]["form"] == "dry"}
+        for step_number, step in enumerate(steps, 1):
+            if step.get("scalable_amounts") and set(step["ingredient_keys"]) & absorbing:
+                # The water amount follows the portions, not a scaled ingredient.
+                raise ValueError(f"{where}: steg {step_number} anger vatten för en skalbar ingrediens; "
+                                 "ta bort intervallet eller skriv steget utan fast vattenmängd")
+        if scalable and row.get("unmeasured_processes"):
+            raise ValueError(f"{where}: recept med omätta processförluster kan inte ha skalbara mängder")
+        if meal_type_of(row) == "dinner" and not any(
+                lines[k]["role"] == "primary" for k in scalable) and not row.get("unmeasured_processes"):
+            warnings.append("Skalbar mängd: ange range för huvudråvaran så att Smako kan nå näringsgränser")
         unused = set(lines) - {k for s in steps for k in s["ingredient_keys"]}
         if unused:
             raise ValueError(f"{where}: ingredienser används inte i något steg: {sorted(unused)}")
@@ -240,6 +304,8 @@ def standardize(source, vocabulary, *, reviewed_at):
                   "waiting_minutes": waiting, "total_minutes": total}
         if row.get("level", "crafted") != "crafted":
             design["dinner_level"] = row["level"]
+        if scalable:
+            design["scaling"] = "reviewed_ranges"
         if row.get("servings_multiple") is not None:
             design["servings_multiple"] = row['servings_multiple']
         if row.get("unmeasured_processes"):
@@ -265,9 +331,38 @@ def standardize(source, vocabulary, *, reviewed_at):
         report.append({"id": f"{design['base_id']}:{design['version']}:{design['variant_id']}",
                        "name": row["name"], "meal_type": meal_type, "counted_ingredients": counted,
                        "active_minutes": active, "waiting_minutes": waiting, "total_minutes": total,
-                       "vegetarian": vegetarian, "fish": fish, "warnings": warnings})
+                       "vegetarian": vegetarian, "fish": fish, "scalable": scalable, "warnings": warnings})
     pack = {"schema_version": "smako-meal-pack-v1", "pack_id": source["pack_id"], "recipes": out}
     return pack, report
+
+
+def meal_type_of(row):
+    return row.get("meal_type", "dinner")
+
+
+def _scale_range(item, quantity, unit, where, key):
+    """(min, max, step) for a reviewed scalable amount, or None (owner decision 2026-11-24)."""
+    if "range" not in item:
+        if "step" in item:
+            raise ValueError(f"{where}: {key} har step utan range")
+        return None
+    bounds = item["range"]
+    if not (isinstance(bounds, list) and len(bounds) == 2):
+        raise ValueError(f"{where}: {key} range ska vara [minst, mest] för receptets portioner")
+    low, high = float(bounds[0]), float(bounds[1])
+    step = float(item.get("step", DEFAULT_STEP[unit]))
+    if item["role"] not in SCALABLE_ROLES:
+        raise ValueError(f"{where}: {key} har rollen {item['role']}; bara huvudråvara, tillbehör och grönsaker "
+                         "får skalas")
+    if not 0 < low <= quantity <= high or low == high:
+        raise ValueError(f"{where}: {key} range {bounds} måste omsluta mängden {quantity:g} och vara ett intervall")
+    if low < SCALE_LIMITS[0] * quantity - 1e-9 or high > SCALE_LIMITS[1] * quantity + 1e-9:
+        raise ValueError(f"{where}: {key} range {bounds} får ligga mellan halva och dubbla mängden {quantity:g}")
+    for value in (high - low, quantity - low):
+        if step <= 0 or abs(value / step - round(value / step)) > 1e-6:
+            raise ValueError(f"{where}: {key} step {step:g} måste gå jämnt upp i range {bounds} "
+                             f"och träffa mängden {quantity:g}")
+    return round(low, 4), round(high, 4), round(step, 4)
 
 
 def readiness(recipes):
