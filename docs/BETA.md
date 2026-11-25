@@ -1,3 +1,13 @@
+# 2026-11-25: Flexrätter – Smako justerar mängder för näringsmål
+
+Main `4334dbf`, releasegren `release/flex-dinners-20261125`. App
+**app-6a22c077aae2-16cbe919**, bas `1032ff8a39be`. 1 992 middagar har granskade
+mängdintervall; med protein-/näringsmål kan Smako ta mer huvudingrediens eller
+mindre tillbehör (kryddor följer med), bara där rätten annars missar målet.
+[Aktiveringsjournal](releases/flex-dinners-20261125/ACTIVATED.md).
+
+---
+
 # 2026-11-24 kväll: Varor och butikspriser från kvitton
 
 Main `bff1442`, releasegren `release/receipt-items-20261124`. App
