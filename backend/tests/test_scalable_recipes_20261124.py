@@ -115,3 +115,38 @@ def test_two_main_ingredients_never_give_two_siblings_the_same_identity(pilot):
     two = recipe.model_copy(update={"ingredients": [change(i) for i in recipe.ingredients]})
     siblings = sr.scaled_versions(two)
     assert len({s.design.variant_id for s in siblings}) == len(siblings) > 0
+
+
+def test_only_dishes_that_miss_the_nutrition_target_try_scaled_versions(pilot):
+    """Owner decision 2026-11-25: closest useful version first, one round at a time."""
+    from app.services.personal_planner import PersonalPlanner
+    from app.services.personal_policy import PolicyConflict
+
+    chickpea = pilot["smako-dinner-chickpea-potato-skillet:base"]
+    tofu = pilot["smako-dinner-potato-tofu-cabbage-pan:base"]
+    siblings = sr.scaled_versions(chickpea) + sr.scaled_versions(tofu)
+    rounds = []
+
+    class Stub:
+        diagnostics = SimpleNamespace(pools=[])
+
+        def _candidates(self, meal, *, _given, qualified_results=None, fixed_slots=(), _scaled_round=False):
+            rounds.append([r.design.variant_id for r in _given])
+            if not _scaled_round:  # the chickpea dish misses protein, the tofu dish lacks products
+                self._qualification_codes[(chickpea.design.base_id, "base")] = "NUTRITION_TARGET_NOT_MET"
+                self._qualification_codes[(tofu.design.base_id, "base")] = "DATA_BLOCKED"
+                raise PolicyConflict("Inget recept passade.", code="NUTRITION_TARGET_NOT_MET")
+            return [r for r in _given if r.design.variant_id == "base-m150s100"]
+
+    meal = SimpleNamespace(meal_type="dinner", limits=PortionLimits(min_protein_g=45))
+    valid = PersonalPlanner._with_needed_scaled(Stub(), meal, [chickpea, tofu, *siblings], None, ())
+    # The side-only version cannot raise protein and is skipped; the tofu dish gets none.
+    assert rounds == [["base", "base"], ["base-m125s100"], ["base-m150s100"]]
+    assert [r.design.variant_id for r in valid] == ["base-m150s100"]
+
+    rounds.clear()
+    meal = SimpleNamespace(meal_type="dinner", limits=PortionLimits(max_kcal=500))
+    with pytest.raises(PolicyConflict):  # nothing qualified: the dishes' own reason stands
+        PersonalPlanner._with_needed_scaled(Stub(), meal, [chickpea, *sr.scaled_versions(chickpea)], None, ())
+    # Only versions that lower an amount can help a maximum.
+    assert rounds == [["base"], ["base-m100s70"], ["base-m125s70"]]

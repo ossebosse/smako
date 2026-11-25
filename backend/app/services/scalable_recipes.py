@@ -149,6 +149,19 @@ def with_scaled_versions(recipes):
     return recipes + extra
 
 
+def scale_direction(parent, scaled):
+    """(raises an amount, lowers an amount) of a scaled version against its dish."""
+    written = {i.name: i.quantity for i in parent.ingredients}
+    up = down = False
+    for i in scaled.ingredients:
+        before = written.get(i.name)
+        if before is None:
+            continue
+        up = up or i.quantity > before + 1e-9
+        down = down or i.quantity < before - 1e-9
+    return up, down
+
+
 def nutrition_limited(meal) -> bool:
     limits = getattr(meal, "limits", None)
     return bool(limits) and any(getattr(limits, f) is not None for f in (
