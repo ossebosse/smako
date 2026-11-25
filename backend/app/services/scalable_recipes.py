@@ -71,7 +71,12 @@ def scaled_versions(recipe):
         seen.add(signature)
         result.append(_scaled_copy(recipe, changed, content_hash))
     result.sort(key=lambda r: (r.design.scale_steps, r.design.variant_id))
-    return result
+    # Two shapes can differ only in a second main ingredient and get the same name;
+    # keep the closest one so every identity is unique.
+    unique = {}
+    for r in result:
+        unique.setdefault(r.design.variant_id, r)
+    return list(unique.values())
 
 
 def follower_amount(value):

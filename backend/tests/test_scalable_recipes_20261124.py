@@ -100,3 +100,18 @@ def test_seasonings_follow_the_main_ingredient_only_in_its_component():
     assert after["rapsolja"] == before["rapsolja"] and after["oregano"] == before["oregano"]  # not followers
     salt_c1 = next(a.quantity for c in recipe.design.components if c.id == "c1" for a in c.amounts if a.ingredient_key == "salt|as_sold")
     assert after["salt"] == pytest.approx(before["salt"] + salt_c1 * (factor - 1), abs=0.5)
+
+
+def test_two_main_ingredients_never_give_two_siblings_the_same_identity(pilot):
+    recipe = pilot["smako-dinner-tofu-pasta-ragu:base"]
+
+    def change(i):
+        if i.name == "tofu":  # capped one step up: x1.25 and x1.5 give the same tofu amount
+            return i.model_copy(update={"quantity_max": i.quantity + i.quantity_step})
+        if i.name == "morot":  # a second main ingredient that keeps scaling
+            return i.model_copy(update={"role": "primary", "quantity_min": 90.0, "quantity_max": 180.0, "quantity_step": 10.0})
+        return i
+
+    two = recipe.model_copy(update={"ingredients": [change(i) for i in recipe.ingredients]})
+    siblings = sr.scaled_versions(two)
+    assert len({s.design.variant_id for s in siblings}) == len(siblings) > 0
