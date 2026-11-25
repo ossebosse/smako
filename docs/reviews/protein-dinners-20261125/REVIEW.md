@@ -212,3 +212,21 @@ Pris = en veckas inköp för just den rätten, 4 portioner, högst 2 butiker
 | Thailändskt | Khao soi – nordthailändsk currynudelsoppa med kyckling | Kyckling | 14 | 37 | 340 | 337 |
 | Thailändskt | Kycklingsatay med jordnötssås, gurkrelish och ris | Kyckling | 14 | 48 | 334 | 333 |
 | Thailändskt | Wokad kyckling i ostronsås med broccoli och svamp | Kyckling | 14 | 25 | 337 | 329 |
+## Planerartest (Lund, slängcontainer, 2 CPU, låg prioritet)
+
+Samma skript med dagens bibliotek och med de 145 rätterna monterade
+(8 012 → 8 709 recept inklusive skalade versioner).
+
+| Plan | Utan | Med | Kostnad |
+|---|---|---|---|
+| Inga mål, 5 middagar | 79,2 s | 80,3 s | 374,33 kr båda |
+| Protein 35 g, 3 | 46,2 s | 48,3 s | 295,84 kr båda |
+| Protein 45 g, 3 | 38,8 s | 40,1 s | 323,00 kr båda |
+| Protein 45 g, 5 | 38,6 s | 41,4 s | 523,82 kr båda |
+| Vegetariskt protein 35 g, 3 | 29,5 s | 29,5 s | 294,98 kr båda |
+| Protein 40 g + 700 kcal, 3 | 42,8 s | 45,6 s | 324,40 kr båda |
+| 45 g, 5 × 4 portioner, 2 kyckling/1 fisk/2 kött | 88,8 s | 90,9 s | 989,56 kr båda |
+
+Toppminne 2 020 → 2 091 MB. Med dagens priser och 2 butiker valde planeraren
+samma rätter i alla testveckor: de nya rätterna är kvalificerade alternativ
+(byte av rätt, variation, undvikna senaste rätter) men var inte billigast här.
