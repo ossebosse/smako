@@ -1,3 +1,14 @@
+# 2026-11-25 natt: Näringsvärden för lösvikt, burkar och kryddor
+
+Main `ac3b789`, releasegren `release/loose-food-20261125`. App
+**app-3a58ee0fba39-5f00a1b9**, bas `10a3567c2499`. Uppskattad vikt alltid på.
+Lösvikt (kött, fisk, grönt, örter), burkar, kryddor, vin och balsamvinäger får
+referensvärden från Livsmedelsverket, Matvaretabellen eller USDA. Lund: 487
+middagar klarar 45 g protein (från 250), planen 812,95 kr (från 989,56 kr).
+[Aktiveringsjournal](releases/loose-food-20261125/ACTIVATED.md).
+
+---
+
 # 2026-11-25 kväll: streckkodsskanning efter kvitto fungerar
 
 Main `ba42a3f`, releasegren `release/receipt-barcode-20261125`. App
