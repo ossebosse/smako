@@ -16,7 +16,7 @@ from pathlib import Path
 
 from app.services.ingredient_normalizer import canonicalize_ingredient_name
 
-POLICY_VERSION = "slv-component-input-v5-nordic-density"
+POLICY_VERSION = "slv-component-input-v6-loose-food"
 PATH = Path(__file__).parents[1] / "data/nutrition/slv-20260911.json"
 SUPPLEMENT_PATH = PATH.with_name('slv-20260924.json')
 APPLE_SUPPLEMENT_PATH = PATH.with_name('slv-20261005-apple.json')
@@ -121,6 +121,30 @@ MAPPINGS = {
     103: ("parmesan", "ready"),
     1981: ("bakpulver", "dry"),
     4937: ("körsbärstomater", "raw"),
+    # slv-20261125-loose.json (owner decision 2026-11-25): loose meat sold by
+    # weight and loose vegetables/herbs publish no table; loose_food_reference.py.
+    5066: ("nötkött", "raw"), 953: ("högrev", "raw"), 961: ("nöt grytbitar", "raw"),
+    946: ("ryggbiff", "raw"), 960: ("entrecôte", "raw"), 954: ("nöt innanlår", "raw"),
+    950: ("fransyska", "raw"), 959: ("nöt ytterlår", "raw"), 957: ("rostbiff", "raw"),
+    949: ("oxfilé", "raw"), 1013: ("flankstek", "raw"), 947: ("oxbringa", "raw"),
+    977: ("fläsk grytbitar", "raw"), 978: ("fläskkarré", "raw"), 970: ("fläskfilé", "raw"),
+    971: ("fläskkotlett", "raw"), 969: ("fläskbog", "raw"), 988: ("fläsk innanlår", "raw"),
+    985: ("sidfläsk", "raw"), 924: ("lammstek", "raw"), 5068: ("lamm grytbitar", "raw"),
+    921: ("lammkotlett", "raw"), 923: ("lammrygg", "raw"), 1174: ("kycklinglårfilé", "raw"),
+    1164: ("kycklingkött", "raw"), 1453: ("kycklinglever", "raw"), 1202: ("sej", "raw_cod"),
+    1237: ("kolja", "raw_cod"), 4615: ("alaska pollock", "raw_cod"), 1260: ("makrill", "raw"),
+    1395: ("räkor kokta", "drained"), 290: ("palsternacka", "raw"), 292: ("rotselleri", "raw"),
+    293: ("rädisa", "raw"), 336: ("fänkål", "raw"), 353: ("pumpa", "raw"), 354: ("purjolök", "raw"),
+    6806: ("purjolök", "frozen"), 3938: ("huvudsallat", "raw"), 340: ("isbergssallat", "raw"),
+    2559: ("romansallat", "raw"), 2561: ("ruccola", "raw"), 378: ("gräslök", "raw"), 337: ("grönkål", "raw"),
+    355: ("rödkål", "raw"), 7192: ("pak choi", "raw"), 331: ("gröna bönor", "raw"),
+    332: ("gröna bönor", "frozen"), 380: ("chilipeppar", "raw"), 320: ("avokado", "raw"),
+    550: ("ananas", "raw"), 345: ("majskolv", "raw"), 342: ("kronärtskocka", "raw"),
+    359: ("sockerärtor", "raw"), 329: ("mungbönsgroddar", "raw"), 4942: ("mangold", "raw"),
+    1908: ("vin vitt 12 %", "ready"), 1907: ("vin rött 14 %", "ready"), 4447: ("risnudlar", "dry"),
+    705: ("korngryn", "dry"), 1270: ("sardeller", "preserved_drained"), 393: ("bambuskott", "drained"),
+    406: ("surkål", "preserved_drained"), 4042: ("vattenkastanjer", "drained"),
+    490: ("saltgurka", "preserved_drained"),
 }
 # Optional data availability is explicit for isolated same-facts comparisons.
 # Deployed reference files are immutable and included in content_version below.
@@ -164,7 +188,7 @@ def macro_values(rows):
 def reference_data():
     raw = PATH.read_bytes()
     data = json.loads(raw)
-    for path in (SUPPLEMENT_PATH, PATH.with_name('slv-20260925.json'), PATH.with_name('slv-20260926.json'), PATH.with_name('slv-20261002.json'), PATH.with_name('slv-20261002-celery.json'), PATH.with_name('slv-20261002-beetroot.json'), PATH.with_name('slv-20261002-sweetpotato.json'), PATH.with_name('slv-20261002-peppers.json'), PATH.with_name('slv-20261003-black-olives.json'), PATH.with_name('slv-20261121.json'), PATH.with_name('slv-20261122.json'), *((APPLE_SUPPLEMENT_PATH,) if APPLE_SUPPLEMENT_PATH.exists() else ())):
+    for path in (SUPPLEMENT_PATH, PATH.with_name('slv-20260925.json'), PATH.with_name('slv-20260926.json'), PATH.with_name('slv-20261002.json'), PATH.with_name('slv-20261002-celery.json'), PATH.with_name('slv-20261002-beetroot.json'), PATH.with_name('slv-20261002-sweetpotato.json'), PATH.with_name('slv-20261002-peppers.json'), PATH.with_name('slv-20261003-black-olives.json'), PATH.with_name('slv-20261121.json'), PATH.with_name('slv-20261122.json'), PATH.with_name('slv-20261125-loose.json'), *((APPLE_SUPPLEMENT_PATH,) if APPLE_SUPPLEMENT_PATH.exists() else ())):
         supplement = json.loads(path.read_bytes())
         if data['foods'].keys() & supplement['foods'].keys():
             raise ValueError('SLV supplement must not silently replace retained references')

@@ -60,7 +60,9 @@ def test_issued_leaf_method_preserves_gross_purchase_and_cannot_borrow_generic_n
     assert raw.package_quantity == 25
     assert input_quantity(MINT_LEAVES, {'mynta': 10}) == pytest.approx(10 * .85 / .5464)
     assert estimated_outputs(MINT_LEAVES, input_quantity(MINT_LEAVES, {'mynta': 10})) == {'mynta': 10}
-    assert p.nutrition_evidence(raw, 'mynta', 'g', {'protein_g'}, issued()) is None
+    # Owner request 2026-11-25: picked leaves use SLV 7194 "Grönmynta blad".
+    leaves = p.nutrition_evidence(raw, 'mynta', 'g', {'protein_g'}, issued())
+    assert leaves.source_product_id == 'slv:7194' and leaves.evidence_kind == 'generic_reference'
     p.request = p.request.model_copy(update={'purchase_planning_mode': 'exact'})
     with pytest.raises(PolicyConflict, match='uppskattningsläge'):
         p.resolve('mynta', 10, 'g', recipe=issued())

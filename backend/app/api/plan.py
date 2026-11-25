@@ -421,7 +421,10 @@ def _production_consumer_request(
 ) -> PlanRequest:
     """Reject public requests that can expand planner work beyond the beta budget."""
 
-    request = request.model_copy(update={"membership_price_policy": "all_advertised"})
+    # Owner decision 2026-11-25: goods sold by weight or by the piece are always
+    # planned with their estimated weight; this is no longer a choice.
+    request = request.model_copy(update={"membership_price_policy": "all_advertised",
+                                         "purchase_planning_mode": "estimated"})
     if settings.app_env != "production":
         return request
     if request.personal is not None:

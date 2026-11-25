@@ -587,9 +587,8 @@ async def _change_plan_body(plan_id, payload, request, response):
         raise HTTPException(
             422, "Ändringen stämmer inte med antalet måltider eller din fördelning."
         ) from exc
-    updates = {"personal": spec, "membership_price_policy": "all_advertised"}
-    if payload.purchase_planning_mode is not None:
-        updates["purchase_planning_mode"] = payload.purchase_planning_mode
+    # Owner decision 2026-11-25: estimated weight is always allowed (also for older plans).
+    updates = {"personal": spec, "membership_price_policy": "all_advertised", "purchase_planning_mode": "estimated"}
     plan_request = saved.request.model_copy(update=updates)
     from app.services.membership import require_membership_limits
     require_membership_limits(plan_request, request)

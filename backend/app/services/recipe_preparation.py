@@ -283,7 +283,14 @@ def input_evidence(recipe, product, name, unit, qualified, fact, *, recipe_cache
     from app.services.nutrition_reference import product_reference, reference_evidence
 
     if gross_purchase_input(recipe, canonical(name)):
-        return None
+        # Owner request 2026-11-25: whole lemongrass stalks are flavouring.
+        from app.services.loose_food_reference import gross_flavouring_evidence
+
+        if (recipe.preparation is None or unit != "g" or has_unmeasured_process(recipe)
+                or not (validate(recipe) if recipe_cache is None else recipe_cache.get(recipe, validate))):
+            return None
+        found = gross_flavouring_evidence(product, name, fact, recipe.preparation.input_forms.get(canonical(name)))
+        return None if found is None else wrap_evidence(recipe, name, found)
 
     # Only the exact recipe's pure preparation validation is reusable. Product
     # identity, source, input form, units and nutrient qualification below still
@@ -373,7 +380,13 @@ def input_evidence(recipe, product, name, unit, qualified, fact, *, recipe_cache
             # Its own table may describe the contents with liquid, so nutrition
             # for the recipe's drained grams comes only from the generic drained
             # reference below, never from the supplier's table.
-            if not (form == "cooked_drained" and unit == "g" and (drained_mass or package_weight_drained(product, fact))):
+            # Owner decision 2026-11-25: a plain canned food without a drained
+            # declaration (capers, anchovies, bamboo shoots...) uses its reference.
+            from app.services.loose_food_reference import identity as loose_identity
+
+            loose_preserve = unit == "g" and loose_identity(name, product.name) is not None
+            if not (form == "cooked_drained" and unit == "g" and (drained_mass or package_weight_drained(product, fact))) \
+                    and not loose_preserve:
                 return None
             generic_drained, qualified = True, False
         else:
@@ -383,6 +396,10 @@ def input_evidence(recipe, product, name, unit, qualified, fact, *, recipe_cache
         from app.services.recipe_volume_nutrition import volume_evidence
 
         evidence = volume_evidence(product, name, fact)
+        if evidence is None:
+            from app.services.loose_food_reference import volume_evidence as loose_volume
+
+            evidence = loose_volume(product, name, fact)
     plain_salt_reference = (
         canonical(name) == 'salt' and form == 'as_sold' and unit == 'g'
         and product_reference(product, name, fact) == 1975
@@ -398,10 +415,14 @@ def input_evidence(recipe, product, name, unit, qualified, fact, *, recipe_cache
         and not {"kcal", "protein_g", "fat_g", "carbs_g"} <= fact.nutrition.keys()
         and product_reference(product, name, fact) is not None
     )
+    from app.services.loose_food_reference import incomplete_table, identity as loose_identity
+
+    loose_partial = incomplete_table(fact) and loose_identity(name, product.name) is not None
     if evidence is None:
         if unit != "g" or (fact and fact.nutrition and not (
             form == "cooked_drained" and fact.nutrition_preparation == "draining_unspecified"
-        ) and not generic_drained and not partial_reference and not plain_salt_reference and not drained_olive_reference):
+        ) and not generic_drained and not partial_reference and not plain_salt_reference and not drained_olive_reference
+                and not loose_partial):
             return None
         if form == "cooked_drained":
             # Origin, organic certification and percentages are not ingredients.
@@ -426,6 +447,11 @@ def input_evidence(recipe, product, name, unit, qualified, fact, *, recipe_cache
             from app.services.nordic_nutrition import plain_food_evidence
 
             evidence = plain_food_evidence(product, name, fact)
+            if evidence is None:
+                # Owner decision 2026-11-25: loose meat and produce without a table.
+                from app.services.loose_food_reference import evidence as loose_evidence
+
+                evidence = loose_evidence(product, name, fact, form)
             if evidence is None:
                 return None
         else:
