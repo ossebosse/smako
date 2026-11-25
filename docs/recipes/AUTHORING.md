@@ -65,9 +65,15 @@ kolhydrater, fett, energi) utan att rätten slutar vara densamma:
 - Granskningen godkänner hela intervallet: varje mängd på steget räknas som
   granskad. Skriv stegen så att de stämmer för hela intervallet, till exempel
   "stek kycklingen" i stället för "stek 300 g kyckling".
-- En skalbar råvara får inte kokas i en fast vattenmängd ("N ml vatten" i ett
-  steg som använder den); då stoppas receptet. Recept med omätta
-  processförluster kan inte ha intervall.
+- En skalbar torr råvara (`form: dry`, till exempel ris, pasta, torra linser)
+  får inte kokas i en fast vattenmängd ("N ml vatten" i ett steg som använder
+  den); då stoppas receptet. Kött, fisk, tofu eller konserverade bönor får
+  sjuda i en fast mängd. Recept med omätta processförluster kan inte ha intervall.
+- Ägarbeslut 2026-11-25: smaksättning, marinad, sås och fett i huvudråvarans
+  komponent kan följa med: `"follows": "kyckling"`. Bara mängden i den
+  komponenten skalas, så salt till tillbehöret står kvar. Mjölk, grädde, mjöl
+  och mannagryn ska inte följa, eftersom de håller ihop en redning, deg eller
+  stanning.
 - En middag utan skalbar huvudråvara får en varning.
 
 Utan näringsgränser använder planeraren alltid `quantity`. Med gränser väljer

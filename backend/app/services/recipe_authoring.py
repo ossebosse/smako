@@ -259,9 +259,13 @@ def standardize(source, vocabulary, *, reviewed_at):
                 # carries the amount and scales with the portion count.
                 row_step["scalable_amounts"] = water
             steps.append(row_step)
-        scalable = sorted(k for k, line in lines.items() if line["quantity_min"] < line["quantity_max"])
+        scalable = sorted(k for k, line in lines.items() if line["quantity_min"] < line["quantity_max"]
+                          and not line.get("scales_with"))
+        # Owner decision 2026-11-25: only a dry ingredient absorbs its cooking water;
+        # meat, fish, tofu or canned beans may simmer in a fixed amount.
+        absorbing = {k for k in scalable if lines[k]["form"] == "dry"}
         for step_number, step in enumerate(steps, 1):
-            if step.get("scalable_amounts") and set(step["ingredient_keys"]) & set(scalable):
+            if step.get("scalable_amounts") and set(step["ingredient_keys"]) & absorbing:
                 # The water amount follows the portions, not a scaled ingredient.
                 raise ValueError(f"{where}: steg {step_number} anger vatten för en skalbar ingrediens; "
                                  "ta bort intervallet eller skriv steget utan fast vattenmängd")

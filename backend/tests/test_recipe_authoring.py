@@ -178,11 +178,17 @@ def test_unsafe_ranges_are_rejected(name, change, message):
         standardize(source, VOCABULARY, reviewed_at="2026-11-24")
 
 
-def test_a_scaled_ingredient_cannot_be_cooked_in_a_fixed_water_amount():
+def test_a_scaled_dry_ingredient_cannot_be_cooked_in_a_fixed_water_amount():
     source = _source()
     source["recipes"][0]["steps"][1]["text"] = "Koka potatisen i 800 ml vatten cirka 20 minuter."
+    standardize(source, VOCABULARY, reviewed_at="2026-11-25")  # potatoes are drained, not absorbing
+    vocabulary = {**VOCABULARY, "potatis|dry": ("g", ["pack:potato"])}
+    for component in source["recipes"][0]["components"]:
+        for item in component["ingredients"]:
+            if item["name"] == "potatis":
+                item["form"] = "dry"
     with pytest.raises(ValueError, match="vatten för en skalbar"):
-        standardize(source, VOCABULARY, reviewed_at="2026-11-24")
+        standardize(source, vocabulary, reviewed_at="2026-11-25")
 
 
 def test_a_dinner_without_a_scalable_main_ingredient_is_flagged():
