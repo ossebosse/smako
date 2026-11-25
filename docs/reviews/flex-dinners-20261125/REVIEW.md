@@ -37,3 +37,20 @@ Kvarstående kända småfel: smaksättning kan följa fel huvudråvara i rätter
 två proteiner (till exempel sojasås till nudlar som följer tofun), och ris som
 kokar i en buljong utan angiven vattenmängd kan få något för lite vätska vid
 120 %. Ägaren godtar sådana fel.
+
+## Full planner test, 2026-11-25 (Lund prices, throwaway container, 2 CPU, low priority)
+
+Same script on the same code, with and without the 1 992 flex dinners imported.
+Library: 3 298 recipes before, 8 012 after (4 714 scaled versions).
+
+| Plan | Without flex | With flex | Cost without → with |
+|---|---|---|---|
+| No limits, 3 dinners | 90.8 s | 104.8 s | 270.74 → 270.74 kr |
+| No limits, 5 dinners | 73.5 s | 79.6 s | 374.33 → 374.33 kr |
+| Protein 35 g, 3 | 38.8 s | 68.4 s | 295.84 → 295.84 kr |
+| Protein 45 g, 3 | 26.6 s | 56.5 s | 323.00 → 323.00 kr |
+| Protein 45 g, 5 | 29.9 s | 81.0 s | 636.50 → 517.82 kr (two scaled dinners) |
+| Vegetarian protein 35 g, 3 | 20.3 s | 39.7 s | 294.98 → 294.98 kr |
+| Protein 40 g + 700 kcal, 3 | 28.8 s | 63.8 s | 324.40 → 324.40 kr |
+
+Peak memory: 1 783 MB → 2 068 MB (+285 MB). Plans without limits pick no scaled versions.
