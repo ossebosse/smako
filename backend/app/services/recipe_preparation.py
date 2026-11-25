@@ -427,6 +427,11 @@ def input_evidence(recipe, product, name, unit, qualified, fact, *, recipe_cache
 
             evidence = plain_food_evidence(product, name, fact)
             if evidence is None:
+                # Owner decision 2026-11-25: loose meat and produce without a table.
+                from app.services.loose_food_reference import evidence as loose_evidence
+
+                evidence = loose_evidence(product, name, fact, form)
+            if evidence is None:
                 return None
         else:
             evidence = reference_evidence(identity)

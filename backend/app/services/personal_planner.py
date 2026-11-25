@@ -1162,7 +1162,7 @@ class PersonalPlanner:
         self._resolution_trace[cache_key] = observed
         if not candidates:
             failure = conflicts[0] if conflicts else PolicyConflict(
-                (f"{name} finns som viktvara. Välj Tillåt uppskattad vikt och kostnad under Inköpsberäkning för att pröva dessa varor. Slutbeloppet beror på faktisk vikt; övriga krav gäller fortfarande."
+                (f"{name} finns bara som viktvara, och den här beräkningen räknar inte med uppskattad vikt."
                  if weight_consent_missing else
                  f"Vi hittar ingen vara att köpa för {name}, {unit}. Kontrollera mängden, egenskaperna eller exakt produkt."),
                 code="DATA_BLOCKED",

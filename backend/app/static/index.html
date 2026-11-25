@@ -151,14 +151,8 @@
                 <span class="field-hint">Du kan jämföra både butiker och nätbutiker. Pristypen anges i listan. Fler inköpsställen kan ge lägre pris.</span>
               </div>
 
-              <div class="field field-wide">
-                <label for="purchase-planning-mode">Köpplanering</label>
-                <select id="purchase-planning-mode" name="purchase_planning_mode">
-                  <option value="exact" selected>Exakt – bara styrkta mängder</option>
-                  <option value="estimated">Uppskattad – även källbelagda cirka-mängder</option>
-                </select>
-                <span class="field-hint">Uppskattningar märks i inköpslistan. Oklart variantval eller allergenunderlag godkänns inte automatiskt.</span>
-              </div>
+              <!-- Owner decision 2026-11-25: estimated weight is always used; no choice. -->
+              <input type="hidden" id="purchase-planning-mode" name="purchase_planning_mode" value="estimated">
 
               <div class="field field-wide">
                 <label for="diet-preference">Kost</label>
