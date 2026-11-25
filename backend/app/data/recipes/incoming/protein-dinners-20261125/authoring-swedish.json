@@ -1,0 +1,5244 @@
+{
+ "schema_version": "smako-recipe-authoring-v1",
+ "pack_id": "smako-protein-dinners-swedish-20261125",
+ "recipes": [
+  {
+   "base_id": "smako-swedish-kottbullar-graddsas-potatismos",
+   "name": "Köttbullar med gräddsås, potatismos och lingon",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "swedish",
+   "family": "köttbullar",
+   "primary": "blandfärs",
+   "method": "pan",
+   "side": "potatis",
+   "flavor": [
+    "kryddpeppar",
+    "grädde"
+   ],
+   "equipment": [
+    "Stekpanna",
+    "Kastrull",
+    "Skål",
+    "Potatisstöt"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Köttbullar",
+     "ingredients": [
+      {
+       "name": "blandfärs",
+       "form": "raw_edible",
+       "quantity": 600.0,
+       "role": "primary",
+       "label": "Blandfärs",
+       "range": [
+        500.0,
+        900.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "ströbröd",
+       "form": "dry",
+       "quantity": 30.0,
+       "role": "cooking",
+       "label": "Ströbröd"
+      },
+      {
+       "name": "mjölk",
+       "form": "as_sold",
+       "quantity": 100.0,
+       "role": "sauce",
+       "label": "Mjölk"
+      },
+      {
+       "name": "ägg",
+       "form": "raw_edible",
+       "quantity": 50.0,
+       "role": "cooking",
+       "label": "Ägg"
+      },
+      {
+       "name": "gul lök",
+       "form": "raw_edible",
+       "quantity": 100.0,
+       "role": "flavour",
+       "label": "Gul lök",
+       "follows": "blandfärs"
+      },
+      {
+       "name": "kryddpeppar",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Kryddpeppar",
+       "follows": "blandfärs"
+      },
+      {
+       "name": "smör",
+       "form": "as_sold",
+       "quantity": 20.0,
+       "role": "cooking",
+       "label": "Smör",
+       "follows": "blandfärs"
+      },
+      {
+       "name": "salt",
+       "form": "as_sold",
+       "quantity": 6.0,
+       "role": "flavour",
+       "label": "Salt",
+       "follows": "blandfärs"
+      },
+      {
+       "name": "svartpeppar",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Svartpeppar",
+       "follows": "blandfärs"
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Gräddsås",
+     "ingredients": [
+      {
+       "name": "grädde",
+       "form": "as_sold",
+       "quantity": 200.0,
+       "role": "sauce",
+       "label": "Grädde"
+      },
+      {
+       "name": "sojasås",
+       "form": "as_sold",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Sojasås"
+      }
+     ]
+    },
+    {
+     "id": "c3",
+     "name": "Potatismos",
+     "ingredients": [
+      {
+       "name": "potatis",
+       "form": "raw_edible",
+       "quantity": 900.0,
+       "role": "side",
+       "label": "Potatis",
+       "range": [
+        650.0,
+        1050.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "mjölk",
+       "form": "as_sold",
+       "quantity": 150.0,
+       "role": "sauce",
+       "label": "Mjölk"
+      },
+      {
+       "name": "smör",
+       "form": "as_sold",
+       "quantity": 30.0,
+       "role": "sauce",
+       "label": "Smör"
+      }
+     ]
+    },
+    {
+     "id": "c4",
+     "name": "Till servering",
+     "ingredients": [
+      {
+       "name": "lingon",
+       "form": "as_sold",
+       "quantity": 120.0,
+       "role": "flavour",
+       "label": "Lingon"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Rör ihop ströbröd och 100 ml mjölk i en skål och låt svälla 5 minuter. Finriv löken.",
+     "uses": [
+      "ströbröd",
+      "mjölk",
+      "gul lök"
+     ],
+     "minutes": 6
+    },
+    {
+     "text": "Blanda färsen med ströbrödsblandningen, ägg, lök, kryddpeppar, salt och peppar. Rulla små bullar.",
+     "uses": [
+      "blandfärs",
+      "ströbröd",
+      "mjölk",
+      "ägg",
+      "gul lök",
+      "kryddpeppar",
+      "salt",
+      "svartpeppar"
+     ],
+     "minutes": 12,
+     "after": [
+      1
+     ]
+    },
+    {
+     "text": "Skala potatisen och koka den mjuk i saltat vatten, cirka 20 minuter.",
+     "uses": [
+      "potatis"
+     ],
+     "minutes": 22,
+     "passive": true
+    },
+    {
+     "text": "Stek köttbullarna i smör i omgångar tills de är genomstekta, minst 72 °C i mitten. Lägg upp.",
+     "uses": [
+      "blandfärs",
+      "smör"
+     ],
+     "minutes": 15,
+     "after": [
+      2
+     ]
+    },
+    {
+     "text": "Häll grädde och soja i pannan, låt sjuda 3 minuter och smaka av.",
+     "uses": [
+      "grädde",
+      "sojasås"
+     ],
+     "minutes": 4,
+     "after": [
+      4
+     ]
+    },
+    {
+     "text": "Häll av potatisen, stöt den med varm mjölk och smör till mos. Servera med köttbullar, sås och lingon.",
+     "uses": [
+      "potatis",
+      "mjölk",
+      "smör",
+      "lingon"
+     ],
+     "minutes": 6,
+     "after": [
+      3,
+      5
+     ]
+    }
+   ]
+  },
+  {
+   "base_id": "smako-swedish-kalops-notkott",
+   "name": "Kalops med kokt potatis och persilja",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "swedish",
+   "family": "kalops",
+   "primary": "nötkött",
+   "method": "pot",
+   "side": "potatis",
+   "flavor": [
+    "kryddpeppar",
+    "lagerblad"
+   ],
+   "equipment": [
+    "Gjutjärnsgryta",
+    "Kastrull",
+    "Skärbräda"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Kalops",
+     "ingredients": [
+      {
+       "name": "nötkött",
+       "form": "raw_edible",
+       "quantity": 700.0,
+       "role": "primary",
+       "requirements": [
+        "pack:beef_braising_cut",
+        "pack:intake_all_10d1e6ea4dc5"
+       ],
+       "label": "Högrev eller grytbitar av nöt",
+       "range": [
+        600.0,
+        1050.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "gul lök",
+       "form": "raw_edible",
+       "quantity": 300.0,
+       "role": "vegetable",
+       "label": "Gul lök"
+      },
+      {
+       "name": "morot",
+       "form": "raw_edible",
+       "quantity": 300.0,
+       "role": "vegetable",
+       "label": "Morot"
+      },
+      {
+       "name": "vetemjöl",
+       "form": "dry",
+       "quantity": 20.0,
+       "role": "sauce",
+       "label": "Vetemjöl"
+      },
+      {
+       "name": "smör",
+       "form": "as_sold",
+       "quantity": 25.0,
+       "role": "cooking",
+       "label": "Smör",
+       "follows": "nötkött"
+      },
+      {
+       "name": "lagerblad",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Lagerblad",
+       "follows": "nötkött"
+      },
+      {
+       "name": "kryddpeppar",
+       "form": "dry",
+       "quantity": 2.0,
+       "role": "flavour",
+       "label": "Kryddpeppar",
+       "follows": "nötkött"
+      },
+      {
+       "name": "palsternacka",
+       "form": "raw_edible",
+       "quantity": 200.0,
+       "role": "vegetable",
+       "label": "Palsternacka"
+      },
+      {
+       "name": "salt",
+       "form": "as_sold",
+       "quantity": 8.0,
+       "role": "flavour",
+       "label": "Salt",
+       "follows": "nötkött"
+      },
+      {
+       "name": "svartpeppar",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Svartpeppar",
+       "follows": "nötkött"
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Potatis",
+     "ingredients": [
+      {
+       "name": "potatis",
+       "form": "raw_edible",
+       "quantity": 900.0,
+       "role": "side",
+       "label": "Potatis",
+       "range": [
+        650.0,
+        1050.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "persilja",
+       "form": "raw_edible",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Persilja"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Skär köttet i stora tärningar och vänd i mjöl, salt och peppar. Skär löken i klyftor och moroten i bitar.",
+     "uses": [
+      "nötkött",
+      "vetemjöl",
+      "salt",
+      "svartpeppar",
+      "gul lök",
+      "morot"
+     ],
+     "minutes": 10
+    },
+    {
+     "text": "Bryn köttet i smör i gjutjärnsgrytan i omgångar. Fräs löken med en stund.",
+     "uses": [
+      "nötkött",
+      "smör",
+      "gul lök"
+     ],
+     "minutes": 10,
+     "after": [
+      1
+     ]
+    },
+    {
+     "text": "Tillsätt 700 ml vatten, kryddpeppar och lagerblad. Sjud under lock i 1 timme och 30 minuter tills köttet är mört.",
+     "uses": [
+      "nötkött",
+      "kryddpeppar",
+      "lagerblad"
+     ],
+     "minutes": 90,
+     "after": [
+      2
+     ],
+     "passive": true
+    },
+    {
+     "text": "Lägg i morot och palsternacka i bitar efter 1 timme och sjud vidare tills de är mjuka. Smaka av med salt.",
+     "uses": [
+      "morot",
+      "palsternacka",
+      "salt"
+     ],
+     "minutes": 3,
+     "after": [
+      3
+     ]
+    },
+    {
+     "text": "Koka potatisen mjuk i saltat vatten, cirka 20 minuter.",
+     "uses": [
+      "potatis"
+     ],
+     "minutes": 20,
+     "after": [
+      3
+     ],
+     "passive": true
+    },
+    {
+     "text": "Servera kalopsen med potatis och hackad persilja.",
+     "uses": [
+      "potatis",
+      "persilja",
+      "nötkött"
+     ],
+     "minutes": 3,
+     "after": [
+      4,
+      5
+     ]
+    }
+   ]
+  },
+  {
+   "base_id": "smako-swedish-biff-rydberg",
+   "name": "Biff Rydberg med äggula, senapsgrädde och potatis",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "swedish",
+   "family": "biff rydberg",
+   "primary": "nötkött",
+   "method": "pan",
+   "side": "potatis",
+   "flavor": [
+    "senap",
+    "smör"
+   ],
+   "equipment": [
+    "Stekpanna",
+    "Ugn",
+    "Skål"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Biff",
+     "ingredients": [
+      {
+       "name": "nötkött",
+       "form": "raw_edible",
+       "quantity": 600.0,
+       "role": "primary",
+       "requirements": [
+        "pack:beef_quick_cut",
+        "pack:intake_all_10d1e6ea4dc5"
+       ],
+       "label": "Nötkött för stekning, t.ex. ryggbiff",
+       "range": [
+        500.0,
+        900.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "rapsolja",
+       "form": "as_sold",
+       "quantity": 20.0,
+       "role": "cooking",
+       "label": "Rapsolja",
+       "follows": "nötkött"
+      },
+      {
+       "name": "smör",
+       "form": "as_sold",
+       "quantity": 20.0,
+       "role": "cooking",
+       "label": "Smör",
+       "follows": "nötkött"
+      },
+      {
+       "name": "salt",
+       "form": "as_sold",
+       "quantity": 5.0,
+       "role": "flavour",
+       "label": "Salt",
+       "follows": "nötkött"
+      },
+      {
+       "name": "svartpeppar",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Svartpeppar",
+       "follows": "nötkött"
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Potatis och lök",
+     "ingredients": [
+      {
+       "name": "potatis",
+       "form": "raw_edible",
+       "quantity": 900.0,
+       "role": "side",
+       "label": "Potatis",
+       "range": [
+        650.0,
+        1050.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "gul lök",
+       "form": "raw_edible",
+       "quantity": 250.0,
+       "role": "vegetable",
+       "label": "Gul lök"
+      },
+      {
+       "name": "smör",
+       "form": "as_sold",
+       "quantity": 20.0,
+       "role": "cooking",
+       "label": "Smör"
+      },
+      {
+       "name": "persilja",
+       "form": "raw_edible",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Persilja"
+      }
+     ]
+    },
+    {
+     "id": "c3",
+     "name": "Senapsgrädde",
+     "ingredients": [
+      {
+       "name": "grädde",
+       "form": "as_sold",
+       "quantity": 150.0,
+       "role": "sauce",
+       "label": "Grädde"
+      },
+      {
+       "name": "senap",
+       "form": "as_sold",
+       "quantity": 30.0,
+       "role": "flavour",
+       "label": "Senap"
+      },
+      {
+       "name": "worcestershiresås",
+       "form": "as_sold",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Worcestershiresås"
+      }
+     ]
+    },
+    {
+     "id": "c4",
+     "name": "Till servering",
+     "ingredients": [
+      {
+       "name": "äggula",
+       "form": "raw_edible",
+       "quantity": 72.0,
+       "role": "sauce",
+       "label": "Äggula"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Skala och tärna potatisen, cirka 1 cm. Tärna löken.",
+     "uses": [
+      "potatis",
+      "gul lök"
+     ],
+     "minutes": 12
+    },
+    {
+     "text": "Stek potatistärningarna i smör i 20 minuter tills de är gyllene och mjuka. Stek löken mjuk i en egen panna.",
+     "uses": [
+      "potatis",
+      "smör",
+      "gul lök"
+     ],
+     "minutes": 22,
+     "after": [
+      1
+     ]
+    },
+    {
+     "text": "Vispa grädden lätt och rör ner senap och worcestershiresås.",
+     "uses": [
+      "grädde",
+      "senap",
+      "worcestershiresås"
+     ],
+     "minutes": 4
+    },
+    {
+     "text": "Tärna köttet och stek det snabbt i het olja i omgångar, 2 minuter. Salta och peppra.",
+     "uses": [
+      "nötkött",
+      "rapsolja",
+      "salt",
+      "svartpeppar"
+     ],
+     "minutes": 8,
+     "after": [
+      1
+     ]
+    },
+    {
+     "text": "Lägg upp kött, potatis och lök i högar, toppa med hackad persilja och en äggula per portion. Servera med senapsgrädden.",
+     "uses": [
+      "nötkött",
+      "potatis",
+      "gul lök",
+      "persilja",
+      "äggula",
+      "grädde"
+     ],
+     "minutes": 4,
+     "after": [
+      2,
+      3,
+      4
+     ]
+    }
+   ]
+  },
+  {
+   "base_id": "smako-swedish-raggmunk-flask-lingon",
+   "name": "Raggmunk med stekt fläsk, lingon och kålsallad",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "swedish",
+   "family": "raggmunk",
+   "primary": "rimmat fläsk",
+   "method": "pan",
+   "side": "potatis",
+   "flavor": [
+    "lingon",
+    "fläsk"
+   ],
+   "equipment": [
+    "Stekpanna",
+    "Skål",
+    "Rivjärn"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Fläsk",
+     "ingredients": [
+      {
+       "name": "rimmat fläsk",
+       "form": "raw_edible",
+       "quantity": 500.0,
+       "role": "primary",
+       "label": "Rimmat fläsk",
+       "range": [
+        400.0,
+        750.0
+       ],
+       "step": 50.0
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Raggmunk",
+     "ingredients": [
+      {
+       "name": "potatis",
+       "form": "raw_edible",
+       "quantity": 800.0,
+       "role": "side",
+       "label": "Potatis",
+       "range": [
+        600.0,
+        950.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "vetemjöl",
+       "form": "dry",
+       "quantity": 120.0,
+       "role": "sauce",
+       "label": "Vetemjöl"
+      },
+      {
+       "name": "mjölk",
+       "form": "as_sold",
+       "quantity": 400.0,
+       "role": "sauce",
+       "label": "Mjölk"
+      },
+      {
+       "name": "ägg",
+       "form": "raw_edible",
+       "quantity": 100.0,
+       "role": "sauce",
+       "label": "Ägg"
+      },
+      {
+       "name": "smör",
+       "form": "as_sold",
+       "quantity": 40.0,
+       "role": "cooking",
+       "label": "Smör"
+      },
+      {
+       "name": "salt",
+       "form": "as_sold",
+       "quantity": 4.0,
+       "role": "flavour",
+       "label": "Salt"
+      }
+     ]
+    },
+    {
+     "id": "c3",
+     "name": "Kålsallad",
+     "ingredients": [
+      {
+       "name": "vitkål",
+       "form": "raw_edible",
+       "quantity": 300.0,
+       "role": "vegetable",
+       "label": "Vitkål"
+      },
+      {
+       "name": "morot",
+       "form": "raw_edible",
+       "quantity": 150.0,
+       "role": "vegetable",
+       "label": "Morot"
+      },
+      {
+       "name": "äppelcidervinäger",
+       "form": "as_sold",
+       "quantity": 15.0,
+       "role": "flavour",
+       "label": "Äppelcidervinäger"
+      },
+      {
+       "name": "rapsolja",
+       "form": "as_sold",
+       "quantity": 15.0,
+       "role": "flavour",
+       "label": "Rapsolja"
+      }
+     ]
+    },
+    {
+     "id": "c4",
+     "name": "Till servering",
+     "ingredients": [
+      {
+       "name": "lingon",
+       "form": "as_sold",
+       "quantity": 150.0,
+       "role": "flavour",
+       "label": "Lingon"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Vispa en slät smet av mjöl, mjölk, ägg och salt.",
+     "uses": [
+      "vetemjöl",
+      "mjölk",
+      "ägg",
+      "salt"
+     ],
+     "minutes": 5
+    },
+    {
+     "text": "Strimla vitkålen fint, riv moroten och blanda med vinäger och olja.",
+     "uses": [
+      "vitkål",
+      "morot",
+      "äppelcidervinäger",
+      "rapsolja"
+     ],
+     "minutes": 8
+    },
+    {
+     "text": "Stek fläskskivorna knapriga i en torr panna, cirka 10 minuter. Håll varma.",
+     "uses": [
+      "rimmat fläsk"
+     ],
+     "minutes": 10
+    },
+    {
+     "text": "Skala och riv potatisen grovt och rör ner den i smeten direkt.",
+     "uses": [
+      "potatis"
+     ],
+     "minutes": 8,
+     "after": [
+      1
+     ]
+    },
+    {
+     "text": "Stek tunna raggmunkar i smör, cirka 3 minuter per sida tills de är krispiga.",
+     "uses": [
+      "potatis",
+      "smör",
+      "vetemjöl"
+     ],
+     "minutes": 20,
+     "after": [
+      4
+     ]
+    },
+    {
+     "text": "Servera raggmunkarna med fläsk, lingon och kålsallad.",
+     "uses": [
+      "rimmat fläsk",
+      "lingon",
+      "vitkål"
+     ],
+     "minutes": 2,
+     "after": [
+      2,
+      3,
+      5
+     ]
+    }
+   ]
+  },
+  {
+   "base_id": "smako-swedish-pytt-i-panna-agg",
+   "name": "Pytt i panna med stekt ägg och saltgurka",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "swedish",
+   "family": "pytt i panna",
+   "primary": "fläskkött",
+   "method": "pan",
+   "side": "potatis",
+   "flavor": [
+    "worcestershiresås",
+    "persilja"
+   ],
+   "equipment": [
+    "Stekpanna",
+    "Skärbräda"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Pytt",
+     "ingredients": [
+      {
+       "name": "fläskkött",
+       "form": "raw_edible",
+       "quantity": 500.0,
+       "role": "primary",
+       "label": "Fläskkött",
+       "range": [
+        400.0,
+        750.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "kokt skinka",
+       "form": "as_sold",
+       "quantity": 150.0,
+       "role": "primary",
+       "label": "Kokt skinka",
+       "range": [
+        120.0,
+        220.0
+       ],
+       "step": 10.0
+      },
+      {
+       "name": "rapsolja",
+       "form": "as_sold",
+       "quantity": 20.0,
+       "role": "cooking",
+       "label": "Rapsolja",
+       "follows": "fläskkött"
+      },
+      {
+       "name": "worcestershiresås",
+       "form": "as_sold",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Worcestershiresås",
+       "follows": "fläskkött"
+      },
+      {
+       "name": "salt",
+       "form": "as_sold",
+       "quantity": 5.0,
+       "role": "flavour",
+       "label": "Salt",
+       "follows": "fläskkött"
+      },
+      {
+       "name": "svartpeppar",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Svartpeppar",
+       "follows": "fläskkött"
+      },
+      {
+       "name": "potatis",
+       "form": "raw_edible",
+       "quantity": 900.0,
+       "role": "side",
+       "label": "Potatis",
+       "range": [
+        650.0,
+        1050.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "gul lök",
+       "form": "raw_edible",
+       "quantity": 250.0,
+       "role": "vegetable",
+       "label": "Gul lök"
+      },
+      {
+       "name": "smör",
+       "form": "as_sold",
+       "quantity": 30.0,
+       "role": "cooking",
+       "label": "Smör",
+       "follows": "fläskkött"
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Till servering",
+     "ingredients": [
+      {
+       "name": "ägg",
+       "form": "raw_edible",
+       "quantity": 200.0,
+       "role": "sauce",
+       "label": "Ägg"
+      },
+      {
+       "name": "saltgurka",
+       "form": "preserved_drained",
+       "quantity": 120.0,
+       "role": "flavour",
+       "label": "Saltgurka"
+      },
+      {
+       "name": "persilja",
+       "form": "raw_edible",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Persilja"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Skala och tärna potatisen i 1 cm tärningar. Tärna fläsket, skinkan och löken lika stort.",
+     "uses": [
+      "potatis",
+      "fläskkött",
+      "kokt skinka",
+      "gul lök"
+     ],
+     "minutes": 15
+    },
+    {
+     "text": "Stek potatisen i smör i 20 minuter tills den är gyllene och mjuk.",
+     "uses": [
+      "potatis",
+      "smör"
+     ],
+     "minutes": 20,
+     "after": [
+      1
+     ]
+    },
+    {
+     "text": "Stek fläsket i olja tills det är genomstekt. Tillsätt lök och skinka och stek 5 minuter till.",
+     "uses": [
+      "fläskkött",
+      "rapsolja",
+      "gul lök",
+      "kokt skinka"
+     ],
+     "minutes": 12,
+     "after": [
+      1
+     ]
+    },
+    {
+     "text": "Blanda potatisen med köttet, smaka av med worcestershiresås, salt och peppar.",
+     "uses": [
+      "potatis",
+      "fläskkött",
+      "worcestershiresås",
+      "salt",
+      "svartpeppar"
+     ],
+     "minutes": 3,
+     "after": [
+      2,
+      3
+     ]
+    },
+    {
+     "text": "Stek äggen och servera på pytten med saltgurka och hackad persilja.",
+     "uses": [
+      "ägg",
+      "saltgurka",
+      "persilja"
+     ],
+     "minutes": 6,
+     "after": [
+      4
+     ]
+    }
+   ]
+  },
+  {
+   "base_id": "smako-swedish-flaskkarre-rotfrukter-senapssas",
+   "name": "Ugnsstekt fläskkarré med rotfrukter och senapssås",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "swedish",
+   "family": "ugnsstek",
+   "primary": "fläskkarré",
+   "method": "oven",
+   "side": "potatis",
+   "flavor": [
+    "senap",
+    "timjan"
+   ],
+   "equipment": [
+    "Ugn",
+    "Långpanna",
+    "Kastrull",
+    "Stektermometer"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Karré",
+     "ingredients": [
+      {
+       "name": "fläskkarré",
+       "form": "raw_edible",
+       "quantity": 800.0,
+       "role": "primary",
+       "label": "Fläskkarré",
+       "range": [
+        650.0,
+        1200.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "rapsolja",
+       "form": "as_sold",
+       "quantity": 15.0,
+       "role": "cooking",
+       "label": "Rapsolja",
+       "follows": "fläskkarré"
+      },
+      {
+       "name": "timjan",
+       "form": "dry",
+       "quantity": 2.0,
+       "role": "flavour",
+       "label": "Timjan",
+       "follows": "fläskkarré"
+      },
+      {
+       "name": "salt",
+       "form": "as_sold",
+       "quantity": 8.0,
+       "role": "flavour",
+       "label": "Salt",
+       "follows": "fläskkarré"
+      },
+      {
+       "name": "svartpeppar",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Svartpeppar",
+       "follows": "fläskkarré"
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Rotfrukter",
+     "ingredients": [
+      {
+       "name": "potatis",
+       "form": "raw_edible",
+       "quantity": 700.0,
+       "role": "side",
+       "label": "Potatis",
+       "range": [
+        500.0,
+        800.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "morot",
+       "form": "raw_edible",
+       "quantity": 300.0,
+       "role": "vegetable",
+       "label": "Morot"
+      },
+      {
+       "name": "palsternacka",
+       "form": "raw_edible",
+       "quantity": 250.0,
+       "role": "vegetable",
+       "label": "Palsternacka"
+      },
+      {
+       "name": "rödlök",
+       "form": "raw_edible",
+       "quantity": 150.0,
+       "role": "vegetable",
+       "label": "Rödlök"
+      },
+      {
+       "name": "rapsolja",
+       "form": "as_sold",
+       "quantity": 15.0,
+       "role": "cooking",
+       "label": "Rapsolja"
+      }
+     ]
+    },
+    {
+     "id": "c3",
+     "name": "Senapssås",
+     "ingredients": [
+      {
+       "name": "crème fraiche",
+       "form": "as_sold",
+       "quantity": 200.0,
+       "role": "sauce",
+       "label": "Crème fraiche"
+      },
+      {
+       "name": "senap",
+       "form": "as_sold",
+       "quantity": 40.0,
+       "role": "flavour",
+       "label": "Senap"
+      },
+      {
+       "name": "honung",
+       "form": "as_sold",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Honung"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Sätt ugnen på 200 °C. Gnid in karrén med olja, timjan, salt och peppar.",
+     "uses": [
+      "fläskkarré",
+      "rapsolja",
+      "timjan",
+      "salt",
+      "svartpeppar"
+     ],
+     "minutes": 5
+    },
+    {
+     "text": "Skär potatis, morot, palsternacka och rödlök i bitar och vänd i olja och salt i långpannan.",
+     "uses": [
+      "potatis",
+      "morot",
+      "palsternacka",
+      "rödlök",
+      "rapsolja",
+      "salt"
+     ],
+     "minutes": 12
+    },
+    {
+     "text": "Lägg karrén på rotfrukterna och stek i ugnen tills köttet håller 68 °C i mitten, cirka 50 minuter.",
+     "uses": [
+      "fläskkarré",
+      "potatis",
+      "morot",
+      "palsternacka",
+      "rödlök"
+     ],
+     "minutes": 50,
+     "after": [
+      1,
+      2
+     ],
+     "passive": true
+    },
+    {
+     "text": "Rör ihop crème fraiche, senap och honung och värm försiktigt.",
+     "uses": [
+      "crème fraiche",
+      "senap",
+      "honung"
+     ],
+     "minutes": 4
+    },
+    {
+     "text": "Låt köttet vila 10 minuter, skiva det och servera med rotfrukterna och såsen.",
+     "uses": [
+      "fläskkarré",
+      "crème fraiche"
+     ],
+     "minutes": 12,
+     "after": [
+      3,
+      4
+     ]
+    }
+   ]
+  },
+  {
+   "base_id": "smako-swedish-tacopaj",
+   "name": "Tacopaj med nötfärs, ost och krispig sallad",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "swedish",
+   "family": "paj",
+   "primary": "nötfärs",
+   "method": "oven",
+   "side": "pajdeg",
+   "flavor": [
+    "spiskummin",
+    "paprika"
+   ],
+   "equipment": [
+    "Ugn",
+    "Pajform",
+    "Stekpanna",
+    "Skål"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Pajdeg",
+     "ingredients": [
+      {
+       "name": "vetemjöl",
+       "form": "dry",
+       "quantity": 180.0,
+       "role": "sauce",
+       "label": "Vetemjöl"
+      },
+      {
+       "name": "smör",
+       "form": "as_sold",
+       "quantity": 100.0,
+       "role": "sauce",
+       "label": "Smör"
+      },
+      {
+       "name": "salt",
+       "form": "as_sold",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Salt"
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Fyllning",
+     "ingredients": [
+      {
+       "name": "nötfärs",
+       "form": "raw_edible",
+       "quantity": 600.0,
+       "role": "primary",
+       "label": "Nötfärs",
+       "range": [
+        500.0,
+        900.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "gul lök",
+       "form": "raw_edible",
+       "quantity": 100.0,
+       "role": "flavour",
+       "label": "Gul lök",
+       "follows": "nötfärs"
+      },
+      {
+       "name": "krossade tomater",
+       "form": "as_sold",
+       "quantity": 200.0,
+       "role": "sauce",
+       "label": "Krossade tomater"
+      },
+      {
+       "name": "paprikapulver",
+       "form": "dry",
+       "quantity": 4.0,
+       "role": "flavour",
+       "label": "Paprikapulver",
+       "follows": "nötfärs"
+      },
+      {
+       "name": "spiskummin",
+       "form": "dry",
+       "quantity": 3.0,
+       "role": "flavour",
+       "label": "Spiskummin",
+       "follows": "nötfärs"
+      },
+      {
+       "name": "chiliflakes",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Chiliflakes",
+       "follows": "nötfärs"
+      },
+      {
+       "name": "salt",
+       "form": "as_sold",
+       "quantity": 5.0,
+       "role": "flavour",
+       "label": "Salt",
+       "follows": "nötfärs"
+      }
+     ]
+    },
+    {
+     "id": "c3",
+     "name": "Topping",
+     "ingredients": [
+      {
+       "name": "crème fraiche",
+       "form": "as_sold",
+       "quantity": 200.0,
+       "role": "sauce",
+       "label": "Crème fraiche"
+      },
+      {
+       "name": "ost",
+       "form": "as_sold",
+       "quantity": 150.0,
+       "role": "sauce",
+       "label": "Ost"
+      },
+      {
+       "name": "tomat",
+       "form": "raw_edible",
+       "quantity": 200.0,
+       "role": "vegetable",
+       "label": "Tomat"
+      }
+     ]
+    },
+    {
+     "id": "c4",
+     "name": "Sallad",
+     "ingredients": [
+      {
+       "name": "sallad",
+       "form": "raw_edible",
+       "quantity": 100.0,
+       "role": "vegetable",
+       "label": "Sallad"
+      },
+      {
+       "name": "gurka",
+       "form": "raw_edible",
+       "quantity": 150.0,
+       "role": "vegetable",
+       "label": "Gurka"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Nyp ihop mjöl, smör och salt, tillsätt 30 ml vatten och arbeta snabbt ihop en deg. Tryck ut den i formen och ställ kallt 15 minuter.",
+     "uses": [
+      "vetemjöl",
+      "smör",
+      "salt"
+     ],
+     "minutes": 25
+    },
+    {
+     "text": "Sätt ugnen på 225 °C. Förgrädda pajskalet 10 minuter.",
+     "uses": [
+      "vetemjöl"
+     ],
+     "minutes": 10,
+     "after": [
+      1
+     ],
+     "passive": true
+    },
+    {
+     "text": "Stek färsen och den hackade löken, rör ner kryddor och krossade tomater och sjud 5 minuter tills färsen är genomstekt, minst 72 °C.",
+     "uses": [
+      "nötfärs",
+      "gul lök",
+      "paprikapulver",
+      "spiskummin",
+      "chiliflakes",
+      "salt",
+      "krossade tomater"
+     ],
+     "minutes": 12
+    },
+    {
+     "text": "Fyll pajskalet med färsen. Bred över crème fraiche, lägg på tomatskivor och strö över riven ost.",
+     "uses": [
+      "nötfärs",
+      "crème fraiche",
+      "tomat",
+      "ost"
+     ],
+     "minutes": 5,
+     "after": [
+      2,
+      3
+     ]
+    },
+    {
+     "text": "Grädda pajen i 15 minuter tills osten fått färg.",
+     "uses": [
+      "ost"
+     ],
+     "minutes": 15,
+     "after": [
+      4
+     ],
+     "passive": true
+    },
+    {
+     "text": "Skär sallad och gurka och servera till pajen.",
+     "uses": [
+      "sallad",
+      "gurka"
+     ],
+     "minutes": 5,
+     "after": [
+      5
+     ]
+    }
+   ]
+  },
+  {
+   "base_id": "smako-swedish-sjomansbiff",
+   "name": "Sjömansbiff med potatis, lök och öl",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "swedish",
+   "family": "sjömansbiff",
+   "primary": "nötkött",
+   "method": "oven",
+   "side": "potatis",
+   "flavor": [
+    "timjan",
+    "kryddpeppar"
+   ],
+   "equipment": [
+    "Gjutjärnsgryta",
+    "Ugn",
+    "Stekpanna"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Sjömansbiff",
+     "ingredients": [
+      {
+       "name": "nötkött",
+       "form": "raw_edible",
+       "quantity": 600.0,
+       "role": "primary",
+       "requirements": [
+        "pack:beef_quick_cut",
+        "pack:intake_all_10d1e6ea4dc5"
+       ],
+       "label": "Nötkött för stekning, t.ex. ryggbiff",
+       "range": [
+        500.0,
+        900.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "smör",
+       "form": "as_sold",
+       "quantity": 30.0,
+       "role": "cooking",
+       "label": "Smör",
+       "follows": "nötkött"
+      },
+      {
+       "name": "salt",
+       "form": "as_sold",
+       "quantity": 8.0,
+       "role": "flavour",
+       "label": "Salt",
+       "follows": "nötkött"
+      },
+      {
+       "name": "svartpeppar",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Svartpeppar",
+       "follows": "nötkött"
+      },
+      {
+       "name": "potatis",
+       "form": "raw_edible",
+       "quantity": 900.0,
+       "role": "side",
+       "label": "Potatis",
+       "range": [
+        650.0,
+        1050.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "gul lök",
+       "form": "raw_edible",
+       "quantity": 300.0,
+       "role": "vegetable",
+       "label": "Gul lök"
+      },
+      {
+       "name": "morot",
+       "form": "raw_edible",
+       "quantity": 150.0,
+       "role": "vegetable",
+       "label": "Morot"
+      },
+      {
+       "name": "alkoholfri öl",
+       "form": "as_sold",
+       "quantity": 330.0,
+       "role": "sauce",
+       "label": "Alkoholfri öl"
+      },
+      {
+       "name": "lagerblad",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Lagerblad",
+       "follows": "nötkött"
+      },
+      {
+       "name": "timjan",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Timjan",
+       "follows": "nötkött"
+      },
+      {
+       "name": "kryddpeppar",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Kryddpeppar",
+       "follows": "nötkött"
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Till servering",
+     "ingredients": [
+      {
+       "name": "persilja",
+       "form": "raw_edible",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Persilja"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Sätt ugnen på 200 °C. Skiva köttet tunt och bulta skivorna lätt. Skala och skiva potatis, lök och morot.",
+     "uses": [
+      "nötkött",
+      "potatis",
+      "gul lök",
+      "morot"
+     ],
+     "minutes": 15
+    },
+    {
+     "text": "Bryn köttet snabbt i smör, salta och peppra. Fräs löken mjuk i samma panna.",
+     "uses": [
+      "nötkött",
+      "smör",
+      "salt",
+      "svartpeppar",
+      "gul lök"
+     ],
+     "minutes": 10,
+     "after": [
+      1
+     ]
+    },
+    {
+     "text": "Varva potatis, morot, lök och kött i grytan med lagerblad, timjan och kryddpeppar. Häll över öl och 200 ml vatten.",
+     "uses": [
+      "potatis",
+      "morot",
+      "gul lök",
+      "nötkött",
+      "lagerblad",
+      "timjan",
+      "kryddpeppar",
+      "alkoholfri öl"
+     ],
+     "minutes": 5,
+     "after": [
+      2
+     ]
+    },
+    {
+     "text": "Ställ grytan med lock i ugnen i 1 timme tills potatisen och köttet är mjuka.",
+     "uses": [
+      "potatis",
+      "nötkött"
+     ],
+     "minutes": 60,
+     "after": [
+      3
+     ],
+     "passive": true
+    },
+    {
+     "text": "Strö över hackad persilja och servera direkt ur grytan.",
+     "uses": [
+      "persilja"
+     ],
+     "minutes": 2,
+     "after": [
+      4
+     ]
+    }
+   ]
+  },
+  {
+   "base_id": "smako-swedish-pepparrotskott",
+   "name": "Pepparrotskött med kokt potatis",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "swedish",
+   "family": "kokt kött",
+   "primary": "nötkött",
+   "method": "pot",
+   "side": "potatis",
+   "flavor": [
+    "pepparrot",
+    "kryddpeppar"
+   ],
+   "equipment": [
+    "Stor kastrull",
+    "Kastrull",
+    "Visp"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Kött",
+     "ingredients": [
+      {
+       "name": "nötkött",
+       "form": "raw_edible",
+       "quantity": 700.0,
+       "role": "primary",
+       "requirements": [
+        "pack:beef_braising_cut",
+        "pack:intake_all_10d1e6ea4dc5"
+       ],
+       "label": "Högrev eller grytbitar av nöt",
+       "range": [
+        600.0,
+        1050.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "gul lök",
+       "form": "raw_edible",
+       "quantity": 150.0,
+       "role": "vegetable",
+       "label": "Gul lök"
+      },
+      {
+       "name": "morot",
+       "form": "raw_edible",
+       "quantity": 200.0,
+       "role": "vegetable",
+       "label": "Morot"
+      },
+      {
+       "name": "lagerblad",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Lagerblad",
+       "follows": "nötkött"
+      },
+      {
+       "name": "kryddpeppar",
+       "form": "dry",
+       "quantity": 2.0,
+       "role": "flavour",
+       "label": "Kryddpeppar",
+       "follows": "nötkött"
+      },
+      {
+       "name": "salt",
+       "form": "as_sold",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Salt",
+       "follows": "nötkött"
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Pepparrotssås",
+     "ingredients": [
+      {
+       "name": "smör",
+       "form": "as_sold",
+       "quantity": 30.0,
+       "role": "sauce",
+       "label": "Smör"
+      },
+      {
+       "name": "vetemjöl",
+       "form": "dry",
+       "quantity": 30.0,
+       "role": "sauce",
+       "label": "Vetemjöl"
+      },
+      {
+       "name": "mjölk",
+       "form": "as_sold",
+       "quantity": 300.0,
+       "role": "sauce",
+       "label": "Mjölk"
+      },
+      {
+       "name": "pepparrot",
+       "form": "raw_edible",
+       "quantity": 40.0,
+       "role": "flavour",
+       "label": "Pepparrot"
+      }
+     ]
+    },
+    {
+     "id": "c3",
+     "name": "Potatis",
+     "ingredients": [
+      {
+       "name": "potatis",
+       "form": "raw_edible",
+       "quantity": 900.0,
+       "role": "side",
+       "label": "Potatis",
+       "range": [
+        650.0,
+        1050.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "persilja",
+       "form": "raw_edible",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Persilja"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Lägg köttet i 1200 ml kokande vatten med salt, lök, morot, lagerblad och kryddpeppar. Skumma.",
+     "uses": [
+      "nötkött",
+      "salt",
+      "gul lök",
+      "morot",
+      "lagerblad",
+      "kryddpeppar"
+     ],
+     "minutes": 10
+    },
+    {
+     "text": "Sjud köttet under lock i 1 timme och 30 minuter tills det är mört.",
+     "uses": [
+      "nötkött"
+     ],
+     "minutes": 90,
+     "after": [
+      1
+     ],
+     "passive": true
+    },
+    {
+     "text": "Koka potatisen mjuk i saltat vatten, cirka 20 minuter.",
+     "uses": [
+      "potatis"
+     ],
+     "minutes": 20,
+     "after": [
+      1
+     ],
+     "passive": true
+    },
+    {
+     "text": "Smält smöret, vispa ner mjölet och späd med mjölk och 300 ml av köttspadet. Sjud 5 minuter och rör ner riven pepparrot.",
+     "uses": [
+      "smör",
+      "vetemjöl",
+      "mjölk",
+      "pepparrot"
+     ],
+     "minutes": 10,
+     "after": [
+      2
+     ]
+    },
+    {
+     "text": "Skiva köttet och servera med potatis, moroten, såsen och hackad persilja.",
+     "uses": [
+      "nötkött",
+      "potatis",
+      "morot",
+      "persilja"
+     ],
+     "minutes": 5,
+     "after": [
+      3,
+      4
+     ]
+    }
+   ]
+  },
+  {
+   "base_id": "smako-swedish-karre-svampsas",
+   "name": "Stekt fläskkarré med svampsås, potatis och haricots verts",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "swedish",
+   "family": "kotlett",
+   "primary": "fläskkarré",
+   "method": "pan",
+   "side": "potatis",
+   "flavor": [
+    "timjan",
+    "svamp"
+   ],
+   "equipment": [
+    "Stekpanna",
+    "Kastrull"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Karré",
+     "ingredients": [
+      {
+       "name": "fläskkarré",
+       "form": "raw_edible",
+       "quantity": 700.0,
+       "role": "primary",
+       "label": "Fläskkarré",
+       "range": [
+        600.0,
+        1050.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "rapsolja",
+       "form": "as_sold",
+       "quantity": 15.0,
+       "role": "cooking",
+       "label": "Rapsolja",
+       "follows": "fläskkarré"
+      },
+      {
+       "name": "salt",
+       "form": "as_sold",
+       "quantity": 6.0,
+       "role": "flavour",
+       "label": "Salt",
+       "follows": "fläskkarré"
+      },
+      {
+       "name": "svartpeppar",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Svartpeppar",
+       "follows": "fläskkarré"
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Svampsås",
+     "ingredients": [
+      {
+       "name": "champinjoner",
+       "form": "raw_edible",
+       "quantity": 250.0,
+       "role": "vegetable",
+       "label": "Champinjoner"
+      },
+      {
+       "name": "gul lök",
+       "form": "raw_edible",
+       "quantity": 100.0,
+       "role": "vegetable",
+       "label": "Gul lök"
+      },
+      {
+       "name": "smör",
+       "form": "as_sold",
+       "quantity": 20.0,
+       "role": "cooking",
+       "label": "Smör"
+      },
+      {
+       "name": "grädde",
+       "form": "as_sold",
+       "quantity": 200.0,
+       "role": "sauce",
+       "label": "Grädde"
+      },
+      {
+       "name": "sojasås",
+       "form": "as_sold",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Sojasås"
+      },
+      {
+       "name": "timjan",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Timjan"
+      }
+     ]
+    },
+    {
+     "id": "c3",
+     "name": "Tillbehör",
+     "ingredients": [
+      {
+       "name": "potatis",
+       "form": "raw_edible",
+       "quantity": 900.0,
+       "role": "side",
+       "label": "Potatis",
+       "range": [
+        650.0,
+        1050.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "haricots verts",
+       "form": "as_sold",
+       "quantity": 250.0,
+       "role": "vegetable",
+       "label": "Haricots verts"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Koka potatisen mjuk i saltat vatten, cirka 20 minuter.",
+     "uses": [
+      "potatis"
+     ],
+     "minutes": 20,
+     "passive": true
+    },
+    {
+     "text": "Skiva karrén i 1,5 cm skivor, salta och peppra. Stek i olja 3–4 minuter per sida tills köttet håller 68 °C. Låt vila.",
+     "uses": [
+      "fläskkarré",
+      "rapsolja",
+      "salt",
+      "svartpeppar"
+     ],
+     "minutes": 10
+    },
+    {
+     "text": "Skiva svampen och hacka löken. Fräs i smör i samma panna tills svampen fått färg.",
+     "uses": [
+      "champinjoner",
+      "gul lök",
+      "smör"
+     ],
+     "minutes": 8,
+     "after": [
+      2
+     ]
+    },
+    {
+     "text": "Tillsätt grädde, soja och timjan och sjud såsen 5 minuter.",
+     "uses": [
+      "grädde",
+      "sojasås",
+      "timjan"
+     ],
+     "minutes": 6,
+     "after": [
+      3
+     ]
+    },
+    {
+     "text": "Koka haricots verts 3 minuter i saltat vatten.",
+     "uses": [
+      "haricots verts"
+     ],
+     "minutes": 4
+    },
+    {
+     "text": "Servera köttet med svampsåsen, potatis och bönor.",
+     "uses": [
+      "fläskkarré",
+      "grädde",
+      "potatis",
+      "haricots verts"
+     ],
+     "minutes": 2,
+     "after": [
+      1,
+      4,
+      5
+     ]
+    }
+   ]
+  },
+  {
+   "base_id": "smako-swedish-fiskgryta-saffran-aioli",
+   "name": "Fiskgryta med räkor, saffran och vitlökscrème",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "swedish",
+   "family": "fiskgryta",
+   "primary": "fisk",
+   "method": "pot",
+   "side": "potatis",
+   "flavor": [
+    "saffran",
+    "fänkål"
+   ],
+   "equipment": [
+    "Gryta",
+    "Skål"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Fiskgryta",
+     "ingredients": [
+      {
+       "name": "fisk",
+       "form": "raw_edible",
+       "quantity": 600.0,
+       "role": "primary",
+       "label": "Vit fiskfilé, t.ex. sej eller torsk",
+       "range": [
+        500.0,
+        900.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "räkor",
+       "form": "cooked_drained",
+       "quantity": 150.0,
+       "role": "primary",
+       "label": "Räkor",
+       "range": [
+        120.0,
+        220.0
+       ],
+       "step": 10.0
+      },
+      {
+       "name": "potatis",
+       "form": "raw_edible",
+       "quantity": 500.0,
+       "role": "side",
+       "label": "Potatis",
+       "range": [
+        350.0,
+        600.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "gul lök",
+       "form": "raw_edible",
+       "quantity": 150.0,
+       "role": "vegetable",
+       "label": "Gul lök"
+      },
+      {
+       "name": "morot",
+       "form": "raw_edible",
+       "quantity": 150.0,
+       "role": "vegetable",
+       "label": "Morot"
+      },
+      {
+       "name": "fänkål",
+       "form": "raw_edible",
+       "quantity": 150.0,
+       "role": "vegetable",
+       "label": "Fänkål"
+      },
+      {
+       "name": "krossade tomater",
+       "form": "as_sold",
+       "quantity": 400.0,
+       "role": "sauce",
+       "label": "Krossade tomater"
+      },
+      {
+       "name": "saffran",
+       "form": "dry",
+       "quantity": 0.5,
+       "role": "flavour",
+       "label": "Saffran",
+       "follows": "fisk"
+      },
+      {
+       "name": "vitt matlagningsvin",
+       "form": "as_sold",
+       "quantity": 100.0,
+       "role": "sauce",
+       "label": "Vitt matlagningsvin"
+      },
+      {
+       "name": "olivolja",
+       "form": "as_sold",
+       "quantity": 30.0,
+       "role": "cooking",
+       "label": "Olivolja",
+       "follows": "fisk"
+      },
+      {
+       "name": "salt",
+       "form": "as_sold",
+       "quantity": 8.0,
+       "role": "flavour",
+       "label": "Salt",
+       "follows": "fisk"
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Vitlökscrème",
+     "ingredients": [
+      {
+       "name": "crème fraiche",
+       "form": "as_sold",
+       "quantity": 150.0,
+       "role": "sauce",
+       "label": "Crème fraiche"
+      },
+      {
+       "name": "vitlök",
+       "form": "raw_edible",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Vitlök"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Hacka lök och fänkål, skiva moroten och tärna potatisen.",
+     "uses": [
+      "gul lök",
+      "fänkål",
+      "morot",
+      "potatis"
+     ],
+     "minutes": 12
+    },
+    {
+     "text": "Fräs lök, fänkål och morot i olja 5 minuter. Tillsätt saffran, vin, krossade tomater, potatis och 600 ml vatten och sjud 15 minuter.",
+     "uses": [
+      "gul lök",
+      "fänkål",
+      "morot",
+      "olivolja",
+      "saffran",
+      "vitt matlagningsvin",
+      "krossade tomater",
+      "potatis"
+     ],
+     "minutes": 20,
+     "after": [
+      1
+     ]
+    },
+    {
+     "text": "Rör ihop crème fraiche med pressad vitlök och lite salt.",
+     "uses": [
+      "crème fraiche",
+      "vitlök",
+      "salt"
+     ],
+     "minutes": 3
+    },
+    {
+     "text": "Skär fisken i bitar och lägg i grytan. Sjud 5 minuter tills fisken håller 63 °C och flagnar.",
+     "uses": [
+      "fisk",
+      "salt"
+     ],
+     "minutes": 6,
+     "after": [
+      2
+     ]
+    },
+    {
+     "text": "Lägg i räkorna och värm 1 minut. Servera med vitlökscrèmen.",
+     "uses": [
+      "räkor",
+      "crème fraiche"
+     ],
+     "minutes": 2,
+     "after": [
+      3,
+      4
+     ]
+    }
+   ]
+  },
+  {
+   "base_id": "smako-swedish-fiskpinnar-potatismos-artor",
+   "name": "Hemgjorda fiskpinnar med potatismos, ärtor och remouladsås",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "swedish",
+   "family": "panerad fisk",
+   "primary": "fisk",
+   "method": "pan",
+   "side": "potatis",
+   "flavor": [
+    "citron",
+    "dill"
+   ],
+   "equipment": [
+    "Stekpanna",
+    "Kastrull",
+    "Skål",
+    "Potatisstöt"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Fiskpinnar",
+     "ingredients": [
+      {
+       "name": "fisk",
+       "form": "raw_edible",
+       "quantity": 650.0,
+       "role": "primary",
+       "label": "Vit fiskfilé, t.ex. sej eller torsk",
+       "range": [
+        550.0,
+        950.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "vetemjöl",
+       "form": "dry",
+       "quantity": 30.0,
+       "role": "sauce",
+       "label": "Vetemjöl"
+      },
+      {
+       "name": "ägg",
+       "form": "raw_edible",
+       "quantity": 50.0,
+       "role": "sauce",
+       "label": "Ägg"
+      },
+      {
+       "name": "ströbröd",
+       "form": "dry",
+       "quantity": 80.0,
+       "role": "sauce",
+       "label": "Ströbröd"
+      },
+      {
+       "name": "rapsolja",
+       "form": "as_sold",
+       "quantity": 40.0,
+       "role": "cooking",
+       "label": "Rapsolja",
+       "follows": "fisk"
+      },
+      {
+       "name": "salt",
+       "form": "as_sold",
+       "quantity": 5.0,
+       "role": "flavour",
+       "label": "Salt",
+       "follows": "fisk"
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Potatismos och ärtor",
+     "ingredients": [
+      {
+       "name": "potatis",
+       "form": "raw_edible",
+       "quantity": 900.0,
+       "role": "side",
+       "label": "Potatis",
+       "range": [
+        650.0,
+        1050.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "mjölk",
+       "form": "as_sold",
+       "quantity": 150.0,
+       "role": "sauce",
+       "label": "Mjölk"
+      },
+      {
+       "name": "smör",
+       "form": "as_sold",
+       "quantity": 30.0,
+       "role": "sauce",
+       "label": "Smör"
+      },
+      {
+       "name": "ärtor",
+       "form": "as_sold",
+       "quantity": 300.0,
+       "role": "vegetable",
+       "label": "Ärtor"
+      }
+     ]
+    },
+    {
+     "id": "c3",
+     "name": "Remouladsås",
+     "ingredients": [
+      {
+       "name": "yoghurt naturell",
+       "form": "as_sold",
+       "quantity": 150.0,
+       "role": "sauce",
+       "label": "Yoghurt naturell"
+      },
+      {
+       "name": "saltgurka",
+       "form": "preserved_drained",
+       "quantity": 60.0,
+       "role": "flavour",
+       "label": "Saltgurka"
+      },
+      {
+       "name": "senap",
+       "form": "as_sold",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Senap"
+      },
+      {
+       "name": "dill",
+       "form": "raw_edible",
+       "quantity": 5.0,
+       "role": "flavour",
+       "label": "Dill"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Koka den skalade potatisen mjuk i saltat vatten, cirka 20 minuter.",
+     "uses": [
+      "potatis"
+     ],
+     "minutes": 20,
+     "passive": true
+    },
+    {
+     "text": "Hacka saltgurka och dill och rör ihop med yoghurt och senap.",
+     "uses": [
+      "saltgurka",
+      "dill",
+      "yoghurt naturell",
+      "senap"
+     ],
+     "minutes": 5
+    },
+    {
+     "text": "Skär fisken i stavar och salta. Vänd dem i mjöl, uppvispat ägg och ströbröd.",
+     "uses": [
+      "fisk",
+      "salt",
+      "vetemjöl",
+      "ägg",
+      "ströbröd"
+     ],
+     "minutes": 12
+    },
+    {
+     "text": "Stek fiskpinnarna i olja 2–3 minuter per sida tills de är gyllene och fisken håller 63 °C.",
+     "uses": [
+      "fisk",
+      "rapsolja"
+     ],
+     "minutes": 10,
+     "after": [
+      3
+     ]
+    },
+    {
+     "text": "Koka ärtorna 2 minuter. Stöt potatisen med varm mjölk och smör till mos.",
+     "uses": [
+      "ärtor",
+      "potatis",
+      "mjölk",
+      "smör"
+     ],
+     "minutes": 6,
+     "after": [
+      1
+     ]
+    },
+    {
+     "text": "Servera fiskpinnarna med mos, ärtor och remouladsås.",
+     "uses": [
+      "fisk",
+      "potatis",
+      "ärtor",
+      "yoghurt naturell"
+     ],
+     "minutes": 2,
+     "after": [
+      2,
+      4,
+      5
+     ]
+    }
+   ]
+  },
+  {
+   "base_id": "smako-swedish-lax-stuvad-spenat",
+   "name": "Stekt lax med stuvad spenat och kokt potatis",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "swedish",
+   "family": "stekt fisk",
+   "primary": "lax",
+   "method": "pan",
+   "side": "potatis",
+   "flavor": [
+    "muskot",
+    "citron"
+   ],
+   "equipment": [
+    "Stekpanna",
+    "Kastrull"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Lax",
+     "ingredients": [
+      {
+       "name": "lax",
+       "form": "raw_edible",
+       "quantity": 600.0,
+       "role": "primary",
+       "label": "Lax",
+       "range": [
+        500.0,
+        900.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "rapsolja",
+       "form": "as_sold",
+       "quantity": 15.0,
+       "role": "cooking",
+       "label": "Rapsolja",
+       "follows": "lax"
+      },
+      {
+       "name": "salt",
+       "form": "as_sold",
+       "quantity": 5.0,
+       "role": "flavour",
+       "label": "Salt",
+       "follows": "lax"
+      },
+      {
+       "name": "citronjuice",
+       "form": "as_sold",
+       "quantity": 15.0,
+       "role": "flavour",
+       "label": "Citronjuice",
+       "follows": "lax"
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Stuvad spenat",
+     "ingredients": [
+      {
+       "name": "spenat",
+       "form": "as_sold",
+       "quantity": 400.0,
+       "role": "vegetable",
+       "label": "Spenat"
+      },
+      {
+       "name": "gul lök",
+       "form": "raw_edible",
+       "quantity": 80.0,
+       "role": "vegetable",
+       "label": "Gul lök"
+      },
+      {
+       "name": "smör",
+       "form": "as_sold",
+       "quantity": 30.0,
+       "role": "sauce",
+       "label": "Smör"
+      },
+      {
+       "name": "vetemjöl",
+       "form": "dry",
+       "quantity": 20.0,
+       "role": "sauce",
+       "label": "Vetemjöl"
+      },
+      {
+       "name": "mjölk",
+       "form": "as_sold",
+       "quantity": 200.0,
+       "role": "sauce",
+       "label": "Mjölk"
+      },
+      {
+       "name": "muskot",
+       "form": "dry",
+       "quantity": 0.5,
+       "role": "flavour",
+       "label": "Muskot"
+      }
+     ]
+    },
+    {
+     "id": "c3",
+     "name": "Potatis",
+     "ingredients": [
+      {
+       "name": "potatis",
+       "form": "raw_edible",
+       "quantity": 900.0,
+       "role": "side",
+       "label": "Potatis",
+       "range": [
+        650.0,
+        1050.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "dill",
+       "form": "raw_edible",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Dill"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Koka potatisen mjuk i saltat vatten, cirka 20 minuter.",
+     "uses": [
+      "potatis"
+     ],
+     "minutes": 20,
+     "passive": true
+    },
+    {
+     "text": "Hacka löken och fräs den mjuk i smör. Rör ner mjölet och späd med mjölken. Sjud 3 minuter.",
+     "uses": [
+      "gul lök",
+      "smör",
+      "vetemjöl",
+      "mjölk"
+     ],
+     "minutes": 8
+    },
+    {
+     "text": "Rör ner spenaten och låt den bli varm. Smaka av med muskot och salt.",
+     "uses": [
+      "spenat",
+      "muskot",
+      "salt"
+     ],
+     "minutes": 5,
+     "after": [
+      2
+     ]
+    },
+    {
+     "text": "Salta laxen och stek den i olja 3–4 minuter per sida tills den håller 63 °C i mitten. Pressa över citron.",
+     "uses": [
+      "lax",
+      "salt",
+      "rapsolja",
+      "citronjuice"
+     ],
+     "minutes": 9
+    },
+    {
+     "text": "Servera laxen med spenatstuvningen och potatis med hackad dill.",
+     "uses": [
+      "lax",
+      "spenat",
+      "potatis",
+      "dill"
+     ],
+     "minutes": 3,
+     "after": [
+      1,
+      3,
+      4
+     ]
+    }
+   ]
+  },
+  {
+   "base_id": "smako-swedish-sej-brynt-smor-agg-rakor",
+   "name": "Stekt sej med brynt smör, ägg, räkor och pepparrot",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "swedish",
+   "family": "stekt fisk",
+   "primary": "fisk",
+   "method": "pan",
+   "side": "potatis",
+   "flavor": [
+    "brynt smör",
+    "pepparrot"
+   ],
+   "equipment": [
+    "Stekpanna",
+    "Kastrull",
+    "Liten kastrull"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Fisk",
+     "ingredients": [
+      {
+       "name": "fisk",
+       "form": "raw_edible",
+       "quantity": 600.0,
+       "role": "primary",
+       "label": "Vit fiskfilé, t.ex. sej eller torsk",
+       "range": [
+        500.0,
+        900.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "vetemjöl",
+       "form": "dry",
+       "quantity": 20.0,
+       "role": "sauce",
+       "label": "Vetemjöl"
+      },
+      {
+       "name": "rapsolja",
+       "form": "as_sold",
+       "quantity": 15.0,
+       "role": "cooking",
+       "label": "Rapsolja",
+       "follows": "fisk"
+      },
+      {
+       "name": "salt",
+       "form": "as_sold",
+       "quantity": 5.0,
+       "role": "flavour",
+       "label": "Salt",
+       "follows": "fisk"
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Brynt smör med ägg och räkor",
+     "ingredients": [
+      {
+       "name": "smör",
+       "form": "as_sold",
+       "quantity": 60.0,
+       "role": "sauce",
+       "label": "Smör"
+      },
+      {
+       "name": "ägg",
+       "form": "raw_edible",
+       "quantity": 150.0,
+       "role": "sauce",
+       "label": "Ägg"
+      },
+      {
+       "name": "räkor",
+       "form": "cooked_drained",
+       "quantity": 120.0,
+       "role": "sauce",
+       "label": "Räkor"
+      },
+      {
+       "name": "persilja",
+       "form": "raw_edible",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Persilja"
+      },
+      {
+       "name": "citronjuice",
+       "form": "as_sold",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Citronjuice"
+      },
+      {
+       "name": "pepparrot",
+       "form": "raw_edible",
+       "quantity": 20.0,
+       "role": "flavour",
+       "label": "Pepparrot"
+      }
+     ]
+    },
+    {
+     "id": "c3",
+     "name": "Tillbehör",
+     "ingredients": [
+      {
+       "name": "potatis",
+       "form": "raw_edible",
+       "quantity": 900.0,
+       "role": "side",
+       "label": "Potatis",
+       "range": [
+        650.0,
+        1050.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "broccoli",
+       "form": "raw_edible",
+       "quantity": 300.0,
+       "role": "vegetable",
+       "label": "Broccoli"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Koka potatisen mjuk i saltat vatten, cirka 20 minuter. Koka äggen 9 minuter och kyl dem.",
+     "uses": [
+      "potatis",
+      "ägg"
+     ],
+     "minutes": 20,
+     "passive": true
+    },
+    {
+     "text": "Salta fisken och vänd den i mjöl. Stek i olja 3 minuter per sida tills den håller 63 °C.",
+     "uses": [
+      "fisk",
+      "salt",
+      "vetemjöl",
+      "rapsolja"
+     ],
+     "minutes": 8
+    },
+    {
+     "text": "Bryn smöret i en kastrull tills det doftar nötigt. Hacka äggen och persiljan och rör ner med räkor och citron.",
+     "uses": [
+      "smör",
+      "ägg",
+      "persilja",
+      "räkor",
+      "citronjuice"
+     ],
+     "minutes": 6,
+     "after": [
+      1
+     ]
+    },
+    {
+     "text": "Koka broccolin 3 minuter. Riv pepparroten.",
+     "uses": [
+      "broccoli",
+      "pepparrot"
+     ],
+     "minutes": 5
+    },
+    {
+     "text": "Servera fisken med potatis och broccoli, häll över smöret och toppa med pepparrot.",
+     "uses": [
+      "fisk",
+      "potatis",
+      "broccoli",
+      "smör",
+      "pepparrot"
+     ],
+     "minutes": 2,
+     "after": [
+      2,
+      3,
+      4
+     ]
+    }
+   ]
+  },
+  {
+   "base_id": "smako-swedish-tonfisk-makaronilada",
+   "name": "Makaronilåda med tonfisk, ärtor och ost",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "swedish",
+   "family": "makaronilåda",
+   "primary": "tonfisk",
+   "method": "oven",
+   "side": "pasta",
+   "flavor": [
+    "ost",
+    "dill"
+   ],
+   "equipment": [
+    "Ugn",
+    "Ugnsform",
+    "Kastrull",
+    "Skål"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Makaronilåda",
+     "ingredients": [
+      {
+       "name": "tonfisk",
+       "form": "cooked_drained",
+       "quantity": 340.0,
+       "role": "primary",
+       "label": "Tonfisk",
+       "range": [
+        280.0,
+        500.0
+       ],
+       "step": 20.0
+      },
+      {
+       "name": "pasta",
+       "form": "dry",
+       "quantity": 300.0,
+       "role": "side",
+       "label": "Pasta",
+       "range": [
+        250.0,
+        350.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "ärtor",
+       "form": "as_sold",
+       "quantity": 200.0,
+       "role": "vegetable",
+       "label": "Ärtor"
+      },
+      {
+       "name": "gul lök",
+       "form": "raw_edible",
+       "quantity": 100.0,
+       "role": "vegetable",
+       "label": "Gul lök"
+      },
+      {
+       "name": "ägg",
+       "form": "raw_edible",
+       "quantity": 150.0,
+       "role": "sauce",
+       "label": "Ägg"
+      },
+      {
+       "name": "mjölk",
+       "form": "as_sold",
+       "quantity": 500.0,
+       "role": "sauce",
+       "label": "Mjölk"
+      },
+      {
+       "name": "ost",
+       "form": "as_sold",
+       "quantity": 120.0,
+       "role": "sauce",
+       "label": "Ost"
+      },
+      {
+       "name": "dill",
+       "form": "raw_edible",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Dill",
+       "follows": "tonfisk"
+      },
+      {
+       "name": "salt",
+       "form": "as_sold",
+       "quantity": 5.0,
+       "role": "flavour",
+       "label": "Salt",
+       "follows": "tonfisk"
+      },
+      {
+       "name": "svartpeppar",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Svartpeppar",
+       "follows": "tonfisk"
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Sallad",
+     "ingredients": [
+      {
+       "name": "tomat",
+       "form": "raw_edible",
+       "quantity": 250.0,
+       "role": "vegetable",
+       "label": "Tomat"
+      },
+      {
+       "name": "gurka",
+       "form": "raw_edible",
+       "quantity": 150.0,
+       "role": "vegetable",
+       "label": "Gurka"
+      },
+      {
+       "name": "rödlök",
+       "form": "raw_edible",
+       "quantity": 50.0,
+       "role": "vegetable",
+       "label": "Rödlök"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Sätt ugnen på 200 °C. Koka makaronerna 2 minuter kortare än förpackningen anger och häll av.",
+     "uses": [
+      "pasta"
+     ],
+     "minutes": 10
+    },
+    {
+     "text": "Hacka löken och dillen. Blanda makaroner, tonfisk, ärtor, lök och dill i formen.",
+     "uses": [
+      "pasta",
+      "tonfisk",
+      "ärtor",
+      "gul lök",
+      "dill"
+     ],
+     "minutes": 5,
+     "after": [
+      1
+     ]
+    },
+    {
+     "text": "Vispa ägg och mjölk med salt och peppar och häll över. Strö över riven ost.",
+     "uses": [
+      "ägg",
+      "mjölk",
+      "salt",
+      "svartpeppar",
+      "ost"
+     ],
+     "minutes": 4,
+     "after": [
+      2
+     ]
+    },
+    {
+     "text": "Grädda i 30 minuter tills äggstanningen har stelnat och ytan är gyllene.",
+     "uses": [
+      "ägg",
+      "ost"
+     ],
+     "minutes": 30,
+     "after": [
+      3
+     ],
+     "passive": true
+    },
+    {
+     "text": "Skär tomat, gurka och rödlök till en sallad och servera till.",
+     "uses": [
+      "tomat",
+      "gurka",
+      "rödlök"
+     ],
+     "minutes": 6
+    }
+   ]
+  },
+  {
+   "base_id": "smako-swedish-varmrokt-lax-potatissallad-agg",
+   "name": "Varm potatissallad med varmrökt lax, ägg och rädisor",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "swedish",
+   "family": "potatissallad",
+   "primary": "varmrökt lax",
+   "method": "pot",
+   "side": "potatis",
+   "flavor": [
+    "dill",
+    "senap"
+   ],
+   "equipment": [
+    "Kastrull",
+    "Skål"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Potatissallad",
+     "ingredients": [
+      {
+       "name": "potatis",
+       "form": "raw_edible",
+       "quantity": 800.0,
+       "role": "side",
+       "label": "Potatis",
+       "range": [
+        600.0,
+        950.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "rödlök",
+       "form": "raw_edible",
+       "quantity": 60.0,
+       "role": "vegetable",
+       "label": "Rödlök"
+      },
+      {
+       "name": "rädisa",
+       "form": "raw_edible",
+       "quantity": 150.0,
+       "role": "vegetable",
+       "label": "Rädisa"
+      },
+      {
+       "name": "crème fraiche",
+       "form": "as_sold",
+       "quantity": 150.0,
+       "role": "sauce",
+       "label": "Crème fraiche"
+      },
+      {
+       "name": "senap",
+       "form": "as_sold",
+       "quantity": 15.0,
+       "role": "flavour",
+       "label": "Senap"
+      },
+      {
+       "name": "äppelcidervinäger",
+       "form": "as_sold",
+       "quantity": 15.0,
+       "role": "flavour",
+       "label": "Äppelcidervinäger"
+      },
+      {
+       "name": "dill",
+       "form": "raw_edible",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Dill"
+      },
+      {
+       "name": "gräslök",
+       "form": "raw_edible",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Gräslök"
+      },
+      {
+       "name": "salt",
+       "form": "as_sold",
+       "quantity": 4.0,
+       "role": "flavour",
+       "label": "Salt"
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Fisk och ägg",
+     "ingredients": [
+      {
+       "name": "varmrökt lax",
+       "form": "as_sold",
+       "quantity": 400.0,
+       "role": "primary",
+       "label": "Varmrökt lax",
+       "range": [
+        350.0,
+        600.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "ägg",
+       "form": "raw_edible",
+       "quantity": 200.0,
+       "role": "sauce",
+       "label": "Ägg"
+      },
+      {
+       "name": "sallad",
+       "form": "raw_edible",
+       "quantity": 100.0,
+       "role": "vegetable",
+       "label": "Sallad"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Koka potatisen mjuk i saltat vatten, cirka 20 minuter. Koka äggen 8 minuter i en egen kastrull.",
+     "uses": [
+      "potatis",
+      "ägg"
+     ],
+     "minutes": 20,
+     "passive": true
+    },
+    {
+     "text": "Rör ihop crème fraiche, senap, vinäger, hackad dill och gräslök.",
+     "uses": [
+      "crème fraiche",
+      "senap",
+      "äppelcidervinäger",
+      "dill",
+      "gräslök"
+     ],
+     "minutes": 5
+    },
+    {
+     "text": "Skiva rödlök och rädisor tunt. Dela laxen i bitar och ta bort skinnet.",
+     "uses": [
+      "rödlök",
+      "rädisa",
+      "varmrökt lax"
+     ],
+     "minutes": 8
+    },
+    {
+     "text": "Skär den varma potatisen i bitar och vänd med såsen, rödlök och rädisor. Salta.",
+     "uses": [
+      "potatis",
+      "crème fraiche",
+      "rödlök",
+      "rädisa",
+      "salt"
+     ],
+     "minutes": 4,
+     "after": [
+      1,
+      2,
+      3
+     ]
+    },
+    {
+     "text": "Lägg sallad, potatis, lax och halverade ägg på fat.",
+     "uses": [
+      "sallad",
+      "potatis",
+      "varmrökt lax",
+      "ägg"
+     ],
+     "minutes": 3,
+     "after": [
+      4
+     ]
+    }
+   ]
+  },
+  {
+   "base_id": "smako-swedish-kycklingfrikasse-ris",
+   "name": "Kycklingfrikassé med morötter, champinjoner och ris",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "swedish",
+   "family": "frikassé",
+   "primary": "kyckling",
+   "method": "pot",
+   "side": "ris",
+   "flavor": [
+    "citron",
+    "persilja"
+   ],
+   "equipment": [
+    "Gryta",
+    "Kastrull"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Frikassé",
+     "ingredients": [
+      {
+       "name": "kyckling",
+       "form": "raw_edible",
+       "quantity": 650.0,
+       "role": "primary",
+       "requirements": [
+        "pack:chicken_breast"
+       ],
+       "label": "Kycklingbröstfilé",
+       "range": [
+        550.0,
+        950.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "salt",
+       "form": "as_sold",
+       "quantity": 6.0,
+       "role": "flavour",
+       "label": "Salt",
+       "follows": "kyckling"
+      },
+      {
+       "name": "morot",
+       "form": "raw_edible",
+       "quantity": 200.0,
+       "role": "vegetable",
+       "label": "Morot"
+      },
+      {
+       "name": "champinjoner",
+       "form": "raw_edible",
+       "quantity": 200.0,
+       "role": "vegetable",
+       "label": "Champinjoner"
+      },
+      {
+       "name": "gul lök",
+       "form": "raw_edible",
+       "quantity": 100.0,
+       "role": "vegetable",
+       "label": "Gul lök"
+      },
+      {
+       "name": "smör",
+       "form": "as_sold",
+       "quantity": 30.0,
+       "role": "sauce",
+       "label": "Smör"
+      },
+      {
+       "name": "vetemjöl",
+       "form": "dry",
+       "quantity": 30.0,
+       "role": "sauce",
+       "label": "Vetemjöl"
+      },
+      {
+       "name": "mjölk",
+       "form": "as_sold",
+       "quantity": 300.0,
+       "role": "sauce",
+       "label": "Mjölk"
+      },
+      {
+       "name": "grönsaksfond",
+       "form": "as_sold",
+       "quantity": 300.0,
+       "role": "sauce",
+       "label": "Grönsaksfond"
+      },
+      {
+       "name": "citronjuice",
+       "form": "as_sold",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Citronjuice",
+       "follows": "kyckling"
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Ris",
+     "ingredients": [
+      {
+       "name": "ris",
+       "form": "dry",
+       "quantity": 300.0,
+       "role": "side",
+       "label": "Ris",
+       "range": [
+        250.0,
+        350.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "persilja",
+       "form": "raw_edible",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Persilja"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Koka riset enligt förpackningen.",
+     "uses": [
+      "ris"
+     ],
+     "minutes": 20,
+     "passive": true
+    },
+    {
+     "text": "Skär kycklingen i bitar, moroten i slantar och svampen i klyftor. Hacka löken.",
+     "uses": [
+      "kyckling",
+      "morot",
+      "champinjoner",
+      "gul lök"
+     ],
+     "minutes": 12
+    },
+    {
+     "text": "Fräs lök och svamp i smör, rör ner mjölet och späd med fond och mjölk.",
+     "uses": [
+      "gul lök",
+      "champinjoner",
+      "smör",
+      "vetemjöl",
+      "grönsaksfond",
+      "mjölk"
+     ],
+     "minutes": 6,
+     "after": [
+      2
+     ]
+    },
+    {
+     "text": "Lägg i kyckling och morötter, salta och sjud 12 minuter tills kycklingen håller 74 °C. Smaka av med citron.",
+     "uses": [
+      "kyckling",
+      "morot",
+      "salt",
+      "citronjuice"
+     ],
+     "minutes": 14,
+     "after": [
+      3
+     ]
+    },
+    {
+     "text": "Servera med riset och hackad persilja.",
+     "uses": [
+      "ris",
+      "persilja"
+     ],
+     "minutes": 2,
+     "after": [
+      1,
+      4
+     ]
+    }
+   ]
+  },
+  {
+   "base_id": "smako-swedish-kycklinglar-potatisgratang",
+   "name": "Kycklinglårfilé med potatisgratäng och haricots verts",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "swedish",
+   "family": "gratäng",
+   "primary": "kyckling",
+   "method": "oven",
+   "side": "potatis",
+   "flavor": [
+    "timjan",
+    "vitlök"
+   ],
+   "equipment": [
+    "Ugn",
+    "Ugnsform",
+    "Stekpanna"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Kyckling",
+     "ingredients": [
+      {
+       "name": "kyckling",
+       "form": "raw_edible",
+       "quantity": 700.0,
+       "role": "primary",
+       "requirements": [
+        "pack:chicken_thigh"
+       ],
+       "label": "Kycklinglårfilé",
+       "range": [
+        600.0,
+        1050.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "rapsolja",
+       "form": "as_sold",
+       "quantity": 15.0,
+       "role": "cooking",
+       "label": "Rapsolja",
+       "follows": "kyckling"
+      },
+      {
+       "name": "timjan",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Timjan",
+       "follows": "kyckling"
+      },
+      {
+       "name": "salt",
+       "form": "as_sold",
+       "quantity": 5.0,
+       "role": "flavour",
+       "label": "Salt",
+       "follows": "kyckling"
+      },
+      {
+       "name": "svartpeppar",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Svartpeppar",
+       "follows": "kyckling"
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Potatisgratäng",
+     "ingredients": [
+      {
+       "name": "potatis",
+       "form": "raw_edible",
+       "quantity": 900.0,
+       "role": "side",
+       "label": "Potatis",
+       "range": [
+        650.0,
+        1050.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "gul lök",
+       "form": "raw_edible",
+       "quantity": 80.0,
+       "role": "vegetable",
+       "label": "Gul lök"
+      },
+      {
+       "name": "grädde",
+       "form": "as_sold",
+       "quantity": 200.0,
+       "role": "sauce",
+       "label": "Grädde"
+      },
+      {
+       "name": "mjölk",
+       "form": "as_sold",
+       "quantity": 200.0,
+       "role": "sauce",
+       "label": "Mjölk"
+      },
+      {
+       "name": "vitlök",
+       "form": "raw_edible",
+       "quantity": 6.0,
+       "role": "flavour",
+       "label": "Vitlök"
+      },
+      {
+       "name": "ost",
+       "form": "as_sold",
+       "quantity": 80.0,
+       "role": "sauce",
+       "label": "Ost"
+      }
+     ]
+    },
+    {
+     "id": "c3",
+     "name": "Bönor",
+     "ingredients": [
+      {
+       "name": "haricots verts",
+       "form": "as_sold",
+       "quantity": 250.0,
+       "role": "vegetable",
+       "label": "Haricots verts"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Sätt ugnen på 200 °C. Skiva potatis och lök tunt och varva i formen. Häll över grädde och mjölk med pressad vitlök och salt.",
+     "uses": [
+      "potatis",
+      "gul lök",
+      "grädde",
+      "mjölk",
+      "vitlök",
+      "salt"
+     ],
+     "minutes": 15
+    },
+    {
+     "text": "Grädda gratängen i 45 minuter, strö över ost de sista 10 minuterna.",
+     "uses": [
+      "potatis",
+      "ost"
+     ],
+     "minutes": 45,
+     "after": [
+      1
+     ],
+     "passive": true
+    },
+    {
+     "text": "Krydda kycklingen med timjan, salt och peppar och bryn i olja. Lägg den i ugnen de sista 20 minuterna tills den håller 74 °C.",
+     "uses": [
+      "kyckling",
+      "timjan",
+      "salt",
+      "svartpeppar",
+      "rapsolja"
+     ],
+     "minutes": 25,
+     "after": [
+      1
+     ]
+    },
+    {
+     "text": "Koka haricots verts 3 minuter och servera med kyckling och gratäng.",
+     "uses": [
+      "haricots verts",
+      "kyckling",
+      "potatis"
+     ],
+     "minutes": 4,
+     "after": [
+      2,
+      3
+     ]
+    }
+   ]
+  },
+  {
+   "base_id": "smako-swedish-kycklingpaj-broccoli",
+   "name": "Kycklingpaj med broccoli och ost",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "swedish",
+   "family": "paj",
+   "primary": "kyckling",
+   "method": "oven",
+   "side": "pajdeg",
+   "flavor": [
+    "ost",
+    "timjan"
+   ],
+   "equipment": [
+    "Ugn",
+    "Pajform",
+    "Stekpanna",
+    "Skål"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Pajdeg",
+     "ingredients": [
+      {
+       "name": "vetemjöl",
+       "form": "dry",
+       "quantity": 180.0,
+       "role": "sauce",
+       "label": "Vetemjöl"
+      },
+      {
+       "name": "smör",
+       "form": "as_sold",
+       "quantity": 100.0,
+       "role": "sauce",
+       "label": "Smör"
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Fyllning",
+     "ingredients": [
+      {
+       "name": "kyckling",
+       "form": "raw_edible",
+       "quantity": 550.0,
+       "role": "primary",
+       "requirements": [
+        "pack:chicken_breast"
+       ],
+       "label": "Kycklingbröstfilé",
+       "range": [
+        450.0,
+        800.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "rapsolja",
+       "form": "as_sold",
+       "quantity": 10.0,
+       "role": "cooking",
+       "label": "Rapsolja",
+       "follows": "kyckling"
+      },
+      {
+       "name": "salt",
+       "form": "as_sold",
+       "quantity": 5.0,
+       "role": "flavour",
+       "label": "Salt",
+       "follows": "kyckling"
+      },
+      {
+       "name": "timjan",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Timjan",
+       "follows": "kyckling"
+      },
+      {
+       "name": "broccoli",
+       "form": "raw_edible",
+       "quantity": 300.0,
+       "role": "vegetable",
+       "label": "Broccoli"
+      },
+      {
+       "name": "gul lök",
+       "form": "raw_edible",
+       "quantity": 80.0,
+       "role": "vegetable",
+       "label": "Gul lök"
+      },
+      {
+       "name": "ägg",
+       "form": "raw_edible",
+       "quantity": 150.0,
+       "role": "sauce",
+       "label": "Ägg"
+      },
+      {
+       "name": "mjölk",
+       "form": "as_sold",
+       "quantity": 200.0,
+       "role": "sauce",
+       "label": "Mjölk"
+      },
+      {
+       "name": "ost",
+       "form": "as_sold",
+       "quantity": 120.0,
+       "role": "sauce",
+       "label": "Ost"
+      }
+     ]
+    },
+    {
+     "id": "c3",
+     "name": "Sallad",
+     "ingredients": [
+      {
+       "name": "sallad",
+       "form": "raw_edible",
+       "quantity": 100.0,
+       "role": "vegetable",
+       "label": "Sallad"
+      },
+      {
+       "name": "tomat",
+       "form": "raw_edible",
+       "quantity": 200.0,
+       "role": "vegetable",
+       "label": "Tomat"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Nyp ihop mjöl och smör, tillsätt 30 ml vatten och tryck ut degen i formen. Ställ kallt 15 minuter.",
+     "uses": [
+      "vetemjöl",
+      "smör"
+     ],
+     "minutes": 25
+    },
+    {
+     "text": "Sätt ugnen på 200 °C och förgrädda skalet 10 minuter.",
+     "uses": [
+      "vetemjöl"
+     ],
+     "minutes": 10,
+     "after": [
+      1
+     ],
+     "passive": true
+    },
+    {
+     "text": "Tärna kycklingen och stek den i olja med lök, timjan och salt tills den håller 74 °C. Dela broccolin i små buketter.",
+     "uses": [
+      "kyckling",
+      "rapsolja",
+      "gul lök",
+      "timjan",
+      "salt",
+      "broccoli"
+     ],
+     "minutes": 12
+    },
+    {
+     "text": "Fördela kyckling och broccoli i skalet. Vispa ägg, mjölk och ost och häll över.",
+     "uses": [
+      "kyckling",
+      "broccoli",
+      "ägg",
+      "mjölk",
+      "ost"
+     ],
+     "minutes": 4,
+     "after": [
+      2,
+      3
+     ]
+    },
+    {
+     "text": "Grädda pajen i 30 minuter tills den har stelnat.",
+     "uses": [
+      "ägg"
+     ],
+     "minutes": 30,
+     "after": [
+      4
+     ],
+     "passive": true
+    },
+    {
+     "text": "Servera med sallad och tomat.",
+     "uses": [
+      "sallad",
+      "tomat"
+     ],
+     "minutes": 4,
+     "after": [
+      5
+     ]
+    }
+   ]
+  },
+  {
+   "base_id": "smako-swedish-torsk-rodbetor-pepparrot",
+   "name": "Torskrygg med ugnsrostade rödbetor, pepparrotscrème och potatis",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "swedish",
+   "family": "fisk i ugn",
+   "primary": "fisk",
+   "method": "oven",
+   "side": "potatis",
+   "flavor": [
+    "pepparrot",
+    "dill"
+   ],
+   "equipment": [
+    "Ugn",
+    "Plåt",
+    "Ugnsform",
+    "Kastrull"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Fisk",
+     "ingredients": [
+      {
+       "name": "fisk",
+       "form": "raw_edible",
+       "quantity": 650.0,
+       "role": "primary",
+       "requirements": [
+        "pack:cod"
+       ],
+       "label": "Torskfilé",
+       "range": [
+        550.0,
+        950.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "smör",
+       "form": "as_sold",
+       "quantity": 20.0,
+       "role": "cooking",
+       "label": "Smör",
+       "follows": "fisk"
+      },
+      {
+       "name": "salt",
+       "form": "as_sold",
+       "quantity": 5.0,
+       "role": "flavour",
+       "label": "Salt",
+       "follows": "fisk"
+      },
+      {
+       "name": "citronjuice",
+       "form": "as_sold",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Citronjuice",
+       "follows": "fisk"
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Rödbetor",
+     "ingredients": [
+      {
+       "name": "rödbeta",
+       "form": "raw_edible",
+       "quantity": 500.0,
+       "role": "vegetable",
+       "label": "Rödbeta"
+      },
+      {
+       "name": "rödlök",
+       "form": "raw_edible",
+       "quantity": 100.0,
+       "role": "vegetable",
+       "label": "Rödlök"
+      },
+      {
+       "name": "rapsolja",
+       "form": "as_sold",
+       "quantity": 15.0,
+       "role": "cooking",
+       "label": "Rapsolja"
+      },
+      {
+       "name": "timjan",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Timjan"
+      },
+      {
+       "name": "äppelcidervinäger",
+       "form": "as_sold",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Äppelcidervinäger"
+      }
+     ]
+    },
+    {
+     "id": "c3",
+     "name": "Pepparrotscrème",
+     "ingredients": [
+      {
+       "name": "crème fraiche",
+       "form": "as_sold",
+       "quantity": 200.0,
+       "role": "sauce",
+       "label": "Crème fraiche"
+      },
+      {
+       "name": "pepparrot",
+       "form": "raw_edible",
+       "quantity": 30.0,
+       "role": "flavour",
+       "label": "Pepparrot"
+      },
+      {
+       "name": "dill",
+       "form": "raw_edible",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Dill"
+      }
+     ]
+    },
+    {
+     "id": "c4",
+     "name": "Potatis",
+     "ingredients": [
+      {
+       "name": "potatis",
+       "form": "raw_edible",
+       "quantity": 800.0,
+       "role": "side",
+       "label": "Potatis",
+       "range": [
+        600.0,
+        950.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "sallad",
+       "form": "raw_edible",
+       "quantity": 80.0,
+       "role": "vegetable",
+       "label": "Sallad"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Sätt ugnen på 220 °C. Skala och skär rödbetorna i klyftor, vänd med rödlök, olja, timjan och salt och rosta 35 minuter.",
+     "uses": [
+      "rödbeta",
+      "rödlök",
+      "rapsolja",
+      "timjan",
+      "salt"
+     ],
+     "minutes": 40,
+     "passive": true
+    },
+    {
+     "text": "Koka potatisen mjuk i saltat vatten, cirka 20 minuter.",
+     "uses": [
+      "potatis"
+     ],
+     "minutes": 20,
+     "passive": true
+    },
+    {
+     "text": "Rör ihop crème fraiche, riven pepparrot och hackad dill.",
+     "uses": [
+      "crème fraiche",
+      "pepparrot",
+      "dill"
+     ],
+     "minutes": 5
+    },
+    {
+     "text": "Lägg fisken i formen med smörklickar, salt och citron. Baka 15 minuter tills den håller 63 °C.",
+     "uses": [
+      "fisk",
+      "smör",
+      "salt",
+      "citronjuice"
+     ],
+     "minutes": 18,
+     "passive": true
+    },
+    {
+     "text": "Ringla vinäger över rödbetorna och servera med fisk, potatis, sallad och crème.",
+     "uses": [
+      "äppelcidervinäger",
+      "rödbeta",
+      "fisk",
+      "potatis",
+      "sallad",
+      "crème fraiche"
+     ],
+     "minutes": 3,
+     "after": [
+      1,
+      2,
+      3,
+      4
+     ]
+    }
+   ]
+  },
+  {
+   "base_id": "smako-swedish-rakpaj-dill",
+   "name": "Räkpaj med dill, purjolök och ost",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "swedish",
+   "family": "paj",
+   "primary": "räkor",
+   "method": "oven",
+   "side": "pajdeg",
+   "flavor": [
+    "dill",
+    "citron"
+   ],
+   "equipment": [
+    "Ugn",
+    "Pajform",
+    "Skål"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Pajdeg",
+     "ingredients": [
+      {
+       "name": "vetemjöl",
+       "form": "dry",
+       "quantity": 180.0,
+       "role": "sauce",
+       "label": "Vetemjöl"
+      },
+      {
+       "name": "smör",
+       "form": "as_sold",
+       "quantity": 100.0,
+       "role": "sauce",
+       "label": "Smör"
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Fyllning",
+     "ingredients": [
+      {
+       "name": "räkor",
+       "form": "cooked_drained",
+       "quantity": 350.0,
+       "role": "primary",
+       "label": "Räkor",
+       "range": [
+        300.0,
+        500.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "ägg",
+       "form": "raw_edible",
+       "quantity": 200.0,
+       "role": "sauce",
+       "label": "Ägg"
+      },
+      {
+       "name": "crème fraiche",
+       "form": "as_sold",
+       "quantity": 200.0,
+       "role": "sauce",
+       "label": "Crème fraiche"
+      },
+      {
+       "name": "mjölk",
+       "form": "as_sold",
+       "quantity": 100.0,
+       "role": "sauce",
+       "label": "Mjölk"
+      },
+      {
+       "name": "ost",
+       "form": "as_sold",
+       "quantity": 120.0,
+       "role": "sauce",
+       "label": "Ost"
+      },
+      {
+       "name": "dill",
+       "form": "raw_edible",
+       "quantity": 15.0,
+       "role": "flavour",
+       "label": "Dill",
+       "follows": "räkor"
+      },
+      {
+       "name": "purjolök",
+       "form": "raw_edible",
+       "quantity": 100.0,
+       "role": "vegetable",
+       "label": "Purjolök"
+      },
+      {
+       "name": "citronjuice",
+       "form": "as_sold",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Citronjuice",
+       "follows": "räkor"
+      },
+      {
+       "name": "salt",
+       "form": "as_sold",
+       "quantity": 3.0,
+       "role": "flavour",
+       "label": "Salt",
+       "follows": "räkor"
+      }
+     ]
+    },
+    {
+     "id": "c3",
+     "name": "Sallad",
+     "ingredients": [
+      {
+       "name": "sallad",
+       "form": "raw_edible",
+       "quantity": 100.0,
+       "role": "vegetable",
+       "label": "Sallad"
+      },
+      {
+       "name": "gurka",
+       "form": "raw_edible",
+       "quantity": 150.0,
+       "role": "vegetable",
+       "label": "Gurka"
+      },
+      {
+       "name": "tomat",
+       "form": "raw_edible",
+       "quantity": 200.0,
+       "role": "vegetable",
+       "label": "Tomat"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Nyp ihop mjöl och smör, tillsätt 30 ml vatten och tryck ut degen i formen. Ställ kallt 15 minuter.",
+     "uses": [
+      "vetemjöl",
+      "smör"
+     ],
+     "minutes": 25
+    },
+    {
+     "text": "Sätt ugnen på 200 °C och förgrädda skalet 10 minuter.",
+     "uses": [
+      "vetemjöl"
+     ],
+     "minutes": 10,
+     "after": [
+      1
+     ],
+     "passive": true
+    },
+    {
+     "text": "Vispa ägg, crème fraiche, mjölk, riven ost, hackad dill, citron och salt. Strimla purjolöken.",
+     "uses": [
+      "ägg",
+      "crème fraiche",
+      "mjölk",
+      "ost",
+      "dill",
+      "citronjuice",
+      "salt",
+      "purjolök"
+     ],
+     "minutes": 8
+    },
+    {
+     "text": "Fördela räkor och purjolök i skalet och häll över äggstanningen.",
+     "uses": [
+      "räkor",
+      "purjolök",
+      "ägg"
+     ],
+     "minutes": 3,
+     "after": [
+      2,
+      3
+     ]
+    },
+    {
+     "text": "Grädda 30 minuter tills stanningen har stelnat.",
+     "uses": [
+      "ägg"
+     ],
+     "minutes": 30,
+     "after": [
+      4
+     ],
+     "passive": true
+    },
+    {
+     "text": "Servera med sallad, gurka och tomat.",
+     "uses": [
+      "sallad",
+      "gurka",
+      "tomat"
+     ],
+     "minutes": 4,
+     "after": [
+      5
+     ]
+    }
+   ]
+  },
+  {
+   "base_id": "smako-swedish-grillad-kyckling-potatissallad",
+   "name": "Grillad kyckling med krämig potatissallad och rädisor",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "swedish",
+   "family": "grillad kyckling",
+   "primary": "kyckling",
+   "method": "pan",
+   "side": "potatis",
+   "flavor": [
+    "gräslök",
+    "senap"
+   ],
+   "equipment": [
+    "Grillpanna",
+    "Kastrull",
+    "Skål"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Kyckling",
+     "ingredients": [
+      {
+       "name": "kyckling",
+       "form": "raw_edible",
+       "quantity": 750.0,
+       "role": "primary",
+       "requirements": [
+        "pack:chicken_thigh"
+       ],
+       "label": "Kycklinglårfilé",
+       "range": [
+        600.0,
+        1100.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "rapsolja",
+       "form": "as_sold",
+       "quantity": 15.0,
+       "role": "cooking",
+       "label": "Rapsolja",
+       "follows": "kyckling"
+      },
+      {
+       "name": "paprikapulver",
+       "form": "dry",
+       "quantity": 2.0,
+       "role": "flavour",
+       "label": "Paprikapulver",
+       "follows": "kyckling"
+      },
+      {
+       "name": "timjan",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Timjan",
+       "follows": "kyckling"
+      },
+      {
+       "name": "salt",
+       "form": "as_sold",
+       "quantity": 6.0,
+       "role": "flavour",
+       "label": "Salt",
+       "follows": "kyckling"
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Potatissallad",
+     "ingredients": [
+      {
+       "name": "potatis",
+       "form": "raw_edible",
+       "quantity": 800.0,
+       "role": "side",
+       "label": "Potatis",
+       "range": [
+        600.0,
+        950.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "crème fraiche",
+       "form": "as_sold",
+       "quantity": 150.0,
+       "role": "sauce",
+       "label": "Crème fraiche"
+      },
+      {
+       "name": "senap",
+       "form": "as_sold",
+       "quantity": 15.0,
+       "role": "flavour",
+       "label": "Senap"
+      },
+      {
+       "name": "rödlök",
+       "form": "raw_edible",
+       "quantity": 60.0,
+       "role": "vegetable",
+       "label": "Rödlök"
+      },
+      {
+       "name": "gräslök",
+       "form": "raw_edible",
+       "quantity": 15.0,
+       "role": "flavour",
+       "label": "Gräslök"
+      },
+      {
+       "name": "äppelcidervinäger",
+       "form": "as_sold",
+       "quantity": 15.0,
+       "role": "flavour",
+       "label": "Äppelcidervinäger"
+      },
+      {
+       "name": "saltgurka",
+       "form": "preserved_drained",
+       "quantity": 80.0,
+       "role": "flavour",
+       "label": "Saltgurka"
+      }
+     ]
+    },
+    {
+     "id": "c3",
+     "name": "Grönt",
+     "ingredients": [
+      {
+       "name": "rädisa",
+       "form": "raw_edible",
+       "quantity": 150.0,
+       "role": "vegetable",
+       "label": "Rädisa"
+      },
+      {
+       "name": "sallad",
+       "form": "raw_edible",
+       "quantity": 100.0,
+       "role": "vegetable",
+       "label": "Sallad"
+      },
+      {
+       "name": "gurka",
+       "form": "raw_edible",
+       "quantity": 150.0,
+       "role": "vegetable",
+       "label": "Gurka"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Koka potatisen mjuk i saltat vatten, cirka 20 minuter, och låt svalna något.",
+     "uses": [
+      "potatis"
+     ],
+     "minutes": 25,
+     "passive": true
+    },
+    {
+     "text": "Krydda kycklingen med olja, paprika, timjan och salt.",
+     "uses": [
+      "kyckling",
+      "rapsolja",
+      "paprikapulver",
+      "timjan",
+      "salt"
+     ],
+     "minutes": 5
+    },
+    {
+     "text": "Grilla kycklingen i grillpanna 5–6 minuter per sida tills den håller 74 °C.",
+     "uses": [
+      "kyckling"
+     ],
+     "minutes": 13,
+     "after": [
+      2
+     ]
+    },
+    {
+     "text": "Rör ihop crème fraiche, senap och vinäger. Vänd ner potatis i bitar, hackad rödlök, saltgurka och gräslök.",
+     "uses": [
+      "crème fraiche",
+      "senap",
+      "äppelcidervinäger",
+      "potatis",
+      "rödlök",
+      "saltgurka",
+      "gräslök"
+     ],
+     "minutes": 8,
+     "after": [
+      1
+     ]
+    },
+    {
+     "text": "Skiva rädisor och gurka och servera med sallad, kyckling och potatissallad.",
+     "uses": [
+      "rädisa",
+      "gurka",
+      "sallad",
+      "kyckling",
+      "potatis"
+     ],
+     "minutes": 5,
+     "after": [
+      3,
+      4
+     ]
+    }
+   ]
+  },
+  {
+   "base_id": "smako-swedish-skogsgryta",
+   "name": "Skogsgryta med fläsk, svamp och grädde, potatismos och lingon",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "swedish",
+   "family": "gryta",
+   "primary": "fläskkött",
+   "method": "pot",
+   "side": "potatis",
+   "flavor": [
+    "timjan",
+    "enbär",
+    "svamp"
+   ],
+   "equipment": [
+    "Gryta",
+    "Kastrull",
+    "Potatisstöt"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Gryta",
+     "ingredients": [
+      {
+       "name": "fläskkött",
+       "form": "raw_edible",
+       "quantity": 700.0,
+       "role": "primary",
+       "label": "Fläskkött",
+       "range": [
+        600.0,
+        1050.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "smör",
+       "form": "as_sold",
+       "quantity": 25.0,
+       "role": "cooking",
+       "label": "Smör",
+       "follows": "fläskkött"
+      },
+      {
+       "name": "salt",
+       "form": "as_sold",
+       "quantity": 7.0,
+       "role": "flavour",
+       "label": "Salt",
+       "follows": "fläskkött"
+      },
+      {
+       "name": "svartpeppar",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Svartpeppar",
+       "follows": "fläskkött"
+      },
+      {
+       "name": "champinjoner",
+       "form": "raw_edible",
+       "quantity": 300.0,
+       "role": "vegetable",
+       "label": "Champinjoner"
+      },
+      {
+       "name": "gul lök",
+       "form": "raw_edible",
+       "quantity": 150.0,
+       "role": "vegetable",
+       "label": "Gul lök"
+      },
+      {
+       "name": "timjan",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Timjan",
+       "follows": "fläskkött"
+      },
+      {
+       "name": "enbär",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Enbär",
+       "follows": "fläskkött"
+      },
+      {
+       "name": "grädde",
+       "form": "as_sold",
+       "quantity": 200.0,
+       "role": "sauce",
+       "label": "Grädde"
+      },
+      {
+       "name": "sojasås",
+       "form": "as_sold",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Sojasås",
+       "follows": "fläskkött"
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Potatismos",
+     "ingredients": [
+      {
+       "name": "potatis",
+       "form": "raw_edible",
+       "quantity": 900.0,
+       "role": "side",
+       "label": "Potatis",
+       "range": [
+        650.0,
+        1050.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "mjölk",
+       "form": "as_sold",
+       "quantity": 150.0,
+       "role": "sauce",
+       "label": "Mjölk"
+      },
+      {
+       "name": "smör",
+       "form": "as_sold",
+       "quantity": 30.0,
+       "role": "sauce",
+       "label": "Smör"
+      }
+     ]
+    },
+    {
+     "id": "c3",
+     "name": "Till servering",
+     "ingredients": [
+      {
+       "name": "lingon",
+       "form": "as_sold",
+       "quantity": 120.0,
+       "role": "flavour",
+       "label": "Lingon"
+      },
+      {
+       "name": "persilja",
+       "form": "raw_edible",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Persilja"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Skär fläsket i bitar och bryn i smör. Salta och peppra.",
+     "uses": [
+      "fläskkött",
+      "smör",
+      "salt",
+      "svartpeppar"
+     ],
+     "minutes": 10
+    },
+    {
+     "text": "Tillsätt svamp och hackad lök och fräs 5 minuter. Lägg i timjan, krossade enbär och 300 ml vatten och sjud under lock 40 minuter.",
+     "uses": [
+      "champinjoner",
+      "gul lök",
+      "timjan",
+      "enbär",
+      "fläskkött"
+     ],
+     "minutes": 45,
+     "after": [
+      1
+     ],
+     "passive": true
+    },
+    {
+     "text": "Rör ner grädde och soja och sjud 5 minuter.",
+     "uses": [
+      "grädde",
+      "sojasås"
+     ],
+     "minutes": 6,
+     "after": [
+      2
+     ]
+    },
+    {
+     "text": "Koka potatisen mjuk och stöt med varm mjölk och smör.",
+     "uses": [
+      "potatis",
+      "mjölk",
+      "smör"
+     ],
+     "minutes": 25,
+     "passive": true
+    },
+    {
+     "text": "Servera grytan med mos, lingon och persilja.",
+     "uses": [
+      "fläskkött",
+      "potatis",
+      "lingon",
+      "persilja"
+     ],
+     "minutes": 2,
+     "after": [
+      3,
+      4
+     ]
+    }
+   ]
+  },
+  {
+   "base_id": "smako-swedish-skinkpaj-purjolok",
+   "name": "Skinkpaj med stekt lök och ost",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "swedish",
+   "family": "paj",
+   "primary": "kokt skinka",
+   "method": "oven",
+   "side": "pajdeg",
+   "flavor": [
+    "senap",
+    "ost"
+   ],
+   "equipment": [
+    "Ugn",
+    "Pajform",
+    "Stekpanna",
+    "Skål"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Pajdeg",
+     "ingredients": [
+      {
+       "name": "vetemjöl",
+       "form": "dry",
+       "quantity": 180.0,
+       "role": "sauce",
+       "label": "Vetemjöl"
+      },
+      {
+       "name": "smör",
+       "form": "as_sold",
+       "quantity": 100.0,
+       "role": "sauce",
+       "label": "Smör"
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Fyllning",
+     "ingredients": [
+      {
+       "name": "kokt skinka",
+       "form": "as_sold",
+       "quantity": 350.0,
+       "role": "primary",
+       "label": "Kokt skinka",
+       "range": [
+        300.0,
+        500.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "gul lök",
+       "form": "raw_edible",
+       "quantity": 200.0,
+       "role": "vegetable",
+       "label": "Gul lök"
+      },
+      {
+       "name": "rapsolja",
+       "form": "as_sold",
+       "quantity": 10.0,
+       "role": "cooking",
+       "label": "Rapsolja",
+       "follows": "kokt skinka"
+      },
+      {
+       "name": "ägg",
+       "form": "raw_edible",
+       "quantity": 200.0,
+       "role": "sauce",
+       "label": "Ägg"
+      },
+      {
+       "name": "mjölk",
+       "form": "as_sold",
+       "quantity": 200.0,
+       "role": "sauce",
+       "label": "Mjölk"
+      },
+      {
+       "name": "crème fraiche",
+       "form": "as_sold",
+       "quantity": 100.0,
+       "role": "sauce",
+       "label": "Crème fraiche"
+      },
+      {
+       "name": "ost",
+       "form": "as_sold",
+       "quantity": 120.0,
+       "role": "sauce",
+       "label": "Ost"
+      },
+      {
+       "name": "senap",
+       "form": "as_sold",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Senap",
+       "follows": "kokt skinka"
+      },
+      {
+       "name": "svartpeppar",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Svartpeppar",
+       "follows": "kokt skinka"
+      }
+     ]
+    },
+    {
+     "id": "c3",
+     "name": "Sallad",
+     "ingredients": [
+      {
+       "name": "sallad",
+       "form": "raw_edible",
+       "quantity": 100.0,
+       "role": "vegetable",
+       "label": "Sallad"
+      },
+      {
+       "name": "tomat",
+       "form": "raw_edible",
+       "quantity": 200.0,
+       "role": "vegetable",
+       "label": "Tomat"
+      },
+      {
+       "name": "rödlök",
+       "form": "raw_edible",
+       "quantity": 50.0,
+       "role": "vegetable",
+       "label": "Rödlök"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Nyp ihop mjöl och smör, tillsätt 30 ml vatten och tryck ut degen i formen. Ställ kallt 15 minuter.",
+     "uses": [
+      "vetemjöl",
+      "smör"
+     ],
+     "minutes": 25
+    },
+    {
+     "text": "Sätt ugnen på 200 °C och förgrädda skalet 10 minuter.",
+     "uses": [
+      "vetemjöl"
+     ],
+     "minutes": 10,
+     "after": [
+      1
+     ],
+     "passive": true
+    },
+    {
+     "text": "Skiva löken och fräs den mjuk och gyllene i olja. Tärna skinkan.",
+     "uses": [
+      "gul lök",
+      "rapsolja",
+      "kokt skinka"
+     ],
+     "minutes": 10
+    },
+    {
+     "text": "Vispa ägg, mjölk, crème fraiche, riven ost, senap och peppar. Fördela skinka och lök i skalet och häll över.",
+     "uses": [
+      "ägg",
+      "mjölk",
+      "crème fraiche",
+      "ost",
+      "senap",
+      "svartpeppar",
+      "kokt skinka",
+      "gul lök"
+     ],
+     "minutes": 5,
+     "after": [
+      2,
+      3
+     ]
+    },
+    {
+     "text": "Grädda 30 minuter tills stanningen har stelnat.",
+     "uses": [
+      "ägg"
+     ],
+     "minutes": 30,
+     "after": [
+      4
+     ],
+     "passive": true
+    },
+    {
+     "text": "Servera med sallad, tomat och rödlök.",
+     "uses": [
+      "sallad",
+      "tomat",
+      "rödlök"
+     ],
+     "minutes": 4,
+     "after": [
+      5
+     ]
+    }
+   ]
+  },
+  {
+   "base_id": "smako-swedish-lammstek-rosmarin",
+   "name": "Lammstek med rosmarin, rostad potatis och rödvinssås",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "swedish",
+   "family": "stek",
+   "primary": "benfri lammstek",
+   "method": "oven",
+   "side": "potatis",
+   "flavor": [
+    "rosmarin",
+    "vitlök"
+   ],
+   "equipment": [
+    "Ugn",
+    "Långpanna",
+    "Kastrull",
+    "Stektermometer"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Lammstek",
+     "ingredients": [
+      {
+       "name": "benfri lammstek",
+       "form": "as_sold",
+       "quantity": 900.0,
+       "role": "primary",
+       "label": "Benfri lammstek",
+       "range": [
+        750.0,
+        1350.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "rosmarin",
+       "form": "dry",
+       "quantity": 2.0,
+       "role": "flavour",
+       "label": "Rosmarin",
+       "follows": "benfri lammstek"
+      },
+      {
+       "name": "vitlök",
+       "form": "raw_edible",
+       "quantity": 12.0,
+       "role": "flavour",
+       "label": "Vitlök",
+       "follows": "benfri lammstek"
+      },
+      {
+       "name": "olivolja",
+       "form": "as_sold",
+       "quantity": 15.0,
+       "role": "cooking",
+       "label": "Olivolja",
+       "follows": "benfri lammstek"
+      },
+      {
+       "name": "salt",
+       "form": "as_sold",
+       "quantity": 8.0,
+       "role": "flavour",
+       "label": "Salt",
+       "follows": "benfri lammstek"
+      },
+      {
+       "name": "svartpeppar",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Svartpeppar",
+       "follows": "benfri lammstek"
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Potatis",
+     "ingredients": [
+      {
+       "name": "potatis",
+       "form": "raw_edible",
+       "quantity": 800.0,
+       "role": "side",
+       "label": "Potatis",
+       "range": [
+        600.0,
+        950.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "rödlök",
+       "form": "raw_edible",
+       "quantity": 150.0,
+       "role": "vegetable",
+       "label": "Rödlök"
+      },
+      {
+       "name": "olivolja",
+       "form": "as_sold",
+       "quantity": 15.0,
+       "role": "cooking",
+       "label": "Olivolja"
+      }
+     ]
+    },
+    {
+     "id": "c3",
+     "name": "Sås",
+     "ingredients": [
+      {
+       "name": "rött matlagningsvin",
+       "form": "as_sold",
+       "quantity": 150.0,
+       "role": "sauce",
+       "label": "Rött matlagningsvin"
+      },
+      {
+       "name": "grädde",
+       "form": "as_sold",
+       "quantity": 100.0,
+       "role": "sauce",
+       "label": "Grädde"
+      },
+      {
+       "name": "smör",
+       "form": "as_sold",
+       "quantity": 15.0,
+       "role": "sauce",
+       "label": "Smör"
+      }
+     ]
+    },
+    {
+     "id": "c4",
+     "name": "Grönsaker",
+     "ingredients": [
+      {
+       "name": "haricots verts",
+       "form": "as_sold",
+       "quantity": 300.0,
+       "role": "vegetable",
+       "label": "Haricots verts"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Sätt ugnen på 175 °C. Gnid in steken med hackad rosmarin, vitlök, olja, salt och peppar.",
+     "uses": [
+      "benfri lammstek",
+      "rosmarin",
+      "vitlök",
+      "olivolja",
+      "salt",
+      "svartpeppar"
+     ],
+     "minutes": 8
+    },
+    {
+     "text": "Skär potatis och rödlök i klyftor och vänd med olja och salt i långpannan. Lägg steken ovanpå.",
+     "uses": [
+      "potatis",
+      "rödlök",
+      "olivolja",
+      "benfri lammstek"
+     ],
+     "minutes": 8,
+     "after": [
+      1
+     ]
+    },
+    {
+     "text": "Stek i ugnen tills steken håller 60 °C i mitten, cirka 1 timme. Låt vila 15 minuter.",
+     "uses": [
+      "benfri lammstek",
+      "potatis"
+     ],
+     "minutes": 75,
+     "after": [
+      2
+     ],
+     "passive": true
+    },
+    {
+     "text": "Koka upp stekskyn med vin, grädde och 100 ml vatten och sjud 5 minuter. Vispa ner smöret.",
+     "uses": [
+      "rött matlagningsvin",
+      "grädde",
+      "smör"
+     ],
+     "minutes": 8,
+     "after": [
+      3
+     ]
+    },
+    {
+     "text": "Koka haricots verts 3 minuter. Skiva steken och servera med potatis, bönor och sås.",
+     "uses": [
+      "haricots verts",
+      "benfri lammstek",
+      "potatis",
+      "grädde"
+     ],
+     "minutes": 5,
+     "after": [
+      4
+     ]
+    }
+   ]
+  }
+ ]
+}

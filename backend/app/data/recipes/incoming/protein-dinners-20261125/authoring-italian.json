@@ -1,0 +1,5258 @@
+{
+ "schema_version": "smako-recipe-authoring-v1",
+ "pack_id": "smako-protein-dinners-italian-20261125",
+ "recipes": [
+  {
+   "base_id": "smako-italian-scaloppine-maiale-funghi",
+   "name": "Fläskscaloppine med champinjoner, vitt vin och potatis",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "italian",
+   "family": "scaloppine",
+   "primary": "fläskkarré",
+   "method": "pan",
+   "side": "potatis",
+   "flavor": [
+    "svamp",
+    "persilja"
+   ],
+   "equipment": [
+    "Stekpanna",
+    "Kastrull",
+    "Köttklubba"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Scaloppine",
+     "ingredients": [
+      {
+       "name": "fläskkarré",
+       "form": "raw_edible",
+       "quantity": 650.0,
+       "role": "primary",
+       "label": "Fläskkarré",
+       "range": [
+        550.0,
+        950.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "vetemjöl",
+       "form": "dry",
+       "quantity": 30.0,
+       "role": "sauce",
+       "label": "Vetemjöl"
+      },
+      {
+       "name": "olivolja",
+       "form": "as_sold",
+       "quantity": 20.0,
+       "role": "cooking",
+       "label": "Olivolja",
+       "follows": "fläskkarré"
+      },
+      {
+       "name": "smör",
+       "form": "as_sold",
+       "quantity": 20.0,
+       "role": "cooking",
+       "label": "Smör",
+       "follows": "fläskkarré"
+      },
+      {
+       "name": "salt",
+       "form": "as_sold",
+       "quantity": 5.0,
+       "role": "flavour",
+       "label": "Salt",
+       "follows": "fläskkarré"
+      },
+      {
+       "name": "svartpeppar",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Svartpeppar",
+       "follows": "fläskkarré"
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Svampsås",
+     "ingredients": [
+      {
+       "name": "champinjoner",
+       "form": "raw_edible",
+       "quantity": 300.0,
+       "role": "vegetable",
+       "label": "Champinjoner"
+      },
+      {
+       "name": "vitlök",
+       "form": "raw_edible",
+       "quantity": 6.0,
+       "role": "flavour",
+       "label": "Vitlök"
+      },
+      {
+       "name": "vitt matlagningsvin",
+       "form": "as_sold",
+       "quantity": 100.0,
+       "role": "sauce",
+       "label": "Vitt matlagningsvin"
+      },
+      {
+       "name": "grädde",
+       "form": "as_sold",
+       "quantity": 100.0,
+       "role": "sauce",
+       "label": "Grädde"
+      },
+      {
+       "name": "persilja",
+       "form": "raw_edible",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Persilja"
+      }
+     ]
+    },
+    {
+     "id": "c3",
+     "name": "Tillbehör",
+     "ingredients": [
+      {
+       "name": "potatis",
+       "form": "raw_edible",
+       "quantity": 900.0,
+       "role": "side",
+       "label": "Potatis",
+       "range": [
+        650.0,
+        1050.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "haricots verts",
+       "form": "as_sold",
+       "quantity": 250.0,
+       "role": "vegetable",
+       "label": "Haricots verts"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Koka potatisen mjuk i saltat vatten, cirka 20 minuter.",
+     "uses": [
+      "potatis"
+     ],
+     "minutes": 20,
+     "passive": true
+    },
+    {
+     "text": "Skär karrén i tunna skivor och bulta dem tunna mellan plastfilm. Salta, peppra och vänd i mjöl.",
+     "uses": [
+      "fläskkarré",
+      "salt",
+      "svartpeppar",
+      "vetemjöl"
+     ],
+     "minutes": 10
+    },
+    {
+     "text": "Stek skivorna i olja och smör 2 minuter per sida tills de är genomstekta. Lägg upp.",
+     "uses": [
+      "fläskkarré",
+      "olivolja",
+      "smör"
+     ],
+     "minutes": 8,
+     "after": [
+      2
+     ]
+    },
+    {
+     "text": "Fräs skivad svamp och vitlök i pannan, tillsätt vinet och låt koka in hälften. Rör ner grädden och värm köttet i såsen.",
+     "uses": [
+      "champinjoner",
+      "vitlök",
+      "vitt matlagningsvin",
+      "grädde",
+      "fläskkarré"
+     ],
+     "minutes": 10,
+     "after": [
+      3
+     ]
+    },
+    {
+     "text": "Koka haricots verts 3 minuter. Strö persilja över köttet och servera med potatis och bönor.",
+     "uses": [
+      "haricots verts",
+      "persilja",
+      "potatis"
+     ],
+     "minutes": 5,
+     "after": [
+      1,
+      4
+     ]
+    }
+   ]
+  },
+  {
+   "base_id": "smako-italian-spezzatino-manzo-patate",
+   "name": "Spezzatino – nötgryta med potatis, morötter och rött vin",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "italian",
+   "family": "spezzatino",
+   "primary": "nötkött",
+   "method": "pot",
+   "side": "potatis",
+   "flavor": [
+    "rosmarin",
+    "rött vin"
+   ],
+   "equipment": [
+    "Gjutjärnsgryta",
+    "Skärbräda"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Gryta",
+     "ingredients": [
+      {
+       "name": "nötkött",
+       "form": "raw_edible",
+       "quantity": 700.0,
+       "role": "primary",
+       "requirements": [
+        "pack:beef_braising_cut",
+        "pack:intake_all_10d1e6ea4dc5"
+       ],
+       "label": "Högrev eller grytbitar av nöt",
+       "range": [
+        600.0,
+        1050.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "olivolja",
+       "form": "as_sold",
+       "quantity": 20.0,
+       "role": "cooking",
+       "label": "Olivolja",
+       "follows": "nötkött"
+      },
+      {
+       "name": "salt",
+       "form": "as_sold",
+       "quantity": 8.0,
+       "role": "flavour",
+       "label": "Salt",
+       "follows": "nötkött"
+      },
+      {
+       "name": "svartpeppar",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Svartpeppar",
+       "follows": "nötkött"
+      },
+      {
+       "name": "gul lök",
+       "form": "raw_edible",
+       "quantity": 150.0,
+       "role": "vegetable",
+       "label": "Gul lök"
+      },
+      {
+       "name": "morot",
+       "form": "raw_edible",
+       "quantity": 250.0,
+       "role": "vegetable",
+       "label": "Morot"
+      },
+      {
+       "name": "selleri",
+       "form": "raw_edible",
+       "quantity": 100.0,
+       "role": "vegetable",
+       "label": "Selleri"
+      },
+      {
+       "name": "tomatpuré",
+       "form": "as_sold",
+       "quantity": 30.0,
+       "role": "sauce",
+       "label": "Tomatpuré"
+      },
+      {
+       "name": "rött matlagningsvin",
+       "form": "as_sold",
+       "quantity": 150.0,
+       "role": "sauce",
+       "label": "Rött matlagningsvin"
+      },
+      {
+       "name": "rosmarin",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Rosmarin",
+       "follows": "nötkött"
+      },
+      {
+       "name": "lagerblad",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Lagerblad",
+       "follows": "nötkött"
+      },
+      {
+       "name": "potatis",
+       "form": "raw_edible",
+       "quantity": 700.0,
+       "role": "side",
+       "label": "Potatis",
+       "range": [
+        500.0,
+        800.0
+       ],
+       "step": 50.0
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Till servering",
+     "ingredients": [
+      {
+       "name": "persilja",
+       "form": "raw_edible",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Persilja"
+      },
+      {
+       "name": "bröd",
+       "form": "as_sold",
+       "quantity": 200.0,
+       "role": "side",
+       "label": "Bröd"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Skär köttet i bitar och bryn det i olja i omgångar. Salta och peppra.",
+     "uses": [
+      "nötkött",
+      "olivolja",
+      "salt",
+      "svartpeppar"
+     ],
+     "minutes": 12
+    },
+    {
+     "text": "Hacka lök, morot och selleri och fräs mjukt i grytan. Rör ner tomatpurén.",
+     "uses": [
+      "gul lök",
+      "morot",
+      "selleri",
+      "tomatpuré"
+     ],
+     "minutes": 8,
+     "after": [
+      1
+     ]
+    },
+    {
+     "text": "Tillsätt vin, rosmarin, lagerblad och 500 ml vatten. Sjud under lock i 1 timme.",
+     "uses": [
+      "rött matlagningsvin",
+      "rosmarin",
+      "lagerblad",
+      "nötkött"
+     ],
+     "minutes": 60,
+     "after": [
+      2
+     ],
+     "passive": true
+    },
+    {
+     "text": "Lägg i potatis i bitar och sjud 30 minuter till tills köttet är mört och potatisen mjuk.",
+     "uses": [
+      "potatis",
+      "nötkött"
+     ],
+     "minutes": 30,
+     "after": [
+      3
+     ],
+     "passive": true
+    },
+    {
+     "text": "Smaka av, strö över persilja och servera med bröd.",
+     "uses": [
+      "persilja",
+      "bröd"
+     ],
+     "minutes": 3,
+     "after": [
+      4
+     ]
+    }
+   ]
+  },
+  {
+   "base_id": "smako-italian-arista-fankal-potatis",
+   "name": "Ugnsstekt fläskkarré med fänkål, rosmarin och potatis",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "italian",
+   "family": "arista",
+   "primary": "fläskkarré",
+   "method": "oven",
+   "side": "potatis",
+   "flavor": [
+    "fänkålsfrön",
+    "rosmarin",
+    "vitlök"
+   ],
+   "equipment": [
+    "Ugn",
+    "Långpanna",
+    "Mortel",
+    "Stektermometer"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Karré",
+     "ingredients": [
+      {
+       "name": "fläskkarré",
+       "form": "raw_edible",
+       "quantity": 800.0,
+       "role": "primary",
+       "label": "Fläskkarré",
+       "range": [
+        650.0,
+        1200.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "fänkålsfrön",
+       "form": "dry",
+       "quantity": 3.0,
+       "role": "flavour",
+       "label": "Fänkålsfrön",
+       "follows": "fläskkarré"
+      },
+      {
+       "name": "rosmarin",
+       "form": "dry",
+       "quantity": 2.0,
+       "role": "flavour",
+       "label": "Rosmarin",
+       "follows": "fläskkarré"
+      },
+      {
+       "name": "vitlök",
+       "form": "raw_edible",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Vitlök",
+       "follows": "fläskkarré"
+      },
+      {
+       "name": "olivolja",
+       "form": "as_sold",
+       "quantity": 20.0,
+       "role": "cooking",
+       "label": "Olivolja",
+       "follows": "fläskkarré"
+      },
+      {
+       "name": "salt",
+       "form": "as_sold",
+       "quantity": 8.0,
+       "role": "flavour",
+       "label": "Salt",
+       "follows": "fläskkarré"
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Grönsaker",
+     "ingredients": [
+      {
+       "name": "potatis",
+       "form": "raw_edible",
+       "quantity": 800.0,
+       "role": "side",
+       "label": "Potatis",
+       "range": [
+        600.0,
+        950.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "fänkål",
+       "form": "raw_edible",
+       "quantity": 300.0,
+       "role": "vegetable",
+       "label": "Fänkål"
+      },
+      {
+       "name": "rödlök",
+       "form": "raw_edible",
+       "quantity": 150.0,
+       "role": "vegetable",
+       "label": "Rödlök"
+      },
+      {
+       "name": "olivolja",
+       "form": "as_sold",
+       "quantity": 20.0,
+       "role": "cooking",
+       "label": "Olivolja"
+      },
+      {
+       "name": "citronjuice",
+       "form": "as_sold",
+       "quantity": 15.0,
+       "role": "flavour",
+       "label": "Citronjuice"
+      }
+     ]
+    },
+    {
+     "id": "c3",
+     "name": "Sallad",
+     "ingredients": [
+      {
+       "name": "rucola",
+       "form": "raw_edible",
+       "quantity": 80.0,
+       "role": "vegetable",
+       "label": "Rucola"
+      },
+      {
+       "name": "tomat",
+       "form": "raw_edible",
+       "quantity": 200.0,
+       "role": "vegetable",
+       "label": "Tomat"
+      },
+      {
+       "name": "balsamvinäger",
+       "form": "as_sold",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Balsamvinäger"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Sätt ugnen på 200 °C. Stöt fänkålsfrön, rosmarin, vitlök och salt och gnid in karrén med kryddorna och oljan.",
+     "uses": [
+      "fänkålsfrön",
+      "rosmarin",
+      "vitlök",
+      "salt",
+      "fläskkarré",
+      "olivolja"
+     ],
+     "minutes": 8
+    },
+    {
+     "text": "Skär potatis, fänkål och rödlök i klyftor och vänd i olja och salt i långpannan.",
+     "uses": [
+      "potatis",
+      "fänkål",
+      "rödlök",
+      "olivolja"
+     ],
+     "minutes": 10
+    },
+    {
+     "text": "Lägg karrén ovanpå och stek tills köttet håller 68 °C i mitten, cirka 55 minuter.",
+     "uses": [
+      "fläskkarré",
+      "potatis",
+      "fänkål",
+      "rödlök"
+     ],
+     "minutes": 55,
+     "after": [
+      1,
+      2
+     ],
+     "passive": true
+    },
+    {
+     "text": "Låt köttet vila 10 minuter. Pressa citron över grönsakerna.",
+     "uses": [
+      "fläskkarré",
+      "citronjuice"
+     ],
+     "minutes": 10,
+     "after": [
+      3
+     ],
+     "passive": true
+    },
+    {
+     "text": "Blanda rucola och tomat med balsamvinäger. Skiva köttet och servera.",
+     "uses": [
+      "rucola",
+      "tomat",
+      "balsamvinäger",
+      "fläskkarré"
+     ],
+     "minutes": 5,
+     "after": [
+      4
+     ]
+    }
+   ]
+  },
+  {
+   "base_id": "smako-italian-salsiccia-fagioli-uccelletto",
+   "name": "Salsiccia med vita bönor i tomat och salvia",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "italian",
+   "family": "salsiccia e fagioli",
+   "primary": "färsk salsicciakorv",
+   "method": "pan",
+   "side": "bröd",
+   "flavor": [
+    "salvia",
+    "vitlök"
+   ],
+   "equipment": [
+    "Stekpanna",
+    "Kastrull"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Korv",
+     "ingredients": [
+      {
+       "name": "färsk salsicciakorv",
+       "form": "as_sold",
+       "quantity": 500.0,
+       "role": "primary",
+       "label": "Färsk salsicciakorv",
+       "range": [
+        400.0,
+        750.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "olivolja",
+       "form": "as_sold",
+       "quantity": 10.0,
+       "role": "cooking",
+       "label": "Olivolja",
+       "follows": "färsk salsicciakorv"
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Bönor",
+     "ingredients": [
+      {
+       "name": "vita bönor",
+       "form": "cooked_drained",
+       "quantity": 500.0,
+       "role": "vegetable",
+       "label": "Vita bönor"
+      },
+      {
+       "name": "krossade tomater",
+       "form": "as_sold",
+       "quantity": 400.0,
+       "role": "sauce",
+       "label": "Krossade tomater"
+      },
+      {
+       "name": "vitlök",
+       "form": "raw_edible",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Vitlök"
+      },
+      {
+       "name": "salvia",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Salvia"
+      },
+      {
+       "name": "chiliflakes",
+       "form": "dry",
+       "quantity": 0.5,
+       "role": "flavour",
+       "label": "Chiliflakes"
+      },
+      {
+       "name": "olivolja",
+       "form": "as_sold",
+       "quantity": 20.0,
+       "role": "cooking",
+       "label": "Olivolja"
+      },
+      {
+       "name": "salt",
+       "form": "as_sold",
+       "quantity": 3.0,
+       "role": "flavour",
+       "label": "Salt"
+      }
+     ]
+    },
+    {
+     "id": "c3",
+     "name": "Tillbehör",
+     "ingredients": [
+      {
+       "name": "bröd",
+       "form": "as_sold",
+       "quantity": 250.0,
+       "role": "side",
+       "label": "Bröd"
+      },
+      {
+       "name": "spenat",
+       "form": "as_sold",
+       "quantity": 200.0,
+       "role": "vegetable",
+       "label": "Spenat"
+      },
+      {
+       "name": "citronjuice",
+       "form": "as_sold",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Citronjuice"
+      },
+      {
+       "name": "parmesan",
+       "form": "as_sold",
+       "quantity": 40.0,
+       "role": "sauce",
+       "label": "Parmesan"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Stek korvarna i olja i 12 minuter, vänd ofta, tills de är genomstekta.",
+     "uses": [
+      "färsk salsicciakorv",
+      "olivolja"
+     ],
+     "minutes": 12
+    },
+    {
+     "text": "Fräs skivad vitlök, salvia och chili i olja. Tillsätt tomater och bönor och sjud 10 minuter.",
+     "uses": [
+      "vitlök",
+      "salvia",
+      "chiliflakes",
+      "olivolja",
+      "krossade tomater",
+      "vita bönor",
+      "salt"
+     ],
+     "minutes": 12
+    },
+    {
+     "text": "Skär korvarna i bitar och lägg dem i bönorna. Sjud 5 minuter.",
+     "uses": [
+      "färsk salsicciakorv",
+      "vita bönor"
+     ],
+     "minutes": 5,
+     "after": [
+      1,
+      2
+     ]
+    },
+    {
+     "text": "Fräs spenaten snabbt i en panna och pressa över citron.",
+     "uses": [
+      "spenat",
+      "citronjuice"
+     ],
+     "minutes": 4
+    },
+    {
+     "text": "Servera med riven parmesan, spenat och bröd.",
+     "uses": [
+      "parmesan",
+      "spenat",
+      "bröd"
+     ],
+     "minutes": 3,
+     "after": [
+      3,
+      4
+     ]
+    }
+   ]
+  },
+  {
+   "base_id": "smako-italian-involtini-maiale-polenta",
+   "name": "Fläskinvoltini med parmesan och salvia i tomatsås, med polenta",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "italian",
+   "family": "involtini",
+   "primary": "fläskkarré",
+   "method": "pot",
+   "side": "polenta",
+   "flavor": [
+    "salvia",
+    "parmesan"
+   ],
+   "equipment": [
+    "Stekpanna",
+    "Kastrull",
+    "Köttklubba"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Involtini",
+     "ingredients": [
+      {
+       "name": "fläskkarré",
+       "form": "raw_edible",
+       "quantity": 650.0,
+       "role": "primary",
+       "label": "Fläskkarré",
+       "range": [
+        550.0,
+        950.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "parmesan",
+       "form": "as_sold",
+       "quantity": 50.0,
+       "role": "sauce",
+       "label": "Parmesan"
+      },
+      {
+       "name": "persilja",
+       "form": "raw_edible",
+       "quantity": 15.0,
+       "role": "flavour",
+       "label": "Persilja",
+       "follows": "fläskkarré"
+      },
+      {
+       "name": "vitlök",
+       "form": "raw_edible",
+       "quantity": 6.0,
+       "role": "flavour",
+       "label": "Vitlök",
+       "follows": "fläskkarré"
+      },
+      {
+       "name": "salvia",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Salvia",
+       "follows": "fläskkarré"
+      },
+      {
+       "name": "olivolja",
+       "form": "as_sold",
+       "quantity": 20.0,
+       "role": "cooking",
+       "label": "Olivolja",
+       "follows": "fläskkarré"
+      },
+      {
+       "name": "salt",
+       "form": "as_sold",
+       "quantity": 4.0,
+       "role": "flavour",
+       "label": "Salt",
+       "follows": "fläskkarré"
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Tomatsås",
+     "ingredients": [
+      {
+       "name": "krossade tomater",
+       "form": "as_sold",
+       "quantity": 500.0,
+       "role": "sauce",
+       "label": "Krossade tomater"
+      },
+      {
+       "name": "gul lök",
+       "form": "raw_edible",
+       "quantity": 100.0,
+       "role": "vegetable",
+       "label": "Gul lök"
+      },
+      {
+       "name": "oregano",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Oregano"
+      }
+     ]
+    },
+    {
+     "id": "c3",
+     "name": "Polenta",
+     "ingredients": [
+      {
+       "name": "polenta",
+       "form": "dry",
+       "quantity": 250.0,
+       "role": "side",
+       "label": "Polenta",
+       "range": [
+        200.0,
+        300.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "smör",
+       "form": "as_sold",
+       "quantity": 20.0,
+       "role": "sauce",
+       "label": "Smör"
+      }
+     ]
+    },
+    {
+     "id": "c4",
+     "name": "Sallad",
+     "ingredients": [
+      {
+       "name": "sallad",
+       "form": "raw_edible",
+       "quantity": 100.0,
+       "role": "vegetable",
+       "label": "Sallad"
+      },
+      {
+       "name": "gurka",
+       "form": "raw_edible",
+       "quantity": 150.0,
+       "role": "vegetable",
+       "label": "Gurka"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Skär karrén i tunna skivor och bulta dem tunna. Strö över riven parmesan, hackad persilja, vitlök och salvia. Rulla ihop och fäst med tandpetare.",
+     "uses": [
+      "fläskkarré",
+      "parmesan",
+      "persilja",
+      "vitlök",
+      "salvia"
+     ],
+     "minutes": 15
+    },
+    {
+     "text": "Bryn rullarna i olja runt om och salta.",
+     "uses": [
+      "fläskkarré",
+      "olivolja",
+      "salt"
+     ],
+     "minutes": 6,
+     "after": [
+      1
+     ]
+    },
+    {
+     "text": "Tillsätt hackad lök, krossade tomater och oregano och sjud under lock 20 minuter tills köttet är genomstekt.",
+     "uses": [
+      "gul lök",
+      "krossade tomater",
+      "oregano",
+      "fläskkarré"
+     ],
+     "minutes": 22,
+     "after": [
+      2
+     ],
+     "passive": true
+    },
+    {
+     "text": "Koka polentan enligt förpackningen under omrörning och rör ner smöret.",
+     "uses": [
+      "polenta",
+      "smör"
+     ],
+     "minutes": 10
+    },
+    {
+     "text": "Skär sallad och gurka. Servera involtini och sås på polentan med salladen.",
+     "uses": [
+      "sallad",
+      "gurka",
+      "fläskkarré",
+      "polenta"
+     ],
+     "minutes": 4,
+     "after": [
+      3,
+      4
+     ]
+    }
+   ]
+  },
+  {
+   "base_id": "smako-italian-tagliata-rucola-patate",
+   "name": "Tagliata – skivad biff med rucola, parmesan och rostad potatis",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "italian",
+   "family": "tagliata",
+   "primary": "nötkött",
+   "method": "pan",
+   "side": "potatis",
+   "flavor": [
+    "rosmarin",
+    "balsamvinäger"
+   ],
+   "equipment": [
+    "Ugn",
+    "Plåt",
+    "Grillpanna"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Biff",
+     "ingredients": [
+      {
+       "name": "nötkött",
+       "form": "raw_edible",
+       "quantity": 600.0,
+       "role": "primary",
+       "requirements": [
+        "pack:beef_quick_cut",
+        "pack:intake_all_10d1e6ea4dc5"
+       ],
+       "label": "Nötkött för stekning, t.ex. ryggbiff",
+       "range": [
+        500.0,
+        900.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "olivolja",
+       "form": "as_sold",
+       "quantity": 15.0,
+       "role": "cooking",
+       "label": "Olivolja",
+       "follows": "nötkött"
+      },
+      {
+       "name": "rosmarin",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Rosmarin",
+       "follows": "nötkött"
+      },
+      {
+       "name": "salt",
+       "form": "as_sold",
+       "quantity": 5.0,
+       "role": "flavour",
+       "label": "Salt",
+       "follows": "nötkött"
+      },
+      {
+       "name": "svartpeppar",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Svartpeppar",
+       "follows": "nötkött"
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Potatis",
+     "ingredients": [
+      {
+       "name": "potatis",
+       "form": "raw_edible",
+       "quantity": 800.0,
+       "role": "side",
+       "label": "Potatis",
+       "range": [
+        600.0,
+        950.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "olivolja",
+       "form": "as_sold",
+       "quantity": 20.0,
+       "role": "cooking",
+       "label": "Olivolja"
+      },
+      {
+       "name": "vitlök",
+       "form": "raw_edible",
+       "quantity": 8.0,
+       "role": "flavour",
+       "label": "Vitlök"
+      }
+     ]
+    },
+    {
+     "id": "c3",
+     "name": "Rucola",
+     "ingredients": [
+      {
+       "name": "rucola",
+       "form": "raw_edible",
+       "quantity": 100.0,
+       "role": "vegetable",
+       "label": "Rucola"
+      },
+      {
+       "name": "tomat",
+       "form": "raw_edible",
+       "quantity": 250.0,
+       "role": "vegetable",
+       "label": "Tomat"
+      },
+      {
+       "name": "parmesan",
+       "form": "as_sold",
+       "quantity": 50.0,
+       "role": "sauce",
+       "label": "Parmesan"
+      },
+      {
+       "name": "balsamvinäger",
+       "form": "as_sold",
+       "quantity": 15.0,
+       "role": "flavour",
+       "label": "Balsamvinäger"
+      },
+      {
+       "name": "citronjuice",
+       "form": "as_sold",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Citronjuice"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Sätt ugnen på 225 °C. Skär potatisen i bitar, vänd med olja, krossad vitlök och salt och rosta 30 minuter.",
+     "uses": [
+      "potatis",
+      "olivolja",
+      "vitlök",
+      "salt"
+     ],
+     "minutes": 35,
+     "passive": true
+    },
+    {
+     "text": "Gnid in köttet med olja, rosmarin, salt och peppar. Låt stå i rumstemperatur.",
+     "uses": [
+      "nötkött",
+      "olivolja",
+      "rosmarin",
+      "salt",
+      "svartpeppar"
+     ],
+     "minutes": 5
+    },
+    {
+     "text": "Stek köttet i het grillpanna 3–4 minuter per sida och låt vila 5 minuter.",
+     "uses": [
+      "nötkött"
+     ],
+     "minutes": 12,
+     "after": [
+      2
+     ]
+    },
+    {
+     "text": "Lägg rucola och halverade tomater på fat. Skiva köttet tunt och lägg ovanpå.",
+     "uses": [
+      "rucola",
+      "tomat",
+      "nötkött"
+     ],
+     "minutes": 5,
+     "after": [
+      3
+     ]
+    },
+    {
+     "text": "Hyvla över parmesan, ringla över balsamvinäger och citron och servera med potatisen.",
+     "uses": [
+      "parmesan",
+      "balsamvinäger",
+      "citronjuice",
+      "potatis"
+     ],
+     "minutes": 3,
+     "after": [
+      1,
+      4
+     ]
+    }
+   ]
+  },
+  {
+   "base_id": "smako-italian-peposo-polenta",
+   "name": "Peposo – pepprig nötgryta med rött vin och krämig polenta",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "italian",
+   "family": "peposo",
+   "primary": "nötkött",
+   "method": "pot",
+   "side": "polenta",
+   "flavor": [
+    "svartpeppar",
+    "rött vin"
+   ],
+   "equipment": [
+    "Gjutjärnsgryta",
+    "Kastrull"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Peposo",
+     "ingredients": [
+      {
+       "name": "nötkött",
+       "form": "raw_edible",
+       "quantity": 700.0,
+       "role": "primary",
+       "requirements": [
+        "pack:beef_braising_cut",
+        "pack:intake_all_10d1e6ea4dc5"
+       ],
+       "label": "Högrev eller grytbitar av nöt",
+       "range": [
+        600.0,
+        1050.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "vitlök",
+       "form": "raw_edible",
+       "quantity": 15.0,
+       "role": "flavour",
+       "label": "Vitlök",
+       "follows": "nötkött"
+      },
+      {
+       "name": "svartpeppar",
+       "form": "dry",
+       "quantity": 4.0,
+       "role": "flavour",
+       "label": "Svartpeppar",
+       "follows": "nötkött"
+      },
+      {
+       "name": "salt",
+       "form": "as_sold",
+       "quantity": 8.0,
+       "role": "flavour",
+       "label": "Salt",
+       "follows": "nötkött"
+      },
+      {
+       "name": "rött matlagningsvin",
+       "form": "as_sold",
+       "quantity": 300.0,
+       "role": "sauce",
+       "label": "Rött matlagningsvin"
+      },
+      {
+       "name": "tomatpuré",
+       "form": "as_sold",
+       "quantity": 30.0,
+       "role": "sauce",
+       "label": "Tomatpuré"
+      },
+      {
+       "name": "lagerblad",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Lagerblad",
+       "follows": "nötkött"
+      },
+      {
+       "name": "rosmarin",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Rosmarin",
+       "follows": "nötkött"
+      },
+      {
+       "name": "olivolja",
+       "form": "as_sold",
+       "quantity": 15.0,
+       "role": "cooking",
+       "label": "Olivolja",
+       "follows": "nötkött"
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Polenta",
+     "ingredients": [
+      {
+       "name": "polenta",
+       "form": "dry",
+       "quantity": 250.0,
+       "role": "side",
+       "label": "Polenta",
+       "range": [
+        200.0,
+        300.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "smör",
+       "form": "as_sold",
+       "quantity": 20.0,
+       "role": "sauce",
+       "label": "Smör"
+      },
+      {
+       "name": "parmesan",
+       "form": "as_sold",
+       "quantity": 40.0,
+       "role": "sauce",
+       "label": "Parmesan"
+      }
+     ]
+    },
+    {
+     "id": "c3",
+     "name": "Grönsaker",
+     "ingredients": [
+      {
+       "name": "broccoli",
+       "form": "raw_edible",
+       "quantity": 350.0,
+       "role": "vegetable",
+       "label": "Broccoli"
+      },
+      {
+       "name": "citronjuice",
+       "form": "as_sold",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Citronjuice"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Skär köttet i bitar och lägg i grytan med hela vitlöksklyftor, grovkrossad peppar, salt, lagerblad och rosmarin.",
+     "uses": [
+      "nötkött",
+      "vitlök",
+      "svartpeppar",
+      "salt",
+      "lagerblad",
+      "rosmarin"
+     ],
+     "minutes": 10
+    },
+    {
+     "text": "Rör ner tomatpuré, vin, olja och 300 ml vatten. Sjud under lock på svag värme i 2 timmar tills köttet faller isär.",
+     "uses": [
+      "tomatpuré",
+      "rött matlagningsvin",
+      "olivolja",
+      "nötkött"
+     ],
+     "minutes": 120,
+     "after": [
+      1
+     ],
+     "passive": true
+    },
+    {
+     "text": "Koka polentan enligt förpackningen och rör ner smör och parmesan.",
+     "uses": [
+      "polenta",
+      "smör",
+      "parmesan"
+     ],
+     "minutes": 10,
+     "after": [
+      2
+     ]
+    },
+    {
+     "text": "Ånga broccolin 4 minuter och pressa över citron.",
+     "uses": [
+      "broccoli",
+      "citronjuice"
+     ],
+     "minutes": 5,
+     "after": [
+      2
+     ]
+    },
+    {
+     "text": "Servera grytan på polentan med broccoli.",
+     "uses": [
+      "nötkött",
+      "polenta",
+      "broccoli"
+     ],
+     "minutes": 2,
+     "after": [
+      3,
+      4
+     ]
+    }
+   ]
+  },
+  {
+   "base_id": "smako-italian-maiale-pizzaiola-patate",
+   "name": "Fläskkarré alla pizzaiola med kapris, oliver och potatis",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "italian",
+   "family": "pizzaiola",
+   "primary": "fläskkarré",
+   "method": "pan",
+   "side": "potatis",
+   "flavor": [
+    "oregano",
+    "kapris"
+   ],
+   "equipment": [
+    "Stekpanna",
+    "Kastrull"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Kött",
+     "ingredients": [
+      {
+       "name": "fläskkarré",
+       "form": "raw_edible",
+       "quantity": 700.0,
+       "role": "primary",
+       "label": "Fläskkarré",
+       "range": [
+        600.0,
+        1050.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "olivolja",
+       "form": "as_sold",
+       "quantity": 20.0,
+       "role": "cooking",
+       "label": "Olivolja",
+       "follows": "fläskkarré"
+      },
+      {
+       "name": "salt",
+       "form": "as_sold",
+       "quantity": 6.0,
+       "role": "flavour",
+       "label": "Salt",
+       "follows": "fläskkarré"
+      },
+      {
+       "name": "vitlök",
+       "form": "raw_edible",
+       "quantity": 8.0,
+       "role": "flavour",
+       "label": "Vitlök",
+       "follows": "fläskkarré"
+      },
+      {
+       "name": "oregano",
+       "form": "dry",
+       "quantity": 2.0,
+       "role": "flavour",
+       "label": "Oregano",
+       "follows": "fläskkarré"
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Sås",
+     "ingredients": [
+      {
+       "name": "krossade tomater",
+       "form": "as_sold",
+       "quantity": 400.0,
+       "role": "sauce",
+       "label": "Krossade tomater"
+      },
+      {
+       "name": "kapris",
+       "form": "preserved_drained",
+       "quantity": 20.0,
+       "role": "flavour",
+       "label": "Kapris"
+      },
+      {
+       "name": "oliver",
+       "form": "preserved_drained",
+       "quantity": 60.0,
+       "role": "flavour",
+       "label": "Oliver"
+      },
+      {
+       "name": "basilika",
+       "form": "raw_edible",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Basilika"
+      }
+     ]
+    },
+    {
+     "id": "c3",
+     "name": "Tillbehör",
+     "ingredients": [
+      {
+       "name": "potatis",
+       "form": "raw_edible",
+       "quantity": 900.0,
+       "role": "side",
+       "label": "Potatis",
+       "range": [
+        650.0,
+        1050.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "zucchini",
+       "form": "raw_edible",
+       "quantity": 300.0,
+       "role": "vegetable",
+       "label": "Zucchini"
+      },
+      {
+       "name": "olivolja",
+       "form": "as_sold",
+       "quantity": 10.0,
+       "role": "cooking",
+       "label": "Olivolja"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Koka potatisen mjuk i saltat vatten, cirka 20 minuter.",
+     "uses": [
+      "potatis"
+     ],
+     "minutes": 20,
+     "passive": true
+    },
+    {
+     "text": "Skär karrén i 1,5 cm skivor och salta. Bryn i olja 2 minuter per sida.",
+     "uses": [
+      "fläskkarré",
+      "salt",
+      "olivolja"
+     ],
+     "minutes": 8
+    },
+    {
+     "text": "Tillsätt vitlök, oregano, tomater, kapris och oliver och sjud under lock 10 minuter tills köttet håller 68 °C.",
+     "uses": [
+      "vitlök",
+      "oregano",
+      "krossade tomater",
+      "kapris",
+      "oliver",
+      "fläskkarré"
+     ],
+     "minutes": 12,
+     "after": [
+      2
+     ],
+     "passive": true
+    },
+    {
+     "text": "Skiva zucchinin och stek den i olja tills den fått färg.",
+     "uses": [
+      "zucchini",
+      "olivolja"
+     ],
+     "minutes": 8
+    },
+    {
+     "text": "Strö basilika över köttet och servera med potatis och zucchini.",
+     "uses": [
+      "basilika",
+      "potatis",
+      "zucchini"
+     ],
+     "minutes": 3,
+     "after": [
+      1,
+      3,
+      4
+     ]
+    }
+   ]
+  },
+  {
+   "base_id": "smako-italian-cannelloni-carne",
+   "name": "Cannelloni med köttfärs, tomatsås och bechamel",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "italian",
+   "family": "cannelloni",
+   "primary": "nötfärs",
+   "method": "oven",
+   "side": "pasta",
+   "flavor": [
+    "muskot",
+    "parmesan"
+   ],
+   "equipment": [
+    "Ugn",
+    "Ugnsform",
+    "Stekpanna",
+    "Kastrull"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Fyllning",
+     "ingredients": [
+      {
+       "name": "nötfärs",
+       "form": "raw_edible",
+       "quantity": 600.0,
+       "role": "primary",
+       "label": "Nötfärs",
+       "range": [
+        500.0,
+        900.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "gul lök",
+       "form": "raw_edible",
+       "quantity": 100.0,
+       "role": "flavour",
+       "label": "Gul lök",
+       "follows": "nötfärs"
+      },
+      {
+       "name": "morot",
+       "form": "raw_edible",
+       "quantity": 100.0,
+       "role": "vegetable",
+       "label": "Morot"
+      },
+      {
+       "name": "selleri",
+       "form": "raw_edible",
+       "quantity": 60.0,
+       "role": "vegetable",
+       "label": "Selleri"
+      },
+      {
+       "name": "olivolja",
+       "form": "as_sold",
+       "quantity": 15.0,
+       "role": "cooking",
+       "label": "Olivolja",
+       "follows": "nötfärs"
+      },
+      {
+       "name": "salt",
+       "form": "as_sold",
+       "quantity": 6.0,
+       "role": "flavour",
+       "label": "Salt",
+       "follows": "nötfärs"
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Tomatsås",
+     "ingredients": [
+      {
+       "name": "krossade tomater",
+       "form": "as_sold",
+       "quantity": 500.0,
+       "role": "sauce",
+       "label": "Krossade tomater"
+      },
+      {
+       "name": "basilika",
+       "form": "raw_edible",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Basilika"
+      }
+     ]
+    },
+    {
+     "id": "c3",
+     "name": "Bechamel",
+     "ingredients": [
+      {
+       "name": "smör",
+       "form": "as_sold",
+       "quantity": 40.0,
+       "role": "sauce",
+       "label": "Smör"
+      },
+      {
+       "name": "vetemjöl",
+       "form": "dry",
+       "quantity": 40.0,
+       "role": "sauce",
+       "label": "Vetemjöl"
+      },
+      {
+       "name": "mjölk",
+       "form": "as_sold",
+       "quantity": 600.0,
+       "role": "sauce",
+       "label": "Mjölk"
+      },
+      {
+       "name": "muskot",
+       "form": "dry",
+       "quantity": 0.5,
+       "role": "flavour",
+       "label": "Muskot"
+      },
+      {
+       "name": "parmesan",
+       "form": "as_sold",
+       "quantity": 60.0,
+       "role": "sauce",
+       "label": "Parmesan"
+      }
+     ]
+    },
+    {
+     "id": "c4",
+     "name": "Pasta",
+     "ingredients": [
+      {
+       "name": "lasagneplattor",
+       "form": "dry",
+       "quantity": 250.0,
+       "role": "side",
+       "label": "Lasagneplattor"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Hacka lök, morot och selleri fint och fräs i olja. Lägg i färsen och stek tills den är genomstekt, minst 72 °C. Salta.",
+     "uses": [
+      "gul lök",
+      "morot",
+      "selleri",
+      "olivolja",
+      "nötfärs",
+      "salt"
+     ],
+     "minutes": 15
+    },
+    {
+     "text": "Smält smöret, vispa ner mjölet och späd med mjölken. Sjud 5 minuter och smaka av med muskot och salt.",
+     "uses": [
+      "smör",
+      "vetemjöl",
+      "mjölk",
+      "muskot",
+      "salt"
+     ],
+     "minutes": 10
+    },
+    {
+     "text": "Sätt ugnen på 200 °C. Koka lasagneplattorna 3 minuter och lägg dem på en handduk.",
+     "uses": [
+      "lasagneplattor"
+     ],
+     "minutes": 8
+    },
+    {
+     "text": "Bred tomatsås med basilika i formen. Lägg färs på varje platta, rulla ihop och lägg rullarna i formen.",
+     "uses": [
+      "krossade tomater",
+      "basilika",
+      "lasagneplattor",
+      "nötfärs"
+     ],
+     "minutes": 12,
+     "after": [
+      1,
+      3
+     ]
+    },
+    {
+     "text": "Täck med bechamel och parmesan och grädda 25 minuter tills ytan är gyllene.",
+     "uses": [
+      "smör",
+      "parmesan"
+     ],
+     "minutes": 25,
+     "after": [
+      2,
+      4
+     ],
+     "passive": true
+    },
+    {
+     "text": "Låt vila 5 minuter före servering.",
+     "uses": [
+      "lasagneplattor"
+     ],
+     "minutes": 5,
+     "after": [
+      5
+     ],
+     "passive": true
+    }
+   ]
+  },
+  {
+   "base_id": "smako-italian-spezzatino-maiale-piselli",
+   "name": "Fläskgryta med ärtor, tomat och vitt vin",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "italian",
+   "family": "spezzatino",
+   "primary": "fläskkött",
+   "method": "pot",
+   "side": "potatis",
+   "flavor": [
+    "rosmarin",
+    "vitt vin"
+   ],
+   "equipment": [
+    "Gryta",
+    "Kastrull"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Gryta",
+     "ingredients": [
+      {
+       "name": "fläskkött",
+       "form": "raw_edible",
+       "quantity": 700.0,
+       "role": "primary",
+       "label": "Fläskkött",
+       "range": [
+        600.0,
+        1050.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "olivolja",
+       "form": "as_sold",
+       "quantity": 20.0,
+       "role": "cooking",
+       "label": "Olivolja",
+       "follows": "fläskkött"
+      },
+      {
+       "name": "salt",
+       "form": "as_sold",
+       "quantity": 7.0,
+       "role": "flavour",
+       "label": "Salt",
+       "follows": "fläskkött"
+      },
+      {
+       "name": "gul lök",
+       "form": "raw_edible",
+       "quantity": 150.0,
+       "role": "vegetable",
+       "label": "Gul lök"
+      },
+      {
+       "name": "vitlök",
+       "form": "raw_edible",
+       "quantity": 8.0,
+       "role": "flavour",
+       "label": "Vitlök",
+       "follows": "fläskkött"
+      },
+      {
+       "name": "vitt matlagningsvin",
+       "form": "as_sold",
+       "quantity": 150.0,
+       "role": "sauce",
+       "label": "Vitt matlagningsvin"
+      },
+      {
+       "name": "krossade tomater",
+       "form": "as_sold",
+       "quantity": 400.0,
+       "role": "sauce",
+       "label": "Krossade tomater"
+      },
+      {
+       "name": "rosmarin",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Rosmarin",
+       "follows": "fläskkött"
+      },
+      {
+       "name": "ärtor",
+       "form": "as_sold",
+       "quantity": 300.0,
+       "role": "vegetable",
+       "label": "Ärtor"
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Tillbehör",
+     "ingredients": [
+      {
+       "name": "potatis",
+       "form": "raw_edible",
+       "quantity": 800.0,
+       "role": "side",
+       "label": "Potatis",
+       "range": [
+        600.0,
+        950.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "persilja",
+       "form": "raw_edible",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Persilja"
+      },
+      {
+       "name": "citronjuice",
+       "form": "as_sold",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Citronjuice"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Skär fläsket i bitar och bryn det i olja i omgångar. Salta.",
+     "uses": [
+      "fläskkött",
+      "olivolja",
+      "salt"
+     ],
+     "minutes": 10
+    },
+    {
+     "text": "Fräs hackad lök och vitlök i grytan. Tillsätt vinet och låt koka in något.",
+     "uses": [
+      "gul lök",
+      "vitlök",
+      "vitt matlagningsvin"
+     ],
+     "minutes": 6,
+     "after": [
+      1
+     ]
+    },
+    {
+     "text": "Lägg tillbaka köttet med tomater, rosmarin och 200 ml vatten. Sjud under lock 50 minuter tills köttet är mört.",
+     "uses": [
+      "fläskkött",
+      "krossade tomater",
+      "rosmarin"
+     ],
+     "minutes": 50,
+     "after": [
+      2
+     ],
+     "passive": true
+    },
+    {
+     "text": "Koka potatisen mjuk i saltat vatten, cirka 20 minuter.",
+     "uses": [
+      "potatis"
+     ],
+     "minutes": 20,
+     "after": [
+      2
+     ],
+     "passive": true
+    },
+    {
+     "text": "Rör ner ärtorna och sjud 5 minuter. Smaka av med citron och strö över persilja. Servera med potatisen.",
+     "uses": [
+      "ärtor",
+      "citronjuice",
+      "persilja",
+      "potatis"
+     ],
+     "minutes": 6,
+     "after": [
+      3,
+      4
+     ]
+    }
+   ]
+  },
+  {
+   "base_id": "smako-italian-cacciucco",
+   "name": "Cacciucco – toskansk fiskgryta med musslor, räkor och rostat bröd",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "italian",
+   "family": "fiskgryta",
+   "primary": "fisk",
+   "method": "pot",
+   "side": "bröd",
+   "flavor": [
+    "vitlök",
+    "chili",
+    "tomat"
+   ],
+   "equipment": [
+    "Gryta",
+    "Ugn",
+    "Plåt"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Gryta",
+     "ingredients": [
+      {
+       "name": "fisk",
+       "form": "raw_edible",
+       "quantity": 500.0,
+       "role": "primary",
+       "label": "Vit fiskfilé, t.ex. sej eller torsk",
+       "range": [
+        400.0,
+        750.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "blåmusselkött utan skal",
+       "form": "as_sold",
+       "quantity": 150.0,
+       "role": "primary",
+       "label": "Blåmusselkött utan skal",
+       "range": [
+        120.0,
+        220.0
+       ],
+       "step": 10.0
+      },
+      {
+       "name": "räkor",
+       "form": "cooked_drained",
+       "quantity": 150.0,
+       "role": "primary",
+       "label": "Räkor",
+       "range": [
+        120.0,
+        220.0
+       ],
+       "step": 10.0
+      },
+      {
+       "name": "gul lök",
+       "form": "raw_edible",
+       "quantity": 100.0,
+       "role": "vegetable",
+       "label": "Gul lök"
+      },
+      {
+       "name": "selleri",
+       "form": "raw_edible",
+       "quantity": 80.0,
+       "role": "vegetable",
+       "label": "Selleri"
+      },
+      {
+       "name": "vitlök",
+       "form": "raw_edible",
+       "quantity": 12.0,
+       "role": "flavour",
+       "label": "Vitlök",
+       "follows": "fisk"
+      },
+      {
+       "name": "chiliflakes",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Chiliflakes",
+       "follows": "fisk"
+      },
+      {
+       "name": "olivolja",
+       "form": "as_sold",
+       "quantity": 30.0,
+       "role": "cooking",
+       "label": "Olivolja",
+       "follows": "fisk"
+      },
+      {
+       "name": "rött matlagningsvin",
+       "form": "as_sold",
+       "quantity": 100.0,
+       "role": "sauce",
+       "label": "Rött matlagningsvin"
+      },
+      {
+       "name": "krossade tomater",
+       "form": "as_sold",
+       "quantity": 500.0,
+       "role": "sauce",
+       "label": "Krossade tomater"
+      },
+      {
+       "name": "salt",
+       "form": "as_sold",
+       "quantity": 6.0,
+       "role": "flavour",
+       "label": "Salt",
+       "follows": "fisk"
+      },
+      {
+       "name": "persilja",
+       "form": "raw_edible",
+       "quantity": 15.0,
+       "role": "flavour",
+       "label": "Persilja",
+       "follows": "fisk"
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Bröd",
+     "ingredients": [
+      {
+       "name": "bröd",
+       "form": "as_sold",
+       "quantity": 250.0,
+       "role": "side",
+       "label": "Bröd"
+      },
+      {
+       "name": "olivolja",
+       "form": "as_sold",
+       "quantity": 15.0,
+       "role": "cooking",
+       "label": "Olivolja"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Hacka lök, selleri och hälften av vitlöken och fräs i olja med chili 5 minuter.",
+     "uses": [
+      "gul lök",
+      "selleri",
+      "vitlök",
+      "chiliflakes",
+      "olivolja"
+     ],
+     "minutes": 8
+    },
+    {
+     "text": "Tillsätt vin, tomater och 400 ml vatten. Sjud 15 minuter.",
+     "uses": [
+      "rött matlagningsvin",
+      "krossade tomater"
+     ],
+     "minutes": 15,
+     "after": [
+      1
+     ],
+     "passive": true
+    },
+    {
+     "text": "Rosta brödet med olja i ugnen och gnid det med resten av vitlöken.",
+     "uses": [
+      "bröd",
+      "olivolja",
+      "vitlök"
+     ],
+     "minutes": 8
+    },
+    {
+     "text": "Lägg fisken i bitar i grytan och sjud 5 minuter tills den håller 63 °C. Tillsätt musslor och räkor och värm 1 minut. Salta.",
+     "uses": [
+      "fisk",
+      "blåmusselkött utan skal",
+      "räkor",
+      "salt"
+     ],
+     "minutes": 7,
+     "after": [
+      2
+     ]
+    },
+    {
+     "text": "Lägg brödet i djupa tallrikar, häll över grytan och strö över persilja.",
+     "uses": [
+      "bröd",
+      "persilja"
+     ],
+     "minutes": 3,
+     "after": [
+      3,
+      4
+     ]
+    }
+   ]
+  },
+  {
+   "base_id": "smako-italian-linguine-gamberi-zucchine",
+   "name": "Linguine med räkor, zucchini, citron och chili",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "italian",
+   "family": "pasta",
+   "primary": "råa skalade vannameiräkor",
+   "method": "pan",
+   "side": "pasta",
+   "flavor": [
+    "citron",
+    "vitlök",
+    "chili"
+   ],
+   "equipment": [
+    "Stor kastrull",
+    "Stekpanna"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Pasta",
+     "ingredients": [
+      {
+       "name": "pasta",
+       "form": "dry",
+       "quantity": 350.0,
+       "role": "side",
+       "label": "Pasta",
+       "range": [
+        250.0,
+        400.0
+       ],
+       "step": 50.0
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Räkor",
+     "ingredients": [
+      {
+       "name": "råa skalade vannameiräkor",
+       "form": "as_sold",
+       "quantity": 500.0,
+       "role": "primary",
+       "label": "Råa skalade vannameiräkor",
+       "range": [
+        400.0,
+        750.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "olivolja",
+       "form": "as_sold",
+       "quantity": 30.0,
+       "role": "cooking",
+       "label": "Olivolja",
+       "follows": "råa skalade vannameiräkor"
+      },
+      {
+       "name": "vitlök",
+       "form": "raw_edible",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Vitlök",
+       "follows": "råa skalade vannameiräkor"
+      },
+      {
+       "name": "chiliflakes",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Chiliflakes",
+       "follows": "råa skalade vannameiräkor"
+      },
+      {
+       "name": "salt",
+       "form": "as_sold",
+       "quantity": 4.0,
+       "role": "flavour",
+       "label": "Salt",
+       "follows": "råa skalade vannameiräkor"
+      },
+      {
+       "name": "zucchini",
+       "form": "raw_edible",
+       "quantity": 400.0,
+       "role": "vegetable",
+       "label": "Zucchini"
+      },
+      {
+       "name": "tomat",
+       "form": "raw_edible",
+       "quantity": 200.0,
+       "role": "vegetable",
+       "label": "Tomat"
+      },
+      {
+       "name": "citronjuice",
+       "form": "as_sold",
+       "quantity": 20.0,
+       "role": "flavour",
+       "label": "Citronjuice",
+       "follows": "råa skalade vannameiräkor"
+      },
+      {
+       "name": "persilja",
+       "form": "raw_edible",
+       "quantity": 15.0,
+       "role": "flavour",
+       "label": "Persilja",
+       "follows": "råa skalade vannameiräkor"
+      },
+      {
+       "name": "parmesan",
+       "form": "as_sold",
+       "quantity": 40.0,
+       "role": "sauce",
+       "label": "Parmesan"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Koka pastan i saltat vatten enligt förpackningen. Spara 100 ml av kokvattnet.",
+     "uses": [
+      "pasta"
+     ],
+     "minutes": 12,
+     "passive": true
+    },
+    {
+     "text": "Skär zucchinin i stavar och tomaterna i bitar. Hacka vitlök och persilja.",
+     "uses": [
+      "zucchini",
+      "tomat",
+      "vitlök",
+      "persilja"
+     ],
+     "minutes": 8
+    },
+    {
+     "text": "Fräs zucchinin i olja 4 minuter. Tillsätt vitlök och chili och sedan räkorna. Stek 3 minuter tills räkorna är rosa och genomstekta.",
+     "uses": [
+      "zucchini",
+      "olivolja",
+      "vitlök",
+      "chiliflakes",
+      "råa skalade vannameiräkor",
+      "salt"
+     ],
+     "minutes": 8,
+     "after": [
+      2
+     ]
+    },
+    {
+     "text": "Vänd ner tomater, pasta, citron och lite av kokvattnet. Toppa med persilja och parmesan.",
+     "uses": [
+      "tomat",
+      "pasta",
+      "citronjuice",
+      "persilja",
+      "parmesan"
+     ],
+     "minutes": 4,
+     "after": [
+      1,
+      3
+     ]
+    }
+   ]
+  },
+  {
+   "base_id": "smako-italian-salmone-salsa-verde",
+   "name": "Ugnsbakad lax med salsa verde, potatis och haricots verts",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "italian",
+   "family": "lax i ugn",
+   "primary": "lax",
+   "method": "oven",
+   "side": "potatis",
+   "flavor": [
+    "kapris",
+    "persilja",
+    "citron"
+   ],
+   "equipment": [
+    "Ugn",
+    "Ugnsform",
+    "Kastrull",
+    "Mixer"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Lax",
+     "ingredients": [
+      {
+       "name": "lax",
+       "form": "raw_edible",
+       "quantity": 600.0,
+       "role": "primary",
+       "label": "Lax",
+       "range": [
+        500.0,
+        900.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "olivolja",
+       "form": "as_sold",
+       "quantity": 10.0,
+       "role": "cooking",
+       "label": "Olivolja",
+       "follows": "lax"
+      },
+      {
+       "name": "salt",
+       "form": "as_sold",
+       "quantity": 5.0,
+       "role": "flavour",
+       "label": "Salt",
+       "follows": "lax"
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Salsa verde",
+     "ingredients": [
+      {
+       "name": "persilja",
+       "form": "raw_edible",
+       "quantity": 30.0,
+       "role": "flavour",
+       "label": "Persilja"
+      },
+      {
+       "name": "basilika",
+       "form": "raw_edible",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Basilika"
+      },
+      {
+       "name": "kapris",
+       "form": "preserved_drained",
+       "quantity": 20.0,
+       "role": "flavour",
+       "label": "Kapris"
+      },
+      {
+       "name": "sardeller",
+       "form": "preserved_drained",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Sardeller"
+      },
+      {
+       "name": "vitlök",
+       "form": "raw_edible",
+       "quantity": 4.0,
+       "role": "flavour",
+       "label": "Vitlök"
+      },
+      {
+       "name": "olivolja",
+       "form": "as_sold",
+       "quantity": 50.0,
+       "role": "sauce",
+       "label": "Olivolja"
+      },
+      {
+       "name": "citronjuice",
+       "form": "as_sold",
+       "quantity": 15.0,
+       "role": "flavour",
+       "label": "Citronjuice"
+      }
+     ]
+    },
+    {
+     "id": "c3",
+     "name": "Tillbehör",
+     "ingredients": [
+      {
+       "name": "potatis",
+       "form": "raw_edible",
+       "quantity": 800.0,
+       "role": "side",
+       "label": "Potatis",
+       "range": [
+        600.0,
+        950.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "haricots verts",
+       "form": "as_sold",
+       "quantity": 300.0,
+       "role": "vegetable",
+       "label": "Haricots verts"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Koka potatisen mjuk i saltat vatten, cirka 20 minuter.",
+     "uses": [
+      "potatis"
+     ],
+     "minutes": 20,
+     "passive": true
+    },
+    {
+     "text": "Sätt ugnen på 200 °C. Lägg laxen i formen, pensla med olja och salta. Baka 15 minuter tills den håller 63 °C.",
+     "uses": [
+      "lax",
+      "olivolja",
+      "salt"
+     ],
+     "minutes": 18,
+     "passive": true
+    },
+    {
+     "text": "Mixa persilja, basilika, kapris, sardeller, vitlök, olja och citron till en grov sås.",
+     "uses": [
+      "persilja",
+      "basilika",
+      "kapris",
+      "sardeller",
+      "vitlök",
+      "olivolja",
+      "citronjuice"
+     ],
+     "minutes": 6
+    },
+    {
+     "text": "Koka haricots verts 3 minuter.",
+     "uses": [
+      "haricots verts"
+     ],
+     "minutes": 4
+    },
+    {
+     "text": "Servera laxen med salsa verde, potatis och bönor.",
+     "uses": [
+      "lax",
+      "persilja",
+      "potatis",
+      "haricots verts"
+     ],
+     "minutes": 2,
+     "after": [
+      1,
+      2,
+      3,
+      4
+     ]
+    }
+   ]
+  },
+  {
+   "base_id": "smako-italian-pesce-gratinato-pangrattato",
+   "name": "Gratinerad fisk med örtbröd, ugnstomater och potatis",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "italian",
+   "family": "gratinerad fisk",
+   "primary": "fisk",
+   "method": "oven",
+   "side": "potatis",
+   "flavor": [
+    "persilja",
+    "citron",
+    "vitlök"
+   ],
+   "equipment": [
+    "Ugn",
+    "Ugnsform",
+    "Plåt"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Fisk",
+     "ingredients": [
+      {
+       "name": "fisk",
+       "form": "raw_edible",
+       "quantity": 650.0,
+       "role": "primary",
+       "label": "Vit fiskfilé, t.ex. sej eller torsk",
+       "range": [
+        550.0,
+        950.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "ströbröd",
+       "form": "dry",
+       "quantity": 50.0,
+       "role": "sauce",
+       "label": "Ströbröd"
+      },
+      {
+       "name": "parmesan",
+       "form": "as_sold",
+       "quantity": 40.0,
+       "role": "sauce",
+       "label": "Parmesan"
+      },
+      {
+       "name": "persilja",
+       "form": "raw_edible",
+       "quantity": 15.0,
+       "role": "flavour",
+       "label": "Persilja",
+       "follows": "fisk"
+      },
+      {
+       "name": "vitlök",
+       "form": "raw_edible",
+       "quantity": 6.0,
+       "role": "flavour",
+       "label": "Vitlök",
+       "follows": "fisk"
+      },
+      {
+       "name": "citronjuice",
+       "form": "as_sold",
+       "quantity": 15.0,
+       "role": "flavour",
+       "label": "Citronjuice",
+       "follows": "fisk"
+      },
+      {
+       "name": "olivolja",
+       "form": "as_sold",
+       "quantity": 30.0,
+       "role": "cooking",
+       "label": "Olivolja",
+       "follows": "fisk"
+      },
+      {
+       "name": "salt",
+       "form": "as_sold",
+       "quantity": 5.0,
+       "role": "flavour",
+       "label": "Salt",
+       "follows": "fisk"
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Tillbehör",
+     "ingredients": [
+      {
+       "name": "potatis",
+       "form": "raw_edible",
+       "quantity": 800.0,
+       "role": "side",
+       "label": "Potatis",
+       "range": [
+        600.0,
+        950.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "tomat",
+       "form": "raw_edible",
+       "quantity": 300.0,
+       "role": "vegetable",
+       "label": "Tomat"
+      },
+      {
+       "name": "oregano",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Oregano"
+      },
+      {
+       "name": "rucola",
+       "form": "raw_edible",
+       "quantity": 60.0,
+       "role": "vegetable",
+       "label": "Rucola"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Sätt ugnen på 220 °C. Skär potatisen i klyftor, vänd med hälften av oljan och salt och rosta 30 minuter.",
+     "uses": [
+      "potatis",
+      "olivolja",
+      "salt"
+     ],
+     "minutes": 33,
+     "passive": true
+    },
+    {
+     "text": "Blanda ströbröd, parmesan, hackad persilja, vitlök och resten av oljan.",
+     "uses": [
+      "ströbröd",
+      "parmesan",
+      "persilja",
+      "vitlök",
+      "olivolja"
+     ],
+     "minutes": 6
+    },
+    {
+     "text": "Lägg fisken i formen, salta och pressa över citron. Täck med örtbrödet och lägg halverade tomater med oregano runt om.",
+     "uses": [
+      "fisk",
+      "salt",
+      "citronjuice",
+      "ströbröd",
+      "tomat",
+      "oregano"
+     ],
+     "minutes": 6,
+     "after": [
+      2
+     ]
+    },
+    {
+     "text": "Baka fisken 15 minuter tills den håller 63 °C och ytan är gyllene.",
+     "uses": [
+      "fisk"
+     ],
+     "minutes": 15,
+     "after": [
+      3
+     ],
+     "passive": true
+    },
+    {
+     "text": "Servera med potatis och rucola.",
+     "uses": [
+      "potatis",
+      "rucola",
+      "fisk"
+     ],
+     "minutes": 2,
+     "after": [
+      1,
+      4
+     ]
+    }
+   ]
+  },
+  {
+   "base_id": "smako-italian-risotto-frutti-di-mare",
+   "name": "Risotto med fisk, räkor och musslor",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "italian",
+   "family": "risotto",
+   "primary": "fisk",
+   "method": "pot",
+   "side": "risottoris",
+   "flavor": [
+    "vitt vin",
+    "citron",
+    "persilja"
+   ],
+   "equipment": [
+    "Gryta",
+    "Kastrull"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Risotto",
+     "ingredients": [
+      {
+       "name": "risottoris",
+       "form": "dry",
+       "quantity": 300.0,
+       "role": "side",
+       "label": "Risottoris",
+       "range": [
+        250.0,
+        350.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "gul lök",
+       "form": "raw_edible",
+       "quantity": 100.0,
+       "role": "vegetable",
+       "label": "Gul lök"
+      },
+      {
+       "name": "olivolja",
+       "form": "as_sold",
+       "quantity": 20.0,
+       "role": "cooking",
+       "label": "Olivolja"
+      },
+      {
+       "name": "vitt matlagningsvin",
+       "form": "as_sold",
+       "quantity": 150.0,
+       "role": "sauce",
+       "label": "Vitt matlagningsvin"
+      },
+      {
+       "name": "grönsaksfond",
+       "form": "as_sold",
+       "quantity": 1000.0,
+       "role": "sauce",
+       "label": "Grönsaksfond"
+      },
+      {
+       "name": "smör",
+       "form": "as_sold",
+       "quantity": 20.0,
+       "role": "sauce",
+       "label": "Smör"
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Skaldjur",
+     "ingredients": [
+      {
+       "name": "fisk",
+       "form": "raw_edible",
+       "quantity": 400.0,
+       "role": "primary",
+       "label": "Vit fiskfilé, t.ex. sej eller torsk",
+       "range": [
+        350.0,
+        600.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "räkor",
+       "form": "cooked_drained",
+       "quantity": 200.0,
+       "role": "primary",
+       "label": "Räkor",
+       "range": [
+        200.0,
+        300.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "blåmusselkött utan skal",
+       "form": "as_sold",
+       "quantity": 150.0,
+       "role": "primary",
+       "label": "Blåmusselkött utan skal",
+       "range": [
+        120.0,
+        220.0
+       ],
+       "step": 10.0
+      },
+      {
+       "name": "vitlök",
+       "form": "raw_edible",
+       "quantity": 6.0,
+       "role": "flavour",
+       "label": "Vitlök",
+       "follows": "fisk"
+      },
+      {
+       "name": "citronjuice",
+       "form": "as_sold",
+       "quantity": 15.0,
+       "role": "flavour",
+       "label": "Citronjuice",
+       "follows": "fisk"
+      },
+      {
+       "name": "persilja",
+       "form": "raw_edible",
+       "quantity": 15.0,
+       "role": "flavour",
+       "label": "Persilja",
+       "follows": "fisk"
+      },
+      {
+       "name": "salt",
+       "form": "as_sold",
+       "quantity": 4.0,
+       "role": "flavour",
+       "label": "Salt",
+       "follows": "fisk"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Värm fonden. Hacka löken och fräs den mjuk i olja. Rör ner riset och fräs 2 minuter.",
+     "uses": [
+      "grönsaksfond",
+      "gul lök",
+      "olivolja",
+      "risottoris"
+     ],
+     "minutes": 8
+    },
+    {
+     "text": "Häll i vinet och sedan fonden lite i taget under omrörning i cirka 18 minuter tills riset är krämigt men har tuggmotstånd.",
+     "uses": [
+      "vitt matlagningsvin",
+      "grönsaksfond",
+      "risottoris"
+     ],
+     "minutes": 18,
+     "after": [
+      1
+     ]
+    },
+    {
+     "text": "Skär fisken i bitar. Lägg den på riset med vitlöken de sista 5 minuterna tills fisken håller 63 °C.",
+     "uses": [
+      "fisk",
+      "vitlök"
+     ],
+     "minutes": 6,
+     "after": [
+      2
+     ]
+    },
+    {
+     "text": "Rör ner räkor, musslor, smör, citron och salt och värm 1 minut. Strö över persilja.",
+     "uses": [
+      "räkor",
+      "blåmusselkött utan skal",
+      "smör",
+      "citronjuice",
+      "salt",
+      "persilja"
+     ],
+     "minutes": 3,
+     "after": [
+      3
+     ]
+    }
+   ]
+  },
+  {
+   "base_id": "smako-italian-lasagne-salmone-spinaci",
+   "name": "Lasagne med lax, spenat och citronbechamel",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "italian",
+   "family": "lasagne",
+   "primary": "lax",
+   "method": "oven",
+   "side": "pasta",
+   "flavor": [
+    "citron",
+    "dill",
+    "muskot"
+   ],
+   "equipment": [
+    "Ugn",
+    "Ugnsform",
+    "Kastrull"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Fyllning",
+     "ingredients": [
+      {
+       "name": "lax",
+       "form": "raw_edible",
+       "quantity": 550.0,
+       "role": "primary",
+       "label": "Lax",
+       "range": [
+        450.0,
+        800.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "spenat",
+       "form": "as_sold",
+       "quantity": 400.0,
+       "role": "vegetable",
+       "label": "Spenat"
+      },
+      {
+       "name": "salt",
+       "form": "as_sold",
+       "quantity": 5.0,
+       "role": "flavour",
+       "label": "Salt",
+       "follows": "lax"
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Bechamel",
+     "ingredients": [
+      {
+       "name": "smör",
+       "form": "as_sold",
+       "quantity": 50.0,
+       "role": "sauce",
+       "label": "Smör"
+      },
+      {
+       "name": "vetemjöl",
+       "form": "dry",
+       "quantity": 50.0,
+       "role": "sauce",
+       "label": "Vetemjöl"
+      },
+      {
+       "name": "mjölk",
+       "form": "as_sold",
+       "quantity": 800.0,
+       "role": "sauce",
+       "label": "Mjölk"
+      },
+      {
+       "name": "muskot",
+       "form": "dry",
+       "quantity": 0.5,
+       "role": "flavour",
+       "label": "Muskot"
+      },
+      {
+       "name": "citronjuice",
+       "form": "as_sold",
+       "quantity": 15.0,
+       "role": "flavour",
+       "label": "Citronjuice"
+      },
+      {
+       "name": "dill",
+       "form": "raw_edible",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Dill"
+      }
+     ]
+    },
+    {
+     "id": "c3",
+     "name": "Pasta och topp",
+     "ingredients": [
+      {
+       "name": "lasagneplattor",
+       "form": "dry",
+       "quantity": 250.0,
+       "role": "side",
+       "label": "Lasagneplattor"
+      },
+      {
+       "name": "parmesan",
+       "form": "as_sold",
+       "quantity": 60.0,
+       "role": "sauce",
+       "label": "Parmesan"
+      }
+     ]
+    },
+    {
+     "id": "c4",
+     "name": "Sallad",
+     "ingredients": [
+      {
+       "name": "sallad",
+       "form": "raw_edible",
+       "quantity": 100.0,
+       "role": "vegetable",
+       "label": "Sallad"
+      },
+      {
+       "name": "tomat",
+       "form": "raw_edible",
+       "quantity": 200.0,
+       "role": "vegetable",
+       "label": "Tomat"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Sätt ugnen på 200 °C. Tina och krama ur spenaten. Skär laxen i tunna skivor och salta.",
+     "uses": [
+      "spenat",
+      "lax",
+      "salt"
+     ],
+     "minutes": 10
+    },
+    {
+     "text": "Smält smöret, vispa ner mjölet och späd med mjölken. Sjud 5 minuter och smaka av med muskot, citron och hackad dill.",
+     "uses": [
+      "smör",
+      "vetemjöl",
+      "mjölk",
+      "muskot",
+      "citronjuice",
+      "dill"
+     ],
+     "minutes": 10
+    },
+    {
+     "text": "Varva bechamel, plattor, lax och spenat i formen och avsluta med bechamel och parmesan.",
+     "uses": [
+      "lasagneplattor",
+      "lax",
+      "spenat",
+      "parmesan"
+     ],
+     "minutes": 10,
+     "after": [
+      1,
+      2
+     ]
+    },
+    {
+     "text": "Grädda 35 minuter tills plattorna är mjuka och laxen håller 63 °C.",
+     "uses": [
+      "lasagneplattor",
+      "lax"
+     ],
+     "minutes": 35,
+     "after": [
+      3
+     ],
+     "passive": true
+    },
+    {
+     "text": "Servera med sallad och tomat.",
+     "uses": [
+      "sallad",
+      "tomat"
+     ],
+     "minutes": 4,
+     "after": [
+      4
+     ]
+    }
+   ]
+  },
+  {
+   "base_id": "smako-italian-merluzzo-ceci-rosmarino",
+   "name": "Torsk med kikärtor, rosmarin, tomat och spenat",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "italian",
+   "family": "fisk i panna",
+   "primary": "fisk",
+   "method": "pan",
+   "side": "kikärtor",
+   "flavor": [
+    "rosmarin",
+    "vitlök",
+    "citron"
+   ],
+   "equipment": [
+    "Stekpanna med lock"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Fisk",
+     "ingredients": [
+      {
+       "name": "fisk",
+       "form": "raw_edible",
+       "quantity": 650.0,
+       "role": "primary",
+       "requirements": [
+        "pack:cod"
+       ],
+       "label": "Torskfilé",
+       "range": [
+        550.0,
+        950.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "olivolja",
+       "form": "as_sold",
+       "quantity": 15.0,
+       "role": "cooking",
+       "label": "Olivolja",
+       "follows": "fisk"
+      },
+      {
+       "name": "salt",
+       "form": "as_sold",
+       "quantity": 5.0,
+       "role": "flavour",
+       "label": "Salt",
+       "follows": "fisk"
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Kikärtor",
+     "ingredients": [
+      {
+       "name": "kikärtor",
+       "form": "cooked_drained",
+       "quantity": 500.0,
+       "role": "vegetable",
+       "label": "Kikärtor"
+      },
+      {
+       "name": "tomat",
+       "form": "raw_edible",
+       "quantity": 300.0,
+       "role": "vegetable",
+       "label": "Tomat"
+      },
+      {
+       "name": "vitlök",
+       "form": "raw_edible",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Vitlök"
+      },
+      {
+       "name": "rosmarin",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Rosmarin"
+      },
+      {
+       "name": "chiliflakes",
+       "form": "dry",
+       "quantity": 0.5,
+       "role": "flavour",
+       "label": "Chiliflakes"
+      },
+      {
+       "name": "spenat",
+       "form": "as_sold",
+       "quantity": 200.0,
+       "role": "vegetable",
+       "label": "Spenat"
+      },
+      {
+       "name": "olivolja",
+       "form": "as_sold",
+       "quantity": 20.0,
+       "role": "cooking",
+       "label": "Olivolja"
+      },
+      {
+       "name": "citronjuice",
+       "form": "as_sold",
+       "quantity": 15.0,
+       "role": "flavour",
+       "label": "Citronjuice"
+      }
+     ]
+    },
+    {
+     "id": "c3",
+     "name": "Bröd",
+     "ingredients": [
+      {
+       "name": "bröd",
+       "form": "as_sold",
+       "quantity": 200.0,
+       "role": "side",
+       "label": "Bröd"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Fräs skivad vitlök, rosmarin och chili i olja. Tillsätt kikärtor och tärnade tomater och sjud 8 minuter.",
+     "uses": [
+      "vitlök",
+      "rosmarin",
+      "chiliflakes",
+      "olivolja",
+      "kikärtor",
+      "tomat"
+     ],
+     "minutes": 10
+    },
+    {
+     "text": "Rör ner spenaten.",
+     "uses": [
+      "spenat"
+     ],
+     "minutes": 2,
+     "after": [
+      1
+     ]
+    },
+    {
+     "text": "Salta fisken, lägg den på kikärtorna, ringla över olja och lägg på lock. Låt sjuda 8 minuter tills fisken håller 63 °C.",
+     "uses": [
+      "fisk",
+      "salt",
+      "olivolja"
+     ],
+     "minutes": 10,
+     "after": [
+      2
+     ],
+     "passive": true
+    },
+    {
+     "text": "Pressa över citron och servera med bröd.",
+     "uses": [
+      "citronjuice",
+      "bröd"
+     ],
+     "minutes": 2,
+     "after": [
+      3
+     ]
+    }
+   ]
+  },
+  {
+   "base_id": "smako-italian-cotoletta-pesce-insalata",
+   "name": "Panerad fisk alla milanese med tomatsallad och potatis",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "italian",
+   "family": "cotoletta",
+   "primary": "fisk",
+   "method": "pan",
+   "side": "potatis",
+   "flavor": [
+    "citron",
+    "parmesan"
+   ],
+   "equipment": [
+    "Stekpanna",
+    "Kastrull",
+    "Skål"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Fisk",
+     "ingredients": [
+      {
+       "name": "fisk",
+       "form": "raw_edible",
+       "quantity": 650.0,
+       "role": "primary",
+       "label": "Vit fiskfilé, t.ex. sej eller torsk",
+       "range": [
+        550.0,
+        950.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "vetemjöl",
+       "form": "dry",
+       "quantity": 30.0,
+       "role": "sauce",
+       "label": "Vetemjöl"
+      },
+      {
+       "name": "ägg",
+       "form": "raw_edible",
+       "quantity": 100.0,
+       "role": "sauce",
+       "label": "Ägg"
+      },
+      {
+       "name": "ströbröd",
+       "form": "dry",
+       "quantity": 80.0,
+       "role": "sauce",
+       "label": "Ströbröd"
+      },
+      {
+       "name": "parmesan",
+       "form": "as_sold",
+       "quantity": 30.0,
+       "role": "sauce",
+       "label": "Parmesan"
+      },
+      {
+       "name": "olivolja",
+       "form": "as_sold",
+       "quantity": 40.0,
+       "role": "cooking",
+       "label": "Olivolja",
+       "follows": "fisk"
+      },
+      {
+       "name": "salt",
+       "form": "as_sold",
+       "quantity": 5.0,
+       "role": "flavour",
+       "label": "Salt",
+       "follows": "fisk"
+      },
+      {
+       "name": "citronjuice",
+       "form": "as_sold",
+       "quantity": 15.0,
+       "role": "flavour",
+       "label": "Citronjuice",
+       "follows": "fisk"
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Sallad",
+     "ingredients": [
+      {
+       "name": "tomat",
+       "form": "raw_edible",
+       "quantity": 300.0,
+       "role": "vegetable",
+       "label": "Tomat"
+      },
+      {
+       "name": "rödlök",
+       "form": "raw_edible",
+       "quantity": 60.0,
+       "role": "vegetable",
+       "label": "Rödlök"
+      },
+      {
+       "name": "rucola",
+       "form": "raw_edible",
+       "quantity": 60.0,
+       "role": "vegetable",
+       "label": "Rucola"
+      },
+      {
+       "name": "olivolja",
+       "form": "as_sold",
+       "quantity": 15.0,
+       "role": "cooking",
+       "label": "Olivolja"
+      },
+      {
+       "name": "rödvinsvinäger",
+       "form": "as_sold",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Rödvinsvinäger"
+      }
+     ]
+    },
+    {
+     "id": "c3",
+     "name": "Potatis",
+     "ingredients": [
+      {
+       "name": "potatis",
+       "form": "raw_edible",
+       "quantity": 800.0,
+       "role": "side",
+       "label": "Potatis",
+       "range": [
+        600.0,
+        950.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "persilja",
+       "form": "raw_edible",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Persilja"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Koka potatisen mjuk i saltat vatten, cirka 20 minuter.",
+     "uses": [
+      "potatis"
+     ],
+     "minutes": 20,
+     "passive": true
+    },
+    {
+     "text": "Blanda ströbröd och riven parmesan. Salta fisken och vänd den i mjöl, uppvispat ägg och ströbrödet.",
+     "uses": [
+      "ströbröd",
+      "parmesan",
+      "fisk",
+      "salt",
+      "vetemjöl",
+      "ägg"
+     ],
+     "minutes": 10
+    },
+    {
+     "text": "Stek fisken i olja 3 minuter per sida tills den är gyllene och håller 63 °C. Pressa över citron.",
+     "uses": [
+      "fisk",
+      "olivolja",
+      "citronjuice"
+     ],
+     "minutes": 8,
+     "after": [
+      2
+     ]
+    },
+    {
+     "text": "Skär tomater och rödlök och blanda med rucola, olja och vinäger.",
+     "uses": [
+      "tomat",
+      "rödlök",
+      "rucola",
+      "olivolja",
+      "rödvinsvinäger"
+     ],
+     "minutes": 6
+    },
+    {
+     "text": "Servera fisken med salladen och potatis med persilja.",
+     "uses": [
+      "fisk",
+      "tomat",
+      "potatis",
+      "persilja"
+     ],
+     "minutes": 2,
+     "after": [
+      1,
+      3,
+      4
+     ]
+    }
+   ]
+  },
+  {
+   "base_id": "smako-italian-pasta-forno-tonno-ricotta",
+   "name": "Ugnspasta med tonfisk, ricotta, spenat och mozzarella",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "italian",
+   "family": "pasta al forno",
+   "primary": "tonfisk",
+   "method": "oven",
+   "side": "pasta",
+   "flavor": [
+    "citron",
+    "basilika"
+   ],
+   "equipment": [
+    "Ugn",
+    "Ugnsform",
+    "Kastrull"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Pasta",
+     "ingredients": [
+      {
+       "name": "pasta",
+       "form": "dry",
+       "quantity": 350.0,
+       "role": "side",
+       "label": "Pasta",
+       "range": [
+        250.0,
+        400.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "tonfisk",
+       "form": "cooked_drained",
+       "quantity": 340.0,
+       "role": "primary",
+       "label": "Tonfisk",
+       "range": [
+        280.0,
+        500.0
+       ],
+       "step": 20.0
+      },
+      {
+       "name": "ricotta",
+       "form": "as_sold",
+       "quantity": 250.0,
+       "role": "sauce",
+       "label": "Ricotta"
+      },
+      {
+       "name": "spenat",
+       "form": "as_sold",
+       "quantity": 300.0,
+       "role": "vegetable",
+       "label": "Spenat"
+      },
+      {
+       "name": "krossade tomater",
+       "form": "as_sold",
+       "quantity": 400.0,
+       "role": "sauce",
+       "label": "Krossade tomater"
+      },
+      {
+       "name": "vitlök",
+       "form": "raw_edible",
+       "quantity": 6.0,
+       "role": "flavour",
+       "label": "Vitlök",
+       "follows": "tonfisk"
+      },
+      {
+       "name": "citronjuice",
+       "form": "as_sold",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Citronjuice",
+       "follows": "tonfisk"
+      },
+      {
+       "name": "basilika",
+       "form": "raw_edible",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Basilika",
+       "follows": "tonfisk"
+      },
+      {
+       "name": "salt",
+       "form": "as_sold",
+       "quantity": 4.0,
+       "role": "flavour",
+       "label": "Salt",
+       "follows": "tonfisk"
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Topp",
+     "ingredients": [
+      {
+       "name": "mozzarella",
+       "form": "preserved_drained",
+       "quantity": 125.0,
+       "role": "sauce",
+       "label": "Mozzarella"
+      },
+      {
+       "name": "parmesan",
+       "form": "as_sold",
+       "quantity": 30.0,
+       "role": "sauce",
+       "label": "Parmesan"
+      }
+     ]
+    },
+    {
+     "id": "c3",
+     "name": "Sallad",
+     "ingredients": [
+      {
+       "name": "sallad",
+       "form": "raw_edible",
+       "quantity": 100.0,
+       "role": "vegetable",
+       "label": "Sallad"
+      },
+      {
+       "name": "gurka",
+       "form": "raw_edible",
+       "quantity": 150.0,
+       "role": "vegetable",
+       "label": "Gurka"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Sätt ugnen på 220 °C. Koka pastan 2 minuter kortare än förpackningen anger.",
+     "uses": [
+      "pasta"
+     ],
+     "minutes": 10
+    },
+    {
+     "text": "Blanda ricotta, upptinad spenat, citron, pressad vitlök och salt. Rör ner tonfisken.",
+     "uses": [
+      "ricotta",
+      "spenat",
+      "citronjuice",
+      "vitlök",
+      "salt",
+      "tonfisk"
+     ],
+     "minutes": 6
+    },
+    {
+     "text": "Vänd pastan med tomater, basilika och ricottablandningen i formen. Täck med mozzarella och parmesan.",
+     "uses": [
+      "pasta",
+      "krossade tomater",
+      "basilika",
+      "ricotta",
+      "mozzarella",
+      "parmesan"
+     ],
+     "minutes": 5,
+     "after": [
+      1,
+      2
+     ]
+    },
+    {
+     "text": "Grädda 20 minuter tills osten bubblar.",
+     "uses": [
+      "mozzarella"
+     ],
+     "minutes": 20,
+     "after": [
+      3
+     ],
+     "passive": true
+    },
+    {
+     "text": "Servera med sallad och gurka.",
+     "uses": [
+      "sallad",
+      "gurka"
+     ],
+     "minutes": 4,
+     "after": [
+      4
+     ]
+    }
+   ]
+  },
+  {
+   "base_id": "smako-italian-pollo-diavola-patate",
+   "name": "Pollo alla diavola – stark kyckling med citron, potatis och rucola",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "italian",
+   "family": "pollo arrosto",
+   "primary": "kyckling",
+   "method": "oven",
+   "side": "potatis",
+   "flavor": [
+    "chili",
+    "citron",
+    "rosmarin"
+   ],
+   "equipment": [
+    "Ugn",
+    "Långpanna",
+    "Skål"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Kyckling",
+     "ingredients": [
+      {
+       "name": "kyckling",
+       "form": "raw_edible",
+       "quantity": 800.0,
+       "role": "primary",
+       "requirements": [
+        "pack:chicken_thigh"
+       ],
+       "label": "Kycklinglårfilé",
+       "range": [
+        650.0,
+        1200.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "chiliflakes",
+       "form": "dry",
+       "quantity": 2.0,
+       "role": "flavour",
+       "label": "Chiliflakes",
+       "follows": "kyckling"
+      },
+      {
+       "name": "vitlök",
+       "form": "raw_edible",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Vitlök",
+       "follows": "kyckling"
+      },
+      {
+       "name": "citronjuice",
+       "form": "as_sold",
+       "quantity": 30.0,
+       "role": "flavour",
+       "label": "Citronjuice",
+       "follows": "kyckling"
+      },
+      {
+       "name": "rosmarin",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Rosmarin",
+       "follows": "kyckling"
+      },
+      {
+       "name": "olivolja",
+       "form": "as_sold",
+       "quantity": 20.0,
+       "role": "cooking",
+       "label": "Olivolja",
+       "follows": "kyckling"
+      },
+      {
+       "name": "salt",
+       "form": "as_sold",
+       "quantity": 6.0,
+       "role": "flavour",
+       "label": "Salt",
+       "follows": "kyckling"
+      },
+      {
+       "name": "svartpeppar",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Svartpeppar",
+       "follows": "kyckling"
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Potatis",
+     "ingredients": [
+      {
+       "name": "potatis",
+       "form": "raw_edible",
+       "quantity": 800.0,
+       "role": "side",
+       "label": "Potatis",
+       "range": [
+        600.0,
+        950.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "rödlök",
+       "form": "raw_edible",
+       "quantity": 150.0,
+       "role": "vegetable",
+       "label": "Rödlök"
+      },
+      {
+       "name": "olivolja",
+       "form": "as_sold",
+       "quantity": 15.0,
+       "role": "cooking",
+       "label": "Olivolja"
+      }
+     ]
+    },
+    {
+     "id": "c3",
+     "name": "Sallad",
+     "ingredients": [
+      {
+       "name": "rucola",
+       "form": "raw_edible",
+       "quantity": 80.0,
+       "role": "vegetable",
+       "label": "Rucola"
+      },
+      {
+       "name": "tomat",
+       "form": "raw_edible",
+       "quantity": 200.0,
+       "role": "vegetable",
+       "label": "Tomat"
+      },
+      {
+       "name": "parmesan",
+       "form": "as_sold",
+       "quantity": 30.0,
+       "role": "sauce",
+       "label": "Parmesan"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Blanda chili, pressad vitlök, citron, rosmarin, olja, salt och peppar och vänd kycklingen i marinaden. Låt stå 15 minuter.",
+     "uses": [
+      "chiliflakes",
+      "vitlök",
+      "citronjuice",
+      "rosmarin",
+      "olivolja",
+      "salt",
+      "svartpeppar",
+      "kyckling"
+     ],
+     "minutes": 20
+    },
+    {
+     "text": "Sätt ugnen på 225 °C. Skär potatis och rödlök i klyftor, vänd med olja och salt och sprid i långpannan.",
+     "uses": [
+      "potatis",
+      "rödlök",
+      "olivolja"
+     ],
+     "minutes": 8
+    },
+    {
+     "text": "Lägg kycklingen på potatisen och rosta 35 minuter tills kycklingen håller 74 °C och potatisen är gyllene.",
+     "uses": [
+      "kyckling",
+      "potatis"
+     ],
+     "minutes": 35,
+     "after": [
+      1,
+      2
+     ],
+     "passive": true
+    },
+    {
+     "text": "Blanda rucola och tomater och hyvla över parmesan. Servera till kycklingen.",
+     "uses": [
+      "rucola",
+      "tomat",
+      "parmesan"
+     ],
+     "minutes": 4,
+     "after": [
+      3
+     ]
+    }
+   ]
+  },
+  {
+   "base_id": "smako-italian-pollo-peperoni-polenta",
+   "name": "Kycklinggryta med paprika, oliver och tomat på polenta",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "italian",
+   "family": "pollo in umido",
+   "primary": "kyckling",
+   "method": "pot",
+   "side": "polenta",
+   "flavor": [
+    "paprika",
+    "oliver",
+    "basilika"
+   ],
+   "equipment": [
+    "Gryta",
+    "Kastrull"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Gryta",
+     "ingredients": [
+      {
+       "name": "kyckling",
+       "form": "raw_edible",
+       "quantity": 700.0,
+       "role": "primary",
+       "requirements": [
+        "pack:chicken_thigh"
+       ],
+       "label": "Kycklinglårfilé",
+       "range": [
+        600.0,
+        1050.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "olivolja",
+       "form": "as_sold",
+       "quantity": 20.0,
+       "role": "cooking",
+       "label": "Olivolja",
+       "follows": "kyckling"
+      },
+      {
+       "name": "salt",
+       "form": "as_sold",
+       "quantity": 6.0,
+       "role": "flavour",
+       "label": "Salt",
+       "follows": "kyckling"
+      },
+      {
+       "name": "paprika",
+       "form": "raw_edible",
+       "quantity": 400.0,
+       "role": "vegetable",
+       "label": "Paprika"
+      },
+      {
+       "name": "gul lök",
+       "form": "raw_edible",
+       "quantity": 150.0,
+       "role": "vegetable",
+       "label": "Gul lök"
+      },
+      {
+       "name": "vitlök",
+       "form": "raw_edible",
+       "quantity": 8.0,
+       "role": "flavour",
+       "label": "Vitlök",
+       "follows": "kyckling"
+      },
+      {
+       "name": "krossade tomater",
+       "form": "as_sold",
+       "quantity": 400.0,
+       "role": "sauce",
+       "label": "Krossade tomater"
+      },
+      {
+       "name": "oliver",
+       "form": "preserved_drained",
+       "quantity": 80.0,
+       "role": "flavour",
+       "label": "Oliver",
+       "follows": "kyckling"
+      },
+      {
+       "name": "oregano",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Oregano",
+       "follows": "kyckling"
+      },
+      {
+       "name": "basilika",
+       "form": "raw_edible",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Basilika",
+       "follows": "kyckling"
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Polenta",
+     "ingredients": [
+      {
+       "name": "polenta",
+       "form": "dry",
+       "quantity": 250.0,
+       "role": "side",
+       "label": "Polenta",
+       "range": [
+        200.0,
+        300.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "parmesan",
+       "form": "as_sold",
+       "quantity": 40.0,
+       "role": "sauce",
+       "label": "Parmesan"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Bryn kycklingen i olja och salta. Lägg upp.",
+     "uses": [
+      "kyckling",
+      "olivolja",
+      "salt"
+     ],
+     "minutes": 8
+    },
+    {
+     "text": "Fräs strimlad paprika, lök och vitlök 8 minuter.",
+     "uses": [
+      "paprika",
+      "gul lök",
+      "vitlök"
+     ],
+     "minutes": 10,
+     "after": [
+      1
+     ]
+    },
+    {
+     "text": "Lägg tillbaka kycklingen med tomater, oliver och oregano och sjud under lock 25 minuter tills kycklingen håller 74 °C.",
+     "uses": [
+      "kyckling",
+      "krossade tomater",
+      "oliver",
+      "oregano"
+     ],
+     "minutes": 25,
+     "after": [
+      2
+     ],
+     "passive": true
+    },
+    {
+     "text": "Koka polentan enligt förpackningen och rör ner parmesan.",
+     "uses": [
+      "polenta",
+      "parmesan"
+     ],
+     "minutes": 10
+    },
+    {
+     "text": "Strö basilika över grytan och servera på polentan.",
+     "uses": [
+      "basilika",
+      "polenta"
+     ],
+     "minutes": 2,
+     "after": [
+      3,
+      4
+     ]
+    }
+   ]
+  },
+  {
+   "base_id": "smako-italian-penne-pollo-broccoli",
+   "name": "Penne med kyckling, broccoli, vitlök och parmesan",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "italian",
+   "family": "pasta",
+   "primary": "kyckling",
+   "method": "pan",
+   "side": "pasta",
+   "flavor": [
+    "vitlök",
+    "citron",
+    "chili"
+   ],
+   "equipment": [
+    "Stor kastrull",
+    "Stekpanna"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Pasta",
+     "ingredients": [
+      {
+       "name": "pasta",
+       "form": "dry",
+       "quantity": 350.0,
+       "role": "side",
+       "label": "Pasta",
+       "range": [
+        250.0,
+        400.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "broccoli",
+       "form": "raw_edible",
+       "quantity": 400.0,
+       "role": "vegetable",
+       "label": "Broccoli"
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Kyckling",
+     "ingredients": [
+      {
+       "name": "kyckling",
+       "form": "raw_edible",
+       "quantity": 600.0,
+       "role": "primary",
+       "requirements": [
+        "pack:chicken_breast"
+       ],
+       "label": "Kycklingbröstfilé",
+       "range": [
+        500.0,
+        900.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "olivolja",
+       "form": "as_sold",
+       "quantity": 30.0,
+       "role": "cooking",
+       "label": "Olivolja",
+       "follows": "kyckling"
+      },
+      {
+       "name": "vitlök",
+       "form": "raw_edible",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Vitlök",
+       "follows": "kyckling"
+      },
+      {
+       "name": "chiliflakes",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Chiliflakes",
+       "follows": "kyckling"
+      },
+      {
+       "name": "salt",
+       "form": "as_sold",
+       "quantity": 5.0,
+       "role": "flavour",
+       "label": "Salt",
+       "follows": "kyckling"
+      },
+      {
+       "name": "citronjuice",
+       "form": "as_sold",
+       "quantity": 15.0,
+       "role": "flavour",
+       "label": "Citronjuice",
+       "follows": "kyckling"
+      },
+      {
+       "name": "parmesan",
+       "form": "as_sold",
+       "quantity": 60.0,
+       "role": "sauce",
+       "label": "Parmesan"
+      },
+      {
+       "name": "tomat",
+       "form": "raw_edible",
+       "quantity": 200.0,
+       "role": "vegetable",
+       "label": "Tomat"
+      },
+      {
+       "name": "persilja",
+       "form": "raw_edible",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Persilja",
+       "follows": "kyckling"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Koka pastan i saltat vatten och lägg i broccolibuketterna de sista 3 minuterna. Spara 150 ml kokvatten.",
+     "uses": [
+      "pasta",
+      "broccoli"
+     ],
+     "minutes": 12,
+     "passive": true
+    },
+    {
+     "text": "Skär kycklingen i bitar och stek i olja med salt tills den håller 74 °C.",
+     "uses": [
+      "kyckling",
+      "olivolja",
+      "salt"
+     ],
+     "minutes": 10
+    },
+    {
+     "text": "Tillsätt vitlök, chili och tärnade tomater och fräs 2 minuter.",
+     "uses": [
+      "vitlök",
+      "chiliflakes",
+      "tomat"
+     ],
+     "minutes": 3,
+     "after": [
+      2
+     ]
+    },
+    {
+     "text": "Vänd ner pasta, broccoli, kokvatten, citron och parmesan. Strö över persilja.",
+     "uses": [
+      "pasta",
+      "broccoli",
+      "citronjuice",
+      "parmesan",
+      "persilja"
+     ],
+     "minutes": 3,
+     "after": [
+      1,
+      3
+     ]
+    }
+   ]
+  },
+  {
+   "base_id": "smako-italian-tagliatelle-pollo-funghi",
+   "name": "Tagliatelle med kyckling, champinjoner och timjan",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "italian",
+   "family": "pasta",
+   "primary": "kyckling",
+   "method": "pan",
+   "side": "pasta",
+   "flavor": [
+    "timjan",
+    "svamp",
+    "parmesan"
+   ],
+   "equipment": [
+    "Stor kastrull",
+    "Stekpanna"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Pasta",
+     "ingredients": [
+      {
+       "name": "pasta",
+       "form": "dry",
+       "quantity": 350.0,
+       "role": "side",
+       "label": "Pasta",
+       "range": [
+        250.0,
+        400.0
+       ],
+       "step": 50.0
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Sås",
+     "ingredients": [
+      {
+       "name": "kyckling",
+       "form": "raw_edible",
+       "quantity": 600.0,
+       "role": "primary",
+       "requirements": [
+        "pack:chicken_breast"
+       ],
+       "label": "Kycklingbröstfilé",
+       "range": [
+        500.0,
+        900.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "olivolja",
+       "form": "as_sold",
+       "quantity": 20.0,
+       "role": "cooking",
+       "label": "Olivolja",
+       "follows": "kyckling"
+      },
+      {
+       "name": "salt",
+       "form": "as_sold",
+       "quantity": 5.0,
+       "role": "flavour",
+       "label": "Salt",
+       "follows": "kyckling"
+      },
+      {
+       "name": "champinjoner",
+       "form": "raw_edible",
+       "quantity": 300.0,
+       "role": "vegetable",
+       "label": "Champinjoner"
+      },
+      {
+       "name": "gul lök",
+       "form": "raw_edible",
+       "quantity": 80.0,
+       "role": "vegetable",
+       "label": "Gul lök"
+      },
+      {
+       "name": "vitlök",
+       "form": "raw_edible",
+       "quantity": 6.0,
+       "role": "flavour",
+       "label": "Vitlök",
+       "follows": "kyckling"
+      },
+      {
+       "name": "timjan",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Timjan",
+       "follows": "kyckling"
+      },
+      {
+       "name": "vitt matlagningsvin",
+       "form": "as_sold",
+       "quantity": 100.0,
+       "role": "sauce",
+       "label": "Vitt matlagningsvin"
+      },
+      {
+       "name": "grädde",
+       "form": "as_sold",
+       "quantity": 150.0,
+       "role": "sauce",
+       "label": "Grädde"
+      },
+      {
+       "name": "parmesan",
+       "form": "as_sold",
+       "quantity": 50.0,
+       "role": "sauce",
+       "label": "Parmesan"
+      },
+      {
+       "name": "spenat",
+       "form": "as_sold",
+       "quantity": 150.0,
+       "role": "vegetable",
+       "label": "Spenat"
+      },
+      {
+       "name": "persilja",
+       "form": "raw_edible",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Persilja",
+       "follows": "kyckling"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Koka pastan enligt förpackningen.",
+     "uses": [
+      "pasta"
+     ],
+     "minutes": 12,
+     "passive": true
+    },
+    {
+     "text": "Strimla kycklingen och stek i olja med salt tills den håller 74 °C. Lägg upp.",
+     "uses": [
+      "kyckling",
+      "olivolja",
+      "salt"
+     ],
+     "minutes": 10
+    },
+    {
+     "text": "Fräs skivad svamp, hackad lök, vitlök och timjan tills svampen fått färg. Häll i vinet och låt koka in.",
+     "uses": [
+      "champinjoner",
+      "gul lök",
+      "vitlök",
+      "timjan",
+      "vitt matlagningsvin"
+     ],
+     "minutes": 10,
+     "after": [
+      2
+     ]
+    },
+    {
+     "text": "Rör ner grädde, spenat, parmesan och kycklingen och sjud 2 minuter. Vänd ner pastan och strö över persilja.",
+     "uses": [
+      "grädde",
+      "spenat",
+      "parmesan",
+      "kyckling",
+      "pasta",
+      "persilja"
+     ],
+     "minutes": 4,
+     "after": [
+      1,
+      3
+     ]
+    }
+   ]
+  },
+  {
+   "base_id": "smako-italian-pollo-arrosto-patate-cipolle",
+   "name": "Ugnsrostad kyckling med potatis, rödlök och citron",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "italian",
+   "family": "pollo arrosto",
+   "primary": "kyckling",
+   "method": "oven",
+   "side": "potatis",
+   "flavor": [
+    "rosmarin",
+    "citron",
+    "vitlök"
+   ],
+   "equipment": [
+    "Ugn",
+    "Långpanna"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Kyckling och potatis",
+     "ingredients": [
+      {
+       "name": "kyckling",
+       "form": "raw_edible",
+       "quantity": 800.0,
+       "role": "primary",
+       "requirements": [
+        "pack:chicken_thigh"
+       ],
+       "label": "Kycklinglårfilé",
+       "range": [
+        650.0,
+        1200.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "rosmarin",
+       "form": "dry",
+       "quantity": 2.0,
+       "role": "flavour",
+       "label": "Rosmarin",
+       "follows": "kyckling"
+      },
+      {
+       "name": "vitlök",
+       "form": "raw_edible",
+       "quantity": 12.0,
+       "role": "flavour",
+       "label": "Vitlök",
+       "follows": "kyckling"
+      },
+      {
+       "name": "citronjuice",
+       "form": "as_sold",
+       "quantity": 20.0,
+       "role": "flavour",
+       "label": "Citronjuice",
+       "follows": "kyckling"
+      },
+      {
+       "name": "olivolja",
+       "form": "as_sold",
+       "quantity": 30.0,
+       "role": "cooking",
+       "label": "Olivolja",
+       "follows": "kyckling"
+      },
+      {
+       "name": "salt",
+       "form": "as_sold",
+       "quantity": 7.0,
+       "role": "flavour",
+       "label": "Salt",
+       "follows": "kyckling"
+      },
+      {
+       "name": "svartpeppar",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Svartpeppar",
+       "follows": "kyckling"
+      },
+      {
+       "name": "potatis",
+       "form": "raw_edible",
+       "quantity": 800.0,
+       "role": "side",
+       "label": "Potatis",
+       "range": [
+        600.0,
+        950.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "rödlök",
+       "form": "raw_edible",
+       "quantity": 200.0,
+       "role": "vegetable",
+       "label": "Rödlök"
+      },
+      {
+       "name": "oliver",
+       "form": "preserved_drained",
+       "quantity": 60.0,
+       "role": "flavour",
+       "label": "Oliver",
+       "follows": "kyckling"
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Grönsaker",
+     "ingredients": [
+      {
+       "name": "haricots verts",
+       "form": "as_sold",
+       "quantity": 300.0,
+       "role": "vegetable",
+       "label": "Haricots verts"
+      },
+      {
+       "name": "citronjuice",
+       "form": "as_sold",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Citronjuice"
+      },
+      {
+       "name": "rucola",
+       "form": "raw_edible",
+       "quantity": 60.0,
+       "role": "vegetable",
+       "label": "Rucola"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Sätt ugnen på 220 °C. Skär potatis och rödlök i klyftor.",
+     "uses": [
+      "potatis",
+      "rödlök"
+     ],
+     "minutes": 8
+    },
+    {
+     "text": "Vänd kyckling, potatis, lök, vitlöksklyftor och oliver med olja, rosmarin, citron, salt och peppar i långpannan.",
+     "uses": [
+      "kyckling",
+      "potatis",
+      "rödlök",
+      "vitlök",
+      "oliver",
+      "olivolja",
+      "rosmarin",
+      "citronjuice",
+      "salt",
+      "svartpeppar"
+     ],
+     "minutes": 6,
+     "after": [
+      1
+     ]
+    },
+    {
+     "text": "Rosta 40 minuter tills kycklingen håller 74 °C och potatisen är gyllene.",
+     "uses": [
+      "kyckling",
+      "potatis"
+     ],
+     "minutes": 40,
+     "after": [
+      2
+     ],
+     "passive": true
+    },
+    {
+     "text": "Koka haricots verts 3 minuter och vänd med citron och rucola. Servera till.",
+     "uses": [
+      "haricots verts",
+      "citronjuice",
+      "rucola"
+     ],
+     "minutes": 4,
+     "after": [
+      3
+     ]
+    }
+   ]
+  },
+  {
+   "base_id": "smako-italian-gnocchi-pollo-spinaci-gorgonzola",
+   "name": "Gnocchi med kyckling, spenat och ädelostsås",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "italian",
+   "family": "gnocchi",
+   "primary": "kyckling",
+   "method": "pan",
+   "side": "gnocchi",
+   "flavor": [
+    "ädelost",
+    "valnötter"
+   ],
+   "equipment": [
+    "Kastrull",
+    "Stekpanna"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Gnocchi",
+     "ingredients": [
+      {
+       "name": "gnocchi",
+       "form": "as_sold",
+       "quantity": 800.0,
+       "role": "side",
+       "label": "Gnocchi",
+       "range": [
+        600.0,
+        950.0
+       ],
+       "step": 50.0
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Sås",
+     "ingredients": [
+      {
+       "name": "kyckling",
+       "form": "raw_edible",
+       "quantity": 550.0,
+       "role": "primary",
+       "requirements": [
+        "pack:chicken_breast"
+       ],
+       "label": "Kycklingbröstfilé",
+       "range": [
+        450.0,
+        800.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "olivolja",
+       "form": "as_sold",
+       "quantity": 20.0,
+       "role": "cooking",
+       "label": "Olivolja",
+       "follows": "kyckling"
+      },
+      {
+       "name": "salt",
+       "form": "as_sold",
+       "quantity": 4.0,
+       "role": "flavour",
+       "label": "Salt",
+       "follows": "kyckling"
+      },
+      {
+       "name": "gul lök",
+       "form": "raw_edible",
+       "quantity": 80.0,
+       "role": "vegetable",
+       "label": "Gul lök"
+      },
+      {
+       "name": "spenat",
+       "form": "as_sold",
+       "quantity": 250.0,
+       "role": "vegetable",
+       "label": "Spenat"
+      },
+      {
+       "name": "grädde",
+       "form": "as_sold",
+       "quantity": 150.0,
+       "role": "sauce",
+       "label": "Grädde"
+      },
+      {
+       "name": "ädelost",
+       "form": "as_sold",
+       "quantity": 80.0,
+       "role": "sauce",
+       "label": "Ädelost"
+      },
+      {
+       "name": "valnötter",
+       "form": "as_sold",
+       "quantity": 40.0,
+       "role": "flavour",
+       "label": "Valnötter",
+       "follows": "kyckling"
+      },
+      {
+       "name": "svartpeppar",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Svartpeppar",
+       "follows": "kyckling"
+      }
+     ]
+    },
+    {
+     "id": "c3",
+     "name": "Sallad",
+     "ingredients": [
+      {
+       "name": "sallad",
+       "form": "raw_edible",
+       "quantity": 100.0,
+       "role": "vegetable",
+       "label": "Sallad"
+      },
+      {
+       "name": "päron",
+       "form": "raw_edible",
+       "quantity": 150.0,
+       "role": "vegetable",
+       "label": "Päron"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Tärna kycklingen och stek i olja med salt tills den håller 74 °C.",
+     "uses": [
+      "kyckling",
+      "olivolja",
+      "salt"
+     ],
+     "minutes": 10
+    },
+    {
+     "text": "Fräs hackad lök, tillsätt spenat, grädde och smulad ädelost och sjud tills osten smält.",
+     "uses": [
+      "gul lök",
+      "spenat",
+      "grädde",
+      "ädelost"
+     ],
+     "minutes": 6,
+     "after": [
+      1
+     ]
+    },
+    {
+     "text": "Koka gnocchin enligt förpackningen tills de flyter upp.",
+     "uses": [
+      "gnocchi"
+     ],
+     "minutes": 4
+    },
+    {
+     "text": "Vänd gnocchi och kyckling i såsen, peppra och strö över rostade valnötter.",
+     "uses": [
+      "gnocchi",
+      "kyckling",
+      "svartpeppar",
+      "valnötter"
+     ],
+     "minutes": 3,
+     "after": [
+      2,
+      3
+     ]
+    },
+    {
+     "text": "Servera med sallad och skivat päron.",
+     "uses": [
+      "sallad",
+      "päron"
+     ],
+     "minutes": 4,
+     "after": [
+      4
+     ]
+    }
+   ]
+  },
+  {
+   "base_id": "smako-italian-pollo-crosta-parmigiano",
+   "name": "Parmesanpanerad kyckling med tomatsallad och citronpotatis",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "italian",
+   "family": "panerad kyckling",
+   "primary": "kyckling",
+   "method": "oven",
+   "side": "potatis",
+   "flavor": [
+    "parmesan",
+    "citron",
+    "basilika"
+   ],
+   "equipment": [
+    "Ugn",
+    "Plåt",
+    "Skål"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Kyckling",
+     "ingredients": [
+      {
+       "name": "kyckling",
+       "form": "raw_edible",
+       "quantity": 650.0,
+       "role": "primary",
+       "requirements": [
+        "pack:chicken_breast"
+       ],
+       "label": "Kycklingbröstfilé",
+       "range": [
+        550.0,
+        950.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "ägg",
+       "form": "raw_edible",
+       "quantity": 50.0,
+       "role": "sauce",
+       "label": "Ägg"
+      },
+      {
+       "name": "ströbröd",
+       "form": "dry",
+       "quantity": 60.0,
+       "role": "sauce",
+       "label": "Ströbröd"
+      },
+      {
+       "name": "parmesan",
+       "form": "as_sold",
+       "quantity": 50.0,
+       "role": "sauce",
+       "label": "Parmesan"
+      },
+      {
+       "name": "oregano",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Oregano",
+       "follows": "kyckling"
+      },
+      {
+       "name": "olivolja",
+       "form": "as_sold",
+       "quantity": 20.0,
+       "role": "cooking",
+       "label": "Olivolja",
+       "follows": "kyckling"
+      },
+      {
+       "name": "salt",
+       "form": "as_sold",
+       "quantity": 5.0,
+       "role": "flavour",
+       "label": "Salt",
+       "follows": "kyckling"
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Potatis",
+     "ingredients": [
+      {
+       "name": "potatis",
+       "form": "raw_edible",
+       "quantity": 800.0,
+       "role": "side",
+       "label": "Potatis",
+       "range": [
+        600.0,
+        950.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "olivolja",
+       "form": "as_sold",
+       "quantity": 15.0,
+       "role": "cooking",
+       "label": "Olivolja"
+      },
+      {
+       "name": "citronjuice",
+       "form": "as_sold",
+       "quantity": 15.0,
+       "role": "flavour",
+       "label": "Citronjuice"
+      }
+     ]
+    },
+    {
+     "id": "c3",
+     "name": "Sallad",
+     "ingredients": [
+      {
+       "name": "tomat",
+       "form": "raw_edible",
+       "quantity": 300.0,
+       "role": "vegetable",
+       "label": "Tomat"
+      },
+      {
+       "name": "rödlök",
+       "form": "raw_edible",
+       "quantity": 60.0,
+       "role": "vegetable",
+       "label": "Rödlök"
+      },
+      {
+       "name": "basilika",
+       "form": "raw_edible",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Basilika"
+      },
+      {
+       "name": "balsamvinäger",
+       "form": "as_sold",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Balsamvinäger"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Sätt ugnen på 220 °C. Skär potatisen i klyftor, vänd med olja och salt och rosta 35 minuter.",
+     "uses": [
+      "potatis",
+      "olivolja",
+      "salt"
+     ],
+     "minutes": 38,
+     "passive": true
+    },
+    {
+     "text": "Dela kycklingfiléerna på längden. Doppa dem i uppvispat ägg och sedan i ströbröd blandat med parmesan och oregano.",
+     "uses": [
+      "kyckling",
+      "ägg",
+      "ströbröd",
+      "parmesan",
+      "oregano"
+     ],
+     "minutes": 10
+    },
+    {
+     "text": "Lägg kycklingen på plåt, ringla över olja och baka 18 minuter tills den håller 74 °C.",
+     "uses": [
+      "kyckling",
+      "olivolja"
+     ],
+     "minutes": 18,
+     "after": [
+      2
+     ],
+     "passive": true
+    },
+    {
+     "text": "Skär tomat och rödlök och blanda med basilika och balsamvinäger.",
+     "uses": [
+      "tomat",
+      "rödlök",
+      "basilika",
+      "balsamvinäger"
+     ],
+     "minutes": 6
+    },
+    {
+     "text": "Pressa citron över potatisen och servera med kyckling och sallad.",
+     "uses": [
+      "citronjuice",
+      "potatis",
+      "kyckling",
+      "tomat"
+     ],
+     "minutes": 2,
+     "after": [
+      1,
+      3,
+      4
+     ]
+    }
+   ]
+  }
+ ]
+}

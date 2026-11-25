@@ -1,0 +1,4657 @@
+{
+ "schema_version": "smako-recipe-authoring-v1",
+ "pack_id": "smako-protein-dinners-thai-20261125",
+ "recipes": [
+  {
+   "base_id": "smako-thai-pad-kra-pao-moo",
+   "name": "Pad kra pao – fläskfärs med basilika, chili och stekt ägg",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "thai",
+   "family": "kra pao",
+   "primary": "fläskfärs",
+   "method": "pan",
+   "side": "ris",
+   "flavor": [
+    "basilika",
+    "chili",
+    "vitlök"
+   ],
+   "equipment": [
+    "Wok",
+    "Stekpanna",
+    "Kastrull"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Fläsk",
+     "ingredients": [
+      {
+       "name": "fläskfärs",
+       "form": "raw_edible",
+       "quantity": 600.0,
+       "role": "primary",
+       "label": "Fläskfärs",
+       "range": [
+        500.0,
+        900.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "rapsolja",
+       "form": "as_sold",
+       "quantity": 20.0,
+       "role": "cooking",
+       "label": "Rapsolja",
+       "follows": "fläskfärs"
+      },
+      {
+       "name": "vitlök",
+       "form": "raw_edible",
+       "quantity": 12.0,
+       "role": "flavour",
+       "label": "Vitlök",
+       "follows": "fläskfärs"
+      },
+      {
+       "name": "grön chili",
+       "form": "raw_edible",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Grön chili",
+       "follows": "fläskfärs"
+      },
+      {
+       "name": "chiliflakes",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Chiliflakes",
+       "follows": "fläskfärs"
+      },
+      {
+       "name": "ostronsås",
+       "form": "as_sold",
+       "quantity": 30.0,
+       "role": "flavour",
+       "label": "Ostronsås",
+       "follows": "fläskfärs"
+      },
+      {
+       "name": "sojasås",
+       "form": "as_sold",
+       "quantity": 15.0,
+       "role": "flavour",
+       "label": "Sojasås",
+       "follows": "fläskfärs"
+      },
+      {
+       "name": "fisksås",
+       "form": "as_sold",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Fisksås",
+       "follows": "fläskfärs"
+      },
+      {
+       "name": "strösocker",
+       "form": "dry",
+       "quantity": 5.0,
+       "role": "flavour",
+       "label": "Strösocker",
+       "follows": "fläskfärs"
+      },
+      {
+       "name": "basilika",
+       "form": "raw_edible",
+       "quantity": 20.0,
+       "role": "flavour",
+       "label": "Basilika",
+       "follows": "fläskfärs"
+      },
+      {
+       "name": "haricots verts",
+       "form": "as_sold",
+       "quantity": 200.0,
+       "role": "vegetable",
+       "label": "Haricots verts"
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Jasminris",
+     "ingredients": [
+      {
+       "name": "ris",
+       "form": "dry",
+       "quantity": 300.0,
+       "role": "side",
+       "label": "Jasminris",
+       "range": [
+        250.0,
+        350.0
+       ],
+       "step": 50.0
+      }
+     ]
+    },
+    {
+     "id": "c3",
+     "name": "Ägg",
+     "ingredients": [
+      {
+       "name": "ägg",
+       "form": "raw_edible",
+       "quantity": 200.0,
+       "role": "sauce",
+       "label": "Ägg"
+      },
+      {
+       "name": "rapsolja",
+       "form": "as_sold",
+       "quantity": 20.0,
+       "role": "cooking",
+       "label": "Rapsolja"
+      }
+     ]
+    },
+    {
+     "id": "c4",
+     "name": "Gurka",
+     "ingredients": [
+      {
+       "name": "gurka",
+       "form": "raw_edible",
+       "quantity": 200.0,
+       "role": "vegetable",
+       "label": "Gurka"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Koka riset enligt förpackningen.",
+     "uses": [
+      "ris"
+     ],
+     "minutes": 20,
+     "passive": true
+    },
+    {
+     "text": "Stöt eller hacka vitlök och chili fint. Skär bönorna i bitar.",
+     "uses": [
+      "vitlök",
+      "grön chili",
+      "haricots verts"
+     ],
+     "minutes": 6
+    },
+    {
+     "text": "Fräs vitlök och chili i olja 30 sekunder. Lägg i färsen och bönorna och stek på hög värme tills färsen är genomstekt, minst 72 °C.",
+     "uses": [
+      "vitlök",
+      "grön chili",
+      "rapsolja",
+      "fläskfärs",
+      "haricots verts",
+      "chiliflakes"
+     ],
+     "minutes": 8,
+     "after": [
+      2
+     ]
+    },
+    {
+     "text": "Smaka av med ostronsås, soja, fisksås och socker. Vänd ner basilikan.",
+     "uses": [
+      "ostronsås",
+      "sojasås",
+      "fisksås",
+      "strösocker",
+      "basilika"
+     ],
+     "minutes": 2,
+     "after": [
+      3
+     ]
+    },
+    {
+     "text": "Stek äggen krispiga i olja. Servera färsen på ris med ägg och gurkskivor.",
+     "uses": [
+      "ägg",
+      "rapsolja",
+      "ris",
+      "gurka"
+     ],
+     "minutes": 6,
+     "after": [
+      1,
+      4
+     ]
+    }
+   ]
+  },
+  {
+   "base_id": "smako-thai-panang-neua",
+   "name": "Panang neua – nötkött i krämig röd curry med jordnötter",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "thai",
+   "family": "panang",
+   "primary": "nötkött",
+   "method": "pan",
+   "side": "ris",
+   "flavor": [
+    "röd curry",
+    "kokos",
+    "jordnöt"
+   ],
+   "equipment": [
+    "Wok",
+    "Kastrull"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Curry",
+     "ingredients": [
+      {
+       "name": "nötkött",
+       "form": "raw_edible",
+       "quantity": 650.0,
+       "role": "primary",
+       "requirements": [
+        "pack:beef_lean_strips_cut",
+        "pack:intake_all_10d1e6ea4dc5"
+       ],
+       "label": "Nötkött i strimlor",
+       "range": [
+        550.0,
+        950.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "rapsolja",
+       "form": "as_sold",
+       "quantity": 10.0,
+       "role": "cooking",
+       "label": "Rapsolja",
+       "follows": "nötkött"
+      },
+      {
+       "name": "röd currypasta",
+       "form": "as_sold",
+       "quantity": 50.0,
+       "role": "sauce",
+       "label": "Röd currypasta"
+      },
+      {
+       "name": "kokosmjölk",
+       "form": "as_sold",
+       "quantity": 400.0,
+       "role": "sauce",
+       "label": "Kokosmjölk"
+      },
+      {
+       "name": "jordnötssmör",
+       "form": "as_sold",
+       "quantity": 30.0,
+       "role": "sauce",
+       "label": "Jordnötssmör"
+      },
+      {
+       "name": "fisksås",
+       "form": "as_sold",
+       "quantity": 15.0,
+       "role": "flavour",
+       "label": "Fisksås",
+       "follows": "nötkött"
+      },
+      {
+       "name": "strösocker",
+       "form": "dry",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Strösocker",
+       "follows": "nötkött"
+      },
+      {
+       "name": "torkade makrutlimeblad",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Torkade makrutlimeblad",
+       "follows": "nötkött"
+      },
+      {
+       "name": "paprika",
+       "form": "raw_edible",
+       "quantity": 200.0,
+       "role": "vegetable",
+       "label": "Paprika"
+      },
+      {
+       "name": "basilika",
+       "form": "raw_edible",
+       "quantity": 15.0,
+       "role": "flavour",
+       "label": "Basilika",
+       "follows": "nötkött"
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Jasminris",
+     "ingredients": [
+      {
+       "name": "ris",
+       "form": "dry",
+       "quantity": 300.0,
+       "role": "side",
+       "label": "Jasminris",
+       "range": [
+        250.0,
+        350.0
+       ],
+       "step": 50.0
+      }
+     ]
+    },
+    {
+     "id": "c3",
+     "name": "Till servering",
+     "ingredients": [
+      {
+       "name": "jordnötter",
+       "form": "as_sold",
+       "quantity": 40.0,
+       "role": "flavour",
+       "label": "Jordnötter"
+      },
+      {
+       "name": "limejuice",
+       "form": "as_sold",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Limejuice"
+      },
+      {
+       "name": "broccoli",
+       "form": "raw_edible",
+       "quantity": 300.0,
+       "role": "vegetable",
+       "label": "Broccoli"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Koka riset enligt förpackningen.",
+     "uses": [
+      "ris"
+     ],
+     "minutes": 20,
+     "passive": true
+    },
+    {
+     "text": "Fräs currypastan i olja och lite av kokosmjölken tills den doftar. Rör ner resten av kokosmjölken, jordnötssmör, fisksås, socker och limeblad.",
+     "uses": [
+      "röd currypasta",
+      "rapsolja",
+      "kokosmjölk",
+      "jordnötssmör",
+      "fisksås",
+      "strösocker",
+      "torkade makrutlimeblad"
+     ],
+     "minutes": 8
+    },
+    {
+     "text": "Lägg i köttet och strimlad paprika och sjud 5 minuter tills köttet är genomstekt.",
+     "uses": [
+      "nötkött",
+      "paprika"
+     ],
+     "minutes": 6,
+     "after": [
+      2
+     ]
+    },
+    {
+     "text": "Ånga broccolin 4 minuter och pressa över lime.",
+     "uses": [
+      "broccoli",
+      "limejuice"
+     ],
+     "minutes": 5
+    },
+    {
+     "text": "Vänd ner basilika och strö över hackade jordnötter. Servera med ris och broccoli.",
+     "uses": [
+      "basilika",
+      "jordnötter",
+      "ris",
+      "broccoli"
+     ],
+     "minutes": 2,
+     "after": [
+      1,
+      3,
+      4
+     ]
+    }
+   ]
+  },
+  {
+   "base_id": "smako-thai-massaman-neua",
+   "name": "Massaman curry med nötkött, potatis och jordnötter",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "thai",
+   "family": "massaman",
+   "primary": "nötkött",
+   "method": "pot",
+   "side": "ris",
+   "flavor": [
+    "kanel",
+    "kardemumma",
+    "jordnöt"
+   ],
+   "equipment": [
+    "Gryta",
+    "Kastrull"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Curry",
+     "ingredients": [
+      {
+       "name": "nötkött",
+       "form": "raw_edible",
+       "quantity": 700.0,
+       "role": "primary",
+       "requirements": [
+        "pack:beef_braising_cut",
+        "pack:intake_all_10d1e6ea4dc5"
+       ],
+       "label": "Högrev eller grytbitar av nöt",
+       "range": [
+        600.0,
+        1050.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "rapsolja",
+       "form": "as_sold",
+       "quantity": 10.0,
+       "role": "cooking",
+       "label": "Rapsolja",
+       "follows": "nötkött"
+      },
+      {
+       "name": "röd currypasta",
+       "form": "as_sold",
+       "quantity": 40.0,
+       "role": "sauce",
+       "label": "Röd currypasta"
+      },
+      {
+       "name": "spiskummin",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Spiskummin",
+       "follows": "nötkött"
+      },
+      {
+       "name": "malen koriander",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Malen koriander",
+       "follows": "nötkött"
+      },
+      {
+       "name": "kanel",
+       "form": "dry",
+       "quantity": 0.5,
+       "role": "flavour",
+       "label": "Kanel",
+       "follows": "nötkött"
+      },
+      {
+       "name": "kardemumma",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Kardemumma",
+       "follows": "nötkött"
+      },
+      {
+       "name": "kokosmjölk",
+       "form": "as_sold",
+       "quantity": 400.0,
+       "role": "sauce",
+       "label": "Kokosmjölk"
+      },
+      {
+       "name": "fisksås",
+       "form": "as_sold",
+       "quantity": 20.0,
+       "role": "flavour",
+       "label": "Fisksås",
+       "follows": "nötkött"
+      },
+      {
+       "name": "strösocker",
+       "form": "dry",
+       "quantity": 15.0,
+       "role": "flavour",
+       "label": "Strösocker",
+       "follows": "nötkött"
+      },
+      {
+       "name": "limejuice",
+       "form": "as_sold",
+       "quantity": 20.0,
+       "role": "flavour",
+       "label": "Limejuice",
+       "follows": "nötkött"
+      },
+      {
+       "name": "potatis",
+       "form": "raw_edible",
+       "quantity": 500.0,
+       "role": "side",
+       "label": "Potatis",
+       "range": [
+        350.0,
+        600.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "gul lök",
+       "form": "raw_edible",
+       "quantity": 150.0,
+       "role": "vegetable",
+       "label": "Gul lök"
+      },
+      {
+       "name": "jordnötter",
+       "form": "as_sold",
+       "quantity": 50.0,
+       "role": "flavour",
+       "label": "Jordnötter",
+       "follows": "nötkött"
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Jasminris",
+     "ingredients": [
+      {
+       "name": "ris",
+       "form": "dry",
+       "quantity": 300.0,
+       "role": "side",
+       "label": "Jasminris",
+       "range": [
+        250.0,
+        350.0
+       ],
+       "step": 50.0
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Fräs currypastan med spiskummin, koriander, kanel och kardemumma i olja 1 minut.",
+     "uses": [
+      "röd currypasta",
+      "spiskummin",
+      "malen koriander",
+      "kanel",
+      "kardemumma",
+      "rapsolja"
+     ],
+     "minutes": 3
+    },
+    {
+     "text": "Lägg i köttet i bitar, kokosmjölken och 300 ml vatten. Sjud under lock 1 timme och 30 minuter tills köttet är mört.",
+     "uses": [
+      "nötkött",
+      "kokosmjölk"
+     ],
+     "minutes": 90,
+     "after": [
+      1
+     ],
+     "passive": true
+    },
+    {
+     "text": "Lägg i potatis och lök i bitar och jordnötterna. Sjud 25 minuter tills potatisen är mjuk.",
+     "uses": [
+      "potatis",
+      "gul lök",
+      "jordnötter"
+     ],
+     "minutes": 25,
+     "after": [
+      2
+     ],
+     "passive": true
+    },
+    {
+     "text": "Smaka av med fisksås, socker och lime.",
+     "uses": [
+      "fisksås",
+      "strösocker",
+      "limejuice"
+     ],
+     "minutes": 2,
+     "after": [
+      3
+     ]
+    },
+    {
+     "text": "Koka riset enligt förpackningen och servera till curryn.",
+     "uses": [
+      "ris"
+     ],
+     "minutes": 20,
+     "after": [
+      2
+     ],
+     "passive": true
+    }
+   ]
+  },
+  {
+   "base_id": "smako-thai-pad-see-ew-moo",
+   "name": "Pad see ew – breda risnudlar med fläsk, broccoli och ägg",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "thai",
+   "family": "nudelwok",
+   "primary": "fläskkött",
+   "method": "pan",
+   "side": "breda risnudlar",
+   "flavor": [
+    "soja",
+    "vitlök"
+   ],
+   "equipment": [
+    "Wok",
+    "Skål"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Nudlar",
+     "ingredients": [
+      {
+       "name": "breda risnudlar",
+       "form": "dry",
+       "quantity": 300.0,
+       "role": "side",
+       "label": "Breda risnudlar",
+       "range": [
+        250.0,
+        350.0
+       ],
+       "step": 50.0
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Wok",
+     "ingredients": [
+      {
+       "name": "fläskkött",
+       "form": "raw_edible",
+       "quantity": 600.0,
+       "role": "primary",
+       "label": "Fläskkött",
+       "range": [
+        500.0,
+        900.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "sojasås",
+       "form": "as_sold",
+       "quantity": 30.0,
+       "role": "flavour",
+       "label": "Sojasås",
+       "follows": "fläskkött"
+      },
+      {
+       "name": "ostronsås",
+       "form": "as_sold",
+       "quantity": 30.0,
+       "role": "flavour",
+       "label": "Ostronsås",
+       "follows": "fläskkött"
+      },
+      {
+       "name": "vitlök",
+       "form": "raw_edible",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Vitlök",
+       "follows": "fläskkött"
+      },
+      {
+       "name": "rapsolja",
+       "form": "as_sold",
+       "quantity": 30.0,
+       "role": "cooking",
+       "label": "Rapsolja",
+       "follows": "fläskkött"
+      },
+      {
+       "name": "broccoli",
+       "form": "raw_edible",
+       "quantity": 300.0,
+       "role": "vegetable",
+       "label": "Broccoli"
+      },
+      {
+       "name": "pak choi",
+       "form": "raw_edible",
+       "quantity": 200.0,
+       "role": "vegetable",
+       "label": "Pak choi"
+      },
+      {
+       "name": "ägg",
+       "form": "raw_edible",
+       "quantity": 150.0,
+       "role": "sauce",
+       "label": "Ägg"
+      },
+      {
+       "name": "strösocker",
+       "form": "dry",
+       "quantity": 8.0,
+       "role": "flavour",
+       "label": "Strösocker",
+       "follows": "fläskkött"
+      },
+      {
+       "name": "svartpeppar",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Svartpeppar",
+       "follows": "fläskkött"
+      }
+     ]
+    },
+    {
+     "id": "c3",
+     "name": "Till servering",
+     "ingredients": [
+      {
+       "name": "limejuice",
+       "form": "as_sold",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Limejuice"
+      },
+      {
+       "name": "chiliflakes",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Chiliflakes"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Lägg nudlarna i blöt i varmt vatten enligt förpackningen och låt rinna av.",
+     "uses": [
+      "breda risnudlar"
+     ],
+     "minutes": 15,
+     "passive": true
+    },
+    {
+     "text": "Skär fläsket i tunna strimlor och vänd med hälften av sojan. Dela broccoli och pak choi.",
+     "uses": [
+      "fläskkött",
+      "sojasås",
+      "broccoli",
+      "pak choi"
+     ],
+     "minutes": 8
+    },
+    {
+     "text": "Fräs vitlök i olja, stek fläsket genomstekt på hög värme och lägg i grönsakerna. Stek 3 minuter.",
+     "uses": [
+      "vitlök",
+      "rapsolja",
+      "fläskkött",
+      "broccoli",
+      "pak choi"
+     ],
+     "minutes": 7,
+     "after": [
+      2
+     ]
+    },
+    {
+     "text": "Skjut åt sidan, knäck i äggen och rör om tills de stelnat. Lägg i nudlarna med resten av sojan, ostronsås, socker och peppar och stek tills nudlarna fått färg.",
+     "uses": [
+      "ägg",
+      "breda risnudlar",
+      "sojasås",
+      "ostronsås",
+      "strösocker",
+      "svartpeppar"
+     ],
+     "minutes": 6,
+     "after": [
+      1,
+      3
+     ]
+    },
+    {
+     "text": "Servera med lime och chiliflakes.",
+     "uses": [
+      "limejuice",
+      "chiliflakes"
+     ],
+     "minutes": 1,
+     "after": [
+      4
+     ]
+    }
+   ]
+  },
+  {
+   "base_id": "smako-thai-pad-prik-khing-moo",
+   "name": "Pad prik khing – fläsk och haricots verts i röd currypasta",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "thai",
+   "family": "pad prik khing",
+   "primary": "fläskkött",
+   "method": "pan",
+   "side": "ris",
+   "flavor": [
+    "röd curry",
+    "makrutlime"
+   ],
+   "equipment": [
+    "Wok",
+    "Kastrull"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Wok",
+     "ingredients": [
+      {
+       "name": "fläskkött",
+       "form": "raw_edible",
+       "quantity": 650.0,
+       "role": "primary",
+       "label": "Fläskkött",
+       "range": [
+        550.0,
+        950.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "rapsolja",
+       "form": "as_sold",
+       "quantity": 20.0,
+       "role": "cooking",
+       "label": "Rapsolja",
+       "follows": "fläskkött"
+      },
+      {
+       "name": "röd currypasta",
+       "form": "as_sold",
+       "quantity": 40.0,
+       "role": "sauce",
+       "label": "Röd currypasta"
+      },
+      {
+       "name": "haricots verts",
+       "form": "as_sold",
+       "quantity": 400.0,
+       "role": "vegetable",
+       "label": "Haricots verts"
+      },
+      {
+       "name": "fisksås",
+       "form": "as_sold",
+       "quantity": 15.0,
+       "role": "flavour",
+       "label": "Fisksås",
+       "follows": "fläskkött"
+      },
+      {
+       "name": "strösocker",
+       "form": "dry",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Strösocker",
+       "follows": "fläskkött"
+      },
+      {
+       "name": "torkade makrutlimeblad",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Torkade makrutlimeblad",
+       "follows": "fläskkött"
+      },
+      {
+       "name": "basilika",
+       "form": "raw_edible",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Basilika",
+       "follows": "fläskkött"
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Jasminris",
+     "ingredients": [
+      {
+       "name": "ris",
+       "form": "dry",
+       "quantity": 300.0,
+       "role": "side",
+       "label": "Jasminris",
+       "range": [
+        250.0,
+        350.0
+       ],
+       "step": 50.0
+      }
+     ]
+    },
+    {
+     "id": "c3",
+     "name": "Gurksallad",
+     "ingredients": [
+      {
+       "name": "gurka",
+       "form": "raw_edible",
+       "quantity": 200.0,
+       "role": "vegetable",
+       "label": "Gurka"
+      },
+      {
+       "name": "rödlök",
+       "form": "raw_edible",
+       "quantity": 50.0,
+       "role": "vegetable",
+       "label": "Rödlök"
+      },
+      {
+       "name": "risvinäger",
+       "form": "as_sold",
+       "quantity": 15.0,
+       "role": "flavour",
+       "label": "Risvinäger"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Koka riset enligt förpackningen.",
+     "uses": [
+      "ris"
+     ],
+     "minutes": 20,
+     "passive": true
+    },
+    {
+     "text": "Skär fläsket i tunna skivor och bönorna i bitar.",
+     "uses": [
+      "fläskkött",
+      "haricots verts"
+     ],
+     "minutes": 8
+    },
+    {
+     "text": "Fräs currypastan i olja. Stek fläsket genomstekt på hög värme, lägg i bönorna och stek 4 minuter.",
+     "uses": [
+      "röd currypasta",
+      "rapsolja",
+      "fläskkött",
+      "haricots verts"
+     ],
+     "minutes": 8,
+     "after": [
+      2
+     ]
+    },
+    {
+     "text": "Smaka av med fisksås, socker och smulade limeblad och vänd ner basilika.",
+     "uses": [
+      "fisksås",
+      "strösocker",
+      "torkade makrutlimeblad",
+      "basilika"
+     ],
+     "minutes": 2,
+     "after": [
+      3
+     ]
+    },
+    {
+     "text": "Skiva gurka och rödlök och vänd med risvinäger. Servera med wok och ris.",
+     "uses": [
+      "gurka",
+      "rödlök",
+      "risvinäger",
+      "ris"
+     ],
+     "minutes": 5,
+     "after": [
+      1,
+      4
+     ]
+    }
+   ]
+  },
+  {
+   "base_id": "smako-thai-suea-rong-hai",
+   "name": "Suea rong hai – grillad biff med chilisås, klibbigt ris och grönsaker",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "thai",
+   "family": "grillat kött",
+   "primary": "nötkött",
+   "method": "pan",
+   "side": "ris",
+   "flavor": [
+    "lime",
+    "fisksås",
+    "chili"
+   ],
+   "equipment": [
+    "Grillpanna",
+    "Kastrull",
+    "Skål"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Biff",
+     "ingredients": [
+      {
+       "name": "nötkött",
+       "form": "raw_edible",
+       "quantity": 650.0,
+       "role": "primary",
+       "requirements": [
+        "pack:beef_quick_cut",
+        "pack:intake_all_10d1e6ea4dc5"
+       ],
+       "label": "Nötkött för stekning, t.ex. ryggbiff",
+       "range": [
+        550.0,
+        950.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "sojasås",
+       "form": "as_sold",
+       "quantity": 15.0,
+       "role": "flavour",
+       "label": "Sojasås",
+       "follows": "nötkött"
+      },
+      {
+       "name": "ostronsås",
+       "form": "as_sold",
+       "quantity": 15.0,
+       "role": "flavour",
+       "label": "Ostronsås",
+       "follows": "nötkött"
+      },
+      {
+       "name": "svartpeppar",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Svartpeppar",
+       "follows": "nötkött"
+      },
+      {
+       "name": "rapsolja",
+       "form": "as_sold",
+       "quantity": 10.0,
+       "role": "cooking",
+       "label": "Rapsolja",
+       "follows": "nötkött"
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Jaew-sås",
+     "ingredients": [
+      {
+       "name": "fisksås",
+       "form": "as_sold",
+       "quantity": 30.0,
+       "role": "sauce",
+       "label": "Fisksås"
+      },
+      {
+       "name": "limejuice",
+       "form": "as_sold",
+       "quantity": 30.0,
+       "role": "flavour",
+       "label": "Limejuice"
+      },
+      {
+       "name": "chiliflakes",
+       "form": "dry",
+       "quantity": 2.0,
+       "role": "flavour",
+       "label": "Chiliflakes"
+      },
+      {
+       "name": "strösocker",
+       "form": "dry",
+       "quantity": 5.0,
+       "role": "flavour",
+       "label": "Strösocker"
+      },
+      {
+       "name": "salladslök",
+       "form": "raw_edible",
+       "quantity": 30.0,
+       "role": "flavour",
+       "label": "Salladslök"
+      },
+      {
+       "name": "koriander",
+       "form": "raw_edible",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Koriander"
+      }
+     ]
+    },
+    {
+     "id": "c3",
+     "name": "Ris och grönsaker",
+     "ingredients": [
+      {
+       "name": "sushiris",
+       "form": "dry",
+       "quantity": 300.0,
+       "role": "side",
+       "label": "Klibbigt ris eller sushiris",
+       "range": [
+        250.0,
+        350.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "gurka",
+       "form": "raw_edible",
+       "quantity": 200.0,
+       "role": "vegetable",
+       "label": "Gurka"
+      },
+      {
+       "name": "sallad",
+       "form": "raw_edible",
+       "quantity": 100.0,
+       "role": "vegetable",
+       "label": "Sallad"
+      },
+      {
+       "name": "haricots verts",
+       "form": "as_sold",
+       "quantity": 200.0,
+       "role": "vegetable",
+       "label": "Haricots verts"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Koka riset enligt förpackningen.",
+     "uses": [
+      "sushiris"
+     ],
+     "minutes": 25,
+     "passive": true
+    },
+    {
+     "text": "Vänd köttet med soja, ostronsås och peppar och låt stå 20 minuter.",
+     "uses": [
+      "nötkött",
+      "sojasås",
+      "ostronsås",
+      "svartpeppar"
+     ],
+     "minutes": 22
+    },
+    {
+     "text": "Rör ihop fisksås, lime, chili, socker, hackad salladslök och koriander.",
+     "uses": [
+      "fisksås",
+      "limejuice",
+      "chiliflakes",
+      "strösocker",
+      "salladslök",
+      "koriander"
+     ],
+     "minutes": 5
+    },
+    {
+     "text": "Stek köttet i het grillpanna med olja 3–4 minuter per sida. Låt vila och skiva tunt.",
+     "uses": [
+      "nötkött",
+      "rapsolja"
+     ],
+     "minutes": 12,
+     "after": [
+      2
+     ]
+    },
+    {
+     "text": "Koka haricots verts 3 minuter. Servera köttet med ris, grönsaker och såsen.",
+     "uses": [
+      "haricots verts",
+      "nötkött",
+      "sushiris",
+      "gurka",
+      "sallad",
+      "fisksås"
+     ],
+     "minutes": 4,
+     "after": [
+      1,
+      3,
+      4
+     ]
+    }
+   ]
+  },
+  {
+   "base_id": "smako-thai-khao-pad-moo",
+   "name": "Khao pad moo – stekt ris med fläsk, ägg och gurka",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "thai",
+   "family": "stekt ris",
+   "primary": "fläskkött",
+   "method": "pan",
+   "side": "ris",
+   "flavor": [
+    "soja",
+    "lime",
+    "vitlök"
+   ],
+   "equipment": [
+    "Wok",
+    "Kastrull"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Ris",
+     "ingredients": [
+      {
+       "name": "ris",
+       "form": "dry",
+       "quantity": 300.0,
+       "role": "side",
+       "label": "Jasminris",
+       "range": [
+        250.0,
+        350.0
+       ],
+       "step": 50.0
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Wok",
+     "ingredients": [
+      {
+       "name": "fläskkött",
+       "form": "raw_edible",
+       "quantity": 600.0,
+       "role": "primary",
+       "label": "Fläskkött",
+       "range": [
+        500.0,
+        900.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "rapsolja",
+       "form": "as_sold",
+       "quantity": 30.0,
+       "role": "cooking",
+       "label": "Rapsolja",
+       "follows": "fläskkött"
+      },
+      {
+       "name": "vitlök",
+       "form": "raw_edible",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Vitlök",
+       "follows": "fläskkött"
+      },
+      {
+       "name": "gul lök",
+       "form": "raw_edible",
+       "quantity": 150.0,
+       "role": "vegetable",
+       "label": "Gul lök"
+      },
+      {
+       "name": "ägg",
+       "form": "raw_edible",
+       "quantity": 150.0,
+       "role": "sauce",
+       "label": "Ägg"
+      },
+      {
+       "name": "sojasås",
+       "form": "as_sold",
+       "quantity": 20.0,
+       "role": "flavour",
+       "label": "Sojasås",
+       "follows": "fläskkött"
+      },
+      {
+       "name": "fisksås",
+       "form": "as_sold",
+       "quantity": 15.0,
+       "role": "flavour",
+       "label": "Fisksås",
+       "follows": "fläskkött"
+      },
+      {
+       "name": "strösocker",
+       "form": "dry",
+       "quantity": 5.0,
+       "role": "flavour",
+       "label": "Strösocker",
+       "follows": "fläskkött"
+      },
+      {
+       "name": "salladslök",
+       "form": "raw_edible",
+       "quantity": 60.0,
+       "role": "vegetable",
+       "label": "Salladslök"
+      },
+      {
+       "name": "tomat",
+       "form": "raw_edible",
+       "quantity": 200.0,
+       "role": "vegetable",
+       "label": "Tomat"
+      }
+     ]
+    },
+    {
+     "id": "c3",
+     "name": "Till servering",
+     "ingredients": [
+      {
+       "name": "gurka",
+       "form": "raw_edible",
+       "quantity": 200.0,
+       "role": "vegetable",
+       "label": "Gurka"
+      },
+      {
+       "name": "limejuice",
+       "form": "as_sold",
+       "quantity": 15.0,
+       "role": "flavour",
+       "label": "Limejuice"
+      },
+      {
+       "name": "koriander",
+       "form": "raw_edible",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Koriander"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Koka riset enligt förpackningen och låt det svalna, gärna dagen innan.",
+     "uses": [
+      "ris"
+     ],
+     "minutes": 25,
+     "passive": true
+    },
+    {
+     "text": "Skär fläsket i tunna strimlor. Stek i olja med vitlök på hög värme tills det är genomstekt.",
+     "uses": [
+      "fläskkött",
+      "rapsolja",
+      "vitlök"
+     ],
+     "minutes": 8
+    },
+    {
+     "text": "Lägg i hackad lök och stek 2 minuter. Skjut åt sidan och rör ut äggen.",
+     "uses": [
+      "gul lök",
+      "ägg"
+     ],
+     "minutes": 4,
+     "after": [
+      2
+     ]
+    },
+    {
+     "text": "Lägg i riset, soja, fisksås, socker och tomatklyftor och stek tills riset är varmt. Vänd ner salladslök.",
+     "uses": [
+      "ris",
+      "sojasås",
+      "fisksås",
+      "strösocker",
+      "tomat",
+      "salladslök"
+     ],
+     "minutes": 6,
+     "after": [
+      1,
+      3
+     ]
+    },
+    {
+     "text": "Servera med gurka, lime och koriander.",
+     "uses": [
+      "gurka",
+      "limejuice",
+      "koriander"
+     ],
+     "minutes": 2,
+     "after": [
+      4
+     ]
+    }
+   ]
+  },
+  {
+   "base_id": "smako-thai-gaeng-phed-moo-fak-thong",
+   "name": "Röd curry med fläsk och pumpa",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "thai",
+   "family": "röd curry",
+   "primary": "fläskkött",
+   "method": "pot",
+   "side": "ris",
+   "flavor": [
+    "röd curry",
+    "kokos",
+    "basilika"
+   ],
+   "equipment": [
+    "Gryta",
+    "Kastrull"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Curry",
+     "ingredients": [
+      {
+       "name": "fläskkött",
+       "form": "raw_edible",
+       "quantity": 650.0,
+       "role": "primary",
+       "label": "Fläskkött",
+       "range": [
+        550.0,
+        950.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "rapsolja",
+       "form": "as_sold",
+       "quantity": 10.0,
+       "role": "cooking",
+       "label": "Rapsolja",
+       "follows": "fläskkött"
+      },
+      {
+       "name": "röd currypasta",
+       "form": "as_sold",
+       "quantity": 50.0,
+       "role": "sauce",
+       "label": "Röd currypasta"
+      },
+      {
+       "name": "kokosmjölk",
+       "form": "as_sold",
+       "quantity": 400.0,
+       "role": "sauce",
+       "label": "Kokosmjölk"
+      },
+      {
+       "name": "pumpa",
+       "form": "raw_edible",
+       "quantity": 400.0,
+       "role": "vegetable",
+       "label": "Pumpa"
+      },
+      {
+       "name": "bambuskott",
+       "form": "preserved_drained",
+       "quantity": 150.0,
+       "role": "vegetable",
+       "label": "Bambuskott"
+      },
+      {
+       "name": "fisksås",
+       "form": "as_sold",
+       "quantity": 20.0,
+       "role": "flavour",
+       "label": "Fisksås",
+       "follows": "fläskkött"
+      },
+      {
+       "name": "strösocker",
+       "form": "dry",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Strösocker",
+       "follows": "fläskkött"
+      },
+      {
+       "name": "torkade makrutlimeblad",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Torkade makrutlimeblad",
+       "follows": "fläskkött"
+      },
+      {
+       "name": "basilika",
+       "form": "raw_edible",
+       "quantity": 15.0,
+       "role": "flavour",
+       "label": "Basilika",
+       "follows": "fläskkött"
+      },
+      {
+       "name": "limejuice",
+       "form": "as_sold",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Limejuice",
+       "follows": "fläskkött"
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Jasminris",
+     "ingredients": [
+      {
+       "name": "ris",
+       "form": "dry",
+       "quantity": 300.0,
+       "role": "side",
+       "label": "Jasminris",
+       "range": [
+        250.0,
+        350.0
+       ],
+       "step": 50.0
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Koka riset enligt förpackningen.",
+     "uses": [
+      "ris"
+     ],
+     "minutes": 20,
+     "passive": true
+    },
+    {
+     "text": "Fräs currypastan i olja och hälften av kokosmjölken tills den doftar.",
+     "uses": [
+      "röd currypasta",
+      "rapsolja",
+      "kokosmjölk"
+     ],
+     "minutes": 5
+    },
+    {
+     "text": "Lägg i fläsket i tunna skivor, pumpa i bitar, resten av kokosmjölken, limeblad och 200 ml vatten. Sjud 15 minuter tills pumpan är mjuk och köttet genomstekt.",
+     "uses": [
+      "fläskkött",
+      "pumpa",
+      "kokosmjölk",
+      "torkade makrutlimeblad"
+     ],
+     "minutes": 16,
+     "after": [
+      2
+     ],
+     "passive": true
+    },
+    {
+     "text": "Lägg i bambuskott och smaka av med fisksås, socker och lime. Vänd ner basilika och servera med riset.",
+     "uses": [
+      "bambuskott",
+      "fisksås",
+      "strösocker",
+      "limejuice",
+      "basilika",
+      "ris"
+     ],
+     "minutes": 4,
+     "after": [
+      1,
+      3
+     ]
+    }
+   ]
+  },
+  {
+   "base_id": "smako-thai-pad-thai-goong",
+   "name": "Pad thai med räkor, ägg, böngroddar och jordnötter",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "thai",
+   "family": "pad thai",
+   "primary": "råa skalade vannameiräkor",
+   "method": "pan",
+   "side": "breda risnudlar",
+   "flavor": [
+    "lime",
+    "fisksås",
+    "jordnöt"
+   ],
+   "equipment": [
+    "Wok",
+    "Skål"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Nudlar",
+     "ingredients": [
+      {
+       "name": "breda risnudlar",
+       "form": "dry",
+       "quantity": 300.0,
+       "role": "side",
+       "label": "Breda risnudlar",
+       "range": [
+        250.0,
+        350.0
+       ],
+       "step": 50.0
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Wok",
+     "ingredients": [
+      {
+       "name": "råa skalade vannameiräkor",
+       "form": "as_sold",
+       "quantity": 500.0,
+       "role": "primary",
+       "label": "Råa skalade vannameiräkor",
+       "range": [
+        400.0,
+        750.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "rapsolja",
+       "form": "as_sold",
+       "quantity": 30.0,
+       "role": "cooking",
+       "label": "Rapsolja",
+       "follows": "råa skalade vannameiräkor"
+      },
+      {
+       "name": "vitlök",
+       "form": "raw_edible",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Vitlök",
+       "follows": "råa skalade vannameiräkor"
+      },
+      {
+       "name": "ägg",
+       "form": "raw_edible",
+       "quantity": 150.0,
+       "role": "sauce",
+       "label": "Ägg"
+      },
+      {
+       "name": "fisksås",
+       "form": "as_sold",
+       "quantity": 30.0,
+       "role": "sauce",
+       "label": "Fisksås"
+      },
+      {
+       "name": "limejuice",
+       "form": "as_sold",
+       "quantity": 30.0,
+       "role": "flavour",
+       "label": "Limejuice",
+       "follows": "råa skalade vannameiräkor"
+      },
+      {
+       "name": "strösocker",
+       "form": "dry",
+       "quantity": 20.0,
+       "role": "flavour",
+       "label": "Strösocker",
+       "follows": "råa skalade vannameiräkor"
+      },
+      {
+       "name": "chiliflakes",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Chiliflakes",
+       "follows": "råa skalade vannameiräkor"
+      },
+      {
+       "name": "böngroddar",
+       "form": "as_sold",
+       "quantity": 200.0,
+       "role": "vegetable",
+       "label": "Böngroddar"
+      },
+      {
+       "name": "salladslök",
+       "form": "raw_edible",
+       "quantity": 60.0,
+       "role": "vegetable",
+       "label": "Salladslök"
+      }
+     ]
+    },
+    {
+     "id": "c3",
+     "name": "Till servering",
+     "ingredients": [
+      {
+       "name": "jordnötter",
+       "form": "as_sold",
+       "quantity": 50.0,
+       "role": "flavour",
+       "label": "Jordnötter"
+      },
+      {
+       "name": "koriander",
+       "form": "raw_edible",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Koriander"
+      },
+      {
+       "name": "limejuice",
+       "form": "as_sold",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Limejuice"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Lägg nudlarna i blöt i varmt vatten enligt förpackningen och låt rinna av.",
+     "uses": [
+      "breda risnudlar"
+     ],
+     "minutes": 15,
+     "passive": true
+    },
+    {
+     "text": "Rör ihop fisksås, lime, socker och chili till en sås.",
+     "uses": [
+      "fisksås",
+      "limejuice",
+      "strösocker",
+      "chiliflakes"
+     ],
+     "minutes": 3
+    },
+    {
+     "text": "Fräs vitlök i olja och stek räkorna 2 minuter. Skjut åt sidan och rör ut äggen.",
+     "uses": [
+      "vitlök",
+      "rapsolja",
+      "råa skalade vannameiräkor",
+      "ägg"
+     ],
+     "minutes": 5
+    },
+    {
+     "text": "Lägg i nudlarna och såsen och vänd tills nudlarna är mjuka och räkorna genomstekta. Vänd ner böngroddar och salladslök.",
+     "uses": [
+      "breda risnudlar",
+      "fisksås",
+      "böngroddar",
+      "salladslök",
+      "råa skalade vannameiräkor"
+     ],
+     "minutes": 5,
+     "after": [
+      1,
+      2,
+      3
+     ]
+    },
+    {
+     "text": "Servera med hackade jordnötter, koriander och lime.",
+     "uses": [
+      "jordnötter",
+      "koriander",
+      "limejuice"
+     ],
+     "minutes": 2,
+     "after": [
+      4
+     ]
+    }
+   ]
+  },
+  {
+   "base_id": "smako-thai-tom-yum-goong",
+   "name": "Tom yum goong – syrlig räksoppa med citrongräs, svamp och ris",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "thai",
+   "family": "tom yum",
+   "primary": "råa skalade vannameiräkor",
+   "method": "pot",
+   "side": "ris",
+   "flavor": [
+    "citrongräs",
+    "lime",
+    "chili"
+   ],
+   "equipment": [
+    "Gryta",
+    "Kastrull"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Soppa",
+     "ingredients": [
+      {
+       "name": "råa skalade vannameiräkor",
+       "form": "as_sold",
+       "quantity": 500.0,
+       "role": "primary",
+       "label": "Råa skalade vannameiräkor",
+       "range": [
+        400.0,
+        750.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "citrongräs",
+       "form": "as_sold",
+       "quantity": 30.0,
+       "role": "flavour",
+       "label": "Citrongräs",
+       "follows": "råa skalade vannameiräkor"
+      },
+      {
+       "name": "ingefära",
+       "form": "raw_edible",
+       "quantity": 20.0,
+       "role": "flavour",
+       "label": "Ingefära",
+       "follows": "råa skalade vannameiräkor"
+      },
+      {
+       "name": "torkade makrutlimeblad",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Torkade makrutlimeblad",
+       "follows": "råa skalade vannameiräkor"
+      },
+      {
+       "name": "champinjoner",
+       "form": "raw_edible",
+       "quantity": 250.0,
+       "role": "vegetable",
+       "label": "Champinjoner"
+      },
+      {
+       "name": "tomat",
+       "form": "raw_edible",
+       "quantity": 200.0,
+       "role": "vegetable",
+       "label": "Tomat"
+      },
+      {
+       "name": "gul lök",
+       "form": "raw_edible",
+       "quantity": 100.0,
+       "role": "vegetable",
+       "label": "Gul lök"
+      },
+      {
+       "name": "röd currypasta",
+       "form": "as_sold",
+       "quantity": 20.0,
+       "role": "sauce",
+       "label": "Röd currypasta"
+      },
+      {
+       "name": "fisksås",
+       "form": "as_sold",
+       "quantity": 30.0,
+       "role": "flavour",
+       "label": "Fisksås",
+       "follows": "råa skalade vannameiräkor"
+      },
+      {
+       "name": "limejuice",
+       "form": "as_sold",
+       "quantity": 40.0,
+       "role": "flavour",
+       "label": "Limejuice",
+       "follows": "råa skalade vannameiräkor"
+      },
+      {
+       "name": "kokosmjölk",
+       "form": "as_sold",
+       "quantity": 200.0,
+       "role": "sauce",
+       "label": "Kokosmjölk"
+      },
+      {
+       "name": "koriander",
+       "form": "raw_edible",
+       "quantity": 15.0,
+       "role": "flavour",
+       "label": "Koriander",
+       "follows": "råa skalade vannameiräkor"
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Jasminris",
+     "ingredients": [
+      {
+       "name": "ris",
+       "form": "dry",
+       "quantity": 300.0,
+       "role": "side",
+       "label": "Jasminris",
+       "range": [
+        250.0,
+        350.0
+       ],
+       "step": 50.0
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Koka riset enligt förpackningen.",
+     "uses": [
+      "ris"
+     ],
+     "minutes": 20,
+     "passive": true
+    },
+    {
+     "text": "Krossa citrongräset och skiva ingefäran. Koka med limeblad i 1200 ml vatten i 10 minuter.",
+     "uses": [
+      "citrongräs",
+      "ingefära",
+      "torkade makrutlimeblad"
+     ],
+     "minutes": 12,
+     "passive": true
+    },
+    {
+     "text": "Lägg i svamp, lök och tomat i klyftor och currypastan. Sjud 5 minuter.",
+     "uses": [
+      "champinjoner",
+      "gul lök",
+      "tomat",
+      "röd currypasta"
+     ],
+     "minutes": 6,
+     "after": [
+      2
+     ]
+    },
+    {
+     "text": "Lägg i räkorna och sjud 3 minuter tills de är rosa och genomstekta. Rör ner kokosmjölk, fisksås och lime.",
+     "uses": [
+      "råa skalade vannameiräkor",
+      "kokosmjölk",
+      "fisksås",
+      "limejuice"
+     ],
+     "minutes": 4,
+     "after": [
+      3
+     ]
+    },
+    {
+     "text": "Strö över koriander och servera med ris.",
+     "uses": [
+      "koriander",
+      "ris"
+     ],
+     "minutes": 2,
+     "after": [
+      1,
+      4
+     ]
+    }
+   ]
+  },
+  {
+   "base_id": "smako-thai-pla-rad-prik",
+   "name": "Pla rad prik – krispig fisk med söt chili- och vitlökssås",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "thai",
+   "family": "stekt fisk",
+   "primary": "fisk",
+   "method": "pan",
+   "side": "ris",
+   "flavor": [
+    "chili",
+    "vitlök",
+    "lime"
+   ],
+   "equipment": [
+    "Stekpanna",
+    "Kastrull",
+    "Skål"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Fisk",
+     "ingredients": [
+      {
+       "name": "fisk",
+       "form": "raw_edible",
+       "quantity": 650.0,
+       "role": "primary",
+       "label": "Vit fiskfilé, t.ex. sej eller torsk",
+       "range": [
+        550.0,
+        950.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "majsstärkelse",
+       "form": "dry",
+       "quantity": 40.0,
+       "role": "sauce",
+       "label": "Majsstärkelse"
+      },
+      {
+       "name": "salt",
+       "form": "as_sold",
+       "quantity": 4.0,
+       "role": "flavour",
+       "label": "Salt",
+       "follows": "fisk"
+      },
+      {
+       "name": "rapsolja",
+       "form": "as_sold",
+       "quantity": 50.0,
+       "role": "cooking",
+       "label": "Rapsolja",
+       "follows": "fisk"
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Sås",
+     "ingredients": [
+      {
+       "name": "vitlök",
+       "form": "raw_edible",
+       "quantity": 15.0,
+       "role": "flavour",
+       "label": "Vitlök"
+      },
+      {
+       "name": "grön chili",
+       "form": "raw_edible",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Grön chili"
+      },
+      {
+       "name": "chiliflakes",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Chiliflakes"
+      },
+      {
+       "name": "fisksås",
+       "form": "as_sold",
+       "quantity": 20.0,
+       "role": "sauce",
+       "label": "Fisksås"
+      },
+      {
+       "name": "strösocker",
+       "form": "dry",
+       "quantity": 25.0,
+       "role": "flavour",
+       "label": "Strösocker"
+      },
+      {
+       "name": "limejuice",
+       "form": "as_sold",
+       "quantity": 20.0,
+       "role": "flavour",
+       "label": "Limejuice"
+      }
+     ]
+    },
+    {
+     "id": "c3",
+     "name": "Jasminris",
+     "ingredients": [
+      {
+       "name": "ris",
+       "form": "dry",
+       "quantity": 300.0,
+       "role": "side",
+       "label": "Jasminris",
+       "range": [
+        250.0,
+        350.0
+       ],
+       "step": 50.0
+      }
+     ]
+    },
+    {
+     "id": "c4",
+     "name": "Grönsaker",
+     "ingredients": [
+      {
+       "name": "pak choi",
+       "form": "raw_edible",
+       "quantity": 300.0,
+       "role": "vegetable",
+       "label": "Pak choi"
+      },
+      {
+       "name": "ostronsås",
+       "form": "as_sold",
+       "quantity": 15.0,
+       "role": "flavour",
+       "label": "Ostronsås"
+      },
+      {
+       "name": "basilika",
+       "form": "raw_edible",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Basilika"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Koka riset enligt förpackningen.",
+     "uses": [
+      "ris"
+     ],
+     "minutes": 20,
+     "passive": true
+    },
+    {
+     "text": "Skär fisken i bitar, salta och vänd i majsstärkelse. Stek i olja tills den är krispig och håller 63 °C.",
+     "uses": [
+      "fisk",
+      "salt",
+      "majsstärkelse",
+      "rapsolja"
+     ],
+     "minutes": 12
+    },
+    {
+     "text": "Fräs hackad vitlök och chili, tillsätt fisksås, socker, chiliflakes, lime och 50 ml vatten och koka ihop till en blank sås.",
+     "uses": [
+      "vitlök",
+      "grön chili",
+      "fisksås",
+      "strösocker",
+      "chiliflakes",
+      "limejuice"
+     ],
+     "minutes": 5
+    },
+    {
+     "text": "Woka pak choi snabbt med ostronsås.",
+     "uses": [
+      "pak choi",
+      "ostronsås"
+     ],
+     "minutes": 4
+    },
+    {
+     "text": "Häll såsen över fisken och toppa med basilika. Servera med ris och pak choi.",
+     "uses": [
+      "fisk",
+      "vitlök",
+      "basilika",
+      "ris",
+      "pak choi"
+     ],
+     "minutes": 2,
+     "after": [
+      1,
+      2,
+      3,
+      4
+     ]
+    }
+   ]
+  },
+  {
+   "base_id": "smako-thai-choo-chee-pla",
+   "name": "Choo chee pla – fisk i tjock röd kokoscurry med limeblad",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "thai",
+   "family": "choo chee",
+   "primary": "fisk",
+   "method": "pan",
+   "side": "ris",
+   "flavor": [
+    "röd curry",
+    "kokos",
+    "makrutlime"
+   ],
+   "equipment": [
+    "Stekpanna",
+    "Kastrull"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Fisk",
+     "ingredients": [
+      {
+       "name": "fisk",
+       "form": "raw_edible",
+       "quantity": 700.0,
+       "role": "primary",
+       "label": "Vit fiskfilé, t.ex. sej eller torsk",
+       "range": [
+        600.0,
+        1050.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "salt",
+       "form": "as_sold",
+       "quantity": 4.0,
+       "role": "flavour",
+       "label": "Salt",
+       "follows": "fisk"
+      },
+      {
+       "name": "rapsolja",
+       "form": "as_sold",
+       "quantity": 15.0,
+       "role": "cooking",
+       "label": "Rapsolja",
+       "follows": "fisk"
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Curry",
+     "ingredients": [
+      {
+       "name": "röd currypasta",
+       "form": "as_sold",
+       "quantity": 50.0,
+       "role": "sauce",
+       "label": "Röd currypasta"
+      },
+      {
+       "name": "kokosmjölk",
+       "form": "as_sold",
+       "quantity": 400.0,
+       "role": "sauce",
+       "label": "Kokosmjölk"
+      },
+      {
+       "name": "fisksås",
+       "form": "as_sold",
+       "quantity": 15.0,
+       "role": "flavour",
+       "label": "Fisksås"
+      },
+      {
+       "name": "strösocker",
+       "form": "dry",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Strösocker"
+      },
+      {
+       "name": "torkade makrutlimeblad",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Torkade makrutlimeblad"
+      },
+      {
+       "name": "paprika",
+       "form": "raw_edible",
+       "quantity": 150.0,
+       "role": "vegetable",
+       "label": "Paprika"
+      },
+      {
+       "name": "basilika",
+       "form": "raw_edible",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Basilika"
+      }
+     ]
+    },
+    {
+     "id": "c3",
+     "name": "Jasminris",
+     "ingredients": [
+      {
+       "name": "ris",
+       "form": "dry",
+       "quantity": 300.0,
+       "role": "side",
+       "label": "Jasminris",
+       "range": [
+        250.0,
+        350.0
+       ],
+       "step": 50.0
+      }
+     ]
+    },
+    {
+     "id": "c4",
+     "name": "Grönsaker",
+     "ingredients": [
+      {
+       "name": "broccoli",
+       "form": "raw_edible",
+       "quantity": 300.0,
+       "role": "vegetable",
+       "label": "Broccoli"
+      },
+      {
+       "name": "haricots verts",
+       "form": "as_sold",
+       "quantity": 200.0,
+       "role": "vegetable",
+       "label": "Haricots verts"
+      },
+      {
+       "name": "limejuice",
+       "form": "as_sold",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Limejuice"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Koka riset enligt förpackningen.",
+     "uses": [
+      "ris"
+     ],
+     "minutes": 20,
+     "passive": true
+    },
+    {
+     "text": "Salta fisken och stek den i olja 3 minuter per sida. Lägg upp.",
+     "uses": [
+      "fisk",
+      "salt",
+      "rapsolja"
+     ],
+     "minutes": 8
+    },
+    {
+     "text": "Fräs currypastan i hälften av kokosmjölken tills oljan skiljer sig. Rör ner resten av kokosmjölken, fisksås, socker, limeblad och strimlad paprika och koka ihop 5 minuter.",
+     "uses": [
+      "röd currypasta",
+      "kokosmjölk",
+      "fisksås",
+      "strösocker",
+      "torkade makrutlimeblad",
+      "paprika"
+     ],
+     "minutes": 8
+    },
+    {
+     "text": "Lägg fisken i såsen och sjud 3 minuter tills den håller 63 °C. Toppa med basilika.",
+     "uses": [
+      "fisk",
+      "basilika"
+     ],
+     "minutes": 4,
+     "after": [
+      2,
+      3
+     ]
+    },
+    {
+     "text": "Ånga broccoli och bönor 4 minuter och pressa över lime. Servera med ris.",
+     "uses": [
+      "broccoli",
+      "haricots verts",
+      "limejuice",
+      "ris"
+     ],
+     "minutes": 5,
+     "after": [
+      1,
+      4
+     ]
+    }
+   ]
+  },
+  {
+   "base_id": "smako-thai-khao-pad-goong",
+   "name": "Khao pad goong – stekt ris med räkor, ägg och lime",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "thai",
+   "family": "stekt ris",
+   "primary": "råa skalade vannameiräkor",
+   "method": "pan",
+   "side": "ris",
+   "flavor": [
+    "lime",
+    "fisksås"
+   ],
+   "equipment": [
+    "Wok",
+    "Kastrull"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Ris",
+     "ingredients": [
+      {
+       "name": "ris",
+       "form": "dry",
+       "quantity": 300.0,
+       "role": "side",
+       "label": "Jasminris",
+       "range": [
+        250.0,
+        350.0
+       ],
+       "step": 50.0
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Wok",
+     "ingredients": [
+      {
+       "name": "råa skalade vannameiräkor",
+       "form": "as_sold",
+       "quantity": 500.0,
+       "role": "primary",
+       "label": "Råa skalade vannameiräkor",
+       "range": [
+        400.0,
+        750.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "rapsolja",
+       "form": "as_sold",
+       "quantity": 30.0,
+       "role": "cooking",
+       "label": "Rapsolja",
+       "follows": "råa skalade vannameiräkor"
+      },
+      {
+       "name": "vitlök",
+       "form": "raw_edible",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Vitlök",
+       "follows": "råa skalade vannameiräkor"
+      },
+      {
+       "name": "gul lök",
+       "form": "raw_edible",
+       "quantity": 100.0,
+       "role": "vegetable",
+       "label": "Gul lök"
+      },
+      {
+       "name": "ägg",
+       "form": "raw_edible",
+       "quantity": 150.0,
+       "role": "sauce",
+       "label": "Ägg"
+      },
+      {
+       "name": "ärtor",
+       "form": "as_sold",
+       "quantity": 200.0,
+       "role": "vegetable",
+       "label": "Ärtor"
+      },
+      {
+       "name": "fisksås",
+       "form": "as_sold",
+       "quantity": 20.0,
+       "role": "flavour",
+       "label": "Fisksås",
+       "follows": "råa skalade vannameiräkor"
+      },
+      {
+       "name": "sojasås",
+       "form": "as_sold",
+       "quantity": 15.0,
+       "role": "flavour",
+       "label": "Sojasås",
+       "follows": "råa skalade vannameiräkor"
+      },
+      {
+       "name": "strösocker",
+       "form": "dry",
+       "quantity": 5.0,
+       "role": "flavour",
+       "label": "Strösocker",
+       "follows": "råa skalade vannameiräkor"
+      },
+      {
+       "name": "salladslök",
+       "form": "raw_edible",
+       "quantity": 60.0,
+       "role": "vegetable",
+       "label": "Salladslök"
+      }
+     ]
+    },
+    {
+     "id": "c3",
+     "name": "Till servering",
+     "ingredients": [
+      {
+       "name": "gurka",
+       "form": "raw_edible",
+       "quantity": 200.0,
+       "role": "vegetable",
+       "label": "Gurka"
+      },
+      {
+       "name": "limejuice",
+       "form": "as_sold",
+       "quantity": 15.0,
+       "role": "flavour",
+       "label": "Limejuice"
+      },
+      {
+       "name": "koriander",
+       "form": "raw_edible",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Koriander"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Koka riset enligt förpackningen och låt det svalna.",
+     "uses": [
+      "ris"
+     ],
+     "minutes": 25,
+     "passive": true
+    },
+    {
+     "text": "Fräs vitlök och hackad lök i olja. Stek räkorna 2 minuter tills de är rosa och genomstekta. Skjut åt sidan och rör ut äggen.",
+     "uses": [
+      "vitlök",
+      "gul lök",
+      "rapsolja",
+      "råa skalade vannameiräkor",
+      "ägg"
+     ],
+     "minutes": 6
+    },
+    {
+     "text": "Lägg i riset, ärtor, fisksås, soja och socker och stek tills allt är varmt. Vänd ner salladslök.",
+     "uses": [
+      "ris",
+      "ärtor",
+      "fisksås",
+      "sojasås",
+      "strösocker",
+      "salladslök"
+     ],
+     "minutes": 6,
+     "after": [
+      1,
+      2
+     ]
+    },
+    {
+     "text": "Servera med gurka, lime och koriander.",
+     "uses": [
+      "gurka",
+      "limejuice",
+      "koriander"
+     ],
+     "minutes": 2,
+     "after": [
+      3
+     ]
+    }
+   ]
+  },
+  {
+   "base_id": "smako-thai-gaeng-kua-goong-sapparot",
+   "name": "Röd curry med räkor och ananas",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "thai",
+   "family": "röd curry",
+   "primary": "råa skalade vannameiräkor",
+   "method": "pot",
+   "side": "ris",
+   "flavor": [
+    "röd curry",
+    "ananas",
+    "kokos"
+   ],
+   "equipment": [
+    "Gryta",
+    "Kastrull"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Curry",
+     "ingredients": [
+      {
+       "name": "råa skalade vannameiräkor",
+       "form": "as_sold",
+       "quantity": 500.0,
+       "role": "primary",
+       "label": "Råa skalade vannameiräkor",
+       "range": [
+        400.0,
+        750.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "röd currypasta",
+       "form": "as_sold",
+       "quantity": 45.0,
+       "role": "sauce",
+       "label": "Röd currypasta"
+      },
+      {
+       "name": "kokosmjölk",
+       "form": "as_sold",
+       "quantity": 400.0,
+       "role": "sauce",
+       "label": "Kokosmjölk"
+      },
+      {
+       "name": "ananas",
+       "form": "raw_edible",
+       "quantity": 300.0,
+       "role": "vegetable",
+       "label": "Ananas"
+      },
+      {
+       "name": "fisksås",
+       "form": "as_sold",
+       "quantity": 20.0,
+       "role": "flavour",
+       "label": "Fisksås",
+       "follows": "råa skalade vannameiräkor"
+      },
+      {
+       "name": "strösocker",
+       "form": "dry",
+       "quantity": 8.0,
+       "role": "flavour",
+       "label": "Strösocker",
+       "follows": "råa skalade vannameiräkor"
+      },
+      {
+       "name": "torkade makrutlimeblad",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Torkade makrutlimeblad",
+       "follows": "råa skalade vannameiräkor"
+      },
+      {
+       "name": "limejuice",
+       "form": "as_sold",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Limejuice",
+       "follows": "råa skalade vannameiräkor"
+      },
+      {
+       "name": "basilika",
+       "form": "raw_edible",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Basilika",
+       "follows": "råa skalade vannameiräkor"
+      },
+      {
+       "name": "haricots verts",
+       "form": "as_sold",
+       "quantity": 200.0,
+       "role": "vegetable",
+       "label": "Haricots verts"
+      },
+      {
+       "name": "rapsolja",
+       "form": "as_sold",
+       "quantity": 10.0,
+       "role": "cooking",
+       "label": "Rapsolja",
+       "follows": "råa skalade vannameiräkor"
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Jasminris",
+     "ingredients": [
+      {
+       "name": "ris",
+       "form": "dry",
+       "quantity": 300.0,
+       "role": "side",
+       "label": "Jasminris",
+       "range": [
+        250.0,
+        350.0
+       ],
+       "step": 50.0
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Koka riset enligt förpackningen.",
+     "uses": [
+      "ris"
+     ],
+     "minutes": 20,
+     "passive": true
+    },
+    {
+     "text": "Fräs currypastan i olja och lite kokosmjölk. Rör ner resten av kokosmjölken, limeblad och 100 ml vatten.",
+     "uses": [
+      "röd currypasta",
+      "rapsolja",
+      "kokosmjölk",
+      "torkade makrutlimeblad"
+     ],
+     "minutes": 6
+    },
+    {
+     "text": "Lägg i ananas och bönor i bitar och sjud 5 minuter.",
+     "uses": [
+      "ananas",
+      "haricots verts"
+     ],
+     "minutes": 6,
+     "after": [
+      2
+     ]
+    },
+    {
+     "text": "Lägg i räkorna och sjud 3 minuter tills de är rosa och genomstekta. Smaka av med fisksås, socker och lime och vänd ner basilika.",
+     "uses": [
+      "råa skalade vannameiräkor",
+      "fisksås",
+      "strösocker",
+      "limejuice",
+      "basilika"
+     ],
+     "minutes": 4,
+     "after": [
+      3
+     ]
+    },
+    {
+     "text": "Servera med riset.",
+     "uses": [
+      "ris"
+     ],
+     "minutes": 1,
+     "after": [
+      1,
+      4
+     ]
+    }
+   ]
+  },
+  {
+   "base_id": "smako-thai-pla-tod-kamin",
+   "name": "Pla tod kamin – gurkmeje- och vitlöksstekt fisk med ris och gurksallad",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "thai",
+   "family": "stekt fisk",
+   "primary": "fisk",
+   "method": "pan",
+   "side": "ris",
+   "flavor": [
+    "gurkmeja",
+    "vitlök",
+    "lime"
+   ],
+   "equipment": [
+    "Stekpanna",
+    "Kastrull",
+    "Skål"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Fisk",
+     "ingredients": [
+      {
+       "name": "fisk",
+       "form": "raw_edible",
+       "quantity": 700.0,
+       "role": "primary",
+       "label": "Vit fiskfilé, t.ex. sej eller torsk",
+       "range": [
+        600.0,
+        1050.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "gurkmeja",
+       "form": "dry",
+       "quantity": 2.0,
+       "role": "flavour",
+       "label": "Gurkmeja",
+       "follows": "fisk"
+      },
+      {
+       "name": "vitlök",
+       "form": "raw_edible",
+       "quantity": 20.0,
+       "role": "flavour",
+       "label": "Vitlök",
+       "follows": "fisk"
+      },
+      {
+       "name": "svartpeppar",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Svartpeppar",
+       "follows": "fisk"
+      },
+      {
+       "name": "fisksås",
+       "form": "as_sold",
+       "quantity": 15.0,
+       "role": "flavour",
+       "label": "Fisksås",
+       "follows": "fisk"
+      },
+      {
+       "name": "majsstärkelse",
+       "form": "dry",
+       "quantity": 20.0,
+       "role": "sauce",
+       "label": "Majsstärkelse"
+      },
+      {
+       "name": "rapsolja",
+       "form": "as_sold",
+       "quantity": 40.0,
+       "role": "cooking",
+       "label": "Rapsolja",
+       "follows": "fisk"
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Jasminris",
+     "ingredients": [
+      {
+       "name": "ris",
+       "form": "dry",
+       "quantity": 300.0,
+       "role": "side",
+       "label": "Jasminris",
+       "range": [
+        250.0,
+        350.0
+       ],
+       "step": 50.0
+      }
+     ]
+    },
+    {
+     "id": "c3",
+     "name": "Gurksallad",
+     "ingredients": [
+      {
+       "name": "gurka",
+       "form": "raw_edible",
+       "quantity": 250.0,
+       "role": "vegetable",
+       "label": "Gurka"
+      },
+      {
+       "name": "rödlök",
+       "form": "raw_edible",
+       "quantity": 60.0,
+       "role": "vegetable",
+       "label": "Rödlök"
+      },
+      {
+       "name": "grön chili",
+       "form": "raw_edible",
+       "quantity": 5.0,
+       "role": "flavour",
+       "label": "Grön chili"
+      },
+      {
+       "name": "risvinäger",
+       "form": "as_sold",
+       "quantity": 20.0,
+       "role": "flavour",
+       "label": "Risvinäger"
+      },
+      {
+       "name": "strösocker",
+       "form": "dry",
+       "quantity": 5.0,
+       "role": "flavour",
+       "label": "Strösocker"
+      }
+     ]
+    },
+    {
+     "id": "c4",
+     "name": "Grönsaker",
+     "ingredients": [
+      {
+       "name": "pak choi",
+       "form": "raw_edible",
+       "quantity": 250.0,
+       "role": "vegetable",
+       "label": "Pak choi"
+      },
+      {
+       "name": "sojasås",
+       "form": "as_sold",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Sojasås"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Koka riset enligt förpackningen.",
+     "uses": [
+      "ris"
+     ],
+     "minutes": 20,
+     "passive": true
+    },
+    {
+     "text": "Vänd fisken i gurkmeja, peppar, fisksås och majsstärkelse.",
+     "uses": [
+      "fisk",
+      "gurkmeja",
+      "svartpeppar",
+      "fisksås",
+      "majsstärkelse"
+     ],
+     "minutes": 5
+    },
+    {
+     "text": "Stek fisken i olja tills den är gyllene och håller 63 °C. Fräs hackad vitlök gyllen i samma olja och strö över.",
+     "uses": [
+      "fisk",
+      "rapsolja",
+      "vitlök"
+     ],
+     "minutes": 12,
+     "after": [
+      2
+     ]
+    },
+    {
+     "text": "Skiva gurka, rödlök och chili och vänd med vinäger och socker.",
+     "uses": [
+      "gurka",
+      "rödlök",
+      "grön chili",
+      "risvinäger",
+      "strösocker"
+     ],
+     "minutes": 6
+    },
+    {
+     "text": "Woka pak choi med soja och servera med fisken och riset.",
+     "uses": [
+      "pak choi",
+      "sojasås",
+      "ris"
+     ],
+     "minutes": 4,
+     "after": [
+      1,
+      3,
+      4
+     ]
+    }
+   ]
+  },
+  {
+   "base_id": "smako-thai-goong-ob-woonsen",
+   "name": "Räkor och glasnudlar i gryta med ingefära och svartpeppar",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "thai",
+   "family": "ob woon sen",
+   "primary": "råa skalade vannameiräkor",
+   "method": "pot",
+   "side": "glasnudlar",
+   "flavor": [
+    "ingefära",
+    "svartpeppar",
+    "soja"
+   ],
+   "equipment": [
+    "Gryta med lock",
+    "Skål"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Glasnudlar",
+     "ingredients": [
+      {
+       "name": "glasnudlar",
+       "form": "dry",
+       "quantity": 200.0,
+       "role": "side",
+       "label": "Glasnudlar",
+       "range": [
+        150.0,
+        200.0
+       ],
+       "step": 50.0
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Gryta",
+     "ingredients": [
+      {
+       "name": "råa skalade vannameiräkor",
+       "form": "as_sold",
+       "quantity": 500.0,
+       "role": "primary",
+       "label": "Råa skalade vannameiräkor",
+       "range": [
+        400.0,
+        750.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "rimmat fläsk",
+       "form": "raw_edible",
+       "quantity": 100.0,
+       "role": "cooking",
+       "label": "Rimmat fläsk",
+       "follows": "råa skalade vannameiräkor"
+      },
+      {
+       "name": "ingefära",
+       "form": "raw_edible",
+       "quantity": 25.0,
+       "role": "flavour",
+       "label": "Ingefära",
+       "follows": "råa skalade vannameiräkor"
+      },
+      {
+       "name": "vitlök",
+       "form": "raw_edible",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Vitlök",
+       "follows": "råa skalade vannameiräkor"
+      },
+      {
+       "name": "svartpeppar",
+       "form": "dry",
+       "quantity": 2.0,
+       "role": "flavour",
+       "label": "Svartpeppar",
+       "follows": "råa skalade vannameiräkor"
+      },
+      {
+       "name": "sojasås",
+       "form": "as_sold",
+       "quantity": 30.0,
+       "role": "sauce",
+       "label": "Sojasås"
+      },
+      {
+       "name": "ostronsås",
+       "form": "as_sold",
+       "quantity": 30.0,
+       "role": "sauce",
+       "label": "Ostronsås"
+      },
+      {
+       "name": "sesamfrön",
+       "form": "as_sold",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Sesamfrön",
+       "follows": "råa skalade vannameiräkor"
+      },
+      {
+       "name": "salladslök",
+       "form": "raw_edible",
+       "quantity": 60.0,
+       "role": "vegetable",
+       "label": "Salladslök"
+      },
+      {
+       "name": "pak choi",
+       "form": "raw_edible",
+       "quantity": 300.0,
+       "role": "vegetable",
+       "label": "Pak choi"
+      },
+      {
+       "name": "koriander",
+       "form": "raw_edible",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Koriander",
+       "follows": "råa skalade vannameiräkor"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Blötlägg glasnudlarna i varmt vatten 10 minuter och låt rinna av.",
+     "uses": [
+      "glasnudlar"
+     ],
+     "minutes": 10,
+     "passive": true
+    },
+    {
+     "text": "Lägg fläskskivor i botten av grytan med skivad ingefära, krossad vitlök och grovkrossad peppar och fräs 3 minuter.",
+     "uses": [
+      "rimmat fläsk",
+      "ingefära",
+      "vitlök",
+      "svartpeppar"
+     ],
+     "minutes": 5
+    },
+    {
+     "text": "Blanda nudlarna med soja, ostronsås och en skvätt vatten och lägg i grytan med pak choi. Lägg räkorna överst och lägg på lock.",
+     "uses": [
+      "glasnudlar",
+      "sojasås",
+      "ostronsås",
+      "pak choi",
+      "råa skalade vannameiräkor"
+     ],
+     "minutes": 4,
+     "after": [
+      1,
+      2
+     ]
+    },
+    {
+     "text": "Låt grytan ånga 8 minuter tills räkorna är rosa och genomstekta och nudlarna mjuka.",
+     "uses": [
+      "råa skalade vannameiräkor",
+      "glasnudlar"
+     ],
+     "minutes": 8,
+     "after": [
+      3
+     ],
+     "passive": true
+    },
+    {
+     "text": "Vänd ihop och strö över salladslök, rostade sesamfrön och koriander.",
+     "uses": [
+      "salladslök",
+      "sesamfrön",
+      "koriander"
+     ],
+     "minutes": 2,
+     "after": [
+      4
+     ]
+    }
+   ]
+  },
+  {
+   "base_id": "smako-thai-khao-man-gai",
+   "name": "Khao man gai – pocherad kyckling med ingefärsris, buljong och sås",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "thai",
+   "family": "khao man gai",
+   "primary": "kyckling",
+   "method": "pot",
+   "side": "ris",
+   "flavor": [
+    "ingefära",
+    "vitlök",
+    "soja"
+   ],
+   "equipment": [
+    "Gryta",
+    "Kastrull",
+    "Skål"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Kyckling",
+     "ingredients": [
+      {
+       "name": "kyckling",
+       "form": "raw_edible",
+       "quantity": 800.0,
+       "role": "primary",
+       "requirements": [
+        "pack:chicken_thigh"
+       ],
+       "label": "Kycklinglårfilé",
+       "range": [
+        650.0,
+        1200.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "ingefära",
+       "form": "raw_edible",
+       "quantity": 30.0,
+       "role": "flavour",
+       "label": "Ingefära",
+       "follows": "kyckling"
+      },
+      {
+       "name": "vitlök",
+       "form": "raw_edible",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Vitlök",
+       "follows": "kyckling"
+      },
+      {
+       "name": "salladslök",
+       "form": "raw_edible",
+       "quantity": 40.0,
+       "role": "flavour",
+       "label": "Salladslök",
+       "follows": "kyckling"
+      },
+      {
+       "name": "salt",
+       "form": "as_sold",
+       "quantity": 8.0,
+       "role": "flavour",
+       "label": "Salt",
+       "follows": "kyckling"
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Ingefärsris",
+     "ingredients": [
+      {
+       "name": "ris",
+       "form": "dry",
+       "quantity": 300.0,
+       "role": "side",
+       "label": "Jasminris",
+       "range": [
+        250.0,
+        350.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "vitlök",
+       "form": "raw_edible",
+       "quantity": 6.0,
+       "role": "flavour",
+       "label": "Vitlök"
+      },
+      {
+       "name": "rapsolja",
+       "form": "as_sold",
+       "quantity": 15.0,
+       "role": "cooking",
+       "label": "Rapsolja"
+      }
+     ]
+    },
+    {
+     "id": "c3",
+     "name": "Sås",
+     "ingredients": [
+      {
+       "name": "sojasås",
+       "form": "as_sold",
+       "quantity": 30.0,
+       "role": "sauce",
+       "label": "Sojasås"
+      },
+      {
+       "name": "ingefära",
+       "form": "raw_edible",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Ingefära"
+      },
+      {
+       "name": "grön chili",
+       "form": "raw_edible",
+       "quantity": 5.0,
+       "role": "flavour",
+       "label": "Grön chili"
+      },
+      {
+       "name": "risvinäger",
+       "form": "as_sold",
+       "quantity": 15.0,
+       "role": "flavour",
+       "label": "Risvinäger"
+      },
+      {
+       "name": "strösocker",
+       "form": "dry",
+       "quantity": 5.0,
+       "role": "flavour",
+       "label": "Strösocker"
+      }
+     ]
+    },
+    {
+     "id": "c4",
+     "name": "Till servering",
+     "ingredients": [
+      {
+       "name": "gurka",
+       "form": "raw_edible",
+       "quantity": 250.0,
+       "role": "vegetable",
+       "label": "Gurka"
+      },
+      {
+       "name": "koriander",
+       "form": "raw_edible",
+       "quantity": 15.0,
+       "role": "flavour",
+       "label": "Koriander"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Lägg kycklingen i 1500 ml vatten med skivad ingefära, krossad vitlök, salladslök och salt. Sjud 25 minuter tills den håller 74 °C. Spara buljongen.",
+     "uses": [
+      "kyckling",
+      "ingefära",
+      "vitlök",
+      "salladslök",
+      "salt"
+     ],
+     "minutes": 30,
+     "passive": true
+    },
+    {
+     "text": "Fräs hackad vitlök i olja, rör ner riset och koka det i buljong enligt förpackningens mängd.",
+     "uses": [
+      "vitlök",
+      "rapsolja",
+      "ris"
+     ],
+     "minutes": 22,
+     "after": [
+      1
+     ],
+     "passive": true
+    },
+    {
+     "text": "Rör ihop soja, riven ingefära, hackad chili, vinäger och socker.",
+     "uses": [
+      "sojasås",
+      "ingefära",
+      "grön chili",
+      "risvinäger",
+      "strösocker"
+     ],
+     "minutes": 5
+    },
+    {
+     "text": "Skiva kycklingen och servera på riset med gurka, koriander, såsen och en kopp varm buljong.",
+     "uses": [
+      "kyckling",
+      "ris",
+      "gurka",
+      "koriander",
+      "sojasås"
+     ],
+     "minutes": 5,
+     "after": [
+      2,
+      3
+     ]
+    }
+   ]
+  },
+  {
+   "base_id": "smako-thai-gai-yang-salad",
+   "name": "Gai yang – grillad kyckling med citrongräs, klibbigt ris och gurksallad",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "thai",
+   "family": "grillad kyckling",
+   "primary": "kyckling",
+   "method": "oven",
+   "side": "ris",
+   "flavor": [
+    "citrongräs",
+    "vitlök",
+    "lime"
+   ],
+   "equipment": [
+    "Ugn",
+    "Plåt",
+    "Kastrull",
+    "Skål"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Kyckling",
+     "ingredients": [
+      {
+       "name": "kyckling",
+       "form": "raw_edible",
+       "quantity": 800.0,
+       "role": "primary",
+       "requirements": [
+        "pack:chicken_thigh"
+       ],
+       "label": "Kycklinglårfilé",
+       "range": [
+        650.0,
+        1200.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "citrongräs",
+       "form": "as_sold",
+       "quantity": 20.0,
+       "role": "flavour",
+       "label": "Citrongräs",
+       "follows": "kyckling"
+      },
+      {
+       "name": "vitlök",
+       "form": "raw_edible",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Vitlök",
+       "follows": "kyckling"
+      },
+      {
+       "name": "koriander",
+       "form": "raw_edible",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Koriander",
+       "follows": "kyckling"
+      },
+      {
+       "name": "fisksås",
+       "form": "as_sold",
+       "quantity": 20.0,
+       "role": "flavour",
+       "label": "Fisksås",
+       "follows": "kyckling"
+      },
+      {
+       "name": "sojasås",
+       "form": "as_sold",
+       "quantity": 15.0,
+       "role": "flavour",
+       "label": "Sojasås",
+       "follows": "kyckling"
+      },
+      {
+       "name": "strösocker",
+       "form": "dry",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Strösocker",
+       "follows": "kyckling"
+      },
+      {
+       "name": "rapsolja",
+       "form": "as_sold",
+       "quantity": 10.0,
+       "role": "cooking",
+       "label": "Rapsolja",
+       "follows": "kyckling"
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Ris",
+     "ingredients": [
+      {
+       "name": "sushiris",
+       "form": "dry",
+       "quantity": 300.0,
+       "role": "side",
+       "label": "Klibbigt ris eller sushiris",
+       "range": [
+        250.0,
+        350.0
+       ],
+       "step": 50.0
+      }
+     ]
+    },
+    {
+     "id": "c3",
+     "name": "Sallad",
+     "ingredients": [
+      {
+       "name": "gurka",
+       "form": "raw_edible",
+       "quantity": 250.0,
+       "role": "vegetable",
+       "label": "Gurka"
+      },
+      {
+       "name": "morot",
+       "form": "raw_edible",
+       "quantity": 150.0,
+       "role": "vegetable",
+       "label": "Morot"
+      },
+      {
+       "name": "tomat",
+       "form": "raw_edible",
+       "quantity": 150.0,
+       "role": "vegetable",
+       "label": "Tomat"
+      },
+      {
+       "name": "limejuice",
+       "form": "as_sold",
+       "quantity": 30.0,
+       "role": "flavour",
+       "label": "Limejuice"
+      },
+      {
+       "name": "jordnötter",
+       "form": "as_sold",
+       "quantity": 30.0,
+       "role": "flavour",
+       "label": "Jordnötter"
+      },
+      {
+       "name": "chiliflakes",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Chiliflakes"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Mixa eller hacka citrongräs, vitlök och koriander fint och blanda med fisksås, soja, socker och olja. Vänd kycklingen i marinaden och låt stå 30 minuter.",
+     "uses": [
+      "citrongräs",
+      "vitlök",
+      "koriander",
+      "fisksås",
+      "sojasås",
+      "strösocker",
+      "rapsolja",
+      "kyckling"
+     ],
+     "minutes": 35
+    },
+    {
+     "text": "Koka riset enligt förpackningen.",
+     "uses": [
+      "sushiris"
+     ],
+     "minutes": 25,
+     "passive": true
+    },
+    {
+     "text": "Sätt ugnen på 225 °C. Grilla kycklingen på plåt 25 minuter tills den håller 74 °C.",
+     "uses": [
+      "kyckling"
+     ],
+     "minutes": 27,
+     "after": [
+      1
+     ],
+     "passive": true
+    },
+    {
+     "text": "Riv gurka och morot grovt, skär tomaten och vänd med lime, chili och krossade jordnötter.",
+     "uses": [
+      "gurka",
+      "morot",
+      "tomat",
+      "limejuice",
+      "chiliflakes",
+      "jordnötter"
+     ],
+     "minutes": 10
+    },
+    {
+     "text": "Servera kycklingen med ris och salladen.",
+     "uses": [
+      "kyckling",
+      "sushiris",
+      "gurka"
+     ],
+     "minutes": 2,
+     "after": [
+      2,
+      3,
+      4
+     ]
+    }
+   ]
+  },
+  {
+   "base_id": "smako-thai-tom-kha-gai",
+   "name": "Tom kha gai – kokossoppa med kyckling, citrongräs och svamp",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "thai",
+   "family": "tom kha",
+   "primary": "kyckling",
+   "method": "pot",
+   "side": "ris",
+   "flavor": [
+    "kokos",
+    "citrongräs",
+    "lime"
+   ],
+   "equipment": [
+    "Gryta",
+    "Kastrull"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Soppa",
+     "ingredients": [
+      {
+       "name": "kyckling",
+       "form": "raw_edible",
+       "quantity": 650.0,
+       "role": "primary",
+       "requirements": [
+        "pack:chicken_breast"
+       ],
+       "label": "Kycklingbröstfilé",
+       "range": [
+        550.0,
+        950.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "kokosmjölk",
+       "form": "as_sold",
+       "quantity": 800.0,
+       "role": "sauce",
+       "label": "Kokosmjölk"
+      },
+      {
+       "name": "citrongräs",
+       "form": "as_sold",
+       "quantity": 30.0,
+       "role": "flavour",
+       "label": "Citrongräs",
+       "follows": "kyckling"
+      },
+      {
+       "name": "ingefära",
+       "form": "raw_edible",
+       "quantity": 25.0,
+       "role": "flavour",
+       "label": "Ingefära",
+       "follows": "kyckling"
+      },
+      {
+       "name": "torkade makrutlimeblad",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Torkade makrutlimeblad",
+       "follows": "kyckling"
+      },
+      {
+       "name": "champinjoner",
+       "form": "raw_edible",
+       "quantity": 250.0,
+       "role": "vegetable",
+       "label": "Champinjoner"
+      },
+      {
+       "name": "tomat",
+       "form": "raw_edible",
+       "quantity": 150.0,
+       "role": "vegetable",
+       "label": "Tomat"
+      },
+      {
+       "name": "fisksås",
+       "form": "as_sold",
+       "quantity": 30.0,
+       "role": "flavour",
+       "label": "Fisksås",
+       "follows": "kyckling"
+      },
+      {
+       "name": "limejuice",
+       "form": "as_sold",
+       "quantity": 30.0,
+       "role": "flavour",
+       "label": "Limejuice",
+       "follows": "kyckling"
+      },
+      {
+       "name": "strösocker",
+       "form": "dry",
+       "quantity": 5.0,
+       "role": "flavour",
+       "label": "Strösocker",
+       "follows": "kyckling"
+      },
+      {
+       "name": "chiliflakes",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Chiliflakes",
+       "follows": "kyckling"
+      },
+      {
+       "name": "koriander",
+       "form": "raw_edible",
+       "quantity": 15.0,
+       "role": "flavour",
+       "label": "Koriander",
+       "follows": "kyckling"
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Jasminris",
+     "ingredients": [
+      {
+       "name": "ris",
+       "form": "dry",
+       "quantity": 300.0,
+       "role": "side",
+       "label": "Jasminris",
+       "range": [
+        250.0,
+        350.0
+       ],
+       "step": 50.0
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Koka riset enligt förpackningen.",
+     "uses": [
+      "ris"
+     ],
+     "minutes": 20,
+     "passive": true
+    },
+    {
+     "text": "Koka upp kokosmjölken med 400 ml vatten, krossat citrongräs, skivad ingefära och limeblad. Sjud 5 minuter.",
+     "uses": [
+      "kokosmjölk",
+      "citrongräs",
+      "ingefära",
+      "torkade makrutlimeblad"
+     ],
+     "minutes": 7
+    },
+    {
+     "text": "Lägg i kyckling i tunna skivor och svamp och sjud 8 minuter tills kycklingen håller 74 °C.",
+     "uses": [
+      "kyckling",
+      "champinjoner"
+     ],
+     "minutes": 9,
+     "after": [
+      2
+     ]
+    },
+    {
+     "text": "Lägg i tomatklyftor och smaka av med fisksås, lime, socker och chili. Strö över koriander och servera med ris.",
+     "uses": [
+      "tomat",
+      "fisksås",
+      "limejuice",
+      "strösocker",
+      "chiliflakes",
+      "koriander",
+      "ris"
+     ],
+     "minutes": 4,
+     "after": [
+      1,
+      3
+     ]
+    }
+   ]
+  },
+  {
+   "base_id": "smako-thai-khao-soi-gai",
+   "name": "Khao soi – nordthailändsk currynudelsoppa med kyckling",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "thai",
+   "family": "khao soi",
+   "primary": "kyckling",
+   "method": "pot",
+   "side": "nudlar",
+   "flavor": [
+    "curry",
+    "kokos",
+    "lime"
+   ],
+   "equipment": [
+    "Gryta",
+    "Kastrull",
+    "Stekpanna"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Soppa",
+     "ingredients": [
+      {
+       "name": "kyckling",
+       "form": "raw_edible",
+       "quantity": 750.0,
+       "role": "primary",
+       "requirements": [
+        "pack:chicken_thigh"
+       ],
+       "label": "Kycklinglårfilé",
+       "range": [
+        600.0,
+        1100.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "röd currypasta",
+       "form": "as_sold",
+       "quantity": 50.0,
+       "role": "sauce",
+       "label": "Röd currypasta"
+      },
+      {
+       "name": "gurkmeja",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Gurkmeja",
+       "follows": "kyckling"
+      },
+      {
+       "name": "malen koriander",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Malen koriander",
+       "follows": "kyckling"
+      },
+      {
+       "name": "rapsolja",
+       "form": "as_sold",
+       "quantity": 15.0,
+       "role": "cooking",
+       "label": "Rapsolja",
+       "follows": "kyckling"
+      },
+      {
+       "name": "kokosmjölk",
+       "form": "as_sold",
+       "quantity": 400.0,
+       "role": "sauce",
+       "label": "Kokosmjölk"
+      },
+      {
+       "name": "fisksås",
+       "form": "as_sold",
+       "quantity": 25.0,
+       "role": "flavour",
+       "label": "Fisksås",
+       "follows": "kyckling"
+      },
+      {
+       "name": "strösocker",
+       "form": "dry",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Strösocker",
+       "follows": "kyckling"
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Nudlar",
+     "ingredients": [
+      {
+       "name": "nudlar",
+       "form": "dry",
+       "quantity": 300.0,
+       "role": "side",
+       "label": "Äggnudlar",
+       "range": [
+        250.0,
+        350.0
+       ],
+       "step": 50.0
+      }
+     ]
+    },
+    {
+     "id": "c3",
+     "name": "Till servering",
+     "ingredients": [
+      {
+       "name": "rödlök",
+       "form": "raw_edible",
+       "quantity": 80.0,
+       "role": "vegetable",
+       "label": "Rödlök"
+      },
+      {
+       "name": "salladslök",
+       "form": "raw_edible",
+       "quantity": 40.0,
+       "role": "vegetable",
+       "label": "Salladslök"
+      },
+      {
+       "name": "koriander",
+       "form": "raw_edible",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Koriander"
+      },
+      {
+       "name": "limejuice",
+       "form": "as_sold",
+       "quantity": 20.0,
+       "role": "flavour",
+       "label": "Limejuice"
+      },
+      {
+       "name": "pak choi",
+       "form": "raw_edible",
+       "quantity": 200.0,
+       "role": "vegetable",
+       "label": "Pak choi"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Fräs currypastan med gurkmeja och koriander i olja 1 minut.",
+     "uses": [
+      "röd currypasta",
+      "gurkmeja",
+      "malen koriander",
+      "rapsolja"
+     ],
+     "minutes": 3
+    },
+    {
+     "text": "Lägg i kycklingen, kokosmjölken och 700 ml vatten. Sjud 25 minuter tills kycklingen håller 74 °C. Smaka av med fisksås och socker.",
+     "uses": [
+      "kyckling",
+      "kokosmjölk",
+      "fisksås",
+      "strösocker"
+     ],
+     "minutes": 27,
+     "after": [
+      1
+     ],
+     "passive": true
+    },
+    {
+     "text": "Koka nudlarna enligt förpackningen. Stek en fjärdedel av nudlarna krispiga i lite olja.",
+     "uses": [
+      "nudlar",
+      "rapsolja"
+     ],
+     "minutes": 12
+    },
+    {
+     "text": "Lägg pak choi i soppan de sista 3 minuterna.",
+     "uses": [
+      "pak choi"
+     ],
+     "minutes": 3,
+     "after": [
+      2
+     ]
+    },
+    {
+     "text": "Lägg nudlar i skålar, häll över soppan och toppa med krispiga nudlar, rödlök, salladslök, koriander och lime.",
+     "uses": [
+      "nudlar",
+      "rödlök",
+      "salladslök",
+      "koriander",
+      "limejuice",
+      "kyckling"
+     ],
+     "minutes": 4,
+     "after": [
+      3,
+      4
+     ]
+    }
+   ]
+  },
+  {
+   "base_id": "smako-thai-gai-satay",
+   "name": "Kycklingsatay med jordnötssås, gurkrelish och ris",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "thai",
+   "family": "satay",
+   "primary": "kyckling",
+   "method": "oven",
+   "side": "ris",
+   "flavor": [
+    "jordnöt",
+    "gurkmeja",
+    "kokos"
+   ],
+   "equipment": [
+    "Ugn",
+    "Plåt",
+    "Grillspett",
+    "Kastrull"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Kyckling",
+     "ingredients": [
+      {
+       "name": "kyckling",
+       "form": "raw_edible",
+       "quantity": 700.0,
+       "role": "primary",
+       "requirements": [
+        "pack:chicken_thigh"
+       ],
+       "label": "Kycklinglårfilé",
+       "range": [
+        600.0,
+        1050.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "gurkmeja",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Gurkmeja",
+       "follows": "kyckling"
+      },
+      {
+       "name": "malen koriander",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Malen koriander",
+       "follows": "kyckling"
+      },
+      {
+       "name": "fisksås",
+       "form": "as_sold",
+       "quantity": 15.0,
+       "role": "flavour",
+       "label": "Fisksås",
+       "follows": "kyckling"
+      },
+      {
+       "name": "strösocker",
+       "form": "dry",
+       "quantity": 5.0,
+       "role": "flavour",
+       "label": "Strösocker",
+       "follows": "kyckling"
+      },
+      {
+       "name": "kokosmjölk",
+       "form": "as_sold",
+       "quantity": 100.0,
+       "role": "sauce",
+       "label": "Kokosmjölk"
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Jordnötssås",
+     "ingredients": [
+      {
+       "name": "jordnötssmör",
+       "form": "as_sold",
+       "quantity": 80.0,
+       "role": "sauce",
+       "label": "Jordnötssmör"
+      },
+      {
+       "name": "röd currypasta",
+       "form": "as_sold",
+       "quantity": 15.0,
+       "role": "sauce",
+       "label": "Röd currypasta"
+      },
+      {
+       "name": "kokosmjölk",
+       "form": "as_sold",
+       "quantity": 200.0,
+       "role": "sauce",
+       "label": "Kokosmjölk"
+      },
+      {
+       "name": "limejuice",
+       "form": "as_sold",
+       "quantity": 15.0,
+       "role": "flavour",
+       "label": "Limejuice"
+      }
+     ]
+    },
+    {
+     "id": "c3",
+     "name": "Gurkrelish",
+     "ingredients": [
+      {
+       "name": "gurka",
+       "form": "raw_edible",
+       "quantity": 250.0,
+       "role": "vegetable",
+       "label": "Gurka"
+      },
+      {
+       "name": "rödlök",
+       "form": "raw_edible",
+       "quantity": 60.0,
+       "role": "vegetable",
+       "label": "Rödlök"
+      },
+      {
+       "name": "risvinäger",
+       "form": "as_sold",
+       "quantity": 30.0,
+       "role": "flavour",
+       "label": "Risvinäger"
+      },
+      {
+       "name": "grön chili",
+       "form": "raw_edible",
+       "quantity": 5.0,
+       "role": "flavour",
+       "label": "Grön chili"
+      }
+     ]
+    },
+    {
+     "id": "c4",
+     "name": "Jasminris",
+     "ingredients": [
+      {
+       "name": "ris",
+       "form": "dry",
+       "quantity": 300.0,
+       "role": "side",
+       "label": "Jasminris",
+       "range": [
+        250.0,
+        350.0
+       ],
+       "step": 50.0
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Skär kycklingen i strimlor och vänd med kryddor, fisksås, socker och 100 ml kokosmjölk. Låt stå 20 minuter och trä upp på spett.",
+     "uses": [
+      "kyckling",
+      "gurkmeja",
+      "malen koriander",
+      "fisksås",
+      "strösocker",
+      "kokosmjölk"
+     ],
+     "minutes": 28
+    },
+    {
+     "text": "Koka riset enligt förpackningen.",
+     "uses": [
+      "ris"
+     ],
+     "minutes": 20,
+     "passive": true
+    },
+    {
+     "text": "Sätt ugnen på 250 °C, grillfunktion. Grilla spetten 10–12 minuter tills kycklingen håller 74 °C.",
+     "uses": [
+      "kyckling"
+     ],
+     "minutes": 14,
+     "after": [
+      1
+     ],
+     "passive": true
+    },
+    {
+     "text": "Värm jordnötssmör, currypasta och kokosmjölk under omrörning. Smaka av med lime.",
+     "uses": [
+      "jordnötssmör",
+      "röd currypasta",
+      "kokosmjölk",
+      "limejuice"
+     ],
+     "minutes": 6
+    },
+    {
+     "text": "Tärna gurka och rödlök och vänd med vinäger och hackad chili. Servera spetten med såsen, relishen och riset.",
+     "uses": [
+      "gurka",
+      "rödlök",
+      "risvinäger",
+      "grön chili",
+      "kyckling",
+      "ris"
+     ],
+     "minutes": 6,
+     "after": [
+      2,
+      3,
+      4
+     ]
+    }
+   ]
+  },
+  {
+   "base_id": "smako-thai-gai-pad-nam-man-hoy",
+   "name": "Wokad kyckling i ostronsås med broccoli och svamp",
+   "servings": 4,
+   "meal_type": "dinner",
+   "cuisine": "thai",
+   "family": "wok",
+   "primary": "kyckling",
+   "method": "pan",
+   "side": "ris",
+   "flavor": [
+    "ostronsås",
+    "vitlök"
+   ],
+   "equipment": [
+    "Wok",
+    "Kastrull"
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "name": "Wok",
+     "ingredients": [
+      {
+       "name": "kyckling",
+       "form": "raw_edible",
+       "quantity": 700.0,
+       "role": "primary",
+       "requirements": [
+        "pack:chicken_breast"
+       ],
+       "label": "Kycklingbröstfilé",
+       "range": [
+        600.0,
+        1050.0
+       ],
+       "step": 50.0
+      },
+      {
+       "name": "rapsolja",
+       "form": "as_sold",
+       "quantity": 20.0,
+       "role": "cooking",
+       "label": "Rapsolja",
+       "follows": "kyckling"
+      },
+      {
+       "name": "vitlök",
+       "form": "raw_edible",
+       "quantity": 10.0,
+       "role": "flavour",
+       "label": "Vitlök",
+       "follows": "kyckling"
+      },
+      {
+       "name": "ostronsås",
+       "form": "as_sold",
+       "quantity": 40.0,
+       "role": "sauce",
+       "label": "Ostronsås"
+      },
+      {
+       "name": "sojasås",
+       "form": "as_sold",
+       "quantity": 15.0,
+       "role": "flavour",
+       "label": "Sojasås",
+       "follows": "kyckling"
+      },
+      {
+       "name": "strösocker",
+       "form": "dry",
+       "quantity": 5.0,
+       "role": "flavour",
+       "label": "Strösocker",
+       "follows": "kyckling"
+      },
+      {
+       "name": "majsstärkelse",
+       "form": "dry",
+       "quantity": 10.0,
+       "role": "sauce",
+       "label": "Majsstärkelse"
+      },
+      {
+       "name": "broccoli",
+       "form": "raw_edible",
+       "quantity": 300.0,
+       "role": "vegetable",
+       "label": "Broccoli"
+      },
+      {
+       "name": "champinjoner",
+       "form": "raw_edible",
+       "quantity": 200.0,
+       "role": "vegetable",
+       "label": "Champinjoner"
+      },
+      {
+       "name": "gul lök",
+       "form": "raw_edible",
+       "quantity": 100.0,
+       "role": "vegetable",
+       "label": "Gul lök"
+      },
+      {
+       "name": "salladslök",
+       "form": "raw_edible",
+       "quantity": 60.0,
+       "role": "vegetable",
+       "label": "Salladslök"
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "name": "Jasminris",
+     "ingredients": [
+      {
+       "name": "ris",
+       "form": "dry",
+       "quantity": 300.0,
+       "role": "side",
+       "label": "Jasminris",
+       "range": [
+        250.0,
+        350.0
+       ],
+       "step": 50.0
+      }
+     ]
+    },
+    {
+     "id": "c3",
+     "name": "Till servering",
+     "ingredients": [
+      {
+       "name": "gurka",
+       "form": "raw_edible",
+       "quantity": 150.0,
+       "role": "vegetable",
+       "label": "Gurka"
+      },
+      {
+       "name": "chiliflakes",
+       "form": "dry",
+       "quantity": 1.0,
+       "role": "flavour",
+       "label": "Chiliflakes"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "text": "Koka riset enligt förpackningen.",
+     "uses": [
+      "ris"
+     ],
+     "minutes": 20,
+     "passive": true
+    },
+    {
+     "text": "Skär kycklingen i tunna skivor och vänd med majsstärkelse. Dela broccoli och svamp och skiva löken.",
+     "uses": [
+      "kyckling",
+      "majsstärkelse",
+      "broccoli",
+      "champinjoner",
+      "gul lök"
+     ],
+     "minutes": 10
+    },
+    {
+     "text": "Fräs vitlök i olja och woka kycklingen på hög värme tills den håller 74 °C. Lägg upp.",
+     "uses": [
+      "vitlök",
+      "rapsolja",
+      "kyckling"
+     ],
+     "minutes": 7,
+     "after": [
+      2
+     ]
+    },
+    {
+     "text": "Woka broccoli, svamp och lök 4 minuter med 50 ml vatten. Lägg tillbaka kycklingen med ostronsås, soja och socker och vänd tills såsen blivit blank.",
+     "uses": [
+      "broccoli",
+      "champinjoner",
+      "gul lök",
+      "kyckling",
+      "ostronsås",
+      "sojasås",
+      "strösocker"
+     ],
+     "minutes": 6,
+     "after": [
+      3
+     ]
+    },
+    {
+     "text": "Strö över salladslök och chili och servera med ris och gurka.",
+     "uses": [
+      "salladslök",
+      "chiliflakes",
+      "ris",
+      "gurka"
+     ],
+     "minutes": 2,
+     "after": [
+      1,
+      4
+     ]
+    }
+   ]
+  }
+ ]
+}
