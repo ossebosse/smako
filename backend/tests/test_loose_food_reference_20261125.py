@@ -73,3 +73,24 @@ def test_spices_preserves_and_noodles_have_a_reference(name, label, form, source
     if protein is not None:
         assert found.nutrition["protein_g"] == pytest.approx(protein)
     assert loose.evidence(product(label), name, None, "raw_edible" if form != "raw_edible" else "dry") is None
+
+
+@pytest.mark.parametrize("name, label, kcal", [
+    ("vitt matlagningsvin", "Matlagningsvin Vitt", 69), ("rött matlagningsvin", "Rött Matlagningsvin", 74),
+    ("balsamvinäger", "Balsamvinäger di Modena", 62),
+])
+def test_cooking_wine_and_balsamic_per_100_ml(name, label, kcal):
+    found = loose.volume_evidence(product(label), name, None)
+    assert found.nutrition_unit == "ml" and found.nutrition["kcal"] == pytest.approx(kcal)
+    assert found.evidence_kind == "food_specific_density_estimate"
+    full = SimpleNamespace(conflicts=(), nutrition={"kcal": 1, "protein_g": 0, "fat_g": 0, "carbs_g": 0})
+    assert loose.volume_evidence(product(label), name, full) is None
+
+
+def test_canned_fish_uses_the_drained_reference_even_with_its_own_table():
+    table = SimpleNamespace(conflicts=(), nutrition={"kcal": 190, "protein_g": 25, "fat_g": 10, "carbs_g": 0})
+    tuna = loose.evidence(product("Tonfisk i vatten"), "tonfisk", table, "preserved_drained")
+    assert tuna.source_product_id == "slv:1278"
+    assert loose.evidence(product("Tonfisk i olja"), "tonfisk", table, "preserved_drained").source_product_id == "slv:1275"
+    assert loose.evidence(product("Saltgurka"), "saltgurka", None, "preserved_drained").source_product_id == "slv:490"
+    assert loose.evidence(product("Tonfisk i vatten"), "tonfisk", table, "raw_edible") is None

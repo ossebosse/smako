@@ -97,6 +97,11 @@ _RULES = {
     "vitpeppar": lambda l: "mvt:vitpeppar",
     "senapsfrön": lambda l: "mvt:senapsfrön",
     "citrongräs": lambda l: "usda:citrongräs",
+    "vitt matlagningsvin": lambda l: "mvt:vitt vin",
+    "vitt vin": lambda l: "mvt:vitt vin",
+    "rött matlagningsvin": lambda l: "mvt:rött vin",
+    "rött vin": lambda l: "mvt:rött vin",
+    "balsamvinäger": lambda l: "mvt:balsamvinäger",
     "breda risnudlar": lambda l: 4447,
     "risvermicelli": lambda l: 4447,
     "runda risnudlar": lambda l: 4447,
@@ -105,6 +110,7 @@ _RULES = {
     "sardeller": lambda l: 1270,
     "bambuskott": lambda l: 393,
     "surkål": lambda l: 406,
+    "saltgurka": lambda l: 490,
     "vattenkastanjer": lambda l: 4042,
     "tonfisk": lambda l: 1275 if "olja" in l else 1278,
     "sardiner": lambda l: 1272 if "tomat" in l else 1271,
@@ -114,7 +120,7 @@ _RULES = {
 # The recipe input form each non-SLV entry describes.
 _EXTERNAL_FORMS = {"salladslök": "raw_edible", "schalottenlök": "raw_edible", "chilipulver": "dry", "karri": "dry",
                    "kapris": "preserved_drained", "currypasta": "as_sold", "vitpeppar": "dry", "senapsfrön": "dry",
-                   "citrongräs": "as_sold"}
+                   "citrongräs": "as_sold", "vitt vin": "as_sold", "rött vin": "as_sold", "balsamvinäger": "as_sold"}
 
 
 def identity(name, product_label):
@@ -156,8 +162,13 @@ def incomplete_table(fact):
 
 
 def evidence(product, name, fact, form):
-    """Unwrapped per-100 g evidence for a plain loose food, or None."""
-    if fact and (fact.conflicts or (fact.nutrition and not incomplete_table(fact))):
+    """Unwrapped per-100 g evidence for a plain loose food, or None.
+
+    A preserve's own table may describe the contents with their liquid, so for
+    drained grams the generic drained reference is used even when it has one.
+    """
+    own_table = fact and fact.nutrition and not incomplete_table(fact)
+    if fact and (fact.conflicts or (own_table and form != "preserved_drained")):
         return None
     ident = identity(name, product.name)
     if ident is None:
@@ -174,3 +185,30 @@ def evidence(product, name, fact, form):
     if state not in compatible.get(form, set()):
         return None
     return reference_evidence(ident)
+
+
+def volume_evidence(product, name, fact):
+    """Per-100 ml evidence for a plain liquid with a published weight per dl, or None."""
+    if fact and (fact.conflicts or (fact.nutrition and not incomplete_table(fact))):
+        return None
+    ident = identity(name, product.name)
+    if not isinstance(ident, str) or not ident.startswith("mvt:"):
+        return None
+    key = ident.split(":", 1)[1]
+    row = _external("mvt").get("density", {}).get(key)
+    if row is None or _EXTERNAL_FORMS.get(key) != "as_sold":
+        return None
+    if row["unit"] != "g/ml" or not 0 < row["value"] < 2:
+        raise ValueError("Invalid reviewed density")
+    from dataclasses import replace
+
+    base = _external_evidence("mvt", key)
+    transformation = {"kind": "food_specific_density_estimate", "source": _external("mvt")["attribution"],
+                      "source_url": row["source_url"], "acquisition": _external("mvt")["acquisition"],
+                      "food_id": row["food_id"], "description": row["description"], "density_g_per_ml": row["value"],
+                      "original_nutrition": dict(base.nutrition),
+                      "operation": "source_per_100_g * reference_density_g_per_ml", "purchase_quantity_changed": False}
+    return replace(base, nutrition={k: v * row["value"] for k, v in base.nutrition.items()}, nutrition_unit="ml",
+                   evidence_kind="food_specific_density_estimate",
+                   nutrition_basis=base.nutrition_basis + " Uppskattat per 100 ml med vikt per dl från Matvaretabellen.",
+                   field_sources={k: (*v, transformation) for k, v in base.field_sources.items()})

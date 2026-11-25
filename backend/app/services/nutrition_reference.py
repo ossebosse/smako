@@ -144,6 +144,7 @@ MAPPINGS = {
     1908: ("vin vitt 12 %", "ready"), 1907: ("vin rött 14 %", "ready"), 4447: ("risnudlar", "dry"),
     705: ("korngryn", "dry"), 1270: ("sardeller", "preserved_drained"), 393: ("bambuskott", "drained"),
     406: ("surkål", "preserved_drained"), 4042: ("vattenkastanjer", "drained"),
+    490: ("saltgurka", "preserved_drained"),
 }
 # Optional data availability is explicit for isolated same-facts comparisons.
 # Deployed reference files are immutable and included in content_version below.

@@ -85,9 +85,17 @@ def source_qualified(method, product, fact, candidate=None):
 
 
 def nutrition(method, name, product_id):
-    # The experiment establishes a leaf-only yield example, no qualified
-    # macro values for those leaves. Generic herb nutrients cannot supply it.
-    return egg.nutrition(name, product_id) if method == egg.METHOD else None
+    if method == egg.METHOD:
+        return egg.nutrition(name, product_id)
+    if method == MINT_LEAVES and name == 'mynta':
+        # Owner request 2026-11-25: the picked leaves use Livsmedelsverket's
+        # analysed spearmint leaves (7194, "Grönmynta blad") per 100 g leaf.
+        from dataclasses import replace
+
+        from app.services.nutrition_reference import reference_evidence
+
+        return replace(reference_evidence(7194), ingredient='mynta')
+    return None
 
 
 def stock_name(method, component):

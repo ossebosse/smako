@@ -389,6 +389,10 @@ def input_evidence(recipe, product, name, unit, qualified, fact, *, recipe_cache
         from app.services.recipe_volume_nutrition import volume_evidence
 
         evidence = volume_evidence(product, name, fact)
+        if evidence is None:
+            from app.services.loose_food_reference import volume_evidence as loose_volume
+
+            evidence = loose_volume(product, name, fact)
     plain_salt_reference = (
         canonical(name) == 'salt' and form == 'as_sold' and unit == 'g'
         and product_reference(product, name, fact) == 1975
