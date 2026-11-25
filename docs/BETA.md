@@ -1,3 +1,12 @@
+# 2026-11-25 kväll: 145 nya middagar med kött, fisk och kyckling
+
+Main `e9c6af1`, releasegren `release/protein-dinners-20261125`. App
+**app-868cb9b93f81-bffcde1f**, bas `6a22c077aae2`. 60 kött-, 48 fisk- och 37
+kycklingmiddagar i sex kök, skalbara för näringsmål, köpbara i Lund och Malmö.
+[Aktiveringsjournal](releases/protein-dinners-20261125/ACTIVATED.md).
+
+---
+
 # 2026-11-25: Flexrätter – Smako justerar mängder för näringsmål
 
 Main `4334dbf`, releasegren `release/flex-dinners-20261125`. App
