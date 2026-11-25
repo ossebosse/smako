@@ -5,8 +5,11 @@ vegetables and herbs (sallad, salladslök, rädisor, mynta...) usually publish
 no nutrition table. Before this, a dinner with such an input could never be
 planned under a nutrition limit. The owner decided that Smako uses a public
 food composition reference for them, also for limits: Livsmedelsverket's
-database, and Matvaretabellen where Livsmedelsverket has no entry
-(salladslök, schalottenlök). The plan marks these values as estimated.
+database, Matvaretabellen where Livsmedelsverket has no entry (salladslök,
+schalottenlök, dried chili, curry powder and paste, capers, white pepper,
+mustard seed) and USDA FoodData Central for lemongrass. Garam masala uses
+Matvaretabellen's ground curry powder, the nearest spice blend. The plan marks
+these values as estimated.
 
 Only a plain food qualifies: a product with its own table, a contradictory
 table, or a label that says it is a different food (marinated, breaded,
@@ -25,8 +28,8 @@ from app.services.ingredient_normalizer import canonicalize_ingredient_name
 POLICY_VERSION = "loose-food-reference-20261125"
 _DATA = Path(__file__).parents[1] / "data/nutrition"
 _OTHER_FOOD = re.compile(
-    r"marinerad|panerad|grillad|rökt|gravad|kryddad|färdigrätt|färdig|röra\b|sås\b|soppa|gratäng|kokt|stekt|"
-    r"inlagd|konserv|torkad|pulver|chips|burgare|korv|bacon|kebab|pulled|sous vide|tillagad")
+    r"marinerad|panerad|grillad|rökt|gravad|kryddad|färdigrätt|färdig|röra\b|sås\b|dressing|soppa|gratäng|kokt|stekt|"
+    r"chips|burgare|korv|bacon|kebab|pulled|sous vide|tillagad")
 
 
 def _first(label, rules, default):
@@ -86,7 +89,32 @@ _RULES = {
     "mynta": lambda l: 7194,
     "salladslök": lambda l: "mvt:salladslök",
     "schalottenlök": lambda l: "mvt:schalottenlök",
+    "chiliflakes": lambda l: "mvt:chilipulver",
+    "anchochili": lambda l: "mvt:chilipulver",
+    "garam masala": lambda l: "mvt:karri",
+    "kapris": lambda l: "mvt:kapris",
+    "röd currypasta": lambda l: "mvt:currypasta",
+    "vitpeppar": lambda l: "mvt:vitpeppar",
+    "senapsfrön": lambda l: "mvt:senapsfrön",
+    "citrongräs": lambda l: "usda:citrongräs",
+    "breda risnudlar": lambda l: 4447,
+    "risvermicelli": lambda l: 4447,
+    "runda risnudlar": lambda l: 4447,
+    "kornris": lambda l: 705,
+    "korngryn": lambda l: 705,
+    "sardeller": lambda l: 1270,
+    "bambuskott": lambda l: 393,
+    "surkål": lambda l: 406,
+    "vattenkastanjer": lambda l: 4042,
+    "tonfisk": lambda l: 1275 if "olja" in l else 1278,
+    "sardiner": lambda l: 1272 if "tomat" in l else 1271,
+    "mozzarella": lambda l: 2255,
+    "parmesan": lambda l: 103,
 }
+# The recipe input form each non-SLV entry describes.
+_EXTERNAL_FORMS = {"salladslök": "raw_edible", "schalottenlök": "raw_edible", "chilipulver": "dry", "karri": "dry",
+                   "kapris": "preserved_drained", "currypasta": "as_sold", "vitpeppar": "dry", "senapsfrön": "dry",
+                   "citrongräs": "as_sold"}
 
 
 def identity(name, product_label):
@@ -98,16 +126,19 @@ def identity(name, product_label):
     return rule(label) if rule else None
 
 
-@lru_cache(maxsize=1)
-def _matvaretabellen():
-    return json.loads((_DATA / "matvaretabellen-20261125-loose.json").read_bytes())
+_FILES = {"mvt": "matvaretabellen-20261125-loose.json", "usda": "usda-20261125-loose.json"}
+
+
+@lru_cache(maxsize=4)
+def _external(prefix):
+    return json.loads((_DATA / _FILES[prefix]).read_bytes())
 
 
 @lru_cache(maxsize=64)
-def _matvaretabellen_evidence(key):
+def _external_evidence(prefix, key):
     from app.services.nutrition_reference import NutritionEvidence
 
-    source = _matvaretabellen()
+    source = _external(prefix)
     row = source["foods"][key]
     proof = {"kind": "generic_reference", "policy": POLICY_VERSION, "food_id": row["food_id"],
              "description": row["description"], "source_url": row["source_url"],
@@ -119,20 +150,27 @@ def _matvaretabellen_evidence(key):
                              field_sources={f"nutrition.{k}": (proof,) for k in row["nutrition"]}, ingredient=key)
 
 
+def incomplete_table(fact):
+    """A product table that lacks one of the four macros counts as no table here."""
+    return bool(fact and fact.nutrition and not {"kcal", "protein_g", "fat_g", "carbs_g"} <= fact.nutrition.keys())
+
+
 def evidence(product, name, fact, form):
     """Unwrapped per-100 g evidence for a plain loose food, or None."""
-    if fact and (fact.conflicts or fact.nutrition):
+    if fact and (fact.conflicts or (fact.nutrition and not incomplete_table(fact))):
         return None
     ident = identity(name, product.name)
     if ident is None:
         return None
     if isinstance(ident, str):
-        return _matvaretabellen_evidence(ident.split(":", 1)[1]) if form == "raw_edible" else None
+        prefix, key = ident.split(":", 1)
+        return _external_evidence(prefix, key) if _EXTERNAL_FORMS.get(key) == form else None
     from app.services.nutrition_reference import MAPPINGS, reference_evidence
 
     state = MAPPINGS.get(ident, (None, None))[1]
     compatible = {"raw_edible": {"raw", "raw_skinless_breast", "raw_cod", "raw_farmed"},
-                  "as_sold": {"frozen", "ready"}, "cooked_drained": {"drained"}}
+                  "as_sold": {"frozen", "ready"}, "dry": {"dry"}, "cooked_drained": {"drained"},
+                  "preserved_drained": {"preserved_drained", "drained"}}
     if state not in compatible.get(form, set()):
         return None
     return reference_evidence(ident)

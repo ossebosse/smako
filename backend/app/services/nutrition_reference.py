@@ -141,6 +141,9 @@ MAPPINGS = {
     332: ("gröna bönor", "frozen"), 380: ("chilipeppar", "raw"), 320: ("avokado", "raw"),
     550: ("ananas", "raw"), 345: ("majskolv", "raw"), 342: ("kronärtskocka", "raw"),
     359: ("sockerärtor", "raw"), 329: ("mungbönsgroddar", "raw"), 4942: ("mangold", "raw"),
+    1908: ("vin vitt 12 %", "ready"), 1907: ("vin rött 14 %", "ready"), 4447: ("risnudlar", "dry"),
+    705: ("korngryn", "dry"), 1270: ("sardeller", "preserved_drained"), 393: ("bambuskott", "drained"),
+    406: ("surkål", "preserved_drained"), 4042: ("vattenkastanjer", "drained"),
 }
 # Optional data availability is explicit for isolated same-facts comparisons.
 # Deployed reference files are immutable and included in content_version below.

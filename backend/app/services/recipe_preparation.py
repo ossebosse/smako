@@ -373,7 +373,13 @@ def input_evidence(recipe, product, name, unit, qualified, fact, *, recipe_cache
             # Its own table may describe the contents with liquid, so nutrition
             # for the recipe's drained grams comes only from the generic drained
             # reference below, never from the supplier's table.
-            if not (form == "cooked_drained" and unit == "g" and (drained_mass or package_weight_drained(product, fact))):
+            # Owner decision 2026-11-25: a plain canned food without a drained
+            # declaration (capers, anchovies, bamboo shoots...) uses its reference.
+            from app.services.loose_food_reference import identity as loose_identity
+
+            loose_preserve = form == "preserved_drained" and unit == "g" and loose_identity(name, product.name) is not None
+            if not (form == "cooked_drained" and unit == "g" and (drained_mass or package_weight_drained(product, fact))) \
+                    and not loose_preserve:
                 return None
             generic_drained, qualified = True, False
         else:
@@ -398,10 +404,14 @@ def input_evidence(recipe, product, name, unit, qualified, fact, *, recipe_cache
         and not {"kcal", "protein_g", "fat_g", "carbs_g"} <= fact.nutrition.keys()
         and product_reference(product, name, fact) is not None
     )
+    from app.services.loose_food_reference import incomplete_table, identity as loose_identity
+
+    loose_partial = incomplete_table(fact) and loose_identity(name, product.name) is not None
     if evidence is None:
         if unit != "g" or (fact and fact.nutrition and not (
             form == "cooked_drained" and fact.nutrition_preparation == "draining_unspecified"
-        ) and not generic_drained and not partial_reference and not plain_salt_reference and not drained_olive_reference):
+        ) and not generic_drained and not partial_reference and not plain_salt_reference and not drained_olive_reference
+                and not loose_partial):
             return None
         if form == "cooked_drained":
             # Origin, organic certification and percentages are not ingredients.
