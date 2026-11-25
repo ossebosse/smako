@@ -57,7 +57,8 @@ def test_every_ingredient_field_changes_exact_key_without_rounding(field):
     updates = {"name": ingredient.name + " ändrad", "quantity": ingredient.quantity + 1e-10,
         "unit": "kg", "canonical_name": "ändrad", "form": "as_sold", "component": "annan",
         "required": not ingredient.required, "role": "cooking", "quantity_min": .125,
-        "quantity_max": 99999, "quantity_step": .125, "product_requirements": ("annan",)}
+        "quantity_max": 99999, "quantity_step": .125, "product_requirements": ("annan",),
+        "scales_with": "annan|raw_edible"}
     assert set(updates) == set(RecipeIngredient.model_fields)
     assert updates[field] != getattr(ingredient, field)
     recipe.ingredients[0] = ingredient.model_copy(update={field: updates[field]})

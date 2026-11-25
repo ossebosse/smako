@@ -159,6 +159,9 @@ class RecipeIngredient(BaseModel):
     quantity_max: float | None = Field(default=None, gt=0, exclude_if=lambda v: v is None)
     quantity_step: float | None = Field(default=None, gt=0, exclude_if=lambda v: v is None)
     product_requirements: tuple[str, ...] | None = Field(default=None, exclude_if=lambda v: v is None)
+    # Owner decision 2026-11-25: a seasoning, marinade or cooking fat that goes with a
+    # scalable main ingredient ("canonical|form") scales with it (scalable_recipes.py).
+    scales_with: str | None = Field(default=None, min_length=3, max_length=160, exclude_if=lambda v: v is None)
 
 
 class Recipe(BaseModel):

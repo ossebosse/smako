@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -75,3 +76,27 @@ def test_only_meals_with_nutrition_limits_get_scaled_recipes():
     assert sr.nutrition_limited(SimpleNamespace(limits=PortionLimits(min_protein_g=35)))
     assert sr.nutrition_limited(SimpleNamespace(limits=PortionLimits(max_kcal=700)))
     assert PlanningRules().scaled_step_kr == 2
+
+
+def test_seasonings_follow_the_main_ingredient_only_in_its_component():
+    """Owner decision 2026-11-25."""
+    from app.services.recipe_authoring import standardize
+    from backend.tests.test_recipe_authoring import VOCABULARY, _source
+
+    source = _source()
+    for component in source["recipes"][0]["components"]:
+        for item in component["ingredients"]:
+            if component["id"] == "c1" and item["name"] in ("citronjuice", "vitlök", "salt"):
+                item["follows"] = "kyckling"
+    pack, _ = standardize(source, VOCABULARY, reviewed_at="2026-11-25")
+    [recipe] = validate_pack_bytes(json.dumps(pack).encode())["recipes"]
+    more = max(sr.scaled_versions(recipe), key=lambda s: {i.name: i.quantity for i in s.ingredients}["kyckling"])
+    _structural_check(more)
+    before = {i.name: i.quantity for i in recipe.ingredients}
+    after = {i.name: i.quantity for i in more.ingredients}
+    factor = after["kyckling"] / before["kyckling"]
+    assert after["citronjuice"] == pytest.approx(before["citronjuice"] * factor, abs=0.5)
+    assert after["vitlök"] == pytest.approx(before["vitlök"] * factor, abs=0.5)
+    assert after["rapsolja"] == before["rapsolja"] and after["oregano"] == before["oregano"]  # not followers
+    salt_c1 = next(a.quantity for c in recipe.design.components if c.id == "c1" for a in c.amounts if a.ingredient_key == "salt|as_sold")
+    assert after["salt"] == pytest.approx(before["salt"] + salt_c1 * (factor - 1), abs=0.5)

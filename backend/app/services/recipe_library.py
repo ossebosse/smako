@@ -73,6 +73,12 @@ def _structural_check(recipe: Recipe) -> None:
             raise ValueError("Ingrediensen saknar godkänt mängdintervall.")
         if not i.quantity_min <= i.quantity <= i.quantity_max:
             raise ValueError("Mängden ligger utanför receptets godkända intervall.")
+        if i.scales_with is not None:
+            # Owner decision 2026-11-25: a seasoning follows a scalable main ingredient.
+            main = next((m for m in recipe.ingredients if f"{m.canonical_name}|{m.form}" == i.scales_with), None)
+            if (i.role not in {"flavour", "cooking", "sauce"} or main is None or main.role not in {"primary", "side"}
+                    or not main.quantity_min < main.quantity_max):
+                raise ValueError("En medföljande ingrediens måste följa en skalbar huvudråvara.")
     if d.content_source is not None or any(c.amounts for c in d.components):
         totals: dict[str, float] = {}
         units = {ingredient_key(i): i.unit for i in recipe.ingredients}

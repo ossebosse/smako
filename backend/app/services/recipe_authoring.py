@@ -175,6 +175,8 @@ def standardize(source, vocabulary, *, reviewed_at):
                     raise ValueError(f"{where}: {key} får inte tappa granskade produktkrav")
                 quantity = float(item["quantity"])
                 scale = _scale_range(item, quantity, unit, where, key)
+                if "follows" in item and item["role"] not in {"flavour", "cooking", "sauce"}:
+                    raise ValueError(f"{where}: {key} med rollen {item['role']} kan inte följa huvudråvaran")
                 amounts.append({"ingredient_key": key, "name": item.get("label", canonical),
                                 "note": item.get("note", ""), "quantity": quantity, "unit": unit})
                 seen_before = key in lines
@@ -196,9 +198,36 @@ def standardize(source, vocabulary, *, reviewed_at):
                                      "ange samma krav eller dela upp till olika former")
                 line["quantity"] += quantity
             components.append({"id": component["id"], "name": component["name"], "amounts": amounts})
+        # Owner decision 2026-11-25: seasonings that follow a scalable main ingredient.
+        by_name = {canonicalize_ingredient_name(i["name"]): (c["id"], i) for c in row["components"] for i in c["ingredients"]}
+        for component in row["components"]:
+            for item in component["ingredients"]:
+                if "follows" not in item:
+                    continue
+                target = by_name.get(canonicalize_ingredient_name(item["follows"]))
+                main_key = target and f"{canonicalize_ingredient_name(target[1]['name'])}|{target[1]['form']}"
+                if not target or target[0] != component["id"] or not lines[main_key].get("_range"):
+                    raise ValueError(f"{where}: {item['name']} följer {item['follows']!r}, som måste vara en skalbar "
+                                     "huvudråvara i samma komponent")
+                key = f"{canonicalize_ingredient_name(item['name'])}|{item['form']}"
+                low, high, _ = lines[main_key]["_range"]
+                main_q = float(target[1]["quantity"])
+                share = float(item["quantity"])
+                line = lines[key]
+                line["scales_with"] = main_key
+                line["_follow"] = (share * (low / main_q - 1), share * (high / main_q - 1))
         ingredients = []
         for line in lines.values():
             q = round(line["quantity"], 4)
+            follow = line.pop("_follow", None)
+            if follow:
+                from app.services.scalable_recipes import follower_amount
+                lo, hi = follower_amount(q + follow[0]), follower_amount(q + follow[1])
+                line.update(quantity=q, quantity_min=min(lo, q), quantity_max=max(hi, q), quantity_step=0.5)
+                if not line["product_requirements"]:
+                    line.pop("product_requirements")
+                ingredients.append(line)
+                continue
             scale = line.pop("_range", None)
             if scale:
                 line.update(quantity=q, quantity_min=scale[0], quantity_max=scale[1], quantity_step=scale[2])

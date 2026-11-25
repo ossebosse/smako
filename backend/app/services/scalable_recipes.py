@@ -9,6 +9,11 @@ nutrition and price checks treat them like any other recipe. Planning offers
 them only to a meal with nutrition limits (``recipe_library.meal_candidates``)
 and prefers the closest one (``PlanningRules.scaled_step_kr`` per grid step).
 Step texts are reviewed for the whole range and are not changed.
+
+Owner decision 2026-11-25: an ingredient with ``scales_with`` (seasoning,
+marinade, cooking fat used with the main ingredient) follows it. Only its
+amount in the components that hold the main ingredient scales, by the same
+factor, so salt shared with a side stays right for the side.
 """
 
 from __future__ import annotations
@@ -69,21 +74,53 @@ def scaled_versions(recipe):
     return result
 
 
+def follower_amount(value):
+    """Round a scaled seasoning to what a cook measures."""
+    precision = 0.5 if value < 10 else 1.0 if value < 100 else 5.0
+    return max(precision, round(round(value / precision) * precision, 4))
+
+
 def _scaled_copy(recipe, changed, content_hash):
     d = recipe.design
-    ratio = {}
-    ingredients, steps = [], 0
+    ratio, steps = {}, 0
     for i in recipe.ingredients:
         if i.name in changed:
-            q = changed[i.name]
-            ratio[f"{i.canonical_name}|{i.form}"] = q / i.quantity
-            steps += round(abs(q - i.quantity) / (i.quantity_step or 1.0))
-            ingredients.append(i.model_copy(update={"quantity": q}))
+            ratio[f"{i.canonical_name}|{i.form}"] = changed[i.name] / i.quantity
+            steps += round(abs(changed[i.name] - i.quantity) / (i.quantity_step or 1.0))
+    # Followers scale only in the components that hold the main ingredient they follow.
+    holders = {key: {c.id for c in d.components if any(a.ingredient_key == key for a in c.amounts)} for key in ratio}
+    new_amounts = {}
+    for c in d.components:
+        for n, a in enumerate(c.amounts):
+            if a.ingredient_key in ratio:
+                new_amounts[(c.id, n)] = round(a.quantity * ratio[a.ingredient_key], 6)
+    for i in recipe.ingredients:
+        key = f"{i.canonical_name}|{i.form}"
+        if i.scales_with in ratio and key not in ratio:
+            for c in d.components:
+                if c.id not in holders[i.scales_with]:
+                    continue
+                for n, a in enumerate(c.amounts):
+                    if a.ingredient_key == key:
+                        new_amounts[(c.id, n)] = follower_amount(a.quantity * ratio[i.scales_with])
+    components = tuple(c.model_copy(update={"amounts": tuple(
+        a.model_copy(update={"quantity": new_amounts[(c.id, n)]}) if (c.id, n) in new_amounts else a
+        for n, a in enumerate(c.amounts))}) for c in d.components)
+    totals = {}
+    for c in components:
+        for a in c.amounts:
+            totals[a.ingredient_key] = totals.get(a.ingredient_key, 0.0) + a.quantity
+    ingredients = []
+    for i in recipe.ingredients:
+        key = f"{i.canonical_name}|{i.form}"
+        if i.name in changed:
+            ingredients.append(i.model_copy(update={"quantity": changed[i.name]}))
+        elif i.scales_with in ratio and key in totals and abs(totals[key] - i.quantity) > 1e-9:
+            q = round(totals[key], 6)
+            ingredients.append(i.model_copy(update={"quantity": q, "quantity_min": min(i.quantity_min or q, q),
+                                                    "quantity_max": max(i.quantity_max or q, q)}))
         else:
             ingredients.append(i)
-    components = tuple(c.model_copy(update={"amounts": tuple(
-        a.model_copy(update={"quantity": round(a.quantity * ratio[a.ingredient_key], 6)})
-        if a.ingredient_key in ratio else a for a in c.amounts)}) for c in d.components)
     main = next((i for i in recipe.ingredients if i.role == "primary" and i.name in changed), None)
     side = next((i for i in recipe.ingredients if i.role == "side" and i.name in changed), None)
     tag = f"m{round(100 * changed[main.name] / main.quantity) if main else 100}s{round(100 * changed[side.name] / side.quantity) if side else 100}"

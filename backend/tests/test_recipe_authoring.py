@@ -190,3 +190,32 @@ def test_a_dinner_without_a_scalable_main_ingredient_is_flagged():
     source = _fixed_source()
     _, report = standardize(source, VOCABULARY, reviewed_at="2026-11-24")
     assert any("Skalbar mängd" in w for w in report[0]["warnings"]) and report[0]["scalable"] == []
+
+
+# Owner decision 2026-11-25: seasonings that go with the main ingredient scale with it.
+def _with_followers():
+    source = _source()
+    for name in ("citronjuice", "oregano", "vitlök", "salt"):
+        _item(source, name)["follows"] = "kyckling"
+    return source
+
+
+def test_followers_get_a_range_that_follows_the_main_ingredient():
+    pack, report = standardize(_with_followers(), VOCABULARY, reviewed_at="2026-11-25")
+    assert validate_pack_bytes(json.dumps(pack).encode())["rejections"] == []
+    lines = {i["name"]: i for i in pack["recipes"][0]["ingredients"]}
+    lemon = lines["citronjuice"]  # 15 ml with 300 g chicken; chicken 240-420 g
+    assert lemon["scales_with"] == "kyckling|raw_edible"
+    assert (lemon["quantity"], lemon["quantity_min"], lemon["quantity_max"]) == (15, 12, 21)
+    assert "scales_with" not in lines["rapsolja"]
+
+
+def test_only_seasonings_in_the_main_component_can_follow():
+    source = _with_followers()
+    _item(source, "potatis")["follows"] = "kyckling"
+    with pytest.raises(ValueError, match="kan inte följa"):
+        standardize(source, VOCABULARY, reviewed_at="2026-11-25")
+    source = _with_followers()
+    _item(source, "dill")["follows"] = "kyckling"  # the tzatziki, another component
+    with pytest.raises(ValueError, match="samma komponent"):
+        standardize(source, VOCABULARY, reviewed_at="2026-11-25")
