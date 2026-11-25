@@ -94,3 +94,13 @@ def test_canned_fish_uses_the_drained_reference_even_with_its_own_table():
     assert loose.evidence(product("Tonfisk i olja"), "tonfisk", table, "preserved_drained").source_product_id == "slv:1275"
     assert loose.evidence(product("Saltgurka"), "saltgurka", None, "preserved_drained").source_product_id == "slv:490"
     assert loose.evidence(product("Tonfisk i vatten"), "tonfisk", table, "raw_edible") is None
+
+
+def test_tuna_cooked_drained_and_pet_food_and_whole_lemongrass():
+    table = SimpleNamespace(conflicts=(), nutrition={"kcal": 110, "protein_g": 25, "fat_g": 1, "carbs_g": 0})
+    assert loose.evidence(product("Tonfisk i vatten"), "tonfisk", table, "cooked_drained").source_product_id == "slv:1278"
+    assert loose.identity("tonfisk", "Kattmat Mousse Tonfisk") is None
+    assert loose.identity("tonfisk", "Tonfiskpastej") is None
+    stalks = loose.gross_flavouring_evidence(product("Citrongräs"), "citrongräs", None, "as_sold")
+    assert stalks.nutrition["kcal"] == pytest.approx(99) and "övre gräns" in stalks.nutrition_basis
+    assert loose.gross_flavouring_evidence(product("Grytbitar Nöt"), "nötkött", None, "raw_edible") is None

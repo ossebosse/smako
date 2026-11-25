@@ -29,7 +29,7 @@ POLICY_VERSION = "loose-food-reference-20261125"
 _DATA = Path(__file__).parents[1] / "data/nutrition"
 _OTHER_FOOD = re.compile(
     r"marinerad|panerad|grillad|rökt|gravad|kryddad|färdigrätt|färdig|röra\b|sås\b|dressing|soppa|gratäng|kokt|stekt|"
-    r"chips|burgare|korv|bacon|kebab|pulled|sous vide|tillagad")
+    r"chips|burgare|korv|bacon|kebab|pulled|sous vide|tillagad|kattmat|hundmat|blötmat|pastej|baguette")
 
 
 def _first(label, rules, default):
@@ -168,7 +168,8 @@ def evidence(product, name, fact, form):
     drained grams the generic drained reference is used even when it has one.
     """
     own_table = fact and fact.nutrition and not incomplete_table(fact)
-    if fact and (fact.conflicts or (own_table and form != "preserved_drained")):
+    drained = form in {"preserved_drained", "cooked_drained"}
+    if fact and ((fact.conflicts and not drained) or (own_table and not drained)):
         return None
     ident = identity(name, product.name)
     if ident is None:
@@ -212,3 +213,21 @@ def volume_evidence(product, name, fact):
                    evidence_kind="food_specific_density_estimate",
                    nutrition_basis=base.nutrition_basis + " Uppskattat per 100 ml med vikt per dl från Matvaretabellen.",
                    field_sources={k: (*v, transformation) for k, v in base.field_sources.items()})
+
+
+# Flavourings bought whole and removed before eating. Their gross mass has no
+# reviewed edible yield; the reference over the whole bought mass is an upper
+# bound of a few kcal per portion.
+GROSS_FLAVOURINGS = frozenset({"citrongräs"})
+
+
+def gross_flavouring_evidence(product, name, fact, form):
+    from dataclasses import replace
+
+    if canonicalize_ingredient_name(name) not in GROSS_FLAVOURINGS:
+        return None
+    found = evidence(product, name, fact, form)
+    if found is None:
+        return None
+    return replace(found, nutrition_basis=found.nutrition_basis
+                   + " Räknat på hela inköpta vikten; det mesta tas bort före servering (övre gräns).")

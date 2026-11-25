@@ -283,7 +283,14 @@ def input_evidence(recipe, product, name, unit, qualified, fact, *, recipe_cache
     from app.services.nutrition_reference import product_reference, reference_evidence
 
     if gross_purchase_input(recipe, canonical(name)):
-        return None
+        # Owner request 2026-11-25: whole lemongrass stalks are flavouring.
+        from app.services.loose_food_reference import gross_flavouring_evidence
+
+        if (recipe.preparation is None or unit != "g" or has_unmeasured_process(recipe)
+                or not (validate(recipe) if recipe_cache is None else recipe_cache.get(recipe, validate))):
+            return None
+        found = gross_flavouring_evidence(product, name, fact, recipe.preparation.input_forms.get(canonical(name)))
+        return None if found is None else wrap_evidence(recipe, name, found)
 
     # Only the exact recipe's pure preparation validation is reusable. Product
     # identity, source, input form, units and nutrient qualification below still
@@ -377,7 +384,7 @@ def input_evidence(recipe, product, name, unit, qualified, fact, *, recipe_cache
             # declaration (capers, anchovies, bamboo shoots...) uses its reference.
             from app.services.loose_food_reference import identity as loose_identity
 
-            loose_preserve = form == "preserved_drained" and unit == "g" and loose_identity(name, product.name) is not None
+            loose_preserve = unit == "g" and loose_identity(name, product.name) is not None
             if not (form == "cooked_drained" and unit == "g" and (drained_mass or package_weight_drained(product, fact))) \
                     and not loose_preserve:
                 return None
