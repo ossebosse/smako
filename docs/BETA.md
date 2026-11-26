@@ -1,3 +1,14 @@
+# 2026-11-26: grönsaksfond, kycklingveckor och 90 nya middagar
+
+Main `def6e2b`, releasegren `release/varied-proteins-20261126`. App
+**app-72815cacaa24-bdd50ebd**, bas `3a58ee0fba39`. Touch of Taste-fond köps i
+alla butiker med näring enligt tillverkarens dosering. Fem kycklingmiddagar
+gav förut ingen meny; nu går det och veckan måste variera i tillagning.
+90 nya middagar (36 kyckling, 26 kött, 28 fisk/skaldjur).
+[Aktiveringsjournal](releases/varied-proteins-20261126/ACTIVATED.md).
+
+---
+
 # 2026-11-25 natt: Näringsvärden för lösvikt, burkar och kryddor
 
 Main `ac3b789`, releasegren `release/loose-food-20261125`. App
