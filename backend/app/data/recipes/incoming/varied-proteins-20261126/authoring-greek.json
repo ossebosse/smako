@@ -1,0 +1,7116 @@
+{
+ "schema_version": "smako-meal-pack-v1",
+ "pack_id": "smako-varied-proteins-greek-20261126",
+ "recipes": [
+  {
+   "name": "Kotopoulo souvlaki – kycklingspett med pitabröd, tzatziki och tomatsallad",
+   "servings": 4,
+   "ingredients": [
+    {
+     "name": "kyckling",
+     "canonical_name": "kyckling",
+     "quantity": 650.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "primary",
+     "product_requirements": [
+      "pack:chicken_thigh"
+     ],
+     "quantity_min": 550.0,
+     "quantity_max": 950.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "olivolja",
+     "canonical_name": "olivolja",
+     "quantity": 30.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "cooking",
+     "product_requirements": [
+      "pack:intake_all_expansion_86ac9b2c5ae6"
+     ],
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 25.0,
+     "quantity_max": 44.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "citronjuice",
+     "canonical_name": "citronjuice",
+     "quantity": 25.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pure_juice"
+     ],
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 21.0,
+     "quantity_max": 37.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "oregano",
+     "canonical_name": "oregano",
+     "quantity": 2.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "dried_leaf"
+     ],
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 1.5,
+     "quantity_max": 3.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "vitlök",
+     "canonical_name": "vitlök",
+     "quantity": 15.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 13.0,
+     "quantity_max": 20.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 6.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 5.0,
+     "quantity_max": 9.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "svartpeppar",
+     "canonical_name": "svartpeppar",
+     "quantity": 1.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:black_pepper"
+     ],
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 1.0,
+     "quantity_max": 1.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "yoghurt naturell",
+     "canonical_name": "yoghurt naturell",
+     "quantity": 300.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "sauce",
+     "product_requirements": [
+      "plain",
+      "thick"
+     ],
+     "quantity_min": 300.0,
+     "quantity_max": 300.0,
+     "quantity_step": 300.0
+    },
+    {
+     "name": "gurka",
+     "canonical_name": "gurka",
+     "quantity": 200.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 200.0,
+     "quantity_max": 200.0,
+     "quantity_step": 200.0
+    },
+    {
+     "name": "dill",
+     "canonical_name": "dill",
+     "quantity": 10.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 10.0,
+     "quantity_max": 10.0,
+     "quantity_step": 10.0
+    },
+    {
+     "name": "bröd",
+     "canonical_name": "bröd",
+     "quantity": 320.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c3",
+     "required": true,
+     "role": "side",
+     "quantity_min": 320.0,
+     "quantity_max": 320.0,
+     "quantity_step": 320.0
+    },
+    {
+     "name": "tomat",
+     "canonical_name": "tomat",
+     "quantity": 250.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c3",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 250.0,
+     "quantity_max": 250.0,
+     "quantity_step": 250.0
+    },
+    {
+     "name": "rödlök",
+     "canonical_name": "rödlök",
+     "quantity": 80.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c3",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 80.0,
+     "quantity_max": 80.0,
+     "quantity_step": 80.0
+    }
+   ],
+   "instructions": [
+    "Skär kycklingen i bitar och marinera i olja, citron, oregano, pressad vitlök, salt och peppar i minst 15 minuter.",
+    "Riv gurkan, krama ur vätskan och blanda med yoghurt, vitlök, dill och salt.",
+    "Trä kycklingen på spett och grilla 10–12 minuter, vänd ofta, tills den är minst 74 °C i mitten.",
+    "Skiva tomat och rödlök. Värm pitabröden i pannan.",
+    "Servera spetten i pitabröd med tzatziki, tomat och lök."
+   ],
+   "design": {
+    "base_id": "smako-greek-kotopoulo-souvlaki-pita",
+    "version": "1.0.0",
+    "variant_id": "base",
+    "cuisines": [
+     "greek"
+    ],
+    "family": "souvlaki",
+    "primary_ingredient": "kyckling",
+    "method": "pan",
+    "side": "bröd",
+    "flavor_profile": [
+     "oregano",
+     "citron"
+    ],
+    "components": [
+     {
+      "id": "c1",
+      "name": "Spett",
+      "amounts": [
+       {
+        "ingredient_key": "kyckling|raw_edible",
+        "name": "Kycklinglårfilé",
+        "note": "",
+        "quantity": 650.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "olivolja|as_sold",
+        "name": "Olivolja",
+        "note": "",
+        "quantity": 30.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "citronjuice|as_sold",
+        "name": "Citronjuice",
+        "note": "",
+        "quantity": 25.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "oregano|dry",
+        "name": "Oregano",
+        "note": "",
+        "quantity": 2.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "vitlök|raw_edible",
+        "name": "Vitlök",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "Salt",
+        "note": "",
+        "quantity": 6.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "svartpeppar|dry",
+        "name": "Svartpeppar",
+        "note": "",
+        "quantity": 1.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c2",
+      "name": "Tzatziki",
+      "amounts": [
+       {
+        "ingredient_key": "yoghurt naturell|as_sold",
+        "name": "Yoghurt naturell",
+        "note": "",
+        "quantity": 300.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "gurka|raw_edible",
+        "name": "Gurka",
+        "note": "",
+        "quantity": 200.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "vitlök|raw_edible",
+        "name": "Vitlök",
+        "note": "",
+        "quantity": 5.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "dill|raw_edible",
+        "name": "Dill",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c3",
+      "name": "Till servering",
+      "amounts": [
+       {
+        "ingredient_key": "bröd|as_sold",
+        "name": "Pitabröd",
+        "note": "",
+        "quantity": 320.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "tomat|raw_edible",
+        "name": "Tomat",
+        "note": "",
+        "quantity": 250.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "rödlök|raw_edible",
+        "name": "Rödlök",
+        "note": "",
+        "quantity": 80.0,
+        "unit": "g"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "Skär kycklingen i bitar och marinera i olja, citron, oregano, pressad vitlök, salt och peppar i minst 15 minuter.",
+      "ingredient_keys": [
+       "citronjuice|as_sold",
+       "kyckling|raw_edible",
+       "olivolja|as_sold",
+       "oregano|dry",
+       "salt|as_sold",
+       "svartpeppar|dry",
+       "vitlök|raw_edible"
+      ],
+      "depends_on": [],
+      "duration_minutes": 18,
+      "parallel_group": null
+     },
+     {
+      "id": "s2",
+      "text": "Riv gurkan, krama ur vätskan och blanda med yoghurt, vitlök, dill och salt.",
+      "ingredient_keys": [
+       "dill|raw_edible",
+       "gurka|raw_edible",
+       "vitlök|raw_edible",
+       "yoghurt naturell|as_sold"
+      ],
+      "depends_on": [],
+      "duration_minutes": 6,
+      "parallel_group": null
+     },
+     {
+      "id": "s3",
+      "text": "Trä kycklingen på spett och grilla 10–12 minuter, vänd ofta, tills den är minst 74 °C i mitten.",
+      "ingredient_keys": [
+       "kyckling|raw_edible"
+      ],
+      "depends_on": [
+       "s1"
+      ],
+      "duration_minutes": 12,
+      "parallel_group": null
+     },
+     {
+      "id": "s4",
+      "text": "Skiva tomat och rödlök. Värm pitabröden i pannan.",
+      "ingredient_keys": [
+       "bröd|as_sold",
+       "rödlök|raw_edible",
+       "tomat|raw_edible"
+      ],
+      "depends_on": [],
+      "duration_minutes": 5,
+      "parallel_group": null
+     },
+     {
+      "id": "s5",
+      "text": "Servera spetten i pitabröd med tzatziki, tomat och lök.",
+      "ingredient_keys": [
+       "bröd|as_sold",
+       "kyckling|raw_edible",
+       "rödlök|raw_edible",
+       "tomat|raw_edible",
+       "yoghurt naturell|as_sold"
+      ],
+      "depends_on": [
+       "s2",
+       "s3",
+       "s4"
+      ],
+      "duration_minutes": 3,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 33,
+    "equipment": [
+     "Grillpanna",
+     "Grillspett",
+     "Skål"
+    ],
+    "vegetarian": false,
+    "fish": false,
+    "ingredient_count": 11,
+    "provenance": {
+     "reviewed_at": "2026-11-26",
+     "notes": "Författat och standardiserat med recept-författarverktyget. Inte provlagat. Köp, allergener och näring kvalificeras separat."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "dinner"
+    ],
+    "active_minutes": 26,
+    "waiting_minutes": 7,
+    "total_minutes": 33,
+    "scaling": "reviewed_ranges"
+   }
+  },
+  {
+   "name": "Kotopoulo lemonato – citronkyckling i ugn med potatis och oregano",
+   "servings": 4,
+   "ingredients": [
+    {
+     "name": "kyckling",
+     "canonical_name": "kyckling",
+     "quantity": 700.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "primary",
+     "product_requirements": [
+      "pack:chicken_thigh"
+     ],
+     "quantity_min": 600.0,
+     "quantity_max": 1050.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "potatis",
+     "canonical_name": "potatis",
+     "quantity": 900.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "side",
+     "quantity_min": 650.0,
+     "quantity_max": 1050.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "citronjuice",
+     "canonical_name": "citronjuice",
+     "quantity": 60.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pure_juice"
+     ],
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 51.0,
+     "quantity_max": 90.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "olivolja",
+     "canonical_name": "olivolja",
+     "quantity": 40.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "cooking",
+     "product_requirements": [
+      "pack:intake_all_expansion_86ac9b2c5ae6"
+     ],
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 34.0,
+     "quantity_max": 60.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "oregano",
+     "canonical_name": "oregano",
+     "quantity": 2.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "dried_leaf"
+     ],
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 1.5,
+     "quantity_max": 3.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "vitlök",
+     "canonical_name": "vitlök",
+     "quantity": 15.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 13.0,
+     "quantity_max": 22.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "senap",
+     "canonical_name": "senap",
+     "quantity": 10.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 8.5,
+     "quantity_max": 15.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 8.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 7.0,
+     "quantity_max": 12.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "svartpeppar",
+     "canonical_name": "svartpeppar",
+     "quantity": 1.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:black_pepper"
+     ],
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 1.0,
+     "quantity_max": 1.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "gurka",
+     "canonical_name": "gurka",
+     "quantity": 200.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 200.0,
+     "quantity_max": 200.0,
+     "quantity_step": 200.0
+    },
+    {
+     "name": "tomat",
+     "canonical_name": "tomat",
+     "quantity": 250.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 250.0,
+     "quantity_max": 250.0,
+     "quantity_step": 250.0
+    },
+    {
+     "name": "fetaost",
+     "canonical_name": "fetaost",
+     "quantity": 100.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "sauce",
+     "quantity_min": 100.0,
+     "quantity_max": 100.0,
+     "quantity_step": 100.0
+    }
+   ],
+   "instructions": [
+    "Sätt ugnen på 210 °C. Vispa citron, olja, senap, pressad vitlök, oregano, salt och peppar.",
+    "Skär potatisen i klyftor och vänd med kycklingen och hälften av dressingen i en form. Häll på 200 ml vatten.",
+    "Baka 45 minuter, vänd och ringla över resten av dressingen halvvägs, tills kycklingen är minst 74 °C och potatisen mjuk.",
+    "Skär gurka och tomat i bitar och toppa med smulad feta. Servera till."
+   ],
+   "design": {
+    "base_id": "smako-greek-kotopoulo-lemonato-patates",
+    "version": "1.0.0",
+    "variant_id": "base",
+    "cuisines": [
+     "greek"
+    ],
+    "family": "lemonato",
+    "primary_ingredient": "kyckling",
+    "method": "oven",
+    "side": "potatis",
+    "flavor_profile": [
+     "citron",
+     "oregano"
+    ],
+    "components": [
+     {
+      "id": "c1",
+      "name": "Kyckling och potatis",
+      "amounts": [
+       {
+        "ingredient_key": "kyckling|raw_edible",
+        "name": "Kycklinglårfilé",
+        "note": "",
+        "quantity": 700.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "potatis|raw_edible",
+        "name": "Potatis",
+        "note": "",
+        "quantity": 900.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "citronjuice|as_sold",
+        "name": "Citronjuice",
+        "note": "",
+        "quantity": 60.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "olivolja|as_sold",
+        "name": "Olivolja",
+        "note": "",
+        "quantity": 40.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "oregano|dry",
+        "name": "Oregano",
+        "note": "",
+        "quantity": 2.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "vitlök|raw_edible",
+        "name": "Vitlök",
+        "note": "",
+        "quantity": 15.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "senap|as_sold",
+        "name": "Senap",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "Salt",
+        "note": "",
+        "quantity": 8.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "svartpeppar|dry",
+        "name": "Svartpeppar",
+        "note": "",
+        "quantity": 1.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c2",
+      "name": "Sallad",
+      "amounts": [
+       {
+        "ingredient_key": "gurka|raw_edible",
+        "name": "Gurka",
+        "note": "",
+        "quantity": 200.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "tomat|raw_edible",
+        "name": "Tomat",
+        "note": "",
+        "quantity": 250.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "fetaost|as_sold",
+        "name": "Fetaost",
+        "note": "",
+        "quantity": 100.0,
+        "unit": "g"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "Sätt ugnen på 210 °C. Vispa citron, olja, senap, pressad vitlök, oregano, salt och peppar.",
+      "ingredient_keys": [
+       "citronjuice|as_sold",
+       "olivolja|as_sold",
+       "oregano|dry",
+       "salt|as_sold",
+       "senap|as_sold",
+       "svartpeppar|dry",
+       "vitlök|raw_edible"
+      ],
+      "depends_on": [],
+      "duration_minutes": 5,
+      "parallel_group": null
+     },
+     {
+      "id": "s2",
+      "text": "Skär potatisen i klyftor och vänd med kycklingen och hälften av dressingen i en form. Häll på 200 ml vatten.",
+      "ingredient_keys": [
+       "kyckling|raw_edible",
+       "potatis|raw_edible"
+      ],
+      "depends_on": [
+       "s1"
+      ],
+      "duration_minutes": 10,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "200 ml",
+        200.0
+       ]
+      ]
+     },
+     {
+      "id": "s3",
+      "text": "Baka 45 minuter, vänd och ringla över resten av dressingen halvvägs, tills kycklingen är minst 74 °C och potatisen mjuk.",
+      "ingredient_keys": [
+       "kyckling|raw_edible",
+       "potatis|raw_edible"
+      ],
+      "depends_on": [
+       "s2"
+      ],
+      "duration_minutes": 45,
+      "parallel_group": null
+     },
+     {
+      "id": "s4",
+      "text": "Skär gurka och tomat i bitar och toppa med smulad feta. Servera till.",
+      "ingredient_keys": [
+       "fetaost|as_sold",
+       "gurka|raw_edible",
+       "tomat|raw_edible"
+      ],
+      "depends_on": [],
+      "duration_minutes": 6,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 60,
+    "equipment": [
+     "Ugn",
+     "Ugnsform"
+    ],
+    "vegetarian": false,
+    "fish": false,
+    "ingredient_count": 10,
+    "provenance": {
+     "reviewed_at": "2026-11-26",
+     "notes": "Författat och standardiserat med recept-författarverktyget. Inte provlagat. Köp, allergener och näring kvalificeras separat."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "dinner"
+    ],
+    "active_minutes": 21,
+    "waiting_minutes": 39,
+    "total_minutes": 60,
+    "scaling": "reviewed_ranges"
+   }
+  },
+  {
+   "name": "Kycklinggryta i kanelkryddad tomatsås med pasta",
+   "servings": 4,
+   "ingredients": [
+    {
+     "name": "kyckling",
+     "canonical_name": "kyckling",
+     "quantity": 700.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "primary",
+     "product_requirements": [
+      "pack:chicken_thigh"
+     ],
+     "quantity_min": 600.0,
+     "quantity_max": 1050.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "olivolja",
+     "canonical_name": "olivolja",
+     "quantity": 20.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "cooking",
+     "product_requirements": [
+      "pack:intake_all_expansion_86ac9b2c5ae6"
+     ],
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 17.0,
+     "quantity_max": 30.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "gul lök",
+     "canonical_name": "gul lök",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    },
+    {
+     "name": "vitlök",
+     "canonical_name": "vitlök",
+     "quantity": 10.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 8.5,
+     "quantity_max": 15.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "krossade tomater",
+     "canonical_name": "krossade tomater",
+     "quantity": 500.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "sauce",
+     "quantity_min": 500.0,
+     "quantity_max": 500.0,
+     "quantity_step": 500.0
+    },
+    {
+     "name": "tomatpuré",
+     "canonical_name": "tomatpuré",
+     "quantity": 20.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 17.0,
+     "quantity_max": 30.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "kanel",
+     "canonical_name": "kanel",
+     "quantity": 1.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "ground"
+     ],
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 1.0,
+     "quantity_max": 1.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "kryddpeppar",
+     "canonical_name": "kryddpeppar",
+     "quantity": 1.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_c412f28a0556"
+     ],
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 1.0,
+     "quantity_max": 1.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "lagerblad",
+     "canonical_name": "lagerblad",
+     "quantity": 1.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_expansion_b43ed6916a64"
+     ],
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 1.0,
+     "quantity_max": 1.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "rött matlagningsvin",
+     "canonical_name": "rött matlagningsvin",
+     "quantity": 100.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_round2_1158b81bb30e"
+     ],
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 86.0,
+     "quantity_max": 150.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 6.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 5.0,
+     "quantity_max": 9.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "pasta",
+     "canonical_name": "pasta",
+     "quantity": 350.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c2",
+     "required": true,
+     "role": "side",
+     "quantity_min": 250.0,
+     "quantity_max": 400.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "fetaost",
+     "canonical_name": "fetaost",
+     "quantity": 100.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c3",
+     "required": true,
+     "role": "sauce",
+     "quantity_min": 100.0,
+     "quantity_max": 100.0,
+     "quantity_step": 100.0
+    }
+   ],
+   "instructions": [
+    "Salta kycklingen och bryn den i olja. Lägg upp.",
+    "Fräs hackad lök och vitlök, rör ner tomatpuré och slå på vinet.",
+    "Tillsätt tomater, kanel, kryddpeppar, lagerblad och 200 ml vatten. Lägg i kycklingen och sjud under lock 35 minuter tills den är minst 74 °C.",
+    "Koka pastan enligt förpackningen.",
+    "Servera grytan över pastan med smulad feta."
+   ],
+   "design": {
+    "base_id": "smako-greek-kotopoulo-kokkinisto-hilopites",
+    "version": "1.0.0",
+    "variant_id": "base",
+    "cuisines": [
+     "greek"
+    ],
+    "family": "kokkinisto",
+    "primary_ingredient": "kyckling",
+    "method": "pot",
+    "side": "pasta",
+    "flavor_profile": [
+     "kanel",
+     "kryddpeppar"
+    ],
+    "components": [
+     {
+      "id": "c1",
+      "name": "Gryta",
+      "amounts": [
+       {
+        "ingredient_key": "kyckling|raw_edible",
+        "name": "Kycklinglårfilé",
+        "note": "",
+        "quantity": 700.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "olivolja|as_sold",
+        "name": "Olivolja",
+        "note": "",
+        "quantity": 20.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "gul lök|raw_edible",
+        "name": "Gul lök",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "vitlök|raw_edible",
+        "name": "Vitlök",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "krossade tomater|as_sold",
+        "name": "Krossade tomater",
+        "note": "",
+        "quantity": 500.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "tomatpuré|as_sold",
+        "name": "Tomatpuré",
+        "note": "",
+        "quantity": 20.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "kanel|dry",
+        "name": "Kanel",
+        "note": "",
+        "quantity": 1.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "kryddpeppar|dry",
+        "name": "Kryddpeppar",
+        "note": "",
+        "quantity": 1.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "lagerblad|dry",
+        "name": "Lagerblad",
+        "note": "",
+        "quantity": 1.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "rött matlagningsvin|as_sold",
+        "name": "Rött matlagningsvin",
+        "note": "",
+        "quantity": 100.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "Salt",
+        "note": "",
+        "quantity": 6.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c2",
+      "name": "Pasta",
+      "amounts": [
+       {
+        "ingredient_key": "pasta|dry",
+        "name": "Kort pasta, t.ex. hilopites eller penne",
+        "note": "",
+        "quantity": 350.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c3",
+      "name": "Till servering",
+      "amounts": [
+       {
+        "ingredient_key": "fetaost|as_sold",
+        "name": "Fetaost",
+        "note": "",
+        "quantity": 100.0,
+        "unit": "g"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "Salta kycklingen och bryn den i olja. Lägg upp.",
+      "ingredient_keys": [
+       "kyckling|raw_edible",
+       "olivolja|as_sold",
+       "salt|as_sold"
+      ],
+      "depends_on": [],
+      "duration_minutes": 8,
+      "parallel_group": null
+     },
+     {
+      "id": "s2",
+      "text": "Fräs hackad lök och vitlök, rör ner tomatpuré och slå på vinet.",
+      "ingredient_keys": [
+       "gul lök|raw_edible",
+       "rött matlagningsvin|as_sold",
+       "tomatpuré|as_sold",
+       "vitlök|raw_edible"
+      ],
+      "depends_on": [
+       "s1"
+      ],
+      "duration_minutes": 6,
+      "parallel_group": null
+     },
+     {
+      "id": "s3",
+      "text": "Tillsätt tomater, kanel, kryddpeppar, lagerblad och 200 ml vatten. Lägg i kycklingen och sjud under lock 35 minuter tills den är minst 74 °C.",
+      "ingredient_keys": [
+       "kanel|dry",
+       "krossade tomater|as_sold",
+       "kryddpeppar|dry",
+       "kyckling|raw_edible",
+       "lagerblad|dry"
+      ],
+      "depends_on": [
+       "s2"
+      ],
+      "duration_minutes": 35,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "200 ml",
+        200.0
+       ]
+      ]
+     },
+     {
+      "id": "s4",
+      "text": "Koka pastan enligt förpackningen.",
+      "ingredient_keys": [
+       "pasta|dry"
+      ],
+      "depends_on": [
+       "s2"
+      ],
+      "duration_minutes": 12,
+      "parallel_group": null
+     },
+     {
+      "id": "s5",
+      "text": "Servera grytan över pastan med smulad feta.",
+      "ingredient_keys": [
+       "fetaost|as_sold",
+       "kyckling|raw_edible",
+       "pasta|dry"
+      ],
+      "depends_on": [
+       "s3",
+       "s4"
+      ],
+      "duration_minutes": 2,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 51,
+    "equipment": [
+     "Gryta",
+     "Kastrull"
+    ],
+    "vegetarian": false,
+    "fish": false,
+    "ingredient_count": 12,
+    "provenance": {
+     "reviewed_at": "2026-11-26",
+     "notes": "Författat och standardiserat med recept-författarverktyget. Inte provlagat. Köp, allergener och näring kvalificeras separat."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "dinner"
+    ],
+    "active_minutes": 16,
+    "waiting_minutes": 35,
+    "total_minutes": 51,
+    "scaling": "reviewed_ranges"
+   }
+  },
+  {
+   "name": "Kotosoupa avgolemono – kycklingsoppa med ris, ägg och citron",
+   "servings": 4,
+   "ingredients": [
+    {
+     "name": "kyckling",
+     "canonical_name": "kyckling",
+     "quantity": 600.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "primary",
+     "product_requirements": [
+      "pack:chicken_thigh"
+     ],
+     "quantity_min": 500.0,
+     "quantity_max": 900.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "morot",
+     "canonical_name": "morot",
+     "quantity": 200.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 200.0,
+     "quantity_max": 200.0,
+     "quantity_step": 200.0
+    },
+    {
+     "name": "selleri",
+     "canonical_name": "selleri",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    },
+    {
+     "name": "gul lök",
+     "canonical_name": "gul lök",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    },
+    {
+     "name": "ris",
+     "canonical_name": "ris",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "side",
+     "product_requirements": [
+      "white_rice"
+     ],
+     "quantity_min": 110.0,
+     "quantity_max": 180.0,
+     "quantity_step": 10.0
+    },
+    {
+     "name": "grönsaksfond",
+     "canonical_name": "grönsaksfond",
+     "quantity": 40.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_round2_5a0df72f98a3"
+     ],
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 33.0,
+     "quantity_max": 60.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 8.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 6.5,
+     "quantity_max": 12.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "svartpeppar",
+     "canonical_name": "svartpeppar",
+     "quantity": 1.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:black_pepper"
+     ],
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 1.0,
+     "quantity_max": 1.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "ägg",
+     "canonical_name": "ägg",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "sauce",
+     "product_requirements": [
+      "pack:egg"
+     ],
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    },
+    {
+     "name": "citronjuice",
+     "canonical_name": "citronjuice",
+     "quantity": 60.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pure_juice"
+     ],
+     "quantity_min": 60.0,
+     "quantity_max": 60.0,
+     "quantity_step": 60.0
+    },
+    {
+     "name": "dill",
+     "canonical_name": "dill",
+     "quantity": 10.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 10.0,
+     "quantity_max": 10.0,
+     "quantity_step": 10.0
+    },
+    {
+     "name": "bröd",
+     "canonical_name": "bröd",
+     "quantity": 250.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c3",
+     "required": true,
+     "role": "sauce",
+     "quantity_min": 250.0,
+     "quantity_max": 250.0,
+     "quantity_step": 250.0
+    }
+   ],
+   "instructions": [
+    "Lägg kyckling, lök i bitar, morot och selleri i en kastrull med fonden och 1500 ml vatten. Sjud 25 minuter tills kycklingen är minst 74 °C.",
+    "Lyft upp kycklingen och dra den i bitar. Koka riset i soppan i 15 minuter.",
+    "Vispa ägg och citron i en skål. Vispa ner en kopp het buljong lite i taget.",
+    "Dra kastrullen från värmen och rör ner äggblandningen. Värm under omrörning utan att koka tills soppan tjocknat lätt.",
+    "Lägg tillbaka kycklingen, smaka av med salt och peppar och toppa med dill. Servera med bröd."
+   ],
+   "design": {
+    "base_id": "smako-greek-kotosoupa-avgolemono",
+    "version": "1.0.0",
+    "variant_id": "base",
+    "cuisines": [
+     "greek"
+    ],
+    "family": "avgolemono",
+    "primary_ingredient": "kyckling",
+    "method": "pot",
+    "side": "ris",
+    "flavor_profile": [
+     "citron",
+     "dill"
+    ],
+    "components": [
+     {
+      "id": "c1",
+      "name": "Soppa",
+      "amounts": [
+       {
+        "ingredient_key": "kyckling|raw_edible",
+        "name": "Kycklinglårfilé",
+        "note": "",
+        "quantity": 600.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "morot|raw_edible",
+        "name": "Morot",
+        "note": "",
+        "quantity": 200.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "selleri|raw_edible",
+        "name": "Selleri",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "gul lök|raw_edible",
+        "name": "Gul lök",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "ris|dry",
+        "name": "Ris",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "grönsaksfond|as_sold",
+        "name": "Grönsaksfond",
+        "note": "",
+        "quantity": 40.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "Salt",
+        "note": "",
+        "quantity": 8.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "svartpeppar|dry",
+        "name": "Svartpeppar",
+        "note": "",
+        "quantity": 1.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c2",
+      "name": "Avgolemono",
+      "amounts": [
+       {
+        "ingredient_key": "ägg|raw_edible",
+        "name": "Ägg",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "citronjuice|as_sold",
+        "name": "Citronjuice",
+        "note": "",
+        "quantity": 60.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "dill|raw_edible",
+        "name": "Dill",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c3",
+      "name": "Till servering",
+      "amounts": [
+       {
+        "ingredient_key": "bröd|as_sold",
+        "name": "Grovt bröd",
+        "note": "",
+        "quantity": 250.0,
+        "unit": "g"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "Lägg kyckling, lök i bitar, morot och selleri i en kastrull med fonden och 1500 ml vatten. Sjud 25 minuter tills kycklingen är minst 74 °C.",
+      "ingredient_keys": [
+       "grönsaksfond|as_sold",
+       "gul lök|raw_edible",
+       "kyckling|raw_edible",
+       "morot|raw_edible",
+       "selleri|raw_edible"
+      ],
+      "depends_on": [],
+      "duration_minutes": 28,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "1500 ml",
+        1500.0
+       ]
+      ]
+     },
+     {
+      "id": "s2",
+      "text": "Lyft upp kycklingen och dra den i bitar. Koka riset i soppan i 15 minuter.",
+      "ingredient_keys": [
+       "kyckling|raw_edible",
+       "ris|dry"
+      ],
+      "depends_on": [
+       "s1"
+      ],
+      "duration_minutes": 15,
+      "parallel_group": null
+     },
+     {
+      "id": "s3",
+      "text": "Vispa ägg och citron i en skål. Vispa ner en kopp het buljong lite i taget.",
+      "ingredient_keys": [
+       "citronjuice|as_sold",
+       "ägg|raw_edible"
+      ],
+      "depends_on": [
+       "s2"
+      ],
+      "duration_minutes": 4,
+      "parallel_group": null
+     },
+     {
+      "id": "s4",
+      "text": "Dra kastrullen från värmen och rör ner äggblandningen. Värm under omrörning utan att koka tills soppan tjocknat lätt.",
+      "ingredient_keys": [
+       "ägg|raw_edible"
+      ],
+      "depends_on": [
+       "s3"
+      ],
+      "duration_minutes": 4,
+      "parallel_group": null
+     },
+     {
+      "id": "s5",
+      "text": "Lägg tillbaka kycklingen, smaka av med salt och peppar och toppa med dill. Servera med bröd.",
+      "ingredient_keys": [
+       "bröd|as_sold",
+       "dill|raw_edible",
+       "kyckling|raw_edible",
+       "salt|as_sold",
+       "svartpeppar|dry"
+      ],
+      "depends_on": [
+       "s4"
+      ],
+      "duration_minutes": 3,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 54,
+    "equipment": [
+     "Kastrull",
+     "Skål"
+    ],
+    "vegetarian": false,
+    "fish": false,
+    "ingredient_count": 10,
+    "provenance": {
+     "reviewed_at": "2026-11-26",
+     "notes": "Författat och standardiserat med recept-författarverktyget. Inte provlagat. Köp, allergener och näring kvalificeras separat."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "dinner"
+    ],
+    "active_minutes": 11,
+    "waiting_minutes": 43,
+    "total_minutes": 54,
+    "scaling": "reviewed_ranges"
+   }
+  },
+  {
+   "name": "Kyckling med haricots verts, tomat och potatis i en gryta",
+   "servings": 4,
+   "ingredients": [
+    {
+     "name": "kyckling",
+     "canonical_name": "kyckling",
+     "quantity": 600.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "primary",
+     "product_requirements": [
+      "pack:chicken_thigh"
+     ],
+     "quantity_min": 500.0,
+     "quantity_max": 900.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "haricots verts",
+     "canonical_name": "haricots verts",
+     "quantity": 400.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "vegetable",
+     "product_requirements": [
+      "frozen",
+      "plain"
+     ],
+     "quantity_min": 400.0,
+     "quantity_max": 400.0,
+     "quantity_step": 400.0
+    },
+    {
+     "name": "potatis",
+     "canonical_name": "potatis",
+     "quantity": 600.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "side",
+     "quantity_min": 450.0,
+     "quantity_max": 700.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "gul lök",
+     "canonical_name": "gul lök",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    },
+    {
+     "name": "vitlök",
+     "canonical_name": "vitlök",
+     "quantity": 10.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 8.5,
+     "quantity_max": 15.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "krossade tomater",
+     "canonical_name": "krossade tomater",
+     "quantity": 400.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "sauce",
+     "quantity_min": 400.0,
+     "quantity_max": 400.0,
+     "quantity_step": 400.0
+    },
+    {
+     "name": "olivolja",
+     "canonical_name": "olivolja",
+     "quantity": 40.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "cooking",
+     "product_requirements": [
+      "pack:intake_all_expansion_86ac9b2c5ae6"
+     ],
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 33.0,
+     "quantity_max": 60.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "mynta",
+     "canonical_name": "mynta",
+     "quantity": 10.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_shape_trimmed_mint"
+     ],
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 8.5,
+     "quantity_max": 15.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 7.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 6.0,
+     "quantity_max": 10.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "svartpeppar",
+     "canonical_name": "svartpeppar",
+     "quantity": 1.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:black_pepper"
+     ],
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 1.0,
+     "quantity_max": 1.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "fetaost",
+     "canonical_name": "fetaost",
+     "quantity": 120.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "sauce",
+     "quantity_min": 120.0,
+     "quantity_max": 120.0,
+     "quantity_step": 120.0
+    },
+    {
+     "name": "bröd",
+     "canonical_name": "bröd",
+     "quantity": 200.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "sauce",
+     "quantity_min": 200.0,
+     "quantity_max": 200.0,
+     "quantity_step": 200.0
+    }
+   ],
+   "instructions": [
+    "Bryn kycklingen i olja i en gryta. Fräs hackad lök och vitlök med.",
+    "Tillsätt tomater, potatis i bitar, salt, peppar och 300 ml vatten. Sjud under lock 15 minuter.",
+    "Lägg i haricots verts och sjud 20 minuter till tills potatisen är mjuk och kycklingen minst 74 °C.",
+    "Strö över hackad mynta och servera med feta och bröd."
+   ],
+   "design": {
+    "base_id": "smako-greek-kotopoulo-fasolakia",
+    "version": "1.0.0",
+    "variant_id": "base",
+    "cuisines": [
+     "greek"
+    ],
+    "family": "kotopoulo me fasolakia",
+    "primary_ingredient": "kyckling",
+    "method": "pot",
+    "side": "potatis",
+    "flavor_profile": [
+     "tomat",
+     "mynta"
+    ],
+    "components": [
+     {
+      "id": "c1",
+      "name": "Gryta",
+      "amounts": [
+       {
+        "ingredient_key": "kyckling|raw_edible",
+        "name": "Kycklinglårfilé",
+        "note": "",
+        "quantity": 600.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "haricots verts|as_sold",
+        "name": "Haricots verts",
+        "note": "",
+        "quantity": 400.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "potatis|raw_edible",
+        "name": "Potatis",
+        "note": "",
+        "quantity": 600.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "gul lök|raw_edible",
+        "name": "Gul lök",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "vitlök|raw_edible",
+        "name": "Vitlök",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "krossade tomater|as_sold",
+        "name": "Krossade tomater",
+        "note": "",
+        "quantity": 400.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "olivolja|as_sold",
+        "name": "Olivolja",
+        "note": "",
+        "quantity": 40.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "mynta|raw_edible",
+        "name": "Mynta",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "Salt",
+        "note": "",
+        "quantity": 7.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "svartpeppar|dry",
+        "name": "Svartpeppar",
+        "note": "",
+        "quantity": 1.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c2",
+      "name": "Till servering",
+      "amounts": [
+       {
+        "ingredient_key": "fetaost|as_sold",
+        "name": "Fetaost",
+        "note": "",
+        "quantity": 120.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "bröd|as_sold",
+        "name": "Grovt bröd",
+        "note": "",
+        "quantity": 200.0,
+        "unit": "g"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "Bryn kycklingen i olja i en gryta. Fräs hackad lök och vitlök med.",
+      "ingredient_keys": [
+       "gul lök|raw_edible",
+       "kyckling|raw_edible",
+       "olivolja|as_sold",
+       "vitlök|raw_edible"
+      ],
+      "depends_on": [],
+      "duration_minutes": 10,
+      "parallel_group": null
+     },
+     {
+      "id": "s2",
+      "text": "Tillsätt tomater, potatis i bitar, salt, peppar och 300 ml vatten. Sjud under lock 15 minuter.",
+      "ingredient_keys": [
+       "krossade tomater|as_sold",
+       "potatis|raw_edible",
+       "salt|as_sold",
+       "svartpeppar|dry"
+      ],
+      "depends_on": [
+       "s1"
+      ],
+      "duration_minutes": 15,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "300 ml",
+        300.0
+       ]
+      ]
+     },
+     {
+      "id": "s3",
+      "text": "Lägg i haricots verts och sjud 20 minuter till tills potatisen är mjuk och kycklingen minst 74 °C.",
+      "ingredient_keys": [
+       "haricots verts|as_sold",
+       "kyckling|raw_edible",
+       "potatis|raw_edible"
+      ],
+      "depends_on": [
+       "s2"
+      ],
+      "duration_minutes": 20,
+      "parallel_group": null
+     },
+     {
+      "id": "s4",
+      "text": "Strö över hackad mynta och servera med feta och bröd.",
+      "ingredient_keys": [
+       "bröd|as_sold",
+       "fetaost|as_sold",
+       "mynta|raw_edible"
+      ],
+      "depends_on": [
+       "s3"
+      ],
+      "duration_minutes": 3,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 48,
+    "equipment": [
+     "Gryta"
+    ],
+    "vegetarian": false,
+    "fish": false,
+    "ingredient_count": 10,
+    "provenance": {
+     "reviewed_at": "2026-11-26",
+     "notes": "Författat och standardiserat med recept-författarverktyget. Inte provlagat. Köp, allergener och näring kvalificeras separat."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "dinner"
+    ],
+    "active_minutes": 13,
+    "waiting_minutes": 35,
+    "total_minutes": 48,
+    "scaling": "reviewed_ranges"
+   }
+  },
+  {
+   "name": "Kycklinggryta med kanel och apelsin, serverad med ris och yoghurt",
+   "servings": 4,
+   "ingredients": [
+    {
+     "name": "kyckling",
+     "canonical_name": "kyckling",
+     "quantity": 700.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "primary",
+     "product_requirements": [
+      "pack:chicken_thigh"
+     ],
+     "quantity_min": 600.0,
+     "quantity_max": 1050.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "gul lök",
+     "canonical_name": "gul lök",
+     "quantity": 200.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 200.0,
+     "quantity_max": 200.0,
+     "quantity_step": 200.0
+    },
+    {
+     "name": "olivolja",
+     "canonical_name": "olivolja",
+     "quantity": 20.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "cooking",
+     "product_requirements": [
+      "pack:intake_all_expansion_86ac9b2c5ae6"
+     ],
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 17.0,
+     "quantity_max": 30.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "krossade tomater",
+     "canonical_name": "krossade tomater",
+     "quantity": 400.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "sauce",
+     "quantity_min": 400.0,
+     "quantity_max": 400.0,
+     "quantity_step": 400.0
+    },
+    {
+     "name": "apelsinjuice",
+     "canonical_name": "apelsinjuice",
+     "quantity": 100.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_bac4ad0c4dc5"
+     ],
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 86.0,
+     "quantity_max": 150.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "kanel",
+     "canonical_name": "kanel",
+     "quantity": 2.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "ground"
+     ],
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 1.5,
+     "quantity_max": 3.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "kryddpeppar",
+     "canonical_name": "kryddpeppar",
+     "quantity": 1.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_c412f28a0556"
+     ],
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 1.0,
+     "quantity_max": 1.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 6.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 5.0,
+     "quantity_max": 9.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "svartpeppar",
+     "canonical_name": "svartpeppar",
+     "quantity": 1.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:black_pepper"
+     ],
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 1.0,
+     "quantity_max": 1.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "ris",
+     "canonical_name": "ris",
+     "quantity": 300.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c2",
+     "required": true,
+     "role": "side",
+     "product_requirements": [
+      "white_rice"
+     ],
+     "quantity_min": 250.0,
+     "quantity_max": 350.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "smör",
+     "canonical_name": "smör",
+     "quantity": 15.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "sauce",
+     "product_requirements": [
+      "pack:intake_butter"
+     ],
+     "quantity_min": 15.0,
+     "quantity_max": 15.0,
+     "quantity_step": 15.0
+    },
+    {
+     "name": "yoghurt naturell",
+     "canonical_name": "yoghurt naturell",
+     "quantity": 200.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c3",
+     "required": true,
+     "role": "sauce",
+     "product_requirements": [
+      "plain",
+      "thick"
+     ],
+     "quantity_min": 200.0,
+     "quantity_max": 200.0,
+     "quantity_step": 200.0
+    },
+    {
+     "name": "persilja",
+     "canonical_name": "persilja",
+     "quantity": 10.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c3",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 10.0,
+     "quantity_max": 10.0,
+     "quantity_step": 10.0
+    }
+   ],
+   "instructions": [
+    "Salta och peppra kycklingen och bryn den i olja. Fräs skivad lök med.",
+    "Tillsätt tomater, apelsinjuice, kanel, kryddpeppar och 150 ml vatten. Sjud under lock 35 minuter tills kycklingen är minst 74 °C.",
+    "Koka riset enligt förpackningen och vänd med smör.",
+    "Servera grytan med ris, en klick yoghurt och persilja."
+   ],
+   "design": {
+    "base_id": "smako-greek-kotopoulo-me-ryzi-kanela",
+    "version": "1.0.0",
+    "variant_id": "base",
+    "cuisines": [
+     "greek"
+    ],
+    "family": "kapama",
+    "primary_ingredient": "kyckling",
+    "method": "pot",
+    "side": "ris",
+    "flavor_profile": [
+     "kanel",
+     "apelsin"
+    ],
+    "components": [
+     {
+      "id": "c1",
+      "name": "Gryta",
+      "amounts": [
+       {
+        "ingredient_key": "kyckling|raw_edible",
+        "name": "Kycklinglårfilé",
+        "note": "",
+        "quantity": 700.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "gul lök|raw_edible",
+        "name": "Gul lök",
+        "note": "",
+        "quantity": 200.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "olivolja|as_sold",
+        "name": "Olivolja",
+        "note": "",
+        "quantity": 20.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "krossade tomater|as_sold",
+        "name": "Krossade tomater",
+        "note": "",
+        "quantity": 400.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "apelsinjuice|as_sold",
+        "name": "Apelsinjuice",
+        "note": "",
+        "quantity": 100.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "kanel|dry",
+        "name": "Kanel",
+        "note": "",
+        "quantity": 2.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "kryddpeppar|dry",
+        "name": "Kryddpeppar",
+        "note": "",
+        "quantity": 1.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "Salt",
+        "note": "",
+        "quantity": 6.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "svartpeppar|dry",
+        "name": "Svartpeppar",
+        "note": "",
+        "quantity": 1.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c2",
+      "name": "Ris",
+      "amounts": [
+       {
+        "ingredient_key": "ris|dry",
+        "name": "Ris",
+        "note": "",
+        "quantity": 300.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "smör|as_sold",
+        "name": "Smör",
+        "note": "",
+        "quantity": 15.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c3",
+      "name": "Till servering",
+      "amounts": [
+       {
+        "ingredient_key": "yoghurt naturell|as_sold",
+        "name": "Yoghurt naturell",
+        "note": "",
+        "quantity": 200.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "persilja|raw_edible",
+        "name": "Persilja",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "g"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "Salta och peppra kycklingen och bryn den i olja. Fräs skivad lök med.",
+      "ingredient_keys": [
+       "gul lök|raw_edible",
+       "kyckling|raw_edible",
+       "olivolja|as_sold",
+       "salt|as_sold",
+       "svartpeppar|dry"
+      ],
+      "depends_on": [],
+      "duration_minutes": 10,
+      "parallel_group": null
+     },
+     {
+      "id": "s2",
+      "text": "Tillsätt tomater, apelsinjuice, kanel, kryddpeppar och 150 ml vatten. Sjud under lock 35 minuter tills kycklingen är minst 74 °C.",
+      "ingredient_keys": [
+       "apelsinjuice|as_sold",
+       "kanel|dry",
+       "krossade tomater|as_sold",
+       "kryddpeppar|dry",
+       "kyckling|raw_edible"
+      ],
+      "depends_on": [
+       "s1"
+      ],
+      "duration_minutes": 35,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "150 ml",
+        150.0
+       ]
+      ]
+     },
+     {
+      "id": "s3",
+      "text": "Koka riset enligt förpackningen och vänd med smör.",
+      "ingredient_keys": [
+       "ris|dry",
+       "smör|as_sold"
+      ],
+      "depends_on": [
+       "s1"
+      ],
+      "duration_minutes": 18,
+      "parallel_group": null
+     },
+     {
+      "id": "s4",
+      "text": "Servera grytan med ris, en klick yoghurt och persilja.",
+      "ingredient_keys": [
+       "kyckling|raw_edible",
+       "persilja|raw_edible",
+       "ris|dry",
+       "yoghurt naturell|as_sold"
+      ],
+      "depends_on": [
+       "s2",
+       "s3"
+      ],
+      "duration_minutes": 2,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 47,
+    "equipment": [
+     "Gryta",
+     "Kastrull"
+    ],
+    "vegetarian": false,
+    "fish": false,
+    "ingredient_count": 11,
+    "provenance": {
+     "reviewed_at": "2026-11-26",
+     "notes": "Författat och standardiserat med recept-författarverktyget. Inte provlagat. Köp, allergener och näring kvalificeras separat."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "dinner"
+    ],
+    "active_minutes": 12,
+    "waiting_minutes": 35,
+    "total_minutes": 47,
+    "scaling": "reviewed_ranges"
+   }
+  },
+  {
+   "name": "Kotopoulo saganaki – kyckling i paprika- och tomatsås med feta och bröd",
+   "servings": 4,
+   "ingredients": [
+    {
+     "name": "kyckling",
+     "canonical_name": "kyckling",
+     "quantity": 600.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "primary",
+     "product_requirements": [
+      "pack:chicken_breast"
+     ],
+     "quantity_min": 500.0,
+     "quantity_max": 900.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "olivolja",
+     "canonical_name": "olivolja",
+     "quantity": 30.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "cooking",
+     "product_requirements": [
+      "pack:intake_all_expansion_86ac9b2c5ae6"
+     ],
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 25.0,
+     "quantity_max": 45.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 5.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 4.0,
+     "quantity_max": 7.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "svartpeppar",
+     "canonical_name": "svartpeppar",
+     "quantity": 1.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:black_pepper"
+     ],
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 1.0,
+     "quantity_max": 1.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "paprika",
+     "canonical_name": "paprika",
+     "quantity": 300.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 300.0,
+     "quantity_max": 300.0,
+     "quantity_step": 300.0
+    },
+    {
+     "name": "gul lök",
+     "canonical_name": "gul lök",
+     "quantity": 100.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 100.0,
+     "quantity_max": 100.0,
+     "quantity_step": 100.0
+    },
+    {
+     "name": "vitlök",
+     "canonical_name": "vitlök",
+     "quantity": 10.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 10.0,
+     "quantity_max": 10.0,
+     "quantity_step": 10.0
+    },
+    {
+     "name": "krossade tomater",
+     "canonical_name": "krossade tomater",
+     "quantity": 400.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "sauce",
+     "quantity_min": 400.0,
+     "quantity_max": 400.0,
+     "quantity_step": 400.0
+    },
+    {
+     "name": "oregano",
+     "canonical_name": "oregano",
+     "quantity": 2.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "dried_leaf"
+     ],
+     "quantity_min": 2.0,
+     "quantity_max": 2.0,
+     "quantity_step": 2.0
+    },
+    {
+     "name": "chiliflakes",
+     "canonical_name": "chiliflakes",
+     "quantity": 1.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 1.0,
+     "quantity_max": 1.0,
+     "quantity_step": 1.0
+    },
+    {
+     "name": "fetaost",
+     "canonical_name": "fetaost",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "sauce",
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    },
+    {
+     "name": "persilja",
+     "canonical_name": "persilja",
+     "quantity": 10.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 10.0,
+     "quantity_max": 10.0,
+     "quantity_step": 10.0
+    },
+    {
+     "name": "bröd",
+     "canonical_name": "bröd",
+     "quantity": 300.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c3",
+     "required": true,
+     "role": "side",
+     "quantity_min": 300.0,
+     "quantity_max": 300.0,
+     "quantity_step": 300.0
+    },
+    {
+     "name": "sallad",
+     "canonical_name": "sallad",
+     "quantity": 120.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c3",
+     "required": true,
+     "role": "vegetable",
+     "product_requirements": [
+      "pack:intake_all_16d63b25fed0"
+     ],
+     "quantity_min": 120.0,
+     "quantity_max": 120.0,
+     "quantity_step": 120.0
+    }
+   ],
+   "instructions": [
+    "Tärna kycklingen, salta och peppra och bryn i olja. Lägg upp.",
+    "Fräs strimlad paprika, lök och vitlök mjukt. Tillsätt tomater, oregano och chili och sjud 10 minuter.",
+    "Lägg tillbaka kycklingen och sjud 8 minuter tills den är minst 74 °C. Smula över fetaosten och låt den mjukna under lock.",
+    "Toppa med persilja och servera med bröd och grönsallad."
+   ],
+   "design": {
+    "base_id": "smako-greek-kotopoulo-saganaki",
+    "version": "1.0.0",
+    "variant_id": "base",
+    "cuisines": [
+     "greek"
+    ],
+    "family": "saganaki",
+    "primary_ingredient": "kyckling",
+    "method": "pan",
+    "side": "bröd",
+    "flavor_profile": [
+     "feta",
+     "oregano"
+    ],
+    "components": [
+     {
+      "id": "c1",
+      "name": "Kyckling",
+      "amounts": [
+       {
+        "ingredient_key": "kyckling|raw_edible",
+        "name": "Kycklingbröstfilé",
+        "note": "",
+        "quantity": 600.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "olivolja|as_sold",
+        "name": "Olivolja",
+        "note": "",
+        "quantity": 30.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "Salt",
+        "note": "",
+        "quantity": 5.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "svartpeppar|dry",
+        "name": "Svartpeppar",
+        "note": "",
+        "quantity": 1.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c2",
+      "name": "Sås",
+      "amounts": [
+       {
+        "ingredient_key": "paprika|raw_edible",
+        "name": "Paprika",
+        "note": "",
+        "quantity": 300.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "gul lök|raw_edible",
+        "name": "Gul lök",
+        "note": "",
+        "quantity": 100.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "vitlök|raw_edible",
+        "name": "Vitlök",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "krossade tomater|as_sold",
+        "name": "Krossade tomater",
+        "note": "",
+        "quantity": 400.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "oregano|dry",
+        "name": "Oregano",
+        "note": "",
+        "quantity": 2.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "chiliflakes|dry",
+        "name": "Chiliflakes",
+        "note": "",
+        "quantity": 1.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "fetaost|as_sold",
+        "name": "Fetaost",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "persilja|raw_edible",
+        "name": "Persilja",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c3",
+      "name": "Till servering",
+      "amounts": [
+       {
+        "ingredient_key": "bröd|as_sold",
+        "name": "Grovt bröd",
+        "note": "",
+        "quantity": 300.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "sallad|raw_edible",
+        "name": "Sallad",
+        "note": "",
+        "quantity": 120.0,
+        "unit": "g"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "Tärna kycklingen, salta och peppra och bryn i olja. Lägg upp.",
+      "ingredient_keys": [
+       "kyckling|raw_edible",
+       "olivolja|as_sold",
+       "salt|as_sold",
+       "svartpeppar|dry"
+      ],
+      "depends_on": [],
+      "duration_minutes": 8,
+      "parallel_group": null
+     },
+     {
+      "id": "s2",
+      "text": "Fräs strimlad paprika, lök och vitlök mjukt. Tillsätt tomater, oregano och chili och sjud 10 minuter.",
+      "ingredient_keys": [
+       "chiliflakes|dry",
+       "gul lök|raw_edible",
+       "krossade tomater|as_sold",
+       "oregano|dry",
+       "paprika|raw_edible",
+       "vitlök|raw_edible"
+      ],
+      "depends_on": [
+       "s1"
+      ],
+      "duration_minutes": 14,
+      "parallel_group": null
+     },
+     {
+      "id": "s3",
+      "text": "Lägg tillbaka kycklingen och sjud 8 minuter tills den är minst 74 °C. Smula över fetaosten och låt den mjukna under lock.",
+      "ingredient_keys": [
+       "fetaost|as_sold",
+       "kyckling|raw_edible"
+      ],
+      "depends_on": [
+       "s2"
+      ],
+      "duration_minutes": 10,
+      "parallel_group": null
+     },
+     {
+      "id": "s4",
+      "text": "Toppa med persilja och servera med bröd och grönsallad.",
+      "ingredient_keys": [
+       "bröd|as_sold",
+       "persilja|raw_edible",
+       "sallad|raw_edible"
+      ],
+      "depends_on": [
+       "s3"
+      ],
+      "duration_minutes": 2,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 34,
+    "equipment": [
+     "Stekpanna",
+     "Ugn"
+    ],
+    "vegetarian": false,
+    "fish": false,
+    "ingredient_count": 12,
+    "provenance": {
+     "reviewed_at": "2026-11-26",
+     "notes": "Författat och standardiserat med recept-författarverktyget. Inte provlagat. Köp, allergener och näring kvalificeras separat."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "dinner"
+    ],
+    "active_minutes": 34,
+    "waiting_minutes": 0,
+    "total_minutes": 34,
+    "scaling": "reviewed_ranges"
+   }
+  },
+  {
+   "name": "Tas kebab – kryddig nötgryta med tomat och smörig pilaff",
+   "servings": 4,
+   "ingredients": [
+    {
+     "name": "nötkött",
+     "canonical_name": "nötkött",
+     "quantity": 700.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "primary",
+     "product_requirements": [
+      "pack:beef_braising_cut",
+      "pack:intake_all_10d1e6ea4dc5"
+     ],
+     "quantity_min": 600.0,
+     "quantity_max": 1050.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "gul lök",
+     "canonical_name": "gul lök",
+     "quantity": 200.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 200.0,
+     "quantity_max": 200.0,
+     "quantity_step": 200.0
+    },
+    {
+     "name": "vitlök",
+     "canonical_name": "vitlök",
+     "quantity": 10.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "nötkött|raw_edible",
+     "quantity_min": 8.5,
+     "quantity_max": 15.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "krossade tomater",
+     "canonical_name": "krossade tomater",
+     "quantity": 400.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "sauce",
+     "quantity_min": 400.0,
+     "quantity_max": 400.0,
+     "quantity_step": 400.0
+    },
+    {
+     "name": "tomatpuré",
+     "canonical_name": "tomatpuré",
+     "quantity": 20.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "nötkött|raw_edible",
+     "quantity_min": 17.0,
+     "quantity_max": 30.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "rött matlagningsvin",
+     "canonical_name": "rött matlagningsvin",
+     "quantity": 100.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_round2_1158b81bb30e"
+     ],
+     "scales_with": "nötkött|raw_edible",
+     "quantity_min": 86.0,
+     "quantity_max": 150.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "kanel",
+     "canonical_name": "kanel",
+     "quantity": 1.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "ground"
+     ],
+     "scales_with": "nötkött|raw_edible",
+     "quantity_min": 1.0,
+     "quantity_max": 1.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "kryddpeppar",
+     "canonical_name": "kryddpeppar",
+     "quantity": 1.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_c412f28a0556"
+     ],
+     "scales_with": "nötkött|raw_edible",
+     "quantity_min": 1.0,
+     "quantity_max": 1.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "spiskummin",
+     "canonical_name": "spiskummin",
+     "quantity": 1.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "ground"
+     ],
+     "scales_with": "nötkött|raw_edible",
+     "quantity_min": 1.0,
+     "quantity_max": 1.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "olivolja",
+     "canonical_name": "olivolja",
+     "quantity": 30.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "cooking",
+     "product_requirements": [
+      "pack:intake_all_expansion_86ac9b2c5ae6"
+     ],
+     "scales_with": "nötkött|raw_edible",
+     "quantity_min": 26.0,
+     "quantity_max": 45.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 7.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "nötkött|raw_edible",
+     "quantity_min": 6.0,
+     "quantity_max": 10.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "ris",
+     "canonical_name": "ris",
+     "quantity": 300.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c2",
+     "required": true,
+     "role": "side",
+     "product_requirements": [
+      "white_rice"
+     ],
+     "quantity_min": 250.0,
+     "quantity_max": 350.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "smör",
+     "canonical_name": "smör",
+     "quantity": 30.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "sauce",
+     "product_requirements": [
+      "pack:intake_butter"
+     ],
+     "quantity_min": 30.0,
+     "quantity_max": 30.0,
+     "quantity_step": 30.0
+    },
+    {
+     "name": "grönsaksfond",
+     "canonical_name": "grönsaksfond",
+     "quantity": 20.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_round2_5a0df72f98a3"
+     ],
+     "quantity_min": 20.0,
+     "quantity_max": 20.0,
+     "quantity_step": 20.0
+    },
+    {
+     "name": "yoghurt naturell",
+     "canonical_name": "yoghurt naturell",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c3",
+     "required": true,
+     "role": "sauce",
+     "product_requirements": [
+      "plain",
+      "thick"
+     ],
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    },
+    {
+     "name": "persilja",
+     "canonical_name": "persilja",
+     "quantity": 10.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c3",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 10.0,
+     "quantity_max": 10.0,
+     "quantity_step": 10.0
+    }
+   ],
+   "instructions": [
+    "Skär köttet i tärningar, salta och bryn i olja. Fräs hackad lök och vitlök med.",
+    "Rör ner tomatpuré, kanel, kryddpeppar och spiskummin, slå på vinet och tillsätt tomater och 300 ml vatten. Sjud under lock 1 timme och 30 minuter.",
+    "Fräs riset i smöret och koka det med fonden och vatten enligt förpackningen.",
+    "Servera grytan på pilaffen med yoghurt och persilja."
+   ],
+   "design": {
+    "base_id": "smako-greek-tas-kebab-pilafi",
+    "version": "1.0.0",
+    "variant_id": "base",
+    "cuisines": [
+     "greek"
+    ],
+    "family": "tas kebab",
+    "primary_ingredient": "nötkött",
+    "method": "pot",
+    "side": "ris",
+    "flavor_profile": [
+     "kanel",
+     "kryddpeppar"
+    ],
+    "components": [
+     {
+      "id": "c1",
+      "name": "Gryta",
+      "amounts": [
+       {
+        "ingredient_key": "nötkött|raw_edible",
+        "name": "Högrev eller grytbitar av nöt",
+        "note": "",
+        "quantity": 700.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "gul lök|raw_edible",
+        "name": "Gul lök",
+        "note": "",
+        "quantity": 200.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "vitlök|raw_edible",
+        "name": "Vitlök",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "krossade tomater|as_sold",
+        "name": "Krossade tomater",
+        "note": "",
+        "quantity": 400.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "tomatpuré|as_sold",
+        "name": "Tomatpuré",
+        "note": "",
+        "quantity": 20.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "rött matlagningsvin|as_sold",
+        "name": "Rött matlagningsvin",
+        "note": "",
+        "quantity": 100.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "kanel|dry",
+        "name": "Kanel",
+        "note": "",
+        "quantity": 1.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "kryddpeppar|dry",
+        "name": "Kryddpeppar",
+        "note": "",
+        "quantity": 1.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "spiskummin|dry",
+        "name": "Spiskummin",
+        "note": "",
+        "quantity": 1.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "olivolja|as_sold",
+        "name": "Olivolja",
+        "note": "",
+        "quantity": 30.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "Salt",
+        "note": "",
+        "quantity": 7.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c2",
+      "name": "Pilaff",
+      "amounts": [
+       {
+        "ingredient_key": "ris|dry",
+        "name": "Ris",
+        "note": "",
+        "quantity": 300.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "smör|as_sold",
+        "name": "Smör",
+        "note": "",
+        "quantity": 30.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "grönsaksfond|as_sold",
+        "name": "Grönsaksfond",
+        "note": "",
+        "quantity": 20.0,
+        "unit": "ml"
+       }
+      ]
+     },
+     {
+      "id": "c3",
+      "name": "Till servering",
+      "amounts": [
+       {
+        "ingredient_key": "yoghurt naturell|as_sold",
+        "name": "Yoghurt naturell",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "persilja|raw_edible",
+        "name": "Persilja",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "g"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "Skär köttet i tärningar, salta och bryn i olja. Fräs hackad lök och vitlök med.",
+      "ingredient_keys": [
+       "gul lök|raw_edible",
+       "nötkött|raw_edible",
+       "olivolja|as_sold",
+       "salt|as_sold",
+       "vitlök|raw_edible"
+      ],
+      "depends_on": [],
+      "duration_minutes": 12,
+      "parallel_group": null
+     },
+     {
+      "id": "s2",
+      "text": "Rör ner tomatpuré, kanel, kryddpeppar och spiskummin, slå på vinet och tillsätt tomater och 300 ml vatten. Sjud under lock 1 timme och 30 minuter.",
+      "ingredient_keys": [
+       "kanel|dry",
+       "krossade tomater|as_sold",
+       "kryddpeppar|dry",
+       "nötkött|raw_edible",
+       "rött matlagningsvin|as_sold",
+       "spiskummin|dry",
+       "tomatpuré|as_sold"
+      ],
+      "depends_on": [
+       "s1"
+      ],
+      "duration_minutes": 92,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "300 ml",
+        300.0
+       ]
+      ]
+     },
+     {
+      "id": "s3",
+      "text": "Fräs riset i smöret och koka det med fonden och vatten enligt förpackningen.",
+      "ingredient_keys": [
+       "grönsaksfond|as_sold",
+       "ris|dry",
+       "smör|as_sold"
+      ],
+      "depends_on": [
+       "s1"
+      ],
+      "duration_minutes": 20,
+      "parallel_group": null
+     },
+     {
+      "id": "s4",
+      "text": "Servera grytan på pilaffen med yoghurt och persilja.",
+      "ingredient_keys": [
+       "nötkött|raw_edible",
+       "persilja|raw_edible",
+       "ris|dry",
+       "yoghurt naturell|as_sold"
+      ],
+      "depends_on": [
+       "s2",
+       "s3"
+      ],
+      "duration_minutes": 2,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 106,
+    "equipment": [
+     "Gryta",
+     "Kastrull"
+    ],
+    "vegetarian": false,
+    "fish": false,
+    "ingredient_count": 15,
+    "provenance": {
+     "reviewed_at": "2026-11-26",
+     "notes": "Författat och standardiserat med recept-författarverktyget. Inte provlagat. Köp, allergener och näring kvalificeras separat."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "dinner"
+    ],
+    "active_minutes": 14,
+    "waiting_minutes": 92,
+    "total_minutes": 106,
+    "scaling": "reviewed_ranges"
+   }
+  },
+  {
+   "name": "Keftedes med myntayoghurt, ugnspommes och grekisk sallad",
+   "servings": 4,
+   "ingredients": [
+    {
+     "name": "nötfärs",
+     "canonical_name": "nötfärs",
+     "quantity": 600.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "primary",
+     "quantity_min": 500.0,
+     "quantity_max": 900.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "gul lök",
+     "canonical_name": "gul lök",
+     "quantity": 100.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 100.0,
+     "quantity_max": 100.0,
+     "quantity_step": 100.0
+    },
+    {
+     "name": "ströbröd",
+     "canonical_name": "ströbröd",
+     "quantity": 40.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "cooking",
+     "quantity_min": 40.0,
+     "quantity_max": 40.0,
+     "quantity_step": 40.0
+    },
+    {
+     "name": "ägg",
+     "canonical_name": "ägg",
+     "quantity": 50.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "cooking",
+     "product_requirements": [
+      "pack:egg"
+     ],
+     "quantity_min": 50.0,
+     "quantity_max": 50.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "mynta",
+     "canonical_name": "mynta",
+     "quantity": 10.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_shape_trimmed_mint"
+     ],
+     "scales_with": "nötfärs|raw_edible",
+     "quantity_min": 8.5,
+     "quantity_max": 15.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "oregano",
+     "canonical_name": "oregano",
+     "quantity": 1.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "dried_leaf"
+     ],
+     "scales_with": "nötfärs|raw_edible",
+     "quantity_min": 1.0,
+     "quantity_max": 1.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "olivolja",
+     "canonical_name": "olivolja",
+     "quantity": 50.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "cooking",
+     "product_requirements": [
+      "pack:intake_all_expansion_86ac9b2c5ae6"
+     ],
+     "scales_with": "nötfärs|raw_edible",
+     "quantity_min": 45.0,
+     "quantity_max": 65.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 6.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "nötfärs|raw_edible",
+     "quantity_min": 5.0,
+     "quantity_max": 9.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "svartpeppar",
+     "canonical_name": "svartpeppar",
+     "quantity": 1.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:black_pepper"
+     ],
+     "scales_with": "nötfärs|raw_edible",
+     "quantity_min": 1.0,
+     "quantity_max": 1.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "potatis",
+     "canonical_name": "potatis",
+     "quantity": 900.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "side",
+     "quantity_min": 650.0,
+     "quantity_max": 1050.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "yoghurt naturell",
+     "canonical_name": "yoghurt naturell",
+     "quantity": 250.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c3",
+     "required": true,
+     "role": "sauce",
+     "product_requirements": [
+      "plain",
+      "thick"
+     ],
+     "quantity_min": 250.0,
+     "quantity_max": 250.0,
+     "quantity_step": 250.0
+    },
+    {
+     "name": "gurka",
+     "canonical_name": "gurka",
+     "quantity": 200.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c3",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 200.0,
+     "quantity_max": 200.0,
+     "quantity_step": 200.0
+    },
+    {
+     "name": "tomat",
+     "canonical_name": "tomat",
+     "quantity": 250.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c3",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 250.0,
+     "quantity_max": 250.0,
+     "quantity_step": 250.0
+    },
+    {
+     "name": "fetaost",
+     "canonical_name": "fetaost",
+     "quantity": 100.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c3",
+     "required": true,
+     "role": "sauce",
+     "quantity_min": 100.0,
+     "quantity_max": 100.0,
+     "quantity_step": 100.0
+    }
+   ],
+   "instructions": [
+    "Sätt ugnen på 225 °C. Skär potatisen i stavar, vänd med olja och salt och baka 30 minuter.",
+    "Riv löken och blanda med färs, ströbröd, ägg, hälften av myntan, oregano, salt och peppar. Rulla små bullar och platta till.",
+    "Stek keftedes i olja 3 minuter per sida tills de är minst 72 °C i mitten.",
+    "Rör ner resten av myntan i yoghurten. Skär gurka och tomat och toppa med feta.",
+    "Servera keftedes med pommes, myntayoghurt och sallad."
+   ],
+   "design": {
+    "base_id": "smako-greek-keftedes-patates-tiganites",
+    "version": "1.0.0",
+    "variant_id": "base",
+    "cuisines": [
+     "greek"
+    ],
+    "family": "keftedes",
+    "primary_ingredient": "nötfärs",
+    "method": "pan",
+    "side": "potatis",
+    "flavor_profile": [
+     "mynta",
+     "oregano"
+    ],
+    "components": [
+     {
+      "id": "c1",
+      "name": "Keftedes",
+      "amounts": [
+       {
+        "ingredient_key": "nötfärs|raw_edible",
+        "name": "Nötfärs",
+        "note": "",
+        "quantity": 600.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "gul lök|raw_edible",
+        "name": "Gul lök",
+        "note": "",
+        "quantity": 100.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "ströbröd|dry",
+        "name": "Ströbröd",
+        "note": "",
+        "quantity": 40.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "ägg|raw_edible",
+        "name": "Ägg",
+        "note": "",
+        "quantity": 50.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "mynta|raw_edible",
+        "name": "Mynta",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "oregano|dry",
+        "name": "Oregano",
+        "note": "",
+        "quantity": 1.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "olivolja|as_sold",
+        "name": "Olivolja",
+        "note": "",
+        "quantity": 30.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "Salt",
+        "note": "",
+        "quantity": 6.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "svartpeppar|dry",
+        "name": "Svartpeppar",
+        "note": "",
+        "quantity": 1.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c2",
+      "name": "Potatis",
+      "amounts": [
+       {
+        "ingredient_key": "potatis|raw_edible",
+        "name": "Potatis",
+        "note": "",
+        "quantity": 900.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "olivolja|as_sold",
+        "name": "Olivolja",
+        "note": "",
+        "quantity": 20.0,
+        "unit": "ml"
+       }
+      ]
+     },
+     {
+      "id": "c3",
+      "name": "Till servering",
+      "amounts": [
+       {
+        "ingredient_key": "yoghurt naturell|as_sold",
+        "name": "Yoghurt naturell",
+        "note": "",
+        "quantity": 250.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "gurka|raw_edible",
+        "name": "Gurka",
+        "note": "",
+        "quantity": 200.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "tomat|raw_edible",
+        "name": "Tomat",
+        "note": "",
+        "quantity": 250.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "fetaost|as_sold",
+        "name": "Fetaost",
+        "note": "",
+        "quantity": 100.0,
+        "unit": "g"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "Sätt ugnen på 225 °C. Skär potatisen i stavar, vänd med olja och salt och baka 30 minuter.",
+      "ingredient_keys": [
+       "olivolja|as_sold",
+       "potatis|raw_edible"
+      ],
+      "depends_on": [],
+      "duration_minutes": 35,
+      "parallel_group": null
+     },
+     {
+      "id": "s2",
+      "text": "Riv löken och blanda med färs, ströbröd, ägg, hälften av myntan, oregano, salt och peppar. Rulla små bullar och platta till.",
+      "ingredient_keys": [
+       "gul lök|raw_edible",
+       "mynta|raw_edible",
+       "nötfärs|raw_edible",
+       "oregano|dry",
+       "salt|as_sold",
+       "ströbröd|dry",
+       "svartpeppar|dry",
+       "ägg|raw_edible"
+      ],
+      "depends_on": [],
+      "duration_minutes": 12,
+      "parallel_group": null
+     },
+     {
+      "id": "s3",
+      "text": "Stek keftedes i olja 3 minuter per sida tills de är minst 72 °C i mitten.",
+      "ingredient_keys": [
+       "nötfärs|raw_edible",
+       "olivolja|as_sold"
+      ],
+      "depends_on": [
+       "s2"
+      ],
+      "duration_minutes": 10,
+      "parallel_group": null
+     },
+     {
+      "id": "s4",
+      "text": "Rör ner resten av myntan i yoghurten. Skär gurka och tomat och toppa med feta.",
+      "ingredient_keys": [
+       "fetaost|as_sold",
+       "gurka|raw_edible",
+       "mynta|raw_edible",
+       "tomat|raw_edible",
+       "yoghurt naturell|as_sold"
+      ],
+      "depends_on": [],
+      "duration_minutes": 6,
+      "parallel_group": null
+     },
+     {
+      "id": "s5",
+      "text": "Servera keftedes med pommes, myntayoghurt och sallad.",
+      "ingredient_keys": [
+       "nötfärs|raw_edible",
+       "potatis|raw_edible",
+       "yoghurt naturell|as_sold"
+      ],
+      "depends_on": [
+       "s1",
+       "s3",
+       "s4"
+      ],
+      "duration_minutes": 2,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 37,
+    "equipment": [
+     "Stekpanna",
+     "Ugn",
+     "Ugnsplåt",
+     "Skål"
+    ],
+    "vegetarian": false,
+    "fish": false,
+    "ingredient_count": 12,
+    "provenance": {
+     "reviewed_at": "2026-11-26",
+     "notes": "Författat och standardiserat med recept-författarverktyget. Inte provlagat. Köp, allergener och näring kvalificeras separat."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "dinner"
+    ],
+    "active_minutes": 30,
+    "waiting_minutes": 7,
+    "total_minutes": 37,
+    "scaling": "reviewed_ranges"
+   }
+  },
+  {
+   "name": "Fläskgryta med selleri, dill och ägg-citronsås",
+   "servings": 4,
+   "ingredients": [
+    {
+     "name": "fläskkött",
+     "canonical_name": "fläskkött",
+     "quantity": 700.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "primary",
+     "quantity_min": 600.0,
+     "quantity_max": 1050.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "selleri",
+     "canonical_name": "selleri",
+     "quantity": 400.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 400.0,
+     "quantity_max": 400.0,
+     "quantity_step": 400.0
+    },
+    {
+     "name": "purjolök",
+     "canonical_name": "purjolök",
+     "quantity": 200.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "vegetable",
+     "product_requirements": [
+      "pack:intake_all_dc8e01654150"
+     ],
+     "quantity_min": 200.0,
+     "quantity_max": 200.0,
+     "quantity_step": 200.0
+    },
+    {
+     "name": "gul lök",
+     "canonical_name": "gul lök",
+     "quantity": 100.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 100.0,
+     "quantity_max": 100.0,
+     "quantity_step": 100.0
+    },
+    {
+     "name": "olivolja",
+     "canonical_name": "olivolja",
+     "quantity": 30.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "cooking",
+     "product_requirements": [
+      "pack:intake_all_expansion_86ac9b2c5ae6"
+     ],
+     "scales_with": "fläskkött|raw_edible",
+     "quantity_min": 26.0,
+     "quantity_max": 45.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "dill",
+     "canonical_name": "dill",
+     "quantity": 20.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "fläskkött|raw_edible",
+     "quantity_min": 17.0,
+     "quantity_max": 30.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 7.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "fläskkött|raw_edible",
+     "quantity_min": 6.0,
+     "quantity_max": 10.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "svartpeppar",
+     "canonical_name": "svartpeppar",
+     "quantity": 1.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:black_pepper"
+     ],
+     "scales_with": "fläskkött|raw_edible",
+     "quantity_min": 1.0,
+     "quantity_max": 1.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "ägg",
+     "canonical_name": "ägg",
+     "quantity": 100.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "sauce",
+     "product_requirements": [
+      "pack:egg"
+     ],
+     "quantity_min": 100.0,
+     "quantity_max": 100.0,
+     "quantity_step": 100.0
+    },
+    {
+     "name": "citronjuice",
+     "canonical_name": "citronjuice",
+     "quantity": 50.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pure_juice"
+     ],
+     "quantity_min": 50.0,
+     "quantity_max": 50.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "majsstärkelse",
+     "canonical_name": "majsstärkelse",
+     "quantity": 10.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c2",
+     "required": true,
+     "role": "sauce",
+     "product_requirements": [
+      "pack:intake_corn_starch"
+     ],
+     "quantity_min": 10.0,
+     "quantity_max": 10.0,
+     "quantity_step": 10.0
+    },
+    {
+     "name": "bröd",
+     "canonical_name": "bröd",
+     "quantity": 300.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c3",
+     "required": true,
+     "role": "side",
+     "quantity_min": 300.0,
+     "quantity_max": 300.0,
+     "quantity_step": 300.0
+    }
+   ],
+   "instructions": [
+    "Tärna köttet, salta och peppra och bryn i olja. Fräs hackad lök och skivad purjolök med.",
+    "Häll på 600 ml vatten och sjud under lock 50 minuter.",
+    "Lägg i sellerin i bitar och hälften av dillen och sjud 15 minuter tills köttet är mört.",
+    "Vispa ägg, citron och majsstärkelse. Vispa ner en kopp het buljong och rör sedan ner blandningen i grytan från värmen. Värm försiktigt utan att koka.",
+    "Toppa med resten av dillen och servera med bröd."
+   ],
+   "design": {
+    "base_id": "smako-greek-hirino-me-selino-avgolemono",
+    "version": "1.0.0",
+    "variant_id": "base",
+    "cuisines": [
+     "greek"
+    ],
+    "family": "hirino me selino",
+    "primary_ingredient": "fläskkött",
+    "method": "pot",
+    "side": "bröd",
+    "flavor_profile": [
+     "dill",
+     "citron"
+    ],
+    "components": [
+     {
+      "id": "c1",
+      "name": "Gryta",
+      "amounts": [
+       {
+        "ingredient_key": "fläskkött|raw_edible",
+        "name": "Fläskkött",
+        "note": "",
+        "quantity": 700.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "selleri|raw_edible",
+        "name": "Selleri",
+        "note": "",
+        "quantity": 400.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "purjolök|raw_edible",
+        "name": "Purjolök",
+        "note": "",
+        "quantity": 200.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "gul lök|raw_edible",
+        "name": "Gul lök",
+        "note": "",
+        "quantity": 100.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "olivolja|as_sold",
+        "name": "Olivolja",
+        "note": "",
+        "quantity": 30.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "dill|raw_edible",
+        "name": "Dill",
+        "note": "",
+        "quantity": 20.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "Salt",
+        "note": "",
+        "quantity": 7.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "svartpeppar|dry",
+        "name": "Svartpeppar",
+        "note": "",
+        "quantity": 1.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c2",
+      "name": "Avgolemono",
+      "amounts": [
+       {
+        "ingredient_key": "ägg|raw_edible",
+        "name": "Ägg",
+        "note": "",
+        "quantity": 100.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "citronjuice|as_sold",
+        "name": "Citronjuice",
+        "note": "",
+        "quantity": 50.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "majsstärkelse|dry",
+        "name": "Majsstärkelse",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c3",
+      "name": "Till servering",
+      "amounts": [
+       {
+        "ingredient_key": "bröd|as_sold",
+        "name": "Grovt bröd",
+        "note": "",
+        "quantity": 300.0,
+        "unit": "g"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "Tärna köttet, salta och peppra och bryn i olja. Fräs hackad lök och skivad purjolök med.",
+      "ingredient_keys": [
+       "fläskkött|raw_edible",
+       "gul lök|raw_edible",
+       "olivolja|as_sold",
+       "purjolök|raw_edible",
+       "salt|as_sold",
+       "svartpeppar|dry"
+      ],
+      "depends_on": [],
+      "duration_minutes": 12,
+      "parallel_group": null
+     },
+     {
+      "id": "s2",
+      "text": "Häll på 600 ml vatten och sjud under lock 50 minuter.",
+      "ingredient_keys": [
+       "fläskkött|raw_edible"
+      ],
+      "depends_on": [
+       "s1"
+      ],
+      "duration_minutes": 50,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "600 ml",
+        600.0
+       ]
+      ]
+     },
+     {
+      "id": "s3",
+      "text": "Lägg i sellerin i bitar och hälften av dillen och sjud 15 minuter tills köttet är mört.",
+      "ingredient_keys": [
+       "dill|raw_edible",
+       "selleri|raw_edible"
+      ],
+      "depends_on": [
+       "s2"
+      ],
+      "duration_minutes": 15,
+      "parallel_group": null
+     },
+     {
+      "id": "s4",
+      "text": "Vispa ägg, citron och majsstärkelse. Vispa ner en kopp het buljong och rör sedan ner blandningen i grytan från värmen. Värm försiktigt utan att koka.",
+      "ingredient_keys": [
+       "citronjuice|as_sold",
+       "majsstärkelse|dry",
+       "ägg|raw_edible"
+      ],
+      "depends_on": [
+       "s3"
+      ],
+      "duration_minutes": 6,
+      "parallel_group": null
+     },
+     {
+      "id": "s5",
+      "text": "Toppa med resten av dillen och servera med bröd.",
+      "ingredient_keys": [
+       "bröd|as_sold",
+       "dill|raw_edible"
+      ],
+      "depends_on": [
+       "s4"
+      ],
+      "duration_minutes": 2,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 85,
+    "equipment": [
+     "Gryta",
+     "Skål"
+    ],
+    "vegetarian": false,
+    "fish": false,
+    "ingredient_count": 10,
+    "provenance": {
+     "reviewed_at": "2026-11-26",
+     "notes": "Författat och standardiserat med recept-författarverktyget. Inte provlagat. Köp, allergener och näring kvalificeras separat."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "dinner"
+    ],
+    "active_minutes": 20,
+    "waiting_minutes": 65,
+    "total_minutes": 85,
+    "scaling": "reviewed_ranges"
+   }
+  },
+  {
+   "name": "Kreatopita – köttfärspaj i filodeg med grekisk sallad",
+   "servings": 4,
+   "ingredients": [
+    {
+     "name": "nötfärs",
+     "canonical_name": "nötfärs",
+     "quantity": 600.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "primary",
+     "quantity_min": 500.0,
+     "quantity_max": 900.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "gul lök",
+     "canonical_name": "gul lök",
+     "quantity": 200.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 200.0,
+     "quantity_max": 200.0,
+     "quantity_step": 200.0
+    },
+    {
+     "name": "olivolja",
+     "canonical_name": "olivolja",
+     "quantity": 20.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "cooking",
+     "product_requirements": [
+      "pack:intake_all_expansion_86ac9b2c5ae6"
+     ],
+     "scales_with": "nötfärs|raw_edible",
+     "quantity_min": 17.0,
+     "quantity_max": 30.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "tomatpuré",
+     "canonical_name": "tomatpuré",
+     "quantity": 20.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "nötfärs|raw_edible",
+     "quantity_min": 17.0,
+     "quantity_max": 30.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "kanel",
+     "canonical_name": "kanel",
+     "quantity": 1.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "ground"
+     ],
+     "scales_with": "nötfärs|raw_edible",
+     "quantity_min": 1.0,
+     "quantity_max": 1.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "mynta",
+     "canonical_name": "mynta",
+     "quantity": 10.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_shape_trimmed_mint"
+     ],
+     "scales_with": "nötfärs|raw_edible",
+     "quantity_min": 8.5,
+     "quantity_max": 15.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "ägg",
+     "canonical_name": "ägg",
+     "quantity": 100.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "sauce",
+     "product_requirements": [
+      "pack:egg"
+     ],
+     "quantity_min": 100.0,
+     "quantity_max": 100.0,
+     "quantity_step": 100.0
+    },
+    {
+     "name": "fetaost",
+     "canonical_name": "fetaost",
+     "quantity": 100.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "sauce",
+     "quantity_min": 100.0,
+     "quantity_max": 100.0,
+     "quantity_step": 100.0
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 6.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "nötfärs|raw_edible",
+     "quantity_min": 5.0,
+     "quantity_max": 9.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "svartpeppar",
+     "canonical_name": "svartpeppar",
+     "quantity": 1.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:black_pepper"
+     ],
+     "scales_with": "nötfärs|raw_edible",
+     "quantity_min": 1.0,
+     "quantity_max": 1.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "filodeg",
+     "canonical_name": "filodeg",
+     "quantity": 250.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "side",
+     "product_requirements": [
+      "pack:intake_all_84bf8a612357"
+     ],
+     "quantity_min": 250.0,
+     "quantity_max": 250.0,
+     "quantity_step": 250.0
+    },
+    {
+     "name": "smör",
+     "canonical_name": "smör",
+     "quantity": 60.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "cooking",
+     "product_requirements": [
+      "pack:intake_butter"
+     ],
+     "quantity_min": 60.0,
+     "quantity_max": 60.0,
+     "quantity_step": 60.0
+    },
+    {
+     "name": "gurka",
+     "canonical_name": "gurka",
+     "quantity": 200.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c3",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 200.0,
+     "quantity_max": 200.0,
+     "quantity_step": 200.0
+    },
+    {
+     "name": "tomat",
+     "canonical_name": "tomat",
+     "quantity": 250.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c3",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 250.0,
+     "quantity_max": 250.0,
+     "quantity_step": 250.0
+    },
+    {
+     "name": "rödlök",
+     "canonical_name": "rödlök",
+     "quantity": 60.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c3",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 60.0,
+     "quantity_max": 60.0,
+     "quantity_step": 60.0
+    }
+   ],
+   "instructions": [
+    "Fräs hackad lök i olja, bryn färsen tills den är genomstekt och rör ner tomatpuré, kanel, salt och peppar. Låt svalna något.",
+    "Rör ner ägg, smulad feta och hackad mynta i färsen.",
+    "Sätt ugnen på 190 °C. Lägg hälften av filoarken i en smord form och pensla med smält smör. Bred ut fyllningen och täck med resten av arken.",
+    "Baka 35–40 minuter tills pajen är gyllene och fyllningen minst 72 °C.",
+    "Skär gurka, tomat och rödlök till en sallad och servera till pajen."
+   ],
+   "design": {
+    "base_id": "smako-greek-kreatopita-filo",
+    "version": "1.0.0",
+    "variant_id": "base",
+    "cuisines": [
+     "greek"
+    ],
+    "family": "kreatopita",
+    "primary_ingredient": "nötfärs",
+    "method": "oven",
+    "side": "filodeg",
+    "flavor_profile": [
+     "kanel",
+     "mynta"
+    ],
+    "components": [
+     {
+      "id": "c1",
+      "name": "Fyllning",
+      "amounts": [
+       {
+        "ingredient_key": "nötfärs|raw_edible",
+        "name": "Nötfärs",
+        "note": "",
+        "quantity": 600.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "gul lök|raw_edible",
+        "name": "Gul lök",
+        "note": "",
+        "quantity": 200.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "olivolja|as_sold",
+        "name": "Olivolja",
+        "note": "",
+        "quantity": 20.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "tomatpuré|as_sold",
+        "name": "Tomatpuré",
+        "note": "",
+        "quantity": 20.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "kanel|dry",
+        "name": "Kanel",
+        "note": "",
+        "quantity": 1.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "mynta|raw_edible",
+        "name": "Mynta",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "ägg|raw_edible",
+        "name": "Ägg",
+        "note": "",
+        "quantity": 100.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "fetaost|as_sold",
+        "name": "Fetaost",
+        "note": "",
+        "quantity": 100.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "Salt",
+        "note": "",
+        "quantity": 6.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "svartpeppar|dry",
+        "name": "Svartpeppar",
+        "note": "",
+        "quantity": 1.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c2",
+      "name": "Deg",
+      "amounts": [
+       {
+        "ingredient_key": "filodeg|as_sold",
+        "name": "Filodeg",
+        "note": "",
+        "quantity": 250.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "smör|as_sold",
+        "name": "Smör",
+        "note": "",
+        "quantity": 60.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c3",
+      "name": "Sallad",
+      "amounts": [
+       {
+        "ingredient_key": "gurka|raw_edible",
+        "name": "Gurka",
+        "note": "",
+        "quantity": 200.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "tomat|raw_edible",
+        "name": "Tomat",
+        "note": "",
+        "quantity": 250.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "rödlök|raw_edible",
+        "name": "Rödlök",
+        "note": "",
+        "quantity": 60.0,
+        "unit": "g"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "Fräs hackad lök i olja, bryn färsen tills den är genomstekt och rör ner tomatpuré, kanel, salt och peppar. Låt svalna något.",
+      "ingredient_keys": [
+       "gul lök|raw_edible",
+       "kanel|dry",
+       "nötfärs|raw_edible",
+       "olivolja|as_sold",
+       "salt|as_sold",
+       "svartpeppar|dry",
+       "tomatpuré|as_sold"
+      ],
+      "depends_on": [],
+      "duration_minutes": 15,
+      "parallel_group": null
+     },
+     {
+      "id": "s2",
+      "text": "Rör ner ägg, smulad feta och hackad mynta i färsen.",
+      "ingredient_keys": [
+       "fetaost|as_sold",
+       "mynta|raw_edible",
+       "nötfärs|raw_edible",
+       "ägg|raw_edible"
+      ],
+      "depends_on": [
+       "s1"
+      ],
+      "duration_minutes": 3,
+      "parallel_group": null
+     },
+     {
+      "id": "s3",
+      "text": "Sätt ugnen på 190 °C. Lägg hälften av filoarken i en smord form och pensla med smält smör. Bred ut fyllningen och täck med resten av arken.",
+      "ingredient_keys": [
+       "filodeg|as_sold",
+       "nötfärs|raw_edible",
+       "smör|as_sold"
+      ],
+      "depends_on": [
+       "s2"
+      ],
+      "duration_minutes": 12,
+      "parallel_group": null
+     },
+     {
+      "id": "s4",
+      "text": "Baka 35–40 minuter tills pajen är gyllene och fyllningen minst 72 °C.",
+      "ingredient_keys": [
+       "filodeg|as_sold"
+      ],
+      "depends_on": [
+       "s3"
+      ],
+      "duration_minutes": 40,
+      "parallel_group": null
+     },
+     {
+      "id": "s5",
+      "text": "Skär gurka, tomat och rödlök till en sallad och servera till pajen.",
+      "ingredient_keys": [
+       "gurka|raw_edible",
+       "rödlök|raw_edible",
+       "tomat|raw_edible"
+      ],
+      "depends_on": [],
+      "duration_minutes": 6,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 70,
+    "equipment": [
+     "Ugn",
+     "Ugnsform",
+     "Stekpanna"
+    ],
+    "vegetarian": false,
+    "fish": false,
+    "ingredient_count": 13,
+    "provenance": {
+     "reviewed_at": "2026-11-26",
+     "notes": "Författat och standardiserat med recept-författarverktyget. Inte provlagat. Köp, allergener och näring kvalificeras separat."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "dinner"
+    ],
+    "active_minutes": 36,
+    "waiting_minutes": 34,
+    "total_minutes": 70,
+    "scaling": "reviewed_ranges"
+   }
+  },
+  {
+   "name": "Grillad fläskkarré med citronpotatis och tzatziki",
+   "servings": 4,
+   "ingredients": [
+    {
+     "name": "fläskkarré",
+     "canonical_name": "fläskkarré",
+     "quantity": 700.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "primary",
+     "product_requirements": [
+      "pack:intake_all_expansion_487e551f21df"
+     ],
+     "quantity_min": 600.0,
+     "quantity_max": 1050.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "olivolja",
+     "canonical_name": "olivolja",
+     "quantity": 50.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "cooking",
+     "product_requirements": [
+      "pack:intake_all_expansion_86ac9b2c5ae6"
+     ],
+     "scales_with": "fläskkarré|raw_edible",
+     "quantity_min": 47.0,
+     "quantity_max": 60.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "oregano",
+     "canonical_name": "oregano",
+     "quantity": 2.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "dried_leaf"
+     ],
+     "scales_with": "fläskkarré|raw_edible",
+     "quantity_min": 1.5,
+     "quantity_max": 3.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 6.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "fläskkarré|raw_edible",
+     "quantity_min": 5.0,
+     "quantity_max": 9.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "svartpeppar",
+     "canonical_name": "svartpeppar",
+     "quantity": 1.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:black_pepper"
+     ],
+     "scales_with": "fläskkarré|raw_edible",
+     "quantity_min": 1.0,
+     "quantity_max": 1.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "potatis",
+     "canonical_name": "potatis",
+     "quantity": 900.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "side",
+     "quantity_min": 650.0,
+     "quantity_max": 1050.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "citronjuice",
+     "canonical_name": "citronjuice",
+     "quantity": 50.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pure_juice"
+     ],
+     "quantity_min": 50.0,
+     "quantity_max": 50.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "vitlök",
+     "canonical_name": "vitlök",
+     "quantity": 10.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 10.0,
+     "quantity_max": 10.0,
+     "quantity_step": 10.0
+    },
+    {
+     "name": "grönsaksfond",
+     "canonical_name": "grönsaksfond",
+     "quantity": 20.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_round2_5a0df72f98a3"
+     ],
+     "quantity_min": 20.0,
+     "quantity_max": 20.0,
+     "quantity_step": 20.0
+    },
+    {
+     "name": "yoghurt naturell",
+     "canonical_name": "yoghurt naturell",
+     "quantity": 250.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c3",
+     "required": true,
+     "role": "sauce",
+     "product_requirements": [
+      "plain",
+      "thick"
+     ],
+     "quantity_min": 250.0,
+     "quantity_max": 250.0,
+     "quantity_step": 250.0
+    },
+    {
+     "name": "gurka",
+     "canonical_name": "gurka",
+     "quantity": 200.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c3",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 200.0,
+     "quantity_max": 200.0,
+     "quantity_step": 200.0
+    },
+    {
+     "name": "dill",
+     "canonical_name": "dill",
+     "quantity": 10.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c3",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 10.0,
+     "quantity_max": 10.0,
+     "quantity_step": 10.0
+    }
+   ],
+   "instructions": [
+    "Sätt ugnen på 220 °C. Skär potatisen i klyftor och vänd med citron, olja, pressad vitlök, salt, fonden och 200 ml vatten i en form. Baka 50 minuter.",
+    "Riv gurkan, krama ur vätskan och blanda med yoghurt, dill och salt.",
+    "Skiva karrén i 2 cm tjocka skivor, pensla med olja och krydda med oregano, salt och peppar.",
+    "Grilla köttet 4–5 minuter per sida tills det är minst 68 °C i mitten. Låt vila.",
+    "Servera med citronpotatisen och tzatziki."
+   ],
+   "design": {
+    "base_id": "smako-greek-brizola-hirini-lemonates-patates",
+    "version": "1.0.0",
+    "variant_id": "base",
+    "cuisines": [
+     "greek"
+    ],
+    "family": "brizola",
+    "primary_ingredient": "fläskkarré",
+    "method": "pan",
+    "side": "potatis",
+    "flavor_profile": [
+     "citron",
+     "oregano"
+    ],
+    "components": [
+     {
+      "id": "c1",
+      "name": "Kött",
+      "amounts": [
+       {
+        "ingredient_key": "fläskkarré|raw_edible",
+        "name": "Fläskkarré",
+        "note": "",
+        "quantity": 700.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "olivolja|as_sold",
+        "name": "Olivolja",
+        "note": "",
+        "quantity": 20.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "oregano|dry",
+        "name": "Oregano",
+        "note": "",
+        "quantity": 2.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "Salt",
+        "note": "",
+        "quantity": 6.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "svartpeppar|dry",
+        "name": "Svartpeppar",
+        "note": "",
+        "quantity": 1.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c2",
+      "name": "Citronpotatis",
+      "amounts": [
+       {
+        "ingredient_key": "potatis|raw_edible",
+        "name": "Potatis",
+        "note": "",
+        "quantity": 900.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "citronjuice|as_sold",
+        "name": "Citronjuice",
+        "note": "",
+        "quantity": 50.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "olivolja|as_sold",
+        "name": "Olivolja",
+        "note": "",
+        "quantity": 30.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "vitlök|raw_edible",
+        "name": "Vitlök",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "grönsaksfond|as_sold",
+        "name": "Grönsaksfond",
+        "note": "",
+        "quantity": 20.0,
+        "unit": "ml"
+       }
+      ]
+     },
+     {
+      "id": "c3",
+      "name": "Tzatziki",
+      "amounts": [
+       {
+        "ingredient_key": "yoghurt naturell|as_sold",
+        "name": "Yoghurt naturell",
+        "note": "",
+        "quantity": 250.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "gurka|raw_edible",
+        "name": "Gurka",
+        "note": "",
+        "quantity": 200.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "dill|raw_edible",
+        "name": "Dill",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "g"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "Sätt ugnen på 220 °C. Skär potatisen i klyftor och vänd med citron, olja, pressad vitlök, salt, fonden och 200 ml vatten i en form. Baka 50 minuter.",
+      "ingredient_keys": [
+       "citronjuice|as_sold",
+       "grönsaksfond|as_sold",
+       "olivolja|as_sold",
+       "potatis|raw_edible",
+       "vitlök|raw_edible"
+      ],
+      "depends_on": [],
+      "duration_minutes": 55,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "200 ml",
+        200.0
+       ]
+      ]
+     },
+     {
+      "id": "s2",
+      "text": "Riv gurkan, krama ur vätskan och blanda med yoghurt, dill och salt.",
+      "ingredient_keys": [
+       "dill|raw_edible",
+       "gurka|raw_edible",
+       "yoghurt naturell|as_sold"
+      ],
+      "depends_on": [],
+      "duration_minutes": 6,
+      "parallel_group": null
+     },
+     {
+      "id": "s3",
+      "text": "Skiva karrén i 2 cm tjocka skivor, pensla med olja och krydda med oregano, salt och peppar.",
+      "ingredient_keys": [
+       "fläskkarré|raw_edible",
+       "olivolja|as_sold",
+       "oregano|dry",
+       "salt|as_sold",
+       "svartpeppar|dry"
+      ],
+      "depends_on": [],
+      "duration_minutes": 5,
+      "parallel_group": null
+     },
+     {
+      "id": "s4",
+      "text": "Grilla köttet 4–5 minuter per sida tills det är minst 68 °C i mitten. Låt vila.",
+      "ingredient_keys": [
+       "fläskkarré|raw_edible"
+      ],
+      "depends_on": [
+       "s3"
+      ],
+      "duration_minutes": 12,
+      "parallel_group": null
+     },
+     {
+      "id": "s5",
+      "text": "Servera med citronpotatisen och tzatziki.",
+      "ingredient_keys": [
+       "fläskkarré|raw_edible",
+       "potatis|raw_edible",
+       "yoghurt naturell|as_sold"
+      ],
+      "depends_on": [
+       "s1",
+       "s2",
+       "s4"
+      ],
+      "duration_minutes": 2,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 57,
+    "equipment": [
+     "Grillpanna",
+     "Ugn",
+     "Ugnsform",
+     "Skål"
+    ],
+    "vegetarian": false,
+    "fish": false,
+    "ingredient_count": 10,
+    "provenance": {
+     "reviewed_at": "2026-11-26",
+     "notes": "Författat och standardiserat med recept-författarverktyget. Inte provlagat. Köp, allergener och näring kvalificeras separat."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "dinner"
+    ],
+    "active_minutes": 25,
+    "waiting_minutes": 32,
+    "total_minutes": 57,
+    "scaling": "reviewed_ranges"
+   }
+  },
+  {
+   "name": "Stekt vit fisk med skordalia, rödbetor och grönsallad",
+   "servings": 4,
+   "ingredients": [
+    {
+     "name": "fisk",
+     "canonical_name": "fisk",
+     "quantity": 600.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "primary",
+     "product_requirements": [
+      "pack:cod"
+     ],
+     "quantity_min": 500.0,
+     "quantity_max": 900.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "vetemjöl",
+     "canonical_name": "vetemjöl",
+     "quantity": 40.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "cooking",
+     "quantity_min": 40.0,
+     "quantity_max": 40.0,
+     "quantity_step": 40.0
+    },
+    {
+     "name": "olivolja",
+     "canonical_name": "olivolja",
+     "quantity": 100.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "cooking",
+     "product_requirements": [
+      "pack:intake_all_expansion_86ac9b2c5ae6"
+     ],
+     "scales_with": "fisk|raw_edible",
+     "quantity_min": 93.0,
+     "quantity_max": 120.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 5.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "fisk|raw_edible",
+     "quantity_min": 4.0,
+     "quantity_max": 7.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "potatis",
+     "canonical_name": "potatis",
+     "quantity": 700.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "side",
+     "quantity_min": 500.0,
+     "quantity_max": 800.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "vitlök",
+     "canonical_name": "vitlök",
+     "quantity": 20.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 20.0,
+     "quantity_max": 20.0,
+     "quantity_step": 20.0
+    },
+    {
+     "name": "rödvinsvinäger",
+     "canonical_name": "rödvinsvinäger",
+     "quantity": 15.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_d0351d1f36c1"
+     ],
+     "quantity_min": 15.0,
+     "quantity_max": 15.0,
+     "quantity_step": 15.0
+    },
+    {
+     "name": "mandel",
+     "canonical_name": "mandel",
+     "quantity": 40.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "sauce",
+     "product_requirements": [
+      "pack:intake_almonds"
+     ],
+     "quantity_min": 40.0,
+     "quantity_max": 40.0,
+     "quantity_step": 40.0
+    },
+    {
+     "name": "rödbeta",
+     "canonical_name": "rödbeta",
+     "quantity": 400.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c3",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 400.0,
+     "quantity_max": 400.0,
+     "quantity_step": 400.0
+    },
+    {
+     "name": "sallad",
+     "canonical_name": "sallad",
+     "quantity": 120.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c3",
+     "required": true,
+     "role": "vegetable",
+     "product_requirements": [
+      "pack:intake_all_16d63b25fed0"
+     ],
+     "quantity_min": 120.0,
+     "quantity_max": 120.0,
+     "quantity_step": 120.0
+    },
+    {
+     "name": "citronjuice",
+     "canonical_name": "citronjuice",
+     "quantity": 20.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c3",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pure_juice"
+     ],
+     "quantity_min": 20.0,
+     "quantity_max": 20.0,
+     "quantity_step": 20.0
+    }
+   ],
+   "instructions": [
+    "Koka rödbetorna mjuka i 35 minuter, skala och skiva.",
+    "Koka den skalade potatisen mjuk. Mosa den med pressad vitlök, olja, vinäger, finhackad mandel och salt.",
+    "Salta fisken och vänd i mjöl. Stek i olja 3–4 minuter per sida tills den är minst 63 °C.",
+    "Servera fisken med skordalia, rödbetor, sallad och citron."
+   ],
+   "design": {
+    "base_id": "smako-greek-bakaliaros-skordalia",
+    "version": "1.0.0",
+    "variant_id": "base",
+    "cuisines": [
+     "greek"
+    ],
+    "family": "skordalia",
+    "primary_ingredient": "fisk",
+    "method": "pan",
+    "side": "potatis",
+    "flavor_profile": [
+     "vitlök",
+     "citron"
+    ],
+    "components": [
+     {
+      "id": "c1",
+      "name": "Fisk",
+      "amounts": [
+       {
+        "ingredient_key": "fisk|raw_edible",
+        "name": "Torskfilé",
+        "note": "",
+        "quantity": 600.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "vetemjöl|dry",
+        "name": "Vetemjöl",
+        "note": "",
+        "quantity": 40.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "olivolja|as_sold",
+        "name": "Olivolja",
+        "note": "",
+        "quantity": 40.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "Salt",
+        "note": "",
+        "quantity": 5.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c2",
+      "name": "Skordalia",
+      "amounts": [
+       {
+        "ingredient_key": "potatis|raw_edible",
+        "name": "Potatis",
+        "note": "",
+        "quantity": 700.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "vitlök|raw_edible",
+        "name": "Vitlök",
+        "note": "",
+        "quantity": 20.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "olivolja|as_sold",
+        "name": "Olivolja",
+        "note": "",
+        "quantity": 60.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "rödvinsvinäger|as_sold",
+        "name": "Rödvinsvinäger",
+        "note": "",
+        "quantity": 15.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "mandel|as_sold",
+        "name": "Mandel",
+        "note": "",
+        "quantity": 40.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c3",
+      "name": "Till servering",
+      "amounts": [
+       {
+        "ingredient_key": "rödbeta|raw_edible",
+        "name": "Rödbeta",
+        "note": "",
+        "quantity": 400.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "sallad|raw_edible",
+        "name": "Sallad",
+        "note": "",
+        "quantity": 120.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "citronjuice|as_sold",
+        "name": "Citronjuice",
+        "note": "",
+        "quantity": 20.0,
+        "unit": "ml"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "Koka rödbetorna mjuka i 35 minuter, skala och skiva.",
+      "ingredient_keys": [
+       "rödbeta|raw_edible"
+      ],
+      "depends_on": [],
+      "duration_minutes": 40,
+      "parallel_group": null
+     },
+     {
+      "id": "s2",
+      "text": "Koka den skalade potatisen mjuk. Mosa den med pressad vitlök, olja, vinäger, finhackad mandel och salt.",
+      "ingredient_keys": [
+       "mandel|as_sold",
+       "olivolja|as_sold",
+       "potatis|raw_edible",
+       "rödvinsvinäger|as_sold",
+       "vitlök|raw_edible"
+      ],
+      "depends_on": [],
+      "duration_minutes": 28,
+      "parallel_group": null
+     },
+     {
+      "id": "s3",
+      "text": "Salta fisken och vänd i mjöl. Stek i olja 3–4 minuter per sida tills den är minst 63 °C.",
+      "ingredient_keys": [
+       "fisk|raw_edible",
+       "olivolja|as_sold",
+       "salt|as_sold",
+       "vetemjöl|dry"
+      ],
+      "depends_on": [],
+      "duration_minutes": 10,
+      "parallel_group": null
+     },
+     {
+      "id": "s4",
+      "text": "Servera fisken med skordalia, rödbetor, sallad och citron.",
+      "ingredient_keys": [
+       "citronjuice|as_sold",
+       "fisk|raw_edible",
+       "potatis|raw_edible",
+       "rödbeta|raw_edible",
+       "sallad|raw_edible"
+      ],
+      "depends_on": [
+       "s1",
+       "s2",
+       "s3"
+      ],
+      "duration_minutes": 3,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 43,
+    "equipment": [
+     "Stekpanna",
+     "Kastrull",
+     "Potatisstöt"
+    ],
+    "vegetarian": false,
+    "fish": true,
+    "ingredient_count": 10,
+    "provenance": {
+     "reviewed_at": "2026-11-26",
+     "notes": "Författat och standardiserat med recept-författarverktyget. Inte provlagat. Köp, allergener och näring kvalificeras separat."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "dinner"
+    ],
+    "active_minutes": 13,
+    "waiting_minutes": 30,
+    "total_minutes": 43,
+    "scaling": "reviewed_ranges"
+   }
+  },
+  {
+   "name": "Kakavia – grekisk fisksoppa med potatis och citron",
+   "servings": 4,
+   "ingredients": [
+    {
+     "name": "fisk",
+     "canonical_name": "fisk",
+     "quantity": 600.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "primary",
+     "quantity_min": 500.0,
+     "quantity_max": 900.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "potatis",
+     "canonical_name": "potatis",
+     "quantity": 400.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 400.0,
+     "quantity_max": 400.0,
+     "quantity_step": 400.0
+    },
+    {
+     "name": "gul lök",
+     "canonical_name": "gul lök",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    },
+    {
+     "name": "morot",
+     "canonical_name": "morot",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    },
+    {
+     "name": "selleri",
+     "canonical_name": "selleri",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    },
+    {
+     "name": "tomat",
+     "canonical_name": "tomat",
+     "quantity": 250.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 250.0,
+     "quantity_max": 250.0,
+     "quantity_step": 250.0
+    },
+    {
+     "name": "olivolja",
+     "canonical_name": "olivolja",
+     "quantity": 50.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "cooking",
+     "product_requirements": [
+      "pack:intake_all_expansion_86ac9b2c5ae6"
+     ],
+     "scales_with": "fisk|raw_edible",
+     "quantity_min": 42.0,
+     "quantity_max": 75.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "lagerblad",
+     "canonical_name": "lagerblad",
+     "quantity": 1.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_expansion_b43ed6916a64"
+     ],
+     "scales_with": "fisk|raw_edible",
+     "quantity_min": 1.0,
+     "quantity_max": 1.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "citronjuice",
+     "canonical_name": "citronjuice",
+     "quantity": 40.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pure_juice"
+     ],
+     "scales_with": "fisk|raw_edible",
+     "quantity_min": 33.0,
+     "quantity_max": 60.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 8.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "fisk|raw_edible",
+     "quantity_min": 6.5,
+     "quantity_max": 12.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "svartpeppar",
+     "canonical_name": "svartpeppar",
+     "quantity": 1.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:black_pepper"
+     ],
+     "scales_with": "fisk|raw_edible",
+     "quantity_min": 1.0,
+     "quantity_max": 1.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "persilja",
+     "canonical_name": "persilja",
+     "quantity": 15.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 15.0,
+     "quantity_max": 15.0,
+     "quantity_step": 15.0
+    },
+    {
+     "name": "bröd",
+     "canonical_name": "bröd",
+     "quantity": 300.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "side",
+     "quantity_min": 300.0,
+     "quantity_max": 300.0,
+     "quantity_step": 300.0
+    }
+   ],
+   "instructions": [
+    "Fräs hackad lök i olja. Tillsätt potatis, morot och selleri i bitar, tomat, lagerblad och 1300 ml vatten.",
+    "Sjud 20 minuter tills grönsakerna är mjuka. Salta.",
+    "Lägg i fisken i bitar och sjud 6–8 minuter tills den är minst 63 °C.",
+    "Smaka av med citron och peppar, toppa med persilja och servera med bröd."
+   ],
+   "design": {
+    "base_id": "smako-greek-kakavia-psarosoupa",
+    "version": "1.0.0",
+    "variant_id": "base",
+    "cuisines": [
+     "greek"
+    ],
+    "family": "kakavia",
+    "primary_ingredient": "fisk",
+    "method": "pot",
+    "side": "bröd",
+    "flavor_profile": [
+     "citron",
+     "selleri"
+    ],
+    "components": [
+     {
+      "id": "c1",
+      "name": "Soppa",
+      "amounts": [
+       {
+        "ingredient_key": "fisk|raw_edible",
+        "name": "Vit fiskfilé, t.ex. sej eller torsk",
+        "note": "",
+        "quantity": 600.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "potatis|raw_edible",
+        "name": "Potatis",
+        "note": "",
+        "quantity": 400.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "gul lök|raw_edible",
+        "name": "Gul lök",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "morot|raw_edible",
+        "name": "Morot",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "selleri|raw_edible",
+        "name": "Selleri",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "tomat|raw_edible",
+        "name": "Tomat",
+        "note": "",
+        "quantity": 250.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "olivolja|as_sold",
+        "name": "Olivolja",
+        "note": "",
+        "quantity": 50.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "lagerblad|dry",
+        "name": "Lagerblad",
+        "note": "",
+        "quantity": 1.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "citronjuice|as_sold",
+        "name": "Citronjuice",
+        "note": "",
+        "quantity": 40.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "Salt",
+        "note": "",
+        "quantity": 8.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "svartpeppar|dry",
+        "name": "Svartpeppar",
+        "note": "",
+        "quantity": 1.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c2",
+      "name": "Till servering",
+      "amounts": [
+       {
+        "ingredient_key": "persilja|raw_edible",
+        "name": "Persilja",
+        "note": "",
+        "quantity": 15.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "bröd|as_sold",
+        "name": "Grovt bröd",
+        "note": "",
+        "quantity": 300.0,
+        "unit": "g"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "Fräs hackad lök i olja. Tillsätt potatis, morot och selleri i bitar, tomat, lagerblad och 1300 ml vatten.",
+      "ingredient_keys": [
+       "gul lök|raw_edible",
+       "lagerblad|dry",
+       "morot|raw_edible",
+       "olivolja|as_sold",
+       "potatis|raw_edible",
+       "selleri|raw_edible",
+       "tomat|raw_edible"
+      ],
+      "depends_on": [],
+      "duration_minutes": 10,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "1300 ml",
+        1300.0
+       ]
+      ]
+     },
+     {
+      "id": "s2",
+      "text": "Sjud 20 minuter tills grönsakerna är mjuka. Salta.",
+      "ingredient_keys": [
+       "potatis|raw_edible",
+       "salt|as_sold"
+      ],
+      "depends_on": [
+       "s1"
+      ],
+      "duration_minutes": 20,
+      "parallel_group": null
+     },
+     {
+      "id": "s3",
+      "text": "Lägg i fisken i bitar och sjud 6–8 minuter tills den är minst 63 °C.",
+      "ingredient_keys": [
+       "fisk|raw_edible"
+      ],
+      "depends_on": [
+       "s2"
+      ],
+      "duration_minutes": 8,
+      "parallel_group": null
+     },
+     {
+      "id": "s4",
+      "text": "Smaka av med citron och peppar, toppa med persilja och servera med bröd.",
+      "ingredient_keys": [
+       "bröd|as_sold",
+       "citronjuice|as_sold",
+       "persilja|raw_edible",
+       "svartpeppar|dry"
+      ],
+      "depends_on": [
+       "s3"
+      ],
+      "duration_minutes": 3,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 41,
+    "equipment": [
+     "Kastrull"
+    ],
+    "vegetarian": false,
+    "fish": true,
+    "ingredient_count": 11,
+    "provenance": {
+     "reviewed_at": "2026-11-26",
+     "notes": "Författat och standardiserat med recept-författarverktyget. Inte provlagat. Köp, allergener och näring kvalificeras separat."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "dinner"
+    ],
+    "active_minutes": 21,
+    "waiting_minutes": 20,
+    "total_minutes": 41,
+    "scaling": "reviewed_ranges"
+   }
+  },
+  {
+   "name": "Ugnsbakad lax med citron, dill och kritharaki med spenat",
+   "servings": 4,
+   "ingredients": [
+    {
+     "name": "lax",
+     "canonical_name": "lax",
+     "quantity": 600.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "primary",
+     "product_requirements": [
+      "pack:salmon"
+     ],
+     "quantity_min": 500.0,
+     "quantity_max": 900.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "olivolja",
+     "canonical_name": "olivolja",
+     "quantity": 15.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "cooking",
+     "product_requirements": [
+      "pack:intake_all_expansion_86ac9b2c5ae6"
+     ],
+     "scales_with": "lax|raw_edible",
+     "quantity_min": 12.0,
+     "quantity_max": 22.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "citronjuice",
+     "canonical_name": "citronjuice",
+     "quantity": 20.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pure_juice"
+     ],
+     "scales_with": "lax|raw_edible",
+     "quantity_min": 17.0,
+     "quantity_max": 30.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "oregano",
+     "canonical_name": "oregano",
+     "quantity": 1.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "dried_leaf"
+     ],
+     "scales_with": "lax|raw_edible",
+     "quantity_min": 1.0,
+     "quantity_max": 1.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 5.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "lax|raw_edible",
+     "quantity_min": 4.0,
+     "quantity_max": 7.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "svartpeppar",
+     "canonical_name": "svartpeppar",
+     "quantity": 1.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:black_pepper"
+     ],
+     "scales_with": "lax|raw_edible",
+     "quantity_min": 1.0,
+     "quantity_max": 1.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "pasta",
+     "canonical_name": "pasta",
+     "quantity": 300.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c2",
+     "required": true,
+     "role": "side",
+     "quantity_min": 250.0,
+     "quantity_max": 350.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "spenat",
+     "canonical_name": "spenat",
+     "quantity": 200.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "vegetable",
+     "product_requirements": [
+      "frozen",
+      "plain"
+     ],
+     "quantity_min": 200.0,
+     "quantity_max": 200.0,
+     "quantity_step": 200.0
+    },
+    {
+     "name": "fetaost",
+     "canonical_name": "fetaost",
+     "quantity": 100.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "sauce",
+     "quantity_min": 100.0,
+     "quantity_max": 100.0,
+     "quantity_step": 100.0
+    },
+    {
+     "name": "dill",
+     "canonical_name": "dill",
+     "quantity": 15.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 15.0,
+     "quantity_max": 15.0,
+     "quantity_step": 15.0
+    },
+    {
+     "name": "rödlök",
+     "canonical_name": "rödlök",
+     "quantity": 80.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 80.0,
+     "quantity_max": 80.0,
+     "quantity_step": 80.0
+    },
+    {
+     "name": "tomat",
+     "canonical_name": "tomat",
+     "quantity": 200.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 200.0,
+     "quantity_max": 200.0,
+     "quantity_step": 200.0
+    }
+   ],
+   "instructions": [
+    "Sätt ugnen på 200 °C. Lägg laxen i en form, ringla över olja och citron och krydda med oregano, salt och peppar.",
+    "Baka laxen 15–18 minuter tills den är minst 63 °C.",
+    "Koka pastan enligt förpackningen. Vänd ner spenaten direkt så att den sjunker ihop.",
+    "Blanda med hackad tomat, finhackad rödlök, dill och smulad feta. Servera med laxen."
+   ],
+   "design": {
+    "base_id": "smako-greek-solomos-kritharaki",
+    "version": "1.0.0",
+    "variant_id": "base",
+    "cuisines": [
+     "greek"
+    ],
+    "family": "lax med kritharaki",
+    "primary_ingredient": "lax",
+    "method": "oven",
+    "side": "pasta",
+    "flavor_profile": [
+     "dill",
+     "citron"
+    ],
+    "components": [
+     {
+      "id": "c1",
+      "name": "Lax",
+      "amounts": [
+       {
+        "ingredient_key": "lax|raw_edible",
+        "name": "Lax",
+        "note": "",
+        "quantity": 600.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "olivolja|as_sold",
+        "name": "Olivolja",
+        "note": "",
+        "quantity": 15.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "citronjuice|as_sold",
+        "name": "Citronjuice",
+        "note": "",
+        "quantity": 20.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "oregano|dry",
+        "name": "Oregano",
+        "note": "",
+        "quantity": 1.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "Salt",
+        "note": "",
+        "quantity": 5.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "svartpeppar|dry",
+        "name": "Svartpeppar",
+        "note": "",
+        "quantity": 1.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c2",
+      "name": "Kritharaki",
+      "amounts": [
+       {
+        "ingredient_key": "pasta|dry",
+        "name": "Kritharaki (risformad pasta)",
+        "note": "",
+        "quantity": 300.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "spenat|as_sold",
+        "name": "Spenat",
+        "note": "",
+        "quantity": 200.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "fetaost|as_sold",
+        "name": "Fetaost",
+        "note": "",
+        "quantity": 100.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "dill|raw_edible",
+        "name": "Dill",
+        "note": "",
+        "quantity": 15.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "rödlök|raw_edible",
+        "name": "Rödlök",
+        "note": "",
+        "quantity": 80.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "tomat|raw_edible",
+        "name": "Tomat",
+        "note": "",
+        "quantity": 200.0,
+        "unit": "g"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "Sätt ugnen på 200 °C. Lägg laxen i en form, ringla över olja och citron och krydda med oregano, salt och peppar.",
+      "ingredient_keys": [
+       "citronjuice|as_sold",
+       "lax|raw_edible",
+       "olivolja|as_sold",
+       "oregano|dry",
+       "salt|as_sold",
+       "svartpeppar|dry"
+      ],
+      "depends_on": [],
+      "duration_minutes": 5,
+      "parallel_group": null
+     },
+     {
+      "id": "s2",
+      "text": "Baka laxen 15–18 minuter tills den är minst 63 °C.",
+      "ingredient_keys": [
+       "lax|raw_edible"
+      ],
+      "depends_on": [
+       "s1"
+      ],
+      "duration_minutes": 18,
+      "parallel_group": null
+     },
+     {
+      "id": "s3",
+      "text": "Koka pastan enligt förpackningen. Vänd ner spenaten direkt så att den sjunker ihop.",
+      "ingredient_keys": [
+       "pasta|dry",
+       "spenat|as_sold"
+      ],
+      "depends_on": [],
+      "duration_minutes": 12,
+      "parallel_group": null
+     },
+     {
+      "id": "s4",
+      "text": "Blanda med hackad tomat, finhackad rödlök, dill och smulad feta. Servera med laxen.",
+      "ingredient_keys": [
+       "dill|raw_edible",
+       "fetaost|as_sold",
+       "lax|raw_edible",
+       "pasta|dry",
+       "rödlök|raw_edible",
+       "tomat|raw_edible"
+      ],
+      "depends_on": [
+       "s2",
+       "s3"
+      ],
+      "duration_minutes": 5,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 28,
+    "equipment": [
+     "Ugn",
+     "Ugnsform",
+     "Kastrull"
+    ],
+    "vegetarian": false,
+    "fish": true,
+    "ingredient_count": 10,
+    "provenance": {
+     "reviewed_at": "2026-11-26",
+     "notes": "Författat och standardiserat med recept-författarverktyget. Inte provlagat. Köp, allergener och näring kvalificeras separat."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "dinner"
+    ],
+    "active_minutes": 22,
+    "waiting_minutes": 6,
+    "total_minutes": 28,
+    "scaling": "reviewed_ranges"
+   }
+  },
+  {
+   "name": "Räkspett med vitlök och citron, bulgursallad och yoghurt",
+   "servings": 4,
+   "ingredients": [
+    {
+     "name": "råa skalade vannameiräkor",
+     "canonical_name": "råa skalade vannameiräkor",
+     "quantity": 500.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "primary",
+     "product_requirements": [
+      "pack:intake_all_round2_599059ef473b"
+     ],
+     "quantity_min": 400.0,
+     "quantity_max": 750.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "olivolja",
+     "canonical_name": "olivolja",
+     "quantity": 40.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "cooking",
+     "product_requirements": [
+      "pack:intake_all_expansion_86ac9b2c5ae6"
+     ],
+     "scales_with": "råa skalade vannameiräkor|as_sold",
+     "quantity_min": 36.0,
+     "quantity_max": 50.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "vitlök",
+     "canonical_name": "vitlök",
+     "quantity": 10.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "råa skalade vannameiräkor|as_sold",
+     "quantity_min": 8.0,
+     "quantity_max": 15.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "citronjuice",
+     "canonical_name": "citronjuice",
+     "quantity": 20.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pure_juice"
+     ],
+     "scales_with": "råa skalade vannameiräkor|as_sold",
+     "quantity_min": 16.0,
+     "quantity_max": 30.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "oregano",
+     "canonical_name": "oregano",
+     "quantity": 1.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "dried_leaf"
+     ],
+     "scales_with": "råa skalade vannameiräkor|as_sold",
+     "quantity_min": 1.0,
+     "quantity_max": 1.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 3.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "råa skalade vannameiräkor|as_sold",
+     "quantity_min": 2.5,
+     "quantity_max": 4.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "bulgur",
+     "canonical_name": "bulgur",
+     "quantity": 240.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c2",
+     "required": true,
+     "role": "side",
+     "product_requirements": [
+      "pack:intake_all_9f9551024574"
+     ],
+     "quantity_min": 180.0,
+     "quantity_max": 280.0,
+     "quantity_step": 20.0
+    },
+    {
+     "name": "gurka",
+     "canonical_name": "gurka",
+     "quantity": 200.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 200.0,
+     "quantity_max": 200.0,
+     "quantity_step": 200.0
+    },
+    {
+     "name": "tomat",
+     "canonical_name": "tomat",
+     "quantity": 250.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 250.0,
+     "quantity_max": 250.0,
+     "quantity_step": 250.0
+    },
+    {
+     "name": "mynta",
+     "canonical_name": "mynta",
+     "quantity": 10.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_shape_trimmed_mint"
+     ],
+     "quantity_min": 10.0,
+     "quantity_max": 10.0,
+     "quantity_step": 10.0
+    },
+    {
+     "name": "persilja",
+     "canonical_name": "persilja",
+     "quantity": 15.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 15.0,
+     "quantity_max": 15.0,
+     "quantity_step": 15.0
+    },
+    {
+     "name": "yoghurt naturell",
+     "canonical_name": "yoghurt naturell",
+     "quantity": 200.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c3",
+     "required": true,
+     "role": "sauce",
+     "product_requirements": [
+      "plain",
+      "thick"
+     ],
+     "quantity_min": 200.0,
+     "quantity_max": 200.0,
+     "quantity_step": 200.0
+    }
+   ],
+   "instructions": [
+    "Vänd räkorna med olja, pressad vitlök, citron, oregano och salt. Trä på spett.",
+    "Koka bulguren enligt förpackningen och låt svalna något.",
+    "Blanda bulgur med tärnad gurka och tomat, mynta, persilja och olja. Salta.",
+    "Grilla spetten 2 minuter per sida tills räkorna är rosa och genomkokta.",
+    "Servera spetten på bulgursalladen med yoghurt."
+   ],
+   "design": {
+    "base_id": "smako-greek-garides-souvlaki-bulgur",
+    "version": "1.0.0",
+    "variant_id": "base",
+    "cuisines": [
+     "greek"
+    ],
+    "family": "räkspett",
+    "primary_ingredient": "råa skalade vannameiräkor",
+    "method": "pan",
+    "side": "bulgur",
+    "flavor_profile": [
+     "citron",
+     "mynta"
+    ],
+    "components": [
+     {
+      "id": "c1",
+      "name": "Spett",
+      "amounts": [
+       {
+        "ingredient_key": "råa skalade vannameiräkor|as_sold",
+        "name": "Råa skalade vannameiräkor",
+        "note": "",
+        "quantity": 500.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "olivolja|as_sold",
+        "name": "Olivolja",
+        "note": "",
+        "quantity": 20.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "vitlök|raw_edible",
+        "name": "Vitlök",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "citronjuice|as_sold",
+        "name": "Citronjuice",
+        "note": "",
+        "quantity": 20.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "oregano|dry",
+        "name": "Oregano",
+        "note": "",
+        "quantity": 1.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "Salt",
+        "note": "",
+        "quantity": 3.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c2",
+      "name": "Bulgursallad",
+      "amounts": [
+       {
+        "ingredient_key": "bulgur|dry",
+        "name": "Bulgur",
+        "note": "",
+        "quantity": 240.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "gurka|raw_edible",
+        "name": "Gurka",
+        "note": "",
+        "quantity": 200.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "tomat|raw_edible",
+        "name": "Tomat",
+        "note": "",
+        "quantity": 250.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "mynta|raw_edible",
+        "name": "Mynta",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "persilja|raw_edible",
+        "name": "Persilja",
+        "note": "",
+        "quantity": 15.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "olivolja|as_sold",
+        "name": "Olivolja",
+        "note": "",
+        "quantity": 20.0,
+        "unit": "ml"
+       }
+      ]
+     },
+     {
+      "id": "c3",
+      "name": "Till servering",
+      "amounts": [
+       {
+        "ingredient_key": "yoghurt naturell|as_sold",
+        "name": "Yoghurt naturell",
+        "note": "",
+        "quantity": 200.0,
+        "unit": "g"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "Vänd räkorna med olja, pressad vitlök, citron, oregano och salt. Trä på spett.",
+      "ingredient_keys": [
+       "citronjuice|as_sold",
+       "olivolja|as_sold",
+       "oregano|dry",
+       "råa skalade vannameiräkor|as_sold",
+       "salt|as_sold",
+       "vitlök|raw_edible"
+      ],
+      "depends_on": [],
+      "duration_minutes": 8,
+      "parallel_group": null
+     },
+     {
+      "id": "s2",
+      "text": "Koka bulguren enligt förpackningen och låt svalna något.",
+      "ingredient_keys": [
+       "bulgur|dry"
+      ],
+      "depends_on": [],
+      "duration_minutes": 12,
+      "parallel_group": null
+     },
+     {
+      "id": "s3",
+      "text": "Blanda bulgur med tärnad gurka och tomat, mynta, persilja och olja. Salta.",
+      "ingredient_keys": [
+       "bulgur|dry",
+       "gurka|raw_edible",
+       "mynta|raw_edible",
+       "olivolja|as_sold",
+       "persilja|raw_edible",
+       "tomat|raw_edible"
+      ],
+      "depends_on": [
+       "s2"
+      ],
+      "duration_minutes": 6,
+      "parallel_group": null
+     },
+     {
+      "id": "s4",
+      "text": "Grilla spetten 2 minuter per sida tills räkorna är rosa och genomkokta.",
+      "ingredient_keys": [
+       "råa skalade vannameiräkor|as_sold"
+      ],
+      "depends_on": [
+       "s1"
+      ],
+      "duration_minutes": 5,
+      "parallel_group": null
+     },
+     {
+      "id": "s5",
+      "text": "Servera spetten på bulgursalladen med yoghurt.",
+      "ingredient_keys": [
+       "bulgur|dry",
+       "råa skalade vannameiräkor|as_sold",
+       "yoghurt naturell|as_sold"
+      ],
+      "depends_on": [
+       "s3",
+       "s4"
+      ],
+      "duration_minutes": 2,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 21,
+    "equipment": [
+     "Grillpanna",
+     "Grillspett",
+     "Kastrull"
+    ],
+    "vegetarian": false,
+    "fish": false,
+    "ingredient_count": 11,
+    "provenance": {
+     "reviewed_at": "2026-11-26",
+     "notes": "Författat och standardiserat med recept-författarverktyget. Inte provlagat. Köp, allergener och näring kvalificeras separat."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "dinner"
+    ],
+    "active_minutes": 21,
+    "waiting_minutes": 0,
+    "total_minutes": 21,
+    "scaling": "reviewed_ranges"
+   }
+  },
+  {
+   "name": "Psari savoro – stekt fisk i rosmarin- och vinägersås med potatis",
+   "servings": 4,
+   "ingredients": [
+    {
+     "name": "fisk",
+     "canonical_name": "fisk",
+     "quantity": 600.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "primary",
+     "quantity_min": 500.0,
+     "quantity_max": 900.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "vetemjöl",
+     "canonical_name": "vetemjöl",
+     "quantity": 40.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "cooking",
+     "quantity_min": 40.0,
+     "quantity_max": 40.0,
+     "quantity_step": 40.0
+    },
+    {
+     "name": "olivolja",
+     "canonical_name": "olivolja",
+     "quantity": 40.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "cooking",
+     "product_requirements": [
+      "pack:intake_all_expansion_86ac9b2c5ae6"
+     ],
+     "scales_with": "fisk|raw_edible",
+     "quantity_min": 33.0,
+     "quantity_max": 60.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 5.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "fisk|raw_edible",
+     "quantity_min": 4.0,
+     "quantity_max": 7.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "rödvinsvinäger",
+     "canonical_name": "rödvinsvinäger",
+     "quantity": 60.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_d0351d1f36c1"
+     ],
+     "quantity_min": 60.0,
+     "quantity_max": 60.0,
+     "quantity_step": 60.0
+    },
+    {
+     "name": "rosmarin",
+     "canonical_name": "rosmarin",
+     "quantity": 1.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_rosemary"
+     ],
+     "quantity_min": 1.0,
+     "quantity_max": 1.0,
+     "quantity_step": 1.0
+    },
+    {
+     "name": "vitlök",
+     "canonical_name": "vitlök",
+     "quantity": 10.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 10.0,
+     "quantity_max": 10.0,
+     "quantity_step": 10.0
+    },
+    {
+     "name": "honung",
+     "canonical_name": "honung",
+     "quantity": 10.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_2e70d2f3b24b"
+     ],
+     "quantity_min": 10.0,
+     "quantity_max": 10.0,
+     "quantity_step": 10.0
+    },
+    {
+     "name": "tomatpuré",
+     "canonical_name": "tomatpuré",
+     "quantity": 15.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 15.0,
+     "quantity_max": 15.0,
+     "quantity_step": 15.0
+    },
+    {
+     "name": "potatis",
+     "canonical_name": "potatis",
+     "quantity": 800.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c3",
+     "required": true,
+     "role": "side",
+     "quantity_min": 600.0,
+     "quantity_max": 950.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "sallad",
+     "canonical_name": "sallad",
+     "quantity": 120.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c3",
+     "required": true,
+     "role": "vegetable",
+     "product_requirements": [
+      "pack:intake_all_16d63b25fed0"
+     ],
+     "quantity_min": 120.0,
+     "quantity_max": 120.0,
+     "quantity_step": 120.0
+    },
+    {
+     "name": "gurka",
+     "canonical_name": "gurka",
+     "quantity": 200.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c3",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 200.0,
+     "quantity_max": 200.0,
+     "quantity_step": 200.0
+    }
+   ],
+   "instructions": [
+    "Koka potatisen mjuk i saltat vatten.",
+    "Salta fisken, vänd i mjöl och stek i olja 3–4 minuter per sida tills den är minst 63 °C. Lägg upp.",
+    "Fräs vitlök och rosmarin i fettet och rör ner tomatpuré, vinäger, honung och 150 ml vatten. Koka 2 minuter.",
+    "Häll såsen över fisken och servera med potatis, sallad och gurka."
+   ],
+   "design": {
+    "base_id": "smako-greek-psari-savoro",
+    "version": "1.0.0",
+    "variant_id": "base",
+    "cuisines": [
+     "greek"
+    ],
+    "family": "savoro",
+    "primary_ingredient": "fisk",
+    "method": "pan",
+    "side": "potatis",
+    "flavor_profile": [
+     "rosmarin",
+     "vinäger"
+    ],
+    "components": [
+     {
+      "id": "c1",
+      "name": "Fisk",
+      "amounts": [
+       {
+        "ingredient_key": "fisk|raw_edible",
+        "name": "Vit fiskfilé, t.ex. sej eller torsk",
+        "note": "",
+        "quantity": 600.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "vetemjöl|dry",
+        "name": "Vetemjöl",
+        "note": "",
+        "quantity": 40.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "olivolja|as_sold",
+        "name": "Olivolja",
+        "note": "",
+        "quantity": 40.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "Salt",
+        "note": "",
+        "quantity": 5.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c2",
+      "name": "Savoro",
+      "amounts": [
+       {
+        "ingredient_key": "rödvinsvinäger|as_sold",
+        "name": "Rödvinsvinäger",
+        "note": "",
+        "quantity": 60.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "rosmarin|dry",
+        "name": "Rosmarin",
+        "note": "",
+        "quantity": 1.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "vitlök|raw_edible",
+        "name": "Vitlök",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "honung|as_sold",
+        "name": "Honung",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "tomatpuré|as_sold",
+        "name": "Tomatpuré",
+        "note": "",
+        "quantity": 15.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c3",
+      "name": "Tillbehör",
+      "amounts": [
+       {
+        "ingredient_key": "potatis|raw_edible",
+        "name": "Potatis",
+        "note": "",
+        "quantity": 800.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "sallad|raw_edible",
+        "name": "Sallad",
+        "note": "",
+        "quantity": 120.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "gurka|raw_edible",
+        "name": "Gurka",
+        "note": "",
+        "quantity": 200.0,
+        "unit": "g"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "Koka potatisen mjuk i saltat vatten.",
+      "ingredient_keys": [
+       "potatis|raw_edible"
+      ],
+      "depends_on": [],
+      "duration_minutes": 22,
+      "parallel_group": null
+     },
+     {
+      "id": "s2",
+      "text": "Salta fisken, vänd i mjöl och stek i olja 3–4 minuter per sida tills den är minst 63 °C. Lägg upp.",
+      "ingredient_keys": [
+       "fisk|raw_edible",
+       "olivolja|as_sold",
+       "salt|as_sold",
+       "vetemjöl|dry"
+      ],
+      "depends_on": [],
+      "duration_minutes": 10,
+      "parallel_group": null
+     },
+     {
+      "id": "s3",
+      "text": "Fräs vitlök och rosmarin i fettet och rör ner tomatpuré, vinäger, honung och 150 ml vatten. Koka 2 minuter.",
+      "ingredient_keys": [
+       "honung|as_sold",
+       "rosmarin|dry",
+       "rödvinsvinäger|as_sold",
+       "tomatpuré|as_sold",
+       "vitlök|raw_edible"
+      ],
+      "depends_on": [
+       "s2"
+      ],
+      "duration_minutes": 5,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "150 ml",
+        150.0
+       ]
+      ]
+     },
+     {
+      "id": "s4",
+      "text": "Häll såsen över fisken och servera med potatis, sallad och gurka.",
+      "ingredient_keys": [
+       "fisk|raw_edible",
+       "gurka|raw_edible",
+       "potatis|raw_edible",
+       "sallad|raw_edible"
+      ],
+      "depends_on": [
+       "s1",
+       "s3"
+      ],
+      "duration_minutes": 3,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 25,
+    "equipment": [
+     "Stekpanna",
+     "Kastrull"
+    ],
+    "vegetarian": false,
+    "fish": true,
+    "ingredient_count": 11,
+    "provenance": {
+     "reviewed_at": "2026-11-26",
+     "notes": "Författat och standardiserat med recept-författarverktyget. Inte provlagat. Köp, allergener och näring kvalificeras separat."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "dinner"
+    ],
+    "active_minutes": 18,
+    "waiting_minutes": 7,
+    "total_minutes": 25,
+    "scaling": "reviewed_ranges"
+   }
+  }
+ ]
+}

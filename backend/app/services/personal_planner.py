@@ -4678,6 +4678,9 @@ class PersonalPlanner:
             policy = diversity_policy(self.request, policy)
         if dinner_count < 2:
             policy = policy.model_copy(update={"min_cooking_methods": 0})
+        else:
+            from app.services.same_protein_variety import same_protein_week_policy
+            policy = same_protein_week_policy(policy, self.meals.get("dinner"))
         constraints = (self.service._culinary_constraints(dinner_pool, policy, profiles=prepared_menu["culinary_profiles"])
                        if prepared_menu else self.service._culinary_constraints(dinner_pool, policy))
         variation_resolution = None
