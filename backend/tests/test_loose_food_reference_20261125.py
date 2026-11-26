@@ -104,3 +104,24 @@ def test_tuna_cooked_drained_and_pet_food_and_whole_lemongrass():
     stalks = loose.gross_flavouring_evidence(product("Citrongräs"), "citrongräs", None, "as_sold")
     assert stalks.nutrition["kcal"] == pytest.approx(99) and "övre gräns" in stalks.nutrition_basis
     assert loose.gross_flavouring_evidence(product("Grytbitar Nöt"), "nötkött", None, "raw_edible") is None
+
+
+def test_oyster_sauce_uses_the_usda_reference():
+    found = loose.evidence(product("Ostronsås"), "ostronsås", None, "as_sold")
+    assert found.source_product_id == "fdc:174529" and found.nutrition["kcal"] == pytest.approx(51)
+    assert loose.identity("ostronsås", "Vegetarisk wok med ostronsås färdigrätt") is None
+    assert loose.evidence(product("Ostronsås"), "ostronsås", None, "dry") is None
+
+
+@pytest.mark.parametrize("label, ident", [
+    ("Pitabröd 6-pack", 193), ("Nanbröd Garlic", 202), ("Hamburgerbröd 8-pack", 3818), ("Surdegsbröd Lantbröd", 6084),
+    ("Rostbröd", 3791), ("Grovt Bröd", 3794), ("Tortilla Original 8-pack", 5974), ("Fralla", 202), ("Grovt bröd från bageriet", 3794),
+])
+def test_plain_bread_without_a_table_uses_a_matching_bread(label, ident):
+    assert loose.identity("bröd", label) == ident
+    assert loose.evidence(product(label), "bröd", None, "as_sold").source_product_id == f"slv:{ident}"
+
+
+@pytest.mark.parametrize("label", ["Knäckebröd Råg", "Skorpor", "Kanelbulle", "Ströbröd", "Glutenfritt Bröd"])
+def test_other_bakery_goods_are_not_bread(label):
+    assert loose.identity("bröd", label) is None

@@ -346,7 +346,12 @@ def input_evidence(recipe, product, name, unit, qualified, fact, *, recipe_cache
             if not is_plain_shell_egg(product.name, getattr(product, "brand", None),
                                       fact.ingredients if fact else ()):
                 return None
-    if form == "dry" and (re.search(r"kokt|färdig|konserv|avrun", text) or "vatten" in composition):
+    # Owner request 2026-11-26: dried noodles and pasta list water (the dough
+    # is made with it). A declared energy of 300 kcal/100 g or more shows a
+    # dried product; fresh noodles are around 150.
+    dried = bool(fact and fact.nutrition_unit == "g" and not fact.conflicts
+                 and (fact.nutrition or {}).get("kcal", 0) >= 300)
+    if form == "dry" and (re.search(r"kokt|färdig|konserv|avrun", text) or ("vatten" in composition and not dried)):
         return None
     if form == "raw_edible" and re.search(r"kokt|grillad|stekt|panerad|rökt|gravad|gravlax|rimmad", text):
         return None

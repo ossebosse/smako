@@ -145,6 +145,10 @@ MAPPINGS = {
     705: ("korngryn", "dry"), 1270: ("sardeller", "preserved_drained"), 393: ("bambuskott", "drained"),
     406: ("surkål", "preserved_drained"), 4042: ("vattenkastanjer", "drained"),
     490: ("saltgurka", "preserved_drained"),
+    193: ("pitabröd", "ready"), 202: ("vitt bröd", "ready"), 3818: ("hamburgerbröd", "ready"),
+    6084: ("surdegsbröd", "ready"), 200: ("baguette", "ready"), 198: ("ciabatta", "ready"),
+    217: ("tunnbröd", "ready"), 5974: ("vetetortilla", "ready"), 3791: ("formfranska", "ready"),
+    3794: ("fullkornsbröd", "ready"), 3795: ("limpa", "ready"),
 }
 # Optional data availability is explicit for isolated same-facts comparisons.
 # Deployed reference files are immutable and included in content_version below.

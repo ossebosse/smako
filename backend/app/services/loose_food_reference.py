@@ -111,6 +111,7 @@ _RULES = {
     "bambuskott": lambda l: 393,
     "surkål": lambda l: 406,
     "saltgurka": lambda l: 490,
+    "bröd": lambda l: _bread(l),
     "vattenkastanjer": lambda l: 4042,
     "tonfisk": lambda l: 1275 if "olja" in l else 1278,
     "sardiner": lambda l: 1272 if "tomat" in l else 1271,
@@ -120,15 +121,37 @@ _RULES = {
 # The recipe input form each non-SLV entry describes.
 _EXTERNAL_FORMS = {"salladslök": "raw_edible", "schalottenlök": "raw_edible", "chilipulver": "dry", "karri": "dry",
                    "kapris": "preserved_drained", "currypasta": "as_sold", "vitpeppar": "dry", "senapsfrön": "dry",
-                   "citrongräs": "as_sold", "vitt vin": "as_sold", "rött vin": "as_sold", "balsamvinäger": "as_sold"}
+                   "citrongräs": "as_sold", "ostronsås": "as_sold", "vitt vin": "as_sold", "rött vin": "as_sold", "balsamvinäger": "as_sold"}
+
+
+_NOT_BREAD = re.compile(r"knäcke|skorpa|skorpor|\bkex|\brån\b|krutong|ströbröd|glutenfri|kanel|bulle|croissant|"
+                        r"tårta|sockerkaka|mjukkaka|söt|majs|polar|brödmix|bröd ?mix")
+
+
+def _bread(label):
+    """A plain bread or flatbread by its label; Owner request 2026-11-26."""
+    if _NOT_BREAD.search(label):
+        return None
+    for pattern, ident in ((r"pita", 193), (r"naa?n|nanbröd|naanbröd", 202), (r"hamburger|burgerbröd", 3818),
+                           (r"surdeg|levain", 6084), (r"baguette", 200), (r"ciabatta|focaccia", 198),
+                           (r"tunnbröd", 217), (r"tortilla|wrap", 5974), (r"formfranska|rostbröd|toast", 3791),
+                           (r"grov|fullkorn|råg", 3794), (r"limpa", 3795)):
+        if re.search(pattern, label):
+            return ident
+    return 202 if re.search(r"bröd|fralla|franska|bagel", label) else None
 
 
 def identity(name, product_label):
     """The reference for this recipe input and bought product, or None."""
     label = " ".join(str(product_label or "").casefold().split())
+    canonical = canonicalize_ingredient_name(name)
+    if canonical == "ostronsås":
+        # The sauce itself; the general filter would read "sås" as another dish.
+        return "usda:ostronsås" if re.search(r"ostronsås|oyster sauce", label) and not _OTHER_FOOD.search(
+            label.replace("ostronsås", "")) else None
     if _OTHER_FOOD.search(label):
         return None
-    rule = _RULES.get(canonicalize_ingredient_name(name))
+    rule = _RULES.get(canonical)
     return rule(label) if rule else None
 
 
@@ -148,7 +171,7 @@ def _external_evidence(prefix, key):
     row = source["foods"][key]
     proof = {"kind": "generic_reference", "policy": POLICY_VERSION, "food_id": row["food_id"],
              "description": row["description"], "source_url": row["source_url"],
-             "acquisition": source["acquisition"], "original_values": row["original_values"],
+             "acquisition": row.get("acquisition", source.get("acquisition")), "original_values": row["original_values"],
              "source": source["attribution"]}
     return NutritionEvidence(source=source["attribution"], source_product_id=row["food_id"],
                              nutrition=dict(row["nutrition"]),
