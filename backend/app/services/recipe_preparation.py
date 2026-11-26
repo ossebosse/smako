@@ -304,6 +304,14 @@ def input_evidence(recipe, product, name, unit, qualified, fact, *, recipe_cache
     form = recipe.preparation.input_forms.get(canonical(name))
     if not form or unit not in {"g", "ml"}:
         return None
+    if canonical(name) == "grönsaksfond" and unit == "ml" and form == "as_sold":
+        # Owner request 2026-11-26: the label is per 100 ml diluted stock, the
+        # recipe uses concentrate; derived with the manufacturer's dose.
+        from app.services.stock_concentrate import evidence as concentrate_evidence
+
+        found = concentrate_evidence(product, fact)
+        if found is not None:
+            return wrap_evidence(recipe, name, found)
     from app.services.recipe_volume_nutrition import VOLUME_FALLBACK
 
     if fact and fact.conflicts and not (canonical(name) in VOLUME_FALLBACK and unit == "ml" and form == "as_sold"):

@@ -306,6 +306,14 @@ def compatible(key, product, fact=None):
         return False
     if fresh_herb_alternative(row, product, fact) or package_weight_alternative(row, product, fact):
         return True
+    if (row["name"] == "grönsaksfond" and row["form"] == "as_sold" and row["unit"] == "ml"
+            and product.usable_unit == "ml" and product.usable_quantity == product.package_quantity):
+        # Owner request 2026-11-26: a liquid Touch of Taste concentrate whose
+        # manufacturer states the dilution, in any store (stock_concentrate).
+        from app.services.stock_concentrate import identity as concentrate
+
+        if concentrate(product, fact) is not None:
+            return True
     if row["kind"] == "definition_only":
         return reviewed_definition(row, product, fact) or declared_definition(row, product, fact)
     if fact is not None and row["kind"] in {"plain", "dry"}:
