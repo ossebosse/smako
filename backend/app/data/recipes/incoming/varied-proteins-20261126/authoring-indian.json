@@ -1,0 +1,6466 @@
+{
+ "schema_version": "smako-meal-pack-v1",
+ "pack_id": "smako-varied-proteins-indian-20261126",
+ "recipes": [
+  {
+   "name": "Tandoorikyckling i ugn med kachumbersallad, myntayoghurt och bröd",
+   "servings": 4,
+   "ingredients": [
+    {
+     "name": "kyckling",
+     "canonical_name": "kyckling",
+     "quantity": 700.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "primary",
+     "product_requirements": [
+      "pack:chicken_thigh"
+     ],
+     "quantity_min": 600.0,
+     "quantity_max": 1050.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "yoghurt naturell",
+     "canonical_name": "yoghurt naturell",
+     "quantity": 350.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "sauce",
+     "product_requirements": [
+      "plain",
+      "thick"
+     ],
+     "quantity_min": 350.0,
+     "quantity_max": 350.0,
+     "quantity_step": 350.0
+    },
+    {
+     "name": "ingefära",
+     "canonical_name": "ingefära",
+     "quantity": 15.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 13.0,
+     "quantity_max": 22.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "vitlök",
+     "canonical_name": "vitlök",
+     "quantity": 10.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 8.5,
+     "quantity_max": 15.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "paprikapulver",
+     "canonical_name": "paprikapulver",
+     "quantity": 4.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "ground"
+     ],
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 3.5,
+     "quantity_max": 6.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "garam masala",
+     "canonical_name": "garam masala",
+     "quantity": 4.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_84e26716ceb0"
+     ],
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 3.5,
+     "quantity_max": 6.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "citronjuice",
+     "canonical_name": "citronjuice",
+     "quantity": 30.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pure_juice"
+     ],
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 26.0,
+     "quantity_max": 45.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "rapsolja",
+     "canonical_name": "rapsolja",
+     "quantity": 20.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "cooking",
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 17.0,
+     "quantity_max": 30.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 6.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 5.0,
+     "quantity_max": 9.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "gurka",
+     "canonical_name": "gurka",
+     "quantity": 200.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 200.0,
+     "quantity_max": 200.0,
+     "quantity_step": 200.0
+    },
+    {
+     "name": "tomat",
+     "canonical_name": "tomat",
+     "quantity": 250.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 250.0,
+     "quantity_max": 250.0,
+     "quantity_step": 250.0
+    },
+    {
+     "name": "rödlök",
+     "canonical_name": "rödlök",
+     "quantity": 80.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 80.0,
+     "quantity_max": 80.0,
+     "quantity_step": 80.0
+    },
+    {
+     "name": "koriander",
+     "canonical_name": "koriander",
+     "quantity": 15.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_9b2370e0e926"
+     ],
+     "quantity_min": 15.0,
+     "quantity_max": 15.0,
+     "quantity_step": 15.0
+    },
+    {
+     "name": "mynta",
+     "canonical_name": "mynta",
+     "quantity": 10.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c3",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_shape_trimmed_mint"
+     ],
+     "quantity_min": 10.0,
+     "quantity_max": 10.0,
+     "quantity_step": 10.0
+    },
+    {
+     "name": "bröd",
+     "canonical_name": "bröd",
+     "quantity": 300.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c3",
+     "required": true,
+     "role": "side",
+     "quantity_min": 300.0,
+     "quantity_max": 300.0,
+     "quantity_step": 300.0
+    }
+   ],
+   "instructions": [
+    "Rör ihop yoghurt, riven ingefära, vitlök, paprikapulver, garam masala, två tredjedelar av citronen, olja och salt. Marinera kycklingen minst 20 minuter.",
+    "Sätt ugnen på 240 °C. Lägg kycklingen på en plåt och baka högt upp 20–25 minuter tills den fått svedda kanter och är minst 74 °C i mitten.",
+    "Tärna gurka, tomat och rödlök och blanda med koriander, resten av citronen och salt.",
+    "Rör ner hackad mynta i yoghurten och värm bröden.",
+    "Servera kycklingen med sallad, myntayoghurt och bröd."
+   ],
+   "design": {
+    "base_id": "smako-indian-tandoori-murgh-kachumber",
+    "version": "1.0.0",
+    "variant_id": "base",
+    "cuisines": [
+     "indian"
+    ],
+    "family": "tandoori",
+    "primary_ingredient": "kyckling",
+    "method": "oven",
+    "side": "bröd",
+    "flavor_profile": [
+     "yoghurt",
+     "garam masala"
+    ],
+    "components": [
+     {
+      "id": "c1",
+      "name": "Kyckling",
+      "amounts": [
+       {
+        "ingredient_key": "kyckling|raw_edible",
+        "name": "Kycklinglårfilé",
+        "note": "",
+        "quantity": 700.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "yoghurt naturell|as_sold",
+        "name": "Yoghurt naturell",
+        "note": "",
+        "quantity": 200.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "ingefära|raw_edible",
+        "name": "Ingefära",
+        "note": "",
+        "quantity": 15.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "vitlök|raw_edible",
+        "name": "Vitlök",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "paprikapulver|dry",
+        "name": "Paprikapulver",
+        "note": "",
+        "quantity": 4.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "garam masala|dry",
+        "name": "Garam masala",
+        "note": "",
+        "quantity": 4.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "citronjuice|as_sold",
+        "name": "Citronjuice",
+        "note": "",
+        "quantity": 30.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "rapsolja|as_sold",
+        "name": "Rapsolja",
+        "note": "",
+        "quantity": 20.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "Salt",
+        "note": "",
+        "quantity": 6.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c2",
+      "name": "Kachumber",
+      "amounts": [
+       {
+        "ingredient_key": "gurka|raw_edible",
+        "name": "Gurka",
+        "note": "",
+        "quantity": 200.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "tomat|raw_edible",
+        "name": "Tomat",
+        "note": "",
+        "quantity": 250.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "rödlök|raw_edible",
+        "name": "Rödlök",
+        "note": "",
+        "quantity": 80.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "koriander|raw_edible",
+        "name": "Koriander",
+        "note": "",
+        "quantity": 15.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c3",
+      "name": "Till servering",
+      "amounts": [
+       {
+        "ingredient_key": "yoghurt naturell|as_sold",
+        "name": "Yoghurt naturell",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "mynta|raw_edible",
+        "name": "Mynta",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "bröd|as_sold",
+        "name": "Nanbröd",
+        "note": "",
+        "quantity": 300.0,
+        "unit": "g"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "Rör ihop yoghurt, riven ingefära, vitlök, paprikapulver, garam masala, två tredjedelar av citronen, olja och salt. Marinera kycklingen minst 20 minuter.",
+      "ingredient_keys": [
+       "citronjuice|as_sold",
+       "garam masala|dry",
+       "ingefära|raw_edible",
+       "kyckling|raw_edible",
+       "paprikapulver|dry",
+       "rapsolja|as_sold",
+       "salt|as_sold",
+       "vitlök|raw_edible",
+       "yoghurt naturell|as_sold"
+      ],
+      "depends_on": [],
+      "duration_minutes": 25,
+      "parallel_group": null
+     },
+     {
+      "id": "s2",
+      "text": "Sätt ugnen på 240 °C. Lägg kycklingen på en plåt och baka högt upp 20–25 minuter tills den fått svedda kanter och är minst 74 °C i mitten.",
+      "ingredient_keys": [
+       "kyckling|raw_edible"
+      ],
+      "depends_on": [
+       "s1"
+      ],
+      "duration_minutes": 25,
+      "parallel_group": null
+     },
+     {
+      "id": "s3",
+      "text": "Tärna gurka, tomat och rödlök och blanda med koriander, resten av citronen och salt.",
+      "ingredient_keys": [
+       "citronjuice|as_sold",
+       "gurka|raw_edible",
+       "koriander|raw_edible",
+       "rödlök|raw_edible",
+       "tomat|raw_edible"
+      ],
+      "depends_on": [],
+      "duration_minutes": 8,
+      "parallel_group": null
+     },
+     {
+      "id": "s4",
+      "text": "Rör ner hackad mynta i yoghurten och värm bröden.",
+      "ingredient_keys": [
+       "bröd|as_sold",
+       "mynta|raw_edible",
+       "yoghurt naturell|as_sold"
+      ],
+      "depends_on": [],
+      "duration_minutes": 4,
+      "parallel_group": null
+     },
+     {
+      "id": "s5",
+      "text": "Servera kycklingen med sallad, myntayoghurt och bröd.",
+      "ingredient_keys": [
+       "bröd|as_sold",
+       "gurka|raw_edible",
+       "kyckling|raw_edible",
+       "yoghurt naturell|as_sold"
+      ],
+      "depends_on": [
+       "s2",
+       "s3",
+       "s4"
+      ],
+      "duration_minutes": 2,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 52,
+    "equipment": [
+     "Ugn",
+     "Ugnsplåt",
+     "Skål"
+    ],
+    "vegetarian": false,
+    "fish": false,
+    "ingredient_count": 14,
+    "provenance": {
+     "reviewed_at": "2026-11-26",
+     "notes": "Författat och standardiserat med recept-författarverktyget. Inte provlagat. Köp, allergener och näring kvalificeras separat."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "dinner"
+    ],
+    "active_minutes": 14,
+    "waiting_minutes": 38,
+    "total_minutes": 52,
+    "scaling": "reviewed_ranges"
+   }
+  },
+  {
+   "name": "Saag murgh – kyckling i kryddig spenatsås med bröd",
+   "servings": 4,
+   "ingredients": [
+    {
+     "name": "kyckling",
+     "canonical_name": "kyckling",
+     "quantity": 650.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "primary",
+     "product_requirements": [
+      "pack:chicken_thigh"
+     ],
+     "quantity_min": 550.0,
+     "quantity_max": 950.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "spenat",
+     "canonical_name": "spenat",
+     "quantity": 450.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "vegetable",
+     "product_requirements": [
+      "frozen",
+      "plain"
+     ],
+     "quantity_min": 450.0,
+     "quantity_max": 450.0,
+     "quantity_step": 450.0
+    },
+    {
+     "name": "gul lök",
+     "canonical_name": "gul lök",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    },
+    {
+     "name": "tomat",
+     "canonical_name": "tomat",
+     "quantity": 200.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 200.0,
+     "quantity_max": 200.0,
+     "quantity_step": 200.0
+    },
+    {
+     "name": "ingefära",
+     "canonical_name": "ingefära",
+     "quantity": 15.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 13.0,
+     "quantity_max": 22.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "vitlök",
+     "canonical_name": "vitlök",
+     "quantity": 10.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 8.5,
+     "quantity_max": 15.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "grön chili",
+     "canonical_name": "grön chili",
+     "quantity": 10.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_round2_c8b0139e0c23"
+     ],
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 8.5,
+     "quantity_max": 15.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "spiskummin",
+     "canonical_name": "spiskummin",
+     "quantity": 2.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "ground"
+     ],
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 1.5,
+     "quantity_max": 3.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "garam masala",
+     "canonical_name": "garam masala",
+     "quantity": 3.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_84e26716ceb0"
+     ],
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 2.5,
+     "quantity_max": 4.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "smör",
+     "canonical_name": "smör",
+     "quantity": 30.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "cooking",
+     "product_requirements": [
+      "pack:intake_butter"
+     ],
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 25.0,
+     "quantity_max": 44.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "grädde",
+     "canonical_name": "grädde",
+     "quantity": 100.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "sauce",
+     "product_requirements": [
+      "pack:intake_all_2ba6bda1d4b2"
+     ],
+     "quantity_min": 100.0,
+     "quantity_max": 100.0,
+     "quantity_step": 100.0
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 6.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 5.0,
+     "quantity_max": 9.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "bröd",
+     "canonical_name": "bröd",
+     "quantity": 300.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "side",
+     "quantity_min": 300.0,
+     "quantity_max": 300.0,
+     "quantity_step": 300.0
+    }
+   ],
+   "instructions": [
+    "Fräs spiskummin i smör, tillsätt hackad lök och fräs gyllene. Rör ner riven ingefära, vitlök och chili.",
+    "Lägg i kycklingen i bitar och bryn. Tillsätt hackad tomat, garam masala och salt och sjud 15 minuter tills kycklingen är minst 74 °C.",
+    "Hetta upp spenaten och mixa grovt.",
+    "Rör ner spenaten och grädden i grytan och sjud 5 minuter. Servera med varmt bröd."
+   ],
+   "design": {
+    "base_id": "smako-indian-saag-murgh-roti",
+    "version": "1.0.0",
+    "variant_id": "base",
+    "cuisines": [
+     "indian"
+    ],
+    "family": "saag",
+    "primary_ingredient": "kyckling",
+    "method": "pot",
+    "side": "bröd",
+    "flavor_profile": [
+     "spenat",
+     "spiskummin"
+    ],
+    "components": [
+     {
+      "id": "c1",
+      "name": "Saag",
+      "amounts": [
+       {
+        "ingredient_key": "kyckling|raw_edible",
+        "name": "Kycklinglårfilé",
+        "note": "",
+        "quantity": 650.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "spenat|as_sold",
+        "name": "Spenat",
+        "note": "",
+        "quantity": 450.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "gul lök|raw_edible",
+        "name": "Gul lök",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "tomat|raw_edible",
+        "name": "Tomat",
+        "note": "",
+        "quantity": 200.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "ingefära|raw_edible",
+        "name": "Ingefära",
+        "note": "",
+        "quantity": 15.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "vitlök|raw_edible",
+        "name": "Vitlök",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "grön chili|raw_edible",
+        "name": "Grön chili",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "spiskummin|dry",
+        "name": "Spiskummin",
+        "note": "",
+        "quantity": 2.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "garam masala|dry",
+        "name": "Garam masala",
+        "note": "",
+        "quantity": 3.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "smör|as_sold",
+        "name": "Smör",
+        "note": "",
+        "quantity": 30.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "grädde|as_sold",
+        "name": "Grädde",
+        "note": "",
+        "quantity": 100.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "Salt",
+        "note": "",
+        "quantity": 6.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c2",
+      "name": "Till servering",
+      "amounts": [
+       {
+        "ingredient_key": "bröd|as_sold",
+        "name": "Nanbröd",
+        "note": "",
+        "quantity": 300.0,
+        "unit": "g"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "Fräs spiskummin i smör, tillsätt hackad lök och fräs gyllene. Rör ner riven ingefära, vitlök och chili.",
+      "ingredient_keys": [
+       "grön chili|raw_edible",
+       "gul lök|raw_edible",
+       "ingefära|raw_edible",
+       "smör|as_sold",
+       "spiskummin|dry",
+       "vitlök|raw_edible"
+      ],
+      "depends_on": [],
+      "duration_minutes": 12,
+      "parallel_group": null
+     },
+     {
+      "id": "s2",
+      "text": "Lägg i kycklingen i bitar och bryn. Tillsätt hackad tomat, garam masala och salt och sjud 15 minuter tills kycklingen är minst 74 °C.",
+      "ingredient_keys": [
+       "garam masala|dry",
+       "kyckling|raw_edible",
+       "salt|as_sold",
+       "tomat|raw_edible"
+      ],
+      "depends_on": [
+       "s1"
+      ],
+      "duration_minutes": 18,
+      "parallel_group": null
+     },
+     {
+      "id": "s3",
+      "text": "Hetta upp spenaten och mixa grovt.",
+      "ingredient_keys": [
+       "spenat|as_sold"
+      ],
+      "depends_on": [],
+      "duration_minutes": 6,
+      "parallel_group": null
+     },
+     {
+      "id": "s4",
+      "text": "Rör ner spenaten och grädden i grytan och sjud 5 minuter. Servera med varmt bröd.",
+      "ingredient_keys": [
+       "bröd|as_sold",
+       "grädde|as_sold",
+       "spenat|as_sold"
+      ],
+      "depends_on": [
+       "s2",
+       "s3"
+      ],
+      "duration_minutes": 6,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 36,
+    "equipment": [
+     "Gryta",
+     "Mixer"
+    ],
+    "vegetarian": false,
+    "fish": false,
+    "ingredient_count": 12,
+    "provenance": {
+     "reviewed_at": "2026-11-26",
+     "notes": "Författat och standardiserat med recept-författarverktyget. Inte provlagat. Köp, allergener och näring kvalificeras separat."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "dinner"
+    ],
+    "active_minutes": 24,
+    "waiting_minutes": 12,
+    "total_minutes": 36,
+    "scaling": "reviewed_ranges"
+   }
+  },
+  {
+   "name": "Kadai murgh – kyckling med paprika, tomat och rostade kryddor",
+   "servings": 4,
+   "ingredients": [
+    {
+     "name": "kyckling",
+     "canonical_name": "kyckling",
+     "quantity": 650.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "primary",
+     "product_requirements": [
+      "pack:chicken_breast"
+     ],
+     "quantity_min": 550.0,
+     "quantity_max": 950.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "paprika",
+     "canonical_name": "paprika",
+     "quantity": 350.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 350.0,
+     "quantity_max": 350.0,
+     "quantity_step": 350.0
+    },
+    {
+     "name": "gul lök",
+     "canonical_name": "gul lök",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    },
+    {
+     "name": "tomat",
+     "canonical_name": "tomat",
+     "quantity": 300.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 300.0,
+     "quantity_max": 300.0,
+     "quantity_step": 300.0
+    },
+    {
+     "name": "ingefära",
+     "canonical_name": "ingefära",
+     "quantity": 15.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 13.0,
+     "quantity_max": 22.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "vitlök",
+     "canonical_name": "vitlök",
+     "quantity": 10.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 8.5,
+     "quantity_max": 15.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "malen koriander",
+     "canonical_name": "malen koriander",
+     "quantity": 4.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:coriander_seed"
+     ],
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 3.5,
+     "quantity_max": 6.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "spiskummin",
+     "canonical_name": "spiskummin",
+     "quantity": 2.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "ground"
+     ],
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 1.5,
+     "quantity_max": 3.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "chiliflakes",
+     "canonical_name": "chiliflakes",
+     "quantity": 1.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 1.0,
+     "quantity_max": 1.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "garam masala",
+     "canonical_name": "garam masala",
+     "quantity": 2.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_84e26716ceb0"
+     ],
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 1.5,
+     "quantity_max": 3.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "rapsolja",
+     "canonical_name": "rapsolja",
+     "quantity": 30.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "cooking",
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 25.0,
+     "quantity_max": 44.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 6.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 5.0,
+     "quantity_max": 9.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "koriander",
+     "canonical_name": "koriander",
+     "quantity": 15.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_9b2370e0e926"
+     ],
+     "quantity_min": 15.0,
+     "quantity_max": 15.0,
+     "quantity_step": 15.0
+    },
+    {
+     "name": "yoghurt naturell",
+     "canonical_name": "yoghurt naturell",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "sauce",
+     "product_requirements": [
+      "plain",
+      "thick"
+     ],
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    },
+    {
+     "name": "bröd",
+     "canonical_name": "bröd",
+     "quantity": 300.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "side",
+     "quantity_min": 300.0,
+     "quantity_max": 300.0,
+     "quantity_step": 300.0
+    }
+   ],
+   "instructions": [
+    "Fräs hackad lök i olja gyllene. Tillsätt riven ingefära och vitlök.",
+    "Rör ner malen koriander, spiskummin och chili och fräs en halv minut. Tillsätt hackad tomat och fräs till en tjock sås.",
+    "Lägg i kycklingen i bitar och fräs 8 minuter. Tillsätt paprika i bitar och fräs 5 minuter tills kycklingen är minst 74 °C.",
+    "Strö över garam masala och koriander och servera med yoghurt och bröd."
+   ],
+   "design": {
+    "base_id": "smako-indian-kadai-murgh-paprika",
+    "version": "1.0.0",
+    "variant_id": "base",
+    "cuisines": [
+     "indian"
+    ],
+    "family": "kadai",
+    "primary_ingredient": "kyckling",
+    "method": "pan",
+    "side": "bröd",
+    "flavor_profile": [
+     "koriander",
+     "paprika"
+    ],
+    "components": [
+     {
+      "id": "c1",
+      "name": "Kadai",
+      "amounts": [
+       {
+        "ingredient_key": "kyckling|raw_edible",
+        "name": "Kycklingbröstfilé",
+        "note": "",
+        "quantity": 650.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "paprika|raw_edible",
+        "name": "Paprika",
+        "note": "",
+        "quantity": 350.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "gul lök|raw_edible",
+        "name": "Gul lök",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "tomat|raw_edible",
+        "name": "Tomat",
+        "note": "",
+        "quantity": 300.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "ingefära|raw_edible",
+        "name": "Ingefära",
+        "note": "",
+        "quantity": 15.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "vitlök|raw_edible",
+        "name": "Vitlök",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "malen koriander|dry",
+        "name": "Malen koriander",
+        "note": "",
+        "quantity": 4.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "spiskummin|dry",
+        "name": "Spiskummin",
+        "note": "",
+        "quantity": 2.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "chiliflakes|dry",
+        "name": "Chiliflakes",
+        "note": "",
+        "quantity": 1.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "garam masala|dry",
+        "name": "Garam masala",
+        "note": "",
+        "quantity": 2.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "rapsolja|as_sold",
+        "name": "Rapsolja",
+        "note": "",
+        "quantity": 30.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "Salt",
+        "note": "",
+        "quantity": 6.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c2",
+      "name": "Till servering",
+      "amounts": [
+       {
+        "ingredient_key": "koriander|raw_edible",
+        "name": "Koriander",
+        "note": "",
+        "quantity": 15.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "yoghurt naturell|as_sold",
+        "name": "Yoghurt naturell",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "bröd|as_sold",
+        "name": "Nanbröd",
+        "note": "",
+        "quantity": 300.0,
+        "unit": "g"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "Fräs hackad lök i olja gyllene. Tillsätt riven ingefära och vitlök.",
+      "ingredient_keys": [
+       "gul lök|raw_edible",
+       "ingefära|raw_edible",
+       "rapsolja|as_sold",
+       "vitlök|raw_edible"
+      ],
+      "depends_on": [],
+      "duration_minutes": 10,
+      "parallel_group": null
+     },
+     {
+      "id": "s2",
+      "text": "Rör ner malen koriander, spiskummin och chili och fräs en halv minut. Tillsätt hackad tomat och fräs till en tjock sås.",
+      "ingredient_keys": [
+       "chiliflakes|dry",
+       "malen koriander|dry",
+       "spiskummin|dry",
+       "tomat|raw_edible"
+      ],
+      "depends_on": [
+       "s1"
+      ],
+      "duration_minutes": 8,
+      "parallel_group": null
+     },
+     {
+      "id": "s3",
+      "text": "Lägg i kycklingen i bitar och fräs 8 minuter. Tillsätt paprika i bitar och fräs 5 minuter tills kycklingen är minst 74 °C.",
+      "ingredient_keys": [
+       "kyckling|raw_edible",
+       "paprika|raw_edible",
+       "salt|as_sold"
+      ],
+      "depends_on": [
+       "s2"
+      ],
+      "duration_minutes": 14,
+      "parallel_group": null
+     },
+     {
+      "id": "s4",
+      "text": "Strö över garam masala och koriander och servera med yoghurt och bröd.",
+      "ingredient_keys": [
+       "bröd|as_sold",
+       "garam masala|dry",
+       "koriander|raw_edible",
+       "yoghurt naturell|as_sold"
+      ],
+      "depends_on": [
+       "s3"
+      ],
+      "duration_minutes": 3,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 35,
+    "equipment": [
+     "Stekpanna",
+     "Mortel"
+    ],
+    "vegetarian": false,
+    "fish": false,
+    "ingredient_count": 14,
+    "provenance": {
+     "reviewed_at": "2026-11-26",
+     "notes": "Författat och standardiserat med recept-författarverktyget. Inte provlagat. Köp, allergener och näring kvalificeras separat."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "dinner"
+    ],
+    "active_minutes": 35,
+    "waiting_minutes": 0,
+    "total_minutes": 35,
+    "scaling": "reviewed_ranges"
+   }
+  },
+  {
+   "name": "Kycklingvindaloo med potatis och vinäger",
+   "servings": 4,
+   "ingredients": [
+    {
+     "name": "kyckling",
+     "canonical_name": "kyckling",
+     "quantity": 650.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "primary",
+     "product_requirements": [
+      "pack:chicken_thigh"
+     ],
+     "quantity_min": 550.0,
+     "quantity_max": 950.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "potatis",
+     "canonical_name": "potatis",
+     "quantity": 500.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "side",
+     "quantity_min": 350.0,
+     "quantity_max": 600.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "gul lök",
+     "canonical_name": "gul lök",
+     "quantity": 200.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 200.0,
+     "quantity_max": 200.0,
+     "quantity_step": 200.0
+    },
+    {
+     "name": "tomat",
+     "canonical_name": "tomat",
+     "quantity": 200.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 200.0,
+     "quantity_max": 200.0,
+     "quantity_step": 200.0
+    },
+    {
+     "name": "vitlök",
+     "canonical_name": "vitlök",
+     "quantity": 15.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 13.0,
+     "quantity_max": 22.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "ingefära",
+     "canonical_name": "ingefära",
+     "quantity": 15.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 13.0,
+     "quantity_max": 22.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "äppelcidervinäger",
+     "canonical_name": "äppelcidervinäger",
+     "quantity": 40.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_be24da3ca83d"
+     ],
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 34.0,
+     "quantity_max": 58.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "paprikapulver",
+     "canonical_name": "paprikapulver",
+     "quantity": 5.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "ground"
+     ],
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 4.0,
+     "quantity_max": 7.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "chiliflakes",
+     "canonical_name": "chiliflakes",
+     "quantity": 2.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 1.5,
+     "quantity_max": 3.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "spiskummin",
+     "canonical_name": "spiskummin",
+     "quantity": 2.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "ground"
+     ],
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 1.5,
+     "quantity_max": 3.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "kanel",
+     "canonical_name": "kanel",
+     "quantity": 1.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "ground"
+     ],
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 1.0,
+     "quantity_max": 1.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "rapsolja",
+     "canonical_name": "rapsolja",
+     "quantity": 30.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "cooking",
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 25.0,
+     "quantity_max": 44.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 6.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 5.0,
+     "quantity_max": 9.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "koriander",
+     "canonical_name": "koriander",
+     "quantity": 10.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_9b2370e0e926"
+     ],
+     "quantity_min": 10.0,
+     "quantity_max": 10.0,
+     "quantity_step": 10.0
+    },
+    {
+     "name": "yoghurt naturell",
+     "canonical_name": "yoghurt naturell",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "sauce",
+     "product_requirements": [
+      "plain",
+      "thick"
+     ],
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    }
+   ],
+   "instructions": [
+    "Mixa vitlök, ingefära, vinäger, paprikapulver, chili, spiskummin, kanel och salt till en pasta. Vänd kycklingen i den.",
+    "Fräs skivad lök i olja gyllene, tillsätt hackad tomat och fräs 3 minuter.",
+    "Lägg i kycklingen med marinaden, potatis i bitar och 300 ml vatten. Sjud under lock 30 minuter tills potatisen är mjuk och kycklingen minst 74 °C.",
+    "Toppa med koriander och servera med yoghurt."
+   ],
+   "design": {
+    "base_id": "smako-indian-chicken-vindaloo-aloo",
+    "version": "1.0.0",
+    "variant_id": "base",
+    "cuisines": [
+     "indian"
+    ],
+    "family": "vindaloo",
+    "primary_ingredient": "kyckling",
+    "method": "pot",
+    "side": "potatis",
+    "flavor_profile": [
+     "vinäger",
+     "chili"
+    ],
+    "components": [
+     {
+      "id": "c1",
+      "name": "Vindaloo",
+      "amounts": [
+       {
+        "ingredient_key": "kyckling|raw_edible",
+        "name": "Kycklinglårfilé",
+        "note": "",
+        "quantity": 650.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "potatis|raw_edible",
+        "name": "Potatis",
+        "note": "",
+        "quantity": 500.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "gul lök|raw_edible",
+        "name": "Gul lök",
+        "note": "",
+        "quantity": 200.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "tomat|raw_edible",
+        "name": "Tomat",
+        "note": "",
+        "quantity": 200.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "vitlök|raw_edible",
+        "name": "Vitlök",
+        "note": "",
+        "quantity": 15.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "ingefära|raw_edible",
+        "name": "Ingefära",
+        "note": "",
+        "quantity": 15.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "äppelcidervinäger|as_sold",
+        "name": "Äppelcidervinäger",
+        "note": "",
+        "quantity": 40.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "paprikapulver|dry",
+        "name": "Paprikapulver",
+        "note": "",
+        "quantity": 5.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "chiliflakes|dry",
+        "name": "Chiliflakes",
+        "note": "",
+        "quantity": 2.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "spiskummin|dry",
+        "name": "Spiskummin",
+        "note": "",
+        "quantity": 2.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "kanel|dry",
+        "name": "Kanel",
+        "note": "",
+        "quantity": 1.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "rapsolja|as_sold",
+        "name": "Rapsolja",
+        "note": "",
+        "quantity": 30.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "Salt",
+        "note": "",
+        "quantity": 6.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c2",
+      "name": "Till servering",
+      "amounts": [
+       {
+        "ingredient_key": "koriander|raw_edible",
+        "name": "Koriander",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "yoghurt naturell|as_sold",
+        "name": "Yoghurt naturell",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "Mixa vitlök, ingefära, vinäger, paprikapulver, chili, spiskummin, kanel och salt till en pasta. Vänd kycklingen i den.",
+      "ingredient_keys": [
+       "chiliflakes|dry",
+       "ingefära|raw_edible",
+       "kanel|dry",
+       "kyckling|raw_edible",
+       "paprikapulver|dry",
+       "salt|as_sold",
+       "spiskummin|dry",
+       "vitlök|raw_edible",
+       "äppelcidervinäger|as_sold"
+      ],
+      "depends_on": [],
+      "duration_minutes": 8,
+      "parallel_group": null
+     },
+     {
+      "id": "s2",
+      "text": "Fräs skivad lök i olja gyllene, tillsätt hackad tomat och fräs 3 minuter.",
+      "ingredient_keys": [
+       "gul lök|raw_edible",
+       "rapsolja|as_sold",
+       "tomat|raw_edible"
+      ],
+      "depends_on": [],
+      "duration_minutes": 12,
+      "parallel_group": null
+     },
+     {
+      "id": "s3",
+      "text": "Lägg i kycklingen med marinaden, potatis i bitar och 300 ml vatten. Sjud under lock 30 minuter tills potatisen är mjuk och kycklingen minst 74 °C.",
+      "ingredient_keys": [
+       "kyckling|raw_edible",
+       "potatis|raw_edible"
+      ],
+      "depends_on": [
+       "s1",
+       "s2"
+      ],
+      "duration_minutes": 30,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "300 ml",
+        300.0
+       ]
+      ]
+     },
+     {
+      "id": "s4",
+      "text": "Toppa med koriander och servera med yoghurt.",
+      "ingredient_keys": [
+       "koriander|raw_edible",
+       "yoghurt naturell|as_sold"
+      ],
+      "depends_on": [
+       "s3"
+      ],
+      "duration_minutes": 2,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 44,
+    "equipment": [
+     "Gryta",
+     "Mixer"
+    ],
+    "vegetarian": false,
+    "fish": false,
+    "ingredient_count": 14,
+    "provenance": {
+     "reviewed_at": "2026-11-26",
+     "notes": "Författat och standardiserat med recept-författarverktyget. Inte provlagat. Köp, allergener och näring kvalificeras separat."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "dinner"
+    ],
+    "active_minutes": 22,
+    "waiting_minutes": 22,
+    "total_minutes": 44,
+    "scaling": "reviewed_ranges"
+   }
+  },
+  {
+   "name": "Kerala-ishtu – mild kycklinggryta med kokos, potatis och ris",
+   "servings": 4,
+   "ingredients": [
+    {
+     "name": "kyckling",
+     "canonical_name": "kyckling",
+     "quantity": 600.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "primary",
+     "product_requirements": [
+      "pack:chicken_thigh"
+     ],
+     "quantity_min": 500.0,
+     "quantity_max": 900.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "potatis",
+     "canonical_name": "potatis",
+     "quantity": 300.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 300.0,
+     "quantity_max": 300.0,
+     "quantity_step": 300.0
+    },
+    {
+     "name": "morot",
+     "canonical_name": "morot",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    },
+    {
+     "name": "gul lök",
+     "canonical_name": "gul lök",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    },
+    {
+     "name": "ingefära",
+     "canonical_name": "ingefära",
+     "quantity": 20.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 17.0,
+     "quantity_max": 30.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "grön chili",
+     "canonical_name": "grön chili",
+     "quantity": 10.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_round2_c8b0139e0c23"
+     ],
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 8.5,
+     "quantity_max": 15.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "kokosmjölk",
+     "canonical_name": "kokosmjölk",
+     "quantity": 400.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "sauce",
+     "quantity_min": 400.0,
+     "quantity_max": 400.0,
+     "quantity_step": 400.0
+    },
+    {
+     "name": "kardemumma",
+     "canonical_name": "kardemumma",
+     "quantity": 1.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_930d08a8d175"
+     ],
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 1.0,
+     "quantity_max": 1.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "kanel",
+     "canonical_name": "kanel",
+     "quantity": 1.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "ground"
+     ],
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 1.0,
+     "quantity_max": 1.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "kryddpeppar",
+     "canonical_name": "kryddpeppar",
+     "quantity": 1.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_c412f28a0556"
+     ],
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 1.0,
+     "quantity_max": 1.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "rapsolja",
+     "canonical_name": "rapsolja",
+     "quantity": 20.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "cooking",
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 17.0,
+     "quantity_max": 30.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 6.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 5.0,
+     "quantity_max": 9.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "ris",
+     "canonical_name": "ris",
+     "quantity": 300.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c2",
+     "required": true,
+     "role": "side",
+     "product_requirements": [
+      "white_rice"
+     ],
+     "quantity_min": 250.0,
+     "quantity_max": 350.0,
+     "quantity_step": 50.0
+    }
+   ],
+   "instructions": [
+    "Fräs kardemumma, kanel och kryddpeppar i olja. Tillsätt skivad lök, ingefära i stavar och chili och fräs mjukt.",
+    "Lägg i kyckling, potatis och morot i bitar, hälften av kokosmjölken, 200 ml vatten och salt. Sjud under lock 25 minuter tills kycklingen är minst 74 °C.",
+    "Koka riset enligt förpackningen.",
+    "Rör ner resten av kokosmjölken och värm utan att koka. Servera med riset."
+   ],
+   "design": {
+    "base_id": "smako-indian-kerala-chicken-ishtu",
+    "version": "1.0.0",
+    "variant_id": "base",
+    "cuisines": [
+     "indian"
+    ],
+    "family": "ishtu",
+    "primary_ingredient": "kyckling",
+    "method": "pot",
+    "side": "ris",
+    "flavor_profile": [
+     "kokos",
+     "ingefära"
+    ],
+    "components": [
+     {
+      "id": "c1",
+      "name": "Ishtu",
+      "amounts": [
+       {
+        "ingredient_key": "kyckling|raw_edible",
+        "name": "Kycklinglårfilé",
+        "note": "",
+        "quantity": 600.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "potatis|raw_edible",
+        "name": "Potatis",
+        "note": "",
+        "quantity": 300.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "morot|raw_edible",
+        "name": "Morot",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "gul lök|raw_edible",
+        "name": "Gul lök",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "ingefära|raw_edible",
+        "name": "Ingefära",
+        "note": "",
+        "quantity": 20.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "grön chili|raw_edible",
+        "name": "Grön chili",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "kokosmjölk|as_sold",
+        "name": "Kokosmjölk",
+        "note": "",
+        "quantity": 400.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "kardemumma|dry",
+        "name": "Kardemumma",
+        "note": "",
+        "quantity": 1.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "kanel|dry",
+        "name": "Kanel",
+        "note": "",
+        "quantity": 1.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "kryddpeppar|dry",
+        "name": "Kryddpeppar",
+        "note": "",
+        "quantity": 1.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "rapsolja|as_sold",
+        "name": "Rapsolja",
+        "note": "",
+        "quantity": 20.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "Salt",
+        "note": "",
+        "quantity": 6.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c2",
+      "name": "Ris",
+      "amounts": [
+       {
+        "ingredient_key": "ris|dry",
+        "name": "Ris",
+        "note": "",
+        "quantity": 300.0,
+        "unit": "g"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "Fräs kardemumma, kanel och kryddpeppar i olja. Tillsätt skivad lök, ingefära i stavar och chili och fräs mjukt.",
+      "ingredient_keys": [
+       "grön chili|raw_edible",
+       "gul lök|raw_edible",
+       "ingefära|raw_edible",
+       "kanel|dry",
+       "kardemumma|dry",
+       "kryddpeppar|dry",
+       "rapsolja|as_sold"
+      ],
+      "depends_on": [],
+      "duration_minutes": 8,
+      "parallel_group": null
+     },
+     {
+      "id": "s2",
+      "text": "Lägg i kyckling, potatis och morot i bitar, hälften av kokosmjölken, 200 ml vatten och salt. Sjud under lock 25 minuter tills kycklingen är minst 74 °C.",
+      "ingredient_keys": [
+       "kokosmjölk|as_sold",
+       "kyckling|raw_edible",
+       "morot|raw_edible",
+       "potatis|raw_edible",
+       "salt|as_sold"
+      ],
+      "depends_on": [
+       "s1"
+      ],
+      "duration_minutes": 28,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "200 ml",
+        200.0
+       ]
+      ]
+     },
+     {
+      "id": "s3",
+      "text": "Koka riset enligt förpackningen.",
+      "ingredient_keys": [
+       "ris|dry"
+      ],
+      "depends_on": [
+       "s1"
+      ],
+      "duration_minutes": 18,
+      "parallel_group": null
+     },
+     {
+      "id": "s4",
+      "text": "Rör ner resten av kokosmjölken och värm utan att koka. Servera med riset.",
+      "ingredient_keys": [
+       "kokosmjölk|as_sold",
+       "ris|dry"
+      ],
+      "depends_on": [
+       "s2",
+       "s3"
+      ],
+      "duration_minutes": 3,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 39,
+    "equipment": [
+     "Gryta",
+     "Kastrull"
+    ],
+    "vegetarian": false,
+    "fish": false,
+    "ingredient_count": 12,
+    "provenance": {
+     "reviewed_at": "2026-11-26",
+     "notes": "Författat och standardiserat med recept-författarverktyget. Inte provlagat. Köp, allergener och näring kvalificeras separat."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "dinner"
+    ],
+    "active_minutes": 11,
+    "waiting_minutes": 28,
+    "total_minutes": 39,
+    "scaling": "reviewed_ranges"
+   }
+  },
+  {
+   "name": "Shami kebab av nötfärs och linser med myntachutney och sallad",
+   "servings": 4,
+   "ingredients": [
+    {
+     "name": "nötfärs",
+     "canonical_name": "nötfärs",
+     "quantity": 500.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "primary",
+     "quantity_min": 400.0,
+     "quantity_max": 750.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "linser",
+     "canonical_name": "linser",
+     "quantity": 100.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "sauce",
+     "product_requirements": [
+      "red_split"
+     ],
+     "quantity_min": 100.0,
+     "quantity_max": 100.0,
+     "quantity_step": 100.0
+    },
+    {
+     "name": "gul lök",
+     "canonical_name": "gul lök",
+     "quantity": 100.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 100.0,
+     "quantity_max": 100.0,
+     "quantity_step": 100.0
+    },
+    {
+     "name": "ingefära",
+     "canonical_name": "ingefära",
+     "quantity": 15.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "nötfärs|raw_edible",
+     "quantity_min": 12.0,
+     "quantity_max": 22.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "vitlök",
+     "canonical_name": "vitlök",
+     "quantity": 10.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "nötfärs|raw_edible",
+     "quantity_min": 8.0,
+     "quantity_max": 15.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "garam masala",
+     "canonical_name": "garam masala",
+     "quantity": 4.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_84e26716ceb0"
+     ],
+     "scales_with": "nötfärs|raw_edible",
+     "quantity_min": 3.0,
+     "quantity_max": 6.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "ägg",
+     "canonical_name": "ägg",
+     "quantity": 50.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "cooking",
+     "product_requirements": [
+      "pack:egg"
+     ],
+     "quantity_min": 50.0,
+     "quantity_max": 50.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "rapsolja",
+     "canonical_name": "rapsolja",
+     "quantity": 30.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "cooking",
+     "scales_with": "nötfärs|raw_edible",
+     "quantity_min": 24.0,
+     "quantity_max": 45.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 6.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "nötfärs|raw_edible",
+     "quantity_min": 5.0,
+     "quantity_max": 9.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "mynta",
+     "canonical_name": "mynta",
+     "quantity": 15.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_shape_trimmed_mint"
+     ],
+     "quantity_min": 15.0,
+     "quantity_max": 15.0,
+     "quantity_step": 15.0
+    },
+    {
+     "name": "koriander",
+     "canonical_name": "koriander",
+     "quantity": 20.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_9b2370e0e926"
+     ],
+     "quantity_min": 20.0,
+     "quantity_max": 20.0,
+     "quantity_step": 20.0
+    },
+    {
+     "name": "yoghurt naturell",
+     "canonical_name": "yoghurt naturell",
+     "quantity": 200.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "sauce",
+     "product_requirements": [
+      "plain",
+      "thick"
+     ],
+     "quantity_min": 200.0,
+     "quantity_max": 200.0,
+     "quantity_step": 200.0
+    },
+    {
+     "name": "limejuice",
+     "canonical_name": "limejuice",
+     "quantity": 15.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pure_juice"
+     ],
+     "quantity_min": 15.0,
+     "quantity_max": 15.0,
+     "quantity_step": 15.0
+    },
+    {
+     "name": "gurka",
+     "canonical_name": "gurka",
+     "quantity": 200.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c3",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 200.0,
+     "quantity_max": 200.0,
+     "quantity_step": 200.0
+    },
+    {
+     "name": "rödlök",
+     "canonical_name": "rödlök",
+     "quantity": 80.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c3",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 80.0,
+     "quantity_max": 80.0,
+     "quantity_step": 80.0
+    },
+    {
+     "name": "bröd",
+     "canonical_name": "bröd",
+     "quantity": 300.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c3",
+     "required": true,
+     "role": "side",
+     "quantity_min": 300.0,
+     "quantity_max": 300.0,
+     "quantity_step": 300.0
+    }
+   ],
+   "instructions": [
+    "Koka linserna med hackad lök, ingefära, vitlök och 300 ml vatten tills vattnet är borta, cirka 15 minuter. Låt svalna.",
+    "Blanda linserna med färs, garam masala, ägg och salt och forma platta biffar.",
+    "Mixa mynta, koriander, yoghurt och lime till en chutney.",
+    "Stek biffarna i olja 3–4 minuter per sida tills de är minst 72 °C i mitten.",
+    "Servera med chutney, skivad gurka och rödlök och varmt bröd."
+   ],
+   "design": {
+    "base_id": "smako-indian-shami-kebab-salad",
+    "version": "1.0.0",
+    "variant_id": "base",
+    "cuisines": [
+     "indian"
+    ],
+    "family": "shami kebab",
+    "primary_ingredient": "nötfärs",
+    "method": "pan",
+    "side": "bröd",
+    "flavor_profile": [
+     "mynta",
+     "linser"
+    ],
+    "components": [
+     {
+      "id": "c1",
+      "name": "Kebab",
+      "amounts": [
+       {
+        "ingredient_key": "nötfärs|raw_edible",
+        "name": "Nötfärs",
+        "note": "",
+        "quantity": 500.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "linser|dry",
+        "name": "Röda linser",
+        "note": "",
+        "quantity": 100.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "gul lök|raw_edible",
+        "name": "Gul lök",
+        "note": "",
+        "quantity": 100.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "ingefära|raw_edible",
+        "name": "Ingefära",
+        "note": "",
+        "quantity": 15.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "vitlök|raw_edible",
+        "name": "Vitlök",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "garam masala|dry",
+        "name": "Garam masala",
+        "note": "",
+        "quantity": 4.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "ägg|raw_edible",
+        "name": "Ägg",
+        "note": "",
+        "quantity": 50.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "rapsolja|as_sold",
+        "name": "Rapsolja",
+        "note": "",
+        "quantity": 30.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "Salt",
+        "note": "",
+        "quantity": 6.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c2",
+      "name": "Chutney",
+      "amounts": [
+       {
+        "ingredient_key": "mynta|raw_edible",
+        "name": "Mynta",
+        "note": "",
+        "quantity": 15.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "koriander|raw_edible",
+        "name": "Koriander",
+        "note": "",
+        "quantity": 20.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "yoghurt naturell|as_sold",
+        "name": "Yoghurt naturell",
+        "note": "",
+        "quantity": 200.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "limejuice|as_sold",
+        "name": "Limejuice",
+        "note": "",
+        "quantity": 15.0,
+        "unit": "ml"
+       }
+      ]
+     },
+     {
+      "id": "c3",
+      "name": "Till servering",
+      "amounts": [
+       {
+        "ingredient_key": "gurka|raw_edible",
+        "name": "Gurka",
+        "note": "",
+        "quantity": 200.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "rödlök|raw_edible",
+        "name": "Rödlök",
+        "note": "",
+        "quantity": 80.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "bröd|as_sold",
+        "name": "Nanbröd",
+        "note": "",
+        "quantity": 300.0,
+        "unit": "g"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "Koka linserna med hackad lök, ingefära, vitlök och 300 ml vatten tills vattnet är borta, cirka 15 minuter. Låt svalna.",
+      "ingredient_keys": [
+       "gul lök|raw_edible",
+       "ingefära|raw_edible",
+       "linser|dry",
+       "vitlök|raw_edible"
+      ],
+      "depends_on": [],
+      "duration_minutes": 18,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "300 ml",
+        300.0
+       ]
+      ]
+     },
+     {
+      "id": "s2",
+      "text": "Blanda linserna med färs, garam masala, ägg och salt och forma platta biffar.",
+      "ingredient_keys": [
+       "garam masala|dry",
+       "linser|dry",
+       "nötfärs|raw_edible",
+       "salt|as_sold",
+       "ägg|raw_edible"
+      ],
+      "depends_on": [
+       "s1"
+      ],
+      "duration_minutes": 8,
+      "parallel_group": null
+     },
+     {
+      "id": "s3",
+      "text": "Mixa mynta, koriander, yoghurt och lime till en chutney.",
+      "ingredient_keys": [
+       "koriander|raw_edible",
+       "limejuice|as_sold",
+       "mynta|raw_edible",
+       "yoghurt naturell|as_sold"
+      ],
+      "depends_on": [],
+      "duration_minutes": 4,
+      "parallel_group": null
+     },
+     {
+      "id": "s4",
+      "text": "Stek biffarna i olja 3–4 minuter per sida tills de är minst 72 °C i mitten.",
+      "ingredient_keys": [
+       "nötfärs|raw_edible",
+       "rapsolja|as_sold"
+      ],
+      "depends_on": [
+       "s2"
+      ],
+      "duration_minutes": 10,
+      "parallel_group": null
+     },
+     {
+      "id": "s5",
+      "text": "Servera med chutney, skivad gurka och rödlök och varmt bröd.",
+      "ingredient_keys": [
+       "bröd|as_sold",
+       "gurka|raw_edible",
+       "nötfärs|raw_edible",
+       "rödlök|raw_edible",
+       "yoghurt naturell|as_sold"
+      ],
+      "depends_on": [
+       "s3",
+       "s4"
+      ],
+      "duration_minutes": 3,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 39,
+    "equipment": [
+     "Kastrull",
+     "Mixer",
+     "Stekpanna"
+    ],
+    "vegetarian": false,
+    "fish": false,
+    "ingredient_count": 15,
+    "provenance": {
+     "reviewed_at": "2026-11-26",
+     "notes": "Författat och standardiserat med recept-författarverktyget. Inte provlagat. Köp, allergener och näring kvalificeras separat."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "dinner"
+    ],
+    "active_minutes": 25,
+    "waiting_minutes": 14,
+    "total_minutes": 39,
+    "scaling": "reviewed_ranges"
+   }
+  },
+  {
+   "name": "Kofta curry – nötfärsbullar i tomat- och yoghurtsås med ris",
+   "servings": 4,
+   "ingredients": [
+    {
+     "name": "nötfärs",
+     "canonical_name": "nötfärs",
+     "quantity": 600.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "primary",
+     "quantity_min": 500.0,
+     "quantity_max": 900.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "gul lök",
+     "canonical_name": "gul lök",
+     "quantity": 230.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 230.0,
+     "quantity_max": 230.0,
+     "quantity_step": 230.0
+    },
+    {
+     "name": "ingefära",
+     "canonical_name": "ingefära",
+     "quantity": 10.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "nötfärs|raw_edible",
+     "quantity_min": 8.5,
+     "quantity_max": 15.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "garam masala",
+     "canonical_name": "garam masala",
+     "quantity": 3.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_84e26716ceb0"
+     ],
+     "scales_with": "nötfärs|raw_edible",
+     "quantity_min": 2.5,
+     "quantity_max": 4.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "koriander",
+     "canonical_name": "koriander",
+     "quantity": 10.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_9b2370e0e926"
+     ],
+     "scales_with": "nötfärs|raw_edible",
+     "quantity_min": 8.5,
+     "quantity_max": 15.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 5.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "nötfärs|raw_edible",
+     "quantity_min": 4.0,
+     "quantity_max": 7.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "krossade tomater",
+     "canonical_name": "krossade tomater",
+     "quantity": 400.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "sauce",
+     "quantity_min": 400.0,
+     "quantity_max": 400.0,
+     "quantity_step": 400.0
+    },
+    {
+     "name": "yoghurt naturell",
+     "canonical_name": "yoghurt naturell",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "sauce",
+     "product_requirements": [
+      "plain",
+      "thick"
+     ],
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    },
+    {
+     "name": "vitlök",
+     "canonical_name": "vitlök",
+     "quantity": 10.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 10.0,
+     "quantity_max": 10.0,
+     "quantity_step": 10.0
+    },
+    {
+     "name": "kanel",
+     "canonical_name": "kanel",
+     "quantity": 1.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "ground"
+     ],
+     "quantity_min": 1.0,
+     "quantity_max": 1.0,
+     "quantity_step": 1.0
+    },
+    {
+     "name": "gurkmeja",
+     "canonical_name": "gurkmeja",
+     "quantity": 1.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "ground"
+     ],
+     "quantity_min": 1.0,
+     "quantity_max": 1.0,
+     "quantity_step": 1.0
+    },
+    {
+     "name": "paprikapulver",
+     "canonical_name": "paprikapulver",
+     "quantity": 3.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "ground"
+     ],
+     "quantity_min": 3.0,
+     "quantity_max": 3.0,
+     "quantity_step": 3.0
+    },
+    {
+     "name": "rapsolja",
+     "canonical_name": "rapsolja",
+     "quantity": 30.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "cooking",
+     "quantity_min": 30.0,
+     "quantity_max": 30.0,
+     "quantity_step": 30.0
+    },
+    {
+     "name": "ris",
+     "canonical_name": "ris",
+     "quantity": 300.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c3",
+     "required": true,
+     "role": "side",
+     "product_requirements": [
+      "white_rice"
+     ],
+     "quantity_min": 250.0,
+     "quantity_max": 350.0,
+     "quantity_step": 50.0
+    }
+   ],
+   "instructions": [
+    "Blanda färs med finriven lök, ingefära, garam masala, hackad koriander och salt. Rulla 20 bullar.",
+    "Fräs hackad lök och vitlök i olja gyllene. Rör ner kanel, gurkmeja och paprikapulver.",
+    "Tillsätt tomater och 200 ml vatten och koka upp. Lägg i bullarna och sjud under lock 20 minuter tills de är minst 72 °C i mitten.",
+    "Koka riset enligt förpackningen.",
+    "Rör ner yoghurten från värmen och servera med ris."
+   ],
+   "design": {
+    "base_id": "smako-indian-kofta-curry-tamatar",
+    "version": "1.0.0",
+    "variant_id": "base",
+    "cuisines": [
+     "indian"
+    ],
+    "family": "kofta curry",
+    "primary_ingredient": "nötfärs",
+    "method": "pot",
+    "side": "ris",
+    "flavor_profile": [
+     "garam masala",
+     "kanel"
+    ],
+    "components": [
+     {
+      "id": "c1",
+      "name": "Kofta",
+      "amounts": [
+       {
+        "ingredient_key": "nötfärs|raw_edible",
+        "name": "Nötfärs",
+        "note": "",
+        "quantity": 600.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "gul lök|raw_edible",
+        "name": "Gul lök",
+        "note": "",
+        "quantity": 80.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "ingefära|raw_edible",
+        "name": "Ingefära",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "garam masala|dry",
+        "name": "Garam masala",
+        "note": "",
+        "quantity": 3.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "koriander|raw_edible",
+        "name": "Koriander",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "Salt",
+        "note": "",
+        "quantity": 5.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c2",
+      "name": "Sås",
+      "amounts": [
+       {
+        "ingredient_key": "gul lök|raw_edible",
+        "name": "Gul lök",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "krossade tomater|as_sold",
+        "name": "Krossade tomater",
+        "note": "",
+        "quantity": 400.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "yoghurt naturell|as_sold",
+        "name": "Yoghurt naturell",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "vitlök|raw_edible",
+        "name": "Vitlök",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "kanel|dry",
+        "name": "Kanel",
+        "note": "",
+        "quantity": 1.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "gurkmeja|dry",
+        "name": "Gurkmeja",
+        "note": "",
+        "quantity": 1.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "paprikapulver|dry",
+        "name": "Paprikapulver",
+        "note": "",
+        "quantity": 3.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "rapsolja|as_sold",
+        "name": "Rapsolja",
+        "note": "",
+        "quantity": 30.0,
+        "unit": "ml"
+       }
+      ]
+     },
+     {
+      "id": "c3",
+      "name": "Ris",
+      "amounts": [
+       {
+        "ingredient_key": "ris|dry",
+        "name": "Ris",
+        "note": "",
+        "quantity": 300.0,
+        "unit": "g"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "Blanda färs med finriven lök, ingefära, garam masala, hackad koriander och salt. Rulla 20 bullar.",
+      "ingredient_keys": [
+       "garam masala|dry",
+       "gul lök|raw_edible",
+       "ingefära|raw_edible",
+       "koriander|raw_edible",
+       "nötfärs|raw_edible",
+       "salt|as_sold"
+      ],
+      "depends_on": [],
+      "duration_minutes": 12,
+      "parallel_group": null
+     },
+     {
+      "id": "s2",
+      "text": "Fräs hackad lök och vitlök i olja gyllene. Rör ner kanel, gurkmeja och paprikapulver.",
+      "ingredient_keys": [
+       "gul lök|raw_edible",
+       "gurkmeja|dry",
+       "kanel|dry",
+       "paprikapulver|dry",
+       "rapsolja|as_sold",
+       "vitlök|raw_edible"
+      ],
+      "depends_on": [],
+      "duration_minutes": 10,
+      "parallel_group": null
+     },
+     {
+      "id": "s3",
+      "text": "Tillsätt tomater och 200 ml vatten och koka upp. Lägg i bullarna och sjud under lock 20 minuter tills de är minst 72 °C i mitten.",
+      "ingredient_keys": [
+       "krossade tomater|as_sold",
+       "nötfärs|raw_edible"
+      ],
+      "depends_on": [
+       "s1",
+       "s2"
+      ],
+      "duration_minutes": 22,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "200 ml",
+        200.0
+       ]
+      ]
+     },
+     {
+      "id": "s4",
+      "text": "Koka riset enligt förpackningen.",
+      "ingredient_keys": [
+       "ris|dry"
+      ],
+      "depends_on": [
+       "s2"
+      ],
+      "duration_minutes": 18,
+      "parallel_group": null
+     },
+     {
+      "id": "s5",
+      "text": "Rör ner yoghurten från värmen och servera med ris.",
+      "ingredient_keys": [
+       "ris|dry",
+       "yoghurt naturell|as_sold"
+      ],
+      "depends_on": [
+       "s3",
+       "s4"
+      ],
+      "duration_minutes": 3,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 37,
+    "equipment": [
+     "Gryta",
+     "Kastrull",
+     "Skål"
+    ],
+    "vegetarian": false,
+    "fish": false,
+    "ingredient_count": 13,
+    "provenance": {
+     "reviewed_at": "2026-11-26",
+     "notes": "Författat och standardiserat med recept-författarverktyget. Inte provlagat. Köp, allergener och näring kvalificeras separat."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "dinner"
+    ],
+    "active_minutes": 25,
+    "waiting_minutes": 12,
+    "total_minutes": 37,
+    "scaling": "reviewed_ranges"
+   }
+  },
+  {
+   "name": "Nihari – långkokt nötgryta med ingefära och bröd",
+   "servings": 4,
+   "ingredients": [
+    {
+     "name": "nötkött",
+     "canonical_name": "nötkött",
+     "quantity": 800.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "primary",
+     "product_requirements": [
+      "pack:beef_braising_cut",
+      "pack:intake_all_10d1e6ea4dc5"
+     ],
+     "quantity_min": 650.0,
+     "quantity_max": 1200.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "gul lök",
+     "canonical_name": "gul lök",
+     "quantity": 250.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 250.0,
+     "quantity_max": 250.0,
+     "quantity_step": 250.0
+    },
+    {
+     "name": "ingefära",
+     "canonical_name": "ingefära",
+     "quantity": 40.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "nötkött|raw_edible",
+     "quantity_min": 32.0,
+     "quantity_max": 60.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "vitlök",
+     "canonical_name": "vitlök",
+     "quantity": 15.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "nötkött|raw_edible",
+     "quantity_min": 12.0,
+     "quantity_max": 22.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "vetemjöl",
+     "canonical_name": "vetemjöl",
+     "quantity": 30.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "sauce",
+     "quantity_min": 30.0,
+     "quantity_max": 30.0,
+     "quantity_step": 30.0
+    },
+    {
+     "name": "garam masala",
+     "canonical_name": "garam masala",
+     "quantity": 4.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_84e26716ceb0"
+     ],
+     "scales_with": "nötkött|raw_edible",
+     "quantity_min": 3.0,
+     "quantity_max": 6.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "spiskummin",
+     "canonical_name": "spiskummin",
+     "quantity": 2.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "ground"
+     ],
+     "scales_with": "nötkött|raw_edible",
+     "quantity_min": 1.5,
+     "quantity_max": 3.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "paprikapulver",
+     "canonical_name": "paprikapulver",
+     "quantity": 4.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "ground"
+     ],
+     "scales_with": "nötkött|raw_edible",
+     "quantity_min": 3.0,
+     "quantity_max": 6.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "gurkmeja",
+     "canonical_name": "gurkmeja",
+     "quantity": 1.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "ground"
+     ],
+     "scales_with": "nötkött|raw_edible",
+     "quantity_min": 1.0,
+     "quantity_max": 1.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "rapsolja",
+     "canonical_name": "rapsolja",
+     "quantity": 40.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "cooking",
+     "scales_with": "nötkött|raw_edible",
+     "quantity_min": 32.0,
+     "quantity_max": 60.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 8.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "nötkött|raw_edible",
+     "quantity_min": 6.5,
+     "quantity_max": 12.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "koriander",
+     "canonical_name": "koriander",
+     "quantity": 15.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_9b2370e0e926"
+     ],
+     "quantity_min": 15.0,
+     "quantity_max": 15.0,
+     "quantity_step": 15.0
+    },
+    {
+     "name": "limejuice",
+     "canonical_name": "limejuice",
+     "quantity": 20.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pure_juice"
+     ],
+     "quantity_min": 20.0,
+     "quantity_max": 20.0,
+     "quantity_step": 20.0
+    },
+    {
+     "name": "grön chili",
+     "canonical_name": "grön chili",
+     "quantity": 10.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_round2_c8b0139e0c23"
+     ],
+     "quantity_min": 10.0,
+     "quantity_max": 10.0,
+     "quantity_step": 10.0
+    },
+    {
+     "name": "bröd",
+     "canonical_name": "bröd",
+     "quantity": 300.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "side",
+     "quantity_min": 300.0,
+     "quantity_max": 300.0,
+     "quantity_step": 300.0
+    }
+   ],
+   "instructions": [
+    "Fräs skivad lök i olja gyllene och lyft upp hälften.",
+    "Bryn köttet i stora bitar med två tredjedelar av ingefäran, riven, och vitlök, spiskummin, paprikapulver, gurkmeja och salt.",
+    "Häll på 1000 ml vatten och sjud under lock 2 timmar och 30 minuter tills köttet faller isär.",
+    "Vispa mjölet med 150 ml vatten, rör ner i grytan med garam masala och sjud 15 minuter tills såsen tjocknat.",
+    "Toppa med stekt lök, resten av ingefäran i tunna stavar, koriander, chili och lime. Servera med bröd."
+   ],
+   "design": {
+    "base_id": "smako-indian-nihari-beef-naan",
+    "version": "1.0.0",
+    "variant_id": "base",
+    "cuisines": [
+     "indian"
+    ],
+    "family": "nihari",
+    "primary_ingredient": "nötkött",
+    "method": "pot",
+    "side": "bröd",
+    "flavor_profile": [
+     "ingefära",
+     "fänkål"
+    ],
+    "components": [
+     {
+      "id": "c1",
+      "name": "Nihari",
+      "amounts": [
+       {
+        "ingredient_key": "nötkött|raw_edible",
+        "name": "Högrev eller grytbitar av nöt",
+        "note": "",
+        "quantity": 800.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "gul lök|raw_edible",
+        "name": "Gul lök",
+        "note": "",
+        "quantity": 250.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "ingefära|raw_edible",
+        "name": "Ingefära",
+        "note": "",
+        "quantity": 40.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "vitlök|raw_edible",
+        "name": "Vitlök",
+        "note": "",
+        "quantity": 15.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "vetemjöl|dry",
+        "name": "Vetemjöl",
+        "note": "",
+        "quantity": 30.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "garam masala|dry",
+        "name": "Garam masala",
+        "note": "",
+        "quantity": 4.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "spiskummin|dry",
+        "name": "Spiskummin",
+        "note": "",
+        "quantity": 2.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "paprikapulver|dry",
+        "name": "Paprikapulver",
+        "note": "",
+        "quantity": 4.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "gurkmeja|dry",
+        "name": "Gurkmeja",
+        "note": "",
+        "quantity": 1.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "rapsolja|as_sold",
+        "name": "Rapsolja",
+        "note": "",
+        "quantity": 40.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "Salt",
+        "note": "",
+        "quantity": 8.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c2",
+      "name": "Till servering",
+      "amounts": [
+       {
+        "ingredient_key": "koriander|raw_edible",
+        "name": "Koriander",
+        "note": "",
+        "quantity": 15.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "limejuice|as_sold",
+        "name": "Limejuice",
+        "note": "",
+        "quantity": 20.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "grön chili|raw_edible",
+        "name": "Grön chili",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "bröd|as_sold",
+        "name": "Nanbröd",
+        "note": "",
+        "quantity": 300.0,
+        "unit": "g"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "Fräs skivad lök i olja gyllene och lyft upp hälften.",
+      "ingredient_keys": [
+       "gul lök|raw_edible",
+       "rapsolja|as_sold"
+      ],
+      "depends_on": [],
+      "duration_minutes": 15,
+      "parallel_group": null
+     },
+     {
+      "id": "s2",
+      "text": "Bryn köttet i stora bitar med två tredjedelar av ingefäran, riven, och vitlök, spiskummin, paprikapulver, gurkmeja och salt.",
+      "ingredient_keys": [
+       "gurkmeja|dry",
+       "ingefära|raw_edible",
+       "nötkött|raw_edible",
+       "paprikapulver|dry",
+       "salt|as_sold",
+       "spiskummin|dry",
+       "vitlök|raw_edible"
+      ],
+      "depends_on": [
+       "s1"
+      ],
+      "duration_minutes": 10,
+      "parallel_group": null
+     },
+     {
+      "id": "s3",
+      "text": "Häll på 1000 ml vatten och sjud under lock 2 timmar och 30 minuter tills köttet faller isär.",
+      "ingredient_keys": [
+       "nötkött|raw_edible"
+      ],
+      "depends_on": [
+       "s2"
+      ],
+      "duration_minutes": 150,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "1000 ml",
+        1000.0
+       ]
+      ]
+     },
+     {
+      "id": "s4",
+      "text": "Vispa mjölet med 150 ml vatten, rör ner i grytan med garam masala och sjud 15 minuter tills såsen tjocknat.",
+      "ingredient_keys": [
+       "garam masala|dry",
+       "vetemjöl|dry"
+      ],
+      "depends_on": [
+       "s3"
+      ],
+      "duration_minutes": 16,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "150 ml",
+        150.0
+       ]
+      ]
+     },
+     {
+      "id": "s5",
+      "text": "Toppa med stekt lök, resten av ingefäran i tunna stavar, koriander, chili och lime. Servera med bröd.",
+      "ingredient_keys": [
+       "bröd|as_sold",
+       "grön chili|raw_edible",
+       "gul lök|raw_edible",
+       "ingefära|raw_edible",
+       "koriander|raw_edible",
+       "limejuice|as_sold"
+      ],
+      "depends_on": [
+       "s4"
+      ],
+      "duration_minutes": 4,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 195,
+    "equipment": [
+     "Gryta"
+    ],
+    "vegetarian": false,
+    "fish": false,
+    "ingredient_count": 14,
+    "provenance": {
+     "reviewed_at": "2026-11-26",
+     "notes": "Författat och standardiserat med recept-författarverktyget. Inte provlagat. Köp, allergener och näring kvalificeras separat."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "dinner"
+    ],
+    "active_minutes": 45,
+    "waiting_minutes": 150,
+    "total_minutes": 195,
+    "scaling": "reviewed_ranges"
+   }
+  },
+  {
+   "name": "Kryddig fläskwok med vitkål, ingefära och ris",
+   "servings": 4,
+   "ingredients": [
+    {
+     "name": "fläskkött",
+     "canonical_name": "fläskkött",
+     "quantity": 600.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "primary",
+     "quantity_min": 500.0,
+     "quantity_max": 900.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "vitkål",
+     "canonical_name": "vitkål",
+     "quantity": 400.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 400.0,
+     "quantity_max": 400.0,
+     "quantity_step": 400.0
+    },
+    {
+     "name": "gul lök",
+     "canonical_name": "gul lök",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    },
+    {
+     "name": "paprika",
+     "canonical_name": "paprika",
+     "quantity": 200.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 200.0,
+     "quantity_max": 200.0,
+     "quantity_step": 200.0
+    },
+    {
+     "name": "ingefära",
+     "canonical_name": "ingefära",
+     "quantity": 15.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "fläskkött|raw_edible",
+     "quantity_min": 12.0,
+     "quantity_max": 22.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "vitlök",
+     "canonical_name": "vitlök",
+     "quantity": 10.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "fläskkött|raw_edible",
+     "quantity_min": 8.5,
+     "quantity_max": 15.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "grön chili",
+     "canonical_name": "grön chili",
+     "quantity": 10.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_round2_c8b0139e0c23"
+     ],
+     "scales_with": "fläskkött|raw_edible",
+     "quantity_min": 8.5,
+     "quantity_max": 15.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "senapsfrön",
+     "canonical_name": "senapsfrön",
+     "quantity": 3.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_68f185da5c3f"
+     ],
+     "scales_with": "fläskkött|raw_edible",
+     "quantity_min": 2.5,
+     "quantity_max": 4.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "gurkmeja",
+     "canonical_name": "gurkmeja",
+     "quantity": 1.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "ground"
+     ],
+     "scales_with": "fläskkött|raw_edible",
+     "quantity_min": 1.0,
+     "quantity_max": 1.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "sojasås",
+     "canonical_name": "sojasås",
+     "quantity": 20.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "fläskkött|raw_edible",
+     "quantity_min": 17.0,
+     "quantity_max": 30.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "rapsolja",
+     "canonical_name": "rapsolja",
+     "quantity": 30.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "cooking",
+     "scales_with": "fläskkött|raw_edible",
+     "quantity_min": 25.0,
+     "quantity_max": 45.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 4.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "fläskkött|raw_edible",
+     "quantity_min": 3.5,
+     "quantity_max": 6.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "ris",
+     "canonical_name": "ris",
+     "quantity": 300.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c2",
+     "required": true,
+     "role": "side",
+     "product_requirements": [
+      "white_rice"
+     ],
+     "quantity_min": 250.0,
+     "quantity_max": 350.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "koriander",
+     "canonical_name": "koriander",
+     "quantity": 10.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_9b2370e0e926"
+     ],
+     "quantity_min": 10.0,
+     "quantity_max": 10.0,
+     "quantity_step": 10.0
+    },
+    {
+     "name": "limejuice",
+     "canonical_name": "limejuice",
+     "quantity": 15.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pure_juice"
+     ],
+     "quantity_min": 15.0,
+     "quantity_max": 15.0,
+     "quantity_step": 15.0
+    }
+   ],
+   "instructions": [
+    "Koka riset enligt förpackningen.",
+    "Strimla köttet tunt och stek det i het olja tills det är genomstekt, minst 68 °C. Lägg upp.",
+    "Fräs senapsfrön tills de poppar. Tillsätt skivad lök, ingefära, vitlök, chili och gurkmeja.",
+    "Tillsätt strimlad kål och paprika och woka 5 minuter. Vänd ner köttet, soja och salt.",
+    "Servera med ris, koriander och lime."
+   ],
+   "design": {
+    "base_id": "smako-indian-chilli-pork-cabbage",
+    "version": "1.0.0",
+    "variant_id": "base",
+    "cuisines": [
+     "indian"
+    ],
+    "family": "chilli pork",
+    "primary_ingredient": "fläskkött",
+    "method": "pan",
+    "side": "ris",
+    "flavor_profile": [
+     "chili",
+     "senapsfrön"
+    ],
+    "components": [
+     {
+      "id": "c1",
+      "name": "Wok",
+      "amounts": [
+       {
+        "ingredient_key": "fläskkött|raw_edible",
+        "name": "Fläskkött",
+        "note": "",
+        "quantity": 600.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "vitkål|raw_edible",
+        "name": "Vitkål",
+        "note": "",
+        "quantity": 400.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "gul lök|raw_edible",
+        "name": "Gul lök",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "paprika|raw_edible",
+        "name": "Paprika",
+        "note": "",
+        "quantity": 200.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "ingefära|raw_edible",
+        "name": "Ingefära",
+        "note": "",
+        "quantity": 15.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "vitlök|raw_edible",
+        "name": "Vitlök",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "grön chili|raw_edible",
+        "name": "Grön chili",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "senapsfrön|dry",
+        "name": "Senapsfrön",
+        "note": "",
+        "quantity": 3.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "gurkmeja|dry",
+        "name": "Gurkmeja",
+        "note": "",
+        "quantity": 1.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "sojasås|as_sold",
+        "name": "Sojasås",
+        "note": "",
+        "quantity": 20.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "rapsolja|as_sold",
+        "name": "Rapsolja",
+        "note": "",
+        "quantity": 30.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "Salt",
+        "note": "",
+        "quantity": 4.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c2",
+      "name": "Ris",
+      "amounts": [
+       {
+        "ingredient_key": "ris|dry",
+        "name": "Ris",
+        "note": "",
+        "quantity": 300.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "koriander|raw_edible",
+        "name": "Koriander",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "limejuice|as_sold",
+        "name": "Limejuice",
+        "note": "",
+        "quantity": 15.0,
+        "unit": "ml"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "Koka riset enligt förpackningen.",
+      "ingredient_keys": [
+       "ris|dry"
+      ],
+      "depends_on": [],
+      "duration_minutes": 18,
+      "parallel_group": null
+     },
+     {
+      "id": "s2",
+      "text": "Strimla köttet tunt och stek det i het olja tills det är genomstekt, minst 68 °C. Lägg upp.",
+      "ingredient_keys": [
+       "fläskkött|raw_edible",
+       "rapsolja|as_sold"
+      ],
+      "depends_on": [],
+      "duration_minutes": 8,
+      "parallel_group": null
+     },
+     {
+      "id": "s3",
+      "text": "Fräs senapsfrön tills de poppar. Tillsätt skivad lök, ingefära, vitlök, chili och gurkmeja.",
+      "ingredient_keys": [
+       "grön chili|raw_edible",
+       "gul lök|raw_edible",
+       "gurkmeja|dry",
+       "ingefära|raw_edible",
+       "senapsfrön|dry",
+       "vitlök|raw_edible"
+      ],
+      "depends_on": [
+       "s2"
+      ],
+      "duration_minutes": 5,
+      "parallel_group": null
+     },
+     {
+      "id": "s4",
+      "text": "Tillsätt strimlad kål och paprika och woka 5 minuter. Vänd ner köttet, soja och salt.",
+      "ingredient_keys": [
+       "fläskkött|raw_edible",
+       "paprika|raw_edible",
+       "salt|as_sold",
+       "sojasås|as_sold",
+       "vitkål|raw_edible"
+      ],
+      "depends_on": [
+       "s3"
+      ],
+      "duration_minutes": 7,
+      "parallel_group": null
+     },
+     {
+      "id": "s5",
+      "text": "Servera med ris, koriander och lime.",
+      "ingredient_keys": [
+       "koriander|raw_edible",
+       "limejuice|as_sold",
+       "ris|dry"
+      ],
+      "depends_on": [
+       "s1",
+       "s4"
+      ],
+      "duration_minutes": 2,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 22,
+    "equipment": [
+     "Wok",
+     "Kastrull"
+    ],
+    "vegetarian": false,
+    "fish": false,
+    "ingredient_count": 14,
+    "provenance": {
+     "reviewed_at": "2026-11-26",
+     "notes": "Författat och standardiserat med recept-författarverktyget. Inte provlagat. Köp, allergener och näring kvalificeras separat."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "dinner"
+    ],
+    "active_minutes": 22,
+    "waiting_minutes": 0,
+    "total_minutes": 22,
+    "scaling": "reviewed_ranges"
+   }
+  },
+  {
+   "name": "Amritsari fisk – kryddpanerad fisk med ugnspotatis och myntachutney",
+   "servings": 4,
+   "ingredients": [
+    {
+     "name": "fisk",
+     "canonical_name": "fisk",
+     "quantity": 600.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "primary",
+     "product_requirements": [
+      "pack:cod"
+     ],
+     "quantity_min": 500.0,
+     "quantity_max": 900.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "kikärtsmjöl",
+     "canonical_name": "kikärtsmjöl",
+     "quantity": 80.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "cooking",
+     "product_requirements": [
+      "pack:intake_chickpea_flour"
+     ],
+     "quantity_min": 80.0,
+     "quantity_max": 80.0,
+     "quantity_step": 80.0
+    },
+    {
+     "name": "ingefära",
+     "canonical_name": "ingefära",
+     "quantity": 10.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "fisk|raw_edible",
+     "quantity_min": 8.5,
+     "quantity_max": 15.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "vitlök",
+     "canonical_name": "vitlök",
+     "quantity": 10.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "fisk|raw_edible",
+     "quantity_min": 8.5,
+     "quantity_max": 15.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "paprikapulver",
+     "canonical_name": "paprikapulver",
+     "quantity": 3.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "ground"
+     ],
+     "scales_with": "fisk|raw_edible",
+     "quantity_min": 2.5,
+     "quantity_max": 4.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "garam masala",
+     "canonical_name": "garam masala",
+     "quantity": 2.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_84e26716ceb0"
+     ],
+     "scales_with": "fisk|raw_edible",
+     "quantity_min": 1.5,
+     "quantity_max": 3.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "citronjuice",
+     "canonical_name": "citronjuice",
+     "quantity": 20.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pure_juice"
+     ],
+     "scales_with": "fisk|raw_edible",
+     "quantity_min": 17.0,
+     "quantity_max": 30.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "rapsolja",
+     "canonical_name": "rapsolja",
+     "quantity": 80.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "cooking",
+     "scales_with": "fisk|raw_edible",
+     "quantity_min": 70.0,
+     "quantity_max": 110.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 6.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "fisk|raw_edible",
+     "quantity_min": 5.0,
+     "quantity_max": 9.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "potatis",
+     "canonical_name": "potatis",
+     "quantity": 800.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "side",
+     "quantity_min": 600.0,
+     "quantity_max": 950.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "spiskummin",
+     "canonical_name": "spiskummin",
+     "quantity": 2.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "ground"
+     ],
+     "quantity_min": 2.0,
+     "quantity_max": 2.0,
+     "quantity_step": 2.0
+    },
+    {
+     "name": "mynta",
+     "canonical_name": "mynta",
+     "quantity": 15.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c3",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_shape_trimmed_mint"
+     ],
+     "quantity_min": 15.0,
+     "quantity_max": 15.0,
+     "quantity_step": 15.0
+    },
+    {
+     "name": "koriander",
+     "canonical_name": "koriander",
+     "quantity": 15.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c3",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_9b2370e0e926"
+     ],
+     "quantity_min": 15.0,
+     "quantity_max": 15.0,
+     "quantity_step": 15.0
+    },
+    {
+     "name": "yoghurt naturell",
+     "canonical_name": "yoghurt naturell",
+     "quantity": 200.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c3",
+     "required": true,
+     "role": "sauce",
+     "product_requirements": [
+      "plain",
+      "thick"
+     ],
+     "quantity_min": 200.0,
+     "quantity_max": 200.0,
+     "quantity_step": 200.0
+    },
+    {
+     "name": "rödlök",
+     "canonical_name": "rödlök",
+     "quantity": 60.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c3",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 60.0,
+     "quantity_max": 60.0,
+     "quantity_step": 60.0
+    }
+   ],
+   "instructions": [
+    "Sätt ugnen på 225 °C. Skär potatisen i klyftor, vänd med olja, spiskummin och salt och baka 30 minuter.",
+    "Vänd fisken i bitar med citron, riven ingefära, vitlök och salt.",
+    "Rör ihop kikärtsmjöl, paprikapulver, garam masala och vatten till en tjock smet. Vänd fisken i smeten.",
+    "Stek fisken i olja 3 minuter per sida tills den är krispig och minst 63 °C.",
+    "Mixa mynta, koriander och yoghurt. Servera fisken med potatis, chutney och tunt skivad rödlök."
+   ],
+   "design": {
+    "base_id": "smako-indian-amritsari-fish-fries",
+    "version": "1.0.0",
+    "variant_id": "base",
+    "cuisines": [
+     "indian"
+    ],
+    "family": "amritsari",
+    "primary_ingredient": "fisk",
+    "method": "pan",
+    "side": "potatis",
+    "flavor_profile": [
+     "ajwain",
+     "mynta"
+    ],
+    "components": [
+     {
+      "id": "c1",
+      "name": "Fisk",
+      "amounts": [
+       {
+        "ingredient_key": "fisk|raw_edible",
+        "name": "Torskfilé",
+        "note": "",
+        "quantity": 600.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "kikärtsmjöl|dry",
+        "name": "Kikärtsmjöl",
+        "note": "",
+        "quantity": 80.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "ingefära|raw_edible",
+        "name": "Ingefära",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "vitlök|raw_edible",
+        "name": "Vitlök",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "paprikapulver|dry",
+        "name": "Paprikapulver",
+        "note": "",
+        "quantity": 3.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "garam masala|dry",
+        "name": "Garam masala",
+        "note": "",
+        "quantity": 2.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "citronjuice|as_sold",
+        "name": "Citronjuice",
+        "note": "",
+        "quantity": 20.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "rapsolja|as_sold",
+        "name": "Rapsolja",
+        "note": "",
+        "quantity": 60.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "Salt",
+        "note": "",
+        "quantity": 6.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c2",
+      "name": "Potatis",
+      "amounts": [
+       {
+        "ingredient_key": "potatis|raw_edible",
+        "name": "Potatis",
+        "note": "",
+        "quantity": 800.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "rapsolja|as_sold",
+        "name": "Rapsolja",
+        "note": "",
+        "quantity": 20.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "spiskummin|dry",
+        "name": "Spiskummin",
+        "note": "",
+        "quantity": 2.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c3",
+      "name": "Chutney",
+      "amounts": [
+       {
+        "ingredient_key": "mynta|raw_edible",
+        "name": "Mynta",
+        "note": "",
+        "quantity": 15.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "koriander|raw_edible",
+        "name": "Koriander",
+        "note": "",
+        "quantity": 15.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "yoghurt naturell|as_sold",
+        "name": "Yoghurt naturell",
+        "note": "",
+        "quantity": 200.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "rödlök|raw_edible",
+        "name": "Rödlök",
+        "note": "",
+        "quantity": 60.0,
+        "unit": "g"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "Sätt ugnen på 225 °C. Skär potatisen i klyftor, vänd med olja, spiskummin och salt och baka 30 minuter.",
+      "ingredient_keys": [
+       "potatis|raw_edible",
+       "rapsolja|as_sold",
+       "spiskummin|dry"
+      ],
+      "depends_on": [],
+      "duration_minutes": 33,
+      "parallel_group": null
+     },
+     {
+      "id": "s2",
+      "text": "Vänd fisken i bitar med citron, riven ingefära, vitlök och salt.",
+      "ingredient_keys": [
+       "citronjuice|as_sold",
+       "fisk|raw_edible",
+       "ingefära|raw_edible",
+       "salt|as_sold",
+       "vitlök|raw_edible"
+      ],
+      "depends_on": [],
+      "duration_minutes": 5,
+      "parallel_group": null
+     },
+     {
+      "id": "s3",
+      "text": "Rör ihop kikärtsmjöl, paprikapulver, garam masala och vatten till en tjock smet. Vänd fisken i smeten.",
+      "ingredient_keys": [
+       "fisk|raw_edible",
+       "garam masala|dry",
+       "kikärtsmjöl|dry",
+       "paprikapulver|dry"
+      ],
+      "depends_on": [
+       "s2"
+      ],
+      "duration_minutes": 5,
+      "parallel_group": null
+     },
+     {
+      "id": "s4",
+      "text": "Stek fisken i olja 3 minuter per sida tills den är krispig och minst 63 °C.",
+      "ingredient_keys": [
+       "fisk|raw_edible",
+       "rapsolja|as_sold"
+      ],
+      "depends_on": [
+       "s3"
+      ],
+      "duration_minutes": 10,
+      "parallel_group": null
+     },
+     {
+      "id": "s5",
+      "text": "Mixa mynta, koriander och yoghurt. Servera fisken med potatis, chutney och tunt skivad rödlök.",
+      "ingredient_keys": [
+       "fisk|raw_edible",
+       "koriander|raw_edible",
+       "mynta|raw_edible",
+       "potatis|raw_edible",
+       "rödlök|raw_edible",
+       "yoghurt naturell|as_sold"
+      ],
+      "depends_on": [
+       "s1",
+       "s4"
+      ],
+      "duration_minutes": 5,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 38,
+    "equipment": [
+     "Stekpanna",
+     "Ugn",
+     "Ugnsplåt",
+     "Mixer"
+    ],
+    "vegetarian": false,
+    "fish": true,
+    "ingredient_count": 14,
+    "provenance": {
+     "reviewed_at": "2026-11-26",
+     "notes": "Författat och standardiserat med recept-författarverktyget. Inte provlagat. Köp, allergener och näring kvalificeras separat."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "dinner"
+    ],
+    "active_minutes": 25,
+    "waiting_minutes": 13,
+    "total_minutes": 38,
+    "scaling": "reviewed_ranges"
+   }
+  },
+  {
+   "name": "Chingri malai – räkcurry med kokos och kardemumma",
+   "servings": 4,
+   "ingredients": [
+    {
+     "name": "råa skalade vannameiräkor",
+     "canonical_name": "råa skalade vannameiräkor",
+     "quantity": 500.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "primary",
+     "product_requirements": [
+      "pack:intake_all_round2_599059ef473b"
+     ],
+     "quantity_min": 400.0,
+     "quantity_max": 750.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "kokosmjölk",
+     "canonical_name": "kokosmjölk",
+     "quantity": 400.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "sauce",
+     "quantity_min": 400.0,
+     "quantity_max": 400.0,
+     "quantity_step": 400.0
+    },
+    {
+     "name": "gul lök",
+     "canonical_name": "gul lök",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    },
+    {
+     "name": "ingefära",
+     "canonical_name": "ingefära",
+     "quantity": 15.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "råa skalade vannameiräkor|as_sold",
+     "quantity_min": 12.0,
+     "quantity_max": 22.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "vitlök",
+     "canonical_name": "vitlök",
+     "quantity": 10.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "råa skalade vannameiräkor|as_sold",
+     "quantity_min": 8.0,
+     "quantity_max": 15.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "gurkmeja",
+     "canonical_name": "gurkmeja",
+     "quantity": 1.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "ground"
+     ],
+     "scales_with": "råa skalade vannameiräkor|as_sold",
+     "quantity_min": 1.0,
+     "quantity_max": 1.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "kardemumma",
+     "canonical_name": "kardemumma",
+     "quantity": 1.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_930d08a8d175"
+     ],
+     "scales_with": "råa skalade vannameiräkor|as_sold",
+     "quantity_min": 1.0,
+     "quantity_max": 1.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "kanel",
+     "canonical_name": "kanel",
+     "quantity": 1.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "ground"
+     ],
+     "scales_with": "råa skalade vannameiräkor|as_sold",
+     "quantity_min": 1.0,
+     "quantity_max": 1.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "garam masala",
+     "canonical_name": "garam masala",
+     "quantity": 2.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_84e26716ceb0"
+     ],
+     "scales_with": "råa skalade vannameiräkor|as_sold",
+     "quantity_min": 1.5,
+     "quantity_max": 3.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "grön chili",
+     "canonical_name": "grön chili",
+     "quantity": 10.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_round2_c8b0139e0c23"
+     ],
+     "scales_with": "råa skalade vannameiräkor|as_sold",
+     "quantity_min": 8.0,
+     "quantity_max": 15.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "smör",
+     "canonical_name": "smör",
+     "quantity": 20.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "cooking",
+     "product_requirements": [
+      "pack:intake_butter"
+     ],
+     "scales_with": "råa skalade vannameiräkor|as_sold",
+     "quantity_min": 16.0,
+     "quantity_max": 30.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 4.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "råa skalade vannameiräkor|as_sold",
+     "quantity_min": 3.0,
+     "quantity_max": 6.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "ris",
+     "canonical_name": "ris",
+     "quantity": 300.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c2",
+     "required": true,
+     "role": "side",
+     "product_requirements": [
+      "white_rice"
+     ],
+     "quantity_min": 250.0,
+     "quantity_max": 350.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "koriander",
+     "canonical_name": "koriander",
+     "quantity": 10.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_9b2370e0e926"
+     ],
+     "quantity_min": 10.0,
+     "quantity_max": 10.0,
+     "quantity_step": 10.0
+    }
+   ],
+   "instructions": [
+    "Koka riset enligt förpackningen.",
+    "Fräs kardemumma och kanel i smör. Tillsätt riven lök och fräs gyllene, sedan ingefära, vitlök och gurkmeja.",
+    "Häll på kokosmjölken, lägg i chili och salt och sjud 5 minuter.",
+    "Lägg i räkorna och sjud 3 minuter tills de är rosa och genomkokta. Strö över garam masala.",
+    "Servera med ris och koriander."
+   ],
+   "design": {
+    "base_id": "smako-indian-chingri-malai-curry",
+    "version": "1.0.0",
+    "variant_id": "base",
+    "cuisines": [
+     "indian"
+    ],
+    "family": "malai curry",
+    "primary_ingredient": "råa skalade vannameiräkor",
+    "method": "pot",
+    "side": "ris",
+    "flavor_profile": [
+     "kokos",
+     "kardemumma"
+    ],
+    "components": [
+     {
+      "id": "c1",
+      "name": "Curry",
+      "amounts": [
+       {
+        "ingredient_key": "råa skalade vannameiräkor|as_sold",
+        "name": "Råa skalade vannameiräkor",
+        "note": "",
+        "quantity": 500.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "kokosmjölk|as_sold",
+        "name": "Kokosmjölk",
+        "note": "",
+        "quantity": 400.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "gul lök|raw_edible",
+        "name": "Gul lök",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "ingefära|raw_edible",
+        "name": "Ingefära",
+        "note": "",
+        "quantity": 15.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "vitlök|raw_edible",
+        "name": "Vitlök",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "gurkmeja|dry",
+        "name": "Gurkmeja",
+        "note": "",
+        "quantity": 1.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "kardemumma|dry",
+        "name": "Kardemumma",
+        "note": "",
+        "quantity": 1.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "kanel|dry",
+        "name": "Kanel",
+        "note": "",
+        "quantity": 1.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "garam masala|dry",
+        "name": "Garam masala",
+        "note": "",
+        "quantity": 2.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "grön chili|raw_edible",
+        "name": "Grön chili",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "smör|as_sold",
+        "name": "Smör",
+        "note": "",
+        "quantity": 20.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "Salt",
+        "note": "",
+        "quantity": 4.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c2",
+      "name": "Ris",
+      "amounts": [
+       {
+        "ingredient_key": "ris|dry",
+        "name": "Ris",
+        "note": "",
+        "quantity": 300.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "koriander|raw_edible",
+        "name": "Koriander",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "g"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "Koka riset enligt förpackningen.",
+      "ingredient_keys": [
+       "ris|dry"
+      ],
+      "depends_on": [],
+      "duration_minutes": 18,
+      "parallel_group": null
+     },
+     {
+      "id": "s2",
+      "text": "Fräs kardemumma och kanel i smör. Tillsätt riven lök och fräs gyllene, sedan ingefära, vitlök och gurkmeja.",
+      "ingredient_keys": [
+       "gul lök|raw_edible",
+       "gurkmeja|dry",
+       "ingefära|raw_edible",
+       "kanel|dry",
+       "kardemumma|dry",
+       "smör|as_sold",
+       "vitlök|raw_edible"
+      ],
+      "depends_on": [],
+      "duration_minutes": 12,
+      "parallel_group": null
+     },
+     {
+      "id": "s3",
+      "text": "Häll på kokosmjölken, lägg i chili och salt och sjud 5 minuter.",
+      "ingredient_keys": [
+       "grön chili|raw_edible",
+       "kokosmjölk|as_sold",
+       "salt|as_sold"
+      ],
+      "depends_on": [
+       "s2"
+      ],
+      "duration_minutes": 6,
+      "parallel_group": null
+     },
+     {
+      "id": "s4",
+      "text": "Lägg i räkorna och sjud 3 minuter tills de är rosa och genomkokta. Strö över garam masala.",
+      "ingredient_keys": [
+       "garam masala|dry",
+       "råa skalade vannameiräkor|as_sold"
+      ],
+      "depends_on": [
+       "s3"
+      ],
+      "duration_minutes": 4,
+      "parallel_group": null
+     },
+     {
+      "id": "s5",
+      "text": "Servera med ris och koriander.",
+      "ingredient_keys": [
+       "koriander|raw_edible",
+       "ris|dry"
+      ],
+      "depends_on": [
+       "s1",
+       "s4"
+      ],
+      "duration_minutes": 2,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 24,
+    "equipment": [
+     "Stekpanna",
+     "Kastrull"
+    ],
+    "vegetarian": false,
+    "fish": false,
+    "ingredient_count": 13,
+    "provenance": {
+     "reviewed_at": "2026-11-26",
+     "notes": "Författat och standardiserat med recept-författarverktyget. Inte provlagat. Köp, allergener och näring kvalificeras separat."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "dinner"
+    ],
+    "active_minutes": 24,
+    "waiting_minutes": 0,
+    "total_minutes": 24,
+    "scaling": "reviewed_ranges"
+   }
+  },
+  {
+   "name": "Tandoorilax med spiskumminris och gurkraita",
+   "servings": 4,
+   "ingredients": [
+    {
+     "name": "lax",
+     "canonical_name": "lax",
+     "quantity": 600.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "primary",
+     "product_requirements": [
+      "pack:salmon"
+     ],
+     "quantity_min": 500.0,
+     "quantity_max": 900.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "yoghurt naturell",
+     "canonical_name": "yoghurt naturell",
+     "quantity": 300.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "sauce",
+     "product_requirements": [
+      "plain",
+      "thick"
+     ],
+     "quantity_min": 300.0,
+     "quantity_max": 300.0,
+     "quantity_step": 300.0
+    },
+    {
+     "name": "ingefära",
+     "canonical_name": "ingefära",
+     "quantity": 10.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "lax|raw_edible",
+     "quantity_min": 8.5,
+     "quantity_max": 15.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "vitlök",
+     "canonical_name": "vitlök",
+     "quantity": 10.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "lax|raw_edible",
+     "quantity_min": 8.5,
+     "quantity_max": 15.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "paprikapulver",
+     "canonical_name": "paprikapulver",
+     "quantity": 3.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "ground"
+     ],
+     "scales_with": "lax|raw_edible",
+     "quantity_min": 2.5,
+     "quantity_max": 4.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "garam masala",
+     "canonical_name": "garam masala",
+     "quantity": 2.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_84e26716ceb0"
+     ],
+     "scales_with": "lax|raw_edible",
+     "quantity_min": 1.5,
+     "quantity_max": 3.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "citronjuice",
+     "canonical_name": "citronjuice",
+     "quantity": 15.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pure_juice"
+     ],
+     "scales_with": "lax|raw_edible",
+     "quantity_min": 12.0,
+     "quantity_max": 22.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 5.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "lax|raw_edible",
+     "quantity_min": 4.0,
+     "quantity_max": 7.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "ris",
+     "canonical_name": "ris",
+     "quantity": 300.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c2",
+     "required": true,
+     "role": "side",
+     "product_requirements": [
+      "white_rice"
+     ],
+     "quantity_min": 250.0,
+     "quantity_max": 350.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "spiskummin",
+     "canonical_name": "spiskummin",
+     "quantity": 3.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "ground"
+     ],
+     "quantity_min": 3.0,
+     "quantity_max": 3.0,
+     "quantity_step": 3.0
+    },
+    {
+     "name": "smör",
+     "canonical_name": "smör",
+     "quantity": 20.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "cooking",
+     "product_requirements": [
+      "pack:intake_butter"
+     ],
+     "quantity_min": 20.0,
+     "quantity_max": 20.0,
+     "quantity_step": 20.0
+    },
+    {
+     "name": "gurka",
+     "canonical_name": "gurka",
+     "quantity": 200.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c3",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 200.0,
+     "quantity_max": 200.0,
+     "quantity_step": 200.0
+    },
+    {
+     "name": "mynta",
+     "canonical_name": "mynta",
+     "quantity": 10.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c3",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_shape_trimmed_mint"
+     ],
+     "quantity_min": 10.0,
+     "quantity_max": 10.0,
+     "quantity_step": 10.0
+    },
+    {
+     "name": "rödlök",
+     "canonical_name": "rödlök",
+     "quantity": 60.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c4",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 60.0,
+     "quantity_max": 60.0,
+     "quantity_step": 60.0
+    },
+    {
+     "name": "koriander",
+     "canonical_name": "koriander",
+     "quantity": 10.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c4",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_9b2370e0e926"
+     ],
+     "quantity_min": 10.0,
+     "quantity_max": 10.0,
+     "quantity_step": 10.0
+    }
+   ],
+   "instructions": [
+    "Rör ihop yoghurt, riven ingefära, vitlök, paprikapulver, garam masala, citron och salt. Pensla över laxen och låt stå 15 minuter.",
+    "Fräs spiskummin i smör, tillsätt riset och koka enligt förpackningen.",
+    "Sätt ugnen på 230 °C och baka laxen 12–15 minuter tills den är minst 63 °C.",
+    "Riv gurkan och blanda med yoghurt, mynta och salt.",
+    "Servera laxen med ris, raita, tunt skivad rödlök och koriander."
+   ],
+   "design": {
+    "base_id": "smako-indian-salmon-tandoori-jeera-rice",
+    "version": "1.0.0",
+    "variant_id": "base",
+    "cuisines": [
+     "indian"
+    ],
+    "family": "lax tandoori",
+    "primary_ingredient": "lax",
+    "method": "oven",
+    "side": "ris",
+    "flavor_profile": [
+     "yoghurt",
+     "spiskummin"
+    ],
+    "components": [
+     {
+      "id": "c1",
+      "name": "Lax",
+      "amounts": [
+       {
+        "ingredient_key": "lax|raw_edible",
+        "name": "Lax",
+        "note": "",
+        "quantity": 600.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "yoghurt naturell|as_sold",
+        "name": "Yoghurt naturell",
+        "note": "",
+        "quantity": 100.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "ingefära|raw_edible",
+        "name": "Ingefära",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "vitlök|raw_edible",
+        "name": "Vitlök",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "paprikapulver|dry",
+        "name": "Paprikapulver",
+        "note": "",
+        "quantity": 3.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "garam masala|dry",
+        "name": "Garam masala",
+        "note": "",
+        "quantity": 2.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "citronjuice|as_sold",
+        "name": "Citronjuice",
+        "note": "",
+        "quantity": 15.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "Salt",
+        "note": "",
+        "quantity": 5.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c2",
+      "name": "Ris",
+      "amounts": [
+       {
+        "ingredient_key": "ris|dry",
+        "name": "Basmatiris",
+        "note": "",
+        "quantity": 300.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "spiskummin|dry",
+        "name": "Spiskummin",
+        "note": "",
+        "quantity": 3.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "smör|as_sold",
+        "name": "Smör",
+        "note": "",
+        "quantity": 20.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c3",
+      "name": "Raita",
+      "amounts": [
+       {
+        "ingredient_key": "yoghurt naturell|as_sold",
+        "name": "Yoghurt naturell",
+        "note": "",
+        "quantity": 200.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "gurka|raw_edible",
+        "name": "Gurka",
+        "note": "",
+        "quantity": 200.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "mynta|raw_edible",
+        "name": "Mynta",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c4",
+      "name": "Till servering",
+      "amounts": [
+       {
+        "ingredient_key": "rödlök|raw_edible",
+        "name": "Rödlök",
+        "note": "",
+        "quantity": 60.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "koriander|raw_edible",
+        "name": "Koriander",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "g"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "Rör ihop yoghurt, riven ingefära, vitlök, paprikapulver, garam masala, citron och salt. Pensla över laxen och låt stå 15 minuter.",
+      "ingredient_keys": [
+       "citronjuice|as_sold",
+       "garam masala|dry",
+       "ingefära|raw_edible",
+       "lax|raw_edible",
+       "paprikapulver|dry",
+       "salt|as_sold",
+       "vitlök|raw_edible",
+       "yoghurt naturell|as_sold"
+      ],
+      "depends_on": [],
+      "duration_minutes": 18,
+      "parallel_group": null
+     },
+     {
+      "id": "s2",
+      "text": "Fräs spiskummin i smör, tillsätt riset och koka enligt förpackningen.",
+      "ingredient_keys": [
+       "ris|dry",
+       "smör|as_sold",
+       "spiskummin|dry"
+      ],
+      "depends_on": [],
+      "duration_minutes": 18,
+      "parallel_group": null
+     },
+     {
+      "id": "s3",
+      "text": "Sätt ugnen på 230 °C och baka laxen 12–15 minuter tills den är minst 63 °C.",
+      "ingredient_keys": [
+       "lax|raw_edible"
+      ],
+      "depends_on": [
+       "s1"
+      ],
+      "duration_minutes": 15,
+      "parallel_group": null
+     },
+     {
+      "id": "s4",
+      "text": "Riv gurkan och blanda med yoghurt, mynta och salt.",
+      "ingredient_keys": [
+       "gurka|raw_edible",
+       "mynta|raw_edible",
+       "yoghurt naturell|as_sold"
+      ],
+      "depends_on": [],
+      "duration_minutes": 5,
+      "parallel_group": null
+     },
+     {
+      "id": "s5",
+      "text": "Servera laxen med ris, raita, tunt skivad rödlök och koriander.",
+      "ingredient_keys": [
+       "koriander|raw_edible",
+       "lax|raw_edible",
+       "ris|dry",
+       "rödlök|raw_edible",
+       "yoghurt naturell|as_sold"
+      ],
+      "depends_on": [
+       "s2",
+       "s3",
+       "s4"
+      ],
+      "duration_minutes": 2,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 35,
+    "equipment": [
+     "Ugn",
+     "Ugnsform",
+     "Kastrull"
+    ],
+    "vegetarian": false,
+    "fish": true,
+    "ingredient_count": 14,
+    "provenance": {
+     "reviewed_at": "2026-11-26",
+     "notes": "Författat och standardiserat med recept-författarverktyget. Inte provlagat. Köp, allergener och näring kvalificeras separat."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "dinner"
+    ],
+    "active_minutes": 25,
+    "waiting_minutes": 10,
+    "total_minutes": 35,
+    "scaling": "reviewed_ranges"
+   }
+  },
+  {
+   "name": "Meen pollichathu – fisk bakad i paket med kryddig tomat-löksås och ris",
+   "servings": 4,
+   "ingredients": [
+    {
+     "name": "fisk",
+     "canonical_name": "fisk",
+     "quantity": 600.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "primary",
+     "quantity_min": 500.0,
+     "quantity_max": 900.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "gurkmeja",
+     "canonical_name": "gurkmeja",
+     "quantity": 1.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "ground"
+     ],
+     "scales_with": "fisk|raw_edible",
+     "quantity_min": 1.0,
+     "quantity_max": 1.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "paprikapulver",
+     "canonical_name": "paprikapulver",
+     "quantity": 3.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "ground"
+     ],
+     "scales_with": "fisk|raw_edible",
+     "quantity_min": 2.5,
+     "quantity_max": 4.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "limejuice",
+     "canonical_name": "limejuice",
+     "quantity": 15.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pure_juice"
+     ],
+     "scales_with": "fisk|raw_edible",
+     "quantity_min": 12.0,
+     "quantity_max": 22.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 5.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "fisk|raw_edible",
+     "quantity_min": 4.0,
+     "quantity_max": 7.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "gul lök",
+     "canonical_name": "gul lök",
+     "quantity": 200.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 200.0,
+     "quantity_max": 200.0,
+     "quantity_step": 200.0
+    },
+    {
+     "name": "tomat",
+     "canonical_name": "tomat",
+     "quantity": 250.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 250.0,
+     "quantity_max": 250.0,
+     "quantity_step": 250.0
+    },
+    {
+     "name": "ingefära",
+     "canonical_name": "ingefära",
+     "quantity": 15.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 15.0,
+     "quantity_max": 15.0,
+     "quantity_step": 15.0
+    },
+    {
+     "name": "vitlök",
+     "canonical_name": "vitlök",
+     "quantity": 10.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 10.0,
+     "quantity_max": 10.0,
+     "quantity_step": 10.0
+    },
+    {
+     "name": "grön chili",
+     "canonical_name": "grön chili",
+     "quantity": 10.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_round2_c8b0139e0c23"
+     ],
+     "quantity_min": 10.0,
+     "quantity_max": 10.0,
+     "quantity_step": 10.0
+    },
+    {
+     "name": "senapsfrön",
+     "canonical_name": "senapsfrön",
+     "quantity": 2.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_68f185da5c3f"
+     ],
+     "quantity_min": 2.0,
+     "quantity_max": 2.0,
+     "quantity_step": 2.0
+    },
+    {
+     "name": "kokosmjölk",
+     "canonical_name": "kokosmjölk",
+     "quantity": 100.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "sauce",
+     "quantity_min": 100.0,
+     "quantity_max": 100.0,
+     "quantity_step": 100.0
+    },
+    {
+     "name": "rapsolja",
+     "canonical_name": "rapsolja",
+     "quantity": 30.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "cooking",
+     "quantity_min": 30.0,
+     "quantity_max": 30.0,
+     "quantity_step": 30.0
+    },
+    {
+     "name": "ris",
+     "canonical_name": "ris",
+     "quantity": 300.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c3",
+     "required": true,
+     "role": "side",
+     "product_requirements": [
+      "white_rice"
+     ],
+     "quantity_min": 250.0,
+     "quantity_max": 350.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "koriander",
+     "canonical_name": "koriander",
+     "quantity": 10.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c3",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_9b2370e0e926"
+     ],
+     "quantity_min": 10.0,
+     "quantity_max": 10.0,
+     "quantity_step": 10.0
+    }
+   ],
+   "instructions": [
+    "Gnid in fisken med gurkmeja, paprikapulver, lime och salt.",
+    "Fräs senapsfrön i olja, tillsätt skivad lök, ingefära, vitlök och chili och fräs gyllene. Tillsätt hackad tomat och kokosmjölk och koka ihop till en tjock sås.",
+    "Sätt ugnen på 200 °C. Lägg fisk och sås på bakplåtspapper och vik ihop till paket. Baka 15–18 minuter tills fisken är minst 63 °C.",
+    "Koka riset enligt förpackningen och servera med paketen och koriander."
+   ],
+   "design": {
+    "base_id": "smako-indian-meen-pollichathu",
+    "version": "1.0.0",
+    "variant_id": "base",
+    "cuisines": [
+     "indian"
+    ],
+    "family": "pollichathu",
+    "primary_ingredient": "fisk",
+    "method": "oven",
+    "side": "ris",
+    "flavor_profile": [
+     "curry",
+     "kokos"
+    ],
+    "components": [
+     {
+      "id": "c1",
+      "name": "Fisk",
+      "amounts": [
+       {
+        "ingredient_key": "fisk|raw_edible",
+        "name": "Vit fiskfilé, t.ex. sej eller torsk",
+        "note": "",
+        "quantity": 600.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "gurkmeja|dry",
+        "name": "Gurkmeja",
+        "note": "",
+        "quantity": 1.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "paprikapulver|dry",
+        "name": "Paprikapulver",
+        "note": "",
+        "quantity": 3.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "limejuice|as_sold",
+        "name": "Limejuice",
+        "note": "",
+        "quantity": 15.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "Salt",
+        "note": "",
+        "quantity": 5.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c2",
+      "name": "Masala",
+      "amounts": [
+       {
+        "ingredient_key": "gul lök|raw_edible",
+        "name": "Gul lök",
+        "note": "",
+        "quantity": 200.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "tomat|raw_edible",
+        "name": "Tomat",
+        "note": "",
+        "quantity": 250.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "ingefära|raw_edible",
+        "name": "Ingefära",
+        "note": "",
+        "quantity": 15.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "vitlök|raw_edible",
+        "name": "Vitlök",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "grön chili|raw_edible",
+        "name": "Grön chili",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "senapsfrön|dry",
+        "name": "Senapsfrön",
+        "note": "",
+        "quantity": 2.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "kokosmjölk|as_sold",
+        "name": "Kokosmjölk",
+        "note": "",
+        "quantity": 100.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "rapsolja|as_sold",
+        "name": "Rapsolja",
+        "note": "",
+        "quantity": 30.0,
+        "unit": "ml"
+       }
+      ]
+     },
+     {
+      "id": "c3",
+      "name": "Ris",
+      "amounts": [
+       {
+        "ingredient_key": "ris|dry",
+        "name": "Ris",
+        "note": "",
+        "quantity": 300.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "koriander|raw_edible",
+        "name": "Koriander",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "g"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "Gnid in fisken med gurkmeja, paprikapulver, lime och salt.",
+      "ingredient_keys": [
+       "fisk|raw_edible",
+       "gurkmeja|dry",
+       "limejuice|as_sold",
+       "paprikapulver|dry",
+       "salt|as_sold"
+      ],
+      "depends_on": [],
+      "duration_minutes": 5,
+      "parallel_group": null
+     },
+     {
+      "id": "s2",
+      "text": "Fräs senapsfrön i olja, tillsätt skivad lök, ingefära, vitlök och chili och fräs gyllene. Tillsätt hackad tomat och kokosmjölk och koka ihop till en tjock sås.",
+      "ingredient_keys": [
+       "grön chili|raw_edible",
+       "gul lök|raw_edible",
+       "ingefära|raw_edible",
+       "kokosmjölk|as_sold",
+       "rapsolja|as_sold",
+       "senapsfrön|dry",
+       "tomat|raw_edible",
+       "vitlök|raw_edible"
+      ],
+      "depends_on": [],
+      "duration_minutes": 15,
+      "parallel_group": null
+     },
+     {
+      "id": "s3",
+      "text": "Sätt ugnen på 200 °C. Lägg fisk och sås på bakplåtspapper och vik ihop till paket. Baka 15–18 minuter tills fisken är minst 63 °C.",
+      "ingredient_keys": [
+       "fisk|raw_edible",
+       "gul lök|raw_edible"
+      ],
+      "depends_on": [
+       "s1",
+       "s2"
+      ],
+      "duration_minutes": 20,
+      "parallel_group": null
+     },
+     {
+      "id": "s4",
+      "text": "Koka riset enligt förpackningen och servera med paketen och koriander.",
+      "ingredient_keys": [
+       "koriander|raw_edible",
+       "ris|dry"
+      ],
+      "depends_on": [],
+      "duration_minutes": 18,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 35,
+    "equipment": [
+     "Ugn",
+     "Bakplåtspapper",
+     "Stekpanna",
+     "Kastrull"
+    ],
+    "vegetarian": false,
+    "fish": true,
+    "ingredient_count": 14,
+    "provenance": {
+     "reviewed_at": "2026-11-26",
+     "notes": "Författat och standardiserat med recept-författarverktyget. Inte provlagat. Köp, allergener och näring kvalificeras separat."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "dinner"
+    ],
+    "active_minutes": 20,
+    "waiting_minutes": 15,
+    "total_minutes": 35,
+    "scaling": "reviewed_ranges"
+   }
+  },
+  {
+   "name": "Krispiga kryddräkor med citronris och kokosflingor",
+   "servings": 4,
+   "ingredients": [
+    {
+     "name": "råa skalade vannameiräkor",
+     "canonical_name": "råa skalade vannameiräkor",
+     "quantity": 500.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "primary",
+     "product_requirements": [
+      "pack:intake_all_round2_599059ef473b"
+     ],
+     "quantity_min": 400.0,
+     "quantity_max": 750.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "ströbröd",
+     "canonical_name": "ströbröd",
+     "quantity": 60.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "cooking",
+     "quantity_min": 60.0,
+     "quantity_max": 60.0,
+     "quantity_step": 60.0
+    },
+    {
+     "name": "paprikapulver",
+     "canonical_name": "paprikapulver",
+     "quantity": 3.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "ground"
+     ],
+     "scales_with": "råa skalade vannameiräkor|as_sold",
+     "quantity_min": 2.5,
+     "quantity_max": 4.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "gurkmeja",
+     "canonical_name": "gurkmeja",
+     "quantity": 1.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "ground"
+     ],
+     "scales_with": "råa skalade vannameiräkor|as_sold",
+     "quantity_min": 1.0,
+     "quantity_max": 1.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "ingefära",
+     "canonical_name": "ingefära",
+     "quantity": 10.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "råa skalade vannameiräkor|as_sold",
+     "quantity_min": 8.0,
+     "quantity_max": 15.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "vitlök",
+     "canonical_name": "vitlök",
+     "quantity": 10.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "råa skalade vannameiräkor|as_sold",
+     "quantity_min": 8.0,
+     "quantity_max": 15.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "limejuice",
+     "canonical_name": "limejuice",
+     "quantity": 15.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pure_juice"
+     ],
+     "scales_with": "råa skalade vannameiräkor|as_sold",
+     "quantity_min": 12.0,
+     "quantity_max": 22.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "rapsolja",
+     "canonical_name": "rapsolja",
+     "quantity": 40.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "cooking",
+     "scales_with": "råa skalade vannameiräkor|as_sold",
+     "quantity_min": 32.0,
+     "quantity_max": 60.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 4.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "råa skalade vannameiräkor|as_sold",
+     "quantity_min": 3.0,
+     "quantity_max": 6.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "ris",
+     "canonical_name": "ris",
+     "quantity": 300.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c2",
+     "required": true,
+     "role": "side",
+     "product_requirements": [
+      "white_rice"
+     ],
+     "quantity_min": 250.0,
+     "quantity_max": 350.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "senapsfrön",
+     "canonical_name": "senapsfrön",
+     "quantity": 2.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_68f185da5c3f"
+     ],
+     "quantity_min": 2.0,
+     "quantity_max": 2.0,
+     "quantity_step": 2.0
+    },
+    {
+     "name": "citronjuice",
+     "canonical_name": "citronjuice",
+     "quantity": 30.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pure_juice"
+     ],
+     "quantity_min": 30.0,
+     "quantity_max": 30.0,
+     "quantity_step": 30.0
+    },
+    {
+     "name": "jordnötter",
+     "canonical_name": "jordnötter",
+     "quantity": 40.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "sauce",
+     "product_requirements": [
+      "pack:peanuts"
+     ],
+     "quantity_min": 40.0,
+     "quantity_max": 40.0,
+     "quantity_step": 40.0
+    },
+    {
+     "name": "kokosflingor",
+     "canonical_name": "kokosflingor",
+     "quantity": 20.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c2",
+     "required": true,
+     "role": "sauce",
+     "product_requirements": [
+      "pack:intake_coconut"
+     ],
+     "quantity_min": 20.0,
+     "quantity_max": 20.0,
+     "quantity_step": 20.0
+    },
+    {
+     "name": "koriander",
+     "canonical_name": "koriander",
+     "quantity": 10.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_9b2370e0e926"
+     ],
+     "quantity_min": 10.0,
+     "quantity_max": 10.0,
+     "quantity_step": 10.0
+    }
+   ],
+   "instructions": [
+    "Koka riset enligt förpackningen.",
+    "Vänd räkorna med riven ingefära, vitlök, paprikapulver, gurkmeja, lime och salt.",
+    "Vänd räkorna i ströbröd och stek i olja 2 minuter per sida tills de är rosa och genomkokta.",
+    "Fräs senapsfrön och jordnötter i lite olja, vänd ner riset, citron, kokosflingor och koriander.",
+    "Servera räkorna på citronriset."
+   ],
+   "design": {
+    "base_id": "smako-indian-prawn-rava-fry-lemon-rice",
+    "version": "1.0.0",
+    "variant_id": "base",
+    "cuisines": [
+     "indian"
+    ],
+    "family": "rava fry",
+    "primary_ingredient": "råa skalade vannameiräkor",
+    "method": "pan",
+    "side": "ris",
+    "flavor_profile": [
+     "citron",
+     "senapsfrön"
+    ],
+    "components": [
+     {
+      "id": "c1",
+      "name": "Räkor",
+      "amounts": [
+       {
+        "ingredient_key": "råa skalade vannameiräkor|as_sold",
+        "name": "Råa skalade vannameiräkor",
+        "note": "",
+        "quantity": 500.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "ströbröd|dry",
+        "name": "Ströbröd",
+        "note": "",
+        "quantity": 60.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "paprikapulver|dry",
+        "name": "Paprikapulver",
+        "note": "",
+        "quantity": 3.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "gurkmeja|dry",
+        "name": "Gurkmeja",
+        "note": "",
+        "quantity": 1.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "ingefära|raw_edible",
+        "name": "Ingefära",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "vitlök|raw_edible",
+        "name": "Vitlök",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "limejuice|as_sold",
+        "name": "Limejuice",
+        "note": "",
+        "quantity": 15.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "rapsolja|as_sold",
+        "name": "Rapsolja",
+        "note": "",
+        "quantity": 40.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "Salt",
+        "note": "",
+        "quantity": 4.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c2",
+      "name": "Citronris",
+      "amounts": [
+       {
+        "ingredient_key": "ris|dry",
+        "name": "Ris",
+        "note": "",
+        "quantity": 300.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "senapsfrön|dry",
+        "name": "Senapsfrön",
+        "note": "",
+        "quantity": 2.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "citronjuice|as_sold",
+        "name": "Citronjuice",
+        "note": "",
+        "quantity": 30.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "jordnötter|as_sold",
+        "name": "Jordnötter",
+        "note": "",
+        "quantity": 40.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "kokosflingor|dry",
+        "name": "Kokosflingor",
+        "note": "",
+        "quantity": 20.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "koriander|raw_edible",
+        "name": "Koriander",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "g"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "Koka riset enligt förpackningen.",
+      "ingredient_keys": [
+       "ris|dry"
+      ],
+      "depends_on": [],
+      "duration_minutes": 18,
+      "parallel_group": null
+     },
+     {
+      "id": "s2",
+      "text": "Vänd räkorna med riven ingefära, vitlök, paprikapulver, gurkmeja, lime och salt.",
+      "ingredient_keys": [
+       "gurkmeja|dry",
+       "ingefära|raw_edible",
+       "limejuice|as_sold",
+       "paprikapulver|dry",
+       "råa skalade vannameiräkor|as_sold",
+       "salt|as_sold",
+       "vitlök|raw_edible"
+      ],
+      "depends_on": [],
+      "duration_minutes": 5,
+      "parallel_group": null
+     },
+     {
+      "id": "s3",
+      "text": "Vänd räkorna i ströbröd och stek i olja 2 minuter per sida tills de är rosa och genomkokta.",
+      "ingredient_keys": [
+       "rapsolja|as_sold",
+       "råa skalade vannameiräkor|as_sold",
+       "ströbröd|dry"
+      ],
+      "depends_on": [
+       "s2"
+      ],
+      "duration_minutes": 8,
+      "parallel_group": null
+     },
+     {
+      "id": "s4",
+      "text": "Fräs senapsfrön och jordnötter i lite olja, vänd ner riset, citron, kokosflingor och koriander.",
+      "ingredient_keys": [
+       "citronjuice|as_sold",
+       "jordnötter|as_sold",
+       "kokosflingor|dry",
+       "koriander|raw_edible",
+       "ris|dry",
+       "senapsfrön|dry"
+      ],
+      "depends_on": [
+       "s1"
+      ],
+      "duration_minutes": 5,
+      "parallel_group": null
+     },
+     {
+      "id": "s5",
+      "text": "Servera räkorna på citronriset.",
+      "ingredient_keys": [
+       "ris|dry",
+       "råa skalade vannameiräkor|as_sold"
+      ],
+      "depends_on": [
+       "s3",
+       "s4"
+      ],
+      "duration_minutes": 2,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 25,
+    "equipment": [
+     "Stekpanna",
+     "Kastrull"
+    ],
+    "vegetarian": false,
+    "fish": false,
+    "ingredient_count": 14,
+    "provenance": {
+     "reviewed_at": "2026-11-26",
+     "notes": "Författat och standardiserat med recept-författarverktyget. Inte provlagat. Köp, allergener och näring kvalificeras separat."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "dinner"
+    ],
+    "active_minutes": 20,
+    "waiting_minutes": 5,
+    "total_minutes": 25,
+    "scaling": "reviewed_ranges"
+   }
+  }
+ ]
+}

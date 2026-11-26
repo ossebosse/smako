@@ -1,0 +1,6447 @@
+{
+ "schema_version": "smako-meal-pack-v1",
+ "pack_id": "smako-varied-proteins-mexican-20261126",
+ "recipes": [
+  {
+   "name": "Tinga de pollo på krispiga tostadas med bönor och avokado",
+   "servings": 4,
+   "ingredients": [
+    {
+     "name": "kyckling",
+     "canonical_name": "kyckling",
+     "quantity": 600.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "primary",
+     "product_requirements": [
+      "pack:chicken_thigh"
+     ],
+     "quantity_min": 500.0,
+     "quantity_max": 900.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "gul lök",
+     "canonical_name": "gul lök",
+     "quantity": 200.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 200.0,
+     "quantity_max": 200.0,
+     "quantity_step": 200.0
+    },
+    {
+     "name": "vitlök",
+     "canonical_name": "vitlök",
+     "quantity": 10.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 8.5,
+     "quantity_max": 15.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "krossade tomater",
+     "canonical_name": "krossade tomater",
+     "quantity": 400.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "sauce",
+     "quantity_min": 400.0,
+     "quantity_max": 400.0,
+     "quantity_step": 400.0
+    },
+    {
+     "name": "anchochili",
+     "canonical_name": "anchochili",
+     "quantity": 4.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_round2_637eba129fe4"
+     ],
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 3.5,
+     "quantity_max": 6.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "rökt paprikapulver",
+     "canonical_name": "rökt paprikapulver",
+     "quantity": 3.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:smoked_paprika"
+     ],
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 2.5,
+     "quantity_max": 4.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "oregano",
+     "canonical_name": "oregano",
+     "quantity": 1.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "dried_leaf"
+     ],
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 1.0,
+     "quantity_max": 1.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "rapsolja",
+     "canonical_name": "rapsolja",
+     "quantity": 20.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "cooking",
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 17.0,
+     "quantity_max": 30.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 5.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 4.0,
+     "quantity_max": 7.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "majstortillas",
+     "canonical_name": "majstortillas",
+     "quantity": 300.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "side",
+     "product_requirements": [
+      "pack:intake_all_round2_4e0f777e646a"
+     ],
+     "quantity_min": 250.0,
+     "quantity_max": 350.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "svarta bönor",
+     "canonical_name": "svarta bönor",
+     "quantity": 380.0,
+     "unit": "g",
+     "form": "cooked_drained",
+     "component": "c2",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 380.0,
+     "quantity_max": 380.0,
+     "quantity_step": 380.0
+    },
+    {
+     "name": "avokado",
+     "canonical_name": "avokado",
+     "quantity": 250.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "vegetable",
+     "product_requirements": [
+      "pack:intake_all_416f9df16b84"
+     ],
+     "quantity_min": 250.0,
+     "quantity_max": 250.0,
+     "quantity_step": 250.0
+    },
+    {
+     "name": "sallad",
+     "canonical_name": "sallad",
+     "quantity": 100.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "vegetable",
+     "product_requirements": [
+      "pack:intake_all_16d63b25fed0"
+     ],
+     "quantity_min": 100.0,
+     "quantity_max": 100.0,
+     "quantity_step": 100.0
+    },
+    {
+     "name": "crème fraiche",
+     "canonical_name": "crème fraiche",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "sauce",
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    },
+    {
+     "name": "limejuice",
+     "canonical_name": "limejuice",
+     "quantity": 20.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pure_juice"
+     ],
+     "quantity_min": 20.0,
+     "quantity_max": 20.0,
+     "quantity_step": 20.0
+    }
+   ],
+   "instructions": [
+    "Sjud kycklingen i saltat vatten 20 minuter tills den är minst 74 °C. Dra isär i trådar.",
+    "Fräs skivad lök och vitlök i olja. Tillsätt tomater, ancho, rökt paprika och oregano och sjud 10 minuter.",
+    "Vänd ner kycklingen i såsen och sjud 5 minuter.",
+    "Sätt ugnen på 200 °C och baka tortillorna krispiga, cirka 8 minuter. Värm och mosa bönorna lätt.",
+    "Bred bönor på tostadas, toppa med tinga, sallad, avokado, crème fraiche och lime."
+   ],
+   "design": {
+    "base_id": "smako-mexican-tinga-de-pollo-tostadas",
+    "version": "1.0.0",
+    "variant_id": "base",
+    "cuisines": [
+     "mexican"
+    ],
+    "family": "tinga",
+    "primary_ingredient": "kyckling",
+    "method": "pot",
+    "side": "majstortillas",
+    "flavor_profile": [
+     "rökig",
+     "tomat"
+    ],
+    "components": [
+     {
+      "id": "c1",
+      "name": "Tinga",
+      "amounts": [
+       {
+        "ingredient_key": "kyckling|raw_edible",
+        "name": "Kycklinglårfilé",
+        "note": "",
+        "quantity": 600.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "gul lök|raw_edible",
+        "name": "Gul lök",
+        "note": "",
+        "quantity": 200.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "vitlök|raw_edible",
+        "name": "Vitlök",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "krossade tomater|as_sold",
+        "name": "Krossade tomater",
+        "note": "",
+        "quantity": 400.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "anchochili|dry",
+        "name": "Anchochili",
+        "note": "",
+        "quantity": 4.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "rökt paprikapulver|dry",
+        "name": "Rökt paprikapulver",
+        "note": "",
+        "quantity": 3.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "oregano|dry",
+        "name": "Oregano",
+        "note": "",
+        "quantity": 1.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "rapsolja|as_sold",
+        "name": "Rapsolja",
+        "note": "",
+        "quantity": 20.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "Salt",
+        "note": "",
+        "quantity": 5.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c2",
+      "name": "Tostadas",
+      "amounts": [
+       {
+        "ingredient_key": "majstortillas|as_sold",
+        "name": "Majstortillas",
+        "note": "",
+        "quantity": 300.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "svarta bönor|cooked_drained",
+        "name": "Svarta bönor",
+        "note": "",
+        "quantity": 380.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "avokado|raw_edible",
+        "name": "Avokado",
+        "note": "",
+        "quantity": 250.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "sallad|raw_edible",
+        "name": "Sallad",
+        "note": "",
+        "quantity": 100.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "crème fraiche|as_sold",
+        "name": "Crème fraiche",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "limejuice|as_sold",
+        "name": "Limejuice",
+        "note": "",
+        "quantity": 20.0,
+        "unit": "ml"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "Sjud kycklingen i saltat vatten 20 minuter tills den är minst 74 °C. Dra isär i trådar.",
+      "ingredient_keys": [
+       "kyckling|raw_edible",
+       "salt|as_sold"
+      ],
+      "depends_on": [],
+      "duration_minutes": 22,
+      "parallel_group": null
+     },
+     {
+      "id": "s2",
+      "text": "Fräs skivad lök och vitlök i olja. Tillsätt tomater, ancho, rökt paprika och oregano och sjud 10 minuter.",
+      "ingredient_keys": [
+       "anchochili|dry",
+       "gul lök|raw_edible",
+       "krossade tomater|as_sold",
+       "oregano|dry",
+       "rapsolja|as_sold",
+       "rökt paprikapulver|dry",
+       "vitlök|raw_edible"
+      ],
+      "depends_on": [],
+      "duration_minutes": 12,
+      "parallel_group": null
+     },
+     {
+      "id": "s3",
+      "text": "Vänd ner kycklingen i såsen och sjud 5 minuter.",
+      "ingredient_keys": [
+       "kyckling|raw_edible"
+      ],
+      "depends_on": [
+       "s1",
+       "s2"
+      ],
+      "duration_minutes": 5,
+      "parallel_group": null
+     },
+     {
+      "id": "s4",
+      "text": "Sätt ugnen på 200 °C och baka tortillorna krispiga, cirka 8 minuter. Värm och mosa bönorna lätt.",
+      "ingredient_keys": [
+       "majstortillas|as_sold",
+       "svarta bönor|cooked_drained"
+      ],
+      "depends_on": [],
+      "duration_minutes": 10,
+      "parallel_group": null
+     },
+     {
+      "id": "s5",
+      "text": "Bred bönor på tostadas, toppa med tinga, sallad, avokado, crème fraiche och lime.",
+      "ingredient_keys": [
+       "avokado|raw_edible",
+       "crème fraiche|as_sold",
+       "kyckling|raw_edible",
+       "limejuice|as_sold",
+       "majstortillas|as_sold",
+       "sallad|raw_edible",
+       "svarta bönor|cooked_drained"
+      ],
+      "depends_on": [
+       "s3",
+       "s4"
+      ],
+      "duration_minutes": 5,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 32,
+    "equipment": [
+     "Kastrull",
+     "Ugn",
+     "Ugnsplåt"
+    ],
+    "vegetarian": false,
+    "fish": false,
+    "ingredient_count": 14,
+    "provenance": {
+     "reviewed_at": "2026-11-26",
+     "notes": "Författat och standardiserat med recept-författarverktyget. Inte provlagat. Köp, allergener och näring kvalificeras separat."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "dinner"
+    ],
+    "active_minutes": 32,
+    "waiting_minutes": 0,
+    "total_minutes": 32,
+    "scaling": "reviewed_ranges"
+   }
+  },
+  {
+   "name": "Pozole verde – grön kycklingsoppa med majs, rädisor och tortillas",
+   "servings": 4,
+   "ingredients": [
+    {
+     "name": "kyckling",
+     "canonical_name": "kyckling",
+     "quantity": 600.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "primary",
+     "product_requirements": [
+      "pack:chicken_thigh"
+     ],
+     "quantity_min": 500.0,
+     "quantity_max": 900.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "majs",
+     "canonical_name": "majs",
+     "quantity": 300.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "vegetable",
+     "product_requirements": [
+      "frozen",
+      "plain"
+     ],
+     "quantity_min": 300.0,
+     "quantity_max": 300.0,
+     "quantity_step": 300.0
+    },
+    {
+     "name": "gul lök",
+     "canonical_name": "gul lök",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    },
+    {
+     "name": "vitlök",
+     "canonical_name": "vitlök",
+     "quantity": 10.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 8.5,
+     "quantity_max": 15.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "salsa verde av tomatillo",
+     "canonical_name": "salsa verde av tomatillo",
+     "quantity": 300.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "sauce",
+     "product_requirements": [
+      "pack:intake_all_round2_8e7a9dc5fbef"
+     ],
+     "quantity_min": 300.0,
+     "quantity_max": 300.0,
+     "quantity_step": 300.0
+    },
+    {
+     "name": "jalapeño",
+     "canonical_name": "jalapeño",
+     "quantity": 20.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_round2_1d3e8bb882c0"
+     ],
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 17.0,
+     "quantity_max": 30.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "koriander",
+     "canonical_name": "koriander",
+     "quantity": 20.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_9b2370e0e926"
+     ],
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 17.0,
+     "quantity_max": 30.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "spiskummin",
+     "canonical_name": "spiskummin",
+     "quantity": 1.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "ground"
+     ],
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 1.0,
+     "quantity_max": 1.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "oregano",
+     "canonical_name": "oregano",
+     "quantity": 1.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "dried_leaf"
+     ],
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 1.0,
+     "quantity_max": 1.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "grönsaksfond",
+     "canonical_name": "grönsaksfond",
+     "quantity": 40.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_round2_5a0df72f98a3"
+     ],
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 33.0,
+     "quantity_max": 60.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 6.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 5.0,
+     "quantity_max": 9.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "rädisa",
+     "canonical_name": "rädisa",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "vegetable",
+     "product_requirements": [
+      "pack:intake_all_749fb6906885"
+     ],
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    },
+    {
+     "name": "vitkål",
+     "canonical_name": "vitkål",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    },
+    {
+     "name": "limejuice",
+     "canonical_name": "limejuice",
+     "quantity": 20.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pure_juice"
+     ],
+     "quantity_min": 20.0,
+     "quantity_max": 20.0,
+     "quantity_step": 20.0
+    },
+    {
+     "name": "majstortillas",
+     "canonical_name": "majstortillas",
+     "quantity": 200.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "side",
+     "product_requirements": [
+      "pack:intake_all_round2_4e0f777e646a"
+     ],
+     "quantity_min": 150.0,
+     "quantity_max": 200.0,
+     "quantity_step": 50.0
+    }
+   ],
+   "instructions": [
+    "Koka kycklingen med lök i bitar, vitlök, fonden och 1500 ml vatten i 25 minuter tills den är minst 74 °C. Lyft upp och dra isär.",
+    "Mixa salsa verde, jalapeño, hälften av koriandern, spiskummin och oregano och rör ner i buljongen.",
+    "Lägg i majs och kyckling, sjud 10 minuter och salta.",
+    "Servera med skivade rädisor, strimlad kål, lime, resten av koriandern och varma tortillas."
+   ],
+   "design": {
+    "base_id": "smako-mexican-pozole-verde-pollo",
+    "version": "1.0.0",
+    "variant_id": "base",
+    "cuisines": [
+     "mexican"
+    ],
+    "family": "pozole",
+    "primary_ingredient": "kyckling",
+    "method": "pot",
+    "side": "majstortillas",
+    "flavor_profile": [
+     "tomatillo",
+     "oregano"
+    ],
+    "components": [
+     {
+      "id": "c1",
+      "name": "Soppa",
+      "amounts": [
+       {
+        "ingredient_key": "kyckling|raw_edible",
+        "name": "Kycklinglårfilé",
+        "note": "",
+        "quantity": 600.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "majs|as_sold",
+        "name": "Majs",
+        "note": "",
+        "quantity": 300.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "gul lök|raw_edible",
+        "name": "Gul lök",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "vitlök|raw_edible",
+        "name": "Vitlök",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "salsa verde av tomatillo|as_sold",
+        "name": "Salsa verde av tomatillo",
+        "note": "",
+        "quantity": 300.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "jalapeño|raw_edible",
+        "name": "Jalapeño",
+        "note": "",
+        "quantity": 20.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "koriander|raw_edible",
+        "name": "Koriander",
+        "note": "",
+        "quantity": 20.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "spiskummin|dry",
+        "name": "Spiskummin",
+        "note": "",
+        "quantity": 1.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "oregano|dry",
+        "name": "Oregano",
+        "note": "",
+        "quantity": 1.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "grönsaksfond|as_sold",
+        "name": "Grönsaksfond",
+        "note": "",
+        "quantity": 40.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "Salt",
+        "note": "",
+        "quantity": 6.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c2",
+      "name": "Till servering",
+      "amounts": [
+       {
+        "ingredient_key": "rädisa|raw_edible",
+        "name": "Rädisa",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "vitkål|raw_edible",
+        "name": "Vitkål",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "limejuice|as_sold",
+        "name": "Limejuice",
+        "note": "",
+        "quantity": 20.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "majstortillas|as_sold",
+        "name": "Majstortillas",
+        "note": "",
+        "quantity": 200.0,
+        "unit": "g"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "Koka kycklingen med lök i bitar, vitlök, fonden och 1500 ml vatten i 25 minuter tills den är minst 74 °C. Lyft upp och dra isär.",
+      "ingredient_keys": [
+       "grönsaksfond|as_sold",
+       "gul lök|raw_edible",
+       "kyckling|raw_edible",
+       "vitlök|raw_edible"
+      ],
+      "depends_on": [],
+      "duration_minutes": 28,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "1500 ml",
+        1500.0
+       ]
+      ]
+     },
+     {
+      "id": "s2",
+      "text": "Mixa salsa verde, jalapeño, hälften av koriandern, spiskummin och oregano och rör ner i buljongen.",
+      "ingredient_keys": [
+       "jalapeño|raw_edible",
+       "koriander|raw_edible",
+       "oregano|dry",
+       "salsa verde av tomatillo|as_sold",
+       "spiskummin|dry"
+      ],
+      "depends_on": [
+       "s1"
+      ],
+      "duration_minutes": 5,
+      "parallel_group": null
+     },
+     {
+      "id": "s3",
+      "text": "Lägg i majs och kyckling, sjud 10 minuter och salta.",
+      "ingredient_keys": [
+       "kyckling|raw_edible",
+       "majs|as_sold",
+       "salt|as_sold"
+      ],
+      "depends_on": [
+       "s2"
+      ],
+      "duration_minutes": 10,
+      "parallel_group": null
+     },
+     {
+      "id": "s4",
+      "text": "Servera med skivade rädisor, strimlad kål, lime, resten av koriandern och varma tortillas.",
+      "ingredient_keys": [
+       "koriander|raw_edible",
+       "limejuice|as_sold",
+       "majstortillas|as_sold",
+       "rädisa|raw_edible",
+       "vitkål|raw_edible"
+      ],
+      "depends_on": [
+       "s3"
+      ],
+      "duration_minutes": 5,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 48,
+    "equipment": [
+     "Kastrull",
+     "Mixer"
+    ],
+    "vegetarian": false,
+    "fish": false,
+    "ingredient_count": 14,
+    "provenance": {
+     "reviewed_at": "2026-11-26",
+     "notes": "Författat och standardiserat med recept-författarverktyget. Inte provlagat. Köp, allergener och näring kvalificeras separat."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "dinner"
+    ],
+    "active_minutes": 20,
+    "waiting_minutes": 28,
+    "total_minutes": 48,
+    "scaling": "reviewed_ranges"
+   }
+  },
+  {
+   "name": "Enchiladas suizas – kyckling i tortillas med grön sås och ost",
+   "servings": 4,
+   "ingredients": [
+    {
+     "name": "kyckling",
+     "canonical_name": "kyckling",
+     "quantity": 600.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "primary",
+     "product_requirements": [
+      "pack:chicken_breast"
+     ],
+     "quantity_min": 500.0,
+     "quantity_max": 900.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "gul lök",
+     "canonical_name": "gul lök",
+     "quantity": 100.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 100.0,
+     "quantity_max": 100.0,
+     "quantity_step": 100.0
+    },
+    {
+     "name": "spiskummin",
+     "canonical_name": "spiskummin",
+     "quantity": 1.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "ground"
+     ],
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 1.0,
+     "quantity_max": 1.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 5.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 4.0,
+     "quantity_max": 7.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "salsa verde av tomatillo",
+     "canonical_name": "salsa verde av tomatillo",
+     "quantity": 350.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "sauce",
+     "product_requirements": [
+      "pack:intake_all_round2_8e7a9dc5fbef"
+     ],
+     "quantity_min": 350.0,
+     "quantity_max": 350.0,
+     "quantity_step": 350.0
+    },
+    {
+     "name": "crème fraiche",
+     "canonical_name": "crème fraiche",
+     "quantity": 200.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "sauce",
+     "quantity_min": 200.0,
+     "quantity_max": 200.0,
+     "quantity_step": 200.0
+    },
+    {
+     "name": "koriander",
+     "canonical_name": "koriander",
+     "quantity": 20.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_9b2370e0e926"
+     ],
+     "quantity_min": 20.0,
+     "quantity_max": 20.0,
+     "quantity_step": 20.0
+    },
+    {
+     "name": "jalapeño",
+     "canonical_name": "jalapeño",
+     "quantity": 20.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_round2_1d3e8bb882c0"
+     ],
+     "quantity_min": 20.0,
+     "quantity_max": 20.0,
+     "quantity_step": 20.0
+    },
+    {
+     "name": "tortillas",
+     "canonical_name": "tortillas",
+     "quantity": 400.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c3",
+     "required": true,
+     "role": "side",
+     "quantity_min": 300.0,
+     "quantity_max": 450.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "ost",
+     "canonical_name": "ost",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c3",
+     "required": true,
+     "role": "sauce",
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    },
+    {
+     "name": "rödlök",
+     "canonical_name": "rödlök",
+     "quantity": 60.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c3",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 60.0,
+     "quantity_max": 60.0,
+     "quantity_step": 60.0
+    },
+    {
+     "name": "sallad",
+     "canonical_name": "sallad",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c4",
+     "required": true,
+     "role": "vegetable",
+     "product_requirements": [
+      "pack:intake_all_16d63b25fed0"
+     ],
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    },
+    {
+     "name": "tomat",
+     "canonical_name": "tomat",
+     "quantity": 200.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c4",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 200.0,
+     "quantity_max": 200.0,
+     "quantity_step": 200.0
+    },
+    {
+     "name": "limejuice",
+     "canonical_name": "limejuice",
+     "quantity": 15.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c4",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pure_juice"
+     ],
+     "quantity_min": 15.0,
+     "quantity_max": 15.0,
+     "quantity_step": 15.0
+    }
+   ],
+   "instructions": [
+    "Sjud kycklingen med lök, spiskummin och salt i 15 minuter tills den är minst 74 °C. Dra isär.",
+    "Mixa salsa verde, crème fraiche, koriander och jalapeño.",
+    "Sätt ugnen på 200 °C. Rulla kycklingen i tortillas med lite sås, lägg i en form och täck med resten av såsen och riven ost.",
+    "Gratinera 20 minuter tills osten bubblar.",
+    "Toppa med tunt skivad rödlök och servera med sallad, tomat och lime."
+   ],
+   "design": {
+    "base_id": "smako-mexican-enchiladas-suizas-pollo",
+    "version": "1.0.0",
+    "variant_id": "base",
+    "cuisines": [
+     "mexican"
+    ],
+    "family": "enchiladas suizas",
+    "primary_ingredient": "kyckling",
+    "method": "oven",
+    "side": "tortillas",
+    "flavor_profile": [
+     "tomatillo",
+     "grädde"
+    ],
+    "components": [
+     {
+      "id": "c1",
+      "name": "Fyllning",
+      "amounts": [
+       {
+        "ingredient_key": "kyckling|raw_edible",
+        "name": "Kycklingbröstfilé",
+        "note": "",
+        "quantity": 600.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "gul lök|raw_edible",
+        "name": "Gul lök",
+        "note": "",
+        "quantity": 100.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "spiskummin|dry",
+        "name": "Spiskummin",
+        "note": "",
+        "quantity": 1.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "Salt",
+        "note": "",
+        "quantity": 5.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c2",
+      "name": "Grön sås",
+      "amounts": [
+       {
+        "ingredient_key": "salsa verde av tomatillo|as_sold",
+        "name": "Salsa verde av tomatillo",
+        "note": "",
+        "quantity": 350.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "crème fraiche|as_sold",
+        "name": "Crème fraiche",
+        "note": "",
+        "quantity": 200.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "koriander|raw_edible",
+        "name": "Koriander",
+        "note": "",
+        "quantity": 20.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "jalapeño|raw_edible",
+        "name": "Jalapeño",
+        "note": "",
+        "quantity": 20.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c3",
+      "name": "Montering",
+      "amounts": [
+       {
+        "ingredient_key": "tortillas|as_sold",
+        "name": "Tortillas",
+        "note": "",
+        "quantity": 400.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "ost|as_sold",
+        "name": "Ost",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "rödlök|raw_edible",
+        "name": "Rödlök",
+        "note": "",
+        "quantity": 60.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c4",
+      "name": "Sallad",
+      "amounts": [
+       {
+        "ingredient_key": "sallad|raw_edible",
+        "name": "Sallad",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "tomat|raw_edible",
+        "name": "Tomat",
+        "note": "",
+        "quantity": 200.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "limejuice|as_sold",
+        "name": "Limejuice",
+        "note": "",
+        "quantity": 15.0,
+        "unit": "ml"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "Sjud kycklingen med lök, spiskummin och salt i 15 minuter tills den är minst 74 °C. Dra isär.",
+      "ingredient_keys": [
+       "gul lök|raw_edible",
+       "kyckling|raw_edible",
+       "salt|as_sold",
+       "spiskummin|dry"
+      ],
+      "depends_on": [],
+      "duration_minutes": 18,
+      "parallel_group": null
+     },
+     {
+      "id": "s2",
+      "text": "Mixa salsa verde, crème fraiche, koriander och jalapeño.",
+      "ingredient_keys": [
+       "crème fraiche|as_sold",
+       "jalapeño|raw_edible",
+       "koriander|raw_edible",
+       "salsa verde av tomatillo|as_sold"
+      ],
+      "depends_on": [],
+      "duration_minutes": 4,
+      "parallel_group": null
+     },
+     {
+      "id": "s3",
+      "text": "Sätt ugnen på 200 °C. Rulla kycklingen i tortillas med lite sås, lägg i en form och täck med resten av såsen och riven ost.",
+      "ingredient_keys": [
+       "kyckling|raw_edible",
+       "ost|as_sold",
+       "salsa verde av tomatillo|as_sold",
+       "tortillas|as_sold"
+      ],
+      "depends_on": [
+       "s1",
+       "s2"
+      ],
+      "duration_minutes": 10,
+      "parallel_group": null
+     },
+     {
+      "id": "s4",
+      "text": "Gratinera 20 minuter tills osten bubblar.",
+      "ingredient_keys": [
+       "ost|as_sold"
+      ],
+      "depends_on": [
+       "s3"
+      ],
+      "duration_minutes": 20,
+      "parallel_group": null
+     },
+     {
+      "id": "s5",
+      "text": "Toppa med tunt skivad rödlök och servera med sallad, tomat och lime.",
+      "ingredient_keys": [
+       "limejuice|as_sold",
+       "rödlök|raw_edible",
+       "sallad|raw_edible",
+       "tomat|raw_edible"
+      ],
+      "depends_on": [
+       "s4"
+      ],
+      "duration_minutes": 4,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 52,
+    "equipment": [
+     "Ugn",
+     "Ugnsform",
+     "Kastrull"
+    ],
+    "vegetarian": false,
+    "fish": false,
+    "ingredient_count": 13,
+    "provenance": {
+     "reviewed_at": "2026-11-26",
+     "notes": "Författat och standardiserat med recept-författarverktyget. Inte provlagat. Köp, allergener och näring kvalificeras separat."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "dinner"
+    ],
+    "active_minutes": 18,
+    "waiting_minutes": 34,
+    "total_minutes": 52,
+    "scaling": "reviewed_ranges"
+   }
+  },
+  {
+   "name": "Chilaquiles rojos med kyckling, stekt ägg och crème fraiche",
+   "servings": 4,
+   "ingredients": [
+    {
+     "name": "kyckling",
+     "canonical_name": "kyckling",
+     "quantity": 500.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "primary",
+     "product_requirements": [
+      "pack:chicken_breast"
+     ],
+     "quantity_min": 400.0,
+     "quantity_max": 750.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "spiskummin",
+     "canonical_name": "spiskummin",
+     "quantity": 1.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "ground"
+     ],
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 1.0,
+     "quantity_max": 1.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "rapsolja",
+     "canonical_name": "rapsolja",
+     "quantity": 35.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "cooking",
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 32.0,
+     "quantity_max": 42.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 4.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 3.0,
+     "quantity_max": 6.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "krossade tomater",
+     "canonical_name": "krossade tomater",
+     "quantity": 400.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "sauce",
+     "quantity_min": 400.0,
+     "quantity_max": 400.0,
+     "quantity_step": 400.0
+    },
+    {
+     "name": "gul lök",
+     "canonical_name": "gul lök",
+     "quantity": 100.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 100.0,
+     "quantity_max": 100.0,
+     "quantity_step": 100.0
+    },
+    {
+     "name": "vitlök",
+     "canonical_name": "vitlök",
+     "quantity": 10.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 10.0,
+     "quantity_max": 10.0,
+     "quantity_step": 10.0
+    },
+    {
+     "name": "anchochili",
+     "canonical_name": "anchochili",
+     "quantity": 4.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_round2_637eba129fe4"
+     ],
+     "quantity_min": 4.0,
+     "quantity_max": 4.0,
+     "quantity_step": 4.0
+    },
+    {
+     "name": "oregano",
+     "canonical_name": "oregano",
+     "quantity": 1.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "dried_leaf"
+     ],
+     "quantity_min": 1.0,
+     "quantity_max": 1.0,
+     "quantity_step": 1.0
+    },
+    {
+     "name": "majstortillas",
+     "canonical_name": "majstortillas",
+     "quantity": 300.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c3",
+     "required": true,
+     "role": "side",
+     "product_requirements": [
+      "pack:intake_all_round2_4e0f777e646a"
+     ],
+     "quantity_min": 250.0,
+     "quantity_max": 350.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "ägg",
+     "canonical_name": "ägg",
+     "quantity": 200.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c3",
+     "required": true,
+     "role": "sauce",
+     "product_requirements": [
+      "pack:egg"
+     ],
+     "quantity_min": 200.0,
+     "quantity_max": 200.0,
+     "quantity_step": 200.0
+    },
+    {
+     "name": "crème fraiche",
+     "canonical_name": "crème fraiche",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c3",
+     "required": true,
+     "role": "sauce",
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    },
+    {
+     "name": "ost",
+     "canonical_name": "ost",
+     "quantity": 80.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c3",
+     "required": true,
+     "role": "sauce",
+     "quantity_min": 80.0,
+     "quantity_max": 80.0,
+     "quantity_step": 80.0
+    },
+    {
+     "name": "rödlök",
+     "canonical_name": "rödlök",
+     "quantity": 60.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c3",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 60.0,
+     "quantity_max": 60.0,
+     "quantity_step": 60.0
+    },
+    {
+     "name": "koriander",
+     "canonical_name": "koriander",
+     "quantity": 10.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c3",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_9b2370e0e926"
+     ],
+     "quantity_min": 10.0,
+     "quantity_max": 10.0,
+     "quantity_step": 10.0
+    }
+   ],
+   "instructions": [
+    "Sätt ugnen på 200 °C. Skär tortillorna i trianglar, vänd med olja och baka krispiga 10 minuter.",
+    "Mixa tomater, lök, vitlök, ancho och oregano och koka såsen 10 minuter.",
+    "Tärna kycklingen, krydda med spiskummin och salt och stek i olja tills den är minst 74 °C.",
+    "Vänd chips och kyckling i såsen precis före servering. Stek äggen.",
+    "Toppa med ägg, crème fraiche, riven ost, rödlök och koriander."
+   ],
+   "design": {
+    "base_id": "smako-mexican-chilaquiles-rojos-pollo",
+    "version": "1.0.0",
+    "variant_id": "base",
+    "cuisines": [
+     "mexican"
+    ],
+    "family": "chilaquiles",
+    "primary_ingredient": "kyckling",
+    "method": "pan",
+    "side": "majstortillas",
+    "flavor_profile": [
+     "chili",
+     "tomat"
+    ],
+    "components": [
+     {
+      "id": "c1",
+      "name": "Kyckling",
+      "amounts": [
+       {
+        "ingredient_key": "kyckling|raw_edible",
+        "name": "Kycklingbröstfilé",
+        "note": "",
+        "quantity": 500.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "spiskummin|dry",
+        "name": "Spiskummin",
+        "note": "",
+        "quantity": 1.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "rapsolja|as_sold",
+        "name": "Rapsolja",
+        "note": "",
+        "quantity": 15.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "Salt",
+        "note": "",
+        "quantity": 4.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c2",
+      "name": "Röd sås",
+      "amounts": [
+       {
+        "ingredient_key": "krossade tomater|as_sold",
+        "name": "Krossade tomater",
+        "note": "",
+        "quantity": 400.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "gul lök|raw_edible",
+        "name": "Gul lök",
+        "note": "",
+        "quantity": 100.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "vitlök|raw_edible",
+        "name": "Vitlök",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "anchochili|dry",
+        "name": "Anchochili",
+        "note": "",
+        "quantity": 4.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "oregano|dry",
+        "name": "Oregano",
+        "note": "",
+        "quantity": 1.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c3",
+      "name": "Chips och topping",
+      "amounts": [
+       {
+        "ingredient_key": "majstortillas|as_sold",
+        "name": "Majstortillas",
+        "note": "",
+        "quantity": 300.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "rapsolja|as_sold",
+        "name": "Rapsolja",
+        "note": "",
+        "quantity": 20.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "ägg|raw_edible",
+        "name": "Ägg",
+        "note": "",
+        "quantity": 200.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "crème fraiche|as_sold",
+        "name": "Crème fraiche",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "ost|as_sold",
+        "name": "Ost",
+        "note": "",
+        "quantity": 80.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "rödlök|raw_edible",
+        "name": "Rödlök",
+        "note": "",
+        "quantity": 60.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "koriander|raw_edible",
+        "name": "Koriander",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "g"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "Sätt ugnen på 200 °C. Skär tortillorna i trianglar, vänd med olja och baka krispiga 10 minuter.",
+      "ingredient_keys": [
+       "majstortillas|as_sold",
+       "rapsolja|as_sold"
+      ],
+      "depends_on": [],
+      "duration_minutes": 12,
+      "parallel_group": null
+     },
+     {
+      "id": "s2",
+      "text": "Mixa tomater, lök, vitlök, ancho och oregano och koka såsen 10 minuter.",
+      "ingredient_keys": [
+       "anchochili|dry",
+       "gul lök|raw_edible",
+       "krossade tomater|as_sold",
+       "oregano|dry",
+       "vitlök|raw_edible"
+      ],
+      "depends_on": [],
+      "duration_minutes": 12,
+      "parallel_group": null
+     },
+     {
+      "id": "s3",
+      "text": "Tärna kycklingen, krydda med spiskummin och salt och stek i olja tills den är minst 74 °C.",
+      "ingredient_keys": [
+       "kyckling|raw_edible",
+       "rapsolja|as_sold",
+       "salt|as_sold",
+       "spiskummin|dry"
+      ],
+      "depends_on": [],
+      "duration_minutes": 10,
+      "parallel_group": null
+     },
+     {
+      "id": "s4",
+      "text": "Vänd chips och kyckling i såsen precis före servering. Stek äggen.",
+      "ingredient_keys": [
+       "krossade tomater|as_sold",
+       "kyckling|raw_edible",
+       "majstortillas|as_sold",
+       "ägg|raw_edible"
+      ],
+      "depends_on": [
+       "s1",
+       "s2",
+       "s3"
+      ],
+      "duration_minutes": 6,
+      "parallel_group": null
+     },
+     {
+      "id": "s5",
+      "text": "Toppa med ägg, crème fraiche, riven ost, rödlök och koriander.",
+      "ingredient_keys": [
+       "crème fraiche|as_sold",
+       "koriander|raw_edible",
+       "ost|as_sold",
+       "rödlök|raw_edible",
+       "ägg|raw_edible"
+      ],
+      "depends_on": [
+       "s4"
+      ],
+      "duration_minutes": 2,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 30,
+    "equipment": [
+     "Ugn",
+     "Ugnsplåt",
+     "Stekpanna",
+     "Mixer"
+    ],
+    "vegetarian": false,
+    "fish": false,
+    "ingredient_count": 14,
+    "provenance": {
+     "reviewed_at": "2026-11-26",
+     "notes": "Författat och standardiserat med recept-författarverktyget. Inte provlagat. Köp, allergener och näring kvalificeras separat."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "dinner"
+    ],
+    "active_minutes": 30,
+    "waiting_minutes": 0,
+    "total_minutes": 30,
+    "scaling": "reviewed_ranges"
+   }
+  },
+  {
+   "name": "Tamal de cazuela – ugnsbakad polenta med kycklingfyllning och salsa",
+   "servings": 4,
+   "ingredients": [
+    {
+     "name": "kyckling",
+     "canonical_name": "kyckling",
+     "quantity": 500.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "primary",
+     "product_requirements": [
+      "pack:chicken_thigh"
+     ],
+     "quantity_min": 400.0,
+     "quantity_max": 750.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "krossade tomater",
+     "canonical_name": "krossade tomater",
+     "quantity": 300.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "sauce",
+     "quantity_min": 300.0,
+     "quantity_max": 300.0,
+     "quantity_step": 300.0
+    },
+    {
+     "name": "gul lök",
+     "canonical_name": "gul lök",
+     "quantity": 100.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 100.0,
+     "quantity_max": 100.0,
+     "quantity_step": 100.0
+    },
+    {
+     "name": "anchochili",
+     "canonical_name": "anchochili",
+     "quantity": 4.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_round2_637eba129fe4"
+     ],
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 3.0,
+     "quantity_max": 6.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "spiskummin",
+     "canonical_name": "spiskummin",
+     "quantity": 1.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "ground"
+     ],
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 1.0,
+     "quantity_max": 1.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 5.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 4.0,
+     "quantity_max": 7.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "polenta",
+     "canonical_name": "polenta",
+     "quantity": 250.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c2",
+     "required": true,
+     "role": "side",
+     "product_requirements": [
+      "pack:intake_all_42edb8fb8420"
+     ],
+     "quantity_min": 200.0,
+     "quantity_max": 300.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "smör",
+     "canonical_name": "smör",
+     "quantity": 40.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "sauce",
+     "product_requirements": [
+      "pack:intake_butter"
+     ],
+     "quantity_min": 40.0,
+     "quantity_max": 40.0,
+     "quantity_step": 40.0
+    },
+    {
+     "name": "majs",
+     "canonical_name": "majs",
+     "quantity": 200.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "vegetable",
+     "product_requirements": [
+      "frozen",
+      "plain"
+     ],
+     "quantity_min": 200.0,
+     "quantity_max": 200.0,
+     "quantity_step": 200.0
+    },
+    {
+     "name": "ost",
+     "canonical_name": "ost",
+     "quantity": 100.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "sauce",
+     "quantity_min": 100.0,
+     "quantity_max": 100.0,
+     "quantity_step": 100.0
+    },
+    {
+     "name": "tomat",
+     "canonical_name": "tomat",
+     "quantity": 250.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c3",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 250.0,
+     "quantity_max": 250.0,
+     "quantity_step": 250.0
+    },
+    {
+     "name": "rödlök",
+     "canonical_name": "rödlök",
+     "quantity": 60.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c3",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 60.0,
+     "quantity_max": 60.0,
+     "quantity_step": 60.0
+    },
+    {
+     "name": "koriander",
+     "canonical_name": "koriander",
+     "quantity": 15.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c3",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_9b2370e0e926"
+     ],
+     "quantity_min": 15.0,
+     "quantity_max": 15.0,
+     "quantity_step": 15.0
+    },
+    {
+     "name": "jalapeño",
+     "canonical_name": "jalapeño",
+     "quantity": 15.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c3",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_round2_1d3e8bb882c0"
+     ],
+     "quantity_min": 15.0,
+     "quantity_max": 15.0,
+     "quantity_step": 15.0
+    },
+    {
+     "name": "limejuice",
+     "canonical_name": "limejuice",
+     "quantity": 15.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c3",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pure_juice"
+     ],
+     "quantity_min": 15.0,
+     "quantity_max": 15.0,
+     "quantity_step": 15.0
+    }
+   ],
+   "instructions": [
+    "Tärna kycklingen och koka den i tomater med hackad lök, ancho, spiskummin och salt i 15 minuter tills den är minst 74 °C.",
+    "Sätt ugnen på 200 °C. Koka polentan enligt förpackningen och rör ner smör och majs.",
+    "Bred hälften av polentan i en form, lägg på kycklingen och täck med resten. Strö över riven ost och baka 20 minuter.",
+    "Hacka tomat, rödlök, koriander och jalapeño och blanda med lime och salt. Servera till."
+   ],
+   "design": {
+    "base_id": "smako-mexican-tamal-de-cazuela-pollo",
+    "version": "1.0.0",
+    "variant_id": "base",
+    "cuisines": [
+     "mexican"
+    ],
+    "family": "tamal de cazuela",
+    "primary_ingredient": "kyckling",
+    "method": "oven",
+    "side": "polenta",
+    "flavor_profile": [
+     "ancho",
+     "majs"
+    ],
+    "components": [
+     {
+      "id": "c1",
+      "name": "Fyllning",
+      "amounts": [
+       {
+        "ingredient_key": "kyckling|raw_edible",
+        "name": "Kycklinglårfilé",
+        "note": "",
+        "quantity": 500.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "krossade tomater|as_sold",
+        "name": "Krossade tomater",
+        "note": "",
+        "quantity": 300.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "gul lök|raw_edible",
+        "name": "Gul lök",
+        "note": "",
+        "quantity": 100.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "anchochili|dry",
+        "name": "Anchochili",
+        "note": "",
+        "quantity": 4.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "spiskummin|dry",
+        "name": "Spiskummin",
+        "note": "",
+        "quantity": 1.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "Salt",
+        "note": "",
+        "quantity": 5.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c2",
+      "name": "Botten",
+      "amounts": [
+       {
+        "ingredient_key": "polenta|dry",
+        "name": "Polenta",
+        "note": "",
+        "quantity": 250.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "smör|as_sold",
+        "name": "Smör",
+        "note": "",
+        "quantity": 40.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "majs|as_sold",
+        "name": "Majs",
+        "note": "",
+        "quantity": 200.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "ost|as_sold",
+        "name": "Ost",
+        "note": "",
+        "quantity": 100.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c3",
+      "name": "Salsa",
+      "amounts": [
+       {
+        "ingredient_key": "tomat|raw_edible",
+        "name": "Tomat",
+        "note": "",
+        "quantity": 250.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "rödlök|raw_edible",
+        "name": "Rödlök",
+        "note": "",
+        "quantity": 60.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "koriander|raw_edible",
+        "name": "Koriander",
+        "note": "",
+        "quantity": 15.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "jalapeño|raw_edible",
+        "name": "Jalapeño",
+        "note": "",
+        "quantity": 15.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "limejuice|as_sold",
+        "name": "Limejuice",
+        "note": "",
+        "quantity": 15.0,
+        "unit": "ml"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "Tärna kycklingen och koka den i tomater med hackad lök, ancho, spiskummin och salt i 15 minuter tills den är minst 74 °C.",
+      "ingredient_keys": [
+       "anchochili|dry",
+       "gul lök|raw_edible",
+       "krossade tomater|as_sold",
+       "kyckling|raw_edible",
+       "salt|as_sold",
+       "spiskummin|dry"
+      ],
+      "depends_on": [],
+      "duration_minutes": 17,
+      "parallel_group": null
+     },
+     {
+      "id": "s2",
+      "text": "Sätt ugnen på 200 °C. Koka polentan enligt förpackningen och rör ner smör och majs.",
+      "ingredient_keys": [
+       "majs|as_sold",
+       "polenta|dry",
+       "smör|as_sold"
+      ],
+      "depends_on": [],
+      "duration_minutes": 10,
+      "parallel_group": null
+     },
+     {
+      "id": "s3",
+      "text": "Bred hälften av polentan i en form, lägg på kycklingen och täck med resten. Strö över riven ost och baka 20 minuter.",
+      "ingredient_keys": [
+       "kyckling|raw_edible",
+       "ost|as_sold",
+       "polenta|dry"
+      ],
+      "depends_on": [
+       "s1",
+       "s2"
+      ],
+      "duration_minutes": 22,
+      "parallel_group": null
+     },
+     {
+      "id": "s4",
+      "text": "Hacka tomat, rödlök, koriander och jalapeño och blanda med lime och salt. Servera till.",
+      "ingredient_keys": [
+       "jalapeño|raw_edible",
+       "koriander|raw_edible",
+       "limejuice|as_sold",
+       "rödlök|raw_edible",
+       "tomat|raw_edible"
+      ],
+      "depends_on": [],
+      "duration_minutes": 6,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 39,
+    "equipment": [
+     "Ugn",
+     "Ugnsform",
+     "Kastrull"
+    ],
+    "vegetarian": false,
+    "fish": false,
+    "ingredient_count": 14,
+    "provenance": {
+     "reviewed_at": "2026-11-26",
+     "notes": "Författat och standardiserat med recept-författarverktyget. Inte provlagat. Köp, allergener och näring kvalificeras separat."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "dinner"
+    ],
+    "active_minutes": 33,
+    "waiting_minutes": 6,
+    "total_minutes": 39,
+    "scaling": "reviewed_ranges"
+   }
+  },
+  {
+   "name": "Pollo adobado – kryddmarinerad ugnskyckling med potatis och majssallad",
+   "servings": 4,
+   "ingredients": [
+    {
+     "name": "kyckling",
+     "canonical_name": "kyckling",
+     "quantity": 700.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "primary",
+     "product_requirements": [
+      "pack:chicken_thigh"
+     ],
+     "quantity_min": 600.0,
+     "quantity_max": 1050.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "anchochili",
+     "canonical_name": "anchochili",
+     "quantity": 5.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_round2_637eba129fe4"
+     ],
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 4.5,
+     "quantity_max": 7.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "vitlök",
+     "canonical_name": "vitlök",
+     "quantity": 10.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 8.5,
+     "quantity_max": 15.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "apelsinjuice",
+     "canonical_name": "apelsinjuice",
+     "quantity": 60.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_bac4ad0c4dc5"
+     ],
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 51.0,
+     "quantity_max": 90.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "äppelcidervinäger",
+     "canonical_name": "äppelcidervinäger",
+     "quantity": 15.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_be24da3ca83d"
+     ],
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 13.0,
+     "quantity_max": 22.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "spiskummin",
+     "canonical_name": "spiskummin",
+     "quantity": 2.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "ground"
+     ],
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 1.5,
+     "quantity_max": 3.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "oregano",
+     "canonical_name": "oregano",
+     "quantity": 1.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "dried_leaf"
+     ],
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 1.0,
+     "quantity_max": 1.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 6.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "kyckling|raw_edible",
+     "quantity_min": 5.0,
+     "quantity_max": 9.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "potatis",
+     "canonical_name": "potatis",
+     "quantity": 800.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "side",
+     "quantity_min": 600.0,
+     "quantity_max": 950.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "rapsolja",
+     "canonical_name": "rapsolja",
+     "quantity": 30.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "cooking",
+     "quantity_min": 30.0,
+     "quantity_max": 30.0,
+     "quantity_step": 30.0
+    },
+    {
+     "name": "majs",
+     "canonical_name": "majs",
+     "quantity": 300.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c3",
+     "required": true,
+     "role": "vegetable",
+     "product_requirements": [
+      "frozen",
+      "plain"
+     ],
+     "quantity_min": 300.0,
+     "quantity_max": 300.0,
+     "quantity_step": 300.0
+    },
+    {
+     "name": "paprika",
+     "canonical_name": "paprika",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c3",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    },
+    {
+     "name": "rödlök",
+     "canonical_name": "rödlök",
+     "quantity": 60.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c3",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 60.0,
+     "quantity_max": 60.0,
+     "quantity_step": 60.0
+    },
+    {
+     "name": "koriander",
+     "canonical_name": "koriander",
+     "quantity": 15.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c3",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_9b2370e0e926"
+     ],
+     "quantity_min": 15.0,
+     "quantity_max": 15.0,
+     "quantity_step": 15.0
+    },
+    {
+     "name": "limejuice",
+     "canonical_name": "limejuice",
+     "quantity": 20.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c3",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pure_juice"
+     ],
+     "quantity_min": 20.0,
+     "quantity_max": 20.0,
+     "quantity_step": 20.0
+    }
+   ],
+   "instructions": [
+    "Mixa ancho, vitlök, apelsinjuice, vinäger, spiskummin, oregano och salt till en adobo. Vänd kycklingen i den.",
+    "Sätt ugnen på 220 °C. Skär potatisen i klyftor och vänd med olja och salt på en plåt.",
+    "Lägg kycklingen bland potatisen och rosta 35 minuter tills kycklingen är minst 74 °C.",
+    "Blanda majs, tärnad paprika, finhackad rödlök, koriander och lime.",
+    "Servera kycklingen med potatis och majssallad."
+   ],
+   "design": {
+    "base_id": "smako-mexican-pollo-adobado-papas",
+    "version": "1.0.0",
+    "variant_id": "base",
+    "cuisines": [
+     "mexican"
+    ],
+    "family": "pollo adobado",
+    "primary_ingredient": "kyckling",
+    "method": "oven",
+    "side": "potatis",
+    "flavor_profile": [
+     "ancho",
+     "apelsin"
+    ],
+    "components": [
+     {
+      "id": "c1",
+      "name": "Kyckling",
+      "amounts": [
+       {
+        "ingredient_key": "kyckling|raw_edible",
+        "name": "Kycklinglårfilé",
+        "note": "",
+        "quantity": 700.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "anchochili|dry",
+        "name": "Anchochili",
+        "note": "",
+        "quantity": 5.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "vitlök|raw_edible",
+        "name": "Vitlök",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "apelsinjuice|as_sold",
+        "name": "Apelsinjuice",
+        "note": "",
+        "quantity": 60.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "äppelcidervinäger|as_sold",
+        "name": "Äppelcidervinäger",
+        "note": "",
+        "quantity": 15.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "spiskummin|dry",
+        "name": "Spiskummin",
+        "note": "",
+        "quantity": 2.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "oregano|dry",
+        "name": "Oregano",
+        "note": "",
+        "quantity": 1.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "Salt",
+        "note": "",
+        "quantity": 6.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c2",
+      "name": "Potatis",
+      "amounts": [
+       {
+        "ingredient_key": "potatis|raw_edible",
+        "name": "Potatis",
+        "note": "",
+        "quantity": 800.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "rapsolja|as_sold",
+        "name": "Rapsolja",
+        "note": "",
+        "quantity": 30.0,
+        "unit": "ml"
+       }
+      ]
+     },
+     {
+      "id": "c3",
+      "name": "Majssallad",
+      "amounts": [
+       {
+        "ingredient_key": "majs|as_sold",
+        "name": "Majs",
+        "note": "",
+        "quantity": 300.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "paprika|raw_edible",
+        "name": "Paprika",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "rödlök|raw_edible",
+        "name": "Rödlök",
+        "note": "",
+        "quantity": 60.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "koriander|raw_edible",
+        "name": "Koriander",
+        "note": "",
+        "quantity": 15.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "limejuice|as_sold",
+        "name": "Limejuice",
+        "note": "",
+        "quantity": 20.0,
+        "unit": "ml"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "Mixa ancho, vitlök, apelsinjuice, vinäger, spiskummin, oregano och salt till en adobo. Vänd kycklingen i den.",
+      "ingredient_keys": [
+       "anchochili|dry",
+       "apelsinjuice|as_sold",
+       "kyckling|raw_edible",
+       "oregano|dry",
+       "salt|as_sold",
+       "spiskummin|dry",
+       "vitlök|raw_edible",
+       "äppelcidervinäger|as_sold"
+      ],
+      "depends_on": [],
+      "duration_minutes": 8,
+      "parallel_group": null
+     },
+     {
+      "id": "s2",
+      "text": "Sätt ugnen på 220 °C. Skär potatisen i klyftor och vänd med olja och salt på en plåt.",
+      "ingredient_keys": [
+       "potatis|raw_edible",
+       "rapsolja|as_sold"
+      ],
+      "depends_on": [],
+      "duration_minutes": 6,
+      "parallel_group": null
+     },
+     {
+      "id": "s3",
+      "text": "Lägg kycklingen bland potatisen och rosta 35 minuter tills kycklingen är minst 74 °C.",
+      "ingredient_keys": [
+       "kyckling|raw_edible",
+       "potatis|raw_edible"
+      ],
+      "depends_on": [
+       "s1",
+       "s2"
+      ],
+      "duration_minutes": 35,
+      "parallel_group": null
+     },
+     {
+      "id": "s4",
+      "text": "Blanda majs, tärnad paprika, finhackad rödlök, koriander och lime.",
+      "ingredient_keys": [
+       "koriander|raw_edible",
+       "limejuice|as_sold",
+       "majs|as_sold",
+       "paprika|raw_edible",
+       "rödlök|raw_edible"
+      ],
+      "depends_on": [],
+      "duration_minutes": 6,
+      "parallel_group": null
+     },
+     {
+      "id": "s5",
+      "text": "Servera kycklingen med potatis och majssallad.",
+      "ingredient_keys": [
+       "kyckling|raw_edible",
+       "majs|as_sold",
+       "potatis|raw_edible"
+      ],
+      "depends_on": [
+       "s3",
+       "s4"
+      ],
+      "duration_minutes": 2,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 45,
+    "equipment": [
+     "Ugn",
+     "Ugnsplåt",
+     "Mixer"
+    ],
+    "vegetarian": false,
+    "fish": false,
+    "ingredient_count": 14,
+    "provenance": {
+     "reviewed_at": "2026-11-26",
+     "notes": "Författat och standardiserat med recept-författarverktyget. Inte provlagat. Köp, allergener och näring kvalificeras separat."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "dinner"
+    ],
+    "active_minutes": 22,
+    "waiting_minutes": 23,
+    "total_minutes": 45,
+    "scaling": "reviewed_ranges"
+   }
+  },
+  {
+   "name": "Albóndigas – nötfärsbullar med ris i rökig tomatsås och tortillas",
+   "servings": 4,
+   "ingredients": [
+    {
+     "name": "nötfärs",
+     "canonical_name": "nötfärs",
+     "quantity": 600.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "primary",
+     "quantity_min": 500.0,
+     "quantity_max": 900.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "ris",
+     "canonical_name": "ris",
+     "quantity": 50.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "cooking",
+     "product_requirements": [
+      "white_rice"
+     ],
+     "scales_with": "nötfärs|raw_edible",
+     "quantity_min": 42.0,
+     "quantity_max": 75.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "ägg",
+     "canonical_name": "ägg",
+     "quantity": 50.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "cooking",
+     "product_requirements": [
+      "pack:egg"
+     ],
+     "quantity_min": 50.0,
+     "quantity_max": 50.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "mynta",
+     "canonical_name": "mynta",
+     "quantity": 10.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_shape_trimmed_mint"
+     ],
+     "scales_with": "nötfärs|raw_edible",
+     "quantity_min": 8.5,
+     "quantity_max": 15.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "spiskummin",
+     "canonical_name": "spiskummin",
+     "quantity": 1.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "ground"
+     ],
+     "scales_with": "nötfärs|raw_edible",
+     "quantity_min": 1.0,
+     "quantity_max": 1.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 6.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "nötfärs|raw_edible",
+     "quantity_min": 5.0,
+     "quantity_max": 9.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "krossade tomater",
+     "canonical_name": "krossade tomater",
+     "quantity": 500.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "sauce",
+     "quantity_min": 500.0,
+     "quantity_max": 500.0,
+     "quantity_step": 500.0
+    },
+    {
+     "name": "gul lök",
+     "canonical_name": "gul lök",
+     "quantity": 100.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 100.0,
+     "quantity_max": 100.0,
+     "quantity_step": 100.0
+    },
+    {
+     "name": "vitlök",
+     "canonical_name": "vitlök",
+     "quantity": 10.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 10.0,
+     "quantity_max": 10.0,
+     "quantity_step": 10.0
+    },
+    {
+     "name": "anchochili",
+     "canonical_name": "anchochili",
+     "quantity": 4.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_round2_637eba129fe4"
+     ],
+     "quantity_min": 4.0,
+     "quantity_max": 4.0,
+     "quantity_step": 4.0
+    },
+    {
+     "name": "rökt paprikapulver",
+     "canonical_name": "rökt paprikapulver",
+     "quantity": 2.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:smoked_paprika"
+     ],
+     "quantity_min": 2.0,
+     "quantity_max": 2.0,
+     "quantity_step": 2.0
+    },
+    {
+     "name": "grönsaksfond",
+     "canonical_name": "grönsaksfond",
+     "quantity": 20.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_round2_5a0df72f98a3"
+     ],
+     "quantity_min": 20.0,
+     "quantity_max": 20.0,
+     "quantity_step": 20.0
+    },
+    {
+     "name": "rapsolja",
+     "canonical_name": "rapsolja",
+     "quantity": 15.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "cooking",
+     "quantity_min": 15.0,
+     "quantity_max": 15.0,
+     "quantity_step": 15.0
+    },
+    {
+     "name": "majstortillas",
+     "canonical_name": "majstortillas",
+     "quantity": 300.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c3",
+     "required": true,
+     "role": "side",
+     "product_requirements": [
+      "pack:intake_all_round2_4e0f777e646a"
+     ],
+     "quantity_min": 250.0,
+     "quantity_max": 350.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "koriander",
+     "canonical_name": "koriander",
+     "quantity": 10.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c3",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_9b2370e0e926"
+     ],
+     "quantity_min": 10.0,
+     "quantity_max": 10.0,
+     "quantity_step": 10.0
+    },
+    {
+     "name": "crème fraiche",
+     "canonical_name": "crème fraiche",
+     "quantity": 100.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c3",
+     "required": true,
+     "role": "sauce",
+     "quantity_min": 100.0,
+     "quantity_max": 100.0,
+     "quantity_step": 100.0
+    }
+   ],
+   "instructions": [
+    "Blanda färs, okokt ris, ägg, hackad mynta, spiskummin och salt. Rulla 20 bullar.",
+    "Fräs hackad lök och vitlök i olja. Tillsätt tomater, ancho, rökt paprika, fonden och 300 ml vatten och koka upp.",
+    "Lägg i bullarna och sjud under lock 25 minuter tills de är minst 72 °C i mitten.",
+    "Värm tortillorna i en torr panna.",
+    "Servera bullarna och såsen med tortillas, koriander och crème fraiche."
+   ],
+   "design": {
+    "base_id": "smako-mexican-albondigas-en-salsa-de-tomate",
+    "version": "1.0.0",
+    "variant_id": "base",
+    "cuisines": [
+     "mexican"
+    ],
+    "family": "albóndigas",
+    "primary_ingredient": "nötfärs",
+    "method": "pot",
+    "side": "majstortillas",
+    "flavor_profile": [
+     "rökig",
+     "mynta"
+    ],
+    "components": [
+     {
+      "id": "c1",
+      "name": "Albóndigas",
+      "amounts": [
+       {
+        "ingredient_key": "nötfärs|raw_edible",
+        "name": "Nötfärs",
+        "note": "",
+        "quantity": 600.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "ris|dry",
+        "name": "Ris",
+        "note": "",
+        "quantity": 50.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "ägg|raw_edible",
+        "name": "Ägg",
+        "note": "",
+        "quantity": 50.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "mynta|raw_edible",
+        "name": "Mynta",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "spiskummin|dry",
+        "name": "Spiskummin",
+        "note": "",
+        "quantity": 1.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "Salt",
+        "note": "",
+        "quantity": 6.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c2",
+      "name": "Sås",
+      "amounts": [
+       {
+        "ingredient_key": "krossade tomater|as_sold",
+        "name": "Krossade tomater",
+        "note": "",
+        "quantity": 500.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "gul lök|raw_edible",
+        "name": "Gul lök",
+        "note": "",
+        "quantity": 100.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "vitlök|raw_edible",
+        "name": "Vitlök",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "anchochili|dry",
+        "name": "Anchochili",
+        "note": "",
+        "quantity": 4.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "rökt paprikapulver|dry",
+        "name": "Rökt paprikapulver",
+        "note": "",
+        "quantity": 2.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "grönsaksfond|as_sold",
+        "name": "Grönsaksfond",
+        "note": "",
+        "quantity": 20.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "rapsolja|as_sold",
+        "name": "Rapsolja",
+        "note": "",
+        "quantity": 15.0,
+        "unit": "ml"
+       }
+      ]
+     },
+     {
+      "id": "c3",
+      "name": "Till servering",
+      "amounts": [
+       {
+        "ingredient_key": "majstortillas|as_sold",
+        "name": "Majstortillas",
+        "note": "",
+        "quantity": 300.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "koriander|raw_edible",
+        "name": "Koriander",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "crème fraiche|as_sold",
+        "name": "Crème fraiche",
+        "note": "",
+        "quantity": 100.0,
+        "unit": "g"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "Blanda färs, okokt ris, ägg, hackad mynta, spiskummin och salt. Rulla 20 bullar.",
+      "ingredient_keys": [
+       "mynta|raw_edible",
+       "nötfärs|raw_edible",
+       "ris|dry",
+       "salt|as_sold",
+       "spiskummin|dry",
+       "ägg|raw_edible"
+      ],
+      "depends_on": [],
+      "duration_minutes": 12,
+      "parallel_group": null
+     },
+     {
+      "id": "s2",
+      "text": "Fräs hackad lök och vitlök i olja. Tillsätt tomater, ancho, rökt paprika, fonden och 300 ml vatten och koka upp.",
+      "ingredient_keys": [
+       "anchochili|dry",
+       "grönsaksfond|as_sold",
+       "gul lök|raw_edible",
+       "krossade tomater|as_sold",
+       "rapsolja|as_sold",
+       "rökt paprikapulver|dry",
+       "vitlök|raw_edible"
+      ],
+      "depends_on": [],
+      "duration_minutes": 8,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "300 ml",
+        300.0
+       ]
+      ]
+     },
+     {
+      "id": "s3",
+      "text": "Lägg i bullarna och sjud under lock 25 minuter tills de är minst 72 °C i mitten.",
+      "ingredient_keys": [
+       "nötfärs|raw_edible"
+      ],
+      "depends_on": [
+       "s1",
+       "s2"
+      ],
+      "duration_minutes": 25,
+      "parallel_group": null
+     },
+     {
+      "id": "s4",
+      "text": "Värm tortillorna i en torr panna.",
+      "ingredient_keys": [
+       "majstortillas|as_sold"
+      ],
+      "depends_on": [
+       "s2"
+      ],
+      "duration_minutes": 5,
+      "parallel_group": null
+     },
+     {
+      "id": "s5",
+      "text": "Servera bullarna och såsen med tortillas, koriander och crème fraiche.",
+      "ingredient_keys": [
+       "crème fraiche|as_sold",
+       "koriander|raw_edible",
+       "majstortillas|as_sold",
+       "nötfärs|raw_edible"
+      ],
+      "depends_on": [
+       "s3",
+       "s4"
+      ],
+      "duration_minutes": 2,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 39,
+    "equipment": [
+     "Kastrull",
+     "Skål"
+    ],
+    "vegetarian": false,
+    "fish": false,
+    "ingredient_count": 15,
+    "provenance": {
+     "reviewed_at": "2026-11-26",
+     "notes": "Författat och standardiserat med recept-författarverktyget. Inte provlagat. Köp, allergener och näring kvalificeras separat."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "dinner"
+    ],
+    "active_minutes": 27,
+    "waiting_minutes": 12,
+    "total_minutes": 39,
+    "scaling": "reviewed_ranges"
+   }
+  },
+  {
+   "name": "Carne guisada – långkokt nötgryta med spiskummin och tortillas",
+   "servings": 4,
+   "ingredients": [
+    {
+     "name": "nötkött",
+     "canonical_name": "nötkött",
+     "quantity": 700.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "primary",
+     "product_requirements": [
+      "pack:beef_braising_cut",
+      "pack:intake_all_10d1e6ea4dc5"
+     ],
+     "quantity_min": 600.0,
+     "quantity_max": 1050.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "gul lök",
+     "canonical_name": "gul lök",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    },
+    {
+     "name": "paprika",
+     "canonical_name": "paprika",
+     "quantity": 200.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 200.0,
+     "quantity_max": 200.0,
+     "quantity_step": 200.0
+    },
+    {
+     "name": "vitlök",
+     "canonical_name": "vitlök",
+     "quantity": 10.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "nötkött|raw_edible",
+     "quantity_min": 8.5,
+     "quantity_max": 15.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "krossade tomater",
+     "canonical_name": "krossade tomater",
+     "quantity": 300.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "sauce",
+     "quantity_min": 300.0,
+     "quantity_max": 300.0,
+     "quantity_step": 300.0
+    },
+    {
+     "name": "vetemjöl",
+     "canonical_name": "vetemjöl",
+     "quantity": 15.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "sauce",
+     "quantity_min": 15.0,
+     "quantity_max": 15.0,
+     "quantity_step": 15.0
+    },
+    {
+     "name": "spiskummin",
+     "canonical_name": "spiskummin",
+     "quantity": 3.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "ground"
+     ],
+     "scales_with": "nötkött|raw_edible",
+     "quantity_min": 2.5,
+     "quantity_max": 4.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "anchochili",
+     "canonical_name": "anchochili",
+     "quantity": 4.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_round2_637eba129fe4"
+     ],
+     "scales_with": "nötkött|raw_edible",
+     "quantity_min": 3.5,
+     "quantity_max": 6.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "oregano",
+     "canonical_name": "oregano",
+     "quantity": 1.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "dried_leaf"
+     ],
+     "scales_with": "nötkött|raw_edible",
+     "quantity_min": 1.0,
+     "quantity_max": 1.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "rapsolja",
+     "canonical_name": "rapsolja",
+     "quantity": 20.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "cooking",
+     "scales_with": "nötkött|raw_edible",
+     "quantity_min": 17.0,
+     "quantity_max": 30.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 7.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "nötkött|raw_edible",
+     "quantity_min": 6.0,
+     "quantity_max": 10.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "tortillas",
+     "canonical_name": "tortillas",
+     "quantity": 320.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "side",
+     "quantity_min": 240.0,
+     "quantity_max": 380.0,
+     "quantity_step": 20.0
+    },
+    {
+     "name": "rödlök",
+     "canonical_name": "rödlök",
+     "quantity": 60.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 60.0,
+     "quantity_max": 60.0,
+     "quantity_step": 60.0
+    },
+    {
+     "name": "koriander",
+     "canonical_name": "koriander",
+     "quantity": 15.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_9b2370e0e926"
+     ],
+     "quantity_min": 15.0,
+     "quantity_max": 15.0,
+     "quantity_step": 15.0
+    },
+    {
+     "name": "limejuice",
+     "canonical_name": "limejuice",
+     "quantity": 20.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pure_juice"
+     ],
+     "quantity_min": 20.0,
+     "quantity_max": 20.0,
+     "quantity_step": 20.0
+    }
+   ],
+   "instructions": [
+    "Skär köttet i tärningar, salta och bryn i olja. Strö över mjölet och rör om.",
+    "Fräs lök, paprika och vitlök med. Tillsätt spiskummin, ancho, oregano, tomater och 400 ml vatten.",
+    "Sjud under lock 1 timme och 30 minuter tills köttet är mört och såsen tjock.",
+    "Servera i varma tortillas med rödlök, koriander och lime."
+   ],
+   "design": {
+    "base_id": "smako-mexican-carne-guisada-tortillas",
+    "version": "1.0.0",
+    "variant_id": "base",
+    "cuisines": [
+     "mexican"
+    ],
+    "family": "carne guisada",
+    "primary_ingredient": "nötkött",
+    "method": "pot",
+    "side": "tortillas",
+    "flavor_profile": [
+     "spiskummin",
+     "ancho"
+    ],
+    "components": [
+     {
+      "id": "c1",
+      "name": "Gryta",
+      "amounts": [
+       {
+        "ingredient_key": "nötkött|raw_edible",
+        "name": "Högrev eller grytbitar av nöt",
+        "note": "",
+        "quantity": 700.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "gul lök|raw_edible",
+        "name": "Gul lök",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "paprika|raw_edible",
+        "name": "Paprika",
+        "note": "",
+        "quantity": 200.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "vitlök|raw_edible",
+        "name": "Vitlök",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "krossade tomater|as_sold",
+        "name": "Krossade tomater",
+        "note": "",
+        "quantity": 300.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "vetemjöl|dry",
+        "name": "Vetemjöl",
+        "note": "",
+        "quantity": 15.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "spiskummin|dry",
+        "name": "Spiskummin",
+        "note": "",
+        "quantity": 3.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "anchochili|dry",
+        "name": "Anchochili",
+        "note": "",
+        "quantity": 4.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "oregano|dry",
+        "name": "Oregano",
+        "note": "",
+        "quantity": 1.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "rapsolja|as_sold",
+        "name": "Rapsolja",
+        "note": "",
+        "quantity": 20.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "Salt",
+        "note": "",
+        "quantity": 7.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c2",
+      "name": "Till servering",
+      "amounts": [
+       {
+        "ingredient_key": "tortillas|as_sold",
+        "name": "Tortillas",
+        "note": "",
+        "quantity": 320.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "rödlök|raw_edible",
+        "name": "Rödlök",
+        "note": "",
+        "quantity": 60.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "koriander|raw_edible",
+        "name": "Koriander",
+        "note": "",
+        "quantity": 15.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "limejuice|as_sold",
+        "name": "Limejuice",
+        "note": "",
+        "quantity": 20.0,
+        "unit": "ml"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "Skär köttet i tärningar, salta och bryn i olja. Strö över mjölet och rör om.",
+      "ingredient_keys": [
+       "nötkött|raw_edible",
+       "rapsolja|as_sold",
+       "salt|as_sold",
+       "vetemjöl|dry"
+      ],
+      "depends_on": [],
+      "duration_minutes": 12,
+      "parallel_group": null
+     },
+     {
+      "id": "s2",
+      "text": "Fräs lök, paprika och vitlök med. Tillsätt spiskummin, ancho, oregano, tomater och 400 ml vatten.",
+      "ingredient_keys": [
+       "anchochili|dry",
+       "gul lök|raw_edible",
+       "krossade tomater|as_sold",
+       "oregano|dry",
+       "paprika|raw_edible",
+       "spiskummin|dry",
+       "vitlök|raw_edible"
+      ],
+      "depends_on": [
+       "s1"
+      ],
+      "duration_minutes": 6,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "400 ml",
+        400.0
+       ]
+      ]
+     },
+     {
+      "id": "s3",
+      "text": "Sjud under lock 1 timme och 30 minuter tills köttet är mört och såsen tjock.",
+      "ingredient_keys": [
+       "nötkött|raw_edible"
+      ],
+      "depends_on": [
+       "s2"
+      ],
+      "duration_minutes": 90,
+      "parallel_group": null
+     },
+     {
+      "id": "s4",
+      "text": "Servera i varma tortillas med rödlök, koriander och lime.",
+      "ingredient_keys": [
+       "koriander|raw_edible",
+       "limejuice|as_sold",
+       "nötkött|raw_edible",
+       "rödlök|raw_edible",
+       "tortillas|as_sold"
+      ],
+      "depends_on": [
+       "s3"
+      ],
+      "duration_minutes": 4,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 112,
+    "equipment": [
+     "Gryta"
+    ],
+    "vegetarian": false,
+    "fish": false,
+    "ingredient_count": 14,
+    "provenance": {
+     "reviewed_at": "2026-11-26",
+     "notes": "Författat och standardiserat med recept-författarverktyget. Inte provlagat. Köp, allergener och näring kvalificeras separat."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "dinner"
+    ],
+    "active_minutes": 22,
+    "waiting_minutes": 90,
+    "total_minutes": 112,
+    "scaling": "reviewed_ranges"
+   }
+  },
+  {
+   "name": "Chile colorado – fläskgryta i röd chilisås med ris och bönor",
+   "servings": 4,
+   "ingredients": [
+    {
+     "name": "fläskkött",
+     "canonical_name": "fläskkött",
+     "quantity": 700.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "primary",
+     "quantity_min": 600.0,
+     "quantity_max": 1050.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "anchochili",
+     "canonical_name": "anchochili",
+     "quantity": 8.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_round2_637eba129fe4"
+     ],
+     "scales_with": "fläskkött|raw_edible",
+     "quantity_min": 7.0,
+     "quantity_max": 12.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "gul lök",
+     "canonical_name": "gul lök",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    },
+    {
+     "name": "vitlök",
+     "canonical_name": "vitlök",
+     "quantity": 15.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "fläskkött|raw_edible",
+     "quantity_min": 13.0,
+     "quantity_max": 22.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "tomatpuré",
+     "canonical_name": "tomatpuré",
+     "quantity": 20.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "fläskkött|raw_edible",
+     "quantity_min": 17.0,
+     "quantity_max": 30.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "spiskummin",
+     "canonical_name": "spiskummin",
+     "quantity": 2.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "ground"
+     ],
+     "scales_with": "fläskkött|raw_edible",
+     "quantity_min": 1.5,
+     "quantity_max": 3.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "oregano",
+     "canonical_name": "oregano",
+     "quantity": 1.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "dried_leaf"
+     ],
+     "scales_with": "fläskkött|raw_edible",
+     "quantity_min": 1.0,
+     "quantity_max": 1.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "rapsolja",
+     "canonical_name": "rapsolja",
+     "quantity": 20.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "cooking",
+     "scales_with": "fläskkött|raw_edible",
+     "quantity_min": 17.0,
+     "quantity_max": 30.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 7.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "fläskkött|raw_edible",
+     "quantity_min": 6.0,
+     "quantity_max": 10.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "ris",
+     "canonical_name": "ris",
+     "quantity": 250.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c2",
+     "required": true,
+     "role": "side",
+     "product_requirements": [
+      "white_rice"
+     ],
+     "quantity_min": 200.0,
+     "quantity_max": 300.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "kidneybönor",
+     "canonical_name": "kidneybönor",
+     "quantity": 380.0,
+     "unit": "g",
+     "form": "cooked_drained",
+     "component": "c2",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 380.0,
+     "quantity_max": 380.0,
+     "quantity_step": 380.0
+    },
+    {
+     "name": "crème fraiche",
+     "canonical_name": "crème fraiche",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c3",
+     "required": true,
+     "role": "sauce",
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    },
+    {
+     "name": "koriander",
+     "canonical_name": "koriander",
+     "quantity": 10.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c3",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_9b2370e0e926"
+     ],
+     "quantity_min": 10.0,
+     "quantity_max": 10.0,
+     "quantity_step": 10.0
+    },
+    {
+     "name": "limejuice",
+     "canonical_name": "limejuice",
+     "quantity": 20.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c3",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pure_juice"
+     ],
+     "quantity_min": 20.0,
+     "quantity_max": 20.0,
+     "quantity_step": 20.0
+    }
+   ],
+   "instructions": [
+    "Mixa ancho, lök, vitlök, tomatpuré, spiskummin, oregano och 400 ml vatten till en slät sås.",
+    "Skär köttet i tärningar, salta och bryn i olja.",
+    "Häll på såsen och sjud under lock 1 timme tills köttet är mört.",
+    "Koka riset och värm bönorna.",
+    "Servera grytan med ris, bönor, crème fraiche, koriander och lime."
+   ],
+   "design": {
+    "base_id": "smako-mexican-chile-colorado-cerdo",
+    "version": "1.0.0",
+    "variant_id": "base",
+    "cuisines": [
+     "mexican"
+    ],
+    "family": "chile colorado",
+    "primary_ingredient": "fläskkött",
+    "method": "pot",
+    "side": "ris",
+    "flavor_profile": [
+     "ancho",
+     "spiskummin"
+    ],
+    "components": [
+     {
+      "id": "c1",
+      "name": "Gryta",
+      "amounts": [
+       {
+        "ingredient_key": "fläskkött|raw_edible",
+        "name": "Fläskkött",
+        "note": "",
+        "quantity": 700.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "anchochili|dry",
+        "name": "Anchochili",
+        "note": "",
+        "quantity": 8.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "gul lök|raw_edible",
+        "name": "Gul lök",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "vitlök|raw_edible",
+        "name": "Vitlök",
+        "note": "",
+        "quantity": 15.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "tomatpuré|as_sold",
+        "name": "Tomatpuré",
+        "note": "",
+        "quantity": 20.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "spiskummin|dry",
+        "name": "Spiskummin",
+        "note": "",
+        "quantity": 2.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "oregano|dry",
+        "name": "Oregano",
+        "note": "",
+        "quantity": 1.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "rapsolja|as_sold",
+        "name": "Rapsolja",
+        "note": "",
+        "quantity": 20.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "Salt",
+        "note": "",
+        "quantity": 7.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c2",
+      "name": "Ris och bönor",
+      "amounts": [
+       {
+        "ingredient_key": "ris|dry",
+        "name": "Ris",
+        "note": "",
+        "quantity": 250.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "kidneybönor|cooked_drained",
+        "name": "Kidneybönor",
+        "note": "",
+        "quantity": 380.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c3",
+      "name": "Till servering",
+      "amounts": [
+       {
+        "ingredient_key": "crème fraiche|as_sold",
+        "name": "Crème fraiche",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "koriander|raw_edible",
+        "name": "Koriander",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "limejuice|as_sold",
+        "name": "Limejuice",
+        "note": "",
+        "quantity": 20.0,
+        "unit": "ml"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "Mixa ancho, lök, vitlök, tomatpuré, spiskummin, oregano och 400 ml vatten till en slät sås.",
+      "ingredient_keys": [
+       "anchochili|dry",
+       "gul lök|raw_edible",
+       "oregano|dry",
+       "spiskummin|dry",
+       "tomatpuré|as_sold",
+       "vitlök|raw_edible"
+      ],
+      "depends_on": [],
+      "duration_minutes": 6,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "400 ml",
+        400.0
+       ]
+      ]
+     },
+     {
+      "id": "s2",
+      "text": "Skär köttet i tärningar, salta och bryn i olja.",
+      "ingredient_keys": [
+       "fläskkött|raw_edible",
+       "rapsolja|as_sold",
+       "salt|as_sold"
+      ],
+      "depends_on": [],
+      "duration_minutes": 10,
+      "parallel_group": null
+     },
+     {
+      "id": "s3",
+      "text": "Häll på såsen och sjud under lock 1 timme tills köttet är mört.",
+      "ingredient_keys": [
+       "fläskkött|raw_edible"
+      ],
+      "depends_on": [
+       "s1",
+       "s2"
+      ],
+      "duration_minutes": 60,
+      "parallel_group": null
+     },
+     {
+      "id": "s4",
+      "text": "Koka riset och värm bönorna.",
+      "ingredient_keys": [
+       "kidneybönor|cooked_drained",
+       "ris|dry"
+      ],
+      "depends_on": [
+       "s2"
+      ],
+      "duration_minutes": 18,
+      "parallel_group": null
+     },
+     {
+      "id": "s5",
+      "text": "Servera grytan med ris, bönor, crème fraiche, koriander och lime.",
+      "ingredient_keys": [
+       "crème fraiche|as_sold",
+       "fläskkött|raw_edible",
+       "kidneybönor|cooked_drained",
+       "koriander|raw_edible",
+       "limejuice|as_sold",
+       "ris|dry"
+      ],
+      "depends_on": [
+       "s3",
+       "s4"
+      ],
+      "duration_minutes": 2,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 72,
+    "equipment": [
+     "Gryta",
+     "Mixer",
+     "Kastrull"
+    ],
+    "vegetarian": false,
+    "fish": false,
+    "ingredient_count": 13,
+    "provenance": {
+     "reviewed_at": "2026-11-26",
+     "notes": "Författat och standardiserat med recept-författarverktyget. Inte provlagat. Köp, allergener och näring kvalificeras separat."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "dinner"
+    ],
+    "active_minutes": 18,
+    "waiting_minutes": 54,
+    "total_minutes": 72,
+    "scaling": "reviewed_ranges"
+   }
+  },
+  {
+   "name": "Cochinita pibil – citrusbräserat fläsk med picklad rödlök och tortillas",
+   "servings": 4,
+   "ingredients": [
+    {
+     "name": "fläskkött",
+     "canonical_name": "fläskkött",
+     "quantity": 800.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "primary",
+     "quantity_min": 650.0,
+     "quantity_max": 1200.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "apelsinjuice",
+     "canonical_name": "apelsinjuice",
+     "quantity": 200.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_bac4ad0c4dc5"
+     ],
+     "scales_with": "fläskkött|raw_edible",
+     "quantity_min": 160.0,
+     "quantity_max": 300.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "limejuice",
+     "canonical_name": "limejuice",
+     "quantity": 40.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pure_juice"
+     ],
+     "scales_with": "fläskkött|raw_edible",
+     "quantity_min": 32.0,
+     "quantity_max": 60.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "vitlök",
+     "canonical_name": "vitlök",
+     "quantity": 15.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "fläskkött|raw_edible",
+     "quantity_min": 12.0,
+     "quantity_max": 22.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "paprikapulver",
+     "canonical_name": "paprikapulver",
+     "quantity": 5.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "ground"
+     ],
+     "scales_with": "fläskkött|raw_edible",
+     "quantity_min": 4.0,
+     "quantity_max": 7.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "spiskummin",
+     "canonical_name": "spiskummin",
+     "quantity": 2.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "ground"
+     ],
+     "scales_with": "fläskkött|raw_edible",
+     "quantity_min": 1.5,
+     "quantity_max": 3.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "oregano",
+     "canonical_name": "oregano",
+     "quantity": 1.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "dried_leaf"
+     ],
+     "scales_with": "fläskkött|raw_edible",
+     "quantity_min": 1.0,
+     "quantity_max": 1.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "kanel",
+     "canonical_name": "kanel",
+     "quantity": 1.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "ground"
+     ],
+     "scales_with": "fläskkött|raw_edible",
+     "quantity_min": 1.0,
+     "quantity_max": 1.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "kryddpeppar",
+     "canonical_name": "kryddpeppar",
+     "quantity": 1.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_c412f28a0556"
+     ],
+     "scales_with": "fläskkött|raw_edible",
+     "quantity_min": 1.0,
+     "quantity_max": 1.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 8.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "fläskkött|raw_edible",
+     "quantity_min": 6.5,
+     "quantity_max": 12.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "rödlök",
+     "canonical_name": "rödlök",
+     "quantity": 200.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 200.0,
+     "quantity_max": 200.0,
+     "quantity_step": 200.0
+    },
+    {
+     "name": "äppelcidervinäger",
+     "canonical_name": "äppelcidervinäger",
+     "quantity": 60.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_be24da3ca83d"
+     ],
+     "quantity_min": 60.0,
+     "quantity_max": 60.0,
+     "quantity_step": 60.0
+    },
+    {
+     "name": "majstortillas",
+     "canonical_name": "majstortillas",
+     "quantity": 320.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c3",
+     "required": true,
+     "role": "side",
+     "product_requirements": [
+      "pack:intake_all_round2_4e0f777e646a"
+     ],
+     "quantity_min": 240.0,
+     "quantity_max": 380.0,
+     "quantity_step": 20.0
+    },
+    {
+     "name": "avokado",
+     "canonical_name": "avokado",
+     "quantity": 200.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c3",
+     "required": true,
+     "role": "vegetable",
+     "product_requirements": [
+      "pack:intake_all_416f9df16b84"
+     ],
+     "quantity_min": 200.0,
+     "quantity_max": 200.0,
+     "quantity_step": 200.0
+    },
+    {
+     "name": "koriander",
+     "canonical_name": "koriander",
+     "quantity": 15.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c3",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_9b2370e0e926"
+     ],
+     "quantity_min": 15.0,
+     "quantity_max": 15.0,
+     "quantity_step": 15.0
+    }
+   ],
+   "instructions": [
+    "Blanda apelsin, lime, pressad vitlök, paprikapulver, spiskummin, oregano, kanel, kryddpeppar och salt. Vänd köttet i stora bitar i marinaden.",
+    "Sätt ugnen på 160 °C. Bräsera köttet med marinaden under lock i 2 timmar tills det faller isär.",
+    "Skiva rödlöken tunt och lägg den i vinäger med en nypa salt.",
+    "Dra isär köttet i skyn. Värm tortillorna.",
+    "Servera fläsket i tortillas med picklad lök, avokado och koriander."
+   ],
+   "design": {
+    "base_id": "smako-mexican-cochinita-pibil-tacos",
+    "version": "1.0.0",
+    "variant_id": "base",
+    "cuisines": [
+     "mexican"
+    ],
+    "family": "cochinita pibil",
+    "primary_ingredient": "fläskkött",
+    "method": "pot",
+    "side": "majstortillas",
+    "flavor_profile": [
+     "apelsin",
+     "spiskummin"
+    ],
+    "components": [
+     {
+      "id": "c1",
+      "name": "Fläsk",
+      "amounts": [
+       {
+        "ingredient_key": "fläskkött|raw_edible",
+        "name": "Fläskkött",
+        "note": "",
+        "quantity": 800.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "apelsinjuice|as_sold",
+        "name": "Apelsinjuice",
+        "note": "",
+        "quantity": 200.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "limejuice|as_sold",
+        "name": "Limejuice",
+        "note": "",
+        "quantity": 40.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "vitlök|raw_edible",
+        "name": "Vitlök",
+        "note": "",
+        "quantity": 15.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "paprikapulver|dry",
+        "name": "Paprikapulver",
+        "note": "",
+        "quantity": 5.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "spiskummin|dry",
+        "name": "Spiskummin",
+        "note": "",
+        "quantity": 2.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "oregano|dry",
+        "name": "Oregano",
+        "note": "",
+        "quantity": 1.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "kanel|dry",
+        "name": "Kanel",
+        "note": "",
+        "quantity": 1.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "kryddpeppar|dry",
+        "name": "Kryddpeppar",
+        "note": "",
+        "quantity": 1.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "Salt",
+        "note": "",
+        "quantity": 8.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c2",
+      "name": "Picklad lök",
+      "amounts": [
+       {
+        "ingredient_key": "rödlök|raw_edible",
+        "name": "Rödlök",
+        "note": "",
+        "quantity": 200.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "äppelcidervinäger|as_sold",
+        "name": "Äppelcidervinäger",
+        "note": "",
+        "quantity": 60.0,
+        "unit": "ml"
+       }
+      ]
+     },
+     {
+      "id": "c3",
+      "name": "Till servering",
+      "amounts": [
+       {
+        "ingredient_key": "majstortillas|as_sold",
+        "name": "Majstortillas",
+        "note": "",
+        "quantity": 320.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "avokado|raw_edible",
+        "name": "Avokado",
+        "note": "",
+        "quantity": 200.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "koriander|raw_edible",
+        "name": "Koriander",
+        "note": "",
+        "quantity": 15.0,
+        "unit": "g"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "Blanda apelsin, lime, pressad vitlök, paprikapulver, spiskummin, oregano, kanel, kryddpeppar och salt. Vänd köttet i stora bitar i marinaden.",
+      "ingredient_keys": [
+       "apelsinjuice|as_sold",
+       "fläskkött|raw_edible",
+       "kanel|dry",
+       "kryddpeppar|dry",
+       "limejuice|as_sold",
+       "oregano|dry",
+       "paprikapulver|dry",
+       "salt|as_sold",
+       "spiskummin|dry",
+       "vitlök|raw_edible"
+      ],
+      "depends_on": [],
+      "duration_minutes": 8,
+      "parallel_group": null
+     },
+     {
+      "id": "s2",
+      "text": "Sätt ugnen på 160 °C. Bräsera köttet med marinaden under lock i 2 timmar tills det faller isär.",
+      "ingredient_keys": [
+       "fläskkött|raw_edible"
+      ],
+      "depends_on": [
+       "s1"
+      ],
+      "duration_minutes": 120,
+      "parallel_group": null
+     },
+     {
+      "id": "s3",
+      "text": "Skiva rödlöken tunt och lägg den i vinäger med en nypa salt.",
+      "ingredient_keys": [
+       "rödlök|raw_edible",
+       "äppelcidervinäger|as_sold"
+      ],
+      "depends_on": [],
+      "duration_minutes": 5,
+      "parallel_group": null
+     },
+     {
+      "id": "s4",
+      "text": "Dra isär köttet i skyn. Värm tortillorna.",
+      "ingredient_keys": [
+       "fläskkött|raw_edible",
+       "majstortillas|as_sold"
+      ],
+      "depends_on": [
+       "s2"
+      ],
+      "duration_minutes": 6,
+      "parallel_group": null
+     },
+     {
+      "id": "s5",
+      "text": "Servera fläsket i tortillas med picklad lök, avokado och koriander.",
+      "ingredient_keys": [
+       "avokado|raw_edible",
+       "fläskkött|raw_edible",
+       "koriander|raw_edible",
+       "majstortillas|as_sold",
+       "rödlök|raw_edible"
+      ],
+      "depends_on": [
+       "s3",
+       "s4"
+      ],
+      "duration_minutes": 3,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 137,
+    "equipment": [
+     "Ugn",
+     "Gryta med lock",
+     "Skål"
+    ],
+    "vegetarian": false,
+    "fish": false,
+    "ingredient_count": 14,
+    "provenance": {
+     "reviewed_at": "2026-11-26",
+     "notes": "Författat och standardiserat med recept-författarverktyget. Inte provlagat. Köp, allergener och näring kvalificeras separat."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "dinner"
+    ],
+    "active_minutes": 22,
+    "waiting_minutes": 115,
+    "total_minutes": 137,
+    "scaling": "reviewed_ranges"
+   }
+  },
+  {
+   "name": "Ugnsbakade paprikor fyllda med nötfärs, ris och ost med tomatsalsa",
+   "servings": 4,
+   "ingredients": [
+    {
+     "name": "nötfärs",
+     "canonical_name": "nötfärs",
+     "quantity": 500.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "primary",
+     "quantity_min": 400.0,
+     "quantity_max": 750.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "ris",
+     "canonical_name": "ris",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "side",
+     "product_requirements": [
+      "white_rice"
+     ],
+     "quantity_min": 110.0,
+     "quantity_max": 180.0,
+     "quantity_step": 10.0
+    },
+    {
+     "name": "gul lök",
+     "canonical_name": "gul lök",
+     "quantity": 100.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 100.0,
+     "quantity_max": 100.0,
+     "quantity_step": 100.0
+    },
+    {
+     "name": "vitlök",
+     "canonical_name": "vitlök",
+     "quantity": 10.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "nötfärs|raw_edible",
+     "quantity_min": 8.0,
+     "quantity_max": 15.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "spiskummin",
+     "canonical_name": "spiskummin",
+     "quantity": 2.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "ground"
+     ],
+     "scales_with": "nötfärs|raw_edible",
+     "quantity_min": 1.5,
+     "quantity_max": 3.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "anchochili",
+     "canonical_name": "anchochili",
+     "quantity": 3.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_round2_637eba129fe4"
+     ],
+     "scales_with": "nötfärs|raw_edible",
+     "quantity_min": 2.5,
+     "quantity_max": 4.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "krossade tomater",
+     "canonical_name": "krossade tomater",
+     "quantity": 300.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "sauce",
+     "quantity_min": 300.0,
+     "quantity_max": 300.0,
+     "quantity_step": 300.0
+    },
+    {
+     "name": "rapsolja",
+     "canonical_name": "rapsolja",
+     "quantity": 15.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "cooking",
+     "scales_with": "nötfärs|raw_edible",
+     "quantity_min": 12.0,
+     "quantity_max": 22.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 6.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "nötfärs|raw_edible",
+     "quantity_min": 5.0,
+     "quantity_max": 9.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "paprika",
+     "canonical_name": "paprika",
+     "quantity": 600.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 600.0,
+     "quantity_max": 600.0,
+     "quantity_step": 600.0
+    },
+    {
+     "name": "ost",
+     "canonical_name": "ost",
+     "quantity": 120.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "sauce",
+     "quantity_min": 120.0,
+     "quantity_max": 120.0,
+     "quantity_step": 120.0
+    },
+    {
+     "name": "tomat",
+     "canonical_name": "tomat",
+     "quantity": 250.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c3",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 250.0,
+     "quantity_max": 250.0,
+     "quantity_step": 250.0
+    },
+    {
+     "name": "koriander",
+     "canonical_name": "koriander",
+     "quantity": 15.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c3",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_9b2370e0e926"
+     ],
+     "quantity_min": 15.0,
+     "quantity_max": 15.0,
+     "quantity_step": 15.0
+    },
+    {
+     "name": "jalapeño",
+     "canonical_name": "jalapeño",
+     "quantity": 15.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c3",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_round2_1d3e8bb882c0"
+     ],
+     "quantity_min": 15.0,
+     "quantity_max": 15.0,
+     "quantity_step": 15.0
+    },
+    {
+     "name": "limejuice",
+     "canonical_name": "limejuice",
+     "quantity": 15.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c3",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pure_juice"
+     ],
+     "quantity_min": 15.0,
+     "quantity_max": 15.0,
+     "quantity_step": 15.0
+    }
+   ],
+   "instructions": [
+    "Koka riset enligt förpackningen.",
+    "Fräs lök och vitlök i olja, bryn färsen tills den är genomstekt, minst 72 °C. Rör ner spiskummin, ancho, salt och hälften av tomaterna.",
+    "Sätt ugnen på 200 °C. Dela paprikorna, kärna ur och fyll med färs och ris. Häll resten av tomaterna i formen.",
+    "Strö över riven ost och baka 25 minuter tills paprikorna är mjuka.",
+    "Hacka tomat, koriander och jalapeño och blanda med lime. Servera till."
+   ],
+   "design": {
+    "base_id": "smako-mexican-chiles-rellenos-picadillo",
+    "version": "1.0.0",
+    "variant_id": "base",
+    "cuisines": [
+     "mexican"
+    ],
+    "family": "chiles rellenos",
+    "primary_ingredient": "nötfärs",
+    "method": "oven",
+    "side": "ris",
+    "flavor_profile": [
+     "spiskummin",
+     "ost"
+    ],
+    "components": [
+     {
+      "id": "c1",
+      "name": "Fyllning",
+      "amounts": [
+       {
+        "ingredient_key": "nötfärs|raw_edible",
+        "name": "Nötfärs",
+        "note": "",
+        "quantity": 500.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "ris|dry",
+        "name": "Ris",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "gul lök|raw_edible",
+        "name": "Gul lök",
+        "note": "",
+        "quantity": 100.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "vitlök|raw_edible",
+        "name": "Vitlök",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "spiskummin|dry",
+        "name": "Spiskummin",
+        "note": "",
+        "quantity": 2.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "anchochili|dry",
+        "name": "Anchochili",
+        "note": "",
+        "quantity": 3.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "krossade tomater|as_sold",
+        "name": "Krossade tomater",
+        "note": "",
+        "quantity": 300.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "rapsolja|as_sold",
+        "name": "Rapsolja",
+        "note": "",
+        "quantity": 15.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "Salt",
+        "note": "",
+        "quantity": 6.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c2",
+      "name": "Paprikor",
+      "amounts": [
+       {
+        "ingredient_key": "paprika|raw_edible",
+        "name": "Paprika",
+        "note": "",
+        "quantity": 600.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "ost|as_sold",
+        "name": "Ost",
+        "note": "",
+        "quantity": 120.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c3",
+      "name": "Salsa",
+      "amounts": [
+       {
+        "ingredient_key": "tomat|raw_edible",
+        "name": "Tomat",
+        "note": "",
+        "quantity": 250.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "koriander|raw_edible",
+        "name": "Koriander",
+        "note": "",
+        "quantity": 15.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "jalapeño|raw_edible",
+        "name": "Jalapeño",
+        "note": "",
+        "quantity": 15.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "limejuice|as_sold",
+        "name": "Limejuice",
+        "note": "",
+        "quantity": 15.0,
+        "unit": "ml"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "Koka riset enligt förpackningen.",
+      "ingredient_keys": [
+       "ris|dry"
+      ],
+      "depends_on": [],
+      "duration_minutes": 18,
+      "parallel_group": null
+     },
+     {
+      "id": "s2",
+      "text": "Fräs lök och vitlök i olja, bryn färsen tills den är genomstekt, minst 72 °C. Rör ner spiskummin, ancho, salt och hälften av tomaterna.",
+      "ingredient_keys": [
+       "anchochili|dry",
+       "gul lök|raw_edible",
+       "krossade tomater|as_sold",
+       "nötfärs|raw_edible",
+       "rapsolja|as_sold",
+       "salt|as_sold",
+       "spiskummin|dry",
+       "vitlök|raw_edible"
+      ],
+      "depends_on": [],
+      "duration_minutes": 12,
+      "parallel_group": null
+     },
+     {
+      "id": "s3",
+      "text": "Sätt ugnen på 200 °C. Dela paprikorna, kärna ur och fyll med färs och ris. Häll resten av tomaterna i formen.",
+      "ingredient_keys": [
+       "krossade tomater|as_sold",
+       "nötfärs|raw_edible",
+       "paprika|raw_edible",
+       "ris|dry"
+      ],
+      "depends_on": [
+       "s1",
+       "s2"
+      ],
+      "duration_minutes": 10,
+      "parallel_group": null
+     },
+     {
+      "id": "s4",
+      "text": "Strö över riven ost och baka 25 minuter tills paprikorna är mjuka.",
+      "ingredient_keys": [
+       "ost|as_sold",
+       "paprika|raw_edible"
+      ],
+      "depends_on": [
+       "s3"
+      ],
+      "duration_minutes": 25,
+      "parallel_group": null
+     },
+     {
+      "id": "s5",
+      "text": "Hacka tomat, koriander och jalapeño och blanda med lime. Servera till.",
+      "ingredient_keys": [
+       "jalapeño|raw_edible",
+       "koriander|raw_edible",
+       "limejuice|as_sold",
+       "tomat|raw_edible"
+      ],
+      "depends_on": [
+       "s4"
+      ],
+      "duration_minutes": 5,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 58,
+    "equipment": [
+     "Ugn",
+     "Ugnsform",
+     "Stekpanna",
+     "Kastrull"
+    ],
+    "vegetarian": false,
+    "fish": false,
+    "ingredient_count": 14,
+    "provenance": {
+     "reviewed_at": "2026-11-26",
+     "notes": "Författat och standardiserat med recept-författarverktyget. Inte provlagat. Köp, allergener och näring kvalificeras separat."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "dinner"
+    ],
+    "active_minutes": 27,
+    "waiting_minutes": 31,
+    "total_minutes": 58,
+    "scaling": "reviewed_ranges"
+   }
+  },
+  {
+   "name": "Caldo de res – nötköttssoppa med majs, kål och potatis",
+   "servings": 4,
+   "ingredients": [
+    {
+     "name": "nötkött",
+     "canonical_name": "nötkött",
+     "quantity": 700.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "primary",
+     "product_requirements": [
+      "pack:beef_braising_cut",
+      "pack:intake_all_10d1e6ea4dc5"
+     ],
+     "quantity_min": 600.0,
+     "quantity_max": 1050.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "potatis",
+     "canonical_name": "potatis",
+     "quantity": 400.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "side",
+     "quantity_min": 300.0,
+     "quantity_max": 450.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "morot",
+     "canonical_name": "morot",
+     "quantity": 200.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 200.0,
+     "quantity_max": 200.0,
+     "quantity_step": 200.0
+    },
+    {
+     "name": "vitkål",
+     "canonical_name": "vitkål",
+     "quantity": 300.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 300.0,
+     "quantity_max": 300.0,
+     "quantity_step": 300.0
+    },
+    {
+     "name": "majs",
+     "canonical_name": "majs",
+     "quantity": 200.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "vegetable",
+     "product_requirements": [
+      "frozen",
+      "plain"
+     ],
+     "quantity_min": 200.0,
+     "quantity_max": 200.0,
+     "quantity_step": 200.0
+    },
+    {
+     "name": "zucchini",
+     "canonical_name": "zucchini",
+     "quantity": 200.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 200.0,
+     "quantity_max": 200.0,
+     "quantity_step": 200.0
+    },
+    {
+     "name": "gul lök",
+     "canonical_name": "gul lök",
+     "quantity": 150.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 150.0,
+     "quantity_max": 150.0,
+     "quantity_step": 150.0
+    },
+    {
+     "name": "vitlök",
+     "canonical_name": "vitlök",
+     "quantity": 10.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "nötkött|raw_edible",
+     "quantity_min": 8.5,
+     "quantity_max": 15.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "krossade tomater",
+     "canonical_name": "krossade tomater",
+     "quantity": 200.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "sauce",
+     "quantity_min": 200.0,
+     "quantity_max": 200.0,
+     "quantity_step": 200.0
+    },
+    {
+     "name": "oregano",
+     "canonical_name": "oregano",
+     "quantity": 1.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "dried_leaf"
+     ],
+     "scales_with": "nötkött|raw_edible",
+     "quantity_min": 1.0,
+     "quantity_max": 1.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 9.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "nötkött|raw_edible",
+     "quantity_min": 7.5,
+     "quantity_max": 14.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "koriander",
+     "canonical_name": "koriander",
+     "quantity": 15.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_9b2370e0e926"
+     ],
+     "quantity_min": 15.0,
+     "quantity_max": 15.0,
+     "quantity_step": 15.0
+    },
+    {
+     "name": "limejuice",
+     "canonical_name": "limejuice",
+     "quantity": 30.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pure_juice"
+     ],
+     "quantity_min": 30.0,
+     "quantity_max": 30.0,
+     "quantity_step": 30.0
+    },
+    {
+     "name": "jalapeño",
+     "canonical_name": "jalapeño",
+     "quantity": 20.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_round2_1d3e8bb882c0"
+     ],
+     "quantity_min": 20.0,
+     "quantity_max": 20.0,
+     "quantity_step": 20.0
+    },
+    {
+     "name": "majstortillas",
+     "canonical_name": "majstortillas",
+     "quantity": 200.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "sauce",
+     "product_requirements": [
+      "pack:intake_all_round2_4e0f777e646a"
+     ],
+     "quantity_min": 200.0,
+     "quantity_max": 200.0,
+     "quantity_step": 200.0
+    }
+   ],
+   "instructions": [
+    "Koka köttet i bitar med lök, vitlök, tomater, oregano, salt och 2000 ml vatten. Skumma och sjud under lock 1 timme och 30 minuter.",
+    "Lägg i potatis och morot i bitar och sjud 15 minuter.",
+    "Tillsätt kål i klyftor, majs och zucchini och sjud 10 minuter tills allt är mjukt.",
+    "Servera med koriander, lime, jalapeño och varma tortillas."
+   ],
+   "design": {
+    "base_id": "smako-mexican-caldo-de-res",
+    "version": "1.0.0",
+    "variant_id": "base",
+    "cuisines": [
+     "mexican"
+    ],
+    "family": "caldo de res",
+    "primary_ingredient": "nötkött",
+    "method": "pot",
+    "side": "potatis",
+    "flavor_profile": [
+     "koriander",
+     "lime"
+    ],
+    "components": [
+     {
+      "id": "c1",
+      "name": "Soppa",
+      "amounts": [
+       {
+        "ingredient_key": "nötkött|raw_edible",
+        "name": "Högrev eller grytbitar av nöt",
+        "note": "",
+        "quantity": 700.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "potatis|raw_edible",
+        "name": "Potatis",
+        "note": "",
+        "quantity": 400.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "morot|raw_edible",
+        "name": "Morot",
+        "note": "",
+        "quantity": 200.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "vitkål|raw_edible",
+        "name": "Vitkål",
+        "note": "",
+        "quantity": 300.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "majs|as_sold",
+        "name": "Majs",
+        "note": "",
+        "quantity": 200.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "zucchini|raw_edible",
+        "name": "Zucchini",
+        "note": "",
+        "quantity": 200.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "gul lök|raw_edible",
+        "name": "Gul lök",
+        "note": "",
+        "quantity": 150.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "vitlök|raw_edible",
+        "name": "Vitlök",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "krossade tomater|as_sold",
+        "name": "Krossade tomater",
+        "note": "",
+        "quantity": 200.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "oregano|dry",
+        "name": "Oregano",
+        "note": "",
+        "quantity": 1.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "Salt",
+        "note": "",
+        "quantity": 9.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c2",
+      "name": "Till servering",
+      "amounts": [
+       {
+        "ingredient_key": "koriander|raw_edible",
+        "name": "Koriander",
+        "note": "",
+        "quantity": 15.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "limejuice|as_sold",
+        "name": "Limejuice",
+        "note": "",
+        "quantity": 30.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "jalapeño|raw_edible",
+        "name": "Jalapeño",
+        "note": "",
+        "quantity": 20.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "majstortillas|as_sold",
+        "name": "Majstortillas",
+        "note": "",
+        "quantity": 200.0,
+        "unit": "g"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "Koka köttet i bitar med lök, vitlök, tomater, oregano, salt och 2000 ml vatten. Skumma och sjud under lock 1 timme och 30 minuter.",
+      "ingredient_keys": [
+       "gul lök|raw_edible",
+       "krossade tomater|as_sold",
+       "nötkött|raw_edible",
+       "oregano|dry",
+       "salt|as_sold",
+       "vitlök|raw_edible"
+      ],
+      "depends_on": [],
+      "duration_minutes": 95,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "2000 ml",
+        2000.0
+       ]
+      ]
+     },
+     {
+      "id": "s2",
+      "text": "Lägg i potatis och morot i bitar och sjud 15 minuter.",
+      "ingredient_keys": [
+       "morot|raw_edible",
+       "potatis|raw_edible"
+      ],
+      "depends_on": [
+       "s1"
+      ],
+      "duration_minutes": 15,
+      "parallel_group": null
+     },
+     {
+      "id": "s3",
+      "text": "Tillsätt kål i klyftor, majs och zucchini och sjud 10 minuter tills allt är mjukt.",
+      "ingredient_keys": [
+       "majs|as_sold",
+       "vitkål|raw_edible",
+       "zucchini|raw_edible"
+      ],
+      "depends_on": [
+       "s2"
+      ],
+      "duration_minutes": 10,
+      "parallel_group": null
+     },
+     {
+      "id": "s4",
+      "text": "Servera med koriander, lime, jalapeño och varma tortillas.",
+      "ingredient_keys": [
+       "jalapeño|raw_edible",
+       "koriander|raw_edible",
+       "limejuice|as_sold",
+       "majstortillas|as_sold"
+      ],
+      "depends_on": [
+       "s3"
+      ],
+      "duration_minutes": 3,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 123,
+    "equipment": [
+     "Kastrull"
+    ],
+    "vegetarian": false,
+    "fish": false,
+    "ingredient_count": 14,
+    "provenance": {
+     "reviewed_at": "2026-11-26",
+     "notes": "Författat och standardiserat med recept-författarverktyget. Inte provlagat. Köp, allergener och näring kvalificeras separat."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "dinner"
+    ],
+    "active_minutes": 3,
+    "waiting_minutes": 120,
+    "total_minutes": 123,
+    "scaling": "reviewed_ranges"
+   }
+  },
+  {
+   "name": "Camarones al mojo de ajo – vitlöksräkor med lime, ris och svarta bönor",
+   "servings": 4,
+   "ingredients": [
+    {
+     "name": "råa skalade vannameiräkor",
+     "canonical_name": "råa skalade vannameiräkor",
+     "quantity": 500.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "primary",
+     "product_requirements": [
+      "pack:intake_all_round2_599059ef473b"
+     ],
+     "quantity_min": 400.0,
+     "quantity_max": 750.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "vitlök",
+     "canonical_name": "vitlök",
+     "quantity": 25.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "råa skalade vannameiräkor|as_sold",
+     "quantity_min": 20.0,
+     "quantity_max": 38.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "smör",
+     "canonical_name": "smör",
+     "quantity": 30.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "cooking",
+     "product_requirements": [
+      "pack:intake_butter"
+     ],
+     "scales_with": "råa skalade vannameiräkor|as_sold",
+     "quantity_min": 24.0,
+     "quantity_max": 45.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "olivolja",
+     "canonical_name": "olivolja",
+     "quantity": 20.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "cooking",
+     "product_requirements": [
+      "pack:intake_all_expansion_86ac9b2c5ae6"
+     ],
+     "scales_with": "råa skalade vannameiräkor|as_sold",
+     "quantity_min": 16.0,
+     "quantity_max": 30.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "chiliflakes",
+     "canonical_name": "chiliflakes",
+     "quantity": 1.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "råa skalade vannameiräkor|as_sold",
+     "quantity_min": 1.0,
+     "quantity_max": 1.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "limejuice",
+     "canonical_name": "limejuice",
+     "quantity": 30.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pure_juice"
+     ],
+     "scales_with": "råa skalade vannameiräkor|as_sold",
+     "quantity_min": 24.0,
+     "quantity_max": 45.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "persilja",
+     "canonical_name": "persilja",
+     "quantity": 15.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "råa skalade vannameiräkor|as_sold",
+     "quantity_min": 12.0,
+     "quantity_max": 22.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 4.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "råa skalade vannameiräkor|as_sold",
+     "quantity_min": 3.0,
+     "quantity_max": 6.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "ris",
+     "canonical_name": "ris",
+     "quantity": 250.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c2",
+     "required": true,
+     "role": "side",
+     "product_requirements": [
+      "white_rice"
+     ],
+     "quantity_min": 200.0,
+     "quantity_max": 300.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "svarta bönor",
+     "canonical_name": "svarta bönor",
+     "quantity": 380.0,
+     "unit": "g",
+     "form": "cooked_drained",
+     "component": "c2",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 380.0,
+     "quantity_max": 380.0,
+     "quantity_step": 380.0
+    },
+    {
+     "name": "spiskummin",
+     "canonical_name": "spiskummin",
+     "quantity": 1.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "ground"
+     ],
+     "quantity_min": 1.0,
+     "quantity_max": 1.0,
+     "quantity_step": 1.0
+    },
+    {
+     "name": "avokado",
+     "canonical_name": "avokado",
+     "quantity": 200.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c3",
+     "required": true,
+     "role": "vegetable",
+     "product_requirements": [
+      "pack:intake_all_416f9df16b84"
+     ],
+     "quantity_min": 200.0,
+     "quantity_max": 200.0,
+     "quantity_step": 200.0
+    },
+    {
+     "name": "tomat",
+     "canonical_name": "tomat",
+     "quantity": 200.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c3",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 200.0,
+     "quantity_max": 200.0,
+     "quantity_step": 200.0
+    }
+   ],
+   "instructions": [
+    "Koka riset enligt förpackningen. Värm bönorna med spiskummin.",
+    "Fräs tunt skivad vitlök i smör och olja på låg värme tills den är gyllene.",
+    "Höj värmen, lägg i räkorna med chili och salt och stek 2–3 minuter tills de är rosa och genomkokta. Pressa över lime och strö över persilja.",
+    "Servera med ris, bönor, avokado och tomat."
+   ],
+   "design": {
+    "base_id": "smako-mexican-camarones-al-mojo-de-ajo",
+    "version": "1.0.0",
+    "variant_id": "base",
+    "cuisines": [
+     "mexican"
+    ],
+    "family": "mojo de ajo",
+    "primary_ingredient": "råa skalade vannameiräkor",
+    "method": "pan",
+    "side": "ris",
+    "flavor_profile": [
+     "vitlök",
+     "lime"
+    ],
+    "components": [
+     {
+      "id": "c1",
+      "name": "Räkor",
+      "amounts": [
+       {
+        "ingredient_key": "råa skalade vannameiräkor|as_sold",
+        "name": "Råa skalade vannameiräkor",
+        "note": "",
+        "quantity": 500.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "vitlök|raw_edible",
+        "name": "Vitlök",
+        "note": "",
+        "quantity": 25.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "smör|as_sold",
+        "name": "Smör",
+        "note": "",
+        "quantity": 30.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "olivolja|as_sold",
+        "name": "Olivolja",
+        "note": "",
+        "quantity": 20.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "chiliflakes|dry",
+        "name": "Chiliflakes",
+        "note": "",
+        "quantity": 1.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "limejuice|as_sold",
+        "name": "Limejuice",
+        "note": "",
+        "quantity": 30.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "persilja|raw_edible",
+        "name": "Persilja",
+        "note": "",
+        "quantity": 15.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "Salt",
+        "note": "",
+        "quantity": 4.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c2",
+      "name": "Ris och bönor",
+      "amounts": [
+       {
+        "ingredient_key": "ris|dry",
+        "name": "Ris",
+        "note": "",
+        "quantity": 250.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "svarta bönor|cooked_drained",
+        "name": "Svarta bönor",
+        "note": "",
+        "quantity": 380.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "spiskummin|dry",
+        "name": "Spiskummin",
+        "note": "",
+        "quantity": 1.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c3",
+      "name": "Till servering",
+      "amounts": [
+       {
+        "ingredient_key": "avokado|raw_edible",
+        "name": "Avokado",
+        "note": "",
+        "quantity": 200.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "tomat|raw_edible",
+        "name": "Tomat",
+        "note": "",
+        "quantity": 200.0,
+        "unit": "g"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "Koka riset enligt förpackningen. Värm bönorna med spiskummin.",
+      "ingredient_keys": [
+       "ris|dry",
+       "spiskummin|dry",
+       "svarta bönor|cooked_drained"
+      ],
+      "depends_on": [],
+      "duration_minutes": 18,
+      "parallel_group": null
+     },
+     {
+      "id": "s2",
+      "text": "Fräs tunt skivad vitlök i smör och olja på låg värme tills den är gyllene.",
+      "ingredient_keys": [
+       "olivolja|as_sold",
+       "smör|as_sold",
+       "vitlök|raw_edible"
+      ],
+      "depends_on": [],
+      "duration_minutes": 6,
+      "parallel_group": null
+     },
+     {
+      "id": "s3",
+      "text": "Höj värmen, lägg i räkorna med chili och salt och stek 2–3 minuter tills de är rosa och genomkokta. Pressa över lime och strö över persilja.",
+      "ingredient_keys": [
+       "chiliflakes|dry",
+       "limejuice|as_sold",
+       "persilja|raw_edible",
+       "råa skalade vannameiräkor|as_sold",
+       "salt|as_sold"
+      ],
+      "depends_on": [
+       "s2"
+      ],
+      "duration_minutes": 4,
+      "parallel_group": null
+     },
+     {
+      "id": "s4",
+      "text": "Servera med ris, bönor, avokado och tomat.",
+      "ingredient_keys": [
+       "avokado|raw_edible",
+       "ris|dry",
+       "svarta bönor|cooked_drained",
+       "tomat|raw_edible"
+      ],
+      "depends_on": [
+       "s1",
+       "s3"
+      ],
+      "duration_minutes": 3,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 21,
+    "equipment": [
+     "Stekpanna",
+     "Kastrull"
+    ],
+    "vegetarian": false,
+    "fish": false,
+    "ingredient_count": 12,
+    "provenance": {
+     "reviewed_at": "2026-11-26",
+     "notes": "Författat och standardiserat med recept-författarverktyget. Inte provlagat. Köp, allergener och näring kvalificeras separat."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "dinner"
+    ],
+    "active_minutes": 13,
+    "waiting_minutes": 8,
+    "total_minutes": 21,
+    "scaling": "reviewed_ranges"
+   }
+  },
+  {
+   "name": "Lax med mango- och avokadosalsa, svarta bönor och ris",
+   "servings": 4,
+   "ingredients": [
+    {
+     "name": "lax",
+     "canonical_name": "lax",
+     "quantity": 600.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "primary",
+     "product_requirements": [
+      "pack:salmon"
+     ],
+     "quantity_min": 500.0,
+     "quantity_max": 900.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "spiskummin",
+     "canonical_name": "spiskummin",
+     "quantity": 1.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "ground"
+     ],
+     "scales_with": "lax|raw_edible",
+     "quantity_min": 1.0,
+     "quantity_max": 1.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "paprikapulver",
+     "canonical_name": "paprikapulver",
+     "quantity": 2.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "ground"
+     ],
+     "scales_with": "lax|raw_edible",
+     "quantity_min": 1.5,
+     "quantity_max": 3.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "rapsolja",
+     "canonical_name": "rapsolja",
+     "quantity": 15.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "cooking",
+     "scales_with": "lax|raw_edible",
+     "quantity_min": 12.0,
+     "quantity_max": 22.0,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 5.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "scales_with": "lax|raw_edible",
+     "quantity_min": 4.0,
+     "quantity_max": 7.5,
+     "quantity_step": 0.5
+    },
+    {
+     "name": "mango",
+     "canonical_name": "mango",
+     "quantity": 300.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "vegetable",
+     "product_requirements": [
+      "pack:intake_all_d51e7b07e8a0"
+     ],
+     "quantity_min": 300.0,
+     "quantity_max": 300.0,
+     "quantity_step": 300.0
+    },
+    {
+     "name": "avokado",
+     "canonical_name": "avokado",
+     "quantity": 200.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "vegetable",
+     "product_requirements": [
+      "pack:intake_all_416f9df16b84"
+     ],
+     "quantity_min": 200.0,
+     "quantity_max": 200.0,
+     "quantity_step": 200.0
+    },
+    {
+     "name": "rödlök",
+     "canonical_name": "rödlök",
+     "quantity": 60.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 60.0,
+     "quantity_max": 60.0,
+     "quantity_step": 60.0
+    },
+    {
+     "name": "jalapeño",
+     "canonical_name": "jalapeño",
+     "quantity": 15.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_round2_1d3e8bb882c0"
+     ],
+     "quantity_min": 15.0,
+     "quantity_max": 15.0,
+     "quantity_step": 15.0
+    },
+    {
+     "name": "koriander",
+     "canonical_name": "koriander",
+     "quantity": 15.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pack:intake_all_9b2370e0e926"
+     ],
+     "quantity_min": 15.0,
+     "quantity_max": 15.0,
+     "quantity_step": 15.0
+    },
+    {
+     "name": "limejuice",
+     "canonical_name": "limejuice",
+     "quantity": 25.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pure_juice"
+     ],
+     "quantity_min": 25.0,
+     "quantity_max": 25.0,
+     "quantity_step": 25.0
+    },
+    {
+     "name": "ris",
+     "canonical_name": "ris",
+     "quantity": 250.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c3",
+     "required": true,
+     "role": "side",
+     "product_requirements": [
+      "white_rice"
+     ],
+     "quantity_min": 200.0,
+     "quantity_max": 300.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "svarta bönor",
+     "canonical_name": "svarta bönor",
+     "quantity": 380.0,
+     "unit": "g",
+     "form": "cooked_drained",
+     "component": "c3",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 380.0,
+     "quantity_max": 380.0,
+     "quantity_step": 380.0
+    }
+   ],
+   "instructions": [
+    "Koka riset enligt förpackningen och vänd ner värmda bönor.",
+    "Tärna mango, avokado och rödlök och blanda med hackad jalapeño, koriander, lime och salt.",
+    "Krydda laxen med spiskummin, paprikapulver och salt och stek i olja 3–4 minuter per sida tills den är minst 63 °C.",
+    "Servera laxen med salsan och ris med bönor."
+   ],
+   "design": {
+    "base_id": "smako-mexican-salmon-salsa-de-mango",
+    "version": "1.0.0",
+    "variant_id": "base",
+    "cuisines": [
+     "mexican"
+    ],
+    "family": "salmón con salsa de mango",
+    "primary_ingredient": "lax",
+    "method": "pan",
+    "side": "ris",
+    "flavor_profile": [
+     "mango",
+     "lime"
+    ],
+    "components": [
+     {
+      "id": "c1",
+      "name": "Lax",
+      "amounts": [
+       {
+        "ingredient_key": "lax|raw_edible",
+        "name": "Lax",
+        "note": "",
+        "quantity": 600.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "spiskummin|dry",
+        "name": "Spiskummin",
+        "note": "",
+        "quantity": 1.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "paprikapulver|dry",
+        "name": "Paprikapulver",
+        "note": "",
+        "quantity": 2.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "rapsolja|as_sold",
+        "name": "Rapsolja",
+        "note": "",
+        "quantity": 15.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "Salt",
+        "note": "",
+        "quantity": 5.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c2",
+      "name": "Salsa",
+      "amounts": [
+       {
+        "ingredient_key": "mango|raw_edible",
+        "name": "Mango",
+        "note": "",
+        "quantity": 300.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "avokado|raw_edible",
+        "name": "Avokado",
+        "note": "",
+        "quantity": 200.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "rödlök|raw_edible",
+        "name": "Rödlök",
+        "note": "",
+        "quantity": 60.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "jalapeño|raw_edible",
+        "name": "Jalapeño",
+        "note": "",
+        "quantity": 15.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "koriander|raw_edible",
+        "name": "Koriander",
+        "note": "",
+        "quantity": 15.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "limejuice|as_sold",
+        "name": "Limejuice",
+        "note": "",
+        "quantity": 25.0,
+        "unit": "ml"
+       }
+      ]
+     },
+     {
+      "id": "c3",
+      "name": "Ris och bönor",
+      "amounts": [
+       {
+        "ingredient_key": "ris|dry",
+        "name": "Ris",
+        "note": "",
+        "quantity": 250.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "svarta bönor|cooked_drained",
+        "name": "Svarta bönor",
+        "note": "",
+        "quantity": 380.0,
+        "unit": "g"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "Koka riset enligt förpackningen och vänd ner värmda bönor.",
+      "ingredient_keys": [
+       "ris|dry",
+       "svarta bönor|cooked_drained"
+      ],
+      "depends_on": [],
+      "duration_minutes": 18,
+      "parallel_group": null
+     },
+     {
+      "id": "s2",
+      "text": "Tärna mango, avokado och rödlök och blanda med hackad jalapeño, koriander, lime och salt.",
+      "ingredient_keys": [
+       "avokado|raw_edible",
+       "jalapeño|raw_edible",
+       "koriander|raw_edible",
+       "limejuice|as_sold",
+       "mango|raw_edible",
+       "rödlök|raw_edible"
+      ],
+      "depends_on": [],
+      "duration_minutes": 8,
+      "parallel_group": null
+     },
+     {
+      "id": "s3",
+      "text": "Krydda laxen med spiskummin, paprikapulver och salt och stek i olja 3–4 minuter per sida tills den är minst 63 °C.",
+      "ingredient_keys": [
+       "lax|raw_edible",
+       "paprikapulver|dry",
+       "rapsolja|as_sold",
+       "salt|as_sold",
+       "spiskummin|dry"
+      ],
+      "depends_on": [],
+      "duration_minutes": 8,
+      "parallel_group": null
+     },
+     {
+      "id": "s4",
+      "text": "Servera laxen med salsan och ris med bönor.",
+      "ingredient_keys": [
+       "lax|raw_edible",
+       "mango|raw_edible",
+       "ris|dry"
+      ],
+      "depends_on": [
+       "s1",
+       "s2",
+       "s3"
+      ],
+      "duration_minutes": 2,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 20,
+    "equipment": [
+     "Stekpanna",
+     "Kastrull",
+     "Skål"
+    ],
+    "vegetarian": false,
+    "fish": true,
+    "ingredient_count": 12,
+    "provenance": {
+     "reviewed_at": "2026-11-26",
+     "notes": "Författat och standardiserat med recept-författarverktyget. Inte provlagat. Köp, allergener och näring kvalificeras separat."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "dinner"
+    ],
+    "active_minutes": 18,
+    "waiting_minutes": 2,
+    "total_minutes": 20,
+    "scaling": "reviewed_ranges"
+   }
+  }
+ ]
+}

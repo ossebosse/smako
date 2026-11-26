@@ -1,0 +1,6236 @@
+{
+  "library_version": "smako-meal-pack-v1",
+  "recipes": [
+    {
+      "design": {
+        "active_minutes": 21,
+        "base_id": "smako-thai-pad-krapao-gai-kai-dao",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "kyckling|raw_edible",
+                "name": "Kycklinglårfilé",
+                "note": "",
+                "quantity": 600.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "Vitlök",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "grön chili|raw_edible",
+                "name": "Grön chili",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "basilika|raw_edible",
+                "name": "Thaibasilika eller basilika",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "haricots verts|as_sold",
+                "name": "Haricots verts",
+                "note": "",
+                "quantity": 200.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ostronsås|as_sold",
+                "name": "Ostronsås",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "fisksås|as_sold",
+                "name": "Fisksås",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "sojasås|as_sold",
+                "name": "Sojasås",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "Strösocker",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "Rapsolja",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "c1",
+            "name": "Wok"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ris|dry",
+                "name": "Jasminris",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ägg|raw_edible",
+                "name": "Ägg",
+                "note": "",
+                "quantity": 200.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "Rapsolja",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "c2",
+            "name": "Ris och ägg"
+          }
+        ],
+        "content_sha256": "227b064a6ba969c02a999466b15b0a8617184bfd3a7170541e25e8745dde5e14",
+        "content_source": {
+          "active_minutes": 21,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "smako-varied-proteins-thai-20261126",
+          "priority": 1,
+          "proposal_id": "smako-thai-pad-krapao-gai-kai-dao",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "c51ec0fca997f8773e69d8104d0410aa8983e245822914309f55efe7e3f1bb94",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "thai"
+        ],
+        "equipment": [
+          "Wok",
+          "Kastrull",
+          "Stekpanna"
+        ],
+        "estimated_minutes": 23,
+        "family": "pad krapao",
+        "fish": true,
+        "flavor_profile": [
+          "basilika",
+          "chili"
+        ],
+        "ingredient_count": 12,
+        "method": "pan",
+        "primary_ingredient": "kyckling",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Författat och standardiserat med recept-författarverktyget. Inte provlagat. Köp, allergener och näring kvalificeras separat.",
+          "reviewed_at": "2026-11-26"
+        },
+        "scaling": "reviewed_ranges",
+        "side": "ris",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 18,
+            "id": "s1",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Koka riset enligt förpackningen."
+          },
+          {
+            "depends_on": [],
+            "duration_minutes": 6,
+            "id": "s2",
+            "ingredient_keys": [
+              "grön chili|raw_edible",
+              "kyckling|raw_edible",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Hacka kycklingen grovt. Mortla eller hacka vitlök och chili."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 8,
+            "id": "s3",
+            "ingredient_keys": [
+              "grön chili|raw_edible",
+              "haricots verts|as_sold",
+              "kyckling|raw_edible",
+              "rapsolja|as_sold",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Fräs vitlök och chili i het olja, lägg i kycklingen och woka tills den är minst 74 °C. Tillsätt haricots verts i bitar."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 2,
+            "id": "s4",
+            "ingredient_keys": [
+              "basilika|raw_edible",
+              "fisksås|as_sold",
+              "ostronsås|as_sold",
+              "sojasås|as_sold",
+              "strösocker|dry"
+            ],
+            "parallel_group": null,
+            "text": "Tillsätt ostronsås, fisksås, soja, socker och en skvätt vatten. Vänd ner basilikan."
+          },
+          {
+            "depends_on": [
+              "s1",
+              "s4"
+            ],
+            "duration_minutes": 5,
+            "id": "s5",
+            "ingredient_keys": [
+              "kyckling|raw_edible",
+              "ris|dry",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Stek äggen krispiga i olja och servera på riset med woken."
+          }
+        ],
+        "total_minutes": 23,
+        "variant_id": "base",
+        "vegetarian": false,
+        "version": "1.0.0",
+        "waiting_minutes": 2
+      },
+      "ingredients": [
+        {
+          "canonical_name": "kyckling",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "kyckling",
+          "product_requirements": [
+            "pack:chicken_thigh"
+          ],
+          "quantity": 600.0,
+          "quantity_max": 900.0,
+          "quantity_min": 500.0,
+          "quantity_step": 50.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 15.0,
+          "quantity_max": 22.0,
+          "quantity_min": 12.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "kyckling|raw_edible",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "grön chili",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "grön chili",
+          "product_requirements": [
+            "pack:intake_all_round2_c8b0139e0c23"
+          ],
+          "quantity": 15.0,
+          "quantity_max": 22.0,
+          "quantity_min": 12.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "kyckling|raw_edible",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "basilika",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "basilika",
+          "quantity": 30.0,
+          "quantity_max": 45.0,
+          "quantity_min": 25.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "kyckling|raw_edible",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "haricots verts",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "haricots verts",
+          "product_requirements": [
+            "frozen",
+            "plain"
+          ],
+          "quantity": 200.0,
+          "quantity_max": 200.0,
+          "quantity_min": 200.0,
+          "quantity_step": 200.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ostronsås",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "ostronsås",
+          "product_requirements": [
+            "pack:intake_all_expansion_e6f53ceb3e2c"
+          ],
+          "quantity": 30.0,
+          "quantity_max": 45.0,
+          "quantity_min": 25.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "kyckling|raw_edible",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "fisksås",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "fisksås",
+          "product_requirements": [
+            "pack:intake_all_expansion_7e1272f47d05"
+          ],
+          "quantity": 15.0,
+          "quantity_max": 22.0,
+          "quantity_min": 12.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "kyckling|raw_edible",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "sojasås",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "sojasås",
+          "quantity": 15.0,
+          "quantity_max": 22.0,
+          "quantity_min": 12.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "kyckling|raw_edible",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "strösocker",
+          "component": "c1",
+          "form": "dry",
+          "name": "strösocker",
+          "product_requirements": [
+            "pack:sugar"
+          ],
+          "quantity": 5.0,
+          "quantity_max": 7.5,
+          "quantity_min": 4.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "kyckling|raw_edible",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 40.0,
+          "quantity_max": 50.0,
+          "quantity_min": 37.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "cooking",
+          "scales_with": "kyckling|raw_edible",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "ris",
+          "component": "c2",
+          "form": "dry",
+          "name": "ris",
+          "product_requirements": [
+            "white_rice"
+          ],
+          "quantity": 300.0,
+          "quantity_max": 350.0,
+          "quantity_min": 250.0,
+          "quantity_step": 50.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ägg",
+          "component": "c2",
+          "form": "raw_edible",
+          "name": "ägg",
+          "product_requirements": [
+            "pack:egg"
+          ],
+          "quantity": 200.0,
+          "quantity_max": 200.0,
+          "quantity_min": 200.0,
+          "quantity_step": 200.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Koka riset enligt förpackningen.",
+        "Hacka kycklingen grovt. Mortla eller hacka vitlök och chili.",
+        "Fräs vitlök och chili i het olja, lägg i kycklingen och woka tills den är minst 74 °C. Tillsätt haricots verts i bitar.",
+        "Tillsätt ostronsås, fisksås, soja, socker och en skvätt vatten. Vänd ner basilikan.",
+        "Stek äggen krispiga i olja och servera på riset med woken."
+      ],
+      "name": "Pad krapao gai – kycklingwok med basilika, chili och stekt ägg",
+      "preparation": {
+        "family": "pad krapao",
+        "input_forms": {
+          "basilika": "raw_edible",
+          "fisksås": "as_sold",
+          "grön chili": "raw_edible",
+          "haricots verts": "as_sold",
+          "kyckling": "raw_edible",
+          "ostronsås": "as_sold",
+          "rapsolja": "as_sold",
+          "ris": "dry",
+          "sojasås": "as_sold",
+          "strösocker": "dry",
+          "vitlök": "raw_edible",
+          "ägg": "raw_edible"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "227b064a6ba969c02a999466b15b0a8617184bfd3a7170541e25e8745dde5e14",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 21,
+        "base_id": "smako-thai-pad-see-ew-gai",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "kyckling|raw_edible",
+                "name": "Kycklingbröstfilé",
+                "note": "",
+                "quantity": 550.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "breda risnudlar|dry",
+                "name": "Breda risnudlar",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "broccoli|raw_edible",
+                "name": "Broccoli",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ägg|raw_edible",
+                "name": "Ägg",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "Vitlök",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "sojasås|as_sold",
+                "name": "Sojasås",
+                "note": "",
+                "quantity": 40.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "ostronsås|as_sold",
+                "name": "Ostronsås",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "Strösocker",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "Svartpeppar",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "Rapsolja",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "c1",
+            "name": "Wok"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "risvinäger|as_sold",
+                "name": "Risvinäger",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "chiliflakes|dry",
+                "name": "Chiliflakes",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c2",
+            "name": "Till servering"
+          }
+        ],
+        "content_sha256": "e25266a7e6bd1db6d223d96c9cb140342188d3f1fadff9453971d6f06af064bf",
+        "content_source": {
+          "active_minutes": 21,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "smako-varied-proteins-thai-20261126",
+          "priority": 1,
+          "proposal_id": "smako-thai-pad-see-ew-gai",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "c51ec0fca997f8773e69d8104d0410aa8983e245822914309f55efe7e3f1bb94",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "thai"
+        ],
+        "equipment": [
+          "Wok",
+          "Skål"
+        ],
+        "estimated_minutes": 21,
+        "family": "pad see ew",
+        "fish": true,
+        "flavor_profile": [
+          "soja",
+          "vitlök"
+        ],
+        "ingredient_count": 11,
+        "method": "pan",
+        "primary_ingredient": "kyckling",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Författat och standardiserat med recept-författarverktyget. Inte provlagat. Köp, allergener och näring kvalificeras separat.",
+          "reviewed_at": "2026-11-26"
+        },
+        "scaling": "reviewed_ranges",
+        "side": "breda risnudlar",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 15,
+            "id": "s1",
+            "ingredient_keys": [
+              "breda risnudlar|dry"
+            ],
+            "parallel_group": null,
+            "text": "Blötlägg nudlarna enligt förpackningen och häll av."
+          },
+          {
+            "depends_on": [],
+            "duration_minutes": 8,
+            "id": "s2",
+            "ingredient_keys": [
+              "broccoli|raw_edible",
+              "kyckling|raw_edible",
+              "ostronsås|as_sold",
+              "sojasås|as_sold",
+              "strösocker|dry"
+            ],
+            "parallel_group": null,
+            "text": "Skiva kycklingen tunt och dela broccolin i små buketter. Rör ihop soja, ostronsås och socker."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 7,
+            "id": "s3",
+            "ingredient_keys": [
+              "broccoli|raw_edible",
+              "kyckling|raw_edible",
+              "rapsolja|as_sold",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Fräs vitlök i het olja, woka kycklingen tills den är minst 74 °C och lägg i broccolin."
+          },
+          {
+            "depends_on": [
+              "s1",
+              "s3"
+            ],
+            "duration_minutes": 5,
+            "id": "s4",
+            "ingredient_keys": [
+              "breda risnudlar|dry",
+              "sojasås|as_sold",
+              "svartpeppar|dry",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Skjut åt sidan, knäck i äggen och rör om. Tillsätt nudlar och sås och woka tills nudlarna fått stekyta. Peppra."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 1,
+            "id": "s5",
+            "ingredient_keys": [
+              "chiliflakes|dry",
+              "risvinäger|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Servera med vinäger och chiliflakes vid sidan."
+          }
+        ],
+        "total_minutes": 21,
+        "variant_id": "base",
+        "vegetarian": false,
+        "version": "1.0.0"
+      },
+      "ingredients": [
+        {
+          "canonical_name": "kyckling",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "kyckling",
+          "product_requirements": [
+            "pack:chicken_breast"
+          ],
+          "quantity": 550.0,
+          "quantity_max": 800.0,
+          "quantity_min": 450.0,
+          "quantity_step": 50.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "breda risnudlar",
+          "component": "c1",
+          "form": "dry",
+          "name": "breda risnudlar",
+          "product_requirements": [
+            "pack:intake_all_e3c4c91f56c3"
+          ],
+          "quantity": 300.0,
+          "quantity_max": 350.0,
+          "quantity_min": 250.0,
+          "quantity_step": 50.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "broccoli",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "broccoli",
+          "quantity": 300.0,
+          "quantity_max": 300.0,
+          "quantity_min": 300.0,
+          "quantity_step": 300.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ägg",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "ägg",
+          "product_requirements": [
+            "pack:egg"
+          ],
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 15.0,
+          "quantity_max": 22.0,
+          "quantity_min": 12.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "kyckling|raw_edible",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "sojasås",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "sojasås",
+          "quantity": 40.0,
+          "quantity_max": 58.0,
+          "quantity_min": 33.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "kyckling|raw_edible",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "ostronsås",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "ostronsås",
+          "product_requirements": [
+            "pack:intake_all_expansion_e6f53ceb3e2c"
+          ],
+          "quantity": 30.0,
+          "quantity_max": 44.0,
+          "quantity_min": 25.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "kyckling|raw_edible",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "strösocker",
+          "component": "c1",
+          "form": "dry",
+          "name": "strösocker",
+          "product_requirements": [
+            "pack:sugar"
+          ],
+          "quantity": 10.0,
+          "quantity_max": 15.0,
+          "quantity_min": 8.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "kyckling|raw_edible",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "c1",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.5,
+          "quantity_min": 1.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "kyckling|raw_edible",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 30.0,
+          "quantity_max": 44.0,
+          "quantity_min": 25.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "cooking",
+          "scales_with": "kyckling|raw_edible",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "risvinäger",
+          "component": "c2",
+          "form": "as_sold",
+          "name": "risvinäger",
+          "product_requirements": [
+            "pack:intake_all_4f04b466a0d2"
+          ],
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "chiliflakes",
+          "component": "c2",
+          "form": "dry",
+          "name": "chiliflakes",
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Blötlägg nudlarna enligt förpackningen och häll av.",
+        "Skiva kycklingen tunt och dela broccolin i små buketter. Rör ihop soja, ostronsås och socker.",
+        "Fräs vitlök i het olja, woka kycklingen tills den är minst 74 °C och lägg i broccolin.",
+        "Skjut åt sidan, knäck i äggen och rör om. Tillsätt nudlar och sås och woka tills nudlarna fått stekyta. Peppra.",
+        "Servera med vinäger och chiliflakes vid sidan."
+      ],
+      "name": "Pad see ew – breda risnudlar med kyckling, broccoli och ägg",
+      "preparation": {
+        "family": "pad see ew",
+        "input_forms": {
+          "breda risnudlar": "dry",
+          "broccoli": "raw_edible",
+          "chiliflakes": "dry",
+          "kyckling": "raw_edible",
+          "ostronsås": "as_sold",
+          "rapsolja": "as_sold",
+          "risvinäger": "as_sold",
+          "sojasås": "as_sold",
+          "strösocker": "dry",
+          "svartpeppar": "dry",
+          "vitlök": "raw_edible",
+          "ägg": "raw_edible"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "e25266a7e6bd1db6d223d96c9cb140342188d3f1fadff9453971d6f06af064bf",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 12,
+        "base_id": "smako-thai-kaeng-kari-gai",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "kyckling|raw_edible",
+                "name": "Kycklinglårfilé",
+                "note": "",
+                "quantity": 600.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "potatis|raw_edible",
+                "name": "Potatis",
+                "note": "",
+                "quantity": 400.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "Gul lök",
+                "note": "",
+                "quantity": 150.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kokosmjölk|as_sold",
+                "name": "Kokosmjölk",
+                "note": "",
+                "quantity": 400.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "röd currypasta|as_sold",
+                "name": "Röd currypasta",
+                "note": "",
+                "quantity": 40.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gurkmeja|dry",
+                "name": "Gurkmeja",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "malen koriander|dry",
+                "name": "Malen koriander",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "fisksås|as_sold",
+                "name": "Fisksås",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "c1",
+            "name": "Curry"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ris|dry",
+                "name": "Jasminris",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gurka|raw_edible",
+                "name": "Gurka",
+                "note": "",
+                "quantity": 200.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "schalottenlök|raw_edible",
+                "name": "Schalottenlök",
+                "note": "",
+                "quantity": 50.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "risvinäger|as_sold",
+                "name": "Risvinäger",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "Strösocker",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c2",
+            "name": "Ris och relish"
+          }
+        ],
+        "content_sha256": "f1f016def8b2de38415abc9d713deb4e39bf72bfbc3d07c22889abccc2c92102",
+        "content_source": {
+          "active_minutes": 12,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "smako-varied-proteins-thai-20261126",
+          "priority": 1,
+          "proposal_id": "smako-thai-kaeng-kari-gai",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "c51ec0fca997f8773e69d8104d0410aa8983e245822914309f55efe7e3f1bb94",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "thai"
+        ],
+        "equipment": [
+          "Gryta",
+          "Kastrull",
+          "Skål"
+        ],
+        "estimated_minutes": 32,
+        "family": "gul curry",
+        "fish": true,
+        "flavor_profile": [
+          "gurkmeja",
+          "kokos"
+        ],
+        "ingredient_count": 13,
+        "method": "pot",
+        "primary_ingredient": "kyckling",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Författat och standardiserat med recept-författarverktyget. Inte provlagat. Köp, allergener och näring kvalificeras separat.",
+          "reviewed_at": "2026-11-26"
+        },
+        "scaling": "reviewed_ranges",
+        "side": "ris",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 5,
+            "id": "s1",
+            "ingredient_keys": [
+              "gurkmeja|dry",
+              "kokosmjölk|as_sold",
+              "malen koriander|dry",
+              "röd currypasta|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Koka upp hälften av kokosmjölken och fräs currypastan, gurkmeja och koriander i den tills det doftar."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 25,
+            "id": "s2",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "kokosmjölk|as_sold",
+              "kyckling|raw_edible",
+              "potatis|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "200 ml",
+                200.0
+              ]
+            ],
+            "text": "Lägg i kycklingen i bitar, potatis och lök i klyftor, resten av kokosmjölken och 200 ml vatten. Sjud 25 minuter tills potatisen är mjuk och kycklingen minst 74 °C."
+          },
+          {
+            "depends_on": [],
+            "duration_minutes": 18,
+            "id": "s3",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Koka riset enligt förpackningen."
+          },
+          {
+            "depends_on": [],
+            "duration_minutes": 5,
+            "id": "s4",
+            "ingredient_keys": [
+              "gurka|raw_edible",
+              "risvinäger|as_sold",
+              "schalottenlök|raw_edible",
+              "strösocker|dry"
+            ],
+            "parallel_group": null,
+            "text": "Skiva gurka och schalottenlök tunt och lägg i vinäger med socker och en nypa salt."
+          },
+          {
+            "depends_on": [
+              "s2",
+              "s3",
+              "s4"
+            ],
+            "duration_minutes": 2,
+            "id": "s5",
+            "ingredient_keys": [
+              "fisksås|as_sold",
+              "gurka|raw_edible",
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Smaka av curryn med fisksås och servera med ris och relish."
+          }
+        ],
+        "total_minutes": 32,
+        "variant_id": "base",
+        "vegetarian": false,
+        "version": "1.0.0",
+        "waiting_minutes": 20
+      },
+      "ingredients": [
+        {
+          "canonical_name": "kyckling",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "kyckling",
+          "product_requirements": [
+            "pack:chicken_thigh"
+          ],
+          "quantity": 600.0,
+          "quantity_max": 900.0,
+          "quantity_min": 500.0,
+          "quantity_step": 50.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "potatis",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "potatis",
+          "quantity": 400.0,
+          "quantity_max": 400.0,
+          "quantity_min": 400.0,
+          "quantity_step": 400.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 150.0,
+          "quantity_max": 150.0,
+          "quantity_min": 150.0,
+          "quantity_step": 150.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kokosmjölk",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "kokosmjölk",
+          "quantity": 400.0,
+          "quantity_max": 400.0,
+          "quantity_min": 400.0,
+          "quantity_step": 400.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "röd currypasta",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "röd currypasta",
+          "product_requirements": [
+            "pack:intake_all_fdde79afdb70"
+          ],
+          "quantity": 40.0,
+          "quantity_max": 60.0,
+          "quantity_min": 33.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "kyckling|raw_edible",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gurkmeja",
+          "component": "c1",
+          "form": "dry",
+          "name": "gurkmeja",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 2.0,
+          "quantity_max": 3.0,
+          "quantity_min": 1.5,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "kyckling|raw_edible",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "malen koriander",
+          "component": "c1",
+          "form": "dry",
+          "name": "malen koriander",
+          "product_requirements": [
+            "pack:coriander_seed"
+          ],
+          "quantity": 2.0,
+          "quantity_max": 3.0,
+          "quantity_min": 1.5,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "kyckling|raw_edible",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "fisksås",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "fisksås",
+          "product_requirements": [
+            "pack:intake_all_expansion_7e1272f47d05"
+          ],
+          "quantity": 20.0,
+          "quantity_max": 30.0,
+          "quantity_min": 17.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "kyckling|raw_edible",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "ris",
+          "component": "c2",
+          "form": "dry",
+          "name": "ris",
+          "product_requirements": [
+            "white_rice"
+          ],
+          "quantity": 300.0,
+          "quantity_max": 350.0,
+          "quantity_min": 250.0,
+          "quantity_step": 50.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gurka",
+          "component": "c2",
+          "form": "raw_edible",
+          "name": "gurka",
+          "quantity": 200.0,
+          "quantity_max": 200.0,
+          "quantity_min": 200.0,
+          "quantity_step": 200.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "schalottenlök",
+          "component": "c2",
+          "form": "raw_edible",
+          "name": "schalottenlök",
+          "product_requirements": [
+            "pack:intake_all_expansion_9b814cbd8647"
+          ],
+          "quantity": 50.0,
+          "quantity_max": 50.0,
+          "quantity_min": 50.0,
+          "quantity_step": 50.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "risvinäger",
+          "component": "c2",
+          "form": "as_sold",
+          "name": "risvinäger",
+          "product_requirements": [
+            "pack:intake_all_4f04b466a0d2"
+          ],
+          "quantity": 30.0,
+          "quantity_max": 30.0,
+          "quantity_min": 30.0,
+          "quantity_step": 30.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "strösocker",
+          "component": "c2",
+          "form": "dry",
+          "name": "strösocker",
+          "product_requirements": [
+            "pack:sugar"
+          ],
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 10.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Koka upp hälften av kokosmjölken och fräs currypastan, gurkmeja och koriander i den tills det doftar.",
+        "Lägg i kycklingen i bitar, potatis och lök i klyftor, resten av kokosmjölken och 200 ml vatten. Sjud 25 minuter tills potatisen är mjuk och kycklingen minst 74 °C.",
+        "Koka riset enligt förpackningen.",
+        "Skiva gurka och schalottenlök tunt och lägg i vinäger med socker och en nypa salt.",
+        "Smaka av curryn med fisksås och servera med ris och relish."
+      ],
+      "name": "Kaeng kari gai – gul kycklingcurry med potatis och gurkrelish",
+      "preparation": {
+        "family": "gul curry",
+        "input_forms": {
+          "fisksås": "as_sold",
+          "gul lök": "raw_edible",
+          "gurka": "raw_edible",
+          "gurkmeja": "dry",
+          "kokosmjölk": "as_sold",
+          "kyckling": "raw_edible",
+          "malen koriander": "dry",
+          "potatis": "raw_edible",
+          "ris": "dry",
+          "risvinäger": "as_sold",
+          "röd currypasta": "as_sold",
+          "schalottenlök": "raw_edible",
+          "strösocker": "dry"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "f1f016def8b2de38415abc9d713deb4e39bf72bfbc3d07c22889abccc2c92102",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 17,
+        "base_id": "smako-thai-khao-pad-gai",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "kyckling|raw_edible",
+                "name": "Kycklingbröstfilé",
+                "note": "",
+                "quantity": 500.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ris|dry",
+                "name": "Jasminris",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ägg|raw_edible",
+                "name": "Ägg",
+                "note": "",
+                "quantity": 150.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "Gul lök",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "Vitlök",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "tomat|raw_edible",
+                "name": "Tomat",
+                "note": "",
+                "quantity": 200.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salladslök|raw_edible",
+                "name": "Salladslök",
+                "note": "",
+                "quantity": 50.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "fisksås|as_sold",
+                "name": "Fisksås",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "sojasås|as_sold",
+                "name": "Sojasås",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "Strösocker",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "Rapsolja",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "c1",
+            "name": "Stekt ris"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "gurka|raw_edible",
+                "name": "Gurka",
+                "note": "",
+                "quantity": 200.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "limejuice|as_sold",
+                "name": "Limejuice",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "koriander|raw_edible",
+                "name": "Koriander",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c2",
+            "name": "Till servering"
+          }
+        ],
+        "content_sha256": "f25fde8a1aaec965ad67000228282093a05bddfe573ab42ef29eb80d3a296f69",
+        "content_source": {
+          "active_minutes": 17,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "smako-varied-proteins-thai-20261126",
+          "priority": 1,
+          "proposal_id": "smako-thai-khao-pad-gai",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "c51ec0fca997f8773e69d8104d0410aa8983e245822914309f55efe7e3f1bb94",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "thai"
+        ],
+        "equipment": [
+          "Wok",
+          "Kastrull"
+        ],
+        "estimated_minutes": 29,
+        "family": "khao pad",
+        "fish": true,
+        "flavor_profile": [
+          "fisksås",
+          "lime"
+        ],
+        "ingredient_count": 14,
+        "method": "pan",
+        "primary_ingredient": "kyckling",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Författat och standardiserat med recept-författarverktyget. Inte provlagat. Köp, allergener och näring kvalificeras separat.",
+          "reviewed_at": "2026-11-26"
+        },
+        "scaling": "reviewed_ranges",
+        "side": "ris",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 20,
+            "id": "s1",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Koka riset enligt förpackningen och låt det svalna, gärna kvällen före."
+          },
+          {
+            "depends_on": [],
+            "duration_minutes": 8,
+            "id": "s2",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "kyckling|raw_edible",
+              "rapsolja|as_sold",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Skiva kycklingen tunt och woka den med lök och vitlök i het olja tills den är minst 74 °C."
+          },
+          {
+            "depends_on": [
+              "s1",
+              "s2"
+            ],
+            "duration_minutes": 5,
+            "id": "s3",
+            "ingredient_keys": [
+              "ris|dry",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Skjut åt sidan och rör ihop äggen. Tillsätt riset och woka på hög värme 3 minuter."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 2,
+            "id": "s4",
+            "ingredient_keys": [
+              "fisksås|as_sold",
+              "salladslök|raw_edible",
+              "sojasås|as_sold",
+              "strösocker|dry",
+              "tomat|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Tillsätt fisksås, soja, socker, tomat i klyftor och salladslök och woka 1 minut."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 2,
+            "id": "s5",
+            "ingredient_keys": [
+              "gurka|raw_edible",
+              "koriander|raw_edible",
+              "limejuice|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Servera med skivad gurka, lime och koriander."
+          }
+        ],
+        "total_minutes": 29,
+        "variant_id": "base",
+        "vegetarian": false,
+        "version": "1.0.0",
+        "waiting_minutes": 12
+      },
+      "ingredients": [
+        {
+          "canonical_name": "kyckling",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "kyckling",
+          "product_requirements": [
+            "pack:chicken_breast"
+          ],
+          "quantity": 500.0,
+          "quantity_max": 750.0,
+          "quantity_min": 400.0,
+          "quantity_step": 50.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ris",
+          "component": "c1",
+          "form": "dry",
+          "name": "ris",
+          "product_requirements": [
+            "white_rice"
+          ],
+          "quantity": 300.0,
+          "quantity_max": 350.0,
+          "quantity_min": 250.0,
+          "quantity_step": 50.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ägg",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "ägg",
+          "product_requirements": [
+            "pack:egg"
+          ],
+          "quantity": 150.0,
+          "quantity_max": 150.0,
+          "quantity_min": 150.0,
+          "quantity_step": 150.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 10.0,
+          "quantity_max": 15.0,
+          "quantity_min": 8.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "kyckling|raw_edible",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "tomat",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "tomat",
+          "quantity": 200.0,
+          "quantity_max": 200.0,
+          "quantity_min": 200.0,
+          "quantity_step": 200.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salladslök",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "salladslök",
+          "product_requirements": [
+            "pack:intake_all_ed5c6da604b5"
+          ],
+          "quantity": 50.0,
+          "quantity_max": 50.0,
+          "quantity_min": 50.0,
+          "quantity_step": 50.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "fisksås",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "fisksås",
+          "product_requirements": [
+            "pack:intake_all_expansion_7e1272f47d05"
+          ],
+          "quantity": 20.0,
+          "quantity_max": 30.0,
+          "quantity_min": 16.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "kyckling|raw_edible",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "sojasås",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "sojasås",
+          "quantity": 20.0,
+          "quantity_max": 30.0,
+          "quantity_min": 16.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "kyckling|raw_edible",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "strösocker",
+          "component": "c1",
+          "form": "dry",
+          "name": "strösocker",
+          "product_requirements": [
+            "pack:sugar"
+          ],
+          "quantity": 5.0,
+          "quantity_max": 7.5,
+          "quantity_min": 4.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "kyckling|raw_edible",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 30.0,
+          "quantity_max": 45.0,
+          "quantity_min": 24.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "cooking",
+          "scales_with": "kyckling|raw_edible",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "gurka",
+          "component": "c2",
+          "form": "raw_edible",
+          "name": "gurka",
+          "quantity": 200.0,
+          "quantity_max": 200.0,
+          "quantity_min": 200.0,
+          "quantity_step": 200.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "limejuice",
+          "component": "c2",
+          "form": "as_sold",
+          "name": "limejuice",
+          "product_requirements": [
+            "pure_juice"
+          ],
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "koriander",
+          "component": "c2",
+          "form": "raw_edible",
+          "name": "koriander",
+          "product_requirements": [
+            "pack:intake_all_9b2370e0e926"
+          ],
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 10.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Koka riset enligt förpackningen och låt det svalna, gärna kvällen före.",
+        "Skiva kycklingen tunt och woka den med lök och vitlök i het olja tills den är minst 74 °C.",
+        "Skjut åt sidan och rör ihop äggen. Tillsätt riset och woka på hög värme 3 minuter.",
+        "Tillsätt fisksås, soja, socker, tomat i klyftor och salladslök och woka 1 minut.",
+        "Servera med skivad gurka, lime och koriander."
+      ],
+      "name": "Khao pad gai – stekt ris med kyckling, ägg och gurka",
+      "preparation": {
+        "family": "khao pad",
+        "input_forms": {
+          "fisksås": "as_sold",
+          "gul lök": "raw_edible",
+          "gurka": "raw_edible",
+          "koriander": "raw_edible",
+          "kyckling": "raw_edible",
+          "limejuice": "as_sold",
+          "rapsolja": "as_sold",
+          "ris": "dry",
+          "salladslök": "raw_edible",
+          "sojasås": "as_sold",
+          "strösocker": "dry",
+          "tomat": "raw_edible",
+          "vitlök": "raw_edible",
+          "ägg": "raw_edible"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "f25fde8a1aaec965ad67000228282093a05bddfe573ab42ef29eb80d3a296f69",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 18,
+        "base_id": "smako-thai-neua-pad-prik-thai-dam",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "nötkött|raw_edible",
+                "name": "Nötkött i strimlor",
+                "note": "",
+                "quantity": 600.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "Gul lök",
+                "note": "",
+                "quantity": 200.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "paprika|raw_edible",
+                "name": "Paprika",
+                "note": "",
+                "quantity": 250.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salladslök|raw_edible",
+                "name": "Salladslök",
+                "note": "",
+                "quantity": 50.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "Vitlök",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "Svartpeppar",
+                "note": "",
+                "quantity": 4.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ostronsås|as_sold",
+                "name": "Ostronsås",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "sojasås|as_sold",
+                "name": "Sojasås",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "Strösocker",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "majsstärkelse|dry",
+                "name": "Majsstärkelse",
+                "note": "",
+                "quantity": 8.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "Rapsolja",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "c1",
+            "name": "Wok"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ris|dry",
+                "name": "Jasminris",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c2",
+            "name": "Ris"
+          }
+        ],
+        "content_sha256": "4932c76a68aedfe3de90284816569e8de9263a9f712043f1c5ce757d151da946",
+        "content_source": {
+          "active_minutes": 18,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "smako-varied-proteins-thai-20261126",
+          "priority": 1,
+          "proposal_id": "smako-thai-neua-pad-prik-thai-dam",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "c51ec0fca997f8773e69d8104d0410aa8983e245822914309f55efe7e3f1bb94",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "thai"
+        ],
+        "equipment": [
+          "Wok",
+          "Kastrull"
+        ],
+        "estimated_minutes": 19,
+        "family": "pad prik thai dam",
+        "fish": true,
+        "flavor_profile": [
+          "svartpeppar",
+          "vitlök"
+        ],
+        "ingredient_count": 11,
+        "method": "pan",
+        "primary_ingredient": "nötkött",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Författat och standardiserat med recept-författarverktyget. Inte provlagat. Köp, allergener och näring kvalificeras separat.",
+          "reviewed_at": "2026-11-26"
+        },
+        "scaling": "reviewed_ranges",
+        "side": "ris",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 18,
+            "id": "s1",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Koka riset enligt förpackningen."
+          },
+          {
+            "depends_on": [],
+            "duration_minutes": 6,
+            "id": "s2",
+            "ingredient_keys": [
+              "majsstärkelse|dry",
+              "nötkött|raw_edible",
+              "sojasås|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Skiva köttet tunt och vänd i majsstärkelse och lite soja."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 6,
+            "id": "s3",
+            "ingredient_keys": [
+              "nötkött|raw_edible",
+              "rapsolja|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Woka köttet snabbt i het olja i omgångar. Lägg upp."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 5,
+            "id": "s4",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "nötkött|raw_edible",
+              "ostronsås|as_sold",
+              "paprika|raw_edible",
+              "salladslök|raw_edible",
+              "sojasås|as_sold",
+              "strösocker|dry",
+              "svartpeppar|dry",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Woka vitlök, grovmald peppar, lök och paprika 3 minuter. Tillsätt kött, ostronsås, soja, socker och salladslök."
+          },
+          {
+            "depends_on": [
+              "s1",
+              "s4"
+            ],
+            "duration_minutes": 1,
+            "id": "s5",
+            "ingredient_keys": [
+              "nötkött|raw_edible",
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Servera med riset."
+          }
+        ],
+        "total_minutes": 19,
+        "variant_id": "base",
+        "vegetarian": false,
+        "version": "1.0.0",
+        "waiting_minutes": 1
+      },
+      "ingredients": [
+        {
+          "canonical_name": "nötkött",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "nötkött",
+          "product_requirements": [
+            "pack:beef_lean_strips_cut",
+            "pack:intake_all_10d1e6ea4dc5"
+          ],
+          "quantity": 600.0,
+          "quantity_max": 900.0,
+          "quantity_min": 500.0,
+          "quantity_step": 50.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 200.0,
+          "quantity_max": 200.0,
+          "quantity_min": 200.0,
+          "quantity_step": 200.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "paprika",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "paprika",
+          "quantity": 250.0,
+          "quantity_max": 250.0,
+          "quantity_min": 250.0,
+          "quantity_step": 250.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salladslök",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "salladslök",
+          "product_requirements": [
+            "pack:intake_all_ed5c6da604b5"
+          ],
+          "quantity": 50.0,
+          "quantity_max": 50.0,
+          "quantity_min": 50.0,
+          "quantity_step": 50.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 15.0,
+          "quantity_max": 22.0,
+          "quantity_min": 12.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "nötkött|raw_edible",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "c1",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 4.0,
+          "quantity_max": 6.0,
+          "quantity_min": 3.5,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "nötkött|raw_edible",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ostronsås",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "ostronsås",
+          "product_requirements": [
+            "pack:intake_all_expansion_e6f53ceb3e2c"
+          ],
+          "quantity": 30.0,
+          "quantity_max": 45.0,
+          "quantity_min": 25.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "nötkött|raw_edible",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "sojasås",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "sojasås",
+          "quantity": 20.0,
+          "quantity_max": 30.0,
+          "quantity_min": 17.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "nötkött|raw_edible",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "strösocker",
+          "component": "c1",
+          "form": "dry",
+          "name": "strösocker",
+          "product_requirements": [
+            "pack:sugar"
+          ],
+          "quantity": 5.0,
+          "quantity_max": 7.5,
+          "quantity_min": 4.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "nötkött|raw_edible",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "majsstärkelse",
+          "component": "c1",
+          "form": "dry",
+          "name": "majsstärkelse",
+          "product_requirements": [
+            "pack:intake_corn_starch"
+          ],
+          "quantity": 8.0,
+          "quantity_max": 8.0,
+          "quantity_min": 8.0,
+          "quantity_step": 8.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 30.0,
+          "quantity_max": 45.0,
+          "quantity_min": 25.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "cooking",
+          "scales_with": "nötkött|raw_edible",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "ris",
+          "component": "c2",
+          "form": "dry",
+          "name": "ris",
+          "product_requirements": [
+            "white_rice"
+          ],
+          "quantity": 300.0,
+          "quantity_max": 350.0,
+          "quantity_min": 250.0,
+          "quantity_step": 50.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Koka riset enligt förpackningen.",
+        "Skiva köttet tunt och vänd i majsstärkelse och lite soja.",
+        "Woka köttet snabbt i het olja i omgångar. Lägg upp.",
+        "Woka vitlök, grovmald peppar, lök och paprika 3 minuter. Tillsätt kött, ostronsås, soja, socker och salladslök.",
+        "Servera med riset."
+      ],
+      "name": "Nötkött med svartpeppar, lök och paprika och jasminris",
+      "preparation": {
+        "family": "pad prik thai dam",
+        "input_forms": {
+          "gul lök": "raw_edible",
+          "majsstärkelse": "dry",
+          "nötkött": "raw_edible",
+          "ostronsås": "as_sold",
+          "paprika": "raw_edible",
+          "rapsolja": "as_sold",
+          "ris": "dry",
+          "salladslök": "raw_edible",
+          "sojasås": "as_sold",
+          "strösocker": "dry",
+          "svartpeppar": "dry",
+          "vitlök": "raw_edible"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "4932c76a68aedfe3de90284816569e8de9263a9f712043f1c5ce757d151da946",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 6,
+        "base_id": "smako-thai-kaeng-hung-lay-moo",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "fläskkött|raw_edible",
+                "name": "Fläskkött",
+                "note": "",
+                "quantity": 700.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "röd currypasta|as_sold",
+                "name": "Röd currypasta",
+                "note": "",
+                "quantity": 40.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ingefära|raw_edible",
+                "name": "Ingefära",
+                "note": "",
+                "quantity": 40.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "Vitlök",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "schalottenlök|raw_edible",
+                "name": "Schalottenlök",
+                "note": "",
+                "quantity": 150.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "jordnötter|as_sold",
+                "name": "Jordnötter",
+                "note": "",
+                "quantity": 40.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gurkmeja|dry",
+                "name": "Gurkmeja",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "fisksås|as_sold",
+                "name": "Fisksås",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "Strösocker",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "limejuice|as_sold",
+                "name": "Limejuice",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "Rapsolja",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "c1",
+            "name": "Gryta"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ris|dry",
+                "name": "Jasminris",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c2",
+            "name": "Ris"
+          }
+        ],
+        "content_sha256": "f4ca78f39dcea416478091fc9ff59596d2bcdd1539270c63afa1c147a36b05c0",
+        "content_source": {
+          "active_minutes": 6,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "smako-varied-proteins-thai-20261126",
+          "priority": 1,
+          "proposal_id": "smako-thai-kaeng-hung-lay-moo",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "c51ec0fca997f8773e69d8104d0410aa8983e245822914309f55efe7e3f1bb94",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "thai"
+        ],
+        "equipment": [
+          "Gryta",
+          "Kastrull"
+        ],
+        "estimated_minutes": 78,
+        "family": "kaeng hung lay",
+        "fish": true,
+        "flavor_profile": [
+          "ingefära",
+          "tamarind"
+        ],
+        "ingredient_count": 12,
+        "method": "pot",
+        "primary_ingredient": "fläskkött",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Författat och standardiserat med recept-författarverktyget. Inte provlagat. Köp, allergener och näring kvalificeras separat.",
+          "reviewed_at": "2026-11-26"
+        },
+        "scaling": "reviewed_ranges",
+        "side": "ris",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 6,
+            "id": "s1",
+            "ingredient_keys": [
+              "fläskkött|raw_edible",
+              "gurkmeja|dry",
+              "röd currypasta|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Skär köttet i tärningar och vänd det i currypasta och gurkmeja."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 52,
+            "id": "s2",
+            "ingredient_keys": [
+              "fisksås|as_sold",
+              "fläskkött|raw_edible",
+              "rapsolja|as_sold",
+              "strösocker|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "600 ml",
+                600.0
+              ]
+            ],
+            "text": "Bryn köttet i olja. Tillsätt 600 ml vatten, fisksås och socker och sjud under lock 50 minuter."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 20,
+            "id": "s3",
+            "ingredient_keys": [
+              "ingefära|raw_edible",
+              "jordnötter|as_sold",
+              "schalottenlök|raw_edible",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Lägg i ingefära i tunna stavar, hela vitlöksklyftor, schalottenlök och jordnötter och sjud 20 minuter tills köttet är mört."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 18,
+            "id": "s4",
+            "ingredient_keys": [
+              "limejuice|as_sold",
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Koka riset. Smaka av grytan med lime."
+          }
+        ],
+        "total_minutes": 78,
+        "variant_id": "base",
+        "vegetarian": false,
+        "version": "1.0.0",
+        "waiting_minutes": 72
+      },
+      "ingredients": [
+        {
+          "canonical_name": "fläskkött",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "fläskkött",
+          "quantity": 700.0,
+          "quantity_max": 1050.0,
+          "quantity_min": 600.0,
+          "quantity_step": 50.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "röd currypasta",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "röd currypasta",
+          "product_requirements": [
+            "pack:intake_all_fdde79afdb70"
+          ],
+          "quantity": 40.0,
+          "quantity_max": 60.0,
+          "quantity_min": 34.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "fläskkött|raw_edible",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ingefära",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "ingefära",
+          "quantity": 40.0,
+          "quantity_max": 60.0,
+          "quantity_min": 34.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "fläskkött|raw_edible",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 15.0,
+          "quantity_max": 22.0,
+          "quantity_min": 13.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "fläskkött|raw_edible",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "schalottenlök",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "schalottenlök",
+          "product_requirements": [
+            "pack:intake_all_expansion_9b814cbd8647"
+          ],
+          "quantity": 150.0,
+          "quantity_max": 150.0,
+          "quantity_min": 150.0,
+          "quantity_step": 150.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "jordnötter",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "jordnötter",
+          "product_requirements": [
+            "pack:peanuts"
+          ],
+          "quantity": 40.0,
+          "quantity_max": 40.0,
+          "quantity_min": 40.0,
+          "quantity_step": 40.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gurkmeja",
+          "component": "c1",
+          "form": "dry",
+          "name": "gurkmeja",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.5,
+          "quantity_min": 1.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "fläskkött|raw_edible",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "fisksås",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "fisksås",
+          "product_requirements": [
+            "pack:intake_all_expansion_7e1272f47d05"
+          ],
+          "quantity": 25.0,
+          "quantity_max": 38.0,
+          "quantity_min": 21.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "fläskkött|raw_edible",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "strösocker",
+          "component": "c1",
+          "form": "dry",
+          "name": "strösocker",
+          "product_requirements": [
+            "pack:sugar"
+          ],
+          "quantity": 15.0,
+          "quantity_max": 22.0,
+          "quantity_min": 13.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "fläskkött|raw_edible",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "limejuice",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "limejuice",
+          "product_requirements": [
+            "pure_juice"
+          ],
+          "quantity": 20.0,
+          "quantity_max": 30.0,
+          "quantity_min": 17.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "fläskkött|raw_edible",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 20.0,
+          "quantity_max": 30.0,
+          "quantity_min": 17.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "cooking",
+          "scales_with": "fläskkött|raw_edible",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "ris",
+          "component": "c2",
+          "form": "dry",
+          "name": "ris",
+          "product_requirements": [
+            "white_rice"
+          ],
+          "quantity": 300.0,
+          "quantity_max": 350.0,
+          "quantity_min": 250.0,
+          "quantity_step": 50.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Skär köttet i tärningar och vänd det i currypasta och gurkmeja.",
+        "Bryn köttet i olja. Tillsätt 600 ml vatten, fisksås och socker och sjud under lock 50 minuter.",
+        "Lägg i ingefära i tunna stavar, hela vitlöksklyftor, schalottenlök och jordnötter och sjud 20 minuter tills köttet är mört.",
+        "Koka riset. Smaka av grytan med lime."
+      ],
+      "name": "Kaeng hung lay – nordthailändsk fläskgryta med ingefära och ris",
+      "preparation": {
+        "family": "kaeng hung lay",
+        "input_forms": {
+          "fisksås": "as_sold",
+          "fläskkött": "raw_edible",
+          "gurkmeja": "dry",
+          "ingefära": "raw_edible",
+          "jordnötter": "as_sold",
+          "limejuice": "as_sold",
+          "rapsolja": "as_sold",
+          "ris": "dry",
+          "röd currypasta": "as_sold",
+          "schalottenlök": "raw_edible",
+          "strösocker": "dry",
+          "vitlök": "raw_edible"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "f4ca78f39dcea416478091fc9ff59596d2bcdd1539270c63afa1c147a36b05c0",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 14,
+        "base_id": "smako-thai-kuay-teow-neua",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "nötkött|raw_edible",
+                "name": "Högrev eller grytbitar av nöt",
+                "note": "",
+                "quantity": 600.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ingefära|raw_edible",
+                "name": "Ingefära",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "Vitlök",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kanel|dry",
+                "name": "Kanel",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "sojasås|as_sold",
+                "name": "Sojasås",
+                "note": "",
+                "quantity": 40.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "fisksås|as_sold",
+                "name": "Fisksås",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "Strösocker",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "grönsaksfond|as_sold",
+                "name": "Grönsaksfond",
+                "note": "",
+                "quantity": 40.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "c1",
+            "name": "Soppa"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "breda risnudlar|dry",
+                "name": "Breda risnudlar",
+                "note": "",
+                "quantity": 250.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "pak choi|raw_edible",
+                "name": "Pak choi",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salladslök|raw_edible",
+                "name": "Salladslök",
+                "note": "",
+                "quantity": 50.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "koriander|raw_edible",
+                "name": "Koriander",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "limejuice|as_sold",
+                "name": "Limejuice",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "c2",
+            "name": "Nudlar och topping"
+          }
+        ],
+        "content_sha256": "f5b99e138543ed4cb7cb30eb967f92a1c7d64fce53b00095565f4def2e29d76f",
+        "content_source": {
+          "active_minutes": 14,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "smako-varied-proteins-thai-20261126",
+          "priority": 1,
+          "proposal_id": "smako-thai-kuay-teow-neua",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "c51ec0fca997f8773e69d8104d0410aa8983e245822914309f55efe7e3f1bb94",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "thai"
+        ],
+        "equipment": [
+          "Kastrull"
+        ],
+        "estimated_minutes": 109,
+        "family": "nudelsoppa",
+        "fish": true,
+        "flavor_profile": [
+          "kanel",
+          "koriander"
+        ],
+        "ingredient_count": 13,
+        "method": "pot",
+        "primary_ingredient": "nötkött",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Författat och standardiserat med recept-författarverktyget. Inte provlagat. Köp, allergener och näring kvalificeras separat.",
+          "reviewed_at": "2026-11-26"
+        },
+        "scaling": "reviewed_ranges",
+        "side": "breda risnudlar",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 95,
+            "id": "s1",
+            "ingredient_keys": [
+              "grönsaksfond|as_sold",
+              "ingefära|raw_edible",
+              "kanel|dry",
+              "nötkött|raw_edible",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "2000 ml",
+                2000.0
+              ]
+            ],
+            "text": "Koka köttet i bitar med ingefära, vitlök, kanel, fonden och 2000 ml vatten. Sjud under lock 1 timme och 30 minuter tills köttet är mört."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 3,
+            "id": "s2",
+            "ingredient_keys": [
+              "fisksås|as_sold",
+              "sojasås|as_sold",
+              "strösocker|dry"
+            ],
+            "parallel_group": null,
+            "text": "Smaka av buljongen med soja, fisksås och socker."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 8,
+            "id": "s3",
+            "ingredient_keys": [
+              "breda risnudlar|dry",
+              "pak choi|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Koka nudlarna enligt förpackningen och lägg i skålar. Koka pak choi 2 minuter i buljongen."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 3,
+            "id": "s4",
+            "ingredient_keys": [
+              "koriander|raw_edible",
+              "limejuice|as_sold",
+              "nötkött|raw_edible",
+              "salladslök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Fördela köttet och buljongen över nudlarna och toppa med salladslök, koriander och lime."
+          }
+        ],
+        "total_minutes": 109,
+        "variant_id": "base",
+        "vegetarian": false,
+        "version": "1.0.0",
+        "waiting_minutes": 95
+      },
+      "ingredients": [
+        {
+          "canonical_name": "nötkött",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "nötkött",
+          "product_requirements": [
+            "pack:beef_braising_cut",
+            "pack:intake_all_10d1e6ea4dc5"
+          ],
+          "quantity": 600.0,
+          "quantity_max": 900.0,
+          "quantity_min": 500.0,
+          "quantity_step": 50.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ingefära",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "ingefära",
+          "quantity": 30.0,
+          "quantity_max": 45.0,
+          "quantity_min": 25.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "nötkött|raw_edible",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 15.0,
+          "quantity_max": 22.0,
+          "quantity_min": 12.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "nötkött|raw_edible",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kanel",
+          "component": "c1",
+          "form": "dry",
+          "name": "kanel",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.5,
+          "quantity_min": 1.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "nötkött|raw_edible",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "sojasås",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "sojasås",
+          "quantity": 40.0,
+          "quantity_max": 60.0,
+          "quantity_min": 33.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "nötkött|raw_edible",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "fisksås",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "fisksås",
+          "product_requirements": [
+            "pack:intake_all_expansion_7e1272f47d05"
+          ],
+          "quantity": 25.0,
+          "quantity_max": 38.0,
+          "quantity_min": 21.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "nötkött|raw_edible",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "strösocker",
+          "component": "c1",
+          "form": "dry",
+          "name": "strösocker",
+          "product_requirements": [
+            "pack:sugar"
+          ],
+          "quantity": 10.0,
+          "quantity_max": 15.0,
+          "quantity_min": 8.5,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "nötkött|raw_edible",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "grönsaksfond",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "grönsaksfond",
+          "product_requirements": [
+            "pack:intake_all_round2_5a0df72f98a3"
+          ],
+          "quantity": 40.0,
+          "quantity_max": 60.0,
+          "quantity_min": 33.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "nötkött|raw_edible",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "breda risnudlar",
+          "component": "c2",
+          "form": "dry",
+          "name": "breda risnudlar",
+          "product_requirements": [
+            "pack:intake_all_e3c4c91f56c3"
+          ],
+          "quantity": 250.0,
+          "quantity_max": 300.0,
+          "quantity_min": 200.0,
+          "quantity_step": 50.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "pak choi",
+          "component": "c2",
+          "form": "raw_edible",
+          "name": "pak choi",
+          "product_requirements": [
+            "pack:intake_all_6097b55c099b"
+          ],
+          "quantity": 300.0,
+          "quantity_max": 300.0,
+          "quantity_min": 300.0,
+          "quantity_step": 300.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salladslök",
+          "component": "c2",
+          "form": "raw_edible",
+          "name": "salladslök",
+          "product_requirements": [
+            "pack:intake_all_ed5c6da604b5"
+          ],
+          "quantity": 50.0,
+          "quantity_max": 50.0,
+          "quantity_min": 50.0,
+          "quantity_step": 50.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "koriander",
+          "component": "c2",
+          "form": "raw_edible",
+          "name": "koriander",
+          "product_requirements": [
+            "pack:intake_all_9b2370e0e926"
+          ],
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "limejuice",
+          "component": "c2",
+          "form": "as_sold",
+          "name": "limejuice",
+          "product_requirements": [
+            "pure_juice"
+          ],
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        }
+      ],
+      "instructions": [
+        "Koka köttet i bitar med ingefära, vitlök, kanel, fonden och 2000 ml vatten. Sjud under lock 1 timme och 30 minuter tills köttet är mört.",
+        "Smaka av buljongen med soja, fisksås och socker.",
+        "Koka nudlarna enligt förpackningen och lägg i skålar. Koka pak choi 2 minuter i buljongen.",
+        "Fördela köttet och buljongen över nudlarna och toppa med salladslök, koriander och lime."
+      ],
+      "name": "Kuay teow neua – nudelsoppa med nötkött, kryddad buljong och pak choi",
+      "preparation": {
+        "family": "nudelsoppa",
+        "input_forms": {
+          "breda risnudlar": "dry",
+          "fisksås": "as_sold",
+          "grönsaksfond": "as_sold",
+          "ingefära": "raw_edible",
+          "kanel": "dry",
+          "koriander": "raw_edible",
+          "limejuice": "as_sold",
+          "nötkött": "raw_edible",
+          "pak choi": "raw_edible",
+          "salladslök": "raw_edible",
+          "sojasås": "as_sold",
+          "strösocker": "dry",
+          "vitlök": "raw_edible"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "f5b99e138543ed4cb7cb30eb967f92a1c7d64fce53b00095565f4def2e29d76f",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 22,
+        "base_id": "smako-thai-khao-kha-moo-palo",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "fläskkött|raw_edible",
+                "name": "Fläskkött",
+                "note": "",
+                "quantity": 700.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ägg|raw_edible",
+                "name": "Ägg",
+                "note": "",
+                "quantity": 200.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "sojasås|as_sold",
+                "name": "Sojasås",
+                "note": "",
+                "quantity": 60.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "Strösocker",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kanel|dry",
+                "name": "Kanel",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "Vitlök",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "koriander|raw_edible",
+                "name": "Koriander",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "Svartpeppar",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c1",
+            "name": "Gryta"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ris|dry",
+                "name": "Jasminris",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "pak choi|raw_edible",
+                "name": "Pak choi",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "saltgurka|preserved_drained",
+                "name": "Saltgurka",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c2",
+            "name": "Ris och tillbehör"
+          }
+        ],
+        "content_sha256": "f675365d7e0e42ca75cc79dd56de8f3960c253cf4cf2903bd48d3ad398ad7281",
+        "content_source": {
+          "active_minutes": 22,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "smako-varied-proteins-thai-20261126",
+          "priority": 1,
+          "proposal_id": "smako-thai-khao-kha-moo-palo",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "c51ec0fca997f8773e69d8104d0410aa8983e245822914309f55efe7e3f1bb94",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "thai"
+        ],
+        "equipment": [
+          "Gryta",
+          "Kastrull"
+        ],
+        "estimated_minutes": 92,
+        "family": "moo palo",
+        "fish": false,
+        "flavor_profile": [
+          "kanel",
+          "soja"
+        ],
+        "ingredient_count": 10,
+        "method": "pot",
+        "primary_ingredient": "fläskkött",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Författat och standardiserat med recept-författarverktyget. Inte provlagat. Köp, allergener och näring kvalificeras separat.",
+          "reviewed_at": "2026-11-26"
+        },
+        "scaling": "reviewed_ranges",
+        "side": "ris",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 12,
+            "id": "s1",
+            "ingredient_keys": [
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Koka äggen 8 minuter, kyl och skala."
+          },
+          {
+            "depends_on": [],
+            "duration_minutes": 6,
+            "id": "s2",
+            "ingredient_keys": [
+              "koriander|raw_edible",
+              "strösocker|dry",
+              "svartpeppar|dry",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Mortla vitlök, koriander och peppar och fräs i en gryta. Smält sockret i grytan till ljus karamell."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 62,
+            "id": "s3",
+            "ingredient_keys": [
+              "fläskkött|raw_edible",
+              "kanel|dry",
+              "sojasås|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "800 ml",
+                800.0
+              ]
+            ],
+            "text": "Lägg i köttet i bitar och vänd. Tillsätt soja, kanel och 800 ml vatten och sjud under lock 1 timme."
+          },
+          {
+            "depends_on": [
+              "s1",
+              "s3"
+            ],
+            "duration_minutes": 20,
+            "id": "s4",
+            "ingredient_keys": [
+              "ris|dry",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Lägg i äggen och sjud 20 minuter tills köttet är mört. Koka riset."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 4,
+            "id": "s5",
+            "ingredient_keys": [
+              "fläskkött|raw_edible",
+              "pak choi|raw_edible",
+              "ris|dry",
+              "saltgurka|preserved_drained"
+            ],
+            "parallel_group": null,
+            "text": "Koka pak choi 2 minuter. Servera grytan med ris, pak choi och saltgurka."
+          }
+        ],
+        "total_minutes": 92,
+        "variant_id": "base",
+        "vegetarian": false,
+        "version": "1.0.0",
+        "waiting_minutes": 70
+      },
+      "ingredients": [
+        {
+          "canonical_name": "fläskkött",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "fläskkött",
+          "quantity": 700.0,
+          "quantity_max": 1050.0,
+          "quantity_min": 600.0,
+          "quantity_step": 50.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ägg",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "ägg",
+          "product_requirements": [
+            "pack:egg"
+          ],
+          "quantity": 200.0,
+          "quantity_max": 200.0,
+          "quantity_min": 200.0,
+          "quantity_step": 200.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "sojasås",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "sojasås",
+          "quantity": 60.0,
+          "quantity_max": 90.0,
+          "quantity_min": 51.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "fläskkött|raw_edible",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "strösocker",
+          "component": "c1",
+          "form": "dry",
+          "name": "strösocker",
+          "product_requirements": [
+            "pack:sugar"
+          ],
+          "quantity": 25.0,
+          "quantity_max": 38.0,
+          "quantity_min": 21.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "fläskkött|raw_edible",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kanel",
+          "component": "c1",
+          "form": "dry",
+          "name": "kanel",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 2.0,
+          "quantity_max": 3.0,
+          "quantity_min": 1.5,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "fläskkött|raw_edible",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 15.0,
+          "quantity_max": 22.0,
+          "quantity_min": 13.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "fläskkött|raw_edible",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "koriander",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "koriander",
+          "product_requirements": [
+            "pack:intake_all_9b2370e0e926"
+          ],
+          "quantity": 15.0,
+          "quantity_max": 22.0,
+          "quantity_min": 13.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "fläskkött|raw_edible",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "c1",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.5,
+          "quantity_min": 1.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "fläskkött|raw_edible",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ris",
+          "component": "c2",
+          "form": "dry",
+          "name": "ris",
+          "product_requirements": [
+            "white_rice"
+          ],
+          "quantity": 300.0,
+          "quantity_max": 350.0,
+          "quantity_min": 250.0,
+          "quantity_step": 50.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "pak choi",
+          "component": "c2",
+          "form": "raw_edible",
+          "name": "pak choi",
+          "product_requirements": [
+            "pack:intake_all_6097b55c099b"
+          ],
+          "quantity": 300.0,
+          "quantity_max": 300.0,
+          "quantity_min": 300.0,
+          "quantity_step": 300.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "saltgurka",
+          "component": "c2",
+          "form": "preserved_drained",
+          "name": "saltgurka",
+          "product_requirements": [
+            "pack:intake_all_round2_4dab8a46c82a"
+          ],
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Koka äggen 8 minuter, kyl och skala.",
+        "Mortla vitlök, koriander och peppar och fräs i en gryta. Smält sockret i grytan till ljus karamell.",
+        "Lägg i köttet i bitar och vänd. Tillsätt soja, kanel och 800 ml vatten och sjud under lock 1 timme.",
+        "Lägg i äggen och sjud 20 minuter tills köttet är mört. Koka riset.",
+        "Koka pak choi 2 minuter. Servera grytan med ris, pak choi och saltgurka."
+      ],
+      "name": "Moo palo – fläsk bräserat i soja och kanel med kokta ägg och ris",
+      "preparation": {
+        "family": "moo palo",
+        "input_forms": {
+          "fläskkött": "raw_edible",
+          "kanel": "dry",
+          "koriander": "raw_edible",
+          "pak choi": "raw_edible",
+          "ris": "dry",
+          "saltgurka": "preserved_drained",
+          "sojasås": "as_sold",
+          "strösocker": "dry",
+          "svartpeppar": "dry",
+          "vitlök": "raw_edible",
+          "ägg": "raw_edible"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "f675365d7e0e42ca75cc79dd56de8f3960c253cf4cf2903bd48d3ad398ad7281",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 19,
+        "base_id": "smako-thai-pla-nueng-manao",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "fisk|raw_edible",
+                "name": "Torskfilé",
+                "note": "",
+                "quantity": 600.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ingefära|raw_edible",
+                "name": "Ingefära",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "citrongräs|as_sold",
+                "name": "Citrongräs",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 3.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c1",
+            "name": "Fisk"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "limejuice|as_sold",
+                "name": "Limejuice",
+                "note": "",
+                "quantity": 50.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "fisksås|as_sold",
+                "name": "Fisksås",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "Vitlök",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "grön chili|raw_edible",
+                "name": "Grön chili",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "Strösocker",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "koriander|raw_edible",
+                "name": "Koriander",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c2",
+            "name": "Sås"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ris|dry",
+                "name": "Jasminris",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "pak choi|raw_edible",
+                "name": "Pak choi",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c3",
+            "name": "Ris och grönt"
+          }
+        ],
+        "content_sha256": "822c784873ec51ed23bec9a0b443e777faecfdaa1541d36a55c82959102be340",
+        "content_source": {
+          "active_minutes": 19,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "smako-varied-proteins-thai-20261126",
+          "priority": 1,
+          "proposal_id": "smako-thai-pla-nueng-manao",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "c51ec0fca997f8773e69d8104d0410aa8983e245822914309f55efe7e3f1bb94",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "thai"
+        ],
+        "equipment": [
+          "Kastrull med ånginsats",
+          "Skål"
+        ],
+        "estimated_minutes": 20,
+        "family": "pla nueng manao",
+        "fish": true,
+        "flavor_profile": [
+          "lime",
+          "vitlök"
+        ],
+        "ingredient_count": 11,
+        "method": "pot",
+        "primary_ingredient": "fisk",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Författat och standardiserat med recept-författarverktyget. Inte provlagat. Köp, allergener och näring kvalificeras separat.",
+          "reviewed_at": "2026-11-26"
+        },
+        "scaling": "reviewed_ranges",
+        "side": "ris",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 18,
+            "id": "s1",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Koka riset enligt förpackningen."
+          },
+          {
+            "depends_on": [],
+            "duration_minutes": 5,
+            "id": "s2",
+            "ingredient_keys": [
+              "fisksås|as_sold",
+              "grön chili|raw_edible",
+              "limejuice|as_sold",
+              "strösocker|dry",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Rör ihop lime, fisksås, finhackad vitlök och chili, socker och 50 ml varmt vatten."
+          },
+          {
+            "depends_on": [],
+            "duration_minutes": 12,
+            "id": "s3",
+            "ingredient_keys": [
+              "citrongräs|as_sold",
+              "fisk|raw_edible",
+              "ingefära|raw_edible",
+              "pak choi|raw_edible",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Lägg fisken på skivad ingefära och citrongräs, salta och ånga 8–10 minuter tills den är minst 63 °C. Ånga pak choi bredvid de sista 3 minuterna."
+          },
+          {
+            "depends_on": [
+              "s1",
+              "s2",
+              "s3"
+            ],
+            "duration_minutes": 2,
+            "id": "s4",
+            "ingredient_keys": [
+              "fisk|raw_edible",
+              "koriander|raw_edible",
+              "limejuice|as_sold",
+              "pak choi|raw_edible",
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Häll såsen över fisken, toppa med koriander och servera med ris och pak choi."
+          }
+        ],
+        "total_minutes": 20,
+        "variant_id": "base",
+        "vegetarian": false,
+        "version": "1.0.0",
+        "waiting_minutes": 1
+      },
+      "ingredients": [
+        {
+          "canonical_name": "fisk",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "fisk",
+          "product_requirements": [
+            "pack:cod"
+          ],
+          "quantity": 600.0,
+          "quantity_max": 900.0,
+          "quantity_min": 500.0,
+          "quantity_step": 50.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ingefära",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "ingefära",
+          "quantity": 15.0,
+          "quantity_max": 22.0,
+          "quantity_min": 12.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "fisk|raw_edible",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "citrongräs",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "citrongräs",
+          "product_requirements": [
+            "pack:intake_all_shape_top5_whole_lemongrass"
+          ],
+          "quantity": 20.0,
+          "quantity_max": 30.0,
+          "quantity_min": 17.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "fisk|raw_edible",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 3.0,
+          "quantity_max": 4.5,
+          "quantity_min": 2.5,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "fisk|raw_edible",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "limejuice",
+          "component": "c2",
+          "form": "as_sold",
+          "name": "limejuice",
+          "product_requirements": [
+            "pure_juice"
+          ],
+          "quantity": 50.0,
+          "quantity_max": 50.0,
+          "quantity_min": 50.0,
+          "quantity_step": 50.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "fisksås",
+          "component": "c2",
+          "form": "as_sold",
+          "name": "fisksås",
+          "product_requirements": [
+            "pack:intake_all_expansion_7e1272f47d05"
+          ],
+          "quantity": 30.0,
+          "quantity_max": 30.0,
+          "quantity_min": 30.0,
+          "quantity_step": 30.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "c2",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "grön chili",
+          "component": "c2",
+          "form": "raw_edible",
+          "name": "grön chili",
+          "product_requirements": [
+            "pack:intake_all_round2_c8b0139e0c23"
+          ],
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "strösocker",
+          "component": "c2",
+          "form": "dry",
+          "name": "strösocker",
+          "product_requirements": [
+            "pack:sugar"
+          ],
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 10.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "koriander",
+          "component": "c2",
+          "form": "raw_edible",
+          "name": "koriander",
+          "product_requirements": [
+            "pack:intake_all_9b2370e0e926"
+          ],
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ris",
+          "component": "c3",
+          "form": "dry",
+          "name": "ris",
+          "product_requirements": [
+            "white_rice"
+          ],
+          "quantity": 300.0,
+          "quantity_max": 350.0,
+          "quantity_min": 250.0,
+          "quantity_step": 50.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "pak choi",
+          "component": "c3",
+          "form": "raw_edible",
+          "name": "pak choi",
+          "product_requirements": [
+            "pack:intake_all_6097b55c099b"
+          ],
+          "quantity": 300.0,
+          "quantity_max": 300.0,
+          "quantity_min": 300.0,
+          "quantity_step": 300.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Koka riset enligt förpackningen.",
+        "Rör ihop lime, fisksås, finhackad vitlök och chili, socker och 50 ml varmt vatten.",
+        "Lägg fisken på skivad ingefära och citrongräs, salta och ånga 8–10 minuter tills den är minst 63 °C. Ånga pak choi bredvid de sista 3 minuterna.",
+        "Häll såsen över fisken, toppa med koriander och servera med ris och pak choi."
+      ],
+      "name": "Pla nueng manao – ångkokt fisk i lime-, vitlöks- och chilisås med ris",
+      "preparation": {
+        "family": "pla nueng manao",
+        "input_forms": {
+          "citrongräs": "as_sold",
+          "fisk": "raw_edible",
+          "fisksås": "as_sold",
+          "grön chili": "raw_edible",
+          "ingefära": "raw_edible",
+          "koriander": "raw_edible",
+          "limejuice": "as_sold",
+          "pak choi": "raw_edible",
+          "ris": "dry",
+          "salt": "as_sold",
+          "strösocker": "dry",
+          "vitlök": "raw_edible"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "822c784873ec51ed23bec9a0b443e777faecfdaa1541d36a55c82959102be340",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 17,
+        "base_id": "smako-thai-pla-pad-cha",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "fisk|raw_edible",
+                "name": "Vit fiskfilé, t.ex. sej eller torsk",
+                "note": "",
+                "quantity": 600.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "majsstärkelse|dry",
+                "name": "Majsstärkelse",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ingefära|raw_edible",
+                "name": "Ingefära",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "Vitlök",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "grön chili|raw_edible",
+                "name": "Grön chili",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "haricots verts|as_sold",
+                "name": "Haricots verts",
+                "note": "",
+                "quantity": 200.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "paprika|raw_edible",
+                "name": "Paprika",
+                "note": "",
+                "quantity": 200.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "basilika|raw_edible",
+                "name": "Basilika",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "fisksås|as_sold",
+                "name": "Fisksås",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "ostronsås|as_sold",
+                "name": "Ostronsås",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "Strösocker",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "Rapsolja",
+                "note": "",
+                "quantity": 40.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "c1",
+            "name": "Wok"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ris|dry",
+                "name": "Jasminris",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c2",
+            "name": "Ris"
+          }
+        ],
+        "content_sha256": "374c7210ec117948c0509896f4f835cda1f3fbecafbd19ec71f2ff034cddc31e",
+        "content_source": {
+          "active_minutes": 17,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "smako-varied-proteins-thai-20261126",
+          "priority": 1,
+          "proposal_id": "smako-thai-pla-pad-cha",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "c51ec0fca997f8773e69d8104d0410aa8983e245822914309f55efe7e3f1bb94",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "thai"
+        ],
+        "equipment": [
+          "Wok",
+          "Kastrull"
+        ],
+        "estimated_minutes": 19,
+        "family": "pad cha",
+        "fish": true,
+        "flavor_profile": [
+          "ingefära",
+          "basilika"
+        ],
+        "ingredient_count": 13,
+        "method": "pan",
+        "primary_ingredient": "fisk",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Författat och standardiserat med recept-författarverktyget. Inte provlagat. Köp, allergener och näring kvalificeras separat.",
+          "reviewed_at": "2026-11-26"
+        },
+        "scaling": "reviewed_ranges",
+        "side": "ris",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 18,
+            "id": "s1",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Koka riset enligt förpackningen."
+          },
+          {
+            "depends_on": [],
+            "duration_minutes": 8,
+            "id": "s2",
+            "ingredient_keys": [
+              "fisk|raw_edible",
+              "majsstärkelse|dry",
+              "rapsolja|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Skär fisken i bitar, vänd i majsstärkelse och stek gyllene i olja. Lägg upp."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 5,
+            "id": "s3",
+            "ingredient_keys": [
+              "grön chili|raw_edible",
+              "haricots verts|as_sold",
+              "ingefära|raw_edible",
+              "paprika|raw_edible",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Woka ingefära i stavar, vitlök och chili, tillsätt haricots verts och paprika och woka 3 minuter."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 3,
+            "id": "s4",
+            "ingredient_keys": [
+              "basilika|raw_edible",
+              "fisksås|as_sold",
+              "fisk|raw_edible",
+              "ostronsås|as_sold",
+              "strösocker|dry"
+            ],
+            "parallel_group": null,
+            "text": "Lägg tillbaka fisken med fisksås, ostronsås och socker och vänd varsamt tills fisken är minst 63 °C. Vänd ner basilikan."
+          },
+          {
+            "depends_on": [
+              "s1",
+              "s4"
+            ],
+            "duration_minutes": 1,
+            "id": "s5",
+            "ingredient_keys": [
+              "fisk|raw_edible",
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Servera med riset."
+          }
+        ],
+        "total_minutes": 19,
+        "variant_id": "base",
+        "vegetarian": false,
+        "version": "1.0.0",
+        "waiting_minutes": 2
+      },
+      "ingredients": [
+        {
+          "canonical_name": "fisk",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "fisk",
+          "quantity": 600.0,
+          "quantity_max": 900.0,
+          "quantity_min": 500.0,
+          "quantity_step": 50.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "majsstärkelse",
+          "component": "c1",
+          "form": "dry",
+          "name": "majsstärkelse",
+          "product_requirements": [
+            "pack:intake_corn_starch"
+          ],
+          "quantity": 30.0,
+          "quantity_max": 30.0,
+          "quantity_min": 30.0,
+          "quantity_step": 30.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ingefära",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "ingefära",
+          "quantity": 30.0,
+          "quantity_max": 45.0,
+          "quantity_min": 25.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "fisk|raw_edible",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 15.0,
+          "quantity_max": 22.0,
+          "quantity_min": 12.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "fisk|raw_edible",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "grön chili",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "grön chili",
+          "product_requirements": [
+            "pack:intake_all_round2_c8b0139e0c23"
+          ],
+          "quantity": 15.0,
+          "quantity_max": 22.0,
+          "quantity_min": 12.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "fisk|raw_edible",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "haricots verts",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "haricots verts",
+          "product_requirements": [
+            "frozen",
+            "plain"
+          ],
+          "quantity": 200.0,
+          "quantity_max": 200.0,
+          "quantity_min": 200.0,
+          "quantity_step": 200.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "paprika",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "paprika",
+          "quantity": 200.0,
+          "quantity_max": 200.0,
+          "quantity_min": 200.0,
+          "quantity_step": 200.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "basilika",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "basilika",
+          "quantity": 20.0,
+          "quantity_max": 30.0,
+          "quantity_min": 17.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "fisk|raw_edible",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "fisksås",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "fisksås",
+          "product_requirements": [
+            "pack:intake_all_expansion_7e1272f47d05"
+          ],
+          "quantity": 25.0,
+          "quantity_max": 38.0,
+          "quantity_min": 21.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "fisk|raw_edible",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "ostronsås",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "ostronsås",
+          "product_requirements": [
+            "pack:intake_all_expansion_e6f53ceb3e2c"
+          ],
+          "quantity": 20.0,
+          "quantity_max": 30.0,
+          "quantity_min": 17.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "fisk|raw_edible",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "strösocker",
+          "component": "c1",
+          "form": "dry",
+          "name": "strösocker",
+          "product_requirements": [
+            "pack:sugar"
+          ],
+          "quantity": 5.0,
+          "quantity_max": 7.5,
+          "quantity_min": 4.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "fisk|raw_edible",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 40.0,
+          "quantity_max": 60.0,
+          "quantity_min": 33.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "cooking",
+          "scales_with": "fisk|raw_edible",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "ris",
+          "component": "c2",
+          "form": "dry",
+          "name": "ris",
+          "product_requirements": [
+            "white_rice"
+          ],
+          "quantity": 300.0,
+          "quantity_max": 350.0,
+          "quantity_min": 250.0,
+          "quantity_step": 50.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Koka riset enligt förpackningen.",
+        "Skär fisken i bitar, vänd i majsstärkelse och stek gyllene i olja. Lägg upp.",
+        "Woka ingefära i stavar, vitlök och chili, tillsätt haricots verts och paprika och woka 3 minuter.",
+        "Lägg tillbaka fisken med fisksås, ostronsås och socker och vänd varsamt tills fisken är minst 63 °C. Vänd ner basilikan.",
+        "Servera med riset."
+      ],
+      "name": "Pla pad cha – wokad fisk med chili, ingefära, basilika och ris",
+      "preparation": {
+        "family": "pad cha",
+        "input_forms": {
+          "basilika": "raw_edible",
+          "fisk": "raw_edible",
+          "fisksås": "as_sold",
+          "grön chili": "raw_edible",
+          "haricots verts": "as_sold",
+          "ingefära": "raw_edible",
+          "majsstärkelse": "dry",
+          "ostronsås": "as_sold",
+          "paprika": "raw_edible",
+          "rapsolja": "as_sold",
+          "ris": "dry",
+          "strösocker": "dry",
+          "vitlök": "raw_edible"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "374c7210ec117948c0509896f4f835cda1f3fbecafbd19ec71f2ff034cddc31e",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 28,
+        "base_id": "smako-thai-tod-mun-pla",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "fisk|raw_edible",
+                "name": "Vit fiskfilé, t.ex. sej eller torsk",
+                "note": "",
+                "quantity": 600.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "röd currypasta|as_sold",
+                "name": "Röd currypasta",
+                "note": "",
+                "quantity": 40.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ägg|raw_edible",
+                "name": "Ägg",
+                "note": "",
+                "quantity": 50.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "fisksås|as_sold",
+                "name": "Fisksås",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "koriander|raw_edible",
+                "name": "Koriander",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "haricots verts|as_sold",
+                "name": "Haricots verts",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "Rapsolja",
+                "note": "",
+                "quantity": 60.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "c1",
+            "name": "Fiskkakor"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "gurka|raw_edible",
+                "name": "Gurka",
+                "note": "",
+                "quantity": 250.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "schalottenlök|raw_edible",
+                "name": "Schalottenlök",
+                "note": "",
+                "quantity": 50.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "risvinäger|as_sold",
+                "name": "Risvinäger",
+                "note": "",
+                "quantity": 40.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "Strösocker",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "jordnötter|as_sold",
+                "name": "Jordnötter",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c2",
+            "name": "Relish"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ris|dry",
+                "name": "Jasminris",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c3",
+            "name": "Ris"
+          }
+        ],
+        "content_sha256": "1aa1e89c1ba28396c0ab314af7fce1356bec83989fb73c0e4b243f852c54de5d",
+        "content_source": {
+          "active_minutes": 28,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "smako-varied-proteins-thai-20261126",
+          "priority": 1,
+          "proposal_id": "smako-thai-tod-mun-pla",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "c51ec0fca997f8773e69d8104d0410aa8983e245822914309f55efe7e3f1bb94",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "thai"
+        ],
+        "equipment": [
+          "Mixer",
+          "Stekpanna",
+          "Kastrull",
+          "Skål"
+        ],
+        "estimated_minutes": 28,
+        "family": "fiskkakor",
+        "fish": true,
+        "flavor_profile": [
+          "röd curry",
+          "koriander"
+        ],
+        "ingredient_count": 13,
+        "method": "pan",
+        "primary_ingredient": "fisk",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Författat och standardiserat med recept-författarverktyget. Inte provlagat. Köp, allergener och näring kvalificeras separat.",
+          "reviewed_at": "2026-11-26"
+        },
+        "scaling": "reviewed_ranges",
+        "side": "ris",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 18,
+            "id": "s1",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Koka riset enligt förpackningen."
+          },
+          {
+            "depends_on": [],
+            "duration_minutes": 8,
+            "id": "s2",
+            "ingredient_keys": [
+              "fisksås|as_sold",
+              "fisk|raw_edible",
+              "haricots verts|as_sold",
+              "koriander|raw_edible",
+              "röd currypasta|as_sold",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Mixa fisken med currypasta, ägg, fisksås och koriander till en seg smet. Vänd ner tunt skivade haricots verts."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 12,
+            "id": "s3",
+            "ingredient_keys": [
+              "fisk|raw_edible",
+              "rapsolja|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Forma små platta kakor och stek dem i olja 2–3 minuter per sida tills de är minst 63 °C."
+          },
+          {
+            "depends_on": [],
+            "duration_minutes": 6,
+            "id": "s4",
+            "ingredient_keys": [
+              "gurka|raw_edible",
+              "jordnötter|as_sold",
+              "risvinäger|as_sold",
+              "schalottenlök|raw_edible",
+              "strösocker|dry"
+            ],
+            "parallel_group": null,
+            "text": "Tärna gurka och skiva schalottenlök. Blanda med vinäger, socker och en nypa salt och toppa med krossade jordnötter."
+          },
+          {
+            "depends_on": [
+              "s1",
+              "s3",
+              "s4"
+            ],
+            "duration_minutes": 2,
+            "id": "s5",
+            "ingredient_keys": [
+              "fisk|raw_edible",
+              "gurka|raw_edible",
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Servera fiskkakorna med relish och ris."
+          }
+        ],
+        "total_minutes": 28,
+        "variant_id": "base",
+        "vegetarian": false,
+        "version": "1.0.0"
+      },
+      "ingredients": [
+        {
+          "canonical_name": "fisk",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "fisk",
+          "quantity": 600.0,
+          "quantity_max": 900.0,
+          "quantity_min": 500.0,
+          "quantity_step": 50.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "röd currypasta",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "röd currypasta",
+          "product_requirements": [
+            "pack:intake_all_fdde79afdb70"
+          ],
+          "quantity": 40.0,
+          "quantity_max": 60.0,
+          "quantity_min": 33.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "fisk|raw_edible",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ägg",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "ägg",
+          "product_requirements": [
+            "pack:egg"
+          ],
+          "quantity": 50.0,
+          "quantity_max": 50.0,
+          "quantity_min": 50.0,
+          "quantity_step": 50.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "fisksås",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "fisksås",
+          "product_requirements": [
+            "pack:intake_all_expansion_7e1272f47d05"
+          ],
+          "quantity": 15.0,
+          "quantity_max": 22.0,
+          "quantity_min": 12.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "fisk|raw_edible",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "koriander",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "koriander",
+          "product_requirements": [
+            "pack:intake_all_9b2370e0e926"
+          ],
+          "quantity": 15.0,
+          "quantity_max": 22.0,
+          "quantity_min": 12.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "fisk|raw_edible",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "haricots verts",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "haricots verts",
+          "product_requirements": [
+            "frozen",
+            "plain"
+          ],
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 60.0,
+          "quantity_max": 90.0,
+          "quantity_min": 50.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "cooking",
+          "scales_with": "fisk|raw_edible",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "gurka",
+          "component": "c2",
+          "form": "raw_edible",
+          "name": "gurka",
+          "quantity": 250.0,
+          "quantity_max": 250.0,
+          "quantity_min": 250.0,
+          "quantity_step": 250.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "schalottenlök",
+          "component": "c2",
+          "form": "raw_edible",
+          "name": "schalottenlök",
+          "product_requirements": [
+            "pack:intake_all_expansion_9b814cbd8647"
+          ],
+          "quantity": 50.0,
+          "quantity_max": 50.0,
+          "quantity_min": 50.0,
+          "quantity_step": 50.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "risvinäger",
+          "component": "c2",
+          "form": "as_sold",
+          "name": "risvinäger",
+          "product_requirements": [
+            "pack:intake_all_4f04b466a0d2"
+          ],
+          "quantity": 40.0,
+          "quantity_max": 40.0,
+          "quantity_min": 40.0,
+          "quantity_step": 40.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "strösocker",
+          "component": "c2",
+          "form": "dry",
+          "name": "strösocker",
+          "product_requirements": [
+            "pack:sugar"
+          ],
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 10.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "jordnötter",
+          "component": "c2",
+          "form": "as_sold",
+          "name": "jordnötter",
+          "product_requirements": [
+            "pack:peanuts"
+          ],
+          "quantity": 30.0,
+          "quantity_max": 30.0,
+          "quantity_min": 30.0,
+          "quantity_step": 30.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ris",
+          "component": "c3",
+          "form": "dry",
+          "name": "ris",
+          "product_requirements": [
+            "white_rice"
+          ],
+          "quantity": 300.0,
+          "quantity_max": 350.0,
+          "quantity_min": 250.0,
+          "quantity_step": 50.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Koka riset enligt förpackningen.",
+        "Mixa fisken med currypasta, ägg, fisksås och koriander till en seg smet. Vänd ner tunt skivade haricots verts.",
+        "Forma små platta kakor och stek dem i olja 2–3 minuter per sida tills de är minst 63 °C.",
+        "Tärna gurka och skiva schalottenlök. Blanda med vinäger, socker och en nypa salt och toppa med krossade jordnötter.",
+        "Servera fiskkakorna med relish och ris."
+      ],
+      "name": "Tod mun pla – thailändska fiskkakor med gurkrelish och ris",
+      "preparation": {
+        "family": "fiskkakor",
+        "input_forms": {
+          "fisk": "raw_edible",
+          "fisksås": "as_sold",
+          "gurka": "raw_edible",
+          "haricots verts": "as_sold",
+          "jordnötter": "as_sold",
+          "koriander": "raw_edible",
+          "rapsolja": "as_sold",
+          "ris": "dry",
+          "risvinäger": "as_sold",
+          "röd currypasta": "as_sold",
+          "schalottenlök": "raw_edible",
+          "strösocker": "dry",
+          "ägg": "raw_edible"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "1aa1e89c1ba28396c0ab314af7fce1356bec83989fb73c0e4b243f852c54de5d",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 15,
+        "base_id": "smako-thai-khao-tom-pla",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "fisk|raw_edible",
+                "name": "Vit fiskfilé, t.ex. sej eller torsk",
+                "note": "",
+                "quantity": 600.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ris|dry",
+                "name": "Jasminris",
+                "note": "",
+                "quantity": 200.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ingefära|raw_edible",
+                "name": "Ingefära",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "grönsaksfond|as_sold",
+                "name": "Grönsaksfond",
+                "note": "",
+                "quantity": 40.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "fisksås|as_sold",
+                "name": "Fisksås",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "sojasås|as_sold",
+                "name": "Sojasås",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "vitpeppar|dry",
+                "name": "Vitpeppar",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c1",
+            "name": "Soppa"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "Vitlök",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "Rapsolja",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salladslök|raw_edible",
+                "name": "Salladslök",
+                "note": "",
+                "quantity": 60.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "koriander|raw_edible",
+                "name": "Koriander",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "selleri|raw_edible",
+                "name": "Selleri",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "chiliflakes|dry",
+                "name": "Chiliflakes",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c2",
+            "name": "Topping"
+          }
+        ],
+        "content_sha256": "3208b687867dcbb828a37b2b79a217ba0fae8ba7ab73523c2ea2d1f12df05114",
+        "content_source": {
+          "active_minutes": 15,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "smako-varied-proteins-thai-20261126",
+          "priority": 1,
+          "proposal_id": "smako-thai-khao-tom-pla",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "c51ec0fca997f8773e69d8104d0410aa8983e245822914309f55efe7e3f1bb94",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "thai"
+        ],
+        "equipment": [
+          "Kastrull",
+          "Stekpanna"
+        ],
+        "estimated_minutes": 32,
+        "family": "khao tom",
+        "fish": true,
+        "flavor_profile": [
+          "ingefära",
+          "vitlök"
+        ],
+        "ingredient_count": 13,
+        "method": "pot",
+        "primary_ingredient": "fisk",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Författat och standardiserat med recept-författarverktyget. Inte provlagat. Köp, allergener och näring kvalificeras separat.",
+          "reviewed_at": "2026-11-26"
+        },
+        "scaling": "reviewed_ranges",
+        "side": "ris",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 22,
+            "id": "s1",
+            "ingredient_keys": [
+              "grönsaksfond|as_sold",
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "1600 ml",
+                1600.0
+              ]
+            ],
+            "text": "Koka riset med fonden och 1600 ml vatten under lock 20 minuter tills det är mjukt."
+          },
+          {
+            "depends_on": [],
+            "duration_minutes": 5,
+            "id": "s2",
+            "ingredient_keys": [
+              "rapsolja|as_sold",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Fräs finhackad vitlök gyllene i olja och lyft upp med oljan."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 7,
+            "id": "s3",
+            "ingredient_keys": [
+              "fisk|raw_edible",
+              "ingefära|raw_edible",
+              "selleri|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Lägg i fisken i bitar, tunt skivad selleri och ingefära i stavar och sjud 5–6 minuter tills fisken är minst 63 °C."
+          },
+          {
+            "depends_on": [
+              "s2",
+              "s3"
+            ],
+            "duration_minutes": 3,
+            "id": "s4",
+            "ingredient_keys": [
+              "chiliflakes|dry",
+              "fisksås|as_sold",
+              "koriander|raw_edible",
+              "salladslök|raw_edible",
+              "sojasås|as_sold",
+              "vitlök|raw_edible",
+              "vitpeppar|dry"
+            ],
+            "parallel_group": null,
+            "text": "Smaka av med fisksås, soja och vitpeppar. Toppa med vitlöksolja, salladslök, koriander och chili."
+          }
+        ],
+        "total_minutes": 32,
+        "variant_id": "base",
+        "vegetarian": false,
+        "version": "1.0.0",
+        "waiting_minutes": 17
+      },
+      "ingredients": [
+        {
+          "canonical_name": "fisk",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "fisk",
+          "quantity": 600.0,
+          "quantity_max": 900.0,
+          "quantity_min": 500.0,
+          "quantity_step": 50.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ris",
+          "component": "c1",
+          "form": "dry",
+          "name": "ris",
+          "product_requirements": [
+            "white_rice"
+          ],
+          "quantity": 200.0,
+          "quantity_max": 200.0,
+          "quantity_min": 200.0,
+          "quantity_step": 200.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ingefära",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "ingefära",
+          "quantity": 30.0,
+          "quantity_max": 45.0,
+          "quantity_min": 25.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "fisk|raw_edible",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "grönsaksfond",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "grönsaksfond",
+          "product_requirements": [
+            "pack:intake_all_round2_5a0df72f98a3"
+          ],
+          "quantity": 40.0,
+          "quantity_max": 60.0,
+          "quantity_min": 33.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "fisk|raw_edible",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "fisksås",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "fisksås",
+          "product_requirements": [
+            "pack:intake_all_expansion_7e1272f47d05"
+          ],
+          "quantity": 30.0,
+          "quantity_max": 45.0,
+          "quantity_min": 25.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "fisk|raw_edible",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "sojasås",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "sojasås",
+          "quantity": 15.0,
+          "quantity_max": 22.0,
+          "quantity_min": 12.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "fisk|raw_edible",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "vitpeppar",
+          "component": "c1",
+          "form": "dry",
+          "name": "vitpeppar",
+          "product_requirements": [
+            "pack:intake_all_expansion_6b11aebbe77d"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.5,
+          "quantity_min": 1.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "fisk|raw_edible",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "c2",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "c2",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 30.0,
+          "quantity_max": 30.0,
+          "quantity_min": 30.0,
+          "quantity_step": 30.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "salladslök",
+          "component": "c2",
+          "form": "raw_edible",
+          "name": "salladslök",
+          "product_requirements": [
+            "pack:intake_all_ed5c6da604b5"
+          ],
+          "quantity": 60.0,
+          "quantity_max": 60.0,
+          "quantity_min": 60.0,
+          "quantity_step": 60.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "koriander",
+          "component": "c2",
+          "form": "raw_edible",
+          "name": "koriander",
+          "product_requirements": [
+            "pack:intake_all_9b2370e0e926"
+          ],
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "selleri",
+          "component": "c2",
+          "form": "raw_edible",
+          "name": "selleri",
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "chiliflakes",
+          "component": "c2",
+          "form": "dry",
+          "name": "chiliflakes",
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Koka riset med fonden och 1600 ml vatten under lock 20 minuter tills det är mjukt.",
+        "Fräs finhackad vitlök gyllene i olja och lyft upp med oljan.",
+        "Lägg i fisken i bitar, tunt skivad selleri och ingefära i stavar och sjud 5–6 minuter tills fisken är minst 63 °C.",
+        "Smaka av med fisksås, soja och vitpeppar. Toppa med vitlöksolja, salladslök, koriander och chili."
+      ],
+      "name": "Khao tom pla – risgröt-soppa med fisk, ingefära och vitlöksolja",
+      "preparation": {
+        "family": "khao tom",
+        "input_forms": {
+          "chiliflakes": "dry",
+          "fisk": "raw_edible",
+          "fisksås": "as_sold",
+          "grönsaksfond": "as_sold",
+          "ingefära": "raw_edible",
+          "koriander": "raw_edible",
+          "rapsolja": "as_sold",
+          "ris": "dry",
+          "salladslök": "raw_edible",
+          "selleri": "raw_edible",
+          "sojasås": "as_sold",
+          "vitlök": "raw_edible",
+          "vitpeppar": "dry"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "3208b687867dcbb828a37b2b79a217ba0fae8ba7ab73523c2ea2d1f12df05114",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 16,
+        "base_id": "smako-thai-goong-kratiem-prik-thai",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "råa skalade vannameiräkor|as_sold",
+                "name": "Råa skalade vannameiräkor",
+                "note": "",
+                "quantity": 500.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "Vitlök",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "Svartpeppar",
+                "note": "",
+                "quantity": 3.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ostronsås|as_sold",
+                "name": "Ostronsås",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "fisksås|as_sold",
+                "name": "Fisksås",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "Strösocker",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "koriander|raw_edible",
+                "name": "Koriander",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "Rapsolja",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "c1",
+            "name": "Räkor"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ris|dry",
+                "name": "Jasminris",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gurka|raw_edible",
+                "name": "Gurka",
+                "note": "",
+                "quantity": 250.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "tomat|raw_edible",
+                "name": "Tomat",
+                "note": "",
+                "quantity": 200.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "limejuice|as_sold",
+                "name": "Limejuice",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "chiliflakes|dry",
+                "name": "Chiliflakes",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c2",
+            "name": "Ris och sallad"
+          }
+        ],
+        "content_sha256": "603dbf66c0695a8bfadd40de15467351716b9eb7bf339c5dd55db30a02c4c9fb",
+        "content_source": {
+          "active_minutes": 16,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "smako-varied-proteins-thai-20261126",
+          "priority": 1,
+          "proposal_id": "smako-thai-goong-kratiem-prik-thai",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "c51ec0fca997f8773e69d8104d0410aa8983e245822914309f55efe7e3f1bb94",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "thai"
+        ],
+        "equipment": [
+          "Stekpanna",
+          "Kastrull"
+        ],
+        "estimated_minutes": 20,
+        "family": "goong kratiem",
+        "fish": true,
+        "flavor_profile": [
+          "vitlök",
+          "peppar"
+        ],
+        "ingredient_count": 12,
+        "method": "pan",
+        "primary_ingredient": "råa skalade vannameiräkor",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Författat och standardiserat med recept-författarverktyget. Inte provlagat. Köp, allergener och näring kvalificeras separat.",
+          "reviewed_at": "2026-11-26"
+        },
+        "scaling": "reviewed_ranges",
+        "side": "ris",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 18,
+            "id": "s1",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Koka riset enligt förpackningen."
+          },
+          {
+            "depends_on": [],
+            "duration_minutes": 4,
+            "id": "s2",
+            "ingredient_keys": [
+              "fisksås|as_sold",
+              "ostronsås|as_sold",
+              "råa skalade vannameiräkor|as_sold",
+              "strösocker|dry",
+              "svartpeppar|dry"
+            ],
+            "parallel_group": null,
+            "text": "Vänd räkorna med ostronsås, fisksås, socker och peppar."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 5,
+            "id": "s3",
+            "ingredient_keys": [
+              "rapsolja|as_sold",
+              "råa skalade vannameiräkor|as_sold",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Fräs finhackad vitlök gyllene i olja, lägg i räkorna och stek 2–3 minuter tills de är rosa och genomkokta."
+          },
+          {
+            "depends_on": [],
+            "duration_minutes": 5,
+            "id": "s4",
+            "ingredient_keys": [
+              "chiliflakes|dry",
+              "gurka|raw_edible",
+              "limejuice|as_sold",
+              "tomat|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Blanda gurka och tomat med lime och chili."
+          },
+          {
+            "depends_on": [
+              "s1",
+              "s3",
+              "s4"
+            ],
+            "duration_minutes": 2,
+            "id": "s5",
+            "ingredient_keys": [
+              "gurka|raw_edible",
+              "koriander|raw_edible",
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Toppa räkorna med koriander och servera med ris och sallad."
+          }
+        ],
+        "total_minutes": 20,
+        "variant_id": "base",
+        "vegetarian": false,
+        "version": "1.0.0",
+        "waiting_minutes": 4
+      },
+      "ingredients": [
+        {
+          "canonical_name": "råa skalade vannameiräkor",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "råa skalade vannameiräkor",
+          "product_requirements": [
+            "pack:intake_all_round2_599059ef473b"
+          ],
+          "quantity": 500.0,
+          "quantity_max": 750.0,
+          "quantity_min": 400.0,
+          "quantity_step": 50.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 30.0,
+          "quantity_max": 45.0,
+          "quantity_min": 24.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "råa skalade vannameiräkor|as_sold",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "c1",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 3.0,
+          "quantity_max": 4.5,
+          "quantity_min": 2.5,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "råa skalade vannameiräkor|as_sold",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ostronsås",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "ostronsås",
+          "product_requirements": [
+            "pack:intake_all_expansion_e6f53ceb3e2c"
+          ],
+          "quantity": 20.0,
+          "quantity_max": 30.0,
+          "quantity_min": 16.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "råa skalade vannameiräkor|as_sold",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "fisksås",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "fisksås",
+          "product_requirements": [
+            "pack:intake_all_expansion_7e1272f47d05"
+          ],
+          "quantity": 15.0,
+          "quantity_max": 22.0,
+          "quantity_min": 12.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "råa skalade vannameiräkor|as_sold",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "strösocker",
+          "component": "c1",
+          "form": "dry",
+          "name": "strösocker",
+          "product_requirements": [
+            "pack:sugar"
+          ],
+          "quantity": 5.0,
+          "quantity_max": 7.5,
+          "quantity_min": 4.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "råa skalade vannameiräkor|as_sold",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "koriander",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "koriander",
+          "product_requirements": [
+            "pack:intake_all_9b2370e0e926"
+          ],
+          "quantity": 15.0,
+          "quantity_max": 22.0,
+          "quantity_min": 12.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "råa skalade vannameiräkor|as_sold",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 30.0,
+          "quantity_max": 45.0,
+          "quantity_min": 24.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "cooking",
+          "scales_with": "råa skalade vannameiräkor|as_sold",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "ris",
+          "component": "c2",
+          "form": "dry",
+          "name": "ris",
+          "product_requirements": [
+            "white_rice"
+          ],
+          "quantity": 300.0,
+          "quantity_max": 350.0,
+          "quantity_min": 250.0,
+          "quantity_step": 50.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gurka",
+          "component": "c2",
+          "form": "raw_edible",
+          "name": "gurka",
+          "quantity": 250.0,
+          "quantity_max": 250.0,
+          "quantity_min": 250.0,
+          "quantity_step": 250.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "tomat",
+          "component": "c2",
+          "form": "raw_edible",
+          "name": "tomat",
+          "quantity": 200.0,
+          "quantity_max": 200.0,
+          "quantity_min": 200.0,
+          "quantity_step": 200.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "limejuice",
+          "component": "c2",
+          "form": "as_sold",
+          "name": "limejuice",
+          "product_requirements": [
+            "pure_juice"
+          ],
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "chiliflakes",
+          "component": "c2",
+          "form": "dry",
+          "name": "chiliflakes",
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Koka riset enligt förpackningen.",
+        "Vänd räkorna med ostronsås, fisksås, socker och peppar.",
+        "Fräs finhackad vitlök gyllene i olja, lägg i räkorna och stek 2–3 minuter tills de är rosa och genomkokta.",
+        "Blanda gurka och tomat med lime och chili.",
+        "Toppa räkorna med koriander och servera med ris och sallad."
+      ],
+      "name": "Goong kratiem – vitlöksräkor med peppar, jasminris och gurksallad",
+      "preparation": {
+        "family": "goong kratiem",
+        "input_forms": {
+          "chiliflakes": "dry",
+          "fisksås": "as_sold",
+          "gurka": "raw_edible",
+          "koriander": "raw_edible",
+          "limejuice": "as_sold",
+          "ostronsås": "as_sold",
+          "rapsolja": "as_sold",
+          "ris": "dry",
+          "råa skalade vannameiräkor": "as_sold",
+          "strösocker": "dry",
+          "svartpeppar": "dry",
+          "tomat": "raw_edible",
+          "vitlök": "raw_edible"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "603dbf66c0695a8bfadd40de15467351716b9eb7bf339c5dd55db30a02c4c9fb",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 24,
+        "base_id": "smako-thai-kaeng-som-pla",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "fisk|raw_edible",
+                "name": "Vit fiskfilé, t.ex. sej eller torsk",
+                "note": "",
+                "quantity": 600.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "röd currypasta|as_sold",
+                "name": "Röd currypasta",
+                "note": "",
+                "quantity": 35.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "schalottenlök|raw_edible",
+                "name": "Schalottenlök",
+                "note": "",
+                "quantity": 80.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitkål|raw_edible",
+                "name": "Vitkål",
+                "note": "",
+                "quantity": 250.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "haricots verts|as_sold",
+                "name": "Haricots verts",
+                "note": "",
+                "quantity": 150.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "morot|raw_edible",
+                "name": "Morot",
+                "note": "",
+                "quantity": 150.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "fisksås|as_sold",
+                "name": "Fisksås",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "limejuice|as_sold",
+                "name": "Limejuice",
+                "note": "",
+                "quantity": 50.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "Strösocker",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c1",
+            "name": "Curry"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ris|dry",
+                "name": "Jasminris",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "koriander|raw_edible",
+                "name": "Koriander",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c2",
+            "name": "Ris"
+          }
+        ],
+        "content_sha256": "c220b376914d064eebed4f3aba8068da65b5412b361864d1fe5771a1dca8e424",
+        "content_source": {
+          "active_minutes": 24,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "smako-varied-proteins-thai-20261126",
+          "priority": 1,
+          "proposal_id": "smako-thai-kaeng-som-pla",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "c51ec0fca997f8773e69d8104d0410aa8983e245822914309f55efe7e3f1bb94",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "thai"
+        ],
+        "equipment": [
+          "Kastrull",
+          "Mortel"
+        ],
+        "estimated_minutes": 24,
+        "family": "kaeng som",
+        "fish": true,
+        "flavor_profile": [
+          "lime",
+          "chili"
+        ],
+        "ingredient_count": 11,
+        "method": "pot",
+        "primary_ingredient": "fisk",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Författat och standardiserat med recept-författarverktyget. Inte provlagat. Köp, allergener och näring kvalificeras separat.",
+          "reviewed_at": "2026-11-26"
+        },
+        "scaling": "reviewed_ranges",
+        "side": "ris",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 18,
+            "id": "s1",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Koka riset enligt förpackningen."
+          },
+          {
+            "depends_on": [],
+            "duration_minutes": 6,
+            "id": "s2",
+            "ingredient_keys": [
+              "fisk|raw_edible",
+              "röd currypasta|as_sold",
+              "schalottenlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Mortla en liten bit av fisken med currypastan och schalottenlöken till en pasta."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 10,
+            "id": "s3",
+            "ingredient_keys": [
+              "haricots verts|as_sold",
+              "morot|raw_edible",
+              "vitkål|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "1000 ml",
+                1000.0
+              ]
+            ],
+            "text": "Koka upp 1000 ml vatten, rör ner pastan och sjud 3 minuter. Tillsätt kål, morot och haricots verts och sjud 6 minuter."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 6,
+            "id": "s4",
+            "ingredient_keys": [
+              "fisksås|as_sold",
+              "fisk|raw_edible",
+              "limejuice|as_sold",
+              "strösocker|dry"
+            ],
+            "parallel_group": null,
+            "text": "Lägg i resten av fisken i bitar och sjud 5 minuter tills den är minst 63 °C. Smaka av med fisksås, lime och socker."
+          },
+          {
+            "depends_on": [
+              "s1",
+              "s4"
+            ],
+            "duration_minutes": 2,
+            "id": "s5",
+            "ingredient_keys": [
+              "koriander|raw_edible",
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Servera med ris och koriander."
+          }
+        ],
+        "total_minutes": 24,
+        "variant_id": "base",
+        "vegetarian": false,
+        "version": "1.0.0"
+      },
+      "ingredients": [
+        {
+          "canonical_name": "fisk",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "fisk",
+          "quantity": 600.0,
+          "quantity_max": 900.0,
+          "quantity_min": 500.0,
+          "quantity_step": 50.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "röd currypasta",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "röd currypasta",
+          "product_requirements": [
+            "pack:intake_all_fdde79afdb70"
+          ],
+          "quantity": 35.0,
+          "quantity_max": 52.0,
+          "quantity_min": 29.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "fisk|raw_edible",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "schalottenlök",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "schalottenlök",
+          "product_requirements": [
+            "pack:intake_all_expansion_9b814cbd8647"
+          ],
+          "quantity": 80.0,
+          "quantity_max": 80.0,
+          "quantity_min": 80.0,
+          "quantity_step": 80.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitkål",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "vitkål",
+          "quantity": 250.0,
+          "quantity_max": 250.0,
+          "quantity_min": 250.0,
+          "quantity_step": 250.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "haricots verts",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "haricots verts",
+          "product_requirements": [
+            "frozen",
+            "plain"
+          ],
+          "quantity": 150.0,
+          "quantity_max": 150.0,
+          "quantity_min": 150.0,
+          "quantity_step": 150.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "morot",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "morot",
+          "quantity": 150.0,
+          "quantity_max": 150.0,
+          "quantity_min": 150.0,
+          "quantity_step": 150.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "fisksås",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "fisksås",
+          "product_requirements": [
+            "pack:intake_all_expansion_7e1272f47d05"
+          ],
+          "quantity": 30.0,
+          "quantity_max": 45.0,
+          "quantity_min": 25.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "fisk|raw_edible",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "limejuice",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "limejuice",
+          "product_requirements": [
+            "pure_juice"
+          ],
+          "quantity": 50.0,
+          "quantity_max": 75.0,
+          "quantity_min": 42.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "fisk|raw_edible",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "strösocker",
+          "component": "c1",
+          "form": "dry",
+          "name": "strösocker",
+          "product_requirements": [
+            "pack:sugar"
+          ],
+          "quantity": 15.0,
+          "quantity_max": 22.0,
+          "quantity_min": 12.0,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "scales_with": "fisk|raw_edible",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ris",
+          "component": "c2",
+          "form": "dry",
+          "name": "ris",
+          "product_requirements": [
+            "white_rice"
+          ],
+          "quantity": 300.0,
+          "quantity_max": 350.0,
+          "quantity_min": 250.0,
+          "quantity_step": 50.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "koriander",
+          "component": "c2",
+          "form": "raw_edible",
+          "name": "koriander",
+          "product_requirements": [
+            "pack:intake_all_9b2370e0e926"
+          ],
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 10.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Koka riset enligt förpackningen.",
+        "Mortla en liten bit av fisken med currypastan och schalottenlöken till en pasta.",
+        "Koka upp 1000 ml vatten, rör ner pastan och sjud 3 minuter. Tillsätt kål, morot och haricots verts och sjud 6 minuter.",
+        "Lägg i resten av fisken i bitar och sjud 5 minuter tills den är minst 63 °C. Smaka av med fisksås, lime och socker.",
+        "Servera med ris och koriander."
+      ],
+      "name": "Kaeng som pla – syrlig fisk- och grönsakscurry med ris",
+      "preparation": {
+        "family": "kaeng som",
+        "input_forms": {
+          "fisk": "raw_edible",
+          "fisksås": "as_sold",
+          "haricots verts": "as_sold",
+          "koriander": "raw_edible",
+          "limejuice": "as_sold",
+          "morot": "raw_edible",
+          "ris": "dry",
+          "röd currypasta": "as_sold",
+          "schalottenlök": "raw_edible",
+          "strösocker": "dry",
+          "vitkål": "raw_edible"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "c220b376914d064eebed4f3aba8068da65b5412b361864d1fe5771a1dca8e424",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 4
+    }
+  ]
+}
