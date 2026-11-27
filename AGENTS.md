@@ -11,6 +11,11 @@
   variants and strict culinary deduplication. Prioritize real uncovered food
   ingredients using coverage evidence and supported demand signals. Product-row
   counts are not popularity; form/fact blockers are not automatically recipe gaps.
+- Owner decision 2026-11-27: every dish has a general popularity score 1–5 in
+  `backend/app/data/recipe_popularity.json` (see `recipe_popularity.py`). Give
+  each new dish a score and a short reason when it is written; compare it with
+  dishes of the same meal type and diet. `test_recipe_popularity.py` fails
+  without one.
 
 ## Product/recipe overview in CI
 
