@@ -504,6 +504,7 @@ class PersonalPlanner:
         self.ecological_results = OrderedDict()
         self.variant_search_evidence = OrderedDict()
         self._avoid, self._avoided_count, self._variation_kr = frozenset(), 0, 0.0
+        self._popularity_floor, self._popularity_dropped, self._popularity_unlocked = 1, 0, set()
         self.normalized_recipe_rows = OrderedDict()
         self.qualified_nutrition_candidates = OrderedDict()
         self.slot_nutrition_cache = OrderedDict()
@@ -4555,7 +4556,65 @@ class PersonalPlanner:
                     )
                     break
 
+    def _requested_popularity_floor(self):
+        """The member's choice, else the admin default (planning_rules)."""
+        floor = getattr(self.spec, "popularity_floor", None)
+        return int(self.rules.popularity_floor if floor is None else floor)
+
+    def _popular_choices(self, meal_type, choices):
+        """Owner decisions 2026-11-27: dishes at or above the cut-off. A dish the
+        member liked always passes. A typed like that no passing dish names
+        unlocks the dishes that name it, so "lever" still brings a liver dish."""
+        from app.services.recipe_popularity import popularity
+
+        floor, liked = self._popularity_floor, frozenset(self.spec.liked_recipes)
+
+        def passes(recipe):
+            design = recipe.design
+            if design is None or design.base_id in liked:
+                return True
+            score = popularity(design.base_id)
+            return score is None or score >= floor
+
+        meal = self.meals.get(meal_type)
+        likes = dict.fromkeys([*self.spec.profile.likes, *(meal.profile.likes if meal else [])])
+        flags = [passes(r) for r in choices]
+        unlock = [t for t in likes
+                  if not any(ok and recipe_names(t, r) for ok, r in zip(flags, choices, strict=True))
+                  and any(recipe_names(t, r) for r in choices)]
+        self._popularity_unlocked.update(unlock)
+        return [r for ok, r in zip(flags, choices, strict=True)
+                if ok or any(recipe_names(t, r) for t in unlock)]
+
     def _create_avoiding(self, *, replace_slot=None, balanced_reference=None):
+        """Owner decision 2026-11-27: start at the popularity cut-off and lower it
+        one step at a time when no week fits; a step that removed no dish is
+        not retried, so other failures cost no extra searches."""
+        requested = self._requested_popularity_floor() if self.complete else 1
+        floor = requested
+        while True:
+            self._popularity_floor, self._popularity_dropped, self._popularity_unlocked = floor, 0, set()
+            try:
+                result = self._create_avoiding_recent(replace_slot=replace_slot,
+                                                      balanced_reference=balanced_reference)
+            except PlanningDeadlineExceeded:
+                raise
+            except (ValueError, IncompleteBasketError):
+                if floor <= 1 or not self._popularity_dropped or replace_slot is not None:
+                    raise
+                floor -= 1
+                continue
+            if self.complete and requested > 1:
+                result.personal.checks["popularity"] = {
+                    "requested_floor": requested, "floor": floor, "lowered": floor < requested,
+                    "removed_choices": self._popularity_dropped,
+                    "unlocked_likes": sorted(self._popularity_unlocked),
+                    "description": "Smako väljer bland rätter som de flesta gillar och tar sedan de billigaste. "
+                                   "Det du skrivit under Gillar extra tas med även om rätten är mindre vanlig.",
+                }
+            return result
+
+    def _create_avoiding_recent(self, *, replace_slot=None, balanced_reference=None):
         """Owner decision 2026-11-21: avoid recent plans' dinners; when no week fits,
         allow the oldest plans' dinners again first (the list is newest first)."""
         avoid = list(self.spec.avoid_recipes)
@@ -4653,6 +4712,14 @@ class PersonalPlanner:
                     if fresh or slot.id != replace_slot:
                         self._avoided_count += len(choices) - len(fresh)
                         choices = fresh
+                # Owner decision 2026-11-27: only dishes at or above the popularity
+                # cut-off (recipe_popularity.py); "Byt rätt" allows the rest only
+                # when nothing else fits.
+                if self.complete and self._popularity_floor > 1:
+                    popular = self._popular_choices(slot.meal_type, choices)
+                    if popular or slot.id != replace_slot:
+                        self._popularity_dropped += len(choices) - len(popular)
+                        choices = popular
                 if slot.id == replace_slot and not choices:
                     raise PolicyConflict(
                         "Det finns ingen annan rätt som passar dina val. Din plan är oförändrad. "
