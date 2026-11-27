@@ -1,3 +1,13 @@
+# 2026-11-27 kväll: Populära rätter först och receptsök
+
+Releasegren `release/popularity-20261127` (`fded9fa`). App
+**app-fded9fa7277b-9c2634f2**, bas `4bb19dc36a86`. Planeraren väljer bland
+rätter med minst betyg 3 av 5 och tar sedan de billigaste; "Sök recept" lägger
+ett recept i matplanen eller dess ingredienser i inköpslistan.
+[Aktiveringsjournal](releases/popularity-search-20261127/ACTIVATED.md).
+
+---
+
 # 2026-11-26: grönsaksfond, kycklingveckor och 90 nya middagar
 
 Main `def6e2b`, releasegren `release/varied-proteins-20261126`. App
