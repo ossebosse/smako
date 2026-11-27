@@ -133,6 +133,15 @@ class Fake:
             if self.job:
                 return 202, {"status": "pending", "status_url": "/api/plan-jobs/j1", **self.job[0]}
             return 201, self.plan(self.job_request)
+        if path == "recipe-search":
+            return 200, {"results": [{"recipe_id": "smako-italian-lasagne:1.0.0:standard", "base_id": "smako-italian-lasagne", "name": "Lasagne al forno",
+                                      "servings": int(query.get("servings", 2)), "meal_type": "dinner", "cuisines": ["italian"], "vegetarian": False, "fish": False,
+                                      "popularity": 5, "active_minutes": 40, "total_minutes": 90,
+                                      "ingredients": [{"name": "blandfärs", "quantity": 400, "unit": "g"}, {"name": "salt", "quantity": 5, "unit": "g"}]}]}
+        if path.startswith("recipe-library/"):
+            recipe = {"name": "Lasagne al forno", "servings": int(query.get("servings", 2)), "instructions": ["Gör så."],
+                      "ingredients": [{"name": "blandfärs", "quantity": 400, "unit": "g"}, {"name": "salt", "quantity": 5, "unit": "g"}]}
+            return 200, {"recipe": recipe, "shopping_rows": [{"query": "blandfärs", "quantity": 400, "unit": "g"}]}
         if path == "personal/plans/plan-1/change":
             if body["action"] == "purchase":
                 if "s1|p-lok|gul lök" not in body.get("measured_purchase_quantities", {}):
@@ -724,3 +733,38 @@ def test_personal_opens_alternative_a_unless_admin_chose_classic():
         assert page.url == f"{base}/personal.html"
         browser.close()
     server.shutdown()
+
+
+def test_a_found_recipe_goes_to_the_shopping_list_or_the_plan(ui):
+    """Owner request 2026-11-27: search recipes, add to the shopping list or the meal plan."""
+    name, page, fake, shot = ui
+    if name == "a":
+        page.goto(re.sub(r"#.*|$", "#lista", page.url, count=1))
+    else:
+        page.get_by_role("button", name=re.compile("Bara handla")).click()
+        page.get_by_label("Ditt postnummer").fill("22350")
+        page.get_by_role("button", name="Hitta butiker").click()
+        page.get_by_role("button", name="Nästa").click()
+    page.get_by_label("Sök recept").fill("lasagne")
+    page.get_by_role("button", name="Sök", exact=True).click()
+    expect(page.get_by_role("heading", name="Lasagne al forno")).to_be_visible()
+    expect(page.get_by_text("Skapa en matplan först")).to_be_visible()
+    page.get_by_role("button", name="Lägg i inköpslistan").click()
+    expect(page.get_by_text(re.compile("1 vara från Lasagne al forno ligger nu i inköpslistan"))).to_be_visible()
+    saved = [body for method, path, body in fake.calls if path == "personal/shopping-list"][-1]
+    assert [(i["query"], i["quantity"], i["unit"]) for i in saved["items"]] == [("blandfärs", 400, "g")]
+    shot("recipe-search-list")
+    if name == "b":
+        return  # B shows the same search on the recipe step; the plan path is covered in A.
+    plan_meat_dinners(name, page)
+    page.goto(re.sub(r"#.*", "#mat", page.url))
+    page.get_by_label("Sök recept").fill("lasagne")
+    page.get_by_role("button", name="Sök", exact=True).click()
+    page.get_by_label("Var i planen").select_option(label="I stället för dag 1: Pannbiff med lök och potatis")
+    page.get_by_role("button", name="Lägg i matplanen").click()
+    for _ in range(50):
+        if any(path.endswith("/change") for _, path, _ in fake.calls):
+            break
+        page.wait_for_timeout(100)
+    edit = [body for method, path, body in fake.calls if path.endswith("/change")][-1]
+    assert edit["action"] == "edit" and edit["slot_id"] == "dinner-1" and edit["recipe"]["name"] == "Lasagne al forno"

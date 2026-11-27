@@ -7,7 +7,7 @@ from dataclasses import replace
 from datetime import UTC, datetime
 from decimal import Decimal
 from time import monotonic
-from typing import Annotated
+from typing import Annotated, Literal
 
 from app.config import Settings, get_settings
 from app.errors import IncompleteBasketError, PriceProviderError
@@ -1111,6 +1111,24 @@ async def recipe_library_metadata():
     settings = get_settings()
     return {"enabled": settings.complete_recipes_enabled,
             "variation_intent_enabled":settings.library_search_policy == 'smako-current-library-v2', **library_summary()}
+
+
+@router.get("/recipe-search")
+async def recipe_search(q: Annotated[str, Query(min_length=1, max_length=80)],
+                        servings: Annotated[int, Query(ge=1, le=12)] = 2,
+                        meal_type: Literal["dinner", "breakfast", "snack"] | None = None):
+    """Owner request 2026-11-27: find a recipe to put in the plan or the shopping list."""
+    from app.services.recipe_search import search
+    return {"results": search(q, servings, meal_type)}
+
+
+@router.get("/recipe-library/{recipe_id}")
+async def recipe_from_library(recipe_id: str, servings: Annotated[int, Query(ge=1, le=12)] = 2):
+    from app.services.recipe_search import recipe_by_id, shopping_rows
+    recipe = recipe_by_id(recipe_id, servings)
+    if recipe is None:
+        raise HTTPException(404, "Receptet finns inte för det antalet portioner. Välj ett annat antal.")
+    return {"recipe": recipe.model_dump(mode="json"), "shopping_rows": shopping_rows(recipe)}
 
 
 @router.get("/price-contexts")

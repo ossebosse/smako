@@ -40,20 +40,20 @@
         if (!S.location) nodes.push(el("p", "Ange postnummer högst upp först.", "hint"));
         return nodes;
       });
-      return [head, placePanel(), N.itemsEditor(), sticky(cta)];
+      return [head, placePanel(), N.itemsEditor(), N.recipeSearch(), sticky(cta)];
     },
     mat() {
       if (N.planHasRecipes() && !screens.mat.editing) {
         const head = el("div"); head.append(el("h1", "Din matplan"), live(el("p", null, "lead"), () => document.createTextNode(`${N.totalText()} för recepten och dina egna varor.`)));
         const links = el("div", null, "links"); links.append(button("Ändra val och skapa en ny plan", () => { screens.mat.editing = true; render(); }, "btn small"));
-        return [head, live(el("div"), () => N.usedView()), links, live(el("div"), () => N.recipesView()), sticky(button("Till handlingslistan", () => go("#handla"), "btn primary cta"))];
+        return [head, live(el("div"), () => N.usedView()), links, live(el("div"), () => N.recipesView()), N.recipeSearch(), sticky(button("Till handlingslistan", () => go("#handla"), "btn primary cta"))];
       }
       const head = el("div"); head.append(el("h1", "Planera veckans mat"), el("p", "Välj hur mycket och vad ni äter. Smako föreslår recept som blir billiga att handla till just nu.", "lead"));
       const meals = live(el("div"), () => N.settings("meals")), basic = live(el("section", null, "panel"), () => N.settings("basic"));
       const more = el("details", null, "panel more"); more.append(el("summary", "Fler val: ingredienser, allergier, butiker, matkök och ekologiskt"), live(el("div"), () => N.settings("advanced")));
       const own = live(el("section", null, "panel"), () => [el("h2", "Egna varor"), el("p", S.items.length ? `${S.items.length} egna varor räknas ihop med recepten.` : "Behöver du något mer än maten? Lägg till det i inköpslistan, så räknas allt ihop.", "meta"), link(S.items.length ? "Ändra egna varor" : "Lägg till egna varor", "#lista")]);
       const cta = live(el("div"), () => [button("Skapa matplan", async () => { if (await N.createPlan()) { screens.mat.editing = false; go("#mat"); render(); } }, "btn primary cta", { disabled: !S.location }), S.location ? null : el("p", "Ange postnummer först.", "hint")]);
-      const nodes = [head, placePanel(), meals, basic, more, own, sticky(cta)];
+      const nodes = [head, placePanel(), meals, basic, more, own, N.recipeSearch(), sticky(cta)];
       if (N.planHasRecipes()) nodes.splice(1, 0, button("‹ Tillbaka till recepten", () => { screens.mat.editing = false; render(); }, "btn quiet small"));
       return nodes;
     },
