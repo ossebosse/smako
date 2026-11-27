@@ -112,13 +112,13 @@ def test_no_fitting_week_allows_the_oldest_plans_dinners_again_first(monkeypatch
     planner = SimpleNamespace(spec=SimpleNamespace(avoid_recipes=["new1", "new2", "old1", "old2"], variation_seed=None),
                               complete=True, _variation_kr=0.0)
     planner._create = lambda **kw: create(planner, **kw)
-    result = PersonalPlanner._create_avoiding(planner)
+    result = PersonalPlanner._create_avoiding_recent(planner)
     assert tried == [["new1", "new2", "old1", "old2"], ["new1", "new2"], []]
     assert result.personal.checks["plan_variation"]["avoided_dinners"] == 0
     tried.clear()
     planner._create = lambda **kw: create(planner, **kw)
     with pytest.raises(ValueError):
-        PersonalPlanner._create_avoiding(planner, replace_slot="d1")  # "Byt rätt" relaxes per slot instead.
+        PersonalPlanner._create_avoiding_recent(planner, replace_slot="d1")  # "Byt rätt" relaxes per slot instead.
     assert tried == [["new1", "new2", "old1", "old2"]]
 
 

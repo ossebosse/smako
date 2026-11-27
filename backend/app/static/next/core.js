@@ -24,7 +24,7 @@
   const KEY = "smako.next.v1";
   const saved = (() => { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch (_) { return {}; } })();
   const persist = () => { try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (_) { /* private mode: choices last for this visit */ } };
-  const DEFAULTS = { diet: "mixed", cooking: "free", ingredients: "any", avoid: [], allergies: [], likes: [], cuisines: [], variety: "low", maxStores: 2, organic: 0, usePantry: true, surplus: "minimize", radius: 3, staples: ["salt", "svartpeppar", "rapsolja"] };
+  const DEFAULTS = { diet: "mixed", cooking: "free", ingredients: "any", avoid: [], allergies: [], likes: [], cuisines: [], variety: "low", maxStores: 2, organic: 0, usePantry: true, surplus: "minimize", popularity: "popular", radius: 3, staples: ["salt", "svartpeppar", "rapsolja"] };
   saved.settings = { ...DEFAULTS, ...(saved.settings || {}) };
   // Each meal type has its own count, portions, distribution and limits, as in /personal.
   // Choices saved before that (one count per meal type, limits for dinners) carry over.
@@ -220,8 +220,12 @@
     return { ...storeFields(), membership_price_policy: "all_advertised", purchase_planning_mode: "estimated", memberships: [], diversity_mode: "balanced", varied_budget_percent: 25, strategy: "optimized",
       recipes: meals.find(m => m.meal_type === "dinner")?.count || 0, servings: meals.find(m => m.meal_type === "dinner")?.servings || 1,
       personal: { profile: { likes: s.likes, dislikes: [], exclusions: s.avoid, allergies: s.allergies }, meals, extras: S.items, pantry_revision: S.state.revision, use_pantry: s.usePantry, staples_at_home: (s.staples || []).filter(v => STAPLE_NAMES.has(v)),
-        allow_nutrition_estimates: true, organic_percent: Number(s.organic) || 0, organic_animals: false, surplus_mode: s.surplus } };
+        allow_nutrition_estimates: true, organic_percent: Number(s.organic) || 0, organic_animals: false, surplus_mode: s.surplus,
+        popularity_floor: POPULARITY_FLOORS[s.popularity] ?? 3 } };
   }
+  // Owner decision 2026-11-27: Smako first keeps dishes most people like (popularity 1–5), then picks the cheapest.
+  const POPULARITY = [["popular", "Populära rätter"], ["some", "Lite äventyrligt"], ["all", "Allt, billigast först"]];
+  const POPULARITY_FLOORS = { popular: 3, some: 2, all: 1 };
   const COOKING = { quick: { max_active_minutes: 30, max_ingredients: 8 }, everyday: { max_active_minutes: 45, max_ingredients: 12 }, more: { min_ingredients: 13 }, free: {} };
   // Owner decision 2026-11-20: the number of ingredients can be chosen under "Fler val".
   // A choice there replaces the ingredient bounds of "Tid i köket"; its time limit stays.
@@ -354,8 +358,10 @@
   }
   function likeNotes() {
     const rows = (S.plan?.plan?.personal?.checks?.likes || []).filter(l => l.status !== "included");
-    return rows.map(l => el("p", l.status === "not_available" ? `Vi hittade ingen middag med ${l.term} som passar dina val.`
-      : `${capital(l.term)} fick inte plats bland middagarna med dina övriga val.`, "hint like-note"));
+    const lowered = S.plan?.plan?.personal?.checks?.popularity?.lowered
+      ? [el("p", "Det fanns för få populära rätter för dina val, så planen har även mindre vanliga rätter.", "hint like-note")] : [];
+    return [...lowered, ...rows.map(l => el("p", l.status === "not_available" ? `Vi hittade ingen middag med ${l.term} som passar dina val.`
+      : `${capital(l.term)} fick inte plats bland middagarna med dina övriga val.`, "hint like-note"))];
   }
   async function refreshState() { try { const mine = S.items; S.state = await api("/api/personal/state"); S.items = mine; } catch (_) { /* the next save reads it again */ } }
   async function run(title, work) {
@@ -652,7 +658,9 @@
       el("p", s.ingredients === "any" ? "Salt, peppar och vatten räknas inte. Tid i köket kan också begränsa antalet." : "Gäller i stället för antalet som Tid i köket väljer. Tidsgränsen gäller fortfarande.", "hint"),
       tags("Allergier", "allergies", "Annan allergi", ALLERGENS), tags("Ät inte", "avoid", "Till exempel koriander", ["fläsk", "svamp", "oliver"]), el("p", "Det du undviker tas bort ur recepten och ur varor som nämner det. Allergier kräver innehållsförteckning för allt utom färsk frukt och grönt, så de begränsar recepten mer.", "hint"), tags("Gillar extra", "likes", "Till exempel kyckling"),
       choice("Butiker att handla i", [[1, "1"], [2, "Högst 2"], [3, "Högst 3"], ["all", "Så många som lönar sig"]], s.maxStores, v => set("maxStores", v)),
-      choice("Omväxling", [["low", "Billigast först"], ["normal", "Blanda matkök", "Minst 3 middagar"]], s.variety, v => set("variety", v)));
+      choice("Omväxling", [["low", "Billigast först"], ["normal", "Blanda matkök", "Minst 3 middagar"]], s.variety, v => set("variety", v)),
+      choice("Vilka rätter?", POPULARITY, s.popularity, v => set("popularity", v)),
+      el("p", s.popularity === "all" ? "Smako tar de billigaste rätterna, även sådana som många väljer bort, till exempel lever." : "Smako väljer bland rätter som de flesta gillar och tar sedan de billigaste. Det du skrivit under Gillar extra kommer med ändå.", "hint"));
     const kitchens = el("fieldset", null, "choice"); kitchens.append(el("legend", "Matkök (inget valt betyder alla)"));
     const row = el("div", null, "chips");
     for (const [value, label] of CUISINES) row.append(button(label, () => set("cuisines", s.cuisines.includes(value) ? s.cuisines.filter(c => c !== value) : [...s.cuisines, value]), "chip", { "aria-pressed": String(s.cuisines.includes(value)) }));

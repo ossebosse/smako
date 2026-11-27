@@ -20,6 +20,7 @@
     ["scaled_step_kr", "Anpassad mängd kostar", "kr per steg", "När en måltid har näringsgränser kan Smako ta mer av huvudråvaran eller mindre tillbehör i recept med granskade intervall. Varje steg från receptets mängd kostar så här mycket, så den närmaste mängden vinner.", 0, 200],
   ];
   const VARIATION = [
+    ["popularity_floor", "Lägsta popularitet", "av 5", "Rätter under detta betyg (1 = polariserande, 5 = folkfavorit) föreslås bara när för få andra passar. Standard för den som inte valt själv. 1 stänger av.", 1, 5],
     ["variation_percent", "Slumpvariation", "% av en middags kostnad", "Hur mycket dyrare en vecka får bli för att nya planer ska skilja sig åt. 0 stänger av.", 0, 50],
     ["member_avoid_recent_plans", "Undvik rätter från senaste", "planer", "Standard för inloggade som inte valt själva.", 0, 10],
   ];

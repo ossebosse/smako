@@ -315,6 +315,10 @@ class PersonalPlanning(PrivateModel):
     # server from the member's ratings when a plan is created; omitted while empty.
     liked_recipes: list[str] = Field(default_factory=list, max_length=1000, exclude_if=lambda v: not v)
     disliked_recipes: list[str] = Field(default_factory=list, max_length=1000, exclude_if=lambda v: not v)
+    # Owner decision 2026-11-27 (recipe_popularity.py): only dishes with at least
+    # this general popularity (1–5) are proposed; 1 means every dish. Unset means
+    # the admin default (planning_rules). Omitted while unset.
+    popularity_floor: int | None = Field(default=None, ge=1, le=5, exclude_if=lambda v: v is None)
 
     @model_validator(mode="after")
     def unique(self):

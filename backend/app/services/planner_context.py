@@ -8,6 +8,7 @@ Universe/fact replacement invalidates the entire context (including negatives).
 """
 from __future__ import annotations
 
+import functools
 import hashlib
 import json
 import os
@@ -71,6 +72,13 @@ def fact_source_contract():
             "axfood_parser_sha256": hashlib.sha256(Path(axfood_detail_archive.__file__).read_bytes()).hexdigest()}
 
 
+@functools.lru_cache(maxsize=1)
+def popularity_digest():
+    from app.services.recipe_popularity import POPULARITY_PATH
+
+    return hashlib.sha256(POPULARITY_PATH.read_bytes()).hexdigest()
+
+
 def planner_context(planner):
     from app.services.meal_library_content import manifest_entries
     from app.services.meal_prepared_artifacts import method_signature
@@ -105,4 +113,7 @@ def planner_context(planner):
         "plan_id": planner.plan_id, "cooked_weights": planner.cooked_weights,
         "nutrition_search_limit": planner.nutrition_search_limit,
         "complete": planner.complete,
+        # Owner decision 2026-11-27: the popularity cut-off of this search step
+        # and the rated table change which dishes may be chosen.
+        "popularity": [getattr(planner, "_popularity_floor", 1), popularity_digest()],
     })
