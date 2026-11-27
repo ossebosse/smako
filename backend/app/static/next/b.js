@@ -48,12 +48,12 @@
     },
     varor() {
       const withMeals = saved.flow === "mat";
-      return { nodes: [head(withMeals ? "Något mer att handla?" : "Vad behöver du?", withMeals ? "Lägg till det som inte hör till recepten, till exempel kaffe eller mjölk. Hoppa över om du inte behöver något." : "Skriv varan som du brukar säga den. Vill du ha ett visst märke väljer du en bestämd vara."), N.itemsEditor()],
+      return { nodes: [head(withMeals ? "Något mer att handla?" : "Vad behöver du?", withMeals ? "Lägg till det som inte hör till recepten, till exempel kaffe eller mjölk. Hoppa över om du inte behöver något." : "Skriv varan som du brukar säga den. Vill du ha ett visst märke väljer du en bestämd vara."), N.itemsEditor(), N.recipeSearch()],
         ready: () => withMeals || S.items.length > 0, hint: "Lägg till minst en vara.", action: withMeals ? "Skapa matplan" : "Hitta billigaste butikerna", onNext: finish };
     },
     recept() {
       if (!N.planHasRecipes()) return screens.handla();
-      return { result: true, nodes: [head("Veckans recept", "Byt de rätter du inte vill ha. Inköpen räknas om varje gång."), live(el("div"), () => N.recipesView())], action: "Visa handlingslistan", onNext: () => go("handla") };
+      return { result: true, nodes: [head("Veckans recept", "Byt de rätter du inte vill ha. Inköpen räknas om varje gång."), live(el("div"), () => N.recipesView()), N.recipeSearch()], action: "Visa handlingslistan", onNext: () => go("handla") };
     },
     handla() {
       if (!S.plan) return screens.start();

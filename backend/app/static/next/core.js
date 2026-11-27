@@ -739,6 +739,61 @@
     if (actions) { const row = el("div", null, "recipe-actions"); row.append(button("Byt recept", () => replaceRecipe(slot.id), "btn"), button("Ta bort", () => removeRecipe(slot.id), "btn quiet")); card.append(row); }
     return card;
   }
+  // Owner request 2026-11-27: search Smako's recipes and put one in the plan or its ingredients in the shopping list.
+  const POPULAR_LABEL = { 5: "Folkfavorit", 4: "Populär" };
+  function planServings(type = "dinner") { return (S.plan?.request?.personal?.meals || []).find(m => m.meal_type === type)?.servings || meal(type)?.servings || 2; }
+  async function recipeToList(row, status) {
+    const servings = planServings(row.meal_type), data = await api(`/api/recipe-library/${encodeURIComponent(row.recipe_id)}?servings=${servings}`);
+    const staples = new Set(saved.settings.staples || []); let added = 0;
+    for (const r of data.shopping_rows) {
+      if (staples.has(r.query)) continue;
+      const same = S.items.find(i => i.kind === "generic" && i.query === r.query && i.unit === r.unit);
+      if (same) same.quantity = Math.round((same.quantity + r.quantity) * 100) / 100;
+      else S.items.push({ id: uuid(), kind: "generic", query: r.query, quantity: r.quantity, unit: r.unit, properties: [], confirmed: true, use_pantry: false, food: true });
+      added += 1;
+    }
+    await saveItems(); emit();
+    status.textContent = `${plural(added, "vara", "varor")} från ${row.name} ligger nu i inköpslistan. Räkna om listan för att se priset.`;
+  }
+  async function recipeToPlan(row, where) {
+    const servings = planServings(row.meal_type), data = await api(`/api/recipe-library/${encodeURIComponent(row.recipe_id)}?servings=${servings}`);
+    if (where === "new") return change("Lägger till receptet och räknar om inköpen", "add_recipe", { recipe: data.recipe });
+    return change("Byter recept och räknar om inköpen", "edit", { slot_id: where, recipe: data.recipe });
+  }
+  function recipeSearch() {
+    const box = el("section", null, "panel recipe-search"), form = el("form", null, "search-row"), results = el("div", null, "search-results"), status = el("p", null, "hint", { role: "status" });
+    const input = el("input", null, null, { type: "search", placeholder: "Sök recept, till exempel lasagne eller kyckling", "aria-label": "Sök recept", maxlength: "80" });
+    form.append(input, button("Sök", null, "btn", { type: "submit" }));
+    box.append(el("h2", "Sök recept"), el("p", "Lägg receptet i matplanen eller lägg dess ingredienser i inköpslistan.", "meta"), form, status, results);
+    const slots = () => [...(S.plan?.plan?.personal?.slots || [])].sort((a, b) => a.day - b.day);
+    function result(row) {
+      const card = el("article", null, "recipe search-hit");
+      card.append(el("h3", row.name), el("p", [POPULAR_LABEL[row.popularity], plural(row.servings, "portion", "portioner"), plural(row.ingredients.length, "ingrediens", "ingredienser"), row.active_minutes ? `${row.active_minutes} min` : null].filter(Boolean).join(" · "), "meta"));
+      const more = el("details", null, "recipe-more"), list = el("ul", null, "ingredients");
+      for (const i of row.ingredients) list.append(el("li", `${number(i.quantity)} ${i.unit} ${i.name}`));
+      more.append(el("summary", "Visa ingredienser"), list); card.append(more);
+      const actions = el("div", null, "recipe-actions"), done = el("p", null, "hint", { role: "status" });
+      if (S.plan?.plan?.personal) {
+        const select = el("select", null, null, { "aria-label": "Var i planen" });
+        if (row.meal_type === "dinner") select.append(el("option", "Som en ny middag", null, { value: "new" }));
+        for (const slot of slots().filter(s => s.meal_type === row.meal_type)) select.append(el("option", `I stället för dag ${slot.day}: ${slot.recipe?.name || "tom måltid"}`, null, { value: slot.id }));
+        if (select.options.length) actions.append(select, button("Lägg i matplanen", () => void recipeToPlan(row, select.value), "btn"));
+      } else actions.append(el("span", "Skapa en matplan först för att lägga receptet i den.", "hint"));
+      actions.append(button("Lägg i inköpslistan", () => void recipeToList(row, done).catch(error => { done.textContent = error.message; }), "btn quiet"));
+      card.append(actions, done);
+      return card;
+    }
+    form.addEventListener("submit", async event => {
+      event.preventDefault(); const q = input.value.trim(); if (!q) return;
+      status.textContent = "Söker…"; results.replaceChildren();
+      try {
+        const data = await api(`/api/recipe-search?q=${encodeURIComponent(q)}&servings=${planServings()}`);
+        status.textContent = data.results.length ? `${plural(data.results.length, "recept", "recept")} hittades.` : "Inga recept hittades. Prova ett annat ord.";
+        results.replaceChildren(...data.results.map(result));
+      } catch (error) { status.textContent = error.message; }
+    });
+    return box;
+  }
   function recipesView(options) {
     const box = el("div", null, "recipes"), slots = [...(S.plan?.plan?.personal?.slots || [])].sort((a, b) => a.day - b.day || Object.keys(MEALS).indexOf(a.meal_type) - Object.keys(MEALS).indexOf(b.meal_type));
     box.append(...likeNotes(), ...likeWeekLines());
@@ -891,7 +946,7 @@
   }
   setInterval(() => { if (S.busy) emit(); }, 1000);
 
-  window.SmakoNext = { el, button, money, number, amount, S, saved, persist, on, emit, start, lookup, placeText, postcodeBox, storePicker, itemsEditor, settings, settingsSummary, recipesView, storesView, areaCode, usedView, atHomeView, busyView, showBusy, errorView,
+  window.SmakoNext = { el, button, money, number, amount, S, saved, persist, on, emit, start, lookup, placeText, postcodeBox, storePicker, itemsEditor, settings, settingsSummary, recipesView, recipeSearch, storesView, areaCode, usedView, atHomeView, busyView, showBusy, errorView,
     calculateList, createPlan, updateListInPlan, forgetPlan, planHasRecipes, itemsChanged, basket, totalText, guest, set,
     // Used by mine.js (account, pantry, registering what was bought).
     api, change, keep, loadState, refreshState, suggestions, uuid, capital, stepOf, isNonfood: text => NONFOOD.test(text) };
